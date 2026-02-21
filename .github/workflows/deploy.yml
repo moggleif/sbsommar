@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Deploy via SFTP
         uses: pressidium/lftp-mirror-action@v1
@@ -21,4 +20,4 @@ jobs:
           pass: ${{ secrets.FTP_PASS }}
           port: 22
           localDir: "public"
-          remoteDir: "/domains/sommar.digitalasynctransparency.com/public_html"
+          remoteDir: ${{ secrets.FTP_REMOTE_DIR }}
