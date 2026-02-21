@@ -1,4 +1,4 @@
-name: Deploy to Inleed
+name: Deploy Website via FTP
 
 on:
   push:
@@ -7,17 +7,39 @@ on:
 
 jobs:
   deploy:
+    name: Upload to Webhotel via FTP
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Deploy via SFTP
-        uses: pressidium/lftp-mirror-action@v1
+      # Validate that FTP_TARGET_DIR ends with a slash
+      - name: Validate FTP_TARGET_DIR format
+        run: |
+          if [[ "${{ secrets.FTP_TARGET_DIR }}" != */ ]]; then
+            echo "❌ Error: FTP_TARGET_DIR must end with a '/'"
+            exit 1
+          fi
+        shell: bash
+
+      # Dry-run: preview what will be uploaded
+      - name: Preview FTP upload (dry-run)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ${{ secrets.FTP_HOST }}
-          user: ${{ secrets.FTP_USER }}
-          pass: ${{ secrets.FTP_PASS }}
-          port: 22
-          localDir: "public"
-          remoteDir: ${{ secrets.FTP_REMOTE_DIR }}
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_TARGET_DIR }}
+          local-dir: ./public
+          dry-run: true
+
+      # Actual deployment
+      - name: Upload to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_TARGET_DIR }}
+          local-dir: ./public
