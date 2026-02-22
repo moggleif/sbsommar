@@ -9,6 +9,29 @@ Architectural principles are.
 
 ---
 
+# 0. Reference Documentation
+
+Before writing any code, CSS, or data, read the relevant docs in `/docs/`.
+These are the authoritative sources. CLAUDE.md summarises principles; the docs define detail.
+
+| File | What it governs |
+| ---- | --------------- |
+| `docs/ARCHITECTURE.md` | System structure, data layers, rendering logic, fallback rules |
+| `docs/DATA_CONTRACT.md` | YAML schema, required fields, validation rules, ID format |
+| `docs/DESIGN.md` | Color palette, typography scale, spacing tokens, component rules |
+| `docs/OPERATIONS.md` | Camp lifecycle: before/during/after, what is and is not version-controlled |
+| `docs/EVENT_DATA_MODEL.md` | Event field definitions and constraints |
+| `docs/EVENT_REQUIREMENTS.md` | Event display and behaviour requirements |
+
+Rules:
+
+- Do not invent colors, spacing, or layout patterns not present in `DESIGN.md`.
+- Do not modify YAML files or the data schema without checking `DATA_CONTRACT.md` first.
+- Do not change the camp lifecycle flow without checking `OPERATIONS.md` first.
+- CSS must use the custom properties defined in `DESIGN.md §7` — do not hardcode design values.
+
+---
+
 # 1. Core Principles
 
 - Static build output.
