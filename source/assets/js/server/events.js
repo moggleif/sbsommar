@@ -115,7 +115,7 @@ async function handleAddEvent(body, res) {
   try {
     const campFilePath = getActiveCampFile();
     fs.appendFileSync(campFilePath, '\n' + buildEventYaml(event) + '\n');
-    execSync('node source/build.js', { cwd: ROOT_DIR });
+    execSync('node source/build/build.js', { cwd: ROOT_DIR });
     send(200, { ok: true, id: event.id, title: event.title });
   } catch (err) {
     console.error('Failed to save event:', err);
