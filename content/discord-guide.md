@@ -1,5 +1,7 @@
 # Discord guide
 
+![Discord](images/Discord-Logo-Blurple.png)
+
 Vi använder Discord som primär kommunikationskanal för lägret.
 
 ## Kom igång

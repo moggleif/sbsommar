@@ -1,5 +1,7 @@
 # Så började det
 
+![Anita Kullander](images/Anita-portrait.webp)
+
 Anita Kullander startade det första sommarlägret 2012 – "Filurums sommarläger".
 
 Lägret var från början för familjer vars barn var medlemmar i Filurum med särbegåvning och/eller neuropsykiatriska diagnoser. Ungefär 150 barn från hela Sverige deltog i olika åldrar.
@@ -11,3 +13,9 @@ Barnen hittade vänner med gemensamma intressen och funktionsnivåer. Konflikter
 En psykologkollega som var med för att observera kommenterade att hon inte, utan att känna till bakgrunden, kunde skilja ut de diagnostiserade barnen från de utan diagnoser.
 
 Foto: Anita Kullander.
+
+![Lägret 2024](images/20240623_115220-scaled-1.jpg)
+
+![Lägret 2024](images/20240623_120058-scaled-1.jpg)
+
+![Lägret 2024](images/20240623_120106-scaled-1.jpg)

@@ -18,6 +18,12 @@ Bra bestånd av ädelfisk. Billiga fiskekort finns att köpa på campingen.
 
 ## Sysslebäcksbadet (simhall)
 
+![Sysslebäcksbadet](images/bad.webp)
+
+![Bubbelpool](images/bubbelpool.webp)
+
+![Simhall](images/simhall.png)
+
 Lägret tecknar ibland abonnemang (tider anges i schemat).
 
 | Pass         | Vuxen  | Barn (–18 år) |
@@ -30,8 +36,14 @@ Bassäng: 20 × 8 m, 29°C.
 
 ## Gym
 
+![Gym](images/gym.webp)
+
 Avantii idrottsklubb – öppet 05:30–22:00 dagligen, obemannat. Endast för 15 år och äldre. Köp kortet online.
 
 ## Branäs
+
+![Branäs sommar](images/branas_sommar-1.webp)
+
+![Branäs sommar](images/branas_sommar-2.webp)
 
 Syns söderut från campingen. Vinterskidort med sommaraktiviteter: discgolf, paddeltennis, mountainbike-spår. Öppnar vanligtvis runt midsommar.

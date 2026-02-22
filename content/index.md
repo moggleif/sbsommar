@@ -3,7 +3,7 @@
 Familjeläger i Sysslebäck för särskilt begåvade barn och ungdomar.
 Arrangerat ideellt i nära samarbete med RFSB. Deltagande förutsätter medlemskap i föreningen.
 
-![Hero image](images/placeholder.jpg)
+![Klarälven vid Sysslebäck](images/klaralven.webp)
 
 Vi har välkomnat familjer varje sommar sedan 2012 med undantag för 2020.
 Under lägerveckorna upplever vi gemenskap, stimulerande aktiviteter och personlig utveckling i trygg miljö.

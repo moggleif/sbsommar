@@ -22,18 +22,26 @@ Boende ordnas av familjer själva. Stugor och camping finns att hyra.
 
 ### Stugor på campingen
 
+![Stuga](images/stuga.webp)
+
 - Stuga 4 bäddar: 4 200 kr
 - Stuga 5 bäddar: 4 500 kr
 
 ### Vandrarhem på campingen
 
+![Vandrarhem](images/vandrarhem.webp)
+
 - Rum 4–5 bäddar: 3 600 kr
 
 ### Camping
+
+![Campingplats](images/camping.webp)
 
 - Plats med el: 220 kr/dygn
 - Plats utan el: 200 kr/dygn
 
 ### Klarälvsbyn (10 km bort)
+
+![Klarälvsbyn](images/klaralvsbyn.webp)
 
 - Stuga 4–5 bäddar: 3 600 kr
