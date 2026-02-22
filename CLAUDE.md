@@ -185,6 +185,15 @@ Non-technical contributors must be able to:
 
 ---
 
+# 10. Git Workflow
+
+- Never push directly to `main`.
+- Always start work on a new branch.
+- Before creating a branch, pull from `main` to ensure you are up to date.
+- After a branch has been merged and the merge has been pulled back via `main`, delete the local branch.
+
+---
+
 # Final Rule
 
 If something adds complexity without clear value, it should not be added.
