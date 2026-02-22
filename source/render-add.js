@@ -29,11 +29,13 @@ function renderAddPage(camp, locations) {
 </head>
 <body>
   <nav class="page-nav">
-    <a class="nav-link" href="schema.html">← Schema</a>
+    <a class="nav-link" href="schema.html">Schema</a>
+    <a class="nav-link active" href="lagg-till.html">Lägg till aktivitet</a>
   </nav>
 
   <h1>Lägg till aktivitet</h1>
-  <p class="intro">Fyll i formuläret och klicka "Skicka". Du får då en rad att kopiera och skicka till en administratör via Discord eller mejl – de lägger in den i schemat.</p>
+  <p class="intro">Kolla gärna <a href="schema.html">schemat</a> innan du lägger till din aktivitet – välj en tid som inte krockar med något annat.</p>
+  <p class="intro">Behöver du material eller ingredienser till din aktivitet? Kontakta Andreas i förväg så ordnar han det.</p>
 
   <form id="event-form" class="event-form" novalidate>
 
@@ -93,13 +95,14 @@ ${locationOptions}
   </form>
 
   <section id="result" hidden>
-    <h2>Klar!</h2>
-    <p class="intro">Kopiera texten nedan och skicka den till en administratör (Discord, mejl eller liknande) så lägger de in aktiviteten i schemat.</p>
-    <div class="yaml-block">
-      <button id="copy-btn" class="btn-secondary copy-btn">Kopiera</button>
-      <pre id="yaml-output"></pre>
+    <div class="success-box">
+      <h2>Aktiviteten är tillagd!</h2>
+      <p class="intro"><strong id="result-title"></strong> syns nu i schemat.</p>
+      <div class="success-actions">
+        <a href="schema.html" class="btn-primary">Gå till schemat →</a>
+        <button id="new-btn" class="btn-secondary">Lägg till en till</button>
+      </div>
     </div>
-    <p><button id="new-btn" class="btn-secondary">Lägg till en till aktivitet</button></p>
   </section>
 
   <script src="lagg-till.js"></script>

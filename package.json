@@ -4,6 +4,7 @@
   "private": true,
   "description": "SB Sommar static site – dev tooling only",
   "scripts": {
+    "start": "node source/server.js",
     "build": "node source/build.js",
     "test": "node --test tests/render.test.js tests/snapshot.test.js",
     "test:update-snapshots": "node tests/helpers/update-snapshots.js",

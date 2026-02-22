@@ -326,6 +326,29 @@ textarea {
   margin-bottom: 0;
 }
 
+/* ── Success state ── */
+
+.success-box {
+  max-width: 750px;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md);
+  border-left: 4px solid var(--color-sage);
+}
+
+.success-box h2 {
+  color: var(--color-navy);
+  margin: 0 0 var(--space-xs);
+}
+
+.success-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+}
+
 /* ── YAML output block ── */
 
 .yaml-block {
