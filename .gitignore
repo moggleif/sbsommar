@@ -20,4 +20,5 @@ Thumbs.db
 .claude/
 
 # Build files for deploying
-public/
+public/*
+!public/.gitkeep
