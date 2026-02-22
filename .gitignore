@@ -14,5 +14,8 @@ dist/
 .DS_Store
 Thumbs.db
 
-# VS Code local settings
-.vscode/settings.json
+# VS Code
+.vscode/
+
+# Claude Code
+.claude/
