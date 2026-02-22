@@ -72,7 +72,7 @@
       })
       .catch(function () {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Skicka →';
+        submitBtn.textContent = 'Lägg till →';
         errBox.hidden = false;
         errBox.innerHTML = '<p>Något gick fel. Kontrollera din internetanslutning och försök igen.</p>';
       });

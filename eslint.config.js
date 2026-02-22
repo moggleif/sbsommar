@@ -8,6 +8,7 @@ module.exports = [
 
   js.configs.recommended,
 
+  // 🔵 Default = Node (serverkod)
   {
     languageOptions: {
       ecmaVersion: 2022,
@@ -17,6 +18,14 @@ module.exports = [
     rules: {
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'off',
+    },
+  },
+
+  // 🟢 Endast client-filen = Browser
+  {
+    files: ['source/assets/js/client/lagg-till.js'],
+    languageOptions: {
+      globals: { ...globals.browser },
     },
   },
 ];

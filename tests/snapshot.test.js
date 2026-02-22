@@ -3,7 +3,7 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { renderSchedulePage } = require('../source/render');
+const { renderSchedulePage } = require('../source/build/render');
 const { matchSnapshot } = require('./helpers/snapshot');
 
 const CAMP = {

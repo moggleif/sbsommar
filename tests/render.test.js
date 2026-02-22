@@ -10,7 +10,7 @@ const {
   groupAndSortEvents,
   eventExtraHtml,
   renderEventRow,
-} = require('../source/render');
+} = require('../source/build/render');
 
 // ── toDateString ─────────────────────────────────────────────────────────────
 
