@@ -43,6 +43,16 @@ const campData = yaml.load(fs.readFileSync(campFilePath, 'utf8'));
 const camp = campData.camp;
 const events = campData.events || [];
 
+// ── Load locations from local.yaml ───────────────────────────────────────────
+
+const localFilePath = path.join(DATA_DIR, 'local.yaml');
+if (!fs.existsSync(localFilePath)) {
+  console.error('ERROR: data/local.yaml not found');
+  process.exit(1);
+}
+const localData = yaml.load(fs.readFileSync(localFilePath, 'utf8'));
+const locations = (localData.locations || []).map((l) => l.name);
+
 // ── Render and write ─────────────────────────────────────────────────────────
 
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -51,6 +61,6 @@ const scheduleHtml = renderSchedulePage(camp, events);
 fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
 console.log(`Built: public/schema.html  (${events.length} events)`);
 
-const addHtml = renderAddPage(camp, camp.locations || []);
+const addHtml = renderAddPage(camp, locations);
 fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
-console.log(`Built: public/lagg-till.html  (${(camp.locations || []).length} locations)`);
+console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
