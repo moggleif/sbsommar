@@ -1,0 +1,37 @@
+locations:
+- id: andreas-taltet
+  name: AndreasTältet
+- id: annat
+  name: Annat
+- id: fotbollsplan
+  name: Fotbollsplan
+- id: ga-datorsal
+  name: GA Datorsal
+- id: ga-idrott
+  name: GA Idrott
+- id: ga-kreativ-horna
+  name: GA Kreativ hörna
+- id: ga-stilla-hyllan
+  name: GA Stilla hyllan
+- id: grillplats
+  name: Grillplats
+- id: kaffe-paviljongen
+  name: KaffePaviljongen
+- id: kaffetalt
+  name: Kaffetält
+- id: nerf-arena
+  name: Nerf-arena
+- id: rollspelstalt-1
+  name: Rollspelstält1
+- id: rollspelstalt-2
+  name: Rollspelstält2
+- id: servicehus
+  name: Servicehus
+- id: talt-1
+  name: Tält1
+- id: talt-2
+  name: Tält2
+- id: talt-3
+  name: Tält3
+- id: tonarsstugan
+  name: Tonårsstugan
