@@ -5,7 +5,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const { renderSchedulePage, toDateString } = require('./render');
 const { renderAddPage } = require('./render-add');
-const { renderIndexPage, convertMarkdown } = require('./render-index');
+const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = require('./render-index');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const CONTENT_DIR = path.join(__dirname, '..', 'content');
@@ -67,24 +67,45 @@ const addHtml = renderAddPage(camp, locations);
 fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
 console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-// ── Render index.html from all content/*.md files ────────────────────────
-// index.md is first; all other files are sorted alphabetically after it.
-// Headings in secondary files are shifted down one level (h1→h2, h2→h3)
-// so the page has a single h1.
+// ── Render index.html from content/sections.yaml ─────────────────────────
+// Section order, IDs, and optional nav labels are defined in sections.yaml.
+// The first image in the first file is hoisted as the hero banner.
 
-const mdFiles = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.md')).sort();
-const mdOrdered = ['index.md', ...mdFiles.filter((f) => f !== 'index.md')];
+const sectionsConfigPath = path.join(CONTENT_DIR, 'sections.yaml');
+if (!fs.existsSync(sectionsConfigPath)) {
+  console.error('ERROR: content/sections.yaml not found');
+  process.exit(1);
+}
+const sectionsConfig = yaml.load(fs.readFileSync(sectionsConfigPath, 'utf8'));
 
-const bodyParts = mdOrdered
-  .filter((f) => fs.existsSync(path.join(CONTENT_DIR, f)))
-  .map((f, i) => {
-    const md = fs.readFileSync(path.join(CONTENT_DIR, f), 'utf8');
-    return convertMarkdown(md, i === 0 ? 0 : 1);
-  });
+let heroSrc = null;
+let heroAlt = null;
 
-const indexHtml = renderIndexPage(bodyParts.join('\n'));
+const sections = sectionsConfig.sections
+  .map((def, i) => {
+    const filePath = path.join(CONTENT_DIR, def.file);
+    if (!fs.existsSync(filePath)) {
+      console.warn(`WARNING: content file not found: ${def.file}`);
+      return null;
+    }
+    let md = fs.readFileSync(filePath, 'utf8');
+
+    if (i === 0) {
+      const extracted = extractHeroImage(md);
+      heroSrc = extracted.heroSrc;
+      heroAlt = extracted.heroAlt;
+      md = extracted.md;
+    }
+
+    const navLabel = def.nav || extractH1(md) || def.file;
+    const html = convertMarkdown(md, i === 0 ? 0 : 1, def.collapsible || false);
+    return { id: def.id, navLabel, html };
+  })
+  .filter(Boolean);
+
+const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections });
 fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
-console.log(`Built: public/index.html  (${mdOrdered.length} sections)`);
+console.log(`Built: public/index.html  (${sections.length} sections)`);
 
 // ── Copy content/images → public/images ──────────────────────────────────
 

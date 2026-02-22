@@ -1,0 +1,28 @@
+sections:
+  - file: index.md
+    id: start
+  - file: testimonials.md
+    id: testimonials
+  - file: faq.md
+    id: faq
+    nav: Vanliga frågor
+    collapsible: true
+  - file: registration.md
+    id: anmalan
+  - file: rules.md
+    id: regler
+  - file: food.md
+    id: mat
+  - file: pricing.md
+    id: kostnad
+  - file: local-info.md
+    id: service
+  - file: activities.md
+    id: aktiviteter
+  - file: locations.md
+    id: lokaler
+    collapsible: true
+  - file: discord-guide.md
+    id: discord
+  - file: how-it-started.md
+    id: historia

@@ -12,32 +12,75 @@ function inlineHtml(text) {
 }
 
 /**
- * Converts a Markdown subset to HTML.
- * Handles: headings (h1–h2), hr, unordered lists, paragraphs.
- *
- * headingOffset shifts all heading levels down by that amount.
- * Pass 1 for non-primary sections so their h1 becomes h2, h2 becomes h3, etc.
+ * Finds the first image in a markdown string, removes it, and returns both.
+ * Used to hoist the hero image out of the body content.
  */
-function convertMarkdown(md, headingOffset = 0) {
+function extractHeroImage(md) {
+  const match = md.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+  if (!match) return { heroSrc: null, heroAlt: null, md };
+  const remaining = md
+    .replace(match[0], '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trimStart();
+  return { heroSrc: match[2], heroAlt: match[1], md: remaining };
+}
+
+/**
+ * Extracts the text of the first # heading in a markdown string.
+ */
+function extractH1(md) {
+  const match = md.match(/^# (.+)$/m);
+  return match ? match[1].trim() : null;
+}
+
+function renderBlock(b) {
+  switch (b.type) {
+    case 'h':         return `<h${b.level}>${inlineHtml(b.text)}</h${b.level}>`;
+    case 'blockquote': return `<blockquote>${inlineHtml(b.text)}</blockquote>`;
+    case 'hr':        return '<hr>';
+    case 'ul':
+      return `<ul>\n${b.items.map((it) => `  <li>${inlineHtml(it)}</li>`).join('\n')}\n</ul>`;
+    case 'p':         return `<p>${inlineHtml(b.text)}</p>`;
+    default:          return '';
+  }
+}
+
+/**
+ * Converts a Markdown subset to HTML.
+ * Handles: headings (h1–h3), blockquotes, hr, unordered lists, paragraphs.
+ *
+ * headingOffset shifts all heading levels down (pass 1 for non-primary sections).
+ *
+ * collapsible: when true, wraps each ## section (after offset) in
+ * <details class="accordion"><summary>…</summary>…</details>.
+ * Closed by default. Add `collapsible: true` in sections.yaml to enable.
+ */
+function convertMarkdown(md, headingOffset = 0, collapsible = false) {
   const lines = md.split('\n');
   const blocks = [];
   let paraLines = [];
 
   function flushPara() {
     const text = paraLines.join(' ').trim();
-    if (text) blocks.push({ type: 'h', level: null, text: null, paraText: text });
+    if (text) blocks.push({ type: 'p', text });
     paraLines = [];
   }
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (line.startsWith('# ')) {
+    if (line.startsWith('### ')) {
       flushPara();
-      blocks.push({ type: 'h', level: Math.min(1 + headingOffset, 6), text: line.slice(2).trim() });
+      blocks.push({ type: 'h', level: Math.min(3 + headingOffset, 6), text: line.slice(4).trim() });
     } else if (line.startsWith('## ')) {
       flushPara();
       blocks.push({ type: 'h', level: Math.min(2 + headingOffset, 6), text: line.slice(3).trim() });
+    } else if (line.startsWith('# ')) {
+      flushPara();
+      blocks.push({ type: 'h', level: Math.min(1 + headingOffset, 6), text: line.slice(2).trim() });
+    } else if (line.startsWith('> ')) {
+      flushPara();
+      blocks.push({ type: 'blockquote', text: line.slice(2) });
     } else if (line.trim() === '---') {
       flushPara();
       blocks.push({ type: 'hr' });
@@ -58,31 +101,71 @@ function convertMarkdown(md, headingOffset = 0) {
   }
   flushPara();
 
-  return blocks
-    .map((b) => {
-      if (b.type === 'h' && b.level !== null) {
-        return `<h${b.level}>${inlineHtml(b.text)}</h${b.level}>`;
-      }
-      if (b.type === 'h' && b.paraText) {
-        return `<p>${inlineHtml(b.paraText)}</p>`;
-      }
-      if (b.type === 'hr') return '<hr>';
-      if (b.type === 'ul') {
-        return `<ul>\n${b.items.map((it) => `  <li>${inlineHtml(it)}</li>`).join('\n')}\n</ul>`;
-      }
-      return '';
+  if (!collapsible) {
+    return blocks.map(renderBlock).join('\n');
+  }
+
+  // Group content by the ## heading level (= 2 + headingOffset after rendering).
+  // Each group becomes a <details> accordion. Content before the first ## is
+  // rendered normally (e.g. the section h1/h2 title stays visible).
+  const splitLevel = 2 + headingOffset;
+  const groups = [];
+  let current = { accordion: false, summary: null, blocks: [] };
+
+  for (const block of blocks) {
+    if (block.type === 'h' && block.level === splitLevel) {
+      groups.push(current);
+      current = { accordion: true, summary: block.text, blocks: [] };
+    } else {
+      current.blocks.push(block);
+    }
+  }
+  groups.push(current);
+
+  return groups
+    .map((g) => {
+      const inner = g.blocks.map(renderBlock).join('\n');
+      if (!g.accordion) return inner;
+      const indented = inner.split('\n').map((l) => (l ? '    ' + l : '')).join('\n');
+      return [
+        '<details class="accordion">',
+        `  <summary>${inlineHtml(g.summary)}</summary>`,
+        '  <div class="accordion-body">',
+        indented,
+        '  </div>',
+        '</details>',
+      ].join('\n');
     })
     .join('\n');
 }
 
 /**
- * Wraps pre-rendered HTML content in the index page shell.
+ * Renders the full index.html.
+ *
+ * @param {object} opts
+ * @param {string|null} opts.heroSrc  - path to hero image
+ * @param {string|null} opts.heroAlt  - alt text for hero image
+ * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
  */
-function renderIndexPage(bodyHtml) {
-  const indented = bodyHtml
-    .split('\n')
-    .map((l) => (l ? '    ' + l : ''))
+function renderIndexPage({ heroSrc, heroAlt, sections }) {
+  const heroHtml = heroSrc
+    ? `\n  <div class="hero">\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img">\n  </div>`
+    : '';
+
+  const sectionNavItems = sections
+    .map((s) => `      <li><a href="#${s.id}">${s.navLabel}</a></li>`)
     .join('\n');
+
+  const contentSections = sections
+    .map((s, i) => {
+      const inner = s.html
+        .split('\n')
+        .map((l) => (l ? '      ' + l : ''))
+        .join('\n');
+      const cls = i === 0 ? ' class="section-first"' : '';
+      return `    <section id="${s.id}"${cls}>\n${inner}\n    </section>`;
+    })
+    .join('\n\n');
 
   return `<!DOCTYPE html>
 <html lang="sv">
@@ -97,13 +180,18 @@ function renderIndexPage(bodyHtml) {
     <a class="nav-link active" href="index.html">Hem</a>
     <a class="nav-link" href="schema.html">Schema</a>
     <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
+  </nav>${heroHtml}
+  <nav class="section-nav" aria-label="Sidnavigation">
+    <ul>
+${sectionNavItems}
+    </ul>
   </nav>
   <div class="content">
-${indented}
+${contentSections}
   </div>
 </body>
 </html>
 `;
 }
 
-module.exports = { renderIndexPage, convertMarkdown };
+module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 };

@@ -5,15 +5,21 @@
   --color-navy:       #192A3D;
   --color-charcoal:   #3B3A38;
   --color-white:      #FFFFFF;
-  --font-sans: system-ui, -apple-system, sans-serif;
-  --space-xs:  8px;
-  --space-sm:  16px;
-  --space-md:  24px;
-  --space-lg:  40px;
-  --container: 1290px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --font-sans:   system-ui, -apple-system, sans-serif;
+  --font-serif:  Georgia, serif;
+  --space-xs:    8px;
+  --space-sm:    16px;
+  --space-md:    24px;
+  --space-lg:    40px;
+  --space-xl:    64px;
+  --space-xxl:   96px;
+  --container:        1290px;
+  --container-wide:   1290px;
+  --container-narrow: 750px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-full: 50%;
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -34,6 +40,77 @@ h1 {
   font-weight: 700;
   color: var(--color-sage);
   margin: 0 0 var(--space-xs);
+}
+
+h2 {
+  font-size: 35px;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 0 0 var(--space-sm);
+}
+
+h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 0 0 var(--space-xs);
+}
+
+/* ── Hero ── */
+
+.hero {
+  margin: 0 calc(-1 * var(--space-sm)) var(--space-md);
+}
+
+.hero-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+}
+
+/* ── Section navigation ── */
+
+.section-nav {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.section-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px var(--space-sm);
+}
+
+.section-nav a {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+.section-nav a:hover {
+  text-decoration: underline;
+}
+
+/* ── Blockquote ── */
+
+blockquote {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--color-charcoal);
+  border-left: 3px solid var(--color-sage);
+  margin: 0 0 var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  max-width: var(--container-narrow);
 }
 
 .intro {
@@ -387,14 +464,69 @@ textarea {
   border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* ── Content (prose pages) ── */
+/* ── Accordion (collapsible sections: FAQ, Lokaler) ── */
 
-.content h2 {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--color-navy);
-  margin: var(--space-lg) 0 var(--space-xs);
+details.accordion {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--space-xs);
+  overflow: hidden;
 }
+
+details.accordion > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-sage);
+  color: var(--color-white);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+details.accordion > summary::-webkit-details-marker { display: none; }
+
+details.accordion > summary::after {
+  content: '+';
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+  opacity: 0.8;
+  flex-shrink: 0;
+  margin-left: var(--space-sm);
+}
+
+details.accordion[open] > summary::after { content: '−'; }
+
+details.accordion > summary:hover { background: #9aad6a; }
+
+.accordion-body {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.accordion-body p:last-child,
+.accordion-body ul:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Content sections ── */
+
+.content section {
+  padding-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.content section.section-first {
+  padding-top: 0;
+  border-top: none;
+}
+
+/* ── Content (prose pages) ── */
 
 .content p,
 .content ul {
@@ -428,6 +560,10 @@ textarea {
 
 @media (max-width: 690px) {
   h1 { font-size: 28px; }
+  h2 { font-size: 26px; }
+  h3 { font-size: 22px; }
+  .hero-img { height: 200px; }
+  .section-nav { padding: var(--space-xs) var(--space-sm); }
   details.day > summary { padding: var(--space-sm); }
   .event-row { padding: 5px var(--space-sm); }
   .event-extra { padding: 5px var(--space-sm) 8px; }
