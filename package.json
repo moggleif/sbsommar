@@ -4,7 +4,7 @@
   "private": true,
   "description": "SB Sommar static site – dev tooling only",
   "scripts": {
-    "build": "node build.js",
+    "build": "node source/build.js",
     "lint:md": "markdownlint \"content/**/*.md\" \"docs/**/*.md\" README.md CLAUDE.md",
     "prepare": "husky"
   },

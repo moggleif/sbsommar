@@ -42,7 +42,14 @@ events:
   end: '20:30'
   location: GA Idrott
   responsible: Alla
-  description: null
+  description: |
+    Vi hjälps åt att hämta material från förrådet vid receptionen.
+    Bygger massa tält.
+    Gör iordning GA-hallen.
+
+    Nya deltagare har här chansen att komma in, bidra, och bli delaktiga i lägret!
+    Det blir vad vi gör det till. Fråga den jämte dig, vad du kan göra.
+    Passa på att fråga om namn också. 🙂
   link: null
   owner:
     name: ''
