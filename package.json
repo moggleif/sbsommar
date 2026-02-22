@@ -19,5 +19,8 @@
     "globals": "^15.0.0",
     "js-yaml": "^4.1.1",
     "markdownlint-cli": "^0.43.0"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
   }
 }

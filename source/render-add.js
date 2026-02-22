@@ -31,6 +31,7 @@ function renderAddPage(camp, locations) {
   <nav class="page-nav">
     <a class="nav-link" href="index.html">Hem</a>
     <a class="nav-link" href="schema.html">Schema</a>
+    <a class="nav-link" href="dagens-schema.html">Idag</a>
     <a class="nav-link active" href="lagg-till.html">Lägg till aktivitet</a>
   </nav>
 

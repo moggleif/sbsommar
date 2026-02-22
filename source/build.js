@@ -3,8 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const QRCode = require('qrcode');
 const { renderSchedulePage, toDateString } = require('./render');
 const { renderAddPage } = require('./render-add');
+const { renderTodayPage } = require('./render-today');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = require('./render-index');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
@@ -57,66 +59,81 @@ const locations = (localData.locations || []).map((l) => l.name);
 
 // ── Render and write ─────────────────────────────────────────────────────────
 
-fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+async function main() {
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
-const scheduleHtml = renderSchedulePage(camp, events);
-fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
-console.log(`Built: public/schema.html  (${events.length} events)`);
+  const scheduleHtml = renderSchedulePage(camp, events);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
+  console.log(`Built: public/schema.html  (${events.length} events)`);
 
-const addHtml = renderAddPage(camp, locations);
-fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
-console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
+  const qrSvg = (await QRCode.toString('https://sbsommar.se', { type: 'svg', margin: 2 }))
+    .replace(/<\?xml[^?]*\?>\s*/g, '')
+    .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
-// ── Render index.html from content/sections.yaml ─────────────────────────
-// Section order, IDs, and optional nav labels are defined in sections.yaml.
-// The first image in the first file is hoisted as the hero banner.
+  const todayHtml = renderTodayPage(camp, events, qrSvg);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
+  console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
 
-const sectionsConfigPath = path.join(CONTENT_DIR, 'sections.yaml');
-if (!fs.existsSync(sectionsConfigPath)) {
-  console.error('ERROR: content/sections.yaml not found');
-  process.exit(1);
-}
-const sectionsConfig = yaml.load(fs.readFileSync(sectionsConfigPath, 'utf8'));
+  const addHtml = renderAddPage(camp, locations);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
+  console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-let heroSrc = null;
-let heroAlt = null;
+  // ── Render index.html from content/sections.yaml ─────────────────────────
+  // Section order, IDs, and optional nav labels are defined in sections.yaml.
+  // The first image in the first file is hoisted as the hero banner.
 
-const sections = sectionsConfig.sections
-  .map((def, i) => {
-    const filePath = path.join(CONTENT_DIR, def.file);
-    if (!fs.existsSync(filePath)) {
-      console.warn(`WARNING: content file not found: ${def.file}`);
-      return null;
-    }
-    let md = fs.readFileSync(filePath, 'utf8');
-
-    if (i === 0) {
-      const extracted = extractHeroImage(md);
-      heroSrc = extracted.heroSrc;
-      heroAlt = extracted.heroAlt;
-      md = extracted.md;
-    }
-
-    const navLabel = def.nav || extractH1(md) || def.file;
-    const html = convertMarkdown(md, i === 0 ? 0 : 1, def.collapsible || false);
-    return { id: def.id, navLabel, html };
-  })
-  .filter(Boolean);
-
-const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections });
-fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
-console.log(`Built: public/index.html  (${sections.length} sections)`);
-
-// ── Copy content/images → public/images ──────────────────────────────────
-
-const srcImages = path.join(CONTENT_DIR, 'images');
-const destImages = path.join(OUTPUT_DIR, 'images');
-if (fs.existsSync(srcImages)) {
-  fs.mkdirSync(destImages, { recursive: true });
-  let copied = 0;
-  for (const file of fs.readdirSync(srcImages)) {
-    fs.copyFileSync(path.join(srcImages, file), path.join(destImages, file));
-    copied++;
+  const sectionsConfigPath = path.join(CONTENT_DIR, 'sections.yaml');
+  if (!fs.existsSync(sectionsConfigPath)) {
+    console.error('ERROR: content/sections.yaml not found');
+    process.exit(1);
   }
-  console.log(`Copied: content/images → public/images  (${copied} files)`);
+  const sectionsConfig = yaml.load(fs.readFileSync(sectionsConfigPath, 'utf8'));
+
+  let heroSrc = null;
+  let heroAlt = null;
+
+  const sections = sectionsConfig.sections
+    .map((def, i) => {
+      const filePath = path.join(CONTENT_DIR, def.file);
+      if (!fs.existsSync(filePath)) {
+        console.warn(`WARNING: content file not found: ${def.file}`);
+        return null;
+      }
+      let md = fs.readFileSync(filePath, 'utf8');
+
+      if (i === 0) {
+        const extracted = extractHeroImage(md);
+        heroSrc = extracted.heroSrc;
+        heroAlt = extracted.heroAlt;
+        md = extracted.md;
+      }
+
+      const navLabel = def.nav || extractH1(md) || def.file;
+      const html = convertMarkdown(md, i === 0 ? 0 : 1, def.collapsible || false);
+      return { id: def.id, navLabel, html };
+    })
+    .filter(Boolean);
+
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections });
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
+  console.log(`Built: public/index.html  (${sections.length} sections)`);
+
+  // ── Copy content/images → public/images ──────────────────────────────────
+
+  const srcImages = path.join(CONTENT_DIR, 'images');
+  const destImages = path.join(OUTPUT_DIR, 'images');
+  if (fs.existsSync(srcImages)) {
+    fs.mkdirSync(destImages, { recursive: true });
+    let copied = 0;
+    for (const file of fs.readdirSync(srcImages)) {
+      fs.copyFileSync(path.join(srcImages, file), path.join(destImages, file));
+      copied++;
+    }
+    console.log(`Copied: content/images → public/images  (${copied} files)`);
+  }
 }
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
