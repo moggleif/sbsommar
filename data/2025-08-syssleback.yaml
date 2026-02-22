@@ -4,6 +4,22 @@ camp:
   location: Sysslebäck
   start_date: '2025-08-03'
   end_date: '2025-08-10'
+  locations:
+    - Servicehus
+    - GA Idrott
+    - GA Stilla hyllan
+    - GA Kreativ hörna
+    - Grillplats
+    - Fotbollsplan
+    - Kaffetält
+    - KaffePaviljongen
+    - Rollspelstält1
+    - Rollspelstält2
+    - AndreasTältet
+    - Tält1
+    - Tält2
+    - Tonårsstugan
+    - Annat
 events:
 - id: valkommen-2025-08-03-1200
   title: Välkommen

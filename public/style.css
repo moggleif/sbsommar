@@ -174,9 +174,202 @@ details.event-row[open] > summary .ev-title {
   font-size: 13px;
 }
 
+/* ── Navigation ── */
+
+.page-nav {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-charcoal);
+  text-decoration: none;
+  opacity: 0.5;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-navy);
+  opacity: 1;
+}
+
+/* ── Buttons ── */
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.btn-primary {
+  background: var(--color-terracotta);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: #b35e3a;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-terracotta);
+  border: 1.5px solid var(--color-terracotta);
+}
+
+.btn-secondary:hover {
+  background: var(--color-terracotta);
+  color: var(--color-white);
+}
+
+/* ── Add-event form ── */
+
+.event-form {
+  max-width: 750px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: var(--space-sm);
+}
+
+.field-row {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.field-row .field {
+  flex: 1 1 140px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.02em;
+}
+
+.req {
+  color: var(--color-terracotta);
+}
+
+.opt {
+  font-weight: 400;
+  color: var(--color-charcoal);
+  opacity: 0.6;
+}
+
+input[type='text'],
+input[type='date'],
+input[type='time'],
+input[type='url'],
+select,
+textarea {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-charcoal);
+  background: var(--color-white);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  width: 100%;
+  transition: border-color 150ms ease;
+}
+
+input[type='text']:focus,
+input[type='date']:focus,
+input[type='time']:focus,
+input[type='url']:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-navy);
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.form-errors {
+  margin-bottom: var(--space-sm);
+  padding: 10px var(--space-sm);
+  background: #fdf0ec;
+  border-left: 3px solid var(--color-terracotta);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--color-charcoal);
+}
+
+.form-errors p {
+  margin: 0 0 4px;
+}
+
+.form-errors p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── YAML output block ── */
+
+.yaml-block {
+  position: relative;
+  background: var(--color-navy);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  overflow-x: auto;
+}
+
+.yaml-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #e8f0f8;
+  white-space: pre;
+}
+
+.copy-btn {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  font-size: 12px;
+  min-height: 32px;
+  padding: 4px 12px;
+  background: transparent;
+  color: #e8f0f8;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Responsive ── */
+
 @media (max-width: 690px) {
   h1 { font-size: 28px; }
   details.day > summary { padding: var(--space-sm); }
   .event-row { padding: 5px var(--space-sm); }
   .event-extra { padding: 5px var(--space-sm) 8px; }
+  .field-row { flex-direction: column; gap: 0; }
 }
