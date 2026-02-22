@@ -5,8 +5,10 @@ const path = require('path');
 const yaml = require('js-yaml');
 const { renderSchedulePage, toDateString } = require('./render');
 const { renderAddPage } = require('./render-add');
+const { renderIndexPage, convertMarkdown } = require('./render-index');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
+const CONTENT_DIR = path.join(__dirname, '..', 'content');
 const OUTPUT_DIR = path.join(__dirname, '..', 'public');
 
 // ── Load camps registry ──────────────────────────────────────────────────────
@@ -64,3 +66,36 @@ console.log(`Built: public/schema.html  (${events.length} events)`);
 const addHtml = renderAddPage(camp, locations);
 fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
 console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
+
+// ── Render index.html from all content/*.md files ────────────────────────
+// index.md is first; all other files are sorted alphabetically after it.
+// Headings in secondary files are shifted down one level (h1→h2, h2→h3)
+// so the page has a single h1.
+
+const mdFiles = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.md')).sort();
+const mdOrdered = ['index.md', ...mdFiles.filter((f) => f !== 'index.md')];
+
+const bodyParts = mdOrdered
+  .filter((f) => fs.existsSync(path.join(CONTENT_DIR, f)))
+  .map((f, i) => {
+    const md = fs.readFileSync(path.join(CONTENT_DIR, f), 'utf8');
+    return convertMarkdown(md, i === 0 ? 0 : 1);
+  });
+
+const indexHtml = renderIndexPage(bodyParts.join('\n'));
+fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
+console.log(`Built: public/index.html  (${mdOrdered.length} sections)`);
+
+// ── Copy content/images → public/images ──────────────────────────────────
+
+const srcImages = path.join(CONTENT_DIR, 'images');
+const destImages = path.join(OUTPUT_DIR, 'images');
+if (fs.existsSync(srcImages)) {
+  fs.mkdirSync(destImages, { recursive: true });
+  let copied = 0;
+  for (const file of fs.readdirSync(srcImages)) {
+    fs.copyFileSync(path.join(srcImages, file), path.join(destImages, file));
+    copied++;
+  }
+  console.log(`Copied: content/images → public/images  (${copied} files)`);
+}
