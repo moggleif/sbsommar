@@ -11,7 +11,9 @@ const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = requir
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const CONTENT_DIR = path.join(__dirname, '..', 'content');
-const OUTPUT_DIR = path.join(__dirname, '..', 'public');
+const ASSETS_DIR = path.join(__dirname, '..', 'assets');
+const OUTPUT_DIR = path.join(__dirname, '../..', 'public');
+
 
 // ── Load camps registry ──────────────────────────────────────────────────────
 
@@ -131,6 +133,32 @@ async function main() {
     }
     console.log(`Copied: content/images → public/images  (${copied} files)`);
   }
+
+  // ── Copy assets → public ──────────────────────────────────
+
+  const srcAssets = path.join(ASSETS_DIR);
+  const destAssets = path.join(OUTPUT_DIR);
+
+  function copyFlattened(srcDir, destDir) {
+    const entries = fs.readdirSync(srcDir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const srcPath = path.join(srcDir, entry.name);
+
+      if (entry.isDirectory()) {
+        copyFlattened(srcPath, destDir); // gå ner i subfolder
+      } else {
+        const destPath = path.join(destDir, entry.name);
+        fs.copyFileSync(srcPath, destPath);
+      }
+    }
+  }
+
+  if (fs.existsSync(srcAssets)) {
+    fs.mkdirSync(destAssets, { recursive: true });
+    copyFlattened(srcAssets, destAssets);
+    console.log('Copied: assets → public (flattened)');
+  } 
 }
 
 main().catch((err) => {
