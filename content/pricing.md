@@ -2,25 +2,38 @@
 
 ## Deltagaravgift
 
-Deltagaravgiften för 2025 är 400 kr per deltagare. :contentReference[oaicite:23]{index=23}
+Deltagaravgiften för 2025 är 400 kr per deltagare (barn 0–2 år är gratis).
 
 ## Medlemskap
 
-Obligatoriskt medlemskap i RFSB:  
-- 200 kr för vuxna 25+  
-- 100 kr för 18–25 år  
-- Barn/ungdomar är gratis :contentReference[oaicite:24]{index=24}
+Obligatoriskt medlemskap i RFSB:
+
+- 200 kr för vuxna (25+ år)
+- 100 kr för unga vuxna (18–25 år)
+- Barn och ungdomar: gratis
 
 ## Betalning
 
-Faktura skickas ut per e-post. :contentReference[oaicite:25]{index=25}
+Faktura skickas ut per e-post.
 
 ## Boende
 
-Boende ordnas av familjer själva. Stugor och camping finns att hyra. :contentReference[oaicite:26]{index=26}
+Boende ordnas av familjer själva. Stugor och camping finns att hyra.
 
-### Exempelpriser
+### Stugor på campingen
 
-- Stuga 4 bäddar: 4200 kr :contentReference[oaicite:27]{index=27}
-- Vandrarhem: från ca 3600 kr :contentReference[oaicite:28]{index=28}
-- Campingplats: 200–220 kr/dygn :contentReference[oaicite:29]{index=29}
+- Stuga 4 bäddar: 4 200 kr
+- Stuga 5 bäddar: 4 500 kr
+
+### Vandrarhem på campingen
+
+- Rum 4–5 bäddar: 3 600 kr
+
+### Camping
+
+- Plats med el: 220 kr/dygn
+- Plats utan el: 200 kr/dygn
+
+### Klarälvsbyn (10 km bort)
+
+- Stuga 4–5 bäddar: 3 600 kr

@@ -1,11 +1,20 @@
 # Discord guide
 
-Vi använder Discord som kommunikationskanal. :contentReference[oaicite:48]{index=48}
+Vi använder Discord som primär kommunikationskanal för lägret.
 
-Följ instruktionerna nedan för att komma igång:
+## Kom igång
 
-- Android/App/Web fungerar :contentReference[oaicite:49]{index=49}
-- Logga in på Discord :contentReference[oaicite:50]{index=50}
-- Gå med i RFSB-servern via inbjudningslänk :contentReference[oaicite:51]{index=51}
+1. Ladda ner appen för Android eller iOS, eller öppna [discord.com/login](https://discord.com/login) i webbläsaren.
+2. Skapa ett konto om du inte har ett (leta efter "Behöver du ett konto? Registrera dig").
+3. Logga in.
+4. Gå med i RFSB-servern via [inbjudningslänken](https://discord.gg/WgyTmnCZqh).
+5. Acceptera inbjudan.
 
-Instruktioner och kanaler beskrivs i servern. :contentReference[oaicite:52]{index=52}
+## Första stegen i servern
+
+- Gå till kanalen "Läs detta först".
+- Klicka på cirkeln som matchar din roll för att få rätt behörigheter.
+- Uppdatera din profil med ditt riktiga namn (går att ange per server).
+- Läs igenom uppförandereglerna i fästa meddelanden.
+
+RFSB-servern är uppdelad i kategorier och kanaler efter roll och åtkomstnivå.

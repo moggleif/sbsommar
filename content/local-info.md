@@ -2,22 +2,25 @@
 
 ## Restauranger och take away
 
-- Baansuan Takeaway Thai :contentReference[oaicite:30]{index=30}  
-- Pizzeria Sysslebäck :contentReference[oaicite:31]{index=31}  
-- Nedergårdens vilt och natur :contentReference[oaicite:32]{index=32}
+- **Baansuan Takeaway Thai**
+- **Pizzeria Sysslebäck** – hemleverans finns vissa dagar
+- **Nedergårdens vilt och natur**
 
 ## Livsmedel
 
-- Coop Sysslebäck :contentReference[oaicite:33]{index=33}  
-- ICA Nära Likenäs :contentReference[oaicite:34]{index=34}  
-- Naturpralinen chokladfabrik :contentReference[oaicite:35]{index=35}
+- **Coop Sysslebäck** – 3 km norrut på väg 62, tel: 010-410 96 80
+- **ICA Nära Likenäs** – 12 km söderut, öppet dygnet runt med mobilt BankID
+- **Chokladfabrik Naturpralinen** – promenadavstånd, handgjord choklad och sommarglass
 
 ## Vård
 
-- Apotek Kronans Apotek Likenäs :contentReference[oaicite:36]{index=36}  
-- Vårdcentralen (Likenäs) :contentReference[oaicite:37]{index=37}  
-- Torsby sjukhus (närmaste akutmottagning) :contentReference[oaicite:38]{index=38}
+- **Kronans Apotek Likenäs** – 12 km bort, vanligtvis öppet mån–fre 10:00–17:00
+- **Vårdcentral Likenäs** – vanligtvis öppet mån–fre 08:00–17:00
+- **Torsby sjukhus** – närmaste akutmottagning, öppet dygnet runt, ca 1 timmes bilresa
 
 ## Internet
 
-WiFi finns på campingområdet, mobilt bredband rekommenderas. :contentReference[oaicite:39]{index=39}
+WiFi finns på det nedre campingområdet med lösenordet **klaralven** (ingen hög hastighet).
+WiFi finns även på det övre området för skola (begränsat).
+Mobilt bredband rekommenderas för privat bruk.
+Datorrummet har lokalt nätverk utan internetåtkomst.
