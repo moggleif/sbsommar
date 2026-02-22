@@ -1,0 +1,354 @@
+camp:
+  id: 2026-02-testar
+  name: SB vinter februari 2026
+  location: Testar
+  start_date: '2026-02-22'
+  end_date: '2026-02-27'
+events:
+- id: valkommen-2026-02-22-1200
+  title: Välkommen
+  date: '2026-02-22'
+  start: '12:00'
+  end: '23:30'
+  location: Annat
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:37
+    updated_at: 2025-07-08 18:37
+- id: middag-2026-02-22-1700
+  title: Middag
+  date: '2026-02-22'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: bradspel-kunskap-2026-02-22-1930
+  title: Brädspel kunskap
+  date: '2026-02-22'
+  start: '19:30'
+  end: '22:00'
+  location: Kaffetält
+  responsible: Karin och Fredrik
+  description: |
+    En massa kul att göra.
+    och inget annat heller.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-03 19:29
+    updated_at: 2025-08-03 19:29
+- id: morgonyoga:-en-en-battre-morgon-2026-02-23-0730
+  title: 'MORGONYOGA: En en bättre morgon'
+  date: '2026-02-23'
+  start: '07:30'
+  end: '08:00'
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-01 06:40
+    updated_at: 2025-08-01 06:40
+- id: nagelstudio-2026-02-23-1000
+  title: Nagelstudio
+  date: '2026-02-23'
+  start: '10:00'
+  end: '11:30'
+  location: AndreasTältet
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 16:17
+    updated_at: 2025-08-05 10:24
+- id: lunch-2026-02-23-1200
+  title: Lunch
+  date: '2026-02-23'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: fotbollsturnering-for-alla-2026-02-23-1600
+  title: Fotbollsturnering för alla
+  date: '2026-02-23'
+  start: '16:00'
+  end: '17:00'
+  location: Fotbollsplan
+  responsible: Christina Johansson, Lisel Naeslund
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-28 12:04
+    updated_at: 2025-07-28 12:04
+- id: middag-2026-02-23-1700
+  title: Middag
+  date: '2026-02-23'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: frigorande-dans:-flodande-2026-02-24-0900
+  title: 'FRIGÖRANDE DANS: Flödande'
+  date: '2026-02-24'
+  start: '09:00'
+  end: '09:45'
+  location: Tält2
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-27 23:26
+    updated_at: 2025-08-04 15:33
+- id: lunch-2026-02-24-1200
+  title: Lunch
+  date: '2026-02-24'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: ai:-teori/praktik---grund/avancerat-2026-02-24-1500
+  title: 'AI: teori/praktik - grund/avancerat'
+  date: '2026-02-24'
+  start: '15:00'
+  end: '16:30'
+  location: GA Stilla hyllan
+  responsible: Petter Åström
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 11:44
+    updated_at: 2025-08-04 11:44
+- id: middag-2026-02-24-1700
+  title: Middag
+  date: '2026-02-24'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: morgonyoga:-free-power-2026-02-25-0730
+  title: 'MORGONYOGA: Free Power'
+  date: '2026-02-25'
+  start: '07:30'
+  end: '08:00'
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:18
+    updated_at: 2025-08-04 12:18
+- id: rollspel,-viktor-dnd,-session-1-2026-02-25-1000
+  title: Rollspel, Viktor DnD, session 1
+  date: '2026-02-25'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist, 0730714200
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-23 21:03
+    updated_at: 2025-07-23 21:03
+- id: charader-2026-02-25-1500
+  title: Charader
+  date: '2026-02-25'
+  start: '15:00'
+  end: '16:00'
+  location: Tält2
+  responsible: Christina Johansson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 09:55
+    updated_at: 2025-07-22 09:55
+- id: middag-2026-02-25-1700
+  title: Middag
+  date: '2026-02-25'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: lunch-2026-02-26-1200
+  title: Lunch
+  date: '2026-02-26'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: braingames-2026-02-26-1400
+  title: BRAINGAMES
+  date: '2026-02-26'
+  start: '14:00'
+  end: '16:30'
+  location: GA Idrott
+  responsible: Ivar Ängquist, 073-6413320
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 17:23
+    updated_at: 2025-07-22 17:23
+- id: grillfest-2026-02-26-1700
+  title: GRILLFEST
+  date: '2026-02-26'
+  start: '17:00'
+  end: '23:59'
+  location: Grillplats
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 09:43
+    updated_at: 2025-08-04 09:43
+- id: musikquiz-2026-02-26-1900
+  title: Musikquiz
+  date: '2026-02-26'
+  start: '19:00'
+  end: '21:00'
+  location: AndreasTältet
+  responsible: Martina och Linn
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:40
+    updated_at: 2025-08-04 12:40
+- id: morgonyoga:-lymfyoga-2026-02-27-0730
+  title: 'MORGONYOGA: Lymfyoga'
+  date: '2026-02-27'
+  start: '07:30'
+  end: '08:00'
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 21:49
+    updated_at: 2025-08-05 21:49
+- id: lunch-2026-02-27-1200
+  title: Lunch
+  date: '2026-02-27'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: '[obligatoriskt-for-alla]-avslutningsmote-2026-02-27-1800'
+  title: '[Obligatoriskt för alla] Avslutningsmöte'
+  date: '2026-02-27'
+  start: '18:00'
+  end: '20:30'
+  location: GA Idrott
+  responsible: Lägernissen (Andreas)
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:43
+    updated_at: 2025-07-08 18:53
