@@ -7,6 +7,7 @@ const QRCode = require('qrcode');
 const { renderSchedulePage, toDateString } = require('./render');
 const { renderAddPage } = require('./render-add');
 const { renderTodayPage } = require('./render-today');
+const { renderIdagPage } = require('./render-idag');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = require('./render-index');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
@@ -75,6 +76,10 @@ async function main() {
   const todayHtml = renderTodayPage(camp, events, qrSvg);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
   console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
+
+  const idagHtml = renderIdagPage(camp, events);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
+  console.log(`Built: public/idag.html  (${events.length} events)`);
 
   const addHtml = renderAddPage(camp, locations);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
