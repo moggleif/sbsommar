@@ -138,7 +138,7 @@ function renderSchedulePage(camp, events) {
   <nav class="page-nav">
     <a class="nav-link" href="index.html">Hem</a>
     <a class="nav-link active" href="schema.html">Schema</a>
-    <a class="nav-link" href="dagens-schema.html">Idag</a>
+    <a class="nav-link" href="idag.html">Idag</a>
     <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
   </nav>
   <h1>Schema – ${campName}</h1>
