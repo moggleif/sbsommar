@@ -10,6 +10,7 @@ This document describes how to operate the system before, during, and after a ca
 
 Example:
 
+```yaml
 - id: 2026-06
   name: SB Sommar Juni 2026
   location: Sysslebäck
@@ -18,6 +19,7 @@ Example:
   file: current.yaml
   archived: false
   active: true
+```
 
 2. Ensure:
    - No other camp has active: true
@@ -36,11 +38,13 @@ All live updates happen in:
 /data/current.yaml
 
 You may:
+
 - Edit manually
 - Use admin interface (future)
 - Upload via FTP
 
 Important:
+
 - current.yaml is NOT version controlled
 - Make backups if necessary
 
@@ -57,9 +61,11 @@ YYYY-MM-syssleback.yaml
 4. Commit to Git
 5. Update camps.yaml:
 
+```yaml
    - file: YYYY-MM-syssleback.yaml
    - archived: true
    - active: false
+```
 
 6. Remove or clear current.yaml
 
@@ -84,4 +90,5 @@ If something goes wrong during camp:
 - Or restore from server snapshot
 
 After camp:
+
 - Git history protects archived data

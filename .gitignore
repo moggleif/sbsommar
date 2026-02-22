@@ -19,3 +19,6 @@ Thumbs.db
 
 # Claude Code
 .claude/
+
+# Temporaru dont store images
+content/images/

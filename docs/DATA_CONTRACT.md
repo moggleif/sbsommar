@@ -11,6 +11,7 @@ Rendering logic depends on it.
 
 Each camp file must follow this structure:
 
+```yaml
 camp:
   id: string
   name: string
@@ -34,18 +35,21 @@ events:
     meta:
       created_at: ISO-8601 | null
       updated_at: ISO-8601 | null
+```
 
 ---
 
 # 2. Required Fields
 
 ## Required on camp level
+
 - id
 - name
 - start_date
 - end_date
 
 ## Required on event level
+
 - id
 - title
 - date
@@ -54,6 +58,7 @@ events:
 - responsible
 
 Optional:
+
 - end
 - description
 - link

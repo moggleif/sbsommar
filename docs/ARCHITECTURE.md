@@ -3,6 +3,7 @@
 This project is a static, YAML-driven camp platform.
 
 The system is intentionally simple:
+
 - No database
 - No CMS
 - No backend dependency for rendering
@@ -18,6 +19,7 @@ Each camp has exactly one YAML file:
 /data/2025-08-syssleback.yaml
 
 These files contain:
+
 - Camp metadata (name, dates, location)
 - A list of events
 - Each event is unique on (title + date + start)
@@ -31,6 +33,7 @@ This is the single source of truth for camp content.
 /data/camps.yaml defines all camps.
 
 It contains:
+
 - All historical camps
 - Their date ranges
 - Which file contains their events
@@ -38,6 +41,7 @@ It contains:
 
 Example:
 
+```yaml
 camps:
   - id: 2026-06
     name: SB Sommar Juni 2026
@@ -46,6 +50,7 @@ camps:
     file: current.yaml
     archived: false
     active: true
+```
 
 The site never hardcodes file names.
 It always reads from camps.yaml.
@@ -59,6 +64,7 @@ During camp week:
 /data/current.yaml
 
 This file:
+
 - Has the exact same structure as archived camp files
 - Is NOT version controlled
 - Is excluded via .gitignore
@@ -96,6 +102,7 @@ Rendering is simple:
 4. Render events
 
 If no camp is active:
+
 - Show archive view
 - Or show latest archived camp
 
@@ -111,6 +118,7 @@ If no camp is active:
 - No hidden state
 
 The system must remain:
+
 - Predictable
 - Minimal
 - Maintainable

@@ -13,6 +13,7 @@ This page replaces the previous WordPress site with a simpler and clearer versio
 SB Sommar is a family summer camp created for families with particularly gifted children and young people.
 
 The camp provides:
+
 - A safe and welcoming environment
 - Peer connection for children and youth
 - Community for parents
@@ -28,6 +29,7 @@ The website is the central place where all important information about the camp 
 The goal of the website is simple:
 
 To make it easy for families to understand:
+
 - What the camp is
 - Who it is for
 - When and where it takes place

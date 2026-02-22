@@ -1,0 +1,14 @@
+{
+  "name": "sbsommar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SB Sommar static site – dev tooling only",
+  "scripts": {
+    "lint:md": "markdownlint \"content/**/*.md\" \"docs/**/*.md\" README.md CLAUDE.md",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.0.0",
+    "markdownlint-cli": "^0.43.0"
+  }
+}
