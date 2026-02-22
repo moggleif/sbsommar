@@ -5,16 +5,29 @@ on:
     branches:
       - main
 
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
 jobs:
   deploy:
-    name: Upload to Webhotel via FTP
+    name: Build & Upload to Webhotel
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # Validate that FTP_TARGET_DIR ends with a slash
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - name: Validate FTP_TARGET_DIR format
         run: |
           if [[ "${{ secrets.FTP_TARGET_DIR }}" != */ ]]; then
@@ -23,18 +36,6 @@ jobs:
           fi
         shell: bash
 
-      # Dry-run: preview what will be uploaded
-      - name: Preview FTP upload (dry-run)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_TARGET_DIR }}
-          local-dir: ./public/
-          dry-run: true
-
-      # Actual deployment
       - name: Upload to FTP server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
