@@ -1,0 +1,2184 @@
+camp:
+  id: 2025-08-syssleback
+  name: SB Sommar Augusti 2025
+  location: Sysslebäck
+  start_date: '2025-08-03'
+  end_date: '2025-08-10'
+events:
+- id: valkommen-2025-08-03-1200
+  title: Välkommen
+  date: '2025-08-03'
+  start: '12:00'
+  end: '23:30'
+  location: Annat
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:37
+    updated_at: 2025-07-08 18:37
+- id: middag-2025-08-03-1700
+  title: Middag
+  date: '2025-08-03'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: alla-rigga-talt-och-stalla-i-ordning-ga-hall-2025-08-03-1800
+  title: (ALLA) Rigga tält och ställa i ordning GA-hall
+  date: '2025-08-03'
+  start: '18:00'
+  end: '20:30'
+  location: GA Idrott
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:35
+    updated_at: 2025-07-08 18:35
+- id: sista-for-idag-2025-08-03-2358
+  title: Sista för idag
+  date: '2025-08-03'
+  start: '23:58'
+  end: '23:59'
+  location: Annat
+  responsible: Myggorna
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:51
+    updated_at: 2025-07-08 18:51
+- id: morgonyoga:-en-en-battre-morgon-2025-08-04-0730
+  title: 'MORGONYOGA: En en bättre morgon'
+  date: '2025-08-04'
+  start: 07:30
+  end: 08:00
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-01 06:40
+    updated_at: 2025-08-01 06:40
+- id: lar-kanna-varandra,-lagret-och-campingen!-2025-08-04-0915
+  title: Lär känna varandra, lägret och campingen!
+  date: '2025-08-04'
+  start: 09:15
+  end: 09:45
+  location: Servicehus
+  responsible: Cecilia (ordf RFSB, Kaffestugan)
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-03 15:02
+    updated_at: 2025-08-03 15:02
+- id: '[alla]-valkomstmote-med-mera-2025-08-04-1000'
+  title: '[Alla] Välkomstmöte med mera'
+  date: '2025-08-04'
+  start: '10:00'
+  end: '12:00'
+  location: GA Idrott
+  responsible: Lägernissen (Andreas)
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:47
+    updated_at: 2025-07-08 18:47
+- id: lunch-2025-08-04-1200
+  title: Lunch
+  date: '2025-08-04'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: rollspel.-gor-karaktarer.-viktors,-fm,-dnd-grupp,-kvall-2025-08-04-1300
+  title: Rollspel. Gör karaktärer. Viktors, fm, DnD-grupp, kväll
+  date: '2025-08-04'
+  start: '13:00'
+  end: '14:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 16:25
+    updated_at: 2025-07-22 16:25
+- id: rollspel.-gora-karaktarer.-johan-d&d-grupp-1-fm.-rs-talt-2-2025-08-04-1300
+  title: Rollspel. Göra karaktärer. Johan D&D grupp 1 fm. RS tält 2
+  date: '2025-08-04'
+  start: '13:00'
+  end: '14:00'
+  location: Rollspelstält2
+  responsible: Johann
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:37
+    updated_at: 2025-07-25 10:37
+- id: mote-rollspelsforaldrar-for-fikaplanering-2025-08-04-1305
+  title: Möte rollspelsföräldrar för fikaplanering
+  date: '2025-08-04'
+  start: '13:05'
+  end: '13:25'
+  location: GA Stilla hyllan
+  responsible: Anna Björnson (070-2871415)
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-03 11:17
+    updated_at: 2025-08-03 11:17
+- id: pokémon-go-traff-2025-08-04-1400
+  title: Pokémon Go-träff
+  date: '2025-08-04'
+  start: '14:00'
+  end: '14:15'
+  location: Tält1
+  responsible: Kajsa & Theo (12)
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-17 16:00
+    updated_at: 2025-07-17 16:00
+- id: rollspel.-gora-karaktarer,-johan-d&d-grupp-2-kvall-2025-08-04-1400
+  title: Rollspel. Göra karaktärer, Johan D&D grupp 2 kväll
+  date: '2025-08-04'
+  start: '14:00'
+  end: '15:00'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:41
+    updated_at: 2025-07-25 10:41
+- id: varulvarna-2025-08-04-1400
+  title: Varulvarna
+  date: '2025-08-04'
+  start: '14:00'
+  end: '14:00'
+  location: GA Kreativ hörna
+  responsible: Alex och Rebecca Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:35
+    updated_at: 2025-08-04 12:35
+- id: ai:-teori/praktik---grund/avancerat-2025-08-04-1500
+  title: 'AI: teori/praktik - grund/avancerat'
+  date: '2025-08-04'
+  start: '15:00'
+  end: '16:30'
+  location: GA Stilla hyllan
+  responsible: Petter Åström
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 11:44
+    updated_at: 2025-08-04 11:44
+- id: gor-din-egen-fluffiga-slime-2025-08-04-1500
+  title: Gör din egen fluffiga slime
+  date: '2025-08-04'
+  start: '15:00'
+  end: '16:00'
+  location: Servicehus
+  responsible: Eila Colling & Kajsa Ögård
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-29 12:53
+    updated_at: 2025-07-29 12:53
+- id: jonglera-med-3-bollar.-2025-08-04-1500
+  title: JONGLERA med 3 bollar.
+  date: '2025-08-04'
+  start: '15:00'
+  end: '16:00'
+  location: GA Idrott
+  responsible: Petter Zonabend König, Stuga 1
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-01 23:46
+    updated_at: 2025-08-01 23:46
+- id: rollspel,-gora-karaktarer,-haralds-daggerheart-kampanj-2025-08-04-1500
+  title: Rollspel, göra karaktärer, Haralds Daggerheart kampanj
+  date: '2025-08-04'
+  start: '15:00'
+  end: '17:00'
+  location: Rollspelstält2
+  responsible: Harald Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-01 15:02
+    updated_at: 2025-08-04 15:38
+- id: rollspel.-gora-karaktarer.-viktor,-em,-daggerheart-2025-08-04-1500
+  title: Rollspel. Göra karaktärer. Viktor, em, Daggerheart
+  date: '2025-08-04'
+  start: '15:00'
+  end: '17:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist, 0730714200
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 16:40
+    updated_at: 2025-08-04 15:39
+- id: fotbollsturnering-for-alla-2025-08-04-1600
+  title: Fotbollsturnering för alla
+  date: '2025-08-04'
+  start: '16:00'
+  end: '17:00'
+  location: Fotbollsplan
+  responsible: Christina Johansson, Lisel Naeslund
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-28 12:04
+    updated_at: 2025-07-28 12:04
+- id: middag-2025-08-04-1700
+  title: Middag
+  date: '2025-08-04'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: pokémon-omanyte-ny-dynamax-2025-08-04-1800
+  title: Pokémon Omanyte ny dynamax
+  date: '2025-08-04'
+  start: '18:00'
+  end: '19:00'
+  location: KaffePaviljongen
+  responsible: Pia Olsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-03 22:47
+    updated_at: 2025-08-03 22:47
+- id: rollspel,-viktor,-daggerheart,-session-1-2025-08-04-1830
+  title: Rollspel, Viktor, Daggerheart, Session 1
+  date: '2025-08-04'
+  start: '18:30'
+  end: '22:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist, 0730714200
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 17:12
+    updated_at: 2025-08-04 15:39
+- id: rollspel.-session-1-haralds-daggerheart-kampanj.-2025-08-04-1830
+  title: Rollspel. Session 1 Haralds Daggerheart kampanj.
+  date: '2025-08-04'
+  start: '18:30'
+  end: '22:00'
+  location: Rollspelstält2
+  responsible: Harald Ängquist, 0735045212
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 17:40
+    updated_at: 2025-08-04 15:40
+- id: prepping,-hur-och-varfor?-2025-08-04-1900
+  title: Prepping, hur och varför?
+  date: '2025-08-04'
+  start: '19:00'
+  end: '20:00'
+  location: Tält2
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 11:46
+    updated_at: 2025-08-04 11:46
+- id: bradspel-kunskap-2025-08-04-1930
+  title: Brädspel kunskap
+  date: '2025-08-04'
+  start: '19:30'
+  end: '22:00'
+  location: Kaffetält
+  responsible: Karin och Fredrik
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-03 19:29
+    updated_at: 2025-08-03 19:29
+- id: sista-for-idag-2025-08-04-2358
+  title: Sista för idag
+  date: '2025-08-04'
+  start: '23:58'
+  end: '23:59'
+  location: Annat
+  responsible: Myggorna
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:51
+    updated_at: 2025-07-08 18:51
+- id: morgonyoga:-espresso-+-matcha-2025-08-05-0730
+  title: 'MORGONYOGA: Espresso + Matcha'
+  date: '2025-08-05'
+  start: 07:30
+  end: 08:15
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:03
+    updated_at: 2025-08-04 12:03
+- id: frigorande-dans:-flodande-2025-08-05-0900
+  title: 'FRIGÖRANDE DANS: Flödande'
+  date: '2025-08-05'
+  start: 09:00
+  end: 09:45
+  location: Tält2
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-27 23:26
+    updated_at: 2025-08-04 15:33
+- id: foraldrafika-2e-inkl-dyslexi-och-pda-2025-08-05-1000
+  title: Föräldrafika 2e inkl dyslexi och PDA
+  date: '2025-08-05'
+  start: '10:00'
+  end: '11:00'
+  location: Tält2
+  responsible: Anna Björnson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 15:25
+    updated_at: 2025-08-04 15:25
+- id: nagelstudio-2025-08-05-1000
+  title: Nagelstudio
+  date: '2025-08-05'
+  start: '10:00'
+  end: '11:30'
+  location: AndreasTältet
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 16:17
+    updated_at: 2025-08-05 10:24
+- id: rollspel,-viktor-dnd,-session-1-2025-08-05-1000
+  title: Rollspel, Viktor DnD, session 1
+  date: '2025-08-05'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist, 0730714200
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-23 21:03
+    updated_at: 2025-07-23 21:03
+- id: spel.-d&d-session-1,-grupp-1-2025-08-05-1000
+  title: Spel. D&D session 1, grupp 1
+  date: '2025-08-05'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:45
+    updated_at: 2025-07-25 10:45
+- id: geografisk--/-lokalforeningstraff-rfsb-2025-08-05-1100
+  title: Geografisk- / lokalföreningsträff RFSB
+  date: '2025-08-05'
+  start: '11:00'
+  end: '12:00'
+  location: GA Kreativ hörna
+  responsible: Cecilia, RFSB
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:25
+    updated_at: 2025-08-04 12:25
+- id: roda-vita-rosen-2025-08-05-1100
+  title: Röda vita rosen
+  date: '2025-08-05'
+  start: '11:00'
+  end: '12:30'
+  location: Servicehus
+  responsible: Christina Falk
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 21:07
+    updated_at: 2025-08-04 21:07
+- id: lunch-2025-08-05-1200
+  title: Lunch
+  date: '2025-08-05'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: ai:-vi-skapar-en-egen-gpt-tillsammans-2025-08-05-1315
+  title: 'AI: Vi skapar en egen GPT tillsammans'
+  date: '2025-08-05'
+  start: '13:15'
+  end: '14:30'
+  location: GA Stilla hyllan
+  responsible: Niclas Nilsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 17:55
+    updated_at: 2025-08-04 17:55
+- id: japansk-bakning-#1-2025-08-05-1400
+  title: 'JAPANSK BAKNING #1'
+  date: '2025-08-05'
+  start: '14:00'
+  end: '16:00'
+  location: Servicehus
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-27 15:22
+    updated_at: 2025-07-27 15:22
+- id: varulvarna-2025-08-05-1400
+  title: Varulvarna
+  date: '2025-08-05'
+  start: '14:00'
+  end: '15:00'
+  location: GA Kreativ hörna
+  responsible: Alex och Rebecca Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:38
+    updated_at: 2025-08-04 15:34
+- id: haralds-daggerheart-kampanj,-session-2-2025-08-05-1430
+  title: Haralds Daggerheart-kampanj, session 2
+  date: '2025-08-05'
+  start: '14:30'
+  end: '18:00'
+  location: Rollspelstält2
+  responsible: Harald Ängquist, 0735045212
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-23 21:08
+    updated_at: 2025-08-04 15:40
+- id: rollspel,-viktors-daggerheart-kampanj,-session-2-2025-08-05-1430
+  title: Rollspel, Viktors Daggerheart kampanj, session 2
+  date: '2025-08-05'
+  start: '14:30'
+  end: '18:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist 0730714200
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-23 21:06
+    updated_at: 2025-08-04 15:40
+- id: skapa-med-chatgpt-och-andra-ai-2025-08-05-1445
+  title: Skapa med ChatGPT (och andra AI)
+  date: '2025-08-05'
+  start: '14:45'
+  end: '16:00'
+  location: GA Stilla hyllan
+  responsible: Ingimar Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 19:02
+    updated_at: 2025-08-04 19:02
+- id: spela-/-lar-dig-spela-bridge-2025-08-05-1500
+  title: Spela / lär dig spela bridge
+  date: '2025-08-05'
+  start: '15:00'
+  end: '17:00'
+  location: AndreasTältet
+  responsible: Christina Falk och Rikard Olofsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 21:28
+    updated_at: 2025-08-05 10:25
+- id: boktraff---vi-diskuterar-boken-framligen-av-albert-camus-lankar-till-boken-finns-om-du-klickar-har-2025-08-05-1600
+  title: Bokträff - vi diskuterar boken Främligen av Albert Camus (länkar till boken
+    finns om du klickar här)
+  date: '2025-08-05'
+  start: '16:00'
+  end: '17:00'
+  location: Kaffetält
+  responsible: Amanda Johansson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-15 22:16
+    updated_at: 2025-07-15 22:19
+- id: fotbollsspel-for-alla-2025-08-05-1600
+  title: Fotbollsspel för alla
+  date: '2025-08-05'
+  start: '16:00'
+  end: '17:00'
+  location: Fotbollsplan
+  responsible: Lisel Næslund
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-28 08:45
+    updated_at: 2025-07-28 08:45
+- id: middag-2025-08-05-1700
+  title: Middag
+  date: '2025-08-05'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: yu-gi-oh---ett-manga--och-anime-trading-card-game-2025-08-05-1800
+  title: YU-GI-OH - ett manga- och anime Trading Card Game
+  date: '2025-08-05'
+  start: '18:00'
+  end: '19:30'
+  location: GA Stilla hyllan
+  responsible: Elias
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 21:56
+    updated_at: 2025-08-04 21:56
+- id: spel.-d&d-session-1,-grupp-2-2025-08-05-1830
+  title: Spel. D&D session 1, grupp 2
+  date: '2025-08-05'
+  start: '18:30'
+  end: '21:30'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:47
+    updated_at: 2025-07-25 10:47
+- id: talja-–-en-smorkniv,-trollstav-eller-valfritt.-2025-08-05-1830
+  title: TÄLJA – En smörkniv, trollstav eller valfritt.
+  date: '2025-08-05'
+  start: '18:30'
+  end: '19:30'
+  location: Tält1
+  responsible: Petter Zonabend König,
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-01 10:07
+    updated_at: 2025-08-01 10:07
+- id: nagelstudio-2025-08-05-1900
+  title: Nagelstudio
+  date: '2025-08-05'
+  start: '19:00'
+  end: '20:00'
+  location: AndreasTältet
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 21:15
+    updated_at: 2025-08-05 10:23
+- id: bradspel-kunskap-2025-08-05-1930
+  title: Brädspel kunskap
+  date: '2025-08-05'
+  start: '19:30'
+  end: '22:00'
+  location: Kaffetält
+  responsible: Karin och Fredrik
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-03 19:52
+    updated_at: 2025-08-03 19:52
+- id: japansk-snodd-2025-08-05-1930
+  title: Japansk snodd
+  date: '2025-08-05'
+  start: '19:30'
+  end: '20:30'
+  location: GA Kreativ hörna
+  responsible: Martina&Linn
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 00:19
+    updated_at: 2025-08-05 00:19
+- id: rita-manga-med-alex-2025-08-05-2000
+  title: Rita Manga med Alex
+  date: '2025-08-05'
+  start: '20:00'
+  end: '21:30'
+  location: GA Stilla hyllan
+  responsible: Alex Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 12:09
+    updated_at: 2025-08-05 12:09
+- id: sista-for-idag-2025-08-05-2358
+  title: Sista för idag
+  date: '2025-08-05'
+  start: '23:58'
+  end: '23:59'
+  location: Annat
+  responsible: Myggorna
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:51
+    updated_at: 2025-07-08 18:51
+- id: morgonyoga:-fria-rorelser-for-brostryggen-2025-08-06-0730
+  title: 'MORGONYOGA: Fria rörelser för bröstryggen'
+  date: '2025-08-06'
+  start: 07:30
+  end: 08:00
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:13
+    updated_at: 2025-08-04 12:13
+- id: diamond-painting-2025-08-06-1000
+  title: Diamond painting
+  date: '2025-08-06'
+  start: '10:00'
+  end: '12:00'
+  location: Tält1
+  responsible: Martina och Linn
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 16:30
+    updated_at: 2025-08-05 16:30
+- id: foraldrafika-radikalaccelation-2025-08-06-1000
+  title: Föräldrafika Radikalaccelation
+  date: '2025-08-06'
+  start: '10:00'
+  end: '11:00'
+  location: Tält2
+  responsible: Malin och Ingimar Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 15:27
+    updated_at: 2025-08-04 15:27
+- id: rollspel,-viktor,-dnd,-session-2,-rs-talt-1-2025-08-06-1000
+  title: Rollspel, Viktor, DnD, session 2, RS-tält 1
+  date: '2025-08-06'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-28 14:25
+    updated_at: 2025-07-28 14:25
+- id: spel.-d&d-session-2,-grupp-1-2025-08-06-1000
+  title: Spel. D&D session 2, grupp 1
+  date: '2025-08-06'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:50
+    updated_at: 2025-07-25 10:50
+- id: foraldrafika-2e---fortsattning-fran-tisdagen-2025-08-06-1115
+  title: Föräldrafika 2e - fortsättning från tisdagen
+  date: '2025-08-06'
+  start: '11:15'
+  end: '12:30'
+  location: GA Stilla hyllan
+  responsible: Anna Björnson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 11:59
+    updated_at: 2025-08-05 11:59
+- id: lunch-2025-08-06-1200
+  title: Lunch
+  date: '2025-08-06'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: pyssel-med-lufttorkande-lera---drop-in-2025-08-06-1300
+  title: Pyssel med lufttorkande lera - drop-in
+  date: '2025-08-06'
+  start: '13:00'
+  end: '14:30'
+  location: AndreasTältet
+  responsible: Kajsa Ögård
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 01:45
+    updated_at: 2025-08-05 10:25
+- id: ai-for-skola-och-utbildning-2025-08-06-1315
+  title: AI för skola och utbildning
+  date: '2025-08-06'
+  start: '13:15'
+  end: '14:30'
+  location: GA Stilla hyllan
+  responsible: Jonas o Petter
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 20:30
+    updated_at: 2025-08-05 20:30
+- id: african-flower-virkning-2025-08-06-1400
+  title: AFRICAN FLOWER VIRKNING
+  date: '2025-08-06'
+  start: '14:00'
+  end: '16:00'
+  location: Tält1
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-27 23:23
+    updated_at: 2025-07-27 23:23
+- id: spela-kubb-2025-08-06-1400
+  title: Spela Kubb
+  date: '2025-08-06'
+  start: '14:00'
+  end: '15:30'
+  location: Annat
+  responsible: familjen Wejbrandt
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 11:23
+    updated_at: 2025-08-04 11:23
+- id: braingame,-funktionarsmote-2025-08-06-1430
+  title: Braingame, funktionärsmöte
+  date: '2025-08-06'
+  start: '14:30'
+  end: '15:10'
+  location: GA Idrott
+  responsible: Jenny von Bahr
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 15:38
+    updated_at: 2025-08-05 15:38
+- id: eld-!-grunderna-for-att-tanda-och-fa-elden-att-ta-sig.-framst-med-tandstal.-2025-08-06-1430
+  title: ELD ! Grunderna för att tända och få elden att ta sig. Främst med tändstål.
+  date: '2025-08-06'
+  start: '14:30'
+  end: '15:30'
+  location: Grillplats
+  responsible: Petter Zonabend König, Stuga 1.
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-01 22:42
+    updated_at: 2025-08-06 14:22
+- id: rollspel,-haralds-dh-kampanj,-session-3-2025-08-06-1430
+  title: Rollspel, Haralds DH-kampanj, session 3
+  date: '2025-08-06'
+  start: '14:30'
+  end: '18:00'
+  location: Rollspelstält2
+  responsible: Harald Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-28 14:32
+    updated_at: 2025-07-28 14:32
+- id: rollspel,-viktors-dh-grupp,-session-3-2025-08-06-1430
+  title: Rollspel, Viktors DH-grupp, session 3
+  date: '2025-08-06'
+  start: '14:30'
+  end: '18:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-28 14:28
+    updated_at: 2025-07-28 14:28
+- id: charader-2025-08-06-1500
+  title: Charader
+  date: '2025-08-06'
+  start: '15:00'
+  end: '16:00'
+  location: Tält2
+  responsible: Christina Johansson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 09:55
+    updated_at: 2025-07-22 09:55
+- id: fotbollsspel-for-alla-2025-08-06-1600
+  title: Fotbollsspel för alla
+  date: '2025-08-06'
+  start: '16:00'
+  end: '17:00'
+  location: Fotbollsplan
+  responsible: Lisel Næslund
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-28 08:46
+    updated_at: 2025-07-28 08:46
+- id: simhall-oppen-2025-08-06-1600
+  title: Simhall öppen
+  date: '2025-08-06'
+  start: '16:00'
+  end: '20:00'
+  location: Annat
+  responsible: Torsby
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 11:06
+    updated_at: 2025-08-06 11:06
+- id: spraymalningen-bakom-rollspelstalten-2025-08-06-1600
+  title: Spraymålningen bakom rollspelstälten
+  date: '2025-08-06'
+  start: '16:00'
+  end: '17:00'
+  location: Annat
+  responsible: Jonas Colling
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 15:40
+    updated_at: 2025-08-06 15:40
+- id: tanda-eldarna-med-eldstal-for-de-som-deltog-tidigare-2025-08-06-1650
+  title: Tända eldarna med eldstål för de som deltog tidigare
+  date: '2025-08-06'
+  start: '16:50'
+  end: '17:15'
+  location: Grillplats
+  responsible: Morgan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 16:28
+    updated_at: 2025-08-06 16:28
+- id: middag-2025-08-06-1700
+  title: Middag
+  date: '2025-08-06'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: grillfest-2025-08-06-1700
+  title: GRILLFEST
+  date: '2025-08-06'
+  start: '17:00'
+  end: '23:59'
+  location: Grillplats
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 09:43
+    updated_at: 2025-08-04 09:43
+- id: pokémon-go-lugia-2025-08-06-1800
+  title: Pokémon go Lugia
+  date: '2025-08-06'
+  start: '18:00'
+  end: '19:00'
+  location: KaffePaviljongen
+  responsible: Pia Olsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-03 19:54
+    updated_at: 2025-08-03 19:54
+- id: rollspel,- d&d-session-2,- grupp-2-2025-08-06-1830
+  title: Rollspel,  D&D session 2,  grupp 2
+  date: '2025-08-06'
+  start: '18:30'
+  end: '21:30'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:52
+    updated_at: 2025-07-25 10:52
+- id: sista-for-idag-2025-08-06-2358
+  title: Sista för idag
+  date: '2025-08-06'
+  start: '23:58'
+  end: '23:59'
+  location: Annat
+  responsible: Myggorna
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:51
+    updated_at: 2025-07-08 18:51
+- id: morgonyoga:-free-power-2025-08-07-0730
+  title: 'MORGONYOGA: Free Power'
+  date: '2025-08-07'
+  start: 07:30
+  end: 08:00
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:18
+    updated_at: 2025-08-04 12:18
+- id: foraldrafika-uppflytt-och-sarkild-provning-2025-08-07-1000
+  title: Föräldrafika uppflytt och särkild prövning
+  date: '2025-08-07'
+  start: '10:00'
+  end: '11:00'
+  location: Tält2
+  responsible: Anna Björnson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 15:29
+    updated_at: 2025-08-04 15:29
+- id: rollspel,- d&d-session-3,- grupp-1-2025-08-07-1000
+  title: Rollspel,  D&D session 3,  grupp 1
+  date: '2025-08-07'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:54
+    updated_at: 2025-07-25 10:54
+- id: rollspel,-viktor-dnd,-session-3-2025-08-07-1000
+  title: Rollspel, Viktor DnD, session 3
+  date: '2025-08-07'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-30 12:24
+    updated_at: 2025-07-30 12:24
+- id: spraymalningen-bakom-rollspelstalten-2025-08-07-1000
+  title: Spraymålningen bakom rollspelstälten
+  date: '2025-08-07'
+  start: '10:00'
+  end: '11:30'
+  location: Annat
+  responsible: Jonas Colling
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 08:43
+    updated_at: 2025-08-07 08:43
+- id: frigorande-dans:-rytmer-2025-08-07-1030
+  title: 'FRIGÖRANDE DANS: Rytmer'
+  date: '2025-08-07'
+  start: '10:30'
+  end: '11:15'
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-27 23:33
+    updated_at: 2025-07-27 23:33
+- id: sapbubblor-for-sma-och-stora-2025-08-07-1100
+  title: Såpbubblor för små och stora
+  date: '2025-08-07'
+  start: '11:00'
+  end: '12:00'
+  location: AndreasTältet
+  responsible: Maja & Ulrik
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 14:01
+    updated_at: 2025-08-07 03:33
+- id: braingame,-funktionarsmote-2025-08-07-1115
+  title: Braingame, funktionärsmöte
+  date: '2025-08-07'
+  start: '11:15'
+  end: '12:00'
+  location: GA Idrott
+  responsible: Jenny von Bahr
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 15:40
+    updated_at: 2025-08-05 15:40
+- id: lunch-2025-08-07-1200
+  title: Lunch
+  date: '2025-08-07'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: simhall-oppen-2025-08-07-1200
+  title: Simhall öppen
+  date: '2025-08-07'
+  start: '12:00'
+  end: '19:00'
+  location: Annat
+  responsible: Torsby
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 11:08
+    updated_at: 2025-08-06 11:08
+- id: fem-fakta-pa-fem-minuter-–-open-stage&popcorn!-2025-08-07-1245
+  title: Fem fakta på fem minuter – open stage&popcorn!
+  date: '2025-08-07'
+  start: '12:45'
+  end: '13:45'
+  location: AndreasTältet
+  responsible: Lisel Næslund, Dante Næslund
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 15:41
+    updated_at: 2025-08-07 12:39
+- id: braingames-2025-08-07-1400
+  title: BRAINGAMES
+  date: '2025-08-07'
+  start: '14:00'
+  end: '16:30'
+  location: GA Idrott
+  responsible: Ivar Ängquist, 073-6413320
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 17:23
+    updated_at: 2025-07-22 17:23
+- id: artstudio/tecknarstudio-drop-in-2025-08-07-1630
+  title: Artstudio/Tecknarstudio Drop in
+  date: '2025-08-07'
+  start: '16:30'
+  end: '18:00'
+  location: GA Stilla hyllan
+  responsible: Tilde, Karin
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 05:18
+    updated_at: 2025-08-07 05:18
+- id: gor-din-egen-slime-#2---drop-in-2025-08-07-1630
+  title: 'Gör din egen slime #2 - drop-in'
+  date: '2025-08-07'
+  start: '16:30'
+  end: '18:00'
+  location: AndreasTältet
+  responsible: Kajsa Ögård
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 10:25
+    updated_at: 2025-08-07 03:31
+- id: middag-2025-08-07-1700
+  title: Middag
+  date: '2025-08-07'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: rollspel,- d&d-session-3, grupp-2-2025-08-07-1830
+  title: Rollspel,  D&D session 3, grupp 2
+  date: '2025-08-07'
+  start: '18:30'
+  end: '21:30'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-25 10:56
+    updated_at: 2025-07-25 10:56
+- id: rollspel,-prova-pa-2025-08-07-1830
+  title: Rollspel, prova-på
+  date: '2025-08-07'
+  start: '18:30'
+  end: '21:30'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-30 12:27
+    updated_at: 2025-07-30 12:27
+- id: musikquiz-2025-08-07-1900
+  title: Musikquiz
+  date: '2025-08-07'
+  start: '19:00'
+  end: '21:00'
+  location: AndreasTältet
+  responsible: Martina och Linn
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:40
+    updated_at: 2025-08-04 12:40
+- id: fackeltillverkning-2025-08-07-2000
+  title: Fackeltillverkning
+  date: '2025-08-07'
+  start: '20:00'
+  end: '22:00'
+  location: Grillplats
+  responsible: Anna Sohlman, Johan Sundell, Henrik Sohlman
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 11:21
+    updated_at: 2025-08-04 15:37
+- id: sallskapsspel---cards-against-humanity-rek-fr-17-ar-2025-08-07-2130
+  title: Sällskapsspel - Cards against humanity (rek fr 17 år)
+  date: '2025-08-07'
+  start: '21:30'
+  end: '22:30'
+  location: GA Stilla hyllan
+  responsible: Cecilia (kaffestugan)
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 18:37
+    updated_at: 2025-08-07 18:37
+- id: improvisationsteater-2025-08-07-2300
+  title: Improvisationsteater
+  date: '2025-08-07'
+  start: '23:00'
+  end: 00:30
+  location: Tonårsstugan
+  responsible: Antonia Ilke, 072 543 9487
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 05:56
+    updated_at: 2025-08-07 05:56
+- id: sista-for-idag-2025-08-07-2358
+  title: Sista för idag
+  date: '2025-08-07'
+  start: '23:58'
+  end: '23:59'
+  location: Annat
+  responsible: Myggorna
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:51
+    updated_at: 2025-07-08 18:51
+- id: morgonyoga:-rostyoga-2025-08-08-0730
+  title: 'MORGONYOGA: Röstyoga'
+  date: '2025-08-08'
+  start: 07:30
+  end: 08:00
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:25
+    updated_at: 2025-08-04 12:25
+- id: foraldrafika-alternativa-skolformer-utomlands-2025-08-08-1000
+  title: Föräldrafika alternativa skolformer utomlands
+  date: '2025-08-08'
+  start: '10:00'
+  end: '11:00'
+  location: Tält2
+  responsible: Maria AIfredsson och Susanna & Niclas Nilsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 15:32
+    updated_at: 2025-08-04 15:32
+- id: nagelstudio-event---nagelmalning-for-fega-foraldrar-2025-08-08-1000
+  title: Nagelstudio Event - Nagelmålning för fega föräldrar
+  date: '2025-08-08'
+  start: '10:00'
+  end: '11:00'
+  location: AndreasTältet
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 19:50
+    updated_at: 2025-08-06 11:41
+- id: rollspel,-viktor-dnd,-session-4-2025-08-08-1000
+  title: Rollspel, Viktor DnD, session 4
+  date: '2025-08-08'
+  start: '10:00'
+  end: '13:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-30 12:30
+    updated_at: 2025-07-30 12:30
+- id: gor-film-i-mobilen---del-1-2025-08-08-1015
+  title: Gör film i mobilen - del 1
+  date: '2025-08-08'
+  start: '10:15'
+  end: '11:30'
+  location: GA Kreativ hörna
+  responsible: Julius Grassman
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 10:11
+    updated_at: 2025-08-06 10:11
+- id: frigorande-dans:-rytmer-2025-08-08-1030
+  title: 'FRIGÖRANDE DANS: Rytmer'
+  date: '2025-08-08'
+  start: '10:30'
+  end: '11:15'
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 22:21
+    updated_at: 2025-08-07 22:21
+- id: nagelstudio-2025-08-08-1100
+  title: Nagelstudio
+  date: '2025-08-08'
+  start: '11:00'
+  end: '12:00'
+  location: AndreasTältet
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 19:53
+    updated_at: 2025-08-06 11:42
+- id: rollspel,-johan,-grupp-2--med-plats-for-lunch-2025-08-08-1100
+  title: Rollspel, Johan, grupp 2 ( med plats för lunch)
+  date: '2025-08-08'
+  start: '11:00'
+  end: '14:00'
+  location: Rollspelstält2
+  responsible: Johan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 20:35
+    updated_at: 2025-08-06 20:35
+- id: skapa-ai-verktyg---med-ai-google-ai-studio-2025-08-08-1100
+  title: Skapa AI-verktyg - med AI (Google AI Studio)
+  date: '2025-08-08'
+  start: '11:00'
+  end: '12:00'
+  location: GA Stilla hyllan
+  responsible: Jonas
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 21:10
+    updated_at: 2025-08-06 21:10
+- id: lunch-2025-08-08-1200
+  title: Lunch
+  date: '2025-08-08'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: diamond-painting-2025-08-08-1300
+  title: Diamond painting
+  date: '2025-08-08'
+  start: '13:00'
+  end: '15:00'
+  location: Tält1
+  responsible: Martina och Linn
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 16:38
+    updated_at: 2025-08-05 16:38
+- id: mahjong-2025-08-08-1400
+  title: Mahjong
+  date: '2025-08-08'
+  start: '14:00'
+  end: '15:15'
+  location: GA Stilla hyllan
+  responsible: Jinghong Sundell, Johan Sundell
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 22:45
+    updated_at: 2025-08-04 22:45
+- id: varulvarna-2025-08-08-1400
+  title: Varulvarna
+  date: '2025-08-08'
+  start: '14:00'
+  end: '16:00'
+  location: GA Kreativ hörna
+  responsible: Alex och Rebecca Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-08 11:38
+    updated_at: 2025-08-08 11:38
+- id: foraldrafika-problematisk-skolnarvaro-2025-08-08-1415
+  title: Föräldrafika problematisk skolnärvaro
+  date: '2025-08-08'
+  start: '14:15'
+  end: '15:30'
+  location: Tält2
+  responsible: Anna Björnson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 12:33
+    updated_at: 2025-08-05 12:33
+- id: rollspel-viktors-dh-kampanj-2025-08-08-1430
+  title: Rollspel Viktors DH-kampanj
+  date: '2025-08-08'
+  start: '14:30'
+  end: '18:00'
+  location: Rollspelstält1
+  responsible: Viktor Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-30 12:32
+    updated_at: 2025-07-30 12:32
+- id: rollspel,-haralds-dh-kampanj-2025-08-08-1430
+  title: Rollspel, Haralds DH-kampanj
+  date: '2025-08-08'
+  start: '14:30'
+  end: '18:00'
+  location: Rollspelstält2
+  responsible: Harald Ängquist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-30 12:33
+    updated_at: 2025-07-30 12:33
+- id: artstudio--/-tecknarstudio-drop-in-2025-08-08-1515
+  title: Artstudio  / Tecknarstudio drop in
+  date: '2025-08-08'
+  start: '15:15'
+  end: '18:00'
+  location: GA Stilla hyllan
+  responsible: Tilde, Karin
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-08 05:51
+    updated_at: 2025-08-08 05:51
+- id: frigorande-dans:lekfullhet-2025-08-08-1530
+  title: FRIGÖRANDE DANS:Lekfullhet
+  date: '2025-08-08'
+  start: '15:30'
+  end: '16:15'
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-27 23:43
+    updated_at: 2025-07-27 23:43
+- id: bokprat-2025-08-08-1600
+  title: Bokprat
+  date: '2025-08-08'
+  start: '16:00'
+  end: '17:00'
+  location: Kaffetält
+  responsible: Christina & Amanda
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-22 10:06
+    updated_at: 2025-07-28 10:53
+- id: fotboll-for-alla!-2025-08-08-1600
+  title: Fotboll för alla!
+  date: '2025-08-08'
+  start: '16:00'
+  end: '17:00'
+  location: Fotbollsplan
+  responsible: Fredrik och Arvid
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-08 09:38
+    updated_at: 2025-08-08 09:38
+- id: gora-film-med-mobilen-del-2-2025-08-08-1600
+  title: Göra film med mobilen del 2
+  date: '2025-08-08'
+  start: '16:00'
+  end: '17:30'
+  location: GA Kreativ hörna
+  responsible: Julius Grassman
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 19:53
+    updated_at: 2025-08-06 19:53
+- id: simhall-oppen-2025-08-08-1600
+  title: Simhall öppen
+  date: '2025-08-08'
+  start: '16:00'
+  end: '20:00'
+  location: Annat
+  responsible: Torsby
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 11:13
+    updated_at: 2025-08-06 11:13
+- id: middag-2025-08-08-1700
+  title: Middag
+  date: '2025-08-08'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: se-hit-alla-pappor---vilka-ar-pa-lagret-och-vad-tanker-vi?-2025-08-08-1800
+  title: Se hit alla pappor - vilka är på lägret och vad tänker vi?
+  date: '2025-08-08'
+  start: '18:00'
+  end: '19:00'
+  location: Kaffetält
+  responsible: Morgan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 12:37
+    updated_at: 2025-08-07 13:14
+- id: bridge-2025-08-08-1900
+  title: Bridge
+  date: '2025-08-08'
+  start: '19:00'
+  end: '21:00'
+  location: AndreasTältet
+  responsible: Christina Falk och Rikard Olofsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 12:52
+    updated_at: 2025-08-07 12:52
+- id: musik-jam-2025-08-08-2100
+  title: Musik-jam
+  date: '2025-08-08'
+  start: '21:00'
+  end: '22:00'
+  location: Servicehus
+  responsible: Petter Å
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-07 18:26
+    updated_at: 2025-08-07 18:26
+- id: sista-for-idag-2025-08-08-2358
+  title: Sista för idag
+  date: '2025-08-08'
+  start: '23:58'
+  end: '23:59'
+  location: Annat
+  responsible: Myggorna
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:51
+    updated_at: 2025-07-08 18:51
+- id: kolakakor-2025-08-09-0100
+  title: Kolakakor
+  date: '2025-08-09'
+  start: 01:00
+  end: 04:00
+  location: Servicehus
+  responsible: Calle o Tilde
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-09 03:48
+    updated_at: 2025-08-09 03:48
+- id: morgonyoga:-grow-your-roots-2025-08-09-0730
+  title: 'MORGONYOGA: Grow your roots'
+  date: '2025-08-09'
+  start: 07:30
+  end: 08:20
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 12:33
+    updated_at: 2025-08-04 12:33
+- id: foraldrafika-hbtqi+-2025-08-09-1000
+  title: Föräldrafika HBTQI+
+  date: '2025-08-09'
+  start: '10:00'
+  end: '11:00'
+  location: Kaffetält
+  responsible: Jonas Colling och Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-04 11:09
+    updated_at: 2025-08-04 11:09
+- id: simhall-oppen-2025-08-09-1000
+  title: Simhall öppen
+  date: '2025-08-09'
+  start: '10:00'
+  end: '14:00'
+  location: Annat
+  responsible: Torsby
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-06 11:30
+    updated_at: 2025-08-06 11:30
+- id: lunch-2025-08-09-1200
+  title: Lunch
+  date: '2025-08-09'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40
+- id: flyttade-fran-fre;-diskussion:-digitalt-stod-kopplat-till-utbildning-och-larande-under-rfsb-paraply?-2025-08-09-1300
+  title: 'Flyttade från fre; Diskussion: Digitalt stöd kopplat till utbildning och
+    lärande under RFSB-paraply?'
+  date: '2025-08-09'
+  start: '13:00'
+  end: '14:00'
+  location: GA Stilla hyllan
+  responsible: Jonas
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-08 11:16
+    updated_at: 2025-08-08 11:16
+- id: japansk-bakning-#3-2025-08-09-1400
+  title: 'JAPANSK BAKNING #3'
+  date: '2025-08-09'
+  start: '14:00'
+  end: '16:00'
+  location: Servicehus
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-27 15:27
+    updated_at: 2025-07-27 15:27
+- id: artstudio/tecknarstudio-drop-in-2025-08-09-1430
+  title: Artstudio/Tecknarstudio Drop in
+  date: '2025-08-09'
+  start: '14:30'
+  end: '17:30'
+  location: GA Stilla hyllan
+  responsible: Tilde, Mida
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-09 06:52
+    updated_at: 2025-08-09 06:52
+- id: avsluta-diamond-painting-plus-klistermarken-2025-08-09-1430
+  title: Avsluta Diamond painting plus klistermärken
+  date: '2025-08-09'
+  start: '14:30'
+  end: '15:30'
+  location: Tält1
+  responsible: Martina Linn
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-08 14:31
+    updated_at: 2025-08-08 14:31
+- id: skradmjolsvafflor-med-gradde-och-sylt-2025-08-09-1500
+  title: Skrädmjölsvåfflor med grädde och sylt
+  date: '2025-08-09'
+  start: '15:00'
+  end: '16:00'
+  location: Servicehus
+  responsible: Peter Jonsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-09 14:17
+    updated_at: 2025-08-09 14:17
+- id: information-om-ib,-international-baccalaureate-2025-08-09-1600
+  title: Information om IB, international baccalaureate
+  date: '2025-08-09'
+  start: '16:00'
+  end: '16:20'
+  location: Kaffetält
+  responsible: Malin och Gabriel Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-09 13:36
+    updated_at: 2025-08-09 13:36
+- id: middag-2025-08-09-1700
+  title: Middag
+  date: '2025-08-09'
+  start: '17:00'
+  end: '18:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:39
+    updated_at: 2025-07-08 18:53
+- id: '[obligatoriskt-for-alla]-avslutningsmote-2025-08-09-1800'
+  title: '[Obligatoriskt för alla] Avslutningsmöte'
+  date: '2025-08-09'
+  start: '18:00'
+  end: '20:30'
+  location: GA Idrott
+  responsible: Lägernissen (Andreas)
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:43
+    updated_at: 2025-07-08 18:53
+- id: sista-for-idag-2025-08-09-2358
+  title: Sista för idag
+  date: '2025-08-09'
+  start: '23:58'
+  end: '23:59'
+  location: Annat
+  responsible: Myggorna
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:51
+    updated_at: 2025-07-08 18:51
+- id: morgonyoga:-lymfyoga-2025-08-10-0730
+  title: 'MORGONYOGA: Lymfyoga'
+  date: '2025-08-10'
+  start: 07:30
+  end: 08:00
+  location: GA Idrott
+  responsible: Lisa Lautrup
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-08-05 21:49
+    updated_at: 2025-08-05 21:49
+- id: glass-pa-chokladfabriken-2025-08-10-1100
+  title: Glass på chokladfabriken
+  date: '2025-08-10'
+  start: '11:00'
+  end: '15:00'
+  location: Annat
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:48
+    updated_at: 2025-08-08 13:26
+- id: lunch-2025-08-10-1200
+  title: Lunch
+  date: '2025-08-10'
+  start: '12:00'
+  end: '13:00'
+  location: Servicehus
+  responsible: Alla
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2025-07-08 18:40
+    updated_at: 2025-07-08 18:40

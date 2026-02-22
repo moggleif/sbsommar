@@ -1,0 +1,49 @@
+camps:
+- id: 2021-06
+  name: SB Sommar Juni 2021
+  location: Sysslebäck
+  start_date: '2021-06-27'
+  end_date: '2021-07-04'
+  file: 2021-06-syssleback.yaml
+  archived: true
+  active: false
+- id: 2022-06
+  name: SB Sommar Juni 2022
+  location: Sysslebäck
+  start_date: '2022-06-26'
+  end_date: '2022-07-03'
+  file: 2022-06-syssleback-clean.yaml
+  archived: true
+  active: false
+- id: 2023-06
+  name: SB Sommar Juni 2023
+  location: Sysslebäck
+  start_date: '2023-06-25'
+  end_date: '2023-07-02'
+  file: 2023-06-syssleback.yaml
+  archived: true
+  active: false
+- id: 2024-06
+  name: SB Sommar Juni 2024
+  location: Sysslebäck
+  start_date: '2024-06-30'
+  end_date: '2024-07-07'
+  file: 2024-06-syssleback.yaml
+  archived: true
+  active: false
+- id: 2025-06
+  name: SB Sommar Juni 2025
+  location: Sysslebäck
+  start_date: '2025-06-29'
+  end_date: '2025-07-06'
+  file: 2025-06-syssleback.yaml
+  archived: true
+  active: false
+- id: 2025-08
+  name: SB Sommar Augusti 2025
+  location: Sysslebäck
+  start_date: '2025-08-03'
+  end_date: '2025-08-10'
+  file: 2025-08-syssleback.yaml
+  archived: true
+  active: false

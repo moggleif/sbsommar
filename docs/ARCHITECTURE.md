@@ -1,203 +1,116 @@
 # SB Sommar – Architecture Overview
 
-This document describes the architectural philosophy of the SB Sommar website.
+This project is a static, YAML-driven camp platform.
 
-The goal is long-term stability with the ability to adjust design when needed,
-without changing the core system.
-
-The website is updated approximately once per year.
-
----
-
-# 1. Guiding Philosophy
-
-SB Sommar is built on three principles:
-
-1. Stability
-2. Simplicity
-3. Regenerability
-
-The core should remain stable for many years.
-The presentation layer may evolve.
-
-AI may assist in redesigning or refining the presentation,
-but the underlying structure must remain predictable and durable.
+The system is intentionally simple:
+- No database
+- No CMS
+- No backend dependency for rendering
+- Git is the archive
 
 ---
 
-# 2. Architectural Layers
+## 1. Data Layer
 
-The system is divided into three clearly separated layers:
+Each camp has exactly one YAML file:
 
-DATA  
-CONTENT  
-PRESENTATION  
+/data/2025-06-syssleback.yaml
+/data/2025-08-syssleback.yaml
 
-Each layer has a specific responsibility.
+These files contain:
+- Camp metadata (name, dates, location)
+- A list of events
+- Each event is unique on (title + date + start)
 
----
-
-# 3. Data Layer (Stable Core)
-
-The data layer contains structured information required for functionality.
-
-Examples:
-- Events
-- Locations
-
-This layer:
-
-- Is machine-readable
-- Has strict structure
-- Is validated
-- Is the single source of truth
-- Does not contain design decisions
-
-This layer should rarely change in structure.
-
-It must remain consistent year after year.
+This is the single source of truth for camp content.
 
 ---
 
-# 4. Content Layer (Human Information)
+## 2. Metadata Layer
 
-The content layer contains informational text such as:
+/data/camps.yaml defines all camps.
 
-- Overview
-- FAQ
-- Rules
-- Food information
-- Pricing
-- Practical information
+It contains:
+- All historical camps
+- Their date ranges
+- Which file contains their events
+- Which camp is currently active
 
-This layer:
+Example:
 
-- Is written in simple structured text
-- Contains no layout instructions
-- Contains no styling
-- Contains no structural HTML
+camps:
+  - id: 2026-06
+    name: SB Sommar Juni 2026
+    start_date: 2026-06-28
+    end_date: 2026-07-05
+    file: current.yaml
+    archived: false
+    active: true
 
-Its purpose is semantic clarity only.
-
-AI may rewrite, restructure or improve this content,
-but must not mix presentation into it.
-
----
-
-# 5. Presentation Layer (Adjustable)
-
-The presentation layer defines:
-
-- Layout
-- Visual structure
-- Typography
-- Colors
-- Responsiveness
-- Screen display mode
-
-This layer may evolve over time.
-
-It must:
-
-- Never redefine data structure
-- Never embed business logic
-- Never duplicate event data
-- Never change the core model
-
-Design changes should not require changing data or content format.
+The site never hardcodes file names.
+It always reads from camps.yaml.
 
 ---
 
-# 6. Event Handling Core
+## 3. Live Layer
 
-The event system is a functional core of the site.
+During camp week:
 
-It must:
+/data/current.yaml
 
-- Read structured event data
-- Validate required fields
-- Sort events chronologically
-- Generate:
-  - Weekly schedule
-  - Daily schedule
-  - “Today” view
-  - Display mode view
-  - RSS feed
-  - Future archive pages
+This file:
+- Has the exact same structure as archived camp files
+- Is NOT version controlled
+- Is excluded via .gitignore
+- Is the only file updated live
 
-This logic should be stable across years.
-
-It is infrastructure, not design.
+The system loads the camp where active: true
+and reads its file.
 
 ---
 
-# 7. AI Usage Strategy
+## 4. Archive Layer
 
-AI is used as:
+After camp:
 
-- A design assistant
-- A layout refiner
-- A content improver
+1. Rename current.yaml → YYYY-MM.yaml
+2. Commit to Git
+3. Update camps.yaml
+   - archived: true
+   - active: false
+   - file: YYYY-MM.yaml
 
-AI is NOT:
+Git becomes the permanent archive.
 
-- Part of runtime
-- Part of the build system
-- A required dependency for deployment
-
-The system must be reproducible without AI.
-
-AI can regenerate presentation.
-AI must not redefine core structure.
+No data is ever lost.
 
 ---
 
-# 8. Update Philosophy (Yearly Update Model)
+## 5. Rendering Logic
 
-Because the site is updated once per year:
+Rendering is simple:
 
-- Dependencies must be minimal.
-- The system must not rely on fragile ecosystems.
-- Build complexity must be low.
-- Documentation must be clear.
+1. Load camps.yaml
+2. Find camp where active: true
+3. Load its file
+4. Render events
 
-The goal is that in five years,
-the system can still be understood in one hour.
-
----
-
-# 9. Long-Term Stability Rules
-
-The following must remain stable:
-
-- Data format
-- Folder structure
-- Core event validation logic
-- Build process
-- Deployment flow
-
-The following may change:
-
-- CSS
-- Layout
-- Visual hierarchy
-- Interaction refinements
+If no camp is active:
+- Show archive view
+- Or show latest archived camp
 
 ---
 
-# 10. Core Principle
+## 6. Design Philosophy
 
-Content is infrastructure.  
-Data is authority.  
-Design is replaceable.
+- YAML is the database
+- Git is the archive
+- Simplicity over cleverness
+- AI-friendly structure
+- One clear data contract
+- No hidden state
 
-The system must remain simple enough that:
-
-- It can be regenerated.
-- It can be redesigned.
-- It can be understood quickly.
-- It does not depend on trends.
-
-Clarity before complexity.
-Structure before aesthetics.
-Stability before innovation.
+The system must remain:
+- Predictable
+- Minimal
+- Maintainable
