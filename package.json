@@ -5,11 +5,17 @@
   "description": "SB Sommar static site – dev tooling only",
   "scripts": {
     "build": "node source/build.js",
+    "test": "node --test tests/render.test.js tests/snapshot.test.js",
+    "test:update-snapshots": "node tests/helpers/update-snapshots.js",
+    "lint": "eslint source tests eslint.config.js",
+    "lint:fix": "eslint source tests eslint.config.js --fix",
     "lint:md": "markdownlint \"content/**/*.md\" \"docs/**/*.md\" README.md CLAUDE.md",
-    "prepare": "husky"
+    "prepare": "git config core.hooksPath .husky"
   },
   "devDependencies": {
-    "husky": "^9.0.0",
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
     "js-yaml": "^4.1.1",
     "markdownlint-cli": "^0.43.0"
   }

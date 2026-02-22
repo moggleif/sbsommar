@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schema – Test Camp 2025</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="page-nav">
+    <a class="nav-link active" href="schema.html">Schema</a>
+    <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
+  </nav>
+  <h1>Schema – Test Camp 2025</h1>
+  <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
+  <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>
+
+  <details class="day" id="2025-06-22" open>
+    <summary>söndag 22 juni 2025</summary>
+    <div class="event-list">
+    <div class="event-row plain">
+      <span class="ev-time">08:00–09:00</span>
+      <span class="ev-title">Frukost</span>
+      <span class="ev-meta"> · Matsalen · alla</span>
+    </div>
+    <details class="event-row">
+      <summary>
+        <span class="ev-time">10:00–12:00</span>
+        <span class="ev-title">Workshop</span>
+        <span class="ev-meta"> · Salen · Bob</span>
+      </summary>
+      <div class="event-extra"><p class="event-desc">A useful workshop.</p><p class="event-desc">Bring your laptop.</p><a class="event-ext-link" href="https://example.com" target="_blank" rel="noopener">Extern länk →</a></div>
+    </details>
+    <div class="event-row plain">
+      <span class="ev-time">20:00–22:00</span>
+      <span class="ev-title">Kvällsmys</span>
+      <span class="ev-meta"> · Stugan · Anna</span>
+    </div>
+    </div>
+  </details>
+
+  <details class="day" id="2025-06-23" open>
+    <summary>måndag 23 juni 2025</summary>
+    <div class="event-list">
+    <div class="event-row plain">
+      <span class="ev-time">18:00</span>
+      <span class="ev-title">Evening Swim</span>
+      <span class="ev-meta"> · Sjön · alla</span>
+    </div>
+    </div>
+  </details>
+</body>
+</html>

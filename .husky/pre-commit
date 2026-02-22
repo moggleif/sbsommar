@@ -1,1 +1,4 @@
-npx markdownlint-cli "content/**/*.md" "docs/**/*.md" README.md CLAUDE.md
+#!/bin/sh
+npm run lint
+npm run lint:md
+npm test
