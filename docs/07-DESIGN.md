@@ -1,7 +1,9 @@
-# Design Specification
+# SB Sommar – Design Specification
 
 Visual design reference for SB Sommar. Inspired by the existing site at sbsommar.se.
 This document is the single source of truth for design decisions.
+
+All CSS must use the custom properties defined in §7. Do not hardcode colors, spacing, or typography values.
 
 ---
 
@@ -157,19 +159,15 @@ Base unit: `8px`. Spacing values are multiples of this.
 
 ## 7. CSS Strategy
 
-### When to write CSS
+### How to write CSS
 
-Do not write production CSS until the static site generator is chosen and HTML
-templates exist. Writing CSS without knowing the HTML structure leads to waste.
+Write CSS for a component only once its HTML structure exists. Speculative CSS — written before the markup is settled — creates waste and drift.
 
-### Recommended approach
+### Structure
 
-Once the SSG and templates are in place:
-
-1. One main CSS file: `src/styles/main.css` (or equivalent in the SSG's asset pipeline).
-2. Organized in sections: reset → tokens → base → layout → components → utilities.
-3. No preprocessor required. CSS custom properties (variables) are enough.
-4. No CSS framework. Hand-written, minimal.
+1. One main CSS file, organized in sections: reset → tokens → base → layout → components → utilities.
+2. No preprocessor required. CSS custom properties (variables) are enough.
+3. No CSS framework. Hand-written, minimal.
 
 ### CSS custom properties (design tokens)
 
@@ -244,4 +242,4 @@ These variables make it trivial to adjust the design globally later.
 - No decorative fonts or display typefaces.
 - No full-width text at desktop widths — always constrain with container.
 - No whitespace-heavy "agency" layouts. Content density matters here.
-- No dark mode for the main site (a separate display mode for schedules is planned, but that is a different context).
+- No dark mode for the main site. The Today/Display view uses a dark theme — but that is a separate, purpose-built view for shared screens and is not a site-wide dark mode.

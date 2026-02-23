@@ -1,0 +1,212 @@
+# SB Sommar – Operations Guide
+
+How to develop, run, and deploy the site.
+
+For a full description of the system's architecture and data flow, see [02-ARCHITECTURE.md](02-ARCHITECTURE.md).
+
+---
+
+## System Overview
+
+| Layer  | Location                   | Role                                                   |
+| ------ | -------------------------- | ------------------------------------------------------ |
+| Data   | `source/data/*.yaml`       | Single source of truth for all events                  |
+| Build  | `source/build/build.js`    | Generates HTML from data and Markdown                  |
+| Server | `app.js`                   | Serves `public/` and handles the add-event API         |
+| Output | `public/`                  | Generated HTML + static CSS/JS — do not edit directly  |
+
+The server (`app.js`) does two things:
+
+1. Serves the built static files from `public/`.
+2. Handles `POST /add-event`, which commits the new event to GitHub via the Contents API, opens a PR, and enables auto-merge. The PR triggers CI (build only) and merges automatically — no admin step needed.
+
+---
+
+## Local Development
+
+### Prerequisites
+
+- Node.js 18 or later
+- npm
+
+### First-time setup
+
+```bash
+npm install
+npm run build
+npm start
+```
+
+The site is available at <http://localhost:3000>.
+
+The port can be overridden:
+
+```bash
+PORT=8080 npm start
+```
+
+### Rebuilding manually
+
+If you edit a YAML data file directly (e.g. to correct an event), rebuild:
+
+```bash
+npm run build
+```
+
+The server does not need to be restarted after a rebuild — it reads files fresh on each request.
+
+### Commands
+
+```bash
+npm test                         # Run tests
+npm run lint                     # Lint JavaScript
+npm run lint:md                  # Lint Markdown
+npm run test:update-snapshots    # Regenerate schedule page snapshots
+```
+
+---
+
+## Data Files
+
+Event data lives in `source/data/`. One YAML file per camp.
+
+Which camp is active is determined by `source/data/camps.yaml`:
+
+- If any camp has `active: true`, that camp is used.
+- If none does, the camp with the most recent `start_date` is shown.
+
+Events are sorted chronologically at build time, so their order in the YAML file does not matter. New events submitted through the form are committed to GitHub and merged via auto-merge PR — the file on disk updates when the next deploy runs.
+
+Locations are defined centrally in `source/data/local.yaml`.
+Never define locations inside individual camp files.
+
+---
+
+## Production Deployment
+
+### Infrastructure
+
+The site is split into two parts deployed to the same host:
+
+| Part                    | Deployment method | Location on host              |
+| ----------------------- | ----------------- | ----------------------------- |
+| Static site (`public/`) | FTP               | Web root (`FTP_TARGET_DIR`)   |
+| API server (`app.js`)   | FTP + SSH         | App directory (`FTP_APP_DIR`) |
+
+The API server runs as a persistent Node.js process via Passenger.
+Passenger restarts automatically when new files are uploaded.
+
+### CI/CD Workflows
+
+| Workflow     | Trigger           | What it does                                                  |
+| ------------ | ----------------- | ------------------------------------------------------------- |
+| `ci.yml`     | Every push and PR | Lint + test + build. Lint/test skipped for data-only commits. |
+| `deploy.yml` | Push to `main`    | Build → FTP static files → FTP + SSH app server restart       |
+
+```mermaid
+flowchart TD
+    A[Push branch] --> B[CI: lint · test · build]
+    B --> C{Passes?}
+    C -- No --> D[Fix and repush]
+    D --> B
+    C -- Yes --> E[Open PR · merge to main]
+    E --> F
+
+    subgraph F [Deploy on push to main]
+        G[Build public/] --> H[FTP: static files to web root]
+        G --> I[FTP: app.js to app dir]
+        I --> J[SSH: npm install · Passenger restart]
+    end
+```
+
+### Environment Variables
+
+| Variable        | Default | Description                                        |
+| --------------- | ------- | -------------------------------------------------- |
+| `PORT`          | `3000`  | Port the HTTP server listens on                    |
+| `API_URL`       | —       | Injected at build time; baked into the static form |
+| `GITHUB_OWNER`  | —       | GitHub repository owner                            |
+| `GITHUB_REPO`   | —       | GitHub repository name                             |
+| `GITHUB_BRANCH` | —       | Branch to commit events to (typically `main`)      |
+| `GITHUB_TOKEN`  | —       | Personal access token with repo write access       |
+
+`API_URL`, `GITHUB_*`, and FTP/SSH credentials are stored as GitHub Actions secrets.
+
+### Manual Production Startup (first time or after server wipe)
+
+```bash
+npm install --omit=dev
+npm run build
+npm start
+```
+
+---
+
+## Camp Lifecycle
+
+### Before Camp
+
+1. Create a new YAML file in `source/data/` (e.g. `2026-06-syssleback.yaml`).
+2. Add the camp entry in `source/data/camps.yaml` with `active: true`.
+3. Set the previous camp to `active: false`.
+4. Run `npm run build` to verify.
+5. Deploy.
+
+Minimal camp file:
+
+```yaml
+camp:
+  id: 2026-06-syssleback
+  name: SB Sommar Juni 2026
+  location: Sysslebäck
+  start_date: '2026-06-28'
+  end_date: '2026-07-05'
+events: []
+```
+
+### During Camp
+
+Participants add events through the web form at `/lagg-till.html`.
+The API server commits the event to GitHub, which triggers an auto-merge PR
+and a full rebuild and deploy — typically live within a few minutes.
+
+An admin can also edit the YAML file directly on GitHub and push to `main`
+to fix or remove entries.
+
+### After Camp
+
+1. Set `active: false` for the camp in `source/data/camps.yaml`.
+2. Set `archived: true`.
+3. Commit. The YAML file already has its permanent name — it becomes the archive as-is.
+4. Deploy. The next most recent camp (or the newly active one) is now shown.
+
+Only one camp should have `active: true` at a time.
+
+---
+
+## Disaster Recovery
+
+### Incorrect or unwanted event
+
+1. Edit the active camp YAML directly on GitHub (or locally and push).
+2. Merge to `main` — the deploy pipeline rebuilds automatically.
+
+Git history provides a full audit trail of all changes, including every event submitted through the form.
+
+### Schedule not updating after form submission
+
+1. Check the GitHub repository for a recently opened or stuck PR from the API.
+2. If the PR is open and CI has passed, manually merge it.
+3. If CI failed, inspect the build log for errors and fix accordingly.
+
+### Site not building after a data change
+
+1. Run `npm run build` locally and read the error output.
+2. Validate the YAML file structure against [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md).
+3. Common causes: missing required field, date outside camp range, duplicate event ID.
+
+### Server not responding
+
+1. Check Passenger logs on the host.
+2. Verify `app.js` and `node_modules/` are present in the app directory.
+3. Re-run the manual startup steps if needed.

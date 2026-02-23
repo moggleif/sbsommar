@@ -1,8 +1,10 @@
-# SB Sommar – Event Handling User Requirements
+# SB Sommar – Event Handling Requirements
 
 This document describes what users must be able to do regarding activities and the weekly schedule.
 
-It focuses strictly on user needs and expected behavior.
+It focuses strictly on user needs and expected behaviour.
+
+For field definitions and data validation rules, see [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md).
 
 ---
 
@@ -12,20 +14,29 @@ Participants must be able to:
 
 - View the full weekly schedule (Sunday–Sunday).
 - View a daily schedule showing only one day.
-- View a simplified “Today” version suitable for mobile devices and shared screens.
+- View a simplified "Today" version suitable for mobile devices and shared screens.
 - See activities listed in chronological order.
 
 In schedule views, each activity must display:
 
 - Title
 - Start time
-- End time
+- End time (if set)
 - Location
 - Responsible person
 
 The day is used for placement in the weekly structure, not for display inside each activity row.
 
 The schedule must be quick to scan and easy to understand.
+
+### Today View
+
+The Today view is a stripped-back version of the daily schedule intended for:
+
+- Mobile phones (used by participants on the go)
+- Shared display screens placed around the camp
+
+It must be legible at a distance. It must use a dark background, large text, and minimal interface elements.
 
 ---
 
@@ -38,13 +49,13 @@ The detail view must include:
 - Title
 - Date
 - Start time
-- End time
+- End time (if set)
 - Location
 - Responsible person
-- Full description (free text)
-- Optional communication link
+- Full description (if set)
+- Communication link (if set)
 
-If no communication link exists, no link section should be shown.
+If no end time, description, or communication link exists, those fields must not be shown.
 
 Users should clearly understand whether additional information exists beyond the schedule row.
 
@@ -54,21 +65,23 @@ Users should clearly understand whether additional information exists beyond the
 
 Participants must be able to create a new activity.
 
-The following fields are mandatory:
+Mandatory fields:
 
-- Title (Header)
+- Title
 - Date
 - Start time
-- End time
 - Location
 - Responsible person
 
-The following fields are optional:
+Optional fields:
 
+- End time
 - Description (free text)
 - Communication link
 
 Creating an activity must be simple and fast, requiring minimal effort.
+
+The form must be accessible at `/lagg-till.html`.
 
 ---
 
@@ -81,21 +94,38 @@ An administrator must be able to:
 
 Participants do not need editing rights.
 
+Admin editing is done by modifying the camp YAML file directly. See [03-OPERATIONS.md](03-OPERATIONS.md) for the workflow.
+
 ---
 
 ## 5. Locations
 
 - Locations must primarily be selected from predefined options.
-- One flexible option (“Other”) must exist.
+- One flexible option ("Other" / "Annan") must exist for locations not in the list.
 - Location names must remain consistent throughout the week.
-
-An administrator must be able to maintain the list of predefined locations in a dedicated file or configuration source.
+- Predefined locations are maintained in `source/data/local.yaml`.
 
 Participants cannot modify the location list.
 
 ---
 
-## 6. Order and Overlaps
+## 6. Validation Rules
+
+When a participant submits an activity, the following must be checked:
+
+- `title` is present and non-empty.
+- `date` is present and falls within the active camp's date range.
+- `start` is present and in valid `HH:MM` format.
+- `end`, if provided, is in valid `HH:MM` format and is after `start`.
+- `location` is present and non-empty.
+- `responsible` is present and non-empty.
+
+Invalid submissions must be rejected with a clear error message.
+Valid submissions must receive a confirmation immediately.
+
+---
+
+## 7. Order and Overlaps
 
 - Activities must always be displayed in chronological order.
 - Overlapping activities are allowed.
@@ -103,19 +133,19 @@ Participants cannot modify the location list.
 
 ---
 
-## 7. Reliability
+## 8. Reliability
 
 Participants must be able to trust that:
 
 - The schedule reflects the current plan.
-- Changes are visible in all schedule views.
-- Deleted activities are no longer visible.
+- A newly submitted activity appears in the schedule within a few minutes.
+- Changes and deletions are visible in all schedule views.
 
 The schedule functions as a shared coordination tool during the camp.
 
 ---
 
-## 8. Simplicity
+## 9. Simplicity
 
 The event handling must:
 

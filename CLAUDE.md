@@ -16,19 +16,20 @@ These are the authoritative sources. CLAUDE.md summarises principles; the docs d
 
 | File | What it governs |
 | ---- | --------------- |
-| `docs/ARCHITECTURE.md` | System structure, data layers, rendering logic, fallback rules |
-| `docs/DATA_CONTRACT.md` | YAML schema, required fields, validation rules, ID format |
-| `docs/DESIGN.md` | Color palette, typography scale, spacing tokens, component rules |
-| `docs/OPERATIONS.md` | Camp lifecycle: before/during/after, what is and is not version-controlled |
-| `docs/EVENT_DATA_MODEL.md` | Event field definitions and constraints |
-| `docs/EVENT_REQUIREMENTS.md` | Event display and behaviour requirements |
+| `docs/01-CONTRIBUTORS.md` | Contribution guidelines, git workflow, setup, linting |
+| `docs/02-ARCHITECTURE.md` | System structure, data layers, rendering logic, fallback rules |
+| `docs/03-OPERATIONS.md` | Camp lifecycle: before/during/after, deployment, disaster recovery |
+| `docs/04-DATA_CONTRACT.md` | YAML schema, required fields, validation rules, ID format |
+| `docs/05-EVENT_REQUIREMENTS.md` | Event display and behaviour requirements |
+| `docs/06-EVENT_DATA_MODEL.md` | Event field definitions and constraints |
+| `docs/07-DESIGN.md` | Color palette, typography scale, spacing tokens, component rules |
 
 Rules:
 
-- Do not invent colors, spacing, or layout patterns not present in `DESIGN.md`.
-- Do not modify YAML files or the data schema without checking `DATA_CONTRACT.md` first.
-- Do not change the camp lifecycle flow without checking `OPERATIONS.md` first.
-- CSS must use the custom properties defined in `DESIGN.md §7` — do not hardcode design values.
+- Do not invent colors, spacing, or layout patterns not present in `07-DESIGN.md`.
+- Do not modify YAML files or the data schema without checking `04-DATA_CONTRACT.md` first.
+- Do not change the camp lifecycle flow without checking `03-OPERATIONS.md` first.
+- CSS must use the custom properties defined in `07-DESIGN.md §7` — do not hardcode design values.
 
 ---
 
