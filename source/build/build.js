@@ -62,6 +62,15 @@ const locations = (localData.locations || []).map((l) => l.name);
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
+// Removes all contents of dir except .gitkeep, to prevent stale build artefacts.
+function cleanOutputDir(dir) {
+  if (!fs.existsSync(dir)) return;
+  for (const entry of fs.readdirSync(dir)) {
+    if (entry === '.gitkeep') continue;
+    fs.rmSync(path.join(dir, entry), { recursive: true, force: true });
+  }
+}
+
 // Recursively copies all files from srcDir into destDir, flattening subdirectories.
 function copyFlattened(srcDir, destDir) {
   const entries = fs.readdirSync(srcDir, { withFileTypes: true });
@@ -78,6 +87,7 @@ function copyFlattened(srcDir, destDir) {
 // ── Render and write ─────────────────────────────────────────────────────────
 
 async function main() {
+  cleanOutputDir(OUTPUT_DIR);
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
   const scheduleHtml = renderSchedulePage(camp, events);
