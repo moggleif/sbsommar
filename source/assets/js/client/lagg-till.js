@@ -38,7 +38,7 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sparar...';
 
-    fetch('/api/events', {
+    fetch('/add-event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -58,14 +58,14 @@
         submitBtn.disabled = false;
         submitBtn.textContent = 'Skicka →';
 
-        if (json.errors) {
+        if (!json.success) {
           errBox.hidden = false;
-          errBox.innerHTML = json.errors.map(function (m) { return '<p>' + m + '</p>'; }).join('');
+          errBox.innerHTML = '<p>' + (json.error || 'Något gick fel.') + '</p>';
           return;
         }
 
         var titleEl = document.getElementById('result-title');
-        if (titleEl) titleEl.textContent = json.title;
+        if (titleEl) titleEl.textContent = title;
         form.hidden = true;
         result.hidden = false;
         window.scrollTo(0, 0);
