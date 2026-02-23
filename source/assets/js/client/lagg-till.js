@@ -38,7 +38,7 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sparar...';
 
-    fetch('/add-event', {
+    fetch(form.dataset.apiUrl || '/add-event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

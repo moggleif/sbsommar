@@ -5,7 +5,7 @@ const { pageNav } = require('./layout');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
-function renderAddPage(camp, locations) {
+function renderAddPage(camp, locations, apiUrl) {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -35,7 +35,7 @@ ${pageNav('lagg-till.html')}
   <p class="intro">Kolla gärna <a href="schema.html">schemat</a> innan du lägger till din aktivitet – välj en tid som inte krockar med något annat.</p>
   <p class="intro">Behöver du material eller ingredienser till din aktivitet? Kontakta Andreas i förväg så ordnar han det.</p>
 
-  <form id="event-form" class="event-form" novalidate>
+  <form id="event-form" class="event-form" novalidate data-api-url="${escapeHtml(apiUrl || '/add-event')}">
 
     <div class="field">
       <label for="f-title">Rubrik <span class="req">*</span></label>

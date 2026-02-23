@@ -106,7 +106,7 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
   console.log(`Built: public/idag.html  (${events.length} events)`);
 
-  const addHtml = renderAddPage(camp, locations);
+  const addHtml = renderAddPage(camp, locations, process.env.API_URL);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
