@@ -4,7 +4,7 @@ This document explains *why* the event data is structured the way it is — the 
 
 It applies to all camps (lägerveckor).
 
-For the authoritative field list, required fields, and validation rules, see [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md). Read that first if you need to know what fields exist. Read this if you need to understand why.
+For the authoritative field list, required fields, and validation rules, see [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md). Read that first if you need to know what fields exist. Read this if you need to understand why.
 
 ---
 
@@ -37,7 +37,7 @@ Nothing else.
 
 ## 3. Camp Metadata
 
-Required fields (authoritative list in [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md)):
+Required fields (authoritative list in [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md)):
 
 - `id`
 - `name`
@@ -64,7 +64,7 @@ The camp `id` must remain stable permanently. It is used in archives and must ne
 
 ## 4. Event Structure
 
-Required and optional fields are defined in [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md).
+Required and optional fields are defined in [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md).
 
 Dates must use ISO format (`YYYY-MM-DD`). Times must use 24-hour format (`HH:MM`).
 
@@ -124,7 +124,7 @@ Initial state:
 
 Meta is for system integrity only.
 
-For a complete YAML example showing all fields together, see [04-DATA_CONTRACT.md §7](04-DATA_CONTRACT.md).
+For a complete YAML example showing all fields together, see [05-DATA_CONTRACT.md §7](05-DATA_CONTRACT.md).
 
 ---
 

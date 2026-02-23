@@ -2,7 +2,7 @@
 
 How to develop, run, and deploy the site.
 
-For a full description of the system's architecture and data flow, see [02-ARCHITECTURE.md](02-ARCHITECTURE.md).
+For a full description of the system's architecture and data flow, see [03-ARCHITECTURE.md](03-ARCHITECTURE.md).
 
 ---
 
@@ -205,7 +205,7 @@ Git history provides a full audit trail of all changes, including every event su
 ### Site not building after a data change
 
 1. Run `npm run build` locally and read the error output.
-2. Validate the YAML file structure against [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md).
+2. Validate the YAML file structure against [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md).
 3. Common causes: missing required field, date outside camp range, duplicate event ID.
 
 ### Server not responding
