@@ -1,157 +1,101 @@
 # SB Sommar
 
-SB Sommar is the official information page for the summer camp in Sysslebäck.
+SB Sommar is a family camp in Sysslebäck for particularly gifted children, young people, and their parents.
 
-It exists to give families a clear, structured, and trustworthy overview of the camp — what it is, how it works, and how to participate.
-
-This page replaces the previous WordPress site with a simpler and clearer version.
+This is the camp's official website — the single place where families find everything they need to understand, trust, and decide to attend.
 
 ---
 
-## What SB Sommar Is
+## The Camp
 
-SB Sommar is a family summer camp created for families with particularly gifted children and young people.
+SB Sommar is not a standard summer camp. It is a community week for families who often feel out of place elsewhere.
 
-The camp provides:
+It offers:
 
-- A safe and welcoming environment
-- Peer connection for children and youth
-- Community for parents
-- Participant-driven activities
-- Shared meals and shared experiences
+- A safe and welcoming environment where gifted children meet peers
+- Space for parents to connect with others who share the same experiences
+- Participant-driven activities — the schedule is built by those attending
+- Shared meals, shared time, shared experiences
+- A week where being different is completely normal
 
-The website is the central place where all important information about the camp is gathered.
-
----
-
-## The Primary Goal of the Website
-
-The goal of the website is simple:
-
-To make it easy for families to understand:
-
-- What the camp is
-- Who it is for
-- When and where it takes place
-- What it costs
-- How to register
-- What practical details they need to know
-
-The site should remove uncertainty.
-It should feel calm, clear and complete.
+The camp takes place in Sysslebäck, a small and peaceful location that sets the tone for the whole week.
 
 ---
 
-## Who the Website Is For
+## The Problem This Site Solves
 
-### Primary Audience
+Families considering the camp need to make a real decision. They need to understand what they are signing up for, whether it is right for their child, what it costs, and what to practically expect.
 
-- Families considering attending the camp
-- Parents of gifted children
-- Returning participants who need updated information
+Without clear information, families hesitate or drop out. With it, they arrive prepared and confident.
 
-### Secondary Audience
-
-- Collaborating organizations
-- Volunteers
-- Curious visitors wanting to understand the camp
-
-The content should always be written with families in mind.
+This site replaces scattered emails, outdated PDFs, and word-of-mouth with one complete and trustworthy source of information.
 
 ---
 
-## What Problem It Solves
+## What the Site Provides
 
-Families considering a camp need:
-
-- Clarity
-- Structure
-- Transparency
-- Practical information
-- A feeling of trust
-
-The website solves the problem of scattered information and uncertainty.
-
-Everything should be in one place.
-
-No searching through emails.
-No unclear instructions.
-No missing details.
-
----
-
-## What the Website Should Contain
-
-The site should clearly cover:
-
-- Overview of the camp
-- Dates and location
-- Registration information
-- Pricing
-- Accommodation details
-- Food and meals
-- Camp rules
+- Who the camp is for and what makes it different
+- Dates, location, and how to get there
+- Registration process and deadlines
+- Pricing and what is included
+- Accommodation and food
+- Camp rules and practical preparation
 - Frequently asked questions
 - Testimonials from previous participants
-- Practical information about the area
-- Daily schedule overview
+- The live activity schedule for the current camp week
+- A form where participants add their own activities during camp
 
-All information should be easy to find and easy to read.
-
----
-
-## What the Website Is Not
-
-The website is not:
-
-- A social platform
-- A blog
-- A marketing funnel
-- A technical system
-- A complex application
-
-It is an information site.
-
-Clear.
-Calm.
-Reliable.
+Everything in one place. Updated before every camp. Easy to navigate on any device.
 
 ---
 
-## Tone and Positioning
+## The Activity Schedule
 
-The tone should be:
+One of the site's most-used features during camp week is the live activity schedule.
 
-- Warm but structured
-- Calm and trustworthy
-- Clear and precise
-- Inclusive
-- Honest
+Participants can view the full **weekly overview**, a focused **daily view**, and a simplified **Today view** designed for mobile phones and shared display screens. Each activity shows its time, location, and who is responsible. Clicking an activity reveals the full description and any communication link.
 
-It should feel:
+Participants sign up to lead activities — a chess tournament, a hike, a film screening, a workshop — and add them directly through the site. The schedule updates within minutes. No admin needed. No emails back and forth.
 
-- Safe
-- Thoughtful
-- Organized
-- Human
-
-No hype.
-No corporate language.
-No complexity.
+This reflects the camp's philosophy: the participants shape the week.
 
 ---
 
-## Mission Statement
+## Tone and Principles
 
-SB Sommar’s website exists to provide families with clear, complete and trustworthy information about the summer camp in Sysslebäck, making it easy to understand, participate and feel confident about attending.
+The site is written for families, not for organizations.
+
+Warm but structured. Calm and trustworthy. Clear and precise. In Swedish.
+
+No hype. No corporate language. No complexity.
+
+> If a parent visits for the first time, they should leave feeling:
+> *"I understand what this is. I know how it works. And I feel comfortable taking the next step."*
 
 ---
 
-## Guiding Principle
+## For Developers
 
-If a parent visits the site for the first time,
-they should leave feeling:
+### Quick Start
 
-“I understand what this is.
-I know how it works.
-And I feel comfortable taking the next step.”
+```bash
+npm install
+npm run build
+npm start          # http://localhost:3000
+```
+
+The project has two parts: a **static site** generated at build time from YAML and Markdown, and a small **API server** (`app.js`) that handles event submissions by committing directly to GitHub and triggering an automated rebuild and deploy.
+
+Start by reading [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md). It covers setup, git workflow, linting, and testing. The rest of the documentation is listed below in suggested reading order.
+
+### Documentation
+
+| # | Doc | What it covers |
+| - | --- | -------------- |
+| 1 | [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md) | Setup, git workflow, linting, testing, contribution rules |
+| 2 | [docs/02-ARCHITECTURE.md](docs/02-ARCHITECTURE.md) | System structure, data layers, rendering logic, API server |
+| 3 | [docs/03-OPERATIONS.md](docs/03-OPERATIONS.md) | Commands, camp lifecycle, deployment, disaster recovery |
+| 4 | [docs/04-DATA_CONTRACT.md](docs/04-DATA_CONTRACT.md) | YAML schema, required fields, ID format, stability policy |
+| 5 | [docs/05-EVENT_REQUIREMENTS.md](docs/05-EVENT_REQUIREMENTS.md) | Schedule views and event behaviour requirements |
+| 6 | [docs/06-EVENT_DATA_MODEL.md](docs/06-EVENT_DATA_MODEL.md) | Event field definitions, ownership, and metadata |
+| 7 | [docs/07-DESIGN.md](docs/07-DESIGN.md) | Colors, typography, spacing tokens, component rules |
