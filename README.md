@@ -78,6 +78,8 @@ No hype. No corporate language. No complexity.
 
 ### Quick Start
 
+Requires Node.js 18 or later.
+
 ```bash
 npm install
 npm run build

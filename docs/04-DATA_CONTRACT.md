@@ -62,6 +62,17 @@ events:
       updated_at: ISO-8601 | null
 ```
 
+How to read this schema:
+
+- `string` means a text value (e.g. `"Schack"`)
+- `boolean` means `true` or `false` (no quotes)
+- `YYYY-MM-DD` means a date written as `2026-06-28`
+- `"HH:MM"` means a 24-hour time written as `"14:00"` (quoted)
+- `ISO-8601` means a full datetime string: `2026-06-28T14:00:00`
+- `| null` means the field can be omitted or set to `null`
+
+See §7 for a complete worked example.
+
 ---
 
 ## 3. Required Fields
@@ -127,7 +138,9 @@ Duplicate events are not allowed.
 slug-title-YYYY-MM-DD-HHMM
 ```
 
-Example:
+A "slug" is a URL-friendly version of the title: lowercase letters, numbers, and hyphens only (no spaces or special characters). For example, "Middag & dans" becomes `middag-dans`.
+
+Example ID:
 
 ```text
 middag-2025-06-30-1630
