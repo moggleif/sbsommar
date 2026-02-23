@@ -60,6 +60,21 @@ if (!fs.existsSync(localFilePath)) {
 const localData = yaml.load(fs.readFileSync(localFilePath, 'utf8'));
 const locations = (localData.locations || []).map((l) => l.name);
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+// Recursively copies all files from srcDir into destDir, flattening subdirectories.
+function copyFlattened(srcDir, destDir) {
+  const entries = fs.readdirSync(srcDir, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path.join(srcDir, entry.name);
+    if (entry.isDirectory()) {
+      copyFlattened(srcPath, destDir);
+    } else {
+      fs.copyFileSync(srcPath, path.join(destDir, entry.name));
+    }
+  }
+}
+
 // ── Render and write ─────────────────────────────────────────────────────────
 
 async function main() {
@@ -143,21 +158,6 @@ async function main() {
 
   const srcAssets = path.join(ASSETS_DIR);
   const destAssets = path.join(OUTPUT_DIR);
-
-  function copyFlattened(srcDir, destDir) {
-    const entries = fs.readdirSync(srcDir, { withFileTypes: true });
-
-    for (const entry of entries) {
-      const srcPath = path.join(srcDir, entry.name);
-
-      if (entry.isDirectory()) {
-        copyFlattened(srcPath, destDir); // gå ner i subfolder
-      } else {
-        const destPath = path.join(destDir, entry.name);
-        fs.copyFileSync(srcPath, destPath);
-      }
-    }
-  }
 
   if (fs.existsSync(srcAssets)) {
     fs.mkdirSync(destAssets, { recursive: true });

@@ -74,6 +74,64 @@ describe('formatDate', () => {
   it('uses the correct Swedish month name', () => {
     assert.ok(formatDate('2025-08-10').includes('augusti'), 'Expected "augusti"');
   });
+
+  // All 7 weekdays
+  it('formats a Tuesday in Swedish', () => {
+    assert.strictEqual(formatDate('2025-06-24'), 'tisdag 24 juni 2025');
+  });
+
+  it('formats a Wednesday in Swedish', () => {
+    assert.strictEqual(formatDate('2025-06-25'), 'onsdag 25 juni 2025');
+  });
+
+  it('formats a Thursday in Swedish', () => {
+    assert.strictEqual(formatDate('2025-06-26'), 'torsdag 26 juni 2025');
+  });
+
+  it('formats a Friday in Swedish', () => {
+    assert.strictEqual(formatDate('2025-06-27'), 'fredag 27 juni 2025');
+  });
+
+  // All 12 months
+  it('uses the correct month name for January', () => {
+    assert.ok(formatDate('2025-01-15').includes('januari'), 'Expected "januari"');
+  });
+
+  it('uses the correct month name for February', () => {
+    assert.ok(formatDate('2025-02-15').includes('februari'), 'Expected "februari"');
+  });
+
+  it('uses the correct month name for March', () => {
+    assert.ok(formatDate('2025-03-15').includes('mars'), 'Expected "mars"');
+  });
+
+  it('uses the correct month name for April', () => {
+    assert.ok(formatDate('2025-04-15').includes('april'), 'Expected "april"');
+  });
+
+  it('uses the correct month name for May', () => {
+    assert.ok(formatDate('2025-05-15').includes('maj'), 'Expected "maj"');
+  });
+
+  it('uses the correct month name for July', () => {
+    assert.ok(formatDate('2025-07-15').includes('juli'), 'Expected "juli"');
+  });
+
+  it('uses the correct month name for September', () => {
+    assert.ok(formatDate('2025-09-15').includes('september'), 'Expected "september"');
+  });
+
+  it('uses the correct month name for October', () => {
+    assert.ok(formatDate('2025-10-15').includes('oktober'), 'Expected "oktober"');
+  });
+
+  it('uses the correct month name for November', () => {
+    assert.ok(formatDate('2025-11-15').includes('november'), 'Expected "november"');
+  });
+
+  it('uses the correct month name for December', () => {
+    assert.ok(formatDate('2025-12-15').includes('december'), 'Expected "december"');
+  });
 });
 
 // ── groupAndSortEvents ───────────────────────────────────────────────────────

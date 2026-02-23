@@ -198,4 +198,4 @@ async function addEventToActiveCamp(body) {
   throw new Error(`SHA conflict: failed to commit after ${MAX_RETRIES} attempts`);
 }
 
-module.exports = { addEventToActiveCamp };
+module.exports = { addEventToActiveCamp, slugify, yamlScalar, buildEventYaml };

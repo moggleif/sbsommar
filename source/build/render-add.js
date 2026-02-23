@@ -1,6 +1,7 @@
 'use strict';
 
 const { escapeHtml, toDateString } = require('./render');
+const { pageNav } = require('./layout');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
@@ -28,12 +29,7 @@ function renderAddPage(camp, locations) {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="page-nav">
-    <a class="nav-link" href="index.html">Hem</a>
-    <a class="nav-link" href="schema.html">Schema</a>
-    <a class="nav-link" href="idag.html">Idag</a>
-    <a class="nav-link active" href="lagg-till.html">Lägg till aktivitet</a>
-  </nav>
+${pageNav('lagg-till.html')}
 
   <h1>Lägg till aktivitet</h1>
   <p class="intro">Kolla gärna <a href="schema.html">schemat</a> innan du lägger till din aktivitet – välj en tid som inte krockar med något annat.</p>

@@ -43,74 +43,14 @@ function renderTodayPage(camp, events, qrSvg) {
     </div>
 
     <aside class="dagens-sidebar">
-      <p class="sidebar-text">Detta \u00e4r schemat f\u00f6r aktiviteter som sker idag. F\u00f6r kartor, information och schema andra dagar \u2013 bes\u00f6k sbsommar.se eller skanna QR-koden.</p>
+      <p class="sidebar-text">Detta är schemat för aktiviteter som sker idag. För kartor, information och schema andra dagar – besök sbsommar.se eller skanna QR-koden.</p>
       <div class="qr-wrap">${qrSvg}</div>
     </aside>
 
   </div>
 
-  <script>
-    (function () {
-      var events = ${eventsJson};
-
-      function pad(n) { return String(n).padStart(2, '0'); }
-      var now = new Date();
-      var today = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
-
-      var weekdays = ['s\u00f6ndag', 'm\u00e5ndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'l\u00f6rdag'];
-      var months = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'];
-      var label = weekdays[now.getDay()] + ' ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
-      document.getElementById('today-heading').textContent = 'Dagens schema \u2013 ' + label;
-
-      var todayEvents = events.filter(function (e) { return e.date === today; });
-      todayEvents.sort(function (a, b) { return a.start.localeCompare(b.start); });
-
-      var container = document.getElementById('today-events');
-
-      if (todayEvents.length === 0) {
-        container.innerHTML = '<p class="sidebar-text">Inga aktiviteter schemalagda f\u00f6r idag.</p>';
-        return;
-      }
-
-      function esc(s) {
-        if (s == null) return '';
-        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-      }
-
-      var rows = todayEvents.map(function (e) {
-        var timeStr = e.end ? esc(e.start) + '\u2013' + esc(e.end) : esc(e.start);
-        var metaParts = [e.location, e.responsible].filter(Boolean).map(esc);
-        var metaEl = metaParts.length ? '<span class="ev-meta"> \u00b7 ' + metaParts.join(' \u00b7 ') + '</span>' : '';
-        var hasExtra = e.description || e.link;
-
-        if (hasExtra) {
-          var extraParts = [];
-          if (e.description) {
-            e.description.trim().split(/\\n\\n+/).forEach(function (p) {
-              extraParts.push('<p class="event-desc">' + esc(p.trim()) + '</p>');
-            });
-          }
-          if (e.link) {
-            extraParts.push('<a class="event-ext-link" href="' + esc(e.link) + '" target="_blank" rel="noopener">Extern l\u00e4nk \u2192</a>');
-          }
-          return '<details class="event-row"><summary>' +
-            '<span class="ev-time">' + timeStr + '</span>' +
-            '<span class="ev-title">' + esc(e.title) + '</span>' +
-            metaEl + '</summary>' +
-            '<div class="event-extra">' + extraParts.join('') + '</div>' +
-            '</details>';
-        } else {
-          return '<div class="event-row plain">' +
-            '<span class="ev-time">' + timeStr + '</span>' +
-            '<span class="ev-title">' + esc(e.title) + '</span>' +
-            metaEl + '</div>';
-        }
-      });
-
-      container.innerHTML = '<div class="today-card"><div class="event-list">' + rows.join('') + '</div></div>' +
-        '<p class="display-footer">' + todayEvents.length + ' aktiviteter schemalagda idag.</p>';
-    })();
-  </script>
+  <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Dagens schema'; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true;</script>
+  <script src="events-today.js"></script>
 </body>
 </html>
 `;
