@@ -95,9 +95,9 @@ Start by reading [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md). It covers s
 | # | Doc | What it covers |
 | - | --- | -------------- |
 | 1 | [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md) | Setup, git workflow, linting, testing, contribution rules |
-| 2 | [docs/02-ARCHITECTURE.md](docs/02-ARCHITECTURE.md) | System structure, data layers, rendering logic, API server |
-| 3 | [docs/03-OPERATIONS.md](docs/03-OPERATIONS.md) | Commands, camp lifecycle, deployment, disaster recovery |
-| 4 | [docs/04-DATA_CONTRACT.md](docs/04-DATA_CONTRACT.md) | YAML schema, required fields, ID format, stability policy |
-| 5 | [docs/05-EVENT_REQUIREMENTS.md](docs/05-EVENT_REQUIREMENTS.md) | Schedule views and event behaviour requirements |
+| 2 | [docs/02-REQUIREMENTS.md](docs/02-REQUIREMENTS.md) | What the site must do and for whom — user, site, and API requirements |
+| 3 | [docs/03-ARCHITECTURE.md](docs/03-ARCHITECTURE.md) | System structure, data layers, rendering logic, API server |
+| 4 | [docs/04-OPERATIONS.md](docs/04-OPERATIONS.md) | Commands, camp lifecycle, deployment, disaster recovery |
+| 5 | [docs/05-DATA_CONTRACT.md](docs/05-DATA_CONTRACT.md) | YAML schema, required fields, ID format, stability policy |
 | 6 | [docs/06-EVENT_DATA_MODEL.md](docs/06-EVENT_DATA_MODEL.md) | Event field definitions, ownership, and metadata |
 | 7 | [docs/07-DESIGN.md](docs/07-DESIGN.md) | Colors, typography, spacing tokens, component rules |

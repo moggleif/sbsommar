@@ -37,8 +37,8 @@ Event data lives in `source/data/`.
 The active camp's events are in the file referenced by `source/data/camps.yaml`.
 Historical camps are stored as individual YAML files (e.g. `2025-06-syssleback.yaml`).
 
-See [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md) for the full data structure.
-See [03-OPERATIONS.md](03-OPERATIONS.md) for the operational workflow.
+See [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md) for the full data structure.
+See [04-OPERATIONS.md](04-OPERATIONS.md) for the operational workflow.
 
 ### Locations
 
@@ -149,9 +149,9 @@ Snapshot tests catch unintended layout regressions — they save the expected HT
 
 Before making structural changes, read:
 
-- [02-ARCHITECTURE.md](02-ARCHITECTURE.md)
-- [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md)
-- [05-EVENT_REQUIREMENTS.md](05-EVENT_REQUIREMENTS.md)
+- [02-REQUIREMENTS.md](02-REQUIREMENTS.md)
+- [03-ARCHITECTURE.md](03-ARCHITECTURE.md)
+- [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md)
 - [06-EVENT_DATA_MODEL.md](06-EVENT_DATA_MODEL.md)
 - [CLAUDE.md](../CLAUDE.md)
 
