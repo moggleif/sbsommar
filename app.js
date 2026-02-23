@@ -30,6 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 
+// Health check (important for Passenger verification)
+app.get('/', (req, res) => {
+  res.json({ status: 'API running' });
+});
+
+
 app.post('/add-event', async (req, res) => {
   const v = validateEventRequest(req.body);
   if (!v.ok) {
