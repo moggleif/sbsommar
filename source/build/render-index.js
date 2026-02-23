@@ -1,5 +1,7 @@
 'use strict';
 
+const { pageNav } = require('./layout');
+
 /**
  * Converts inline Markdown (images, links, bold) to HTML.
  * Content files are author-controlled so no HTML escaping is applied.
@@ -176,11 +178,7 @@ function renderIndexPage({ heroSrc, heroAlt, sections }) {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="page-nav">
-    <a class="nav-link active" href="index.html">Hem</a>
-    <a class="nav-link" href="schema.html">Schema</a>
-    <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
-  </nav>${heroHtml}
+${pageNav('index.html', { includeIdag: false })}${heroHtml}
   <nav class="section-nav" aria-label="Sidnavigation">
     <ul>
 ${sectionNavItems}

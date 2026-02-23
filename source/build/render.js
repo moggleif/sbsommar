@@ -1,45 +1,7 @@
 'use strict';
 
-// js-yaml may parse unquoted YYYY-MM-DD values as Date objects
-function toDateString(val) {
-  if (val instanceof Date) return val.toISOString().slice(0, 10);
-  return String(val);
-}
-
-function escapeHtml(str) {
-  if (str == null) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-// Swedish weekday + date formatting without locale dependency
-const WEEKDAYS_SV = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'];
-const MONTHS_SV = [
-  'januari',
-  'februari',
-  'mars',
-  'april',
-  'maj',
-  'juni',
-  'juli',
-  'augusti',
-  'september',
-  'oktober',
-  'november',
-  'december',
-];
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  const weekday = WEEKDAYS_SV[d.getDay()];
-  const day = d.getDate();
-  const month = MONTHS_SV[d.getMonth()];
-  const year = d.getFullYear();
-  return `${weekday} ${day} ${month} ${year}`;
-}
+const { pageNav } = require('./layout');
+const { toDateString, escapeHtml, formatDate } = require('./utils');
 
 /**
  * Groups events by date and sorts each day's events by start time.
@@ -135,12 +97,7 @@ function renderSchedulePage(camp, events) {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="page-nav">
-    <a class="nav-link" href="index.html">Hem</a>
-    <a class="nav-link active" href="schema.html">Schema</a>
-    <a class="nav-link" href="idag.html">Idag</a>
-    <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
-  </nav>
+${pageNav('schema.html')}
   <h1>Schema – ${campName}</h1>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
   <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>

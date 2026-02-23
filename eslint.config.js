@@ -21,9 +21,9 @@ module.exports = [
     },
   },
 
-  // 🟢 Endast client-filen = Browser
+  // 🟢 Client-filer = Browser
   {
-    files: ['source/assets/js/client/lagg-till.js'],
+    files: ['source/assets/js/client/*.js'],
     languageOptions: {
       globals: { ...globals.browser },
     },
