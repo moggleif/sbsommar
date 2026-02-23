@@ -1,0 +1,97 @@
+camp:
+  end_date: '2021-07-04'
+  id: 2021-06-syssleback
+  location: Sysslebäck
+  name: SB Sommar Juni 2021
+  start_date: '2021-06-27'
+events:
+- date: '2021-06-27'
+  description: null
+  end: null
+  id: middag-2021-06-27-1630
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: null
+    updated_at: null
+  owner:
+    email: ''
+    name: ''
+  responsible: ' '
+  start: '16:30'
+  title: Middag
+- date: '2021-06-28'
+  description: null
+  end: '10:00'
+  id: titta-på-sommarlov-2021-06-28-0900
+  link: null
+  location: TV-rummet
+  meta:
+    created_at: null
+    updated_at: null
+  owner:
+    email: ''
+    name: ''
+  responsible: Servicehuset
+  start: 09:00
+  title: Titta på sommarlov
+- date: '2021-06-28'
+  description: Vi väljer gemensamt ut roliga spel att spela.
+  end: '10:30'
+  id: brädspel-2021-06-28-0930
+  link: null
+  location: Speltältet
+  meta:
+    created_at: null
+    updated_at: null
+  owner:
+    email: ''
+    name: ''
+  responsible: Ivar
+  start: 09:30
+  title: Brädspel
+- date: '2021-06-28'
+  description: null
+  end: '11:30'
+  id: välkomstmöte-2021-06-28-1100
+  link: null
+  location: Gräsplanen
+  meta:
+    created_at: null
+    updated_at: null
+  owner:
+    email: ''
+    name: ''
+  responsible: Andreas
+  start: '11:00'
+  title: Välkomstmöte
+- date: '2021-06-28'
+  description: null
+  end: '12:30'
+  id: varulvarna-i-klågerup-2021-06-28-1130
+  link: null
+  location: Tält 1
+  meta:
+    created_at: null
+    updated_at: null
+  owner:
+    email: ''
+    name: ''
+  responsible: Emilia
+  start: '11:30'
+  title: Varulvarna i Klågerup
+- date: '2021-06-28'
+  description: null
+  end: null
+  id: lunch-2021-06-28-1230
+  link: null
+  location: Servicehuset
+  meta:
+    created_at: null
+    updated_at: null
+  owner:
+    email: ''
+    name: ''
+  responsible: ''
+  start: '12:30'
+  title: Lunch
