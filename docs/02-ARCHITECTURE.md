@@ -69,12 +69,12 @@ During camp week, participants submit activities through the `/lagg-till.html` f
 The API server (`app.js`) handles each submission as follows:
 
 1. Validates the incoming event data.
-2. Responds `200 OK` immediately — the form does not wait.
+2. Responds immediately with a success confirmation — the form does not wait for the rest of the process.
 3. Reads `source/data/camps.yaml` from GitHub via the Contents API.
 4. Finds the active camp and reads its YAML file from GitHub.
-5. Appends the new event and commits it to an ephemeral branch.
+5. Appends the new event and commits it to a temporary branch.
 6. Opens a pull request with auto-merge enabled.
-7. CI runs a build-only check (lint and tests are skipped for data-only changes).
+7. CI runs a build-only check (lint and tests are skipped for data-only changes — commits that only modify YAML files in `source/data/`).
 8. The PR merges automatically. The deploy pipeline runs and the schedule is live within minutes.
 
 The active camp's YAML file is always version-controlled. Git history provides a full audit trail of every event submitted through the form.
@@ -82,7 +82,7 @@ The active camp's YAML file is always version-controlled. Git history provides a
 ```mermaid
 flowchart TD
     A[Participant submits form] --> B["POST /add-event (API server)"]
-    B --> C[Validate · respond 200 immediately]
+    B --> C[Validate · respond immediately]
     C --> D[GitHub API: read camps.yaml]
     D --> E[Read active camp YAML]
     E --> F[Append event · create ephemeral branch]
@@ -143,7 +143,7 @@ Key files:
 | `source/data/camps.yaml` | Registry of all camps; determines which is active |
 | `source/data/local.yaml` | Predefined location list — the only place locations are defined |
 | `source/data/YYYY-MM-name.yaml` | Per-camp event files, referenced from `camps.yaml` |
-| `app.js` | Serves `public/` and handles `POST /add-event` |
+| `app.js` | Express (Node.js web server) — serves `public/` and handles `POST /add-event` |
 
 ---
 

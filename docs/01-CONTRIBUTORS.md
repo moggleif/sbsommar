@@ -28,7 +28,7 @@ Each file corresponds to a section of the site:
 - `source/content/how-it-started.md` — background story
 - `source/content/testimonials.md` — participant testimonials
 
-Edit these files directly. Layout is handled separately and does not need to change.
+Edit these files directly using any text editor, or through GitHub's web interface (open the file in the repository and click the pencil icon). Layout is handled separately — you never need to touch the HTML templates.
 
 ### Adding or Editing Events
 
@@ -93,7 +93,7 @@ Always work on a branch. Never commit directly to `main`.
 
 3. Make your changes, then push the branch and open a pull request.
 
-4. CI must pass before the PR can be merged.
+4. CI (Continuous Integration — automated checks that run on every push) must pass before the PR can be merged.
 
 5. After the PR is merged, pull `main` and delete the local branch:
 
@@ -143,7 +143,7 @@ npm run test:update-snapshots
 ```
 
 Tests cover event sorting, date handling, and schedule page rendering.
-Snapshot tests catch unintended layout regressions.
+Snapshot tests catch unintended layout regressions — they save the expected HTML output and fail if it changes unexpectedly, flagging the change for review.
 
 ### Architecture
 

@@ -98,6 +98,9 @@ Passenger restarts automatically when new files are uploaded.
 
 ### CI/CD Workflows
 
+CI (Continuous Integration) runs automated checks on every push and pull request.
+CD (Continuous Deployment) deploys the site automatically after a successful merge to `main`.
+
 | Workflow     | Trigger           | What it does                                                  |
 | ------------ | ----------------- | ------------------------------------------------------------- |
 | `ci.yml`     | Every push and PR | Lint + test + build. Lint/test skipped for data-only commits. |
@@ -130,7 +133,7 @@ flowchart TD
 | `GITHUB_BRANCH` | —       | Branch to commit events to (typically `main`)      |
 | `GITHUB_TOKEN`  | —       | Personal access token with repo write access       |
 
-`API_URL`, `GITHUB_*`, and FTP/SSH credentials are stored as GitHub Actions secrets.
+`API_URL`, `GITHUB_*`, and FTP/SSH credentials are stored as GitHub Actions secrets and are not needed for local development. Without `API_URL` set, the built form will have no submit endpoint — this is expected in local builds. Without `GITHUB_*` set, event submission via the API will fail; all other functionality works normally.
 
 ### Manual Production Startup (first time or after server wipe)
 
@@ -197,7 +200,7 @@ Git history provides a full audit trail of all changes, including every event su
 
 1. Check the GitHub repository for a recently opened or stuck PR from the API.
 2. If the PR is open and CI has passed, manually merge it.
-3. If CI failed, inspect the build log for errors and fix accordingly.
+3. If CI failed, inspect the build log in the Actions tab of the GitHub repository and fix accordingly.
 
 ### Site not building after a data change
 

@@ -1,6 +1,6 @@
 # SB Sommar – Design Specification
 
-Visual design reference for SB Sommar. Inspired by the existing site at sbsommar.se.
+Visual design reference for SB Sommar. Inspired by sbsommar.se, the live production site.
 This document is the single source of truth for design decisions.
 
 All CSS must use the custom properties defined in §7. Do not hardcode colors, spacing, or typography values.
@@ -187,6 +187,12 @@ When CSS is written, start with these at `:root`:
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-serif: Georgia, serif;
   --font-size-base: 16px;
+  --font-size-h1: 40px;
+  --font-size-h2: 35px;
+  --font-size-h3: 30px;
+  --font-size-pullquote: 25px;
+  --font-size-small: 14px;
+  --font-size-nav: 12px;
   --line-height-body: 1.65;
 
   /* Spacing */
@@ -227,7 +233,7 @@ These variables make it trivial to adjust the design globally later.
 
 ## 9. Accessibility
 
-- Color contrast must meet WCAG AA minimum (`4.5:1` for body text).
+- Color contrast must meet WCAG AA minimum (`4.5:1` for body text). WCAG is the Web Content Accessibility Guidelines — the international standard for accessible web design.
 - Interactive elements must have visible focus states.
 - Navigation must be keyboard accessible.
 - Images must have descriptive `alt` text.

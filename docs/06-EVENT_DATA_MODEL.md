@@ -37,7 +37,7 @@ Nothing else.
 
 ## 3. Camp Metadata
 
-Required fields:
+Required fields (authoritative list in [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md)):
 
 - `id`
 - `name`
@@ -64,22 +64,7 @@ The camp `id` must remain stable permanently. It is used in archives and must ne
 
 ## 4. Event Structure
 
-Required fields:
-
-- `id`
-- `title`
-- `date`
-- `start`
-- `location`
-- `responsible`
-
-Optional fields:
-
-- `end`
-- `description`
-- `link`
-- `owner`
-- `meta`
+Required and optional fields are defined in [04-DATA_CONTRACT.md](04-DATA_CONTRACT.md).
 
 Dates must use ISO format (`YYYY-MM-DD`). Times must use 24-hour format (`HH:MM`).
 
@@ -139,43 +124,11 @@ Initial state:
 
 Meta is for system integrity only.
 
----
-
-## 7. Full Example
-
-File: `source/data/2025-08-syssleback.yaml`
-
-```yaml
-camp:
-  id: 2025-08-syssleback
-  name: SB Sommar Augusti 2025
-  location: Sysslebäck
-  start_date: 2025-08-03
-  end_date: 2025-08-10
-
-events:
-  - id: schack-2025-08-04-1400
-    title: Schack
-    date: 2025-08-04
-    start: "14:00"
-    end: "16:00"
-    location: Samlingssalen
-    responsible: Anna
-    description: >
-      Öppet parti för alla åldrar.
-      Ta med eget schackbräde om du vill.
-    link: null
-    owner:
-      name: ""
-      email: ""
-    meta:
-      created_at: null
-      updated_at: null
-```
+For a complete YAML example showing all fields together, see [04-DATA_CONTRACT.md §7](04-DATA_CONTRACT.md).
 
 ---
 
-## 8. Stability Rules
+## 7. Stability Rules
 
 The data model must:
 
@@ -189,7 +142,7 @@ Fields may be added in future versions. Fields must not be removed without a mig
 
 ---
 
-## 9. Core Principle
+## 8. Core Principle
 
 Event data is infrastructure.
 
