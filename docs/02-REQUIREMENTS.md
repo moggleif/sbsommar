@@ -32,19 +32,20 @@ managing location lists. Editing is done directly in YAML files. No admin UI is 
 
 The following pages must exist:
 
-| Page | URL | Audience |
-|------|-----|----------|
-| Homepage | `/` | Prospective families, participants |
-| Weekly schedule | `/schema.html` | Participants |
-| Daily view | `/dagens-schema.html` | Participants |
-| Today / Display view | `/idag.html` | Participants, shared screens |
-| Add activity | `/lagg-till.html` | Participants |
-| Archive | `/arkiv.html` | Prospective families, returning participants |
-| RSS feed | `/schema.rss` | Anyone subscribing to the schedule |
+| ID | Page | URL | Audience |
+| --- | --- | --- | --- |
+| `02-§2.1` | Homepage | `/` | Prospective families, participants |
+| `02-§2.2` | Weekly schedule | `/schema.html` | Participants |
+| `02-§2.3` | Daily view | `/dagens-schema.html` | Participants |
+| `02-§2.4` | Today / Display view | `/idag.html` | Participants, shared screens |
+| `02-§2.5` | Add activity | `/lagg-till.html` | Participants |
+| `02-§2.6` | Archive | `/arkiv.html` | Prospective families, returning participants |
+| `02-§2.7` | RSS feed | `/schema.rss` | Anyone subscribing to the schedule |
 
-The homepage, schedule pages, add-activity form, and archive share the same header and navigation. None require login.
+The homepage, schedule pages, add-activity form, and archive share the same header and navigation. <!-- 02-§2.8 -->
+None require login. <!-- 02-§2.9 -->
 
-The Today / Display view has no header or navigation — it is a minimal, full-screen display intended for shared screens and quick mobile glances.
+The Today / Display view has no header or navigation — it is a minimal, full-screen display intended for shared screens and quick mobile glances. <!-- 02-§2.10 -->
 
 ---
 
@@ -52,7 +53,7 @@ The Today / Display view has no header or navigation — it is a minimal, full-s
 
 The homepage is for families who know nothing about the camp.
 
-It must answer, in order:
+It must answer, in order: <!-- 02-§3.1 -->
 
 - What is SB Sommar, and who is it for?
 - Is this the right place for my child?
@@ -63,10 +64,10 @@ It must answer, in order:
 - What are the rules and what should we bring?
 - What do previous participants say about it?
 
-It must also include a frequently asked questions section.
+It must also include a frequently asked questions section. <!-- 02-§3.2 -->
 
-The homepage must feel complete and trustworthy even when no camp is currently active.
-When a camp is active or upcoming, the schedule and add-activity links are prominent.
+The homepage must feel complete and trustworthy even when no camp is currently active. <!-- 02-§3.3 -->
+When a camp is active or upcoming, the schedule and add-activity links are prominent. <!-- 02-§3.4 -->
 
 **Tone:** Warm, calm, and clear. Written in Swedish. Not corporate. Not promotional.
 The goal is that a parent visiting for the first time leaves thinking:
@@ -78,36 +79,36 @@ The goal is that a parent visiting for the first time leaves thinking:
 
 ### Weekly schedule
 
-- Shows all activities for the full camp week (Sunday–Sunday).
+- Shows all activities for the full camp week (Sunday–Sunday). <!-- 02-§4.1 -->
 - Activities are grouped by day.
-- Within each day, activities are listed in chronological order.
-- Each activity shows: title, start time, end time (if set), location, responsible person.
+- Within each day, activities are listed in chronological order. <!-- 02-§4.2 -->
+- Each activity shows: title, start time, end time (if set), location, responsible person. <!-- 02-§4.3 -->
 
 ### Daily view
 
 - Shows activities for a single selected day.
 - Same field display as the weekly view.
-- The user can navigate between days.
+- The user can navigate between days. <!-- 02-§4.4 -->
 
 ### Today / Display view
 
-- Shows only today's activities.
+- Shows only today's activities. <!-- 02-§4.5 -->
 - Designed for two uses: mobile phones carried by participants, and shared screens placed around the camp.
-- Must be legible at a distance: dark background, large text, minimal interface chrome.
-- Must not require any interaction to stay useful — it should be readable at a glance.
+- Must be legible at a distance: dark background, large text, minimal interface chrome. <!-- 02-§4.6 -->
+- Must not require any interaction to stay useful — it should be readable at a glance. <!-- 02-§4.7 -->
 - No navigation to other days. This view is always today.
 
 ### All schedule views
 
-- Activities are always in chronological order.
-- Overlapping activities are allowed and must remain readable.
-- Clicking an activity opens its detail view (see §5).
+- Activities are always in chronological order. <!-- 02-§11.1 -->
+- Overlapping activities are allowed and must remain readable. <!-- 02-§4.8 -->
+- Clicking an activity opens its detail view (see §5). <!-- 02-§4.9 -->
 
 ---
 
 ## 5. Activity Detail View
 
-When a participant clicks an activity, a detail view must show:
+When a participant clicks an activity, a detail view must show: <!-- 02-§5.1 -->
 
 - Title
 - Date
@@ -125,7 +126,7 @@ additional information exists beyond what the schedule row shows.
 
 ## 6. Adding an Activity
 
-Participants must be able to submit a new activity through the form at `/lagg-till.html`.
+Participants must be able to submit a new activity through the form at `/lagg-till.html`. <!-- 02-§6.1 -->
 
 ### Required fields
 
@@ -147,26 +148,26 @@ The form must help the user fill it in correctly. This is not about security —
 it is about reducing confusion and frustration.
 
 - **Date field:** constrained to the active camp's date range. The user cannot
-  select a date outside the camp week.
+  select a date outside the camp week. <!-- 02-§6.2 -->
 - **Location field:** a dropdown populated from `source/data/local.yaml`.
-  One option ("Annat") allows a free-text location not in the list.
+  One option ("Annat") allows a free-text location not in the list. <!-- 02-§6.3 -->
 - **Time fields:** display a `HH:MM` format hint. The field should guide the user
-  toward a valid value.
+  toward a valid value. <!-- 02-§6.4 -->
 - **Errors:** shown inline, per field, immediately on submit. Not as a single
   generic message at the top of the form. Each error message must name the specific
-  problem (e.g. "Sluttid måste vara efter starttid").
+  problem (e.g. "Sluttid måste vara efter starttid"). <!-- 02-§6.5 -->
 - **Submit button:** disabled while the submission is in progress.
-  Shows a visual indication that something is happening.
+  Shows a visual indication that something is happening. <!-- 02-§6.6 -->
 - **Success state:** a clear confirmation that the activity has been received.
-  The user should not be left wondering whether it worked.
+  The user should not be left wondering whether it worked. <!-- 02-§6.7 -->
 - **Network failure:** if the submission cannot reach the server, the user is
-  told clearly that it failed and can try again. Submissions must not be silently lost.
+  told clearly that it failed and can try again. Submissions must not be silently lost. <!-- 02-§6.8 -->
 
 ---
 
 ## 7. Editing and Removing Activities
 
-Only administrators can edit or remove activities.
+Only administrators can edit or remove activities. <!-- 02-§7.1 -->
 
 This is done by modifying the camp's YAML file directly. See [04-OPERATIONS.md](04-OPERATIONS.md) for the workflow.
 
@@ -177,8 +178,8 @@ Participants do not have editing rights.
 ## 8. Locations
 
 - Locations must be selected from a predefined list.
-- One flexible option ("Annat") must exist for locations not in the list.
-- Location names must remain consistent throughout the week.
+- One flexible option ("Annat") must exist for locations not in the list. <!-- 02-§8.2 -->
+- Location names must remain consistent throughout the week. <!-- 02-§8.1 -->
 - The predefined list is maintained in `source/data/local.yaml` — this is the
   only place locations are defined.
 
@@ -190,12 +191,12 @@ Participants cannot modify the location list.
 
 When a participant submits an activity, the following must be verified:
 
-- `title` is present and non-empty.
-- `date` falls within the active camp's date range.
-- `start` is in valid `HH:MM` format.
-- `end`, if provided, is in valid `HH:MM` format and is after `start`.
-- `location` is present and non-empty.
-- `responsible` is present and non-empty.
+- `title` is present and non-empty. <!-- 02-§9.1 -->
+- `date` falls within the active camp's date range. <!-- 02-§9.2 -->
+- `start` is in valid `HH:MM` format. <!-- 02-§9.3 -->
+- `end`, if provided, is in valid `HH:MM` format and is after `start`. <!-- 02-§9.4 -->
+- `location` is present and non-empty. <!-- 02-§9.5 -->
+- `responsible` is present and non-empty. <!-- 02-§9.6 -->
 
 Invalid submissions must be rejected with a clear, specific error message.
 Valid submissions must receive a confirmation immediately.
@@ -210,13 +211,13 @@ the entire site.
 
 The server must therefore validate all input before touching GitHub:
 
-- All required fields must be present and of the correct type before any write begins.
+- All required fields must be present and of the correct type before any write begins. <!-- 02-§10.1 -->
 - Only known fields are written to the YAML file. Unknown or extra fields in the
-  POST body are ignored — they are never committed.
-- String values are type-checked and length-limited. Extremely long strings are rejected.
+  POST body are ignored — they are never committed. <!-- 02-§10.2 -->
+- String values are type-checked and length-limited. Extremely long strings are rejected. <!-- 02-§10.3 -->
 - YAML escaping is handled entirely by the YAML serializer. User-provided strings
-  are never interpolated directly into YAML text.
-- Any validation failure results in an HTTP error response. Nothing is committed to GitHub.
+  are never interpolated directly into YAML text. <!-- 02-§10.4 -->
+- Any validation failure results in an HTTP error response. Nothing is committed to GitHub. <!-- 02-§10.5 -->
 
 This is separate from form UX validation. Form validation helps users. API validation
 protects the site's data integrity.
@@ -225,8 +226,8 @@ protects the site's data integrity.
 
 ## 11. Activity Order and Overlaps
 
-- Activities must always be displayed in chronological order (by date, then start time).
-- Overlapping activities are allowed.
+- Activities must always be displayed in chronological order (by date, then start time). <!-- 02-§11.1 -->
+- Overlapping activities are allowed. <!-- 02-§11.2 -->
 - The schedule must remain readable when multiple activities occur at the same time.
 
 ---
@@ -236,8 +237,8 @@ protects the site's data integrity.
 Participants must be able to trust that:
 
 - The schedule reflects the current plan.
-- A newly submitted activity appears in the schedule within a few minutes.
-- Corrections and removals made by an admin are visible in all schedule views.
+- A newly submitted activity appears in the schedule within a few minutes. <!-- 02-§12.1 -->
+- Corrections and removals made by an admin are visible in all schedule views. <!-- 02-§12.2 -->
 
 The schedule is a shared coordination tool during the camp week.
 
@@ -247,18 +248,18 @@ The schedule is a shared coordination tool during the camp week.
 
 The site must meet WCAG AA as a baseline:
 
-- Color contrast must be at least `4.5:1` for body text.
-- All interactive elements must have visible focus states.
-- Navigation must be fully keyboard accessible.
-- Images must have descriptive `alt` text.
-- The add-activity form must be usable without a mouse.
-- Accordion or expandable elements must use proper ARIA attributes.
+- Color contrast must be at least `4.5:1` for body text. <!-- 02-§13.1 -->
+- All interactive elements must have visible focus states. <!-- 02-§13.2 -->
+- Navigation must be fully keyboard accessible. <!-- 02-§13.3 -->
+- Images must have descriptive `alt` text. <!-- 02-§13.4 -->
+- The add-activity form must be usable without a mouse. <!-- 02-§13.5 -->
+- Accordion or expandable elements must use proper ARIA attributes. <!-- 02-§13.6 -->
 
 ---
 
 ## 14. Language
 
-The site is written entirely in Swedish.
+The site is written entirely in Swedish. <!-- 02-§14.1 -->
 
 This includes: all page content, navigation labels, form labels, error messages,
 confirmation messages, and accessibility text (alt, aria-label, etc.).
@@ -267,7 +268,7 @@ confirmation messages, and accessibility text (alt, aria-label, etc.).
 
 ## 15. RSS Feed
 
-The activity schedule must be available as an RSS feed at `/schema.rss`.
+The activity schedule must be available as an RSS feed at `/schema.rss`. <!-- 02-§15.1 -->
 
 The feed must reflect the current state of the schedule. It is intended for
 participants who want to follow the schedule in an RSS reader or use it to
@@ -279,9 +280,9 @@ integrate the schedule elsewhere.
 
 Past camps must remain accessible.
 
-- When a camp ends, it becomes an archived camp. Its data is never deleted.
-- The archive page must list all past camps and link to their schedules.
-- When no camp is active, the most recent archived camp is shown by default.
+- When a camp ends, it becomes an archived camp. Its data is never deleted. <!-- 02-§16.1 -->
+- The archive page must list all past camps and link to their schedules. <!-- 02-§16.2 -->
+- When no camp is active, the most recent archived camp is shown by default. <!-- 02-§16.3 -->
 - The archive must be usable and complete, not a placeholder.
 
 ---
@@ -291,10 +292,10 @@ Past camps must remain accessible.
 The site must:
 
 - Work well on mobile devices. Schedule viewing and event submission are
-  frequently done from a phone during camp week.
+  frequently done from a phone during camp week. <!-- 02-§17.1 -->
 - Be readable on shared display screens (see Today view in §4).
 - Require no explanation to use. A first-time visitor should understand the
-  schedule and the add-activity form without instructions.
+  schedule and the add-activity form without instructions. <!-- 02-§17.2 -->
 - Avoid complexity that does not serve a clear user need.
 
 The purpose of the schedule is coordination, not administration.

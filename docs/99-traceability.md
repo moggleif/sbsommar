@@ -19,12 +19,23 @@ This document makes those gaps visible so they can be planned and prioritised.
 ### ID
 
 A short, stable reference you can use in issues, pull requests, and commit messages.
+For example: `"this PR closes 02-§9.5"`.
+
+The ID appears in **two places**: in this matrix (the Table section below), and inline in the
+source document next to the requirement text as an HTML comment. To find requirement `02-§9.5`,
+search for `02-§9.5` in either this file or in `docs/02-REQUIREMENTS.md` — it will appear on the
+line that says `` `location` is present and non-empty ``.
 
 Format: `{doc}-§{section}.{counter}`
 
 - `02` = the document the requirement comes from (`02-REQUIREMENTS.md`)
-- `§4` = the section number inside that document
-- `.2` = the second requirement extracted from that section
+- `§9` = the section number inside that document (matches the `## 9.` heading)
+- `.5` = a sequential counter within that section (labels are added top-to-bottom)
+
+The section prefix tells you *which document owns the requirement* and therefore where to look
+if you want to read the surrounding context or open a discussion about changing it.
+When adding a new requirement to a section, give it the next available number in that section
+and add the `<!-- {id} -->` comment to the source doc alongside the entry in this matrix.
 
 Examples:
 
@@ -108,7 +119,8 @@ Audit date: 2026-02-23.
 | `02-§2.6` | Archive page exists at `/arkiv.html` | 03-ARCHITECTURE.md §4 | — | — | gap |
 | `02-§2.7` | RSS feed exists at `/schema.rss` | — (no implementation doc) | — | — | gap |
 | `02-§2.8` | Homepage, schedule, add-activity, and archive pages share header and navigation | 03-ARCHITECTURE.md §6 | SNP-01 | `source/build/layout.js` – `pageNav()` | covered |
-| `02-§2.9` | Today/Display view has no header or navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js` – no `pageNav()` call | implemented |
+| `02-§2.9` | None of the site pages require login | 03-ARCHITECTURE.md §3 | — | No authentication exists anywhere in the codebase | implemented |
+| `02-§2.10` | Today/Display view has no header or navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js` – no `pageNav()` call | implemented |
 | `02-§3.1` | Homepage answers all pre-camp questions (what, who, when, cost, registration, lodging, rules, testimonials) | 03-ARCHITECTURE.md §5 | — | `source/build/render-index.js`, `source/content/*.md` sections | implemented |
 | `02-§3.2` | Homepage includes a collapsible FAQ section | 03-ARCHITECTURE.md §5; `collapsible: true` in `sections.yaml` | RNI-22..28 | `source/build/render-index.js` – `convertMarkdown(…, collapsible: true)` | covered |
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | — | `source/build/build.js` – falls back to most recent camp by `start_date` | implemented |
@@ -173,15 +185,15 @@ Audit date: 2026-02-23.
 | `05-§6.1` | Event `id` must be unique within the camp file | 06-EVENT_DATA_MODEL.md §4 | GH-01..11 (slugify determinism) | — (no uniqueness check against existing IDs; ID is deterministic but not verified) | gap |
 | `05-§6.2` | Event `id` must be stable and not change after creation | 06-EVENT_DATA_MODEL.md §4 | — | `source/api/github.js` – deterministic `slugify(title)+date+start` on first write; no update path exists | implemented |
 | `07-§7.1` | All CSS uses the custom properties defined at `:root`; no hardcoded colors, spacing, or typography | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – all values use `var(--…)` tokens (not enforced by a linter) | implemented |
-| `07-§9.1` | Accordion items use `aria-expanded` and `aria-controls` ARIA attributes | 07-DESIGN.md §9 | — | `source/build/render.js` – `<details>/<summary>` without explicit `aria-expanded` or `aria-controls` | gap |
+| `07-§9.5` | Accordion items use `aria-expanded` and `aria-controls` ARIA attributes | 07-DESIGN.md §9 | — | `source/build/render.js` – `<details>/<summary>` without explicit `aria-expanded` or `aria-controls` | gap |
 | `CL-§1.1` | Build output is static HTML/CSS/JS; no server is required to view pages | 03-ARCHITECTURE.md §7 | SNP-01 | `source/build/build.js` – writes to `public/` | covered |
-| `CL-§1.2` | No client-side rendering framework is used | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – plain vanilla JS only | implemented |
-| `CL-§1.3` | Event data has a single source of truth | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml` files; `source/build/build.js` reads exclusively from there | implemented |
-| `CL-§4.1` | Main page sections are authored in Markdown | 03-ARCHITECTURE.md §6 | RNI-01..38 | `source/build/render-index.js` – `convertMarkdown()` | covered |
+| `CL-§1.3` | No client-side rendering framework is used | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – plain vanilla JS only | implemented |
+| `CL-§4.1` | Event data has a single source of truth | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml` files; `source/build/build.js` reads exclusively from there | implemented |
+| `CL-§3.2` | Main page sections are authored in Markdown | 03-ARCHITECTURE.md §6 | RNI-01..38 | `source/build/render-index.js` – `convertMarkdown()` | covered |
 | `CL-§5.1` | HTML validation runs in CI; build fails if HTML is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no HTML linter configured; `ci.yml` runs ESLint and markdownlint only) | gap |
 | `CL-§5.2` | CSS linting runs in CI; build fails if CSS is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no CSS linter configured) | gap |
 | `CL-§5.3` | JavaScript linting runs in CI; build fails if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – `npm run lint` (ESLint) | implemented |
-| `CL-§5.4` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | VLD-04..16 (server-side only) | — (validation only in API layer; manually edited YAML is not validated at build time) | gap |
+| `CL-§5.5` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | VLD-04..16 (server-side only) | — (validation only in API layer; manually edited YAML is not validated at build time) | gap |
 | `CL-§9.1` | Built output lives in `/public` | 04-OPERATIONS.md (System Overview) | — | `source/build/build.js` – `OUTPUT_DIR = …/public` | implemented |
 | `CL-§9.2` | GitHub Actions builds and validates; deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml`, `.github/workflows/deploy.yml` | implemented |
 
@@ -190,9 +202,9 @@ Audit date: 2026-02-23.
 ## Summary
 
 ```text
-Total requirements:              84
+Total requirements:              85
 Covered (implemented + tested):  21
-Implemented, not tested:         43
+Implemented, not tested:         44
 Gap (no implementation):         20
 Orphan tests (no requirement):    0
 ```
@@ -247,7 +259,7 @@ Orphan tests (no requirement):    0
 11. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
     No code prevents a camp from being marked both active and archived.
 
-12. **`CL-§5.4` — Build-time YAML data validation**
+12. **`CL-§5.5` — Build-time YAML data validation**
     Manually edited YAML bypasses all validation.
 
 ### Low — tooling and accessibility gaps
@@ -261,7 +273,7 @@ Orphan tests (no requirement):    0
 15. **`02-§13.2` — Visible focus states**
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
 
-16. **`02-§13.6` / `07-§9.1` — Accordion ARIA attributes**
+16. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
     `<details>/<summary>` is used without explicit `aria-expanded` or `aria-controls`.
 
 ---
