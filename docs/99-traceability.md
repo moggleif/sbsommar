@@ -99,7 +99,7 @@ Sources read: `02-REQUIREMENTS.md`, `05-DATA_CONTRACT.md`, `07-DESIGN.md`, `CLAU
 
 ## Summary
 
-```
+```text
 Total requirements:                    68
 Covered (implemented + tested):        16
 Implemented, not tested:               36
