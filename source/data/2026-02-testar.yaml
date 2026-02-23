@@ -352,3 +352,19 @@ events:
   meta:
     created_at: 2025-07-08 18:43
     updated_at: 2025-07-08 18:53
+- id: test-event-2026-02-23-2026-02-23T1000:00
+  title: Test Event
+  date: '2026-02-23'
+  start: '2026-02-23T10:00:00'
+  end: '2026-02-23T12:00:00'
+  location: Annat
+  responsible: Test Responsible Person
+  description: |
+    Test description
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-23 10:34
+    updated_at: 2026-02-23 10:34
