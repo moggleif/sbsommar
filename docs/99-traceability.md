@@ -1,13 +1,96 @@
 # Requirements Traceability Matrix – SB Sommar
 
-Each row is one distinct, testable requirement. Columns:
+## What is this document?
 
-- **ID** — doc number + section number + counter within that section, e.g. `02-§4.2`
-- **Requirement** — one sentence describing the specific, testable requirement
-- **Doc Ref** — where the *implementation approach* is documented (not the requirement source)
-- **Test(s)** — short test IDs (see legend at the bottom); comes before Implementation to reflect TDD order
-- **Implementation** — file(s) and function(s) where this is realised
-- **Status** — `covered` / `implemented` / `gap`
+A requirements traceability matrix answers three questions for every requirement:
+
+1. **Is it documented?** Where does the requirement come from?
+2. **Is it implemented?** Which code makes it work?
+3. **Is it verified?** Which test proves it works?
+
+When a requirement has no test, it may be broken without anyone noticing.
+When a requirement has no implementation, it is a gap — a feature that is missing.
+This document makes those gaps visible so they can be planned and prioritised.
+
+---
+
+## How to read the columns
+
+### ID
+
+A short, stable reference you can use in issues, pull requests, and commit messages.
+
+Format: `{doc}-§{section}.{counter}`
+
+- `02` = the document the requirement comes from (`02-REQUIREMENTS.md`)
+- `§4` = the section number inside that document
+- `.2` = the second requirement extracted from that section
+
+Examples:
+
+- `02-§4.2` = second requirement from §4 of `02-REQUIREMENTS.md`
+- `05-§4.1` = first requirement from §4 of `05-DATA_CONTRACT.md`
+- `CL-§5.3` = third requirement from §5 of `CLAUDE.md`
+
+The documents requirements are drawn from:
+
+| Prefix | Document |
+| --- | --- |
+| `02` | `docs/02-REQUIREMENTS.md` — what the site must do and for whom |
+| `05` | `docs/05-DATA_CONTRACT.md` — YAML schema and validation rules |
+| `07` | `docs/07-DESIGN.md` — visual design, CSS tokens, accessibility |
+| `CL` | `CLAUDE.md` — architectural constraints and quality requirements |
+
+### Requirement
+
+One sentence describing a single, testable thing the system must do.
+"Single" matters — if a sentence could be split into two independently verifiable things, it should be.
+
+### Doc Ref
+
+This is **not** where the requirement is stated — it is where the *solution approach* is documented.
+It points to the doc that tells a developer *how* to implement the requirement.
+
+Example: the requirement "event date must fall within camp dates" comes from `02-REQUIREMENTS.md §9`,
+but the implementation rules (date format, range check) are specified in `06-EVENT_DATA_MODEL.md §4`,
+so that is the Doc Ref.
+
+A `—` here means no implementation guidance has been written yet.
+That is itself a gap worth noting.
+
+### Test(s)
+
+Short IDs that point to tests in the `tests/` directory.
+The full mapping from ID to file and describe-suite is in the **Test ID Legend** at the bottom.
+
+Examples:
+
+- `VLD-04..11` = tests VLD-04 through VLD-11 in `tests/validate.test.js`
+- `SNP-01` = first test in `tests/snapshot.test.js`
+
+Tests are listed **before** Implementation to reflect the intended order of work:
+write the test first, then write the code that makes it pass.
+
+A `—` here means no automated test exists for this requirement.
+
+### Implementation
+
+The file(s) and function(s) in the codebase where the requirement is satisfied.
+A `—` means nothing has been built yet.
+Notes in parentheses explain partial or incorrect implementations.
+
+### Status
+
+| Value | Meaning |
+| --- | --- |
+| `covered` | Code exists **and** a test verifies it |
+| `implemented` | Code exists, but no automated test |
+| `gap` | The requirement has no implementation (and no test) |
+
+`implemented` is not the same as `covered`. Code that is not tested may break silently.
+Aim to move all `implemented` rows toward `covered` over time.
+
+---
 
 Audit date: 2026-02-23.
 
