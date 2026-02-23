@@ -21,7 +21,7 @@ These are the authoritative sources. CLAUDE.md summarises principles; the docs d
 | `docs/03-OPERATIONS.md` | Camp lifecycle: before/during/after, deployment, disaster recovery |
 | `docs/04-DATA_CONTRACT.md` | YAML schema, required fields, validation rules, ID format |
 | `docs/05-EVENT_REQUIREMENTS.md` | Event display and behaviour requirements |
-| `docs/06-EVENT_DATA_MODEL.md` | Event field definitions and constraints |
+| `docs/06-EVENT_DATA_MODEL.md` | Why the event data is shaped the way it is — ownership, metadata, stability reasoning |
 | `docs/07-DESIGN.md` | Color palette, typography scale, spacing tokens, component rules |
 
 Rules:
@@ -29,7 +29,7 @@ Rules:
 - Do not invent colors, spacing, or layout patterns not present in `07-DESIGN.md`.
 - Do not modify YAML files or the data schema without checking `04-DATA_CONTRACT.md` first.
 - Do not change the camp lifecycle flow without checking `03-OPERATIONS.md` first.
-- CSS must use the custom properties defined in `07-DESIGN.md §7` — do not hardcode design values.
+- CSS must use the custom properties defined in `07-DESIGN.md §7` — do not hardcode colors, spacing, or typography values.
 
 ---
 
@@ -189,8 +189,15 @@ Non-technical contributors must be able to:
 # 10. Git Workflow
 
 - Never push directly to `main`.
-- Always start work on a new branch.
-- Before creating a branch, pull from `main` to ensure you are up to date.
+- At the start of every session — before writing any code or making any changes — run:
+
+  ```bash
+  git checkout main
+  git pull
+  git checkout -b branch-name
+  ```
+
+- Choose a descriptive branch name (e.g. `fix/schedule-sort`, `feature/today-view`, `docs/update-contract`).
 - After a branch has been merged and the merge has been pulled back via `main`, delete the local branch.
 
 ---
