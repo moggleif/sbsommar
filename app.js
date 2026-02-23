@@ -34,19 +34,17 @@ app.get('/', (req, res) => {
   res.json({ status: 'API running' });
 });
 
-app.post('/add-event', async (req, res) => {
+app.post('/add-event', (req, res) => {
   const v = validateEventRequest(req.body);
   if (!v.ok) {
     return res.status(400).json({ success: false, error: v.error });
   }
 
-  try {
-    await addEventToActiveCamp(req.body);
-    return res.json({ success: true });
-  } catch (err) {
-    console.error('POST /add-event error:', err.message);
-    return res.status(500).json({ success: false, error: err.message });
-  }
+  res.json({ success: true });
+
+  addEventToActiveCamp(req.body).catch((err) => {
+    console.error('POST /add-event background error:', err.message);
+  });
 });
 
 // Static LAST

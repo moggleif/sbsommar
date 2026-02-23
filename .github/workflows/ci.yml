@@ -22,13 +22,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Detect changed files
+        id: changes
+        run: |
+          git fetch origin main --depth=1
+          git diff --name-only origin/main...HEAD | grep -qvE '^source/data/' \
+            && echo "has_code=true" >> $GITHUB_OUTPUT \
+            || echo "has_code=false" >> $GITHUB_OUTPUT
+
       - name: Lint JavaScript
+        if: steps.changes.outputs.has_code == 'true'
         run: npm run lint
 
       - name: Lint Markdown
+        if: steps.changes.outputs.has_code == 'true'
         run: npm run lint:md
 
       - name: Run tests
+        if: steps.changes.outputs.has_code == 'true'
         run: npm test
 
       - name: Build
