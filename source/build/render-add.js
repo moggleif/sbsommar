@@ -95,7 +95,7 @@ ${locationOptions}
   <section id="result" hidden>
     <div class="success-box">
       <h2>Aktiviteten är tillagd!</h2>
-      <p class="intro"><strong id="result-title"></strong> syns nu i schemat.</p>
+      <p class="intro"><strong id="result-title"></strong> syns i schemat om ungefär en minut.</p>
       <div class="success-actions">
         <a href="schema.html" class="btn-primary">Gå till schemat →</a>
         <button id="new-btn" class="btn-secondary">Lägg till en till</button>
