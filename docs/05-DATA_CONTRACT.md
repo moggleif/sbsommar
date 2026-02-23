@@ -22,12 +22,12 @@ camps:
     archived: boolean    # true once the camp has ended
 ```
 
-All fields shown are required for each entry.
+All fields shown are required for each entry. <!-- 05-§1.1 -->
 
 Rules:
 
-- Exactly one camp may have `active: true` at a time.
-- A camp that is `active: true` must not also be `archived: true`.
+- Exactly one camp may have `active: true` at a time. <!-- 05-§1.2 -->
+- A camp that is `active: true` must not also be `archived: true`. <!-- 05-§1.3 -->
 - The `file` field references a YAML file in `source/data/`.
 
 ---
@@ -85,7 +85,7 @@ See §7 for a complete worked example.
 - `start_date`
 - `end_date`
 
-### Required for each event
+### Required for each event <!-- 05-§3.1 -->
 
 - `id`
 - `title`
@@ -106,10 +106,10 @@ See §7 for a complete worked example.
 
 ## 4. Date and Time Rules
 
-- `date` must fall within the camp's `start_date` and `end_date` (inclusive).
-- `start` must use 24-hour format: `"HH:MM"`.
+- `date` must fall within the camp's `start_date` and `end_date` (inclusive). <!-- 05-§4.1 -->
+- `start` must use 24-hour format: `"HH:MM"`. <!-- 05-§4.2 -->
 - `end` must be `null` or `"HH:MM"`.
-- `end`, when present, must be after `start`.
+- `end`, when present, must be after `start`. <!-- 05-§4.3 -->
 - No timezone handling. All times are local.
 
 ---
@@ -122,7 +122,7 @@ The combination of:
 (title + date + start)
 ```
 
-must be unique within a camp file.
+must be unique within a camp file. <!-- 05-§5.1 -->
 
 Duplicate events are not allowed.
 
@@ -130,8 +130,8 @@ Duplicate events are not allowed.
 
 ## 6. Event ID Rules
 
-- Must be unique within the file.
-- Must be stable — do not change after creation.
+- Must be unique within the file. <!-- 05-§6.1 -->
+- Must be stable — do not change after creation. <!-- 05-§6.2 -->
 - Recommended format:
 
 ```text

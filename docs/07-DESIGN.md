@@ -3,31 +3,31 @@
 Visual design reference for SB Sommar. Inspired by sbsommar.se, the live production site.
 This document is the single source of truth for design decisions.
 
-All CSS must use the custom properties defined in §7. Do not hardcode colors, spacing, or typography values.
+All CSS must use the custom properties defined in §7. Do not hardcode colors, spacing, or typography values. <!-- 07-§7.1 -->
 
 ---
 
 ## 1. Design Philosophy
 
-- Warm, welcoming, outdoorsy feel — not corporate or sterile.
-- Earth tones and natural colors that evoke summer, forest, and water.
-- Clean and readable. Content first.
-- Fast and lightweight. No decorative excess.
+- Warm, welcoming, outdoorsy feel — not corporate or sterile. <!-- 07-§1.1 -->
+- Earth tones and natural colors that evoke summer, forest, and water. <!-- 07-§1.2 -->
+- Clean and readable. Content first. <!-- 07-§1.3 -->
+- Fast and lightweight. No decorative excess. <!-- 07-§1.4 -->
 
 ---
 
 ## 2. Color Palette
 
-| Name        | Hex       | Use                                          |
-|-------------|-----------|----------------------------------------------|
-| Terracotta  | `#C76D48` | Primary accent, buttons, links, highlights   |
-| Sage green  | `#ADBF77` | Secondary accent, section headers, tags      |
-| Cream       | `#F5EEDF` | Page background, warm neutral base           |
-| Navy        | `#192A3D` | Main headings, strong contrast               |
-| Charcoal    | `#3B3A38` | Body text, muted dark                        |
-| White       | `#FFFFFF` | Cards, content blocks, contrast surfaces     |
+| ID | Name | Hex | Use |
+| --- | --- | --- | --- |
+| `07-§2.1` | Terracotta | `#C76D48` | Primary accent, buttons, links, highlights |
+| `07-§2.2` | Sage green | `#ADBF77` | Secondary accent, section headers, tags |
+| `07-§2.3` | Cream | `#F5EEDF` | Page background, warm neutral base |
+| `07-§2.4` | Navy | `#192A3D` | Main headings, strong contrast |
+| `07-§2.5` | Charcoal | `#3B3A38` | Body text, muted dark |
+| `07-§2.6` | White | `#FFFFFF` | Cards, content blocks, contrast surfaces |
 
-Avoid bright or saturated colors outside this palette. The warmth comes from restraint.
+Avoid bright or saturated colors outside this palette. The warmth comes from restraint. <!-- 07-§2.7 -->
 
 ---
 
@@ -36,23 +36,23 @@ Avoid bright or saturated colors outside this palette. The warmth comes from res
 ### Font families
 
 - **Headings**: System sans-serif stack, or a single humanist sans-serif web font if added later.
-  Fallback: `system-ui, -apple-system, sans-serif`
-- **Body**: Same sans-serif stack. Clean and readable.
-- **Pull quotes / callouts**: Georgia, serif. Adds warmth and character in small doses.
+  Fallback: `system-ui, -apple-system, sans-serif` <!-- 07-§3.1 -->
+- **Body**: Same sans-serif stack. Clean and readable. <!-- 07-§3.2 -->
+- **Pull quotes / callouts**: Georgia, serif. Adds warmth and character in small doses. <!-- 07-§3.3 -->
 
 ### Scale
 
-| Element       | Size  | Weight | Color     | Notes                        |
-|---------------|-------|--------|-----------|------------------------------|
-| H1            | 40px  | 700    | `#192A3D` | Page titles, hero heading    |
-| H2            | 35px  | 700    | `#192A3D` | Section headings             |
-| H3            | 30px  | 700    | `#192A3D` | Sub-section headings         |
-| Body          | 16px  | 400    | `#3B3A38` | All running text             |
-| Small / meta  | 14px  | 400    | `#3B3A38` | Dates, labels, captions      |
-| Pull quote    | 25px  | 600    | `#3B3A38` | Georgia serif, italic        |
-| Nav links     | 12px  | 700    | varies    | Uppercase, spaced out        |
+| ID | Element | Size | Weight | Color | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `07-§3.4` | H1 | 40px | 700 | `#192A3D` | Page titles, hero heading |
+| `07-§3.5` | H2 | 35px | 700 | `#192A3D` | Section headings |
+| `07-§3.6` | H3 | 30px | 700 | `#192A3D` | Sub-section headings |
+| `07-§3.7` | Body | 16px | 400 | `#3B3A38` | All running text |
+| `07-§3.8` | Small / meta | 14px | 400 | `#3B3A38` | Dates, labels, captions |
+| `07-§3.9` | Pull quote | 25px | 600 | `#3B3A38` | Georgia serif, italic |
+| `07-§3.10` | Nav links | 12px | 700 | varies | Uppercase, spaced out |
 
-Line height for body text: `1.65`. Generous — makes Swedish long-form text comfortable to read.
+Line height for body text: `1.65`. Generous — makes Swedish long-form text comfortable to read. <!-- 07-§3.11 -->
 
 ---
 
@@ -60,42 +60,42 @@ Line height for body text: `1.65`. Generous — makes Swedish long-form text com
 
 ### Containers
 
-| Type    | Max-width | Use                          |
-|---------|-----------|------------------------------|
-| Wide    | `1290px`  | Full layout, header, hero    |
-| Narrow  | `750px`   | Reading sections, articles   |
+| ID | Type | Max-width | Use |
+| --- | --- | --- | --- |
+| `07-§4.1` | Wide | `1290px` | Full layout, header, hero |
+| `07-§4.2` | Narrow | `750px` | Reading sections, articles |
 
-Container is centered with `margin: 0 auto` and horizontal padding on small screens.
+Container is centered with `margin: 0 auto` and horizontal padding on small screens. <!-- 07-§4.3 -->
 
 ### Spacing rhythm
 
-Base unit: `8px`. Spacing values are multiples of this.
+Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 
-| Token name    | Value  | Use                            |
-|---------------|--------|--------------------------------|
-| `space-xs`    | 8px    | Tight gaps, icon padding       |
-| `space-sm`    | 16px   | Between inline elements        |
-| `space-md`    | 24px   | Card padding, form fields      |
-| `space-lg`    | 40px   | Between sections within a page |
-| `space-xl`    | 64px   | Between major page sections    |
-| `space-xxl`   | 96px   | Hero padding, page top/bottom  |
+| ID | Token name | Value | Use |
+| --- | --- | --- | --- |
+| `07-§4.5` | `space-xs` | 8px | Tight gaps, icon padding |
+| `07-§4.6` | `space-sm` | 16px | Between inline elements |
+| `07-§4.7` | `space-md` | 24px | Card padding, form fields |
+| `07-§4.8` | `space-lg` | 40px | Between sections within a page |
+| `07-§4.9` | `space-xl` | 64px | Between major page sections |
+| `07-§4.10` | `space-xxl` | 96px | Hero padding, page top/bottom |
 
 ### Grid
 
-- Desktop: up to 3 columns for cards/testimonials.
-- Tablet: 2 columns.
-- Mobile: 1 column.
-- Use CSS Grid. No grid framework.
+- Desktop: up to 3 columns for cards/testimonials. <!-- 07-§4.11 -->
+- Tablet: 2 columns. <!-- 07-§4.12 -->
+- Mobile: 1 column. <!-- 07-§4.13 -->
+- Use CSS Grid. No grid framework. <!-- 07-§4.14 -->
 
 ---
 
 ## 5. Responsive Breakpoints
 
-| Breakpoint | Width       | Description                        |
-|------------|-------------|------------------------------------|
-| Desktop    | > 1000px    | Full layout, side-by-side columns  |
-| Tablet     | 690–999px   | 2-column grids, condensed header   |
-| Mobile     | < 690px     | Single column, stacked layout      |
+| ID | Breakpoint | Width | Description |
+| --- | --- | --- | --- |
+| `07-§5.1` | Desktop | > 1000px | Full layout, side-by-side columns |
+| `07-§5.2` | Tablet | 690–999px | 2-column grids, condensed header |
+| `07-§5.3` | Mobile | < 690px | Single column, stacked layout |
 
 ---
 
@@ -103,57 +103,57 @@ Base unit: `8px`. Spacing values are multiples of this.
 
 ### Header / Navigation
 
-- Full-width, fixed or sticky at top.
-- Height: `120px` desktop, `70px` mobile.
-- Background: white or cream, with a subtle bottom border or shadow.
-- Logo on the left. Navigation links on the right.
-- Nav links: uppercase, `12px`, `700` weight, spaced with `letter-spacing: 0.08em`.
-- Active/hover: terracotta underline or color shift.
-- Mobile: hamburger menu, full-screen or dropdown.
+- Full-width, fixed or sticky at top. <!-- 07-§6.1 -->
+- Height: `120px` desktop, `70px` mobile. <!-- 07-§6.2 -->
+- Background: white or cream, with a subtle bottom border or shadow. <!-- 07-§6.3 -->
+- Logo on the left. Navigation links on the right. <!-- 07-§6.4 -->
+- Nav links: uppercase, `12px`, `700` weight, spaced with `letter-spacing: 0.08em`. <!-- 07-§6.5 -->
+- Active/hover: terracotta underline or color shift. <!-- 07-§6.6 -->
+- Mobile: hamburger menu, full-screen or dropdown. <!-- 07-§6.7 -->
 
 ### Hero Section
 
-- Large background image (Klarälven river / camp landscape).
-- Overlay text: camp name, dates, short tagline.
-- One or two CTA buttons (see Buttons below).
-- Image should use `object-fit: cover` and be responsive.
+- Large background image (Klarälven river / camp landscape). <!-- 07-§6.8 -->
+- Overlay text: camp name, dates, short tagline. <!-- 07-§6.9 -->
+- One or two CTA buttons (see Buttons below). <!-- 07-§6.10 -->
+- Image should use `object-fit: cover` and be responsive. <!-- 07-§6.11 -->
 
 ### Buttons
 
-- Min height: `40px`.
-- Padding: `10px 24px`.
-- Border-radius: `4px` (subtle, not fully rounded).
-- **Primary**: Background `#C76D48`, text white, no border.
-- **Secondary**: Border `#C76D48`, text `#C76D48`, transparent background.
-- Hover: darken background by ~10%, smooth transition `200ms ease`.
-- Font: same as body, `700` weight, `14–16px`.
+- Min height: `40px`. <!-- 07-§6.12 -->
+- Padding: `10px 24px`. <!-- 07-§6.13 -->
+- Border-radius: `4px` (subtle, not fully rounded). <!-- 07-§6.14 -->
+- **Primary**: Background `#C76D48`, text white, no border. <!-- 07-§6.15 -->
+- **Secondary**: Border `#C76D48`, text `#C76D48`, transparent background. <!-- 07-§6.16 -->
+- Hover: darken background by ~10%, smooth transition `200ms ease`. <!-- 07-§6.17 -->
+- Font: same as body, `700` weight, `14–16px`. <!-- 07-§6.18 -->
 
 ### Cards (info blocks, testimonials)
 
-- Background: white `#FFFFFF`.
-- Border-radius: `6px`.
-- Box shadow: `0 4px 12px rgba(0, 0, 0, 0.04)`.
-- Padding: `24px`.
-- Testimonial cards: circular profile image (`border-radius: 50%`, ~`60px`).
+- Background: white `#FFFFFF`. <!-- 07-§6.19 -->
+- Border-radius: `6px`. <!-- 07-§6.20 -->
+- Box shadow: `0 4px 12px rgba(0, 0, 0, 0.04)`. <!-- 07-§6.21 -->
+- Padding: `24px`. <!-- 07-§6.22 -->
+- Testimonial cards: circular profile image (`border-radius: 50%`, ~`60px`). <!-- 07-§6.23 -->
 
 ### Accordion (FAQ)
 
-- Header: sage green `#ADBF77` background, dark text.
-- Body: cream `#F5EEDF` or white background.
-- Toggle icon: `+` / `−` or a chevron.
-- Animate open/close with CSS `max-height` transition.
-- No JavaScript framework — plain JS or CSS-only if feasible.
+- Header: sage green `#ADBF77` background, dark text. <!-- 07-§6.24 -->
+- Body: cream `#F5EEDF` or white background. <!-- 07-§6.25 -->
+- Toggle icon: `+` / `−` or a chevron. <!-- 07-§6.26 -->
+- Animate open/close with CSS `max-height` transition. <!-- 07-§6.27 -->
+- No JavaScript framework — plain JS or CSS-only if feasible. <!-- 07-§6.28 -->
 
 ### Section headings
 
-- H2 with a short decorative line or color block underneath (optional).
-- Or: a sage-green label above the heading at `12px` uppercase.
+- H2 with a short decorative line or color block underneath (optional). <!-- 07-§6.29 -->
+- Or: a sage-green label above the heading at `12px` uppercase. <!-- 07-§6.30 -->
 
 ### Event / schedule items
 
-- Clear time display: bold start time, lighter end time.
-- Location as small text below.
-- Optional colored left border to categorize activity type.
+- Clear time display: bold start time, lighter end time. <!-- 07-§6.31 -->
+- Location as small text below. <!-- 07-§6.32 -->
+- Optional colored left border to categorize activity type. <!-- 07-§6.33 -->
 
 ---
 
@@ -161,13 +161,13 @@ Base unit: `8px`. Spacing values are multiples of this.
 
 ### How to write CSS
 
-Write CSS for a component only once its HTML structure exists. Speculative CSS — written before the markup is settled — creates waste and drift.
+Write CSS for a component only once its HTML structure exists. Speculative CSS — written before the markup is settled — creates waste and drift. <!-- 07-§7.2 -->
 
 ### Structure
 
-1. One main CSS file, organized in sections: reset → tokens → base → layout → components → utilities.
-2. No preprocessor required. CSS custom properties (variables) are enough.
-3. No CSS framework. Hand-written, minimal.
+1. One main CSS file, organized in sections: reset → tokens → base → layout → components → utilities. <!-- 07-§7.3 -->
+2. No preprocessor required. CSS custom properties (variables) are enough. <!-- 07-§7.4 -->
+3. No CSS framework. Hand-written, minimal. <!-- 07-§7.5 -->
 
 ### CSS custom properties (design tokens)
 
@@ -223,29 +223,29 @@ These variables make it trivial to adjust the design globally later.
 
 ## 8. Imagery
 
-- Natural, warm photography: river, forest, camp activities, families.
-- Avoid stock-photo feel. Prefer real photos from actual camps.
-- Hero image: landscape format, high resolution, dark enough for text overlay.
-- Testimonial avatars: portrait photos, cropped square, displayed circular.
-- Optimize all images: use responsive `srcset`, modern formats (WebP with JPEG fallback).
+- Natural, warm photography: river, forest, camp activities, families. <!-- 07-§8.1 -->
+- Avoid stock-photo feel. Prefer real photos from actual camps. <!-- 07-§8.2 -->
+- Hero image: landscape format, high resolution, dark enough for text overlay. <!-- 07-§8.3 -->
+- Testimonial avatars: portrait photos, cropped square, displayed circular. <!-- 07-§8.4 -->
+- Optimize all images: use responsive `srcset`, modern formats (WebP with JPEG fallback). <!-- 07-§8.5 -->
 
 ---
 
 ## 9. Accessibility
 
-- Color contrast must meet WCAG AA minimum (`4.5:1` for body text). WCAG is the Web Content Accessibility Guidelines — the international standard for accessible web design.
-- Interactive elements must have visible focus states.
-- Navigation must be keyboard accessible.
-- Images must have descriptive `alt` text.
-- Accordion items must use proper ARIA attributes (`aria-expanded`, `aria-controls`).
+- Color contrast must meet WCAG AA minimum (`4.5:1` for body text). WCAG is the Web Content Accessibility Guidelines — the international standard for accessible web design. <!-- 07-§9.1 -->
+- Interactive elements must have visible focus states. <!-- 07-§9.2 -->
+- Navigation must be keyboard accessible. <!-- 07-§9.3 -->
+- Images must have descriptive `alt` text. <!-- 07-§9.4 -->
+- Accordion items must use proper ARIA attributes (`aria-expanded`, `aria-controls`). <!-- 07-§9.5 -->
 
 ---
 
 ## 10. What Not to Do
 
-- No gradients or drop shadows heavier than specified.
-- No animations beyond subtle transitions (`200–300ms`).
-- No decorative fonts or display typefaces.
-- No full-width text at desktop widths — always constrain with container.
-- No whitespace-heavy "agency" layouts. Content density matters here.
-- No dark mode for the main site. The Today/Display view uses a dark theme — but that is a separate, purpose-built view for shared screens and is not a site-wide dark mode.
+- No gradients or drop shadows heavier than specified. <!-- 07-§10.1 -->
+- No animations beyond subtle transitions (`200–300ms`). <!-- 07-§10.2 -->
+- No decorative fonts or display typefaces. <!-- 07-§10.3 -->
+- No full-width text at desktop widths — always constrain with container. <!-- 07-§10.4 -->
+- No whitespace-heavy "agency" layouts. Content density matters here. <!-- 07-§10.5 -->
+- No dark mode for the main site. The Today/Display view uses a dark theme — but that is a separate, purpose-built view for shared screens and is not a site-wide dark mode. <!-- 07-§10.6 -->

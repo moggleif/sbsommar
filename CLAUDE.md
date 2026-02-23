@@ -35,16 +35,16 @@ Rules:
 
 # 1. Core Principles
 
-- Static build output.
-- No backend server.
-- No client-side framework (no React, Vue, etc.).
-- Minimal JavaScript.
-- Content-first architecture.
-- Clear separation of content, layout, and styling.
-- Maintainable by non-developers.
-- Fast loading.
+- Static build output. <!-- CL-§1.1 -->
+- No backend server. <!-- CL-§1.2 -->
+- No client-side framework (no React, Vue, etc.). <!-- CL-§1.3 -->
+- Minimal JavaScript. <!-- CL-§1.4 -->
+- Content-first architecture. <!-- CL-§1.5 -->
+- Clear separation of content, layout, and styling. <!-- CL-§1.6 -->
+- Maintainable by non-developers. <!-- CL-§1.7 -->
+- Fast loading. <!-- CL-§1.8 -->
 
-Clarity over cleverness.
+Clarity over cleverness. <!-- CL-§1.9 -->
 
 ---
 
@@ -52,21 +52,21 @@ Clarity over cleverness.
 
 The implementation must:
 
-- Produce static HTML/CSS/JS as final output.
-- Support Markdown-based content for main sections.
-- Support structured data for events (single source of truth).
-- Reuse layout components across pages.
-- Avoid duplicating markup between pages.
-- Avoid heavy runtime dependencies.
+- Produce static HTML/CSS/JS as final output. <!-- CL-§2.1 -->
+- Support Markdown-based content for main sections. <!-- CL-§2.2 -->
+- Support structured data for events (single source of truth). <!-- CL-§2.3 -->
+- Reuse layout components across pages. <!-- CL-§2.4 -->
+- Avoid duplicating markup between pages. <!-- CL-§2.5 -->
+- Avoid heavy runtime dependencies. <!-- CL-§2.6 -->
 
 Do NOT:
 
-- Build a SPA.
-- Introduce a database.
-- Use client-side rendering frameworks.
-- Create custom complex build systems unless clearly justified.
+- Build a SPA. <!-- CL-§2.7 -->
+- Introduce a database. <!-- CL-§2.8 -->
+- Use client-side rendering frameworks. <!-- CL-§2.9 -->
+- Create custom complex build systems unless clearly justified. <!-- CL-§2.10 -->
 
-Prefer standard, well-established static site tooling.
+Prefer standard, well-established static site tooling. <!-- CL-§2.11 -->
 
 ---
 
@@ -74,9 +74,9 @@ Prefer standard, well-established static site tooling.
 
 Main page:
 
-- Built from modular sections.
-- Content written in Markdown.
-- Sections can be reordered or edited without modifying layout code.
+- Built from modular sections. <!-- CL-§3.1 -->
+- Content written in Markdown. <!-- CL-§3.2 -->
+- Sections can be reordered or edited without modifying layout code. <!-- CL-§3.3 -->
 
 Special pages:
 
@@ -87,7 +87,7 @@ Special pages:
 - RSS Feed
 - Archive pages (later)
 
-All must share layout structure.
+All must share layout structure. <!-- CL-§3.4 -->
 
 ---
 
@@ -95,8 +95,8 @@ All must share layout structure.
 
 Event data must:
 
-- Live in one central structured source.
-- Power:
+- Live in one central structured source. <!-- CL-§4.1 -->
+- Power: <!-- CL-§4.2 -->
   - Weekly schedule
   - Daily schedule
   - Today view
@@ -105,9 +105,9 @@ Event data must:
 
 There must be:
 
-- No duplicated event definitions.
-- Deterministic sorting.
-- Clear validation of required fields.
+- No duplicated event definitions. <!-- CL-§4.3 -->
+- Deterministic sorting. <!-- CL-§4.4 -->
+- Clear validation of required fields. <!-- CL-§4.5 -->
 
 ---
 
@@ -115,28 +115,28 @@ There must be:
 
 ## Linting
 
-- HTML validation
-- CSS linting
-- JS linting
+- HTML validation <!-- CL-§5.1 -->
+- CSS linting <!-- CL-§5.2 -->
+- JS linting <!-- CL-§5.3 -->
 
-Build must fail if lint fails.
+Build must fail if lint fails. <!-- CL-§5.4 -->
 
 ## Data Validation
 
-Event data must be validated for:
+Event data must be validated for: <!-- CL-§5.5 -->
 
-- Required fields
-- Valid dates
-- End time after start time
-- No duplicate identifiers
+- Required fields <!-- CL-§5.6 -->
+- Valid dates <!-- CL-§5.7 -->
+- End time after start time <!-- CL-§5.8 -->
+- No duplicate identifiers <!-- CL-§5.9 -->
 
 ## Build Integrity
 
 The site must:
 
-- Build locally.
-- Build in GitHub Actions.
-- Fail CI if build fails.
+- Build locally. <!-- CL-§5.10 -->
+- Build in GitHub Actions. <!-- CL-§5.11 -->
+- Fail CI if build fails. <!-- CL-§5.12 -->
 
 ---
 
@@ -144,26 +144,26 @@ The site must:
 
 Before merge:
 
-- Build must run locally.
-- Lint must pass.
-- Validation must pass.
+- Build must run locally. <!-- CL-§6.1 -->
+- Lint must pass. <!-- CL-§6.2 -->
+- Validation must pass. <!-- CL-§6.3 -->
 
 Optional but encouraged:
 
-- Automated minimal tests for event sorting and date handling.
-- Screenshot comparison tests for schedule pages.
+- Automated minimal tests for event sorting and date handling. <!-- CL-§6.4 -->
+- Screenshot comparison tests for schedule pages. <!-- CL-§6.5 -->
 
 ---
 
 # 7. Performance Requirements
 
-- Minimal JS footprint.
-- No unused CSS.
-- No blocking large assets.
-- Optimized images.
-- No runtime hydration frameworks.
+- Minimal JS footprint. <!-- CL-§7.1 -->
+- No unused CSS. <!-- CL-§7.2 -->
+- No blocking large assets. <!-- CL-§7.3 -->
+- Optimized images. <!-- CL-§7.4 -->
+- No runtime hydration frameworks. <!-- CL-§7.5 -->
 
-The site should feel instant.
+The site should feel instant. <!-- CL-§7.6 -->
 
 ---
 
@@ -171,25 +171,25 @@ The site should feel instant.
 
 Non-technical contributors must be able to:
 
-- Edit text content in Markdown.
-- Add new events via structured data.
-- Add images.
-- Without editing layout files.
+- Edit text content in Markdown. <!-- CL-§8.1 -->
+- Add new events via structured data. <!-- CL-§8.2 -->
+- Add images. <!-- CL-§8.3 -->
+- Without editing layout files. <!-- CL-§8.4 -->
 
 ---
 
 # 9. Deployment
 
-- Built output lives in /public.
-- GitHub Actions builds and validates.
-- Deployment happens only after successful CI.
+- Built output lives in /public. <!-- CL-§9.1 -->
+- GitHub Actions builds and validates. <!-- CL-§9.2 -->
+- Deployment happens only after successful CI. <!-- CL-§9.3 -->
 
 ---
 
 # 10. Git Workflow
 
-- Never push directly to `main`.
-- At the start of every session — before writing any code or making any changes — run:
+- Never push directly to `main`. <!-- CL-§10.1 -->
+- At the start of every session — before writing any code or making any changes — run: <!-- CL-§10.2 -->
 
   ```bash
   git checkout main
@@ -197,8 +197,8 @@ Non-technical contributors must be able to:
   git checkout -b branch-name
   ```
 
-- Choose a descriptive branch name (e.g. `fix/schedule-sort`, `feature/today-view`, `docs/update-contract`).
-- After a branch has been merged and the merge has been pulled back via `main`, delete the local branch.
+- Choose a descriptive branch name (e.g. `fix/schedule-sort`, `feature/today-view`, `docs/update-contract`). <!-- CL-§10.3 -->
+- After a branch has been merged and the merge has been pulled back via `main`, delete the local branch. <!-- CL-§10.4 -->
 
 ---
 
