@@ -12,12 +12,15 @@ const app = express();
 
 app.use(express.json());
 
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '';
+const ALLOWED_ORIGINS = new Set(
+  [process.env.ALLOWED_ORIGIN, process.env.QA_ORIGIN].filter(Boolean)
+);
 
 app.use((req, res, next) => {
-  if (ALLOWED_ORIGIN && req.headers.origin === ALLOWED_ORIGIN) {
-    res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   }
   if (req.method === 'OPTIONS') return res.sendStatus(204);
