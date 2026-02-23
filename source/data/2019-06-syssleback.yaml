@@ -1,0 +1,81 @@
+events:
+- date: '2019-06-24'
+  description: null
+  end: null
+  link: null
+  location: 'obs: Förbokade platser'
+  responsible: Gisela Wanek
+  start: '10:30'
+  title: Studiebesök 3D-printing
+- date: '2019-06-24'
+  description: null
+  end: '17:00'
+  link: null
+  location: GA-Hallen
+  responsible: Gisela Wanek
+  start: '15:30'
+  title: Välkomstaktiviteter
+- date: '2019-06-24'
+  description: null
+  end: '20:00'
+  link: null
+  location: null
+  responsible: null
+  start: '16:00'
+  title: Badhuset
+- date: '2019-06-24'
+  description: null
+  end: '18:30'
+  link: null
+  location: null
+  responsible: null
+  start: '17:00'
+  title: Middag
+- date: '2019-06-24'
+  description: null
+  end: null
+  link: null
+  location: Fritidsgården
+  responsible: Sara Varda & Ingemar Lindh
+  start: '19:00'
+  title: Musik – uppstart
+- date: '2019-06-24'
+  description: null
+  end: null
+  link: null
+  location: Grillplatsen
+  responsible: Gabriel Olsson & Elisabeth Ejeblad
+  start: '20:00'
+  title: Lägereld, sång & trummeditation
+- date: '2019-06-25'
+  description: null
+  end: null
+  link: null
+  location: TV-rummet Servicehuset
+  responsible: Niclas Nilsson
+  start: '9:00'
+  title: Titta på sommarlov
+- date: '2019-06-25'
+  description: null
+  end: '12:00'
+  link: null
+  location: GA-Hallen
+  responsible: null
+  start: '9:00'
+  title: Datasalen
+- date: '2019-06-25'
+  description: null
+  end: null
+  link: null
+  location: GA-Hallen
+  responsible: CJ & Andreas
+  start: '10:00'
+  title: Välkomstmöte
+- date: '2019-06-25'
+  description: null
+  end: '11:30'
+  link: null
+  location: GA-Hallen Bollsidan
+  responsible: Gabriel Olsson
+  start: '10:30'
+  title: Frågelådan

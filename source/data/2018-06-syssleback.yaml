@@ -1,0 +1,106 @@
+events:
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: varulvarna-i-klågerup-2018-06-17-1030
+  link: https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/?comment_id=2179133798975512&comment_tracking=%7B%22tn%22%3A%22R9%22%7D
+  location: Matt-tältet
+  meta:
+    created_at: '2026-02-23 23:06:02.569842'
+    updated_at: '2026-02-23 23:06:02.569854'
+  owner:
+    email: ''
+    name: ''
+  responsible: Emilia
+  start: '10:30'
+  title: Varulvarna i Klågerup
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: scratch-för-nybörjare-2018-06-17-1030
+  link: null
+  location: Fritidsgården
+  meta:
+    created_at: '2026-02-23 23:06:02.569860'
+    updated_at: '2026-02-23 23:06:02.569862'
+  owner:
+    email: ''
+    name: ''
+  responsible: Daniel N
+  start: '10:30'
+  title: Scratch för nybörjare
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: yoga-2018-06-17-1030
+  link: null
+  location: Grillplatsen
+  meta:
+    created_at: '2026-02-23 23:06:02.569867'
+    updated_at: '2026-02-23 23:06:02.569869'
+  owner:
+    email: ''
+    name: ''
+  responsible: None (ledare saknas)
+  start: '10:30'
+  title: Yoga
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: hundpromenad-2018-06-17-1100
+  link: null
+  location: Grillplatsen
+  meta:
+    created_at: '2026-02-23 23:06:02.569873'
+    updated_at: '2026-02-23 23:06:02.569875'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:00'
+  title: Hundpromenad
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: nerf-snällkrig-2018-06-17-1100
+  link: null
+  location: Nerfarenan
+  meta:
+    created_at: '2026-02-23 23:06:02.569880'
+    updated_at: '2026-02-23 23:06:02.569882'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:00'
+  title: Nerf Snällkrig
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: sagostund-för-de-yngsta-2018-06-17-1400
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-23 23:06:02.569887'
+    updated_at: '2026-02-23 23:06:02.569889'
+  owner:
+    email: ''
+    name: ''
+  responsible: Nemi N
+  start: '14:00'
+  title: Sagostund för de yngsta
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: cirkus-skola-2018-06-17-1400
+  link: https://www.facebook.com/events/2076104085945151/permalink/2186850811537144/?ref=1&action_history=null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-23 23:06:02.569893'
+    updated_at: '2026-02-23 23:06:02.569895'
+  owner:
+    email: ''
+    name: ''
+  responsible: Jenny vB
+  start: '14:00'
+  title: Cirkus-skola
