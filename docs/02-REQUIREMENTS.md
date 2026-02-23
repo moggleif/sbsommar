@@ -36,13 +36,15 @@ The following pages must exist:
 |------|-----|----------|
 | Homepage | `/` | Prospective families, participants |
 | Weekly schedule | `/schema.html` | Participants |
-| Daily view | `/dag.html` | Participants |
+| Daily view | `/dagens-schema.html` | Participants |
 | Today / Display view | `/idag.html` | Participants, shared screens |
 | Add activity | `/lagg-till.html` | Participants |
 | Archive | `/arkiv.html` | Prospective families, returning participants |
 | RSS feed | `/schema.rss` | Anyone subscribing to the schedule |
 
-All pages share the same header and navigation. None require login.
+The homepage, schedule pages, add-activity form, and archive share the same header and navigation. None require login.
+
+The Today / Display view has no header or navigation — it is a minimal, full-screen display intended for shared screens and quick mobile glances.
 
 ---
 
