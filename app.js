@@ -12,7 +12,6 @@ const app = express();
 
 app.use(express.json());
 
-// CORS: allow only the configured production origin.
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '';
 
 app.use((req, res, next) => {
@@ -25,16 +24,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Static files (the built site).
-app.use(express.static(path.join(__dirname, 'public')));
-
 // ── Routes ───────────────────────────────────────────────────────────────────
 
-// Health check (important for Passenger verification)
+// Health check
 app.get('/', (req, res) => {
   res.json({ status: 'API running' });
 });
-
 
 app.post('/add-event', async (req, res) => {
   const v = validateEventRequest(req.body);
@@ -51,6 +46,9 @@ app.post('/add-event', async (req, res) => {
   }
 });
 
+// Static LAST
+app.use(express.static(path.join(__dirname, 'public')));
+
 // ── Start ────────────────────────────────────────────────────────────────────
 
 const PORT = process.env.PORT || 3000;
@@ -58,5 +56,4 @@ app.listen(PORT, () => {
   console.log(`SB Sommar → http://localhost:${PORT}`);
 });
 
-// Passenger requires the app to be exported.
 module.exports = app;
