@@ -11,7 +11,7 @@
     "lint": "eslint source tests eslint.config.js",
     "lint:fix": "eslint source tests eslint.config.js --fix",
     "lint:md": "markdownlint \"content/**/*.md\" \"docs/**/*.md\" README.md CLAUDE.md",
-    "prepare": "git config core.hooksPath .husky"
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
