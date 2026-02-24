@@ -124,16 +124,21 @@ flowchart TD
 
 ### Environment Variables
 
-| Variable        | Default | Description                                        |
-| --------------- | ------- | -------------------------------------------------- |
-| `PORT`          | `3000`  | Port the HTTP server listens on                    |
-| `API_URL`       | —       | Injected at build time; baked into the static form |
-| `GITHUB_OWNER`  | —       | GitHub repository owner                            |
-| `GITHUB_REPO`   | —       | GitHub repository name                             |
-| `GITHUB_BRANCH` | —       | Branch to commit events to (typically `main`)      |
-| `GITHUB_TOKEN`  | —       | Personal access token with repo write access       |
+| Variable         | Default | Description                                              |
+| ---------------- | ------- | -------------------------------------------------------- |
+| `PORT`           | `3000`  | Port the HTTP server listens on                          |
+| `API_URL`        | —       | Baked into the static form HTML as the fetch target      |
+| `ALLOWED_ORIGIN` | —       | Primary origin allowed by the CORS middleware            |
+| `QA_ORIGIN`      | —       | Secondary origin allowed by CORS (staging/QA)            |
+| `COOKIE_DOMAIN`  | —       | Shared parent domain for session cookie (see note below) |
+| `GITHUB_OWNER`   | —       | GitHub repository owner                                  |
+| `GITHUB_REPO`    | —       | GitHub repository name                                   |
+| `GITHUB_BRANCH`  | —       | Branch to commit events to (typically `main`)            |
+| `GITHUB_TOKEN`   | —       | Personal access token with repo write access             |
 
-`API_URL`, `GITHUB_*`, and FTP/SSH credentials are stored as GitHub Actions secrets and are not needed for local development. Without `API_URL` set, the built form will have no submit endpoint — this is expected in local builds. Without `GITHUB_*` set, event submission via the API will fail; all other functionality works normally.
+`API_URL`, `ALLOWED_ORIGIN`, `COOKIE_DOMAIN`, `GITHUB_*`, and FTP/SSH credentials are stored as GitHub Actions secrets and server environment variables. They are not needed for local development. Without `API_URL` set, the built form will have no submit endpoint — this is expected in local builds. Without `GITHUB_*` set, event submission via the API will fail; all other functionality works normally.
+
+**`COOKIE_DOMAIN`**: required when the API and the static site are deployed on different subdomains (e.g. `api.sommar.example.com` and `sommar.example.com`). Set it to the shared parent domain — e.g. `sommar.digitalasynctransparency.com`. This causes the session cookie to include `Domain=<value>` so that client-side JavaScript on the static site can read it. Omit the variable for single-origin deployments.
 
 ### Manual Production Startup (first time or after server wipe)
 
