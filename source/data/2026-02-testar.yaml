@@ -368,17 +368,17 @@ events:
       created_at: 2026-02-24 19:01
       updated_at: 2026-02-24 19:01
   - id: en-ny-2026-02-24-1900
-    title: En ny
-    date: '2026-02-24'
+    title: En ny - uppdaterad igen
+    date: '2026-02-25'
     start: '19:00'
     end: '21:00'
     location: AndreasTältet
     responsible: fmoafsa
-    description: lite mer
+    description: lite mer text här för andra dagen
     link: null
     owner:
       name: ''
       email: ''
     meta:
       created_at: 2026-02-24 19:11
-      updated_at: 2026-02-24 19:15
+      updated_at: 2026-02-24 19:22
