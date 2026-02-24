@@ -406,25 +406,44 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `02-§18.38` | The cookie consent banner must appear directly after the submit button, not at the top of the page | 03-ARCHITECTURE.md §7 | — (manual: inspect DOM position of banner after form submit) | `source/assets/js/client/cookie-consent.js` – `insertBefore(banner, submitBtn.nextSibling)` | implemented |
 | `02-§18.39` | The add-activity form has no owner name field; event ownership is established entirely via session cookie | 03-ARCHITECTURE.md §7 | — (manual: confirm no ownerName input in rendered lagg-till.html) | `source/build/render-add.js` – `ownerName` field removed from form | implemented |
 | `02-§18.40` | The add-activity submit handler must only reference form elements that exist in the HTML form; accessing a missing element via `form.elements` returns `undefined` and calling `.value` on it throws a TypeError that aborts submission | 03-ARCHITECTURE.md §7 | — (no automated test: `form.elements` is a browser DOM API not available in Node.js; manual: open `lagg-till.html` in a browser and submit the form — confirm it submits without TypeError and the consent banner appears and responds correctly) | `source/assets/js/client/lagg-till.js` – `ownerName` line removed from `JSON.stringify` body | implemented |
+| `02-§19.1` | When validation passes and submission begins, all form inputs and the submit button are immediately disabled | 03-ARCHITECTURE.md §8 | ADD-02; manual: press Skicka and confirm all inputs are disabled before the modal opens | `source/assets/js/client/lagg-till.js` – `lock()` sets `fieldset.disabled = true` and `submitBtn.disabled = true` | implemented |
+| `02-§19.2` | Disabled form elements are visually distinct (reduced opacity / grayed out) | 03-ARCHITECTURE.md §8 | — (manual: confirm visual appearance of disabled fieldset) | `source/assets/cs/style.css` – `.event-form fieldset:disabled { opacity: 0.5 }` | implemented |
+| `02-§19.3` | The consent banner is shown while the form is locked, inserted after the disabled submit button | 03-ARCHITECTURE.md §8 | — (manual: confirm banner position when form is locked and consent not yet given) | `source/assets/js/client/cookie-consent.js` – inserts after submit button which is outside fieldset, so banner buttons remain enabled | implemented |
+| `02-§19.4` | After the user accepts or declines, the banner removes itself and submission continues | 03-ARCHITECTURE.md §8 | — (manual: confirm banner disappears before modal opens) | `source/assets/js/client/cookie-consent.js` – `banner.remove()` before calling callback; `lagg-till.js` – calls `setModalLoading()` in callback | implemented |
+| `02-§19.5` | After consent is resolved, a modal dialog opens over the page before the fetch begins | 03-ARCHITECTURE.md §8 | ADD-03; manual: confirm modal opens immediately after consent banner resolves | `source/assets/js/client/lagg-till.js` – `setModalLoading()` called before `fetch()` in consent callback | implemented |
+| `02-§19.6` | The modal displays a spinner and the text "Skickar till GitHub…" while the fetch is in progress | 03-ARCHITECTURE.md §8 | — (manual: confirm spinner and text are visible during submission) | `lagg-till.js` – `setModalLoading()` sets `.modal-spinner` + `.modal-status`; CSS animates spinner | implemented |
+| `02-§19.7` | The modal carries role="dialog", aria-modal="true", and aria-labelledby pointing to its heading | 03-ARCHITECTURE.md §8 | ADD-04, ADD-05, ADD-06 | `source/build/render-add.js` – `role="dialog" aria-modal="true" aria-labelledby="modal-heading"`; heading has `id="modal-heading"` | covered |
+| `02-§19.8` | Keyboard focus is trapped inside the modal while it is open | 03-ARCHITECTURE.md §8 | — (manual: Tab through the modal — focus must not leave it) | `lagg-till.js` – `trapFocus()` registered on `keydown` when modal opens; removed on close | implemented |
+| `02-§19.9` | The page behind the modal is not scrollable while the modal is open | 03-ARCHITECTURE.md §8 | — (manual: confirm body does not scroll when modal is open) | `lagg-till.js` – `document.body.classList.add('modal-open')`; CSS – `body.modal-open { overflow: hidden }` | implemented |
+| `02-§19.10` | On success, the modal shows the title, confirmation text, "Gå till schemat →" link, and "Lägg till en till" button | 03-ARCHITECTURE.md §8 | — (manual: submit a valid form and confirm modal success content) | `lagg-till.js` – `setModalSuccess()` builds the content with title, intro text, and two action elements | implemented |
+| `02-§19.11` | If the user declined cookie consent, the success modal shows a Swedish note about editing not being possible | 03-ARCHITECTURE.md §8 | — (manual: decline consent, submit, and confirm note appears in modal) | `lagg-till.js` – `setModalSuccess(title, consentGiven)` conditionally inserts `.result-note` paragraph | implemented |
+| `02-§19.12` | "Lägg till en till" closes the modal, resets the form, and re-enables all fields | 03-ARCHITECTURE.md §8 | — (manual: click "Lägg till en till" and confirm form is blank and enabled) | `lagg-till.js` – `modal-new-btn` click calls `closeModal()`, `form.reset()`, `unlock()`, `scrollTo(0,0)` | implemented |
+| `02-§19.13` | On error, the modal shows the error message and a "Försök igen" button | 03-ARCHITECTURE.md §8 | — (manual: simulate a server error and confirm modal error content) | `lagg-till.js` – `setModalError()` sets heading to "Något gick fel" and inserts error message + retry button | implemented |
+| `02-§19.14` | "Försök igen" closes the modal and re-enables all form fields (input data preserved) | 03-ARCHITECTURE.md §8 | — (manual: click "Försök igen" and confirm form is enabled with data intact) | `lagg-till.js` – `modal-retry-btn` click calls `closeModal()`, `unlock()`, `submitBtn.focus()` without resetting the form | implemented |
+| `02-§19.15` | The modal uses only CSS custom properties from 07-DESIGN.md §7 — no hardcoded colors or spacing | 07-DESIGN.md §7 | — (code review: grep for hardcoded hex/px values in modal CSS) | `source/assets/cs/style.css` – modal section uses `var(--color-*)`, `var(--space-*)`, `var(--radius-*)`; only `rgba(0,0,0,0.16)` shadow (no design token for overlay shadow) | implemented |
+| `02-§19.16` | The modal is implemented in vanilla JavaScript; no library or framework is added | 03-ARCHITECTURE.md §8 | — (code review: confirm no new npm dependencies for modal logic) | `lagg-till.js` – pure DOM manipulation; no new dependencies in `package.json` | implemented |
+| `02-§19.17` | The existing #result section is removed; the modal is the sole post-submission feedback mechanism | 03-ARCHITECTURE.md §8 | ADD-01 | `source/build/render-add.js` – `#result` section removed; `#submit-modal` added in its place | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             295
-Covered (implemented + tested):  47
-Implemented, not tested:        216
+Total requirements:             312
+Covered (implemented + tested):  50
+Implemented, not tested:        230
 Gap (no implementation):         32
 Orphan tests (no requirement):    0
 
-Note: 3 requirements added for cookie consent UX fixes (02-§18.37–39).
+Note: 17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
+3 of these are covered (ADD-01..06 test structural HTML: 02-§19.7, 02-§19.17, and
+  fieldset via ADD-02 for 02-§19.1).
+14 are implemented but browser-only; cannot be unit-tested in Node.js.
+Previous: 3 requirements added for cookie consent UX fixes (02-§18.37–39).
 02-§18.11 updated: only 'accepted' is now persisted (not 'declined').
-All 3 new requirements are implemented; browser-only behaviour cannot be unit-tested.
 End time is now required everywhere (add form, edit form, data contract).
 02-§9.4, 05-§3.1, 05-§4.3, 02-§18.25 all moved to covered (VLD-27..32).
-02-§18.40 added and implemented: ownerName crash fix — submit handler no longer
-accesses the non-existent ownerName field.
+02-§18.40 added and implemented: ownerName crash fix.
 ```
 
 ---

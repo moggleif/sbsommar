@@ -253,7 +253,82 @@ declines, the event is still submitted but no session cookie is set.
 
 ---
 
-## 8. Design Philosophy
+## 8. Add-Activity Submit Flow — Field Locking and Progress Modal
+
+### Submit flow stages
+
+When the user presses "Skicka" and validation passes, the submit flow
+proceeds through four stages before returning control to the user:
+
+1. **Field lock** — all form inputs and the submit button are disabled
+   immediately, preventing edits or re-submission during the async flow.
+2. **Consent prompt** (if needed) — `cookie-consent.js` inserts the consent
+   banner directly after the disabled submit button. The user accepts or
+   declines. The banner removes itself before stage 3.
+3. **Progress modal** — a modal dialog opens over the page with a spinner and
+   the text "Skickar till GitHub…". The fetch begins.
+4. **Result** — the modal content is replaced with a success or error state
+   depending on the server response.
+
+### Field locking
+
+All `<input>`, `<select>`, and `<textarea>` elements inside `#event-form`
+are disabled by wrapping the form body in a `<fieldset>` and setting
+`fieldset.disabled = true`. This is simpler and more reliable than disabling
+each element individually. CSS uses `opacity` and `cursor: not-allowed` on
+`fieldset:disabled` to communicate the locked state visually.
+
+### Progress modal
+
+The modal is a `<div>` injected into `<body>` by `lagg-till.js` on first
+submit. It is re-used on subsequent submissions ("Lägg till en till").
+
+Structure:
+
+```html
+<div id="submit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" hidden>
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <h2 id="modal-heading"><!-- heading text set by JS --></h2>
+    <!-- spinner / message / actions set by JS -->
+  </div>
+</div>
+```
+
+The backdrop covers the full viewport (fixed, full-width/height) and blocks
+scroll via `overflow: hidden` on `<body>` while open. The modal box is
+centered with flexbox.
+
+Focus is trapped: when the modal opens, focus moves to the first focusable
+element inside `.modal-box`. Tab and Shift+Tab wrap within the modal.
+
+### States
+
+| State | Heading | Content |
+| --- | --- | --- |
+| Loading | "Skickar…" | Spinner + "Skickar till GitHub…" |
+| Success | "Aktiviteten är tillagd!" | Title, "Den syns i schemat om ungefär en minut.", optional no-edit note, two action buttons |
+| Error | "Något gick fel" | Error message + "Försök igen" button |
+
+### "Försök igen" and "Lägg till en till"
+
+- **Försök igen**: closes the modal, sets `fieldset.disabled = false`,
+  restores focus to the submit button. Form data is preserved so the user
+  can correct the issue.
+- **Lägg till en till**: closes the modal, calls `form.reset()`, sets
+  `fieldset.disabled = false`, scrolls to top.
+
+### Files affected
+
+| File | Change |
+| --- | --- |
+| `source/build/render-add.js` | Wrap form fields in `<fieldset>`, remove `#result` section, add `#submit-modal` skeleton |
+| `source/assets/js/client/lagg-till.js` | Implement lock/modal/state logic |
+| `source/assets/cs/style.css` | Add `fieldset:disabled` style, modal backdrop, modal box |
+
+---
+
+## 9. Design Philosophy
 
 - YAML is the database
 - Git is the archive

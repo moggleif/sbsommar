@@ -17,7 +17,7 @@ function renderAddPage(camp, locations, apiUrl) {
   ];
 
   const locationOptions = locList
-    .map((l) => `          <option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`)
+    .map((l) => `            <option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`)
     .join('\n');
 
   return `<!DOCTYPE html>
@@ -38,67 +38,67 @@ ${pageNav('lagg-till.html')}
 
   <form id="event-form" class="event-form" novalidate data-api-url="${escapeHtml(apiUrl || '/add-event')}">
 
-    <div class="field">
-      <label for="f-title">Rubrik <span class="req">*</span></label>
-      <input type="text" id="f-title" name="title" autocomplete="off" required>
-    </div>
+    <fieldset>
 
-    <div class="field-row">
       <div class="field">
-        <label for="f-date">Datum <span class="req">*</span></label>
-        <input type="date" id="f-date" name="date" min="${startDate}" max="${endDate}" required>
+        <label for="f-title">Rubrik <span class="req">*</span></label>
+        <input type="text" id="f-title" name="title" autocomplete="off" required>
       </div>
-      <div class="field">
-        <label for="f-start">Starttid <span class="req">*</span></label>
-        <input type="time" id="f-start" name="start" required>
-      </div>
-      <div class="field">
-        <label for="f-end">Sluttid <span class="req">*</span></label>
-        <input type="time" id="f-end" name="end" required>
-      </div>
-    </div>
 
-    <div class="field-row">
-      <div class="field">
-        <label for="f-location">Plats <span class="req">*</span></label>
-        <select id="f-location" name="location" required>
-          <option value="">Välj plats...</option>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-date">Datum <span class="req">*</span></label>
+          <input type="date" id="f-date" name="date" min="${startDate}" max="${endDate}" required>
+        </div>
+        <div class="field">
+          <label for="f-start">Starttid <span class="req">*</span></label>
+          <input type="time" id="f-start" name="start" required>
+        </div>
+        <div class="field">
+          <label for="f-end">Sluttid <span class="req">*</span></label>
+          <input type="time" id="f-end" name="end" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-location">Plats <span class="req">*</span></label>
+          <select id="f-location" name="location" required>
+            <option value="">Välj plats...</option>
 ${locationOptions}
-        </select>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-responsible">Ansvarig <span class="req">*</span></label>
+          <input type="text" id="f-responsible" name="responsible" autocomplete="off" required>
+        </div>
       </div>
+
       <div class="field">
-        <label for="f-responsible">Ansvarig <span class="req">*</span></label>
-        <input type="text" id="f-responsible" name="responsible" autocomplete="off" required>
+        <label for="f-description">Beskrivning <span class="opt">(valfritt)</span></label>
+        <textarea id="f-description" name="description" rows="4" placeholder="Beskriv aktiviteten, vad behövs, vad händer..."></textarea>
       </div>
-    </div>
 
-    <div class="field">
-      <label for="f-description">Beskrivning <span class="opt">(valfritt)</span></label>
-      <textarea id="f-description" name="description" rows="4" placeholder="Beskriv aktiviteten, vad behövs, vad händer..."></textarea>
-    </div>
+      <div class="field">
+        <label for="f-link">Länk <span class="opt">(valfritt)</span></label>
+        <input type="url" id="f-link" name="link" placeholder="https://...">
+      </div>
 
-    <div class="field">
-      <label for="f-link">Länk <span class="opt">(valfritt)</span></label>
-      <input type="url" id="f-link" name="link" placeholder="https://...">
-    </div>
+      <div id="form-errors" class="form-errors" hidden></div>
 
-    <div id="form-errors" class="form-errors" hidden></div>
+    </fieldset>
 
     <button type="submit" class="btn-primary">Skicka →</button>
 
   </form>
 
-  <section id="result" hidden>
-    <div class="success-box">
-      <h2>Aktiviteten är tillagd!</h2>
-      <p class="intro"><strong id="result-title"></strong> syns i schemat om ungefär en minut.</p>
-      <p id="result-no-edit-note" class="result-note" hidden>Du valde att inte tillåta cookie, så aktiviteten kan inte redigeras från den här webbläsaren. Vill du ändra dig? Lägg till en ny aktivitet och välj <em>Ja, det är okej</em> när vi frågar.</p>
-      <div class="success-actions">
-        <a href="schema.html" class="btn-primary">Gå till schemat →</a>
-        <button id="new-btn" class="btn-secondary">Lägg till en till</button>
-      </div>
+  <div id="submit-modal" class="submit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <h2 id="modal-heading" class="modal-heading" tabindex="-1"></h2>
+      <div id="modal-content" class="modal-content"></div>
     </div>
-  </section>
+  </div>
 
   <script src="cookie-consent.js"></script>
   <script src="lagg-till.js"></script>
