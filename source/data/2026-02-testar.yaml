@@ -430,3 +430,50 @@ events:
   meta:
     created_at: 2026-02-24 13:41
     updated_at: 2026-02-24 13:41
+- id: editera-2026-02-24-1509
+  title: editera
+  date: '2026-02-24'
+  start: '15:09'
+  end: '17:00'
+  location: Fotbollsplan
+  responsible: fafds
+  description: |
+    fdsafdsafsa
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 15:38
+    updated_at: 2026-02-24 15:38
+- id: dsfafsda-fsdf-2026-02-25-1400
+  title: dsfafsda fsdf
+  date: '2026-02-25'
+  start: '14:00'
+  end: '15:00'
+  location: GA Kreativ hörna
+  responsible: gfskgmkd
+  description: |
+    gfdksgnflkd
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 15:39
+    updated_at: 2026-02-24 15:39
+- id: kom-igen-2026-02-24-1600
+  title: kom igen
+  date: '2026-02-24'
+  start: '16:00'
+  end: '18:00'
+  location: Fotbollsplan
+  responsible: fjdaskf
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 15:44
+    updated_at: 2026-02-24 15:44
