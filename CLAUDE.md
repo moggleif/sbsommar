@@ -259,9 +259,9 @@ Before writing any code: <!-- CL-§11.2 -->
 ## Phase 6 — Final Check
 
 Perform a structured review from multiple perspectives. <!-- CL-§11.11 -->
-Loop through this list at least twice — the second pass catches what the first missed.
+Repeat passes until a full pass finds nothing to fix, or until 5 passes have been completed — whichever comes first. <!-- CL-§11.12 -->
 
-Check from each of these perspectives in turn:
+For each pass, check from every one of these perspectives in turn:
 
 - **Developer**: Is the code clean, consistent with existing patterns, and maintainable? Are there edge cases unhandled? Is anything over-engineered or under-explained?
 - **User** (a camp participant): Can they complete the task? Are labels, errors, and confirmations clear? Is the Swedish correct and natural?
@@ -270,9 +270,9 @@ Check from each of these perspectives in turn:
 - **First-time visitor**: Does the feature feel coherent with the rest of the site? Does anything feel out of place or inconsistent in tone, style, or layout?
 - **AI self-review**: Step back and ask — did I miss anything? Did I take shortcuts? Did I follow all constraints? Is there anything I would do differently?
 
-After the second pass, fix any issues found, then commit: `fix: post-review improvements for [feature]`
+After each pass: fix any issues found, then commit: `fix: post-review improvements for [feature] (pass N)`
 
-If no issues are found in the second pass, the commit may be skipped.
+If a pass finds nothing to fix, stop — no commit needed. The feature is done.
 
 ---
 
