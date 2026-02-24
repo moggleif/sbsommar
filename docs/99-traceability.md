@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 added as gap).
+Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 implemented and covered).
 
 ---
 
@@ -453,12 +453,12 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `02-§21.9` | Information text is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-07 | `source/build/render-arkiv.js` – `info ? …camp-information… : ''` | covered |
 | `02-§21.10` | Facebook link is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-08 | `source/build/render-arkiv.js` – `link ? …camp-link… : ''` | covered |
 | `02-§21.11` | No blank rows or placeholder text appear for empty fields | 03-ARCHITECTURE.md §4a | ARK-07, ARK-08 | `source/build/render-arkiv.js` – conditional rendering of optional fields | covered |
-| `02-§22.1` | Every page produced by the build includes a `<footer class="site-footer">` element at the bottom of `<body>` | 03-ARCHITECTURE.md §4b | — | — | gap |
-| `02-§22.2` | Footer content is maintained in `source/content/footer.md` | 03-ARCHITECTURE.md §4b | — | — | gap |
-| `02-§22.3` | The build reads `footer.md`, converts it with `convertMarkdown()`, and injects the result into every page | 03-ARCHITECTURE.md §4b | — | — | gap |
-| `02-§22.4` | No render function or template contains literal footer markup — `footer.md` is the single source of truth | 03-ARCHITECTURE.md §4b | — | — | gap |
-| `02-§22.5` | If `footer.md` is missing at build time, all pages render with an empty footer and the build does not crash | 03-ARCHITECTURE.md §4b | — | — | gap |
-| `02-§22.6` | Updating `footer.md` and running the build changes the footer on all pages without modifying any other file | 03-ARCHITECTURE.md §4b | — | — | gap |
+| `02-§22.1` | Every page produced by the build includes a `<footer class="site-footer">` element at the bottom of `<body>` | 03-ARCHITECTURE.md §4b | FTR-02, FTR-04, FTR-06, FTR-08, FTR-10, FTR-12, FTR-14, FTR-16 | `source/build/layout.js` – `pageFooter()`; all render functions | covered |
+| `02-§22.2` | Footer content is maintained in `source/content/footer.md` | 03-ARCHITECTURE.md §4b | — (convention; code review) | `source/content/footer.md` | implemented |
+| `02-§22.3` | The build reads `footer.md`, converts it with `convertMarkdown()`, and injects the result into every page | 03-ARCHITECTURE.md §4b | FTR-03, FTR-04, FTR-06, FTR-08, FTR-10, FTR-12, FTR-14, FTR-16 | `source/build/build.js` – reads `footer.md`, calls `convertMarkdown()`, passes `footerHtml` to all render calls | covered |
+| `02-§22.4` | No render function or template contains literal footer markup — `footer.md` is the single source of truth | 03-ARCHITECTURE.md §4b | — (code review: no hardcoded footer text in any render function) | Convention enforced by single-source architecture | implemented |
+| `02-§22.5` | If `footer.md` is missing at build time, all pages render with an empty footer and the build does not crash | 03-ARCHITECTURE.md §4b | FTR-01, FTR-05, FTR-07, FTR-09, FTR-11, FTR-13, FTR-15, FTR-17 | `source/build/build.js` – `fs.existsSync()` fallback to `''`; `pageFooter('')` returns `''` | covered |
+| `02-§22.6` | Updating `footer.md` and running the build changes the footer on all pages without modifying any other file | 03-ARCHITECTURE.md §4b | — (follows from §22.3; no separate test needed) | Verified structurally: `footerHtml` flows from `footer.md` through `convertMarkdown()` into every page | implemented |
 
 ---
 
@@ -466,9 +466,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 
 ```text
 Total requirements:             348
-Covered (implemented + tested):  74
-Implemented, not tested:        240
-Gap (no implementation):         34
+Covered (implemented + tested):  78
+Implemented, not tested:        242
+Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -482,7 +482,7 @@ Snapshot updated to include Arkiv nav link.
 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
 02-§18.45 implemented (manual): edit form credentials: 'include' for cross-origin API.
 02-§18.41 added and covered: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
-6 requirements added for shared site footer (02-§22.1–22.6), all gap pending implementation.
+6 requirements added for shared site footer (02-§22.1–22.6): 4 covered (FTR tests), 2 implemented (convention + structural).
 SES-14 and SES-15 verify Domain= is included/omitted correctly.
 17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
 3 of these are covered (ADD-01..06 test structural HTML: 02-§19.7, 02-§19.17, and
