@@ -373,6 +373,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `02-§18.5` | The session cookie is JavaScript-readable (not httpOnly) — documented trade-off; server-side validation compensates | 03-ARCHITECTURE.md §7 | — | By design: `buildSetCookieHeader()` omits `HttpOnly`; server validates ownership on every edit | implemented |
 | `02-§18.6` | The session cookie is set only by the server, never written directly by client-side JS | 03-ARCHITECTURE.md §7 | — | `app.js` sets `Set-Cookie`; `session.js` only re-writes the client-readable cookie after expiry cleanup | implemented |
 | `02-§18.7` | The session cookie name is `sb_session` | 03-ARCHITECTURE.md §7 | SES-06 | `source/api/session.js` – `COOKIE_NAME = 'sb_session'` | covered |
+| `02-§18.41` | When API and static site are on different subdomains, the session cookie must include `Domain` covering the shared parent domain, supplied via `COOKIE_DOMAIN` env var; omitted for single-origin deployments | 03-ARCHITECTURE.md §7 | SES-14, SES-15 | `source/api/session.js` – `buildSetCookieHeader(ids, domain)`; `app.js` – passes `process.env.COOKIE_DOMAIN` | gap |
 | `02-§18.8` | Before setting the session cookie, the client displays an inline consent prompt on the add-activity form | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/cookie-consent.js` – `showConsentBanner()` | implemented |
 | `02-§18.9` | If the user accepts consent, the form submission proceeds and the server sets the session cookie | 03-ARCHITECTURE.md §7 | — | `lagg-till.js` passes `cookieConsent: true`; `app.js` sets cookie | implemented |
 | `02-§18.10` | If the user declines consent, the event is still submitted but no session cookie is set | 03-ARCHITECTURE.md §7 | — | `lagg-till.js` passes `cookieConsent: false`; `app.js` skips `Set-Cookie` | implemented |
@@ -429,17 +430,19 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 ## Summary
 
 ```text
-Total requirements:             312
-Covered (implemented + tested):  50
-Implemented, not tested:        230
+Total requirements:             313
+Covered (implemented + tested):  52
+Implemented, not tested:        229
 Gap (no implementation):         32
 Orphan tests (no requirement):    0
 
-Note: 17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
+Note: 02-§18.41 added: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
+SES-14 and SES-15 cover the new behaviour; status will move to covered after implementation.
+Previous: 17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
 3 of these are covered (ADD-01..06 test structural HTML: 02-§19.7, 02-§19.17, and
   fieldset via ADD-02 for 02-§19.1).
 14 are implemented but browser-only; cannot be unit-tested in Node.js.
-Previous: 3 requirements added for cookie consent UX fixes (02-§18.37–39).
+3 requirements added for cookie consent UX fixes (02-§18.37–39).
 02-§18.11 updated: only 'accepted' is now persisted (not 'declined').
 End time is now required everywhere (add form, edit form, data contract).
 02-§9.4, 05-§3.1, 05-§4.3, 02-§18.25 all moved to covered (VLD-27..32).
@@ -551,4 +554,8 @@ End time is now required everywhere (add form, edit form, data contract).
 | RNI-22..28 | `tests/render-index.test.js` | `convertMarkdown – collapsible mode` |
 | RNI-29..33 | `tests/render-index.test.js` | `extractHeroImage` |
 | RNI-34..38 | `tests/render-index.test.js` | `extractH1` |
+| SES-01..05 | `tests/session.test.js` | `parseSessionIds` |
+| SES-06..09 | `tests/session.test.js` | `buildSetCookieHeader` |
+| SES-10..13 | `tests/session.test.js` | `mergeIds` |
+| SES-14..15 | `tests/session.test.js` | `buildSetCookieHeader – domain` |
 | SNP-01..06 | `tests/snapshot.test.js` | `renderSchedulePage` |
