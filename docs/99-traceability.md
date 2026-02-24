@@ -116,7 +116,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§2.3` | Daily view page at `/dagens-schema.html` allows navigation between days | 03-ARCHITECTURE.md §5 | — | — (page exists but shows today only in display mode; no day navigation) | gap |
 | `02-§2.4` | Today/Display view at `/idag.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | — (URL mismatch: `idag.html` has standard layout; dark/no-nav view is at `dagens-schema.html`) | gap |
 | `02-§2.5` | Add-activity form exists at `/lagg-till.html` | 03-ARCHITECTURE.md §3, §6 | — | `source/build/render-add.js`, `source/build/build.js` → `public/lagg-till.html` | implemented |
-| `02-§2.6` | Archive page exists at `/arkiv.html` | 03-ARCHITECTURE.md §4 | — | — | gap |
+| `02-§2.6` | Archive page exists at `/arkiv.html` | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js`, `source/build/build.js` → `public/arkiv.html` | covered |
 | `02-§2.7` | RSS feed exists at `/schema.rss` | — (no implementation doc) | — | — | gap |
 | `02-§2.8` | Homepage, schedule, add-activity, and archive pages share header and navigation | 03-ARCHITECTURE.md §6 | SNP-01 | `source/build/layout.js` – `pageNav()` | covered |
 | `02-§2.9` | None of the site pages require login | 03-ARCHITECTURE.md §3 | — | No authentication exists anywhere in the codebase | implemented |
@@ -170,7 +170,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§14.1` | The site is written entirely in Swedish: all content, nav, labels, errors, confirmations, and alt text | 07-DESIGN.md §1 | — | All templates and client JS use Swedish text | implemented |
 | `02-§15.1` | Activity schedule is available as an RSS feed at `/schema.rss` | — (no implementation doc) | — | — | gap |
 | `02-§16.1` | Past camp data is never deleted; `archived: true` marks completed camps | 03-ARCHITECTURE.md §4 | — | `source/data/camps.yaml` – `archived` flag; no deletion logic exists | implemented |
-| `02-§16.2` | Archive page lists all past camps and links to their schedules | 03-ARCHITECTURE.md §4 | — | — | gap |
+| `02-§16.2` | Archive page lists all past camps and links to their schedules | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js` – `renderArkivPage()` | covered |
 | `02-§16.3` | When no camp is active, the most recent archived camp is shown by default | 03-ARCHITECTURE.md §5 (Fallback rule) | — | `source/build/build.js` – falls back to most recent by `start_date` (not filtered to `archived: true`) | implemented |
 | `02-§17.1` | The site works well on mobile devices | 07-DESIGN.md §4, §5 | — | `source/assets/cs/style.css` – responsive layout, container widths, breakpoints | implemented |
 | `02-§17.2` | The site requires no explanation; the schedule and add-activity form are self-evident | 07-DESIGN.md §1 | — | UX/design principle; assessed through usability review, not automatable | implemented |
@@ -261,7 +261,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§11.3` | The schedule remains readable when multiple activities overlap | 07-DESIGN.md §6 | — | CSS layout handles overlap; no exclusion logic in render | implemented |
 | `02-§12.3` | All event submissions are permanently recorded in Git history as a full audit trail | 03-ARCHITECTURE.md §3 | — | `source/api/github.js` – every submission creates a Git commit via the Contents API | implemented |
 | `02-§15.2` | The RSS feed reflects the current state of the schedule | — (no implementation doc) | — | — | gap |
-| `02-§16.4` | The archive must be usable and complete, not a placeholder | 03-ARCHITECTURE.md §4 | — | — (archive page not yet built) | gap |
+| `02-§16.4` | The archive must be usable and complete, not a placeholder | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js` – interactive timeline with accordion per camp | covered |
 | `02-§17.3` | The site is readable on shared display screens | 07-DESIGN.md §6 | — | `source/build/render-today.js` – display mode view; `source/assets/cs/style.css` | implemented |
 | `05-§1.4` | The `file` field in `camps.yaml` references a YAML file in `source/data/` | 06-EVENT_DATA_MODEL.md §1 | — | `source/build/build.js` – loads camp file via `camps.yaml` `file` field | implemented |
 | `05-§1.5` | The camp `id` is permanent and must never change after the camp is first created | 06-EVENT_DATA_MODEL.md §3 | — | — (no enforcement; enforced by convention and docs) | implemented |
@@ -442,17 +442,17 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§20.11` | The edit modal uses only CSS custom properties from 07-DESIGN.md §7 — no hardcoded colors or spacing | 07-DESIGN.md §7 | — (code review: confirm modal CSS uses only custom properties) | `source/assets/cs/style.css` – modal CSS shared with add form; uses `var(--color-*)`, `var(--space-*)`, `var(--radius-*)` | implemented |
 | `02-§20.12` | The edit modal is implemented in vanilla JavaScript; no library or framework is added | 03-ARCHITECTURE.md §9 | — (code review: confirm no new npm dependencies for modal logic) | `redigera.js` – pure DOM manipulation; no new dependencies in `package.json` | implemented |
 | `02-§20.13` | The existing #result section in the edit page is removed; the modal is the sole post-submission feedback mechanism | 03-ARCHITECTURE.md §9 | EDIT-01 | `source/build/render-edit.js` – `#result` section removed; `#submit-modal` added in its place | covered |
-| `02-§21.1` | Only camps with `archived: true` are shown on the archive page | 03-ARCHITECTURE.md §4a | ARK-01 | — | gap |
-| `02-§21.2` | Archive page lists camps newest first (descending by `start_date`) | 03-ARCHITECTURE.md §4a | ARK-02 | — | gap |
-| `02-§21.3` | Archive timeline is vertical; each camp is a point on a vertical line | 03-ARCHITECTURE.md §4a | — (manual: visual verification) | — | gap |
-| `02-§21.4` | Each camp is an accordion item — a clickable header that expands to reveal details | 03-ARCHITECTURE.md §4a | ARK-03 | — | gap |
-| `02-§21.5` | Only one accordion item may be open at a time; opening a new item closes any previously open item | 03-ARCHITECTURE.md §4a | — (manual: open two items and verify only one stays open) | — | gap |
-| `02-§21.6` | Each accordion header is a `<button>` with `aria-expanded` and `aria-controls` attributes | 03-ARCHITECTURE.md §4a | ARK-04, ARK-05 | — | gap |
-| `02-§21.7` | Keyboard users can open and close accordion items using Enter or Space | 03-ARCHITECTURE.md §4a | — (manual: tab to a header and press Enter/Space) | — | gap |
-| `02-§21.8` | Expanded accordion shows name, date range, location, information (if set), and Facebook link (if set) | 03-ARCHITECTURE.md §4a | ARK-06 | — | gap |
-| `02-§21.9` | Information text is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-07 | — | gap |
-| `02-§21.10` | Facebook link is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-08 | — | gap |
-| `02-§21.11` | No blank rows or placeholder text appear for empty fields | 03-ARCHITECTURE.md §4a | ARK-07, ARK-08 | — | gap |
+| `02-§21.1` | Only camps with `archived: true` are shown on the archive page | 03-ARCHITECTURE.md §4a | ARK-01 | `source/build/render-arkiv.js` – filters `archived === true` | covered |
+| `02-§21.2` | Archive page lists camps newest first (descending by `start_date`) | 03-ARCHITECTURE.md §4a | ARK-02 | `source/build/render-arkiv.js` – sort descending by `toDateString(start_date)` | covered |
+| `02-§21.3` | Archive timeline is vertical; each camp is a point on a vertical line | 03-ARCHITECTURE.md §4a | — (manual: open arkiv.html and verify vertical layout with dots) | `source/assets/cs/style.css` – `.timeline`, `.timeline-dot`, `.timeline::before` | implemented |
+| `02-§21.4` | Each camp is an accordion item — a clickable header that expands to reveal details | 03-ARCHITECTURE.md §4a | ARK-03 | `source/build/render-arkiv.js` – `.timeline-panel[hidden]`; `source/assets/js/client/arkiv.js` – toggles `hidden` | covered |
+| `02-§21.5` | Only one accordion item may be open at a time; opening a new item closes any previously open item | 03-ARCHITECTURE.md §4a | — (manual: open two items in browser and verify only one stays open) | `source/assets/js/client/arkiv.js` – closes all other panels before opening new one | implemented |
+| `02-§21.6` | Each accordion header is a `<button>` with `aria-expanded` and `aria-controls` attributes | 03-ARCHITECTURE.md §4a | ARK-04, ARK-05 | `source/build/render-arkiv.js` – `<button class="timeline-header" aria-expanded="false" aria-controls="…">` | covered |
+| `02-§21.7` | Keyboard users can open and close accordion items using Enter or Space | 03-ARCHITECTURE.md §4a | — (manual: tab to header and press Enter or Space) | Native `<button>` keyboard behaviour; `arkiv.js` handles click event | implemented |
+| `02-§21.8` | Expanded accordion shows name, date range, location, information (if set), and Facebook link (if set) | 03-ARCHITECTURE.md §4a | ARK-06 | `source/build/render-arkiv.js` – `renderArkivPage()` renders all fields | covered |
+| `02-§21.9` | Information text is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-07 | `source/build/render-arkiv.js` – `info ? …camp-information… : ''` | covered |
+| `02-§21.10` | Facebook link is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-08 | `source/build/render-arkiv.js` – `link ? …camp-link… : ''` | covered |
+| `02-§21.11` | No blank rows or placeholder text appear for empty fields | 03-ARCHITECTURE.md §4a | ARK-07, ARK-08 | `source/build/render-arkiv.js` – conditional rendering of optional fields | covered |
 
 ---
 
@@ -460,17 +460,24 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 
 ```text
 Total requirements:             342
-Covered (implemented + tested):  61
-Implemented, not tested:        242
-Gap (no implementation):         39
+Covered (implemented + tested):  74
+Implemented, not tested:        240
+Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
-Note: 11 requirements added for archive timeline (02-§21.1–21.11), all gap.
+Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
+8 of 11 new requirements are covered (ARK-01..08 tests).
+3 are implemented but require manual/visual verification
+  (02-§21.3 layout, 02-§21.5 single-open, 02-§21.7 keyboard).
+02-§2.6, 02-§16.2, 02-§16.4 moved from gap to covered.
+11 requirements added for archive timeline (02-§21.1–21.11), all now implemented.
+Snapshot updated to include Arkiv nav link.
+13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
 02-§18.45 implemented (manual): edit form credentials: 'include' for cross-origin API.
 02-§18.41 added and covered: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
 SES-14 and SES-15 verify Domain= is included/omitted correctly.
-Previous: 17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
+17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
 3 of these are covered (ADD-01..06 test structural HTML: 02-§19.7, 02-§19.17, and
   fieldset via ADD-02 for 02-§19.1).
 14 are implemented but browser-only; cannot be unit-tested in Node.js.
@@ -506,60 +513,57 @@ End time is now required everywhere (add form, edit form, data contract).
 
 ### High — missing whole features
 
-4. **`02-§2.6` / `02-§16.2` / `02-§16.4` — Archive page** (`/arkiv.html`)
-   No page exists to browse past camps. The archive must be usable and complete, not a placeholder.
-
-5. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
+4. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
    No RSS feed is generated; it must reflect the current state of the schedule.
    No implementation guidance document exists — `03-ARCHITECTURE.md` needs an RSS section before this can be built.
 
-6. **`02-§10.3` — String length limits in API validation**
+5. **`02-§10.3` — String length limits in API validation**
    `validate.js` type-checks strings but sets no maximum length.
    Unbounded strings can be committed to the YAML file.
 
 ### Medium — data integrity
 
-7. **`05-§4.1` — Event date range check (API server)**
+6. **`05-§4.1` — Event date range check (API server)**
    The API accepts any structurally valid `YYYY-MM-DD` date regardless of camp `start_date`/`end_date`.
 
-8. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
+7. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
    `validate.js` checks `start` is non-empty but not that it matches `HH:MM`.
    `end` is not validated as a valid `HH:MM` string — only that it is after `start`.
 
-9. **`05-§5.1` — Duplicate event uniqueness not enforced**
+8. **`05-§5.1` — Duplicate event uniqueness not enforced**
    The `(title + date + start)` combination is never checked for uniqueness before committing.
 
-10. **`05-§6.1` — Event ID uniqueness not enforced**
-    Identical submissions produce identical IDs. No check is made against existing IDs in the file.
+9. **`05-§6.1` — Event ID uniqueness not enforced**
+   Identical submissions produce identical IDs. No check is made against existing IDs in the file.
 
-11. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
+10. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
     No code prevents a camp from being marked both active and archived.
 
-12. **`CL-§5.5` / `CL-§5.9` / `CL-§6.3` — Build-time YAML data validation**
+11. **`CL-§5.5` / `CL-§5.9` / `CL-§6.3` — Build-time YAML data validation**
     Manually edited YAML bypasses all validation (required fields, date ranges, duplicate IDs).
     Validation only runs in the API layer when events are submitted through the form.
 
 ### Low — tooling, design, and accessibility gaps
 
-13. **`CL-§5.1` — HTML validation in CI**
+12. **`CL-§5.1` — HTML validation in CI**
     No HTML linter is configured; invalid HTML does not fail the build.
 
-14. **`CL-§5.2` — CSS linting in CI**
+13. **`CL-§5.2` — CSS linting in CI**
     No CSS linter is configured.
 
-15. **`CL-§7.4` / `07-§8.5` — Image optimisation**
+14. **`CL-§7.4` / `07-§8.5` — Image optimisation**
     Images may not be served as WebP with responsive `srcset`. Not confirmed implemented.
 
-16. **`02-§13.2` / `07-§9.2` — Visible focus states**
+15. **`02-§13.2` / `07-§9.2` — Visible focus states**
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
 
-17. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
+16. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
     `<details>/<summary>` is used without explicit `aria-expanded` or `aria-controls`.
 
-18. **`07-§6.7` — Mobile hamburger menu**
+17. **`07-§6.7` — Mobile hamburger menu**
     No hamburger/dropdown navigation confirmed for mobile viewports.
 
-19. **`07-§6.33` — Colored left border for activity type**
+18. **`07-§6.33` — Colored left border for activity type**
     No activity type categorization exists; colored left borders are not implemented.
 
 ---
@@ -594,3 +598,4 @@ End time is now required everywhere (add form, edit form, data contract).
 | SES-10..13 | `tests/session.test.js` | `mergeIds` |
 | SES-14..15 | `tests/session.test.js` | `buildSetCookieHeader – domain` |
 | SNP-01..06 | `tests/snapshot.test.js` | `renderSchedulePage` |
+| ARK-01..08 | `tests/render-arkiv.test.js` | `renderArkivPage` |
