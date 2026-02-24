@@ -405,7 +405,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `02-§18.37` | The add-event form fetch must use `credentials: 'include'` so cross-origin `Set-Cookie` response headers are applied by the browser | 03-ARCHITECTURE.md §7 | — (manual: verify cookie saved after form submit in a cross-origin deployment) | `source/assets/js/client/lagg-till.js` – `credentials: 'include'` in `fetch()` options | implemented |
 | `02-§18.38` | The cookie consent banner must appear directly after the submit button, not at the top of the page | 03-ARCHITECTURE.md §7 | — (manual: inspect DOM position of banner after form submit) | `source/assets/js/client/cookie-consent.js` – `insertBefore(banner, submitBtn.nextSibling)` | implemented |
 | `02-§18.39` | The add-activity form has no owner name field; event ownership is established entirely via session cookie | 03-ARCHITECTURE.md §7 | — (manual: confirm no ownerName input in rendered lagg-till.html) | `source/build/render-add.js` – `ownerName` field removed from form | implemented |
-| `02-§18.40` | The add-activity submit handler must only reference form elements that exist in the HTML form; accessing a missing element via `form.elements` returns `undefined` and calling `.value` on it throws a TypeError that aborts submission | 03-ARCHITECTURE.md §7 | — (no automated test: `form.elements` is a browser DOM API not available in Node.js; manual: open `lagg-till.html` in a browser and submit the form — confirm it submits without TypeError and the consent banner appears and responds correctly) | — | gap |
+| `02-§18.40` | The add-activity submit handler must only reference form elements that exist in the HTML form; accessing a missing element via `form.elements` returns `undefined` and calling `.value` on it throws a TypeError that aborts submission | 03-ARCHITECTURE.md §7 | — (no automated test: `form.elements` is a browser DOM API not available in Node.js; manual: open `lagg-till.html` in a browser and submit the form — confirm it submits without TypeError and the consent banner appears and responds correctly) | `source/assets/js/client/lagg-till.js` – `ownerName` line removed from `JSON.stringify` body | implemented |
 
 ---
 
@@ -414,8 +414,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 ```text
 Total requirements:             295
 Covered (implemented + tested):  47
-Implemented, not tested:        215
-Gap (no implementation):         33
+Implemented, not tested:        216
+Gap (no implementation):         32
 Orphan tests (no requirement):    0
 
 Note: 3 requirements added for cookie consent UX fixes (02-§18.37–39).
@@ -423,7 +423,8 @@ Note: 3 requirements added for cookie consent UX fixes (02-§18.37–39).
 All 3 new requirements are implemented; browser-only behaviour cannot be unit-tested.
 End time is now required everywhere (add form, edit form, data contract).
 02-§9.4, 05-§3.1, 05-§4.3, 02-§18.25 all moved to covered (VLD-27..32).
-02-§18.40 added: submit handler must not access missing form fields (ownerName crash fix).
+02-§18.40 added and implemented: ownerName crash fix — submit handler no longer
+accesses the non-existent ownerName field.
 ```
 
 ---
