@@ -46,7 +46,7 @@
     consentFn(function (consentGiven) {
       fetch(form.dataset.apiUrl || '/add-event', {
         method: 'POST',
-        credentials: 'same-origin',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title:         title,
