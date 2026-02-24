@@ -5,6 +5,14 @@ const { pageNav } = require('./layout');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
+// Derive the edit-event API URL from the add-event API URL.
+// Replaces a trailing /add-event segment with /edit-event.
+// Falls back to '/edit-event' when no URL is supplied.
+function editApiUrl(addUrl) {
+  if (!addUrl) return '/edit-event';
+  return addUrl.replace(/\/add-event$/, '/edit-event');
+}
+
 function renderEditPage(camp, locations, apiUrl) {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
@@ -120,4 +128,4 @@ ${locationOptions}
 `;
 }
 
-module.exports = { renderEditPage };
+module.exports = { renderEditPage, editApiUrl };
