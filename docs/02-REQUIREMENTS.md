@@ -414,5 +414,9 @@ that requires no login.
 - The add-activity form does not include an owner name field. Event ownership is
   established entirely via the session cookie; no name is required for the editing
   mechanism to work. <!-- 02-§18.39 -->
+- The add-activity submit handler must only reference form elements that are
+  rendered in the form HTML. Accessing a missing element via `form.elements`
+  returns `undefined`; calling `.value` on it throws a `TypeError` that aborts
+  the submission and breaks the consent banner interaction. <!-- 02-§18.40 -->
 
 ---
