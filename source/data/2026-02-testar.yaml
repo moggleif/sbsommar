@@ -384,3 +384,19 @@ events:
   meta:
     created_at: 2026-02-23 11:11
     updated_at: 2026-02-23 11:11
+- id: testar-agare-2026-02-26-1400
+  title: Testar ägare
+  date: '2026-02-26'
+  start: '14:00'
+  end: '14:30'
+  location: AndreasTältet
+  responsible: morgan
+  description: |
+    nä
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 10:34
+    updated_at: 2026-02-24 10:34
