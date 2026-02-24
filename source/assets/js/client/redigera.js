@@ -139,7 +139,7 @@
 
       fetch(form.dataset.apiUrl || '/edit-event', {
         method: 'POST',
-        credentials: 'same-origin',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id:          els.id.value,

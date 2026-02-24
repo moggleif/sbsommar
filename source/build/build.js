@@ -6,7 +6,7 @@ const yaml = require('js-yaml');
 const QRCode = require('qrcode');
 const { renderSchedulePage, toDateString } = require('./render');
 const { renderAddPage } = require('./render-add');
-const { renderEditPage } = require('./render-edit');
+const { renderEditPage, editApiUrl } = require('./render-edit');
 const { renderTodayPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = require('./render-index');
@@ -111,7 +111,7 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-  const editHtml = renderEditPage(camp, locations, process.env.API_URL);
+  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL));
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 
