@@ -31,7 +31,7 @@ function renderEditPage(camp, locations, apiUrl) {
 <body>
 ${pageNav('redigera.html')}
 
-  <div id="edit-loading">
+  <div id="edit-loading" role="status">
     <p>Laddar aktivitet…</p>
   </div>
 

@@ -500,7 +500,7 @@ textarea {
 .form-errors {
   margin-bottom: var(--space-sm);
   padding: 10px var(--space-sm);
-  background: #fdf0ec;
+  background: color-mix(in srgb, var(--color-terracotta) 10%, var(--color-white));
   border-left: 3px solid var(--color-terracotta);
   border-radius: var(--radius-sm);
   font-size: 14px;
