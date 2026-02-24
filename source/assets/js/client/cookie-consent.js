@@ -12,7 +12,7 @@
     try { localStorage.setItem(LS_KEY, value); } catch { /* ignore */ }
   }
 
-  // Show the consent banner above the form.
+  // Show the consent banner below the submit button.
   // Calls callback(true) when accepted, callback(false) when declined.
   function showConsentBanner(callback) {
     var banner = document.createElement('div');
@@ -26,12 +26,17 @@
         '<button class="btn-secondary" id="consent-decline">Nej tack</button>' +
       '</div>';
 
-    // Insert before the form
-    var form = document.getElementById('event-form');
-    if (form && form.parentNode) {
-      form.parentNode.insertBefore(banner, form);
+    // Insert after the submit button (inside the form).
+    var submitBtn = document.querySelector('#event-form button[type="submit"]');
+    if (submitBtn && submitBtn.parentNode) {
+      submitBtn.parentNode.insertBefore(banner, submitBtn.nextSibling);
     } else {
-      document.body.insertBefore(banner, document.body.firstChild);
+      var form = document.getElementById('event-form');
+      if (form) {
+        form.appendChild(banner);
+      } else {
+        document.body.insertBefore(banner, document.body.firstChild);
+      }
     }
 
     document.getElementById('consent-accept').addEventListener('click', function () {
