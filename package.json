@@ -10,6 +10,8 @@
     "test:update-snapshots": "node tests/helpers/update-snapshots.js",
     "lint": "eslint source tests eslint.config.js",
     "lint:fix": "eslint source tests eslint.config.js --fix",
+    "lint:yaml": "node source/scripts/lint-yaml.js",
+    "check:security": "node source/scripts/check-yaml-security.js",
     "lint:md": "markdownlint \"content/**/*.md\" \"docs/**/*.md\" README.md CLAUDE.md",
     "prepare": "git config core.hooksPath .githooks || true"
   },

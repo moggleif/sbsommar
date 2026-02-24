@@ -1,0 +1,155 @@
+name: Event Data Deploy
+
+# Triggered when a PR targeting main contains changes to event data files.
+# Applies only to PRs from event/ (add-event) and event-edit/ (edit-event) branches.
+#
+# Four sequential jobs:
+#   1. lint-yaml      – structural validation of the changed YAML file
+#   2. security-check – injection scan and link protocol validation
+#   3. build          – full site build; captures the 4 event-data pages as an artefact
+#   4. ftp-deploy     – uploads only those 4 files to FTP (no clean-slate)
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'source/data/**.yaml'
+
+jobs:
+  lint-yaml:
+    name: Lint event YAML
+    runs-on: ubuntu-latest
+    # Only run for PRs opened by the add-event or edit-event API flows.
+    # Downstream jobs inherit this gate via their `needs:` chain.
+    if: |
+      startsWith(github.head_ref, 'event/') ||
+      startsWith(github.head_ref, 'event-edit/')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Detect changed event YAML file
+        id: changed
+        run: |
+          git fetch origin main --depth=1
+          CHANGED=$(git diff --name-only origin/main...HEAD \
+            | grep '^source/data/' | grep '\.yaml$' | grep -v 'camps\.yaml' | head -1)
+          if [ -z "$CHANGED" ]; then
+            echo "No event YAML file changed — nothing to validate"
+            exit 1
+          fi
+          echo "yaml_file=$CHANGED" >> $GITHUB_OUTPUT
+          echo "Detected changed file: $CHANGED"
+
+      - name: Lint YAML
+        run: node source/scripts/lint-yaml.js "${{ steps.changed.outputs.yaml_file }}"
+
+  security-check:
+    name: Security scan
+    runs-on: ubuntu-latest
+    needs: lint-yaml
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Detect changed event YAML file
+        id: changed
+        run: |
+          git fetch origin main --depth=1
+          CHANGED=$(git diff --name-only origin/main...HEAD \
+            | grep '^source/data/' | grep '\.yaml$' | grep -v 'camps\.yaml' | head -1)
+          echo "yaml_file=$CHANGED" >> $GITHUB_OUTPUT
+
+      - name: Security scan
+        run: node source/scripts/check-yaml-security.js "${{ steps.changed.outputs.yaml_file }}"
+
+  build:
+    name: Build schema pages
+    runs-on: ubuntu-latest
+    needs: security-check
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+        env:
+          API_URL: ${{ secrets.API_URL }}
+
+      # Capture only the four event-data-derived files.
+      # Other pages (index.html, lagg-till.html, redigera.html, arkiv.html) are not
+      # affected by event data changes and are not uploaded by this workflow.
+      - name: Upload schema pages artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: schema-pages
+          path: |
+            public/schema.html
+            public/idag.html
+            public/dagens-schema.html
+            public/events.json
+          retention-days: 1
+
+  ftp-deploy:
+    name: Deploy schema pages via FTP
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download schema pages artefact
+        uses: actions/download-artifact@v4
+        with:
+          name: schema-pages
+          path: ./deploy-output
+
+      - name: Validate FTP_TARGET_DIR format
+        run: |
+          if [[ "${{ secrets.FTP_TARGET_DIR }}" != */ ]]; then
+            echo "Error: FTP_TARGET_DIR must end with a '/'"
+            exit 1
+          fi
+        shell: bash
+
+      # Upload only the four files using curl.
+      # SamKirkland/FTP-Deploy-Action is intentionally not used here: its
+      # dangerous-clean-slate mode would delete the entire site. curl is
+      # available on ubuntu-latest without any additional installation.
+      - name: Upload schema pages via FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
+        run: |
+          for FILE in schema.html idag.html dagens-schema.html events.json; do
+            curl --ftp-create-dirs \
+                 --upload-file "deploy-output/$FILE" \
+                 --user "$FTP_USERNAME:$FTP_PASSWORD" \
+                 "ftp://$FTP_HOST${FTP_TARGET_DIR}$FILE"
+            echo "Uploaded: $FILE"
+          done
