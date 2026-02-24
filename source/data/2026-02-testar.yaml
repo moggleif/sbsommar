@@ -583,3 +583,18 @@ events:
   meta:
     created_at: 2026-02-24 16:58
     updated_at: 2026-02-24 16:58
+- id: ny-aktivitet-som-jag-gjort-clean-cookie-2026-02-24-1907
+  title: ny aktivitet som jag gjort - clean cookie
+  date: '2026-02-24'
+  start: '19:07'
+  end: '20:07'
+  location: AndreasTältet
+  responsible: fdsafdsfa
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 17:07
+    updated_at: 2026-02-24 17:07
