@@ -92,12 +92,12 @@ See §7 for a complete worked example.
 - `title`
 - `date`
 - `start`
+- `end`
 - `location`
 - `responsible`
 
 ### Optional for each event
 
-- `end`
 - `description`
 - `link`
 - `owner`
@@ -111,8 +111,8 @@ The `owner` and `meta` fields are for internal use only and must never be displa
 
 - `date` must fall within the camp's `start_date` and `end_date` (inclusive). <!-- 05-§4.1 -->
 - `start` must use 24-hour format: `"HH:MM"`. <!-- 05-§4.2 -->
-- `end` must be `null` or `"HH:MM"`. <!-- 05-§4.4 -->
-- `end`, when present, must be after `start`. <!-- 05-§4.3 -->
+- `end` must be `"HH:MM"`. <!-- 05-§4.4 -->
+- `end` must be after `start`. <!-- 05-§4.3 -->
 - No timezone handling. All times are local. <!-- 05-§4.5 -->
 
 ---

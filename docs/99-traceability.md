@@ -127,7 +127,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `02-§3.4` | Schedule and add-activity links are prominent when a camp is active or upcoming | 03-ARCHITECTURE.md §3 | — | `source/build/layout.js` – nav always shows all links (not conditionally prominent based on camp state) | implemented |
 | `02-§4.1` | Weekly schedule shows all activities for the full camp week, grouped by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `renderSchedulePage()`, `groupAndSortEvents()` | covered |
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
-| `02-§4.3` | Each activity shows title, start time, end time (if set), location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
+| `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
 | `02-§4.4` | Daily view allows the user to navigate between days | 03-ARCHITECTURE.md §5 | — | — | gap |
 | `02-§4.5` | Today view (`/idag.html`) shows only today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | — | `source/build/render-idag.js`, `source/assets/js/client/events-today.js` | implemented |
 | `02-§4.6` | Today/Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | — | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` (at `/dagens-schema.html`, not `/idag.html` — see `02-§2.4`) | implemented |
@@ -149,7 +149,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `02-§9.1` | `title` is present and non-empty before form submission | 05-DATA_CONTRACT.md §3 | VLD-04..06 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
 | `02-§9.2` | `date` falls within the active camp's date range | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `min`/`max` (browser-enforced only; not in submit handler) | implemented |
 | `02-§9.3` | `start` is in valid `HH:MM` format | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `type="time"` (browser-enforced only; not validated by server — see `05-§4.2`) | implemented |
-| `02-§9.4` | `end`, if provided, is after `start` | 05-DATA_CONTRACT.md §4 | VLD-16..20 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
+| `02-§9.4` | `end` is present, in valid `HH:MM` format, and is after `start` | 05-DATA_CONTRACT.md §4 | VLD-16..20, VLD-27..32 | `source/assets/js/client/lagg-till.js` and `redigera.js` (client); `source/api/validate.js` – `validateEventRequest()` and `validateEditRequest()` (server, tested) | covered |
 | `02-§9.5` | `location` is present and non-empty | 05-DATA_CONTRACT.md §3 | VLD-10 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
 | `02-§9.6` | `responsible` is present and non-empty | 05-DATA_CONTRACT.md §3 | VLD-11 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
 | `02-§10.1` | All required fields are present and of correct type before any write begins | 03-ARCHITECTURE.md §3 | VLD-01..11 | `source/api/validate.js` – `validateEventRequest()`; `app.js` – returns HTTP 400 on failure | covered |
@@ -177,10 +177,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `05-§1.1` | Each `camps.yaml` entry includes all required fields: `id`, `name`, `start_date`, `end_date`, `file`, `active`, `archived` | 06-EVENT_DATA_MODEL.md §3, 03-ARCHITECTURE.md §2 | — | `source/build/build.js` reads and uses these fields; no build-time schema validator | implemented |
 | `05-§1.2` | Exactly one camp may have `active: true` at a time | 03-ARCHITECTURE.md §2, 04-OPERATIONS.md | — | `source/api/github.js` – `addEventToActiveCamp()` rejects if `activeCamps.length ≠ 1` (checked at submit time only, not at build time) | implemented |
 | `05-§1.3` | A camp with `active: true` must not also have `archived: true` | 03-ARCHITECTURE.md §2, 04-OPERATIONS.md | — | — | gap |
-| `05-§3.1` | Each submitted event must include `id`, `title`, `date`, `start`, `location`, and `responsible` | 06-EVENT_DATA_MODEL.md §4, 05-DATA_CONTRACT.md §3 | VLD-04..11 | `source/api/validate.js` – `validateEventRequest()` (note: `id` is server-generated, not submitted as input) | covered |
+| `05-§3.1` | Each submitted event must include `id`, `title`, `date`, `start`, `end`, `location`, and `responsible` | 06-EVENT_DATA_MODEL.md §4, 05-DATA_CONTRACT.md §3 | VLD-04..11, VLD-27..28 | `source/api/validate.js` – `validateEventRequest()` and `validateEditRequest()` (note: `id` is server-generated, not submitted as input) | covered |
 | `05-§4.1` | Event `date` must fall within the camp's `start_date` and `end_date` (inclusive) | 06-EVENT_DATA_MODEL.md §4 | — | — (`source/api/validate.js` validates date format but not range against the active camp) | gap |
 | `05-§4.2` | `start` must use 24-hour `HH:MM` format | 06-EVENT_DATA_MODEL.md §4 | VLD-08 (non-empty check only) | — (`source/api/validate.js` checks that `start` is non-empty; format not validated) | gap |
-| `05-§4.3` | `end`, when present, must be after `start` | 06-EVENT_DATA_MODEL.md §4 | VLD-16..20 | `source/api/validate.js` – `end <= start` check | covered |
+| `05-§4.3` | `end` must be after `start` | 06-EVENT_DATA_MODEL.md §4 | VLD-16..20, VLD-29..30 | `source/api/validate.js` – `end <= start` check in both `validateEventRequest()` and `validateEditRequest()` | covered |
 | `05-§5.1` | The combination of `(title + date + start)` must be unique within a camp file | 03-ARCHITECTURE.md §1 | — | — (no uniqueness check before committing) | gap |
 | `05-§6.1` | Event `id` must be unique within the camp file | 06-EVENT_DATA_MODEL.md §4 | GH-01..11 (slugify determinism) | — (no uniqueness check against existing IDs; ID is deterministic but not verified) | gap |
 | `05-§6.2` | Event `id` must be stable and not change after creation | 06-EVENT_DATA_MODEL.md §4 | — | `source/api/github.js` – deterministic `slugify(title)+date+start` on first write; no update path exists | implemented |
@@ -267,7 +267,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `05-§1.5` | The camp `id` is permanent and must never change after the camp is first created | 06-EVENT_DATA_MODEL.md §3 | — | — (no enforcement; enforced by convention and docs) | implemented |
 | `05-§3.2` | Each camp file's `camp:` block must include `id`, `name`, `location`, `start_date`, and `end_date` | 06-EVENT_DATA_MODEL.md §3 | — | `source/build/build.js` – reads and uses all five fields; no build-time schema validator | implemented |
 | `05-§3.3` | The `owner` and `meta` fields are for internal use only and must never appear in any public view | 06-EVENT_DATA_MODEL.md §5, §6 | — | `source/build/render.js` – neither field is referenced in render output | implemented |
-| `05-§4.4` | `end` must be `null` or a valid `"HH:MM"` string | 06-EVENT_DATA_MODEL.md §4 | — | — (`source/api/validate.js` checks end ordering but not the null-or-HH:MM constraint explicitly) | gap |
+| `05-§4.4` | `end` must be a valid `"HH:MM"` string | 06-EVENT_DATA_MODEL.md §4 | — | — (`source/api/validate.js` checks end ordering but not the HH:MM format explicitly; `validateEditRequest()` does not yet require end) | gap |
 | `05-§4.5` | All times are local; no timezone handling | 06-EVENT_DATA_MODEL.md §4 | — | No timezone conversion anywhere in the codebase | implemented |
 | `CL-§2.12` | Data file names are never hardcoded; active camp and file paths are always derived from `camps.yaml` | 03-ARCHITECTURE.md §2 | — | `source/build/build.js` – reads `camps.yaml` first; `source/api/github.js` – same | implemented |
 | `CL-§5.13` | Markdown linting runs on every commit via pre-commit hook; commit is blocked if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.githooks/` pre-commit hook – `npm run lint:md`; `.markdownlint.json` config | implemented |
@@ -390,7 +390,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `02-§18.22` | If the event ID is not in the cookie or the event has passed, the edit page shows an error and no form | 03-ARCHITECTURE.md §7 | — | `redigera.js` – `showError()` when ID not in cookie or `event.date < today` | implemented |
 | `02-§18.23` | The edit form exposes the same fields as the add-activity form | 03-ARCHITECTURE.md §7 | — | `source/build/render-edit.js` – all add-activity fields present | implemented |
 | `02-§18.24` | The event's stable `id` must not change after creation even when mutable fields are edited | 06-EVENT_DATA_MODEL.md §4 | EDIT-13 | `source/api/edit-event.js` – `patchEventInYaml()` preserves `event.id` | covered |
-| `02-§18.25` | The edit form is subject to the same validation rules as the add-activity form (§9) | 03-ARCHITECTURE.md §7 | — | `source/api/validate.js` – `validateEditRequest()`; `redigera.js` client-side validate | implemented |
+| `02-§18.25` | The edit form is subject to the same validation rules as the add-activity form (§9) | 03-ARCHITECTURE.md §7 | VLD-27..32 | `source/api/validate.js` – `validateEditRequest()`; `redigera.js` client-side validate | covered |
 | `02-§18.26` | After a successful edit, a clear Swedish confirmation is shown; schedule updates within minutes | 03-ARCHITECTURE.md §7 | — | `render-edit.js` – `#result` section; `github.js` – `updateEventInActiveCamp()` PR pipeline | implemented |
 | `02-§18.27` | The edit form is written entirely in Swedish | 02-REQUIREMENTS.md §14 | — | `source/build/render-edit.js` – all labels and messages in Swedish | implemented |
 | `02-§18.28` | A static `/events.json` file is generated at build time containing all events for the active camp | 03-ARCHITECTURE.md §7 | — | `source/build/build.js` – writes `public/events.json` | implemented |
@@ -412,14 +412,16 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 
 ```text
 Total requirements:             294
-Covered (implemented + tested):  46
-Implemented, not tested:        216
+Covered (implemented + tested):  47
+Implemented, not tested:        215
 Gap (no implementation):         32
 Orphan tests (no requirement):    0
 
 Note: 3 requirements added for cookie consent UX fixes (02-§18.37–39).
 02-§18.11 updated: only 'accepted' is now persisted (not 'declined').
 All 3 new requirements are implemented; browser-only behaviour cannot be unit-tested.
+End time is now required everywhere (add form, edit form, data contract).
+02-§9.4, 05-§3.1, 05-§4.3, 02-§18.25 all moved to covered (VLD-27..32).
 ```
 
 ---
@@ -462,7 +464,7 @@ All 3 new requirements are implemented; browser-only behaviour cannot be unit-te
 
 8. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
    `validate.js` checks `start` is non-empty but not that it matches `HH:MM`.
-   `end` is not validated as `null` or `HH:MM` — only that it is after `start` when present.
+   `end` is not validated as a valid `HH:MM` string — only that it is after `start`.
 
 9. **`05-§5.1` — Duplicate event uniqueness not enforced**
    The `(title + date + start)` combination is never checked for uniqueness before committing.

@@ -38,7 +38,6 @@ function validateEventRequest(body) {
 }
 
 // Validate an edit request body.  Same rules as validateEventRequest but:
-// - end is optional (may be empty string or absent → cleared to null)
 // - id is required (the stable event identifier being edited)
 function validateEditRequest(body) {
   if (!body || typeof body !== 'object') {
@@ -59,7 +58,8 @@ function validateEditRequest(body) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return fail('date måste vara YYYY-MM-DD');
   if (isNaN(new Date(date).getTime())) return fail('date är inte ett giltigt datum');
   if (!start)       return fail('start är obligatoriskt');
-  if (end && end <= start) return fail('end måste vara efter start');
+  if (!end)         return fail('end är obligatoriskt');
+  if (end <= start) return fail('end måste vara efter start');
   if (!location)    return fail('location är obligatoriskt');
   if (!responsible) return fail('responsible är obligatoriskt');
 

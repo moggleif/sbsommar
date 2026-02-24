@@ -83,7 +83,7 @@ The goal is that a parent visiting for the first time leaves thinking:
 - Shows all activities for the full camp week (Sunday–Sunday). <!-- 02-§4.1 -->
 - Activities are grouped by day. <!-- 02-§4.10 -->
 - Within each day, activities are listed in chronological order. <!-- 02-§4.2 -->
-- Each activity shows: title, start time, end time (if set), location, responsible person. <!-- 02-§4.3 -->
+- Each activity shows: title, start time, end time, location, responsible person. <!-- 02-§4.3 -->
 
 ### Daily view
 
@@ -114,7 +114,7 @@ When a participant clicks an activity, a detail view must show: <!-- 02-§5.1 --
 - Title
 - Date
 - Start time
-- End time (only if set)
+- End time
 - Location
 - Responsible person
 - Full description (only if set)
@@ -136,12 +136,12 @@ Participants must be able to submit a new activity through the form at `/lagg-ti
 - Title
 - Date
 - Start time
+- End time
 - Location
 - Responsible person
 
 ### Optional fields
 
-- End time
 - Description (free text)
 - Communication link
 
@@ -200,7 +200,7 @@ When a participant submits an activity, the following must be verified:
 - `title` is present and non-empty. <!-- 02-§9.1 -->
 - `date` falls within the active camp's date range. <!-- 02-§9.2 -->
 - `start` is in valid `HH:MM` format. <!-- 02-§9.3 -->
-- `end`, if provided, is in valid `HH:MM` format and is after `start`. <!-- 02-§9.4 -->
+- `end` is present, in valid `HH:MM` format, and is after `start`. <!-- 02-§9.4 -->
 - `location` is present and non-empty. <!-- 02-§9.5 -->
 - `responsible` is present and non-empty. <!-- 02-§9.6 -->
 

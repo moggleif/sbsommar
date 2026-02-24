@@ -121,7 +121,8 @@
       if (!title)       errs.push('Rubrik är obligatoriskt.');
       if (!date)        errs.push('Datum är obligatoriskt.');
       if (!start)       errs.push('Starttid är obligatorisk.');
-      if (end && end <= start) errs.push('Sluttid måste vara efter starttid.');
+      if (!end)         errs.push('Sluttid är obligatorisk.');
+      else if (end <= start) errs.push('Sluttid måste vara efter starttid.');
       if (!location)    errs.push('Plats är obligatoriskt.');
       if (!responsible) errs.push('Ansvarig är obligatoriskt.');
 
