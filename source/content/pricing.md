@@ -4,7 +4,7 @@
 
 Deltagaravgiften för 2025 är **400 kr per deltagare** för hela lägret. Definitionen av *deltagare* är alltså deltagande vuxna och barn, där de allra yngsta (ca 0-2 år) är undantagna. Man är deltagare oavsett man bor på lägerområdet eller inte.
 
-![|800x562](https://sbsommar.se/wp-content/uploads/2025/05/servicehuset.webp)
+![Servicehus](images/servicehuset.webp)
 
 ### Medlem RFSB
 

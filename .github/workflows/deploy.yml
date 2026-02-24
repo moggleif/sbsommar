@@ -48,6 +48,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_TARGET_DIR }}
           local-dir: ./public/
+          dangerous-clean-slate: true
 
       # Stage only the server files that need to run on Inleed via Passenger.
       # FTP_APP_DIR is a repo secret: e.g. /domains/sbsommar.se/app/
