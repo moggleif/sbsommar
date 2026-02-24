@@ -415,3 +415,18 @@ events:
   meta:
     created_at: 2026-02-24 13:39
     updated_at: 2026-02-24 13:39
+- id: cookie-2026-02-24-1800
+  title: 'cookie?'
+  date: '2026-02-24'
+  start: '18:00'
+  end: '21:00'
+  location: Tonårsstugan
+  responsible: jag
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 13:41
+    updated_at: 2026-02-24 13:41
