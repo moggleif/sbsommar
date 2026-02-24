@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24.
+Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02-§18.37–39 added).
 
 ---
 
@@ -376,7 +376,7 @@ Audit date: 2026-02-24.
 | `02-§18.8` | Before setting the session cookie, the client displays an inline consent prompt on the add-activity form | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/cookie-consent.js` – `showConsentBanner()` | implemented |
 | `02-§18.9` | If the user accepts consent, the form submission proceeds and the server sets the session cookie | 03-ARCHITECTURE.md §7 | — | `lagg-till.js` passes `cookieConsent: true`; `app.js` sets cookie | implemented |
 | `02-§18.10` | If the user declines consent, the event is still submitted but no session cookie is set | 03-ARCHITECTURE.md §7 | — | `lagg-till.js` passes `cookieConsent: false`; `app.js` skips `Set-Cookie` | implemented |
-| `02-§18.11` | The consent decision is stored in `localStorage` as `sb_cookie_consent`; the prompt is not shown again | 03-ARCHITECTURE.md §7 | — | `cookie-consent.js` – `saveConsent()` / `getConsent()` via `localStorage` | implemented |
+| `02-§18.11` | Only an accepted consent decision is stored in `localStorage` as `sb_cookie_consent`; declining is not persisted so the user can change their mind | 03-ARCHITECTURE.md §7 | — | `cookie-consent.js` – `saveConsent()` stores only `'accepted'`; decline handler omits `saveConsent()` | implemented |
 | `02-§18.12` | The consent prompt is written in Swedish | 02-REQUIREMENTS.md §14 | — | `cookie-consent.js` – banner innerHTML is Swedish text | implemented |
 | `02-§18.13` | On every page load, JS removes event IDs from the cookie whose date has already passed | 03-ARCHITECTURE.md §7 | — | `session.js` – `removeExpiredIds()` called on load | implemented |
 | `02-§18.14` | After cleaning, if no IDs remain the cookie is deleted; otherwise the cleaned cookie is written back | 03-ARCHITECTURE.md §7 | — | `session.js` – `writeSessionIds([])` sets `Max-Age=0` | implemented |
@@ -402,20 +402,24 @@ Audit date: 2026-02-24.
 | `02-§18.34` | On a valid edit, the server reads YAML from GitHub, replaces mutable fields, commits via ephemeral branch + PR with auto-merge | 03-ARCHITECTURE.md §7 | EDIT-04..17 | `source/api/github.js` – `updateEventInActiveCamp()`; `edit-event.js` – `patchEventInYaml()` | covered |
 | `02-§18.35` | The event's `meta.updated_at` is updated on every successful edit | 06-EVENT_DATA_MODEL.md §6 | EDIT-15 | `source/api/edit-event.js` – `patchEventInYaml()` sets `meta.updated_at = now` | covered |
 | `02-§18.36` | Only recognised edit-form fields are written; no unrecognised POST body fields are ever committed | 03-ARCHITECTURE.md §7 | — | `source/api/validate.js` – `validateEditRequest()`; `patchEventInYaml()` explicit field set | implemented |
+| `02-§18.37` | The add-event form fetch must use `credentials: 'include'` so cross-origin `Set-Cookie` response headers are applied by the browser | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/lagg-till.js` – `credentials: 'include'` in `fetch()` options | implemented |
+| `02-§18.38` | The cookie consent banner must appear directly after the submit button, not at the top of the page | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/cookie-consent.js` – `insertBefore(banner, submitBtn.nextSibling)` | implemented |
+| `02-§18.39` | The add-activity form has no owner name field; event ownership is established entirely via session cookie | 03-ARCHITECTURE.md §7 | — | `source/build/render-add.js` – `ownerName` field removed from form | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             291
+Total requirements:             294
 Covered (implemented + tested):  46
-Implemented, not tested:        213
+Implemented, not tested:        216
 Gap (no implementation):         32
 Orphan tests (no requirement):    0
 
-Note: 40 requirements added for §18 (participant event editing via session cookie).
-All 40 are now implemented and covered — Phase 4 and Phase 5 complete.
+Note: 3 requirements added for cookie consent UX fixes (02-§18.37–39).
+02-§18.11 updated: only 'accepted' is now persisted (not 'declined').
+All 3 new requirements are implemented; browser-only behaviour cannot be unit-tested.
 ```
 
 ---
