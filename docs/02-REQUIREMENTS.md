@@ -341,8 +341,9 @@ that requires no login.
 - If the user declines, the form submission still proceeds (the event is still
   submitted), but the server does not set the session cookie and the user receives
   no editing capability. <!-- 02-§18.10 -->
-- The consent decision (accepted or declined) is stored in `localStorage` as
-  `sb_cookie_consent` so the prompt is not shown again in the same browser. <!-- 02-§18.11 -->
+- Only an **accepted** decision is stored in `localStorage` as `sb_cookie_consent`.
+  A declined decision is not persisted — the prompt will appear again next time
+  the user submits an event, allowing them to change their mind. <!-- 02-§18.11 -->
 - The consent prompt must be written in Swedish. <!-- 02-§18.12 -->
 
 ### 18.3 Expiry management
@@ -402,5 +403,16 @@ that requires no login.
 - The event's `meta.updated_at` field is updated on every successful edit. <!-- 02-§18.35 -->
 - Only fields that are part of the edit form are written. No unrecognised fields
   from the request body are ever committed. <!-- 02-§18.36 -->
+
+### 18.8 Client-side cookie mechanics
+
+- The add-activity form submission must use `credentials: 'include'` so that
+  `Set-Cookie` response headers from the cross-origin API are applied by the
+  browser. Without this, the cookie is silently discarded. <!-- 02-§18.37 -->
+- The cookie consent banner must be inserted directly after the submit button
+  within the form — not at the top of the page or before the form. <!-- 02-§18.38 -->
+- The add-activity form does not include an owner name field. Event ownership is
+  established entirely via the session cookie; no name is required for the editing
+  mechanism to work. <!-- 02-§18.39 -->
 
 ---
