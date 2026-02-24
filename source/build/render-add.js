@@ -103,6 +103,7 @@ ${locationOptions}
     </div>
   </section>
 
+  <script src="cookie-consent.js"></script>
   <script src="lagg-till.js"></script>
 </body>
 </html>

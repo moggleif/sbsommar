@@ -6,6 +6,7 @@ const yaml = require('js-yaml');
 const QRCode = require('qrcode');
 const { renderSchedulePage, toDateString } = require('./render');
 const { renderAddPage } = require('./render-add');
+const { renderEditPage } = require('./render-edit');
 const { renderTodayPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = require('./render-index');
@@ -109,6 +110,25 @@ async function main() {
   const addHtml = renderAddPage(camp, locations, process.env.API_URL);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
+
+  const editHtml = renderEditPage(camp, locations, process.env.API_URL);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
+  console.log(`Built: public/redigera.html`);
+
+  // ── Build events.json — public event data for the edit form ──────────────
+  // Contains only fields the edit form needs; owner and meta are excluded.
+  const PUBLIC_EVENT_FIELDS = ['id', 'title', 'date', 'start', 'end', 'location', 'responsible', 'description', 'link'];
+  const eventsJson = JSON.stringify(
+    events.map((e) => {
+      const pub = {};
+      for (const f of PUBLIC_EVENT_FIELDS) pub[f] = e[f] !== undefined ? e[f] : null;
+      return pub;
+    }),
+    null,
+    2,
+  );
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'events.json'), eventsJson, 'utf8');
+  console.log(`Built: public/events.json  (${events.length} events)`);
 
   // ── Render index.html from content/sections.yaml ─────────────────────────
   // Section order, IDs, and optional nav labels are defined in sections.yaml.

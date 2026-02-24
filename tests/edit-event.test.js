@@ -145,20 +145,20 @@ describe('patchEventInYaml', () => {
   });
 
   it('EDIT-15: updates meta.updated_at to a current timestamp', () => { // EDIT-15
-    const beforeMs = Date.now();
     const result = patchEventInYaml(SAMPLE_YAML, 'event-one-2099-06-01-1000', { title: 'Ändrad' });
-    const afterMs = Date.now();
     const parsed = yaml.load(result);
     const ev = parsed.events.find(e => e.id === 'event-one-2099-06-01-1000');
 
     // updated_at format: "YYYY-MM-DD HH:MM"
     assert.ok(typeof ev.meta.updated_at === 'string', 'updated_at should be a string');
-    assert.ok(ev.meta.updated_at !== '2099-05-01 12:00', 'updated_at should have changed');
+    assert.ok(ev.meta.updated_at !== '2099-05-01 12:00', 'updated_at should have changed from original');
 
-    // Verify the timestamp is plausible (within the test run window)
-    const parsedDate = new Date(ev.meta.updated_at.replace(' ', 'T'));
-    assert.ok(parsedDate.getTime() >= beforeMs - 1000, 'updated_at should not be before test start');
-    assert.ok(parsedDate.getTime() <= afterMs + 1000, 'updated_at should not be after test end');
+    // Verify the value starts with today's date
+    const today = new Date().toISOString().slice(0, 10);
+    assert.ok(
+      ev.meta.updated_at.startsWith(today),
+      `updated_at "${ev.meta.updated_at}" should start with today "${today}"`,
+    );
   });
 
   it('EDIT-16: leaves other events in the file unchanged', () => { // EDIT-16

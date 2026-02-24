@@ -256,4 +256,39 @@ async function addEventToActiveCamp(body) {
   await enableAutoMerge(pr.node_id);
 }
 
-module.exports = { addEventToActiveCamp, slugify, yamlScalar, buildEventYaml };
+// Finds an event by ID in the active camp's YAML file and replaces its
+// mutable fields.  Uses the same ephemeral-branch + PR + auto-merge
+// pipeline as addEventToActiveCamp.
+async function updateEventInActiveCamp(eventId, updates) {
+  const { patchEventInYaml } = require('./edit-event');
+
+  // Step 1: resolve active camp
+  const { content: campsYaml } = await getFile(CAMPS_PATH);
+  const campsData = yaml.load(campsYaml);
+  const activeCamps = (campsData.camps || []).filter((c) => c.active === true);
+
+  if (activeCamps.length === 0) throw new Error('No active camp found');
+  if (activeCamps.length > 1)  throw new Error('Multiple active camps found');
+
+  const camp         = activeCamps[0];
+  const campFilePath = `source/data/${camp.file}`;
+
+  // Step 2: fetch camp file
+  const { content: campContent, sha: fileSha } = await getFile(campFilePath);
+
+  // Step 3: patch the event in the YAML string
+  const newContent = patchEventInYaml(campContent, eventId, updates);
+  if (newContent === null) throw new Error(`Event not found: ${eventId}`);
+
+  const commitMsg  = `Edit event in ${camp.name}: ${eventId}`;
+
+  // Step 4: ephemeral branch → commit → PR → auto-merge
+  const mainSha    = await getMainSha();
+  const branchName = `event-edit/${eventId}-${Date.now()}`;
+  await createBranch(branchName, mainSha);
+  await putFile(campFilePath, newContent, fileSha, commitMsg, branchName);
+  const pr = await createPullRequest(commitMsg, branchName);
+  await enableAutoMerge(pr.node_id);
+}
+
+module.exports = { addEventToActiveCamp, updateEventInActiveCamp, slugify, yamlScalar, buildEventYaml };
