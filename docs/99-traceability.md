@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-§18.42–44 implemented).
+Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 added as gap).
 
 ---
 
@@ -453,16 +453,22 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§21.9` | Information text is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-07 | `source/build/render-arkiv.js` – `info ? …camp-information… : ''` | covered |
 | `02-§21.10` | Facebook link is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-08 | `source/build/render-arkiv.js` – `link ? …camp-link… : ''` | covered |
 | `02-§21.11` | No blank rows or placeholder text appear for empty fields | 03-ARCHITECTURE.md §4a | ARK-07, ARK-08 | `source/build/render-arkiv.js` – conditional rendering of optional fields | covered |
+| `02-§22.1` | Every page produced by the build includes a `<footer class="site-footer">` element at the bottom of `<body>` | 03-ARCHITECTURE.md §4b | — | — | gap |
+| `02-§22.2` | Footer content is maintained in `source/content/footer.md` | 03-ARCHITECTURE.md §4b | — | — | gap |
+| `02-§22.3` | The build reads `footer.md`, converts it with `convertMarkdown()`, and injects the result into every page | 03-ARCHITECTURE.md §4b | — | — | gap |
+| `02-§22.4` | No render function or template contains literal footer markup — `footer.md` is the single source of truth | 03-ARCHITECTURE.md §4b | — | — | gap |
+| `02-§22.5` | If `footer.md` is missing at build time, all pages render with an empty footer and the build does not crash | 03-ARCHITECTURE.md §4b | — | — | gap |
+| `02-§22.6` | Updating `footer.md` and running the build changes the footer on all pages without modifying any other file | 03-ARCHITECTURE.md §4b | — | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             342
+Total requirements:             348
 Covered (implemented + tested):  74
 Implemented, not tested:        240
-Gap (no implementation):         28
+Gap (no implementation):         34
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -476,6 +482,7 @@ Snapshot updated to include Arkiv nav link.
 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
 02-§18.45 implemented (manual): edit form credentials: 'include' for cross-origin API.
 02-§18.41 added and covered: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
+6 requirements added for shared site footer (02-§22.1–22.6), all gap pending implementation.
 SES-14 and SES-15 verify Domain= is included/omitted correctly.
 17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
 3 of these are covered (ADD-01..06 test structural HTML: 02-§19.7, 02-§19.17, and
