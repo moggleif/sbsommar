@@ -1,0 +1,217 @@
+'use strict';
+
+const { describe, it } = require('node:test');
+const assert = require('node:assert/strict');
+
+// The script exports { validateYaml } when required as a module.
+// The CLI entry point is guarded by require.main === module.
+const { validateYaml } = require('../source/scripts/lint-yaml');
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function makeYaml(events = [], campOverrides = {}) {
+  const camp = Object.assign({
+    id: 'test-camp',
+    name: 'Test Camp',
+    location: 'Testvik',
+    start_date: '2026-07-01',
+    end_date: '2026-07-07',
+  }, campOverrides);
+
+  const campBlock = [
+    'camp:',
+    `  id: ${camp.id}`,
+    `  name: ${camp.name}`,
+    `  location: ${camp.location}`,
+    `  start_date: '${camp.start_date}'`,
+    `  end_date: '${camp.end_date}'`,
+  ].join('\n');
+
+  const eventLines = events.map((e) => {
+    const ev = Object.assign({
+      id: 'frukost-2026-07-01-0800',
+      title: 'Frukost',
+      date: '2026-07-01',
+      start: '08:00',
+      end: '09:00',
+      location: 'Matsalen',
+      responsible: 'Alla',
+    }, e);
+    const lines = [
+      `- id: ${ev.id}`,
+      `  title: ${ev.title}`,
+      `  date: '${ev.date}'`,
+      `  start: '${ev.start}'`,
+      `  end: '${ev.end}'`,
+      `  location: ${ev.location}`,
+      `  responsible: ${ev.responsible}`,
+      '  description: null',
+      '  link: null',
+    ];
+    return lines.join('\n');
+  });
+
+  const eventsBlock = eventLines.length > 0
+    ? 'events:\n' + eventLines.join('\n')
+    : 'events: []';
+
+  return campBlock + '\n\n' + eventsBlock + '\n';
+}
+
+function validEvent(overrides = {}) {
+  return Object.assign({
+    id: 'frukost-2026-07-01-0800',
+    title: 'Frukost',
+    date: '2026-07-01',
+    start: '08:00',
+    end: '09:00',
+    location: 'Matsalen',
+    responsible: 'Alla',
+  }, overrides);
+}
+
+// ── LNT-01: YAML parse ────────────────────────────────────────────────────────
+
+describe('validateYaml – parse check (02-§22.1)', () => {
+  it('LNT-01: accepts a valid YAML file', () => {
+    const r = validateYaml(makeYaml([validEvent()]));
+    assert.strictEqual(r.ok, true, `expected ok but got errors: ${r.errors}`);
+  });
+
+  it('LNT-01b: rejects a YAML syntax error', () => {
+    const r = validateYaml('camp:\n  id: [unclosed');
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /parse|yaml/i.test(e)), `expected parse error, got: ${r.errors}`);
+  });
+});
+
+// ── LNT-02..09: Required event fields (02-§22.2) ─────────────────────────────
+
+describe('validateYaml – required event fields (02-§22.2)', () => {
+  const REQUIRED = ['id', 'title', 'date', 'start', 'end', 'location', 'responsible'];
+
+  for (const field of REQUIRED) {
+    it(`LNT-0${REQUIRED.indexOf(field) + 2}: rejects event with missing ${field}`, () => {
+      const ev = validEvent({ [field]: undefined });
+      // Build YAML manually without the missing field
+      const lines = [
+        ev.id !== undefined     ? `- id: ${ev.id}` : null,
+        ev.title !== undefined  ? `  title: ${ev.title}` : null,
+        ev.date !== undefined   ? `  date: '${ev.date}'` : null,
+        ev.start !== undefined  ? `  start: '${ev.start}'` : null,
+        ev.end !== undefined    ? `  end: '${ev.end}'` : null,
+        ev.location !== undefined   ? `  location: ${ev.location}` : null,
+        ev.responsible !== undefined ? `  responsible: ${ev.responsible}` : null,
+        '  description: null',
+        '  link: null',
+      ].filter(Boolean);
+      const yaml = [
+        "camp:",
+        "  id: test-camp",
+        "  name: Test Camp",
+        "  location: Testvik",
+        "  start_date: '2026-07-01'",
+        "  end_date: '2026-07-07'",
+        "",
+        "events:",
+        lines.join('\n'),
+      ].join('\n');
+      const r = validateYaml(yaml);
+      assert.strictEqual(r.ok, false, `expected failure when ${field} is missing`);
+    });
+  }
+
+  it('LNT-09: accepts an event with all required fields present', () => {
+    const r = validateYaml(makeYaml([validEvent()]));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+// ── LNT-10..13: Date validation (02-§22.3) ────────────────────────────────────
+
+describe('validateYaml – date validation (02-§22.3)', () => {
+  it('LNT-10: rejects date in wrong format', () => {
+    const r = validateYaml(makeYaml([validEvent({ date: '01-07-2026' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /date/i.test(e)));
+  });
+
+  it('LNT-11: rejects a structurally valid but calendar-impossible date', () => {
+    const r = validateYaml(makeYaml([validEvent({ date: '2026-02-30' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /date/i.test(e)));
+  });
+
+  it('LNT-12: rejects a date before the camp start_date', () => {
+    const r = validateYaml(makeYaml([validEvent({ date: '2026-06-30' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /date|camp/i.test(e)));
+  });
+
+  it('LNT-13: rejects a date after the camp end_date', () => {
+    const r = validateYaml(makeYaml([validEvent({ date: '2026-07-08' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /date|camp/i.test(e)));
+  });
+
+  it('accepts a date within the camp range', () => {
+    const r = validateYaml(makeYaml([validEvent({ date: '2026-07-04' })]));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+// ── LNT-14..17: Time validation (02-§22.4) ────────────────────────────────────
+
+describe('validateYaml – time validation (02-§22.4)', () => {
+  it('LNT-14: rejects start time in wrong format', () => {
+    const r = validateYaml(makeYaml([validEvent({ start: '8:00' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /start/i.test(e)));
+  });
+
+  it('LNT-15: rejects end time in wrong format', () => {
+    const r = validateYaml(makeYaml([validEvent({ end: '900' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /end/i.test(e)));
+  });
+
+  it('LNT-16: rejects end equal to start', () => {
+    const r = validateYaml(makeYaml([validEvent({ start: '10:00', end: '10:00' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /end|after|start/i.test(e)));
+  });
+
+  it('LNT-17: rejects end before start', () => {
+    const r = validateYaml(makeYaml([validEvent({ start: '10:00', end: '09:00' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /end|after|start/i.test(e)));
+  });
+
+  it('accepts end one minute after start', () => {
+    const r = validateYaml(makeYaml([validEvent({ start: '08:00', end: '08:01' })]));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+// ── LNT-18: Duplicate IDs (02-§22.5) ──────────────────────────────────────────
+
+describe('validateYaml – duplicate event IDs (02-§22.5)', () => {
+  it('LNT-18: rejects a file with two events sharing the same id', () => {
+    const events = [
+      validEvent({ id: 'same-id', date: '2026-07-01', start: '08:00', end: '09:00' }),
+      validEvent({ id: 'same-id', date: '2026-07-01', start: '10:00', end: '11:00', title: 'Lunch' }),
+    ];
+    const r = validateYaml(makeYaml(events));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /duplicate|id/i.test(e)));
+  });
+
+  it('accepts a file with unique event IDs', () => {
+    const events = [
+      validEvent({ id: 'frukost-2026-07-01-0800', date: '2026-07-01', start: '08:00', end: '09:00' }),
+      validEvent({ id: 'lunch-2026-07-01-1200', date: '2026-07-01', start: '12:00', end: '13:00', title: 'Lunch' }),
+    ];
+    const r = validateYaml(makeYaml(events));
+    assert.strictEqual(r.ok, true);
+  });
+});
