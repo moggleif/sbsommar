@@ -213,15 +213,28 @@ Do not skip phases. Each phase ends with a commit. <!-- CL-§11.1 -->
 ## Phase 0 — Alignment
 
 Before writing requirements, discuss the request. <!-- CL-§11.0 -->
+This phase applies to all prompts — bugs, new features, refactors, data changes, documentation — anything. The user is not always right and should be told so when relevant.
+
+**Understand and challenge the request:**
 
 - Read the prompt carefully. Identify anything unclear, ambiguous, or potentially wrong.
 - Check whether the request conflicts with existing requirements, architecture decisions, or data contracts.
-- Propose improvements or alternatives if you see a better approach — the user might be right, or they might not.
+- Propose improvements or alternatives if you see a better approach.
 - Raise technical concerns (e.g. a requested approach that conflicts with the static-site constraint).
-- Agree on the scope and approach before moving forward.
+
+**Assess the size of the work:**
+
+- If the request is large enough that it risks running out of context, producing a rushed result, or spanning too many concerns at once — say so explicitly. <!-- CL-§11.13 -->
+- In that case, do not start implementing. Instead, decompose the request into a numbered list of self-contained work packages, write a ready-to-use prompt for each one, and stop. <!-- CL-§11.14 -->
+- The user can then run each prompt as a separate session in the correct order.
+- There is no fixed threshold — use judgement. A single focused feature is one session. Multiple new pages, a new data model, a new API layer, or a cross-cutting refactor spanning many files are candidates for splitting.
+
+**Agree before proceeding:**
+
+- Agree on scope and approach before writing any requirements.
 - This phase does not end with a commit. It ends with mutual understanding.
 
-Do not rubber-stamp prompts. If something seems off, say so.
+Do not rubber-stamp prompts. If something seems off, say so. If something is too big, split it.
 
 ## Phase 1 — Requirements
 
