@@ -5,6 +5,7 @@ camps:
   end_date: '2026-02-27'
   location: Testar
   link: ""
+  information: ""
   file: 2026-02-testar.yaml
   archived: false
   active: true
@@ -15,6 +16,7 @@ camps:
   end_date: '2025-08-15'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2025-08-syssleback.yaml
   archived: true
   active: false
@@ -25,6 +27,7 @@ camps:
   end_date: '2025-06-29'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2025-06-syssleback.yaml
   archived: true
   active: false
@@ -35,6 +38,7 @@ camps:
   end_date: '2024-06-30'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2024-06-syssleback.yaml
   archived: true
   active: false
@@ -45,6 +49,7 @@ camps:
   end_date: '2023-07-02'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2023-06-syssleback.yaml
   archived: true
   active: false
@@ -55,6 +60,7 @@ camps:
   end_date: '2022-07-03'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2022-06-syssleback.yaml
   archived: true
   active: false
@@ -65,6 +71,7 @@ camps:
   end_date: '2021-07-04'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2021-06-syssleback.yaml
   archived: true
   active: false
@@ -75,6 +82,7 @@ camps:
   end_date: '2019-07-01'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2019-06-syssleback.yaml
   archived: true
   active: false
@@ -85,6 +93,7 @@ camps:
   end_date: '2018-06-20'
   location: Sysslebäck
   link: ""
+  information: ""
   file: 2018-06-syssleback.yaml
   archived: true
   active: false
