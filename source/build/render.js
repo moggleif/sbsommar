@@ -46,10 +46,11 @@ function renderEventRow(e) {
   const hasExtra = e.description || e.link;
 
   const idAttr = e.id ? ` data-event-id="${escapeHtml(String(e.id))}"` : '';
+  const dateAttr = e.date ? ` data-event-date="${escapeHtml(String(e.date))}"` : '';
 
   if (hasExtra) {
     return [
-      `    <details class="event-row"${idAttr}>`,
+      `    <details class="event-row"${idAttr}${dateAttr}>`,
       '      <summary>',
       `        <span class="ev-time">${timeStr}</span>`,
       `        <span class="ev-title">${escapeHtml(e.title)}</span>`,
@@ -62,7 +63,7 @@ function renderEventRow(e) {
       .join('\n');
   } else {
     return [
-      `    <div class="event-row plain"${idAttr}>`,
+      `    <div class="event-row plain"${idAttr}${dateAttr}>`,
       `      <span class="ev-time">${timeStr}</span>`,
       `      <span class="ev-title">${escapeHtml(e.title)}</span>`,
       metaEl ? `      ${metaEl}` : '',

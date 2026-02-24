@@ -27,12 +27,12 @@
   function writeSessionIds(ids) {
     if (!ids || ids.length === 0) {
       // Delete the cookie by setting Max-Age=0
-      document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; SameSite=Strict';
+      document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; Secure; SameSite=Strict';
       return;
     }
     var value = encodeURIComponent(JSON.stringify(ids));
     document.cookie = COOKIE_NAME + '=' + value +
-      '; Path=/; Max-Age=' + MAX_AGE_SECONDS + '; SameSite=Strict';
+      '; Path=/; Max-Age=' + MAX_AGE_SECONDS + '; Secure; SameSite=Strict';
   }
 
   // ── Expiry cleanup ──────────────────────────────────────────────────────────
@@ -74,7 +74,13 @@
         link.href = 'redigera.html?id=' + encodeURIComponent(id);
         link.textContent = 'Redigera';
         link.className = 'edit-link';
-        row.appendChild(link);
+
+        // For <details> rows the link must go inside <summary> so it is
+        // visible when collapsed, not hidden in the expandable body.
+        var target = (row.tagName === 'DETAILS')
+          ? row.querySelector('summary')
+          : row;
+        (target || row).appendChild(link);
       });
     });
   }

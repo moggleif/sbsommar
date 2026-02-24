@@ -251,7 +251,7 @@ describe('renderEventRow', () => {
       link: null,
     };
     const html = renderEventRow(e);
-    assert.ok(html.includes('<details class="event-row">'), 'Expected details element');
+    assert.ok(html.includes('<details class="event-row"'), 'Expected details element');
     assert.ok(html.includes('<summary>'), 'Expected summary element');
     assert.ok(html.includes('Bring your laptop.'), 'Expected description text');
   });
@@ -268,7 +268,7 @@ describe('renderEventRow', () => {
       link: 'https://maps.example.com',
     };
     const html = renderEventRow(e);
-    assert.ok(html.includes('<details class="event-row">'), 'Expected details element');
+    assert.ok(html.includes('<details class="event-row"'), 'Expected details element');
     assert.ok(html.includes('https://maps.example.com'), 'Expected link URL');
   });
 

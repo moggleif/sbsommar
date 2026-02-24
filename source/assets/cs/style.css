@@ -531,6 +531,13 @@ textarea {
   margin: 0 0 var(--space-xs);
 }
 
+.result-note {
+  font-size: 14px;
+  color: var(--color-charcoal);
+  opacity: 0.75;
+  margin: 0 0 var(--space-sm);
+}
+
 .success-actions {
   display: flex;
   gap: var(--space-sm);
@@ -722,7 +729,7 @@ details.accordion > summary:hover { background: #9aad6a; }
 
 .form-error-msg {
   color: var(--color-charcoal);
-  background: #fdf0ec;
+  background: color-mix(in srgb, var(--color-terracotta) 10%, var(--color-white));
   border-left: 3px solid var(--color-terracotta);
   border-radius: var(--radius-sm);
   padding: 10px var(--space-sm);

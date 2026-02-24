@@ -3,10 +3,10 @@
 const express = require('express');
 const path    = require('path');
 
-const { addEventToActiveCamp, updateEventInActiveCamp } = require('./source/api/github');
-const { validateEventRequest, validateEditRequest }     = require('./source/api/validate');
-const { isEventPast }                                   = require('./source/api/edit-event');
-const { parseSessionIds, buildSetCookieHeader, mergeIds } = require('./source/api/session');
+const { addEventToActiveCamp, updateEventInActiveCamp, slugify } = require('./source/api/github');
+const { validateEventRequest, validateEditRequest }              = require('./source/api/validate');
+const { isEventPast }                                            = require('./source/api/edit-event');
+const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
 
 const app = express();
 
@@ -45,7 +45,6 @@ app.post('/add-event', (req, res) => {
 
   // Build the event ID the same way github.js does, so we can include it
   // in the session cookie before the GitHub commit completes.
-  const { slugify } = require('./source/api/github');
   const title  = String(req.body.title).trim();
   const date   = String(req.body.date).trim();
   const start  = String(req.body.start).trim();

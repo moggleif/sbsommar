@@ -74,13 +74,19 @@
 
           var titleEl = document.getElementById('result-title');
           if (titleEl) titleEl.textContent = title;
+
+          // If the user declined cookie consent, surface a note so they know
+          // they won't be able to edit the activity later from this browser.
+          var noEditNote = document.getElementById('result-no-edit-note');
+          if (noEditNote) noEditNote.hidden = consentGiven;
+
           form.hidden = true;
           result.hidden = false;
           window.scrollTo(0, 0);
         })
         .catch(function () {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Lägg till →';
+          submitBtn.textContent = 'Skicka →';
           errBox.hidden = false;
           errBox.innerHTML = '<p>Något gick fel. Kontrollera din internetanslutning och försök igen.</p>';
         });
