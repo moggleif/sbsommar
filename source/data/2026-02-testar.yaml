@@ -507,3 +507,18 @@ events:
   meta:
     created_at: 2026-02-24 16:04
     updated_at: 2026-02-24 16:04
+- id: vafasdfs-2026-02-24-1200
+  title: vafasdfs
+  date: '2026-02-24'
+  start: '12:00'
+  end: '12:32'
+  location: AndreasTältet
+  responsible: fa
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 16:09
+    updated_at: 2026-02-24 16:09
