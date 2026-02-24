@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02-§18.37–39 added).
+Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-§18.42–44 added).
 
 ---
 
@@ -386,6 +386,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 | `02-§18.17` | Edit links are injected by client-side JS; they are never part of the static HTML | 03-ARCHITECTURE.md §7 | — | `source/build/render.js` – no edit links at build time; `session.js` injects at runtime | implemented |
 | `02-§18.18` | Event rows in generated HTML carry a `data-event-id` attribute with the event's stable ID | 03-ARCHITECTURE.md §7 | RND-46, RND-47 | `source/build/render.js` – `renderEventRow()` adds `data-event-id` | covered |
 | `02-§18.19` | The "Redigera" link navigates to `/redigera.html?id={eventId}` | 03-ARCHITECTURE.md §7 | — | `session.js` – `link.href = 'redigera.html?id=' + encodeURIComponent(id)` | implemented |
+| `02-§18.42` | The "Idag" today view (`/idag.html`) shows a "Redigera" link next to each owned, non-past event — same rule as the weekly schedule | 03-ARCHITECTURE.md §7 | — | — | gap |
+| `02-§18.43` | The events JSON embedded in `idag.html` includes the event `id` field | 03-ARCHITECTURE.md §7 | — | — | gap |
+| `02-§18.44` | Event rows rendered dynamically on `idag.html` carry `data-event-id` and `data-event-date` attributes for edit-link injection | 03-ARCHITECTURE.md §7 | — | — | gap |
 | `02-§18.20` | An edit page exists at `/redigera.html` | 03-ARCHITECTURE.md §7 | — | `source/build/render-edit.js` → `public/redigera.html` | implemented |
 | `02-§18.21` | The edit page reads the `id` query param, checks the cookie, and fetches `/events.json` to pre-populate the form | 03-ARCHITECTURE.md §7 | — | `redigera.js` – `getParam()`, `readSessionIds()`, `fetch('/events.json')`, `populate()` | implemented |
 | `02-§18.22` | If the event ID is not in the cookie or the event has passed, the edit page shows an error and no form | 03-ARCHITECTURE.md §7 | — | `redigera.js` – `showError()` when ID not in cookie or `event.date < today` | implemented |
@@ -430,10 +433,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (cookie consent UX fixes — 02
 ## Summary
 
 ```text
-Total requirements:             313
+Total requirements:             316
 Covered (implemented + tested):  52
 Implemented, not tested:        230
-Gap (no implementation):         31
+Gap (no implementation):         34
 Orphan tests (no requirement):    0
 
 Note: 02-§18.41 added and covered: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
