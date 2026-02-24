@@ -205,6 +205,77 @@ Non-technical contributors must be able to:
 
 ---
 
+# 11. Feature Development Lifecycle
+
+When implementing any new feature or significant change, follow these phases in order.
+Do not skip phases. Each phase ends with a commit. <!-- CL-§11.1 -->
+
+## Phase 0 — Alignment
+
+Before writing requirements, discuss the request. <!-- CL-§11.0 -->
+
+- Read the prompt carefully. Identify anything unclear, ambiguous, or potentially wrong.
+- Check whether the request conflicts with existing requirements, architecture decisions, or data contracts.
+- Propose improvements or alternatives if you see a better approach — the user might be right, or they might not.
+- Raise technical concerns (e.g. a requested approach that conflicts with the static-site constraint).
+- Agree on the scope and approach before moving forward.
+- This phase does not end with a commit. It ends with mutual understanding.
+
+Do not rubber-stamp prompts. If something seems off, say so.
+
+## Phase 1 — Requirements
+
+Before writing any code: <!-- CL-§11.2 -->
+
+- Convert the agreed prompt into structured requirements: user requirements, event/data requirements, and site requirements.
+- Add them to `docs/02-REQUIREMENTS.md` with correct `02-§` IDs and inline comment markers.
+- Commit: `docs: add requirements for [feature]`
+
+## Phase 2 — Documentation and Traceability
+
+- Document how each requirement is or will be implemented in the relevant architecture and design docs (`docs/03-ARCHITECTURE.md`, `docs/07-DESIGN.md`, etc.). <!-- CL-§11.3 -->
+- Add new sections to docs where needed; existing docs may already cover some requirements.
+- Add all new requirements to `docs/99-traceability.md` with status `gap`. <!-- CL-§11.4 -->
+- Commit: `docs: document design and traceability for [feature]`
+
+## Phase 3 — Tests
+
+- Write tests for each testable requirement. <!-- CL-§11.5 -->
+- If a requirement cannot be tested in code (visual, UX, or inherently manual), document the reason in the traceability matrix note field and mark it as a manual/AI validation checkpoint. <!-- CL-§11.6 -->
+- Commit: `test: add tests for [feature]`
+
+## Phase 4 — Implementation
+
+- Write code to make all tests pass. <!-- CL-§11.7 -->
+- Commit: `feat: implement [feature]`
+
+## Phase 5 — Review and Traceability Update
+
+- Verify that requirements, documentation, tests, and implementation are consistent and complete. <!-- CL-§11.8 -->
+- Update the traceability matrix: set final statuses, fill in implementation references, link tests. <!-- CL-§11.9 -->
+- Update summary counts in the matrix. <!-- CL-§11.10 -->
+- Commit: `docs: traceability update for [feature]`
+
+## Phase 6 — Final Check
+
+Perform a structured review from multiple perspectives. <!-- CL-§11.11 -->
+Loop through this list at least twice — the second pass catches what the first missed.
+
+Check from each of these perspectives in turn:
+
+- **Developer**: Is the code clean, consistent with existing patterns, and maintainable? Are there edge cases unhandled? Is anything over-engineered or under-explained?
+- **User** (a camp participant): Can they complete the task? Are labels, errors, and confirmations clear? Is the Swedish correct and natural?
+- **Beginner developer**: Would someone new to this codebase understand what was added? Are there confusing names, implicit assumptions, or missing comments where needed?
+- **Beginner user**: Would a non-technical person understand the form, the feedback, and the flow? Is anything intimidating or unclear?
+- **First-time visitor**: Does the feature feel coherent with the rest of the site? Does anything feel out of place or inconsistent in tone, style, or layout?
+- **AI self-review**: Step back and ask — did I miss anything? Did I take shortcuts? Did I follow all constraints? Is there anything I would do differently?
+
+After the second pass, fix any issues found, then commit: `fix: post-review improvements for [feature]`
+
+If no issues are found in the second pass, the commit may be skipped.
+
+---
+
 # Final Rule
 
 If something adds complexity without clear value, it should not be added.
