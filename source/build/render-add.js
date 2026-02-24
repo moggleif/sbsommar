@@ -1,11 +1,11 @@
 'use strict';
 
 const { escapeHtml, toDateString } = require('./render');
-const { pageNav } = require('./layout');
+const { pageNav, pageFooter } = require('./layout');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
-function renderAddPage(camp, locations, apiUrl) {
+function renderAddPage(camp, locations, apiUrl, footerHtml = '') {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -102,6 +102,7 @@ ${locationOptions}
 
   <script src="cookie-consent.js"></script>
   <script src="lagg-till.js"></script>
+${pageFooter(footerHtml)}
 </body>
 </html>
 `;

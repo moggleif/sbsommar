@@ -1,6 +1,6 @@
 'use strict';
 
-const { pageNav } = require('./layout');
+const { pageNav, pageFooter } = require('./layout');
 const { escapeHtml, toDateString } = require('./utils');
 
 const MONTHS_SV = [
@@ -22,7 +22,7 @@ function formatDateRange(startStr, endStr) {
   return `${formatShortDate(startStr)} – ${formatShortDate(endStr)} ${year}`;
 }
 
-function renderArkivPage(allCamps) {
+function renderArkivPage(allCamps, footerHtml = '') {
   const camps = [...allCamps]
     .filter((c) => c.archived === true)
     .sort((a, b) => toDateString(b.start_date).localeCompare(toDateString(a.start_date)));
@@ -84,6 +84,7 @@ ${items}
   </div>
 
   <script src="arkiv.js"></script>
+${pageFooter(footerHtml)}
 </body>
 </html>`;
 }

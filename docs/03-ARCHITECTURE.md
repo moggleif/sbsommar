@@ -159,6 +159,65 @@ Dates are formatted in Swedish: `D månadsnamn YYYY` (e.g. "22 juni 2025").
 
 ---
 
+## 4b. Shared Site Footer
+
+Every page produced by the build includes a `<footer class="site-footer">` element
+at the bottom of `<body>`.
+
+### Content source
+
+Footer content lives in `source/content/footer.md`. Non-technical contributors
+can edit this file to change the footer on all pages without touching any template
+or render function.
+
+### Build-time rendering
+
+`source/build/build.js`:
+
+1. Reads `source/content/footer.md` at the start of the build, before rendering
+   any page.
+2. Converts the Markdown to HTML using `convertMarkdown()` from
+   `source/build/render-index.js` (the same pipeline used for homepage sections).
+3. If the file does not exist, `footerHtml` is set to an empty string — no error,
+   no crash.
+4. Passes `footerHtml` as an argument to every render function.
+
+### Render functions
+
+Each render function (`renderSchedulePage`, `renderTodayPage`, `renderIdagPage`,
+`renderAddPage`, `renderEditPage`, `renderArkivPage`, `renderIndexPage`) accepts
+`footerHtml` as its last argument. It calls `pageFooter(footerHtml)` from
+`source/build/layout.js` and places the result immediately before `</body>`.
+
+`pageFooter(footerHtml)`:
+
+- Returns `<footer class="site-footer">…</footer>` when `footerHtml` is non-empty.
+- Returns an empty string when `footerHtml` is empty (file-missing fallback).
+
+### No duplication
+
+No render function contains literal footer text. The Markdown file is the single
+source of truth. Updating `footer.md` and rebuilding changes the footer on every
+page simultaneously.
+
+### Files changed
+
+| File | Change |
+| --- | --- |
+| `source/content/footer.md` | New file — footer content in Markdown |
+| `source/build/layout.js` | Add `pageFooter(footerHtml)` |
+| `source/build/build.js` | Load `footer.md`, convert to HTML, pass to all render calls |
+| `source/build/render.js` | Accept `footerHtml`; inject via `pageFooter()` |
+| `source/build/render-today.js` | Accept `footerHtml`; inject via `pageFooter()` |
+| `source/build/render-idag.js` | Accept `footerHtml`; inject via `pageFooter()` |
+| `source/build/render-add.js` | Accept `footerHtml`; inject via `pageFooter()` |
+| `source/build/render-edit.js` | Accept `footerHtml`; inject via `pageFooter()` |
+| `source/build/render-arkiv.js` | Accept `footerHtml`; inject via `pageFooter()` |
+| `source/build/render-index.js` | Accept `footerHtml`; inject via `pageFooter()` |
+| `source/assets/cs/style.css` | Add `.site-footer` styles |
+
+---
+
 ## 5. Rendering Logic
 
 At build time:

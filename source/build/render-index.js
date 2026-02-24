@@ -1,6 +1,6 @@
 'use strict';
 
-const { pageNav } = require('./layout');
+const { pageNav, pageFooter } = require('./layout');
 
 /**
  * Converts inline Markdown (images, links, bold) to HTML.
@@ -149,7 +149,7 @@ function convertMarkdown(md, headingOffset = 0, collapsible = false) {
  * @param {string|null} opts.heroAlt  - alt text for hero image
  * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
  */
-function renderIndexPage({ heroSrc, heroAlt, sections }) {
+function renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml = '') {
   const heroHtml = heroSrc
     ? `\n  <div class="hero">\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img">\n  </div>`
     : '';
@@ -187,6 +187,7 @@ ${sectionNavItems}
   <div class="content">
 ${contentSections}
   </div>
+${pageFooter(footerHtml)}
 </body>
 </html>
 `;

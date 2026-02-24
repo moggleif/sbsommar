@@ -1,13 +1,13 @@
 'use strict';
 
 const { escapeHtml, toDateString } = require('./render');
-const { pageNav } = require('./layout');
+const { pageNav, pageFooter } = require('./layout');
 
 /**
  * Renders the "Idag" page – today's schedule in the standard site layout.
  * All events are embedded as JSON; client-side JS filters to the current day.
  */
-function renderIdagPage(camp, events) {
+function renderIdagPage(camp, events, footerHtml = '') {
   const campName = escapeHtml(camp.name);
 
   const eventsJson = JSON.stringify(
@@ -43,6 +43,7 @@ ${pageNav('idag.html')}
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Idag'; window.__EMPTY_CLASS__ = 'intro'; window.__SHOW_FOOTER__ = false;</script>
   <script src="events-today.js"></script>
   <script src="session.js"></script>
+${pageFooter(footerHtml)}
 </body>
 </html>
 `;

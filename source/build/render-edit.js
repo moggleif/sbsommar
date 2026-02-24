@@ -1,7 +1,7 @@
 'use strict';
 
 const { escapeHtml, toDateString } = require('./render');
-const { pageNav } = require('./layout');
+const { pageNav, pageFooter } = require('./layout');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
@@ -13,7 +13,7 @@ function editApiUrl(addUrl) {
   return addUrl.replace(/\/add-event$/, '/edit-event');
 }
 
-function renderEditPage(camp, locations, apiUrl) {
+function renderEditPage(camp, locations, apiUrl, footerHtml = '') {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -125,6 +125,7 @@ ${locationOptions}
   </div>
 
   <script src="redigera.js"></script>
+${pageFooter(footerHtml)}
 </body>
 </html>
 `;

@@ -92,7 +92,14 @@ async function main() {
   cleanOutputDir(OUTPUT_DIR);
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
-  const scheduleHtml = renderSchedulePage(camp, events);
+  // ── Load footer from content/footer.md ────────────────────────────────────
+  // Falls back to empty string if the file is missing — pages render without a footer.
+  const footerMdPath = path.join(CONTENT_DIR, 'footer.md');
+  const footerHtml = fs.existsSync(footerMdPath)
+    ? convertMarkdown(fs.readFileSync(footerMdPath, 'utf8'))
+    : '';
+
+  const scheduleHtml = renderSchedulePage(camp, events, footerHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
@@ -100,23 +107,23 @@ async function main() {
     .replace(/<\?xml[^?]*\?>\s*/g, '')
     .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
-  const todayHtml = renderTodayPage(camp, events, qrSvg);
+  const todayHtml = renderTodayPage(camp, events, qrSvg, footerHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
   console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
 
-  const idagHtml = renderIdagPage(camp, events);
+  const idagHtml = renderIdagPage(camp, events, footerHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
   console.log(`Built: public/idag.html  (${events.length} events)`);
 
-  const addHtml = renderAddPage(camp, locations, process.env.API_URL);
+  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL));
+  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 
-  const arkivHtml = renderArkivPage(camps);
+  const arkivHtml = renderArkivPage(camps, footerHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'arkiv.html'), arkivHtml, 'utf8');
   const archivedCount = camps.filter((c) => c.archived === true).length;
   console.log(`Built: public/arkiv.html  (${archivedCount} archived camps)`);
@@ -172,7 +179,7 @@ async function main() {
     })
     .filter(Boolean);
 
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections });
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 
