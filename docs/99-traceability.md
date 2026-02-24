@@ -410,8 +410,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§18.38` | The cookie consent banner must appear directly after the submit button, not at the top of the page | 03-ARCHITECTURE.md §7 | — (manual: inspect DOM position of banner after form submit) | `source/assets/js/client/cookie-consent.js` – `insertBefore(banner, submitBtn.nextSibling)` | implemented |
 | `02-§18.39` | The add-activity form has no owner name field; event ownership is established entirely via session cookie | 03-ARCHITECTURE.md §7 | — (manual: confirm no ownerName input in rendered lagg-till.html) | `source/build/render-add.js` – `ownerName` field removed from form | implemented |
 | `02-§18.40` | The add-activity submit handler must only reference form elements that exist in the HTML form; accessing a missing element via `form.elements` returns `undefined` and calling `.value` on it throws a TypeError that aborts submission | 03-ARCHITECTURE.md §7 | — (no automated test: `form.elements` is a browser DOM API not available in Node.js; manual: open `lagg-till.html` in a browser and submit the form — confirm it submits without TypeError and the consent banner appears and responds correctly) | `source/assets/js/client/lagg-till.js` – `ownerName` line removed from `JSON.stringify` body | implemented |
-| `02-§18.44` | The edit form must submit to the `/edit-event` endpoint; the build derives the edit URL from `API_URL` by replacing a trailing `/add-event` with `/edit-event`, falling back to `/edit-event` | 03-ARCHITECTURE.md §7 | BUILD-01 | `source/build/build.js` – derive edit URL from `API_URL` | gap |
-| `02-§18.45` | The edit form fetch must use `credentials: 'include'` so the `sb_session` cookie is sent to the cross-origin API | 03-ARCHITECTURE.md §7 | — (manual: open `redigera.html` in a browser, submit an edit, and verify the request carries the cookie and returns HTTP 200) | `source/assets/js/client/redigera.js` – change `credentials` to `'include'` | gap |
+| `02-§18.44` | The edit form must submit to the `/edit-event` endpoint; the build derives the edit URL from `API_URL` by replacing a trailing `/add-event` with `/edit-event`, falling back to `/edit-event` | 03-ARCHITECTURE.md §7 | BUILD-01..04 | `source/build/render-edit.js` – `editApiUrl()`; `source/build/build.js` – passes `editApiUrl(process.env.API_URL)` | covered |
+| `02-§18.45` | The edit form fetch must use `credentials: 'include'` so the `sb_session` cookie is sent to the cross-origin API | 03-ARCHITECTURE.md §7 | — (manual: open `redigera.html` in a browser, submit an edit, and verify the request carries the cookie and returns HTTP 200) | `source/assets/js/client/redigera.js` – `credentials: 'include'` | implemented |
 | `02-§19.1` | When validation passes and submission begins, all form inputs and the submit button are immediately disabled | 03-ARCHITECTURE.md §8 | ADD-02; manual: press Skicka and confirm all inputs are disabled before the modal opens | `source/assets/js/client/lagg-till.js` – `lock()` sets `fieldset.disabled = true` and `submitBtn.disabled = true` | implemented |
 | `02-§19.2` | Disabled form elements are visually distinct (reduced opacity / grayed out) | 03-ARCHITECTURE.md §8 | — (manual: confirm visual appearance of disabled fieldset) | `source/assets/cs/style.css` – `.event-form fieldset:disabled { opacity: 0.5 }` | implemented |
 | `02-§19.3` | The consent banner is shown while the form is locked, inserted after the disabled submit button | 03-ARCHITECTURE.md §8 | — (manual: confirm banner position when form is locked and consent not yet given) | `source/assets/js/client/cookie-consent.js` – inserts after submit button which is outside fieldset, so banner buttons remain enabled | implemented |
@@ -436,12 +436,13 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 
 ```text
 Total requirements:             318
-Covered (implemented + tested):  54
-Implemented, not tested:        231
-Gap (no implementation):         33
+Covered (implemented + tested):  58
+Implemented, not tested:        232
+Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
-Note: 02-§18.44 and 02-§18.45 added (gap): edit form endpoint and credentials fix.
+Note: 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
+02-§18.45 implemented (manual): edit form credentials: 'include' for cross-origin API.
 02-§18.41 added and covered: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
 SES-14 and SES-15 verify Domain= is included/omitted correctly.
 Previous: 17 requirements added for add-activity submit UX flow (02-§19.1–19.17).
