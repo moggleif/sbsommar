@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-23.
+Audit date: 2026-02-24.
 
 ---
 
@@ -196,16 +196,182 @@ Audit date: 2026-02-23.
 | `CL-§5.5` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | VLD-04..16 (server-side only) | — (validation only in API layer; manually edited YAML is not validated at build time) | gap |
 | `CL-§9.1` | Built output lives in `/public` | 04-OPERATIONS.md (System Overview) | — | `source/build/build.js` – `OUTPUT_DIR = …/public` | implemented |
 | `CL-§9.2` | GitHub Actions builds and validates; deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml`, `.github/workflows/deploy.yml` | implemented |
+| `CL-§9.3` | Deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/deploy.yml` – triggered only on push to `main` after CI passes | implemented |
+| `CL-§9.4` | For data-only commits (YAML files only), CI runs build only — lint and tests are skipped | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – data-only path check | implemented |
+| `CL-§10.1` | Never push directly to `main` | 01-CONTRIBUTORS.md | — | Enforced by branch protection; described in contributor guide | implemented |
+| `CL-§10.2` | At the start of every session, run `git checkout main && git pull && git checkout -b branch-name` before any changes | 01-CONTRIBUTORS.md | — | Developer discipline; documented in `01-CONTRIBUTORS.md` | implemented |
+| `CL-§10.3` | Branch names must be descriptive | 01-CONTRIBUTORS.md | — | Developer convention; no technical enforcement | implemented |
+| `CL-§10.4` | After a branch is merged and pulled via `main`, delete the local branch | 01-CONTRIBUTORS.md | — | Developer discipline; no technical enforcement | implemented |
+| `CL-§1.2` | No backend server is required to view any page | 03-ARCHITECTURE.md §7 | — | `source/build/build.js` – all pages are pre-rendered to `public/` | implemented |
+| `CL-§1.4` | JavaScript usage is minimal | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – only three small client scripts exist | implemented |
+| `CL-§1.5` | Architecture is content-first: content is authored separately from layout | 03-ARCHITECTURE.md §6 | — | `source/content/*.md` (content) vs `source/build/` (layout) | implemented |
+| `CL-§1.6` | Content, layout, and styling are clearly separated | 03-ARCHITECTURE.md §6 | — | `source/content/` (Markdown), `source/build/` (templates), `source/assets/cs/` (CSS) | implemented |
+| `CL-§1.7` | The site is maintainable by non-developers | 01-CONTRIBUTORS.md | — | Content editable via Markdown + YAML; no build tools needed for content changes | implemented |
+| `CL-§1.8` | Pages load fast | 03-ARCHITECTURE.md §7 | — | Static HTML, no runtime framework, CSS custom properties only | implemented |
+| `CL-§1.9` | Clarity is preferred over cleverness in all implementation decisions | 03-ARCHITECTURE.md §7 | — | Principle; assessed through code review | implemented |
+| `CL-§2.1` | Final build output is static HTML, CSS, and JS | 03-ARCHITECTURE.md §7 | SNP-01 | `source/build/build.js` – writes to `public/` | covered |
+| `CL-§2.2` | Main page sections are authored in Markdown | 03-ARCHITECTURE.md §6 | RNI-01..38 | `source/build/render-index.js` – `convertMarkdown()` | covered |
+| `CL-§2.3` | Event data has a single source of truth; all views derive from it | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml`; `source/build/build.js` reads exclusively from there | implemented |
+| `CL-§2.4` | Layout components are reused across pages | 03-ARCHITECTURE.md §6 | — | `source/build/layout.js` – shared `pageHeader()`, `pageNav()`, `pageFooter()` | implemented |
+| `CL-§2.5` | Markup is not duplicated between pages | 03-ARCHITECTURE.md §6 | — | `source/build/layout.js` – single source of shared layout | implemented |
+| `CL-§2.6` | Heavy runtime dependencies are avoided | 03-ARCHITECTURE.md §7 | — | `package.json` – no client-side framework dependencies | implemented |
+| `CL-§2.7` | The site is not a single-page application | 03-ARCHITECTURE.md §7 | — | Each page is a separate `.html` file; no client-side routing | implemented |
+| `CL-§2.8` | No database is used | 03-ARCHITECTURE.md §1, §7 | — | YAML files and Git are the only storage layer | implemented |
+| `CL-§2.9` | No client-side rendering framework is used | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – plain vanilla JS only | implemented |
+| `CL-§2.10` | Custom complex build systems must not be created unless clearly justified | 03-ARCHITECTURE.md §7 | — | `source/build/build.js` – straightforward Node.js script, no custom bundler | implemented |
+| `CL-§2.11` | Standard, well-established static site tooling is preferred | 03-ARCHITECTURE.md §7 | — | Principle; current toolchain is plain Node.js + YAML + Markdown | implemented |
+| `CL-§3.1` | The main page is built from modular, independently reorderable sections | 03-ARCHITECTURE.md §6 | — | `source/content/*.md` sections; `source/build/render-index.js` assembles them | implemented |
+| `CL-§3.3` | Sections can be reordered or edited without modifying layout code | 03-ARCHITECTURE.md §6 | — | `source/build/render-index.js` – section order driven by config, not hardcoded | implemented |
+| `CL-§3.4` | All special pages share the same layout structure | 03-ARCHITECTURE.md §6 | — | `source/build/layout.js` – shared layout used by all pages except Today/Display view | implemented |
+| `CL-§4.2` | Event data powers the weekly schedule, daily schedule, Today view, RSS feed, and future archive pages | 03-ARCHITECTURE.md §1, §5 | — | `source/build/build.js` – single load feeds all render targets | implemented |
+| `CL-§4.3` | No event is defined in more than one place | 03-ARCHITECTURE.md §1 | — | One YAML file per camp; no duplication mechanism exists | implemented |
+| `CL-§4.4` | Event sorting is deterministic | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` sorts by date + start | covered |
+| `CL-§4.5` | Required event fields are validated before data is accepted | 05-DATA_CONTRACT.md §3 | VLD-04..11 | `source/api/validate.js` – `validateEventRequest()` | covered |
+| `CL-§5.4` | Build fails if any linter reports errors | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – lint step gates the build | implemented |
+| `CL-§5.6` | Event data is validated for required fields | 05-DATA_CONTRACT.md §3 | VLD-04..11 | `source/api/validate.js` – `validateEventRequest()` | covered |
+| `CL-§5.7` | Event data is validated for valid dates | 05-DATA_CONTRACT.md §4 | VLD-12..15 | `source/api/validate.js` – date format check (range check missing — see `05-§4.1`) | implemented |
+| `CL-§5.8` | Event data is validated: end time must be after start time | 05-DATA_CONTRACT.md §4 | VLD-16..20 | `source/api/validate.js` – `end <= start` check | covered |
+| `CL-§5.9` | Event data is validated for duplicate identifiers | 05-DATA_CONTRACT.md §6 | — | — (no uniqueness check before committing — see `05-§6.1`) | gap |
+| `CL-§5.10` | The site builds locally without errors | 04-OPERATIONS.md (Local Development) | — | `npm run build` on developer machine | implemented |
+| `CL-§5.11` | The site builds in GitHub Actions without errors | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – build step | implemented |
+| `CL-§5.12` | CI fails if the build fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – build step failure blocks merge | implemented |
+| `CL-§6.1` | Build runs locally before merge | 04-OPERATIONS.md (Local Development) | — | Developer discipline + pre-commit hook | implemented |
+| `CL-§6.2` | Lint passes before merge | 04-OPERATIONS.md (CI/CD Workflows) | — | CI lint step blocks merge on failure | implemented |
+| `CL-§6.3` | Data validation passes before merge | 05-DATA_CONTRACT.md §3–§6 | — | — (build-time YAML validation not implemented — see `CL-§5.5`) | gap |
+| `CL-§6.4` | Automated minimal tests exist for event sorting and date handling | — | RND-01..45 | `tests/render.test.js` | covered |
+| `CL-§6.5` | Screenshot comparison tests exist for schedule pages | — | SNP-01..06 | `tests/snapshot.test.js` | covered |
+| `CL-§7.1` | JavaScript footprint is minimal | 03-ARCHITECTURE.md §7 | — | Three small client scripts; no framework | implemented |
+| `CL-§7.2` | No unused CSS is shipped | 07-DESIGN.md §7 | — | Hand-written CSS with no unused rules (not enforced by tooling) | implemented |
+| `CL-§7.3` | No large blocking assets are loaded | 03-ARCHITECTURE.md §7 | — | No large scripts or stylesheets; images use `srcset` | implemented |
+| `CL-§7.4` | Images are optimised | 07-DESIGN.md §8 | — | `07-§8.5` requires WebP + srcset; not confirmed implemented | gap |
+| `CL-§7.5` | No runtime hydration framework is used | 03-ARCHITECTURE.md §7 | — | No framework; plain JS only | implemented |
+| `CL-§7.6` | The site feels instant to load | 03-ARCHITECTURE.md §7 | — | Static HTML + minimal JS + optimised CSS | implemented |
+| `CL-§8.1` | Non-technical contributors can edit text content in Markdown without touching layout files | 01-CONTRIBUTORS.md | — | `source/content/*.md` editable directly; layout is separate | implemented |
+| `CL-§8.2` | Non-technical contributors can add new events via YAML | 01-CONTRIBUTORS.md | — | `source/data/*.yaml` editable directly | implemented |
+| `CL-§8.3` | Non-technical contributors can add images without editing layout files | 01-CONTRIBUTORS.md | — | Images referenced from Markdown content files | implemented |
+| `CL-§8.4` | Layout files do not need to be edited for content changes | 03-ARCHITECTURE.md §6 | — | Content-layout separation is architectural; `source/build/` is never touched for content edits | implemented |
+| `02-§4.10` | Weekly schedule groups activities by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `groupAndSortEvents()` | covered |
+| `02-§4.11` | Daily view shows activities for a single selected day | 03-ARCHITECTURE.md §5 | — | — (page exists but currently shows display mode, not a per-day list — see `02-§2.3`) | gap |
+| `02-§4.12` | Daily view shows the same fields as the weekly view | 05-DATA_CONTRACT.md §3 | — | — | gap |
+| `02-§4.13` | Today/Display view has no day navigation; it always shows today | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day navigation rendered | implemented |
+| `02-§5.2` | Empty fields are omitted from the detail view; no blank rows appear | 05-DATA_CONTRACT.md §3 | RND-33..38 | `source/build/render.js` – `eventExtraHtml()` guards each optional field | covered |
+| `02-§5.3` | The `owner` and `meta` fields are never shown in any public view | 05-DATA_CONTRACT.md §3.3 | — | `source/build/render.js` – neither field is referenced in render output | implemented |
+| `02-§8.3` | Locations must be selected from a predefined list | 03-ARCHITECTURE.md §6 | — | `source/build/render-add.js` – `<select>` populated from `local.yaml` | implemented |
+| `02-§8.4` | Participants cannot modify the location list | 03-ARCHITECTURE.md §6 | — | No form UI for adding locations; enforced by absence | implemented |
+| `02-§11.3` | The schedule remains readable when multiple activities overlap | 07-DESIGN.md §6 | — | CSS layout handles overlap; no exclusion logic in render | implemented |
+| `02-§12.3` | All event submissions are permanently recorded in Git history as a full audit trail | 03-ARCHITECTURE.md §3 | — | `source/api/github.js` – every submission creates a Git commit via the Contents API | implemented |
+| `02-§15.2` | The RSS feed reflects the current state of the schedule | — (no implementation doc) | — | — | gap |
+| `02-§16.4` | The archive must be usable and complete, not a placeholder | 03-ARCHITECTURE.md §4 | — | — (archive page not yet built) | gap |
+| `02-§17.3` | The site is readable on shared display screens | 07-DESIGN.md §6 | — | `source/build/render-today.js` – display mode view; `source/assets/cs/style.css` | implemented |
+| `05-§1.4` | The `file` field in `camps.yaml` references a YAML file in `source/data/` | 06-EVENT_DATA_MODEL.md §1 | — | `source/build/build.js` – loads camp file via `camps.yaml` `file` field | implemented |
+| `05-§1.5` | The camp `id` is permanent and must never change after the camp is first created | 06-EVENT_DATA_MODEL.md §3 | — | — (no enforcement; enforced by convention and docs) | implemented |
+| `05-§3.2` | Each camp file's `camp:` block must include `id`, `name`, `location`, `start_date`, and `end_date` | 06-EVENT_DATA_MODEL.md §3 | — | `source/build/build.js` – reads and uses all five fields; no build-time schema validator | implemented |
+| `05-§3.3` | The `owner` and `meta` fields are for internal use only and must never appear in any public view | 06-EVENT_DATA_MODEL.md §5, §6 | — | `source/build/render.js` – neither field is referenced in render output | implemented |
+| `05-§4.4` | `end` must be `null` or a valid `"HH:MM"` string | 06-EVENT_DATA_MODEL.md §4 | — | — (`source/api/validate.js` checks end ordering but not the null-or-HH:MM constraint explicitly) | gap |
+| `05-§4.5` | All times are local; no timezone handling | 06-EVENT_DATA_MODEL.md §4 | — | No timezone conversion anywhere in the codebase | implemented |
+| `CL-§2.12` | Data file names are never hardcoded; active camp and file paths are always derived from `camps.yaml` | 03-ARCHITECTURE.md §2 | — | `source/build/build.js` – reads `camps.yaml` first; `source/api/github.js` – same | implemented |
+| `CL-§5.13` | Markdown linting runs on every commit via pre-commit hook; commit is blocked if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.githooks/` pre-commit hook – `npm run lint:md`; `.markdownlint.json` config | implemented |
+| `07-§1.1` | The design has a warm, welcoming, outdoorsy feel — not corporate or sterile | 07-DESIGN.md §1 | — | Assessed through visual review | implemented |
+| `07-§1.2` | Earth tones and natural colors are used throughout | 07-DESIGN.md §2 | — | Color palette defined in `source/assets/cs/style.css` `:root` | implemented |
+| `07-§1.3` | Design is clean and readable; content comes first | 07-DESIGN.md §1 | — | Assessed through visual review | implemented |
+| `07-§1.4` | Design is fast and lightweight with no decorative excess | 07-DESIGN.md §1 | — | No decorative assets; minimal CSS | implemented |
+| `07-§2.1` | Primary accent color is Terracotta `#C76D48` (buttons, links, highlights) | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--color-terracotta: #C76D48` | implemented |
+| `07-§2.2` | Secondary accent color is Sage green `#ADBF77` (section headers, tags) | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--color-sage: #ADBF77` | implemented |
+| `07-§2.3` | Page background color is Cream `#F5EEDF` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--color-cream: #F5EEDF` | implemented |
+| `07-§2.4` | Main heading color is Navy `#192A3D` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--color-navy: #192A3D` | implemented |
+| `07-§2.5` | Body text color is Charcoal `#3B3A38` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--color-charcoal: #3B3A38` | implemented |
+| `07-§2.6` | Card and contrast surface color is White `#FFFFFF` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--color-white: #FFFFFF` | implemented |
+| `07-§2.7` | No bright or saturated colors are used outside the defined palette | 07-DESIGN.md §2 | — | Enforced by design convention; not linted | implemented |
+| `07-§3.1` | Headings use `system-ui, -apple-system, sans-serif` (or a single humanist web font if added) | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-sans` token | implemented |
+| `07-§3.2` | Body text uses the same sans-serif stack | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-sans` token applied to body | implemented |
+| `07-§3.3` | Pull quotes and callouts use Georgia, serif | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-serif: Georgia, serif` | implemented |
+| `07-§3.4` | H1 is 40px, weight 700, color Navy `#192A3D` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-size-h1: 40px` | implemented |
+| `07-§3.5` | H2 is 35px, weight 700, color Navy `#192A3D` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-size-h2: 35px` | implemented |
+| `07-§3.6` | H3 is 30px, weight 700, color Navy `#192A3D` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-size-h3: 30px` | implemented |
+| `07-§3.7` | Body text is 16px, weight 400, color Charcoal `#3B3A38` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-size-base: 16px` | implemented |
+| `07-§3.8` | Small/meta text is 14px, weight 400, color Charcoal | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-size-small: 14px` | implemented |
+| `07-§3.9` | Pull quote text is 25px, weight 600, Georgia serif, italic | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-size-pullquote: 25px` | implemented |
+| `07-§3.10` | Nav links are 12px, weight 700, uppercase, letter-spaced | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--font-size-nav: 12px` | implemented |
+| `07-§3.11` | Body text line height is `1.65` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--line-height-body: 1.65` | implemented |
+| `07-§4.1` | Wide container max-width is `1290px` (header, hero, full layout) | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--container-wide: 1290px` | implemented |
+| `07-§4.2` | Narrow container max-width is `750px` (reading sections, articles) | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--container-narrow: 750px` | implemented |
+| `07-§4.3` | Containers are centered with `margin: 0 auto` and horizontal padding on small screens | 07-DESIGN.md §4 | — | `source/assets/cs/style.css` | implemented |
+| `07-§4.4` | Spacing base unit is `8px`; all spacing values are multiples of it | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – spacing tokens at `:root` | implemented |
+| `07-§4.5` | `space-xs` = `8px` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--space-xs: 8px` | implemented |
+| `07-§4.6` | `space-sm` = `16px` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--space-sm: 16px` | implemented |
+| `07-§4.7` | `space-md` = `24px` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--space-md: 24px` | implemented |
+| `07-§4.8` | `space-lg` = `40px` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--space-lg: 40px` | implemented |
+| `07-§4.9` | `space-xl` = `64px` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--space-xl: 64px` | implemented |
+| `07-§4.10` | `space-xxl` = `96px` | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – `--space-xxl: 96px` | implemented |
+| `07-§4.11` | Desktop grid: up to 3 columns for cards and testimonials | 07-DESIGN.md §4 | — | `source/assets/cs/style.css` | implemented |
+| `07-§4.12` | Tablet grid: 2 columns | 07-DESIGN.md §4 | — | `source/assets/cs/style.css` | implemented |
+| `07-§4.13` | Mobile grid: 1 column | 07-DESIGN.md §4 | — | `source/assets/cs/style.css` | implemented |
+| `07-§4.14` | Grid uses CSS Grid; no grid framework | 07-DESIGN.md §4 | — | `source/assets/cs/style.css` – CSS Grid used | implemented |
+| `07-§5.1` | Desktop breakpoint: > 1000px — full layout, side-by-side columns | 07-DESIGN.md §5 | — | `source/assets/cs/style.css` | implemented |
+| `07-§5.2` | Tablet breakpoint: 690–999px — 2-column grids, condensed header | 07-DESIGN.md §5 | — | `source/assets/cs/style.css` | implemented |
+| `07-§5.3` | Mobile breakpoint: < 690px — single column, stacked layout | 07-DESIGN.md §5 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.1` | Header is full-width, fixed or sticky at top | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.2` | Header height is `120px` desktop, `70px` mobile | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.3` | Header background is white or cream with a subtle bottom border or shadow | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.4` | Logo is on the left; nav links on the right | 07-DESIGN.md §6 | — | `source/build/layout.js` – `pageHeader()` HTML structure | implemented |
+| `07-§6.5` | Nav links are uppercase, `12px`, `700` weight, `letter-spacing: 0.08em` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.6` | Active/hover nav state uses terracotta underline or color shift | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.7` | Mobile header uses a hamburger menu (full-screen or dropdown) | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | gap |
+| `07-§6.8` | Hero section has a large background image (Klarälven river / camp landscape) | 07-DESIGN.md §6 | — | `source/build/render-index.js` – `extractHeroImage()` | implemented |
+| `07-§6.9` | Hero overlay text shows camp name, dates, and a short tagline | 07-DESIGN.md §6 | — | `source/build/render-index.js` | implemented |
+| `07-§6.10` | Hero has one or two CTA buttons | 07-DESIGN.md §6 | — | `source/build/render-index.js` | implemented |
+| `07-§6.11` | Hero image uses `object-fit: cover` and is responsive | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.12` | Button minimum height is `40px` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.13` | Button padding is `10px 24px` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.14` | Button border-radius is `4px` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` – `--radius-sm: 4px` | implemented |
+| `07-§6.15` | Primary button: background `#C76D48`, white text, no border | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.16` | Secondary button: border `#C76D48`, text `#C76D48`, transparent background | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.17` | Button hover darkens background ~10% with `200ms ease` transition | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.18` | Button font is body stack, weight `700`, size `14–16px` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.19` | Cards have white `#FFFFFF` background | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.20` | Cards have `border-radius: 6px` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` – `--radius-md: 6px` | implemented |
+| `07-§6.21` | Cards have box-shadow `0 4px 12px rgba(0,0,0,0.04)` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` – `--shadow-card` | implemented |
+| `07-§6.22` | Card padding is `24px` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.23` | Testimonial cards show a circular profile image (`border-radius: 50%`, ~`60px`) | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.24` | Accordion header background is sage green `#ADBF77`, dark text | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.25` | Accordion body background is cream `#F5EEDF` or white | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.26` | Accordion toggle icon is `+`/`−` or a chevron | 07-DESIGN.md §6 | — | `source/build/render.js` – `<details>/<summary>` default disclosure triangle | implemented |
+| `07-§6.27` | Accordion open/close is animated with CSS `max-height` transition | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.28` | Accordion uses no JavaScript framework — plain JS or CSS-only | 07-DESIGN.md §6 | — | `source/build/render.js` – `<details>/<summary>` (native HTML) | implemented |
+| `07-§6.29` | Section headings (H2) have a short decorative line or color block underneath | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.30` | Alternatively, a sage-green label appears above the heading at `12px` uppercase | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
+| `07-§6.31` | Schedule event rows show a bold start time and a lighter end time | 07-DESIGN.md §6 | — | `source/build/render.js` – `renderEventRow()`; `source/assets/cs/style.css` | implemented |
+| `07-§6.32` | Location is shown as small text below the time in event rows | 07-DESIGN.md §6 | — | `source/build/render.js` – `renderEventRow()` | implemented |
+| `07-§6.33` | Event rows may have an optional colored left border to indicate activity type | 07-DESIGN.md §6 | — | — (not implemented; no activity type categorization exists) | gap |
+| `07-§7.2` | CSS is written for a component only once its HTML structure exists; no speculative CSS | 07-DESIGN.md §7 | — | Convention; assessed through code review | implemented |
+| `07-§7.3` | CSS is organized in one main file: reset → tokens → base → layout → components → utilities | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` | implemented |
+| `07-§7.4` | No CSS preprocessor is used; CSS custom properties are sufficient | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – plain CSS with custom properties | implemented |
+| `07-§7.5` | No CSS framework is used; CSS is hand-written and minimal | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – no framework imports | implemented |
+| `07-§8.1` | Photography is natural and warm: river, forest, camp activities, families | 07-DESIGN.md §8 | — | `source/content/` – image references; assessed through visual review | implemented |
+| `07-§8.2` | Stock photography is avoided; real photos from actual camps are preferred | 07-DESIGN.md §8 | — | Assessed through visual review | implemented |
+| `07-§8.3` | Hero image is landscape format, high resolution, dark enough for text overlay | 07-DESIGN.md §8 | — | `source/build/render-index.js` – `extractHeroImage()` | implemented |
+| `07-§8.4` | Testimonial avatars are portrait photos, cropped square, displayed circular | 07-DESIGN.md §8 | — | `source/assets/cs/style.css` – `--radius-full: 50%` | implemented |
+| `07-§8.5` | All images are optimised: responsive `srcset`, WebP format with JPEG fallback | 07-DESIGN.md §8 | — | — (not confirmed; images may not use srcset or WebP) | gap |
+| `07-§9.1` | Color contrast meets WCAG AA minimum `4.5:1` for body text | 07-DESIGN.md §9 | — | Charcoal `#3B3A38` on Cream `#F5EEDF` passes WCAG AA; not verified programmatically | implemented |
+| `07-§9.2` | Interactive elements have visible focus states | 07-DESIGN.md §9 | — | — (explicit `:focus-visible` rules not confirmed in `style.css` — see `02-§13.2`) | gap |
+| `07-§9.3` | Navigation is keyboard accessible | 07-DESIGN.md §9 | — | `source/build/layout.js` – standard `<nav>` and `<a>` elements | implemented |
+| `07-§9.4` | Images have descriptive `alt` text | 07-DESIGN.md §9 | RNI-29..33 | `source/build/render-index.js` – `extractHeroImage()` preserves alt | covered |
+| `07-§10.1` | No gradients or drop shadows heavier than specified are used | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` – only `--shadow-card` used | implemented |
+| `07-§10.2` | No animations beyond subtle transitions (`200–300ms`) are used | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` | implemented |
+| `07-§10.3` | No decorative fonts or display typefaces are used | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` – system fonts only | implemented |
+| `07-§10.4` | Text is never full-width at desktop widths; always constrained by a container | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` – container widths enforced | implemented |
+| `07-§10.5` | Layout is not whitespace-heavy; content density is appropriate | 07-DESIGN.md §10 | — | Assessed through visual review | implemented |
+| `07-§10.6` | The main site has no dark mode; the Today/Display view dark theme is purpose-built and not site-wide | 07-DESIGN.md §10 | — | `source/build/render-today.js` – dark theme isolated to display mode | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:              85
-Covered (implemented + tested):  21
-Implemented, not tested:         44
-Gap (no implementation):         20
+Total requirements:             251
+Covered (implemented + tested):  33
+Implemented, not tested:        186
+Gap (no implementation):         32
 Orphan tests (no requirement):    0
 ```
 
@@ -215,8 +381,8 @@ Orphan tests (no requirement):    0
 
 ### Critical — broken or missing user-facing features
 
-1. **`02-§2.3` / `02-§4.4` — Daily view with day navigation** (`/dagens-schema.html`)
-   The spec defines this page as a per-day schedule with forward/back navigation.
+1. **`02-§2.3` / `02-§4.4` / `02-§4.11` / `02-§4.12` — Daily view with day navigation** (`/dagens-schema.html`)
+   The spec defines a per-day schedule page with forward/back navigation and the same field display as the weekly view.
    The current page at this URL is the projector/display mode view (dark, QR code, no nav).
    No page exists that lets a user browse the schedule day by day.
 
@@ -231,11 +397,12 @@ Orphan tests (no requirement):    0
 
 ### High — missing whole features
 
-4. **`02-§2.6` / `02-§16.2` — Archive page** (`/arkiv.html`)
-   No page exists to browse past camps.
+4. **`02-§2.6` / `02-§16.2` / `02-§16.4` — Archive page** (`/arkiv.html`)
+   No page exists to browse past camps. The archive must be usable and complete, not a placeholder.
 
-5. **`02-§2.7` / `02-§15.1` — RSS feed** (`/schema.rss`)
-   No RSS feed is generated. No implementation guidance document exists for this feature.
+5. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
+   No RSS feed is generated; it must reflect the current state of the schedule.
+   No implementation guidance document exists — `03-ARCHITECTURE.md` needs an RSS section before this can be built.
 
 6. **`02-§10.3` — String length limits in API validation**
    `validate.js` type-checks strings but sets no maximum length.
@@ -243,12 +410,12 @@ Orphan tests (no requirement):    0
 
 ### Medium — data integrity
 
-7. **`05-§4.1` — Event date must fall within camp dates (API server)**
+7. **`05-§4.1` — Event date range check (API server)**
    The API accepts any structurally valid `YYYY-MM-DD` date regardless of camp `start_date`/`end_date`.
 
-8. **`05-§4.2` — `start` must be `HH:MM` format (API server)**
-   `validate.js` checks that `start` is non-empty but not that it matches `HH:MM`.
-   An invalid string (e.g. `"morning"`) passes validation and is written to YAML.
+8. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
+   `validate.js` checks `start` is non-empty but not that it matches `HH:MM`.
+   `end` is not validated as `null` or `HH:MM` — only that it is after `start` when present.
 
 9. **`05-§5.1` — Duplicate event uniqueness not enforced**
    The `(title + date + start)` combination is never checked for uniqueness before committing.
@@ -259,10 +426,11 @@ Orphan tests (no requirement):    0
 11. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
     No code prevents a camp from being marked both active and archived.
 
-12. **`CL-§5.5` — Build-time YAML data validation**
-    Manually edited YAML bypasses all validation.
+12. **`CL-§5.5` / `CL-§5.9` / `CL-§6.3` — Build-time YAML data validation**
+    Manually edited YAML bypasses all validation (required fields, date ranges, duplicate IDs).
+    Validation only runs in the API layer when events are submitted through the form.
 
-### Low — tooling and accessibility gaps
+### Low — tooling, design, and accessibility gaps
 
 13. **`CL-§5.1` — HTML validation in CI**
     No HTML linter is configured; invalid HTML does not fail the build.
@@ -270,11 +438,20 @@ Orphan tests (no requirement):    0
 14. **`CL-§5.2` — CSS linting in CI**
     No CSS linter is configured.
 
-15. **`02-§13.2` — Visible focus states**
+15. **`CL-§7.4` / `07-§8.5` — Image optimisation**
+    Images may not be served as WebP with responsive `srcset`. Not confirmed implemented.
+
+16. **`02-§13.2` / `07-§9.2` — Visible focus states**
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
 
-16. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
+17. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
     `<details>/<summary>` is used without explicit `aria-expanded` or `aria-controls`.
+
+18. **`07-§6.7` — Mobile hamburger menu**
+    No hamburger/dropdown navigation confirmed for mobile viewports.
+
+19. **`07-§6.33` — Colored left border for activity type**
+    No activity type categorization exists; colored left borders are not implemented.
 
 ---
 

@@ -80,14 +80,14 @@ The goal is that a parent visiting for the first time leaves thinking:
 ### Weekly schedule
 
 - Shows all activities for the full camp week (Sunday–Sunday). <!-- 02-§4.1 -->
-- Activities are grouped by day.
+- Activities are grouped by day. <!-- 02-§4.10 -->
 - Within each day, activities are listed in chronological order. <!-- 02-§4.2 -->
 - Each activity shows: title, start time, end time (if set), location, responsible person. <!-- 02-§4.3 -->
 
 ### Daily view
 
-- Shows activities for a single selected day.
-- Same field display as the weekly view.
+- Shows activities for a single selected day. <!-- 02-§4.11 -->
+- Same field display as the weekly view. <!-- 02-§4.12 -->
 - The user can navigate between days. <!-- 02-§4.4 -->
 
 ### Today / Display view
@@ -96,7 +96,7 @@ The goal is that a parent visiting for the first time leaves thinking:
 - Designed for two uses: mobile phones carried by participants, and shared screens placed around the camp.
 - Must be legible at a distance: dark background, large text, minimal interface chrome. <!-- 02-§4.6 -->
 - Must not require any interaction to stay useful — it should be readable at a glance. <!-- 02-§4.7 -->
-- No navigation to other days. This view is always today.
+- No navigation to other days. This view is always today. <!-- 02-§4.13 -->
 
 ### All schedule views
 
@@ -119,8 +119,10 @@ When a participant clicks an activity, a detail view must show: <!-- 02-§5.1 --
 - Full description (only if set)
 - Communication link (only if set)
 
-Fields with no value must not appear. The user must clearly understand whether
+Fields with no value must not appear. <!-- 02-§5.2 --> The user must clearly understand whether
 additional information exists beyond what the schedule row shows.
+
+The `owner` and `meta` fields are internal and must never appear in any public view. <!-- 02-§5.3 -->
 
 ---
 
@@ -177,13 +179,13 @@ Participants do not have editing rights.
 
 ## 8. Locations
 
-- Locations must be selected from a predefined list.
-- One flexible option ("Annat") must exist for locations not in the list. <!-- 02-§8.2 -->
+- Locations must be selected from a predefined list. <!-- 02-§8.3 -->
 - Location names must remain consistent throughout the week. <!-- 02-§8.1 -->
+- One flexible option ("Annat") must exist for locations not in the list. <!-- 02-§8.2 -->
 - The predefined list is maintained in `source/data/local.yaml` — this is the
   only place locations are defined.
 
-Participants cannot modify the location list.
+Participants cannot modify the location list. <!-- 02-§8.4 -->
 
 ---
 
@@ -228,7 +230,7 @@ protects the site's data integrity.
 
 - Activities must always be displayed in chronological order (by date, then start time). <!-- 02-§11.1 -->
 - Overlapping activities are allowed. <!-- 02-§11.2 -->
-- The schedule must remain readable when multiple activities occur at the same time.
+- The schedule must remain readable when multiple activities occur at the same time. <!-- 02-§11.3 -->
 
 ---
 
@@ -239,6 +241,7 @@ Participants must be able to trust that:
 - The schedule reflects the current plan.
 - A newly submitted activity appears in the schedule within a few minutes. <!-- 02-§12.1 -->
 - Corrections and removals made by an admin are visible in all schedule views. <!-- 02-§12.2 -->
+- All event submissions are permanently recorded in Git history as a full audit trail. <!-- 02-§12.3 -->
 
 The schedule is a shared coordination tool during the camp week.
 
@@ -270,7 +273,7 @@ confirmation messages, and accessibility text (alt, aria-label, etc.).
 
 The activity schedule must be available as an RSS feed at `/schema.rss`. <!-- 02-§15.1 -->
 
-The feed must reflect the current state of the schedule. It is intended for
+The feed must reflect the current state of the schedule. <!-- 02-§15.2 --> It is intended for
 participants who want to follow the schedule in an RSS reader or use it to
 integrate the schedule elsewhere.
 
@@ -283,7 +286,7 @@ Past camps must remain accessible.
 - When a camp ends, it becomes an archived camp. Its data is never deleted. <!-- 02-§16.1 -->
 - The archive page must list all past camps and link to their schedules. <!-- 02-§16.2 -->
 - When no camp is active, the most recent archived camp is shown by default. <!-- 02-§16.3 -->
-- The archive must be usable and complete, not a placeholder.
+- The archive must be usable and complete, not a placeholder. <!-- 02-§16.4 -->
 
 ---
 
@@ -293,7 +296,7 @@ The site must:
 
 - Work well on mobile devices. Schedule viewing and event submission are
   frequently done from a phone during camp week. <!-- 02-§17.1 -->
-- Be readable on shared display screens (see Today view in §4).
+- Be readable on shared display screens (see Today view in §4). <!-- 02-§17.3 -->
 - Require no explanation to use. A first-time visitor should understand the
   schedule and the add-activity form without instructions. <!-- 02-§17.2 -->
 - Avoid complexity that does not serve a clear user need.
