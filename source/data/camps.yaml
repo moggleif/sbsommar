@@ -1,99 +1,130 @@
 camps:
-- id: 2026-02-testar
-  name: SB vinter februari 2026
-  start_date: '2026-02-22'
-  end_date: '2026-02-27'
-  location: Testar
-  link: ""
-  information: ""
-  file: 2026-02-testar.yaml
-  archived: false
-  active: true
+  - id: 2026-02-testar
+    name: SB vinter februari 2026
+    start_date: '2026-02-22'
+    end_date: '2026-02-27'
+    location: Testar
+    link: ""
+    information: ""
+    file: 2026-02-testar.yaml
+    archived: false
+    active: true
 
-- id: 2025-08-syssleback
-  name: SB Sommar Augusti 2025
-  start_date: '2025-08-03'
-  end_date: '2025-08-15'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2025-08-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2025-08-syssleback
+    name: SB Sommar Augusti 2025
+    start_date: '2025-08-03'
+    end_date: '2025-08-15'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/syssleback2025"
+    information: |
+      I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
+      Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
+      Det gör också att det finns inget smidigt sätt att dela på dagarna för att visa i en lista så då är hela veckan i en klump.
+      Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
+    file: 2025-08-syssleback.yaml
+    archived: true
+    active: false
 
-- id: 2025-06-syssleback
-  name: SB Sommar Juni 2025
-  start_date: '2025-06-22'
-  end_date: '2025-06-29'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2025-06-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2025-06-syssleback
+    name: SB Sommar Juni 2025
+    start_date: '2025-06-22'
+    end_date: '2025-06-29'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/syssleback2025"
+    information: |
+      I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
+      Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
+      Det gör också att det finns inget smidigt sätt att dela på dagarna för att visa i en lista så då är hela veckan i en klump.
+      Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
+    file: 2025-06-syssleback.yaml
+    archived: true
+    active: false
 
-- id: 2024-06-syssleback
-  name: SB Sommar Juni 2024
-  start_date: '2024-06-23'
-  end_date: '2024-06-30'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2024-06-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2024-06-syssleback
+    name: SB Sommar Juni 2024
+    start_date: '2024-06-23'
+    end_date: '2024-06-30'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/syssleback2024"
+    information: |
+      I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
+      Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
+      Det gör också att det finns inget smidigt sätt att dela på dagarna för att visa i en lista så då är hela veckan i en klump.
+      Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
+    file: 2024-06-syssleback.yaml
+    archived: true
+    active: false
 
-- id: 2023-06-syssleback
-  name: SB Sommar Juni 2023
-  start_date: '2023-06-25'
-  end_date: '2023-07-02'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2023-06-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2023-06-syssleback
+    name: SB Sommar Juni 2023
+    start_date: '2023-06-25'
+    end_date: '2023-07-02'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/syssleback2023"
+    information: |
+      I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
+      Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
+      Det gör också att det finns inget smidigt sätt att dela på dagarna för att visa i en lista så då är hela veckan i en klump.
+      Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
+    file: 2023-06-syssleback.yaml
+    archived: true
+    active: false
 
-- id: 2022-06-syssleback
-  name: SB Sommar Juni 2022
-  start_date: '2022-06-26'
-  end_date: '2022-07-03'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2022-06-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2022-06-syssleback
+    name: SB Sommar Juni 2022
+    start_date: '2022-06-26'
+    end_date: '2022-07-03'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/639094320468722"
+    information: |
+      I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
+      Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
+      Det gör också att det finns inget smidigt sätt att dela på dagarna för att visa i en lista så då är hela veckan i en klump.
+      Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
+    file: 2022-06-syssleback.yaml
+    archived: true
+    active: false
 
-- id: 2021-06-syssleback
-  name: SB Sommar Juni 2021
-  start_date: '2021-06-27'
-  end_date: '2021-07-04'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2021-06-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2021-06-syssleback
+    name: SB Sommar Juni 2021
+    start_date: '2021-06-27'
+    end_date: '2021-07-04'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/1117007488486447"
+    information: |
+      Hör gärna av dig via PM (se Facebooktråden) om du vet att du vill anordna en aktivitet en eller flera av dagarna!
+      Lägret blir vad vi gör det till.
+      “Deadline” schemauppdatering nya aktiviteter – PM senast kl 9.30 och 16.30.
+      Aktiviteter utan tidsangivelser: Fiske, minigolf, gym, kanotuthyrning, pussel, brädspel m.m.
+      Datasal : GA-hallen 10:00-12:00, 13:00-16:30
+    file: 2021-06-syssleback.yaml
+    archived: true
+    active: false
 
-- id: 2019-06-syssleback
-  name: SB Sommar Juni 2019
-  start_date: '2019-06-24'
-  end_date: '2019-07-01'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2019-06-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2019-06-syssleback
+    name: SB Sommar Juni 2019
+    start_date: '2019-06-24'
+    end_date: '2019-07-01'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/rfsb2019sommar/permalink/462623754311856/"
+    information: |
+      Aktivitetsschemat sätts och uppdateras löpande under lägret.
+      Hör gärna av dig till Gabriel eller Johan redan nu (eller skriv i Facebooktråden) om du vet att du vill anordna en aktivitet en eller flera av dagarna!
+      Lägret blir vad vi gör det till.
+      Aktiviteter utan tidsangivelser: Fiske, minigolf, gym, kanotuthyrning, puzzel, BRÄDSPEL (GA hallen) m.m.
+    file: 2019-06-syssleback.yaml
+    archived: true
+    active: false
 
-- id: 2018-06-syssleback
-  name: SB Sommar Juni 2018
-  start_date: '2018-06-17'
-  end_date: '2018-06-20'
-  location: Sysslebäck
-  link: ""
-  information: ""
-  file: 2018-06-syssleback.yaml
-  archived: true
-  active: false
+  - id: 2018-06-syssleback
+    name: SB Sommar Juni 2018
+    start_date: '2018-06-17'
+    end_date: '2018-06-20'
+    location: Sysslebäck
+    link: "https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/"
+    information: |
+      Klickbara länkar leder till Facebook-tråd om aktiviteten.
+      Obs att det kan finnas fler trådar om aktiviteten (sök i FB-gruppen för lägret om du vill vara säker på att inte missa någon info).
+    file: 2018-06-syssleback.yaml
+    archived: true
+    active: false
