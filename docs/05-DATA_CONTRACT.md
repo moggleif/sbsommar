@@ -17,12 +17,15 @@ camps:
     name: string         # display name
     start_date: YYYY-MM-DD
     end_date: YYYY-MM-DD
+    location: string     # place name displayed on the archive page
     file: string         # filename in source/data/ (e.g. 2026-06-syssleback.yaml)
     active: boolean      # true for the current camp; only one at a time
     archived: boolean    # true once the camp has ended
+    information: string | null   # optional descriptive text shown on archive page
+    link: string | null          # optional URL (e.g. Facebook group) shown on archive page
 ```
 
-All fields shown are required for each entry. <!-- 05-§1.1 -->
+All fields except `information` and `link` are required for each entry. <!-- 05-§1.1 -->
 
 Rules:
 

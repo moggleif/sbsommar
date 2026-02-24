@@ -14,6 +14,7 @@ function pageNav(activeHref, { includeIdag = true } = {}) {
     { href: 'schema.html',     label: 'Schema' },
     ...(includeIdag ? [{ href: 'idag.html', label: 'Idag' }] : []),
     { href: 'lagg-till.html',  label: 'Lägg till aktivitet' },
+    { href: 'arkiv.html',      label: 'Arkiv' },
   ];
 
   const items = links

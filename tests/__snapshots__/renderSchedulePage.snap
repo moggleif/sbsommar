@@ -12,6 +12,7 @@
     <a class="nav-link active" href="schema.html">Schema</a>
     <a class="nav-link" href="idag.html">Idag</a>
     <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
+    <a class="nav-link" href="arkiv.html">Arkiv</a>
   </nav>
   <h1>Schema – Test Camp 2025</h1>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
