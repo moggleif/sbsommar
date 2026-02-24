@@ -45,9 +45,12 @@ function renderEventRow(e) {
   const metaEl = metaParts.length ? `<span class="ev-meta"> · ${metaParts.join(' · ')}</span>` : '';
   const hasExtra = e.description || e.link;
 
+  const idAttr = e.id ? ` data-event-id="${escapeHtml(String(e.id))}"` : '';
+  const dateAttr = e.date ? ` data-event-date="${escapeHtml(String(e.date))}"` : '';
+
   if (hasExtra) {
     return [
-      '    <details class="event-row">',
+      `    <details class="event-row"${idAttr}${dateAttr}>`,
       '      <summary>',
       `        <span class="ev-time">${timeStr}</span>`,
       `        <span class="ev-title">${escapeHtml(e.title)}</span>`,
@@ -60,7 +63,7 @@ function renderEventRow(e) {
       .join('\n');
   } else {
     return [
-      '    <div class="event-row plain">',
+      `    <div class="event-row plain"${idAttr}${dateAttr}>`,
       `      <span class="ev-time">${timeStr}</span>`,
       `      <span class="ev-title">${escapeHtml(e.title)}</span>`,
       metaEl ? `      ${metaEl}` : '',
@@ -103,6 +106,7 @@ ${pageNav('schema.html')}
   <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>
 
 ${daySections}
+  <script src="session.js"></script>
 </body>
 </html>
 `;

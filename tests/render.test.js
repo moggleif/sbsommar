@@ -251,7 +251,7 @@ describe('renderEventRow', () => {
       link: null,
     };
     const html = renderEventRow(e);
-    assert.ok(html.includes('<details class="event-row">'), 'Expected details element');
+    assert.ok(html.includes('<details class="event-row"'), 'Expected details element');
     assert.ok(html.includes('<summary>'), 'Expected summary element');
     assert.ok(html.includes('Bring your laptop.'), 'Expected description text');
   });
@@ -268,7 +268,7 @@ describe('renderEventRow', () => {
       link: 'https://maps.example.com',
     };
     const html = renderEventRow(e);
-    assert.ok(html.includes('<details class="event-row">'), 'Expected details element');
+    assert.ok(html.includes('<details class="event-row"'), 'Expected details element');
     assert.ok(html.includes('https://maps.example.com'), 'Expected link URL');
   });
 
@@ -319,5 +319,41 @@ describe('renderEventRow', () => {
     const html = renderEventRow(e);
     assert.ok(html.includes('&lt;XSS&gt;'), 'Expected escaped title');
     assert.ok(!html.includes('<XSS>'), 'Must not contain raw <XSS>');
+  });
+
+  it('RND-46: includes a data-event-id attribute with the event ID', () => { // RND-46
+    const e = {
+      id: 'frukost-2025-06-22-0800',
+      title: 'Frukost',
+      date: '2025-06-22',
+      start: '08:00',
+      end: '09:00',
+      location: 'Matsalen',
+      responsible: 'Alla',
+      description: null,
+      link: null,
+    };
+    const html = renderEventRow(e);
+    assert.ok(html.includes('data-event-id="frukost-2025-06-22-0800"'), `Missing data-event-id in:\n${html}`);
+  });
+
+  it('RND-47: data-event-id value matches the event id exactly', () => { // RND-47
+    const id = 'morgonyoga-2025-06-23-0730';
+    const e = {
+      id,
+      title: 'Morgonyoga',
+      date: '2025-06-23',
+      start: '07:30',
+      end: '08:00',
+      location: 'Idrott',
+      responsible: 'Stina',
+      description: null,
+      link: null,
+    };
+    const html = renderEventRow(e);
+    // Extract the data-event-id value from the HTML
+    const match = html.match(/data-event-id="([^"]+)"/);
+    assert.ok(match, 'Expected data-event-id attribute');
+    assert.strictEqual(match[1], id);
   });
 });

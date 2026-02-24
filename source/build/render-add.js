@@ -96,6 +96,7 @@ ${locationOptions}
     <div class="success-box">
       <h2>Aktiviteten är tillagd!</h2>
       <p class="intro"><strong id="result-title"></strong> syns i schemat om ungefär en minut.</p>
+      <p id="result-no-edit-note" class="result-note" hidden>Du valde att inte spara en sessionscookie, så du kan inte redigera aktiviteten senare från den här webbläsaren.</p>
       <div class="success-actions">
         <a href="schema.html" class="btn-primary">Gå till schemat →</a>
         <button id="new-btn" class="btn-secondary">Lägg till en till</button>
@@ -103,6 +104,7 @@ ${locationOptions}
     </div>
   </section>
 
+  <script src="cookie-consent.js"></script>
   <script src="lagg-till.js"></script>
 </body>
 </html>

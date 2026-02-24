@@ -38,44 +38,59 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sparar...';
 
-    fetch(form.dataset.apiUrl || '/add-event', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title:       title,
-        date:        date,
-        start:       start,
-        end:         end,
-        location:    location,
-        responsible: responsible,
-        description: els.description.value,
-        link:        els.link.value.trim(),
-        ownerName:   els.ownerName.value.trim(),
-      }),
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (json) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Skicka →';
+    // Ask for cookie consent before sending (shown once per browser).
+    // If window.SBConsentReady is unavailable (cookie-consent.js not loaded),
+    // proceed without consent.
+    var consentFn = window.SBConsentReady || function (cb) { cb(false); };
 
-        if (!json.success) {
-          errBox.hidden = false;
-          errBox.innerHTML = '<p>' + (json.error || 'Något gick fel.') + '</p>';
-          return;
-        }
-
-        var titleEl = document.getElementById('result-title');
-        if (titleEl) titleEl.textContent = title;
-        form.hidden = true;
-        result.hidden = false;
-        window.scrollTo(0, 0);
+    consentFn(function (consentGiven) {
+      fetch(form.dataset.apiUrl || '/add-event', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title:         title,
+          date:          date,
+          start:         start,
+          end:           end,
+          location:      location,
+          responsible:   responsible,
+          description:   els.description.value,
+          link:          els.link.value.trim(),
+          ownerName:     els.ownerName.value.trim(),
+          cookieConsent: consentGiven,
+        }),
       })
-      .catch(function () {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Lägg till →';
-        errBox.hidden = false;
-        errBox.innerHTML = '<p>Något gick fel. Kontrollera din internetanslutning och försök igen.</p>';
-      });
+        .then(function (r) { return r.json(); })
+        .then(function (json) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Skicka →';
+
+          if (!json.success) {
+            errBox.hidden = false;
+            errBox.innerHTML = '<p>' + (json.error || 'Något gick fel.') + '</p>';
+            return;
+          }
+
+          var titleEl = document.getElementById('result-title');
+          if (titleEl) titleEl.textContent = title;
+
+          // If the user declined cookie consent, surface a note so they know
+          // they won't be able to edit the activity later from this browser.
+          var noEditNote = document.getElementById('result-no-edit-note');
+          if (noEditNote) noEditNote.hidden = consentGiven;
+
+          form.hidden = true;
+          result.hidden = false;
+          window.scrollTo(0, 0);
+        })
+        .catch(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Skicka →';
+          errBox.hidden = false;
+          errBox.innerHTML = '<p>Något gick fel. Kontrollera din internetanslutning och försök igen.</p>';
+        });
+    });
   });
 
   newBtn.addEventListener('click', function () {

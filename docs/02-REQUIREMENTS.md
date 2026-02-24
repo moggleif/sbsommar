@@ -41,6 +41,7 @@ The following pages must exist:
 | `02-§2.5` | Add activity | `/lagg-till.html` | Participants |
 | `02-§2.6` | Archive | `/arkiv.html` | Prospective families, returning participants |
 | `02-§2.7` | RSS feed | `/schema.rss` | Anyone subscribing to the schedule |
+| `02-§2.11` | Edit activity | `/redigera.html` | Participants who submitted the event |
 
 The homepage, schedule pages, add-activity form, and archive share the same header and navigation. <!-- 02-§2.8 -->
 None require login. <!-- 02-§2.9 -->
@@ -169,11 +170,14 @@ it is about reducing confusion and frustration.
 
 ## 7. Editing and Removing Activities
 
-Only administrators can edit or remove activities. <!-- 02-§7.1 -->
+Participants can edit their own active events (events whose date has not yet passed)
+through a session-cookie-based ownership mechanism. See §18 for the full specification. <!-- 02-§7.1 -->
 
-This is done by modifying the camp's YAML file directly. See [04-OPERATIONS.md](04-OPERATIONS.md) for the workflow.
+Administrators can edit or remove any activity by modifying the camp's YAML file
+directly. See [04-OPERATIONS.md](04-OPERATIONS.md) for the workflow. <!-- 02-§7.2 -->
 
-Participants do not have editing rights.
+Only the submitting participant (identified by their session cookie) may edit a
+given participant-submitted event. <!-- 02-§7.3 -->
 
 ---
 
@@ -302,3 +306,101 @@ The site must:
 - Avoid complexity that does not serve a clear user need.
 
 The purpose of the schedule is coordination, not administration.
+
+---
+
+## 18. Participant Event Editing
+
+Participants who submit events should be able to edit those events for as long as
+the event is in the future. This uses a lightweight, cookie-based ownership model
+that requires no login.
+
+### 18.1 Ownership and session cookie
+
+- When a participant's event is successfully created, the server sets a session
+  cookie in the response containing the new event's ID. <!-- 02-§18.1 -->
+- The session cookie stores a JSON array of event IDs the current browser owns. <!-- 02-§18.2 -->
+- The cookie has a `Max-Age` of 7 days; submitting another event updates (extends) it. <!-- 02-§18.3 -->
+- The cookie uses the `Secure` flag (HTTPS only) and `SameSite=Strict` to prevent
+  cross-site misuse. <!-- 02-§18.4 -->
+- **The session cookie is intentionally JavaScript-readable (not `httpOnly`).**
+  Because the schedule pages are static HTML pre-rendered at build time, client-side
+  JavaScript is the only layer that can read the cookie and show or hide edit links
+  per event. Server-side validation on every edit request compensates for the
+  absence of `httpOnly`. This trade-off is explicit and documented. <!-- 02-§18.5 -->
+- The session cookie is set only by the server — never written directly by
+  client-side JavaScript. <!-- 02-§18.6 -->
+- The cookie name is `sb_session`. <!-- 02-§18.7 -->
+
+### 18.2 Cookie consent
+
+- Before the server sets the session cookie, the client must first obtain the
+  user's explicit consent through an inline prompt on the add-activity form. <!-- 02-§18.8 -->
+- If the user accepts, the form submission proceeds and the server sets the
+  session cookie in its response. <!-- 02-§18.9 -->
+- If the user declines, the form submission still proceeds (the event is still
+  submitted), but the server does not set the session cookie and the user receives
+  no editing capability. <!-- 02-§18.10 -->
+- The consent decision (accepted or declined) is stored in `localStorage` as
+  `sb_cookie_consent` so the prompt is not shown again in the same browser. <!-- 02-§18.11 -->
+- The consent prompt must be written in Swedish. <!-- 02-§18.12 -->
+
+### 18.3 Expiry management
+
+- On every page load, client-side JavaScript reads the session cookie and removes
+  any event IDs whose date has already passed. <!-- 02-§18.13 -->
+- The cleaned cookie is written back. If no event IDs remain after cleaning, the
+  cookie is deleted. <!-- 02-§18.14 -->
+- "Passed" means the event's date is strictly before today's local date. <!-- 02-§18.15 -->
+
+### 18.4 Edit links on schedule pages
+
+- Schedule pages (weekly and daily) add an "Redigera" link next to each event
+  whose ID is present in the session cookie and whose date has not passed. <!-- 02-§18.16 -->
+- The link is injected by client-side JavaScript after page load; it is never
+  part of the static HTML. <!-- 02-§18.17 -->
+- Each event row in the generated HTML carries a `data-event-id` attribute
+  containing the event's stable ID so JavaScript can identify it. <!-- 02-§18.18 -->
+- The "Redigera" link navigates to `/redigera.html?id={eventId}`. <!-- 02-§18.19 -->
+
+### 18.5 Edit form
+
+- An edit page exists at `/redigera.html`. <!-- 02-§18.20 -->
+- When loaded, it reads the `id` query parameter, checks the session cookie,
+  and fetches `/events.json` to pre-populate the form with the event's current
+  values. <!-- 02-§18.21 -->
+- If the event ID is not in the session cookie, or the event has already passed,
+  the page shows a clear error and no form is rendered. <!-- 02-§18.22 -->
+- The edit form exposes the same fields as the add-activity form (title, date,
+  start time, end time, location, responsible person, description, link). <!-- 02-§18.23 -->
+- The event's stable `id` must not change after creation, even when mutable
+  fields are edited. <!-- 02-§18.24 -->
+- The edit form is subject to the same field-level validation rules as the
+  add-activity form (§9). <!-- 02-§18.25 -->
+- After a successful edit, a clear Swedish confirmation is shown. The schedule
+  updates within a few minutes via the same PR auto-merge pipeline. <!-- 02-§18.26 -->
+- The edit form is written entirely in Swedish (§14). <!-- 02-§18.27 -->
+
+### 18.6 Event data API
+
+- A static file `/events.json` is generated at build time containing all events
+  for the active camp. <!-- 02-§18.28 -->
+- The file contains only fields that appear in the edit form (id, title, date,
+  start, end, location, responsible, description, link). Internal fields
+  (`owner`, `meta`) are excluded. <!-- 02-§18.29 -->
+
+### 18.7 Server-side edit endpoint
+
+- A `POST /edit-event` endpoint accepts edit requests. <!-- 02-§18.30 -->
+- The server reads the `sb_session` cookie from the request, parses the event
+  ID array, and verifies the target event ID is present. <!-- 02-§18.31 -->
+- If the event ID is not in the cookie, the server responds with HTTP 403. <!-- 02-§18.32 -->
+- If the event's date has already passed, the server responds with HTTP 400. <!-- 02-§18.33 -->
+- If validation passes, the server reads the YAML file from GitHub, replaces the
+  target event's mutable fields in place, and commits the change via an ephemeral
+  branch and PR with auto-merge — the same pipeline used for additions. <!-- 02-§18.34 -->
+- The event's `meta.updated_at` field is updated on every successful edit. <!-- 02-§18.35 -->
+- Only fields that are part of the edit form are written. No unrecognised fields
+  from the request body are ever committed. <!-- 02-§18.36 -->
+
+---
