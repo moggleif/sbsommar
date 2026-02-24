@@ -562,39 +562,39 @@ progress modal → result.
 
 ---
 
-## 20. Archive Timeline
+## 21. Archive Timeline
 
 The archive page (`/arkiv.html`) presents past camps as an interactive vertical
 timeline. Each camp is a point on the timeline that expands to show details.
 
-### 20.1 Timeline layout
+### 21.1 Timeline layout
 
-- Only camps with `archived: true` in `camps.yaml` are shown. <!-- 02-§20.1 -->
-- Camps are listed newest first (descending by `start_date`). <!-- 02-§20.2 -->
-- The timeline is vertical; each camp is a point on a vertical line. <!-- 02-§20.3 -->
+- Only camps with `archived: true` in `camps.yaml` are shown. <!-- 02-§21.1 -->
+- Camps are listed newest first (descending by `start_date`). <!-- 02-§21.2 -->
+- The timeline is vertical; each camp is a point on a vertical line. <!-- 02-§21.3 -->
 
-### 20.2 Accordion interaction
+### 21.2 Accordion interaction
 
 - Each camp is rendered as an accordion item — a clickable header that expands
-  to reveal camp details below. <!-- 02-§20.4 -->
+  to reveal camp details below. <!-- 02-§21.4 -->
 - Only one accordion item may be open at a time; opening a new item closes
-  any previously open item. <!-- 02-§20.5 -->
+  any previously open item. <!-- 02-§21.5 -->
 - Each accordion header uses a `<button>` element with `aria-expanded` and
-  `aria-controls` attributes so screen readers announce the state. <!-- 02-§20.6 -->
+  `aria-controls` attributes so screen readers announce the state. <!-- 02-§21.6 -->
 - Keyboard users must be able to open and close accordion items using Enter
-  or Space on the focused header button. <!-- 02-§20.7 -->
+  or Space on the focused header button. <!-- 02-§21.7 -->
 
-### 20.3 Accordion content
+### 21.3 Accordion content
 
-Each expanded accordion shows, in order: <!-- 02-§20.8 -->
+Each expanded accordion shows, in order: <!-- 02-§21.8 -->
 
 - Camp name (already visible in the header)
 - Start date and end date formatted in Swedish (`D månadsnamn YYYY`)
 - Location
-- Information text (only if non-empty in `camps.yaml`) <!-- 02-§20.9 -->
-- A link to the Facebook group (only if `link` is non-empty in `camps.yaml`) <!-- 02-§20.10 -->
+- Information text (only if non-empty in `camps.yaml`) <!-- 02-§21.9 -->
+- A link to the Facebook group (only if `link` is non-empty in `camps.yaml`) <!-- 02-§21.10 -->
 
 Fields that are empty or absent must not produce blank rows or placeholder
-text. <!-- 02-§20.11 -->
+text. <!-- 02-§21.11 -->
 
 ---

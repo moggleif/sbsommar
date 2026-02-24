@@ -442,19 +442,31 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§20.11` | The edit modal uses only CSS custom properties from 07-DESIGN.md §7 — no hardcoded colors or spacing | 07-DESIGN.md §7 | — (code review: confirm modal CSS uses only custom properties) | `source/assets/cs/style.css` – modal CSS shared with add form; uses `var(--color-*)`, `var(--space-*)`, `var(--radius-*)` | implemented |
 | `02-§20.12` | The edit modal is implemented in vanilla JavaScript; no library or framework is added | 03-ARCHITECTURE.md §9 | — (code review: confirm no new npm dependencies for modal logic) | `redigera.js` – pure DOM manipulation; no new dependencies in `package.json` | implemented |
 | `02-§20.13` | The existing #result section in the edit page is removed; the modal is the sole post-submission feedback mechanism | 03-ARCHITECTURE.md §9 | EDIT-01 | `source/build/render-edit.js` – `#result` section removed; `#submit-modal` added in its place | covered |
+| `02-§21.1` | Only camps with `archived: true` are shown on the archive page | 03-ARCHITECTURE.md §4a | ARK-01 | — | gap |
+| `02-§21.2` | Archive page lists camps newest first (descending by `start_date`) | 03-ARCHITECTURE.md §4a | ARK-02 | — | gap |
+| `02-§21.3` | Archive timeline is vertical; each camp is a point on a vertical line | 03-ARCHITECTURE.md §4a | — (manual: visual verification) | — | gap |
+| `02-§21.4` | Each camp is an accordion item — a clickable header that expands to reveal details | 03-ARCHITECTURE.md §4a | ARK-03 | — | gap |
+| `02-§21.5` | Only one accordion item may be open at a time; opening a new item closes any previously open item | 03-ARCHITECTURE.md §4a | — (manual: open two items and verify only one stays open) | — | gap |
+| `02-§21.6` | Each accordion header is a `<button>` with `aria-expanded` and `aria-controls` attributes | 03-ARCHITECTURE.md §4a | ARK-04, ARK-05 | — | gap |
+| `02-§21.7` | Keyboard users can open and close accordion items using Enter or Space | 03-ARCHITECTURE.md §4a | — (manual: tab to a header and press Enter/Space) | — | gap |
+| `02-§21.8` | Expanded accordion shows name, date range, location, information (if set), and Facebook link (if set) | 03-ARCHITECTURE.md §4a | ARK-06 | — | gap |
+| `02-§21.9` | Information text is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-07 | — | gap |
+| `02-§21.10` | Facebook link is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-08 | — | gap |
+| `02-§21.11` | No blank rows or placeholder text appear for empty fields | 03-ARCHITECTURE.md §4a | ARK-07, ARK-08 | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             331
+Total requirements:             342
 Covered (implemented + tested):  61
 Implemented, not tested:        242
-Gap (no implementation):         28
+Gap (no implementation):         39
 Orphan tests (no requirement):    0
 
-Note: 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
+Note: 11 requirements added for archive timeline (02-§21.1–21.11), all gap.
+02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
 02-§18.45 implemented (manual): edit form credentials: 'include' for cross-origin API.
 02-§18.41 added and covered: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
 SES-14 and SES-15 verify Domain= is included/omitted correctly.

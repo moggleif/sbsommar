@@ -111,6 +111,54 @@ No data is ever lost.
 
 ---
 
+## 4a. Archive Page Rendering
+
+At build time, `source/build/render-arkiv.js` produces `public/arkiv.html`.
+
+The data source is `camps.yaml` — no per-camp event files are loaded.
+
+Steps:
+
+1. Filter `camps` to those with `archived: true`.
+2. Sort descending by `start_date` (newest first).
+3. Render a vertical timeline: each camp is one `<li>` in an `<ol class="timeline">`.
+4. Each timeline item contains:
+   - A `<button>` accordion header showing the camp name and year.
+   - A hidden `<div>` panel with dates, location, information, and Facebook link.
+5. The panel is hidden/shown by toggling `aria-expanded` and `hidden` via
+   `source/assets/js/client/arkiv.js` — no framework.
+6. Only one panel may be open at a time; the JS closes any previously open panel
+   before opening the new one.
+
+### Fields used from `camps.yaml`
+
+| Field | Used for |
+| --- | --- |
+| `name` | Accordion header |
+| `start_date` | Date range display; sort key |
+| `end_date` | Date range display |
+| `location` | Location line |
+| `information` | Information paragraph (omitted if empty) |
+| `link` | Facebook button (omitted if empty) |
+
+Dates are formatted in Swedish: `D månadsnamn YYYY` (e.g. "22 juni 2025").
+
+### Archive page files
+
+| File | Role |
+| --- | --- |
+| `source/build/render-arkiv.js` | Renders `public/arkiv.html` at build time |
+| `source/assets/js/client/arkiv.js` | Accordion open/close + ARIA state on the archive page |
+
+### Archive page changes to existing files
+
+| File | Change |
+| --- | --- |
+| `source/build/build.js` | Call `renderArkivPage(camps)` and write `public/arkiv.html` |
+| `source/build/layout.js` | Add "Arkiv" nav link |
+
+---
+
 ## 5. Rendering Logic
 
 At build time:
