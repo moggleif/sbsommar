@@ -3,13 +3,14 @@
 
   var LS_KEY = 'sb_cookie_consent';
 
-  // Returns 'accepted', 'declined', or null (no decision yet).
+  // Returns 'accepted' or null. Declining is not persisted — the user will
+  // be asked again next time, which allows them to change their mind.
   function getConsent() {
     try { return localStorage.getItem(LS_KEY); } catch { return null; }
   }
 
-  function saveConsent(value) {
-    try { localStorage.setItem(LS_KEY, value); } catch { /* ignore */ }
+  function saveConsent() {
+    try { localStorage.setItem(LS_KEY, 'accepted'); } catch { /* ignore */ }
   }
 
   // Show the consent banner below the submit button.
@@ -40,25 +41,22 @@
     }
 
     document.getElementById('consent-accept').addEventListener('click', function () {
-      saveConsent('accepted');
+      saveConsent();
       banner.remove();
       callback(true);
     });
 
     document.getElementById('consent-decline').addEventListener('click', function () {
-      saveConsent('declined');
       banner.remove();
       callback(false);
     });
   }
 
   // Public API used by lagg-till.js before submitting the form.
-  // If a decision already exists, calls callback immediately.
+  // If the user has previously accepted, calls callback immediately.
   // Otherwise, shows the banner.
   window.SBConsentReady = function (callback) {
-    var existing = getConsent();
-    if (existing === 'accepted') { callback(true); return; }
-    if (existing === 'declined') { callback(false); return; }
+    if (getConsent() === 'accepted') { callback(true); return; }
     showConsentBanner(callback);
   };
 })();

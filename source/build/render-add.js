@@ -34,6 +34,7 @@ ${pageNav('lagg-till.html')}
   <h1>Lägg till aktivitet</h1>
   <p class="intro">Kolla gärna <a href="schema.html">schemat</a> innan du lägger till din aktivitet – välj en tid som inte krockar med något annat.</p>
   <p class="intro">Behöver du material eller ingredienser till din aktivitet? Kontakta Andreas i förväg så ordnar han det.</p>
+  <p class="intro">När du skickat in kan du redigera din aktivitet efteråt – vi frågar om lov att spara ett tillfälligt ID i webbläsaren så att vi vet att aktiviteten är din. ID:t försvinner automatiskt efter 7 dagar.</p>
 
   <form id="event-form" class="event-form" novalidate data-api-url="${escapeHtml(apiUrl || '/add-event')}">
 
@@ -81,11 +82,6 @@ ${locationOptions}
       <input type="url" id="f-link" name="link" placeholder="https://...">
     </div>
 
-    <div class="field">
-      <label for="f-owner">Ditt namn <span class="opt">(valfritt – för framtida redigering)</span></label>
-      <input type="text" id="f-owner" name="ownerName" autocomplete="name">
-    </div>
-
     <div id="form-errors" class="form-errors" hidden></div>
 
     <button type="submit" class="btn-primary">Skicka →</button>
@@ -96,7 +92,7 @@ ${locationOptions}
     <div class="success-box">
       <h2>Aktiviteten är tillagd!</h2>
       <p class="intro"><strong id="result-title"></strong> syns i schemat om ungefär en minut.</p>
-      <p id="result-no-edit-note" class="result-note" hidden>Du valde att inte spara en sessionscookie, så du kan inte redigera aktiviteten senare från den här webbläsaren.</p>
+      <p id="result-no-edit-note" class="result-note" hidden>Du valde att inte tillåta cookie, så aktiviteten kan inte redigeras från den här webbläsaren. Vill du ändra dig? Lägg till en ny aktivitet och välj <em>Ja, det är okej</em> när vi frågar.</p>
       <div class="success-actions">
         <a href="schema.html" class="btn-primary">Gå till schemat →</a>
         <button id="new-btn" class="btn-secondary">Lägg till en till</button>
