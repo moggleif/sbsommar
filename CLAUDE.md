@@ -233,6 +233,7 @@ This phase applies to all prompts — bugs, new features, refactors, data change
 
 - Agree on scope and approach before writing any requirements.
 - This phase does not end with a commit. It ends with mutual understanding.
+- **Even when the fix seems obvious** — a one-liner, a typo, a clear bug — always pause to confirm: restate the problem, the proposed fix, and any trade-offs in one or two sentences. A misread prompt is harder to undo than a skipped step. Short messages are easy to misinterpret.
 
 Do not rubber-stamp prompts. If something seems off, say so. If something is too big, split it.
 
@@ -255,6 +256,7 @@ Before writing any code: <!-- CL-§11.2 -->
 
 - Write tests for each testable requirement. <!-- CL-§11.5 -->
 - If a requirement cannot be tested in code (visual, UX, or inherently manual), document the reason in the traceability matrix note field and mark it as a manual/AI validation checkpoint. <!-- CL-§11.6 -->
+- Requirements that only involve browser-specific behaviour (DOM manipulation, `fetch` options, `localStorage`, CSS layout) cannot be unit-tested in Node.js. Mark these as manual checkpoints with a concrete, actionable verification step — e.g. *"open the form in a browser and confirm the banner appears below the submit button"*.
 - Commit: `test: add tests for [feature]`
 
 ## Phase 4 — Implementation
@@ -267,7 +269,8 @@ Before writing any code: <!-- CL-§11.2 -->
 - Verify that requirements, documentation, tests, and implementation are consistent and complete. <!-- CL-§11.8 -->
 - Update the traceability matrix: set final statuses, fill in implementation references, link tests. <!-- CL-§11.9 -->
 - Update summary counts in the matrix. <!-- CL-§11.10 -->
-- Commit: `docs: traceability update for [feature]`
+- Only create a commit if the matrix actually required updating. If Phase 2 already covered everything and nothing has changed, no commit is needed — verification alone is sufficient.
+- Commit (if needed): `docs: traceability update for [feature]`
 
 ## Phase 6 — Final Check
 
