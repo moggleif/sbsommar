@@ -1,6 +1,7 @@
 :root {
   --color-terracotta: #C76D48;
   --color-sage:       #ADBF77;
+  --color-sage-hover: #9aad6a;
   --color-cream:      #F5EEDF;
   --color-navy:       #192A3D;
   --color-charcoal:   #3B3A38;
@@ -638,7 +639,7 @@ details.accordion > summary::after {
 
 details.accordion[open] > summary::after { content: '−'; }
 
-details.accordion > summary:hover { background: #9aad6a; }
+details.accordion > summary:hover { background: var(--color-sage-hover); }
 
 .accordion-body {
   padding: var(--space-sm) var(--space-md);
@@ -865,7 +866,7 @@ body.modal-open {
   background: var(--color-terracotta);
   border: 3px solid var(--color-cream);
   box-shadow: 0 0 0 2px var(--color-terracotta);
-  margin-top: 8px;
+  margin-top: var(--space-xs);
   position: relative;
   z-index: 1;
 }
@@ -896,7 +897,7 @@ body.modal-open {
 
 .timeline-header:hover,
 .timeline-header:focus-visible {
-  background: #9aad6a;
+  background: var(--color-sage-hover);
   outline: 2px solid var(--color-terracotta);
   outline-offset: 2px;
 }
