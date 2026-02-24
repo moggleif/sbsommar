@@ -446,3 +446,19 @@ events:
   meta:
     created_at: 2026-02-24 15:38
     updated_at: 2026-02-24 15:38
+- id: dsfafsda-fsdf-2026-02-25-1400
+  title: dsfafsda fsdf
+  date: '2026-02-25'
+  start: '14:00'
+  end: '15:00'
+  location: GA Kreativ hörna
+  responsible: gfskgmkd
+  description: |
+    gfdksgnflkd
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 15:39
+    updated_at: 2026-02-24 15:39
