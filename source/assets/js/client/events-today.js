@@ -46,6 +46,8 @@
     var metaParts = [e.location, e.responsible].filter(Boolean).map(esc);
     var metaEl = metaParts.length ? '<span class="ev-meta"> · ' + metaParts.join(' · ') + '</span>' : '';
     var hasExtra = e.description || e.link;
+    var idAttr = e.id ? ' data-event-id="' + esc(e.id) + '"' : '';
+    var dateAttr = e.date ? ' data-event-date="' + esc(e.date) + '"' : '';
 
     if (hasExtra) {
       var extraParts = [];
@@ -57,14 +59,14 @@
       if (e.link) {
         extraParts.push('<a class="event-ext-link" href="' + esc(e.link) + '" target="_blank" rel="noopener">Extern länk →</a>');
       }
-      return '<details class="event-row"><summary>' +
+      return '<details class="event-row"' + idAttr + dateAttr + '><summary>' +
         '<span class="ev-time">' + timeStr + '</span>' +
         '<span class="ev-title">' + esc(e.title) + '</span>' +
         metaEl + '</summary>' +
         '<div class="event-extra">' + extraParts.join('') + '</div>' +
         '</details>';
     } else {
-      return '<div class="event-row plain">' +
+      return '<div class="event-row plain"' + idAttr + dateAttr + '>' +
         '<span class="ev-time">' + timeStr + '</span>' +
         '<span class="ev-title">' + esc(e.title) + '</span>' +
         metaEl + '</div>';
