@@ -8,6 +8,10 @@
   --color-white:      #FFFFFF;
   --font-sans:   system-ui, -apple-system, sans-serif;
   --font-serif:  Georgia, serif;
+  --font-size-base:  16px;
+  --font-size-small: 14px;
+  --font-size-nav:   12px;
+  --line-height-body: 1.65;
   --space-xs:    8px;
   --space-sm:    16px;
   --space-md:    24px;
@@ -909,7 +913,7 @@ body.modal-open {
 /* Chevron rotates when open */
 .timeline-chevron::before {
   content: '▼';
-  font-size: 12px;
+  font-size: var(--font-size-nav);
   display: inline-block;
   transition: transform 200ms ease;
 }
