@@ -95,7 +95,7 @@ ${locationOptions}
   <div id="submit-modal" class="submit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" hidden>
     <div class="modal-backdrop"></div>
     <div class="modal-box">
-      <h2 id="modal-heading" class="modal-heading"></h2>
+      <h2 id="modal-heading" class="modal-heading" tabindex="-1"></h2>
       <div id="modal-content" class="modal-content"></div>
     </div>
   </div>

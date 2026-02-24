@@ -38,6 +38,13 @@
     document.body.classList.add('modal-open');
     modal.addEventListener('keydown', trapFocus);
     var focusable = getFocusable();
+    // Focus first interactive element, or the heading so screen readers
+    // announce the modal state even in the loading phase.
+    if (focusable.length) { focusable[0].focus(); } else { modalHeading.focus(); }
+  }
+
+  function focusFirstInModal() {
+    var focusable = getFocusable();
     if (focusable.length) focusable[0].focus();
   }
 
@@ -51,40 +58,43 @@
   // ── Modal states ─────────────────────────────────────────────────────────────
 
   function setModalLoading() {
-    modalHeading.textContent = 'Skickar\u2026';
+    modalHeading.textContent = 'Skickar…';
     modalContent.innerHTML =
       '<div class="modal-spinner" aria-hidden="true"></div>' +
-      '<p class="modal-status">Skickar till GitHub\u2026</p>';
+      '<p class="modal-status">Skickar till GitHub…</p>';
     openModal();
   }
 
   function setModalSuccess(title, consentGiven) {
-    modalHeading.textContent = 'Aktiviteten \u00e4r tillagd!';
+    modalHeading.textContent = 'Aktiviteten är tillagd!';
     var noEditNote = consentGiven ? '' :
-      '<p class="result-note">Du valde att inte till\u00e5ta cookie, s\u00e5 aktiviteten kan inte' +
-      ' redigeras fr\u00e5n den h\u00e4r webbl\u00e4saren. Vill du \u00e4ndra dig? L\u00e4gg till' +
-      ' en ny aktivitet och v\u00e4lj <em>Ja, det \u00e4r okej</em> n\u00e4r vi fr\u00e5gar.</p>';
+      '<p class="result-note">Du valde att inte tillåta cookie, så aktiviteten kan inte' +
+      ' redigeras från den här webbläsaren. Vill du ändra dig? Lägg till' +
+      ' en ny aktivitet och välj <em>Ja, det är okej</em> när vi frågar.</p>';
     modalContent.innerHTML =
       '<p class="intro"><strong>' + escHtml(title) + '</strong>' +
-      ' syns i schemat om ungef\u00e4r en minut.</p>' +
+      ' syns i schemat om ungefär en minut.</p>' +
       noEditNote +
       '<div class="success-actions">' +
-        '<a href="schema.html" class="btn-primary">G\u00e5 till schemat \u2192</a>' +
-        '<button id="modal-new-btn" class="btn-secondary">L\u00e4gg till en till</button>' +
+        '<a href="schema.html" class="btn-primary">Gå till schemat →</a>' +
+        '<button id="modal-new-btn" class="btn-secondary">Lägg till en till</button>' +
       '</div>';
+    focusFirstInModal();
     document.getElementById('modal-new-btn').addEventListener('click', function () {
       closeModal();
       form.reset();
+      errBox.hidden = true;
       unlock();
       window.scrollTo(0, 0);
     });
   }
 
   function setModalError(message) {
-    modalHeading.textContent = 'N\u00e5got gick fel';
+    modalHeading.textContent = 'Något gick fel';
     modalContent.innerHTML =
       '<p class="form-error-msg">' + escHtml(message) + '</p>' +
-      '<button id="modal-retry-btn" class="btn-primary">F\u00f6rs\u00f6k igen</button>';
+      '<button id="modal-retry-btn" class="btn-primary">Försök igen</button>';
+    focusFirstInModal();
     document.getElementById('modal-retry-btn').addEventListener('click', function () {
       closeModal();
       unlock();
@@ -128,13 +138,13 @@
     var responsible = els.responsible.value.trim();
 
     var errs = [];
-    if (!title)            errs.push('Rubrik \u00e4r obligatoriskt.');
-    if (!date)             errs.push('Datum \u00e4r obligatoriskt.');
-    if (!start)            errs.push('Starttid \u00e4r obligatorisk.');
-    if (!end)              errs.push('Sluttid \u00e4r obligatorisk.');
-    else if (end <= start) errs.push('Sluttid m\u00e5ste vara efter starttid.');
-    if (!location)         errs.push('Plats \u00e4r obligatoriskt.');
-    if (!responsible)      errs.push('Ansvarig \u00e4r obligatoriskt.');
+    if (!title)            errs.push('Rubrik är obligatoriskt.');
+    if (!date)             errs.push('Datum är obligatoriskt.');
+    if (!start)            errs.push('Starttid är obligatorisk.');
+    if (!end)              errs.push('Sluttid är obligatorisk.');
+    else if (end <= start) errs.push('Sluttid måste vara efter starttid.');
+    if (!location)         errs.push('Plats är obligatoriskt.');
+    if (!responsible)      errs.push('Ansvarig är obligatoriskt.');
 
     if (errs.length) {
       errBox.hidden = false;
@@ -173,15 +183,13 @@
         .then(function (r) { return r.json(); })
         .then(function (json) {
           if (!json.success) {
-            setModalError(json.error || 'N\u00e5got gick fel.');
+            setModalError(json.error || 'Något gick fel.');
             return;
           }
           setModalSuccess(title, consentGiven);
         })
         .catch(function () {
-          setModalError(
-            'N\u00e5got gick fel. Kontrollera din internetanslutning och f\u00f6rs\u00f6k igen.',
-          );
+          setModalError('Något gick fel. Kontrollera din internetanslutning och försök igen.');
         });
     });
   });
