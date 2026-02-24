@@ -429,16 +429,29 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§19.15` | The modal uses only CSS custom properties from 07-DESIGN.md §7 — no hardcoded colors or spacing | 07-DESIGN.md §7 | — (code review: grep for hardcoded hex/px values in modal CSS) | `source/assets/cs/style.css` – modal section uses `var(--color-*)`, `var(--space-*)`, `var(--radius-*)`; only `rgba(0,0,0,0.16)` shadow (no design token for overlay shadow) | implemented |
 | `02-§19.16` | The modal is implemented in vanilla JavaScript; no library or framework is added | 03-ARCHITECTURE.md §8 | — (code review: confirm no new npm dependencies for modal logic) | `lagg-till.js` – pure DOM manipulation; no new dependencies in `package.json` | implemented |
 | `02-§19.17` | The existing #result section is removed; the modal is the sole post-submission feedback mechanism | 03-ARCHITECTURE.md §8 | ADD-01 | `source/build/render-add.js` – `#result` section removed; `#submit-modal` added in its place | covered |
+| `02-§20.1` | When edit-form validation passes and submission begins, all form inputs and the submit button are immediately disabled | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.2` | Disabled edit-form elements are visually distinct (reduced opacity / grayed out) | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.3` | After edit-form submission begins, a modal dialog opens over the page before the fetch begins | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.4` | The edit modal displays a spinner and the text "Sparar till GitHub…" while the fetch is in progress | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.5` | The edit modal carries role="dialog", aria-modal="true", and aria-labelledby pointing to its heading | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.6` | Keyboard focus is trapped inside the edit modal while it is open | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.7` | The page behind the edit modal is not scrollable while the modal is open | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.8` | On success, the edit modal shows the activity title, "Aktiviteten är uppdaterad!", and a "Gå till schemat →" link | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.9` | On error, the edit modal shows the error message in Swedish and a "Försök igen" button | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.10` | Clicking "Försök igen" on the edit modal closes it and re-enables all form fields (input data preserved) | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.11` | The edit modal uses only CSS custom properties from 07-DESIGN.md §7 — no hardcoded colors or spacing | 07-DESIGN.md §7 | — | — | gap |
+| `02-§20.12` | The edit modal is implemented in vanilla JavaScript; no library or framework is added | 03-ARCHITECTURE.md §9 | — | — | gap |
+| `02-§20.13` | The existing #result section in the edit page is removed; the modal is the sole post-submission feedback mechanism | 03-ARCHITECTURE.md §9 | — | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             318
+Total requirements:             331
 Covered (implemented + tested):  58
 Implemented, not tested:        232
-Gap (no implementation):         28
+Gap (no implementation):         41
 Orphan tests (no requirement):    0
 
 Note: 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
@@ -454,6 +467,7 @@ Previous: 17 requirements added for add-activity submit UX flow (02-§19.1–19.
 End time is now required everywhere (add form, edit form, data contract).
 02-§9.4, 05-§3.1, 05-§4.3, 02-§18.25 all moved to covered (VLD-27..32).
 02-§18.40 added and implemented: ownerName crash fix.
+13 requirements added for edit-activity submit UX flow (02-§20.1–20.13); all gap.
 ```
 
 ---
