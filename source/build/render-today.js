@@ -1,6 +1,7 @@
 'use strict';
 
 const { escapeHtml, toDateString } = require('./render');
+const { pageFooter } = require('./layout');
 
 /**
  * Renders the "Dagens schema" page.
@@ -8,7 +9,7 @@ const { escapeHtml, toDateString } = require('./render');
  * Uses display-mode (dark) styling for screen/projector use.
  * No navigation – clean display layout with QR code sidebar.
  */
-function renderTodayPage(camp, events, qrSvg) {
+function renderTodayPage(camp, events, qrSvg, footerHtml = '') {
   const campName = escapeHtml(camp.name);
 
   const eventsJson = JSON.stringify(
@@ -51,6 +52,7 @@ function renderTodayPage(camp, events, qrSvg) {
 
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Dagens schema'; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true;</script>
   <script src="events-today.js"></script>
+${pageFooter(footerHtml)}
 </body>
 </html>
 `;

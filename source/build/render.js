@@ -1,6 +1,6 @@
 'use strict';
 
-const { pageNav } = require('./layout');
+const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml, formatDate } = require('./utils');
 
 /**
@@ -86,7 +86,7 @@ function renderDaySection(date, dayEvents) {
   ].join('\n');
 }
 
-function renderSchedulePage(camp, events) {
+function renderSchedulePage(camp, events, footerHtml = '') {
   const { dates, byDate } = groupAndSortEvents(events);
   const daySections = dates.map((date) => renderDaySection(date, byDate[date])).join('\n\n');
   const campName = escapeHtml(camp.name);
@@ -107,6 +107,7 @@ ${pageNav('schema.html')}
 
 ${daySections}
   <script src="session.js"></script>
+${pageFooter(footerHtml)}
 </body>
 </html>
 `;
