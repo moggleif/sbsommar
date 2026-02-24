@@ -57,7 +57,6 @@
           responsible:   responsible,
           description:   els.description.value,
           link:          els.link.value.trim(),
-          ownerName:     els.ownerName.value.trim(),
           cookieConsent: consentGiven,
         }),
       })
