@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 implemented and covered).
+Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 implemented and covered; event data CI pipeline — 02-§23.1–23.13 added as gap).
 
 ---
 
@@ -459,16 +459,29 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `02-§22.4` | No render function or template contains literal footer markup — `footer.md` is the single source of truth | 03-ARCHITECTURE.md §4b | — (code review: no hardcoded footer text in any render function) | Convention enforced by single-source architecture | implemented |
 | `02-§22.5` | If `footer.md` is missing at build time, all pages render with an empty footer and the build does not crash | 03-ARCHITECTURE.md §4b | FTR-01, FTR-05, FTR-07, FTR-09, FTR-11, FTR-13, FTR-15, FTR-17 | `source/build/build.js` – `fs.existsSync()` fallback to `''`; `pageFooter('')` returns `''` | covered |
 | `02-§22.6` | Updating `footer.md` and running the build changes the footer on all pages without modifying any other file | 03-ARCHITECTURE.md §4b | — (follows from §22.3; no separate test needed) | Verified structurally: `footerHtml` flows from `footer.md` through `convertMarkdown()` into every page | implemented |
+| `02-§23.1` | CI must parse and structurally validate the changed event YAML file on event-branch PRs before merge | 03-ARCHITECTURE.md §11 | LNT-01 | — | gap |
+| `02-§23.2` | Lint validates all required fields (id, title, date, start, end, location, responsible) are present and non-empty | 03-ARCHITECTURE.md §11.1 | LNT-02..09 | — | gap |
+| `02-§23.3` | Lint validates that date is YYYY-MM-DD, calendar-valid, and within the camp's date range | 03-ARCHITECTURE.md §11.1 | LNT-10..13 | — | gap |
+| `02-§23.4` | Lint validates start and end match HH:MM and end is strictly after start | 03-ARCHITECTURE.md §11.1 | LNT-14..17 | — | gap |
+| `02-§23.5` | Lint rejects files with duplicate event IDs | 03-ARCHITECTURE.md §11.1 | LNT-18 | — | gap |
+| `02-§23.6` | Security scan checks free-text fields for injection patterns (script tags, javascript: URIs, on*= attributes, embedding elements, data: HTML URIs) | 03-ARCHITECTURE.md §11.2 | SEC-01..06 | — | gap |
+| `02-§23.7` | Security scan rejects non-empty link values that do not start with http:// or https:// | 03-ARCHITECTURE.md §11.2 | SEC-07..09 | — | gap |
+| `02-§23.8` | Security scan rejects text fields exceeding their character limits | 03-ARCHITECTURE.md §11.2 | SEC-10..13 | — | gap |
+| `02-§23.9` | If the lint job fails, security scan, build, and deploy jobs must not run | 03-ARCHITECTURE.md §11 | — (CI end-to-end: submit a PR with invalid YAML and confirm only lint-yaml check fails) | — | gap |
+| `02-§23.10` | If the security scan job fails, build and deploy jobs must not run | 03-ARCHITECTURE.md §11 | — (CI end-to-end: submit a PR with injected content and confirm lint passes but security fails) | — | gap |
+| `02-§23.11` | On successful validation the pipeline deploys schema.html, idag.html, dagens-schema.html, and events.json to FTP | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: submit a test event and verify pages update on FTP before PR merges) | — | gap |
+| `02-§23.12` | The targeted FTP upload must not modify any files outside the four schema-derived files | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: confirm no other FTP files are touched after an event PR) | — | gap |
+| `02-§23.13` | The targeted deployment must complete while the PR is still open (before auto-merge) | 03-ARCHITECTURE.md §11 | — (CI end-to-end: confirm FTP files update before the PR shows as merged) | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             348
+Total requirements:             361
 Covered (implemented + tested):  78
 Implemented, not tested:        242
-Gap (no implementation):         28
+Gap (no implementation):         41
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -477,6 +490,7 @@ Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–
   (02-§21.3 layout, 02-§21.5 single-open, 02-§21.7 keyboard).
 02-§2.6, 02-§16.2, 02-§16.4 moved from gap to covered.
 11 requirements added for archive timeline (02-§21.1–21.11), all now implemented.
+13 requirements added for event data CI pipeline (02-§23.1–23.13), all currently gap.
 Snapshot updated to include Arkiv nav link.
 13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
