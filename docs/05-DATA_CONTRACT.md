@@ -28,7 +28,8 @@ Rules:
 
 - Exactly one camp may have `active: true` at a time. <!-- 05-§1.2 -->
 - A camp that is `active: true` must not also be `archived: true`. <!-- 05-§1.3 -->
-- The `file` field references a YAML file in `source/data/`.
+- The `file` field references a YAML file in `source/data/`. <!-- 05-§1.4 -->
+- The camp `id` is permanent and must never change after the camp is first created. <!-- 05-§1.5 -->
 
 ---
 
@@ -77,7 +78,7 @@ See §7 for a complete worked example.
 
 ## 3. Required Fields
 
-### Required in the camp file (under `camp:`)
+### Required in the camp file (under `camp:`) <!-- 05-§3.2 -->
 
 - `id`
 - `name`
@@ -102,15 +103,17 @@ See §7 for a complete worked example.
 - `owner`
 - `meta`
 
+The `owner` and `meta` fields are for internal use only and must never be displayed in any public view. <!-- 05-§3.3 -->
+
 ---
 
 ## 4. Date and Time Rules
 
 - `date` must fall within the camp's `start_date` and `end_date` (inclusive). <!-- 05-§4.1 -->
 - `start` must use 24-hour format: `"HH:MM"`. <!-- 05-§4.2 -->
-- `end` must be `null` or `"HH:MM"`.
+- `end` must be `null` or `"HH:MM"`. <!-- 05-§4.4 -->
 - `end`, when present, must be after `start`. <!-- 05-§4.3 -->
-- No timezone handling. All times are local.
+- No timezone handling. All times are local. <!-- 05-§4.5 -->
 
 ---
 

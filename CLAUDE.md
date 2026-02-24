@@ -58,6 +58,7 @@ The implementation must:
 - Reuse layout components across pages. <!-- CL-§2.4 -->
 - Avoid duplicating markup between pages. <!-- CL-§2.5 -->
 - Avoid heavy runtime dependencies. <!-- CL-§2.6 -->
+- Never hardcode data file names; always derive active camp and file paths from `camps.yaml`. <!-- CL-§2.12 -->
 
 Do NOT:
 
@@ -118,6 +119,7 @@ There must be:
 - HTML validation <!-- CL-§5.1 -->
 - CSS linting <!-- CL-§5.2 -->
 - JS linting <!-- CL-§5.3 -->
+- Markdown linting <!-- CL-§5.13 -->
 
 Build must fail if lint fails. <!-- CL-§5.4 -->
 
@@ -183,6 +185,7 @@ Non-technical contributors must be able to:
 - Built output lives in /public. <!-- CL-§9.1 -->
 - GitHub Actions builds and validates. <!-- CL-§9.2 -->
 - Deployment happens only after successful CI. <!-- CL-§9.3 -->
+- For commits that modify only YAML data files in `source/data/`, CI runs build only — lint and tests are skipped. <!-- CL-§9.4 -->
 
 ---
 
