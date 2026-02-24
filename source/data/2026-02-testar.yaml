@@ -522,3 +522,18 @@ events:
   meta:
     created_at: 2026-02-24 16:09
     updated_at: 2026-02-24 16:09
+- id: morgsn-2026-02-24-2258
+  title: morgsn
+  date: '2026-02-24'
+  start: '22:58'
+  end: '23:59'
+  location: GA Stilla hyllan
+  responsible: jag
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 16:26
+    updated_at: 2026-02-24 16:26
