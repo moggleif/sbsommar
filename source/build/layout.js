@@ -27,4 +27,15 @@ function pageNav(activeHref, { includeIdag = true } = {}) {
   return `  <nav class="page-nav">\n${items}\n  </nav>`;
 }
 
-module.exports = { pageNav };
+/**
+ * Wraps pre-converted footer HTML in a <footer> element.
+ * Returns an empty string when footerHtml is empty (file missing fallback).
+ *
+ * @param {string} footerHtml - HTML produced by convertMarkdown from footer.md
+ */
+function pageFooter(footerHtml) {
+  if (!footerHtml) return '';
+  return `  <footer class="site-footer">\n${footerHtml}\n  </footer>`;
+}
+
+module.exports = { pageNav, pageFooter };
