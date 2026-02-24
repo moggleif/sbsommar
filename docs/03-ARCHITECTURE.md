@@ -561,10 +561,13 @@ but not deployed — they are not affected by event data changes.
 Downloads the artefact and uploads only the four files to FTP using `curl`:
 
 ```bash
-curl --upload-file "deploy-output/$FILE" \
+curl --upload-file "deploy-output/public/$FILE" \
      --user "$FTP_USERNAME:$FTP_PASSWORD" \
      "ftp://$FTP_HOST${FTP_TARGET_DIR}$FILE"
 ```
+
+`upload-artifact` preserves the workspace-relative path, so files land at
+`deploy-output/public/<file>` (not `deploy-output/<file>`).
 
 `SamKirkland/FTP-Deploy-Action` is intentionally not used here: that action's
 `dangerous-clean-slate` mode would delete the entire site. `curl` is available on
