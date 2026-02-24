@@ -430,3 +430,19 @@ events:
   meta:
     created_at: 2026-02-24 13:41
     updated_at: 2026-02-24 13:41
+- id: editera-2026-02-24-1509
+  title: editera
+  date: '2026-02-24'
+  start: '15:09'
+  end: '17:00'
+  location: Fotbollsplan
+  responsible: fafds
+  description: |
+    fdsafdsafsa
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 15:38
+    updated_at: 2026-02-24 15:38
