@@ -143,11 +143,117 @@ Key files:
 | `source/data/camps.yaml` | Registry of all camps; determines which is active |
 | `source/data/local.yaml` | Predefined location list — the only place locations are defined |
 | `source/data/YYYY-MM-name.yaml` | Per-camp event files, referenced from `camps.yaml` |
-| `app.js` | Express (Node.js web server) — serves `public/` and handles `POST /add-event` |
+| `app.js` | Express (Node.js web server) — serves `public/`, handles `POST /add-event` and `POST /edit-event` |
+| `public/events.json` | Generated at build time; all public event fields for the active camp |
 
 ---
 
-## 7. Design Philosophy
+## 7. Participant Event Editing — Session Cookie Architecture
+
+### Overview
+
+Participants who submit an event gain temporary ownership of that event,
+tracked through a browser cookie. They can then edit the event until its
+date passes. No server-side session store is used.
+
+### Cookie design
+
+| Property | Value |
+| --- | --- |
+| Name | `sb_session` |
+| Content | JSON array of event ID strings |
+| Max-Age | 7 days (604 800 s) |
+| Secure | Yes (HTTPS only) |
+| SameSite | Strict |
+| HttpOnly | **No** — see note below |
+
+**Why the cookie is not `httpOnly`:**
+The schedule pages are static HTML, pre-rendered at build time. There is no
+server-side rendering at request time. Client-side JavaScript is therefore the
+only layer that can read the cookie and selectively show edit links for events
+the current visitor owns. Making the cookie `httpOnly` would prevent this.
+Security is maintained through server-side validation: the `/edit-event` endpoint
+always verifies that the target event ID appears in the cookie sent with the
+request. An attacker who cannot forge a session cookie they do not have cannot
+edit events they do not own.
+
+### Cookie lifecycle
+
+1. User submits the add-activity form and accepts cookie consent.
+2. Server validates the event, responds with `Set-Cookie: sb_session=…`.
+3. The cookie contains the new event's ID merged with any IDs already in
+   the existing cookie.
+4. On every page load, `source/assets/js/client/session.js` reads the
+   cookie, removes IDs for events whose dates have passed, and writes the
+   cleaned cookie back (or deletes it if the array becomes empty).
+5. Schedule pages read the cookie and attach "Redigera" links to matching
+   event rows.
+
+### /events.json
+
+At build time, `source/build/build.js` writes `public/events.json` — a JSON
+array of all public event fields for the active camp. The edit page
+(`/redigera.html`) fetches this file client-side to pre-populate the edit
+form with current event data.
+
+### Edit endpoint
+
+`POST /edit-event` handles edit submissions:
+
+1. Read and parse the `sb_session` cookie from the request.
+2. Confirm the target event ID is in the cookie array.
+3. Validate the submitted fields (same rules as `POST /add-event`).
+4. Confirm the event's date has not passed.
+5. Read the camp YAML from GitHub, locate the event by ID, replace mutable
+   fields, update `meta.updated_at`.
+6. Commit to an ephemeral branch and open a PR with auto-merge — same
+   pipeline as event additions.
+
+```mermaid
+flowchart TD
+    A[Participant clicks Redigera link] --> B[/redigera.html?id=event-id/]
+    B --> C[JS: check session cookie — owns this ID?]
+    C -->|No| D[Show error — not authorised]
+    C -->|Yes| E[Fetch /events.json · pre-populate form]
+    E --> F[User edits and submits]
+    F --> G["POST /edit-event (server)"]
+    G --> H[Validate cookie ownership + fields + date not passed]
+    H -->|Fail| I[HTTP 400/403]
+    H -->|Pass| J[GitHub API: read camp YAML]
+    J --> K[Replace event fields · update meta.updated_at]
+    K --> L[Commit to ephemeral branch · open PR · enable auto-merge]
+    L --> M[Auto-merge · deploy · schedule updated]
+```
+
+### Cookie consent
+
+Before the session cookie is set, the add-activity page prompts the user for
+cookie consent (first submission only, per browser). The consent decision is
+stored in `localStorage` under the key `sb_cookie_consent`. If the user
+declines, the event is still submitted but no session cookie is set.
+
+### New files
+
+| File | Role |
+| --- | --- |
+| `source/assets/js/client/session.js` | Reads/cleans session cookie; injects edit links on schedule pages |
+| `source/assets/js/client/cookie-consent.js` | Displays consent prompt; writes `localStorage` decision |
+| `source/assets/js/client/redigera.js` | Edit form logic: load event data, validate, submit |
+| `source/build/render-edit.js` | Renders static `/redigera.html` at build time |
+| `source/api/edit-event.js` | Server-side edit handler: ownership check, YAML patch, GitHub PR |
+
+### Modified files
+
+| File | Change |
+| --- | --- |
+| `app.js` | Add `POST /edit-event` route; add cookie-parser middleware |
+| `source/build/build.js` | Build `/redigera.html`; write `public/events.json` |
+| `source/build/render.js` | Add `data-event-id` attribute to event rows |
+| `source/api/github.js` | Add `updateEventInActiveCamp()` function |
+
+---
+
+## 8. Design Philosophy
 
 - YAML is the database
 - Git is the archive
