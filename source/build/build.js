@@ -10,6 +10,7 @@ const { renderEditPage, editApiUrl } = require('./render-edit');
 const { renderTodayPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = require('./render-index');
+const { renderArkivPage } = require('./render-arkiv');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const CONTENT_DIR = path.join(__dirname, '..', 'content');
@@ -114,6 +115,11 @@ async function main() {
   const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL));
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
+
+  const arkivHtml = renderArkivPage(camps);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'arkiv.html'), arkivHtml, 'utf8');
+  const archivedCount = camps.filter((c) => c.archived === true).length;
+  console.log(`Built: public/arkiv.html  (${archivedCount} archived camps)`);
 
   // ── Build events.json — public event data for the edit form ──────────────
   // Contains only fields the edit form needs; owner and meta are excluded.
