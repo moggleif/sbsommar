@@ -1,35 +1,20 @@
 # Sommarläger i Sysslebäck
 
-Familjeläger i Sysslebäck för särskilt begåvade barn och ungdomar.
-Arrangerat ideellt i nära samarbete med RFSB. Deltagande förutsätter medlemskap i föreningen.
-
 ![Klarälven vid Sysslebäck](images/klaralven.webp)
 
-Vi har välkomnat familjer varje sommar sedan 2012 med undantag för 2020.
-Under lägerveckorna upplever vi gemenskap, stimulerande aktiviteter och personlig utveckling i trygg miljö.
+## **Familjeläger i Sysslebäck för särskilt begåvade barn och ungdomar - kommande läger**
 
-I år arrangeras två läger:
+* **Juni-lägret 2026** är 21 juni (söndag) – 28 juni (söndag)
+* **Augusti-lägret 2026** är 2 augusti (söndag) – 9 augusti (söndag)
 
-- **Juni-lägret 2025:** 22 juni (söndag) – 29 juni (söndag)
-- **Augusti-lägret 2025:** 3 augusti (söndag) – 10 augusti (söndag)
+## Lägren hålls på [Sysslebäcks camping](http://www.vildmarkscenter.com/sv/sommar-3/sysslebaeks-camping), läs mer nedan.
 
-Lägret drivs helt på ideell basis utan ekonomiska bidrag utifrån.
+Vi arrangerar med stolthet familjeläger för särskilt begåvade barn i Sysslebäck. Lägret är fristående men genomförs i nära samarbete med RFSB, och deltagande förutsätter medlemskap i föreningen.
 
----
+Sedan 2012 (med undantag för 2020) har vi varje sommar välkomnat familjer under veckan som följer efter midsommar. Hos oss får ni uppleva genuin gemenskap, stimulerande aktiviteter och personlig utveckling i en trygg miljö.
 
-## Schema
+Nyhet för i år! För första gången anordnar vi även ett sensommarläger – perfekt för dig som vill njuta av ytterligare en vecka fylld av familjär värme och lärorika upplevelser.
 
-Schemat växer fram under och precis innan lägret. Det är deltagarstyrt och kan förändras.
+Vi arbetar helt ideellt, utan några ekonomiska bidrag. Därför är lägret helt beroende av deltagande vuxnas arbetsinsatser. På lägret är vi alla deltagare i lägret. Det blir vad vi alla gör det till.
 
-"Schema växer fram under och strax innan lägret, precis som tidigare år. Inriktningen är upp till de som väljer att anordna aktiviteter."
-
-- [Lägg till aktivitet](#)
-- [Dagens schema](#)
-- [Veckans schema](#)
-- [Arkiv / Gamla scheman](#)
-
----
-
-## Viktig information
-
-Deltagande är öppet för medlemmar i RFSB, Filurföräldrar GCP Sverige, Begåvade Unga och Tankesällskapet.
+Schema växer fram under och strax innan lägret, precis som tidigare år. Inriktningen är upp till de som väljer att anordna aktiviteter. **Det går inte att säga i förväg vilka aktiviteter som kommer bli av och när de kommer ske.**

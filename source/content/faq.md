@@ -2,28 +2,28 @@
 
 ## När börjar lägret?
 
-Under sommaren är det två läger. De börjar på söndagen och gemensam byggnation sker oftast redan på söndag eftermiddag. Det officiella öppningsmötet hålls på måndag kl. 10:00.
+Under sommaren är det två läger. De börjar på söndagen. Söndagen används för att resa till lägret, gör sig hemmastadd och bygga lägret gemensamt. På eftermiddagen/kvällen är det obligatorisk gemensam byggnation av lägret där alla deltar. Det officiella uppstartsmötet är på måndag morgon klockan 1000. Även om mycket redan hunnit komma igång.
 
 ## När slutar lägret?
 
-Lägren avslutas på söndagen. På lördagskvällen sker gemensam avetablering och umgänge. Söndagen ägnas åt individuell packning och städning.
+Lägren avslutas på söndagen. Lördag kväll är det obligatoriskt där alla gemensamt avetablerar lägret och städar gemensamma ytor och sedan umgås vi runtom lägret. Söndagen är det inviduell städning och hoppackning.
 
 ## Vilka aktiviteter erbjuds på lägret?
 
-Alla aktiviteter är deltagarstyrda och skapas av de som deltar. De flesta aktiviteter är spontana och det finns inget förutbestämt schema.
+Alla aktiviteter är deltagarstyrda. De skapas av deltagare på lägret. De flesta aktiviteterna är spontana.
 
 ## Vilka får delta på lägret?
 
-Öppet för medlemmar i RFSB, Filurföräldrar GCP Sverige, Begåvade Unga och Tankesällskapet.
+Lägret är öppet för medlemmar i RFSB, Filurföräldrar GCP Sverige, Begåvade Unga och Tankesällskapet.
 
 ## Är lägret kopplat till RFSB?
 
-Ja, lägret är självständigt men samarbetar med RFSB och stödjer deras verksamhet.
+Ja, lägret är fristående men samarbetar med RFSB och stödjer deras verksamhet.
 
-## Kan hela familjen följa med?
+## Jag har ett särbegåvat barn, får jag ta med övriga familjemedlemmar?
 
-Ja, hela familjen är välkommen. Samtliga räknas som deltagare, från spädbarn till vuxna över 20 år.
+Ja, det får du. Hela familjen är välkommen. Ofta är det så att övriga barn är det också, men insikten finns inte ännu. Detta enligt Linda Silverman.
 
-## Kan jag komma senare eller åka hem tidigare?
+## Vi kommer inte till start och deltar bara några dagar, hur gör jag då?
 
-Ja, man är välkommen även om man bara är där några dagar. Anmäl dig normalt och ange vilka dagar du planerar att vara med i anmälan.
+Välkomna. Anmäl er som vanligt och skriv i anmälan vilka dagar ni är där. När ni kommer prata med vem som helst för att bli välkomnade. Därefter sök upp lägernissen, de ni välkomnas av hjälper er med detta.
