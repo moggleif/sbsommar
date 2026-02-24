@@ -331,6 +331,13 @@ that requires no login.
 - The session cookie is set only by the server — never written directly by
   client-side JavaScript. <!-- 02-§18.6 -->
 - The cookie name is `sb_session`. <!-- 02-§18.7 -->
+- When the API server and the static site are deployed on different subdomains
+  (e.g. `api.sommar.example.com` and `sommar.example.com`), the session cookie
+  must be set with a `Domain` attribute covering the shared parent domain so that
+  client-side JavaScript running on the static site can read the cookie via
+  `document.cookie`. The domain is supplied via the `COOKIE_DOMAIN` environment
+  variable. If the variable is not set, no `Domain` attribute is included and the
+  cookie is scoped to the API host only (acceptable for single-origin deployments). <!-- 02-§18.41 -->
 
 ### 18.2 Cookie consent
 

@@ -55,7 +55,7 @@ app.post('/add-event', (req, res) => {
   if (consentGiven) {
     const existing = parseSessionIds(req.headers.cookie || '');
     const updated  = mergeIds(existing, eventId);
-    res.setHeader('Set-Cookie', buildSetCookieHeader(updated));
+    res.setHeader('Set-Cookie', buildSetCookieHeader(updated, process.env.COOKIE_DOMAIN));
   }
 
   res.json({ success: true, eventId });

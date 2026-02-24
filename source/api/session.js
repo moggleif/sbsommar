@@ -31,9 +31,12 @@ function parseSessionIds(cookieHeader) {
 // ── buildSetCookieHeader ──────────────────────────────────────────────────────
 
 // Build the Set-Cookie response header value for the session cookie.
-function buildSetCookieHeader(ids) {
+// Pass `domain` (e.g. 'sommar.example.com') when the API and static site
+// are on different subdomains; omit it for single-origin deployments.
+function buildSetCookieHeader(ids, domain) {
   const value = encodeURIComponent(JSON.stringify(ids));
-  return `${COOKIE_NAME}=${value}; Path=/; Max-Age=${MAX_AGE_SECONDS}; Secure; SameSite=Strict`;
+  const domainPart = domain ? `; Domain=${domain}` : '';
+  return `${COOKIE_NAME}=${value}; Path=/; Max-Age=${MAX_AGE_SECONDS}; Secure; SameSite=Strict${domainPart}`;
 }
 
 // ── mergeIds ─────────────────────────────────────────────────────────────────
