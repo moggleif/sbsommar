@@ -104,7 +104,7 @@ describe('renderArkivPage', () => {
   it('ARK-08b: Facebook link is rendered when present', () => {
     const html = renderArkivPage([campA]);
     assert.ok(
-      html.includes('https://www.facebook.com/groups/syssleback2025'),
+      html.includes('href="https://www.facebook.com/groups/syssleback2025"'),
       'should render Facebook href',
     );
   });
