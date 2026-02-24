@@ -328,7 +328,59 @@ element inside `.modal-box`. Tab and Shift+Tab wrap within the modal.
 
 ---
 
-## 9. Design Philosophy
+## 9. Edit-Activity Submit Flow — Progress Modal
+
+The edit-activity submit flow mirrors the add-activity flow (§8) but without a
+consent step, and with success text appropriate for an update rather than a new
+submission.
+
+### Edit submit flow stages
+
+When the user presses "Spara ändringar" and validation passes:
+
+1. **Field lock** — all form inputs and the submit button are disabled
+   immediately via `fieldset.disabled = true`.
+2. **Progress modal** — a modal dialog opens over the page with a spinner and
+   the text "Sparar till GitHub…". The fetch begins.
+3. **Result** — the modal content is replaced with a success or error state
+   depending on the server response.
+
+### Edit form field locking
+
+The edit form wraps all its fields in a `<fieldset>` (same pattern as the add
+form). Setting `fieldset.disabled = true` disables all child inputs and the
+submit button atomically. CSS communicates the locked state visually via
+`opacity` and `cursor: not-allowed` on `fieldset:disabled`.
+
+### Edit progress modal
+
+The modal uses the same `#submit-modal` HTML skeleton and CSS as the add form —
+`role="dialog"`, `aria-modal="true"`, `aria-labelledby="modal-heading"`, focus
+trapping, and `body.modal-open { overflow: hidden }`.
+
+### Edit modal states
+
+| State | Heading | Content |
+| --- | --- | --- |
+| Loading | "Sparar…" | Spinner + "Sparar till GitHub…" |
+| Success | "Aktiviteten är uppdaterad!" | Title, "Den syns i schemat om ungefär en minut.", "Gå till schemat →" link |
+| Error | "Något gick fel" | Error message + "Försök igen" button |
+
+### Edit "Försök igen"
+
+Closes the modal, sets `fieldset.disabled = false`, restores focus to the submit
+button. Form data is preserved so the user can correct and resubmit.
+
+### Edit files affected
+
+| File | Change |
+| --- | --- |
+| `source/build/render-edit.js` | Wrap form fields in `<fieldset>`, remove `#result` section, add `#submit-modal` skeleton |
+| `source/assets/js/client/redigera.js` | Implement lock/modal/state logic |
+
+---
+
+## 10. Design Philosophy
 
 - YAML is the database
 - Git is the archive

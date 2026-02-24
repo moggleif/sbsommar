@@ -450,6 +450,56 @@ that requires no login.
 
 ---
 
+## 20. Edit-Activity Submit Flow
+
+When the user submits the edit-activity form, the submission proceeds through a
+defined sequence: field locking → progress modal → result. This mirrors the
+add-activity submit flow (§19) but without a consent step, and with success text
+and actions appropriate for an edit rather than a new submission.
+
+### 20.1 Field locking
+
+- When validation passes and submission begins, all form inputs (text, date, time,
+  select, textarea) and the submit button are immediately disabled. This prevents
+  edits and duplicate submissions during the async flow. <!-- 02-§20.1 -->
+- Disabled elements are visually distinct from their enabled state (reduced opacity
+  or grayed-out appearance). <!-- 02-§20.2 -->
+
+### 20.2 Progress modal
+
+- After submission begins, a modal dialog opens over the page before the fetch
+  begins. <!-- 02-§20.3 -->
+- The modal displays a loading indicator (spinner or equivalent) and the text
+  "Sparar till GitHub…". <!-- 02-§20.4 -->
+- The modal carries `role="dialog"`, `aria-modal="true"`, and `aria-labelledby`
+  pointing to its heading element. <!-- 02-§20.5 -->
+- Keyboard focus is trapped inside the modal while it is open. <!-- 02-§20.6 -->
+- The page behind the modal is not scrollable while the modal is open. <!-- 02-§20.7 -->
+
+### 20.3 Success state
+
+- On a successful response, the modal shows: the edited activity title, the text
+  "Aktiviteten är uppdaterad! Den syns i schemat om ungefär en minut.", and a
+  primary link "Gå till schemat →" to `schema.html`. <!-- 02-§20.8 -->
+
+### 20.4 Error state
+
+- On an error response or network failure, the modal shows the error message in
+  Swedish and a "Försök igen" button. <!-- 02-§20.9 -->
+- Clicking "Försök igen" closes the modal and re-enables all form fields,
+  allowing the user to correct and resubmit without losing their typed input. <!-- 02-§20.10 -->
+
+### 20.5 Implementation constraints
+
+- The modal uses only CSS custom properties defined in `docs/07-DESIGN.md §7`.
+  No hardcoded colors, spacing, or typography values. <!-- 02-§20.11 -->
+- The modal is implemented in vanilla JavaScript; no library or framework is
+  added. <!-- 02-§20.12 -->
+- The existing `#result` section in the edit-page HTML is removed; the modal is
+  the sole post-submission feedback mechanism for the edit form. <!-- 02-§20.13 -->
+
+---
+
 ## 19. Add-Activity Submit Flow
 
 When validation passes and the user submits the add-activity form, the submission

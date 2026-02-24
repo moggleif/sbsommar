@@ -429,15 +429,28 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (edit-link on idag.html — 02-
 | `02-§19.15` | The modal uses only CSS custom properties from 07-DESIGN.md §7 — no hardcoded colors or spacing | 07-DESIGN.md §7 | — (code review: grep for hardcoded hex/px values in modal CSS) | `source/assets/cs/style.css` – modal section uses `var(--color-*)`, `var(--space-*)`, `var(--radius-*)`; only `rgba(0,0,0,0.16)` shadow (no design token for overlay shadow) | implemented |
 | `02-§19.16` | The modal is implemented in vanilla JavaScript; no library or framework is added | 03-ARCHITECTURE.md §8 | — (code review: confirm no new npm dependencies for modal logic) | `lagg-till.js` – pure DOM manipulation; no new dependencies in `package.json` | implemented |
 | `02-§19.17` | The existing #result section is removed; the modal is the sole post-submission feedback mechanism | 03-ARCHITECTURE.md §8 | ADD-01 | `source/build/render-add.js` – `#result` section removed; `#submit-modal` added in its place | covered |
+| `02-§20.1` | When edit-form validation passes and submission begins, all form inputs and the submit button are immediately disabled | 03-ARCHITECTURE.md §9 | EDIT-02; manual: press "Spara ändringar" and confirm all inputs are disabled before the modal opens | `source/assets/js/client/redigera.js` – `lock()` sets `fieldset.disabled = true` and `submitBtn.disabled = true` | implemented |
+| `02-§20.2` | Disabled edit-form elements are visually distinct (reduced opacity / grayed out) | 03-ARCHITECTURE.md §9 | — (manual: confirm visual appearance of disabled fieldset) | `source/assets/cs/style.css` – `.event-form fieldset:disabled { opacity: 0.5 }` (shared with add form) | implemented |
+| `02-§20.3` | After edit-form submission begins, a modal dialog opens over the page before the fetch begins | 03-ARCHITECTURE.md §9 | EDIT-03; manual: confirm modal opens immediately after pressing "Spara ändringar" | `redigera.js` – `setModalLoading()` called before `fetch()` | implemented |
+| `02-§20.4` | The edit modal displays a spinner and the text "Sparar till GitHub…" while the fetch is in progress | 03-ARCHITECTURE.md §9 | — (manual: confirm spinner and text are visible during submission) | `redigera.js` – `setModalLoading()` sets `.modal-spinner` + `.modal-status`; CSS animates spinner | implemented |
+| `02-§20.5` | The edit modal carries role="dialog", aria-modal="true", and aria-labelledby pointing to its heading | 03-ARCHITECTURE.md §9 | EDIT-04, EDIT-05, EDIT-06 | `source/build/render-edit.js` – `role="dialog" aria-modal="true" aria-labelledby="modal-heading"`; heading has `id="modal-heading"` | covered |
+| `02-§20.6` | Keyboard focus is trapped inside the edit modal while it is open | 03-ARCHITECTURE.md §9 | — (manual: Tab through the modal — focus must not leave it) | `redigera.js` – `trapFocus()` registered on `keydown` when modal opens; removed on close | implemented |
+| `02-§20.7` | The page behind the edit modal is not scrollable while the modal is open | 03-ARCHITECTURE.md §9 | — (manual: confirm body does not scroll when modal is open) | `redigera.js` – `document.body.classList.add('modal-open')`; CSS – `body.modal-open { overflow: hidden }` | implemented |
+| `02-§20.8` | On success, the edit modal shows the activity title, "Aktiviteten är uppdaterad!", and a "Gå till schemat →" link | 03-ARCHITECTURE.md §9 | — (manual: submit a valid edit and confirm modal success content) | `redigera.js` – `setModalSuccess()` sets heading + title + link | implemented |
+| `02-§20.9` | On error, the edit modal shows the error message in Swedish and a "Försök igen" button | 03-ARCHITECTURE.md §9 | — (manual: simulate a server error and confirm modal error content) | `redigera.js` – `setModalError()` sets heading to "Något gick fel" and inserts error message + retry button | implemented |
+| `02-§20.10` | Clicking "Försök igen" on the edit modal closes it and re-enables all form fields (input data preserved) | 03-ARCHITECTURE.md §9 | — (manual: click "Försök igen" and confirm form is enabled with data intact) | `redigera.js` – `modal-retry-btn` click calls `closeModal()`, `unlock()`, `submitBtn.focus()` without resetting the form | implemented |
+| `02-§20.11` | The edit modal uses only CSS custom properties from 07-DESIGN.md §7 — no hardcoded colors or spacing | 07-DESIGN.md §7 | — (code review: confirm modal CSS uses only custom properties) | `source/assets/cs/style.css` – modal CSS shared with add form; uses `var(--color-*)`, `var(--space-*)`, `var(--radius-*)` | implemented |
+| `02-§20.12` | The edit modal is implemented in vanilla JavaScript; no library or framework is added | 03-ARCHITECTURE.md §9 | — (code review: confirm no new npm dependencies for modal logic) | `redigera.js` – pure DOM manipulation; no new dependencies in `package.json` | implemented |
+| `02-§20.13` | The existing #result section in the edit page is removed; the modal is the sole post-submission feedback mechanism | 03-ARCHITECTURE.md §9 | EDIT-01 | `source/build/render-edit.js` – `#result` section removed; `#submit-modal` added in its place | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             318
-Covered (implemented + tested):  58
-Implemented, not tested:        232
+Total requirements:             331
+Covered (implemented + tested):  61
+Implemented, not tested:        242
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
@@ -454,6 +467,9 @@ Previous: 17 requirements added for add-activity submit UX flow (02-§19.1–19.
 End time is now required everywhere (add form, edit form, data contract).
 02-§9.4, 05-§3.1, 05-§4.3, 02-§18.25 all moved to covered (VLD-27..32).
 02-§18.40 added and implemented: ownerName crash fix.
+13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
+3 covered (EDIT-01, EDIT-02 partial, EDIT-04–06): §20.13, §20.1, §20.5.
+10 implemented but browser-only; cannot be unit-tested in Node.js.
 ```
 
 ---
