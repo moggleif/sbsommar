@@ -537,3 +537,18 @@ events:
   meta:
     created_at: 2026-02-24 16:26
     updated_at: 2026-02-24 16:26
+- id: testasfasfs-2026-02-24-1515
+  title: testasfasfs
+  date: '2026-02-24'
+  start: '15:15'
+  end: '16:16'
+  location: Fritidsgården
+  responsible: dxfdsaf
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-24 16:32
+    updated_at: 2026-02-24 16:32
