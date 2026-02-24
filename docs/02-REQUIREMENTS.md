@@ -371,6 +371,18 @@ that requires no login.
   containing the event's stable ID so JavaScript can identify it. <!-- 02-§18.18 -->
 - The "Redigera" link navigates to `/redigera.html?id={eventId}`. <!-- 02-§18.19 -->
 
+### 18.7 Edit links on the Idag today view
+
+- The "Idag" today view (`/idag.html`) also shows a "Redigera" link next to
+  each event the visitor owns and that has not passed — using the same rule and
+  link text as the weekly schedule. <!-- 02-§18.42 -->
+- The events JSON embedded in `idag.html` at build time includes the event's
+  `id` field so client-side JavaScript can associate rendered rows with their
+  stable IDs. <!-- 02-§18.43 -->
+- Event rows rendered dynamically on `idag.html` carry `data-event-id` and
+  `data-event-date` HTML attributes so `session.js` can inject the edit link
+  using the same mechanism as on `schema.html`. <!-- 02-§18.44 -->
+
 ### 18.5 Edit form
 
 - An edit page exists at `/redigera.html`. <!-- 02-§18.20 -->
