@@ -34,8 +34,9 @@ function pageNav(activeHref, { includeIdag = true } = {}) {
  * @param {string} footerHtml - HTML produced by convertMarkdown from footer.md
  */
 function pageFooter(footerHtml) {
-  if (!footerHtml) return '';
-  return `  <footer class="site-footer">\n${footerHtml}\n  </footer>`;
+  const trimmed = (footerHtml || '').trim();
+  if (!trimmed) return '';
+  return `  <footer class="site-footer">\n${trimmed}\n  </footer>`;
 }
 
 module.exports = { pageNav, pageFooter };
