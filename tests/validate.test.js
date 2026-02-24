@@ -3,7 +3,7 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { validateEventRequest } = require('../source/api/validate');
+const { validateEventRequest, validateEditRequest } = require('../source/api/validate');
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -198,6 +198,56 @@ describe('validateEventRequest – optional fields', () => {
     const r = validateEventRequest(valid({ ownerName: [] }));
     assert.strictEqual(r.ok, false);
     assert.ok(r.error.includes('ownerName'));
+  });
+});
+
+// ── validateEditRequest – end time required ────────────────────────────────────
+
+function validEdit(overrides = {}) {
+  return {
+    id: '2025-08-04-frukost',
+    title: 'Frukost',
+    date: '2025-06-22',
+    start: '08:00',
+    end: '09:00',
+    location: 'Matsalen',
+    responsible: 'Alla',
+    ...overrides,
+  };
+}
+
+describe('validateEditRequest – end time required', () => {
+  it('VLD-27: rejects empty end', () => {
+    const r = validateEditRequest(validEdit({ end: '' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('end'));
+  });
+
+  it('VLD-28: rejects absent end', () => {
+    const r = validateEditRequest(validEdit({ end: undefined }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('end'));
+  });
+
+  it('VLD-29: rejects end equal to start', () => {
+    const r = validateEditRequest(validEdit({ start: '09:00', end: '09:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('end'));
+  });
+
+  it('VLD-30: rejects end before start', () => {
+    const r = validateEditRequest(validEdit({ start: '10:00', end: '09:00' }));
+    assert.strictEqual(r.ok, false);
+  });
+
+  it('VLD-31: accepts end one minute after start', () => {
+    const r = validateEditRequest(validEdit({ start: '08:00', end: '08:01' }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-32: accepts a fully valid edit request', () => {
+    const r = validateEditRequest(validEdit());
+    assert.deepStrictEqual(r, { ok: true });
   });
 });
 

@@ -65,8 +65,8 @@ ${pageNav('redigera.html')}
           <input type="time" id="f-start" name="start" required>
         </div>
         <div class="field">
-          <label for="f-end">Sluttid <span class="opt">(valfritt)</span></label>
-          <input type="time" id="f-end" name="end">
+          <label for="f-end">Sluttid <span class="req">*</span></label>
+          <input type="time" id="f-end" name="end" required>
         </div>
       </div>
 
