@@ -443,10 +443,10 @@ that requires no login.
 - The edit form must submit to the `/edit-event` endpoint. The build step derives
   the edit URL from the `API_URL` environment variable by replacing a trailing
   `/add-event` path segment with `/edit-event`; if `API_URL` does not end with
-  `/add-event`, the edit URL falls back to `/edit-event`. <!-- 02-§18.42 -->
+  `/add-event`, the edit URL falls back to `/edit-event`. <!-- 02-§18.44 -->
 - The edit form submission must use `credentials: 'include'` so that the
   `sb_session` cookie is sent to the cross-origin API. Without this the server
-  cannot verify ownership and will reject the request with HTTP 403. <!-- 02-§18.43 -->
+  cannot verify ownership and will reject the request with HTTP 403. <!-- 02-§18.45 -->
 
 ---
 
