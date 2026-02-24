@@ -55,6 +55,16 @@ describe('buildSetCookieHeader', () => {
     const header = buildSetCookieHeader([]);
     assert.ok(header.includes('SameSite=Strict'), `Missing SameSite=Strict in: ${header}`);
   });
+
+  it('SES-14: includes Domain attribute when a domain is provided', () => { // SES-14
+    const header = buildSetCookieHeader(['my-event'], 'sommar.example.com');
+    assert.ok(header.includes('Domain=sommar.example.com'), `Missing Domain= in: ${header}`);
+  });
+
+  it('SES-15: omits Domain attribute when no domain is provided', () => { // SES-15
+    const header = buildSetCookieHeader(['my-event']);
+    assert.ok(!header.includes('Domain='), `Unexpected Domain= in: ${header}`);
+  });
 });
 
 // ── mergeIds ─────────────────────────────────────────────────────────────────
