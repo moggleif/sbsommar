@@ -420,3 +420,65 @@ that requires no login.
   the submission and breaks the consent banner interaction. <!-- 02-§18.40 -->
 
 ---
+
+## 19. Add-Activity Submit Flow
+
+When validation passes and the user submits the add-activity form, the submission
+proceeds through a defined sequence: field locking → optional consent prompt →
+progress modal → result.
+
+### 19.1 Field locking
+
+- When validation passes and submission begins, all form inputs (text, date, time,
+  select, textarea) and the submit button are immediately disabled. This prevents
+  edits and duplicate submissions during the async flow. <!-- 02-§19.1 -->
+- Disabled elements are visually distinct from their enabled state (reduced opacity
+  or grayed-out appearance). <!-- 02-§19.2 -->
+
+### 19.2 Consent prompt
+
+- The consent banner (§18.2) is shown while the form is locked, inserted directly
+  after the disabled submit button, as it is today. <!-- 02-§19.3 -->
+- After the user accepts or declines, the banner removes itself and the submission
+  continues to the progress modal. <!-- 02-§19.4 -->
+
+### 19.3 Progress modal
+
+- After consent is resolved, a modal dialog opens over the page before the fetch
+  begins. <!-- 02-§19.5 -->
+- The modal displays a loading indicator (spinner or equivalent) and the text
+  "Skickar till GitHub…". <!-- 02-§19.6 -->
+- The modal carries `role="dialog"`, `aria-modal="true"`, and `aria-labelledby`
+  pointing to its heading element. <!-- 02-§19.7 -->
+- Keyboard focus is trapped inside the modal while it is open. <!-- 02-§19.8 -->
+- The page behind the modal is not scrollable while the modal is open. <!-- 02-§19.9 -->
+
+### 19.4 Success state
+
+- On a successful response, the modal content changes to show: the submitted
+  activity title, the text "Aktiviteten är tillagd! Den syns i schemat om ungefär
+  en minut.", a primary link "Gå till schemat →" to `schema.html`, and a secondary
+  button "Lägg till en till". <!-- 02-§19.10 -->
+- If the user declined cookie consent, the success state also shows a Swedish note
+  explaining they cannot edit the activity from this browser, and that they can
+  resubmit with consent next time. <!-- 02-§19.11 -->
+- Clicking "Lägg till en till" closes the modal, resets the form, and re-enables
+  all form fields. <!-- 02-§19.12 -->
+
+### 19.5 Error state
+
+- On an error response or network failure, the modal content changes to show the
+  error message in Swedish and a "Försök igen" button. <!-- 02-§19.13 -->
+- Clicking "Försök igen" closes the modal and re-enables all form fields, allowing
+  the user to correct and resubmit without losing their typed input. <!-- 02-§19.14 -->
+
+### 19.6 Implementation constraints
+
+- The modal uses only CSS custom properties defined in `docs/07-DESIGN.md §7`.
+  No hardcoded colors, spacing, or typography values. <!-- 02-§19.15 -->
+- The modal is implemented in vanilla JavaScript; no library or framework is
+  added. <!-- 02-§19.16 -->
+- The existing `#result` section in the page HTML is removed; the modal is the
+  sole post-submission feedback mechanism. <!-- 02-§19.17 -->
+
+---
