@@ -562,6 +562,27 @@ progress modal → result.
 
 ---
 
+## 22. Shared Site Footer
+
+A shared footer must appear at the bottom of every page. Its content is maintained
+in a single Markdown file so non-technical contributors can update it without
+touching any template or layout code.
+
+- Every page produced by the build must include a footer element at the bottom of
+  `<body>`. <!-- 02-§22.1 -->
+- Footer content is maintained in `source/content/footer.md`. <!-- 02-§22.2 -->
+- The build reads `footer.md`, converts it to HTML using the same Markdown pipeline
+  as other content pages, and injects the result into every page via the shared
+  rendering layer. <!-- 02-§22.3 -->
+- There must be no duplicated footer markup in any template or render function —
+  the Markdown file is the single source of truth. <!-- 02-§22.4 -->
+- If `footer.md` does not exist at build time, every page must still render
+  successfully with an empty footer. The build must not crash or exit with an error. <!-- 02-§22.5 -->
+- Updating `footer.md` and running the build must change the footer on all pages
+  without modifying any other file. <!-- 02-§22.6 -->
+
+---
+
 ## 21. Archive Timeline
 
 The archive page (`/arkiv.html`) presents past camps as an interactive vertical
