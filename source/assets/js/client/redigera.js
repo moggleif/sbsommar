@@ -3,14 +3,117 @@
 
   var COOKIE_NAME = 'sb_session';
 
-  var loadingEl = document.getElementById('edit-loading');
-  var errorEl   = document.getElementById('edit-error');
-  var errorMsg  = document.getElementById('edit-error-msg');
-  var sectionEl = document.getElementById('edit-section');
-  var resultEl  = document.getElementById('result');
-  var form      = document.getElementById('edit-form');
-  var errBox    = document.getElementById('form-errors');
-  var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+  var loadingEl    = document.getElementById('edit-loading');
+  var errorEl      = document.getElementById('edit-error');
+  var errorMsg     = document.getElementById('edit-error-msg');
+  var sectionEl    = document.getElementById('edit-section');
+  var form         = document.getElementById('edit-form');
+  var fieldset     = form ? form.querySelector('fieldset') : null;
+  var errBox       = document.getElementById('form-errors');
+  var submitBtn    = form ? form.querySelector('button[type="submit"]') : null;
+  var modal        = document.getElementById('submit-modal');
+  var modalHeading = document.getElementById('modal-heading');
+  var modalContent = document.getElementById('modal-content');
+
+  // ── Utility ──────────────────────────────────────────────────────────────────
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ── Modal helpers ─────────────────────────────────────────────────────────────
+
+  var preFocusEl = null;
+
+  function getFocusable() {
+    return Array.from(
+      modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+    );
+  }
+
+  function trapFocus(e) {
+    if (e.key !== 'Tab') return;
+    var focusable = getFocusable();
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
+  }
+
+  function openModal() {
+    preFocusEl = document.activeElement;
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    modal.addEventListener('keydown', trapFocus);
+    var focusable = getFocusable();
+    if (focusable.length) { focusable[0].focus(); } else { modalHeading.focus(); }
+  }
+
+  function focusFirstInModal() {
+    var focusable = getFocusable();
+    if (focusable.length) focusable[0].focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    modal.removeEventListener('keydown', trapFocus);
+    if (preFocusEl) preFocusEl.focus();
+  }
+
+  // ── Modal states ──────────────────────────────────────────────────────────────
+
+  function setModalLoading() {
+    modalHeading.textContent = 'Sparar…';
+    modalContent.innerHTML =
+      '<div class="modal-spinner" aria-hidden="true"></div>' +
+      '<p class="modal-status">Sparar till GitHub…</p>';
+    openModal();
+  }
+
+  function setModalSuccess(title) {
+    modalHeading.textContent = 'Aktiviteten är uppdaterad!';
+    modalContent.innerHTML =
+      '<p class="intro"><strong>' + escHtml(title) + '</strong>' +
+      ' syns i schemat om ungefär en minut.</p>' +
+      '<div class="success-actions">' +
+        '<a href="schema.html" class="btn-primary">Gå till schemat →</a>' +
+      '</div>';
+    focusFirstInModal();
+  }
+
+  function setModalError(message) {
+    modalHeading.textContent = 'Något gick fel';
+    modalContent.innerHTML =
+      '<p class="form-error-msg">' + escHtml(message) + '</p>' +
+      '<button id="modal-retry-btn" class="btn-primary">Försök igen</button>';
+    focusFirstInModal();
+    document.getElementById('modal-retry-btn').addEventListener('click', function () {
+      closeModal();
+      unlock();
+      submitBtn.focus();
+    });
+  }
+
+  // ── Form lock / unlock ────────────────────────────────────────────────────────
+
+  function lock() {
+    fieldset.disabled = true;
+    submitBtn.disabled = true;
+  }
+
+  function unlock() {
+    fieldset.disabled = false;
+    submitBtn.disabled = false;
+  }
 
   // ── Cookie helper ────────────────────────────────────────────────────────────
 
@@ -134,8 +237,8 @@
       }
 
       errBox.hidden = true;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sparar...';
+      lock();
+      setModalLoading();
 
       fetch(form.dataset.apiUrl || '/edit-event', {
         method: 'POST',
@@ -155,26 +258,14 @@
       })
         .then(function (r) { return r.json(); })
         .then(function (json) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Spara ändringar →';
-
           if (!json.success) {
-            errBox.hidden = false;
-            errBox.innerHTML = '<p>' + (json.error || 'Något gick fel.') + '</p>';
+            setModalError(json.error || 'Något gick fel.');
             return;
           }
-
-          var titleEl = document.getElementById('result-title');
-          if (titleEl) titleEl.textContent = title;
-          sectionEl.hidden = true;
-          resultEl.hidden = false;
-          window.scrollTo(0, 0);
+          setModalSuccess(title);
         })
         .catch(function () {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Spara ändringar →';
-          errBox.hidden = false;
-          errBox.innerHTML = '<p>Något gick fel. Kontrollera din internetanslutning och försök igen.</p>';
+          setModalError('Något gick fel. Kontrollera din internetanslutning och försök igen.');
         });
     });
   }
