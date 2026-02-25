@@ -163,7 +163,7 @@ function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, 
 
   const sidebarHtml = (discordUrl || facebookUrl || countdownTarget)
     ? `\n    <div class="hero-sidebar">${
-      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer">\n        <img src="images/discord_group.webp" alt="Discord">\n      </a>` : ''
+      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer">\n        <img src="images/DiscordLogo.webp" alt="Discord">\n      </a>` : ''
     }${
       facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook">\n      </a>` : ''
     }${countdownHtml}\n    </div>`

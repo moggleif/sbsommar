@@ -139,6 +139,18 @@ describe('hero section – countdown (02-§29.13–29.17)', () => {
   });
 });
 
+// ── Discord icon image (02-§30.24) ──────────────────────────────────────────
+
+describe('hero section – Discord icon image (02-§30.24)', () => {
+  it('HERO-16: Discord link uses DiscordLogo.webp image', () => {
+    const html = renderIndexPage(buildPage());
+    assert.ok(
+      html.includes('src="images/DiscordLogo.webp"'),
+      `Expected DiscordLogo.webp, got: ${html.match(/<img[^>]*Discord[^>]*>/)?.[0] || 'no match'}`,
+    );
+  });
+});
+
 // ── Social links not hardcoded (02-§29.22) ──────────────────────────────────
 
 describe('hero section – links from config (02-§29.22)', () => {

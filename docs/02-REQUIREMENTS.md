@@ -1062,6 +1062,14 @@ and connects visitors to community channels.
 - The countdown area has a subtle background (cream/sand oval or rounded
   rectangle) to visually separate it from the sidebar. <!-- 02-§30.18 -->
 
+### 30.7 Visual refinements
+
+- The countdown background color is `#FAF7EF` (a near-white cream), not
+  semi-transparent. <!-- 02-§30.23 -->
+- The Discord icon uses the image `DiscordLogo.webp`. <!-- 02-§30.24 -->
+- The sidebar is vertically centered alongside the hero image (not
+  top-aligned). <!-- 02-§30.25 -->
+
 ### 30.6 Implementation constraints
 
 - All styling uses CSS custom properties from `docs/07-DESIGN.md §7`.
