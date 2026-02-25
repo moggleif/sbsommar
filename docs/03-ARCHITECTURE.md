@@ -885,11 +885,12 @@ No external dependencies. ~15 lines of JS.
 New classes in `style.css`:
 
 - `.upcoming-camps` — list reset, spacing
-- `.camp-item` — individual camp row
+- `.camp-item` — individual camp row; horizontal flex layout with icon, name, and meta on a single line; no border separators
 - `.camp-check` — the checkbox/checkmark indicator
 - `.camp-past` — green checkmark + `text-decoration: line-through`
-- `.camp-name` — camp name (may be a link)
-- `.camp-meta` — location and date range
+- `.camp-body` — flex row container; `display: flex; align-items: baseline` places name and meta on one line
+- `.camp-name` — camp name (may be a link); inline within `.camp-body`
+- `.camp-meta` — location and date range; inline within `.camp-body`
 - `.camp-info` — information text
 
 All values use CSS custom properties from `07-DESIGN.md §7`.

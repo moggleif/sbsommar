@@ -85,6 +85,7 @@ It must also include a frequently asked questions section. <!-- 02-§3.2 -->
 
 The homepage must feel complete and trustworthy even when no camp is currently active. <!-- 02-§3.3 -->
 When a camp is active or upcoming, the schedule and add-activity links are prominent. <!-- 02-§3.4 -->
+The upcoming-camps list renders each camp as a compact one-liner (icon, name, location, and dates on a single line) with no visual separators between items. <!-- 02-§3.5 -->
 
 **Tone:** Warm, calm, and clear. Written in Swedish. Not corporate. Not promotional.
 The goal is that a parent visiting for the first time leaves thinking:

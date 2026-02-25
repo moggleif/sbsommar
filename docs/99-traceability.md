@@ -125,6 +125,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§3.2` | Homepage includes a collapsible FAQ section | 03-ARCHITECTURE.md §5; `collapsible: true` in `sections.yaml` | RNI-22..28 | `source/build/render-index.js` – `convertMarkdown(…, collapsible: true)` | covered |
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | — | `source/build/build.js` – falls back to most recent camp by `start_date` | implemented |
 | `02-§3.4` | Schedule and add-activity links are prominent when a camp is active or upcoming | 03-ARCHITECTURE.md §3 | — | `source/build/layout.js` – nav always shows all links (not conditionally prominent based on camp state) | implemented |
+| `02-§3.5` | Upcoming-camps list renders each camp as a compact one-liner with no separators | 03-ARCHITECTURE.md §14.6 | CL-01, CL-02, CL-03 (CSS presence); manual: visual check | `source/assets/cs/style.css` – `.camp-item`, `.camp-body` flex layout | covered |
 | `02-§4.1` | Weekly schedule shows all activities for the full camp week, grouped by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `renderSchedulePage()`, `groupAndSortEvents()` | covered |
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
 | `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
@@ -625,8 +626,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 ## Summary
 
 ```text
-Total requirements:             495
-Covered (implemented + tested): 158
+Total requirements:             496
+Covered (implemented + tested): 159
 Implemented, not tested:        334
 Gap (no implementation):          3
 Orphan tests (no requirement):    0
@@ -736,6 +737,9 @@ Matrix cleanup (2026-02-25):
   02-§13.6 / 07-§9.5 moved from gap to implemented:
     native <details>/<summary> accepted as satisfying ARIA requirement;
     archive accordion already uses explicit aria-expanded/aria-controls.
+1 requirement added for compact camp list layout (02-§3.5):
+  covered (CL-01..03): CSS presence tests for flex layout, no border, no display: block.
+  Manual visual check: open homepage and confirm one-liner layout.
 ```
 
 ---

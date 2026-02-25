@@ -1059,21 +1059,15 @@ body.modal-open {
 
 .camp-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.camp-item:last-child {
-  border-bottom: none;
+  padding: var(--space-xs) 0;
 }
 
 .camp-icon {
   flex-shrink: 0;
   font-size: 1.25em;
   line-height: 1;
-  margin-top: 1px;
 }
 
 .camp-icon::after {
@@ -1087,10 +1081,13 @@ body.modal-open {
 .camp-body {
   flex: 1;
   min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
 }
 
 .camp-name {
-  display: block;
   font-weight: 700;
   color: var(--color-navy);
 }
@@ -1114,10 +1111,8 @@ body.modal-open {
 }
 
 .camp-item .camp-meta {
-  display: block;
   font-size: var(--font-size-small);
   color: var(--color-charcoal);
-  margin: 2px 0 0;
 }
 
 .camp-info {
