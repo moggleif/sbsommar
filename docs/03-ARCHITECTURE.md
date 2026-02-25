@@ -117,31 +117,46 @@ No data is ever lost.
 
 At build time, `source/build/render-arkiv.js` produces `public/arkiv.html`.
 
-The data source is `camps.yaml` — no per-camp event files are loaded.
+Data sources:
+
+- `camps.yaml` — camp metadata (name, dates, location, information, link).
+- Per-camp event YAML files (referenced via the `file:` field in `camps.yaml`) —
+  event data for the event list inside each accordion panel.
 
 Steps:
 
 1. Filter `camps` to those with `archived: true`.
 2. Sort descending by `start_date` (newest first).
-3. Render a vertical timeline: each camp is one `<li>` in an `<ol class="timeline">`.
-4. Each timeline item contains:
-   - A `<button>` accordion header showing the camp name and year.
-   - A hidden `<div>` panel with dates, location, information, and Facebook link.
-5. The panel is hidden/shown by toggling `aria-expanded` and `hidden` via
+3. For each archived camp, load its event YAML file (via the `file:` field in
+   `camps.yaml`) and pass the events array to the template.
+4. Render a vertical timeline: each camp is one `<li>` in an `<ol class="timeline">`.
+5. Each timeline item contains:
+   - A `<button>` accordion header showing the camp name, with date range and
+     location in subdued text to the right.
+   - A hidden `<div>` panel with:
+     - Facebook logo link (if `link` is non-empty), using the image at
+       `images/social-facebook-button-blue-icon-small.webp`.
+     - Camp metadata (dates, location).
+     - Information paragraph (if non-empty).
+     - Event list grouped by day, using the same row format as the schedule page.
+6. The panel is hidden/shown by toggling `aria-expanded` and `hidden` via
    `source/assets/js/client/arkiv.js` — no framework.
-6. Only one panel may be open at a time; the JS closes any previously open panel
+7. Only one panel may be open at a time; the JS closes any previously open panel
    before opening the new one.
+8. The JS toggles a CSS class on the active timeline dot to highlight the
+   selected camp on the timeline.
 
 ### Fields used from `camps.yaml`
 
 | Field | Used for |
 | --- | --- |
-| `name` | Accordion header |
-| `start_date` | Date range display; sort key |
-| `end_date` | Date range display |
-| `location` | Location line |
+| `name` | Accordion header (primary text) |
+| `start_date` | Date range display; sort key; header metadata |
+| `end_date` | Date range display; header metadata |
+| `location` | Header metadata (gray text); location line in panel |
 | `information` | Information paragraph (omitted if empty) |
-| `link` | Facebook button (omitted if empty) |
+| `link` | Facebook logo link (omitted if empty) |
+| `file` | Path to per-camp event YAML for event list |
 
 Dates are formatted in Swedish: `D månadsnamn YYYY` (e.g. "22 juni 2025").
 

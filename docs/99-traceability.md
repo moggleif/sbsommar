@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-§1a.1 implemented, 02-§1a.2–1a.3 covered).
+Audit date: 2026-02-24. Last updated: 2026-02-25 (archive page improvements — 02-§21.12–21.30).
 
 ---
 
@@ -455,6 +455,25 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 | `02-§21.9` | Information text is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-07 | `source/build/render-arkiv.js` – `info ? …camp-information… : ''` | covered |
 | `02-§21.10` | Facebook link is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-08 | `source/build/render-arkiv.js` – `link ? …camp-link… : ''` | covered |
 | `02-§21.11` | No blank rows or placeholder text appear for empty fields | 03-ARCHITECTURE.md §4a | ARK-07, ARK-08 | `source/build/render-arkiv.js` – conditional rendering of optional fields | covered |
+| `02-§21.12` | Accordion header shows camp name as primary text with date range and location in subdued gray text | 03-ARCHITECTURE.md §4a | ARK-09 | `source/build/render-arkiv.js` – `.timeline-name` + `.timeline-meta`; `source/assets/cs/style.css` – `.timeline-meta` | covered |
+| `02-§21.13` | Header date range is formatted as `D–D månadsnamn YYYY` | 03-ARCHITECTURE.md §4a | ARK-10 | `source/build/render-arkiv.js` – `formatHeaderDateRange()` | covered |
+| `02-§21.14` | Header location follows date range, separated by `·` | 03-ARCHITECTURE.md §4a | ARK-11 | `source/build/render-arkiv.js` – template `${headerDateRange} · ${location}` | covered |
+| `02-§21.15` | On narrow viewports the header metadata may wrap below the camp name but remains visually subdued | 03-ARCHITECTURE.md §4a | — (manual: resize viewport and verify `.timeline-meta` wraps) | `source/assets/cs/style.css` – `@media (max-width: 690px)` `.timeline-meta` rules | implemented |
+| `02-§21.16` | When a camp accordion is expanded, its timeline dot is visually highlighted (larger, accent color) | 03-ARCHITECTURE.md §4a | — (manual: open an accordion and verify dot grows) | `source/assets/js/client/arkiv.js` – toggles `.active` class; `source/assets/cs/style.css` – `.timeline-dot.active` | implemented |
+| `02-§21.17` | When the accordion is collapsed the dot returns to default size | 03-ARCHITECTURE.md §4a | — (manual: close accordion and verify dot shrinks) | `source/assets/js/client/arkiv.js` – removes `.active` class on close | implemented |
+| `02-§21.18` | Facebook logo image replaces text button when `link` is non-empty | 03-ARCHITECTURE.md §4a | ARK-12 | `source/build/render-arkiv.js` – `<img src="images/social-facebook-button-blue-icon-small.webp">` | covered |
+| `02-§21.19` | Facebook logo is placed at top of panel content near camp metadata | 03-ARCHITECTURE.md §4a | ARK-15 | `source/build/render-arkiv.js` – `linkHtml` rendered before `.camp-meta` | covered |
+| `02-§21.20` | Facebook link opens in a new tab with `target="_blank"` and `rel="noopener noreferrer"` | 03-ARCHITECTURE.md §4a | ARK-14 | `source/build/render-arkiv.js` – `target="_blank" rel="noopener noreferrer"` on `<a>` | covered |
+| `02-§21.21` | Facebook logo image has accessible `alt` text | 03-ARCHITECTURE.md §4a | ARK-13 | `source/build/render-arkiv.js` – `alt="Facebookgrupp"` | covered |
+| `02-§21.22` | Each expanded accordion displays the camp's events from its YAML file, loaded at build time | 03-ARCHITECTURE.md §4a | ARK-16 | `source/build/render-arkiv.js` – `renderEventsSection()`; `source/build/build.js` – loads per-camp YAML into `campEventsMap` | covered |
+| `02-§21.23` | Events are grouped by date with day headings (e.g. "måndag 3 augusti 2025") | 03-ARCHITECTURE.md §4a | ARK-17 | `source/build/render-arkiv.js` – `groupAndSortEvents()` + `formatDate()` headings | covered |
+| `02-§21.24` | Within each date, events are sorted by start time ascending | 03-ARCHITECTURE.md §4a | ARK-18 | `source/build/render-arkiv.js` – `groupAndSortEvents()` sorts by `start` | covered |
+| `02-§21.25` | Event rows use the same visual format as the weekly schedule: time, title, metadata | 03-ARCHITECTURE.md §4a | ARK-19 | `source/build/render-arkiv.js` – `renderArchiveEventRow()` uses `.ev-time`, `.ev-title`, `.ev-meta` | covered |
+| `02-§21.26` | Day headings are plain headings, not collapsible | 03-ARCHITECTURE.md §4a | ARK-21 | `source/build/render-arkiv.js` – `<h3>` headings, no `<details>` | covered |
+| `02-§21.27` | Event rows are flat (not collapsible) — only time, title, and metadata shown | 03-ARCHITECTURE.md §4a | ARK-20 | `source/build/render-arkiv.js` – `<div class="event-row plain">`, no `<details>` | covered |
+| `02-§21.28` | If a camp has no events in its YAML file, the event list section is omitted | 03-ARCHITECTURE.md §4a | ARK-22, ARK-23 | `source/build/render-arkiv.js` – `renderEventsSection()` returns `''` for empty events | covered |
+| `02-§21.29` | Archive page uses the same typography scale, color tokens, and spacing tokens as the rest of the site | 03-ARCHITECTURE.md §4a, 07-DESIGN.md §7 | — (manual: visual comparison) | `source/assets/cs/style.css` – all archive CSS uses design tokens | implemented |
+| `02-§21.30` | Event list styling matches the weekly schedule page in font size, weight, and color | 03-ARCHITECTURE.md §4a | — (manual: visual comparison) | `source/assets/cs/style.css` – reuses `.event-row`, `.ev-time`, `.ev-title`, `.ev-meta` classes | implemented |
 | `02-§22.1` | Every page produced by the build includes a `<footer class="site-footer">` element at the bottom of `<body>` | 03-ARCHITECTURE.md §4b | FTR-02, FTR-04, FTR-06, FTR-08, FTR-10, FTR-12, FTR-14, FTR-16 | `source/build/layout.js` – `pageFooter()`; all render functions | covered |
 | `02-§22.2` | Footer content is maintained in `source/content/footer.md` | 03-ARCHITECTURE.md §4b | — (convention; code review) | `source/content/footer.md` | implemented |
 | `02-§22.3` | The build reads `footer.md`, converts it with `convertMarkdown()`, and injects the result into every page | 03-ARCHITECTURE.md §4b | FTR-03, FTR-04, FTR-06, FTR-08, FTR-10, FTR-12, FTR-14, FTR-16 | `source/build/build.js` – reads `footer.md`, calls `convertMarkdown()`, passes `footerHtml` to all render calls | covered |
@@ -530,9 +549,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 ## Summary
 
 ```text
-Total requirements:             408
-Covered (implemented + tested): 111
-Implemented, not tested:        268
+Total requirements:             427
+Covered (implemented + tested): 125
+Implemented, not tested:        273
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
@@ -586,6 +605,9 @@ End time is now required everywhere (add form, edit form, data contract).
   3 covered (PDT-03..06): 02-§27.4, 02-§27.5, 02-§27.6
   2 implemented (browser-only client validation): 02-§27.2, 02-§27.3
   1 definition (no implementation needed): 02-§27.1
+19 requirements added for archive page improvements (02-§21.12–21.30):
+  14 covered (ARK-09..24): header layout, FB logo, event list.
+  5 implemented (browser-only or manual): responsive, active dot, visual consistency.
 ```
 
 ---
@@ -695,7 +717,8 @@ End time is now required everywhere (add form, edit form, data contract).
 | SES-10..13 | `tests/session.test.js` | `mergeIds` |
 | SES-14..15 | `tests/session.test.js` | `buildSetCookieHeader – domain` |
 | SNP-01..06 | `tests/snapshot.test.js` | `renderSchedulePage` |
-| ARK-01..08 | `tests/render-arkiv.test.js` | `renderArkivPage` |
+| ARK-01..08 | `tests/render-arkiv.test.js` | `renderArkivPage` (original timeline tests) |
+| ARK-09..24 | `tests/render-arkiv.test.js` | `renderArkivPage` (header layout, FB logo, event list) |
 | NAV-01..11 | `tests/nav.test.js` | `pageNav` |
 | ROB-01..07 | `tests/robots.test.js` | `meta robots noindex (02-§1a.2)` |
 | ROB-08..14 | `tests/robots.test.js` | `no discoverability metadata (02-§1a.3)` |

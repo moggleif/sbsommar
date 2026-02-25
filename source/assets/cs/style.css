@@ -931,6 +931,12 @@ body.modal-open {
   margin-top: var(--space-xs);
   position: relative;
   z-index: 1;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.timeline-dot.active {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 3px var(--color-terracotta), 0 0 0 6px rgba(199, 109, 72, 0.25);
 }
 
 .timeline-card {
@@ -966,6 +972,16 @@ body.modal-open {
 
 .timeline-name {
   flex: 1;
+}
+
+.timeline-meta {
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  color: rgba(25, 42, 61, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 50%;
 }
 
 /* Chevron rotates when open */
@@ -1022,16 +1038,45 @@ body.modal-open {
   white-space: pre-line;
 }
 
-.camp-link {
+.camp-fb-link {
   display: inline-block;
-  margin-top: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.camp-fb-logo {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+}
+
+/* Archive event list */
+.archive-events {
+  margin-top: var(--space-sm);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: var(--space-sm);
+}
+
+.archive-day {
+  margin-bottom: var(--space-sm);
+}
+
+.archive-day-heading {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  color: var(--color-navy);
+  text-transform: capitalize;
+  margin: 0 0 var(--space-xs);
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 @media (max-width: 690px) {
   .timeline::before { left: 11px; }
   .timeline-dot { width: 24px; height: 24px; margin-top: 10px; }
   .timeline-item { gap: var(--space-sm); }
-  .timeline-header { padding: var(--space-sm); font-size: var(--font-size-small); }
+  .timeline-header { padding: var(--space-sm); font-size: var(--font-size-small); flex-wrap: wrap; }
+  .timeline-meta { max-width: 100%; white-space: normal; font-size: var(--font-size-nav); }
 }
 
 /* ── Site footer ── */

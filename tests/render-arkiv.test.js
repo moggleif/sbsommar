@@ -42,6 +42,43 @@ const activeCamp = {
   active: true,
 };
 
+// Sample events for testing event list rendering
+const sampleEvents = [
+  {
+    id: 'ev-a1',
+    title: 'Frukost',
+    date: '2025-06-23',
+    start: '08:00',
+    end: '09:00',
+    location: 'Matsalen',
+    responsible: 'Kocken',
+    description: null,
+    link: null,
+  },
+  {
+    id: 'ev-a2',
+    title: 'Fotboll',
+    date: '2025-06-23',
+    start: '10:00',
+    end: '12:00',
+    location: 'Planen',
+    responsible: 'Erik',
+    description: 'Bring your own ball',
+    link: null,
+  },
+  {
+    id: 'ev-b1',
+    title: 'Vandring',
+    date: '2025-06-22',
+    start: '14:00',
+    end: '17:00',
+    location: 'Skogen',
+    responsible: 'Anna',
+    description: null,
+    link: null,
+  },
+];
+
 // ── renderArkivPage ───────────────────────────────────────────────────────────
 
 describe('renderArkivPage', () => {
@@ -123,5 +160,141 @@ describe('renderArkivPage', () => {
     const html = renderArkivPage([xssCamp]);
     assert.ok(!html.includes('<script>alert'), 'should not render unescaped script tag');
     assert.ok(html.includes('&lt;script&gt;'), 'should escape the script tag');
+  });
+
+  // ── 21.4 Header layout ──────────────────────────────────────────────────────
+
+  it('ARK-09 (02-§21.12): header shows camp name and subdued metadata', () => {
+    const html = renderArkivPage([campA]);
+    assert.ok(html.includes('class="timeline-name"'), 'should have timeline-name span');
+    assert.ok(html.includes('class="timeline-meta"'), 'should have timeline-meta span');
+  });
+
+  it('ARK-10 (02-§21.13): header metadata includes date range', () => {
+    const html = renderArkivPage([campA]);
+    // campA: 2025-06-22 to 2025-06-29 → "22–29 juni 2025"
+    assert.ok(html.includes('22'), 'should include start day');
+    assert.ok(html.includes('29'), 'should include end day');
+  });
+
+  it('ARK-11 (02-§21.14): header metadata includes location separated by ·', () => {
+    const html = renderArkivPage([campA]);
+    // The meta span should contain the dot separator and location
+    const metaMatch = html.match(/class="timeline-meta"[^>]*>([\s\S]*?)<\/span>/);
+    assert.ok(metaMatch, 'should find timeline-meta span');
+    assert.ok(metaMatch[1].includes('·'), 'should contain · separator');
+    assert.ok(metaMatch[1].includes('Sysslebäck'), 'should contain location');
+  });
+
+  // ── 21.6 Facebook logo link ──────────────────────────────────────────────────
+
+  it('ARK-12 (02-§21.18): Facebook link uses logo image when link is present', () => {
+    const html = renderArkivPage([campA]);
+    assert.ok(
+      html.includes('social-facebook-button-blue-icon-small.webp'),
+      'should reference the Facebook logo image',
+    );
+    assert.ok(
+      !html.includes('Facebookgrupp →'),
+      'should not render old text button',
+    );
+  });
+
+  it('ARK-13 (02-§21.21): Facebook logo image has alt text', () => {
+    const html = renderArkivPage([campA]);
+    // Find the img tag for the Facebook logo
+    const imgMatch = html.match(/<img[^>]*social-facebook[^>]*>/);
+    assert.ok(imgMatch, 'should have an img tag for the Facebook logo');
+    assert.ok(imgMatch[0].includes('alt='), 'should have an alt attribute');
+  });
+
+  it('ARK-14 (02-§21.20): Facebook link opens in new tab', () => {
+    const html = renderArkivPage([campA]);
+    const linkMatch = html.match(/<a[^>]*facebook\.com[^>]*>/);
+    assert.ok(linkMatch, 'should have a link to Facebook');
+    assert.ok(linkMatch[0].includes('target="_blank"'), 'should open in new tab');
+    assert.ok(linkMatch[0].includes('rel="noopener noreferrer"'), 'should have noopener noreferrer');
+  });
+
+  it('ARK-15 (02-§21.19): Facebook logo is placed near top of panel before camp-meta', () => {
+    const html = renderArkivPage([campA]);
+    const fbPos = html.indexOf('social-facebook');
+    const metaPos = html.indexOf('class="camp-meta"');
+    assert.ok(fbPos > 0, 'should have Facebook logo');
+    assert.ok(metaPos > 0, 'should have camp-meta');
+    assert.ok(fbPos < metaPos, 'Facebook logo should appear before camp-meta');
+  });
+
+  // ── 21.7 Event list in archive ───────────────────────────────────────────────
+
+  it('ARK-16 (02-§21.22): renders events when campEventsMap is provided', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    assert.ok(html.includes('Frukost'), 'should include event title');
+    assert.ok(html.includes('Fotboll'), 'should include second event title');
+    assert.ok(html.includes('Vandring'), 'should include third event title');
+  });
+
+  it('ARK-17 (02-§21.23): events are grouped by date with day headings', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    // Should have day headings with Swedish format
+    assert.ok(html.includes('söndag 22 juni 2025'), 'should have heading for June 22');
+    assert.ok(html.includes('måndag 23 juni 2025'), 'should have heading for June 23');
+  });
+
+  it('ARK-18 (02-§21.24): events within a day are sorted by start time', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    const frukostPos = html.indexOf('Frukost');
+    const fotbollPos = html.indexOf('Fotboll');
+    assert.ok(frukostPos < fotbollPos, 'Frukost (08:00) should appear before Fotboll (10:00)');
+  });
+
+  it('ARK-19 (02-§21.25): event rows contain time, title, and metadata', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    assert.ok(html.includes('class="ev-time"'), 'should have ev-time span');
+    assert.ok(html.includes('class="ev-title"'), 'should have ev-title span');
+    assert.ok(html.includes('class="ev-meta"'), 'should have ev-meta span');
+  });
+
+  it('ARK-20 (02-§21.27): event rows are flat (div, not details)', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    // Archive event rows should be plain divs, never details
+    const archivePanel = html.split('class="timeline-panel"')[1];
+    assert.ok(archivePanel, 'should have a timeline panel');
+    // The event rows inside the panel should be div.event-row, not details.event-row
+    const detailsEventRows = (archivePanel.match(/<details class="event-row/g) || []);
+    assert.strictEqual(detailsEventRows.length, 0, 'should have no <details> event rows in archive');
+  });
+
+  it('ARK-21 (02-§21.26): day headings are not collapsible', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    // Day headings should be h3 or similar, not <details> or <summary>
+    const archivePanel = html.split('class="timeline-panel"')[1];
+    // Should NOT find <details class="day"> or <summary> around day headings
+    const detailsDays = (archivePanel.match(/<details class="day/g) || []);
+    assert.strictEqual(detailsDays.length, 0, 'day sections should not be collapsible');
+  });
+
+  it('ARK-22 (02-§21.28): event list is omitted when camp has no events', () => {
+    const evMap = { [campA.id]: [] };
+    const html = renderArkivPage([campA], '', [], evMap);
+    assert.ok(!html.includes('class="archive-events"'), 'should not have event list section');
+  });
+
+  it('ARK-23 (02-§21.28): event list is omitted when campEventsMap has no entry for camp', () => {
+    const html = renderArkivPage([campA], '', [], {});
+    assert.ok(!html.includes('class="archive-events"'), 'should not have event list section');
+  });
+
+  it('ARK-24: backward-compatible when campEventsMap is not provided', () => {
+    // Existing call pattern without campEventsMap should still work
+    const html = renderArkivPage([campA], '', []);
+    assert.ok(html.includes(campA.name), 'should still render camp name');
+    assert.ok(!html.includes('class="archive-events"'), 'should have no event list');
   });
 });
