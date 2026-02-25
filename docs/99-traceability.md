@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp naming — 02-§21.31–32, 02-§29.1–3).
+Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate cross-refs, status fixes).
 
 ---
 
@@ -131,7 +131,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§4.4` | Daily view allows the user to navigate between days | 03-ARCHITECTURE.md §5 | — | — | gap |
 | `02-§4.5` | Today view (`/idag.html`) shows only today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | — | `source/build/render-idag.js`, `source/assets/js/client/events-today.js` | implemented |
 | `02-§4.6` | Today/Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | — | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` (at `/dagens-schema.html`, not `/idag.html` — see `02-§2.4`) | implemented |
-| `02-§4.7` | Today/Display view requires no interaction; no day navigation controls | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day controls rendered | implemented |
+| `02-§4.7` | Today/Display view requires no interaction; no day navigation controls (see `02-§2.10`) | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day controls rendered | implemented |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | — | No exclusion logic in `source/build/render.js`; CSS handles layout | implemented |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -159,7 +159,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§10.5` | A validation failure results in an HTTP error response; nothing is committed to GitHub | 03-ARCHITECTURE.md §3 | VLD-01..26 (validate logic; no HTTP integration test) | `app.js` – `res.status(400)` before calling `addEventToActiveCamp` | covered |
 | `02-§10.6` | Appended event YAML is indented to match the `events:` list; resulting file is valid YAML | 03-ARCHITECTURE.md §3 | GH-39..43 | `source/api/github.js` – `buildEventYaml(event, indent)` with `indent=2` in `addEventToActiveCamp()` | covered |
 | `02-§11.1` | Activities are always displayed in chronological order (by date, then start time) | 03-ARCHITECTURE.md §5 | RND-28..32, SNP-03 | `source/build/render.js` – `groupAndSortEvents()` | covered |
-| `02-§11.2` | Overlapping activities are allowed; the schedule must remain readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | — | No exclusion logic in `source/build/render.js`; CSS handles layout | implemented |
+| `02-§11.2` | Overlapping activities are allowed; the schedule must remain readable (see `02-§4.8`) | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | — | No exclusion logic in `source/build/render.js`; CSS handles layout | implemented |
 | `02-§12.1` | A newly submitted activity appears in the live schedule within a few minutes | 03-ARCHITECTURE.md §3 (PR auto-merge → deploy pipeline) | — | `source/api/github.js` – `createPullRequest()`, `enableAutoMerge()` | implemented |
 | `02-§12.2` | Admin corrections to YAML are reflected in all schedule views after the next build | 04-OPERATIONS.md (Disaster Recovery) | — | `source/build/build.js` – reads all YAML at build time | implemented |
 | `02-§13.1` | Color contrast is at least 4.5:1 for body text | 07-DESIGN.md §9 | — | `source/assets/cs/style.css` – charcoal (`#3B3A38`) on cream (`#F5EEDF`) (passes WCAG AA; not verified programmatically) | implemented |
@@ -186,11 +186,11 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `05-§6.1` | Event `id` must be unique within the camp file | 06-EVENT_DATA_MODEL.md §4 | GH-01..11 (slugify determinism) | — (no uniqueness check against existing IDs; ID is deterministic but not verified) | gap |
 | `05-§6.2` | Event `id` must be stable and not change after creation | 06-EVENT_DATA_MODEL.md §4 | — | `source/api/github.js` – deterministic `slugify(title)+date+start` on first write; no update path exists | implemented |
 | `07-§7.1` | All CSS uses the custom properties defined at `:root`; no hardcoded colors, spacing, or typography | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – all values use `var(--…)` tokens (not enforced by a linter) | implemented |
-| `07-§9.5` | Accordion items use `aria-expanded` and `aria-controls` ARIA attributes | 07-DESIGN.md §9 | — | `source/build/render.js` – `<details>/<summary>` without explicit `aria-expanded` or `aria-controls` | gap |
+| `07-§9.5` | Accordion items use `aria-expanded` and `aria-controls` ARIA attributes (see `02-§13.6`; archive accordion uses explicit ARIA via `02-§21.6`) | 07-DESIGN.md §9 | — | `source/build/render.js` – `<details>/<summary>` without explicit ARIA (native element provides equivalent accessibility); archive uses `<button>` with `aria-expanded`/`aria-controls` (ARK-04, ARK-05) | gap |
 | `CL-§1.1` | Build output is static HTML/CSS/JS; no server is required to view pages | 03-ARCHITECTURE.md §7 | SNP-01 | `source/build/build.js` – writes to `public/` | covered |
-| `CL-§1.3` | No client-side rendering framework is used | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – plain vanilla JS only | implemented |
-| `CL-§4.1` | Event data has a single source of truth | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml` files; `source/build/build.js` reads exclusively from there | implemented |
-| `CL-§3.2` | Main page sections are authored in Markdown | 03-ARCHITECTURE.md §6 | RNI-01..38 | `source/build/render-index.js` – `convertMarkdown()` | covered |
+| `CL-§1.3` | No client-side rendering framework is used (see `CL-§2.9`) | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – plain vanilla JS only | implemented |
+| `CL-§4.1` | Event data has a single source of truth (see `CL-§2.3`) | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml` files; `source/build/build.js` reads exclusively from there | implemented |
+| `CL-§3.2` | Main page sections are authored in Markdown (see `CL-§2.2`) | 03-ARCHITECTURE.md §6 | RNI-01..38 | `source/build/render-index.js` – `convertMarkdown()` | covered |
 | `CL-§5.1` | HTML validation runs in CI; build fails if HTML is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no HTML linter configured; `ci.yml` runs ESLint and markdownlint only) | gap |
 | `CL-§5.2` | CSS linting runs in CI; build fails if CSS is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no CSS linter configured) | gap |
 | `CL-§5.3` | JavaScript linting runs in CI; build fails if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – `npm run lint` (ESLint) | implemented |
@@ -233,7 +233,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `CL-§5.6` | Event data is validated for required fields | 05-DATA_CONTRACT.md §3 | VLD-04..11 | `source/api/validate.js` – `validateEventRequest()` | covered |
 | `CL-§5.7` | Event data is validated for valid dates | 05-DATA_CONTRACT.md §4 | VLD-12..15 | `source/api/validate.js` – date format check (range check missing — see `05-§4.1`) | implemented |
 | `CL-§5.8` | Event data is validated: end time must be after start time | 05-DATA_CONTRACT.md §4 | VLD-16..20 | `source/api/validate.js` – `end <= start` check | covered |
-| `CL-§5.9` | Event data is validated for duplicate identifiers | 05-DATA_CONTRACT.md §6 | — | — (no uniqueness check before committing — see `05-§6.1`) | gap |
+| `CL-§5.9` | Event data is validated for duplicate identifiers (see `05-§6.1`) | 05-DATA_CONTRACT.md §6 | — | — (no uniqueness check before committing — see `05-§6.1`) | gap |
 | `CL-§5.10` | The site builds locally without errors | 04-OPERATIONS.md (Local Development) | — | `npm run build` on developer machine | implemented |
 | `CL-§5.11` | The site builds in GitHub Actions without errors | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – build step | implemented |
 | `CL-§5.12` | CI fails if the build fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – build step failure blocks merge | implemented |
@@ -260,7 +260,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§5.3` | The `owner` and `meta` fields are never shown in any public view | 05-DATA_CONTRACT.md §3.3 | — | `source/build/render.js` – neither field is referenced in render output | implemented |
 | `02-§8.3` | Locations must be selected from a predefined list | 03-ARCHITECTURE.md §6 | — | `source/build/render-add.js` – `<select>` populated from `local.yaml` | implemented |
 | `02-§8.4` | Participants cannot modify the location list | 03-ARCHITECTURE.md §6 | — | No form UI for adding locations; enforced by absence | implemented |
-| `02-§11.3` | The schedule remains readable when multiple activities overlap | 07-DESIGN.md §6 | — | CSS layout handles overlap; no exclusion logic in render | implemented |
+| `02-§11.3` | The schedule remains readable when multiple activities overlap (see `02-§4.8`) | 07-DESIGN.md §6 | — | CSS layout handles overlap; no exclusion logic in render | implemented |
 | `02-§12.3` | All event submissions are permanently recorded in Git history as a full audit trail | 03-ARCHITECTURE.md §3 | — | `source/api/github.js` – every submission creates a Git commit via the Contents API | implemented |
 | `02-§15.2` | The RSS feed reflects the current state of the schedule | — (no implementation doc) | — | — | gap |
 | `02-§16.4` | The archive must be usable and complete, not a placeholder | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js` – interactive timeline with accordion per camp | covered |
@@ -318,7 +318,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `07-§6.4` | Logo is on the left; nav links on the right | 07-DESIGN.md §6 | — | `source/build/layout.js` – `pageHeader()` HTML structure | implemented |
 | `07-§6.5` | Nav links are uppercase, `12px`, `700` weight, `letter-spacing: 0.08em` | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
 | `07-§6.6` | Active/hover nav state uses terracotta underline or color shift | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
-| `07-§6.7` | Mobile header uses a hamburger menu (full-screen or dropdown) | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | gap |
+| `07-§6.7` | Mobile header uses a hamburger menu (full-screen or dropdown) | 07-DESIGN.md §6 | NAV-10, NAV-11 | `source/build/layout.js` – `.nav-toggle` button; `source/assets/js/client/nav.js` – toggle logic; `source/assets/cs/style.css` – mobile nav rules (see `02-§24.10`–`02-§24.14`) | implemented |
 | `07-§6.8` | Hero section has a large background image (Klarälven river / camp landscape) | 07-DESIGN.md §6 | — | `source/build/render-index.js` – `extractHeroImage()` | implemented |
 | `07-§6.9` | Hero overlay text shows camp name, dates, and a short tagline | 07-DESIGN.md §6 | — | `source/build/render-index.js` | implemented |
 | `07-§6.10` | Hero has one or two CTA buttons | 07-DESIGN.md §6 | — | `source/build/render-index.js` | implemented |
@@ -344,7 +344,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `07-§6.30` | Alternatively, a sage-green label appears above the heading at `12px` uppercase | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
 | `07-§6.31` | Schedule event rows show a bold start time and a lighter end time | 07-DESIGN.md §6 | — | `source/build/render.js` – `renderEventRow()`; `source/assets/cs/style.css` | implemented |
 | `07-§6.32` | Location is shown as small text below the time in event rows | 07-DESIGN.md §6 | — | `source/build/render.js` – `renderEventRow()` | implemented |
-| `07-§6.33` | Event rows may have an optional colored left border to indicate activity type | 07-DESIGN.md §6 | — | — (not implemented; no activity type categorization exists) | gap |
+| `07-§6.33` | Event rows may have an optional colored left border to indicate activity type | 07-DESIGN.md §6 | — | — (deferred: requires an activity-type field in the data model, which is not in scope; the design spec uses "may" — this is optional) | gap |
 | `07-§7.2` | CSS is written for a component only once its HTML structure exists; no speculative CSS | 07-DESIGN.md §7 | — | Convention; assessed through code review | implemented |
 | `07-§7.3` | CSS is organized in one main file: reset → tokens → base → layout → components → utilities | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` | implemented |
 | `07-§7.4` | No CSS preprocessor is used; CSS custom properties are sufficient | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – plain CSS with custom properties | implemented |
@@ -353,11 +353,11 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `07-§8.2` | Stock photography is avoided; real photos from actual camps are preferred | 07-DESIGN.md §8 | — | Assessed through visual review | implemented |
 | `07-§8.3` | Hero image is landscape format, high resolution, dark enough for text overlay | 07-DESIGN.md §8 | — | `source/build/render-index.js` – `extractHeroImage()` | implemented |
 | `07-§8.4` | Testimonial avatars are portrait photos, cropped square, displayed circular | 07-DESIGN.md §8 | — | `source/assets/cs/style.css` – `--radius-full: 50%` | implemented |
-| `07-§8.5` | All images are optimised: responsive `srcset`, WebP format with JPEG fallback | 07-DESIGN.md §8 | — | — (not confirmed; images may not use srcset or WebP) | gap |
+| `07-§8.5` | All images are optimised: responsive `srcset`, WebP format with JPEG fallback (see `CL-§7.4`) | 07-DESIGN.md §8 | — | — (not confirmed; images may not use srcset or WebP) | gap |
 | `07-§9.1` | Color contrast meets WCAG AA minimum `4.5:1` for body text | 07-DESIGN.md §9 | — | Charcoal `#3B3A38` on Cream `#F5EEDF` passes WCAG AA; not verified programmatically | implemented |
-| `07-§9.2` | Interactive elements have visible focus states | 07-DESIGN.md §9 | — | — (explicit `:focus-visible` rules not confirmed in `style.css` — see `02-§13.2`) | gap |
-| `07-§9.3` | Navigation is keyboard accessible | 07-DESIGN.md §9 | — | `source/build/layout.js` – standard `<nav>` and `<a>` elements | implemented |
-| `07-§9.4` | Images have descriptive `alt` text | 07-DESIGN.md §9 | RNI-29..33 | `source/build/render-index.js` – `extractHeroImage()` preserves alt | covered |
+| `07-§9.2` | Interactive elements have visible focus states (see `02-§13.2`) | 07-DESIGN.md §9 | — | — (explicit `:focus-visible` rules not confirmed in `style.css`) | gap |
+| `07-§9.3` | Navigation is keyboard accessible (see `02-§13.3`) | 07-DESIGN.md §9 | — | `source/build/layout.js` – standard `<nav>` and `<a>` elements | implemented |
+| `07-§9.4` | Images have descriptive `alt` text (see `02-§13.4`) | 07-DESIGN.md §9 | RNI-29..33 | `source/build/render-index.js` – `extractHeroImage()` preserves alt | covered |
 | `07-§10.1` | No gradients or drop shadows heavier than specified are used | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` – only `--shadow-card` used | implemented |
 | `07-§10.2` | No animations beyond subtle transitions (`200–300ms`) are used | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` | implemented |
 | `07-§10.3` | No decorative fonts or display typefaces are used | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` – system fonts only | implemented |
@@ -412,7 +412,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§18.38` | The cookie consent prompt must be displayed as a modal dialog (backdrop, focus trap, centered box) reusing the submit-feedback modal's styling and accessibility patterns | 03-ARCHITECTURE.md §7, §8 | — (manual: submit form without prior consent and confirm modal appears with backdrop and focus trap) | `source/assets/js/client/cookie-consent.js` – `showConsentModal()` via `modalApi` from `lagg-till.js` | implemented |
 | `02-§18.39` | The add-activity form has no owner name field; event ownership is established entirely via session cookie | 03-ARCHITECTURE.md §7 | — (manual: confirm no ownerName input in rendered lagg-till.html) | `source/build/render-add.js` – `ownerName` field removed from form | implemented |
 | `02-§18.40` | The add-activity submit handler must only reference form elements that exist in the HTML form; accessing a missing element via `form.elements` returns `undefined` and calling `.value` on it throws a TypeError that aborts submission | 03-ARCHITECTURE.md §7 | — (no automated test: `form.elements` is a browser DOM API not available in Node.js; manual: open `lagg-till.html` in a browser and submit the form — confirm it submits without TypeError and the consent banner appears and responds correctly) | `source/assets/js/client/lagg-till.js` – `ownerName` line removed from `JSON.stringify` body | implemented |
-| `02-§18.44` | The edit form must submit to the `/edit-event` endpoint; the build derives the edit URL from `API_URL` by replacing a trailing `/add-event` with `/edit-event`, falling back to `/edit-event` | 03-ARCHITECTURE.md §7 | BUILD-01..04 | `source/build/render-edit.js` – `editApiUrl()`; `source/build/build.js` – passes `editApiUrl(process.env.API_URL)` | covered |
+| `02-§18.46` | The edit form must submit to the `/edit-event` endpoint; the build derives the edit URL from `API_URL` by replacing a trailing `/add-event` with `/edit-event`, falling back to `/edit-event` | 03-ARCHITECTURE.md §7 | BUILD-01..04 | `source/build/render-edit.js` – `editApiUrl()`; `source/build/build.js` – passes `editApiUrl(process.env.API_URL)` | covered |
 | `02-§18.45` | The edit form fetch must use `credentials: 'include'` so the `sb_session` cookie is sent to the cross-origin API | 03-ARCHITECTURE.md §7 | — (manual: open `redigera.html` in a browser, submit an edit, and verify the request carries the cookie and returns HTTP 200) | `source/assets/js/client/redigera.js` – `credentials: 'include'` | implemented |
 | `02-§19.1` | When validation passes and submission begins, all form inputs and the submit button are immediately disabled | 03-ARCHITECTURE.md §8 | ADD-02; manual: press Skicka and confirm all inputs are disabled before the modal opens | `source/assets/js/client/lagg-till.js` – `lock()` sets `fieldset.disabled = true` and `submitBtn.disabled = true` | implemented |
 | `02-§19.2` | Disabled form elements are visually distinct (reduced opacity / grayed out) | 03-ARCHITECTURE.md §8 | — (manual: confirm visual appearance of disabled fieldset) | `source/assets/cs/style.css` – `.event-form fieldset:disabled { opacity: 0.5 }` | implemented |
@@ -597,8 +597,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 ```text
 Total requirements:             471
 Covered (implemented + tested): 153
-Implemented, not tested:        290
-Gap (no implementation):         27
+Implemented, not tested:        291
+Gap (no implementation):         26
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -616,7 +616,7 @@ Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–
 
 Snapshot updated to include Arkiv nav link.
 13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
-02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
+02-§18.46 covered (BUILD-01..04): edit form URL derivation via editApiUrl().
 02-§18.45 implemented (manual): edit form credentials: 'include' for cross-origin API.
 02-§18.41 added and covered: cross-subdomain cookie domain fix (COOKIE_DOMAIN env var).
 6 requirements added for shared site footer (02-§22.1–22.6): 4 covered (FTR tests), 2 implemented (convention + structural).
@@ -669,6 +669,16 @@ End time is now required everywhere (add form, edit form, data contract).
   15 covered (HERO-01..15): layout structure, title, image, social links, countdown.
   7 implemented (browser-only or manual): mobile responsive, rounded corners, icon size,
     countdown background, CSS tokens, minimal JS, image files.
+Matrix cleanup (2026-02-25):
+  07-§6.7 moved from gap to implemented (hamburger menu exists; see 02-§24.10–14, NAV-10, NAV-11).
+  12 duplicate rows annotated with cross-references (see-also notes):
+    02-§4.7→02-§2.10, 02-§11.2→02-§4.8, 02-§11.3→02-§4.8,
+    CL-§1.3→CL-§2.9, CL-§3.2→CL-§2.2, CL-§4.1→CL-§2.3, CL-§5.9→05-§6.1,
+    07-§9.2→02-§13.2, 07-§9.3→02-§13.3, 07-§9.4→02-§13.4, 07-§9.5→02-§13.6,
+    07-§8.5→CL-§7.4.
+  07-§6.33 marked as deferred (optional; requires activity-type data model).
+  Top Gaps list updated: item 8 consolidated with CL-§5.9; item 16 notes
+    native <details> accessibility; item 17 marked deferred.
 ```
 
 ---
@@ -709,15 +719,17 @@ End time is now required everywhere (add form, edit form, data contract).
 7. **`05-§5.1` — Duplicate event uniqueness not enforced**
    The `(title + date + start)` combination is never checked for uniqueness before committing.
 
-8. **`05-§6.1` — Event ID uniqueness not enforced**
+8. **`05-§6.1` / `CL-§5.9` — Event ID uniqueness not enforced**
    Identical submissions produce identical IDs. No check is made against existing IDs in the file.
+   (`CL-§5.9` is a duplicate of this gap — same concern from CLAUDE.md.)
 
 9. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
     No code prevents a camp from being marked both active and archived.
 
-10. **`CL-§5.5` / `CL-§5.9` / `CL-§6.3` — Build-time YAML data validation**
+10. **`CL-§5.5` / `CL-§6.3` — Build-time YAML data validation**
     Manually edited YAML bypasses all validation (required fields, date ranges, duplicate IDs).
     Validation only runs in the API layer when events are submitted through the form.
+    (`CL-§5.9` / `05-§6.1` duplicate ID gap is listed separately in item 8.)
 
 ### Low — tooling, design, and accessibility gaps
 
@@ -736,10 +748,11 @@ End time is now required everywhere (add form, edit form, data contract).
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
 
 16. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
-    `<details>/<summary>` is used without explicit `aria-expanded` or `aria-controls`.
+    `<details>/<summary>` is used on the schedule page without explicit `aria-expanded` or `aria-controls`.
+    Note: `<details>` is natively accessible — browsers announce open/closed state. The archive accordion (`02-§21.6`) uses explicit ARIA and is covered (ARK-04, ARK-05). Consider accepting native `<details>` as sufficient or adding explicit ARIA.
 
-17. **`07-§6.33` — Colored left border for activity type**
-    No activity type categorization exists; colored left borders are not implemented.
+17. **`07-§6.33` — Colored left border for activity type** *(deferred)*
+    The design spec says "may have" (optional). Requires an activity-type field in the data model, which has never been specced. Not actionable without a data model change.
 
 ---
 
