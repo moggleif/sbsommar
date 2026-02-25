@@ -525,6 +525,24 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive page improvements — 
 | `02-§27.5` | `POST /edit-event` rejects submitted past dates with HTTP 400 | 02-REQUIREMENTS.md §27.5 | PDT-05, PDT-06 | `source/api/validate.js` – `isDatePast()` in `validateEditRequest` | covered |
 | `02-§27.6` | Past-date check is in the shared validation module | 02-REQUIREMENTS.md §27.6 | PDT-03..06 | `source/api/validate.js` – single `isDatePast()` function | covered |
 
+| `02-§28.1` | List includes camps where `archived === false` OR `start_date` year matches current year | 02-REQUIREMENTS.md §28.1 | — | — | gap |
+| `02-§28.2` | "Current year" evaluated at page-load time in browser | 02-REQUIREMENTS.md §28.2 | — | — | gap |
+| `02-§28.3` | Camps sorted by `start_date` ascending | 02-REQUIREMENTS.md §28.3 | — | — | gap |
+| `02-§28.4` | Camp is "past" when `end_date` < today | 02-REQUIREMENTS.md §28.4 | — | — | gap |
+| `02-§28.5` | "Today" evaluated client-side using Stockholm time | 02-REQUIREMENTS.md §28.5 | — | — | gap |
+| `02-§28.6` | Past camps shown with green checkmark and strikethrough | 02-REQUIREMENTS.md §28.6 | — | — | gap |
+| `02-§28.7` | Upcoming camps shown with unchecked indicator and normal text | 02-REQUIREMENTS.md §28.7 | — | — | gap |
+| `02-§28.8` | Section uses data from `camps.yaml` | 02-REQUIREMENTS.md §28.8 | — | — | gap |
+| `02-§28.9` | Section heading is "Kommande läger" | 02-REQUIREMENTS.md §28.9 | — | — | gap |
+| `02-§28.10` | Section positioned via `sections.yaml` | 02-REQUIREMENTS.md §28.10 | — | — | gap |
+| `02-§28.11` | Each item shows camp name, location, and date range | 02-REQUIREMENTS.md §28.11 | — | — | gap |
+| `02-§28.12` | Camp name linked if `link` is non-empty | 02-REQUIREMENTS.md §28.12 | — | — | gap |
+| `02-§28.13` | Information text shown when non-empty | 02-REQUIREMENTS.md §28.13 | — | — | gap |
+| `02-§28.14` | Past/upcoming status via client-side script with `data-end` attribute | 02-REQUIREMENTS.md §28.14 | — | — | gap |
+| `02-§28.15` | No daily rebuilds needed for status updates | 02-REQUIREMENTS.md §28.15 | — | — | gap |
+| `02-§28.16` | Uses only CSS custom properties from 07-DESIGN.md | 02-REQUIREMENTS.md §28.16 | — | — | gap |
+| `02-§28.17` | Client-side script is minimal — no framework | 02-REQUIREMENTS.md §28.17 | — | — | gap |
+
 | `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — (manual: run `npm run build` and verify `public/robots.txt` contains `User-agent: *` and `Disallow: /`) | `source/build/build.js` – writes `public/robots.txt` | implemented |
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
 | `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-ARCHITECTURE.md §4c | ROB-08..14 | No discoverability tags in any render file | covered |

@@ -1,4 +1,30 @@
 camps:
+  - id: 2026-08-syssleback
+    name: SB Sommar Augusti 2026
+    start_date: '2026-08-02'
+    end_date: '2026-08-09'
+    opens_for_editing: '2026-07-25'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/syssleback2026"
+    information: |
+      Claude code har nu fixat systemet. Ingen wordpress längre. Ren kod endast för våra behov. Kanske kan vi snart skriva önskemål och det införs nästan automatiskt.
+    file: 2026-08-syssleback.yaml
+    archived: false
+    active: false
+
+  - id: 2026-06-syssleback
+    name: SB Sommar Juni 2026
+    start_date: '2026-06-21'
+    end_date: '2026-06-28'
+    opens_for_editing: '2026-06-17'
+    location: Sysslebäck
+    link: "https://www.facebook.com/groups/syssleback2026"
+    information: |
+      Claude code har nu fixat systemet. Ingen wordpress längre. Ren kod endast för våra behov. Kanske kan vi snart skriva önskemål och det införs nästan automatiskt.
+    file: 2026-06-syssleback.yaml
+    archived: false
+    active: false
+
   - id: 2026-02-testar
     name: SB vinter februari 2026
     start_date: '2026-02-22'

@@ -1,6 +1,7 @@
 'use strict';
 
 const { pageNav, pageFooter } = require('./layout');
+const { toDateString, escapeHtml } = require('./utils');
 
 /**
  * Converts inline Markdown (images, links, bold) to HTML.
@@ -195,4 +196,76 @@ ${pageFooter(footerHtml)}
 `;
 }
 
-module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 };
+const MONTHS_SV_SHORT = [
+  'jan', 'feb', 'mar', 'apr', 'maj', 'jun',
+  'jul', 'aug', 'sep', 'okt', 'nov', 'dec',
+];
+
+function formatShortDate(dateStr) {
+  const d = new Date(toDateString(dateStr) + 'T12:00:00');
+  return `${d.getDate()} ${MONTHS_SV_SHORT[d.getMonth()]}`;
+}
+
+function formatCampDateRange(startStr, endStr) {
+  const end = new Date(toDateString(endStr) + 'T12:00:00');
+  return `${formatShortDate(startStr)} – ${formatShortDate(endStr)} ${end.getFullYear()}`;
+}
+
+/**
+ * Renders the "Kommande läger" section HTML from camps.yaml data.
+ *
+ * @param {Array} allCamps  - full camps array from camps.yaml
+ * @param {number} currentYear - the year to use for filtering (e.g. 2026)
+ * @returns {string} HTML string, or empty string if no camps match
+ */
+function renderUpcomingCampsHtml(allCamps, currentYear) {
+  const camps = allCamps
+    .filter((c) => {
+      if (c.archived !== true) return true;
+      const year = new Date(toDateString(c.start_date) + 'T12:00:00').getFullYear();
+      return year === currentYear;
+    })
+    .sort((a, b) => toDateString(a.start_date).localeCompare(toDateString(b.start_date)));
+
+  if (camps.length === 0) return '';
+
+  const items = camps.map((camp) => {
+    const name = escapeHtml(camp.name || '');
+    const location = escapeHtml(camp.location || '');
+    const dateRange = escapeHtml(formatCampDateRange(camp.start_date, camp.end_date));
+    const endDate = toDateString(camp.end_date);
+    const info = (camp.information || '').trim();
+    const link = (camp.link || '').trim();
+
+    const nameHtml = link
+      ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${name}</a>`
+      : name;
+
+    const infoHtml = info
+      ? `\n      <p class="camp-info">${escapeHtml(info)}</p>`
+      : '';
+
+    return `    <li class="camp-item" data-end="${endDate}">
+      <span class="camp-check" aria-hidden="true"></span>
+      <div class="camp-body">
+        <span class="camp-name">${nameHtml}</span>
+        <span class="camp-meta">${location} · ${dateRange}</span>${infoHtml}
+      </div>
+    </li>`;
+  }).join('\n');
+
+  return `<h2>Kommande läger</h2>
+<ul class="upcoming-camps">
+${items}
+</ul>
+<script>
+(function () {
+  var today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+  document.querySelectorAll('.camp-item[data-end]').forEach(function (el) {
+    if (el.getAttribute('data-end') < today) el.classList.add('camp-past');
+  });
+})();
+</script>`;
+}
+
+module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml };

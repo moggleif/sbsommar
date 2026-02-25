@@ -892,6 +892,91 @@ body.modal-open {
   .field-row { flex-direction: column; gap: 0; }
 }
 
+/* ── Upcoming camps ── */
+
+.upcoming-camps {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-sm) 0 0;
+}
+
+.camp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.camp-item:last-child {
+  border-bottom: none;
+}
+
+.camp-check {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-charcoal);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  font-size: var(--font-size-small);
+  line-height: 1;
+  color: transparent;
+}
+
+.camp-check::after {
+  content: '✔';
+}
+
+.camp-past .camp-check {
+  background: var(--color-sage);
+  border-color: var(--color-sage);
+  color: var(--color-white);
+}
+
+.camp-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.camp-name {
+  display: block;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.camp-name a {
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+.camp-name a:hover {
+  text-decoration: underline;
+}
+
+.camp-past .camp-name {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.camp-item .camp-meta {
+  display: block;
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  margin: 2px 0 0;
+}
+
+.camp-info {
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  margin: var(--space-xs) 0 0;
+  line-height: var(--line-height-body);
+  white-space: pre-line;
+}
+
 /* ── Archive timeline ── */
 
 .timeline {
