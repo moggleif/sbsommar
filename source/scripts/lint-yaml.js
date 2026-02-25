@@ -63,6 +63,11 @@ function validateYaml(content) {
     errors.push(`camp.end_date must be on or after camp.start_date`);
   }
 
+  // Active + archived conflict (05-§1.3)
+  if (camp.active === true && camp.archived === true) {
+    errors.push('camp must not be both active and archived');
+  }
+
   // ── Events ─────────────────────────────────────────────────────────────────
 
   if (!Array.isArray(data.events)) {
@@ -71,6 +76,7 @@ function validateYaml(content) {
   }
 
   const seenIds = new Set();
+  const seenCombos = new Set();
 
   data.events.forEach((event, idx) => {
     const ref = `events[${idx}] (id: ${event.id || 'MISSING'})`;
@@ -89,6 +95,15 @@ function validateYaml(content) {
         errors.push(`${ref}: duplicate id "${event.id}"`);
       }
       seenIds.add(event.id);
+    }
+
+    // Unique (title + date + start) combo (05-§5.1)
+    if (event.title && event.date && event.start) {
+      const combo = `${String(event.title).trim()}|${String(event.date)}|${String(event.start)}`;
+      if (seenCombos.has(combo)) {
+        errors.push(`${ref}: duplicate (title+date+start) kombination "${event.title}" / ${event.date} / ${event.start}`);
+      }
+      seenCombos.add(combo);
     }
 
     // Date format and calendar validity
