@@ -28,6 +28,20 @@ managing location lists. Editing is done directly in YAML files. No admin UI is 
 
 ---
 
+## 1a. Search Engine and Crawler Policy
+
+This site must not be indexed by search engines or crawlers. It is intentionally
+hidden — discoverable only by direct link.
+
+- The build must generate a `robots.txt` file at the site root that disallows all
+  user agents from all paths. <!-- 02-§1a.1 -->
+- Every HTML page must include a `<meta name="robots" content="noindex, nofollow">`
+  tag in the `<head>` section. <!-- 02-§1a.2 -->
+- No sitemap, Open Graph tags, or other discoverability metadata may be added
+  to any page. <!-- 02-§1a.3 -->
+
+---
+
 ## 2. Site Pages
 
 The following pages must exist:
