@@ -183,14 +183,6 @@ async function main() {
 
   const sections = sectionsConfig.sections
     .map((def, i) => {
-      // Special section types that render from data instead of markdown
-      if (def.type === 'upcoming-camps') {
-        const html = renderUpcomingCampsHtml(camps, currentYear);
-        if (!html) return null;
-        const navLabel = def.nav || 'Kommande läger';
-        return { id: def.id, navLabel, html };
-      }
-
       const filePath = path.join(CONTENT_DIR, def.file);
       if (!fs.existsSync(filePath)) {
         console.warn(`WARNING: content file not found: ${def.file}`);
