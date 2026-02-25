@@ -99,7 +99,20 @@ async function main() {
     ? convertMarkdown(fs.readFileSync(footerMdPath, 'utf8'))
     : '';
 
-  const scheduleHtml = renderSchedulePage(camp, events, footerHtml);
+  // ── Load nav sections from content/sections.yaml ──────────────────────────
+  // Resolved early so navSections can be passed to every render function.
+  // Only sections with a nav: label are included.
+  const sectionsConfigPath = path.join(CONTENT_DIR, 'sections.yaml');
+  if (!fs.existsSync(sectionsConfigPath)) {
+    console.error('ERROR: content/sections.yaml not found');
+    process.exit(1);
+  }
+  const sectionsConfig = yaml.load(fs.readFileSync(sectionsConfigPath, 'utf8'));
+  const navSections = (sectionsConfig.sections || [])
+    .filter((def) => def.id && def.nav)
+    .map((def) => ({ id: def.id, navLabel: def.nav }));
+
+  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
@@ -111,19 +124,19 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
   console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
 
-  const idagHtml = renderIdagPage(camp, events, footerHtml);
+  const idagHtml = renderIdagPage(camp, events, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
   console.log(`Built: public/idag.html  (${events.length} events)`);
 
-  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerHtml);
+  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerHtml);
+  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 
-  const arkivHtml = renderArkivPage(camps, footerHtml);
+  const arkivHtml = renderArkivPage(camps, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'arkiv.html'), arkivHtml, 'utf8');
   const archivedCount = camps.filter((c) => c.archived === true).length;
   console.log(`Built: public/arkiv.html  (${archivedCount} archived camps)`);
@@ -144,15 +157,9 @@ async function main() {
   console.log(`Built: public/events.json  (${events.length} events)`);
 
   // ── Render index.html from content/sections.yaml ─────────────────────────
+  // sectionsConfig already loaded above for navSections.
   // Section order, IDs, and optional nav labels are defined in sections.yaml.
   // The first image in the first file is hoisted as the hero banner.
-
-  const sectionsConfigPath = path.join(CONTENT_DIR, 'sections.yaml');
-  if (!fs.existsSync(sectionsConfigPath)) {
-    console.error('ERROR: content/sections.yaml not found');
-    process.exit(1);
-  }
-  const sectionsConfig = yaml.load(fs.readFileSync(sectionsConfigPath, 'utf8'));
 
   let heroSrc = null;
   let heroAlt = null;
@@ -179,7 +186,7 @@ async function main() {
     })
     .filter(Boolean);
 
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml);
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 

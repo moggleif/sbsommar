@@ -7,12 +7,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="page-nav">
-    <a class="nav-link" href="index.html">Hem</a>
-    <a class="nav-link active" href="schema.html">Schema</a>
-    <a class="nav-link" href="idag.html">Idag</a>
-    <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
-    <a class="nav-link" href="arkiv.html">Arkiv</a>
+  <nav class="page-nav" aria-label="Sidnavigation">
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="nav-menu" id="nav-menu">
+      <div class="nav-pages">
+      <a class="nav-link" href="index.html">Hem</a>
+      <a class="nav-link active" href="schema.html">Schema</a>
+      <a class="nav-link" href="idag.html">Idag</a>
+      <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
+      <a class="nav-link" href="arkiv.html">Arkiv</a>
+      </div>
+    </div>
   </nav>
   <h1>Schema – Test Camp 2025</h1>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
@@ -53,6 +62,7 @@
     </div>
   </details>
   <script src="session.js"></script>
+  <script src="nav.js"></script>
 
 </body>
 </html>

@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 implemented and covered; event data CI pipeline — 02-§23.1–23.13 implemented; 8 covered, 5 implemented).
+Audit date: 2026-02-24. Last updated: 2026-02-25 (CI checkout depth fix — CL-§9.5 and 02-§23.14 implemented).
 
 ---
 
@@ -198,6 +198,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `CL-§9.2` | GitHub Actions builds and validates; deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml`, `.github/workflows/deploy.yml` | implemented |
 | `CL-§9.3` | Deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/deploy.yml` – triggered only on push to `main` after CI passes | implemented |
 | `CL-§9.4` | For data-only commits (YAML files only), CI runs build only — lint and tests are skipped | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – data-only path check | implemented |
+| `CL-§9.5` | CI workflows that compare branches must check out with enough git history for the diff to succeed (`fetch-depth: 0`) | 03-ARCHITECTURE.md §11.6 | — (CI end-to-end: open a PR and confirm the diff step succeeds) | `.github/workflows/ci.yml` – `fetch-depth: 0`; `.github/workflows/event-data-deploy.yml` – `fetch-depth: 0` on lint-yaml and security-check | implemented |
 | `CL-§10.1` | Never push directly to `main` | 01-CONTRIBUTORS.md | — | Enforced by branch protection; described in contributor guide | implemented |
 | `CL-§10.2` | At the start of every session, run `git checkout main && git pull && git checkout -b branch-name` before any changes | 01-CONTRIBUTORS.md | — | Developer discipline; documented in `01-CONTRIBUTORS.md` | implemented |
 | `CL-§10.3` | Branch names must be descriptive | 01-CONTRIBUTORS.md | — | Developer convention; no technical enforcement | implemented |
@@ -473,15 +474,31 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `02-§23.11` | On successful validation the pipeline deploys schema.html, idag.html, dagens-schema.html, and events.json to FTP | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: submit a test event and verify pages update on FTP before PR merges) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job uploads the four files via curl | implemented |
 | `02-§23.12` | The targeted FTP upload must not modify any files outside the four schema-derived files | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: confirm no other FTP files are touched after an event PR) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job explicitly names only the four files in the curl loop | implemented |
 | `02-§23.13` | The targeted deployment must complete while the PR is still open (before auto-merge) | 03-ARCHITECTURE.md §11 | — (CI end-to-end: confirm FTP files update before the PR shows as merged) | `.github/workflows/event-data-deploy.yml` – triggered by `pull_request` event (not `push` to main), so it runs on the PR branch before merge | implemented |
+| `02-§23.14` | CI workflows that diff against `main` must check out with sufficient git history for the three-dot diff to find a merge base | 03-ARCHITECTURE.md §11.6 | — (CI end-to-end: open an event PR and confirm the detect-changed-file step succeeds) | `.github/workflows/event-data-deploy.yml` – `fetch-depth: 0` on lint-yaml and security-check checkout steps | implemented |
+| `02-§24.1` | Every page must include the same navigation header | 03-ARCHITECTURE.md §12 | NAV-01, NAV-01a..f | `source/build/layout.js` – `pageNav()`; all render functions accept and pass `navSections` | covered |
+| `02-§24.2` | Navigation appears once per page, before page content | 03-ARCHITECTURE.md §12.1 | NAV-02 | `source/build/layout.js` – `pageNav()` emits a single `<nav>` element | covered |
+| `02-§24.3` | Index page must not have a section-navigation menu below the hero | 03-ARCHITECTURE.md §12.5 | NAV-03 | `source/build/render-index.js` – `<nav class="section-nav">` removed entirely | covered |
+| `02-§24.4` | Navigation contains links to all five main pages | 03-ARCHITECTURE.md §12.1 | NAV-04, NAV-04b..e | `source/build/layout.js` – `pageLinks` array in `pageNav()` | covered |
+| `02-§24.5` | Current page link is visually marked active | 03-ARCHITECTURE.md §12.1 | NAV-05 | `source/build/layout.js` – `active` class appended when `href === activeHref` | covered |
+| `02-§24.6` | Page links are identical on all pages including index | 03-ARCHITECTURE.md §12.1 | NAV-06 | `source/build/layout.js` – single `pageLinks` array; Idag always included (no exclusions) | covered |
+| `02-§24.7` | Navigation includes anchor links to index page sections | 03-ARCHITECTURE.md §12.1 | NAV-07 | `source/build/layout.js` – `sectionRow` rendered when `navSections.length > 0` | covered |
+| `02-§24.8` | Short nav labels defined per section via `nav:` in `sections.yaml` | 03-ARCHITECTURE.md §12.3 | NAV-08 | `source/content/sections.yaml` – `nav:` field on all 12 sections; `build.js` extracts `navSections` | covered |
+| `02-§24.9` | Section links on non-index pages point to `index.html#id` | 03-ARCHITECTURE.md §12.1 | NAV-09, NAV-09b | `source/build/layout.js` – `onIndex` flag switches between `#id` and `index.html#id` | covered |
+| `02-§24.10` | Mobile: navigation collapsed by default, toggled via hamburger | 03-ARCHITECTURE.md §12.1 | — (manual: open on mobile, confirm collapsed by default) | `source/assets/css/style.css` – `.nav-menu` hidden at ≤767 px; `source/assets/js/client/nav.js` – toggles `.is-open` | implemented |
+| `02-§24.11` | Hamburger button has accessible `aria-label` | 03-ARCHITECTURE.md §12.4 | NAV-10 | `source/build/layout.js` – `aria-label="Öppna meny"` on toggle button | covered |
+| `02-§24.12` | Hamburger button uses `aria-expanded` | 03-ARCHITECTURE.md §12.4 | NAV-11 | `source/build/layout.js` – `aria-expanded="false"` on toggle button; `nav.js` updates it on click | covered |
+| `02-§24.13` | Expanded menu closable via Escape key | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – `keydown` listener closes on `Escape` | implemented |
+| `02-§24.14` | Expanded menu closable by clicking outside | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – document `click` listener closes when outside nav | implemented |
+| `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-DESIGN.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | `source/assets/css/style.css` – `.nav-toggle { display: none }` at `@media (min-width: 768px)` | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             361
-Covered (implemented + tested):  86
-Implemented, not tested:        247
+Total requirements:             378
+Covered (implemented + tested):  97
+Implemented, not tested:        253
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
@@ -494,6 +511,9 @@ Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–
 13 requirements added for event data CI pipeline (02-§23.1–23.13):
   8 covered (LNT-01..18, SEC-01..13): 02-§23.1–23.8
   5 implemented (CI workflow, no unit test possible): 02-§23.9–23.13
+15 requirements added for unified navigation (02-§24.1–24.15):
+  11 covered (NAV-01..11): 02-§24.1–24.9, 02-§24.11–24.12
+  4 implemented (CSS/JS mobile/desktop, browser-only): 02-§24.10, 02-§24.13–24.15
 
 Snapshot updated to include Arkiv nav link.
 13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
@@ -514,6 +534,8 @@ End time is now required everywhere (add form, edit form, data contract).
 13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
 3 covered (EDIT-01, EDIT-02 partial, EDIT-04–06): §20.13, §20.1, §20.5.
 10 implemented but browser-only; cannot be unit-tested in Node.js.
+2 requirements added for CI checkout depth (CL-§9.5, 02-§23.14):
+  both implemented (CI workflow config, no unit test possible).
 ```
 
 ---
@@ -585,10 +607,7 @@ End time is now required everywhere (add form, edit form, data contract).
 16. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
     `<details>/<summary>` is used without explicit `aria-expanded` or `aria-controls`.
 
-17. **`07-§6.7` — Mobile hamburger menu**
-    No hamburger/dropdown navigation confirmed for mobile viewports.
-
-18. **`07-§6.33` — Colored left border for activity type**
+17. **`07-§6.33` — Colored left border for activity type**
     No activity type categorization exists; colored left borders are not implemented.
 
 ---
@@ -624,3 +643,4 @@ End time is now required everywhere (add form, edit form, data contract).
 | SES-14..15 | `tests/session.test.js` | `buildSetCookieHeader – domain` |
 | SNP-01..06 | `tests/snapshot.test.js` | `renderSchedulePage` |
 | ARK-01..08 | `tests/render-arkiv.test.js` | `renderArkivPage` |
+| NAV-01..11 | `tests/nav.test.js` | `pageNav` |
