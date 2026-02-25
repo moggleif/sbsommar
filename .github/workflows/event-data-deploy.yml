@@ -31,6 +31,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -43,7 +45,7 @@ jobs:
       - name: Detect changed event YAML file
         id: changed
         run: |
-          git fetch origin main --depth=1
+          git fetch origin main
           CHANGED=$(git diff --name-only origin/main...HEAD \
             | grep '^source/data/' | grep '\.yaml$' | grep -v 'camps\.yaml' | head -1)
           if [ -z "$CHANGED" ]; then
@@ -63,6 +65,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -75,7 +79,7 @@ jobs:
       - name: Detect changed event YAML file
         id: changed
         run: |
-          git fetch origin main --depth=1
+          git fetch origin main
           CHANGED=$(git diff --name-only origin/main...HEAD \
             | grep '^source/data/' | grep '\.yaml$' | grep -v 'camps\.yaml' | head -1)
           echo "yaml_file=$CHANGED" >> $GITHUB_OUTPUT

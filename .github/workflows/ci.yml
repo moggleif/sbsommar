@@ -13,6 +13,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -25,7 +27,7 @@ jobs:
       - name: Detect changed files
         id: changes
         run: |
-          git fetch origin main --depth=1
+          git fetch origin main
           git diff --name-only origin/main...HEAD | grep -qvE '^source/data/' \
             && echo "has_code=true" >> $GITHUB_OUTPUT \
             || echo "has_code=false" >> $GITHUB_OUTPUT
