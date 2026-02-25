@@ -451,7 +451,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§21.5` | Only one accordion item may be open at a time; opening a new item closes any previously open item | 03-ARCHITECTURE.md §4a | — (manual: open two items in browser and verify only one stays open) | `source/assets/js/client/arkiv.js` – closes all other panels before opening new one | implemented |
 | `02-§21.6` | Each accordion header is a `<button>` with `aria-expanded` and `aria-controls` attributes | 03-ARCHITECTURE.md §4a | ARK-04, ARK-05 | `source/build/render-arkiv.js` – `<button class="timeline-header" aria-expanded="false" aria-controls="…">` | covered |
 | `02-§21.7` | Keyboard users can open and close accordion items using Enter or Space | 03-ARCHITECTURE.md §4a | — (manual: tab to header and press Enter or Space) | Native `<button>` keyboard behaviour; `arkiv.js` handles click event | implemented |
-| `02-§21.8` | Expanded accordion shows information (if set) and Facebook link (if set) | 03-ARCHITECTURE.md §4a | ARK-06 | `source/build/render-arkiv.js` – `renderArkivPage()` renders all fields | gap |
+| `02-§21.8` | Expanded accordion shows information (if set) and Facebook link (if set) — no date/location | 03-ARCHITECTURE.md §4a | ARK-06 | `source/build/render-arkiv.js` – `renderArkivPage()` renders info + FB link, no `camp-meta` dl | covered |
 | `02-§21.9` | Information text is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-07 | `source/build/render-arkiv.js` – `info ? …camp-information… : ''` | covered |
 | `02-§21.10` | Facebook link is omitted if empty | 03-ARCHITECTURE.md §4a | ARK-08 | `source/build/render-arkiv.js` – `link ? …camp-link… : ''` | covered |
 | `02-§21.11` | No blank rows or placeholder text appear for empty fields | 03-ARCHITECTURE.md §4a | ARK-07, ARK-08 | `source/build/render-arkiv.js` – conditional rendering of optional fields | covered |
@@ -462,7 +462,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§21.16` | When a camp accordion is expanded, its timeline dot is visually highlighted (larger, accent color) | 03-ARCHITECTURE.md §4a | — (manual: open an accordion and verify dot grows) | `source/assets/js/client/arkiv.js` – toggles `.active` class; `source/assets/cs/style.css` – `.timeline-dot.active` | implemented |
 | `02-§21.17` | When the accordion is collapsed the dot returns to default size | 03-ARCHITECTURE.md §4a | — (manual: close accordion and verify dot shrinks) | `source/assets/js/client/arkiv.js` – removes `.active` class on close | implemented |
 | `02-§21.18` | Facebook logo image replaces text button when `link` is non-empty | 03-ARCHITECTURE.md §4a | ARK-12 | `source/build/render-arkiv.js` – `<img src="images/social-facebook-button-blue-icon-small.webp">` | covered |
-| `02-§21.19` | Facebook logo is placed at top of panel content near camp metadata | 03-ARCHITECTURE.md §4a | ARK-15 | `source/build/render-arkiv.js` – `linkHtml` rendered before `.camp-meta` | covered |
+| `02-§21.19` | Facebook logo is placed at top of panel content, before camp information | 03-ARCHITECTURE.md §4a | ARK-15 | `source/build/render-arkiv.js` – `linkHtml` rendered before `.camp-information` | covered |
 | `02-§21.20` | Facebook link opens in a new tab with `target="_blank"` and `rel="noopener noreferrer"` | 03-ARCHITECTURE.md §4a | ARK-14 | `source/build/render-arkiv.js` – `target="_blank" rel="noopener noreferrer"` on `<a>` | covered |
 | `02-§21.21` | Facebook logo image has accessible `alt` text | 03-ARCHITECTURE.md §4a | ARK-13 | `source/build/render-arkiv.js` – `alt="Facebookgrupp"` | covered |
 | `02-§21.22` | Each expanded accordion displays the camp's events from its YAML file, loaded at build time | 03-ARCHITECTURE.md §4a | ARK-16 | `source/build/render-arkiv.js` – `renderEventsSection()`; `source/build/build.js` – loads per-camp YAML into `campEventsMap` | covered |
@@ -470,9 +470,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§21.24` | Within each date, events are sorted by start time ascending | 03-ARCHITECTURE.md §4a | ARK-18 | `source/build/render-arkiv.js` – `groupAndSortEvents()` sorts by `start` | covered |
 | `02-§21.25` | Event rows use the same visual format as the weekly schedule: time, title, metadata | 03-ARCHITECTURE.md §4a | ARK-19 | `source/build/render-arkiv.js` – `renderArchiveEventRow()` uses `.ev-time`, `.ev-title`, `.ev-meta` | covered |
 | `02-§21.26` | Day headings are plain headings, not collapsible | 03-ARCHITECTURE.md §4a | ARK-21 | `source/build/render-arkiv.js` – `<h3>` headings, no `<details>` | covered |
-| `02-§21.27` | Event rows with `description` or `link` are rendered as expandable `<details>` elements with ℹ️ icon, matching `schema.html` | 03-ARCHITECTURE.md §4a | ARK-20 | — | gap |
-| `02-§21.31` | Date range and location must not be repeated inside the accordion panel (already in header) | 03-ARCHITECTURE.md §4a | — | — | gap |
-| `02-§21.32` | Event rows without `description` or `link` remain flat (`<div class="event-row plain">`) | 03-ARCHITECTURE.md §4a | — | — | gap |
+| `02-§21.27` | Event rows with `description` or `link` are rendered as expandable `<details>` elements with ℹ️ icon, matching `schema.html` | 03-ARCHITECTURE.md §4a | ARK-20 | `source/build/render-arkiv.js` – `renderArchiveEventRow()` renders `<details>` when `hasExtra` | covered |
+| `02-§21.31` | Date range and location must not be repeated inside the accordion panel (already in header) | 03-ARCHITECTURE.md §4a | ARK-26 | `source/build/render-arkiv.js` – no `camp-meta` dl rendered in panel | covered |
+| `02-§21.32` | Event rows without `description` or `link` remain flat (`<div class="event-row plain">`) | 03-ARCHITECTURE.md §4a | ARK-25 | `source/build/render-arkiv.js` – `renderArchiveEventRow()` renders plain `<div>` when no extras | covered |
 | `02-§21.28` | If a camp has no events in its YAML file, the event list section is omitted | 03-ARCHITECTURE.md §4a | ARK-22, ARK-23 | `source/build/render-arkiv.js` – `renderEventsSection()` returns `''` for empty events | covered |
 | `02-§21.29` | Archive page uses the same typography scale, color tokens, and spacing tokens as the rest of the site | 03-ARCHITECTURE.md §4a, 07-DESIGN.md §7 | — (manual: visual comparison) | `source/assets/cs/style.css` – all archive CSS uses design tokens | implemented |
 | `02-§21.30` | Event list styling matches the weekly schedule page in font size, weight, and color | 03-ARCHITECTURE.md §4a | — (manual: visual comparison) | `source/assets/cs/style.css` – reuses `.event-row`, `.ev-time`, `.ev-title`, `.ev-meta` classes | implemented |
@@ -545,9 +545,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§28.16` | Uses only CSS custom properties from 07-DESIGN.md | 03-ARCHITECTURE.md §14.6 | — (manual: inspect `style.css` `.upcoming-camps` section — all values use `--color-*`, `--space-*`, `--font-*`, `--radius-*` tokens) | `source/assets/cs/style.css` – upcoming-camps section | implemented |
 | `02-§28.17` | Client-side script is minimal — no framework | 03-ARCHITECTURE.md §14.5 | — (manual: inline IIFE, 6 lines, no imports) | `source/build/render-index.js` – inline `<script>` | implemented |
 
-| `02-§29.1` | Camp `name` format is `{type} {year} {month}` (e.g. "SB sommar 2026 augusti") | 05-DATA_CONTRACT.md §1 | — | — | gap |
-| `02-§29.2` | Month names in camp names are lowercase (Swedish convention) | 05-DATA_CONTRACT.md §1 | — | — | gap |
-| `02-§29.3` | Camp type name uses sentence case (e.g. "SB sommar", not "SB Sommar") | 05-DATA_CONTRACT.md §1 | — | — | gap |
+| `02-§29.1` | Camp `name` format is `{type} {year} {month}` (e.g. "SB sommar 2026 augusti") | 05-DATA_CONTRACT.md §1 | — (data convention; verified by inspection of `camps.yaml`) | `source/data/camps.yaml` – all camp names follow the format | implemented |
+| `02-§29.2` | Month names in camp names are lowercase (Swedish convention) | 05-DATA_CONTRACT.md §1 | — (data convention) | `source/data/camps.yaml` – all months lowercase | implemented |
+| `02-§29.3` | Camp type name uses sentence case (e.g. "SB sommar", not "SB Sommar") | 05-DATA_CONTRACT.md §1 | — (data convention) | `source/data/camps.yaml` – "SB sommar", "SB vinter" | implemented |
 
 | `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — (manual: run `npm run build` and verify `public/robots.txt` contains `User-agent: *` and `Disallow: /`) | `source/build/build.js` – writes `public/robots.txt` | implemented |
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
@@ -574,9 +574,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 
 ```text
 Total requirements:             449
-Covered (implemented + tested): 134
-Implemented, not tested:        280
-Gap (no implementation):         34
+Covered (implemented + tested): 138
+Implemented, not tested:        283
+Gap (no implementation):         27
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -633,9 +633,10 @@ End time is now required everywhere (add form, edit form, data contract).
   14 covered (ARK-09..24): header layout, FB logo, event list.
   5 implemented (browser-only or manual): responsive, active dot, visual consistency.
 5 requirements added for archive cleanup and camp naming (02-§21.31–32, 02-§29.1–3):
-  all 5 gap (pending implementation).
-  02-§21.8 updated: date/location removed from accordion content spec, moved to gap.
-  02-§21.27 updated: event rows now expandable when description/link present, moved to gap.
+  4 covered (ARK-06, ARK-20, ARK-25, ARK-26): 02-§21.8, 02-§21.27, 02-§21.31, 02-§21.32.
+  3 implemented (data convention): 02-§29.1, 02-§29.2, 02-§29.3.
+  02-§21.8 updated: date/location removed from accordion content.
+  02-§21.27 updated: event rows now expandable when description/link present.
 17 requirements added for upcoming camps on homepage (02-§28.1–28.17):
   10 covered (UC-01..14): filtering, sorting, heading, content, data-end, indicators.
   7 implemented (browser-only or manual): past-marking, Stockholm time, CSS tokens,
