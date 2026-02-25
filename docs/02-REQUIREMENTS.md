@@ -774,3 +774,56 @@ and reduce layout shift. No new client-side JavaScript is required.
   parsing. <!-- 02-§25.6 -->
 
 ---
+
+## 26. Form Time-Gating
+
+The add-activity and edit-activity forms must only be usable during a defined
+period around the active camp. Outside this period, participants cannot create
+or edit activities.
+
+### 26.1 Data model
+
+- Each camp in `camps.yaml` must have an `opens_for_editing` field containing a
+  `YYYY-MM-DD` date. This is the first date on which the forms become
+  available. <!-- 02-§26.1 -->
+- The submission period for a camp runs from `opens_for_editing` through
+  `end_date + 1 day` (inclusive on both ends, compared as dates without
+  timezone). <!-- 02-§26.2 -->
+
+### 26.2 UI behaviour — before the period opens
+
+- When the current date is before `opens_for_editing`, the add-activity form
+  is rendered but visually greyed out (reduced opacity on all form fields). <!-- 02-§26.3 -->
+- The submit button is disabled. <!-- 02-§26.4 -->
+- A message is displayed above the form stating when it opens, e.g.
+  "Formuläret öppnar den 15 februari 2026." <!-- 02-§26.5 -->
+
+### 26.3 UI behaviour — after the period closes
+
+- When the current date is after `end_date + 1 day`, the add-activity form
+  is rendered but visually greyed out (reduced opacity on all form fields). <!-- 02-§26.6 -->
+- The submit button is disabled. <!-- 02-§26.7 -->
+- A message is displayed above the form stating that the camp has ended, e.g.
+  "Lägret är avslutat." <!-- 02-§26.8 -->
+
+### 26.4 UI behaviour — edit form
+
+- The same time-gating rules apply to the edit-activity form
+  (`/redigera.html`). <!-- 02-§26.9 -->
+
+### 26.5 API enforcement
+
+- The `POST /add-event` endpoint must reject requests with HTTP 403 when the
+  current date is outside the `[opens_for_editing, end_date + 1d]`
+  period. <!-- 02-§26.10 -->
+- The `POST /edit-event` endpoint must apply the same check. <!-- 02-§26.11 -->
+- The error response must include a Swedish message explaining why the
+  submission was rejected. <!-- 02-§26.12 -->
+
+### 26.6 Build-time data passing
+
+- The build must embed `opens_for_editing` and `end_date` as `data-` attributes
+  on the form element so client-side JavaScript can evaluate the period at page
+  load without an API call. <!-- 02-§26.13 -->
+
+---
