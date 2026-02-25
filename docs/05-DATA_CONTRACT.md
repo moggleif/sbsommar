@@ -20,7 +20,6 @@ camps:
     opens_for_editing: YYYY-MM-DD  # first date participants can add/edit activities
     location: string     # place name displayed on the archive page
     file: string         # filename in source/data/ (e.g. 2026-06-syssleback.yaml)
-    active: boolean      # true for the current camp; only one at a time
     archived: boolean    # true once the camp has ended
     information: string | null   # optional descriptive text shown on archive page
     link: string | null          # optional URL (e.g. Facebook group) shown on archive page
@@ -34,8 +33,8 @@ edit-activity forms are available. The submission period closes at the end of
 
 Rules:
 
-- Exactly one camp may have `active: true` at a time. <!-- 05-§1.2 -->
-- A camp that is `active: true` must not also be `archived: true`. <!-- 05-§1.3 -->
+- The active camp is derived at build/request time from dates — there is no
+  manual `active` field. See `02-REQUIREMENTS.md §34` for derivation rules. <!-- 05-§1.2 -->
 - The `file` field references a YAML file in `source/data/`. <!-- 05-§1.4 -->
 - The camp `id` is permanent and must never change after the camp is first created. <!-- 05-§1.5 -->
 

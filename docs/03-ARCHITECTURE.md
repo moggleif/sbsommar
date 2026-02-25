@@ -53,12 +53,21 @@ camps:
     end_date: 2026-07-05
     file: 2026-06-syssleback.yaml
     archived: false
-    active: true
 ```
 
 The site never hardcodes file names. It always reads from `camps.yaml` first.
 
-Only one camp should have `active: true` at a time.
+The active camp is **derived at build time and API request time** — there is
+no manual `active` flag. The derivation rules (in priority order):
+
+1. **On dates** — today falls within `start_date..end_date` (inclusive).
+2. **Next upcoming** — nearest future `start_date`.
+3. **Most recent** — latest `end_date`, even if archived.
+
+If two camps overlap, the one with the earlier `start_date` wins.
+
+The derivation logic lives in `source/scripts/resolve-active-camp.js` and is
+shared by `build.js` and the API (`github.js`).
 
 ---
 
@@ -71,7 +80,7 @@ The API server (`app.js`) handles each submission as follows:
 1. Validates the incoming event data.
 2. Responds immediately with a success confirmation — the form does not wait for the rest of the process.
 3. Reads `source/data/camps.yaml` from GitHub via the Contents API.
-4. Finds the active camp and reads its YAML file from GitHub.
+4. Derives the active camp from dates and reads its YAML file from GitHub.
 5. Appends the new event and commits it to a temporary branch. The serialised YAML block is indented to match the existing `events:` list so the file remains valid YAML.
 6. Opens a pull request with auto-merge enabled.
 7. The event data CI pipeline runs (see §11): YAML lint → security scan → build → targeted FTP upload of the four schema files.
@@ -104,10 +113,9 @@ flowchart TD
 
 After camp ends:
 
-1. Set `active: false` for the camp in `source/data/camps.yaml`.
-2. Set `archived: true`.
-3. Commit the final YAML file — it becomes the permanent archive.
-4. Deploy. The site now shows the next active camp, or the most recent archived camp if none is active.
+1. Set `archived: true` for the camp in `source/data/camps.yaml`.
+2. Commit the change — the YAML file becomes the permanent archive.
+3. Deploy. The system automatically derives the next active camp from dates.
 
 No data is ever lost.
 
@@ -280,12 +288,10 @@ the tag as part of its `<head>` block.
 At build time:
 
 1. Load `source/data/camps.yaml`.
-2. Find the camp where `active: true`.
+2. Derive the active camp from dates (see §2 for derivation rules).
 3. Load its YAML file.
 4. Sort events chronologically.
 5. Render HTML pages.
-
-Fallback: if no camp is `active: true`, the camp with the most recent `start_date` is shown.
 
 ---
 
