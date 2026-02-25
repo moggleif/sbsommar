@@ -685,7 +685,7 @@ Reuses the same secrets as `deploy.yml`: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWO
 
 | Workflow | Trigger | Scope |
 | --- | --- | --- |
-| `ci.yml` | All branches + PRs | Lint, test, build (skips lint+test for data-only changes) |
+| `ci.yml` | All branches + PRs | Lint (JS, Markdown, CSS, HTML), test, build (skips lint+test for data-only changes) |
 | `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | Lint YAML + security scan + build + targeted FTP |
 | `deploy.yml` | Push to `main` (ignores `source/data/**.yaml`-only changes) | Full build + clean-slate FTP + SSH restart |
 

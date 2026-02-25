@@ -190,8 +190,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `CL-§1.3` | No client-side rendering framework is used (see `CL-§2.9`) | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – plain vanilla JS only | implemented |
 | `CL-§4.1` | Event data has a single source of truth (see `CL-§2.3`) | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml` files; `source/build/build.js` reads exclusively from there | implemented |
 | `CL-§3.2` | Main page sections are authored in Markdown (see `CL-§2.2`) | 03-ARCHITECTURE.md §6 | RNI-01..38 | `source/build/render-index.js` – `convertMarkdown()` | covered |
-| `CL-§5.1` | HTML validation runs in CI; build fails if HTML is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no HTML linter configured; `ci.yml` runs ESLint and markdownlint only) | gap |
-| `CL-§5.2` | CSS linting runs in CI; build fails if CSS is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no CSS linter configured) | gap |
+| `CL-§5.1` | HTML validation runs in CI; build fails if HTML is invalid (see `02-§32.1`–`02-§32.8`) | 03-ARCHITECTURE.md §11.5; 02-REQUIREMENTS.md §32 | — | — | gap |
+| `CL-§5.2` | CSS linting runs in CI; build fails if CSS is invalid (see `02-§33.1`–`02-§33.8`) | 03-ARCHITECTURE.md §11.5; 02-REQUIREMENTS.md §33 | — | — | gap |
 | `CL-§5.3` | JavaScript linting runs in CI; build fails if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – `npm run lint` (ESLint) | implemented |
 | `CL-§5.5` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | LNT-01..23 | `source/scripts/lint-yaml.js` – validates required fields, dates, time format, camp range, duplicate IDs, unique (title+date+start), active+archived; runs in CI via `event-data-deploy.yml` | covered |
 | `CL-§9.1` | Built output lives in `/public` | 04-OPERATIONS.md (System Overview) | — | `source/build/build.js` – `OUTPUT_DIR = …/public` | implemented |
@@ -606,6 +606,22 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§31.10` | Markdown converter supports h4 headings | — | — (manual: build output check) | `source/build/render-index.js` – `####` pattern added | implemented |
 | `02-§31.11` | All styling uses CSS custom properties | 07-DESIGN.md §7 | — (manual: code review) | `source/assets/cs/style.css` | implemented |
 | `02-§31.12` | No additional runtime JS | — | — (manual: code review) | No new scripts added | implemented |
+| `02-§32.1` | HTML validation uses `html-validate` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.2` | Validation runs on all `public/*.html` after build | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.3` | `lint:html` npm script runs `html-validate` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.4` | CI runs `lint:html` after build step | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.5` | HTML validation failures fail CI | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.6` | HTML validation skipped for data-only commits | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.7` | Configured via `.htmlvalidate.json` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.8` | Rules tuned to accept existing generated HTML | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.1` | CSS linting uses Stylelint with `stylelint-config-standard` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.2` | Linting runs on `source/assets/css/*.css` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.3` | `lint:css` npm script runs Stylelint | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.4` | CI runs `lint:css` alongside existing lint steps | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.5` | CSS lint failures fail CI | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.6` | CSS linting skipped for data-only commits | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.7` | Configured via `.stylelintrc.json` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§33.8` | Rules tuned to accept existing CSS | 03-ARCHITECTURE.md §11.5 | — | — | gap |
 
 ---
 
@@ -727,11 +743,13 @@ Matrix cleanup (2026-02-25):
 
 ### Low — tooling, design, and accessibility gaps
 
-2. **`CL-§5.1` — HTML validation in CI**
+2. **`CL-§5.1` / `02-§32.1`–`02-§32.8` — HTML validation in CI**
     No HTML linter is configured; invalid HTML does not fail the build.
+    Requirements added in §32; implementation in progress.
 
-3. **`CL-§5.2` — CSS linting in CI**
+3. **`CL-§5.2` / `02-§33.1`–`02-§33.8` — CSS linting in CI**
     No CSS linter is configured.
+    Requirements added in §33; implementation in progress.
 
 4. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
     Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
