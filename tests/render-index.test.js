@@ -6,6 +6,7 @@ const assert = require('node:assert/strict');
 // render-index.js exports only renderIndexPage and convertMarkdown publicly.
 // inlineHtml and extractHeroImage / extractH1 are also exported for testing.
 const {
+  renderIndexPage,
   convertMarkdown,
   extractHeroImage,
   extractH1,
@@ -25,9 +26,9 @@ describe('convertMarkdown – inline Markdown', () => {
     assert.ok(html.includes('<a href="https://example.com">Click here</a>'), `Got: ${html}`);
   });
 
-  it('converts an image (![alt](src)) to <img>', () => {
+  it('converts an image (![alt](src)) to <img> with loading="lazy"', () => {
     const html = convertMarkdown('![A cat](cat.jpg)');
-    assert.ok(html.includes('<img src="cat.jpg" alt="A cat" class="content-img">'), `Got: ${html}`);
+    assert.ok(html.includes('<img src="cat.jpg" alt="A cat" class="content-img" loading="lazy">'), `Got: ${html}`);
   });
 
   it('leaves plain text unchanged', () => {
@@ -264,5 +265,75 @@ describe('extractH1', () => {
   it('trims whitespace from heading text', () => {
     const md = '#   Spaces Around   \n\nText.';
     assert.strictEqual(extractH1(md), 'Spaces Around');
+  });
+});
+
+// ── renderIndexPage – image loading performance (02-§25.1–25.4) ─────────────
+
+describe('renderIndexPage – image loading performance (02-§25.1–25.4)', () => {
+  const basePage = {
+    heroSrc: 'images/hero.webp',
+    heroAlt: 'Camp river',
+    sections: [{ id: 'intro', navLabel: 'Intro', html: '<p>Hello</p>' }],
+  };
+
+  it('IMG-01 (02-§25.1): content images have loading="lazy"', () => {
+    const md = '![A photo](images/photo.webp)';
+    const html = convertMarkdown(md);
+    assert.ok(
+      html.includes('loading="lazy"'),
+      `Expected loading="lazy" on content image, got: ${html}`,
+    );
+  });
+
+  it('IMG-02 (02-§25.2): hero image does NOT have loading="lazy"', () => {
+    const html = renderIndexPage(basePage);
+    const heroMatch = html.match(/<img[^>]*class="hero-img"[^>]*>/);
+    assert.ok(heroMatch, 'Expected a hero-img element');
+    assert.ok(
+      !heroMatch[0].includes('loading="lazy"'),
+      `Hero image must not have loading="lazy", got: ${heroMatch[0]}`,
+    );
+  });
+
+  it('IMG-03 (02-§25.3): homepage head includes a preload link for the hero image', () => {
+    const html = renderIndexPage(basePage);
+    const preload = `<link rel="preload" as="image" href="images/hero.webp">`;
+    assert.ok(
+      html.includes(preload),
+      `Expected hero preload link in <head>, got head: ${html.slice(0, 500)}`,
+    );
+    // Must be inside <head>, not <body>
+    const headEnd = html.indexOf('</head>');
+    const preloadPos = html.indexOf(preload);
+    assert.ok(preloadPos < headEnd, 'Preload link must be inside <head>');
+  });
+
+  it('IMG-04 (02-§25.3): preload href is dynamic, not hardcoded', () => {
+    const page = { ...basePage, heroSrc: 'images/custom-hero.webp' };
+    const html = renderIndexPage(page);
+    assert.ok(
+      html.includes('href="images/custom-hero.webp"'),
+      'Preload href should match the dynamic hero source',
+    );
+  });
+
+  it('IMG-05 (02-§25.3): no preload link when there is no hero image', () => {
+    const page = { ...basePage, heroSrc: null };
+    const html = renderIndexPage(page);
+    assert.ok(
+      !html.includes('rel="preload"'),
+      'No preload link should be emitted when heroSrc is null',
+    );
+  });
+
+  it('IMG-06 (02-§25.4): hero image has fetchpriority="high"', () => {
+    const html = renderIndexPage(basePage);
+    const heroMatch = html.match(/<img[^>]*class="hero-img"[^>]*>/);
+    assert.ok(heroMatch, 'Expected a hero-img element');
+    assert.ok(
+      heroMatch[0].includes('fetchpriority="high"'),
+      `Hero image must have fetchpriority="high", got: ${heroMatch[0]}`,
+    );
   });
 });
