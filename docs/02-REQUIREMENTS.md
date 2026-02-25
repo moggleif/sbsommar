@@ -628,11 +628,11 @@ timeline. Each camp is a point on the timeline that expands to show details.
 
 Each expanded accordion shows, in order: <!-- 02-§21.8 -->
 
-- Camp name (already visible in the header)
-- Start date and end date formatted in Swedish (`D månadsnamn YYYY`)
-- Location
 - Information text (only if non-empty in `camps.yaml`) <!-- 02-§21.9 -->
 - A link to the Facebook group (only if `link` is non-empty in `camps.yaml`) <!-- 02-§21.10 -->
+
+Date range and location are already displayed in the accordion header
+(§21.4) and must not be repeated inside the panel. <!-- 02-§21.31 -->
 
 Fields that are empty or absent must not produce blank rows or placeholder
 text. <!-- 02-§21.11 -->
@@ -683,8 +683,12 @@ time. <!-- 02-§21.22 -->
 - Each event row uses the same visual format as the weekly schedule page:
   time range, title, and location/responsible metadata. <!-- 02-§21.25 -->
 - Day headings are plain headings, not collapsible. <!-- 02-§21.26 -->
-- Event rows are flat (not accordion/collapsible) — descriptions are not
-  shown; only time, title, and metadata. <!-- 02-§21.27 -->
+- Event rows that have a `description` or `link` field must be rendered as
+  expandable `<details>` elements — identical to the weekly schedule page
+  (`schema.html`). The ℹ️ icon and dotted-underline title style must
+  appear on these rows. <!-- 02-§21.27 -->
+- Event rows without `description` or `link` remain flat (plain `<div>`),
+  showing only time, title, and metadata. <!-- 02-§21.32 -->
 - If a camp has no events in its YAML file, the event list section is
   omitted entirely. <!-- 02-§21.28 -->
 
@@ -985,5 +989,21 @@ visitors can see what is planned and what has already happened this year.
   No hardcoded colors, spacing, or typography. <!-- 02-§28.16 -->
 - The client-side script is minimal — no framework, no external
   dependency. <!-- 02-§28.17 -->
+
+---
+
+## 29. Camp Naming Convention
+
+The `name` field in `camps.yaml` follows a fixed format so that camp
+titles are consistent across the archive, upcoming camps section, and
+any other display.
+
+- The format is: `{type} {year} {month}`, where `{type}` is the camp
+  series name (e.g. "SB sommar", "SB vinter"), `{year}` is the four-digit
+  year, and `{month}` is the Swedish month name in lowercase. <!-- 02-§29.1 -->
+- Month names follow Swedish convention and are never
+  capitalised. <!-- 02-§29.2 -->
+- The camp type name uses sentence case — only the first word is
+  capitalised (e.g. "SB sommar", not "SB Sommar"). <!-- 02-§29.3 -->
 
 ---
