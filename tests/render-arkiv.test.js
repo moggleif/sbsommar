@@ -128,7 +128,7 @@ describe('renderArkivPage', () => {
   it('ARK-06 (02-§21.8): expanded panel contains information and Facebook link but not Datum/Plats dl', () => {
     const html = renderArkivPage([campA]);
     assert.ok(html.includes('Info om 2025.'), 'should include information text');
-    assert.ok(html.includes('facebook.com'), 'should include Facebook link');
+    assert.ok(html.includes('href="https://www.facebook.com/'), 'should include Facebook link');
     assert.ok(!html.includes('class="camp-meta"'), 'should NOT have camp-meta dl');
   });
 
