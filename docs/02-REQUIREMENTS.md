@@ -50,8 +50,8 @@ The following pages must exist:
 | --- | --- | --- | --- |
 | `02-§2.1` | Homepage | `/` | Prospective families, participants |
 | `02-§2.2` | Weekly schedule | `/schema.html` | Participants |
-| `02-§2.3` | Daily view | `/dagens-schema.html` | Participants |
-| `02-§2.4` | Today / Display view | `/idag.html` | Participants, shared screens |
+| `02-§2.4` | Today view | `/idag.html` | Participants |
+| `02-§2.4a` | Display view | `/dagens-schema.html` | Shared screens |
 | `02-§2.5` | Add activity | `/lagg-till.html` | Participants |
 | `02-§2.6` | Archive | `/arkiv.html` | Prospective families, returning participants |
 | `02-§2.7` | RSS feed | `/schema.rss` | Anyone subscribing to the schedule |
@@ -60,7 +60,9 @@ The following pages must exist:
 The homepage, schedule pages, add-activity form, and archive share the same header and navigation. <!-- 02-§2.8 -->
 None require login. <!-- 02-§2.9 -->
 
-The Today / Display view has no header or navigation — it is a minimal, full-screen display intended for shared screens and quick mobile glances. <!-- 02-§2.10 -->
+The Today view (`/idag.html`) uses the standard site layout with header and navigation. <!-- 02-§2.4 -->
+The Display view (`/dagens-schema.html`) has no header or navigation — it is a minimal, full-screen display intended for shared screens around the camp. <!-- 02-§2.10 -->
+Both show today's activities; they differ only in presentation context.
 
 ---
 
@@ -99,19 +101,16 @@ The goal is that a parent visiting for the first time leaves thinking:
 - Within each day, activities are listed in chronological order. <!-- 02-§4.2 -->
 - Each activity shows: title, start time, end time, location, responsible person. <!-- 02-§4.3 -->
 
-### Daily view
+### Today view (`/idag.html`)
 
-- Shows activities for a single selected day. <!-- 02-§4.11 -->
-- Same field display as the weekly view. <!-- 02-§4.12 -->
-- The user can navigate between days. <!-- 02-§4.4 -->
+- Shows only today's activities in the standard site layout. <!-- 02-§4.5 -->
+- No navigation to other days. This view is always today. <!-- 02-§4.13 -->
 
-### Today / Display view
+### Display view (`/dagens-schema.html`)
 
-- Shows only today's activities. <!-- 02-§4.5 -->
-- Designed for two uses: mobile phones carried by participants, and shared screens placed around the camp.
+- Shows today's activities on a dark, full-screen layout for shared screens around the camp.
 - Must be legible at a distance: dark background, large text, minimal interface chrome. <!-- 02-§4.6 -->
 - Must not require any interaction to stay useful — it should be readable at a glance. <!-- 02-§4.7 -->
-- No navigation to other days. This view is always today. <!-- 02-§4.13 -->
 
 ### All schedule views
 
@@ -380,7 +379,7 @@ that requires no login.
 
 ### 18.4 Edit links on schedule pages
 
-- Schedule pages (weekly and daily) add an "Redigera" link next to each event
+- Schedule pages add an "Redigera" link next to each event
   whose ID is present in the session cookie and whose date has not passed. <!-- 02-§18.16 -->
 - The link is injected by client-side JavaScript after page load; it is never
   part of the static HTML. <!-- 02-§18.17 -->
