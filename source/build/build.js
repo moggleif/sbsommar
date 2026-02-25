@@ -9,7 +9,7 @@ const { renderAddPage } = require('./render-add');
 const { renderEditPage, editApiUrl } = require('./render-edit');
 const { renderTodayPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
-const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml } = require('./render-index');
+const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions } = require('./render-index');
 const { renderArkivPage } = require('./render-arkiv');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 
@@ -56,7 +56,8 @@ if (!fs.existsSync(localFilePath)) {
   process.exit(1);
 }
 const localData = yaml.load(fs.readFileSync(localFilePath, 'utf8'));
-const locations = (localData.locations || []).map((l) => l.name);
+const allLocations = localData.locations || [];
+const locations = allLocations.map((l) => l.name);
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -198,6 +199,14 @@ async function main() {
       // Inject camp listings into the first section, right after the first <h4>.
       if (i === 0 && campListingHtml) {
         html = html.replace(/(<\/h4>)/, '$1\n' + campListingHtml);
+      }
+
+      // Inject location accordions into the lokaler section.
+      if (def.id === 'lokaler') {
+        const locationHtml = renderLocationAccordions(allLocations);
+        if (locationHtml) {
+          html += '\n' + locationHtml;
+        }
       }
 
       return { id: def.id, navLabel, html };

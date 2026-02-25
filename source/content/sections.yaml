@@ -30,7 +30,6 @@ sections:
   - file: locations.md
     id: lokaler
     nav: Lokaler
-    collapsible: true
   - file: discord-guide.md
     id: discord
     nav: Discord

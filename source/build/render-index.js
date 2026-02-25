@@ -292,4 +292,43 @@ ${items}
 </script>`;
 }
 
-module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml };
+/**
+ * Renders location data from local.yaml as individual accordion items.
+ *
+ * @param {Array<{id: string, name: string, information: string, image_path: string|string[]}>} locations
+ * @returns {string} HTML string of accordion elements
+ */
+function renderLocationAccordions(locations) {
+  if (!locations || locations.length === 0) return '';
+
+  return locations.map((loc) => {
+    const name = escapeHtml(loc.name || '');
+    const info = (loc.information || '').trim();
+    const paths = Array.isArray(loc.image_path)
+      ? loc.image_path.filter((p) => p)
+      : (loc.image_path ? [loc.image_path] : []);
+
+    const bodyParts = [];
+    if (info) {
+      bodyParts.push(`<p>${inlineHtml(info)}</p>`);
+    }
+    for (const imgPath of paths) {
+      bodyParts.push(`<img src="${escapeHtml(imgPath)}" alt="${name}" class="content-img" loading="lazy">`);
+    }
+
+    const bodyHtml = bodyParts.length > 0
+      ? bodyParts.map((l) => '    ' + l).join('\n')
+      : '';
+
+    return [
+      '<details class="accordion">',
+      `  <summary>${name}</summary>`,
+      '  <div class="accordion-body">',
+      bodyHtml,
+      '  </div>',
+      '</details>',
+    ].join('\n');
+  }).join('\n');
+}
+
+module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions };
