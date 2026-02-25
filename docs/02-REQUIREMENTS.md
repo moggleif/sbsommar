@@ -359,7 +359,7 @@ that requires no login.
 ### 18.2 Cookie consent
 
 - Before the server sets the session cookie, the client must first obtain the
-  user's explicit consent through an inline prompt on the add-activity form. <!-- 02-§18.8 -->
+  user's explicit consent through a modal dialog on the add-activity form. <!-- 02-§18.8 -->
 - If the user accepts, the form submission proceeds and the server sets the
   session cookie in its response. <!-- 02-§18.9 -->
 - If the user declines, the form submission still proceeds (the event is still
@@ -445,8 +445,9 @@ that requires no login.
 - The add-activity form submission must use `credentials: 'include'` so that
   `Set-Cookie` response headers from the cross-origin API are applied by the
   browser. Without this, the cookie is silently discarded. <!-- 02-§18.37 -->
-- The cookie consent banner must be inserted directly after the submit button
-  within the form — not at the top of the page or before the form. <!-- 02-§18.38 -->
+- The cookie consent prompt must be displayed as a modal dialog (with backdrop,
+  focus trap, and centered box) so the user cannot miss it. The modal reuses the
+  same styling and accessibility patterns as the submit-feedback modal. <!-- 02-§18.38 -->
 - The add-activity form does not include an owner name field. Event ownership is
   established entirely via the session cookie; no name is required for the editing
   mechanism to work. <!-- 02-§18.39 -->
@@ -533,10 +534,11 @@ progress modal → result.
 
 ### 19.2 Consent prompt
 
-- The consent banner (§18.2) is shown while the form is locked, inserted directly
-  after the disabled submit button, as it is today. <!-- 02-§19.3 -->
-- After the user accepts or declines, the banner removes itself and the submission
-  continues to the progress modal. <!-- 02-§19.4 -->
+- The consent prompt (§18.2) is shown as a modal dialog while the form is locked.
+  The modal uses the same `#submit-modal` element and styling as the progress and
+  result modals. <!-- 02-§19.3 -->
+- After the user accepts or declines, the modal content transitions to the
+  progress state (spinner) and the submission continues. <!-- 02-§19.4 -->
 
 ### 19.3 Progress modal
 

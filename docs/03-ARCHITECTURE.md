@@ -411,9 +411,10 @@ proceeds through four stages before returning control to the user:
 
 1. **Field lock** — all form inputs and the submit button are disabled
    immediately, preventing edits or re-submission during the async flow.
-2. **Consent prompt** (if needed) — `cookie-consent.js` inserts the consent
-   banner directly after the disabled submit button. The user accepts or
-   declines. The banner removes itself before stage 3.
+2. **Consent prompt** (if needed) — `cookie-consent.js` renders the consent
+   prompt inside the existing `#submit-modal` as a modal dialog with backdrop
+   and focus trap. The user accepts or declines. The modal content then
+   transitions to the progress state (stage 3) without closing.
 3. **Progress modal** — a modal dialog opens over the page with a spinner and
    the text "Skickar till GitHub…". The fetch begins.
 4. **Result** — the modal content is replaced with a success or error state
