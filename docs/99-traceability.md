@@ -139,7 +139,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive page improvements — 
 | `02-§6.2` | Date field is constrained to the active camp's date range | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `min`/`max` attributes on date input | implemented |
 | `02-§6.3` | Location field is a dropdown populated from `source/data/local.yaml` | 03-ARCHITECTURE.md §6 | — | `source/build/build.js` (loads `local.yaml`); `source/build/render-add.js` (renders `<select>`) | implemented |
 | `02-§6.4` | Time fields guide the user toward a valid `HH:MM` value | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `type="time"` inputs (browser-native validation) | implemented |
-| `02-§6.5` | Form errors are shown inline, per field, immediately on submit | 03-ARCHITECTURE.md §3 | — | — (`lagg-till.js` collects all errors into a single `#form-errors` div, not per-field) | gap |
+| `02-§6.5` | Form errors are shown inline, per field, immediately on submit | 03-ARCHITECTURE.md §7a; 07-DESIGN.md §6.34–6.39 | — | — | gap |
 | `02-§6.6` | Submit button is disabled and shows a visual indicator while submission is in progress | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – `submitBtn.disabled = true`; `textContent = 'Sparar...'` | implemented |
 | `02-§6.7` | A clear success confirmation is shown after submission | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – reveals `#result` section with activity title | implemented |
 | `02-§6.8` | Network failure shows a clear error and allows retry; submissions are never silently lost | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – `.catch()` re-enables button and shows error | implemented |

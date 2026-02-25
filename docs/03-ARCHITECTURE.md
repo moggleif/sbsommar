@@ -417,6 +417,55 @@ declines, the event is still submitted but no session cookie is set.
 
 ---
 
+## 7a. Per-Field Inline Validation Errors
+
+Both the add-activity and edit-activity forms validate required fields
+on submit. Each validation error is displayed inline, directly below the
+input it relates to — not in a single aggregated error box.
+
+### HTML structure
+
+Each `.field` div contains an error `<span>` after its input element:
+
+```html
+<span class="field-error" id="err-title" hidden></span>
+```
+
+The input links to its error span via `aria-describedby="err-title"`.
+
+### Validation flow (client-side)
+
+1. On submit, JS iterates over each required field.
+2. For each invalid field: set `aria-invalid="true"` on the input,
+   populate and show its `.field-error` span.
+3. For each valid field: remove `aria-invalid`, hide the error span.
+4. If any field is invalid, focus the first invalid input and cancel submit.
+5. If all fields are valid, proceed to the submit flow (§8/§9).
+
+### Clearing errors
+
+Errors are cleared on the next submit attempt — not on individual
+keystroke or blur. This keeps the JS simple and avoids distracting
+the user while they are still filling in the form.
+
+### Accessibility
+
+- `aria-invalid="true"` communicates the error state to screen readers.
+- `aria-describedby` links each input to its error message so the
+  error is announced when the input receives focus.
+
+### Inline validation files changed
+
+| File | Change |
+| --- | --- |
+| `source/build/render-add.js` | Add `.field-error` spans and `aria-describedby` to inputs; remove `#form-errors` div |
+| `source/build/render-edit.js` | Same changes as render-add.js |
+| `source/assets/js/client/lagg-till.js` | Rewrite validation to show per-field errors |
+| `source/assets/js/client/redigera.js` | Same validation rewrite |
+| `source/assets/cs/style.css` | Add `.field-error` and `[aria-invalid="true"]` styles; remove `.form-errors` styles |
+
+---
+
 ## 8. Add-Activity Submit Flow — Field Locking and Progress Modal
 
 ### Submit flow stages
