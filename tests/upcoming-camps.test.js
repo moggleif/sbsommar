@@ -2,8 +2,15 @@
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
+const { readFileSync } = require('node:fs');
+const { join } = require('node:path');
 
 const { renderUpcomingCampsHtml } = require('../source/build/render-index');
+
+const CSS = readFileSync(
+  join(__dirname, '..', 'source', 'assets', 'cs', 'style.css'),
+  'utf8',
+);
 
 // ── Test fixtures ────────────────────────────────────────────────────────────
 
@@ -167,5 +174,35 @@ describe('renderUpcomingCampsHtml – empty list', () => {
   it('UC-14: returns empty string when no camps match', () => {
     const html = renderUpcomingCampsHtml([archivedCampOldYear], 2026);
     assert.strictEqual(html, '', 'should return empty string for no matching camps');
+  });
+});
+
+// ── Compact one-liner layout (02-§3.5) ──────────────────────────────────────
+
+describe('Camp list CSS – compact one-liner layout (02-§3.5)', () => {
+  it('CL-01: .camp-body uses display: flex for inline layout', () => {
+    assert.ok(
+      /\.camp-body\s*\{[^}]*display:\s*flex/s.test(CSS),
+      '.camp-body should have display: flex',
+    );
+  });
+
+  it('CL-02: .camp-item has no border-bottom', () => {
+    // Extract the .camp-item rule block (not .camp-item:last-child or similar)
+    const match = CSS.match(/\.camp-item\s*\{([^}]*)\}/);
+    assert.ok(match, '.camp-item rule should exist');
+    assert.ok(
+      !match[1].includes('border-bottom'),
+      '.camp-item should not have border-bottom',
+    );
+  });
+
+  it('CL-03: .camp-name does not use display: block', () => {
+    const match = CSS.match(/\.camp-name\s*\{([^}]*)\}/);
+    assert.ok(match, '.camp-name rule should exist');
+    assert.ok(
+      !match[1].includes('display: block') && !match[1].includes('display:block'),
+      '.camp-name should not have display: block',
+    );
   });
 });
