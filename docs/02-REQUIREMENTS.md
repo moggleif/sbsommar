@@ -224,6 +224,9 @@ The server must therefore validate all input before touching GitHub:
 - YAML escaping is handled entirely by the YAML serializer. User-provided strings
   are never interpolated directly into YAML text. <!-- 02-§10.4 -->
 - Any validation failure results in an HTTP error response. Nothing is committed to GitHub. <!-- 02-§10.5 -->
+- When a new event is appended to a camp YAML file, the serialised YAML block must be
+  indented to match the existing `events:` list. The resulting file must remain valid YAML
+  that parses identically to the original file plus the new event entry. <!-- 02-§10.6 -->
 
 This is separate from form UX validation. Form validation helps users. API validation
 protects the site's data integrity.
