@@ -10,8 +10,6 @@ camps:
       Claude code har nu fixat systemet. Ingen wordpress längre. Ren kod endast för våra behov. Kanske kan vi snart skriva önskemål och det införs nästan automatiskt.
     file: 2026-08-syssleback.yaml
     archived: false
-    active: false
-
   - id: 2026-06-syssleback
     name: SB sommar 2026 juni
     start_date: '2026-06-21'
@@ -23,8 +21,6 @@ camps:
       Claude code har nu fixat systemet. Ingen wordpress längre. Ren kod endast för våra behov. Kanske kan vi snart skriva önskemål och det införs nästan automatiskt.
     file: 2026-06-syssleback.yaml
     archived: false
-    active: false
-
   - id: 2026-02-testar
     name: SB vinter 2026 februari
     start_date: '2026-02-22'
@@ -35,8 +31,6 @@ camps:
     information: ""
     file: 2026-02-testar.yaml
     archived: false
-    active: true
-
   - id: 2025-08-syssleback
     name: SB sommar 2025 augusti
     start_date: '2025-08-03'
@@ -51,8 +45,6 @@ camps:
       Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
     file: 2025-08-syssleback.yaml
     archived: true
-    active: false
-
   - id: 2025-06-syssleback
     name: SB sommar 2025 juni
     start_date: '2025-06-22'
@@ -67,8 +59,6 @@ camps:
       Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
     file: 2025-06-syssleback.yaml
     archived: true
-    active: false
-
   - id: 2024-06-syssleback
     name: SB sommar 2024 juni
     start_date: '2024-06-23'
@@ -83,8 +73,6 @@ camps:
       Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
     file: 2024-06-syssleback.yaml
     archived: true
-    active: false
-
   - id: 2023-06-syssleback
     name: SB sommar 2023 juni
     start_date: '2023-06-25'
@@ -99,8 +87,6 @@ camps:
       Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
     file: 2023-06-syssleback.yaml
     archived: true
-    active: false
-
   - id: 2022-06-syssleback
     name: SB sommar 2022 juni
     start_date: '2022-06-26'
@@ -115,8 +101,6 @@ camps:
       Håll utkik efter “Myggorna” så är det en dygnsavgränsare.
     file: 2022-06-syssleback.yaml
     archived: true
-    active: false
-
   - id: 2021-06-syssleback
     name: SB sommar 2021 juni
     start_date: '2021-06-27'
@@ -132,8 +116,6 @@ camps:
       Datasal : GA-hallen 10:00-12:00, 13:00-16:30
     file: 2021-06-syssleback.yaml
     archived: true
-    active: false
-
   - id: 2019-06-syssleback
     name: SB sommar 2019 juni
     start_date: '2019-06-24'
@@ -148,8 +130,6 @@ camps:
       Aktiviteter utan tidsangivelser: Fiske, minigolf, gym, kanotuthyrning, puzzel, BRÄDSPEL (GA hallen) m.m.
     file: 2019-06-syssleback.yaml
     archived: true
-    active: false
-
   - id: 2018-06-syssleback
     name: SB sommar 2018 juni
     start_date: '2018-06-17'
@@ -162,4 +142,3 @@ camps:
       Obs att det kan finnas fler trådar om aktiviteten (sök i FB-gruppen för lägret om du vill vara säker på att inte missa någon info).
     file: 2018-06-syssleback.yaml
     archived: true
-    active: false

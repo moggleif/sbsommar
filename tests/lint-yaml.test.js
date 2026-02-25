@@ -248,41 +248,5 @@ describe('validateYaml – unique (title+date+start) combo (05-§5.1)', () => {
   });
 });
 
-// ── LNT-22..23: Active + archived conflict (05-§1.3) ───────────────────────
-
-describe('validateYaml – active+archived camp conflict (05-§1.3)', () => {
-  it('LNT-22: rejects a camp that is both active and archived', () => {
-    const yaml = [
-      'camp:',
-      '  id: test-camp',
-      '  name: Test Camp',
-      '  location: Testvik',
-      "  start_date: '2026-07-01'",
-      "  end_date: '2026-07-07'",
-      '  active: true',
-      '  archived: true',
-      '',
-      'events: []',
-    ].join('\n');
-    const r = validateYaml(yaml);
-    assert.strictEqual(r.ok, false);
-    assert.ok(r.errors.some((e) => /active.*archived|archived.*active/i.test(e)));
-  });
-
-  it('LNT-23: accepts a camp that is active but not archived', () => {
-    const yaml = [
-      'camp:',
-      '  id: test-camp',
-      '  name: Test Camp',
-      '  location: Testvik',
-      "  start_date: '2026-07-01'",
-      "  end_date: '2026-07-07'",
-      '  active: true',
-      '  archived: false',
-      '',
-      'events: []',
-    ].join('\n');
-    const r = validateYaml(yaml);
-    assert.strictEqual(r.ok, true);
-  });
-});
+// LNT-22..23 removed: active+archived conflict check no longer exists
+// (active field removed — see 02-§34.6, 02-§34.8).

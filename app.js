@@ -10,6 +10,7 @@ const { validateEventRequest, validateEditRequest }              = require('./so
 const { isEventPast }                                            = require('./source/api/edit-event');
 const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
 const { isOutsideEditingPeriod }                                 = require('./source/api/time-gate');
+const { resolveActiveCamp }                                      = require('./source/scripts/resolve-active-camp');
 
 const app = express();
 
@@ -17,7 +18,7 @@ const app = express();
 
 const campsPath = path.join(__dirname, 'source', 'data', 'camps.yaml');
 const campsData = yaml.load(fs.readFileSync(campsPath, 'utf8'));
-const activeCamp = (campsData.camps || []).find((c) => c.active === true);
+const activeCamp = resolveActiveCamp(campsData.camps || []);
 
 // ── Middleware ───────────────────────────────────────────────────────────────
 
