@@ -177,11 +177,14 @@ async function main() {
   let heroSrc = null;
   let heroAlt = null;
 
+  // Pre-render the camp listing HTML to inject into the first section.
+  const currentYear = new Date().getFullYear();
+  const campListingHtml = renderUpcomingCampsHtml(camps, currentYear);
+
   const sections = sectionsConfig.sections
     .map((def, i) => {
       // Special section types that render from data instead of markdown
       if (def.type === 'upcoming-camps') {
-        const currentYear = new Date().getFullYear();
         const html = renderUpcomingCampsHtml(camps, currentYear);
         if (!html) return null;
         const navLabel = def.nav || 'Kommande läger';
@@ -205,7 +208,13 @@ async function main() {
       }
 
       const navLabel = def.nav || extractH1(md) || def.file;
-      const html = convertMarkdown(md, i === 0 ? 0 : 1, def.collapsible || false);
+      let html = convertMarkdown(md, i === 0 ? 0 : 1, def.collapsible || false);
+
+      // Inject camp listings into the first section, right after the first <h4>.
+      if (i === 0 && campListingHtml) {
+        html = html.replace(/(<\/h4>)/, '$1\n' + campListingHtml);
+      }
+
       return { id: def.id, navLabel, html };
     })
     .filter(Boolean);
