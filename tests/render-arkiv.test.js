@@ -77,6 +77,17 @@ const sampleEvents = [
     description: null,
     link: null,
   },
+  {
+    id: 'ev-c1',
+    title: 'Kvällsaktivitet',
+    date: '2025-06-23',
+    start: '19:00',
+    end: '21:00',
+    location: 'Stora salen',
+    responsible: 'Lisa',
+    description: null,
+    link: 'https://example.com/event',
+  },
 ];
 
 // ── renderArkivPage ───────────────────────────────────────────────────────────
@@ -114,11 +125,11 @@ describe('renderArkivPage', () => {
     assert.ok(html.includes('aria-controls='), 'should have aria-controls');
   });
 
-  it('ARK-06: expanded panel contains dates, location, and camp name', () => {
+  it('ARK-06 (02-§21.8): expanded panel contains information and Facebook link but not Datum/Plats dl', () => {
     const html = renderArkivPage([campA]);
-    assert.ok(html.includes('Sysslebäck'), 'should include location');
-    assert.ok(html.includes('2025'), 'should include year');
-    assert.ok(html.includes('juni'), 'should include Swedish month name');
+    assert.ok(html.includes('Info om 2025.'), 'should include information text');
+    assert.ok(html.includes('facebook.com'), 'should include Facebook link');
+    assert.ok(!html.includes('class="camp-meta"'), 'should NOT have camp-meta dl');
   });
 
   it('ARK-07: information is omitted when empty', () => {
@@ -216,13 +227,13 @@ describe('renderArkivPage', () => {
     assert.ok(linkMatch[0].includes('rel="noopener noreferrer"'), 'should have noopener noreferrer');
   });
 
-  it('ARK-15 (02-§21.19): Facebook logo is placed near top of panel before camp-meta', () => {
+  it('ARK-15 (02-§21.19): Facebook logo is placed near top of panel before camp-information', () => {
     const html = renderArkivPage([campA]);
     const fbPos = html.indexOf('social-facebook');
-    const metaPos = html.indexOf('class="camp-meta"');
+    const infoPos = html.indexOf('class="camp-information"');
     assert.ok(fbPos > 0, 'should have Facebook logo');
-    assert.ok(metaPos > 0, 'should have camp-meta');
-    assert.ok(fbPos < metaPos, 'Facebook logo should appear before camp-meta');
+    assert.ok(infoPos > 0, 'should have camp-information');
+    assert.ok(fbPos < infoPos, 'Facebook logo should appear before camp-information');
   });
 
   // ── 21.7 Event list in archive ───────────────────────────────────────────────
@@ -259,15 +270,35 @@ describe('renderArkivPage', () => {
     assert.ok(html.includes('class="ev-meta"'), 'should have ev-meta span');
   });
 
-  it('ARK-20 (02-§21.27): event rows are flat (div, not details)', () => {
+  it('ARK-20 (02-§21.27): events with description or link are rendered as expandable <details>', () => {
     const evMap = { [campA.id]: sampleEvents };
     const html = renderArkivPage([campA], '', [], evMap);
-    // Archive event rows should be plain divs, never details
     const archivePanel = html.split('class="timeline-panel"')[1];
     assert.ok(archivePanel, 'should have a timeline panel');
-    // The event rows inside the panel should be div.event-row, not details.event-row
-    const detailsEventRows = (archivePanel.match(/<details class="event-row/g) || []);
-    assert.strictEqual(detailsEventRows.length, 0, 'should have no <details> event rows in archive');
+    // ev-a2 has description, ev-c1 has link — both should be <details>
+    const detailsEventRows = (archivePanel.match(/<details class="event-row"/g) || []);
+    assert.strictEqual(detailsEventRows.length, 2, 'should have 2 expandable event rows');
+    // Verify description and link content are inside event-extra
+    assert.ok(archivePanel.includes('Bring your own ball'), 'should render description text');
+    assert.ok(archivePanel.includes('Extern länk'), 'should render external link');
+  });
+
+  it('ARK-25 (02-§21.32): events without description or link remain flat divs', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    const archivePanel = html.split('class="timeline-panel"')[1];
+    assert.ok(archivePanel, 'should have a timeline panel');
+    // ev-a1 and ev-b1 have no description or link — should be plain divs
+    const plainRows = (archivePanel.match(/<div class="event-row plain"/g) || []);
+    assert.strictEqual(plainRows.length, 2, 'should have 2 flat event rows');
+  });
+
+  it('ARK-26 (02-§21.31): accordion panel does not contain Datum/Plats metadata', () => {
+    const evMap = { [campA.id]: sampleEvents };
+    const html = renderArkivPage([campA], '', [], evMap);
+    assert.ok(!html.includes('class="camp-meta"'), 'should not have camp-meta dl');
+    assert.ok(!html.includes('<dt>Datum</dt>'), 'should not contain Datum label');
+    assert.ok(!html.includes('<dt>Plats</dt>'), 'should not contain Plats label');
   });
 
   it('ARK-21 (02-§21.26): day headings are not collapsible', () => {
