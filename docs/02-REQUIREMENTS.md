@@ -748,8 +748,12 @@ and reduce layout shift. No new client-side JavaScript is required.
 
 ### 25.1 Lazy loading for below-fold images
 
-- All content images (class `content-img`) produced by the build must include
-  `loading="lazy"`. <!-- 02-§25.1 -->
+- Content images (class `content-img`) produced by the build must include
+  `loading="lazy"`, except for images in the first content section (which is
+  above the fold on mobile and may contain the LCP element). <!-- 02-§25.1 -->
+- Images in the first content section must NOT have `loading="lazy"` — they are
+  above the fold on mobile and lazy-loading them delays the Largest Contentful
+  Paint. <!-- 02-§25.5 -->
 - The hero image (class `hero-img`) must NOT have `loading="lazy"` — it is
   above the fold and must load immediately. <!-- 02-§25.2 -->
 
@@ -759,5 +763,12 @@ and reduce layout shift. No new client-side JavaScript is required.
   element whose `href` matches the hero image source. The path must not be
   hardcoded — it is derived from the hero image extracted at build time. <!-- 02-§25.3 -->
 - The hero `<img>` tag must include `fetchpriority="high"`. <!-- 02-§25.4 -->
+
+### 25.3 Script loading
+
+- The `nav.js` script tag must include the `defer` attribute on all pages. This
+  breaks the critical request chain (HTML → CSS → JS) identified by Lighthouse,
+  allowing the browser to discover and preload the script during HTML
+  parsing. <!-- 02-§25.6 -->
 
 ---
