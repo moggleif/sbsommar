@@ -492,6 +492,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (CI checkout depth fix — CL-�
 | `02-§24.14` | Expanded menu closable by clicking outside | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – document `click` listener closes when outside nav | implemented |
 | `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-DESIGN.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | `source/assets/css/style.css` – `.nav-toggle { display: none }` at `@media (min-width: 768px)` | implemented |
 
+| `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — | — | gap |
+| `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | — | — | gap |
+| `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-ARCHITECTURE.md §4c | — | — | gap |
+
 ---
 
 ## Summary
