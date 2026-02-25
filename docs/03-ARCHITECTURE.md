@@ -589,7 +589,20 @@ Reuses the same secrets as `deploy.yml`: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWO
 validation and early deployment. The full `deploy.yml` run after merge is idempotent for
 the four schema files (same content, re-uploaded).
 
-### 11.6 Required repository settings
+### 11.6 Checkout depth
+
+Both `ci.yml` and `event-data-deploy.yml` compare the PR branch to `main` using a
+three-dot diff (`origin/main...HEAD`). This requires a merge base — a common ancestor
+commit — to exist in the local clone.
+
+GitHub Actions' `actions/checkout@v4` defaults to `fetch-depth: 1` (shallow clone).
+With a shallow checkout, the diff has no merge base and fails with
+`fatal: origin/main...HEAD: no merge base`.
+
+Both workflows must therefore use `fetch-depth: 0` (full history) on their checkout
+step so the three-dot diff can find a common ancestor.
+
+### 11.7 Required repository settings
 
 - **"Allow auto-merge"** must be enabled in Settings > General > Pull Requests.
 - The four new job names must be added as required status checks in branch protection for

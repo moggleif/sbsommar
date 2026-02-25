@@ -630,6 +630,12 @@ This section covers requirements for that targeted CI pipeline.
 It applies only to PRs from branches matching `event/**` (add-event) and
 `event-edit/**` (edit-event).
 
+### 22.0 Git history for branch comparison
+
+- CI workflows that compare the PR branch to `main` to detect changed files must check out
+  with sufficient git history for the three-dot diff (`origin/main...HEAD`) to find a merge
+  base. A shallow checkout (depth 1) is not sufficient. <!-- 02-§23.14 -->
+
 ### 22.1 YAML structural validation
 
 - The CI pipeline must parse and structurally validate the changed event YAML file before

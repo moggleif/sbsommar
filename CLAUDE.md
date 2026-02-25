@@ -186,6 +186,7 @@ Non-technical contributors must be able to:
 - GitHub Actions builds and validates. <!-- CL-§9.2 -->
 - Deployment happens only after successful CI. <!-- CL-§9.3 -->
 - For commits that modify only YAML data files in `source/data/`, CI runs build only — lint and tests are skipped. <!-- CL-§9.4 -->
+- CI workflows that compare the current branch to `main` (e.g. to detect changed files) must check out with enough git history for the comparison to succeed (`fetch-depth: 0` or equivalent). <!-- CL-§9.5 -->
 
 ---
 
