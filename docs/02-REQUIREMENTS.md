@@ -1196,3 +1196,51 @@ the `CL-§5.2` gap.
   adjusted. <!-- 02-§33.8 -->
 
 ---
+
+## 34. Derived Active Camp
+
+The active camp must be derived automatically from camp dates at build time
+and at API request time. The manual `active` field is removed from the data
+model. This ensures exactly one camp is active at all times without manual
+intervention.
+
+### 34.1 Derivation rules
+
+The system determines the active camp using the following priority: <!-- 02-§34.1 -->
+
+1. **On dates** — if today falls within a camp's `start_date..end_date`
+   (inclusive), that camp is active. <!-- 02-§34.2 -->
+2. **Next upcoming** — if no camp is on dates, the camp with the nearest
+   future `start_date` is active. <!-- 02-§34.3 -->
+3. **Most recent** — if no upcoming camps exist, the camp with the latest
+   `end_date` is active, even if it is archived. <!-- 02-§34.4 -->
+
+If two camps overlap in dates, the one with the earlier `start_date` wins. <!-- 02-§34.5 -->
+
+### 34.2 Data model changes
+
+- The `active` field is removed from `camps.yaml` entries. <!-- 02-§34.6 -->
+- The `active` field is removed from the data contract (`05-DATA_CONTRACT.md`). <!-- 02-§34.7 -->
+- The `active + archived` conflict check is removed from lint-yaml.js
+  (the conflict is impossible when `active` no longer exists). <!-- 02-§34.8 -->
+
+### 34.3 Build-time resolution
+
+- `build.js` resolves the active camp by applying the derivation rules
+  at build time using the current date. <!-- 02-§34.9 -->
+- The resolved camp is logged to stdout for operator visibility. <!-- 02-§34.10 -->
+
+### 34.4 API resolution
+
+- `github.js` resolves the active camp using the same derivation rules
+  when handling add-event and edit-event requests. <!-- 02-§34.11 -->
+- The derivation logic is shared between build and API (not duplicated). <!-- 02-§34.12 -->
+
+### 34.5 Validation
+
+- `lint-yaml.js` no longer checks for the `active` field or the
+  `active + archived` conflict. <!-- 02-§34.13 -->
+- Existing tests that assert on the `active` field are updated or
+  removed. <!-- 02-§34.14 -->
+
+---
