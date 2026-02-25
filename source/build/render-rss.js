@@ -1,6 +1,6 @@
 'use strict';
 
-const { toDateString, escapeHtml } = require('./utils');
+const { toDateString, escapeHtml, formatDate } = require('./utils');
 
 const WEEKDAYS_RFC822 = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS_RFC822 = [
@@ -35,7 +35,6 @@ function escapeXml(str) {
  * Builds a human-readable description for an RSS item.
  */
 function buildDescription(event) {
-  const { formatDate } = require('./utils');
   const parts = [];
   parts.push(formatDate(toDateString(event.date)));
   const timeStr = event.end
@@ -67,8 +66,10 @@ function renderRssFeed(camp, events, siteUrl) {
     return String(a.start).localeCompare(String(b.start));
   });
 
+  const safeSiteUrl = escapeXml(siteUrl);
+
   const items = sorted.map((e) => {
-    const eventUrl = `${siteUrl}/schema/${escapeXml(String(e.id))}/`;
+    const eventUrl = `${safeSiteUrl}/schema/${escapeXml(String(e.id))}/`;
     const desc = escapeXml(buildDescription(e));
     const pubDate = toRfc822(toDateString(e.date), String(e.start));
 
@@ -85,7 +86,7 @@ function renderRssFeed(camp, events, siteUrl) {
 <rss version="2.0">
   <channel>
     <title>Schema – ${escapeXml(camp.name)}</title>
-    <link>${siteUrl}/schema.html</link>
+    <link>${safeSiteUrl}/schema.html</link>
     <description>Aktivitetsschema för ${escapeXml(camp.name)}</description>
     <language>sv</language>
 ${items}

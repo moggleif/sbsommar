@@ -40,12 +40,13 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
+  <base href="../../">
   <title>${title} – ${campName}</title>
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 ${pageNav('schema.html', navSections)}
-  <p class="back-link"><a href="../../schema.html">← Tillbaka till schemat</a></p>
+  <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
   <h1>${title}</h1>
   <dl class="event-detail">
     <dt>Datum</dt>
@@ -57,7 +58,8 @@ ${pageNav('schema.html', navSections)}
     <dt>Ansvarig</dt>
     <dd>${escapeHtml(event.responsible)}</dd>
   </dl>
-${descriptionHtml}${linkHtml}${pageFooter(footerHtml)}
+${descriptionHtml}${linkHtml}  <script src="nav.js" defer></script>
+${pageFooter(footerHtml)}
 </body>
 </html>
 `;

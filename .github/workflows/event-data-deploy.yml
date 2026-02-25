@@ -6,8 +6,8 @@ name: Event Data Deploy
 # Four sequential jobs:
 #   1. lint-yaml      – structural validation of the changed YAML file
 #   2. security-check – injection scan and link protocol validation
-#   3. build          – full site build; captures the 4 event-data pages as an artefact
-#   4. ftp-deploy     – uploads only those 4 files to FTP (no clean-slate)
+#   3. build          – full site build; captures event-data pages, RSS, and per-event pages
+#   4. ftp-deploy     – uploads those files to FTP (no clean-slate)
 
 permissions:
   contents: read

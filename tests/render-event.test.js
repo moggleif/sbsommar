@@ -45,55 +45,55 @@ const minimalEvent = {
 
 // ── Tests ───────────────────────────────────────────────────────────────────
 
-describe('renderEventPage (02-§35)', () => {
-  it('EVT-01 (02-§35.3): page shows event title as heading', () => {
+describe('renderEventPage (02-§36)', () => {
+  it('EVT-01 (02-§36.3): page shows event title as heading', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('<h1>Fotboll</h1>'), 'should have title as h1');
   });
 
-  it('EVT-02 (02-§35.3): page shows date formatted in Swedish', () => {
+  it('EVT-02 (02-§36.3): page shows date formatted in Swedish', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     // 2026-06-29 is a Monday
     assert.ok(html.includes('måndag 29 juni 2026'), 'should show Swedish formatted date');
   });
 
-  it('EVT-03 (02-§35.3): page shows start and end time', () => {
+  it('EVT-03 (02-§36.3): page shows start and end time', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('10:00'), 'should show start time');
     assert.ok(html.includes('12:00'), 'should show end time');
   });
 
-  it('EVT-04 (02-§35.3): page shows location', () => {
+  it('EVT-04 (02-§36.3): page shows location', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('Planen'), 'should show location');
   });
 
-  it('EVT-05 (02-§35.3): page shows responsible person', () => {
+  it('EVT-05 (02-§36.3): page shows responsible person', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('Erik'), 'should show responsible person');
   });
 
-  it('EVT-06 (02-§35.3): page shows description when set', () => {
+  it('EVT-06 (02-§36.3): page shows description when set', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('Alla är välkomna att spela fotboll.'), 'should show description');
   });
 
-  it('EVT-07 (02-§35.3): page shows external link when set', () => {
+  it('EVT-07 (02-§36.3): page shows external link when set', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('href="https://example.com/fotboll"'), 'should show external link');
   });
 
-  it('EVT-08 (02-§35.4): description is omitted when null', () => {
+  it('EVT-08 (02-§36.4): description is omitted when null', () => {
     const html = renderEventPage(minimalEvent, camp, siteUrl);
     assert.ok(!html.includes('class="event-description"'), 'should not render description section');
   });
 
-  it('EVT-09 (02-§35.4): external link is omitted when null', () => {
+  it('EVT-09 (02-§36.4): external link is omitted when null', () => {
     const html = renderEventPage(minimalEvent, camp, siteUrl);
     assert.ok(!html.includes('class="event-ext-link"'), 'should not render external link');
   });
 
-  it('EVT-10 (02-§35.5): owner and meta fields are never shown', () => {
+  it('EVT-10 (02-§36.5): owner and meta fields are never shown', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(!html.includes('Secret'), 'should not show owner name');
     assert.ok(!html.includes('secret@example.com'), 'should not show owner email');
@@ -101,28 +101,28 @@ describe('renderEventPage (02-§35)', () => {
     assert.ok(!html.includes('updated_at'), 'should not show updated_at');
   });
 
-  it('EVT-11 (02-§35.6): page includes shared navigation', () => {
+  it('EVT-11 (02-§36.6): page includes shared navigation', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('class="page-nav"'), 'should have page-nav');
   });
 
-  it('EVT-12 (02-§35.6): page includes footer when provided', () => {
+  it('EVT-12 (02-§36.6): page includes footer when provided', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl, '<p>Footer</p>');
     assert.ok(html.includes('class="site-footer"'), 'should have site-footer');
     assert.ok(html.includes('Footer'), 'should include footer content');
   });
 
-  it('EVT-13 (02-§35.6): page links to stylesheet', () => {
+  it('EVT-13 (02-§36.6): page links to stylesheet', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('style.css'), 'should link to stylesheet');
   });
 
-  it('EVT-14 (02-§35.7): page includes back link to schedule', () => {
+  it('EVT-14 (02-§36.7): page includes back link to schedule', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('schema.html'), 'should link back to schema.html');
   });
 
-  it('EVT-15 (02-§35.8): page includes meta robots noindex nofollow', () => {
+  it('EVT-15 (02-§36.8): page includes meta robots noindex nofollow', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(html.includes('<meta name="robots" content="noindex, nofollow">'), 'should have robots meta');
   });
@@ -145,7 +145,7 @@ describe('renderEventPage (02-§35)', () => {
     assert.ok(!html.includes('<script>alert'), 'should not contain unescaped script tag');
   });
 
-  it('EVT-18 (02-§35.6): page title includes event title and camp name', () => {
+  it('EVT-18 (02-§36.6): page title includes event title and camp name', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     const titleMatch = html.match(/<title>([^<]+)<\/title>/);
     assert.ok(titleMatch, 'should have title element');
