@@ -9,7 +9,6 @@
   var sectionEl    = document.getElementById('edit-section');
   var form         = document.getElementById('edit-form');
   var fieldset     = form ? form.querySelector('fieldset') : null;
-  var errBox       = document.getElementById('form-errors');
   var submitBtn    = form ? form.querySelector('button[type="submit"]') : null;
   var modal        = document.getElementById('submit-modal');
   var modalHeading = document.getElementById('modal-heading');
@@ -232,11 +231,33 @@
       showError('Kunde inte hämta schemadata. Kontrollera din internetanslutning.');
     });
 
+  // ── Per-field inline errors (02-§6.5) ──────────────────────────────────────
+
+  function setFieldError(name, message) {
+    var input = form.querySelector('#f-' + name);
+    var span  = document.getElementById('err-' + name);
+    if (message) {
+      input.setAttribute('aria-invalid', 'true');
+      span.textContent = message;
+      span.hidden = false;
+    } else {
+      input.removeAttribute('aria-invalid');
+      span.textContent = '';
+      span.hidden = true;
+    }
+  }
+
+  function clearAllErrors() {
+    var fields = ['title', 'date', 'start', 'end', 'location', 'responsible'];
+    for (var i = 0; i < fields.length; i++) { setFieldError(fields[i], null); }
+  }
+
   // ── Form submission ──────────────────────────────────────────────────────────
 
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      clearAllErrors();
 
       var els         = form.elements;
       var title       = els.title.value.trim();
@@ -247,24 +268,30 @@
       var responsible = els.responsible.value.trim();
 
       var submitToday = new Date().toISOString().slice(0, 10);
-      var errs = [];
-      if (!title)              errs.push('Rubrik är obligatoriskt.');
-      if (!date)               errs.push('Datum är obligatoriskt.');
-      else if (date < submitToday) errs.push('Datum kan inte vara i det förflutna.');
-      if (!start)              errs.push('Starttid är obligatorisk.');
-      if (!end)                errs.push('Sluttid är obligatorisk.');
-      else if (end <= start)   errs.push('Sluttid måste vara efter starttid.');
-      if (!location)    errs.push('Plats är obligatoriskt.');
-      if (!responsible) errs.push('Ansvarig är obligatoriskt.');
+      var hasError = false;
+      var firstInvalid = null;
 
-      if (errs.length) {
-        errBox.hidden = false;
-        errBox.innerHTML = errs.map(function (m) { return '<p>' + m + '</p>'; }).join('');
-        errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      function fail(name, msg) {
+        setFieldError(name, msg);
+        hasError = true;
+        if (!firstInvalid) firstInvalid = form.querySelector('#f-' + name);
+      }
+
+      if (!title)              fail('title', 'Rubrik är obligatoriskt.');
+      if (!date)               fail('date', 'Datum är obligatoriskt.');
+      else if (date < submitToday) fail('date', 'Datum kan inte vara i det förflutna.');
+      if (!start)              fail('start', 'Starttid är obligatorisk.');
+      if (!end)                fail('end', 'Sluttid är obligatorisk.');
+      else if (end <= start)   fail('end', 'Sluttid måste vara efter starttid.');
+      if (!location)    fail('location', 'Plats är obligatoriskt.');
+      if (!responsible) fail('responsible', 'Ansvarig är obligatoriskt.');
+
+      if (hasError) {
+        firstInvalid.focus();
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         return;
       }
 
-      errBox.hidden = true;
       lock();
       setModalLoading();
 
