@@ -9,6 +9,9 @@ name: Event Data Deploy
 #   3. build          – full site build; captures the 4 event-data pages as an artefact
 #   4. ftp-deploy     – uploads only those 4 files to FTP (no clean-slate)
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     branches:
