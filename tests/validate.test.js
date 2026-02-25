@@ -281,6 +281,170 @@ describe('validateEditRequest – past-date blocking', () => {
   });
 });
 
+// ── Time format (05-§4.2, 05-§4.4) ──────────────────────────────────────────
+
+describe('validateEventRequest – time format', () => {
+  it('VLD-33: rejects start without leading zero (e.g. "8:00")', () => {
+    const r = validateEventRequest(valid({ start: '8:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('HH:MM'));
+  });
+
+  it('VLD-34: rejects start with extra characters (e.g. "08:00:00")', () => {
+    const r = validateEventRequest(valid({ start: '08:00:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('HH:MM'));
+  });
+
+  it('VLD-35: rejects end without leading zero (e.g. "9:00")', () => {
+    const r = validateEventRequest(valid({ end: '9:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('HH:MM'));
+  });
+
+  it('VLD-36: rejects end with no colon (e.g. "0900")', () => {
+    const r = validateEventRequest(valid({ end: '0900' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('HH:MM'));
+  });
+
+  it('VLD-37: rejects start with letters (e.g. "ab:cd")', () => {
+    const r = validateEventRequest(valid({ start: 'ab:cd' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('HH:MM'));
+  });
+
+  it('VLD-38: accepts valid HH:MM start "08:00"', () => {
+    const r = validateEventRequest(valid({ start: '08:00', end: '09:00' }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-39: accepts valid HH:MM end "23:59"', () => {
+    const r = validateEventRequest(valid({ start: '23:00', end: '23:59' }));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+describe('validateEditRequest – time format', () => {
+  it('VLD-40: rejects start without leading zero', () => {
+    const r = validateEditRequest(validEdit({ start: '8:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('HH:MM'));
+  });
+
+  it('VLD-41: rejects end without leading zero', () => {
+    const r = validateEditRequest(validEdit({ end: '9:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('HH:MM'));
+  });
+});
+
+// ── String length limits (02-§10.3) ─────────────────────────────────────────
+
+describe('validateEventRequest – string length limits', () => {
+  it('VLD-42: rejects title exceeding 200 characters', () => {
+    const r = validateEventRequest(valid({ title: 'A'.repeat(201) }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('title'));
+  });
+
+  it('VLD-43: accepts title at exactly 200 characters', () => {
+    const r = validateEventRequest(valid({ title: 'A'.repeat(200) }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-44: rejects location exceeding 200 characters', () => {
+    const r = validateEventRequest(valid({ location: 'B'.repeat(201) }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('location'));
+  });
+
+  it('VLD-45: rejects responsible exceeding 200 characters', () => {
+    const r = validateEventRequest(valid({ responsible: 'C'.repeat(201) }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('responsible'));
+  });
+
+  it('VLD-46: rejects description exceeding 2000 characters', () => {
+    const r = validateEventRequest(valid({ description: 'D'.repeat(2001) }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('description'));
+  });
+
+  it('VLD-47: accepts description at exactly 2000 characters', () => {
+    const r = validateEventRequest(valid({ description: 'D'.repeat(2000) }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-48: rejects link exceeding 500 characters', () => {
+    const r = validateEventRequest(valid({ link: 'https://example.com/' + 'x'.repeat(481) }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('link'));
+  });
+});
+
+describe('validateEditRequest – string length limits', () => {
+  it('VLD-49: rejects title exceeding 200 characters', () => {
+    const r = validateEditRequest(validEdit({ title: 'A'.repeat(201) }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('title'));
+  });
+});
+
+// ── Date within camp range (05-§4.1) ────────────────────────────────────────
+
+describe('validateEventRequest – date within camp range', () => {
+  it('VLD-50: rejects date before camp start_date', () => {
+    const r = validateEventRequest(valid({ date: '2099-06-20' }), {
+      start_date: '2099-06-21',
+      end_date: '2099-06-28',
+    });
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('utanför'));
+  });
+
+  it('VLD-51: rejects date after camp end_date', () => {
+    const r = validateEventRequest(valid({ date: '2099-06-29' }), {
+      start_date: '2099-06-21',
+      end_date: '2099-06-28',
+    });
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('utanför'));
+  });
+
+  it('VLD-52: accepts date on camp start_date (inclusive)', () => {
+    const r = validateEventRequest(valid({ date: '2099-06-21' }), {
+      start_date: '2099-06-21',
+      end_date: '2099-06-28',
+    });
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-53: accepts date on camp end_date (inclusive)', () => {
+    const r = validateEventRequest(valid({ date: '2099-06-28' }), {
+      start_date: '2099-06-21',
+      end_date: '2099-06-28',
+    });
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-54: skips range check when no camp dates provided', () => {
+    const r = validateEventRequest(valid({ date: '2099-06-22' }));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+describe('validateEditRequest – date within camp range', () => {
+  it('VLD-55: rejects date outside camp range', () => {
+    const r = validateEditRequest(validEdit({ date: '2099-06-20' }), {
+      start_date: '2099-06-21',
+      end_date: '2099-06-28',
+    });
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('utanför'));
+  });
+});
+
 // ── Happy path ────────────────────────────────────────────────────────────────
 
 describe('validateEventRequest – happy path', () => {

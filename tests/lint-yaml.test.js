@@ -215,3 +215,74 @@ describe('validateYaml – duplicate event IDs (02-§23.5)', () => {
     assert.strictEqual(r.ok, true);
   });
 });
+
+// ── LNT-19..21: Unique (title + date + start) combo (05-§5.1) ──────────────
+
+describe('validateYaml – unique (title+date+start) combo (05-§5.1)', () => {
+  it('LNT-19: rejects two events with same title, date, and start', () => {
+    const events = [
+      validEvent({ id: 'frukost-2026-07-01-0800', title: 'Frukost', date: '2026-07-01', start: '08:00', end: '09:00' }),
+      validEvent({ id: 'frukost-2026-07-01-0800b', title: 'Frukost', date: '2026-07-01', start: '08:00', end: '09:30' }),
+    ];
+    const r = validateYaml(makeYaml(events));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /duplicate|title.*date.*start|kombination/i.test(e)));
+  });
+
+  it('LNT-20: accepts two events with same title but different start times', () => {
+    const events = [
+      validEvent({ id: 'frukost-2026-07-01-0800', title: 'Frukost', date: '2026-07-01', start: '08:00', end: '09:00' }),
+      validEvent({ id: 'frukost-2026-07-01-1200', title: 'Frukost', date: '2026-07-01', start: '12:00', end: '13:00' }),
+    ];
+    const r = validateYaml(makeYaml(events));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('LNT-21: accepts two events with same title and start but different dates', () => {
+    const events = [
+      validEvent({ id: 'frukost-2026-07-01-0800', title: 'Frukost', date: '2026-07-01', start: '08:00', end: '09:00' }),
+      validEvent({ id: 'frukost-2026-07-02-0800', title: 'Frukost', date: '2026-07-02', start: '08:00', end: '09:00' }),
+    ];
+    const r = validateYaml(makeYaml(events));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+// ── LNT-22..23: Active + archived conflict (05-§1.3) ───────────────────────
+
+describe('validateYaml – active+archived camp conflict (05-§1.3)', () => {
+  it('LNT-22: rejects a camp that is both active and archived', () => {
+    const yaml = [
+      'camp:',
+      '  id: test-camp',
+      '  name: Test Camp',
+      '  location: Testvik',
+      "  start_date: '2026-07-01'",
+      "  end_date: '2026-07-07'",
+      '  active: true',
+      '  archived: true',
+      '',
+      'events: []',
+    ].join('\n');
+    const r = validateYaml(yaml);
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /active.*archived|archived.*active/i.test(e)));
+  });
+
+  it('LNT-23: accepts a camp that is active but not archived', () => {
+    const yaml = [
+      'camp:',
+      '  id: test-camp',
+      '  name: Test Camp',
+      '  location: Testvik',
+      "  start_date: '2026-07-01'",
+      "  end_date: '2026-07-07'",
+      '  active: true',
+      '  archived: false',
+      '',
+      'events: []',
+    ].join('\n');
+    const r = validateYaml(yaml);
+    assert.strictEqual(r.ok, true);
+  });
+});
