@@ -11,12 +11,21 @@ const { renderTodayPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions } = require('./render-index');
 const { renderArkivPage } = require('./render-arkiv');
+const { renderRssFeed } = require('./render-rss');
+const { renderEventPage } = require('./render-event');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const CONTENT_DIR = path.join(__dirname, '..', 'content');
 const ASSETS_DIR = path.join(__dirname, '..', 'assets');
 const OUTPUT_DIR = path.join(__dirname, '../..', 'public');
+
+// ── Site base URL (required for RSS feed and per-event page links) ──────────
+const SITE_URL = (process.env.SITE_URL || '').replace(/\/+$/, '');
+if (!SITE_URL) {
+  console.error('ERROR: SITE_URL environment variable is not set. RSS feed and event pages require an absolute base URL.');
+  process.exit(1);
+}
 
 
 // ── Load camps registry ──────────────────────────────────────────────────────
@@ -162,6 +171,21 @@ async function main() {
   );
   fs.writeFileSync(path.join(OUTPUT_DIR, 'events.json'), eventsJson, 'utf8');
   console.log(`Built: public/events.json  (${events.length} events)`);
+
+  // ── Render RSS feed ─────────────────────────────────────────────────────
+  const rssXml = renderRssFeed(camp, events, SITE_URL);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.rss'), rssXml, 'utf8');
+  console.log(`Built: public/schema.rss  (${events.length} events)`);
+
+  // ── Render per-event detail pages ───────────────────────────────────────
+  const schemaDir = path.join(OUTPUT_DIR, 'schema');
+  for (const e of events) {
+    const eventDir = path.join(schemaDir, String(e.id));
+    fs.mkdirSync(eventDir, { recursive: true });
+    const eventHtml = renderEventPage(e, camp, SITE_URL, footerHtml, navSections);
+    fs.writeFileSync(path.join(eventDir, 'index.html'), eventHtml, 'utf8');
+  }
+  console.log(`Built: public/schema/*/index.html  (${events.length} event pages)`);
 
   // ── Render index.html from content/sections.yaml ─────────────────────────
   // sectionsConfig already loaded above for navSections.

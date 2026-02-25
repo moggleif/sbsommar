@@ -8,7 +8,7 @@ events:
 - date: '2023-06-25'
   description: null
   end: '23:30'
-  id: välkommen-2023-06-25-1200
+  id: valkommen-2023-06-25-1200
   link: null
   location: Annat
   meta:
@@ -23,7 +23,7 @@ events:
 - date: '2023-07-02'
   description: null
   end: '15:00'
-  id: glass-på-chokladfabriken-2023-07-02-1200
+  id: glass-pa-chokladfabriken-2023-07-02-1200
   link: null
   location: Annat
   meta:
@@ -38,7 +38,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '20:00'
-  id: avslutningsmöte-(alla-deltar)-2023-07-01-1800
+  id: avslutningsmote-alla-deltar-2023-07-01-1800
   link: null
   location: Annat
   meta:
@@ -53,7 +53,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '23:55'
-  id: sista-för-idag-2023-06-26-2355
+  id: sista-for-idag-2023-06-26-2355
   link: null
   location: Annat
   meta:
@@ -68,7 +68,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '23:55'
-  id: sista-för-idag-2023-06-27-2355
+  id: sista-for-idag-2023-06-27-2355
   link: null
   location: Annat
   meta:
@@ -83,7 +83,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '23:55'
-  id: sista-för-idag-2023-06-28-2355
+  id: sista-for-idag-2023-06-28-2355
   link: null
   location: Annat
   meta:
@@ -98,7 +98,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '23:55'
-  id: sista-för-idag-2023-06-29-2355
+  id: sista-for-idag-2023-06-29-2355
   link: null
   location: Annat
   meta:
@@ -113,7 +113,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '23:55'
-  id: sista-för-idag-2023-06-30-2355
+  id: sista-for-idag-2023-06-30-2355
   link: null
   location: Annat
   meta:
@@ -128,7 +128,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '23:55'
-  id: sista-för-idag-2023-07-01-2355
+  id: sista-for-idag-2023-07-01-2355
   link: null
   location: Annat
   meta:
@@ -143,7 +143,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '10:00'
-  id: titta-på-sommarlovsmorgon-2023-06-26-0900
+  id: titta-pa-sommarlovsmorgon-2023-06-26-0900
   link: null
   location: Servicehus
   meta:
@@ -158,7 +158,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '10:00'
-  id: titta-på-sommarlovsmorgon-2023-06-27-0900
+  id: titta-pa-sommarlovsmorgon-2023-06-27-0900
   link: null
   location: Servicehus
   meta:
@@ -173,7 +173,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '10:00'
-  id: titta-på-sommarlovsmorgon-2023-06-28-0900
+  id: titta-pa-sommarlovsmorgon-2023-06-28-0900
   link: null
   location: Servicehus
   meta:
@@ -188,7 +188,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '10:00'
-  id: titta-på-sommarlovsmorgon-2023-06-29-0900
+  id: titta-pa-sommarlovsmorgon-2023-06-29-0900
   link: null
   location: Servicehus
   meta:
@@ -203,7 +203,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '10:00'
-  id: titta-på-sommarlovsmorgon-2023-06-30-0900
+  id: titta-pa-sommarlovsmorgon-2023-06-30-0900
   link: null
   location: Servicehus
   meta:
@@ -218,7 +218,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '10:00'
-  id: titta-på-sommarlovsmorgon-2023-07-01-0900
+  id: titta-pa-sommarlovsmorgon-2023-07-01-0900
   link: null
   location: Servicehus
   meta:
@@ -233,7 +233,7 @@ events:
 - date: '2023-07-02'
   description: null
   end: '10:00'
-  id: titta-på-sommarlovsmorgon-2023-07-02-0900
+  id: titta-pa-sommarlovsmorgon-2023-07-02-0900
   link: null
   location: Servicehus
   meta:
@@ -248,7 +248,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '14:00'
-  id: vattenkrig!-2023-07-01-1300
+  id: vattenkrig-2023-07-01-1300
   link: null
   location: Annat
   meta:
@@ -458,7 +458,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '16:00'
-  id: japansk-bakkurs-#1-2023-06-27-1300
+  id: japansk-bakkurs-1-2023-06-27-1300
   link: null
   location: Skolsal
   meta:
@@ -473,7 +473,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '16:00'
-  id: japansk-bakkurs-#2-2023-06-29-1300
+  id: japansk-bakkurs-2-2023-06-29-1300
   link: null
   location: Skolsal
   meta:
@@ -488,7 +488,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '12:00'
-  id: rollspel-fm,-viktor-2023-06-27-0930
+  id: rollspel-fm-viktor-2023-06-27-0930
   link: null
   location: Rollspelstält1
   meta:
@@ -503,7 +503,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '12:00'
-  id: rollspel-fm,-viktor-2023-06-30-0930
+  id: rollspel-fm-viktor-2023-06-30-0930
   link: null
   location: Rollspelstält1
   meta:
@@ -518,7 +518,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '16:45'
-  id: latindans-(-jive-och-cha-cha-cha)-2023-06-28-1515
+  id: latindans-jive-och-cha-cha-cha-2023-06-28-1515
   link: null
   location: GA Idrott
   meta:
@@ -563,7 +563,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '15:30'
-  id: simons-svärdskola--2023-06-26-1300
+  id: simons-svardskola-2023-06-26-1300
   link: null
   location: Skolsal
   meta:
@@ -578,7 +578,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '17:00'
-  id: bäst-i-test-2023-06-26-1400
+  id: bast-i-test-2023-06-26-1400
   link: null
   location: Nerf-arena
   meta:
@@ -593,7 +593,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '10:30'
-  id: välkomstmöte-2023-06-26-1000
+  id: valkomstmote-2023-06-26-1000
   link: null
   location: GA Idrott
   meta:
@@ -608,7 +608,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '16:00'
-  id: simhall-abonnerad-för-rfsb-2023-06-26-1000
+  id: simhall-abonnerad-for-rfsb-2023-06-26-1000
   link: null
   location: Annat
   meta:
@@ -623,7 +623,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '15:00'
-  id: simhall-abonnerad-för-rfsb-2023-06-27-1000
+  id: simhall-abonnerad-for-rfsb-2023-06-27-1000
   link: null
   location: Annat
   meta:
@@ -638,7 +638,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '16:00'
-  id: simhall-abonnerad-för-rfsb-2023-06-30-1000
+  id: simhall-abonnerad-for-rfsb-2023-06-30-1000
   link: null
   location: Annat
   meta:
@@ -653,7 +653,7 @@ events:
 - date: '2023-06-25'
   description: null
   end: '20:45'
-  id: rigga-tält-och-ställa-i-ordning-ga-hall-2023-06-25-1900
+  id: rigga-talt-och-stalla-i-ordning-ga-hall-2023-06-25-1900
   link: null
   location: Annat
   meta:
@@ -668,7 +668,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '10:40'
-  id: mentorträff-2023-06-26-1030
+  id: mentortraff-2023-06-26-1030
   link: null
   location: GA Kreativ hörna
   meta:
@@ -683,7 +683,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '10:00'
-  id: tipsrunda-lära-känna-aktivitet-2023-06-26-0900
+  id: tipsrunda-lara-kanna-aktivitet-2023-06-26-0900
   link: null
   location: Servicehus
   meta:
@@ -698,7 +698,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '22:00'
-  id: brädspel-2023-06-26-1900
+  id: bradspel-2023-06-26-1900
   link: null
   location: Kaffetält
   meta:
@@ -833,7 +833,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '12:00'
-  id: street-inspirerad-lägerdans-2023-06-26-1130
+  id: street-inspirerad-lagerdans-2023-06-26-1130
   link: null
   location: Servicehus
   meta:
@@ -848,7 +848,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '11:00'
-  id: ultralätt-fjällpackning--2023-06-27-0900
+  id: ultralatt-fjallpackning-2023-06-27-0900
   link: null
   location: Tält1
   meta:
@@ -863,7 +863,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '17:00'
-  id: ul-kök,-tillverknings-workshop-2023-06-28-1500
+  id: ul-kok-tillverknings-workshop-2023-06-28-1500
   link: null
   location: Tält1
   meta:
@@ -878,7 +878,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '16:00'
-  id: samtal-med-skola,-erfarenhets-utbyte.-prata-med-skolledare.--2023-06-27-1500
+  id: samtal-med-skola-erfarenhets-utbyte-prata-med-skolledare-2023-06-27-1500
   link: null
   location: Tält1
   meta:
@@ -893,7 +893,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '13:55'
-  id: gör-ditt-eget-slime-2023-06-26-1305
+  id: gor-ditt-eget-slime-2023-06-26-1305
   link: null
   location: Servicehus
   meta:
@@ -908,7 +908,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '23:00'
-  id: brädspel-2023-06-27-1900
+  id: bradspel-2023-06-27-1900
   link: null
   location: Kaffetält
   meta:
@@ -923,7 +923,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '17:00'
-  id: kanot-4h-nedströms-2023-06-27-1300
+  id: kanot-4h-nedstroms-2023-06-27-1300
   link: null
   location: Annat
   meta:
@@ -938,7 +938,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: 01:00
-  id: sen-kväll-i-datahallen---från-10-år-2023-06-28-2200
+  id: sen-kvall-i-datahallen-fran-10-ar-2023-06-28-2200
   link: null
   location: GA Datorsal
   meta:
@@ -968,7 +968,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '22:00'
-  id: lägerbål-2023-06-26-2000
+  id: lagerbal-2023-06-26-2000
   link: null
   location: Grillplats
   meta:
@@ -983,7 +983,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '12:00'
-  id: street-inspirerad-lägerdans-2023-06-27-1130
+  id: street-inspirerad-lagerdans-2023-06-27-1130
   link: null
   location: Servicehus
   meta:
@@ -998,7 +998,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '16:00'
-  id: föräldrafika---2e-(särskild-begåvning-och-npf)-2023-06-28-1500
+  id: foraldrafika-2e-sarskild-begavning-och-npf-2023-06-28-1500
   link: null
   location: Kaffetält
   meta:
@@ -1013,7 +1013,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '16:00'
-  id: flyttad-lokal,-föräldrafika---prövning,-uppflytt,-att-ta-studenten-vid-16-2023-06-29-1500
+  id: flyttad-lokal-foraldrafika-provning-uppflytt-att-ta-studenten-vid-16-2023-06-29-1500
   link: null
   location: Tält2
   meta:
@@ -1028,7 +1028,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '21:00'
-  id: dagens-löppass-2023-06-26-2000
+  id: dagens-loppass-2023-06-26-2000
   link: null
   location: GA Idrott
   meta:
@@ -1043,7 +1043,7 @@ events:
 - date: '2023-06-26'
   description: null
   end: '19:30'
-  id: tecknarstudio-(besök-av-kalle!)-2023-06-26-1800
+  id: tecknarstudio-besok-av-kalle-2023-06-26-1800
   link: null
   location: Skolsal
   meta:
@@ -1058,7 +1058,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '16:00'
-  id: hur-funkar-chatgpt-egentligen?-2023-06-30-1500
+  id: hur-funkar-chatgpt-egentligen-2023-06-30-1500
   link: null
   location: Tält1
   meta:
@@ -1088,7 +1088,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '14:15'
-  id: grundläggande-bollkontroll-(basket-anknutet)-2023-06-27-1330
+  id: grundlaggande-bollkontroll-basket-anknutet-2023-06-27-1330
   link: null
   location: GA Idrott
   meta:
@@ -1103,7 +1103,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '12:00'
-  id: klättring-2023-06-28-1000
+  id: klattring-2023-06-28-1000
   link: null
   location: Fritidsgård
   meta:
@@ -1133,7 +1133,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '16:00'
-  id: schackträning-inför-schackturnering-2023-06-27-1500
+  id: schacktraning-infor-schackturnering-2023-06-27-1500
   link: null
   location: Kaffetält
   meta:
@@ -1148,7 +1148,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '21:00'
-  id: schackturnering--2023-06-28-1900
+  id: schackturnering-2023-06-28-1900
   link: null
   location: Kaffetält
   meta:
@@ -1163,7 +1163,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '14:55'
-  id: skrivarmaraton--2023-06-28-1315
+  id: skrivarmaraton-2023-06-28-1315
   link: null
   location: Tält1
   meta:
@@ -1178,7 +1178,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '17:00'
-  id: cirkelträning--2023-06-27-1630
+  id: cirkeltraning-2023-06-27-1630
   link: null
   location: Annat
   meta:
@@ -1208,7 +1208,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '12:00'
-  id: nybörjarkurs-programmering--2023-06-28-1000
+  id: nyborjarkurs-programmering-2023-06-28-1000
   link: null
   location: Skolsal
   meta:
@@ -1223,7 +1223,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '16:00'
-  id: engelskspråkig-bokklubb-2023-06-28-1500
+  id: engelsksprakig-bokklubb-2023-06-28-1500
   link: null
   location: Annat
   meta:
@@ -1253,7 +1253,7 @@ events:
 - date: '2023-06-27'
   description: null
   end: '20:30'
-  id: kareoke--2023-06-27-1900
+  id: kareoke-2023-06-27-1900
   link: null
   location: Skolsal
   meta:
@@ -1283,7 +1283,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '12:00'
-  id: prova-på-rollspel-för-tjejer---(fullbokat)-2023-06-29-0930
+  id: prova-pa-rollspel-for-tjejer-fullbokat-2023-06-29-0930
   link: null
   location: Rollspelstält2
   meta:
@@ -1298,7 +1298,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '14:30'
-  id: föreläsning-introduktion-till-särskild-begåvning-2023-06-28-1330
+  id: forelasning-introduktion-till-sarskild-begavning-2023-06-28-1330
   link: null
   location: Skolsal
   meta:
@@ -1313,7 +1313,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '12:00'
-  id: tryck-på-tyg-2023-06-28-1000
+  id: tryck-pa-tyg-2023-06-28-1000
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1328,7 +1328,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '12:00'
-  id: tryck-på-tyg-2023-06-29-1000
+  id: tryck-pa-tyg-2023-06-29-1000
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1343,7 +1343,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '12:00'
-  id: tryck-på-tyg-2023-06-30-1000
+  id: tryck-pa-tyg-2023-06-30-1000
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1373,7 +1373,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '17:00'
-  id: cirkelträning-2023-06-28-1630
+  id: cirkeltraning-2023-06-28-1630
   link: null
   location: Annat
   meta:
@@ -1388,7 +1388,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '14:00'
-  id: dansworkshop-fortsättning-2023-06-28-1230
+  id: dansworkshop-fortsattning-2023-06-28-1230
   link: null
   location: Fritidsgård
   meta:
@@ -1403,7 +1403,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '14:00'
-  id: street-inspirerad-lägerdans-2023-06-28-1330
+  id: street-inspirerad-lagerdans-2023-06-28-1330
   link: null
   location: GA Idrott
   meta:
@@ -1433,7 +1433,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '16:00'
-  id: hemliga-gäster-på-besök-2023-06-28-1500
+  id: hemliga-gaster-pa-besok-2023-06-28-1500
   link: null
   location: Annat
   meta:
@@ -1448,7 +1448,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '19:00'
-  id: hemliga-gäster-spelar-pandemic-2023-06-28-1700
+  id: hemliga-gaster-spelar-pandemic-2023-06-28-1700
   link: null
   location: Kaffetält
   meta:
@@ -1478,7 +1478,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '12:00'
-  id: välkommen-på-fika-med-rfsb-dalarna-gävleborg-2023-06-30-1100
+  id: valkommen-pa-fika-med-rfsb-dalarna-gavleborg-2023-06-30-1100
   link: null
   location: Kaffetält
   meta:
@@ -1493,7 +1493,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '14:55'
-  id: rita-med-digitala-medel-(för-barn)-2023-06-28-1400
+  id: rita-med-digitala-medel-for-barn-2023-06-28-1400
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1508,7 +1508,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: 03:00
-  id: årets-traditionella-stora-lägereld-vid-vattnet-2023-06-29-1800
+  id: arets-traditionella-stora-lagereld-vid-vattnet-2023-06-29-1800
   link: null
   location: Grillplats
   meta:
@@ -1523,7 +1523,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '23:50'
-  id: brädspel-2023-06-28-2100
+  id: bradspel-2023-06-28-2100
   link: null
   location: Kaffetält
   meta:
@@ -1553,7 +1553,7 @@ events:
 - date: '2023-06-28'
   description: null
   end: '20:30'
-  id: varulvarna-från-klågerup--2023-06-28-1930
+  id: varulvarna-fran-klagerup-2023-06-28-1930
   link: null
   location: Tält1
   meta:
@@ -1568,7 +1568,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '17:00'
-  id: cirkelträning-2023-06-29-1630
+  id: cirkeltraning-2023-06-29-1630
   link: null
   location: Annat
   meta:
@@ -1583,7 +1583,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '12:00'
-  id: rollspel-för-de-yngre-(typ-4-10år)-2023-06-29-1000
+  id: rollspel-for-de-yngre-typ-4-10ar-2023-06-29-1000
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1598,7 +1598,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '11:45'
-  id: lägerdans---uppvisning--2023-06-29-1130
+  id: lagerdans-uppvisning-2023-06-29-1130
   link: null
   location: Annat
   meta:
@@ -1613,7 +1613,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '22:00'
-  id: brädspel-2023-06-29-1930
+  id: bradspel-2023-06-29-1930
   link: null
   location: Kaffetält
   meta:
@@ -1628,7 +1628,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '15:30'
-  id: fotboll-för-tjejer-2023-06-29-1430
+  id: fotboll-for-tjejer-2023-06-29-1430
   link: null
   location: Fotbollsplan
   meta:
@@ -1658,7 +1658,7 @@ events:
 - date: '2023-06-29'
   description: null
   end: '16:00'
-  id: mattestuga---prata-om-anpassning-av-matte-och-räkna-lite-2023-06-29-1500
+  id: mattestuga-prata-om-anpassning-av-matte-och-rakna-lite-2023-06-29-1500
   link: null
   location: Kaffetält
   meta:
@@ -1703,7 +1703,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '16:00'
-  id: värmlandsträff-2023-07-01-1500
+  id: varmlandstraff-2023-07-01-1500
   link: null
   location: Kaffetält
   meta:
@@ -1718,7 +1718,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '14:45'
-  id: om-quietframes-och-entreprenörsresan--2023-06-30-1400
+  id: om-quietframes-och-entreprenorsresan-2023-06-30-1400
   link: null
   location: Tält1
   meta:
@@ -1733,7 +1733,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '12:00'
-  id: rollspel-för-de-yngre-(typ-4-10år)-2023-06-30-1000
+  id: rollspel-for-de-yngre-typ-4-10ar-2023-06-30-1000
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1748,7 +1748,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '12:00'
-  id: teknarstudio--2023-06-30-1000
+  id: teknarstudio-2023-06-30-1000
   link: null
   location: Skolsal
   meta:
@@ -1763,7 +1763,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '19:00'
-  id: stickning--2023-06-30-1800
+  id: stickning-2023-06-30-1800
   link: null
   location: Kaffetält
   meta:
@@ -1778,7 +1778,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '17:00'
-  id: cirkelträning-2023-06-30-1630
+  id: cirkeltraning-2023-06-30-1630
   link: null
   location: Annat
   meta:
@@ -1808,7 +1808,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '18:00'
-  id: bröllop-2023-06-30-1730
+  id: brollop-2023-06-30-1730
   link: null
   location: Servicehus
   meta:
@@ -1823,7 +1823,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '21:00'
-  id: tecknarstudio-(13+-sista-för-i-år)-2023-06-30-1900
+  id: tecknarstudio-13-sista-for-i-ar-2023-06-30-1900
   link: null
   location: Skolsal
   meta:
@@ -1853,7 +1853,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '16:00'
-  id: klurumläger-2.0-planeringsworkshop-2023-07-01-1500
+  id: klurumlager-2-0-planeringsworkshop-2023-07-01-1500
   link: null
   location: Tält2
   meta:
@@ -1868,7 +1868,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '12:02'
-  id: slutomgång-rollspel-2023-07-01-1000
+  id: slutomgang-rollspel-2023-07-01-1000
   link: null
   location: Kaffetält
   meta:
@@ -1883,7 +1883,7 @@ events:
 - date: '2023-06-30'
   description: null
   end: '21:30'
-  id: högläsning---mika-läser-upp-sin-famfic-2023-06-30-2100
+  id: hoglasning-mika-laser-upp-sin-famfic-2023-06-30-2100
   link: null
   location: Tält2
   meta:
@@ -1898,7 +1898,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '16:30'
-  id: cirkelträning-2023-07-01-1600
+  id: cirkeltraning-2023-07-01-1600
   link: null
   location: Annat
   meta:
@@ -1913,7 +1913,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '21:19'
-  id: kahoot-(pentesting)--2023-07-01-2019
+  id: kahoot-pentesting-2023-07-01-2019
   link: null
   location: Servicehus
   meta:
@@ -1928,7 +1928,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '14:00'
-  id: minecraft-nästa-år-2023-07-01-1330
+  id: minecraft-nasta-ar-2023-07-01-1330
   link: null
   location: GA Datorsal
   meta:
@@ -1943,7 +1943,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '15:30'
-  id: fikaträff-stockholm/mälardalen--2023-07-01-1430
+  id: fikatraff-stockholm-malardalen-2023-07-01-1430
   link: null
   location: Tält1
   meta:
@@ -1958,7 +1958,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '14:30'
-  id: årsmöte--2023-07-01-1400
+  id: arsmote-2023-07-01-1400
   link: null
   location: Kaffetält
   meta:
@@ -1973,7 +1973,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '14:00'
-  id: årsmöte-rfsb,-därefter-lokalförening-stockholm-mälardalen-2023-07-01-1400
+  id: arsmote-rfsb-darefter-lokalforening-stockholm-malardalen-2023-07-01-1400
   link: null
   location: Kaffetält
   meta:
@@ -1988,7 +1988,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '21:15'
-  id: kahoot!-(pentesting)-2023-07-01-2015
+  id: kahoot-pentesting-2023-07-01-2015
   link: null
   location: Servicehus
   meta:
@@ -2003,7 +2003,7 @@ events:
 - date: '2023-07-01'
   description: null
   end: '21:15'
-  id: kahoot!-pentesting-och-önskemål-2023-07-01-2015
+  id: kahoot-pentesting-och-onskemal-2023-07-01-2015
   link: null
   location: Servicehus
   meta:

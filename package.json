@@ -14,7 +14,7 @@
     "check:security": "node source/scripts/check-yaml-security.js",
     "lint:md": "markdownlint \"content/**/*.md\" \"docs/**/*.md\" README.md CLAUDE.md",
     "lint:css": "stylelint \"source/assets/cs/**/*.css\"",
-    "lint:html": "html-validate \"public/*.html\"",
+    "lint:html": "html-validate \"public/**/*.html\"",
     "prepare": "git config core.hooksPath .githooks || true"
   },
   "devDependencies": {

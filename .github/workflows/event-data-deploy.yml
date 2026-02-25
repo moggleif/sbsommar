@@ -6,8 +6,8 @@ name: Event Data Deploy
 # Four sequential jobs:
 #   1. lint-yaml      – structural validation of the changed YAML file
 #   2. security-check – injection scan and link protocol validation
-#   3. build          – full site build; captures the 4 event-data pages as an artefact
-#   4. ftp-deploy     – uploads only those 4 files to FTP (no clean-slate)
+#   3. build          – full site build; captures event-data pages, RSS, and per-event pages
+#   4. ftp-deploy     – uploads those files to FTP (no clean-slate)
 
 permissions:
   contents: read
@@ -107,8 +107,9 @@ jobs:
         run: npm run build
         env:
           API_URL: ${{ secrets.API_URL }}
+          SITE_URL: ${{ secrets.SITE_URL }}
 
-      # Capture only the four event-data-derived files.
+      # Capture event-data-derived files: schedule pages, JSON, RSS, and per-event pages.
       # Other pages (index.html, lagg-till.html, redigera.html, arkiv.html) are not
       # affected by event data changes and are not uploaded by this workflow.
       - name: Upload schema pages artefact
@@ -120,6 +121,8 @@ jobs:
             public/idag.html
             public/dagens-schema.html
             public/events.json
+            public/schema.rss
+            public/schema/
           retention-days: 1
 
   ftp-deploy:
@@ -157,10 +160,21 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
         run: |
-          for FILE in schema.html idag.html dagens-schema.html events.json; do
+          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss; do
             curl --ftp-create-dirs \
                  --upload-file "deploy-output/$FILE" \
                  --user "$FTP_USERNAME:$FTP_PASSWORD" \
                  "ftp://$FTP_HOST${FTP_TARGET_DIR}$FILE"
             echo "Uploaded: $FILE"
           done
+          # Upload per-event detail pages
+          if [ -d "deploy-output/schema" ]; then
+            find deploy-output/schema -name 'index.html' | while read -r PAGE; do
+              REL="${PAGE#deploy-output/}"
+              curl --ftp-create-dirs \
+                   --upload-file "$PAGE" \
+                   --user "$FTP_USERNAME:$FTP_PASSWORD" \
+                   "ftp://$FTP_HOST${FTP_TARGET_DIR}$REL"
+              echo "Uploaded: $REL"
+            done
+          fi

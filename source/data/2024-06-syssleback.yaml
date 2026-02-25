@@ -203,7 +203,7 @@ events:
 - date: '2024-06-23'
   description: null
   end: '23:30'
-  id: välkommen-2024-06-23-1200
+  id: valkommen-2024-06-23-1200
   link: null
   location: Annat
   meta:
@@ -218,7 +218,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '23:59'
-  id: sista-för-idag-2024-06-24-2355
+  id: sista-for-idag-2024-06-24-2355
   link: null
   location: Annat
   meta:
@@ -233,7 +233,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '23:59'
-  id: sista-för-idag-2024-06-25-2355
+  id: sista-for-idag-2024-06-25-2355
   link: null
   location: Annat
   meta:
@@ -248,7 +248,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '23:59'
-  id: sista-för-idag-2024-06-26-2355
+  id: sista-for-idag-2024-06-26-2355
   link: null
   location: Annat
   meta:
@@ -263,7 +263,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '23:59'
-  id: sista-för-idag-2024-06-27-2355
+  id: sista-for-idag-2024-06-27-2355
   link: null
   location: Annat
   meta:
@@ -278,7 +278,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '23:59'
-  id: sista-för-idag-2024-06-28-2355
+  id: sista-for-idag-2024-06-28-2355
   link: null
   location: Annat
   meta:
@@ -293,7 +293,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '23:59'
-  id: sista-för-idag-2024-06-29-2355
+  id: sista-for-idag-2024-06-29-2355
   link: null
   location: Annat
   meta:
@@ -308,7 +308,7 @@ events:
 - date: '2024-06-23'
   description: null
   end: '20:45'
-  id: rigga-tält-och-ställa-i-ordning-ga-hall-2024-06-23-1900
+  id: rigga-talt-och-stalla-i-ordning-ga-hall-2024-06-23-1900
   link: null
   location: Annat
   meta:
@@ -323,7 +323,7 @@ events:
 - date: '2024-06-30'
   description: null
   end: '15:00'
-  id: glass-på-chokladfabriken-2024-06-30-1200
+  id: glass-pa-chokladfabriken-2024-06-30-1200
   link: null
   location: Annat
   meta:
@@ -338,7 +338,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '10:30'
-  id: välkomstmöte-2024-06-24-1000
+  id: valkomstmote-2024-06-24-1000
   link: null
   location: GA Idrott
   meta:
@@ -353,7 +353,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '15:00'
-  id: simhall-abonnerad-för-rfsb-2024-06-25-1000
+  id: simhall-abonnerad-for-rfsb-2024-06-25-1000
   link: null
   location: Annat
   meta:
@@ -368,7 +368,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '15:00'
-  id: simhall-abonnerad-för-rfsb-2024-06-26-1000
+  id: simhall-abonnerad-for-rfsb-2024-06-26-1000
   link: null
   location: Annat
   meta:
@@ -383,7 +383,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '15:00'
-  id: simhall-abonnerad-för-rfsb-2024-06-28-1000
+  id: simhall-abonnerad-for-rfsb-2024-06-28-1000
   link: null
   location: Annat
   meta:
@@ -398,7 +398,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '15:00'
-  id: rfsb-lokalföreningar-2024-06-24-1400
+  id: rfsb-lokalforeningar-2024-06-24-1400
   link: null
   location: GA Idrott
   meta:
@@ -413,7 +413,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '15:00'
-  id: molles-rollspelskampanj,-ordna-karaktärer-2024-06-24-1400
+  id: molles-rollspelskampanj-ordna-karaktarer-2024-06-24-1400
   link: null
   location: Rollspelstält2
   meta:
@@ -428,7 +428,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '15:00'
-  id: selmas-kampanj---ordna-karaktärer-2024-06-24-1400
+  id: selmas-kampanj-ordna-karaktarer-2024-06-24-1400
   link: null
   location: Rollspelstält1
   meta:
@@ -443,7 +443,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '17:00'
-  id: dubbelkampanjen--ordna-karaktärer--2024-06-24-1500
+  id: dubbelkampanjen-ordna-karaktarer-2024-06-24-1500
   link: null
   location: Rollspelstält1
   meta:
@@ -458,7 +458,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '13:00'
-  id: molles-rollspelskampanj---session-1-2024-06-25-1000
+  id: molles-rollspelskampanj-session-1-2024-06-25-1000
   link: null
   location: Rollspelstält2
   meta:
@@ -473,7 +473,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '13:00'
-  id: selmas-rollspelskampanj---session-1-2024-06-25-1000
+  id: selmas-rollspelskampanj-session-1-2024-06-25-1000
   link: null
   location: Rollspelstält1
   meta:
@@ -488,7 +488,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '16:00'
-  id: japansk-bakning-#1---fullbokad-2024-06-25-1400
+  id: japansk-bakning-1-fullbokad-2024-06-25-1400
   link: null
   location: Servicehus
   meta:
@@ -503,7 +503,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '22:00'
-  id: brädspel-2024-06-24-1900
+  id: bradspel-2024-06-24-1900
   link: null
   location: Kaffetält
   meta:
@@ -518,7 +518,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '22:00'
-  id: brädspel-2024-06-28-1900
+  id: bradspel-2024-06-28-1900
   link: null
   location: Kaffetält
   meta:
@@ -533,7 +533,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '22:00'
-  id: brädspel-2024-06-26-1900
+  id: bradspel-2024-06-26-1900
   link: null
   location: Kaffetält
   meta:
@@ -548,7 +548,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '23:00'
-  id: grillfest-vid-klarälven-2024-06-25-1830
+  id: grillfest-vid-klaralven-2024-06-25-1830
   link: null
   location: Grillplats
   meta:
@@ -563,7 +563,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '17:00'
-  id: bokcirkel-"fallet"-av-albert-camus-2024-06-26-1600
+  id: bokcirkel-fallet-av-albert-camus-2024-06-26-1600
   link: null
   location: Kaffetält
   meta:
@@ -578,7 +578,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '17:00'
-  id: japansk-bakning-#2---fullbokad-2024-06-27-1400
+  id: japansk-bakning-2-fullbokad-2024-06-27-1400
   link: null
   location: Servicehus
   meta:
@@ -593,7 +593,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '17:00'
-  id: japansk-bakning-#3---???---ledare-behövs-2024-06-29-1400
+  id: japansk-bakning-3-ledare-behovs-2024-06-29-1400
   link: null
   location: Servicehus
   meta:
@@ -608,7 +608,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '17:00'
-  id: bäst-i-test-2024-06-24-1500
+  id: bast-i-test-2024-06-24-1500
   link: null
   location: Nerf-arena
   meta:
@@ -623,7 +623,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '13:00'
-  id: molles-rollspelskampanj---session-2-2024-06-26-1000
+  id: molles-rollspelskampanj-session-2-2024-06-26-1000
   link: null
   location: Rollspelstält2
   meta:
@@ -638,7 +638,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '13:00'
-  id: selmas-rollspelskampanj-–-session-3-2024-06-27-1000
+  id: selmas-rollspelskampanj-session-3-2024-06-27-1000
   link: null
   location: Rollspelstält1
   meta:
@@ -653,7 +653,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '16:30'
-  id: dubbelkampanjen-–-session-3-2024-06-27-1330
+  id: dubbelkampanjen-session-3-2024-06-27-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -668,7 +668,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '16:30'
-  id: dubbelkampanjen-–-session-4-2024-06-28-1330
+  id: dubbelkampanjen-session-4-2024-06-28-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -683,7 +683,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '16:30'
-  id: dubbelkampanjen-–-session-5-2024-06-29-1330
+  id: dubbelkampanjen-session-5-2024-06-29-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -698,7 +698,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '20:00'
-  id: spelledarkurs-–-grupp-1o2---ordna-karaktärer-2024-06-25-1830
+  id: spelledarkurs-grupp-1o2-ordna-karaktarer-2024-06-25-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -713,7 +713,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '21:00'
-  id: spelledarkurs-–-grupp-1---session-2-2024-06-26-1830
+  id: spelledarkurs-grupp-1-session-2-2024-06-26-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -728,7 +728,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '21:00'
-  id: spelledarkurs-–-grupp-2---session-1-2024-06-27-1830
+  id: spelledarkurs-grupp-2-session-1-2024-06-27-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -743,7 +743,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '21:00'
-  id: spelledarkurs-–-grupp-2---session-2-2024-06-28-1830
+  id: spelledarkurs-grupp-2-session-2-2024-06-28-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -758,7 +758,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '12:30'
-  id: prova-på-kampanj-2-2024-06-27-1000
+  id: prova-pa-kampanj-2-2024-06-27-1000
   link: null
   location: Rollspelstält2
   meta:
@@ -773,7 +773,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '16:30'
-  id: dubbelkampanjen---session-1-2024-06-25-1330
+  id: dubbelkampanjen-session-1-2024-06-25-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -788,7 +788,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '13:00'
-  id: selmas-rollspelskampanj---session-2-2024-06-26-1000
+  id: selmas-rollspelskampanj-session-2-2024-06-26-1000
   link: null
   location: Rollspelstält1
   meta:
@@ -803,7 +803,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '16:30'
-  id: dubbelkampanjen---session-2-2024-06-26-1330
+  id: dubbelkampanjen-session-2-2024-06-26-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -818,7 +818,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '21:00'
-  id: spelledarkurs---öppen-föreläsning---att-leda-rollspel-2024-06-24-1830
+  id: spelledarkurs-oppen-forelasning-att-leda-rollspel-2024-06-24-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -878,7 +878,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '20:00'
-  id: sysscon-2024---marknad-och-loppis-2024-06-28-1200
+  id: sysscon-2024-marknad-och-loppis-2024-06-28-1200
   link: null
   location: GA Idrott
   meta:
@@ -893,7 +893,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '19:30'
-  id: sysscon-2024---cosplay-parad-2024-06-28-1900
+  id: sysscon-2024-cosplay-parad-2024-06-28-1900
   link: null
   location: GA Idrott
   meta:
@@ -968,7 +968,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '12:30'
-  id: prova-på-rollspel-2024-06-29-1000
+  id: prova-pa-rollspel-2024-06-29-1000
   link: null
   location: Rollspelstält1
   meta:
@@ -983,7 +983,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '17:00'
-  id: måla-och-spela-spacehulk--2024-06-24-1500
+  id: mala-och-spela-spacehulk-2024-06-24-1500
   link: null
   location: Servicehus
   meta:
@@ -998,7 +998,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '10:00'
-  id: lära-känna-bingo--2024-06-24-0915
+  id: lara-kanna-bingo-2024-06-24-0915
   link: null
   location: Servicehus
   meta:
@@ -1013,7 +1013,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '22:30'
-  id: spelledarkurs-–-grupp-1---session-1-2024-06-25-2000
+  id: spelledarkurs-grupp-1-session-1-2024-06-25-2000
   link: null
   location: Rollspelstält1
   meta:
@@ -1028,7 +1028,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '20:00'
-  id: avslutningsmöte-(alla-deltar)-2024-06-29-1800
+  id: avslutningsmote-alla-deltar-2024-06-29-1800
   link: null
   location: Annat
   meta:
@@ -1043,7 +1043,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '20:00'
-  id: bygg-ditt-egna-brädspel!-2024-06-24-1830
+  id: bygg-ditt-egna-bradspel-2024-06-24-1830
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1058,7 +1058,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '17:00'
-  id: musikjam---sång-och-musik-2024-06-24-1600
+  id: musikjam-sang-och-musik-2024-06-24-1600
   link: null
   location: Kaffetält
   meta:
@@ -1073,7 +1073,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '17:00'
-  id: musikjam-–-sång-och-musik-2024-06-25-1600
+  id: musikjam-sang-och-musik-2024-06-25-1600
   link: null
   location: Kaffetält
   meta:
@@ -1088,7 +1088,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '16:00'
-  id: musikjam-–-sång-och-musik-2024-06-26-1500
+  id: musikjam-sang-och-musik-2024-06-26-1500
   link: null
   location: Kaffetält
   meta:
@@ -1103,7 +1103,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '17:00'
-  id: musikjam-–-sång-och-musik-2024-06-27-1600
+  id: musikjam-sang-och-musik-2024-06-27-1600
   link: null
   location: Kaffetält
   meta:
@@ -1118,7 +1118,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '17:00'
-  id: musikjam-–-sång-och-musik-2024-06-28-1600
+  id: musikjam-sang-och-musik-2024-06-28-1600
   link: null
   location: Kaffetält
   meta:
@@ -1133,7 +1133,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '17:00'
-  id: musikjam-–-sång-och-musik-2024-06-29-1600
+  id: musikjam-sang-och-musik-2024-06-29-1600
   link: null
   location: Kaffetält
   meta:
@@ -1148,7 +1148,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '15:45'
-  id: i-wanna-rock!-–-elgitarr-för-nybörjare-2024-06-24-1400
+  id: i-wanna-rock-elgitarr-for-nyborjare-2024-06-24-1400
   link: null
   location: Kaffetält
   meta:
@@ -1163,7 +1163,7 @@ events:
 - date: '2024-06-23'
   description: null
   end: '23:55'
-  id: sista-för-idag-2024-06-23-2350
+  id: sista-for-idag-2024-06-23-2350
   link: null
   location: Annat
   meta:
@@ -1178,7 +1178,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '15:00'
-  id: baka-tunnbröd--2024-06-24-1300
+  id: baka-tunnbrod-2024-06-24-1300
   link: null
   location: Grillplats
   meta:
@@ -1193,7 +1193,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '11:30'
-  id: fota-med-systemkamera--2024-06-25-1030
+  id: fota-med-systemkamera-2024-06-25-1030
   link: null
   location: Annat
   meta:
@@ -1223,7 +1223,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '15:30'
-  id: papperslera-(drop-in)-2024-06-25-1400
+  id: papperslera-drop-in-2024-06-25-1400
   link: null
   location: Kaffetält
   meta:
@@ -1238,7 +1238,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '11:45'
-  id: lägerdans-2024-06-24-1100
+  id: lagerdans-2024-06-24-1100
   link: null
   location: Servicehus
   meta:
@@ -1268,7 +1268,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '12:30'
-  id: vi-gör-stora-såpbubblor---vid-lekplatsen.-2024-06-24-1130
+  id: vi-gor-stora-sapbubblor-vid-lekplatsen-2024-06-24-1130
   link: null
   location: Annat
   meta:
@@ -1283,7 +1283,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '12:00'
-  id: accelration/radikalaccelation-i-praktiken-2024-06-25-1030
+  id: accelration-radikalaccelation-i-praktiken-2024-06-25-1030
   link: null
   location: Tält1
   meta:
@@ -1298,7 +1298,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '14:30'
-  id: skapa-i-krympplast-(drop-in-på-vandrarhemmet)-2024-06-25-1300
+  id: skapa-i-krympplast-drop-in-pa-vandrarhemmet-2024-06-25-1300
   link: null
   location: Annat
   meta:
@@ -1313,7 +1313,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '16:30'
-  id: planeringsmöte-rollspelsfika-föräldrar/vårdnadshavare--2024-06-24-1600
+  id: planeringsmote-rollspelsfika-foraldrar-vardnadshavare-2024-06-24-1600
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1328,7 +1328,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '11:00'
-  id: ångest-hos-barn-2024-06-26-1000
+  id: angest-hos-barn-2024-06-26-1000
   link: null
   location: Tält1
   meta:
@@ -1358,7 +1358,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '13:00'
-  id: syhörna--drop-in-(föräldrar-assistera-gärna)-2024-06-24-1000
+  id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-24-1000
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1373,7 +1373,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '13:00'
-  id: syhörna--drop-in-(föräldrar-assistera-gärna)-2024-06-25-1000
+  id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-25-1000
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1388,7 +1388,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '13:00'
-  id: syhörna--drop-in-(föräldrar-assistera-gärna)-2024-06-26-1000
+  id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-26-1000
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1403,7 +1403,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '13:00'
-  id: syhörna--drop-in-(föräldrar-assistera-gärna)-2024-06-27-1000
+  id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-27-1000
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1418,7 +1418,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '13:00'
-  id: syhörna--drop-in-(föräldrar-assistera-gärna)-2024-06-28-1000
+  id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-28-1000
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1433,7 +1433,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '18:30'
-  id: nail-art-(-alla-åldrar-)-2024-06-24-1700
+  id: nail-art-alla-aldrar-2024-06-24-1700
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1448,7 +1448,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '16:00'
-  id: föräldrafika---2e-(särskild-begåvning-och-npf)-2024-06-26-1500
+  id: foraldrafika-2e-sarskild-begavning-och-npf-2024-06-26-1500
   link: null
   location: Tält1
   meta:
@@ -1463,7 +1463,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '11:00'
-  id: föräldrafika---prövning,-uppflytt,-att-ta-studenten-vid-16-2024-06-27-1000
+  id: foraldrafika-provning-uppflytt-att-ta-studenten-vid-16-2024-06-27-1000
   link: null
   location: Tält1
   meta:
@@ -1478,7 +1478,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '11:00'
-  id: föräldrafika---dyslexi-och-särskild-begåvning--2024-06-29-1000
+  id: foraldrafika-dyslexi-och-sarskild-begavning-2024-06-29-1000
   link: null
   location: Tält1
   meta:
@@ -1493,7 +1493,7 @@ events:
 - date: '2024-06-24'
   description: null
   end: '22:00'
-  id: tecknarstudio-en-lugn-stund.-anmälan-behövs-2024-06-24-2000
+  id: tecknarstudio-en-lugn-stund-anmalan-behovs-2024-06-24-2000
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1568,7 +1568,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '11:30'
-  id: lägerdans-2024-06-25-1100
+  id: lagerdans-2024-06-25-1100
   link: null
   location: Servicehus
   meta:
@@ -1598,7 +1598,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '15:50'
-  id: teckna-ett-realistiskt-öga-2024-06-25-1500
+  id: teckna-ett-realistiskt-oga-2024-06-25-1500
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1628,7 +1628,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '15:00'
-  id: pyssel-inför-sysscon-2024-06-26-1300
+  id: pyssel-infor-sysscon-2024-06-26-1300
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1643,7 +1643,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '15:00'
-  id: pyssel-inför-sysscon-2024-06-27-1300
+  id: pyssel-infor-sysscon-2024-06-27-1300
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1658,7 +1658,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '22:30'
-  id: brädspel-2024-06-27-2000
+  id: bradspel-2024-06-27-2000
   link: null
   location: Kaffetält
   meta:
@@ -1688,7 +1688,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '17:00'
-  id: prova-på-frigörande-dans-2024-06-26-1600
+  id: prova-pa-frigorande-dans-2024-06-26-1600
   link: null
   location: Annat
   meta:
@@ -1718,7 +1718,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '16:00'
-  id: schack-för-nybörjare-2024-06-25-1400
+  id: schack-for-nyborjare-2024-06-25-1400
   link: null
   location: Kaffetält
   meta:
@@ -1733,7 +1733,7 @@ events:
 - date: '2024-06-30'
   description: null
   end: '23:59'
-  id: sista-för-idag-2024-06-30-2355
+  id: sista-for-idag-2024-06-30-2355
   link: null
   location: Annat
   meta:
@@ -1763,7 +1763,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '17:00'
-  id: ukrainska-mat-och-kultur.-5-platser-kvar--2024-06-25-1700
+  id: ukrainska-mat-och-kultur-5-platser-kvar-2024-06-25-1700
   link: null
   location: Servicehus
   meta:
@@ -1778,7 +1778,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '22:15'
-  id: planering-av-klurumläger-2025-2024-06-28-2130
+  id: planering-av-klurumlager-2025-2024-06-28-2130
   link: null
   location: Rollspelstält1
   meta:
@@ -1793,7 +1793,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '17:00'
-  id: vi-fortsätter-att-måla-modellerna-till-brädspelet-spacehulk--2024-06-26-1500
+  id: vi-fortsatter-att-mala-modellerna-till-bradspelet-spacehulk-2024-06-26-1500
   link: null
   location: Servicehus
   meta:
@@ -1808,7 +1808,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '16:00'
-  id: schacktävling-i-blixt-2024-06-27-1400
+  id: schacktavling-i-blixt-2024-06-27-1400
   link: null
   location: Kaffetält
   meta:
@@ -1823,7 +1823,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '16:00'
-  id: schacktävling-i-snabb-2024-06-28-1300
+  id: schacktavling-i-snabb-2024-06-28-1300
   link: null
   location: Kaffetält
   meta:
@@ -1853,7 +1853,7 @@ events:
 - date: '2024-06-25'
   description: null
   end: '18:00'
-  id: familjeträning-vid-pingisbordet-utomhus-2024-06-25-1730
+  id: familjetraning-vid-pingisbordet-utomhus-2024-06-25-1730
   link: null
   location: Annat
   meta:
@@ -1883,7 +1883,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '14:30'
-  id: rubiks-kub-prova-på-2024-06-26-1330
+  id: rubiks-kub-prova-pa-2024-06-26-1330
   link: null
   location: Tält1
   meta:
@@ -1898,7 +1898,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '15:30'
-  id: 5d-schack-turnering--2024-06-26-1330
+  id: 5d-schack-turnering-2024-06-26-1330
   link: null
   location: GA Datorsal
   meta:
@@ -1913,7 +1913,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '19:00'
-  id: mattelektion---grafteori-2024-06-26-1800
+  id: mattelektion-grafteori-2024-06-26-1800
   link: null
   location: Tält1
   meta:
@@ -1928,7 +1928,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '14:00'
-  id: krympplast-(drop-in-i-vandrarhemmet)-2024-06-26-1300
+  id: krympplast-drop-in-i-vandrarhemmet-2024-06-26-1300
   link: null
   location: Annat
   meta:
@@ -1958,7 +1958,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: 00:30
-  id: tecknarstudio---anmälan-krävs-2024-06-26-2230
+  id: tecknarstudio-anmalan-kravs-2024-06-26-2230
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1973,7 +1973,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '18:00'
-  id: familjeträning---samling-vid-pingisbordet-utomhus-2024-06-26-1730
+  id: familjetraning-samling-vid-pingisbordet-utomhus-2024-06-26-1730
   link: null
   location: Annat
   meta:
@@ -1988,7 +1988,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: '15:00'
-  id: slåss-med-lajvvapen-2024-06-26-1400
+  id: slass-med-lajvvapen-2024-06-26-1400
   link: null
   location: Nerf-arena
   meta:
@@ -2003,7 +2003,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '14:30'
-  id: göteborgsfika-2024-06-27-1330
+  id: goteborgsfika-2024-06-27-1330
   link: null
   location: Kaffetält
   meta:
@@ -2018,7 +2018,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '15:00'
-  id: få-och-ge-boktips--2024-06-27-1400
+  id: fa-och-ge-boktips-2024-06-27-1400
   link: null
   location: Annat
   meta:
@@ -2033,7 +2033,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '15:00'
-  id: ångest-för-unga.-2024-06-27-1400
+  id: angest-for-unga-2024-06-27-1400
   link: null
   location: Annat
   meta:
@@ -2048,7 +2048,7 @@ events:
 - date: '2024-06-26'
   description: null
   end: 02:00
-  id: datahäng-där-vi-spelar-minecraft--2024-06-26-2300
+  id: datahang-dar-vi-spelar-minecraft-2024-06-26-2300
   link: null
   location: GA Datorsal
   meta:
@@ -2063,7 +2063,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '11:00'
-  id: föräldrafika---problematisk-skolnärvaro-(hemmasittare)-2024-06-28-1000
+  id: foraldrafika-problematisk-skolnarvaro-hemmasittare-2024-06-28-1000
   link: null
   location: Tält1
   meta:
@@ -2078,7 +2078,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '12:30'
-  id: öppet-samtal-om-särbegåvningens-psykologi-2024-06-29-1130
+  id: oppet-samtal-om-sarbegavningens-psykologi-2024-06-29-1130
   link: null
   location: Tält1
   meta:
@@ -2093,7 +2093,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '12:00'
-  id: beredskap-och-prepping,-hur-då?--2024-06-28-1100
+  id: beredskap-och-prepping-hur-da-2024-06-28-1100
   link: null
   location: Tält1
   meta:
@@ -2108,7 +2108,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '16:00'
-  id: vad-är-en-sten?-2024-06-28-1400
+  id: vad-ar-en-sten-2024-06-28-1400
   link: null
   location: Annat
   meta:
@@ -2123,7 +2123,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '12:30'
-  id: utflykt-till-digerfallet-(13-min-bilresa---finns-extra-platser-i-bil)-2024-06-27-1105
+  id: utflykt-till-digerfallet-13-min-bilresa-finns-extra-platser-i-bil-2024-06-27-1105
   link: null
   location: Annat
   meta:
@@ -2138,7 +2138,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '18:00'
-  id: familjeträning---samling-vid-pingisbordet-utomhus-2024-06-27-1730
+  id: familjetraning-samling-vid-pingisbordet-utomhus-2024-06-27-1730
   link: null
   location: Annat
   meta:
@@ -2153,7 +2153,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '20:45'
-  id: nerf-arenan-städas-av-nerfare-2024-06-27-2030
+  id: nerf-arenan-stadas-av-nerfare-2024-06-27-2030
   link: null
   location: Nerf-arena
   meta:
@@ -2168,7 +2168,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '20:45'
-  id: nerf-arenan-städas-av-nerfare-2024-06-28-2030
+  id: nerf-arenan-stadas-av-nerfare-2024-06-28-2030
   link: null
   location: Nerf-arena
   meta:
@@ -2183,7 +2183,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '14:00'
-  id: att-resa-med-tåg-i-europa-2024-06-29-1300
+  id: att-resa-med-tag-i-europa-2024-06-29-1300
   link: null
   location: Kaffetält
   meta:
@@ -2198,7 +2198,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '16:30'
-  id: maffia/varulvar-2024-06-27-1530
+  id: maffia-varulvar-2024-06-27-1530
   link: null
   location: Tält1
   meta:
@@ -2228,7 +2228,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: '17:30'
-  id: fotografering-ändrad-plats---vandrarhemmet--2024-06-27-1630
+  id: fotografering-andrad-plats-vandrarhemmet-2024-06-27-1630
   link: null
   location: Annat
   meta:
@@ -2243,7 +2243,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '17:00'
-  id: stockholm/mälardalen-höstplanering-av-aktiviteter--2024-06-28-1600
+  id: stockholm-malardalen-hostplanering-av-aktiviteter-2024-06-28-1600
   link: null
   location: Tält1
   meta:
@@ -2273,7 +2273,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '15:00'
-  id: påverka-politiker---t.ex.-inför-valet-2024-06-29-1400
+  id: paverka-politiker-t-ex-infor-valet-2024-06-29-1400
   link: null
   location: Tält1
   meta:
@@ -2288,7 +2288,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '13:00'
-  id: experimentell-akvarell-(anmälan-behövs)-2024-06-29-1200
+  id: experimentell-akvarell-anmalan-behovs-2024-06-29-1200
   link: null
   location: Annat
   meta:
@@ -2303,7 +2303,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '16:00'
-  id: akvarell-(anmälan-behövs)-2024-06-29-1430
+  id: akvarell-anmalan-behovs-2024-06-29-1430
   link: null
   location: Annat
   meta:
@@ -2318,7 +2318,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '18:45'
-  id: träff-för-de-som-ska-till-närcon-2024-06-28-1830
+  id: traff-for-de-som-ska-till-narcon-2024-06-28-1830
   link: null
   location: GA Idrott
   meta:
@@ -2333,7 +2333,7 @@ events:
 - date: '2024-06-27'
   description: null
   end: 01:00
-  id: kvälls/nattpass-minecraft-2024-06-27-2230
+  id: kvalls-nattpass-minecraft-2024-06-27-2230
   link: null
   location: GA Datorsal
   meta:
@@ -2348,7 +2348,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '11:30'
-  id: syhörna---avslutning-(föräldrar-assistera-gärna)-2024-06-29-1000
+  id: syhorna-avslutning-foraldrar-assistera-garna-2024-06-29-1000
   link: null
   location: GA Stilla hyllan
   meta:
@@ -2378,7 +2378,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '14:00'
-  id: prata-och-spekulera-om-hur-ai-kommer-ha-påverkat-oss-om-10-15-år-2024-06-29-1300
+  id: prata-och-spekulera-om-hur-ai-kommer-ha-paverkat-oss-om-10-15-ar-2024-06-29-1300
   link: null
   location: Tält2
   meta:
@@ -2393,7 +2393,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '15:30'
-  id: inställt---tecknarstudio-tonåringar.-anmälan-krävs-2024-06-28-1330
+  id: installt-tecknarstudio-tonaringar-anmalan-kravs-2024-06-28-1330
   link: null
   location: Annat
   meta:
@@ -2408,7 +2408,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '21:30'
-  id: open-stage-(med-länk-till-anmälningsformulär)-2024-06-28-1930
+  id: open-stage-med-lank-till-anmalningsformular-2024-06-28-1930
   link: null
   location: GA Idrott
   meta:
@@ -2423,7 +2423,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '16:00'
-  id: blixttal-(max-5-min/talare,-länk-till-anmälan)-2024-06-29-1500
+  id: blixttal-max-5-min-talare-lank-till-anmalan-2024-06-29-1500
   link: null
   location: GA Idrott
   meta:
@@ -2438,7 +2438,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '17:30'
-  id: pop-up-nagelstudio-på-sysscon-2024-06-28-1600
+  id: pop-up-nagelstudio-pa-sysscon-2024-06-28-1600
   link: null
   location: GA Idrott
   meta:
@@ -2453,7 +2453,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: '18:00'
-  id: familjeträning---samling-vid-pingisbordet-och-petter-behöver-hjälp-med-att-någon-annan-vuxen-leder-passet-idag-2024-06-28-1730
+  id: familjetraning-samling-vid-pingisbordet-och-petter-behover-hjalp-med-att-nagon-annan-vuxen-leder-passet-idag-2024-06-28-1730
   link: null
   location: Annat
   meta:
@@ -2469,7 +2469,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: 01:00
-  id: tecknarstudio-(tonåringar)-2024-06-28-2200
+  id: tecknarstudio-tonaringar-2024-06-28-2200
   link: null
   location: GA Stilla hyllan
   meta:
@@ -2484,7 +2484,7 @@ events:
 - date: '2024-06-28'
   description: null
   end: 01:00
-  id: kvälls/nattpass-minecraft-2024-06-28-2200
+  id: kvalls-nattpass-minecraft-2024-06-28-2200
   link: null
   location: GA Datorsal
   meta:
@@ -2499,7 +2499,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '15:30'
-  id: dalarna-gävleborg,-glass/fika-samt-input-kring-aktiviteter-2024-06-29-1400
+  id: dalarna-gavleborg-glass-fika-samt-input-kring-aktiviteter-2024-06-29-1400
   link: null
   location: Annat
   meta:
@@ -2514,7 +2514,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '14:30'
-  id: sista-tecknarstudion-(tonåringar)-2024-06-29-1300
+  id: sista-tecknarstudion-tonaringar-2024-06-29-1300
   link: null
   location: Annat
   meta:
@@ -2529,7 +2529,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '17:30'
-  id: familjeträning-obs-kl-17---samling-vid-pingisbordet-utomhus-2024-06-29-1700
+  id: familjetraning-obs-kl-17-samling-vid-pingisbordet-utomhus-2024-06-29-1700
   link: null
   location: Annat
   meta:
@@ -2544,7 +2544,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '16:00'
-  id: hattleken--nu-med-beskrivning-vad-det-är-2024-06-29-1500
+  id: hattleken-nu-med-beskrivning-vad-det-ar-2024-06-29-1500
   link: null
   location: Tält2
   meta:
@@ -2559,7 +2559,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '15:00'
-  id: jonglering-2-/-3-/-(4)-bollar-2024-06-29-1400
+  id: jonglering-2-3-4-bollar-2024-06-29-1400
   link: null
   location: GA Idrott
   meta:
@@ -2574,7 +2574,7 @@ events:
 - date: '2024-06-29'
   description: null
   end: '16:45'
-  id: natur---djur---geografi-quiz-2024-06-29-1600
+  id: natur-djur-geografi-quiz-2024-06-29-1600
   link: null
   location: Tält2
   meta:

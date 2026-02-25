@@ -52,7 +52,7 @@ events:
     meta:
       created_at: 2025-08-03 19:29
       updated_at: 2025-08-03 19:29
-  - id: morgonyoga:-en-en-battre-morgon-2026-02-23-0730
+  - id: morgonyoga-en-en-battre-morgon-2026-02-23-0730
     title: 'MORGONYOGA: En en bättre morgon'
     date: '2026-02-23'
     start: '07:30'
@@ -127,7 +127,7 @@ events:
     meta:
       created_at: 2025-07-08 18:39
       updated_at: 2025-07-08 18:53
-  - id: frigorande-dans:-flodande-2026-02-24-0900
+  - id: frigorande-dans-flodande-2026-02-24-0900
     title: 'FRIGÖRANDE DANS: Flödande'
     date: '2026-02-24'
     start: '09:00'
@@ -157,7 +157,7 @@ events:
     meta:
       created_at: 2025-07-08 18:40
       updated_at: 2025-07-08 18:40
-  - id: ai:-teori/praktik---grund/avancerat-2026-02-24-1500
+  - id: ai-teori-praktik-grund-avancerat-2026-02-24-1500
     title: 'AI: teori/praktik - grund/avancerat'
     date: '2026-02-24'
     start: '15:00'
@@ -187,7 +187,7 @@ events:
     meta:
       created_at: 2025-07-08 18:39
       updated_at: 2025-07-08 18:53
-  - id: morgonyoga:-free-power-2026-02-25-0730
+  - id: morgonyoga-free-power-2026-02-25-0730
     title: 'MORGONYOGA: Free Power'
     date: '2026-02-25'
     start: '07:30'
@@ -202,7 +202,7 @@ events:
     meta:
       created_at: 2025-08-04 12:18
       updated_at: 2025-08-04 12:18
-  - id: rollspel,-viktor-dnd,-session-1-2026-02-25-1000
+  - id: rollspel-viktor-dnd-session-1-2026-02-25-1000
     title: Rollspel, Viktor DnD, session 1
     date: '2026-02-25'
     start: '10:00'
@@ -307,7 +307,7 @@ events:
     meta:
       created_at: 2025-08-04 12:40
       updated_at: 2025-08-04 12:40
-  - id: morgonyoga:-lymfyoga-2026-02-27-0730
+  - id: morgonyoga-lymfyoga-2026-02-27-0730
     title: 'MORGONYOGA: Lymfyoga'
     date: '2026-02-27'
     start: '07:30'
@@ -337,7 +337,7 @@ events:
     meta:
       created_at: 2025-07-08 18:40
       updated_at: 2025-07-08 18:40
-  - id: '[obligatoriskt-for-alla]-avslutningsmote-2026-02-27-1800'
+  - id: obligatoriskt-for-alla-avslutningsmote-2026-02-27-1800
     title: '[Obligatoriskt för alla] Avslutningsmöte'
     date: '2026-02-27'
     start: '18:00'
