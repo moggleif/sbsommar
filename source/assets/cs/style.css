@@ -1054,20 +1054,11 @@ body.modal-open {
 .upcoming-camps {
   list-style: none;
   padding: 0;
-  margin: var(--space-sm) 0 0;
+  margin: var(--space-xs) 0 0;
 }
 
 .camp-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-xs) 0;
-}
-
-.camp-icon {
-  flex-shrink: 0;
-  font-size: 1.25em;
-  line-height: 1;
+  line-height: var(--line-height-body);
 }
 
 .camp-icon::after {
@@ -1076,15 +1067,6 @@ body.modal-open {
 
 .camp-past .camp-icon::after {
   content: '✅';
-}
-
-.camp-body {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-xs);
-  flex-wrap: wrap;
 }
 
 .camp-name {

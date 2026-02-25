@@ -272,10 +272,8 @@ function renderUpcomingCampsHtml(allCamps, currentYear) {
 
     return `    <li class="camp-item" data-end="${endDate}">
       <span class="camp-icon" aria-hidden="true"></span>
-      <div class="camp-body">
-        <span class="camp-name">${nameHtml}</span>
-        <span class="camp-meta">${location} · ${dateRange}</span>
-      </div>
+      <span class="camp-name">${nameHtml}</span>
+      <span class="camp-meta">${location} · ${dateRange}</span>
     </li>`;
   }).join('\n');
 

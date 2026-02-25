@@ -179,10 +179,12 @@ describe('renderUpcomingCampsHtml – empty list', () => {
 // ── Compact one-liner layout (02-§3.5) ──────────────────────────────────────
 
 describe('Camp list CSS – compact one-liner layout (02-§3.5)', () => {
-  it('CL-01: .camp-body uses display: flex for inline layout', () => {
+  it('CL-01: .camp-item uses inline flow (no flexbox)', () => {
+    const match = CSS.match(/\.camp-item\s*\{([^}]*)\}/);
+    assert.ok(match, '.camp-item rule should exist');
     assert.ok(
-      /\.camp-body\s*\{[^}]*display:\s*flex/s.test(CSS),
-      '.camp-body should have display: flex',
+      !match[1].includes('display: flex') && !match[1].includes('display:flex'),
+      '.camp-item should not have display: flex',
     );
   });
 
