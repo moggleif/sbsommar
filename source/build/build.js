@@ -144,7 +144,7 @@ async function main() {
   for (const c of camps.filter((x) => x.archived === true)) {
     const evFile = path.join(DATA_DIR, c.file);
     if (fs.existsSync(evFile)) {
-      const evData = yaml.load(fs.readFileSync(evFile, 'utf8'));
+      const evData = yaml.load(fs.readFileSync(evFile, 'utf8')) || {};
       campEventsMap[c.id] = evData.events || [];
     }
   }
