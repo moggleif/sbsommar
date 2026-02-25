@@ -117,7 +117,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§2.4a` | Display view at `/dagens-schema.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js`, `source/build/build.js` → `public/dagens-schema.html` | implemented |
 | `02-§2.5` | Add-activity form exists at `/lagg-till.html` | 03-ARCHITECTURE.md §3, §6 | — | `source/build/render-add.js`, `source/build/build.js` → `public/lagg-till.html` | implemented |
 | `02-§2.6` | Archive page exists at `/arkiv.html` | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js`, `source/build/build.js` → `public/arkiv.html` | covered |
-| `02-§2.7` | RSS feed exists at `/schema.rss` | — (no implementation doc) | — | — | gap |
+| `02-§2.7` | RSS feed exists at `/schema.rss` | 03-ARCHITECTURE.md §16 | — | — | gap |
 | `02-§2.8` | Homepage, schedule, add-activity, and archive pages share header and navigation | 03-ARCHITECTURE.md §6 | SNP-01 | `source/build/layout.js` – `pageNav()` | covered |
 | `02-§2.9` | None of the site pages require login | 03-ARCHITECTURE.md §3 | — | No authentication exists anywhere in the codebase | implemented |
 | `02-§2.10` | Display view has no header or navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js` – no `pageNav()` call | implemented |
@@ -169,7 +169,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§13.5` | The add-activity form is fully usable without a mouse | 07-DESIGN.md §9 | — | `source/build/render-add.js` – all standard form controls (native keyboard) | implemented |
 | `02-§13.6` | Accordion and expandable elements use proper ARIA attributes (`aria-expanded`, `aria-controls`) | 07-DESIGN.md §9 | — (manual: native `<details>` provides equivalent accessibility; archive uses explicit ARIA via ARK-04, ARK-05) | `source/build/render.js` – native `<details>/<summary>` (browser-exposed state); `source/build/render-arkiv.js` – explicit `aria-expanded`/`aria-controls` | implemented |
 | `02-§14.1` | The site is written entirely in Swedish: all content, nav, labels, errors, confirmations, and alt text | 07-DESIGN.md §1 | — | All templates and client JS use Swedish text | implemented |
-| `02-§15.1` | Activity schedule is available as an RSS feed at `/schema.rss` | — (no implementation doc) | — | — | gap |
+| `02-§15.1` | Activity schedule is available as an RSS feed at `/schema.rss` | 03-ARCHITECTURE.md §16 | — | — | gap |
 | `02-§16.1` | Past camp data is never deleted; `archived: true` marks completed camps | 03-ARCHITECTURE.md §4 | — | `source/data/camps.yaml` – `archived` flag; no deletion logic exists | implemented |
 | `02-§16.2` | Archive page lists all past camps and links to their schedules | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js` – `renderArkivPage()` | covered |
 | `02-§16.3` | When no camp is active, the most recent archived camp is shown by default | 03-ARCHITECTURE.md §5 (Fallback rule) | — | `source/build/build.js` – falls back to most recent by `start_date` (not filtered to `archived: true`) | implemented |
@@ -259,7 +259,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§8.4` | Participants cannot modify the location list | 03-ARCHITECTURE.md §6 | — | No form UI for adding locations; enforced by absence | implemented |
 | `02-§11.3` | The schedule remains readable when multiple activities overlap (see `02-§4.8`) | 07-DESIGN.md §6 | — | CSS layout handles overlap; no exclusion logic in render | implemented |
 | `02-§12.3` | All event submissions are permanently recorded in Git history as a full audit trail | 03-ARCHITECTURE.md §3 | — | `source/api/github.js` – every submission creates a Git commit via the Contents API | implemented |
-| `02-§15.2` | The RSS feed reflects the current state of the schedule | — (no implementation doc) | — | — | gap |
+| `02-§15.2` | The RSS feed reflects the current state of the schedule | 03-ARCHITECTURE.md §16 | — | — | gap |
 | `02-§16.4` | The archive must be usable and complete, not a placeholder | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js` – interactive timeline with accordion per camp | covered |
 | `02-§17.3` | The site is readable on shared display screens | 07-DESIGN.md §6 | — | `source/build/render-today.js` – display mode view; `source/assets/cs/style.css` | implemented |
 | `05-§1.4` | The `file` field in `camps.yaml` references a YAML file in `source/data/` | 06-EVENT_DATA_MODEL.md §1 | — | `source/build/build.js` – loads camp file via `camps.yaml` `file` field | implemented |
@@ -639,6 +639,28 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§34.12` | Derivation logic shared (not duplicated) | 03-ARCHITECTURE.md §2 | manual: code review | `source/scripts/resolve-active-camp.js` | implemented |
 | `02-§34.13` | lint-yaml no longer checks active field | — | DAC-06 | `source/scripts/lint-yaml.js` | covered |
 | `02-§34.14` | Existing active-field tests updated/removed | — | manual: `npm test` passes | test files | implemented |
+| `02-§15.3` | RSS feed is valid RSS 2.0 XML | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§15.4` | Feed metadata in Swedish (title, description, language) | 03-ARCHITECTURE.md §16.3 | — | — | gap |
+| `02-§15.5` | Feed `<link>` points to weekly schedule via SITE_URL | 03-ARCHITECTURE.md §16.2, §16.3 | — | — | gap |
+| `02-§15.6` | One `<item>` per event in the active camp | 03-ARCHITECTURE.md §16.3 | — | — | gap |
+| `02-§15.7` | Each item has title, link, guid, description, pubDate | 03-ARCHITECTURE.md §16.3 | — | — | gap |
+| `02-§15.8` | Items sorted chronologically | 03-ARCHITECTURE.md §16.3 | — | — | gap |
+| `02-§15.9` | Feed generated at build time by render-rss.js | 03-ARCHITECTURE.md §16, §16.6 | — | — | gap |
+| `02-§15.10` | No RSS library dependency | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§15.11` | Absolute URLs require configurable base URL | 03-ARCHITECTURE.md §16.2 | — | — | gap |
+| `02-§15.12` | Build reads SITE_URL from environment variable | 03-ARCHITECTURE.md §16.2 | — | — | gap |
+| `02-§15.13` | Build fails if SITE_URL is not set | 03-ARCHITECTURE.md §16.2 | — | — | gap |
+| `02-§15.14` | CI workflows pass SITE_URL alongside API_URL | 03-ARCHITECTURE.md §16.7 | — | — | gap |
+| `02-§35.1` | Each event has its own static HTML page | 03-ARCHITECTURE.md §17 | — | — | gap |
+| `02-§35.2` | Event pages at `/schema/{event-id}/index.html` | 03-ARCHITECTURE.md §17 | — | — | gap |
+| `02-§35.3` | Event page shows title, date, time, location, responsible, description, link | 03-ARCHITECTURE.md §17.2 | — | — | gap |
+| `02-§35.4` | Empty fields omitted from event page | 03-ARCHITECTURE.md §17.2 | — | — | gap |
+| `02-§35.5` | owner and meta fields never shown on event pages | 03-ARCHITECTURE.md §17.2 | — | — | gap |
+| `02-§35.6` | Event pages use shared layout (nav, footer, stylesheet) | 03-ARCHITECTURE.md §17.3 | — | — | gap |
+| `02-§35.7` | Event page includes back link to weekly schedule | 03-ARCHITECTURE.md §17.2 | — | — | gap |
+| `02-§35.8` | Event pages include meta robots noindex nofollow | 03-ARCHITECTURE.md §17.3 | — | — | gap |
+| `02-§35.9` | Event pages generated by render-event.js | 03-ARCHITECTURE.md §17.6 | — | — | gap |
+| `02-§35.10` | Build creates `/schema/{event-id}/` directories | 03-ARCHITECTURE.md §17.4 | — | — | gap |
 
 ### §35 — Location Accordions on Index Page
 
@@ -792,9 +814,9 @@ Matrix cleanup (2026-02-25):
 
 ### High — missing whole features
 
-1. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
-   No RSS feed is generated; it must reflect the current state of the schedule.
-   No implementation guidance document exists — `03-ARCHITECTURE.md` needs an RSS section before this can be built.
+1. **`02-§2.7` / `02-§15.1`–`02-§15.14` / `02-§35.1`–`02-§35.10` — RSS feed + per-event pages**
+   RSS feed at `/schema.rss` and per-event detail pages at `/schema/{id}/`.
+   Architecture documented in `03-ARCHITECTURE.md §16–17`. Implementation in progress.
 
 ### Low — tooling, design, and accessibility gaps
 
