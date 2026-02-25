@@ -567,16 +567,38 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§26.12` | API error response includes Swedish message | 03-ARCHITECTURE.md §13.4 | — (manual: inspect 403 response body) | `app.js` – Swedish error strings in both endpoints | implemented |
 | `02-§26.13` | Build embeds `opens_for_editing` and `end_date` as `data-` attributes on form | 03-ARCHITECTURE.md §13.2 | GATE-01..04 | `source/build/render-add.js`, `source/build/render-edit.js` – `data-opens` and `data-closes` on `<form>` | covered |
 | `05-§1.6` | `opens_for_editing` field documented in data contract | 05-DATA_CONTRACT.md §1 | — | `docs/05-DATA_CONTRACT.md` – field added to schema and described | implemented |
+| `02-§30.1` | Hero two-column layout: image ~2/3, sidebar ~1/3 | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | — | — | gap |
+| `02-§30.2` | Mobile: hero stacks vertically | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | — (manual: resize to <690px) | — | gap |
+| `02-§30.3` | Title "Sommarläger i Sysslebäck" above image, left-aligned | 03-ARCHITECTURE.md §15 | — | — | gap |
+| `02-§30.4` | Title uses terracotta color | 07-DESIGN.md §6 | — | — | gap |
+| `02-§30.5` | Title uses H1 size (40px) and weight (700) | 07-DESIGN.md §3 | — | — | gap |
+| `02-§30.6` | Hero image has rounded corners (--radius-lg) | 07-DESIGN.md §7 | — | — | gap |
+| `02-§30.7` | Hero image uses object-fit: cover and is responsive | 07-DESIGN.md §6 | — | — | gap |
+| `02-§30.8` | Image occupies ~2/3 of hero width on desktop | 07-DESIGN.md §6 | — | — | gap |
+| `02-§30.9` | Sidebar contains Discord and Facebook icons stacked vertically | 03-ARCHITECTURE.md §15.4 | — | — | gap |
+| `02-§30.10` | Discord icon links to Discord channel | 03-ARCHITECTURE.md §15.4 | — | — | gap |
+| `02-§30.11` | Facebook icon links to Facebook group | 03-ARCHITECTURE.md §15.4 | — | — | gap |
+| `02-§30.12` | Icons displayed at ~64px, vertically centered | 07-DESIGN.md §6 | — (manual: visual check) | — | gap |
+| `02-§30.13` | Countdown shows days remaining until next camp | 03-ARCHITECTURE.md §15.3 | — | — | gap |
+| `02-§30.14` | Countdown target derived from camps.yaml (nearest future camp) | 03-ARCHITECTURE.md §15.2 | — | — | gap |
+| `02-§30.15` | Countdown shows large number + "Dagar kvar" label | 07-DESIGN.md §6 | — | — | gap |
+| `02-§30.16` | Countdown target embedded as data-target; JS computes on load | 03-ARCHITECTURE.md §15.3 | — | — | gap |
+| `02-§30.17` | Countdown hidden if no future camp | 03-ARCHITECTURE.md §15.3 | — | — | gap |
+| `02-§30.18` | Countdown has subtle cream/sand background | 07-DESIGN.md §6 | — (manual: visual check) | — | gap |
+| `02-§30.19` | All hero styling uses CSS custom properties | 07-DESIGN.md §7 | — | — | gap |
+| `02-§30.20` | Countdown JS is minimal, no framework | 03-ARCHITECTURE.md §15.3 | — | — | gap |
+| `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | — | gap |
+| `02-§30.22` | Social links provided at build time, not hardcoded | 03-ARCHITECTURE.md §15.2 | — | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             449
+Total requirements:             471
 Covered (implemented + tested): 138
 Implemented, not tested:        283
-Gap (no implementation):         27
+Gap (no implementation):         49
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
