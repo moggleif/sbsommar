@@ -30,31 +30,38 @@ function yamlScalar(val) {
 }
 
 // Serialise a single event as a YAML block ready to append.
-function buildEventYaml(event) {
+// `indent` is the number of leading spaces for the list marker (`- id:`).
+// Field lines are indented by `indent + 2`.  Default 0 keeps backward
+// compatibility; callers that append to an `events:` list should pass 2.
+function buildEventYaml(event, indent = 0) {
+  const p  = ' '.repeat(indent);      // prefix for "- id:" line
+  const fp = ' '.repeat(indent + 2);  // prefix for field lines
+  const dp = ' '.repeat(indent + 4);  // prefix for description body / sub-keys
+
   const lines = [
-    `- id: ${event.id}`,
-    `  title: ${yamlScalar(event.title)}`,
-    `  date: '${event.date}'`,
-    `  start: '${event.start}'`,
-    `  end: '${event.end}'`,
-    `  location: ${yamlScalar(event.location)}`,
-    `  responsible: ${yamlScalar(event.responsible)}`,
+    `${p}- id: ${event.id}`,
+    `${fp}title: ${yamlScalar(event.title)}`,
+    `${fp}date: '${event.date}'`,
+    `${fp}start: '${event.start}'`,
+    `${fp}end: '${event.end}'`,
+    `${fp}location: ${yamlScalar(event.location)}`,
+    `${fp}responsible: ${yamlScalar(event.responsible)}`,
   ];
 
   if (event.description) {
-    lines.push('  description: |');
-    event.description.split('\n').forEach((l) => lines.push(`    ${l}`));
+    lines.push(`${fp}description: |`);
+    event.description.split('\n').forEach((l) => lines.push(`${dp}${l}`));
   } else {
-    lines.push('  description: null');
+    lines.push(`${fp}description: null`);
   }
 
-  lines.push(`  link: ${event.link ? yamlScalar(event.link) : 'null'}`);
-  lines.push('  owner:');
-  lines.push(`    name: '${(event.owner.name || '').replace(/'/g, "''")}'`);
-  lines.push("    email: ''");
-  lines.push('  meta:');
-  lines.push(`    created_at: ${event.meta.created_at}`);
-  lines.push(`    updated_at: ${event.meta.updated_at}`);
+  lines.push(`${fp}link: ${event.link ? yamlScalar(event.link) : 'null'}`);
+  lines.push(`${fp}owner:`);
+  lines.push(`${dp}name: '${(event.owner.name || '').replace(/'/g, "''")}'`);
+  lines.push(`${dp}email: ''`);
+  lines.push(`${fp}meta:`);
+  lines.push(`${dp}created_at: ${event.meta.created_at}`);
+  lines.push(`${dp}updated_at: ${event.meta.updated_at}`);
 
   return lines.join('\n');
 }
@@ -241,7 +248,7 @@ async function addEventToActiveCamp(body) {
   const { content: campContent, sha: fileSha } = await getFile(campFilePath);
 
   // Step 3: build new file content
-  const newContent = campContent.trimEnd() + '\n' + buildEventYaml(event) + '\n';
+  const newContent = campContent.trimEnd() + '\n' + buildEventYaml(event, 2) + '\n';
   const commitMsg  = `Add event to ${camp.name}: ${title} (${date})`;
 
   // Step 4: create ephemeral branch from current main HEAD
