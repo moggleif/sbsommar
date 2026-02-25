@@ -412,3 +412,18 @@ events:
     meta:
       created_at: 2026-02-25 11:45
       updated_at: 2026-02-25 11:45
+  - id: funkar-redigera-2026-02-25-1500
+    title: 'funkar redigera?'
+    date: '2026-02-25'
+    start: '15:00'
+    end: '16:00'
+    location: Tält2
+    responsible: jag
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-25 11:49
+      updated_at: 2026-02-25 11:49
