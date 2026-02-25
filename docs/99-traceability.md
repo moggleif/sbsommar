@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-25 (CI checkout depth fix — CL-§9.5 and 02-§23.14 implemented).
+Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-§1a.1 implemented, 02-§1a.2–1a.3 covered).
 
 ---
 
@@ -492,18 +492,18 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (CI checkout depth fix — CL-�
 | `02-§24.14` | Expanded menu closable by clicking outside | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – document `click` listener closes when outside nav | implemented |
 | `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-DESIGN.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | `source/assets/css/style.css` – `.nav-toggle { display: none }` at `@media (min-width: 768px)` | implemented |
 
-| `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — | — | gap |
-| `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | — | — | gap |
-| `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-ARCHITECTURE.md §4c | — | — | gap |
+| `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — (manual: run `npm run build` and verify `public/robots.txt` contains `User-agent: *` and `Disallow: /`) | `source/build/build.js` – writes `public/robots.txt` | implemented |
+| `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
+| `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-ARCHITECTURE.md §4c | ROB-08..14 | No discoverability tags in any render file | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             379
-Covered (implemented + tested):  98
-Implemented, not tested:        253
+Total requirements:             386
+Covered (implemented + tested): 104
+Implemented, not tested:        254
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
@@ -543,6 +543,9 @@ End time is now required everywhere (add form, edit form, data contract).
   both implemented (CI workflow config, no unit test possible).
 4 requirements added for image loading performance (02-§25.1–25.4):
   all 4 covered (IMG-01..06 in render-index.test.js).
+3 requirements added for search engine blocking (02-§1a.1–1a.3):
+  2 covered (ROB-01..14): 02-§1a.2, 02-§1a.3
+  1 implemented (build writes robots.txt; manual verification): 02-§1a.1
 ```
 
 ---
@@ -654,3 +657,5 @@ End time is now required everywhere (add form, edit form, data contract).
 | SNP-01..06 | `tests/snapshot.test.js` | `renderSchedulePage` |
 | ARK-01..08 | `tests/render-arkiv.test.js` | `renderArkivPage` |
 | NAV-01..11 | `tests/nav.test.js` | `pageNav` |
+| ROB-01..07 | `tests/robots.test.js` | `meta robots noindex (02-§1a.2)` |
+| ROB-08..14 | `tests/robots.test.js` | `no discoverability metadata (02-§1a.3)` |
