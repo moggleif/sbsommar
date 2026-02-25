@@ -637,6 +637,65 @@ Each expanded accordion shows, in order: <!-- 02-§21.8 -->
 Fields that are empty or absent must not produce blank rows or placeholder
 text. <!-- 02-§21.11 -->
 
+### 21.4 Header layout
+
+The accordion header must display the camp name as the primary text, followed
+by the date range and location in subdued (gray) text to the right. <!-- 02-§21.12 -->
+
+- The date range is formatted as `D–D månadsnamn YYYY` (or spanning months
+  when the camp crosses a month boundary). <!-- 02-§21.13 -->
+- The location follows the date range, separated by a centered dot
+  (`·`). <!-- 02-§21.14 -->
+- On narrow viewports the metadata may wrap below the camp name, but must
+  remain visually subdued. <!-- 02-§21.15 -->
+
+### 21.5 Active camp indicator
+
+- When a camp accordion is expanded, its timeline dot must be visually
+  highlighted — larger and with an accent color — to mark the selected
+  camp on the timeline. <!-- 02-§21.16 -->
+- When the accordion is collapsed the dot returns to its default
+  size. <!-- 02-§21.17 -->
+
+### 21.6 Facebook logo link
+
+- When a camp has a non-empty `link` field, the expanded panel must show
+  the Facebook logo image (`images/social-facebook-button-blue-icon-small.webp`)
+  as a clickable link to the Facebook group, replacing the previous text
+  button. <!-- 02-§21.18 -->
+- The logo must be placed at the top of the panel content, near the camp
+  metadata. <!-- 02-§21.19 -->
+- The link must open in a new tab (`target="_blank"`,
+  `rel="noopener noreferrer"`). <!-- 02-§21.20 -->
+- The image must have an accessible `alt` text (e.g.
+  "Facebookgrupp"). <!-- 02-§21.21 -->
+
+### 21.7 Event list in archive
+
+Each expanded accordion must display the camp's events below the description
+and Facebook link. Events are loaded from the camp's event YAML file at build
+time. <!-- 02-§21.22 -->
+
+- Events are grouped by date, with each date shown as a heading (e.g.
+  "måndag 3 augusti 2025"). <!-- 02-§21.23 -->
+- Within each date, events are sorted by start time
+  ascending. <!-- 02-§21.24 -->
+- Each event row uses the same visual format as the weekly schedule page:
+  time range, title, and location/responsible metadata. <!-- 02-§21.25 -->
+- Day headings are plain headings, not collapsible. <!-- 02-§21.26 -->
+- Event rows are flat (not accordion/collapsible) — descriptions are not
+  shown; only time, title, and metadata. <!-- 02-§21.27 -->
+- If a camp has no events in its YAML file, the event list section is
+  omitted entirely. <!-- 02-§21.28 -->
+
+### 21.8 Visual consistency
+
+- The archive page must use the same typography scale, color tokens, and
+  spacing tokens as the rest of the site. <!-- 02-§21.29 -->
+- The event list styling in the archive must match the weekly schedule page
+  in font size, weight, and color for time, title, and metadata
+  spans. <!-- 02-§21.30 -->
+
 ---
 
 ## 23. Event Data CI Pipeline
