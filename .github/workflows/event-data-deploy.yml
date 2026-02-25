@@ -146,8 +146,10 @@ jobs:
       # SamKirkland/FTP-Deploy-Action is intentionally not used here: its
       # dangerous-clean-slate mode would delete the entire site. curl is
       # available on ubuntu-latest without any additional installation.
-      # upload-artifact preserves the workspace-relative path, so schema.html is at
-      # deploy-output/public/schema.html (not deploy-output/schema.html).
+      # upload-artifact@v4 uses the least common ancestor as root — since all
+      # four paths share public/, the artefact contains schema.html (not
+      # public/schema.html). After download to deploy-output/, the files are
+      # at deploy-output/schema.html.
       - name: Upload schema pages via FTP
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
@@ -157,7 +159,7 @@ jobs:
         run: |
           for FILE in schema.html idag.html dagens-schema.html events.json; do
             curl --ftp-create-dirs \
-                 --upload-file "deploy-output/public/$FILE" \
+                 --upload-file "deploy-output/$FILE" \
                  --user "$FTP_USERNAME:$FTP_PASSWORD" \
                  "ftp://$FTP_HOST${FTP_TARGET_DIR}$FILE"
             echo "Uploaded: $FILE"
