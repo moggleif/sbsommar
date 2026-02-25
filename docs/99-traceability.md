@@ -581,11 +581,14 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§30.15` | Countdown shows large number + "Dagar kvar" label | 07-DESIGN.md §6 | HERO-11, HERO-13 | `source/build/render-index.js` – `.hero-countdown-number` + `.hero-countdown-label` | covered |
 | `02-§30.16` | Countdown target embedded as data-target; JS computes on load | 03-ARCHITECTURE.md §15.3 | HERO-10 | `source/build/render-index.js` – `data-target="${countdownTarget}"` | covered |
 | `02-§30.17` | Countdown hidden if no future camp | 03-ARCHITECTURE.md §15.3 | HERO-12 | `source/build/render-index.js` – no countdown HTML when `countdownTarget` is null | covered |
-| `02-§30.18` | Countdown has subtle cream/sand background | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: rgba(245, 238, 223, 0.7) }` | implemented |
+| `02-§30.18` | Countdown has subtle cream/sand background | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: #FAF7EF }` | implemented |
 | `02-§30.19` | All hero styling uses CSS custom properties | 07-DESIGN.md §7 | — (manual: CSS review) | `style.css` – all hero rules use `var(--…)` tokens | implemented |
 | `02-§30.20` | Countdown JS is minimal, no framework | 03-ARCHITECTURE.md §15.3 | — (manual: code review) | `source/build/render-index.js` – ~8-line inline `<script>` | implemented |
-| `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | `source/content/images/discord_group.webp`, `social-facebook-button-blue-icon-small.webp` | implemented |
+| `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | `source/content/images/DiscordLogo.webp`, `social-facebook-button-blue-icon-small.webp` | implemented |
 | `02-§30.22` | Social links provided at build time, not hardcoded | 03-ARCHITECTURE.md §15.2 | HERO-14, HERO-15 | `source/build/build.js` – passes `discordUrl`, `facebookUrl` to `renderIndexPage` | covered |
+| `02-§30.23` | Countdown background color is `#FAF7EF` (solid, not semi-transparent) | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: #FAF7EF }` | implemented |
+| `02-§30.24` | Discord icon uses `DiscordLogo.webp` | 03-ARCHITECTURE.md §15.4 | HERO-16 | `render-index.js` – `DiscordLogo.webp` in Discord link `<img>` | covered |
+| `02-§30.25` | Sidebar vertically centered alongside hero image | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero { align-items: center }` | implemented |
 
 ### 31. Inline Camp Listing and Link Styling
 
@@ -609,9 +612,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 ## Summary
 
 ```text
-Total requirements:             479
-Covered (implemented + tested): 145
-Implemented, not tested:        312
+Total requirements:             482
+Covered (implemented + tested): 146
+Implemented, not tested:        314
 Gap (no implementation):         22
 Orphan tests (no requirement):    0
 
@@ -693,6 +696,11 @@ Matrix cleanup (2026-02-25):
   07-§6.33 marked as deferred (optional; requires activity-type data model).
   Top Gaps list updated: item 8 consolidated with CL-§5.9; item 16 notes
     native <details> accessibility; item 17 marked deferred.
+3 requirements added for hero visual refinements (02-§30.23–30.25):
+  1 covered (HERO-16): 02-§30.24 (Discord icon image).
+  2 implemented (visual/CSS, manual check): 02-§30.23 (countdown bg), 02-§30.25 (sidebar centering).
+  02-§30.18 updated: background changed from rgba(245,238,223,0.7) to #FAF7EF.
+  02-§30.21 updated: discord_group.webp → DiscordLogo.webp.
 12 requirements added for inline camp listing and link styling (02-§31.1–31.12):
   2 covered (UC-06, UC-11): 02-§31.5, 02-§31.6.
   10 implemented (visual/CSS or manual code review): 02-§31.1–31.4, 02-§31.7–31.12.
@@ -808,3 +816,4 @@ Matrix cleanup (2026-02-25):
 | HERO-07..09 | `tests/hero.test.js` | `hero section – social links (02-§30.9–30.11)` |
 | HERO-10..13 | `tests/hero.test.js` | `hero section – countdown (02-§30.13–30.17)` |
 | HERO-14..15 | `tests/hero.test.js` | `hero section – links from config (02-§30.22)` |
+| HERO-16 | `tests/hero.test.js` | `hero section – Discord icon image (02-§30.24)` |
