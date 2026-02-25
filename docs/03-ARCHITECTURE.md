@@ -784,6 +784,78 @@ message.
 
 ---
 
+## 14. Upcoming Camps Section on Homepage
+
+### 14.1 Overview
+
+The homepage includes a "Kommande läger" section that lists camps the visitor
+should know about: upcoming camps, currently running camps, and camps that
+already took place this year. Past camps are visually marked so visitors can
+see what happened and what is still ahead.
+
+### 14.2 Data source
+
+The section uses `camps.yaml` — the same registry used by the archive page.
+No per-camp event files are loaded.
+
+### 14.3 Build-time rendering
+
+`render-index.js` exports a new function `renderUpcomingCampsHtml(camps)` that:
+
+1. Filters camps: include if `archived === false` OR `start_date` year matches
+   the current year. The current year for filtering is determined at build time.
+   Client-side JS re-evaluates the year check is not needed — the build runs
+   frequently enough and the year boundary is a rare edge case.
+2. Sorts ascending by `start_date`.
+3. Renders an `<ul class="upcoming-camps">` list. Each `<li>` carries a
+   `data-end="{end_date}"` attribute.
+4. Each item shows: camp name (linked if `link` is non-empty), location, and
+   date range. An `information` paragraph is included when non-empty.
+
+### 14.4 Section integration
+
+The section is integrated into the index page via `sections.yaml` as a special
+section type. A new `type: upcoming-camps` property signals `build.js` to call
+`renderUpcomingCampsHtml(camps)` instead of loading a markdown file.
+
+### 14.5 Client-side past-camp marking
+
+A small inline `<script>` at the end of the section (or a dedicated JS file)
+runs on page load:
+
+1. Selects all `.camp-item[data-end]` elements.
+2. Computes "today" in Stockholm time: `new Date().toLocaleDateString('sv-SE',
+   { timeZone: 'Europe/Stockholm' })` → `YYYY-MM-DD`.
+3. If `data-end < today`, adds class `.camp-past` to the element.
+4. `.camp-past` applies a green checkmark and strikethrough via CSS.
+
+No external dependencies. ~15 lines of JS.
+
+### 14.6 CSS
+
+New classes in `style.css`:
+
+- `.upcoming-camps` — list reset, spacing
+- `.camp-item` — individual camp row
+- `.camp-check` — the checkbox/checkmark indicator
+- `.camp-past` — green checkmark + `text-decoration: line-through`
+- `.camp-name` — camp name (may be a link)
+- `.camp-meta` — location and date range
+- `.camp-info` — information text
+
+All values use CSS custom properties from `07-DESIGN.md §7`.
+
+### 14.7 Files changed
+
+| File | Change |
+| --- | --- |
+| `source/build/render-index.js` | Add `renderUpcomingCampsHtml()` function |
+| `source/build/build.js` | Pass camps to index rendering; handle `type: upcoming-camps` |
+| `source/content/sections.yaml` | Add upcoming-camps section entry |
+| `source/assets/cs/style.css` | Add `.upcoming-camps`, `.camp-item`, `.camp-past` styles |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
