@@ -85,7 +85,7 @@ ${items}
   </div>
 
   <script src="arkiv.js"></script>
-  <script src="nav.js"></script>
+  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>`;

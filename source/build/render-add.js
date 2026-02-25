@@ -103,7 +103,7 @@ ${locationOptions}
 
   <script src="cookie-consent.js"></script>
   <script src="lagg-till.js"></script>
-  <script src="nav.js"></script>
+  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

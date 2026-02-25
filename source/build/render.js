@@ -108,7 +108,7 @@ ${pageNav('schema.html', navSections)}
 
 ${daySections}
   <script src="session.js"></script>
-  <script src="nav.js"></script>
+  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

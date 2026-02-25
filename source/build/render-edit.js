@@ -126,7 +126,7 @@ ${locationOptions}
   </div>
 
   <script src="redigera.js"></script>
-  <script src="nav.js"></script>
+  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

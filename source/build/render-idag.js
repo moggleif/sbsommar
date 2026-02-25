@@ -44,7 +44,7 @@ ${pageNav('idag.html', navSections)}
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Idag'; window.__EMPTY_CLASS__ = 'intro'; window.__SHOW_FOOTER__ = false;</script>
   <script src="events-today.js"></script>
   <script src="session.js"></script>
-  <script src="nav.js"></script>
+  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>
