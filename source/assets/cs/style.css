@@ -883,7 +883,6 @@ body.modal-open {
   h2 { font-size: 26px; }
   h3 { font-size: 22px; }
   .hero-img { height: 200px; }
-  .section-nav { padding: var(--space-xs) var(--space-sm); }
   details.day > summary { padding: var(--space-sm); }
   .event-row { padding: 5px var(--space-sm); }
   .event-extra { padding: 5px var(--space-sm) 8px; }
