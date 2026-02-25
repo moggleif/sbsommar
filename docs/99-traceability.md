@@ -503,6 +503,21 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
 | `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-ARCHITECTURE.md §4c | ROB-08..14 | No discoverability tags in any render file | covered |
 
+| `02-§26.1` | Each camp in `camps.yaml` has an `opens_for_editing` field (YYYY-MM-DD) | 05-DATA_CONTRACT.md §1 | — | — | gap |
+| `02-§26.2` | Submission period runs from `opens_for_editing` through `end_date + 1 day` | 03-ARCHITECTURE.md §13.1 | — | — | gap |
+| `02-§26.3` | Before period: add-activity form greyed out (reduced opacity) | 03-ARCHITECTURE.md §13.3 | — (manual: open form before `opens_for_editing`, confirm fields greyed out) | — | gap |
+| `02-§26.4` | Before period: submit button disabled | 03-ARCHITECTURE.md §13.3 | — | — | gap |
+| `02-§26.5` | Before period: message shown stating when it opens | 03-ARCHITECTURE.md §13.3 | — (manual: open form before period, confirm message with date) | — | gap |
+| `02-§26.6` | After period: add-activity form greyed out (reduced opacity) | 03-ARCHITECTURE.md §13.3 | — (manual: open form after `end_date + 1`, confirm fields greyed out) | — | gap |
+| `02-§26.7` | After period: submit button disabled | 03-ARCHITECTURE.md §13.3 | — | — | gap |
+| `02-§26.8` | After period: message shown stating camp has ended | 03-ARCHITECTURE.md §13.3 | — (manual: open form after period, confirm "Lägret är avslutat" message) | — | gap |
+| `02-§26.9` | Same time-gating rules apply to edit-activity form | 03-ARCHITECTURE.md §13.3 | — | — | gap |
+| `02-§26.10` | `POST /add-event` rejects with HTTP 403 outside period | 03-ARCHITECTURE.md §13.4 | — | — | gap |
+| `02-§26.11` | `POST /edit-event` rejects with HTTP 403 outside period | 03-ARCHITECTURE.md §13.4 | — | — | gap |
+| `02-§26.12` | API error response includes Swedish message | 03-ARCHITECTURE.md §13.4 | — | — | gap |
+| `02-§26.13` | Build embeds `opens_for_editing` and `end_date` as `data-` attributes on form | 03-ARCHITECTURE.md §13.2 | — | — | gap |
+| `05-§1.6` | `opens_for_editing` field documented in data contract | 05-DATA_CONTRACT.md §1 | — | — | gap |
+
 ---
 
 ## Summary
