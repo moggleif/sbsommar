@@ -10,7 +10,7 @@ const { validateEventRequest, validateEditRequest } = require('../source/api/val
 function valid(overrides = {}) {
   return {
     title: 'Frukost',
-    date: '2025-06-22',
+    date: '2099-06-22',
     start: '08:00',
     end: '09:00',
     location: 'Matsalen',
@@ -117,7 +117,7 @@ describe('validateEventRequest – date validation', () => {
   });
 
   it('accepts a valid ISO date', () => {
-    const r = validateEventRequest(valid({ date: '2025-06-22' }));
+    const r = validateEventRequest(valid({ date: '2099-06-22' }));
     assert.strictEqual(r.ok, true);
   });
 });
@@ -158,7 +158,7 @@ describe('validateEventRequest – optional fields', () => {
   it('accepts request with no optional fields', () => {
     const r = validateEventRequest({
       title: 'Frukost',
-      date: '2025-06-22',
+      date: '2099-06-22',
       start: '08:00',
       end: '09:00',
       location: 'Matsalen',
@@ -205,9 +205,9 @@ describe('validateEventRequest – optional fields', () => {
 
 function validEdit(overrides = {}) {
   return {
-    id: '2025-08-04-frukost',
+    id: '2099-08-04-frukost',
     title: 'Frukost',
-    date: '2025-06-22',
+    date: '2099-06-22',
     start: '08:00',
     end: '09:00',
     location: 'Matsalen',
@@ -251,13 +251,43 @@ describe('validateEditRequest – end time required', () => {
   });
 });
 
+// ── Past-date blocking (02-§26.4, 02-§26.5, 02-§26.6) ──────────────────────
+
+describe('validateEventRequest – past-date blocking', () => {
+  it('PDT-03: rejects a date in the past', () => {
+    const r = validateEventRequest(valid({ date: '2020-01-01' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('förflutna'));
+  });
+
+  it('PDT-04: accepts today\'s date', () => {
+    const today = new Date().toISOString().slice(0, 10);
+    const r = validateEventRequest(valid({ date: today }));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+describe('validateEditRequest – past-date blocking', () => {
+  it('PDT-05: rejects a date in the past', () => {
+    const r = validateEditRequest(validEdit({ date: '2020-01-01' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('förflutna'));
+  });
+
+  it('PDT-06: accepts today\'s date', () => {
+    const today = new Date().toISOString().slice(0, 10);
+    const r = validateEditRequest(validEdit({ date: today }));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
 // ── Happy path ────────────────────────────────────────────────────────────────
 
 describe('validateEventRequest – happy path', () => {
   it('accepts a fully populated valid request', () => {
     const r = validateEventRequest({
       title: 'Morgonmöte',
-      date: '2026-02-24',
+      date: '2099-06-22',
       start: '08:30',
       end: '09:00',
       location: 'GA Datorsal',

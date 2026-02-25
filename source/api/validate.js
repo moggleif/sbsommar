@@ -1,5 +1,10 @@
 'use strict';
 
+function isDatePast(dateStr) {
+  const today = new Date().toISOString().slice(0, 10);
+  return dateStr < today;
+}
+
 // Mirrors the validation in the legacy events.js handler.
 // Returns { ok: true } on success or { ok: false, error: string } on failure.
 function validateEventRequest(body) {
@@ -18,6 +23,7 @@ function validateEventRequest(body) {
   if (!date)        return fail('date är obligatoriskt');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return fail('date måste vara YYYY-MM-DD');
   if (isNaN(new Date(date).getTime())) return fail('date är inte ett giltigt datum');
+  if (isDatePast(date))               return fail('Datum kan inte vara i det förflutna.');
   if (!start)       return fail('start är obligatoriskt');
   if (!end)         return fail('end är obligatoriskt');
   if (end <= start) return fail('end måste vara efter start');
@@ -57,6 +63,7 @@ function validateEditRequest(body) {
   if (!date)        return fail('date är obligatoriskt');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return fail('date måste vara YYYY-MM-DD');
   if (isNaN(new Date(date).getTime())) return fail('date är inte ett giltigt datum');
+  if (isDatePast(date))               return fail('Datum kan inte vara i det förflutna.');
   if (!start)       return fail('start är obligatoriskt');
   if (!end)         return fail('end är obligatoriskt');
   if (end <= start) return fail('end måste vara efter start');
