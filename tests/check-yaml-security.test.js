@@ -126,15 +126,20 @@ describe('scanYaml – injection patterns (02-§23.6)', () => {
   it('does not scan owner fields for injection (they are not rendered in public HTML)', () => {
     // A YAML file where owner.name contains a script tag should NOT be flagged by the
     // security scan — those fields are never rendered in public output.
+    // Inject an owner block containing a script tag in owner.name.
+    // The helper does not generate an owner block, so we patch the raw YAML string.
     const yaml = makeYaml([clean()]).replace(
       'events:',
-      // Inject owner block into the YAML — the helper does not generate one, so we patch raw YAML
-      // by noting this test verifies the scan does NOT fail, not that it passes validation.
-      'events:',
+      [
+        'owner:',
+        "  name: '<script>alert(1)</script>'",
+        '  email: owner@example.com',
+        '',
+        'events:',
+      ].join('\n'),
     );
     // The scan only looks at title, location, responsible, description, link.
-    // There is no owner block in the helper output — this test asserts the scanner is
-    // not sensitive to fields it should ignore. A clean file must pass.
+    // owner.name and owner.email are never rendered in public HTML, so they must not be flagged.
     const r = scanYaml(yaml);
     assert.strictEqual(r.ok, true);
   });
