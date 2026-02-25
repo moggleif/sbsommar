@@ -398,7 +398,7 @@ events:
       created_at: 2026-02-25 07:59
       updated_at: 2026-02-25 07:59
   - id: snabbt-nu-2026-02-25-1600
-    title: 'snabbt nu?'
+    title: snabbt nu?
     date: '2026-02-25'
     start: '16:00'
     end: '17:00'
@@ -413,17 +413,17 @@ events:
       created_at: 2026-02-25 11:45
       updated_at: 2026-02-25 11:45
   - id: funkar-redigera-2026-02-25-1500
-    title: 'funkar redigera?'
+    title: funkar redigera?
     date: '2026-02-25'
     start: '15:00'
     end: '16:00'
     location: Tält2
     responsible: jag
-    description: null
+    description: hmm...dfakfklkfalkf
     link: null
     owner:
       name: ''
       email: ''
     meta:
       created_at: 2026-02-25 11:49
-      updated_at: 2026-02-25 11:49
+      updated_at: 2026-02-25 12:00
