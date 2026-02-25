@@ -23,7 +23,7 @@ events:
 - date: '2021-06-28'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2021-06-28-0900
+  id: titta-pa-sommarlov-2021-06-28-0900
   link: null
   location: TV-rummet
   meta:
@@ -38,7 +38,7 @@ events:
 - date: '2021-06-28'
   description: Vi väljer gemensamt ut roliga spel att spela.
   end: '10:30'
-  id: brädspel-2021-06-28-0930
+  id: bradspel-2021-06-28-0930
   link: null
   location: Speltältet
   meta:
@@ -53,7 +53,7 @@ events:
 - date: '2021-06-28'
   description: null
   end: '11:30'
-  id: välkomstmöte-2021-06-28-1100
+  id: valkomstmote-2021-06-28-1100
   link: null
   location: Gräsplanen
   meta:
@@ -68,7 +68,7 @@ events:
 - date: '2021-06-28'
   description: null
   end: '12:30'
-  id: varulvarna-i-klågerup-2021-06-28-1130
+  id: varulvarna-i-klagerup-2021-06-28-1130
   link: null
   location: Tält 1
   meta:

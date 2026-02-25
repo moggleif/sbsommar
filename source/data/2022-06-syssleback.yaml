@@ -8,7 +8,7 @@ events:
 - date: '2022-06-26'
   description: null
   end: '23:30'
-  id: välkommen-2022-06-26-1200
+  id: valkommen-2022-06-26-1200
   link: null
   location: Annat
   meta:
@@ -23,7 +23,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '11:15'
-  id: välkomstmöte-2022-06-27-1100
+  id: valkomstmote-2022-06-27-1100
   link: null
   location: Annat
   meta:
@@ -233,7 +233,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2022-06-27-0900
+  id: titta-pa-sommarlov-2022-06-27-0900
   link: null
   location: Servicehus
   meta:
@@ -248,7 +248,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2022-06-28-0900
+  id: titta-pa-sommarlov-2022-06-28-0900
   link: null
   location: Servicehus
   meta:
@@ -263,7 +263,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2022-06-29-0900
+  id: titta-pa-sommarlov-2022-06-29-0900
   link: null
   location: Servicehus
   meta:
@@ -278,7 +278,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2022-06-30-0900
+  id: titta-pa-sommarlov-2022-06-30-0900
   link: null
   location: Servicehus
   meta:
@@ -293,7 +293,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2022-07-01-0900
+  id: titta-pa-sommarlov-2022-07-01-0900
   link: null
   location: Servicehus
   meta:
@@ -308,7 +308,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2022-07-02-0900
+  id: titta-pa-sommarlov-2022-07-02-0900
   link: null
   location: Servicehus
   meta:
@@ -323,7 +323,7 @@ events:
 - date: '2022-07-03'
   description: null
   end: '10:00'
-  id: titta-på-sommarlov-2022-07-03-0900
+  id: titta-pa-sommarlov-2022-07-03-0900
   link: null
   location: Servicehus
   meta:
@@ -338,7 +338,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '20:00'
-  id: avslutningsmöte-2022-07-02-1800
+  id: avslutningsmote-2022-07-02-1800
   link: null
   location: Annat
   meta:
@@ -368,7 +368,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '15:45'
-  id: japansk-bakkurs---glutenfritt--2022-06-27-1315
+  id: japansk-bakkurs-glutenfritt-2022-06-27-1315
   link: null
   location: Skolsal
   meta:
@@ -383,7 +383,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '15:00'
-  id: höljes-rallycrossbana-2022-06-27-1500
+  id: holjes-rallycrossbana-2022-06-27-1500
   link: null
   location: Annat
   meta:
@@ -428,7 +428,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '12:00'
-  id: rollspel-fm,-viktor-2022-06-27-0900
+  id: rollspel-fm-viktor-2022-06-27-0900
   link: null
   location: Rollspelstält1
   meta:
@@ -443,7 +443,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '17:00'
-  id: bäst-i-test-(flyttad)-2022-06-29-1300
+  id: bast-i-test-flyttad-2022-06-29-1300
   link: null
   location: Nerf-arena
   meta:
@@ -458,7 +458,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '17:00'
-  id: årsmöte-rfsb-2022-06-30-1400
+  id: arsmote-rfsb-2022-06-30-1400
   link: null
   location: Annat
   meta:
@@ -473,7 +473,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '12:30'
-  id: lägerarmband-rfsb-2022-06-29-1100
+  id: lagerarmband-rfsb-2022-06-29-1100
   link: null
   location: Servicehus
   meta:
@@ -488,7 +488,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '10:15'
-  id: uppgifts-runda---lära-känna-aktivitet-2022-06-27-0930
+  id: uppgifts-runda-lara-kanna-aktivitet-2022-06-27-0930
   link: null
   location: Servicehus
   meta:
@@ -503,7 +503,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '12:00'
-  id: prova-på-rollspel-2022-06-28-0900
+  id: prova-pa-rollspel-2022-06-28-0900
   link: null
   location: Rollspelstält2
   meta:
@@ -518,7 +518,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '12:00'
-  id: rollspel,-minikampanj-2022-06-30-0900
+  id: rollspel-minikampanj-2022-06-30-0900
   link: null
   location: Rollspelstält2
   meta:
@@ -533,7 +533,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '12:00'
-  id: rollspel,-minikampanj-2022-07-01-0900
+  id: rollspel-minikampanj-2022-07-01-0900
   link: null
   location: Rollspelstält2
   meta:
@@ -548,7 +548,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '17:00'
-  id: rollspel,-stor-grupp,-viktor-och-harald-2022-06-27-1330
+  id: rollspel-stor-grupp-viktor-och-harald-2022-06-27-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -563,7 +563,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '21:30'
-  id: rollspel-kväll,-viktor-2022-06-27-1830
+  id: rollspel-kvall-viktor-2022-06-27-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -578,7 +578,7 @@ events:
 - date: '2022-06-26'
   description: null
   end: '20:45'
-  id: resa-två-rollspelstält.-2022-06-26-2000
+  id: resa-tva-rollspelstalt-2022-06-26-2000
   link: null
   location: Annat
   meta:
@@ -593,7 +593,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '21:30'
-  id: rollspel-kväll,-harald-2022-06-27-1830
+  id: rollspel-kvall-harald-2022-06-27-1830
   link: null
   location: Rollspelstält2
   meta:
@@ -608,7 +608,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '18:30'
-  id: höljes-rallycrossbana-tävling-2022-07-01-1430
+  id: holjes-rallycrossbana-tavling-2022-07-01-1430
   link: null
   location: Annat
   meta:
@@ -623,7 +623,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '11:30'
-  id: föredrag-och-diskussion:-radikalacceleration-i-praktiken-2022-06-28-1030
+  id: foredrag-och-diskussion-radikalacceleration-i-praktiken-2022-06-28-1030
   link: null
   location: Tält1
   meta:
@@ -653,7 +653,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '12:00'
-  id: geometri---problemlösningsstuga-2022-06-29-1030
+  id: geometri-problemlosningsstuga-2022-06-29-1030
   link: null
   location: Skolsal
   meta:
@@ -668,7 +668,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '21:00'
-  id: rollspel-kväll,-viktor-2022-06-28-1830
+  id: rollspel-kvall-viktor-2022-06-28-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -683,7 +683,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '21:30'
-  id: rollspel-kväll,-harald-2022-06-28-1830
+  id: rollspel-kvall-harald-2022-06-28-1830
   link: null
   location: Rollspelstält2
   meta:
@@ -698,7 +698,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '16:45'
-  id: testa-stop-motion.-2022-06-29-1315
+  id: testa-stop-motion-2022-06-29-1315
   link: null
   location: GA-hall
   meta:
@@ -713,7 +713,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '19:30'
-  id: fotbollsträning--2022-06-27-1830
+  id: fotbollstraning-2022-06-27-1830
   link: null
   location: Fotbollsplan
   meta:
@@ -728,7 +728,7 @@ events:
 - date: '2022-06-26'
   description: null
   end: '20:45'
-  id: rigga-tält1,-tält2-och-datorsal.--2022-06-26-1900
+  id: rigga-talt1-talt2-och-datorsal-2022-06-26-1900
   link: null
   location: Annat
   meta:
@@ -743,7 +743,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '16:30'
-  id: matematiklektion---räkna-med-modulo-2022-06-27-1530
+  id: matematiklektion-rakna-med-modulo-2022-06-27-1530
   link: null
   location: Tält1
   meta:
@@ -758,7 +758,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '11:45'
-  id: uppstartsmöte-datasal---för-spelare-och-spelares-föräldrar-2022-06-27-1115
+  id: uppstartsmote-datasal-for-spelare-och-spelares-foraldrar-2022-06-27-1115
   link: null
   location: Datorsal
   meta:
@@ -773,7 +773,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '17:00'
-  id: beatbox-workshop-(för-nybörjare)-2022-06-28-1500
+  id: beatbox-workshop-for-nyborjare-2022-06-28-1500
   link: null
   location: Tält2
   meta:
@@ -803,7 +803,7 @@ events:
 - date: '2022-06-27'
   description: null
   end: '15:00'
-  id: bygg-lego-och-prova-stop-motion--2022-06-27-1330
+  id: bygg-lego-och-prova-stop-motion-2022-06-27-1330
   link: null
   location: GA-hall
   meta:
@@ -818,7 +818,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '16:30'
-  id: introduktion-särskild-begåvning-2022-06-29-1500
+  id: introduktion-sarskild-begavning-2022-06-29-1500
   link: null
   location: Skolsal
   meta:
@@ -833,7 +833,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '16:30'
-  id: föreläsning--2022-07-01-1500
+  id: forelasning-2022-07-01-1500
   link: null
   location: Skolsal
   meta:
@@ -863,7 +863,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '15:00'
-  id: prova-på-programmering-i-python-2022-06-28-1300
+  id: prova-pa-programmering-i-python-2022-06-28-1300
   link: null
   location: Datorsal
   meta:
@@ -878,7 +878,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '20:30'
-  id: högskolestudier---tips-och-trix-2022-06-28-1900
+  id: hogskolestudier-tips-och-trix-2022-06-28-1900
   link: null
   location: Tält1
   meta:
@@ -893,7 +893,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '20:00'
-  id: dokumentärvisning-(samma-tis-och-tors)-2022-06-28-1900
+  id: dokumentarvisning-samma-tis-och-tors-2022-06-28-1900
   link: null
   location: Skolsal
   meta:
@@ -908,7 +908,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '20:00'
-  id: dokumentärvisning-(samma-tis-och-tors)-2022-06-30-1900
+  id: dokumentarvisning-samma-tis-och-tors-2022-06-30-1900
   link: null
   location: Skolsal
   meta:
@@ -923,7 +923,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '11:00'
-  id: pitch-perfect-inspirerad-kör-2022-06-28-1000
+  id: pitch-perfect-inspirerad-kor-2022-06-28-1000
   link: null
   location: Skolsal
   meta:
@@ -938,7 +938,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '11:00'
-  id: pitch-perfect-inspirerad-kör-2022-06-29-1000
+  id: pitch-perfect-inspirerad-kor-2022-06-29-1000
   link: null
   location: Skolsal
   meta:
@@ -953,7 +953,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '11:00'
-  id: pitch-perfect-inspirerad-kör-2022-06-30-1000
+  id: pitch-perfect-inspirerad-kor-2022-06-30-1000
   link: null
   location: Skolsal
   meta:
@@ -968,7 +968,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '11:00'
-  id: pitch-perfect-inspirerad-kör-2022-07-01-1000
+  id: pitch-perfect-inspirerad-kor-2022-07-01-1000
   link: null
   location: Skolsal
   meta:
@@ -983,7 +983,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '15:00'
-  id: teckenspråk--2022-06-28-1400
+  id: teckensprak-2022-06-28-1400
   link: null
   location: Tält1
   meta:
@@ -998,7 +998,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '10:30'
-  id: pokemonträff-2022-06-28-1000
+  id: pokemontraff-2022-06-28-1000
   link: null
   location: Tält1
   meta:
@@ -1013,7 +1013,7 @@ events:
 - date: '2022-07-03'
   description: null
   end: '15:00'
-  id: glass-på-chokladfabriken-2022-07-03-1200
+  id: glass-pa-chokladfabriken-2022-07-03-1200
   link: null
   location: Annat
   meta:
@@ -1028,7 +1028,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '16:30'
-  id: prova-klättra-på-klätterväg-2022-06-28-1330
+  id: prova-klattra-pa-klattervag-2022-06-28-1330
   link: null
   location: Fritidsgård
   meta:
@@ -1043,7 +1043,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '17:00'
-  id: rollspel,-stor-grupp,-viktor-och-harald-2022-06-28-1330
+  id: rollspel-stor-grupp-viktor-och-harald-2022-06-28-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -1058,7 +1058,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '17:00'
-  id: rollspel,-stor-grupp,-viktor-och-harald-2022-06-29-1330
+  id: rollspel-stor-grupp-viktor-och-harald-2022-06-29-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -1073,7 +1073,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '17:00'
-  id: rollspel,-stor-grupp,-viktor-och-harald-2022-06-30-1330
+  id: rollspel-stor-grupp-viktor-och-harald-2022-06-30-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -1088,7 +1088,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '17:00'
-  id: rollspel,-stor-grupp,-viktor-och-harald-2022-07-01-1330
+  id: rollspel-stor-grupp-viktor-och-harald-2022-07-01-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -1103,7 +1103,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '17:00'
-  id: rollspel,-stor-grupp,-viktor-och-harald-2022-07-02-1330
+  id: rollspel-stor-grupp-viktor-och-harald-2022-07-02-1330
   link: null
   location: Rollspelstält1
   meta:
@@ -1118,7 +1118,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '21:30'
-  id: rollspel-kväll,-harald-2022-06-30-1830
+  id: rollspel-kvall-harald-2022-06-30-1830
   link: null
   location: Rollspelstält2
   meta:
@@ -1133,7 +1133,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '21:30'
-  id: rollspel-kväll,-harald-2022-07-01-1830
+  id: rollspel-kvall-harald-2022-07-01-1830
   link: null
   location: Rollspelstält2
   meta:
@@ -1148,7 +1148,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '12:00'
-  id: rollspel-fm,-viktor-2022-06-28-0900
+  id: rollspel-fm-viktor-2022-06-28-0900
   link: null
   location: Rollspelstält1
   meta:
@@ -1163,7 +1163,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '12:00'
-  id: rollspel-fm,-viktor-2022-06-29-0900
+  id: rollspel-fm-viktor-2022-06-29-0900
   link: null
   location: Rollspelstält1
   meta:
@@ -1178,7 +1178,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '21:00'
-  id: rollspel-kväll,-viktor-2022-06-30-1830
+  id: rollspel-kvall-viktor-2022-06-30-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -1193,7 +1193,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '21:00'
-  id: rollspel-kväll,-viktor-2022-07-01-1830
+  id: rollspel-kvall-viktor-2022-07-01-1830
   link: null
   location: Rollspelstält1
   meta:
@@ -1208,7 +1208,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '12:00'
-  id: rollspel-fm,-viktor-2022-07-01-0900
+  id: rollspel-fm-viktor-2022-07-01-0900
   link: null
   location: Rollspelstält1
   meta:
@@ -1223,7 +1223,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '12:00'
-  id: rollspel-fm,-viktor-2022-07-02-0900
+  id: rollspel-fm-viktor-2022-07-02-0900
   link: null
   location: Rollspelstält1
   meta:
@@ -1268,7 +1268,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '11:00'
-  id: föräldrafika-–-framgångsfaktorer-för-en-lyckad-skolgång-och-särskild-prövning-2022-07-02-1000
+  id: foraldrafika-framgangsfaktorer-for-en-lyckad-skolgang-och-sarskild-provning-2022-07-02-1000
   link: null
   location: Annat
   meta:
@@ -1283,7 +1283,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '11:00'
-  id: föräldrafika-–-hemmasittare,-livspusslet-och-vägen-tillbaka-(kaffetältet,-bredvid-stuga-6)-2022-07-01-1000
+  id: foraldrafika-hemmasittare-livspusslet-och-vagen-tillbaka-kaffetaltet-bredvid-stuga-6-2022-07-01-1000
   link: null
   location: Annat
   meta:
@@ -1299,7 +1299,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '11:00'
-  id: rfsb-–-fler-lokala-aktiviteter-2022-06-30-1000
+  id: rfsb-fler-lokala-aktiviteter-2022-06-30-1000
   link: null
   location: Tält1
   meta:
@@ -1314,7 +1314,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '11:00'
-  id: föräldrafika-–-särbegåvning-och-vänner-(kaffetältet---bredvid-stuga-6)-2022-06-29-1000
+  id: foraldrafika-sarbegavning-och-vanner-kaffetaltet-bredvid-stuga-6-2022-06-29-1000
   link: null
   location: Annat
   meta:
@@ -1329,7 +1329,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '21:30'
-  id: tecknarstudio-(13-år-och-uppåt)-2022-06-28-2000
+  id: tecknarstudio-13-ar-och-uppat-2022-06-28-2000
   link: null
   location: Fritidsgård
   meta:
@@ -1344,7 +1344,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '12:00'
-  id: skolan-och-sb---ur-en-kurators-perspektiv--2022-06-30-1100
+  id: skolan-och-sb-ur-en-kurators-perspektiv-2022-06-30-1100
   link: null
   location: Tält1
   meta:
@@ -1434,7 +1434,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '12:00'
-  id: träningspass/familjefys-2022-06-29-1115
+  id: traningspass-familjefys-2022-06-29-1115
   link: null
   location: Fotbollsplan
   meta:
@@ -1449,7 +1449,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: 09:50
-  id: yoga-i-rörelse--2022-06-29-0900
+  id: yoga-i-rorelse-2022-06-29-0900
   link: null
   location: Grillplatsen
   meta:
@@ -1464,7 +1464,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '17:00'
-  id: hemundervisning-på-åland-2022-06-28-1600
+  id: hemundervisning-pa-aland-2022-06-28-1600
   link: null
   location: Tält1
   meta:
@@ -1479,7 +1479,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '23:55'
-  id: sista-för-idag-2022-06-28-2355
+  id: sista-for-idag-2022-06-28-2355
   link: null
   location: Annat
   meta:
@@ -1494,7 +1494,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '23:55'
-  id: sista-för-idag-2022-06-29-2355
+  id: sista-for-idag-2022-06-29-2355
   link: null
   location: Annat
   meta:
@@ -1509,7 +1509,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '23:55'
-  id: sista-för-idag-2022-06-30-2355
+  id: sista-for-idag-2022-06-30-2355
   link: null
   location: Annat
   meta:
@@ -1524,7 +1524,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '23:55'
-  id: sista-för-idag-2022-07-01-2355
+  id: sista-for-idag-2022-07-01-2355
   link: null
   location: Annat
   meta:
@@ -1539,7 +1539,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '23:55'
-  id: sista-för-idag-2022-07-02-2355
+  id: sista-for-idag-2022-07-02-2355
   link: null
   location: Annat
   meta:
@@ -1554,7 +1554,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '20:30'
-  id: fotboll-sverige-brasilien--2022-06-28-1830
+  id: fotboll-sverige-brasilien-2022-06-28-1830
   link: null
   location: Skolsal
   meta:
@@ -1569,7 +1569,7 @@ events:
 - date: '2022-06-28'
   description: null
   end: '22:00'
-  id: filmkväll,-familjen-mitchell-mot-maskinerna-2022-06-28-2000
+  id: filmkvall-familjen-mitchell-mot-maskinerna-2022-06-28-2000
   link: null
   location: GA-hall
   meta:
@@ -1584,7 +1584,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '12:00'
-  id: qudditch-match--2022-07-01-1100
+  id: qudditch-match-2022-07-01-1100
   link: null
   location: Nerf-arena
   meta:
@@ -1599,7 +1599,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '12:00'
-  id: lär-dig-spela-flöjt--2022-06-29-1100
+  id: lar-dig-spela-flojt-2022-06-29-1100
   link: null
   location: Tält1
   meta:
@@ -1614,7 +1614,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '14:00'
-  id: hopp-och-lek-för-de-yngre--2022-07-01-1300
+  id: hopp-och-lek-for-de-yngre-2022-07-01-1300
   link: null
   location: GA-hall
   meta:
@@ -1629,7 +1629,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: 09:50
-  id: tillsammans-odling-av-grönsaker--2022-06-30-0900
+  id: tillsammans-odling-av-gronsaker-2022-06-30-0900
   link: null
   location: Kaffetältet
   meta:
@@ -1644,7 +1644,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: 03:00
-  id: grillfest---gemensam-grillfest-vid-klarälven.--2022-06-29-1800
+  id: grillfest-gemensam-grillfest-vid-klaralven-2022-06-29-1800
   link: null
   location: Grillplatsen
   meta:
@@ -1659,7 +1659,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '11:00'
-  id: självförsvarsintro-för-alla-2022-07-01-1000
+  id: sjalvforsvarsintro-for-alla-2022-07-01-1000
   link: null
   location: Annat
   meta:
@@ -1674,7 +1674,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '12:00'
-  id: grundläggande-bollkontroll-2022-07-01-1130
+  id: grundlaggande-bollkontroll-2022-07-01-1130
   link: null
   location: GA-hall
   meta:
@@ -1689,7 +1689,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '12:00'
-  id: grundläggande-bollkontroll-2022-07-02-1130
+  id: grundlaggande-bollkontroll-2022-07-02-1130
   link: null
   location: GA-hall
   meta:
@@ -1704,7 +1704,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '14:30'
-  id: diskussion-om-dyslexi-hos-särskilt-begåvade-barn--2022-07-01-1330
+  id: diskussion-om-dyslexi-hos-sarskilt-begavade-barn-2022-07-01-1330
   link: null
   location: Kaffetältet
   meta:
@@ -1719,7 +1719,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '19:00'
-  id: teckenspråk--2022-06-30-1800
+  id: teckensprak-2022-06-30-1800
   link: null
   location: Tält1
   meta:
@@ -1734,7 +1734,7 @@ events:
 - date: '2022-06-29'
   description: null
   end: '17:00'
-  id: volleyboll-för-stora-och-små-2022-06-29-1600
+  id: volleyboll-for-stora-och-sma-2022-06-29-1600
   link: null
   location: Nerf-arena
   meta:
@@ -1749,7 +1749,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '12:00'
-  id: träningspass/familjefys-2022-06-30-1115
+  id: traningspass-familjefys-2022-06-30-1115
   link: null
   location: Annat
   meta:
@@ -1779,7 +1779,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '20:30'
-  id: virk-workshop-(flyttad)-2022-06-30-1830
+  id: virk-workshop-flyttad-2022-06-30-1830
   link: null
   location: Tält2
   meta:
@@ -1794,7 +1794,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '16:00'
-  id: andning---hur-den-hänger-ihop-med-spända-axlar-tex--2022-06-30-1500
+  id: andning-hur-den-hanger-ihop-med-spanda-axlar-tex-2022-06-30-1500
   link: null
   location: Grillplatsen
   meta:
@@ -1809,7 +1809,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '19:30'
-  id: fotbollsträning--2022-06-30-1830
+  id: fotbollstraning-2022-06-30-1830
   link: null
   location: Fotbollsplan
   meta:
@@ -1824,7 +1824,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '17:00'
-  id: tecknarstudio-tonåringar.-anmälan-behövs-göras.-2022-06-30-1400
+  id: tecknarstudio-tonaringar-anmalan-behovs-goras-2022-06-30-1400
   link: null
   location: Annat
   meta:
@@ -1839,7 +1839,7 @@ events:
 - date: '2022-06-30'
   description: null
   end: '14:00'
-  id: minecraft---mods,-demos-och-annat-2022-06-30-1300
+  id: minecraft-mods-demos-och-annat-2022-06-30-1300
   link: null
   location: Datorsal
   meta:
@@ -1854,7 +1854,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '12:00'
-  id: träningspass/familjefys-2022-07-01-1115
+  id: traningspass-familjefys-2022-07-01-1115
   link: null
   location: Annat
   meta:
@@ -1959,7 +1959,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '17:30'
-  id: träff-för-stockholm/mälardalen-2022-07-01-1645
+  id: traff-for-stockholm-malardalen-2022-07-01-1645
   link: null
   location: Tält1
   meta:
@@ -1974,7 +1974,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '18:00'
-  id: ansiktsmålning-2022-07-01-1630
+  id: ansiktsmalning-2022-07-01-1630
   link: null
   location: Tält2
   meta:
@@ -1989,7 +1989,7 @@ events:
 - date: '2022-07-01'
   description: null
   end: '23:45'
-  id: friday-=-game-night-(brädspelsafton)-2022-07-01-2000
+  id: friday-game-night-bradspelsafton-2022-07-01-2000
   link: null
   location: GA-hall
   meta:
@@ -2004,7 +2004,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '12:00'
-  id: att-leva-med-särbegåvning.-(för-föräldrar-och-unga-vuxna).-2022-07-02-1100
+  id: att-leva-med-sarbegavning-for-foraldrar-och-unga-vuxna-2022-07-02-1100
   link: null
   location: Tält1
   meta:
@@ -2034,7 +2034,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '14:00'
-  id: vattenkrig!-2022-07-02-1300
+  id: vattenkrig-2022-07-02-1300
   link: null
   location: Annat
   meta:
@@ -2049,7 +2049,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '15:00'
-  id: japanska-för-nybörjare-2022-07-02-1400
+  id: japanska-for-nyborjare-2022-07-02-1400
   link: null
   location: Tält1
   meta:
@@ -2064,7 +2064,7 @@ events:
 - date: '2022-07-02'
   description: null
   end: '12:00'
-  id: vi-testar-hinderbanan--2022-07-02-1115
+  id: vi-testar-hinderbanan-2022-07-02-1115
   link: null
   location: Annat
   meta:

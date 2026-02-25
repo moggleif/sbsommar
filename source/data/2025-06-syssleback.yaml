@@ -98,7 +98,7 @@ events:
 - date: '2025-06-22'
   description: null
   end: '23:59'
-  id: sista-för-idag-2025-06-22-2359
+  id: sista-for-idag-2025-06-22-2359
   link: null
   location: Annat
   meta:
@@ -113,7 +113,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '23:59'
-  id: sista-för-idag-2025-06-23-2359
+  id: sista-for-idag-2025-06-23-2359
   link: null
   location: Annat
   meta:
@@ -128,7 +128,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '23:59'
-  id: sista-för-idag-2025-06-24-2359
+  id: sista-for-idag-2025-06-24-2359
   link: null
   location: Annat
   meta:
@@ -143,7 +143,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '23:59'
-  id: sista-för-idag-2025-06-25-2359
+  id: sista-for-idag-2025-06-25-2359
   link: null
   location: Annat
   meta:
@@ -158,7 +158,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '23:59'
-  id: sista-för-idag-2025-06-26-2359
+  id: sista-for-idag-2025-06-26-2359
   link: null
   location: Annat
   meta:
@@ -173,7 +173,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '23:59'
-  id: sista-för-idag-2025-06-27-2359
+  id: sista-for-idag-2025-06-27-2359
   link: null
   location: Annat
   meta:
@@ -188,7 +188,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '23:59'
-  id: sista-för-idag-2025-06-28-2359
+  id: sista-for-idag-2025-06-28-2359
   link: null
   location: Annat
   meta:
@@ -293,7 +293,7 @@ events:
 - date: '2025-06-22'
   description: null
   end: '23:30'
-  id: välkommen-2025-06-22-1200
+  id: valkommen-2025-06-22-1200
   link: null
   location: Annat
   meta:
@@ -308,7 +308,7 @@ events:
 - date: '2025-06-29'
   description: null
   end: '15:00'
-  id: glass-på-chokladfabriken-2025-06-29-1200
+  id: glass-pa-chokladfabriken-2025-06-29-1200
   link: null
   location: Annat
   meta:
@@ -323,7 +323,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '10:30'
-  id: välkomstmöte-2025-06-23-1000
+  id: valkomstmote-2025-06-23-1000
   link: null
   location: GA Idrott
   meta:
@@ -338,7 +338,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '16:00'
-  id: simhall-abonnerad-(gratis)-2025-06-28-1400
+  id: simhall-abonnerad-gratis-2025-06-28-1400
   link: null
   location: Annat
   meta:
@@ -353,7 +353,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '17:00'
-  id: lokalföreningsträff-rfsb-(inga-andra-aktiviteter-samma-tid)-2025-06-23-1600
+  id: lokalforeningstraff-rfsb-inga-andra-aktiviteter-samma-tid-2025-06-23-1600
   link: null
   location: Tält3
   meta:
@@ -368,7 +368,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '20:00'
-  id: avslutningsmöte-(alla-deltar)-2025-06-28-1800
+  id: avslutningsmote-alla-deltar-2025-06-28-1800
   link: null
   location: Annat
   meta:
@@ -383,7 +383,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '10:30'
-  id: barndans--2025-06-24-1000
+  id: barndans-2025-06-24-1000
   link: null
   location: GA Idrott
   meta:
@@ -398,7 +398,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '23:00'
-  id: brädspel-kunskap--2025-06-23-1930
+  id: bradspel-kunskap-2025-06-23-1930
   link: null
   location: Kaffetält
   meta:
@@ -413,7 +413,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '23:00'
-  id: brädspel-kunskap--2025-06-24-1930
+  id: bradspel-kunskap-2025-06-24-1930
   link: null
   location: Kaffetält
   meta:
@@ -428,7 +428,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '23:00'
-  id: brädspel-kunskap--2025-06-27-1900
+  id: bradspel-kunskap-2025-06-27-1900
   link: null
   location: Kaffetält
   meta:
@@ -443,7 +443,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '17:00'
-  id: japansk-bakning-#1-2025-06-24-1400
+  id: japansk-bakning-1-2025-06-24-1400
   link: null
   location: Servicehus
   meta:
@@ -458,7 +458,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '17:00'
-  id: japansk-bakning-#2-2025-06-26-1400
+  id: japansk-bakning-2-2025-06-26-1400
   link: null
   location: Servicehus
   meta:
@@ -473,7 +473,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '17:00'
-  id: japansk-bakning-#3-2025-06-28-1400
+  id: japansk-bakning-3-2025-06-28-1400
   link: null
   location: Servicehus
   meta:
@@ -488,7 +488,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '17:00'
-  id: så-kul-med-läger!-–-vill-vi-ha-fler?-2025-06-25-1600
+  id: sa-kul-med-lager-vill-vi-ha-fler-2025-06-25-1600
   link: null
   location: Kaffetält
   meta:
@@ -503,7 +503,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '18:00'
-  id: strid-med-lajv-svärd!---2025-06-23-1700
+  id: strid-med-lajv-svard-2025-06-23-1700
   link: null
   location: Nerf-arena
   meta:
@@ -518,7 +518,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '14:00'
-  id: artbestämning-i-gammelskog-2025-06-25-1000
+  id: artbestamning-i-gammelskog-2025-06-25-1000
   link: null
   location: Annat
   meta:
@@ -533,7 +533,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '15:00'
-  id: skapa-karaktärer-rollspel-hampus-kampanj-2025-06-23-1300
+  id: skapa-karaktarer-rollspel-hampus-kampanj-2025-06-23-1300
   link: null
   location: Rollspelstält1
   meta:
@@ -548,7 +548,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '15:00'
-  id: skapa-karaktärer-rollspel-astors-kampanj-2025-06-23-1300
+  id: skapa-karaktarer-rollspel-astors-kampanj-2025-06-23-1300
   link: null
   location: Rollspelstält2
   meta:
@@ -563,7 +563,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '17:00'
-  id: skapa-karaktärer-rollspel-xanders-kampanj-2025-06-23-1500
+  id: skapa-karaktarer-rollspel-xanders-kampanj-2025-06-23-1500
   link: null
   location: Rollspelstält2
   meta:
@@ -578,7 +578,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '17:00'
-  id: surrning-för-vissa-förkunskaper-krävs-2025-06-25-1400
+  id: surrning-for-vissa-forkunskaper-kravs-2025-06-25-1400
   link: null
   location: Annat
   meta:
@@ -653,7 +653,7 @@ events:
 - date: '2025-06-22'
   description: null
   end: '20:30'
-  id: (obs!-alla-deltar,-nya-lite-extra)-rigga-tält-och-ställa-i-ordning-ga-hall-2025-06-22-1800
+  id: obs-alla-deltar-nya-lite-extra-rigga-talt-och-stalla-i-ordning-ga-hall-2025-06-22-1800
   link: null
   location: Annat
   meta:
@@ -698,7 +698,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '17:00'
-  id: bokcirkel---diskutera-djurens-gård-(george-orwell)-2025-06-24-1600
+  id: bokcirkel-diskutera-djurens-gard-george-orwell-2025-06-24-1600
   link: null
   location: AndreasTältet
   meta:
@@ -713,7 +713,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '17:00'
-  id: skapa-karaktärer-rollspel-wilhelms-kampanj-2025-06-23-1500
+  id: skapa-karaktarer-rollspel-wilhelms-kampanj-2025-06-23-1500
   link: null
   location: Rollspelstält1
   meta:
@@ -773,7 +773,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: 09:30
-  id: lär-känna-varandra,-lägret-och-campingen!-2025-06-23-0900
+  id: lar-kanna-varandra-lagret-och-campingen-2025-06-23-0900
   link: null
   location: Servicehus
   meta:
@@ -848,7 +848,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '23:55'
-  id: grillkväll-vid-älven-2025-06-25-1700
+  id: grillkvall-vid-alven-2025-06-25-1700
   link: null
   location: Grillplats
   meta:
@@ -893,7 +893,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '12:00'
-  id: prova-på-surrning-2025-06-26-1000
+  id: prova-pa-surrning-2025-06-26-1000
   link: null
   location: Annat
   meta:
@@ -923,7 +923,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '16:30'
-  id: fotbollsspel--2025-06-27-1530
+  id: fotbollsspel-2025-06-27-1530
   link: null
   location: Fotbollsplan
   meta:
@@ -938,7 +938,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '16:30'
-  id: fotbollsspel--2025-06-28-1530
+  id: fotbollsspel-2025-06-28-1530
   link: null
   location: Fotbollsplan
   meta:
@@ -953,7 +953,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '14:30'
-  id: bokhörna-2025-06-24-1330
+  id: bokhorna-2025-06-24-1330
   link: null
   location: GA Idrott
   meta:
@@ -968,7 +968,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '14:30'
-  id: ryktet-går---rolig-ritlek-för-alla-som-inte-måste-vinna-2025-06-25-1330
+  id: ryktet-gar-rolig-ritlek-for-alla-som-inte-maste-vinna-2025-06-25-1330
   link: null
   location: Nerf-arena
   meta:
@@ -983,7 +983,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '17:30'
-  id: brädspel--2025-06-24-1030
+  id: bradspel-2025-06-24-1030
   link: null
   location: GA Idrott
   meta:
@@ -998,7 +998,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '12:00'
-  id: fläta-vidars-hår-2025-06-23-1120
+  id: flata-vidars-har-2025-06-23-1120
   link: null
   location: Annat
   meta:
@@ -1013,7 +1013,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '15:00'
-  id: accelration/radikalaccelation-i-praktiken-2025-06-23-1400
+  id: accelration-radikalaccelation-i-praktiken-2025-06-23-1400
   link: null
   location: Tält2
   meta:
@@ -1028,7 +1028,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '15:00'
-  id: särskilt-begåvades-emotionalitet-och-familjelivets-konflikter-med-barnets-behov-i-centrum-2025-06-27-1330
+  id: sarskilt-begavades-emotionalitet-och-familjelivets-konflikter-med-barnets-behov-i-centrum-2025-06-27-1330
   link: null
   location: Kaffetält
   meta:
@@ -1044,7 +1044,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '15:00'
-  id: lufttorkad-lera--2025-06-23-1300
+  id: lufttorkad-lera-2025-06-23-1300
   link: null
   location: Tält1
   meta:
@@ -1059,7 +1059,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '15:00'
-  id: tälj-en-penna-eller-vad-som-helst!-2025-06-24-1300
+  id: talj-en-penna-eller-vad-som-helst-2025-06-24-1300
   link: null
   location: Tält1
   meta:
@@ -1089,7 +1089,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '16:30'
-  id: lokalförening:-dalarna-gävleborg-2025-06-23-1600
+  id: lokalforening-dalarna-gavleborg-2025-06-23-1600
   link: null
   location: Kaffetält
   meta:
@@ -1104,7 +1104,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '17:00'
-  id: musikjam!-2025-06-26-1600
+  id: musikjam-2025-06-26-1600
   link: null
   location: AndreasTältet
   meta:
@@ -1119,7 +1119,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '16:00'
-  id: bland-tanketroll-och-känslomonster---om-ångest-hos-barn-och-unga.-2025-06-25-1500
+  id: bland-tanketroll-och-kanslomonster-om-angest-hos-barn-och-unga-2025-06-25-1500
   link: null
   location: Tält2
   meta:
@@ -1134,7 +1134,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '17:00'
-  id: musikjam!-2025-06-27-1600
+  id: musikjam-2025-06-27-1600
   link: null
   location: Kaffetält
   meta:
@@ -1149,7 +1149,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '17:00'
-  id: musikjam!-2025-06-24-1600
+  id: musikjam-2025-06-24-1600
   link: null
   location: Kaffetält
   meta:
@@ -1164,7 +1164,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '20:00'
-  id: tecknarstudio---anmälan-krävs-2025-06-23-1800
+  id: tecknarstudio-anmalan-kravs-2025-06-23-1800
   link: null
   location: GA Stilla hyllan
   meta:
@@ -1179,7 +1179,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '17:00'
-  id: musikjam!-2025-06-28-1600
+  id: musikjam-2025-06-28-1600
   link: null
   location: Kaffetält
   meta:
@@ -1194,7 +1194,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '17:00'
-  id: musikjam!-2025-06-25-1600
+  id: musikjam-2025-06-25-1600
   link: null
   location: AndreasTältet
   meta:
@@ -1224,7 +1224,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '12:00'
-  id: stationer-brain-games--2025-06-24-1100
+  id: stationer-brain-games-2025-06-24-1100
   link: null
   location: Kaffetält
   meta:
@@ -1239,7 +1239,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '20:00'
-  id: diamond-painting--2025-06-23-1815
+  id: diamond-painting-2025-06-23-1815
   link: null
   location: Tält1
   meta:
@@ -1254,7 +1254,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '21:00'
-  id: brain-games--2025-06-26-1930
+  id: brain-games-2025-06-26-1930
   link: null
   location: GA Idrott
   meta:
@@ -1269,7 +1269,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '19:30'
-  id: samling-stationsvärdar-brain-games--2025-06-26-1845
+  id: samling-stationsvardar-brain-games-2025-06-26-1845
   link: null
   location: GA Idrott
   meta:
@@ -1299,7 +1299,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '20:30'
-  id: lätt-och-svår-eurovisionquiz.-vi-börjar-med-den-lätta.-2025-06-23-1900
+  id: latt-och-svar-eurovisionquiz-vi-borjar-med-den-latta-2025-06-23-1900
   link: null
   location: AndreasTältet
   meta:
@@ -1314,7 +1314,7 @@ events:
 - date: '2025-06-23'
   description: null
   end: '17:00'
-  id: rfsb-syd-lokalföreningsträff-2025-06-23-1600
+  id: rfsb-syd-lokalforeningstraff-2025-06-23-1600
   link: null
   location: Servicehus
   meta:
@@ -1359,7 +1359,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '12:00'
-  id: göteborgsträff---rfsb-väst-2025-06-24-1100
+  id: goteborgstraff-rfsb-vast-2025-06-24-1100
   link: null
   location: AndreasTältet
   meta:
@@ -1374,7 +1374,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '12:00'
-  id: trädgårdssnack-2025-06-27-1100
+  id: tradgardssnack-2025-06-27-1100
   link: null
   location: Kaffetält
   meta:
@@ -1524,7 +1524,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '16:30'
-  id: skattjakt-för-de-yngsta-(cirka-4-7-år)-2025-06-27-1530
+  id: skattjakt-for-de-yngsta-cirka-4-7-ar-2025-06-27-1530
   link: null
   location: Nerf-arena
   meta:
@@ -1539,7 +1539,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '12:00'
-  id: gör-din-egen-trollstav!-(ca-4-10-år)-2025-06-25-1100
+  id: gor-din-egen-trollstav-ca-4-10-ar-2025-06-25-1100
   link: null
   location: GA Kreativ hörna
   meta:
@@ -1554,7 +1554,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '14:30'
-  id: hemmakämpare---hur-hitta-gnistan-igen?--2025-06-25-1330
+  id: hemmakampare-hur-hitta-gnistan-igen-2025-06-25-1330
   link: null
   location: Tält2
   meta:
@@ -1614,7 +1614,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '16:00'
-  id: powerpoint-karaoke!-2025-06-27-1500
+  id: powerpoint-karaoke-2025-06-27-1500
   link: null
   location: GA Idrott
   meta:
@@ -1704,7 +1704,7 @@ events:
 - date: '2025-06-24'
   description: null
   end: '19:30'
-  id: programmerarhäng-2025-06-24-1830
+  id: programmerarhang-2025-06-24-1830
   link: null
   location: Kaffetält
   meta:
@@ -1794,7 +1794,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '15:00'
-  id: baka-tunnbröd-vid-grillplatsen-vid-älven--2025-06-25-1300
+  id: baka-tunnbrod-vid-grillplatsen-vid-alven-2025-06-25-1300
   link: null
   location: Grillplats
   meta:
@@ -1809,7 +1809,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '11:00'
-  id: schack-för-nybörjare-2025-06-26-1000
+  id: schack-for-nyborjare-2025-06-26-1000
   link: null
   location: Kaffetält
   meta:
@@ -1839,7 +1839,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: 09:00
-  id: trum-meditation--2025-06-26-0800
+  id: trum-meditation-2025-06-26-0800
   link: null
   location: Tält2
   meta:
@@ -1854,7 +1854,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '17:30'
-  id: strid-med-lajvsvärd-och-*strumpor*!--2025-06-25-1615
+  id: strid-med-lajvsvard-och-strumpor-2025-06-25-1615
   link: null
   location: Nerf-arena
   meta:
@@ -1869,7 +1869,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '12:00'
-  id: diamond-painting--2025-06-25-1030
+  id: diamond-painting-2025-06-25-1030
   link: null
   location: Tält1
   meta:
@@ -1884,7 +1884,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '17:00'
-  id: stand-up-comedy---vad-är-det-och-hur-gör-man-ett-skämt?-2025-06-25-1600
+  id: stand-up-comedy-vad-ar-det-och-hur-gor-man-ett-skamt-2025-06-25-1600
   link: null
   location: Tält2
   meta:
@@ -1944,7 +1944,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '10:45'
-  id: familjeträning-utomhus,-nedanför-beachvolleyplan,-nära-gungorna-2025-06-25-1015
+  id: familjetraning-utomhus-nedanfor-beachvolleyplan-nara-gungorna-2025-06-25-1015
   link: null
   location: Annat
   meta:
@@ -1959,7 +1959,7 @@ events:
 - date: '2025-06-25'
   description: null
   end: '15:00'
-  id: täljning-2025-06-25-1300
+  id: taljning-2025-06-25-1300
   link: null
   location: Tält1
   meta:
@@ -2004,7 +2004,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '15:00'
-  id: ai-–-ett-samtal-om-framtid,-idéer-och-människan-2025-06-26-1400
+  id: ai-ett-samtal-om-framtid-ideer-och-manniskan-2025-06-26-1400
   link: null
   location: Tält2
   meta:
@@ -2019,7 +2019,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '11:00'
-  id: familjedans-till-västafrikanska-rytmer-2025-06-26-1000
+  id: familjedans-till-vastafrikanska-rytmer-2025-06-26-1000
   link: null
   location: GA Idrott
   meta:
@@ -2034,7 +2034,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '20:30'
-  id: prisutdelning-brain-games--2025-06-27-2015
+  id: prisutdelning-brain-games-2025-06-27-2015
   link: null
   location: GA Idrott
   meta:
@@ -2049,7 +2049,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '14:30'
-  id: spelutveckling-med-godot,-en-kort-intro-2025-06-27-1330
+  id: spelutveckling-med-godot-en-kort-intro-2025-06-27-1330
   link: null
   location: GA Stilla hyllan
   meta:
@@ -2079,7 +2079,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '12:00'
-  id: stand-up-comedy---vad-är-det-och-hur-gör-man-ett-skämt?-2025-06-26-1100
+  id: stand-up-comedy-vad-ar-det-och-hur-gor-man-ett-skamt-2025-06-26-1100
   link: null
   location: Tält2
   meta:
@@ -2094,7 +2094,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '12:00'
-  id: jobbigt-att-prata-inför-klassen,-kollegorna,-publik---kom-hit-för-lite-tips-2025-06-27-1100
+  id: jobbigt-att-prata-infor-klassen-kollegorna-publik-kom-hit-for-lite-tips-2025-06-27-1100
   link: null
   location: GA Stilla hyllan
   meta:
@@ -2124,7 +2124,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '18:30'
-  id: gör-din-egen-miljövänliga-matförvaring--2025-06-26-1630
+  id: gor-din-egen-miljovanliga-matforvaring-2025-06-26-1630
   link: null
   location: Tält1
   meta:
@@ -2154,7 +2154,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '15:30'
-  id: artstudio-äldre-tonåringar/unga-vuxna---chokladfabriken/naturpralinen-2025-06-26-1300
+  id: artstudio-aldre-tonaringar-unga-vuxna-chokladfabriken-naturpralinen-2025-06-26-1300
   link: null
   location: Annat
   meta:
@@ -2169,7 +2169,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '11:00'
-  id: frigörande-dans--2025-06-27-1000
+  id: frigorande-dans-2025-06-27-1000
   link: null
   location: GA Idrott
   meta:
@@ -2184,7 +2184,7 @@ events:
 - date: '2025-06-26'
   description: null
   end: '13:30'
-  id: antika-räknemaskiner-workshop-2025-06-26-1300
+  id: antika-raknemaskiner-workshop-2025-06-26-1300
   link: null
   location: AndreasTältet
   meta:
@@ -2199,7 +2199,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '12:00'
-  id: frigörande-dans-2025-06-28-1100
+  id: frigorande-dans-2025-06-28-1100
   link: null
   location: GA Idrott
   meta:
@@ -2259,7 +2259,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '12:30'
-  id: -vi-startar-upp-rfsb-väst!-2025-06-27-1200
+  id: vi-startar-upp-rfsb-vast-2025-06-27-1200
   link: null
   location: Kaffetält
   meta:
@@ -2274,7 +2274,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '11:00'
-  id: it-projekt,-agila-ramverk-m.m.-informellt-snack-2025-06-27-1000
+  id: it-projekt-agila-ramverk-m-m-informellt-snack-2025-06-27-1000
   link: null
   location: Kaffetält
   meta:
@@ -2289,7 +2289,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '14:30'
-  id: prepping,-hur-och-varför?--2025-06-28-1300
+  id: prepping-hur-och-varfor-2025-06-28-1300
   link: null
   location: Tält2
   meta:
@@ -2319,7 +2319,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '16:30'
-  id: inkluderad-till-exkludering-(repris-från-den-internationella-begåvningskonferensen-i-karlstad-tidigare-i-sommar)-2025-06-27-1600
+  id: inkluderad-till-exkludering-repris-fran-den-internationella-begavningskonferensen-i-karlstad-tidigare-i-sommar-2025-06-27-1600
   link: null
   location: GA Idrott
   meta:
@@ -2335,7 +2335,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '18:45'
-  id: neurodiversitet,-2e,-iq-begreppet,-bra-att-veta-om-hur-psykologer-kan-tänka-2025-06-27-1800
+  id: neurodiversitet-2e-iq-begreppet-bra-att-veta-om-hur-psykologer-kan-tanka-2025-06-27-1800
   link: null
   location: Annat
   meta:
@@ -2365,7 +2365,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '22:30'
-  id: open-stage---med-anmälningslänk!-2025-06-27-2030
+  id: open-stage-med-anmalningslank-2025-06-27-2030
   link: null
   location: GA Idrott
   meta:
@@ -2380,7 +2380,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '20:00'
-  id: karaoke---med-anmälningslänk!-2025-06-27-1800
+  id: karaoke-med-anmalningslank-2025-06-27-1800
   link: null
   location: GA Idrott
   meta:
@@ -2410,7 +2410,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '18:00'
-  id: tänk-dig-innanför-boxen!-tillfälle-2-2025-06-28-1700
+  id: tank-dig-innanfor-boxen-tillfalle-2-2025-06-28-1700
   link: null
   location: AndreasTältet
   meta:
@@ -2425,7 +2425,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '14:00'
-  id: tänk-dig-innanför-boxen!-tillfälle-1-2025-06-28-1300
+  id: tank-dig-innanfor-boxen-tillfalle-1-2025-06-28-1300
   link: null
   location: AndreasTältet
   meta:
@@ -2440,7 +2440,7 @@ events:
 - date: '2025-06-27'
   description: null
   end: '20:00'
-  id: artstudio---hantverkstältet--2025-06-27-1800
+  id: artstudio-hantverkstaltet-2025-06-27-1800
   link: null
   location: Annat
   meta:
@@ -2455,7 +2455,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '15:30'
-  id: powerpoint-karaoke,-2:a-tillfället-2025-06-28-1430
+  id: powerpoint-karaoke-2-a-tillfallet-2025-06-28-1430
   link: null
   location: GA Idrott
   meta:
@@ -2485,7 +2485,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '12:00'
-  id: få-hjälp-med-att-gå-med-i-rfsb-discord-(kan-bli-grejen-framöver,-samma-som-de-yngre)---https://discord.gg/gbcfxsek-2025-06-28-1100
+  id: fa-hjalp-med-att-ga-med-i-rfsb-discord-kan-bli-grejen-framover-samma-som-de-yngre-https-discord-gg-gbcfxsek-2025-06-28-1100
   link: null
   location: KaffePaviljongen
   meta:
@@ -2501,7 +2501,7 @@ events:
 - date: '2025-06-28'
   description: null
   end: '16:30'
-  id: svenskarna,-samtiden-och-framtiden--2025-06-28-1530
+  id: svenskarna-samtiden-och-framtiden-2025-06-28-1530
   link: null
   location: GA Idrott
   meta:
@@ -2531,7 +2531,7 @@ events:
 - date: '2025-06-29'
   description: null
   end: 01:10
-  id: gissa-vem-jag-är-2025-06-29-0100
+  id: gissa-vem-jag-ar-2025-06-29-0100
   link: null
   location: Nerf-arena
   meta:

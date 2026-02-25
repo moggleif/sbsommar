@@ -2,7 +2,7 @@ events:
 - date: '2018-06-17'
   description: null
   end: null
-  id: varulvarna-i-klågerup-2018-06-17-1030
+  id: varulvarna-i-klagerup-2018-06-17-1030
   link: https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/?comment_id=2179133798975512&comment_tracking=%7B%22tn%22%3A%22R9%22%7D
   location: Matt-tältet
   meta:
@@ -17,7 +17,7 @@ events:
 - date: '2018-06-17'
   description: null
   end: null
-  id: scratch-för-nybörjare-2018-06-17-1030
+  id: scratch-for-nyborjare-2018-06-17-1030
   link: null
   location: Fritidsgården
   meta:
@@ -62,7 +62,7 @@ events:
 - date: '2018-06-17'
   description: null
   end: null
-  id: nerf-snällkrig-2018-06-17-1100
+  id: nerf-snallkrig-2018-06-17-1100
   link: null
   location: Nerfarenan
   meta:
@@ -77,7 +77,7 @@ events:
 - date: '2018-06-17'
   description: null
   end: null
-  id: sagostund-för-de-yngsta-2018-06-17-1400
+  id: sagostund-for-de-yngsta-2018-06-17-1400
   link: null
   location: GA-hallen
   meta:
