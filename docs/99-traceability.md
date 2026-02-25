@@ -120,7 +120,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§2.7` | RSS feed exists at `/schema.rss` | — (no implementation doc) | — | — | gap |
 | `02-§2.8` | Homepage, schedule, add-activity, and archive pages share header and navigation | 03-ARCHITECTURE.md §6 | SNP-01 | `source/build/layout.js` – `pageNav()` | covered |
 | `02-§2.9` | None of the site pages require login | 03-ARCHITECTURE.md §3 | — | No authentication exists anywhere in the codebase | implemented |
-| `02-§2.10` | Today/Display view has no header or navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js` – no `pageNav()` call | implemented |
+| `02-§2.10` | Display view has no header or navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js` – no `pageNav()` call | implemented |
 | `02-§3.1` | Homepage answers all pre-camp questions (what, who, when, cost, registration, lodging, rules, testimonials) | 03-ARCHITECTURE.md §5 | — | `source/build/render-index.js`, `source/content/*.md` sections | implemented |
 | `02-§3.2` | Homepage includes a collapsible FAQ section | 03-ARCHITECTURE.md §5; `collapsible: true` in `sections.yaml` | RNI-22..28 | `source/build/render-index.js` – `convertMarkdown(…, collapsible: true)` | covered |
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | — | `source/build/build.js` – falls back to most recent camp by `start_date` | implemented |
@@ -130,7 +130,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
 | `02-§4.5` | Today view (`/idag.html`) shows only today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | — | `source/build/render-idag.js`, `source/assets/js/client/events-today.js` | implemented |
 | `02-§4.6` | Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | — | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` → `/dagens-schema.html` | implemented |
-| `02-§4.7` | Today/Display view requires no interaction; no day navigation controls | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day controls rendered | implemented |
+| `02-§4.7` | Display view requires no interaction to stay useful | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day controls rendered | implemented |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | — | No exclusion logic in `source/build/render.js`; CSS handles layout | implemented |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -252,7 +252,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `CL-§8.3` | Non-technical contributors can add images without editing layout files | 01-CONTRIBUTORS.md | — | Images referenced from Markdown content files | implemented |
 | `CL-§8.4` | Layout files do not need to be edited for content changes | 03-ARCHITECTURE.md §6 | — | Content-layout separation is architectural; `source/build/` is never touched for content edits | implemented |
 | `02-§4.10` | Weekly schedule groups activities by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `groupAndSortEvents()` | covered |
-| `02-§4.13` | Today/Display view has no day navigation; it always shows today | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day navigation rendered | implemented |
+| `02-§4.13` | Today view has no day navigation; it always shows today | 03-ARCHITECTURE.md §3 | — | `source/build/render-idag.js`, `source/build/render-today.js` – no day navigation rendered | implemented |
 | `02-§5.2` | Empty fields are omitted from the detail view; no blank rows appear | 05-DATA_CONTRACT.md §3 | RND-33..38 | `source/build/render.js` – `eventExtraHtml()` guards each optional field | covered |
 | `02-§5.3` | The `owner` and `meta` fields are never shown in any public view | 05-DATA_CONTRACT.md §3.3 | — | `source/build/render.js` – neither field is referenced in render output | implemented |
 | `02-§8.3` | Locations must be selected from a predefined list | 03-ARCHITECTURE.md §6 | — | `source/build/render-add.js` – `<select>` populated from `local.yaml` | implemented |
@@ -610,9 +610,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 
 ```text
 Total requirements:             479
-Covered (implemented + tested): 155
-Implemented, not tested:        303
-Gap (no implementation):         20
+Covered (implemented + tested): 145
+Implemented, not tested:        312
+Gap (no implementation):         22
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
