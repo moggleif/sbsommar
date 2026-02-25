@@ -581,12 +581,12 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§30.15` | Countdown shows large number + "Dagar kvar" label | 07-DESIGN.md §6 | HERO-11, HERO-13 | `source/build/render-index.js` – `.hero-countdown-number` + `.hero-countdown-label` | covered |
 | `02-§30.16` | Countdown target embedded as data-target; JS computes on load | 03-ARCHITECTURE.md §15.3 | HERO-10 | `source/build/render-index.js` – `data-target="${countdownTarget}"` | covered |
 | `02-§30.17` | Countdown hidden if no future camp | 03-ARCHITECTURE.md §15.3 | HERO-12 | `source/build/render-index.js` – no countdown HTML when `countdownTarget` is null | covered |
-| `02-§30.18` | Countdown has subtle cream/sand background | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: #FAF7EF }` | implemented |
+| `02-§30.18` | Countdown has subtle cream/sand background | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: var(--color-cream-light) }` | implemented |
 | `02-§30.19` | All hero styling uses CSS custom properties | 07-DESIGN.md §7 | — (manual: CSS review) | `style.css` – all hero rules use `var(--…)` tokens | implemented |
 | `02-§30.20` | Countdown JS is minimal, no framework | 03-ARCHITECTURE.md §15.3 | — (manual: code review) | `source/build/render-index.js` – ~8-line inline `<script>` | implemented |
 | `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | `source/content/images/DiscordLogo.webp`, `social-facebook-button-blue-icon-small.webp` | implemented |
 | `02-§30.22` | Social links provided at build time, not hardcoded | 03-ARCHITECTURE.md §15.2 | HERO-14, HERO-15 | `source/build/build.js` – passes `discordUrl`, `facebookUrl` to `renderIndexPage` | covered |
-| `02-§30.23` | Countdown background color is `#FAF7EF` (solid, not semi-transparent) | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: #FAF7EF }` | implemented |
+| `02-§30.23` | Countdown background color is `#FAF7EF` (solid, not semi-transparent) | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: var(--color-cream-light) }` | implemented |
 | `02-§30.24` | Discord icon uses `DiscordLogo.webp` | 03-ARCHITECTURE.md §15.4 | HERO-16 | `render-index.js` – `DiscordLogo.webp` in Discord link `<img>` | covered |
 | `02-§30.25` | Sidebar vertically centered alongside hero image | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero { align-items: center }` | implemented |
 

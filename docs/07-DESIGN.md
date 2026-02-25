@@ -26,6 +26,7 @@ All CSS must use the custom properties defined in §7. Do not hardcode colors, s
 | `07-§2.4` | Navy | `#192A3D` | Main headings, strong contrast |
 | `07-§2.5` | Charcoal | `#3B3A38` | Body text, muted dark |
 | `07-§2.6` | White | `#FFFFFF` | Cards, content blocks, contrast surfaces |
+| `07-§2.8` | Cream light | `#FAF7EF` | Countdown background, lighter cream variant |
 
 Avoid bright or saturated colors outside this palette. The warmth comes from restraint. <!-- 07-§2.7 -->
 
@@ -208,6 +209,7 @@ When CSS is written, start with these at `:root`:
   --color-navy: #192A3D;
   --color-charcoal: #3B3A38;
   --color-white: #FFFFFF;
+  --color-cream-light: #FAF7EF;
 
   /* Typography */
   --font-sans: system-ui, -apple-system, sans-serif;
