@@ -139,7 +139,17 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 
-  const arkivHtml = renderArkivPage(camps, footerHtml, navSections);
+  // Load events for all archived camps
+  const campEventsMap = {};
+  for (const c of camps.filter((x) => x.archived === true)) {
+    const evFile = path.join(DATA_DIR, c.file);
+    if (fs.existsSync(evFile)) {
+      const evData = yaml.load(fs.readFileSync(evFile, 'utf8'));
+      campEventsMap[c.id] = evData.events || [];
+    }
+  }
+
+  const arkivHtml = renderArkivPage(camps, footerHtml, navSections, campEventsMap);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'arkiv.html'), arkivHtml, 'utf8');
   const archivedCount = camps.filter((c) => c.archived === true).length;
   console.log(`Built: public/arkiv.html  (${archivedCount} archived camps)`);
