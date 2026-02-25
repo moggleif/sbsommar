@@ -625,20 +625,20 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 
 | ID | Requirement | Doc reference | Test | Implementation | Status |
 | -- | ----------- | ------------- | ---- | -------------- | ------ |
-| `02-§34.1` | Active camp derived from dates with defined priority | 03-ARCHITECTURE.md §2 | DAC-01..07 | `source/scripts/resolve-active-camp.js` | gap |
-| `02-§34.2` | On-dates camp is active | 03-ARCHITECTURE.md §2 | DAC-01 | `resolve-active-camp.js` | gap |
-| `02-§34.3` | Next upcoming camp if none on dates | 03-ARCHITECTURE.md §2 | DAC-02 | `resolve-active-camp.js` | gap |
-| `02-§34.4` | Most recent camp if no upcoming | 03-ARCHITECTURE.md §2 | DAC-03 | `resolve-active-camp.js` | gap |
-| `02-§34.5` | Overlapping camps: earlier start_date wins | 03-ARCHITECTURE.md §2 | DAC-04 | `resolve-active-camp.js` | gap |
-| `02-§34.6` | `active` field removed from camps.yaml | 05-DATA_CONTRACT.md §1 | DAC-05 | `source/data/camps.yaml` | gap |
-| `02-§34.7` | `active` field removed from data contract | 05-DATA_CONTRACT.md §1 | manual: field absent in doc | `docs/05-DATA_CONTRACT.md` | gap |
-| `02-§34.8` | active+archived lint check removed | — | DAC-06 | `source/scripts/lint-yaml.js` | gap |
-| `02-§34.9` | build.js uses derivation at build time | 03-ARCHITECTURE.md §5 | DAC-07 | `source/build/build.js` | gap |
-| `02-§34.10` | Resolved camp logged to stdout | 03-ARCHITECTURE.md §5 | manual: build output | `source/build/build.js` | gap |
-| `02-§34.11` | github.js uses derivation for API requests | 03-ARCHITECTURE.md §3 | manual: code review | `source/api/github.js` | gap |
-| `02-§34.12` | Derivation logic shared (not duplicated) | 03-ARCHITECTURE.md §2 | manual: code review | `source/scripts/resolve-active-camp.js` | gap |
-| `02-§34.13` | lint-yaml no longer checks active field | — | DAC-06 | `source/scripts/lint-yaml.js` | gap |
-| `02-§34.14` | Existing active-field tests updated/removed | — | manual: `npm test` passes | test files | gap |
+| `02-§34.1` | Active camp derived from dates with defined priority | 03-ARCHITECTURE.md §2 | DAC-01..07 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§34.2` | On-dates camp is active | 03-ARCHITECTURE.md §2 | DAC-01 | `resolve-active-camp.js` | covered |
+| `02-§34.3` | Next upcoming camp if none on dates | 03-ARCHITECTURE.md §2 | DAC-02 | `resolve-active-camp.js` | covered |
+| `02-§34.4` | Most recent camp if no upcoming | 03-ARCHITECTURE.md §2 | DAC-03 | `resolve-active-camp.js` | covered |
+| `02-§34.5` | Overlapping camps: earlier start_date wins | 03-ARCHITECTURE.md §2 | DAC-04 | `resolve-active-camp.js` | covered |
+| `02-§34.6` | `active` field removed from camps.yaml | 05-DATA_CONTRACT.md §1 | DAC-05 | `source/data/camps.yaml` | covered |
+| `02-§34.7` | `active` field removed from data contract | 05-DATA_CONTRACT.md §1 | manual: field absent in doc | `docs/05-DATA_CONTRACT.md` | implemented |
+| `02-§34.8` | active+archived lint check removed | — | DAC-06 | `source/scripts/lint-yaml.js` | covered |
+| `02-§34.9` | build.js uses derivation at build time | 03-ARCHITECTURE.md §5 | DAC-07 | `source/build/build.js` | covered |
+| `02-§34.10` | Resolved camp logged to stdout | 03-ARCHITECTURE.md §5 | manual: build output | `source/build/build.js` | implemented |
+| `02-§34.11` | github.js uses derivation for API requests | 03-ARCHITECTURE.md §3 | manual: code review | `source/api/github.js` | implemented |
+| `02-§34.12` | Derivation logic shared (not duplicated) | 03-ARCHITECTURE.md §2 | manual: code review | `source/scripts/resolve-active-camp.js` | implemented |
+| `02-§34.13` | lint-yaml no longer checks active field | — | DAC-06 | `source/scripts/lint-yaml.js` | covered |
+| `02-§34.14` | Existing active-field tests updated/removed | — | manual: `npm test` passes | test files | implemented |
 
 ---
 
@@ -646,9 +646,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 
 ```text
 Total requirements:             510
-Covered (implemented + tested): 159
-Implemented, not tested:        335
-Gap (no implementation):         16
+Covered (implemented + tested): 167
+Implemented, not tested:        340
+Gap (no implementation):          3
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -751,10 +751,12 @@ Matrix cleanup (2026-02-25):
   Stylelint with stylelint-config-standard for CSS linting.
   Both integrated into ci.yml with data-only skip condition.
 14 requirements added for derived active camp (02-§34.1–34.14):
-  all 14 start as gap; tests and implementation pending.
+  8 covered (DAC-01..07): 02-§34.1–34.6, 02-§34.8–34.9, 02-§34.13.
+  5 implemented (manual/code review): 02-§34.7, 02-§34.10–34.12, 02-§34.14.
   05-§1.2 updated: now references derivation logic instead of manual flag.
   05-§1.3 superseded: active+archived conflict is impossible without active field.
-  LNT-22..23 tests to be removed (active+archived check removed).
+  LNT-22..23 tests removed (active+archived check removed).
+  `active` field removed from camps.yaml and data contract.
 4 accessibility gaps closed:
   02-§13.2 / 07-§9.2 moved from gap to covered (A11Y-01..09):
     :focus-visible rules added to all interactive elements in style.css.
@@ -797,9 +799,10 @@ Matrix cleanup (2026-02-25):
     Custom accordion components (archive timeline) already use explicit `aria-expanded`
     and `aria-controls` (ARK-04, ARK-05). Design doc updated to codify this decision.
 
-6. **`02-§34.1`–`02-§34.14` — Derived active camp** *(in progress)*
-   The `active` flag is being removed from `camps.yaml`; the active camp
-   will be derived from dates at build and API time.
+6. **`02-§34.1`–`02-§34.14` — Derived active camp** *(resolved)*
+   The `active` flag has been removed from `camps.yaml`. The active camp
+   is now derived from dates at build and API time. 8 covered (DAC-01..07),
+   5 implemented (manual/code review). 05-§1.3 superseded.
 
 ---
 
@@ -856,6 +859,6 @@ Matrix cleanup (2026-02-25):
 | VLD-50..54 | `tests/validate.test.js` | `validateEventRequest – date within camp range` |
 | VLD-55 | `tests/validate.test.js` | `validateEditRequest – date within camp range` |
 | LNT-19..21 | `tests/lint-yaml.test.js` | `validateYaml – unique (title+date+start) combo (05-§5.1)` |
-| LNT-22..23 | `tests/lint-yaml.test.js` | `validateYaml – active+archived camp conflict (05-§1.3)` |
+| LNT-22..23 | *(removed — active+archived check no longer exists; see 02-§34.8)* | — |
 | A11Y-01..09 | `tests/accessibility.test.js` | `:focus-visible rules (02-§13.2)` |
 | DAC-01..07 | `tests/resolve-active-camp.test.js` | `resolveActiveCamp` |
