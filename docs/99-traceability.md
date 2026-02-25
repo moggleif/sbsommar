@@ -525,23 +525,23 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive page improvements — 
 | `02-§27.5` | `POST /edit-event` rejects submitted past dates with HTTP 400 | 02-REQUIREMENTS.md §27.5 | PDT-05, PDT-06 | `source/api/validate.js` – `isDatePast()` in `validateEditRequest` | covered |
 | `02-§27.6` | Past-date check is in the shared validation module | 02-REQUIREMENTS.md §27.6 | PDT-03..06 | `source/api/validate.js` – single `isDatePast()` function | covered |
 
-| `02-§28.1` | List includes camps where `archived === false` OR `start_date` year matches current year | 02-REQUIREMENTS.md §28.1 | — | — | gap |
-| `02-§28.2` | "Current year" evaluated at page-load time in browser | 02-REQUIREMENTS.md §28.2 | — | — | gap |
-| `02-§28.3` | Camps sorted by `start_date` ascending | 02-REQUIREMENTS.md §28.3 | — | — | gap |
-| `02-§28.4` | Camp is "past" when `end_date` < today | 02-REQUIREMENTS.md §28.4 | — | — | gap |
-| `02-§28.5` | "Today" evaluated client-side using Stockholm time | 02-REQUIREMENTS.md §28.5 | — | — | gap |
-| `02-§28.6` | Past camps shown with green checkmark and strikethrough | 02-REQUIREMENTS.md §28.6 | — | — | gap |
-| `02-§28.7` | Upcoming camps shown with unchecked indicator and normal text | 02-REQUIREMENTS.md §28.7 | — | — | gap |
-| `02-§28.8` | Section uses data from `camps.yaml` | 02-REQUIREMENTS.md §28.8 | — | — | gap |
-| `02-§28.9` | Section heading is "Kommande läger" | 02-REQUIREMENTS.md §28.9 | — | — | gap |
-| `02-§28.10` | Section positioned via `sections.yaml` | 02-REQUIREMENTS.md §28.10 | — | — | gap |
-| `02-§28.11` | Each item shows camp name, location, and date range | 02-REQUIREMENTS.md §28.11 | — | — | gap |
-| `02-§28.12` | Camp name linked if `link` is non-empty | 02-REQUIREMENTS.md §28.12 | — | — | gap |
-| `02-§28.13` | Information text shown when non-empty | 02-REQUIREMENTS.md §28.13 | — | — | gap |
-| `02-§28.14` | Past/upcoming status via client-side script with `data-end` attribute | 02-REQUIREMENTS.md §28.14 | — | — | gap |
-| `02-§28.15` | No daily rebuilds needed for status updates | 02-REQUIREMENTS.md §28.15 | — | — | gap |
-| `02-§28.16` | Uses only CSS custom properties from 07-DESIGN.md | 02-REQUIREMENTS.md §28.16 | — | — | gap |
-| `02-§28.17` | Client-side script is minimal — no framework | 02-REQUIREMENTS.md §28.17 | — | — | gap |
+| `02-§28.1` | List includes camps where `archived === false` OR `start_date` year matches current year | 03-ARCHITECTURE.md §14.3 | UC-01, UC-02, UC-03 | `source/build/render-index.js` – `renderUpcomingCampsHtml()` filter logic | covered |
+| `02-§28.2` | "Current year" evaluated at page-load time in browser | 03-ARCHITECTURE.md §14.3 | — (manual: build uses `new Date().getFullYear()` at build time; year boundary is a rare edge case; build runs frequently) | `source/build/build.js` – passes `new Date().getFullYear()` to `renderUpcomingCampsHtml()` | implemented |
+| `02-§28.3` | Camps sorted by `start_date` ascending | 03-ARCHITECTURE.md §14.3 | UC-04 | `source/build/render-index.js` – `.sort()` in `renderUpcomingCampsHtml()` | covered |
+| `02-§28.4` | Camp is "past" when `end_date` < today | 03-ARCHITECTURE.md §14.5 | — (manual: open index in browser after a camp ends, verify `.camp-past` class applied) | `source/build/render-index.js` – inline `<script>` compares `data-end` < today | implemented |
+| `02-§28.5` | "Today" evaluated client-side using Stockholm time | 03-ARCHITECTURE.md §14.5 | — (manual: browser JS uses `toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' })`) | `source/build/render-index.js` – inline `<script>` | implemented |
+| `02-§28.6` | Past camps shown with green checkmark and strikethrough | 03-ARCHITECTURE.md §14.6 | — (manual: open index after a camp ends, verify green check + line-through) | `source/assets/cs/style.css` – `.camp-past .camp-check` + `.camp-past .camp-name` | implemented |
+| `02-§28.7` | Upcoming camps shown with unchecked indicator and normal text | 03-ARCHITECTURE.md §14.6 | UC-12 | `source/build/render-index.js` – `<span class="camp-check">` rendered for all items; CSS shows transparent check by default | covered |
+| `02-§28.8` | Section uses data from `camps.yaml` | 03-ARCHITECTURE.md §14.2 | UC-01..04 (all tests pass camps array from camps.yaml structure) | `source/build/build.js` – passes `camps` to `renderUpcomingCampsHtml()` | covered |
+| `02-§28.9` | Section heading is "Kommande läger" | 03-ARCHITECTURE.md §14.3 | UC-05 | `source/build/render-index.js` – `<h2>Kommande läger</h2>` | covered |
+| `02-§28.10` | Section positioned via `sections.yaml` | 03-ARCHITECTURE.md §14.4 | — (manual: verify `sections.yaml` has `type: upcoming-camps` entry) | `source/content/sections.yaml` – `type: upcoming-camps` entry; `source/build/build.js` – handles the type | implemented |
+| `02-§28.11` | Each item shows camp name, location, and date range | 03-ARCHITECTURE.md §14.3 | UC-06 | `source/build/render-index.js` – `.camp-name`, `.camp-meta` spans in `renderUpcomingCampsHtml()` | covered |
+| `02-§28.12` | Camp name linked if `link` is non-empty | 03-ARCHITECTURE.md §14.3 | UC-07, UC-08 | `source/build/render-index.js` – conditional `<a>` wrapper in `renderUpcomingCampsHtml()` | covered |
+| `02-§28.13` | Information text shown when non-empty | 03-ARCHITECTURE.md §14.3 | UC-09, UC-10 | `source/build/render-index.js` – conditional `.camp-info` paragraph | covered |
+| `02-§28.14` | Past/upcoming status via client-side script with `data-end` attribute | 03-ARCHITECTURE.md §14.5 | UC-11 | `source/build/render-index.js` – `data-end` attribute on `<li>`; inline `<script>` applies `.camp-past` | covered |
+| `02-§28.15` | No daily rebuilds needed for status updates | 03-ARCHITECTURE.md §14.5 | — (architectural constraint; client-side JS evaluates dates at page load) | `source/build/render-index.js` – inline `<script>` runs on every page load | implemented |
+| `02-§28.16` | Uses only CSS custom properties from 07-DESIGN.md | 03-ARCHITECTURE.md §14.6 | — (manual: inspect `style.css` `.upcoming-camps` section — all values use `--color-*`, `--space-*`, `--font-*`, `--radius-*` tokens) | `source/assets/cs/style.css` – upcoming-camps section | implemented |
+| `02-§28.17` | Client-side script is minimal — no framework | 03-ARCHITECTURE.md §14.5 | — (manual: inline IIFE, 6 lines, no imports) | `source/build/render-index.js` – inline `<script>` | implemented |
 
 | `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — (manual: run `npm run build` and verify `public/robots.txt` contains `User-agent: *` and `Disallow: /`) | `source/build/build.js` – writes `public/robots.txt` | implemented |
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
@@ -567,9 +567,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive page improvements — 
 ## Summary
 
 ```text
-Total requirements:             427
-Covered (implemented + tested): 125
-Implemented, not tested:        273
+Total requirements:             444
+Covered (implemented + tested): 135
+Implemented, not tested:        280
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
@@ -626,6 +626,10 @@ End time is now required everywhere (add form, edit form, data contract).
 19 requirements added for archive page improvements (02-§21.12–21.30):
   14 covered (ARK-09..24): header layout, FB logo, event list.
   5 implemented (browser-only or manual): responsive, active dot, visual consistency.
+17 requirements added for upcoming camps on homepage (02-§28.1–28.17):
+  10 covered (UC-01..14): filtering, sorting, heading, content, data-end, indicators.
+  7 implemented (browser-only or manual): past-marking, Stockholm time, CSS tokens,
+    section placement, no-rebuild, minimal JS.
 ```
 
 ---
