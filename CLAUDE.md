@@ -313,6 +313,30 @@ git rebase origin/main
 - Body: summary bullets, test plan checklist, Claude Code footer.
 - No commit is needed for this phase — the PR itself is the deliverable.
 
+## Phase 8 — CI, Merge, and Cleanup
+
+After the PR is created, verify that CI passes and complete the merge. <!-- CL-§11.19 -->
+
+**Check CI:**
+
+- Run `gh pr checks <number>` and wait for all checks to pass. <!-- CL-§11.20 -->
+- If any check fails, investigate the failure, fix the issue on the branch, push, and re-check. <!-- CL-§11.21 -->
+
+**Merge:**
+
+- Merge the PR with `gh pr merge <number> --merge`. <!-- CL-§11.22 -->
+
+**Cleanup:**
+
+```bash
+git checkout main
+git pull
+git branch -d <branch-name>
+```
+
+- Switch back to `main`, pull the merge, and delete the local branch. <!-- CL-§11.23 -->
+- No commit is needed for this phase.
+
 ---
 
 # Final Rule
