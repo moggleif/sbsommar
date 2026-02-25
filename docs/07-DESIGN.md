@@ -120,10 +120,16 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 
 ### Hero Section
 
-- Large background image (Klarälven river / camp landscape). <!-- 07-§6.8 -->
-- Overlay text: camp name, dates, short tagline. <!-- 07-§6.9 -->
-- One or two CTA buttons (see Buttons below). <!-- 07-§6.10 -->
-- Image should use `object-fit: cover` and be responsive. <!-- 07-§6.11 -->
+- Two-column layout on desktop: image area (~2/3) and sidebar panel (~1/3).
+  On mobile (<690px), stacks vertically. <!-- 07-§6.8 -->
+- A terracotta H1 title "Sommarläger i Sysslebäck" sits above the image
+  column, left-aligned. <!-- 07-§6.9 -->
+- Image has rounded corners using `--radius-lg` (16px) and uses
+  `object-fit: cover`. <!-- 07-§6.10 -->
+- The sidebar contains Discord and Facebook icons (~64px), vertically
+  centered, followed by a countdown widget. <!-- 07-§6.11 -->
+- The countdown shows a large number and "Dagar kvar" label inside a
+  subtle cream/sand rounded container. <!-- 07-§6.11a -->
 
 ### Buttons
 
@@ -230,6 +236,7 @@ When CSS is written, start with these at `:root`:
   /* Borders */
   --radius-sm: 4px;
   --radius-md: 6px;
+  --radius-lg: 16px;
   --radius-full: 50%;
 }
 ```

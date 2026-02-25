@@ -1007,3 +1007,71 @@ any other display.
   capitalised (e.g. "SB sommar", not "SB Sommar"). <!-- 02-§29.3 -->
 
 ---
+
+## 30. Hero Section Redesign
+
+The homepage hero section is redesigned from a full-width image to a two-column
+layout with a title, social links, and a camp countdown. The goal is a warmer,
+more inviting first impression that immediately communicates the site's purpose
+and connects visitors to community channels.
+
+### 30.1 Layout structure
+
+- The hero section is a two-column layout: image area (approximately 2/3 width)
+  and a sidebar panel (approximately 1/3 width). <!-- 02-§30.1 -->
+- On mobile (below 690px), the layout stacks vertically: title, then image,
+  then sidebar content. <!-- 02-§30.2 -->
+
+### 30.2 Title
+
+- A heading "Sommarläger i Sysslebäck" is displayed above the hero image,
+  left-aligned within the image column. <!-- 02-§30.3 -->
+- The title uses `var(--color-terracotta)` as its text color. <!-- 02-§30.4 -->
+- The title uses the existing H1 size (40px) and weight (700) from the
+  design system. <!-- 02-§30.5 -->
+
+### 30.3 Hero image
+
+- The hero image has rounded corners (a new `--radius-lg` token is added
+  to the design system for this purpose). <!-- 02-§30.6 -->
+- The image uses `object-fit: cover` and is responsive. <!-- 02-§30.7 -->
+- The image occupies approximately 2/3 of the hero section width on
+  desktop. <!-- 02-§30.8 -->
+
+### 30.4 Social links sidebar
+
+- The sidebar contains two social link icons stacked vertically:
+  a Discord icon and a Facebook icon. <!-- 02-§30.9 -->
+- The Discord icon links to the project Discord channel. <!-- 02-§30.10 -->
+- The Facebook icon links to the camp's Facebook group. <!-- 02-§30.11 -->
+- Icons are displayed at a recognizable size (approximately 64px) and are
+  vertically centered within their area of the sidebar. <!-- 02-§30.12 -->
+
+### 30.5 Countdown
+
+- Below the social icons, a countdown displays the number of days remaining
+  until the next camp starts. <!-- 02-§30.13 -->
+- The countdown target date is derived automatically from `camps.yaml`:
+  the `start_date` of the nearest future camp (or the active camp if its
+  start date is still in the future). <!-- 02-§30.14 -->
+- The countdown shows two lines: the number (large, prominent) and the
+  label "Dagar kvar" beneath it. <!-- 02-§30.15 -->
+- The countdown is rendered at build time as a `data-target` attribute.
+  Client-side JavaScript calculates and updates the number on page
+  load. <!-- 02-§30.16 -->
+- If no future camp exists, the countdown is hidden. <!-- 02-§30.17 -->
+- The countdown area has a subtle background (cream/sand oval or rounded
+  rectangle) to visually separate it from the sidebar. <!-- 02-§30.18 -->
+
+### 30.6 Implementation constraints
+
+- All styling uses CSS custom properties from `docs/07-DESIGN.md §7`.
+  No hardcoded colors, spacing, or typography. <!-- 02-§30.19 -->
+- The countdown client-side script is minimal — no framework, no external
+  dependency. <!-- 02-§30.20 -->
+- Social icon images are stored in `source/content/images/` and copied
+  to `public/images/` at build time. <!-- 02-§30.21 -->
+- The Facebook link and Discord link are provided at build time from
+  configuration, not hardcoded in templates. <!-- 02-§30.22 -->
+
+---

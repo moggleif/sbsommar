@@ -567,15 +567,37 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive cleanup and camp namin
 | `02-§26.12` | API error response includes Swedish message | 03-ARCHITECTURE.md §13.4 | — (manual: inspect 403 response body) | `app.js` – Swedish error strings in both endpoints | implemented |
 | `02-§26.13` | Build embeds `opens_for_editing` and `end_date` as `data-` attributes on form | 03-ARCHITECTURE.md §13.2 | GATE-01..04 | `source/build/render-add.js`, `source/build/render-edit.js` – `data-opens` and `data-closes` on `<form>` | covered |
 | `05-§1.6` | `opens_for_editing` field documented in data contract | 05-DATA_CONTRACT.md §1 | — | `docs/05-DATA_CONTRACT.md` – field added to schema and described | implemented |
+| `02-§30.1` | Hero two-column layout: image ~2/3, sidebar ~1/3 | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | HERO-01, HERO-02 | `source/build/render-index.js` – `.hero` grid, `.hero-main`, `.hero-sidebar`; `style.css` – `grid-template-columns: 2fr 1fr` | covered |
+| `02-§30.2` | Mobile: hero stacks vertically | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | — (manual: resize to <690px) | `style.css` – `@media (max-width: 690px) { .hero { grid-template-columns: 1fr } }` | implemented |
+| `02-§30.3` | Title "Sommarläger i Sysslebäck" above image, left-aligned | 03-ARCHITECTURE.md §15 | HERO-03 | `source/build/render-index.js` – `<h1 class="hero-title">Sommarläger i Sysslebäck</h1>` | covered |
+| `02-§30.4` | Title uses terracotta color | 07-DESIGN.md §6 | HERO-04 | `style.css` – `.hero-title { color: var(--color-terracotta) }` | covered |
+| `02-§30.5` | Title uses H1 size (40px) and weight (700) | 07-DESIGN.md §3 | HERO-04 | `style.css` – `.hero-title { font-size: 40px; font-weight: 700 }` | covered |
+| `02-§30.6` | Hero image has rounded corners (--radius-lg) | 07-DESIGN.md §7 | — (manual: visual check) | `style.css` – `.hero-img { border-radius: var(--radius-lg) }` | implemented |
+| `02-§30.7` | Hero image uses object-fit: cover and is responsive | 07-DESIGN.md §6 | HERO-05, HERO-06 | `style.css` – `.hero-img { object-fit: cover; width: 100% }` | covered |
+| `02-§30.8` | Image occupies ~2/3 of hero width on desktop | 07-DESIGN.md §6 | HERO-01 | `style.css` – `.hero { grid-template-columns: 2fr 1fr }` | covered |
+| `02-§30.9` | Sidebar contains Discord and Facebook icons stacked vertically | 03-ARCHITECTURE.md §15.4 | HERO-09 | `source/build/render-index.js` – `.hero-sidebar` with two `.hero-social-link` | covered |
+| `02-§30.10` | Discord icon links to Discord channel | 03-ARCHITECTURE.md §15.4 | HERO-07 | `source/build/render-index.js` – `<a href="${discordUrl}">` | covered |
+| `02-§30.11` | Facebook icon links to Facebook group | 03-ARCHITECTURE.md §15.4 | HERO-08 | `source/build/render-index.js` – `<a href="${facebookUrl}">` | covered |
+| `02-§30.12` | Icons displayed at ~64px, vertically centered | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-social-link img { width: 64px; height: 64px }` | implemented |
+| `02-§30.13` | Countdown shows days remaining until next camp | 03-ARCHITECTURE.md §15.3 | HERO-10 | `source/build/render-index.js` – countdown inline script | covered |
+| `02-§30.14` | Countdown target derived from camps.yaml (nearest future camp) | 03-ARCHITECTURE.md §15.2 | HERO-10 | `source/build/build.js` – `futureCamps` filter and sort | covered |
+| `02-§30.15` | Countdown shows large number + "Dagar kvar" label | 07-DESIGN.md §6 | HERO-11, HERO-13 | `source/build/render-index.js` – `.hero-countdown-number` + `.hero-countdown-label` | covered |
+| `02-§30.16` | Countdown target embedded as data-target; JS computes on load | 03-ARCHITECTURE.md §15.3 | HERO-10 | `source/build/render-index.js` – `data-target="${countdownTarget}"` | covered |
+| `02-§30.17` | Countdown hidden if no future camp | 03-ARCHITECTURE.md §15.3 | HERO-12 | `source/build/render-index.js` – no countdown HTML when `countdownTarget` is null | covered |
+| `02-§30.18` | Countdown has subtle cream/sand background | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: rgba(245, 238, 223, 0.7) }` | implemented |
+| `02-§30.19` | All hero styling uses CSS custom properties | 07-DESIGN.md §7 | — (manual: CSS review) | `style.css` – all hero rules use `var(--…)` tokens | implemented |
+| `02-§30.20` | Countdown JS is minimal, no framework | 03-ARCHITECTURE.md §15.3 | — (manual: code review) | `source/build/render-index.js` – ~8-line inline `<script>` | implemented |
+| `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | `source/content/images/discord_group.webp`, `social-facebook-button-blue-icon-small.webp` | implemented |
+| `02-§30.22` | Social links provided at build time, not hardcoded | 03-ARCHITECTURE.md §15.2 | HERO-14, HERO-15 | `source/build/build.js` – passes `discordUrl`, `facebookUrl` to `renderIndexPage` | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             449
-Covered (implemented + tested): 138
-Implemented, not tested:        283
+Total requirements:             471
+Covered (implemented + tested): 153
+Implemented, not tested:        290
 Gap (no implementation):         27
 Orphan tests (no requirement):    0
 
@@ -643,6 +665,10 @@ End time is now required everywhere (add form, edit form, data contract).
     section placement, no-rebuild, minimal JS.
 02-§6.5 moved from gap to covered (ILE-01..04, ILE-E01..E04):
   per-field inline validation errors on add and edit forms.
+22 requirements added for hero section redesign (02-§30.1–30.22):
+  15 covered (HERO-01..15): layout structure, title, image, social links, countdown.
+  7 implemented (browser-only or manual): mobile responsive, rounded corners, icon size,
+    countdown background, CSS tokens, minimal JS, image files.
 ```
 
 ---
@@ -756,3 +782,9 @@ End time is now required everywhere (add form, edit form, data contract).
 | GATE-01..02 | `tests/time-gate.test.js` | `renderAddPage – time-gating data attributes` |
 | GATE-03..04 | `tests/time-gate.test.js` | `renderEditPage – time-gating data attributes` |
 | GATE-05..10 | `tests/time-gate.test.js` | `isOutsideEditingPeriod` |
+| HERO-01..02 | `tests/hero.test.js` | `hero section – layout structure (02-§30.1)` |
+| HERO-03..04 | `tests/hero.test.js` | `hero section – title (02-§30.3–30.5)` |
+| HERO-05..06 | `tests/hero.test.js` | `hero section – image (02-§30.6–30.7)` |
+| HERO-07..09 | `tests/hero.test.js` | `hero section – social links (02-§30.9–30.11)` |
+| HERO-10..13 | `tests/hero.test.js` | `hero section – countdown (02-§30.13–30.17)` |
+| HERO-14..15 | `tests/hero.test.js` | `hero section – links from config (02-§30.22)` |

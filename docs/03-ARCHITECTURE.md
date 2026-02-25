@@ -905,6 +905,72 @@ All values use CSS custom properties from `07-DESIGN.md §7`.
 
 ---
 
+## 15. Hero Section Redesign
+
+### 15.1 Overview
+
+The homepage hero is a two-column layout: a large image with rounded corners
+on the left (~2/3) and a sidebar on the right (~1/3) with social links and
+a camp countdown.
+
+### 15.2 Build-time rendering
+
+`render-index.js` renders the hero section. The function `renderIndexPage`
+receives `heroSrc`, `heroAlt`, and new parameters for social links and the
+countdown target date.
+
+`build.js` computes the countdown target by finding the nearest future camp
+from `camps.yaml` (comparing `start_date` against today). This date is
+embedded as a `data-target` attribute on the countdown element.
+
+Social link URLs (Discord and Facebook) are passed from `build.js` based on
+configuration.
+
+### 15.3 Client-side countdown
+
+A small inline `<script>` at the end of the hero section:
+
+1. Reads `data-target` from the countdown element.
+2. Computes the difference in days between today (Stockholm time) and the
+   target date.
+3. Writes the number into the element.
+4. If the target is in the past or missing, hides the countdown.
+
+No external dependencies.
+
+### 15.4 Social icons
+
+Discord and Facebook SVG/WebP icons are stored in `source/content/images/`.
+They are rendered as `<a>` elements wrapping `<img>` tags with appropriate
+`alt` text and `target="_blank" rel="noopener noreferrer"`.
+
+### 15.5 CSS
+
+New/modified classes in `style.css`:
+
+- `.hero` — CSS Grid, two-column layout on desktop, single column on mobile
+- `.hero-title` — terracotta H1 above the image
+- `.hero-img` — rounded corners via `--radius-lg`
+- `.hero-sidebar` — flexbox column, centered items
+- `.hero-social` — social icon links
+- `.hero-countdown` — countdown widget with cream background
+- `.hero-countdown-number` — large number display
+- `.hero-countdown-label` — "Dagar kvar" text
+
+All values use CSS custom properties.
+
+### 15.6 Files changed
+
+| File | Change |
+| --- | --- |
+| `source/build/render-index.js` | Redesign hero HTML, accept social/countdown params |
+| `source/build/build.js` | Compute countdown target date, pass social links |
+| `source/assets/cs/style.css` | Redesign `.hero` layout, add new hero classes |
+| `source/content/images/` | Add Discord and Facebook icon images |
+| `docs/07-DESIGN.md` | Add `--radius-lg` token |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
