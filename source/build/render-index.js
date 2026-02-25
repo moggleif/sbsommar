@@ -156,7 +156,12 @@ function renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml = '', navSec
 
   const contentSections = sections
     .map((s, i) => {
-      const inner = s.html
+      // First section is above the fold — don't lazy-load its images
+      // (the RFSB logo there is the LCP element on mobile).
+      const sectionHtml = i === 0
+        ? s.html.replace(/ loading="lazy"/g, '')
+        : s.html;
+      const inner = sectionHtml
         .split('\n')
         .map((l) => (l ? '      ' + l : ''))
         .join('\n');
@@ -183,7 +188,7 @@ ${pageNav('index.html', navSections)}${heroHtml}
   <div class="content">
 ${contentSections}
   </div>
-  <script src="nav.js"></script>
+  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

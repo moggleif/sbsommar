@@ -336,4 +336,30 @@ describe('renderIndexPage – image loading performance (02-§25.1–25.4)', () 
       `Hero image must have fetchpriority="high", got: ${heroMatch[0]}`,
     );
   });
+
+  it('IMG-07 (02-§25.5): first-section images do NOT have loading="lazy"', () => {
+    const page = {
+      heroSrc: 'images/hero.webp',
+      heroAlt: 'Camp river',
+      sections: [
+        { id: 'intro', navLabel: 'Intro', html: '<p>Text <img src="images/logo.webp" alt="Logo" class="content-img" loading="lazy"></p>' },
+        { id: 'about', navLabel: 'About', html: '<p><img src="images/photo.webp" alt="Photo" class="content-img" loading="lazy"></p>' },
+      ],
+    };
+    const html = renderIndexPage(page);
+    // First section (id="intro") must not contain loading="lazy"
+    const firstSection = html.match(/<section id="intro"[^>]*>([\s\S]*?)<\/section>/);
+    assert.ok(firstSection, 'Expected a section with id="intro"');
+    assert.ok(
+      !firstSection[1].includes('loading="lazy"'),
+      `First section must not have loading="lazy", got: ${firstSection[1]}`,
+    );
+    // Second section should still have loading="lazy"
+    const secondSection = html.match(/<section id="about"[^>]*>([\s\S]*?)<\/section>/);
+    assert.ok(secondSection, 'Expected a section with id="about"');
+    assert.ok(
+      secondSection[1].includes('loading="lazy"'),
+      `Non-first sections must keep loading="lazy", got: ${secondSection[1]}`,
+    );
+  });
 });
