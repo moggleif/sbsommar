@@ -537,7 +537,8 @@ End time is now required everywhere (add form, edit form, data contract).
 10 implemented but browser-only; cannot be unit-tested in Node.js.
 2 requirements added for CI checkout depth (CL-§9.5, 02-§23.14):
   both implemented (CI workflow config, no unit test possible).
-4 requirements added for image loading performance (02-§25.1–25.4): status gap.
+4 requirements added for image loading performance (02-§25.1–25.4):
+  all 4 covered (IMG-01..06 in render-index.test.js).
 ```
 
 ---
@@ -600,9 +601,10 @@ End time is now required everywhere (add form, edit form, data contract).
 13. **`CL-§5.2` — CSS linting in CI**
     No CSS linter is configured.
 
-14. **`CL-§7.4` / `07-§8.5` — Image optimisation**
+14. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
     Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
-    `loading="lazy"`, hero preload, and `fetchpriority` are being added (02-§25.1–25.4).
+    `loading="lazy"`, hero preload, and `fetchpriority="high"` are implemented (02-§25.1–25.4).
+    Remaining: manual conversion of 6 small PNG/JPG source files to WebP.
 
 15. **`02-§13.2` / `07-§9.2` — Visible focus states**
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
@@ -640,6 +642,7 @@ End time is now required everywhere (add form, edit form, data contract).
 | RNI-22..28 | `tests/render-index.test.js` | `convertMarkdown – collapsible mode` |
 | RNI-29..33 | `tests/render-index.test.js` | `extractHeroImage` |
 | RNI-34..38 | `tests/render-index.test.js` | `extractH1` |
+| IMG-01..06 | `tests/render-index.test.js` | `renderIndexPage – image loading performance` |
 | SES-01..05 | `tests/session.test.js` | `parseSessionIds` |
 | SES-06..09 | `tests/session.test.js` | `buildSetCookieHeader` |
 | SES-10..13 | `tests/session.test.js` | `mergeIds` |
