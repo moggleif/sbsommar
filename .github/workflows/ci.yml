@@ -40,9 +40,17 @@ jobs:
         if: steps.changes.outputs.has_code == 'true'
         run: npm run lint:md
 
+      - name: Lint CSS
+        if: steps.changes.outputs.has_code == 'true'
+        run: npm run lint:css
+
       - name: Run tests
         if: steps.changes.outputs.has_code == 'true'
         run: npm test
 
       - name: Build
         run: npm run build
+
+      - name: Validate HTML
+        if: steps.changes.outputs.has_code == 'true'
+        run: npm run lint:html

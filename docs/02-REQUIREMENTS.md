@@ -1130,3 +1130,68 @@ appearing directly below the first heading. Link styling is updated site-wide.
   detection. <!-- 02-§31.12 -->
 
 ---
+
+## 32. HTML Validation in CI
+
+The build generates HTML pages. Invalid HTML must be caught automatically
+before merge. This closes the `CL-§5.1` gap.
+
+### 32.1 Tool
+
+- HTML validation uses `html-validate` — a standard, offline HTML
+  validator with configurable rules. <!-- 02-§32.1 -->
+
+### 32.2 Scope
+
+- Validation runs against all `.html` files in `public/` after the
+  build step completes. <!-- 02-§32.2 -->
+
+### 32.3 CI integration
+
+- A `lint:html` npm script runs `html-validate` on `public/*.html`. <!-- 02-§32.3 -->
+- The CI workflow (`ci.yml`) runs `lint:html` after the build step. <!-- 02-§32.4 -->
+- HTML validation failures cause the CI job to fail. <!-- 02-§32.5 -->
+- HTML validation is skipped for data-only commits (same condition as
+  existing lint steps). <!-- 02-§32.6 -->
+
+### 32.4 Configuration
+
+- The tool is configured via `.htmlvalidate.json` at the project root. <!-- 02-§32.7 -->
+- Rules must be tuned to accept the existing generated HTML without
+  false positives. Overly strict rules that conflict with the project's
+  markup patterns must be disabled or adjusted. <!-- 02-§32.8 -->
+
+---
+
+## 33. CSS Linting in CI
+
+CSS source files must be linted automatically before merge. This closes
+the `CL-§5.2` gap.
+
+### 33.1 Tool
+
+- CSS linting uses Stylelint with `stylelint-config-standard` as the
+  base configuration. <!-- 02-§33.1 -->
+
+### 33.2 Scope
+
+- Linting runs against all `.css` files in `source/assets/cs/`. <!-- 02-§33.2 -->
+
+### 33.3 CI integration
+
+- A `lint:css` npm script runs Stylelint on the CSS source files. <!-- 02-§33.3 -->
+- The CI workflow (`ci.yml`) runs `lint:css` alongside the existing
+  lint steps. <!-- 02-§33.4 -->
+- CSS lint failures cause the CI job to fail. <!-- 02-§33.5 -->
+- CSS linting is skipped for data-only commits (same condition as
+  existing lint steps). <!-- 02-§33.6 -->
+
+### 33.4 Configuration
+
+- The tool is configured via `.stylelintrc.json` at the project root. <!-- 02-§33.7 -->
+- Rules must be tuned to accept the existing CSS without false
+  positives. Rules that conflict with project conventions (e.g.
+  custom property patterns, selector patterns) must be disabled or
+  adjusted. <!-- 02-§33.8 -->
+
+---
