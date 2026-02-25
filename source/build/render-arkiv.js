@@ -22,7 +22,7 @@ function formatDateRange(startStr, endStr) {
   return `${formatShortDate(startStr)} – ${formatShortDate(endStr)} ${year}`;
 }
 
-function renderArkivPage(allCamps, footerHtml = '') {
+function renderArkivPage(allCamps, footerHtml = '', navSections = []) {
   const camps = [...allCamps]
     .filter((c) => c.archived === true)
     .sort((a, b) => toDateString(b.start_date).localeCompare(toDateString(a.start_date)));
@@ -72,7 +72,7 @@ function renderArkivPage(allCamps, footerHtml = '') {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-${pageNav('arkiv.html')}
+${pageNav('arkiv.html', navSections)}
 
   <div class="page-content">
     <h1>Lägerarkiv</h1>
@@ -84,6 +84,7 @@ ${items}
   </div>
 
   <script src="arkiv.js"></script>
+  <script src="nav.js"></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>`;

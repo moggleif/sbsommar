@@ -7,7 +7,7 @@ const { pageNav, pageFooter } = require('./layout');
  * Renders the "Idag" page – today's schedule in the standard site layout.
  * All events are embedded as JSON; client-side JS filters to the current day.
  */
-function renderIdagPage(camp, events, footerHtml = '') {
+function renderIdagPage(camp, events, footerHtml = '', navSections = []) {
   const campName = escapeHtml(camp.name);
 
   const eventsJson = JSON.stringify(
@@ -33,7 +33,7 @@ function renderIdagPage(camp, events, footerHtml = '') {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-${pageNav('idag.html')}
+${pageNav('idag.html', navSections)}
 
   <h1 id="today-heading">Idag</h1>
   <p class="intro">Aktiviteterna nedan är schemalagda för idag. Kolla gärna <a href="schema.html">hela schemat</a> för övriga dagar.</p>
@@ -43,6 +43,7 @@ ${pageNav('idag.html')}
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Idag'; window.__EMPTY_CLASS__ = 'intro'; window.__SHOW_FOOTER__ = false;</script>
   <script src="events-today.js"></script>
   <script src="session.js"></script>
+  <script src="nav.js"></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>
