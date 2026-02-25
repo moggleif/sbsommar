@@ -72,7 +72,7 @@ The API server (`app.js`) handles each submission as follows:
 2. Responds immediately with a success confirmation — the form does not wait for the rest of the process.
 3. Reads `source/data/camps.yaml` from GitHub via the Contents API.
 4. Finds the active camp and reads its YAML file from GitHub.
-5. Appends the new event and commits it to a temporary branch.
+5. Appends the new event and commits it to a temporary branch. The serialised YAML block is indented to match the existing `events:` list so the file remains valid YAML.
 6. Opens a pull request with auto-merge enabled.
 7. The event data CI pipeline runs (see §11): YAML lint → security scan → build → targeted FTP upload of the four schema files.
 8. The PR merges automatically via auto-merge. The full deploy pipeline then rebuilds and re-uploads the entire site (idempotent for the schema files).
