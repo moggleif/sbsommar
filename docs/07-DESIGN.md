@@ -263,10 +263,10 @@ These variables make it trivial to adjust the design globally later.
 ## 9. Accessibility
 
 - Color contrast must meet WCAG AA minimum (`4.5:1` for body text). WCAG is the Web Content Accessibility Guidelines — the international standard for accessible web design. <!-- 07-§9.1 -->
-- Interactive elements must have visible focus states. <!-- 07-§9.2 -->
+- Interactive elements must have visible `:focus-visible` states: `outline: 2px solid var(--color-terracotta); outline-offset: 2px`. This applies to buttons, navigation links, form inputs, accordion summaries, content links, and any other focusable element. <!-- 07-§9.2 -->
 - Navigation must be keyboard accessible. <!-- 07-§9.3 -->
 - Images must have descriptive `alt` text. <!-- 07-§9.4 -->
-- Accordion items must use proper ARIA attributes (`aria-expanded`, `aria-controls`). <!-- 07-§9.5 -->
+- Accordion items must use proper ARIA attributes (`aria-expanded`, `aria-controls`). Native `<details>/<summary>` elements satisfy this requirement — browsers expose expanded/collapsed state to assistive technology without explicit ARIA attributes. Custom accordion components (e.g. the archive timeline) must use explicit `aria-expanded` and `aria-controls`. <!-- 07-§9.5 -->
 
 ---
 

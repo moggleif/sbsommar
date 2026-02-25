@@ -162,11 +162,11 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§12.1` | A newly submitted activity appears in the live schedule within a few minutes | 03-ARCHITECTURE.md §3 (PR auto-merge → deploy pipeline) | — | `source/api/github.js` – `createPullRequest()`, `enableAutoMerge()` | implemented |
 | `02-§12.2` | Admin corrections to YAML are reflected in all schedule views after the next build | 04-OPERATIONS.md (Disaster Recovery) | — | `source/build/build.js` – reads all YAML at build time | implemented |
 | `02-§13.1` | Color contrast is at least 4.5:1 for body text | 07-DESIGN.md §9 | — | `source/assets/cs/style.css` – charcoal (`#3B3A38`) on cream (`#F5EEDF`) (passes WCAG AA; not verified programmatically) | implemented |
-| `02-§13.2` | All interactive elements have visible focus states | 07-DESIGN.md §9 | — | — (explicit `:focus-visible` rules not confirmed in `style.css`) | gap |
+| `02-§13.2` | All interactive elements have visible focus states | 07-DESIGN.md §9 | A11Y-01..09 | `source/assets/cs/style.css` – `:focus-visible` rules on buttons, nav links, toggle, summaries, content links, form inputs | covered |
 | `02-§13.3` | Navigation is fully keyboard accessible | 07-DESIGN.md §9 | — | `source/build/layout.js` – `<nav>` and `<a>` elements; `source/build/render-add.js` – standard form controls (native keyboard) | implemented |
 | `02-§13.4` | Images have descriptive `alt` text | 07-DESIGN.md §8 | RNI-29..33 | `source/build/render-index.js` – `extractHeroImage()` preserves alt; `inlineHtml()` passes through alt | covered |
 | `02-§13.5` | The add-activity form is fully usable without a mouse | 07-DESIGN.md §9 | — | `source/build/render-add.js` – all standard form controls (native keyboard) | implemented |
-| `02-§13.6` | Accordion and expandable elements use proper ARIA attributes (`aria-expanded`, `aria-controls`) | 07-DESIGN.md §9 | — | `source/build/render.js` – `<details>/<summary>` used without explicit ARIA attributes | gap |
+| `02-§13.6` | Accordion and expandable elements use proper ARIA attributes (`aria-expanded`, `aria-controls`) | 07-DESIGN.md §9 | — (manual: native `<details>` provides equivalent accessibility; archive uses explicit ARIA via ARK-04, ARK-05) | `source/build/render.js` – native `<details>/<summary>` (browser-exposed state); `source/build/render-arkiv.js` – explicit `aria-expanded`/`aria-controls` | implemented |
 | `02-§14.1` | The site is written entirely in Swedish: all content, nav, labels, errors, confirmations, and alt text | 07-DESIGN.md §1 | — | All templates and client JS use Swedish text | implemented |
 | `02-§15.1` | Activity schedule is available as an RSS feed at `/schema.rss` | — (no implementation doc) | — | — | gap |
 | `02-§16.1` | Past camp data is never deleted; `archived: true` marks completed camps | 03-ARCHITECTURE.md §4 | — | `source/data/camps.yaml` – `archived` flag; no deletion logic exists | implemented |
@@ -185,7 +185,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `05-§6.1` | Event `id` must be unique within the camp file | 06-EVENT_DATA_MODEL.md §4 | GH-01..11 (slugify determinism), LNT-18 | `source/scripts/lint-yaml.js` – `seenIds` set (build-time + CI); API generates deterministic IDs from unique (title+date+start) | covered |
 | `05-§6.2` | Event `id` must be stable and not change after creation | 06-EVENT_DATA_MODEL.md §4 | — | `source/api/github.js` – deterministic `slugify(title)+date+start` on first write; no update path exists | implemented |
 | `07-§7.1` | All CSS uses the custom properties defined at `:root`; no hardcoded colors, spacing, or typography | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – all values use `var(--…)` tokens (not enforced by a linter) | implemented |
-| `07-§9.5` | Accordion items use `aria-expanded` and `aria-controls` ARIA attributes (see `02-§13.6`; archive accordion uses explicit ARIA via `02-§21.6`) | 07-DESIGN.md §9 | — | `source/build/render.js` – `<details>/<summary>` without explicit ARIA (native element provides equivalent accessibility); archive uses `<button>` with `aria-expanded`/`aria-controls` (ARK-04, ARK-05) | gap |
+| `07-§9.5` | Accordion items use `aria-expanded` and `aria-controls` ARIA attributes (see `02-§13.6`; archive accordion uses explicit ARIA via `02-§21.6`) | 07-DESIGN.md §9 | — (manual: native `<details>` provides equivalent accessibility; see `02-§13.6`) | `source/build/render.js` – native `<details>/<summary>`; archive uses explicit ARIA (ARK-04, ARK-05) | implemented |
 | `CL-§1.1` | Build output is static HTML/CSS/JS; no server is required to view pages | 03-ARCHITECTURE.md §7 | SNP-01 | `source/build/build.js` – writes to `public/` | covered |
 | `CL-§1.3` | No client-side rendering framework is used (see `CL-§2.9`) | 03-ARCHITECTURE.md §7 | — | `source/assets/js/client/` – plain vanilla JS only | implemented |
 | `CL-§4.1` | Event data has a single source of truth (see `CL-§2.3`) | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml` files; `source/build/build.js` reads exclusively from there | implemented |
@@ -352,7 +352,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `07-§8.4` | Testimonial avatars are portrait photos, cropped square, displayed circular | 07-DESIGN.md §8 | — | `source/assets/cs/style.css` – `--radius-full: 50%` | implemented |
 | `07-§8.5` | All images are optimised: responsive `srcset`, WebP format with JPEG fallback (see `CL-§7.4`) | 07-DESIGN.md §8 | — | — (not confirmed; images may not use srcset or WebP) | gap |
 | `07-§9.1` | Color contrast meets WCAG AA minimum `4.5:1` for body text | 07-DESIGN.md §9 | — | Charcoal `#3B3A38` on Cream `#F5EEDF` passes WCAG AA; not verified programmatically | implemented |
-| `07-§9.2` | Interactive elements have visible focus states (see `02-§13.2`) | 07-DESIGN.md §9 | — | — (explicit `:focus-visible` rules not confirmed in `style.css`) | gap |
+| `07-§9.2` | Interactive elements have visible focus states (see `02-§13.2`) | 07-DESIGN.md §9 | A11Y-01..09 | `source/assets/cs/style.css` – `:focus-visible` rules (see `02-§13.2`) | covered |
 | `07-§9.3` | Navigation is keyboard accessible (see `02-§13.3`) | 07-DESIGN.md §9 | — | `source/build/layout.js` – standard `<nav>` and `<a>` elements | implemented |
 | `07-§9.4` | Images have descriptive `alt` text (see `02-§13.4`) | 07-DESIGN.md §9 | RNI-29..33 | `source/build/render-index.js` – `extractHeroImage()` preserves alt | covered |
 | `07-§10.1` | No gradients or drop shadows heavier than specified are used | 07-DESIGN.md §10 | — | `source/assets/cs/style.css` – only `--shadow-card` used | implemented |
@@ -629,9 +629,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 
 ```text
 Total requirements:             498
-Covered (implemented + tested): 156
-Implemented, not tested:        332
-Gap (no implementation):         10
+Covered (implemented + tested): 158
+Implemented, not tested:        334
+Gap (no implementation):          6
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -735,6 +735,12 @@ Matrix cleanup (2026-02-25):
   html-validate for HTML validation of built output.
   Stylelint with stylelint-config-standard for CSS linting.
   Both integrated into ci.yml with data-only skip condition.
+4 accessibility gaps closed:
+  02-§13.2 / 07-§9.2 moved from gap to covered (A11Y-01..09):
+    :focus-visible rules added to all interactive elements in style.css.
+  02-§13.6 / 07-§9.5 moved from gap to implemented:
+    native <details>/<summary> accepted as satisfying ARIA requirement;
+    archive accordion already uses explicit aria-expanded/aria-controls.
 ```
 
 ---
@@ -762,12 +768,16 @@ Matrix cleanup (2026-02-25):
     `loading="lazy"`, hero preload, `fetchpriority="high"`, first-section eager loading, and `nav.js defer` are implemented (02-§25.1–25.6).
     Remaining: manual conversion of 6 small PNG/JPG source files to WebP.
 
-5. **`02-§13.2` / `07-§9.2` — Visible focus states**
-    Explicit `:focus-visible` rules are not confirmed in `style.css`.
+5. **`02-§13.2` / `07-§9.2` — Visible focus states** *(resolved)*
+    `:focus-visible` rules added to all interactive elements in `style.css`:
+    `outline: 2px solid var(--color-terracotta); outline-offset: 2px`.
+    Form inputs retain their `:focus` border-color change and gain the outline on `:focus-visible`.
 
-6. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
-    `<details>/<summary>` is used on the schedule page without explicit `aria-expanded` or `aria-controls`.
-    Note: `<details>` is natively accessible — browsers announce open/closed state. The archive accordion (`02-§21.6`) uses explicit ARIA and is covered (ARK-04, ARK-05). Consider accepting native `<details>` as sufficient or adding explicit ARIA.
+6. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes** *(resolved)*
+    Native `<details>/<summary>` elements satisfy the ARIA requirement — browsers expose
+    expanded/collapsed state to assistive technology without explicit attributes.
+    Custom accordion components (archive timeline) already use explicit `aria-expanded`
+    and `aria-controls` (ARK-04, ARK-05). Design doc updated to codify this decision.
 
 7. **`07-§6.33` — Colored left border for activity type** *(deferred)*
     The design spec says "may have" (optional). Requires an activity-type field in the data model, which has never been specced. Not actionable without a data model change.
@@ -828,3 +838,4 @@ Matrix cleanup (2026-02-25):
 | VLD-55 | `tests/validate.test.js` | `validateEditRequest – date within camp range` |
 | LNT-19..21 | `tests/lint-yaml.test.js` | `validateYaml – unique (title+date+start) combo (05-§5.1)` |
 | LNT-22..23 | `tests/lint-yaml.test.js` | `validateYaml – active+archived camp conflict (05-§1.3)` |
+| A11Y-01..09 | `tests/accessibility.test.js` | `:focus-visible rules (02-§13.2)` |

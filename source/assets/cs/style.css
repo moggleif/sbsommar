@@ -111,6 +111,12 @@ h3 {
   opacity: 0.8;
 }
 
+.hero-social-link:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
 .hero-social-link img {
   width: 64px;
   height: 64px;
@@ -335,6 +341,11 @@ details.day[open] > summary::after { content: '−'; }
 
 details.day > summary:hover { background: #243d56; }
 
+details.day > summary:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
 /* ── Event rows ── */
 
 .event-list {
@@ -367,6 +378,11 @@ details.event-row > summary {
 }
 
 details.event-row > summary::-webkit-details-marker { display: none; }
+
+details.event-row > summary:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
 
 .ev-time {
   font-variant-numeric: tabular-nums;
@@ -421,6 +437,11 @@ details.event-row[open] > summary .ev-title {
   font-size: 13px;
 }
 
+.event-ext-link:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
 /* ── Navigation ── */
 
 .page-nav {
@@ -439,6 +460,11 @@ details.event-row[open] > summary .ev-title {
   padding: 4px;
   color: var(--color-charcoal);
   line-height: 0;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 .nav-toggle-bar {
@@ -479,6 +505,12 @@ details.event-row[open] > summary .ev-title {
 .nav-link:hover,
 .nav-link.active {
   color: var(--color-navy);
+  opacity: 1;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
   opacity: 1;
 }
 
@@ -556,6 +588,12 @@ details.event-row[open] > summary .ev-title {
 
 .btn-primary:hover {
   background: #b35e3a;
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 .btn-secondary {
@@ -651,6 +689,16 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--color-navy);
+}
+
+input[type='text']:focus-visible,
+input[type='date']:focus-visible,
+input[type='time']:focus-visible,
+input[type='url']:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 textarea {
@@ -758,6 +806,11 @@ textarea {
   border-color: rgba(255, 255, 255, 0.6);
 }
 
+.copy-btn:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
 /* ── Accordion (collapsible sections: FAQ, Lokaler) ── */
 
 details.accordion {
@@ -797,6 +850,11 @@ details.accordion > summary::after {
 details.accordion[open] > summary::after { content: '−'; }
 
 details.accordion > summary:hover { background: var(--color-sage-hover); }
+
+details.accordion > summary:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
 
 .accordion-body {
   padding: var(--space-sm) var(--space-md);
@@ -851,6 +909,11 @@ details.accordion > summary:hover { background: var(--color-sage-hover); }
   text-decoration: underline;
 }
 
+.content a:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
 .content-img {
   max-width: 100%;
   height: auto;
@@ -875,6 +938,11 @@ details.accordion > summary:hover { background: var(--color-sage-hover); }
 
 .edit-link:hover {
   text-decoration: underline;
+}
+
+.edit-link:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 /* ── Cookie consent actions (inside modal) ── */
@@ -1034,6 +1102,11 @@ body.modal-open {
 
 .camp-name a:hover {
   text-decoration: underline;
+}
+
+.camp-name a:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 .camp-past .camp-name {
