@@ -473,16 +473,31 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `02-§23.11` | On successful validation the pipeline deploys schema.html, idag.html, dagens-schema.html, and events.json to FTP | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: submit a test event and verify pages update on FTP before PR merges) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job uploads the four files via curl | implemented |
 | `02-§23.12` | The targeted FTP upload must not modify any files outside the four schema-derived files | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: confirm no other FTP files are touched after an event PR) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job explicitly names only the four files in the curl loop | implemented |
 | `02-§23.13` | The targeted deployment must complete while the PR is still open (before auto-merge) | 03-ARCHITECTURE.md §11 | — (CI end-to-end: confirm FTP files update before the PR shows as merged) | `.github/workflows/event-data-deploy.yml` – triggered by `pull_request` event (not `push` to main), so it runs on the PR branch before merge | implemented |
+| `02-§24.1` | Every page must include the same navigation header | 03-ARCHITECTURE.md §12 | NAV-01 | — | gap |
+| `02-§24.2` | Navigation appears once per page, before page content | 03-ARCHITECTURE.md §12.1 | NAV-02 | — | gap |
+| `02-§24.3` | Index page must not have a section-navigation menu below the hero | 03-ARCHITECTURE.md §12.5 | NAV-03 | — | gap |
+| `02-§24.4` | Navigation contains links to all five main pages | 03-ARCHITECTURE.md §12.1 | NAV-04 | — | gap |
+| `02-§24.5` | Current page link is visually marked active | 03-ARCHITECTURE.md §12.1 | NAV-05 | — | gap |
+| `02-§24.6` | Page links are identical on all pages including index | 03-ARCHITECTURE.md §12.1 | NAV-06 | — | gap |
+| `02-§24.7` | Navigation includes anchor links to index page sections | 03-ARCHITECTURE.md §12.1 | NAV-07 | — | gap |
+| `02-§24.8` | Short nav labels defined per section via `nav:` in `sections.yaml` | 03-ARCHITECTURE.md §12.3 | NAV-08 | — | gap |
+| `02-§24.9` | Section links on non-index pages point to `index.html#id` | 03-ARCHITECTURE.md §12.1 | NAV-09 | — | gap |
+| `02-§24.10` | Mobile: navigation collapsed by default, toggled via hamburger | 03-ARCHITECTURE.md §12.1 | — (manual: open on mobile, confirm collapsed by default) | — | gap |
+| `02-§24.11` | Hamburger button has accessible `aria-label` | 03-ARCHITECTURE.md §12.4 | NAV-10 | — | gap |
+| `02-§24.12` | Hamburger button uses `aria-expanded` | 03-ARCHITECTURE.md §12.4 | NAV-11 | — | gap |
+| `02-§24.13` | Expanded menu closable via Escape key | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | — | gap |
+| `02-§24.14` | Expanded menu closable by clicking outside | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | — | gap |
+| `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-DESIGN.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             361
+Total requirements:             376
 Covered (implemented + tested):  86
 Implemented, not tested:        247
-Gap (no implementation):         28
+Gap (no implementation):         43
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -494,6 +509,7 @@ Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–
 13 requirements added for event data CI pipeline (02-§23.1–23.13):
   8 covered (LNT-01..18, SEC-01..13): 02-§23.1–23.8
   5 implemented (CI workflow, no unit test possible): 02-§23.9–23.13
+15 requirements added for unified navigation (02-§24.1–24.15), all gap pending implementation.
 
 Snapshot updated to include Arkiv nav link.
 13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
@@ -624,3 +640,4 @@ End time is now required everywhere (add form, edit form, data contract).
 | SES-14..15 | `tests/session.test.js` | `buildSetCookieHeader – domain` |
 | SNP-01..06 | `tests/snapshot.test.js` | `renderSchedulePage` |
 | ARK-01..08 | `tests/render-arkiv.test.js` | `renderArkivPage` |
+| NAV-01..11 | `tests/nav.test.js` | `pageNav` |
