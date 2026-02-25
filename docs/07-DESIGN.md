@@ -130,6 +130,9 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
   centered, followed by a countdown widget. <!-- 07-§6.11 -->
 - The countdown shows a large number and "Dagar kvar" label inside a
   subtle cream/sand rounded container. <!-- 07-§6.11a -->
+- The countdown background is `#FAF7EF` (near-white cream), solid — not
+  semi-transparent. <!-- 07-§6.11b -->
+- The sidebar is vertically centered alongside the hero image. <!-- 07-§6.11c -->
 
 ### Buttons
 

@@ -953,7 +953,7 @@ New/modified classes in `style.css`:
 - `.hero-img` — rounded corners via `--radius-lg`
 - `.hero-sidebar` — flexbox column, centered items
 - `.hero-social` — social icon links
-- `.hero-countdown` — countdown widget with cream background
+- `.hero-countdown` — countdown widget with `#FAF7EF` background
 - `.hero-countdown-number` — large number display
 - `.hero-countdown-label` — "Dagar kvar" text
 
