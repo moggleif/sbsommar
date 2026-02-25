@@ -47,7 +47,6 @@ const pastCampThisYear = {
   link: '',
   information: '',
   archived: false,
-  active: true,
 };
 
 const archivedCampOldYear = {

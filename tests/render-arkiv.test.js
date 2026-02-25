@@ -39,7 +39,6 @@ const activeCamp = {
   link: '',
   information: '',
   archived: false,
-  active: true,
 };
 
 // Sample events for testing event list rendering
