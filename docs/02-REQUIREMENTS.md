@@ -928,3 +928,62 @@ layers.
   (`source/api/validate.js`) so that both endpoints use the same logic. <!-- 02-§27.6 -->
 
 ---
+
+## 28. Upcoming Camps on Homepage
+
+The homepage must show a list of upcoming (and recently past) camps so that
+visitors can see what is planned and what has already happened this year.
+
+### 28.1 Filtering
+
+- The list must include all camps where `archived` is `false` OR the camp's
+  `start_date` year matches the current year. <!-- 02-§28.1 -->
+- "Current year" is evaluated at page-load time in the visitor's browser,
+  not at build time. <!-- 02-§28.2 -->
+
+### 28.2 Sorting
+
+- Camps are sorted by `start_date` ascending (nearest date first). <!-- 02-§28.3 -->
+
+### 28.3 Past-camp marking
+
+- A camp is considered "past" when its `end_date` is strictly before today. <!-- 02-§28.4 -->
+- "Today" is evaluated client-side using Stockholm time
+  (`Europe/Stockholm`). <!-- 02-§28.5 -->
+- Past camps are displayed with a green checkmark (`✔`) and strikethrough
+  text, making it immediately clear they have already taken place. <!-- 02-§28.6 -->
+- Upcoming camps are displayed with an unchecked indicator (`☐`) and
+  normal text. <!-- 02-§28.7 -->
+
+### 28.4 Section placement
+
+- The section is rendered as part of the index page, using data from
+  `camps.yaml`. <!-- 02-§28.8 -->
+- The section heading is "Kommande läger". <!-- 02-§28.9 -->
+- The section must appear as a content section on the index page, positioned
+  via `sections.yaml` like other sections. <!-- 02-§28.10 -->
+
+### 28.5 Camp item content
+
+- Each camp item shows: camp name, location, and formatted date range
+  (e.g. "2 aug – 9 aug 2026"). <!-- 02-§28.11 -->
+- If the camp has a non-empty `link` field, the camp name is rendered as
+  a clickable link to that URL. <!-- 02-§28.12 -->
+- If the camp has a non-empty `information` field, the information text is
+  shown below the camp entry. <!-- 02-§28.13 -->
+
+### 28.6 Client-side date logic
+
+- The past/upcoming status is determined by a small client-side script
+  that runs on page load. The build renders all qualifying camps with
+  `data-end` attributes; JavaScript applies the visual state. <!-- 02-§28.14 -->
+- This avoids the need for daily rebuilds to keep the status current. <!-- 02-§28.15 -->
+
+### 28.7 Implementation constraints
+
+- The section uses only CSS custom properties from `docs/07-DESIGN.md §7`.
+  No hardcoded colors, spacing, or typography. <!-- 02-§28.16 -->
+- The client-side script is minimal — no framework, no external
+  dependency. <!-- 02-§28.17 -->
+
+---
