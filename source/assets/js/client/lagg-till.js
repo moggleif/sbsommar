@@ -170,9 +170,11 @@
     var location    = els.location.value;
     var responsible = els.responsible.value.trim();
 
+    var today = new Date().toISOString().slice(0, 10);
     var errs = [];
     if (!title)            errs.push('Rubrik är obligatoriskt.');
     if (!date)             errs.push('Datum är obligatoriskt.');
+    else if (date < today) errs.push('Datum kan inte vara i det förflutna.');
     if (!start)            errs.push('Starttid är obligatorisk.');
     if (!end)              errs.push('Sluttid är obligatorisk.');
     else if (end <= start) errs.push('Sluttid måste vara efter starttid.');

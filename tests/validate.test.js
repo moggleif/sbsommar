@@ -117,7 +117,7 @@ describe('validateEventRequest – date validation', () => {
   });
 
   it('accepts a valid ISO date', () => {
-    const r = validateEventRequest(valid({ date: '2025-06-22' }));
+    const r = validateEventRequest(valid({ date: '2099-06-22' }));
     assert.strictEqual(r.ok, true);
   });
 });
@@ -158,7 +158,7 @@ describe('validateEventRequest – optional fields', () => {
   it('accepts request with no optional fields', () => {
     const r = validateEventRequest({
       title: 'Frukost',
-      date: '2025-06-22',
+      date: '2099-06-22',
       start: '08:00',
       end: '09:00',
       location: 'Matsalen',

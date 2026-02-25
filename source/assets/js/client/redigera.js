@@ -246,12 +246,14 @@
       var location    = els.location.value;
       var responsible = els.responsible.value.trim();
 
+      var submitToday = new Date().toISOString().slice(0, 10);
       var errs = [];
-      if (!title)       errs.push('Rubrik är obligatoriskt.');
-      if (!date)        errs.push('Datum är obligatoriskt.');
-      if (!start)       errs.push('Starttid är obligatorisk.');
-      if (!end)         errs.push('Sluttid är obligatorisk.');
-      else if (end <= start) errs.push('Sluttid måste vara efter starttid.');
+      if (!title)              errs.push('Rubrik är obligatoriskt.');
+      if (!date)               errs.push('Datum är obligatoriskt.');
+      else if (date < submitToday) errs.push('Datum kan inte vara i det förflutna.');
+      if (!start)              errs.push('Starttid är obligatorisk.');
+      if (!end)                errs.push('Sluttid är obligatorisk.');
+      else if (end <= start)   errs.push('Sluttid måste vara efter starttid.');
       if (!location)    errs.push('Plats är obligatoriskt.');
       if (!responsible) errs.push('Ansvarig är obligatoriskt.');
 
