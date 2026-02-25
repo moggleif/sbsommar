@@ -640,14 +640,29 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§34.13` | lint-yaml no longer checks active field | — | DAC-06 | `source/scripts/lint-yaml.js` | covered |
 | `02-§34.14` | Existing active-field tests updated/removed | — | manual: `npm test` passes | test files | implemented |
 
+### §35 — Location Accordions on Index Page
+
+| ID | Requirement | Doc reference | Test | Implementation | Status |
+| -- | ----------- | ------------- | ---- | -------------- | ------ |
+| `02-§35.1` | Lokaler heading renders as regular heading, not accordion | 03-ARCHITECTURE.md §16 | manual: build output shows `<h3>Lokaler</h3>` | `sections.yaml` — `collapsible` removed | implemented |
+| `02-§35.2` | Introductory paragraph stays visible above accordions | 03-ARCHITECTURE.md §16 | manual: build output shows `<p>` before first `<details>` | `render-index.js` — markdown rendered normally | implemented |
+| `02-§35.3` | Each location renders as `<details class="accordion">` | 03-ARCHITECTURE.md §16 | LOC-01 | `render-index.js` — `renderLocationAccordions()` | covered |
+| `02-§35.4` | Location name appears as `<summary>` text | 03-ARCHITECTURE.md §16 | LOC-02 | `render-index.js` — `renderLocationAccordions()` | covered |
+| `02-§35.5` | Location information appears in accordion body | 03-ARCHITECTURE.md §16 | LOC-03 | `render-index.js` — `renderLocationAccordions()` | covered |
+| `02-§35.6` | Location images render as `<img>` in accordion body | 03-ARCHITECTURE.md §16 | LOC-04, LOC-05 | `render-index.js` — `renderLocationAccordions()` | covered |
+| `02-§35.7` | Empty locations render as accordion with empty body | 03-ARCHITECTURE.md §16 | LOC-06 | `render-index.js` — `renderLocationAccordions()` | covered |
+| `02-§35.8` | Accordions appear in `local.yaml` order | 03-ARCHITECTURE.md §16 | LOC-07 | `render-index.js` — `renderLocationAccordions()` | covered |
+| `02-§35.9` | Build passes full location data to index pipeline | 03-ARCHITECTURE.md §16 | LOC-01 (indirect) | `build.js` — `allLocations` → `renderLocationAccordions()` | covered |
+| `02-§35.10` | `collapsible: true` removed from lokaler in sections.yaml | 03-ARCHITECTURE.md §16 | manual: file diff | `sections.yaml` | implemented |
+
 ---
 
 ## Summary
 
 ```text
-Total requirements:             510
-Covered (implemented + tested): 167
-Implemented, not tested:        340
+Total requirements:             520
+Covered (implemented + tested): 174
+Implemented, not tested:        343
 Gap (no implementation):          3
 Orphan tests (no requirement):    0
 
@@ -766,6 +781,9 @@ Matrix cleanup (2026-02-25):
 1 requirement added for compact camp list layout (02-§3.5):
   covered (CL-01..03): CSS presence tests for flex layout, no border, no display: block.
   Manual visual check: open homepage and confirm one-liner layout.
+10 requirements added for location accordions on index page (02-§35.1–35.10):
+  7 covered (LOC-01..10): 02-§35.3–35.9.
+  3 implemented (visual/structural, manual verification): 02-§35.1, 02-§35.2, 02-§35.10.
 ```
 
 ---
@@ -862,3 +880,4 @@ Matrix cleanup (2026-02-25):
 | LNT-22..23 | *(removed — active+archived check no longer exists; see 02-§34.8)* | — |
 | A11Y-01..09 | `tests/accessibility.test.js` | `:focus-visible rules (02-§13.2)` |
 | DAC-01..07 | `tests/resolve-active-camp.test.js` | `resolveActiveCamp` |
+| LOC-01..10 | `tests/render-locations.test.js` | `renderLocationAccordions` |
