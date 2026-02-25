@@ -606,22 +606,22 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§31.10` | Markdown converter supports h4 headings | — | — (manual: build output check) | `source/build/render-index.js` – `####` pattern added | implemented |
 | `02-§31.11` | All styling uses CSS custom properties | 07-DESIGN.md §7 | — (manual: code review) | `source/assets/cs/style.css` | implemented |
 | `02-§31.12` | No additional runtime JS | — | — (manual: code review) | No new scripts added | implemented |
-| `02-§32.1` | HTML validation uses `html-validate` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§32.2` | Validation runs on all `public/*.html` after build | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§32.3` | `lint:html` npm script runs `html-validate` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§32.4` | CI runs `lint:html` after build step | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§32.5` | HTML validation failures fail CI | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§32.6` | HTML validation skipped for data-only commits | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§32.7` | Configured via `.htmlvalidate.json` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§32.8` | Rules tuned to accept existing generated HTML | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.1` | CSS linting uses Stylelint with `stylelint-config-standard` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.2` | Linting runs on `source/assets/css/*.css` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.3` | `lint:css` npm script runs Stylelint | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.4` | CI runs `lint:css` alongside existing lint steps | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.5` | CSS lint failures fail CI | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.6` | CSS linting skipped for data-only commits | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.7` | Configured via `.stylelintrc.json` | 03-ARCHITECTURE.md §11.5 | — | — | gap |
-| `02-§33.8` | Rules tuned to accept existing CSS | 03-ARCHITECTURE.md §11.5 | — | — | gap |
+| `02-§32.1` | HTML validation uses `html-validate` | 03-ARCHITECTURE.md §11.5 | manual: check `package.json` devDeps include `html-validate` | — | gap |
+| `02-§32.2` | Validation runs on all `public/*.html` after build | 03-ARCHITECTURE.md §11.5 | manual: run `npm run build && npm run lint:html` | — | gap |
+| `02-§32.3` | `lint:html` npm script runs `html-validate` | 03-ARCHITECTURE.md §11.5 | manual: run `npm run lint:html` | — | gap |
+| `02-§32.4` | CI runs `lint:html` after build step | 03-ARCHITECTURE.md §11.5 | manual: inspect `ci.yml` for `lint:html` step after build | — | gap |
+| `02-§32.5` | HTML validation failures fail CI | 03-ARCHITECTURE.md §11.5 | manual: `lint:html` step has no `continue-on-error` | — | gap |
+| `02-§32.6` | HTML validation skipped for data-only commits | 03-ARCHITECTURE.md §11.5 | manual: `lint:html` step uses same `has_code` condition | — | gap |
+| `02-§32.7` | Configured via `.htmlvalidate.json` | 03-ARCHITECTURE.md §11.5 | manual: file exists at project root | — | gap |
+| `02-§32.8` | Rules tuned to accept existing generated HTML | 03-ARCHITECTURE.md §11.5 | manual: `npm run build && npm run lint:html` passes | — | gap |
+| `02-§33.1` | CSS linting uses Stylelint with `stylelint-config-standard` | 03-ARCHITECTURE.md §11.5 | manual: check `package.json` devDeps and `.stylelintrc.json` | — | gap |
+| `02-§33.2` | Linting runs on `source/assets/css/*.css` | 03-ARCHITECTURE.md §11.5 | manual: run `npm run lint:css` | — | gap |
+| `02-§33.3` | `lint:css` npm script runs Stylelint | 03-ARCHITECTURE.md §11.5 | manual: run `npm run lint:css` | — | gap |
+| `02-§33.4` | CI runs `lint:css` alongside existing lint steps | 03-ARCHITECTURE.md §11.5 | manual: inspect `ci.yml` for `lint:css` step | — | gap |
+| `02-§33.5` | CSS lint failures fail CI | 03-ARCHITECTURE.md §11.5 | manual: `lint:css` step has no `continue-on-error` | — | gap |
+| `02-§33.6` | CSS linting skipped for data-only commits | 03-ARCHITECTURE.md §11.5 | manual: `lint:css` step uses same `has_code` condition | — | gap |
+| `02-§33.7` | Configured via `.stylelintrc.json` | 03-ARCHITECTURE.md §11.5 | manual: file exists at project root | — | gap |
+| `02-§33.8` | Rules tuned to accept existing CSS | 03-ARCHITECTURE.md §11.5 | manual: `npm run lint:css` passes | — | gap |
 
 ---
 
