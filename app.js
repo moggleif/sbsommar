@@ -55,7 +55,7 @@ app.post('/add-event', (req, res) => {
     }
   }
 
-  const v = validateEventRequest(req.body);
+  const v = validateEventRequest(req.body, activeCamp);
   if (!v.ok) {
     return res.status(400).json({ success: false, error: v.error });
   }
@@ -91,7 +91,7 @@ app.post('/edit-event', (req, res) => {
     }
   }
 
-  const v = validateEditRequest(req.body);
+  const v = validateEditRequest(req.body, activeCamp);
   if (!v.ok) {
     return res.status(400).json({ success: false, error: v.error });
   }
