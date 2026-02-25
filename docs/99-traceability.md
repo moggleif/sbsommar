@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate cross-refs, status fixes).
+Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed — 10 gaps moved to covered).
 
 ---
 
@@ -153,7 +153,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§9.6` | `responsible` is present and non-empty | 05-DATA_CONTRACT.md §3 | VLD-11 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
 | `02-§10.1` | All required fields are present and of correct type before any write begins | 03-ARCHITECTURE.md §3 | VLD-01..11 | `source/api/validate.js` – `validateEventRequest()`; `app.js` – returns HTTP 400 on failure | covered |
 | `02-§10.2` | Only known fields are written to YAML; unknown POST body fields are silently ignored | 03-ARCHITECTURE.md §3, 05-DATA_CONTRACT.md §2 | GH-24..38 | `source/api/github.js` – `buildEventYaml()` constructs a fixed, explicit field set | covered |
-| `02-§10.3` | String values are length-limited; extremely long strings are rejected | 03-ARCHITECTURE.md §3 | — | — (`source/api/validate.js` type-checks strings but has no max-length check) | gap |
+| `02-§10.3` | String values are length-limited; extremely long strings are rejected | 03-ARCHITECTURE.md §3 | VLD-42..49 | `source/api/validate.js` – `MAX_LENGTHS` map; `check-yaml-security.js` – `MAX_LENGTHS` (build-time) | covered |
 | `02-§10.4` | User-provided strings are never directly interpolated into YAML; all quoting is handled by the serializer | 05-DATA_CONTRACT.md §8, 06-EVENT_DATA_MODEL.md §8 | GH-12..23, GH-38 | `source/api/github.js` – `yamlScalar()` | covered |
 | `02-§10.5` | A validation failure results in an HTTP error response; nothing is committed to GitHub | 03-ARCHITECTURE.md §3 | VLD-01..26 (validate logic; no HTTP integration test) | `app.js` – `res.status(400)` before calling `addEventToActiveCamp` | covered |
 | `02-§10.6` | Appended event YAML is indented to match the `events:` list; resulting file is valid YAML | 03-ARCHITECTURE.md §3 | GH-39..43 | `source/api/github.js` – `buildEventYaml(event, indent)` with `indent=2` in `addEventToActiveCamp()` | covered |
@@ -176,13 +176,13 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§17.2` | The site requires no explanation; the schedule and add-activity form are self-evident | 07-DESIGN.md §1 | — | UX/design principle; assessed through usability review, not automatable | implemented |
 | `05-§1.1` | Each `camps.yaml` entry includes all required fields: `id`, `name`, `start_date`, `end_date`, `file`, `active`, `archived` | 06-EVENT_DATA_MODEL.md §3, 03-ARCHITECTURE.md §2 | — | `source/build/build.js` reads and uses these fields; no build-time schema validator | implemented |
 | `05-§1.2` | Exactly one camp may have `active: true` at a time | 03-ARCHITECTURE.md §2, 04-OPERATIONS.md | — | `source/api/github.js` – `addEventToActiveCamp()` rejects if `activeCamps.length ≠ 1` (checked at submit time only, not at build time) | implemented |
-| `05-§1.3` | A camp with `active: true` must not also have `archived: true` | 03-ARCHITECTURE.md §2, 04-OPERATIONS.md | — | — | gap |
+| `05-§1.3` | A camp with `active: true` must not also have `archived: true` | 03-ARCHITECTURE.md §2, 04-OPERATIONS.md | LNT-22, LNT-23 | `source/scripts/lint-yaml.js` – `camp.active && camp.archived` check | covered |
 | `05-§3.1` | Each submitted event must include `id`, `title`, `date`, `start`, `end`, `location`, and `responsible` | 06-EVENT_DATA_MODEL.md §4, 05-DATA_CONTRACT.md §3 | VLD-04..11, VLD-27..28 | `source/api/validate.js` – `validateEventRequest()` and `validateEditRequest()` (note: `id` is server-generated, not submitted as input) | covered |
-| `05-§4.1` | Event `date` must fall within the camp's `start_date` and `end_date` (inclusive) | 06-EVENT_DATA_MODEL.md §4 | — | — (`source/api/validate.js` validates date format but not range against the active camp) | gap |
-| `05-§4.2` | `start` must use 24-hour `HH:MM` format | 06-EVENT_DATA_MODEL.md §4 | VLD-08 (non-empty check only) | — (`source/api/validate.js` checks that `start` is non-empty; format not validated) | gap |
+| `05-§4.1` | Event `date` must fall within the camp's `start_date` and `end_date` (inclusive) | 06-EVENT_DATA_MODEL.md §4 | VLD-50..55, LNT-12, LNT-13 | `source/api/validate.js` – `campDates` range check; `lint-yaml.js` – camp range check; `app.js` – passes `activeCamp` | covered |
+| `05-§4.2` | `start` must use 24-hour `HH:MM` format | 06-EVENT_DATA_MODEL.md §4 | VLD-33..34, VLD-37..40, LNT-14 | `source/api/validate.js` – `TIME_RE` format check; `lint-yaml.js` – `TIME_RE` | covered |
 | `05-§4.3` | `end` must be after `start` | 06-EVENT_DATA_MODEL.md §4 | VLD-16..20, VLD-29..30 | `source/api/validate.js` – `end <= start` check in both `validateEventRequest()` and `validateEditRequest()` | covered |
-| `05-§5.1` | The combination of `(title + date + start)` must be unique within a camp file | 03-ARCHITECTURE.md §1 | — | — (no uniqueness check before committing) | gap |
-| `05-§6.1` | Event `id` must be unique within the camp file | 06-EVENT_DATA_MODEL.md §4 | GH-01..11 (slugify determinism) | — (no uniqueness check against existing IDs; ID is deterministic but not verified) | gap |
+| `05-§5.1` | The combination of `(title + date + start)` must be unique within a camp file | 03-ARCHITECTURE.md §1 | LNT-19..21 | `source/scripts/lint-yaml.js` – `seenCombos` set (build-time + CI); API layer relies on deterministic ID generation | covered |
+| `05-§6.1` | Event `id` must be unique within the camp file | 06-EVENT_DATA_MODEL.md §4 | GH-01..11 (slugify determinism), LNT-18 | `source/scripts/lint-yaml.js` – `seenIds` set (build-time + CI); API generates deterministic IDs from unique (title+date+start) | covered |
 | `05-§6.2` | Event `id` must be stable and not change after creation | 06-EVENT_DATA_MODEL.md §4 | — | `source/api/github.js` – deterministic `slugify(title)+date+start` on first write; no update path exists | implemented |
 | `07-§7.1` | All CSS uses the custom properties defined at `:root`; no hardcoded colors, spacing, or typography | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – all values use `var(--…)` tokens (not enforced by a linter) | implemented |
 | `07-§9.5` | Accordion items use `aria-expanded` and `aria-controls` ARIA attributes (see `02-§13.6`; archive accordion uses explicit ARIA via `02-§21.6`) | 07-DESIGN.md §9 | — | `source/build/render.js` – `<details>/<summary>` without explicit ARIA (native element provides equivalent accessibility); archive uses `<button>` with `aria-expanded`/`aria-controls` (ARK-04, ARK-05) | gap |
@@ -193,7 +193,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `CL-§5.1` | HTML validation runs in CI; build fails if HTML is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no HTML linter configured; `ci.yml` runs ESLint and markdownlint only) | gap |
 | `CL-§5.2` | CSS linting runs in CI; build fails if CSS is invalid | 04-OPERATIONS.md (CI/CD Workflows) | — | — (no CSS linter configured) | gap |
 | `CL-§5.3` | JavaScript linting runs in CI; build fails if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – `npm run lint` (ESLint) | implemented |
-| `CL-§5.5` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | VLD-04..16 (server-side only) | — (validation only in API layer; manually edited YAML is not validated at build time) | gap |
+| `CL-§5.5` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | LNT-01..23 | `source/scripts/lint-yaml.js` – validates required fields, dates, time format, camp range, duplicate IDs, unique (title+date+start), active+archived; runs in CI via `event-data-deploy.yml` | covered |
 | `CL-§9.1` | Built output lives in `/public` | 04-OPERATIONS.md (System Overview) | — | `source/build/build.js` – `OUTPUT_DIR = …/public` | implemented |
 | `CL-§9.2` | GitHub Actions builds and validates; deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml`, `.github/workflows/deploy.yml` | implemented |
 | `CL-§9.3` | Deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/deploy.yml` – triggered only on push to `main` after CI passes | implemented |
@@ -232,13 +232,13 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `CL-§5.6` | Event data is validated for required fields | 05-DATA_CONTRACT.md §3 | VLD-04..11 | `source/api/validate.js` – `validateEventRequest()` | covered |
 | `CL-§5.7` | Event data is validated for valid dates | 05-DATA_CONTRACT.md §4 | VLD-12..15 | `source/api/validate.js` – date format check (range check missing — see `05-§4.1`) | implemented |
 | `CL-§5.8` | Event data is validated: end time must be after start time | 05-DATA_CONTRACT.md §4 | VLD-16..20 | `source/api/validate.js` – `end <= start` check | covered |
-| `CL-§5.9` | Event data is validated for duplicate identifiers (see `05-§6.1`) | 05-DATA_CONTRACT.md §6 | — | — (no uniqueness check before committing — see `05-§6.1`) | gap |
+| `CL-§5.9` | Event data is validated for duplicate identifiers (see `05-§6.1`) | 05-DATA_CONTRACT.md §6 | LNT-18, LNT-19..21 | `source/scripts/lint-yaml.js` – `seenIds` (duplicate ID check) + `seenCombos` (title+date+start uniqueness) | covered |
 | `CL-§5.10` | The site builds locally without errors | 04-OPERATIONS.md (Local Development) | — | `npm run build` on developer machine | implemented |
 | `CL-§5.11` | The site builds in GitHub Actions without errors | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – build step | implemented |
 | `CL-§5.12` | CI fails if the build fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – build step failure blocks merge | implemented |
 | `CL-§6.1` | Build runs locally before merge | 04-OPERATIONS.md (Local Development) | — | Developer discipline + pre-commit hook | implemented |
 | `CL-§6.2` | Lint passes before merge | 04-OPERATIONS.md (CI/CD Workflows) | — | CI lint step blocks merge on failure | implemented |
-| `CL-§6.3` | Data validation passes before merge | 05-DATA_CONTRACT.md §3–§6 | — | — (build-time YAML validation not implemented — see `CL-§5.5`) | gap |
+| `CL-§6.3` | Data validation passes before merge | 05-DATA_CONTRACT.md §3–§6 | LNT-01..23 | `source/scripts/lint-yaml.js` runs in CI (`event-data-deploy.yml` lint-yaml job); pre-commit hook runs `npm test` which includes lint-yaml tests | covered |
 | `CL-§6.4` | Automated minimal tests exist for event sorting and date handling | — | RND-01..45 | `tests/render.test.js` | covered |
 | `CL-§6.5` | Screenshot comparison tests exist for schedule pages | — | SNP-01..06 | `tests/snapshot.test.js` | covered |
 | `CL-§7.1` | JavaScript footprint is minimal | 03-ARCHITECTURE.md §7 | — | Three small client scripts; no framework | implemented |
@@ -266,7 +266,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `05-§1.5` | The camp `id` is permanent and must never change after the camp is first created | 06-EVENT_DATA_MODEL.md §3 | — | — (no enforcement; enforced by convention and docs) | implemented |
 | `05-§3.2` | Each camp file's `camp:` block must include `id`, `name`, `location`, `start_date`, and `end_date` | 06-EVENT_DATA_MODEL.md §3 | — | `source/build/build.js` – reads and uses all five fields; no build-time schema validator | implemented |
 | `05-§3.3` | The `owner` and `meta` fields are for internal use only and must never appear in any public view | 06-EVENT_DATA_MODEL.md §5, §6 | — | `source/build/render.js` – neither field is referenced in render output | implemented |
-| `05-§4.4` | `end` must be a valid `"HH:MM"` string | 06-EVENT_DATA_MODEL.md §4 | — | — (`source/api/validate.js` checks end ordering but not the HH:MM format explicitly; `validateEditRequest()` does not yet require end) | gap |
+| `05-§4.4` | `end` must be a valid `"HH:MM"` string | 06-EVENT_DATA_MODEL.md §4 | VLD-35..36, VLD-41, LNT-15 | `source/api/validate.js` – `TIME_RE` format check; `lint-yaml.js` – `TIME_RE` | covered |
 | `05-§4.5` | All times are local; no timezone handling | 06-EVENT_DATA_MODEL.md §4 | — | No timezone conversion anywhere in the codebase | implemented |
 | `CL-§2.12` | Data file names are never hardcoded; active camp and file paths are always derived from `camps.yaml` | 03-ARCHITECTURE.md §2 | — | `source/build/build.js` – reads `camps.yaml` first; `source/api/github.js` – same | implemented |
 | `CL-§5.13` | Markdown linting runs on every commit via pre-commit hook; commit is blocked if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.githooks/` pre-commit hook – `npm run lint:md`; `.markdownlint.json` config | implemented |
@@ -613,9 +613,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 
 ```text
 Total requirements:             482
-Covered (implemented + tested): 146
+Covered (implemented + tested): 156
 Implemented, not tested:        314
-Gap (no implementation):         22
+Gap (no implementation):         12
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -706,6 +706,13 @@ Matrix cleanup (2026-02-25):
   10 implemented (visual/CSS or manual code review): 02-§31.1–31.4, 02-§31.7–31.12.
   02-§28.9 superseded (camp listing no longer has its own heading).
   02-§28.13 superseded (information text no longer rendered).
+10 data validation gaps closed (02-§10.3, 05-§1.3, 05-§4.1, 05-§4.2, 05-§4.4,
+  05-§5.1, 05-§6.1, CL-§5.5, CL-§5.9, CL-§6.3) — all moved from gap to covered:
+  validate.js: HH:MM format (TIME_RE), string length limits (MAX_LENGTHS),
+    camp date range (campDates param). Tests: VLD-33..55.
+  lint-yaml.js: unique (title+date+start) combo, active+archived conflict.
+    Tests: LNT-19..23.
+  app.js: passes activeCamp to validators for range checking.
 ```
 
 ---
@@ -718,55 +725,27 @@ Matrix cleanup (2026-02-25):
    No RSS feed is generated; it must reflect the current state of the schedule.
    No implementation guidance document exists — `03-ARCHITECTURE.md` needs an RSS section before this can be built.
 
-2. **`02-§10.3` — String length limits in API validation**
-   `validate.js` type-checks strings but sets no maximum length.
-   Unbounded strings can be committed to the YAML file.
-
-### Medium — data integrity
-
-3. **`05-§4.1` — Event date range check (API server)**
-   The API accepts any structurally valid `YYYY-MM-DD` date regardless of camp `start_date`/`end_date`.
-
-4. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
-   `validate.js` checks `start` is non-empty but not that it matches `HH:MM`.
-   `end` is not validated as a valid `HH:MM` string — only that it is after `start`.
-
-5. **`05-§5.1` — Duplicate event uniqueness not enforced**
-   The `(title + date + start)` combination is never checked for uniqueness before committing.
-
-6. **`05-§6.1` / `CL-§5.9` — Event ID uniqueness not enforced**
-   Identical submissions produce identical IDs. No check is made against existing IDs in the file.
-   (`CL-§5.9` is a duplicate of this gap — same concern from CLAUDE.md.)
-
-7. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
-    No code prevents a camp from being marked both active and archived.
-
-8. **`CL-§5.5` / `CL-§6.3` — Build-time YAML data validation**
-    Manually edited YAML bypasses all validation (required fields, date ranges, duplicate IDs).
-    Validation only runs in the API layer when events are submitted through the form.
-    (`CL-§5.9` / `05-§6.1` duplicate ID gap is listed separately in item 6.)
-
 ### Low — tooling, design, and accessibility gaps
 
-9. **`CL-§5.1` — HTML validation in CI**
+2. **`CL-§5.1` — HTML validation in CI**
     No HTML linter is configured; invalid HTML does not fail the build.
 
-10. **`CL-§5.2` — CSS linting in CI**
+3. **`CL-§5.2` — CSS linting in CI**
     No CSS linter is configured.
 
-11. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
+4. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
     Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
     `loading="lazy"`, hero preload, `fetchpriority="high"`, first-section eager loading, and `nav.js defer` are implemented (02-§25.1–25.6).
     Remaining: manual conversion of 6 small PNG/JPG source files to WebP.
 
-12. **`02-§13.2` / `07-§9.2` — Visible focus states**
+5. **`02-§13.2` / `07-§9.2` — Visible focus states**
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
 
-13. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
+6. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
     `<details>/<summary>` is used on the schedule page without explicit `aria-expanded` or `aria-controls`.
     Note: `<details>` is natively accessible — browsers announce open/closed state. The archive accordion (`02-§21.6`) uses explicit ARIA and is covered (ARK-04, ARK-05). Consider accepting native `<details>` as sufficient or adding explicit ARIA.
 
-14. **`07-§6.33` — Colored left border for activity type** *(deferred)*
+7. **`07-§6.33` — Colored left border for activity type** *(deferred)*
     The design spec says "may have" (optional). Requires an activity-type field in the data model, which has never been specced. Not actionable without a data model change.
 
 ---
@@ -817,3 +796,11 @@ Matrix cleanup (2026-02-25):
 | HERO-10..13 | `tests/hero.test.js` | `hero section – countdown (02-§30.13–30.17)` |
 | HERO-14..15 | `tests/hero.test.js` | `hero section – links from config (02-§30.22)` |
 | HERO-16 | `tests/hero.test.js` | `hero section – Discord icon image (02-§30.24)` |
+| VLD-33..39 | `tests/validate.test.js` | `validateEventRequest – time format` |
+| VLD-40..41 | `tests/validate.test.js` | `validateEditRequest – time format` |
+| VLD-42..48 | `tests/validate.test.js` | `validateEventRequest – string length limits` |
+| VLD-49 | `tests/validate.test.js` | `validateEditRequest – string length limits` |
+| VLD-50..54 | `tests/validate.test.js` | `validateEventRequest – date within camp range` |
+| VLD-55 | `tests/validate.test.js` | `validateEditRequest – date within camp range` |
+| LNT-19..21 | `tests/lint-yaml.test.js` | `validateYaml – unique (title+date+start) combo (05-§5.1)` |
+| LNT-22..23 | `tests/lint-yaml.test.js` | `validateYaml – active+archived camp conflict (05-§1.3)` |
