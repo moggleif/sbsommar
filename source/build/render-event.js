@@ -1,0 +1,66 @@
+'use strict';
+
+const { escapeHtml, formatDate, toDateString } = require('./utils');
+const { pageNav, pageFooter } = require('./layout');
+
+/**
+ * Renders a static HTML detail page for a single event.
+ *
+ * @param {object} event - Event object
+ * @param {object} camp - Camp object (for page title)
+ * @param {string} siteUrl - Base URL (unused in HTML but kept for consistency)
+ * @param {string} [footerHtml=''] - Pre-rendered footer HTML
+ * @param {Array}  [navSections=[]] - Navigation sections
+ * @returns {string} Full HTML page
+ */
+function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []) {
+  const title = escapeHtml(event.title);
+  const campName = escapeHtml(camp.name);
+  const date = formatDate(toDateString(event.date));
+  const timeStr = event.end
+    ? `${escapeHtml(String(event.start))}–${escapeHtml(String(event.end))}`
+    : escapeHtml(String(event.start));
+
+  let descriptionHtml = '';
+  if (event.description) {
+    const paragraphs = event.description.trim().split(/\n\n+/)
+      .map((p) => `    <p>${escapeHtml(p.trim())}</p>`)
+      .join('\n');
+    descriptionHtml = `  <div class="event-description">\n${paragraphs}\n  </div>\n`;
+  }
+
+  let linkHtml = '';
+  if (event.link) {
+    linkHtml = `  <a class="event-ext-link" href="${escapeHtml(String(event.link))}" target="_blank" rel="noopener noreferrer">Extern länk →</a>\n`;
+  }
+
+  return `<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>${title} – ${campName}</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+${pageNav('schema.html', navSections)}
+  <p class="back-link"><a href="../../schema.html">← Tillbaka till schemat</a></p>
+  <h1>${title}</h1>
+  <dl class="event-detail">
+    <dt>Datum</dt>
+    <dd>${date}</dd>
+    <dt>Tid</dt>
+    <dd>${timeStr}</dd>
+    <dt>Plats</dt>
+    <dd>${escapeHtml(event.location)}</dd>
+    <dt>Ansvarig</dt>
+    <dd>${escapeHtml(event.responsible)}</dd>
+  </dl>
+${descriptionHtml}${linkHtml}${pageFooter(footerHtml)}
+</body>
+</html>
+`;
+}
+
+module.exports = { renderEventPage };
