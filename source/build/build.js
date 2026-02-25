@@ -208,7 +208,19 @@ async function main() {
     })
     .filter(Boolean);
 
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml, navSections);
+  // ── Compute hero social links and countdown target ────────────────────────
+  const discordUrl = 'https://discord.com/channels/992817044527534181/1390691617052037232';
+  // Use the Facebook link from the nearest future camp, or the active camp
+  const facebookUrl = (activeCamp.link || '').trim() || null;
+
+  // Countdown: find the nearest future camp by start_date
+  const todayStr = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+  const futureCamps = camps
+    .filter((c) => toDateString(c.start_date) > todayStr)
+    .sort((a, b) => toDateString(a.start_date).localeCompare(toDateString(b.start_date)));
+  const countdownTarget = futureCamps.length > 0 ? toDateString(futureCamps[0].start_date) : null;
+
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 
