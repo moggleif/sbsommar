@@ -17,6 +17,7 @@ camps:
     name: string         # display name
     start_date: YYYY-MM-DD
     end_date: YYYY-MM-DD
+    opens_for_editing: YYYY-MM-DD  # first date participants can add/edit activities
     location: string     # place name displayed on the archive page
     file: string         # filename in source/data/ (e.g. 2026-06-syssleback.yaml)
     active: boolean      # true for the current camp; only one at a time
@@ -26,6 +27,10 @@ camps:
 ```
 
 All fields except `information` and `link` are required for each entry. <!-- 05-§1.1 -->
+
+The `opens_for_editing` field defines the first date on which the add-activity and
+edit-activity forms are available. The submission period closes at the end of
+`end_date + 1 day`. Typical default: `start_date − 7 days`. <!-- 05-§1.6 -->
 
 Rules:
 

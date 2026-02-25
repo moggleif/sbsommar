@@ -716,6 +716,59 @@ The `.section-nav` CSS rule is also removed.
 
 ---
 
+## 13. Form Time-Gating
+
+The add-activity and edit-activity forms are only usable during a defined period
+around the active camp. Outside this period, submissions are rejected.
+
+### 13.1 Period definition
+
+Each camp in `camps.yaml` has an `opens_for_editing` field (see `05-DATA_CONTRACT.md §1`).
+The submission period runs from `opens_for_editing` through `end_date + 1 day`
+(inclusive on both ends). Dates are compared as plain `YYYY-MM-DD` strings — no
+timezone handling.
+
+### 13.2 Build-time data passing
+
+At build time, `render-add.js` and `render-edit.js` read `opens_for_editing` and
+`end_date` from the active camp and embed them as `data-opens` and `data-closes`
+attributes on the `<form>` element. The closes date is computed as `end_date + 1 day`.
+
+### 13.3 Client-side gating
+
+`lagg-till.js` and `redigera.js` read the `data-opens` and `data-closes` attributes
+at page load and compare against today's date (`new Date().toISOString().slice(0, 10)`).
+
+If outside the period:
+
+1. All form fields receive reduced opacity via a CSS class.
+2. The submit button is disabled.
+3. A message is shown above the form:
+   - Before opening: "Formuläret öppnar den {formatted date}."
+   - After closing: "Lägret är avslutat."
+
+### 13.4 Server-side gating
+
+`app.js` reads `opens_for_editing` and `end_date` from the active camp in
+`camps.yaml` (already fetched from GitHub). Both `POST /add-event` and
+`POST /edit-event` check the current date against the period before processing
+the request. Requests outside the period receive HTTP 403 with a Swedish error
+message.
+
+### 13.5 Files changed
+
+| File | Change |
+| --- | --- |
+| `source/data/camps.yaml` | Add `opens_for_editing` to every camp entry |
+| `docs/05-DATA_CONTRACT.md` | Document the new field |
+| `source/build/render-add.js` | Embed `data-opens` and `data-closes` on form |
+| `source/build/render-edit.js` | Embed `data-opens` and `data-closes` on form |
+| `source/assets/js/client/lagg-till.js` | Client-side date check and form disabling |
+| `source/assets/js/client/redigera.js` | Client-side date check and form disabling |
+| `app.js` | Server-side date check on both endpoints |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.

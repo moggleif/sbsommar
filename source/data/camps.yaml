@@ -3,6 +3,7 @@ camps:
     name: SB vinter februari 2026
     start_date: '2026-02-22'
     end_date: '2026-02-27'
+    opens_for_editing: '2026-02-15'
     location: Testar
     link: ""
     information: ""
@@ -14,6 +15,7 @@ camps:
     name: SB Sommar Augusti 2025
     start_date: '2025-08-03'
     end_date: '2025-08-15'
+    opens_for_editing: '2025-07-27'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/syssleback2025"
     information: |
@@ -29,6 +31,7 @@ camps:
     name: SB Sommar Juni 2025
     start_date: '2025-06-22'
     end_date: '2025-06-29'
+    opens_for_editing: '2025-06-15'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/syssleback2025"
     information: |
@@ -44,6 +47,7 @@ camps:
     name: SB Sommar Juni 2024
     start_date: '2024-06-23'
     end_date: '2024-06-30'
+    opens_for_editing: '2024-06-16'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/syssleback2024"
     information: |
@@ -59,6 +63,7 @@ camps:
     name: SB Sommar Juni 2023
     start_date: '2023-06-25'
     end_date: '2023-07-02'
+    opens_for_editing: '2023-06-18'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/syssleback2023"
     information: |
@@ -74,6 +79,7 @@ camps:
     name: SB Sommar Juni 2022
     start_date: '2022-06-26'
     end_date: '2022-07-03'
+    opens_for_editing: '2022-06-19'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/639094320468722"
     information: |
@@ -89,6 +95,7 @@ camps:
     name: SB Sommar Juni 2021
     start_date: '2021-06-27'
     end_date: '2021-07-04'
+    opens_for_editing: '2021-06-20'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/1117007488486447"
     information: |
@@ -105,6 +112,7 @@ camps:
     name: SB Sommar Juni 2019
     start_date: '2019-06-24'
     end_date: '2019-07-01'
+    opens_for_editing: '2019-06-17'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/rfsb2019sommar/permalink/462623754311856/"
     information: |
@@ -120,6 +128,7 @@ camps:
     name: SB Sommar Juni 2018
     start_date: '2018-06-17'
     end_date: '2018-06-20'
+    opens_for_editing: '2018-06-10'
     location: Sysslebäck
     link: "https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/"
     information: |

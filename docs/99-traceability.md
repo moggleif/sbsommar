@@ -503,14 +503,29 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
 | `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-ARCHITECTURE.md §4c | ROB-08..14 | No discoverability tags in any render file | covered |
 
+| `02-§26.1` | Each camp in `camps.yaml` has an `opens_for_editing` field (YYYY-MM-DD) | 05-DATA_CONTRACT.md §1 | — | `source/data/camps.yaml` – all 9 camps have `opens_for_editing` | implemented |
+| `02-§26.2` | Submission period runs from `opens_for_editing` through `end_date + 1 day` | 03-ARCHITECTURE.md §13.1 | GATE-05..10 | `source/api/time-gate.js` – `isOutsideEditingPeriod()` | covered |
+| `02-§26.3` | Before period: add-activity form greyed out (reduced opacity) | 03-ARCHITECTURE.md §13.3 | — (manual: open form before `opens_for_editing`, confirm fields greyed out) | `source/assets/js/client/lagg-till.js` – sets `fieldset.disabled` and `form-gated` class | implemented |
+| `02-§26.4` | Before period: submit button disabled | 03-ARCHITECTURE.md §13.3 | — (manual: open form before period, confirm submit disabled) | `source/assets/js/client/lagg-till.js` – `submitBtn.disabled = true` | implemented |
+| `02-§26.5` | Before period: message shown stating when it opens | 03-ARCHITECTURE.md §13.3 | — (manual: open form before period, confirm message with formatted Swedish date) | `source/assets/js/client/lagg-till.js` – inserts `.form-gate-msg` element | implemented |
+| `02-§26.6` | After period: add-activity form greyed out (reduced opacity) | 03-ARCHITECTURE.md §13.3 | — (manual: open form after `end_date + 1`, confirm fields greyed out) | `source/assets/js/client/lagg-till.js` – sets `fieldset.disabled` and `form-gated` class | implemented |
+| `02-§26.7` | After period: submit button disabled | 03-ARCHITECTURE.md §13.3 | — (manual: open form after period, confirm submit disabled) | `source/assets/js/client/lagg-till.js` – `submitBtn.disabled = true` | implemented |
+| `02-§26.8` | After period: message shown stating camp has ended | 03-ARCHITECTURE.md §13.3 | — (manual: open form after period, confirm "Lägret är avslutat" message) | `source/assets/js/client/lagg-till.js` – inserts `.form-gate-msg` with "Lägret är avslutat." | implemented |
+| `02-§26.9` | Same time-gating rules apply to edit-activity form | 03-ARCHITECTURE.md §13.3 | — (manual: open edit form outside period, confirm gating behaviour) | `source/assets/js/client/redigera.js` – time-gate check using `data-opens` / `data-closes` | implemented |
+| `02-§26.10` | `POST /add-event` rejects with HTTP 403 outside period | 03-ARCHITECTURE.md §13.4 | GATE-05..10 (logic); — (manual: POST outside period) | `app.js` – `isOutsideEditingPeriod()` check before validation | implemented |
+| `02-§26.11` | `POST /edit-event` rejects with HTTP 403 outside period | 03-ARCHITECTURE.md §13.4 | GATE-05..10 (logic); — (manual: POST outside period) | `app.js` – `isOutsideEditingPeriod()` check before validation | implemented |
+| `02-§26.12` | API error response includes Swedish message | 03-ARCHITECTURE.md §13.4 | — (manual: inspect 403 response body) | `app.js` – Swedish error strings in both endpoints | implemented |
+| `02-§26.13` | Build embeds `opens_for_editing` and `end_date` as `data-` attributes on form | 03-ARCHITECTURE.md §13.2 | GATE-01..04 | `source/build/render-add.js`, `source/build/render-edit.js` – `data-opens` and `data-closes` on `<form>` | covered |
+| `05-§1.6` | `opens_for_editing` field documented in data contract | 05-DATA_CONTRACT.md §1 | — | `docs/05-DATA_CONTRACT.md` – field added to schema and described | implemented |
+
 ---
 
 ## Summary
 
 ```text
-Total requirements:             388
-Covered (implemented + tested): 106
-Implemented, not tested:        254
+Total requirements:             402
+Covered (implemented + tested): 108
+Implemented, not tested:        266
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
@@ -557,6 +572,9 @@ End time is now required everywhere (add form, edit form, data contract).
 3 requirements added for search engine blocking (02-§1a.1–1a.3):
   2 covered (ROB-01..14): 02-§1a.2, 02-§1a.3
   1 implemented (build writes robots.txt; manual verification): 02-§1a.1
+14 requirements added for form time-gating (02-§26.1–26.13, 05-§1.6):
+  2 covered (GATE-01..10): 02-§26.2 (period logic), 02-§26.13 (data attributes).
+  12 implemented (browser-only or manual): 02-§26.1, 02-§26.3–26.12, 05-§1.6.
 ```
 
 ---
@@ -670,3 +688,6 @@ End time is now required everywhere (add form, edit form, data contract).
 | NAV-01..11 | `tests/nav.test.js` | `pageNav` |
 | ROB-01..07 | `tests/robots.test.js` | `meta robots noindex (02-§1a.2)` |
 | ROB-08..14 | `tests/robots.test.js` | `no discoverability metadata (02-§1a.3)` |
+| GATE-01..02 | `tests/time-gate.test.js` | `renderAddPage – time-gating data attributes` |
+| GATE-03..04 | `tests/time-gate.test.js` | `renderEditPage – time-gating data attributes` |
+| GATE-05..10 | `tests/time-gate.test.js` | `isOutsideEditingPeriod` |

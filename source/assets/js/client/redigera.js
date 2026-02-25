@@ -163,6 +163,32 @@
     els.link.value = event.link || '';
   }
 
+  // ── Time-gating (02-§26.9) ──────────────────────────────────────────────────
+
+  if (form) {
+    var opensDate = form.dataset.opens;
+    var closesDate = form.dataset.closes;
+
+    if (opensDate && closesDate) {
+      var todayGate = new Date().toISOString().slice(0, 10);
+      if (todayGate < opensDate) {
+        var parts = opensDate.split('-');
+        var months = ['januari','februari','mars','april','maj','juni',
+                      'juli','augusti','september','oktober','november','december'];
+        var formatted = parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+        loadingEl.hidden = true;
+        errorMsg.textContent = 'Formuläret öppnar den ' + formatted + '.';
+        errorEl.hidden = false;
+        return;
+      } else if (todayGate > closesDate) {
+        loadingEl.hidden = true;
+        errorMsg.textContent = 'Lägret är avslutat.';
+        errorEl.hidden = false;
+        return;
+      }
+    }
+  }
+
   // ── Init ─────────────────────────────────────────────────────────────────────
 
   var eventId = getParam('id');
