@@ -397,3 +397,18 @@ events:
     meta:
       created_at: 2026-02-25 07:59
       updated_at: 2026-02-25 07:59
+  - id: snabbt-nu-2026-02-25-1600
+    title: 'snabbt nu?'
+    date: '2026-02-25'
+    start: '16:00'
+    end: '17:00'
+    location: AndreasTältet
+    responsible: morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-25 11:45
+      updated_at: 2026-02-25 11:45
