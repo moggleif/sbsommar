@@ -978,6 +978,47 @@ All values use CSS custom properties.
 
 ---
 
+## 16. Location Accordions on Index Page
+
+The Lokaler section displays each location from `source/data/local.yaml` as an
+individual accordion, rendered at build time into `index.html`.
+
+### 16.1 Data flow
+
+`build.js` already loads `local.yaml`. The full location objects (not just names)
+are passed to the index rendering pipeline. A new function
+`renderLocationAccordions(locations)` in `render-index.js` generates one
+`<details class="accordion">` per location entry.
+
+### 16.2 Rendering rules
+
+- The `## Lokaler` heading and the introductory paragraph in `locations.md` render
+  as normal HTML (heading + paragraph), not wrapped in any accordion.
+- The `collapsible: true` flag is removed from the lokaler entry in `sections.yaml`.
+- After the markdown-derived HTML, the build injects the location accordion HTML.
+- Each accordion:
+  - `<summary>` = location `name`
+  - Body = location `information` text (inline markdown converted) + images.
+  - Images: if `image_path` is a string, one `<img>`; if an array, one `<img>` per
+    entry. Empty strings are skipped.
+  - Empty information + empty images = accordion with summary only, empty body.
+
+### 16.3 Injection mechanism
+
+`build.js` identifies the lokaler section by its `id: lokaler` in `sections.yaml`
+and appends the location accordion HTML after the section's markdown HTML. This
+mirrors the pattern used for camp listings in section `id: start`.
+
+### 16.4 Files changed
+
+| File | Change |
+| ---- | ------ |
+| `source/content/sections.yaml` | Remove `collapsible: true` from lokaler |
+| `source/build/render-index.js` | Add `renderLocationAccordions()` function |
+| `source/build/build.js` | Pass full location data; inject into lokaler section |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.

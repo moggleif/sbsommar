@@ -640,6 +640,21 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§34.13` | lint-yaml no longer checks active field | — | DAC-06 | `source/scripts/lint-yaml.js` | covered |
 | `02-§34.14` | Existing active-field tests updated/removed | — | manual: `npm test` passes | test files | implemented |
 
+### §35 — Location Accordions on Index Page
+
+| ID | Requirement | Doc reference | Test | Implementation | Status |
+| -- | ----------- | ------------- | ---- | -------------- | ------ |
+| `02-§35.1` | Lokaler heading renders as regular heading, not accordion | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.2` | Introductory paragraph stays visible above accordions | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.3` | Each location renders as `<details class="accordion">` | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.4` | Location name appears as `<summary>` text | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.5` | Location information appears in accordion body | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.6` | Location images render as `<img>` in accordion body | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.7` | Empty locations render as accordion with empty body | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.8` | Accordions appear in `local.yaml` order | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.9` | Build passes full location data to index pipeline | 03-ARCHITECTURE.md §16 | — | — | gap |
+| `02-§35.10` | `collapsible: true` removed from lokaler in sections.yaml | 03-ARCHITECTURE.md §16 | — | — | gap |
+
 ---
 
 ## Summary
