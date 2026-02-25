@@ -105,7 +105,6 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 implemented and covered; event data CI pipeline — 02-§23.1–23.13 implemented; 8 covered, 5 implemented).
 
-
 ---
 
 ## Table
@@ -474,8 +473,6 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `02-§23.11` | On successful validation the pipeline deploys schema.html, idag.html, dagens-schema.html, and events.json to FTP | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: submit a test event and verify pages update on FTP before PR merges) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job uploads the four files via curl | implemented |
 | `02-§23.12` | The targeted FTP upload must not modify any files outside the four schema-derived files | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: confirm no other FTP files are touched after an event PR) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job explicitly names only the four files in the curl loop | implemented |
 | `02-§23.13` | The targeted deployment must complete while the PR is still open (before auto-merge) | 03-ARCHITECTURE.md §11 | — (CI end-to-end: confirm FTP files update before the PR shows as merged) | `.github/workflows/event-data-deploy.yml` – triggered by `pull_request` event (not `push` to main), so it runs on the PR branch before merge | implemented |
-
-
 
 ---
 
