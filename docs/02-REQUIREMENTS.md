@@ -1075,3 +1075,51 @@ and connects visitors to community channels.
   configuration, not hardcoded in templates. <!-- 02-§30.22 -->
 
 ---
+
+## 31. Inline Camp Listing and Link Styling
+
+The camp listing is moved from a standalone section into the intro section,
+appearing directly below the first heading. Link styling is updated site-wide.
+
+### 31.1 Camp listing placement
+
+- The camp listing (upcoming and recent camps) is rendered inside the intro
+  section, immediately after the first `<h4>` heading. <!-- 02-§31.1 -->
+- The camp listing is no longer a separate page section and does not have its
+  own heading or navigation entry. <!-- 02-§31.2 -->
+
+### 31.2 Camp status icons
+
+- Upcoming camps (end date in the future) display a sun icon (☀️) before the
+  camp name. <!-- 02-§31.3 -->
+- Past camps (end date in the past) display a green checkbox icon (✅) before
+  the camp name. <!-- 02-§31.4 -->
+- Status detection remains client-side via `data-end` attributes and
+  JavaScript, as defined in 02-§28.14. <!-- 02-§31.5 -->
+
+### 31.3 Camp item content
+
+- Each camp item shows the camp name, location, and formatted date
+  range. <!-- 02-§31.6 -->
+- Camp information text is no longer rendered in the listing. <!-- 02-§31.7 -->
+
+### 31.4 Content link styling
+
+- All links inside `.content` use `var(--color-terracotta)` as their text
+  color. <!-- 02-§31.8 -->
+- Content links have no underline by default; underline appears on
+  hover. <!-- 02-§31.9 -->
+
+### 31.5 Markdown heading support
+
+- The markdown converter supports `####` (h4) headings in addition to
+  h1–h3. <!-- 02-§31.10 -->
+
+### 31.6 Implementation constraints
+
+- All styling must use CSS custom properties from the design system.
+  No hardcoded colors, spacing, or typography. <!-- 02-§31.11 -->
+- No additional runtime JavaScript beyond the existing client-side date
+  detection. <!-- 02-§31.12 -->
+
+---
