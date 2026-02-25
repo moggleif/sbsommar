@@ -41,6 +41,51 @@ function render() {
   return renderEditPage(CAMP, LOCATIONS, API_URL);
 }
 
+// ── Per-field inline errors (02-§6.5) ─────────────────────────────────────────
+
+const REQUIRED_FIELDS = ['title', 'date', 'start', 'end', 'location', 'responsible'];
+
+describe('renderEditPage – per-field inline errors (02-§6.5)', () => {
+  it('ILE-E01: does not render a #form-errors block', () => {
+    assert.ok(
+      !render().includes('id="form-errors"'),
+      'Found id="form-errors" — the aggregated error box must be removed',
+    );
+  });
+
+  for (const field of REQUIRED_FIELDS) {
+    it(`ILE-E02-${field}: renders a .field-error span for "${field}"`, () => {
+      const html = render();
+      const errId = `err-${field}`;
+      assert.ok(
+        html.includes(`id="${errId}"`),
+        `No element with id="${errId}" found — each required field needs a .field-error span`,
+      );
+    });
+
+    it(`ILE-E03-${field}: input "${field}" has aria-describedby pointing to its error span`, () => {
+      const html = render();
+      const errId = `err-${field}`;
+      const pattern = new RegExp(`id="f-${field}"[^>]*aria-describedby="${errId}"`);
+      assert.ok(
+        pattern.test(html),
+        `Input f-${field} must have aria-describedby="${errId}"`,
+      );
+    });
+  }
+
+  it('ILE-E04: field-error spans are hidden by default', () => {
+    const html = render();
+    const matches = html.match(/class="field-error"[^>]*/g) || [];
+    assert.ok(matches.length >= REQUIRED_FIELDS.length, 'Not enough .field-error elements found');
+    for (const m of matches) {
+      assert.ok(m.includes('hidden'), `field-error span missing hidden attribute: ${m}`);
+    }
+  });
+});
+
+// ── Submit UX structure ───────────────────────────────────────────────────────
+
 describe('renderEditPage – submit UX structure', () => {
   // 02-§20.13: the old #result section must be removed and replaced by the modal
   it('EDIT-01 (02-§20.13): does not render a #result section', () => {
