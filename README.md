@@ -53,7 +53,7 @@ Everything in one place. Updated before every camp. Easy to navigate on any devi
 
 One of the site's most-used features during camp week is the live activity schedule.
 
-Participants can view the full **weekly overview**, a focused **daily view**, and a simplified **Today view** designed for mobile phones and shared display screens. Each activity shows its time, location, and who is responsible. Clicking an activity reveals the full description and any communication link.
+Participants can view the full **weekly overview** and a **Today view** showing what's happening right now. A separate **display mode** page is designed for shared screens around the camp — dark background, large text, no interaction needed. Each activity shows its time, location, and who is responsible. Clicking an activity reveals the full description and any communication link.
 
 Participants sign up to lead activities — a chess tournament, a hike, a film screening, a workshop — and add them directly through the site. The schedule updates within minutes. No admin needed. No emails back and forth.
 

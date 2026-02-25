@@ -113,14 +113,14 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | --- | --- | --- | --- | --- | --- |
 | `02-§2.1` | Homepage exists and is served at `/` | 03-ARCHITECTURE.md §5, §6 | — | `source/build/render-index.js`, `source/build/build.js` → `public/index.html` | implemented |
 | `02-§2.2` | Weekly schedule page exists at `/schema.html` | 03-ARCHITECTURE.md §5 | SNP-01 | `source/build/render.js`, `source/build/build.js` → `public/schema.html` | covered |
-| `02-§2.3` | Daily view page at `/dagens-schema.html` allows navigation between days | 03-ARCHITECTURE.md §5 | — | — (page exists but shows today only in display mode; no day navigation) | gap |
-| `02-§2.4` | Today/Display view at `/idag.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | — (URL mismatch: `idag.html` has standard layout; dark/no-nav view is at `dagens-schema.html`) | gap |
+| `02-§2.4` | Today view at `/idag.html` shows today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | — | `source/build/render-idag.js`, `source/build/build.js` → `public/idag.html` | implemented |
+| `02-§2.4a` | Display view at `/dagens-schema.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js`, `source/build/build.js` → `public/dagens-schema.html` | implemented |
 | `02-§2.5` | Add-activity form exists at `/lagg-till.html` | 03-ARCHITECTURE.md §3, §6 | — | `source/build/render-add.js`, `source/build/build.js` → `public/lagg-till.html` | implemented |
 | `02-§2.6` | Archive page exists at `/arkiv.html` | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js`, `source/build/build.js` → `public/arkiv.html` | covered |
 | `02-§2.7` | RSS feed exists at `/schema.rss` | — (no implementation doc) | — | — | gap |
 | `02-§2.8` | Homepage, schedule, add-activity, and archive pages share header and navigation | 03-ARCHITECTURE.md §6 | SNP-01 | `source/build/layout.js` – `pageNav()` | covered |
 | `02-§2.9` | None of the site pages require login | 03-ARCHITECTURE.md §3 | — | No authentication exists anywhere in the codebase | implemented |
-| `02-§2.10` | Today/Display view has no header or navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js` – no `pageNav()` call | implemented |
+| `02-§2.10` | Display view has no header or navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | — | `source/build/render-today.js` – no `pageNav()` call | implemented |
 | `02-§3.1` | Homepage answers all pre-camp questions (what, who, when, cost, registration, lodging, rules, testimonials) | 03-ARCHITECTURE.md §5 | — | `source/build/render-index.js`, `source/content/*.md` sections | implemented |
 | `02-§3.2` | Homepage includes a collapsible FAQ section | 03-ARCHITECTURE.md §5; `collapsible: true` in `sections.yaml` | RNI-22..28 | `source/build/render-index.js` – `convertMarkdown(…, collapsible: true)` | covered |
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | — | `source/build/build.js` – falls back to most recent camp by `start_date` | implemented |
@@ -128,10 +128,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§4.1` | Weekly schedule shows all activities for the full camp week, grouped by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `renderSchedulePage()`, `groupAndSortEvents()` | covered |
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
 | `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
-| `02-§4.4` | Daily view allows the user to navigate between days | 03-ARCHITECTURE.md §5 | — | — | gap |
 | `02-§4.5` | Today view (`/idag.html`) shows only today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | — | `source/build/render-idag.js`, `source/assets/js/client/events-today.js` | implemented |
-| `02-§4.6` | Today/Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | — | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` (at `/dagens-schema.html`, not `/idag.html` — see `02-§2.4`) | implemented |
-| `02-§4.7` | Today/Display view requires no interaction; no day navigation controls (see `02-§2.10`) | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day controls rendered | implemented |
+| `02-§4.6` | Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | — | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` → `/dagens-schema.html` | implemented |
+| `02-§4.7` | Display view requires no interaction to stay useful | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day controls rendered | implemented |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | — | No exclusion logic in `source/build/render.js`; CSS handles layout | implemented |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -253,9 +252,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `CL-§8.3` | Non-technical contributors can add images without editing layout files | 01-CONTRIBUTORS.md | — | Images referenced from Markdown content files | implemented |
 | `CL-§8.4` | Layout files do not need to be edited for content changes | 03-ARCHITECTURE.md §6 | — | Content-layout separation is architectural; `source/build/` is never touched for content edits | implemented |
 | `02-§4.10` | Weekly schedule groups activities by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `groupAndSortEvents()` | covered |
-| `02-§4.11` | Daily view shows activities for a single selected day | 03-ARCHITECTURE.md §5 | — | — (page exists but currently shows display mode, not a per-day list — see `02-§2.3`) | gap |
-| `02-§4.12` | Daily view shows the same fields as the weekly view | 05-DATA_CONTRACT.md §3 | — | — | gap |
-| `02-§4.13` | Today/Display view has no day navigation; it always shows today | 03-ARCHITECTURE.md §3 | — | `source/build/render-today.js` – no day navigation rendered | implemented |
+| `02-§4.13` | Today view has no day navigation; it always shows today | 03-ARCHITECTURE.md §3 | — | `source/build/render-idag.js`, `source/build/render-today.js` – no day navigation rendered | implemented |
 | `02-§5.2` | Empty fields are omitted from the detail view; no blank rows appear | 05-DATA_CONTRACT.md §3 | RND-33..38 | `source/build/render.js` – `eventExtraHtml()` guards each optional field | covered |
 | `02-§5.3` | The `owner` and `meta` fields are never shown in any public view | 05-DATA_CONTRACT.md §3.3 | — | `source/build/render.js` – neither field is referenced in render output | implemented |
 | `02-§8.3` | Locations must be selected from a predefined list | 03-ARCHITECTURE.md §6 | — | `source/build/render-add.js` – `<select>` populated from `local.yaml` | implemented |
@@ -612,10 +609,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 ## Summary
 
 ```text
-Total requirements:             483
-Covered (implemented + tested): 155
-Implemented, not tested:        301
-Gap (no implementation):         26
+Total requirements:             479
+Covered (implemented + tested): 145
+Implemented, not tested:        312
+Gap (no implementation):         22
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -707,73 +704,61 @@ Matrix cleanup (2026-02-25):
 
 ## Top Gaps — Prioritised Action List
 
-### Critical — broken or missing user-facing features
-
-1. **`02-§2.3` / `02-§4.4` / `02-§4.11` / `02-§4.12` — Daily view with day navigation** (`/dagens-schema.html`)
-   The spec defines a per-day schedule page with forward/back navigation and the same field display as the weekly view.
-   The current page at this URL is the projector/display mode view (dark, QR code, no nav).
-   No page exists that lets a user browse the schedule day by day.
-
-2. **`02-§2.4` — URL and layout mismatch for Today/Display view** (`/idag.html`)
-   The spec assigns the dark, no-nav display view to `/idag.html`.
-   In the implementation: `/idag.html` has the standard layout with nav; the dark view is at `/dagens-schema.html`.
-   The two pages need their URLs swapped, or the spec updated to match reality.
-
 ### High — missing whole features
 
-3. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
+1. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
    No RSS feed is generated; it must reflect the current state of the schedule.
    No implementation guidance document exists — `03-ARCHITECTURE.md` needs an RSS section before this can be built.
 
-4. **`02-§10.3` — String length limits in API validation**
+2. **`02-§10.3` — String length limits in API validation**
    `validate.js` type-checks strings but sets no maximum length.
    Unbounded strings can be committed to the YAML file.
 
 ### Medium — data integrity
 
-5. **`05-§4.1` — Event date range check (API server)**
+3. **`05-§4.1` — Event date range check (API server)**
    The API accepts any structurally valid `YYYY-MM-DD` date regardless of camp `start_date`/`end_date`.
 
-6. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
+4. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
    `validate.js` checks `start` is non-empty but not that it matches `HH:MM`.
    `end` is not validated as a valid `HH:MM` string — only that it is after `start`.
 
-7. **`05-§5.1` — Duplicate event uniqueness not enforced**
+5. **`05-§5.1` — Duplicate event uniqueness not enforced**
    The `(title + date + start)` combination is never checked for uniqueness before committing.
 
-8. **`05-§6.1` / `CL-§5.9` — Event ID uniqueness not enforced**
+6. **`05-§6.1` / `CL-§5.9` — Event ID uniqueness not enforced**
    Identical submissions produce identical IDs. No check is made against existing IDs in the file.
    (`CL-§5.9` is a duplicate of this gap — same concern from CLAUDE.md.)
 
-9. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
+7. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
     No code prevents a camp from being marked both active and archived.
 
-10. **`CL-§5.5` / `CL-§6.3` — Build-time YAML data validation**
+8. **`CL-§5.5` / `CL-§6.3` — Build-time YAML data validation**
     Manually edited YAML bypasses all validation (required fields, date ranges, duplicate IDs).
     Validation only runs in the API layer when events are submitted through the form.
-    (`CL-§5.9` / `05-§6.1` duplicate ID gap is listed separately in item 8.)
+    (`CL-§5.9` / `05-§6.1` duplicate ID gap is listed separately in item 6.)
 
 ### Low — tooling, design, and accessibility gaps
 
-11. **`CL-§5.1` — HTML validation in CI**
+9. **`CL-§5.1` — HTML validation in CI**
     No HTML linter is configured; invalid HTML does not fail the build.
 
-12. **`CL-§5.2` — CSS linting in CI**
+10. **`CL-§5.2` — CSS linting in CI**
     No CSS linter is configured.
 
-13. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
+11. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
     Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
     `loading="lazy"`, hero preload, `fetchpriority="high"`, first-section eager loading, and `nav.js defer` are implemented (02-§25.1–25.6).
     Remaining: manual conversion of 6 small PNG/JPG source files to WebP.
 
-15. **`02-§13.2` / `07-§9.2` — Visible focus states**
+12. **`02-§13.2` / `07-§9.2` — Visible focus states**
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
 
-16. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
+13. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
     `<details>/<summary>` is used on the schedule page without explicit `aria-expanded` or `aria-controls`.
     Note: `<details>` is natively accessible — browsers announce open/closed state. The archive accordion (`02-§21.6`) uses explicit ARIA and is covered (ARK-04, ARK-05). Consider accepting native `<details>` as sufficient or adding explicit ARIA.
 
-17. **`07-§6.33` — Colored left border for activity type** *(deferred)*
+14. **`07-§6.33` — Colored left border for activity type** *(deferred)*
     The design spec says "may have" (optional). Requires an activity-type field in the data model, which has never been specced. Not actionable without a data model change.
 
 ---
