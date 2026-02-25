@@ -3,6 +3,7 @@
 const https = require('https');
 const yaml  = require('js-yaml');
 const { patchEventInYaml } = require('./edit-event');
+const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 
 const CAMPS_PATH = 'source/data/camps.yaml';
 
@@ -236,12 +237,7 @@ async function addEventToActiveCamp(body) {
   // Step 1: resolve active camp from main
   const { content: campsYaml } = await getFile(CAMPS_PATH);
   const campsData = yaml.load(campsYaml);
-  const activeCamps = (campsData.camps || []).filter((c) => c.active === true);
-
-  if (activeCamps.length === 0) throw new Error('No active camp found');
-  if (activeCamps.length > 1)  throw new Error('Multiple active camps found');
-
-  const camp         = activeCamps[0];
+  const camp = resolveActiveCamp(campsData.camps || []);
   const campFilePath = `source/data/${camp.file}`;
 
   // Step 2: fetch camp file + SHA (reads from main via GITHUB_BRANCH)
@@ -271,12 +267,7 @@ async function updateEventInActiveCamp(eventId, updates) {
   // Step 1: resolve active camp
   const { content: campsYaml } = await getFile(CAMPS_PATH);
   const campsData = yaml.load(campsYaml);
-  const activeCamps = (campsData.camps || []).filter((c) => c.active === true);
-
-  if (activeCamps.length === 0) throw new Error('No active camp found');
-  if (activeCamps.length > 1)  throw new Error('Multiple active camps found');
-
-  const camp         = activeCamps[0];
+  const camp = resolveActiveCamp(campsData.camps || []);
   const campFilePath = `source/data/${camp.file}`;
 
   // Step 2: fetch camp file

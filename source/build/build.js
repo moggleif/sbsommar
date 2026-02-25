@@ -11,6 +11,7 @@ const { renderTodayPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml } = require('./render-index');
 const { renderArkivPage } = require('./render-arkiv');
+const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const CONTENT_DIR = path.join(__dirname, '..', 'content');
@@ -29,16 +30,8 @@ if (!fs.existsSync(campsFile)) {
 const campsData = yaml.load(fs.readFileSync(campsFile, 'utf8'));
 const camps = campsData.camps;
 
-let activeCamp = camps.find((c) => c.active === true);
-if (!activeCamp) {
-  const sorted = [...camps].sort((a, b) =>
-    toDateString(b.start_date).localeCompare(toDateString(a.start_date)),
-  );
-  activeCamp = sorted[0];
-  console.log(`No active camp – using most recent: ${activeCamp.name}`);
-} else {
-  console.log(`Active camp: ${activeCamp.name}`);
-}
+const activeCamp = resolveActiveCamp(camps);
+console.log(`Active camp: ${activeCamp.name} (${activeCamp.start_date} – ${activeCamp.end_date})`);
 
 // ── Load camp file ───────────────────────────────────────────────────────────
 

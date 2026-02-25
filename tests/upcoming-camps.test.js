@@ -23,7 +23,7 @@ const futureCamp = {
   link: 'https://www.facebook.com/groups/syssleback2026',
   information: 'Info om Augusti.',
   archived: false,
-  active: false,
+
 };
 
 const futureCampJuni = {
@@ -35,7 +35,7 @@ const futureCampJuni = {
   link: '',
   information: '',
   archived: false,
-  active: false,
+
 };
 
 const pastCampThisYear = {
@@ -47,7 +47,6 @@ const pastCampThisYear = {
   link: '',
   information: '',
   archived: false,
-  active: true,
 };
 
 const archivedCampOldYear = {
@@ -59,7 +58,7 @@ const archivedCampOldYear = {
   link: 'https://www.facebook.com/groups/syssleback2025',
   information: 'Gammal info.',
   archived: true,
-  active: false,
+
 };
 
 const archivedCampCurrentYear = {
@@ -71,7 +70,7 @@ const archivedCampCurrentYear = {
   link: '',
   information: '',
   archived: true,
-  active: false,
+
 };
 
 // ── Filtering (02-§28.1) ────────────────────────────────────────────────────

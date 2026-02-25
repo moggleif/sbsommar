@@ -63,11 +63,6 @@ function validateYaml(content) {
     errors.push(`camp.end_date must be on or after camp.start_date`);
   }
 
-  // Active + archived conflict (05-§1.3)
-  if (camp.active === true && camp.archived === true) {
-    errors.push('camp must not be both active and archived');
-  }
-
   // ── Events ─────────────────────────────────────────────────────────────────
 
   if (!Array.isArray(data.events)) {

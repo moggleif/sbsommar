@@ -15,7 +15,6 @@ const campA = {
   link: 'https://www.facebook.com/groups/syssleback2025',
   information: 'Info om 2025.',
   archived: true,
-  active: false,
 };
 
 const campB = {
@@ -27,7 +26,6 @@ const campB = {
   link: '',
   information: '',
   archived: true,
-  active: false,
 };
 
 const activeCamp = {
@@ -39,7 +37,6 @@ const activeCamp = {
   link: '',
   information: '',
   archived: false,
-  active: true,
 };
 
 // Sample events for testing event list rendering

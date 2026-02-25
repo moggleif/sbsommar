@@ -70,10 +70,11 @@ npm run test:update-snapshots    # Regenerate schedule page snapshots
 
 Event data lives in `source/data/`. One YAML file per camp.
 
-Which camp is active is determined by `source/data/camps.yaml`:
+Which camp is active is derived automatically from dates at build time:
 
-- If any camp has `active: true`, that camp is used.
-- If none does, the camp with the most recent `start_date` is shown.
+1. If today falls within a camp's `start_date..end_date`, that camp is active.
+2. Otherwise, the next upcoming camp (nearest future `start_date`) is active.
+3. If no upcoming camps exist, the most recent camp (latest `end_date`) is active.
 
 Events are sorted chronologically at build time, so their order in the YAML file does not matter. New events submitted through the form are committed to GitHub and merged via auto-merge PR — the file on disk updates when the next deploy runs.
 
@@ -156,10 +157,9 @@ npm start
 ### Before Camp
 
 1. Create a new YAML file in `source/data/` (e.g. `2026-06-syssleback.yaml`).
-2. Add the camp entry in `source/data/camps.yaml` with `active: true`.
-3. Set the previous camp to `active: false`.
-4. Run `npm run build` to verify.
-5. Deploy.
+2. Add the camp entry in `source/data/camps.yaml` with dates and `archived: false`.
+3. Run `npm run build` to verify the correct camp is derived as active.
+4. Deploy.
 
 Minimal camp file:
 
@@ -184,12 +184,9 @@ to fix or remove entries.
 
 ### After Camp
 
-1. Set `active: false` for the camp in `source/data/camps.yaml`.
-2. Set `archived: true`.
-3. Commit. The YAML file already has its permanent name — it becomes the archive as-is.
-4. Deploy. The next most recent camp (or the newly active one) is now shown.
-
-Only one camp should have `active: true` at a time.
+1. Set `archived: true` for the camp in `source/data/camps.yaml`.
+2. Commit. The YAML file already has its permanent name — it becomes the archive as-is.
+3. Deploy. The system automatically derives the next active camp from dates.
 
 ---
 
@@ -197,7 +194,7 @@ Only one camp should have `active: true` at a time.
 
 ### Incorrect or unwanted event
 
-1. Edit the active camp YAML directly on GitHub (or locally and push).
+1. Edit the current camp's YAML directly on GitHub (or locally and push).
 2. Merge to `main` — the deploy pipeline rebuilds automatically.
 
 Git history provides a full audit trail of all changes, including every event submitted through the form.
