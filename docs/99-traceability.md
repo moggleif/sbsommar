@@ -105,6 +105,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22.1–22.6 implemented and covered; event data CI pipeline — 02-§23.1–23.13 implemented; 8 covered, 5 implemented).
 
+
 ---
 
 ## Table
@@ -459,6 +460,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `02-§22.4` | No render function or template contains literal footer markup — `footer.md` is the single source of truth | 03-ARCHITECTURE.md §4b | — (code review: no hardcoded footer text in any render function) | Convention enforced by single-source architecture | implemented |
 | `02-§22.5` | If `footer.md` is missing at build time, all pages render with an empty footer and the build does not crash | 03-ARCHITECTURE.md §4b | FTR-01, FTR-05, FTR-07, FTR-09, FTR-11, FTR-13, FTR-15, FTR-17 | `source/build/build.js` – `fs.existsSync()` fallback to `''`; `pageFooter('')` returns `''` | covered |
 | `02-§22.6` | Updating `footer.md` and running the build changes the footer on all pages without modifying any other file | 03-ARCHITECTURE.md §4b | — (follows from §22.3; no separate test needed) | Verified structurally: `footerHtml` flows from `footer.md` through `convertMarkdown()` into every page | implemented |
+
 | `02-§23.1` | CI must parse and structurally validate the changed event YAML file on event-branch PRs before merge | 03-ARCHITECTURE.md §11 | LNT-01 | `source/scripts/lint-yaml.js` – `validateYaml()` parses with js-yaml; `.github/workflows/event-data-deploy.yml` – `lint-yaml` job | covered |
 | `02-§23.2` | Lint validates all required fields (id, title, date, start, end, location, responsible) are present and non-empty | 03-ARCHITECTURE.md §11.1 | LNT-02..09 | `source/scripts/lint-yaml.js` – `EVENT_REQUIRED` field loop | covered |
 | `02-§23.3` | Lint validates that date is YYYY-MM-DD, calendar-valid, and within the camp's date range | 03-ARCHITECTURE.md §11.1 | LNT-10..13 | `source/scripts/lint-yaml.js` – `DATE_RE` check + `isNaN(new Date(d))` + camp range comparison | covered |
@@ -472,6 +474,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-24 (shared site footer — 02-§22
 | `02-§23.11` | On successful validation the pipeline deploys schema.html, idag.html, dagens-schema.html, and events.json to FTP | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: submit a test event and verify pages update on FTP before PR merges) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job uploads the four files via curl | implemented |
 | `02-§23.12` | The targeted FTP upload must not modify any files outside the four schema-derived files | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: confirm no other FTP files are touched after an event PR) | `.github/workflows/event-data-deploy.yml` – `ftp-deploy` job explicitly names only the four files in the curl loop | implemented |
 | `02-§23.13` | The targeted deployment must complete while the PR is still open (before auto-merge) | 03-ARCHITECTURE.md §11 | — (CI end-to-end: confirm FTP files update before the PR shows as merged) | `.github/workflows/event-data-deploy.yml` – triggered by `pull_request` event (not `push` to main), so it runs on the PR branch before merge | implemented |
+
 
 
 ---
@@ -494,6 +497,7 @@ Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–
 13 requirements added for event data CI pipeline (02-§23.1–23.13):
   8 covered (LNT-01..18, SEC-01..13): 02-§23.1–23.8
   5 implemented (CI workflow, no unit test possible): 02-§23.9–23.13
+
 Snapshot updated to include Arkiv nav link.
 13 requirements added and implemented for edit-activity submit UX flow (02-§20.1–20.13).
 02-§18.44 covered (BUILD-01..04): edit form URL derivation via editApiUrl().

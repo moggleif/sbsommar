@@ -72,7 +72,7 @@ function validEvent(overrides = {}) {
 
 // ── LNT-01: YAML parse ────────────────────────────────────────────────────────
 
-describe('validateYaml – parse check (02-§22.1)', () => {
+describe('validateYaml – parse check (02-§23.1)', () => {
   it('LNT-01: accepts a valid YAML file', () => {
     const r = validateYaml(makeYaml([validEvent()]));
     assert.strictEqual(r.ok, true, `expected ok but got errors: ${r.errors}`);
@@ -85,9 +85,9 @@ describe('validateYaml – parse check (02-§22.1)', () => {
   });
 });
 
-// ── LNT-02..09: Required event fields (02-§22.2) ─────────────────────────────
+// ── LNT-02..09: Required event fields (02-§23.2) ─────────────────────────────
 
-describe('validateYaml – required event fields (02-§22.2)', () => {
+describe('validateYaml – required event fields (02-§23.2)', () => {
   const REQUIRED = ['id', 'title', 'date', 'start', 'end', 'location', 'responsible'];
 
   for (const field of REQUIRED) {
@@ -127,9 +127,9 @@ describe('validateYaml – required event fields (02-§22.2)', () => {
   });
 });
 
-// ── LNT-10..13: Date validation (02-§22.3) ────────────────────────────────────
+// ── LNT-10..13: Date validation (02-§23.3) ────────────────────────────────────
 
-describe('validateYaml – date validation (02-§22.3)', () => {
+describe('validateYaml – date validation (02-§23.3)', () => {
   it('LNT-10: rejects date in wrong format', () => {
     const r = validateYaml(makeYaml([validEvent({ date: '01-07-2026' })]));
     assert.strictEqual(r.ok, false);
@@ -160,9 +160,9 @@ describe('validateYaml – date validation (02-§22.3)', () => {
   });
 });
 
-// ── LNT-14..17: Time validation (02-§22.4) ────────────────────────────────────
+// ── LNT-14..17: Time validation (02-§23.4) ────────────────────────────────────
 
-describe('validateYaml – time validation (02-§22.4)', () => {
+describe('validateYaml – time validation (02-§23.4)', () => {
   it('LNT-14: rejects start time in wrong format', () => {
     const r = validateYaml(makeYaml([validEvent({ start: '8:00' })]));
     assert.strictEqual(r.ok, false);
@@ -193,9 +193,9 @@ describe('validateYaml – time validation (02-§22.4)', () => {
   });
 });
 
-// ── LNT-18: Duplicate IDs (02-§22.5) ──────────────────────────────────────────
+// ── LNT-18: Duplicate IDs (02-§23.5) ──────────────────────────────────────────
 
-describe('validateYaml – duplicate event IDs (02-§22.5)', () => {
+describe('validateYaml – duplicate event IDs (02-§23.5)', () => {
   it('LNT-18: rejects a file with two events sharing the same id', () => {
     const events = [
       validEvent({ id: 'same-id', date: '2026-07-01', start: '08:00', end: '09:00' }),

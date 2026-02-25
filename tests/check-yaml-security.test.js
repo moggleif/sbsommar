@@ -84,9 +84,9 @@ describe('scanYaml – baseline', () => {
   });
 });
 
-// ── SEC-01..06: Injection patterns (02-§22.6) ─────────────────────────────────
+// ── SEC-01..06: Injection patterns (02-§23.6) ─────────────────────────────────
 
-describe('scanYaml – injection patterns (02-§22.6)', () => {
+describe('scanYaml – injection patterns (02-§23.6)', () => {
   it('SEC-01: rejects <script> tag in title', () => {
     const r = scanYaml(makeYaml([clean({ title: '<script>alert(1)</script>' })]));
     assert.strictEqual(r.ok, false);
@@ -140,9 +140,9 @@ describe('scanYaml – injection patterns (02-§22.6)', () => {
   });
 });
 
-// ── SEC-07..09: Link protocol validation (02-§22.7) ──────────────────────────
+// ── SEC-07..09: Link protocol validation (02-§23.7) ──────────────────────────
 
-describe('scanYaml – link protocol (02-§22.7)', () => {
+describe('scanYaml – link protocol (02-§23.7)', () => {
   it('SEC-07: rejects a javascript: link', () => {
     const r = scanYaml(makeYaml([clean({ link: 'javascript:alert(1)' })]));
     assert.strictEqual(r.ok, false);
@@ -177,9 +177,9 @@ describe('scanYaml – link protocol (02-§22.7)', () => {
   });
 });
 
-// ── SEC-10..13: Length limits (02-§22.8) ─────────────────────────────────────
+// ── SEC-10..13: Length limits (02-§23.8) ─────────────────────────────────────
 
-describe('scanYaml – length limits (02-§22.8)', () => {
+describe('scanYaml – length limits (02-§23.8)', () => {
   it('SEC-10: rejects title exceeding 200 characters', () => {
     const r = scanYaml(makeYaml([clean({ title: 'A'.repeat(201) })]));
     assert.strictEqual(r.ok, false);
