@@ -382,3 +382,18 @@ events:
     meta:
       created_at: 2026-02-24 19:11
       updated_at: 2026-02-24 19:22
+  - id: nytt-och-snabbt-2026-02-25-1400
+    title: Nytt och snabbt
+    date: '2026-02-25'
+    start: '14:00'
+    end: '14:08'
+    location: AndreasTältet
+    responsible: mroga
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-25 07:59
+      updated_at: 2026-02-25 07:59
