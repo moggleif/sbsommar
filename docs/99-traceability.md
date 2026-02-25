@@ -762,12 +762,16 @@ Matrix cleanup (2026-02-25):
     `loading="lazy"`, hero preload, `fetchpriority="high"`, first-section eager loading, and `nav.js defer` are implemented (02-§25.1–25.6).
     Remaining: manual conversion of 6 small PNG/JPG source files to WebP.
 
-5. **`02-§13.2` / `07-§9.2` — Visible focus states**
-    Explicit `:focus-visible` rules are not confirmed in `style.css`.
+5. **`02-§13.2` / `07-§9.2` — Visible focus states** *(resolved)*
+    `:focus-visible` rules added to all interactive elements in `style.css`:
+    `outline: 2px solid var(--color-terracotta); outline-offset: 2px`.
+    Form inputs retain their `:focus` border-color change and gain the outline on `:focus-visible`.
 
-6. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes**
-    `<details>/<summary>` is used on the schedule page without explicit `aria-expanded` or `aria-controls`.
-    Note: `<details>` is natively accessible — browsers announce open/closed state. The archive accordion (`02-§21.6`) uses explicit ARIA and is covered (ARK-04, ARK-05). Consider accepting native `<details>` as sufficient or adding explicit ARIA.
+6. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes** *(resolved)*
+    Native `<details>/<summary>` elements satisfy the ARIA requirement — browsers expose
+    expanded/collapsed state to assistive technology without explicit attributes.
+    Custom accordion components (archive timeline) already use explicit `aria-expanded`
+    and `aria-controls` (ARK-04, ARK-05). Design doc updated to codify this decision.
 
 7. **`07-§6.33` — Colored left border for activity type** *(deferred)*
     The design spec says "may have" (optional). Requires an activity-type field in the data model, which has never been specced. Not actionable without a data model change.
