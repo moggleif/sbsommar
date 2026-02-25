@@ -13,7 +13,7 @@ function editApiUrl(addUrl) {
   return addUrl.replace(/\/add-event$/, '/edit-event');
 }
 
-function renderEditPage(camp, locations, apiUrl, footerHtml = '') {
+function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = []) {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -37,7 +37,7 @@ function renderEditPage(camp, locations, apiUrl, footerHtml = '') {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-${pageNav('redigera.html')}
+${pageNav('redigera.html', navSections)}
 
   <div id="edit-loading" role="status">
     <p>Laddar aktivitet…</p>
@@ -125,6 +125,7 @@ ${locationOptions}
   </div>
 
   <script src="redigera.js"></script>
+  <script src="nav.js"></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

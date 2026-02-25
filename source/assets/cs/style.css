@@ -75,36 +75,6 @@ h3 {
   display: block;
 }
 
-/* ── Section navigation ── */
-
-.section-nav {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-sm) var(--space-md);
-  margin-bottom: var(--space-xl);
-}
-
-.section-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px var(--space-sm);
-}
-
-.section-nav a {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-terracotta);
-  text-decoration: none;
-}
-
-.section-nav a:hover {
-  text-decoration: underline;
-}
-
 /* ── Blockquote ── */
 
 blockquote {
@@ -371,11 +341,46 @@ details.event-row[open] > summary .ev-title {
 /* ── Navigation ── */
 
 .page-nav {
-  display: flex;
-  gap: var(--space-sm);
+  position: relative;
   margin-bottom: var(--space-md);
-  padding-bottom: var(--space-xs);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: var(--space-xs);
+}
+
+/* Hamburger toggle – hidden on desktop, shown on mobile */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--color-charcoal);
+  line-height: 0;
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  margin: 4px 0;
+}
+
+/* Desktop: both rows always visible */
+.nav-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px var(--space-sm);
+  margin-bottom: 6px;
+}
+
+.nav-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px var(--space-sm);
+  padding-top: 6px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .nav-link {
@@ -392,6 +397,57 @@ details.event-row[open] > summary .ev-title {
 .nav-link.active {
   color: var(--color-navy);
   opacity: 1;
+}
+
+.nav-link--section {
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.45;
+}
+
+/* Mobile: hamburger visible, menu hidden until toggled */
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-cream);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: var(--space-md) var(--space-sm);
+    z-index: 100;
+  }
+
+  .nav-menu.is-open {
+    display: block;
+  }
+
+  .nav-pages {
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: var(--space-sm);
+  }
+
+  .nav-sections {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nav-link,
+  .nav-link--section {
+    font-size: 15px;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 6px 0;
+    opacity: 0.75;
+  }
 }
 
 /* ── Buttons ── */

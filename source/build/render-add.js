@@ -5,7 +5,7 @@ const { pageNav, pageFooter } = require('./layout');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
-function renderAddPage(camp, locations, apiUrl, footerHtml = '') {
+function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = []) {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -29,7 +29,7 @@ function renderAddPage(camp, locations, apiUrl, footerHtml = '') {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-${pageNav('lagg-till.html')}
+${pageNav('lagg-till.html', navSections)}
 
   <h1>Lägg till aktivitet</h1>
   <p class="intro">Kolla gärna <a href="schema.html">schemat</a> innan du lägger till din aktivitet – välj en tid som inte krockar med något annat.</p>
@@ -102,6 +102,7 @@ ${locationOptions}
 
   <script src="cookie-consent.js"></script>
   <script src="lagg-till.js"></script>
+  <script src="nav.js"></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

@@ -149,14 +149,10 @@ function convertMarkdown(md, headingOffset = 0, collapsible = false) {
  * @param {string|null} opts.heroAlt  - alt text for hero image
  * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
  */
-function renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml = '') {
+function renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml = '', navSections = []) {
   const heroHtml = heroSrc
     ? `\n  <div class="hero">\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img">\n  </div>`
     : '';
-
-  const sectionNavItems = sections
-    .map((s) => `      <li><a href="#${s.id}">${s.navLabel}</a></li>`)
-    .join('\n');
 
   const contentSections = sections
     .map((s, i) => {
@@ -178,15 +174,11 @@ function renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml = '') {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-${pageNav('index.html', { includeIdag: false })}${heroHtml}
-  <nav class="section-nav" aria-label="Sidnavigation">
-    <ul>
-${sectionNavItems}
-    </ul>
-  </nav>
+${pageNav('index.html', navSections)}${heroHtml}
   <div class="content">
 ${contentSections}
   </div>
+  <script src="nav.js"></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

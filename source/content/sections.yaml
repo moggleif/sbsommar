@@ -1,28 +1,39 @@
 sections:
   - file: index.md
     id: start
+    nav: Om lägret
   - file: testimonials.md
     id: testimonials
+    nav: Röster
   - file: faq.md
     id: faq
     nav: Vanliga frågor
     collapsible: true
   - file: registration.md
     id: anmalan
+    nav: Anmälan
   - file: rules.md
     id: regler
+    nav: Regler
   - file: food.md
     id: mat
+    nav: Mat
   - file: pricing.md
     id: kostnad
+    nav: Kostnad
   - file: local-info.md
     id: service
+    nav: Service
   - file: activities.md
     id: aktiviteter
+    nav: Aktiviteter
   - file: locations.md
     id: lokaler
+    nav: Lokaler
     collapsible: true
   - file: discord-guide.md
     id: discord
+    nav: Discord
   - file: how-it-started.md
     id: historia
+    nav: Historik

@@ -86,7 +86,7 @@ function renderDaySection(date, dayEvents) {
   ].join('\n');
 }
 
-function renderSchedulePage(camp, events, footerHtml = '') {
+function renderSchedulePage(camp, events, footerHtml = '', navSections = []) {
   const { dates, byDate } = groupAndSortEvents(events);
   const daySections = dates.map((date) => renderDaySection(date, byDate[date])).join('\n\n');
   const campName = escapeHtml(camp.name);
@@ -100,13 +100,14 @@ function renderSchedulePage(camp, events, footerHtml = '') {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-${pageNav('schema.html')}
+${pageNav('schema.html', navSections)}
   <h1>Schema – ${campName}</h1>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
   <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>
 
 ${daySections}
   <script src="session.js"></script>
+  <script src="nav.js"></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>
