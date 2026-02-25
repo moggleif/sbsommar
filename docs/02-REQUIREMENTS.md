@@ -666,3 +666,54 @@ It applies only to PRs from branches matching `event/**` (add-event) and
   schedule is visible to participants without waiting for the full site deploy. <!-- 02-§23.13 -->
 
 ---
+
+## 24. Unified Navigation
+
+The site must have exactly one navigation component, appearing at the top of every
+page. There must be no secondary or duplicate navigation menus elsewhere on any page.
+
+### 24.1 Structure
+
+- Every page must include the same navigation header. <!-- 02-§24.1 -->
+- The navigation must appear only once per page, in the header area, before
+  any page content. <!-- 02-§24.2 -->
+- The index page must not have an additional section-navigation menu below the
+  hero image. <!-- 02-§24.3 -->
+
+### 24.2 Page links
+
+The navigation must contain links to all main pages: <!-- 02-§24.4 -->
+
+- Hem (`index.html`)
+- Schema (`schema.html`)
+- Idag (`idag.html`)
+- Lägg till aktivitet (`lagg-till.html`)
+- Arkiv (`arkiv.html`)
+
+The link for the current page must be visually marked as active. <!-- 02-§24.5 -->
+These links must be identical on all pages, including the index page. <!-- 02-§24.6 -->
+
+### 24.3 Section links
+
+The navigation must also include anchor links to the main sections of the
+index page. <!-- 02-§24.7 -->
+
+- Short nav labels are defined per section in `sections.yaml` via the `nav:` field. <!-- 02-§24.8 -->
+- Section links on non-index pages must point to `index.html#id`. <!-- 02-§24.9 -->
+
+### 24.4 Mobile behaviour
+
+- On mobile (viewport narrower than 768 px), the navigation must be collapsed
+  by default and toggled via a hamburger button. <!-- 02-§24.10 -->
+- The hamburger button must have an accessible label (`aria-label`). <!-- 02-§24.11 -->
+- The hamburger button must use `aria-expanded` to communicate state to
+  assistive technologies. <!-- 02-§24.12 -->
+- The expanded menu must be closable by pressing Escape. <!-- 02-§24.13 -->
+- The expanded menu must be closable by clicking outside it. <!-- 02-§24.14 -->
+
+### 24.5 Desktop behaviour
+
+- On desktop (viewport 768 px and wider), the hamburger button must be hidden
+  and all navigation links must be directly visible. <!-- 02-§24.15 -->
+
+---
