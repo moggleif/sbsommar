@@ -9,7 +9,7 @@ const { renderAddPage } = require('./render-add');
 const { renderEditPage, editApiUrl } = require('./render-edit');
 const { renderTodayPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
-const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1 } = require('./render-index');
+const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml } = require('./render-index');
 const { renderArkivPage } = require('./render-arkiv');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
@@ -179,6 +179,15 @@ async function main() {
 
   const sections = sectionsConfig.sections
     .map((def, i) => {
+      // Special section types that render from data instead of markdown
+      if (def.type === 'upcoming-camps') {
+        const currentYear = new Date().getFullYear();
+        const html = renderUpcomingCampsHtml(camps, currentYear);
+        if (!html) return null;
+        const navLabel = def.nav || 'Kommande läger';
+        return { id: def.id, navLabel, html };
+      }
+
       const filePath = path.join(CONTENT_DIR, def.file);
       if (!fs.existsSync(filePath)) {
         console.warn(`WARNING: content file not found: ${def.file}`);
