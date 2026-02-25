@@ -111,6 +111,12 @@ h3 {
   opacity: 0.8;
 }
 
+.hero-social-link:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
 .hero-social-link img {
   width: 64px;
   height: 64px;
@@ -429,6 +435,11 @@ details.event-row[open] > summary .ev-title {
   color: var(--color-terracotta);
   font-weight: 600;
   font-size: 13px;
+}
+
+.event-ext-link:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 /* ── Navigation ── */
@@ -795,6 +806,11 @@ textarea {
   border-color: rgba(255, 255, 255, 0.6);
 }
 
+.copy-btn:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
 /* ── Accordion (collapsible sections: FAQ, Lokaler) ── */
 
 details.accordion {
@@ -922,6 +938,11 @@ details.accordion > summary:focus-visible {
 
 .edit-link:hover {
   text-decoration: underline;
+}
+
+.edit-link:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 /* ── Cookie consent actions (inside modal) ── */
@@ -1081,6 +1102,11 @@ body.modal-open {
 
 .camp-name a:hover {
   text-decoration: underline;
+}
+
+.camp-name a:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 .camp-past .camp-name {
