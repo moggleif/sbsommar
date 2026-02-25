@@ -74,8 +74,10 @@ The API server (`app.js`) handles each submission as follows:
 4. Finds the active camp and reads its YAML file from GitHub.
 5. Appends the new event and commits it to a temporary branch.
 6. Opens a pull request with auto-merge enabled.
-7. CI runs a build-only check (lint and tests are skipped for data-only changes — commits that only modify YAML files in `source/data/`).
-8. The PR merges automatically. The deploy pipeline runs and the schedule is live within minutes.
+7. The event data CI pipeline runs (see §11): YAML lint → security scan → build → targeted FTP upload of the four schema files.
+8. The PR merges automatically via auto-merge. The full deploy pipeline then rebuilds and re-uploads the entire site (idempotent for the schema files).
+
+The targeted FTP upload in step 7 makes the updated schedule visible to participants while the PR is still open — typically within a minute of submission.
 
 The active camp's YAML file is always version-controlled. Git history provides a full audit trail of every event submitted through the form.
 
@@ -87,12 +89,12 @@ flowchart TD
     D --> E[Read active camp YAML]
     E --> F[Append event · create ephemeral branch]
     F --> G[Open PR · enable auto-merge]
-    G --> H[CI: build only — lint/test skipped for data-only changes]
+    G --> H["Event data CI pipeline (§11):\nLint YAML → Security scan\n→ Build → FTP upload 4 files"]
     H --> I[Auto-merge to main]
     I --> J
 
-    subgraph J [Deploy on push to main]
-        K[Build public/] --> L[FTP: updated schedule pages live]
+    subgraph J [Full deploy on push to main]
+        K[Build public/] --> L[FTP: full site re-upload]
     end
 ```
 
@@ -484,6 +486,116 @@ button. Form data is preserved so the user can correct and resubmit.
 | --- | --- |
 | `source/build/render-edit.js` | Wrap form fields in `<fieldset>`, remove `#result` section, add `#submit-modal` skeleton |
 | `source/assets/js/client/redigera.js` | Implement lock/modal/state logic |
+
+---
+
+## 11. Event Data CI Pipeline
+
+When a participant submits or edits an activity, `source/api/github.js` opens an ephemeral
+PR from a branch named `event/**` (add) or `event-edit/**` (edit). The event data CI
+pipeline (`.github/workflows/event-data-deploy.yml`) intercepts these PRs and runs four
+sequential jobs:
+
+### 11.1 Job: Lint event YAML (`source/scripts/lint-yaml.js`)
+
+Parses and structurally validates the changed per-camp YAML file using `js-yaml`.
+
+Checks:
+
+- YAML is syntactically valid (js-yaml throws on parse error)
+- Top-level `camp` key present with all required fields
+- Camp `start_date` / `end_date` in YYYY-MM-DD format; end ≥ start
+- `events` is an array
+- Every event has all required fields: `id`, `title`, `date`, `start`, `end`, `location`, `responsible`
+- No duplicate `id` values within the file
+- `date` is a valid calendar date within the camp's date range
+- `start` and `end` match HH:MM; `end` is strictly after `start`
+- Optional fields (`description`, `link`) are string or null if present
+
+If this job fails, all downstream jobs are skipped.
+
+### 11.2 Job: Security scan (`source/scripts/check-yaml-security.js`)
+
+Scans free-text event fields for content that would be dangerous if injected into the
+rendered HTML.
+
+Fields scanned: `title`, `location`, `responsible`, `description`.
+
+Patterns that cause failure:
+
+- `<script` — script tags
+- `javascript:` — javascript URI scheme
+- `on\w+=` — event handler attributes (`onerror=`, `onclick=`, etc.)
+- `<iframe`, `<object`, `<embed` — embedding elements
+- `data:text/html` — inline HTML data URIs
+
+Link validation:
+
+- If `link` is non-empty it must begin with `http://` or `https://`.
+
+Length limits (generous, to reject abuse):
+
+- `title`, `location`, `responsible`: 200 characters
+- `description`: 2 000 characters
+- `link`: 500 characters
+
+Fields not scanned: `owner.name`, `owner.email` — these are never rendered in public HTML.
+
+If this job fails, build and deploy are skipped.
+
+### 11.3 Job: Build
+
+Runs `npm run build` (the full site build). The four event-data-derived files are then
+captured as a workflow artefact:
+
+- `public/schema.html`
+- `public/idag.html`
+- `public/dagens-schema.html`
+- `public/events.json`
+
+The other pages (`index.html`, `lagg-till.html`, `redigera.html`, `arkiv.html`) are built
+but not deployed — they are not affected by event data changes.
+
+### 11.4 Job: Targeted FTP deploy
+
+Downloads the artefact and uploads only the four files to FTP using `curl`:
+
+```bash
+curl --upload-file "deploy-output/public/$FILE" \
+     --user "$FTP_USERNAME:$FTP_PASSWORD" \
+     "ftp://$FTP_HOST${FTP_TARGET_DIR}$FILE"
+```
+
+`upload-artifact` preserves the workspace-relative path, so files land at
+`deploy-output/public/<file>` (not `deploy-output/<file>`).
+
+`SamKirkland/FTP-Deploy-Action` is intentionally not used here: that action's
+`dangerous-clean-slate` mode would delete the entire site. `curl` is available on
+`ubuntu-latest` without any additional installation.
+
+Reuses the same secrets as `deploy.yml`: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
+`FTP_TARGET_DIR`, `API_URL`.
+
+### 11.5 Relationship to existing workflows
+
+| Workflow | Trigger | Scope |
+| --- | --- | --- |
+| `ci.yml` | All branches + PRs | Lint, test, build (skips lint+test for data-only changes) |
+| `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | Lint YAML + security scan + build + targeted FTP |
+| `deploy.yml` | Push to `main` | Full build + clean-slate FTP + SSH restart |
+
+`ci.yml` and `event-data-deploy.yml` both run on the same event PRs. This is by design:
+`ci.yml` provides the general build check; `event-data-deploy.yml` provides data-specific
+validation and early deployment. The full `deploy.yml` run after merge is idempotent for
+the four schema files (same content, re-uploaded).
+
+### 11.6 Required repository settings
+
+- **"Allow auto-merge"** must be enabled in Settings > General > Pull Requests.
+- The four new job names must be added as required status checks in branch protection for
+  `main` after the workflow has run at least once (check names only appear in the UI
+  after a run exists).
+- No new secrets are needed beyond the five already used by `deploy.yml`.
 
 ---
 

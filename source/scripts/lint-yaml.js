@@ -1,0 +1,177 @@
+'use strict';
+
+// Validates a per-camp event YAML file against the data contract.
+//
+// Usage (CLI):  node source/scripts/lint-yaml.js <path-to-yaml>
+// Usage (API):  const { validateYaml } = require('./lint-yaml')
+//               const { ok, errors } = validateYaml(yamlString)
+//
+// Exits 0 on success, 1 on any validation failure (CLI mode only).
+
+const fs   = require('fs');
+const path = require('path');
+const yaml = require('js-yaml');
+
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const TIME_RE = /^\d{2}:\d{2}$/;
+const CAMP_REQUIRED = ['id', 'name', 'location', 'start_date', 'end_date'];
+const EVENT_REQUIRED = ['id', 'title', 'date', 'start', 'end', 'location', 'responsible'];
+
+// ── Core validation ───────────────────────────────────────────────────────────
+
+// Validates a YAML string representing a per-camp event file.
+// Returns { ok: true } or { ok: false, errors: string[] }.
+function validateYaml(content) {
+  const errors = [];
+
+  // Parse
+  let data;
+  try {
+    data = yaml.load(content);
+  } catch (e) {
+    return { ok: false, errors: [`YAML parse error: ${e.message}`] };
+  }
+
+  if (!data || typeof data !== 'object') {
+    return { ok: false, errors: ['File does not contain a YAML object'] };
+  }
+
+  // ── Camp metadata ──────────────────────────────────────────────────────────
+
+  const camp = data.camp;
+  if (!camp) {
+    errors.push('Missing top-level "camp" key');
+    return { ok: false, errors };
+  }
+
+  for (const field of CAMP_REQUIRED) {
+    if (!camp[field]) {
+      errors.push(`camp.${field} is required`);
+    }
+  }
+
+  const campStart = camp.start_date ? String(camp.start_date) : '';
+  const campEnd   = camp.end_date   ? String(camp.end_date)   : '';
+
+  if (campStart && !DATE_RE.test(campStart)) {
+    errors.push(`camp.start_date must be YYYY-MM-DD, got: ${campStart}`);
+  }
+  if (campEnd && !DATE_RE.test(campEnd)) {
+    errors.push(`camp.end_date must be YYYY-MM-DD, got: ${campEnd}`);
+  }
+  if (campStart && campEnd && DATE_RE.test(campStart) && DATE_RE.test(campEnd) && campEnd < campStart) {
+    errors.push(`camp.end_date must be on or after camp.start_date`);
+  }
+
+  // ── Events ─────────────────────────────────────────────────────────────────
+
+  if (!Array.isArray(data.events)) {
+    errors.push('Missing or invalid "events" array');
+    return { ok: false, errors };
+  }
+
+  const seenIds = new Set();
+
+  data.events.forEach((event, idx) => {
+    const ref = `events[${idx}] (id: ${event.id || 'MISSING'})`;
+
+    // Required fields
+    for (const field of EVENT_REQUIRED) {
+      const val = event[field];
+      if (val === undefined || val === null || val === '') {
+        errors.push(`${ref}: required field "${field}" is missing or empty`);
+      }
+    }
+
+    // Duplicate IDs
+    if (event.id) {
+      if (seenIds.has(event.id)) {
+        errors.push(`${ref}: duplicate id "${event.id}"`);
+      }
+      seenIds.add(event.id);
+    }
+
+    // Date format and calendar validity
+    if (event.date) {
+      const d = String(event.date);
+      if (!DATE_RE.test(d)) {
+        errors.push(`${ref}: date must be YYYY-MM-DD, got "${d}"`);
+      } else if (isNaN(new Date(d).getTime())) {
+        errors.push(`${ref}: date "${d}" is not a valid calendar date`);
+      } else if (campStart && campEnd) {
+        if (d < campStart || d > campEnd) {
+          errors.push(`${ref}: date "${d}" is outside camp range ${campStart}–${campEnd}`);
+        }
+      }
+    }
+
+    // Time format
+    if (event.start !== undefined && event.start !== null) {
+      const s = String(event.start);
+      if (!TIME_RE.test(s)) {
+        errors.push(`${ref}: start must be HH:MM, got "${s}"`);
+      }
+    }
+    if (event.end !== undefined && event.end !== null) {
+      const e = String(event.end);
+      if (!TIME_RE.test(e)) {
+        errors.push(`${ref}: end must be HH:MM, got "${e}"`);
+      }
+    }
+
+    // End after start
+    if (event.start && event.end) {
+      const s = String(event.start);
+      const e = String(event.end);
+      if (TIME_RE.test(s) && TIME_RE.test(e) && e <= s) {
+        errors.push(`${ref}: end "${e}" must be strictly after start "${s}"`);
+      }
+    }
+
+    // Optional field type checks
+    if (event.description !== undefined && event.description !== null && typeof event.description !== 'string') {
+      errors.push(`${ref}: description must be a string or null`);
+    }
+    if (event.link !== undefined && event.link !== null && typeof event.link !== 'string') {
+      errors.push(`${ref}: link must be a string or null`);
+    }
+  });
+
+  return errors.length === 0 ? { ok: true } : { ok: false, errors };
+}
+
+module.exports = { validateYaml };
+
+// ── CLI entry point ───────────────────────────────────────────────────────────
+
+if (require.main === module) {
+  const filePath = process.argv[2];
+  if (!filePath) {
+    console.error('Usage: node source/scripts/lint-yaml.js <path-to-yaml>');
+    process.exit(1);
+  }
+
+  const abs = path.resolve(filePath);
+  if (!fs.existsSync(abs)) {
+    console.error(`File not found: ${abs}`);
+    process.exit(1);
+  }
+
+  let content;
+  try {
+    content = fs.readFileSync(abs, 'utf8');
+  } catch (e) {
+    console.error(`Cannot read file: ${e.message}`);
+    process.exit(1);
+  }
+
+  const { ok, errors } = validateYaml(content);
+  if (!ok) {
+    for (const err of errors) console.error(`LINT ERROR: ${err}`);
+    process.exit(1);
+  }
+
+  const data = yaml.load(content);
+  const count = Array.isArray(data && data.events) ? data.events.length : 0;
+  console.log(`OK: ${count} events validated in ${filePath}`);
+}

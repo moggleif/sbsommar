@@ -619,3 +619,50 @@ Fields that are empty or absent must not produce blank rows or placeholder
 text. <!-- 02-§21.11 -->
 
 ---
+
+## 23. Event Data CI Pipeline
+
+When a participant submits or edits an activity, the API creates an ephemeral Git branch,
+commits the updated YAML, and opens a pull request. The CI pipeline must intercept these
+PRs and validate the data before the merge completes.
+
+This section covers requirements for that targeted CI pipeline.
+It applies only to PRs from branches matching `event/**` (add-event) and
+`event-edit/**` (edit-event).
+
+### 22.1 YAML structural validation
+
+- The CI pipeline must parse and structurally validate the changed event YAML file before
+  the PR is merged. <!-- 02-§23.1 -->
+- Validation must check all required fields are present and non-empty: `id`, `title`,
+  `date`, `start`, `end`, `location`, `responsible`. <!-- 02-§23.2 -->
+- Validation must check that `date` is a valid YYYY-MM-DD calendar date within the
+  camp's start/end date range. <!-- 02-§23.3 -->
+- Validation must check that `start` and `end` match HH:MM format and `end` is strictly
+  after `start`. <!-- 02-§23.4 -->
+- Validation must check for duplicate event IDs within the file. <!-- 02-§23.5 -->
+
+### 22.2 Security scan
+
+- The CI pipeline must scan all free-text event fields for injection patterns (script
+  tags, JavaScript URIs, event handler attributes) before the PR is merged. <!-- 02-§23.6 -->
+- The `link` field, when non-empty, must use `http://` or `https://` protocol; any other
+  protocol must be rejected. <!-- 02-§23.7 -->
+- Text fields must be length-limited; payloads exceeding reasonable limits must be
+  rejected. <!-- 02-§23.8 -->
+
+### 22.3 Failure gates
+
+- If the YAML lint step fails, the security scan, build, and deploy steps must not run. <!-- 02-§23.9 -->
+- If the security scan step fails, the build and deploy steps must not run. <!-- 02-§23.10 -->
+
+### 22.4 Targeted deployment
+
+- On successful validation, the pipeline must build the site and deploy only the four
+  event-data-derived files: `schema.html`, `idag.html`, `dagens-schema.html`, and
+  `events.json`. <!-- 02-§23.11 -->
+- No other files may be touched by this pipeline's FTP upload step. <!-- 02-§23.12 -->
+- This deployment must happen while the PR is open (before auto-merge), so the updated
+  schedule is visible to participants without waiting for the full site deploy. <!-- 02-§23.13 -->
+
+---
