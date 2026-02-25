@@ -250,8 +250,8 @@ protects the site's data integrity.
 ## 11. Activity Order and Overlaps
 
 - Activities must always be displayed in chronological order (by date, then start time). <!-- 02-§11.1 -->
-- Overlapping activities are allowed. <!-- 02-§11.2 -->
-- The schedule must remain readable when multiple activities occur at the same time. <!-- 02-§11.3 -->
+- Overlapping activities are allowed (see §4.8). <!-- 02-§11.2 -->
+- The schedule must remain readable when multiple activities occur at the same time (see §4.8). <!-- 02-§11.3 -->
 
 ---
 
@@ -426,7 +426,7 @@ that requires no login.
   start, end, location, responsible, description, link). Internal fields
   (`owner`, `meta`) are excluded. <!-- 02-§18.29 -->
 
-### 18.7 Server-side edit endpoint
+### 18.10 Server-side edit endpoint
 
 - A `POST /edit-event` endpoint accepts edit requests. <!-- 02-§18.30 -->
 - The server reads the `sb_session` cookie from the request, parses the event
@@ -461,7 +461,7 @@ that requires no login.
 - The edit form must submit to the `/edit-event` endpoint. The build step derives
   the edit URL from the `API_URL` environment variable by replacing a trailing
   `/add-event` path segment with `/edit-event`; if `API_URL` does not end with
-  `/add-event`, the edit URL falls back to `/edit-event`. <!-- 02-§18.44 -->
+  `/add-event`, the edit URL falls back to `/edit-event`. <!-- 02-§18.46 -->
 - The edit form submission must use `credentials: 'include'` so that the
   `sb_session` cookie is sent to the cross-origin API. Without this the server
   cannot verify ownership and will reject the request with HTTP 403. <!-- 02-§18.45 -->
@@ -712,13 +712,13 @@ This section covers requirements for that targeted CI pipeline.
 It applies only to PRs from branches matching `event/**` (add-event) and
 `event-edit/**` (edit-event).
 
-### 22.0 Git history for branch comparison
+### 23.0 Git history for branch comparison
 
 - CI workflows that compare the PR branch to `main` to detect changed files must check out
   with sufficient git history for the three-dot diff (`origin/main...HEAD`) to find a merge
   base. A shallow checkout (depth 1) is not sufficient. <!-- 02-§23.14 -->
 
-### 22.1 YAML structural validation
+### 23.1 YAML structural validation
 
 - The CI pipeline must parse and structurally validate the changed event YAML file before
   the PR is merged. <!-- 02-§23.1 -->
@@ -730,7 +730,7 @@ It applies only to PRs from branches matching `event/**` (add-event) and
   after `start`. <!-- 02-§23.4 -->
 - Validation must check for duplicate event IDs within the file. <!-- 02-§23.5 -->
 
-### 22.2 Security scan
+### 23.2 Security scan
 
 - The CI pipeline must scan all free-text event fields for injection patterns (script
   tags, JavaScript URIs, event handler attributes) before the PR is merged. <!-- 02-§23.6 -->
@@ -739,12 +739,12 @@ It applies only to PRs from branches matching `event/**` (add-event) and
 - Text fields must be length-limited; payloads exceeding reasonable limits must be
   rejected. <!-- 02-§23.8 -->
 
-### 22.3 Failure gates
+### 23.3 Failure gates
 
 - If the YAML lint step fails, the security scan, build, and deploy steps must not run. <!-- 02-§23.9 -->
 - If the security scan step fails, the build and deploy steps must not run. <!-- 02-§23.10 -->
 
-### 22.4 Targeted deployment
+### 23.4 Targeted deployment
 
 - On successful validation, the pipeline must build the site and deploy only the four
   event-data-derived files: `schema.html`, `idag.html`, `dagens-schema.html`, and
