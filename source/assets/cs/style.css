@@ -914,8 +914,8 @@ body.modal-open {
 
 .camp-check {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: var(--space-md);
+  height: var(--space-md);
   border: 2px solid var(--color-charcoal);
   border-radius: var(--radius-sm);
   display: flex;
