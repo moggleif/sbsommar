@@ -382,3 +382,18 @@ events:
     meta:
       created_at: 2026-02-24 19:11
       updated_at: 2026-02-24 19:22
+- id: snabbare-idag-2026-02-25-1200
+  title: 'Snabbare idag?'
+  date: '2026-02-25'
+  start: '12:00'
+  end: '14:00'
+  location: AndreasTältet
+  responsible: jag
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-02-25 06:47
+    updated_at: 2026-02-25 06:47
