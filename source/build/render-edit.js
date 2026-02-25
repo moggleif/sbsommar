@@ -2,6 +2,7 @@
 
 const { escapeHtml, toDateString } = require('./render');
 const { pageNav, pageFooter } = require('./layout');
+const { addOneDay } = require('../api/time-gate');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
@@ -17,6 +18,8 @@ function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = 
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
+  const opensDate = toDateString(camp.opens_for_editing || startDate);
+  const closesDate = addOneDay(endDate);
 
   // "Annat" always last; deduplicate
   const locList = [
@@ -55,7 +58,9 @@ ${pageNav('redigera.html', navSections)}
     <form id="edit-form" class="event-form" novalidate
           data-api-url="${escapeHtml(apiUrl || '/edit-event')}"
           data-camp-start="${startDate}"
-          data-camp-end="${endDate}">
+          data-camp-end="${endDate}"
+          data-opens="${opensDate}"
+          data-closes="${closesDate}">
 
       <input type="hidden" id="f-id" name="id">
 

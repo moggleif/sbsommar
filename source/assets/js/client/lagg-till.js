@@ -9,6 +9,38 @@
   var modalHeading = document.getElementById('modal-heading');
   var modalContent = document.getElementById('modal-content');
 
+  // ── Time-gating (02-§26.3–26.8) ───────────────────────────────────────────
+
+  var opensDate = form.dataset.opens;
+  var closesDate = form.dataset.closes;
+
+  if (opensDate && closesDate) {
+    var today = new Date().toISOString().slice(0, 10);
+    if (today < opensDate) {
+      // Before opening
+      var parts = opensDate.split('-');
+      var months = ['januari','februari','mars','april','maj','juni',
+                    'juli','augusti','september','oktober','november','december'];
+      var formatted = parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+      var msg = document.createElement('div');
+      msg.className = 'form-gate-msg';
+      msg.textContent = 'Formuläret öppnar den ' + formatted + '.';
+      form.parentNode.insertBefore(msg, form);
+      fieldset.disabled = true;
+      submitBtn.disabled = true;
+      form.classList.add('form-gated');
+    } else if (today > closesDate) {
+      // After closing
+      var msg2 = document.createElement('div');
+      msg2.className = 'form-gate-msg';
+      msg2.textContent = 'Lägret är avslutat.';
+      form.parentNode.insertBefore(msg2, form);
+      fieldset.disabled = true;
+      submitBtn.disabled = true;
+      form.classList.add('form-gated');
+    }
+  }
+
   // ── Modal helpers ────────────────────────────────────────────────────────────
 
   var preFocusEl = null;

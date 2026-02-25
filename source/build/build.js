@@ -50,6 +50,9 @@ if (!fs.existsSync(campFilePath)) {
 
 const campData = yaml.load(fs.readFileSync(campFilePath, 'utf8'));
 const camp = campData.camp;
+// Merge opens_for_editing from the registry (camps.yaml) into the camp object.
+// The per-camp YAML file does not include this field.
+camp.opens_for_editing = activeCamp.opens_for_editing;
 const events = campData.events || [];
 
 // ── Load locations from local.yaml ───────────────────────────────────────────

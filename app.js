@@ -1,14 +1,23 @@
 'use strict';
 
 const express = require('express');
+const fs      = require('fs');
 const path    = require('path');
+const yaml    = require('js-yaml');
 
 const { addEventToActiveCamp, updateEventInActiveCamp, slugify } = require('./source/api/github');
 const { validateEventRequest, validateEditRequest }              = require('./source/api/validate');
 const { isEventPast }                                            = require('./source/api/edit-event');
 const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
+const { isOutsideEditingPeriod }                                 = require('./source/api/time-gate');
 
 const app = express();
+
+// ── Load active camp metadata for time-gating ───────────────────────────────
+
+const campsPath = path.join(__dirname, 'source', 'data', 'camps.yaml');
+const campsData = yaml.load(fs.readFileSync(campsPath, 'utf8'));
+const activeCamp = (campsData.camps || []).find((c) => c.active === true);
 
 // ── Middleware ───────────────────────────────────────────────────────────────
 
@@ -38,6 +47,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/add-event', (req, res) => {
+  // Time-gating: reject if outside the editing period.
+  if (activeCamp) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (isOutsideEditingPeriod(today, activeCamp.opens_for_editing, activeCamp.end_date)) {
+      return res.status(403).json({ success: false, error: 'Det går inte att lägga till aktiviteter just nu. Formuläret är inte öppet.' });
+    }
+  }
+
   const v = validateEventRequest(req.body);
   if (!v.ok) {
     return res.status(400).json({ success: false, error: v.error });
@@ -66,6 +83,14 @@ app.post('/add-event', (req, res) => {
 });
 
 app.post('/edit-event', (req, res) => {
+  // Time-gating: reject if outside the editing period.
+  if (activeCamp) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (isOutsideEditingPeriod(today, activeCamp.opens_for_editing, activeCamp.end_date)) {
+      return res.status(403).json({ success: false, error: 'Det går inte att redigera aktiviteter just nu. Formuläret är inte öppet.' });
+    }
+  }
+
   const v = validateEditRequest(req.body);
   if (!v.ok) {
     return res.status(400).json({ success: false, error: v.error });

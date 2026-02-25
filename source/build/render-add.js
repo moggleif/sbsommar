@@ -2,6 +2,7 @@
 
 const { escapeHtml, toDateString } = require('./render');
 const { pageNav, pageFooter } = require('./layout');
+const { addOneDay } = require('../api/time-gate');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
@@ -9,6 +10,8 @@ function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = [
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
+  const opensDate = toDateString(camp.opens_for_editing || startDate);
+  const closesDate = addOneDay(endDate);
 
   // "Annat" always last; deduplicate
   const locList = [
@@ -37,7 +40,7 @@ ${pageNav('lagg-till.html', navSections)}
   <p class="intro">Behöver du material eller ingredienser till din aktivitet? Kontakta Andreas i förväg så ordnar han det.</p>
   <p class="intro">När du skickat in kan du redigera din aktivitet efteråt – vi frågar om lov att spara ett tillfälligt ID i webbläsaren så att vi vet att aktiviteten är din. ID:t försvinner automatiskt efter 7 dagar.</p>
 
-  <form id="event-form" class="event-form" novalidate data-api-url="${escapeHtml(apiUrl || '/add-event')}">
+  <form id="event-form" class="event-form" novalidate data-api-url="${escapeHtml(apiUrl || '/add-event')}" data-opens="${opensDate}" data-closes="${closesDate}">
 
     <fieldset>
 
