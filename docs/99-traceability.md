@@ -492,6 +492,13 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 | `02-§24.14` | Expanded menu closable by clicking outside | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – document `click` listener closes when outside nav | implemented |
 | `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-DESIGN.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | `source/assets/css/style.css` – `.nav-toggle { display: none }` at `@media (min-width: 768px)` | implemented |
 
+| `02-§25.1` | Content images have `loading="lazy"` (except first section) | 03-ARCHITECTURE.md §4b | IMG-01 | `source/build/render-index.js` – `inlineHtml()` adds `loading="lazy"`; `renderIndexPage()` strips it from first section | covered |
+| `02-§25.2` | Hero image must NOT have `loading="lazy"` | 03-ARCHITECTURE.md §4b | IMG-02 | `source/build/render-index.js` – hero uses separate template without `loading="lazy"` | covered |
+| `02-§25.3` | Homepage head includes `<link rel="preload">` for hero image | 03-ARCHITECTURE.md §4b | IMG-03, IMG-04, IMG-05 | `source/build/render-index.js` – `preloadHtml` variable | covered |
+| `02-§25.4` | Hero image has `fetchpriority="high"` | 03-ARCHITECTURE.md §4b | IMG-06 | `source/build/render-index.js` – hero `<img>` template | covered |
+| `02-§25.5` | First-section images must NOT have `loading="lazy"` (LCP fix) | 03-ARCHITECTURE.md §4b | IMG-07 | `source/build/render-index.js` – `renderIndexPage()` strips `loading="lazy"` when `i === 0` | covered |
+| `02-§25.6` | `nav.js` script tag must include `defer` on all pages | 03-ARCHITECTURE.md §4b | — (manual: run build, verify `defer` on all `nav.js` tags; snapshot test covers schema page) | All 6 render files + snapshot | covered |
+
 | `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — (manual: run `npm run build` and verify `public/robots.txt` contains `User-agent: *` and `Disallow: /`) | `source/build/build.js` – writes `public/robots.txt` | implemented |
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
 | `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-ARCHITECTURE.md §4c | ROB-08..14 | No discoverability tags in any render file | covered |
@@ -501,8 +508,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 ## Summary
 
 ```text
-Total requirements:             386
-Covered (implemented + tested): 104
+Total requirements:             388
+Covered (implemented + tested): 106
 Implemented, not tested:        254
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
@@ -543,6 +550,10 @@ End time is now required everywhere (add form, edit form, data contract).
   both implemented (CI workflow config, no unit test possible).
 4 requirements added for image loading performance (02-§25.1–25.4):
   all 4 covered (IMG-01..06 in render-index.test.js).
+2 requirements added for speed-index performance fixes (02-§25.5–25.6):
+  02-§25.5 covered (IMG-07): first-section images stripped of loading="lazy".
+  02-§25.6 covered (snapshot + manual): nav.js defer on all pages.
+  02-§25.1 updated: exception added for first-section images.
 3 requirements added for search engine blocking (02-§1a.1–1a.3):
   2 covered (ROB-01..14): 02-§1a.2, 02-§1a.3
   1 implemented (build writes robots.txt; manual verification): 02-§1a.1
@@ -610,7 +621,7 @@ End time is now required everywhere (add form, edit form, data contract).
 
 14. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
     Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
-    `loading="lazy"`, hero preload, and `fetchpriority="high"` are implemented (02-§25.1–25.4).
+    `loading="lazy"`, hero preload, `fetchpriority="high"`, first-section eager loading, and `nav.js defer` are implemented (02-§25.1–25.6).
     Remaining: manual conversion of 6 small PNG/JPG source files to WebP.
 
 15. **`02-§13.2` / `07-§9.2` — Visible focus states**
