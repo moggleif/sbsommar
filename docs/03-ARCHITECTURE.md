@@ -582,12 +582,13 @@ Reuses the same secrets as `deploy.yml`: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWO
 | --- | --- | --- |
 | `ci.yml` | All branches + PRs | Lint, test, build (skips lint+test for data-only changes) |
 | `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | Lint YAML + security scan + build + targeted FTP |
-| `deploy.yml` | Push to `main` | Full build + clean-slate FTP + SSH restart |
+| `deploy.yml` | Push to `main` (ignores `source/data/**.yaml`-only changes) | Full build + clean-slate FTP + SSH restart |
 
 `ci.yml` and `event-data-deploy.yml` both run on the same event PRs. This is by design:
 `ci.yml` provides the general build check; `event-data-deploy.yml` provides data-specific
-validation and early deployment. The full `deploy.yml` run after merge is idempotent for
-the four schema files (same content, re-uploaded).
+validation and early deployment. `deploy.yml` uses `paths-ignore` so that pushes to `main`
+containing only YAML data file changes do not trigger a full site deploy — the four schema
+files are already deployed by `event-data-deploy.yml` during the PR phase.
 
 ### 11.6 Checkout depth
 
