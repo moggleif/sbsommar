@@ -62,7 +62,8 @@
     modalContent.innerHTML =
       '<div class="modal-spinner" aria-hidden="true"></div>' +
       '<p class="modal-status">Skickar till GitHub…</p>';
-    openModal();
+    // Open only if not already open (consent modal may have opened it).
+    if (modal.hidden) { openModal(); } else { modalHeading.focus(); }
   }
 
   function setModalSuccess(title, consentGiven) {
@@ -160,6 +161,11 @@
     // If window.SBConsentReady is unavailable (cookie-consent.js not loaded),
     // proceed without consent.
     var consentFn = window.SBConsentReady || function (cb) { cb(false); };
+    var modalApi = {
+      open: openModal,
+      setHeading: function (t) { modalHeading.textContent = t; },
+      setContent: function (h) { modalContent.innerHTML = h; focusFirstInModal(); },
+    };
 
     consentFn(function (consentGiven) {
       setModalLoading();
@@ -191,6 +197,6 @@
         .catch(function () {
           setModalError('Något gick fel. Kontrollera din internetanslutning och försök igen.');
         });
-    });
+    }, modalApi);
   });
 })();
