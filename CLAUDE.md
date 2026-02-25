@@ -211,6 +211,19 @@ Non-technical contributors must be able to:
 When implementing any new feature or significant change, follow these phases in order.
 Do not skip phases. Each phase ends with a commit. <!-- CL-§11.1 -->
 
+## Parallel-work rebase rule
+
+When multiple branches are in flight, shared documentation files (`99-traceability.md`, `02-REQUIREMENTS.md`, architecture and design docs) change frequently on `main` and are prone to renumbering conflicts. <!-- CL-§11.24 -->
+
+Before editing any shared documentation file, rebase on the latest `main`: <!-- CL-§11.25 -->
+
+```bash
+git fetch origin main
+git rebase origin/main
+```
+
+This applies throughout all phases — not only at Phase 7. The cost of rebasing when `main` has not moved is zero; the cost of discovering conflicts late is high. <!-- CL-§11.26 -->
+
 ## Phase 0 — Alignment
 
 Before writing requirements, discuss the request. <!-- CL-§11.0 -->
