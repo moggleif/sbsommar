@@ -499,12 +499,12 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 | `02-§25.5` | First-section images must NOT have `loading="lazy"` (LCP fix) | 03-ARCHITECTURE.md §4b | IMG-07 | `source/build/render-index.js` – `renderIndexPage()` strips `loading="lazy"` when `i === 0` | covered |
 | `02-§25.6` | `nav.js` script tag must include `defer` on all pages | 03-ARCHITECTURE.md §4b | — (manual: run build, verify `defer` on all `nav.js` tags; snapshot test covers schema page) | All 6 render files + snapshot | covered |
 
-| `02-§26.1` | "Past" means event date is strictly before today's local date | 02-REQUIREMENTS.md §26.1 | — | Definition only; enforced by 02-§26.2–26.6 | — |
-| `02-§26.2` | Add-activity form blocks submission when date is in the past | 02-REQUIREMENTS.md §26.2 | PDT-01 | `source/assets/js/client/lagg-till.js` – date < today check | gap |
-| `02-§26.3` | Edit-activity form blocks submission when date is in the past | 02-REQUIREMENTS.md §26.3 | PDT-02 | `source/assets/js/client/redigera.js` – date < today check | gap |
-| `02-§26.4` | `POST /add-event` rejects past dates with HTTP 400 | 02-REQUIREMENTS.md §26.4 | PDT-03, PDT-04 | `source/api/validate.js` – `isDatePast()` in `validateEventRequest` | gap |
-| `02-§26.5` | `POST /edit-event` rejects submitted past dates with HTTP 400 | 02-REQUIREMENTS.md §26.5 | PDT-05, PDT-06 | `source/api/validate.js` – `isDatePast()` in `validateEditRequest` | gap |
-| `02-§26.6` | Past-date check is in the shared validation module | 02-REQUIREMENTS.md §26.6 | PDT-03..06 | `source/api/validate.js` – single `isDatePast()` function | gap |
+| `02-§27.1` | "Past" means event date is strictly before today's local date | 02-REQUIREMENTS.md §27.1 | — | Definition only; enforced by 02-§27.2–27.6 | — |
+| `02-§27.2` | Add-activity form blocks submission when date is in the past | 02-REQUIREMENTS.md §27.2 | PDT-01 (manual: open form, pick yesterday, submit → error shown) | `source/assets/js/client/lagg-till.js` – `date < today` check before submit | implemented |
+| `02-§27.3` | Edit-activity form blocks submission when date is in the past | 02-REQUIREMENTS.md §27.3 | PDT-02 (manual: edit event, change date to past, submit → error shown) | `source/assets/js/client/redigera.js` – `date < submitToday` check before submit | implemented |
+| `02-§27.4` | `POST /add-event` rejects past dates with HTTP 400 | 02-REQUIREMENTS.md §27.4 | PDT-03, PDT-04 | `source/api/validate.js` – `isDatePast()` in `validateEventRequest` | covered |
+| `02-§27.5` | `POST /edit-event` rejects submitted past dates with HTTP 400 | 02-REQUIREMENTS.md §27.5 | PDT-05, PDT-06 | `source/api/validate.js` – `isDatePast()` in `validateEditRequest` | covered |
+| `02-§27.6` | Past-date check is in the shared validation module | 02-REQUIREMENTS.md §27.6 | PDT-03..06 | `source/api/validate.js` – single `isDatePast()` function | covered |
 
 | `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-ARCHITECTURE.md §4c | — (manual: run `npm run build` and verify `public/robots.txt` contains `User-agent: *` and `Disallow: /`) | `source/build/build.js` – writes `public/robots.txt` | implemented |
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-ARCHITECTURE.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
@@ -530,9 +530,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (search engine blocking — 02-
 ## Summary
 
 ```text
-Total requirements:             402
-Covered (implemented + tested): 108
-Implemented, not tested:        266
+Total requirements:             408
+Covered (implemented + tested): 111
+Implemented, not tested:        268
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
@@ -582,6 +582,10 @@ End time is now required everywhere (add form, edit form, data contract).
 14 requirements added for form time-gating (02-§26.1–26.13, 05-§1.6):
   2 covered (GATE-01..10): 02-§26.2 (period logic), 02-§26.13 (data attributes).
   12 implemented (browser-only or manual): 02-§26.1, 02-§26.3–26.12, 05-§1.6.
+6 requirements added for past-date blocking (02-§27.1–27.6):
+  3 covered (PDT-03..06): 02-§27.4, 02-§27.5, 02-§27.6
+  2 implemented (browser-only client validation): 02-§27.2, 02-§27.3
+  1 definition (no implementation needed): 02-§27.1
 ```
 
 ---
