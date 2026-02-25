@@ -2,9 +2,6 @@ sections:
   - file: index.md
     id: start
     nav: Om lägret
-  - type: upcoming-camps
-    id: kommande-lager
-    nav: Kommande läger
   - file: testimonials.md
     id: testimonials
     nav: Röster

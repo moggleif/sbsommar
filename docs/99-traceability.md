@@ -590,14 +590,31 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (matrix cleanup — duplicate c
 | `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | `source/content/images/discord_group.webp`, `social-facebook-button-blue-icon-small.webp` | implemented |
 | `02-§30.22` | Social links provided at build time, not hardcoded | 03-ARCHITECTURE.md §15.2 | HERO-14, HERO-15 | `source/build/build.js` – passes `discordUrl`, `facebookUrl` to `renderIndexPage` | covered |
 
+### 31. Inline Camp Listing and Link Styling
+
+| ID | Requirement | Design ref | Test ID(s) | Implementation | Status |
+| --- | --- | --- | --- | --- | --- |
+| `02-§31.1` | Camp listing rendered inside intro section after first h4 | 07-DESIGN.md §6 | — (manual: visual check) | `source/build/build.js` – injects camp HTML after first `</h4>` | implemented |
+| `02-§31.2` | Camp listing is not a separate section or nav entry | 07-DESIGN.md §6 | — (manual: visual check) | `source/content/sections.yaml` – `upcoming-camps` entry removed | implemented |
+| `02-§31.3` | Upcoming camps show sun icon (☀️) | 07-DESIGN.md §6 | — (manual: visual check) | `source/assets/cs/style.css` – `.camp-icon::after { content: '☀️' }` | implemented |
+| `02-§31.4` | Past camps show green checkbox (✅) | 07-DESIGN.md §6 | — (manual: visual check) | `source/assets/cs/style.css` – `.camp-past .camp-icon::after { content: '✅' }` | implemented |
+| `02-§31.5` | Status detection remains client-side via data-end | 02-§28.14 | UC-11 | `source/build/render-index.js` – same inline `<script>` | covered |
+| `02-§31.6` | Each item shows name, location, date range | 02-§28.11–13 | UC-06 | `source/build/render-index.js` – `renderUpcomingCampsHtml()` | covered |
+| `02-§31.7` | Camp information text no longer rendered | — | — | `source/build/render-index.js` – info block removed | implemented |
+| `02-§31.8` | Content links use terracotta color | 07-DESIGN.md §2.1 | — (manual: visual check) | `source/assets/cs/style.css` – `.content a { color: var(--color-terracotta) }` | implemented |
+| `02-§31.9` | Content links no underline, underline on hover | 07-DESIGN.md §2.1 | — (manual: visual check) | `source/assets/cs/style.css` – `.content a { text-decoration: none }` | implemented |
+| `02-§31.10` | Markdown converter supports h4 headings | — | — (manual: build output check) | `source/build/render-index.js` – `####` pattern added | implemented |
+| `02-§31.11` | All styling uses CSS custom properties | 07-DESIGN.md §7 | — (manual: code review) | `source/assets/cs/style.css` | implemented |
+| `02-§31.12` | No additional runtime JS | — | — (manual: code review) | No new scripts added | implemented |
+
 ---
 
 ## Summary
 
 ```text
-Total requirements:             471
-Covered (implemented + tested): 153
-Implemented, not tested:        291
+Total requirements:             483
+Covered (implemented + tested): 155
+Implemented, not tested:        301
 Gap (no implementation):         26
 Orphan tests (no requirement):    0
 
@@ -679,6 +696,11 @@ Matrix cleanup (2026-02-25):
   07-§6.33 marked as deferred (optional; requires activity-type data model).
   Top Gaps list updated: item 8 consolidated with CL-§5.9; item 16 notes
     native <details> accessibility; item 17 marked deferred.
+12 requirements added for inline camp listing and link styling (02-§31.1–31.12):
+  2 covered (UC-06, UC-11): 02-§31.5, 02-§31.6.
+  10 implemented (visual/CSS or manual code review): 02-§31.1–31.4, 02-§31.7–31.12.
+  02-§28.9 superseded (camp listing no longer has its own heading).
+  02-§28.13 superseded (information text no longer rendered).
 ```
 
 ---

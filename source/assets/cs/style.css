@@ -843,6 +843,15 @@ details.accordion > summary:hover { background: var(--color-sage-hover); }
   margin: var(--space-lg) 0;
 }
 
+.content a {
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
 .content-img {
   max-width: 100%;
   height: auto;
@@ -993,29 +1002,19 @@ body.modal-open {
   border-bottom: none;
 }
 
-.camp-check {
+.camp-icon {
   flex-shrink: 0;
-  width: var(--space-md);
-  height: var(--space-md);
-  border: 2px solid var(--color-charcoal);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2px;
-  font-size: var(--font-size-small);
+  font-size: 1.25em;
   line-height: 1;
-  color: transparent;
+  margin-top: 1px;
 }
 
-.camp-check::after {
-  content: '✔';
+.camp-icon::after {
+  content: '☀️';
 }
 
-.camp-past .camp-check {
-  background: var(--color-sage);
-  border-color: var(--color-sage);
-  color: var(--color-white);
+.camp-past .camp-icon::after {
+  content: '✅';
 }
 
 .camp-body {
@@ -1039,7 +1038,6 @@ body.modal-open {
 }
 
 .camp-past .camp-name {
-  text-decoration: line-through;
   opacity: 0.6;
 }
 

@@ -72,7 +72,10 @@ function convertMarkdown(md, headingOffset = 0, collapsible = false) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (line.startsWith('### ')) {
+    if (line.startsWith('#### ')) {
+      flushPara();
+      blocks.push({ type: 'h', level: Math.min(4 + headingOffset, 6), text: line.slice(5).trim() });
+    } else if (line.startsWith('### ')) {
       flushPara();
       blocks.push({ type: 'h', level: Math.min(3 + headingOffset, 6), text: line.slice(4).trim() });
     } else if (line.startsWith('## ')) {
@@ -260,28 +263,22 @@ function renderUpcomingCampsHtml(allCamps, currentYear) {
     const location = escapeHtml(camp.location || '');
     const dateRange = escapeHtml(formatCampDateRange(camp.start_date, camp.end_date));
     const endDate = toDateString(camp.end_date);
-    const info = (camp.information || '').trim();
     const link = (camp.link || '').trim();
 
     const nameHtml = link
       ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${name}</a>`
       : name;
 
-    const infoHtml = info
-      ? `\n      <p class="camp-info">${escapeHtml(info)}</p>`
-      : '';
-
     return `    <li class="camp-item" data-end="${endDate}">
-      <span class="camp-check" aria-hidden="true"></span>
+      <span class="camp-icon" aria-hidden="true"></span>
       <div class="camp-body">
         <span class="camp-name">${nameHtml}</span>
-        <span class="camp-meta">${location} · ${dateRange}</span>${infoHtml}
+        <span class="camp-meta">${location} · ${dateRange}</span>
       </div>
     </li>`;
   }).join('\n');
 
-  return `<h2>Kommande läger</h2>
-<ul class="upcoming-camps">
+  return `<ul class="upcoming-camps">
 ${items}
 </ul>
 <script>

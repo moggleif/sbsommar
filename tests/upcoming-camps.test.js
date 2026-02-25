@@ -101,13 +101,8 @@ describe('renderUpcomingCampsHtml – sorting (02-§28.3)', () => {
 });
 
 // ── Section heading (02-§28.9) ──────────────────────────────────────────────
-
-describe('renderUpcomingCampsHtml – heading (02-§28.9)', () => {
-  it('UC-05: includes heading "Kommande läger"', () => {
-    const html = renderUpcomingCampsHtml([futureCamp], 2026);
-    assert.ok(html.includes('Kommande läger'), 'heading should be present');
-  });
-});
+// Camp listing no longer includes its own heading — it is injected
+// into the first section of the index page by the build script.
 
 // ── Camp item content (02-§28.11, 02-§28.12, 02-§28.13) ────────────────────
 
@@ -134,15 +129,7 @@ describe('renderUpcomingCampsHtml – item content (02-§28.11–28.13)', () => 
     assert.ok(html.includes('SB Sommar Juni 2026'), 'should render camp name as text');
   });
 
-  it('UC-09: information text shown when non-empty', () => {
-    const html = renderUpcomingCampsHtml([futureCamp], 2026);
-    assert.ok(html.includes('Info om Augusti.'), 'should include information text');
-  });
-
-  it('UC-10: information text omitted when empty', () => {
-    const html = renderUpcomingCampsHtml([futureCampJuni], 2026);
-    assert.ok(!html.includes('camp-info'), 'should not render info element for empty info');
-  });
+  // UC-09/UC-10: information text is no longer rendered in the camp listing.
 });
 
 // ── data-end attribute (02-§28.14) ──────────────────────────────────────────
@@ -157,9 +144,9 @@ describe('renderUpcomingCampsHtml – data-end attribute (02-§28.14)', () => {
 // ── Unchecked indicator (02-§28.7) ──────────────────────────────────────────
 
 describe('renderUpcomingCampsHtml – indicators (02-§28.7)', () => {
-  it('UC-12: each camp item includes a check indicator element', () => {
+  it('UC-12: each camp item includes an icon indicator element', () => {
     const html = renderUpcomingCampsHtml([futureCamp], 2026);
-    assert.ok(html.includes('camp-check'), 'should have check indicator element');
+    assert.ok(html.includes('camp-icon'), 'should have icon indicator element');
   });
 });
 
