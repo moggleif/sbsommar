@@ -827,3 +827,45 @@ or edit activities.
   load without an API call. <!-- 02-§26.13 -->
 
 ---
+
+## 27. Past-Date Blocking
+
+Events must not be created or edited with a date in the past. This rule applies
+to both the add-activity and edit-activity flows, at both the client and server
+layers.
+
+### 27.1 Definition
+
+- "Past" means the event's date is strictly before today's local date
+  (`YYYY-MM-DD` string comparison). Today itself is not considered past. <!-- 02-§27.1 -->
+
+### 27.2 Add-activity form (client)
+
+- Before submission, the add-activity form must check that the selected date is
+  not in the past. If it is, the form must show the error message
+  "Datum kan inte vara i det förflutna." and prevent submission. <!-- 02-§27.2 -->
+
+### 27.3 Edit-activity form (client)
+
+- Before submission, the edit-activity form must check that the date field value
+  is not in the past. If it is, the form must show the error message
+  "Datum kan inte vara i det förflutna." and prevent submission. <!-- 02-§27.3 -->
+
+### 27.4 Add-event API endpoint (server)
+
+- The `POST /add-event` endpoint must reject requests where the `date` field is
+  in the past, responding with HTTP 400 and a Swedish error message. <!-- 02-§27.4 -->
+
+### 27.5 Edit-event API endpoint (server)
+
+- The `POST /edit-event` endpoint must reject requests where the submitted
+  `date` field is in the past, responding with HTTP 400 and a Swedish error
+  message. This is in addition to the existing check that blocks editing events
+  whose original date has passed. <!-- 02-§27.5 -->
+
+### 27.6 Server validation location
+
+- The past-date check must be implemented in the shared validation module
+  (`source/api/validate.js`) so that both endpoints use the same logic. <!-- 02-§27.6 -->
+
+---
