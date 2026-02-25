@@ -8,7 +8,7 @@ const { renderArkivPage } = require('../source/build/render-arkiv');
 // Minimal camp fixtures
 const campA = {
   id: '2025-06-syssleback',
-  name: 'SB Sommar Juni 2025',
+  name: 'SB sommar 2025 juni',
   start_date: '2025-06-22',
   end_date: '2025-06-29',
   location: 'Sysslebäck',
@@ -20,7 +20,7 @@ const campA = {
 
 const campB = {
   id: '2024-06-syssleback',
-  name: 'SB Sommar Juni 2024',
+  name: 'SB sommar 2024 juni',
   start_date: '2024-06-23',
   end_date: '2024-06-30',
   location: 'Sysslebäck',
@@ -32,7 +32,7 @@ const campB = {
 
 const activeCamp = {
   id: '2026-02-testar',
-  name: 'SB Vinter Februari 2026',
+  name: 'SB vinter 2026 februari',
   start_date: '2026-02-22',
   end_date: '2026-02-27',
   location: 'Testar',

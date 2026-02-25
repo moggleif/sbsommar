@@ -1,6 +1,6 @@
 camps:
   - id: 2026-08-syssleback
-    name: SB Sommar Augusti 2026
+    name: SB sommar 2026 augusti
     start_date: '2026-08-02'
     end_date: '2026-08-09'
     opens_for_editing: '2026-07-25'
@@ -13,7 +13,7 @@ camps:
     active: false
 
   - id: 2026-06-syssleback
-    name: SB Sommar Juni 2026
+    name: SB sommar 2026 juni
     start_date: '2026-06-21'
     end_date: '2026-06-28'
     opens_for_editing: '2026-06-17'
@@ -26,7 +26,7 @@ camps:
     active: false
 
   - id: 2026-02-testar
-    name: SB vinter februari 2026
+    name: SB vinter 2026 februari
     start_date: '2026-02-22'
     end_date: '2026-02-27'
     opens_for_editing: '2026-02-15'
@@ -38,7 +38,7 @@ camps:
     active: true
 
   - id: 2025-08-syssleback
-    name: SB Sommar Augusti 2025
+    name: SB sommar 2025 augusti
     start_date: '2025-08-03'
     end_date: '2025-08-15'
     opens_for_editing: '2025-07-27'
@@ -54,7 +54,7 @@ camps:
     active: false
 
   - id: 2025-06-syssleback
-    name: SB Sommar Juni 2025
+    name: SB sommar 2025 juni
     start_date: '2025-06-22'
     end_date: '2025-06-29'
     opens_for_editing: '2025-06-15'
@@ -70,7 +70,7 @@ camps:
     active: false
 
   - id: 2024-06-syssleback
-    name: SB Sommar Juni 2024
+    name: SB sommar 2024 juni
     start_date: '2024-06-23'
     end_date: '2024-06-30'
     opens_for_editing: '2024-06-16'
@@ -86,7 +86,7 @@ camps:
     active: false
 
   - id: 2023-06-syssleback
-    name: SB Sommar Juni 2023
+    name: SB sommar 2023 juni
     start_date: '2023-06-25'
     end_date: '2023-07-02'
     opens_for_editing: '2023-06-18'
@@ -102,7 +102,7 @@ camps:
     active: false
 
   - id: 2022-06-syssleback
-    name: SB Sommar Juni 2022
+    name: SB sommar 2022 juni
     start_date: '2022-06-26'
     end_date: '2022-07-03'
     opens_for_editing: '2022-06-19'
@@ -118,7 +118,7 @@ camps:
     active: false
 
   - id: 2021-06-syssleback
-    name: SB Sommar Juni 2021
+    name: SB sommar 2021 juni
     start_date: '2021-06-27'
     end_date: '2021-07-04'
     opens_for_editing: '2021-06-20'
@@ -135,7 +135,7 @@ camps:
     active: false
 
   - id: 2019-06-syssleback
-    name: SB Sommar Juni 2019
+    name: SB sommar 2019 juni
     start_date: '2019-06-24'
     end_date: '2019-07-01'
     opens_for_editing: '2019-06-17'
@@ -151,7 +151,7 @@ camps:
     active: false
 
   - id: 2018-06-syssleback
-    name: SB Sommar Juni 2018
+    name: SB sommar 2018 juni
     start_date: '2018-06-17'
     end_date: '2018-06-20'
     opens_for_editing: '2018-06-10'

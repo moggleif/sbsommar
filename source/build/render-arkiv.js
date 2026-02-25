@@ -8,20 +8,6 @@ const MONTHS_SV = [
   'juli', 'augusti', 'september', 'oktober', 'november', 'december',
 ];
 
-// Formats a date string as "D månadsnamn" (e.g. "22 juni")
-function formatShortDate(dateStr) {
-  const d = new Date(toDateString(dateStr) + 'T12:00:00');
-  return `${d.getDate()} ${MONTHS_SV[d.getMonth()]}`;
-}
-
-// Formats a camp date range as "D månadsnamn – D månadsnamn YYYY"
-// e.g. "22 juni – 29 juni 2025"
-function formatDateRange(startStr, endStr) {
-  const end = new Date(toDateString(endStr) + 'T12:00:00');
-  const year = end.getFullYear();
-  return `${formatShortDate(startStr)} – ${formatShortDate(endStr)} ${year}`;
-}
-
 // Formats a compact header date range: "D–D månadsnamn YYYY"
 // When months differ: "D månadsnamn – D månadsnamn YYYY"
 function formatHeaderDateRange(startStr, endStr) {
@@ -49,13 +35,43 @@ function groupAndSortEvents(events) {
   return { dates, byDate };
 }
 
-// Renders a flat (non-collapsible) event row for the archive event list
+// Renders the expandable detail content for events with description/link
+function eventExtraHtml(ev) {
+  const parts = [];
+  if (ev.description) {
+    ev.description
+      .trim()
+      .split(/\n\n+/)
+      .forEach((p) => parts.push(`<p class="event-desc">${escapeHtml(p.trim())}</p>`));
+  }
+  if (ev.link) {
+    parts.push(
+      `<a class="event-ext-link" href="${escapeHtml(String(ev.link))}" target="_blank" rel="noopener">Extern länk →</a>`,
+    );
+  }
+  return `<div class="event-extra">${parts.join('')}</div>`;
+}
+
+// Renders an event row — expandable <details> when description/link present,
+// otherwise a flat <div>
 function renderArchiveEventRow(ev) {
   const timeStr = ev.end
     ? `${escapeHtml(String(ev.start))}–${escapeHtml(String(ev.end))}`
     : escapeHtml(String(ev.start));
   const metaParts = [ev.location, ev.responsible].filter(Boolean).map(escapeHtml);
   const metaEl = metaParts.length ? `<span class="ev-meta"> · ${metaParts.join(' · ')}</span>` : '';
+  const hasExtra = ev.description || ev.link;
+
+  if (hasExtra) {
+    return `        <details class="event-row">
+          <summary>
+            <span class="ev-time">${timeStr}</span>
+            <span class="ev-title">${escapeHtml(ev.title)}</span>
+            ${metaEl}
+          </summary>
+          ${eventExtraHtml(ev)}
+        </details>`;
+  }
 
   return `        <div class="event-row plain">
           <span class="ev-time">${timeStr}</span>
@@ -92,7 +108,6 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
     const id = escapeHtml(camp.id || '');
     const panelId = `panel-${id}`;
     const name = escapeHtml(camp.name || '');
-    const dateRange = escapeHtml(formatDateRange(camp.start_date, camp.end_date));
     const headerDateRange = escapeHtml(formatHeaderDateRange(camp.start_date, camp.end_date));
     const location = escapeHtml(camp.location || '');
     const info = (camp.information || '').trim();
@@ -117,13 +132,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
         <span class="timeline-meta">${headerDateRange} · ${location}</span>
         <span class="timeline-chevron" aria-hidden="true"></span>
       </button>
-      <div class="timeline-panel" id="${panelId}" hidden>${linkHtml}
-        <dl class="camp-meta">
-          <dt>Datum</dt>
-          <dd>${dateRange}</dd>
-          <dt>Plats</dt>
-          <dd>${location}</dd>
-        </dl>${infoHtml}${eventsHtml}
+      <div class="timeline-panel" id="${panelId}" hidden>${linkHtml}${infoHtml}${eventsHtml}
       </div>
     </div>
   </li>`;
