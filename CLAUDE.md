@@ -162,7 +162,6 @@ Optional but encouraged:
 - Minimal JS footprint. <!-- CL-§7.1 -->
 - No unused CSS. <!-- CL-§7.2 -->
 - No blocking large assets. <!-- CL-§7.3 -->
-- Optimized images. <!-- CL-§7.4 -->
 - No runtime hydration frameworks. <!-- CL-§7.5 -->
 
 The site should feel instant. <!-- CL-§7.6 -->
