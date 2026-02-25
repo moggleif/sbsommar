@@ -190,6 +190,15 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 
+  // ── Generate robots.txt (02-§1a.1) ─────────────────────────────────────────
+
+  fs.writeFileSync(
+    path.join(OUTPUT_DIR, 'robots.txt'),
+    'User-agent: *\nDisallow: /\n',
+    'utf8',
+  );
+  console.log('Built: public/robots.txt');
+
   // ── Copy content/images → public/images ──────────────────────────────────
 
   const srcImages = path.join(CONTENT_DIR, 'images');

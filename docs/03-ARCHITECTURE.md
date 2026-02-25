@@ -220,6 +220,46 @@ page simultaneously.
 
 ---
 
+## 4c. Search Engine and Crawler Blocking
+
+The site is intentionally hidden from search engines. Two mechanisms enforce this:
+
+### robots.txt
+
+`source/build/build.js` writes `public/robots.txt` during the build:
+
+```text
+User-agent: *
+Disallow: /
+```
+
+This tells well-behaved crawlers not to index any page.
+
+### Meta robots tag
+
+Every HTML page includes a `<meta name="robots" content="noindex, nofollow">` tag
+in its `<head>` section. This is the browser-level signal that reinforces
+`robots.txt` for crawlers that follow the meta tag standard.
+
+Each render function (`renderSchedulePage`, `renderTodayPage`, `renderIdagPage`,
+`renderAddPage`, `renderEditPage`, `renderArkivPage`, `renderIndexPage`) emits
+the tag as part of its `<head>` block.
+
+### Crawler-blocking files changed
+
+| File | Change |
+| --- | --- |
+| `source/build/build.js` | Write `public/robots.txt` during build |
+| `source/build/render.js` | Add `<meta name="robots">` to `<head>` |
+| `source/build/render-today.js` | Add `<meta name="robots">` to `<head>` |
+| `source/build/render-idag.js` | Add `<meta name="robots">` to `<head>` |
+| `source/build/render-add.js` | Add `<meta name="robots">` to `<head>` |
+| `source/build/render-edit.js` | Add `<meta name="robots">` to `<head>` |
+| `source/build/render-arkiv.js` | Add `<meta name="robots">` to `<head>` |
+| `source/build/render-index.js` | Add `<meta name="robots">` to `<head>` |
+
+---
+
 ## 5. Rendering Logic
 
 At build time:
