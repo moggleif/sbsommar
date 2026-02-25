@@ -715,7 +715,17 @@ The `.section-nav` CSS rule is also removed.
 
 ---
 
-## 10. Design Philosophy
+## 10. Decided Against
+
+Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
+
+| Decision | Reason | Date |
+| --- | --- | --- |
+| CSS/JS minification | Total CSS+JS is ~22 KB; server gzips text assets, so actual transfer savings would be ~3–5 KB. Images (~1.7 MB) are the real payload. Build complexity not justified. | 2026-02 |
+
+---
+
+## 11. Design Philosophy
 
 - YAML is the database
 - Git is the archive
