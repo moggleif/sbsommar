@@ -170,7 +170,6 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 
 - Clear time display: bold start time, lighter end time. <!-- 07-§6.31 -->
 - Location as small text below. <!-- 07-§6.32 -->
-- Optional colored left border to categorize activity type. <!-- 07-§6.33 -->
 
 ### Form field errors (inline)
 
@@ -256,7 +255,6 @@ These variables make it trivial to adjust the design globally later.
 - Avoid stock-photo feel. Prefer real photos from actual camps. <!-- 07-§8.2 -->
 - Hero image: landscape format, high resolution, dark enough for text overlay. <!-- 07-§8.3 -->
 - Testimonial avatars: portrait photos, cropped square, displayed circular. <!-- 07-§8.4 -->
-- Optimize all images: use responsive `srcset`, modern formats (WebP with JPEG fallback). <!-- 07-§8.5 -->
 
 ---
 

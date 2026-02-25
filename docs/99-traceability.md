@@ -243,8 +243,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `CL-§6.5` | Screenshot comparison tests exist for schedule pages | — | SNP-01..06 | `tests/snapshot.test.js` | covered |
 | `CL-§7.1` | JavaScript footprint is minimal | 03-ARCHITECTURE.md §7 | — | Three small client scripts; no framework | implemented |
 | `CL-§7.2` | No unused CSS is shipped | 07-DESIGN.md §7 | — | Hand-written CSS with no unused rules (not enforced by tooling) | implemented |
-| `CL-§7.3` | No large blocking assets are loaded | 03-ARCHITECTURE.md §7 | — | No large scripts or stylesheets; images use `srcset` | implemented |
-| `CL-§7.4` | Images are optimised | 07-DESIGN.md §8 | — | `07-§8.5` requires WebP + srcset; not confirmed implemented | gap |
+| `CL-§7.3` | No large blocking assets are loaded | 03-ARCHITECTURE.md §7 | — | No large scripts or stylesheets | implemented |
 | `CL-§7.5` | No runtime hydration framework is used | 03-ARCHITECTURE.md §7 | — | No framework; plain JS only | implemented |
 | `CL-§7.6` | The site feels instant to load | 03-ARCHITECTURE.md §7 | — | Static HTML + minimal JS + optimised CSS | implemented |
 | `CL-§8.1` | Non-technical contributors can edit text content in Markdown without touching layout files | 01-CONTRIBUTORS.md | — | `source/content/*.md` editable directly; layout is separate | implemented |
@@ -341,7 +340,6 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `07-§6.30` | Alternatively, a sage-green label appears above the heading at `12px` uppercase | 07-DESIGN.md §6 | — | `source/assets/cs/style.css` | implemented |
 | `07-§6.31` | Schedule event rows show a bold start time and a lighter end time | 07-DESIGN.md §6 | — | `source/build/render.js` – `renderEventRow()`; `source/assets/cs/style.css` | implemented |
 | `07-§6.32` | Location is shown as small text below the time in event rows | 07-DESIGN.md §6 | — | `source/build/render.js` – `renderEventRow()` | implemented |
-| `07-§6.33` | Event rows may have an optional colored left border to indicate activity type | 07-DESIGN.md §6 | — | — (deferred: requires an activity-type field in the data model, which is not in scope; the design spec uses "may" — this is optional) | gap |
 | `07-§7.2` | CSS is written for a component only once its HTML structure exists; no speculative CSS | 07-DESIGN.md §7 | — | Convention; assessed through code review | implemented |
 | `07-§7.3` | CSS is organized in one main file: reset → tokens → base → layout → components → utilities | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` | implemented |
 | `07-§7.4` | No CSS preprocessor is used; CSS custom properties are sufficient | 07-DESIGN.md §7 | — | `source/assets/cs/style.css` – plain CSS with custom properties | implemented |
@@ -350,7 +348,6 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `07-§8.2` | Stock photography is avoided; real photos from actual camps are preferred | 07-DESIGN.md §8 | — | Assessed through visual review | implemented |
 | `07-§8.3` | Hero image is landscape format, high resolution, dark enough for text overlay | 07-DESIGN.md §8 | — | `source/build/render-index.js` – `extractHeroImage()` | implemented |
 | `07-§8.4` | Testimonial avatars are portrait photos, cropped square, displayed circular | 07-DESIGN.md §8 | — | `source/assets/cs/style.css` – `--radius-full: 50%` | implemented |
-| `07-§8.5` | All images are optimised: responsive `srcset`, WebP format with JPEG fallback (see `CL-§7.4`) | 07-DESIGN.md §8 | — | — (not confirmed; images may not use srcset or WebP) | gap |
 | `07-§9.1` | Color contrast meets WCAG AA minimum `4.5:1` for body text | 07-DESIGN.md §9 | — | Charcoal `#3B3A38` on Cream `#F5EEDF` passes WCAG AA; not verified programmatically | implemented |
 | `07-§9.2` | Interactive elements have visible focus states (see `02-§13.2`) | 07-DESIGN.md §9 | A11Y-01..09 | `source/assets/cs/style.css` – `:focus-visible` rules (see `02-§13.2`) | covered |
 | `07-§9.3` | Navigation is keyboard accessible (see `02-§13.3`) | 07-DESIGN.md §9 | — | `source/build/layout.js` – standard `<nav>` and `<a>` elements | implemented |
@@ -628,10 +625,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 ## Summary
 
 ```text
-Total requirements:             498
+Total requirements:             495
 Covered (implemented + tested): 158
 Implemented, not tested:        334
-Gap (no implementation):          6
+Gap (no implementation):          3
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -704,14 +701,12 @@ End time is now required everywhere (add form, edit form, data contract).
     countdown background, CSS tokens, minimal JS, image files.
 Matrix cleanup (2026-02-25):
   07-§6.7 moved from gap to implemented (hamburger menu exists; see 02-§24.10–14, NAV-10, NAV-11).
-  12 duplicate rows annotated with cross-references (see-also notes):
+  11 duplicate rows annotated with cross-references (see-also notes):
     02-§4.7→02-§2.10, 02-§11.2→02-§4.8, 02-§11.3→02-§4.8,
     CL-§1.3→CL-§2.9, CL-§3.2→CL-§2.2, CL-§4.1→CL-§2.3, CL-§5.9→05-§6.1,
-    07-§9.2→02-§13.2, 07-§9.3→02-§13.3, 07-§9.4→02-§13.4, 07-§9.5→02-§13.6,
-    07-§8.5→CL-§7.4.
-  07-§6.33 marked as deferred (optional; requires activity-type data model).
+    07-§9.2→02-§13.2, 07-§9.3→02-§13.3, 07-§9.4→02-§13.4, 07-§9.5→02-§13.6.
   Top Gaps list updated: item 8 consolidated with CL-§5.9; item 16 notes
-    native <details> accessibility; item 17 marked deferred.
+    native <details> accessibility.
 3 requirements added for hero visual refinements (02-§30.23–30.25):
   1 covered (HERO-16): 02-§30.24 (Discord icon image).
   2 implemented (visual/CSS, manual check): 02-§30.23 (countdown bg), 02-§30.25 (sidebar centering).
@@ -763,24 +758,16 @@ Matrix cleanup (2026-02-25):
     No CSS linter is configured.
     Requirements added in §33; implementation in progress.
 
-4. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
-    Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
-    `loading="lazy"`, hero preload, `fetchpriority="high"`, first-section eager loading, and `nav.js defer` are implemented (02-§25.1–25.6).
-    Remaining: manual conversion of 6 small PNG/JPG source files to WebP.
-
-5. **`02-§13.2` / `07-§9.2` — Visible focus states** *(resolved)*
+4. **`02-§13.2` / `07-§9.2` — Visible focus states** *(resolved)*
     `:focus-visible` rules added to all interactive elements in `style.css`:
     `outline: 2px solid var(--color-terracotta); outline-offset: 2px`.
     Form inputs retain their `:focus` border-color change and gain the outline on `:focus-visible`.
 
-6. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes** *(resolved)*
+5. **`02-§13.6` / `07-§9.5` — Accordion ARIA attributes** *(resolved)*
     Native `<details>/<summary>` elements satisfy the ARIA requirement — browsers expose
     expanded/collapsed state to assistive technology without explicit attributes.
     Custom accordion components (archive timeline) already use explicit `aria-expanded`
     and `aria-controls` (ARK-04, ARK-05). Design doc updated to codify this decision.
-
-7. **`07-§6.33` — Colored left border for activity type** *(deferred)*
-    The design spec says "may have" (optional). Requires an activity-type field in the data model, which has never been specced. Not actionable without a data model change.
 
 ---
 
