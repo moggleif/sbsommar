@@ -1244,3 +1244,37 @@ If two camps overlap in dates, the one with the earlier `start_date` wins. <!-- 
   removed. <!-- 02-§34.14 -->
 
 ---
+
+## 35. Location Accordions on Index Page
+
+The Lokaler section on the index page must display each location from `local.yaml`
+as an individual accordion item. The section heading and introductory text remain
+visible; only the individual locations are collapsible.
+
+### 35.1 Section heading
+
+- The "Lokaler" heading (`## Lokaler` in `locations.md`) must render as a regular
+  heading, not wrapped in an accordion. <!-- 02-§35.1 -->
+- The introductory paragraph below the heading must remain visible (not inside
+  any accordion). <!-- 02-§35.2 -->
+
+### 35.2 Location accordions
+
+- Each location entry in `local.yaml` must render as a separate
+  `<details class="accordion">` element. <!-- 02-§35.3 -->
+- The location `name` must appear as the `<summary>` text. <!-- 02-§35.4 -->
+- The location `information` text must appear inside the accordion body. <!-- 02-§35.5 -->
+- Locations with one or more `image_path` values must render each image as an
+  `<img>` inside the accordion body, below the information text. <!-- 02-§35.6 -->
+- Locations with empty `information` and empty `image_path` must still render as
+  an accordion (summary only, empty body). <!-- 02-§35.7 -->
+- Accordions must appear in the same order as entries in `local.yaml`. <!-- 02-§35.8 -->
+
+### 35.3 Build integration
+
+- The build must pass the full location data (not just names) to the index
+  rendering pipeline. <!-- 02-§35.9 -->
+- The `collapsible: true` flag in `sections.yaml` must be removed for the lokaler
+  section (individual location accordions replace it). <!-- 02-§35.10 -->
+
+---
