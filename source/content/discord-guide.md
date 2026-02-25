@@ -1,6 +1,6 @@
 # Discord guide
 
-![Discord](images/Discord-Logo-Blurple.png)
+![Discord](images/Discord-Logo-Blurple.webp)
 
 Vi kommer använda Discord som en kommunikationskanal, för diskussioner, dialoger och interaktioner.
 Facebook kommer finnas kvar, givetvis kommer det märkas genom att mer kommunikation kommer finnas i Discord också. Facebook används av några vuxna och väldigt få barn. Discord är mer fokuserat på vår kommunikation och störs inte av allt runtom som i Facebook. Välkommen.
@@ -19,8 +19,7 @@ Vår RFSB server är indelad i kategorier och beroende på roll så kommer man �
 
 * Det första vi vill att du gör är att gå till denna kanal
   * Discord-kanal: Läs detta först
-  * När du är där, se detta meddelandet
-    ![Discord](images/Discord-Logo-Blurple.png)
+  * När du är där, se detta meddelandet ![Discord](images/discord_group.png)
   * Klicka på den cirkeln som du är. Du blir nu tilldelad korrekt roll. Var ärlig.
 * På just denna server är det tacksamt om ni har era vanliga namn.
   * Gå till din profil

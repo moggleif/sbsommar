@@ -54,7 +54,7 @@ Bassängen är 20*8m och 29 grader varm. Se länken ovan för detaljerad informa
 
 ![Bubbelpool](images/bubbelpool.webp)
 
-![Simhall](images/simhall.png)
+![Simhall](images/simhall.webp)
 
 ### Gym
 

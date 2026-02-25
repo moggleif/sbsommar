@@ -2,7 +2,7 @@ locations:
   - id: andreas-taltet
     name: AndreasTältet
     information: ""
-    image_path: "images/andreas-taltet.webp"
+    image_path: ""
   - id: annat
     name: Annat
     information: >
@@ -53,24 +53,34 @@ locations:
     information: >
       En del av GA hallen brukar användas för att spela spel, pussla, pyssla,
       bygga lego, med mera.
-    image_path: "images/GA-kreativ-scaled-1.jpg"
+    image_path: "images/GA-kreativ.webp"
+  - id: ga-lego
+    name: GA Lego
+    information: >
+      En del av GA hallen brukar användas för att spela spel, pussla, pyssla,
+      bygga lego, med mera.
+    image_path: "images/GA-lego.webp"
   - id: ga-stilla-hyllan
     name: GA Stilla hyllan
     information: >
       Uppe på hyllan finns det lite små bord, där kan det göras lugnare och
       mer fokuserade aktiviteter.
-    image_path: "images/GA_stilla_hyllan.webp"
+    image_path:
+      - "images/GA_stilla_hyllan.webp"
+      - "images/GA_laktare.webp"
   - id: grillplats
     name: Grillplats
     information: >
       Grillplatsen ligger vid älven. Badet brukar vara lite varmare på
       eftermiddagen då solen värmt upp “dagens” vatten. Ingen simmar i älven,
       det är sedan gammalt.
-    image_path: "images/grillplatsen.webp"
+    image_path:
+      - "images/grillplatsen.webp"
+      - "images/camping_badplats.webp"
   - id: kaffe-paviljongen
     name: KaffePaviljongen
-    information: ""
-    image_path: "images/kaffetalt.webp"
+    information: "Placerat framför stuga 6, där kaffe och te finns dygnet runt."
+    image_path: ""
   - id: kaffetalt
     name: Kaffetält
     information: >
@@ -138,5 +148,5 @@ locations:
     image_path: "images/talt1_talt2-1.webp"
   - id: tonarsstugan
     name: Tonårsstugan
-    information: ""
-    image_path: "images/tonarsstugan.webp"
+    information: "Endast tillträde för ungdomar som har är 13år fyllda."
+    image_path: ""
