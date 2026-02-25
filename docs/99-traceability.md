@@ -139,7 +139,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive page improvements — 
 | `02-§6.2` | Date field is constrained to the active camp's date range | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `min`/`max` attributes on date input | implemented |
 | `02-§6.3` | Location field is a dropdown populated from `source/data/local.yaml` | 03-ARCHITECTURE.md §6 | — | `source/build/build.js` (loads `local.yaml`); `source/build/render-add.js` (renders `<select>`) | implemented |
 | `02-§6.4` | Time fields guide the user toward a valid `HH:MM` value | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `type="time"` inputs (browser-native validation) | implemented |
-| `02-§6.5` | Form errors are shown inline, per field, immediately on submit | 03-ARCHITECTURE.md §3 | — | — (`lagg-till.js` collects all errors into a single `#form-errors` div, not per-field) | gap |
+| `02-§6.5` | Form errors are shown inline, per field, immediately on submit | 03-ARCHITECTURE.md §7a; 07-DESIGN.md §6.34–6.39 | ILE-01..04, ILE-E01..E04 | `render-add.js` / `render-edit.js` (`.field-error` spans, `aria-describedby`); `lagg-till.js` / `redigera.js` (per-field `setFieldError`); `style.css` (`.field-error`, `[aria-invalid]`) | covered |
 | `02-§6.6` | Submit button is disabled and shows a visual indicator while submission is in progress | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – `submitBtn.disabled = true`; `textContent = 'Sparar...'` | implemented |
 | `02-§6.7` | A clear success confirmation is shown after submission | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – reveals `#result` section with activity title | implemented |
 | `02-§6.8` | Network failure shows a clear error and allows retry; submissions are never silently lost | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – `.catch()` re-enables button and shows error | implemented |
@@ -568,9 +568,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (archive page improvements — 
 
 ```text
 Total requirements:             444
-Covered (implemented + tested): 135
+Covered (implemented + tested): 136
 Implemented, not tested:        280
-Gap (no implementation):         28
+Gap (no implementation):         27
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -630,6 +630,8 @@ End time is now required everywhere (add form, edit form, data contract).
   10 covered (UC-01..14): filtering, sorting, heading, content, data-end, indicators.
   7 implemented (browser-only or manual): past-marking, Stockholm time, CSS tokens,
     section placement, no-rebuild, minimal JS.
+02-§6.5 moved from gap to covered (ILE-01..04, ILE-E01..E04):
+  per-field inline validation errors on add and edit forms.
 ```
 
 ---
@@ -648,51 +650,47 @@ End time is now required everywhere (add form, edit form, data contract).
    In the implementation: `/idag.html` has the standard layout with nav; the dark view is at `/dagens-schema.html`.
    The two pages need their URLs swapped, or the spec updated to match reality.
 
-3. **`02-§6.5` — Per-field inline errors on form submit**
-   `lagg-till.js` collects all validation messages into a single `#form-errors` block.
-   The requirement is that each error appears inline next to the relevant field.
-
 ### High — missing whole features
 
-4. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
+3. **`02-§2.7` / `02-§15.1` / `02-§15.2` — RSS feed** (`/schema.rss`)
    No RSS feed is generated; it must reflect the current state of the schedule.
    No implementation guidance document exists — `03-ARCHITECTURE.md` needs an RSS section before this can be built.
 
-5. **`02-§10.3` — String length limits in API validation**
+4. **`02-§10.3` — String length limits in API validation**
    `validate.js` type-checks strings but sets no maximum length.
    Unbounded strings can be committed to the YAML file.
 
 ### Medium — data integrity
 
-6. **`05-§4.1` — Event date range check (API server)**
+5. **`05-§4.1` — Event date range check (API server)**
    The API accepts any structurally valid `YYYY-MM-DD` date regardless of camp `start_date`/`end_date`.
 
-7. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
+6. **`05-§4.2` / `05-§4.4` — Time format validation (API server)**
    `validate.js` checks `start` is non-empty but not that it matches `HH:MM`.
    `end` is not validated as a valid `HH:MM` string — only that it is after `start`.
 
-8. **`05-§5.1` — Duplicate event uniqueness not enforced**
+7. **`05-§5.1` — Duplicate event uniqueness not enforced**
    The `(title + date + start)` combination is never checked for uniqueness before committing.
 
-9. **`05-§6.1` — Event ID uniqueness not enforced**
+8. **`05-§6.1` — Event ID uniqueness not enforced**
    Identical submissions produce identical IDs. No check is made against existing IDs in the file.
 
-10. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
+9. **`05-§1.3` — `active: true` and `archived: true` mutual exclusion**
     No code prevents a camp from being marked both active and archived.
 
-11. **`CL-§5.5` / `CL-§5.9` / `CL-§6.3` — Build-time YAML data validation**
+10. **`CL-§5.5` / `CL-§5.9` / `CL-§6.3` — Build-time YAML data validation**
     Manually edited YAML bypasses all validation (required fields, date ranges, duplicate IDs).
     Validation only runs in the API layer when events are submitted through the form.
 
 ### Low — tooling, design, and accessibility gaps
 
-12. **`CL-§5.1` — HTML validation in CI**
+11. **`CL-§5.1` — HTML validation in CI**
     No HTML linter is configured; invalid HTML does not fail the build.
 
-13. **`CL-§5.2` — CSS linting in CI**
+12. **`CL-§5.2` — CSS linting in CI**
     No CSS linter is configured.
 
-14. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
+13. **`CL-§7.4` / `07-§8.5` — Image optimisation** *(partially resolved)*
     Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
     `loading="lazy"`, hero preload, `fetchpriority="high"`, first-section eager loading, and `nav.js defer` are implemented (02-§25.1–25.6).
     Remaining: manual conversion of 6 small PNG/JPG source files to WebP.

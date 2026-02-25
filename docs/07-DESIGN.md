@@ -162,6 +162,16 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 - Location as small text below. <!-- 07-§6.32 -->
 - Optional colored left border to categorize activity type. <!-- 07-§6.33 -->
 
+### Form field errors (inline)
+
+Per-field validation errors appear directly below the input they relate to. <!-- 07-§6.34 -->
+
+- Each `.field` div may contain a `<span class="field-error">` after the input element. <!-- 07-§6.35 -->
+- Error text: `14px`, `var(--color-terracotta)`. <!-- 07-§6.36 -->
+- Invalid inputs receive a terracotta bottom border (`2px solid var(--color-terracotta)`) via `aria-invalid="true"`. <!-- 07-§6.37 -->
+- Each error span is linked to its input with `aria-describedby` so screen readers announce the error in context. <!-- 07-§6.38 -->
+- On successful revalidation (next submit attempt), the error text is removed, `aria-invalid` is cleared, and the border returns to normal. <!-- 07-§6.39 -->
+
 ---
 
 ## 7. CSS Strategy

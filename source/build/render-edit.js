@@ -68,35 +68,41 @@ ${pageNav('redigera.html', navSections)}
 
         <div class="field">
           <label for="f-title">Rubrik <span class="req">*</span></label>
-          <input type="text" id="f-title" name="title" autocomplete="off" required>
+          <input type="text" id="f-title" name="title" autocomplete="off" required aria-describedby="err-title">
+          <span class="field-error" id="err-title" hidden></span>
         </div>
 
         <div class="field-row">
           <div class="field">
             <label for="f-date">Datum <span class="req">*</span></label>
-            <input type="date" id="f-date" name="date" min="${startDate}" max="${endDate}" required>
+            <input type="date" id="f-date" name="date" min="${startDate}" max="${endDate}" required aria-describedby="err-date">
+            <span class="field-error" id="err-date" hidden></span>
           </div>
           <div class="field">
             <label for="f-start">Starttid <span class="req">*</span></label>
-            <input type="time" id="f-start" name="start" required>
+            <input type="time" id="f-start" name="start" required aria-describedby="err-start">
+            <span class="field-error" id="err-start" hidden></span>
           </div>
           <div class="field">
             <label for="f-end">Sluttid <span class="req">*</span></label>
-            <input type="time" id="f-end" name="end" required>
+            <input type="time" id="f-end" name="end" required aria-describedby="err-end">
+            <span class="field-error" id="err-end" hidden></span>
           </div>
         </div>
 
         <div class="field-row">
           <div class="field">
             <label for="f-location">Plats <span class="req">*</span></label>
-            <select id="f-location" name="location" required>
+            <select id="f-location" name="location" required aria-describedby="err-location">
               <option value="">Välj plats...</option>
 ${locationOptions}
             </select>
+            <span class="field-error" id="err-location" hidden></span>
           </div>
           <div class="field">
             <label for="f-responsible">Ansvarig <span class="req">*</span></label>
-            <input type="text" id="f-responsible" name="responsible" autocomplete="off" required>
+            <input type="text" id="f-responsible" name="responsible" autocomplete="off" required aria-describedby="err-responsible">
+            <span class="field-error" id="err-responsible" hidden></span>
           </div>
         </div>
 
@@ -109,8 +115,6 @@ ${locationOptions}
           <label for="f-link">Länk <span class="opt">(valfritt)</span></label>
           <input type="url" id="f-link" name="link" placeholder="https://...">
         </div>
-
-        <div id="form-errors" class="form-errors" hidden></div>
 
       </fieldset>
 

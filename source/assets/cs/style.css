@@ -592,22 +592,19 @@ textarea {
   cursor: not-allowed;
 }
 
-.form-errors {
-  margin-bottom: var(--space-sm);
-  padding: 10px var(--space-sm);
-  background: color-mix(in srgb, var(--color-terracotta) 10%, var(--color-white));
-  border-left: 3px solid var(--color-terracotta);
-  border-radius: var(--radius-sm);
-  font-size: 14px;
-  color: var(--color-charcoal);
+/* ── Per-field inline errors (02-§6.5) ── */
+
+.field-error {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-small);
+  color: var(--color-terracotta);
 }
 
-.form-errors p {
-  margin: 0 0 4px;
-}
-
-.form-errors p:last-child {
-  margin-bottom: 0;
+.field input[aria-invalid="true"],
+.field select[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-bottom: 2px solid var(--color-terracotta);
 }
 
 /* ── Success state ── */

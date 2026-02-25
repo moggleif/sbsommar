@@ -3,7 +3,6 @@
 
   var form         = document.getElementById('event-form');
   var fieldset     = form.querySelector('fieldset');
-  var errBox       = document.getElementById('form-errors');
   var submitBtn    = form.querySelector('button[type="submit"]');
   var modal        = document.getElementById('submit-modal');
   var modalHeading = document.getElementById('modal-heading');
@@ -116,7 +115,7 @@
     document.getElementById('modal-new-btn').addEventListener('click', function () {
       closeModal();
       form.reset();
-      errBox.hidden = true;
+      clearAllErrors();
       unlock();
       window.scrollTo(0, 0);
     });
@@ -157,10 +156,32 @@
       .replace(/"/g, '&quot;');
   }
 
+  // ── Per-field inline errors (02-§6.5) ────────────────────────────────────────
+
+  function setFieldError(name, message) {
+    var input = form.querySelector('#f-' + name);
+    var span  = document.getElementById('err-' + name);
+    if (message) {
+      input.setAttribute('aria-invalid', 'true');
+      span.textContent = message;
+      span.hidden = false;
+    } else {
+      input.removeAttribute('aria-invalid');
+      span.textContent = '';
+      span.hidden = true;
+    }
+  }
+
+  function clearAllErrors() {
+    var fields = ['title', 'date', 'start', 'end', 'location', 'responsible'];
+    for (var i = 0; i < fields.length; i++) { setFieldError(fields[i], null); }
+  }
+
   // ── Submit handler ───────────────────────────────────────────────────────────
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    clearAllErrors();
 
     var els         = form.elements;
     var title       = els.title.value.trim();
@@ -171,24 +192,30 @@
     var responsible = els.responsible.value.trim();
 
     var today = new Date().toISOString().slice(0, 10);
-    var errs = [];
-    if (!title)            errs.push('Rubrik är obligatoriskt.');
-    if (!date)             errs.push('Datum är obligatoriskt.');
-    else if (date < today) errs.push('Datum kan inte vara i det förflutna.');
-    if (!start)            errs.push('Starttid är obligatorisk.');
-    if (!end)              errs.push('Sluttid är obligatorisk.');
-    else if (end <= start) errs.push('Sluttid måste vara efter starttid.');
-    if (!location)         errs.push('Plats är obligatoriskt.');
-    if (!responsible)      errs.push('Ansvarig är obligatoriskt.');
+    var hasError = false;
+    var firstInvalid = null;
 
-    if (errs.length) {
-      errBox.hidden = false;
-      errBox.innerHTML = errs.map(function (m) { return '<p>' + m + '</p>'; }).join('');
-      errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    function fail(name, msg) {
+      setFieldError(name, msg);
+      hasError = true;
+      if (!firstInvalid) firstInvalid = form.querySelector('#f-' + name);
+    }
+
+    if (!title)            fail('title', 'Rubrik är obligatoriskt.');
+    if (!date)             fail('date', 'Datum är obligatoriskt.');
+    else if (date < today) fail('date', 'Datum kan inte vara i det förflutna.');
+    if (!start)            fail('start', 'Starttid är obligatorisk.');
+    if (!end)              fail('end', 'Sluttid är obligatorisk.');
+    else if (end <= start) fail('end', 'Sluttid måste vara efter starttid.');
+    if (!location)         fail('location', 'Plats är obligatoriskt.');
+    if (!responsible)      fail('responsible', 'Ansvarig är obligatoriskt.');
+
+    if (hasError) {
+      firstInvalid.focus();
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
-    errBox.hidden = true;
     lock();
 
     // Ask for cookie consent before sending (shown once per browser).
