@@ -200,6 +200,8 @@ async function main() {
         heroSrc = extracted.heroSrc;
         heroAlt = extracted.heroAlt;
         md = extracted.md;
+        // Strip the first H1 — the hero title now renders it.
+        md = md.replace(/^# .+\n*/m, '').trimStart();
       }
 
       const navLabel = def.nav || extractH1(md) || def.file;
@@ -210,8 +212,6 @@ async function main() {
 
   // ── Compute hero social links and countdown target ────────────────────────
   const discordUrl = 'https://discord.com/channels/992817044527534181/1390691617052037232';
-  // Use the Facebook link from the nearest future camp, or the active camp
-  const facebookUrl = (activeCamp.link || '').trim() || null;
 
   // Countdown: find the nearest future camp by start_date
   const todayStr = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
@@ -219,6 +219,11 @@ async function main() {
     .filter((c) => toDateString(c.start_date) > todayStr)
     .sort((a, b) => toDateString(a.start_date).localeCompare(toDateString(b.start_date)));
   const countdownTarget = futureCamps.length > 0 ? toDateString(futureCamps[0].start_date) : null;
+
+  // Facebook link: prefer active camp, fall back to nearest future camp
+  const facebookUrl = (activeCamp.link || '').trim()
+    || (futureCamps.length > 0 && (futureCamps[0].link || '').trim())
+    || null;
 
   const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
