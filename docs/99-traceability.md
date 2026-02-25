@@ -537,6 +537,7 @@ End time is now required everywhere (add form, edit form, data contract).
 10 implemented but browser-only; cannot be unit-tested in Node.js.
 2 requirements added for CI checkout depth (CL-§9.5, 02-§23.14):
   both implemented (CI workflow config, no unit test possible).
+4 requirements added for image loading performance (02-§25.1–25.4): status gap.
 ```
 
 ---
@@ -600,7 +601,8 @@ End time is now required everywhere (add form, edit form, data contract).
     No CSS linter is configured.
 
 14. **`CL-§7.4` / `07-§8.5` — Image optimisation**
-    Images may not be served as WebP with responsive `srcset`. Not confirmed implemented.
+    Images are mostly served as WebP. Remaining PNG/JPG files are small (≤41 KB).
+    `loading="lazy"`, hero preload, and `fetchpriority` are being added (02-§25.1–25.4).
 
 15. **`02-§13.2` / `07-§9.2` — Visible focus states**
     Explicit `:focus-visible` rules are not confirmed in `style.css`.
