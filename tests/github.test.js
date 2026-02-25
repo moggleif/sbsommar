@@ -227,4 +227,70 @@ describe('buildEventYaml', () => {
     assert.strictEqual(event.title, 'Frukost');
     assert.ok(event.description.includes('Multi'), `Got: ${JSON.stringify(event.description)}`);
   });
+
+  it('GH-39 (02-§10.6): accepts an indent parameter and indents the list marker', () => {
+    const block = buildEventYaml(baseEvent(), 2);
+    const firstLine = block.split('\n')[0];
+    assert.ok(firstLine.startsWith('  - id:'), `Expected 2-space indent on "- id:", got: "${firstLine}"`);
+  });
+
+  it('GH-40 (02-§10.6): indents all field lines by indent + 2 when indent is provided', () => {
+    const block = buildEventYaml(baseEvent(), 2);
+    const lines = block.split('\n');
+    // Second line should be "    title:" (4 spaces = 2 indent + 2 field)
+    const titleLine = lines.find((l) => l.includes('title:'));
+    assert.ok(titleLine.startsWith('    '), `Expected 4-space indent on title line, got: "${titleLine}"`);
+  });
+
+  it('GH-41 (02-§10.6): indented output appended to a camp file produces valid YAML', () => {
+    const yaml = require('js-yaml');
+    const campFile = [
+      'camp:',
+      '  id: test-camp',
+      '  name: Test',
+      '  location: Here',
+      "  start_date: '2025-06-22'",
+      "  end_date: '2025-06-28'",
+      'events:',
+      '  - id: existing-event',
+      "    title: 'Existing'",
+      "    date: '2025-06-22'",
+      "    start: '10:00'",
+      "    end: '11:00'",
+      '    location: There',
+      '    responsible: Someone',
+      '    description: null',
+      '    link: null',
+      '    owner:',
+      "      name: ''",
+      "      email: ''",
+      '    meta:',
+      '      created_at: 2025-06-22 07:00',
+      '      updated_at: 2025-06-22 07:00',
+    ].join('\n');
+
+    const newEvent = buildEventYaml(baseEvent(), 2);
+    const combined = campFile.trimEnd() + '\n' + newEvent + '\n';
+    const parsed = yaml.load(combined);
+
+    assert.ok(parsed.events, 'Parsed YAML must have events key');
+    assert.strictEqual(parsed.events.length, 2, `Expected 2 events, got ${parsed.events.length}`);
+    assert.strictEqual(parsed.events[1].id, 'frukost-2025-06-22-0800');
+  });
+
+  it('GH-42 (02-§10.6): description block scalar lines are indented correctly with indent', () => {
+    const block = buildEventYaml(baseEvent({ description: 'Line one.\nLine two.' }), 2);
+    // description lines should be at indent + 4 (2 + 4 = 6 spaces)
+    assert.ok(block.includes('      Line one.'), `Expected 6-space indent on description, got:\n${block}`);
+    assert.ok(block.includes('      Line two.'), `Expected 6-space indent on description, got:\n${block}`);
+  });
+
+  it('GH-43 (02-§10.6): owner sub-fields are indented correctly with indent', () => {
+    const block = buildEventYaml(baseEvent(), 2);
+    // "owner:" at indent+2 = 4, "name:" at indent+4 = 6
+    const ownerLine = block.split('\n').find((l) => l.trimStart().startsWith('owner:'));
+    assert.ok(ownerLine.startsWith('    owner:'), `Expected 4-space indent on owner, got: "${ownerLine}"`);
+    const nameLine = block.split('\n').find((l) => l.trimStart().startsWith('name:'));
+    assert.ok(nameLine.startsWith('      name:'), `Expected 6-space indent on name, got: "${nameLine}"`);
+  });
 });
