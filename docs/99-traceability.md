@@ -157,7 +157,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (CI checkout depth fix — CL-�
 | `02-§10.3` | String values are length-limited; extremely long strings are rejected | 03-ARCHITECTURE.md §3 | — | — (`source/api/validate.js` type-checks strings but has no max-length check) | gap |
 | `02-§10.4` | User-provided strings are never directly interpolated into YAML; all quoting is handled by the serializer | 05-DATA_CONTRACT.md §8, 06-EVENT_DATA_MODEL.md §8 | GH-12..23, GH-38 | `source/api/github.js` – `yamlScalar()` | covered |
 | `02-§10.5` | A validation failure results in an HTTP error response; nothing is committed to GitHub | 03-ARCHITECTURE.md §3 | VLD-01..26 (validate logic; no HTTP integration test) | `app.js` – `res.status(400)` before calling `addEventToActiveCamp` | covered |
-| `02-§10.6` | Appended event YAML is indented to match the `events:` list; resulting file is valid YAML | 03-ARCHITECTURE.md §3 | — | — | gap |
+| `02-§10.6` | Appended event YAML is indented to match the `events:` list; resulting file is valid YAML | 03-ARCHITECTURE.md §3 | GH-39..43 | `source/api/github.js` – `buildEventYaml(event, indent)` with `indent=2` in `addEventToActiveCamp()` | covered |
 | `02-§11.1` | Activities are always displayed in chronological order (by date, then start time) | 03-ARCHITECTURE.md §5 | RND-28..32, SNP-03 | `source/build/render.js` – `groupAndSortEvents()` | covered |
 | `02-§11.2` | Overlapping activities are allowed; the schedule must remain readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | — | No exclusion logic in `source/build/render.js`; CSS handles layout | implemented |
 | `02-§12.1` | A newly submitted activity appears in the live schedule within a few minutes | 03-ARCHITECTURE.md §3 (PR auto-merge → deploy pipeline) | — | `source/api/github.js` – `createPullRequest()`, `enableAutoMerge()` | implemented |
@@ -497,8 +497,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (CI checkout depth fix — CL-�
 ## Summary
 
 ```text
-Total requirements:             378
-Covered (implemented + tested):  97
+Total requirements:             379
+Covered (implemented + tested):  98
 Implemented, not tested:        253
 Gap (no implementation):         28
 Orphan tests (no requirement):    0
