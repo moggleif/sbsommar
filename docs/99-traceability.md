@@ -615,7 +615,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (data validation gaps closed �
 | `02-§32.7` | Configured via `.htmlvalidate.json` | 03-ARCHITECTURE.md §11.5 | manual: file exists at project root | — | gap |
 | `02-§32.8` | Rules tuned to accept existing generated HTML | 03-ARCHITECTURE.md §11.5 | manual: `npm run build && npm run lint:html` passes | — | gap |
 | `02-§33.1` | CSS linting uses Stylelint with `stylelint-config-standard` | 03-ARCHITECTURE.md §11.5 | manual: check `package.json` devDeps and `.stylelintrc.json` | — | gap |
-| `02-§33.2` | Linting runs on `source/assets/css/*.css` | 03-ARCHITECTURE.md §11.5 | manual: run `npm run lint:css` | — | gap |
+| `02-§33.2` | Linting runs on `source/assets/cs/*.css` | 03-ARCHITECTURE.md §11.5 | manual: run `npm run lint:css` | — | gap |
 | `02-§33.3` | `lint:css` npm script runs Stylelint | 03-ARCHITECTURE.md §11.5 | manual: run `npm run lint:css` | — | gap |
 | `02-§33.4` | CI runs `lint:css` alongside existing lint steps | 03-ARCHITECTURE.md §11.5 | manual: inspect `ci.yml` for `lint:css` step | — | gap |
 | `02-§33.5` | CSS lint failures fail CI | 03-ARCHITECTURE.md §11.5 | manual: `lint:css` step has no `continue-on-error` | — | gap |

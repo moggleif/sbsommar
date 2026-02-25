@@ -1,0 +1,9 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "valid-id": ["error", { "relaxed": true }],
+    "wcag/h71": "off",
+    "empty-heading": "off",
+    "no-raw-characters": "off"
+  }
+}

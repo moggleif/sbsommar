@@ -47,7 +47,7 @@ describe('pageNav – structure (02-§24.1, §24.2)', () => {
 
   it('NAV-02: renders a hamburger toggle button inside the nav', () => {
     const html = pageNav('index.html', []);
-    assert.ok(html.includes('<button class="nav-toggle"'), `Got: ${html}`);
+    assert.ok(html.includes('<button type="button" class="nav-toggle"'), `Got: ${html}`);
   });
 
   it('NAV-10: hamburger button has an aria-label attribute (02-§24.11)', () => {

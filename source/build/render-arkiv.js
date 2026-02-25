@@ -66,8 +66,7 @@ function renderArchiveEventRow(ev) {
     return `        <details class="event-row">
           <summary>
             <span class="ev-time">${timeStr}</span>
-            <span class="ev-title">${escapeHtml(ev.title)}</span>
-            ${metaEl}
+            <span class="ev-title">${escapeHtml(ev.title)}</span>${metaEl ? `\n            ${metaEl}` : ''}
           </summary>
           ${eventExtraHtml(ev)}
         </details>`;
@@ -75,8 +74,7 @@ function renderArchiveEventRow(ev) {
 
   return `        <div class="event-row plain">
           <span class="ev-time">${timeStr}</span>
-          <span class="ev-title">${escapeHtml(ev.title)}</span>
-          ${metaEl}
+          <span class="ev-title">${escapeHtml(ev.title)}</span>${metaEl ? `\n          ${metaEl}` : ''}
         </div>`;
 }
 
@@ -127,7 +125,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
     return `  <li class="timeline-item">
     <div class="timeline-dot" aria-hidden="true"></div>
     <div class="timeline-card">
-      <button class="timeline-header" aria-expanded="false" aria-controls="${panelId}">
+      <button type="button" class="timeline-header" aria-expanded="false" aria-controls="${panelId}">
         <span class="timeline-name">${name}</span>
         <span class="timeline-meta">${headerDateRange} · ${location}</span>
         <span class="timeline-chevron" aria-hidden="true"></span>

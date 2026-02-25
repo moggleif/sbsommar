@@ -45,7 +45,7 @@ function pageNav(activeHref, navSections = []) {
   }
 
   return `  <nav class="page-nav" aria-label="Sidnavigation">
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>

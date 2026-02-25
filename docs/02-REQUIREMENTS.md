@@ -1175,7 +1175,7 @@ the `CL-§5.2` gap.
 
 ### 33.2 Scope
 
-- Linting runs against all `.css` files in `source/assets/css/`. <!-- 02-§33.2 -->
+- Linting runs against all `.css` files in `source/assets/cs/`. <!-- 02-§33.2 -->
 
 ### 33.3 CI integration
 
