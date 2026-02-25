@@ -33,9 +33,9 @@ locations:
       - "images/fritids_tvrum.webp"
       - "images/fritids_sal.webp"
       - "images/fritids_biljard-1.webp"
-      - "images/fritids_kllettervagg-rotated-1.webp"
-      - "images/karta_fritidsgard_kallare.png"
-      - "images/karta_skola_overvaning.png"
+      - "images/fritids_klattervagg-rotated-1.webp"
+      - "images/karta_fritidsgard_kallare.webp"
+      - "images/karta_skola_overvaning.webp"
   - id: ga-datorsal
     name: GA Datorsal
     information: >

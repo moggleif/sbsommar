@@ -8,7 +8,7 @@ const { pageNav, pageFooter } = require('./layout');
  */
 function inlineHtml(text) {
   return text
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="content-img">')
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="content-img" loading="lazy">')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 }
@@ -151,7 +151,7 @@ function convertMarkdown(md, headingOffset = 0, collapsible = false) {
  */
 function renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml = '', navSections = []) {
   const heroHtml = heroSrc
-    ? `\n  <div class="hero">\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img">\n  </div>`
+    ? `\n  <div class="hero">\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img" fetchpriority="high">\n  </div>`
     : '';
 
   const contentSections = sections
@@ -165,13 +165,17 @@ function renderIndexPage({ heroSrc, heroAlt, sections }, footerHtml = '', navSec
     })
     .join('\n\n');
 
+  const preloadHtml = heroSrc
+    ? `\n  <link rel="preload" as="image" href="${heroSrc}">`
+    : '';
+
   return `<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SB Sommar</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">${preloadHtml}
 </head>
 <body>
 ${pageNav('index.html', navSections)}${heroHtml}

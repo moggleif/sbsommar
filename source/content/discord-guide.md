@@ -19,7 +19,7 @@ Vår RFSB server är indelad i kategorier och beroende på roll så kommer man �
 
 * Det första vi vill att du gör är att gå till denna kanal
   * Discord-kanal: Läs detta först
-  * När du är där, se detta meddelandet ![Discord](images/discord_group.png)
+  * När du är där, se detta meddelandet ![Discord](images/discord_group.webp)
   * Klicka på den cirkeln som du är. Du blir nu tilldelad korrekt roll. Var ärlig.
 * På just denna server är det tacksamt om ni har era vanliga namn.
   * Gå till din profil

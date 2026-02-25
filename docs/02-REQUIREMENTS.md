@@ -726,3 +726,24 @@ index page. <!-- 02-§24.7 -->
   and all navigation links must be directly visible. <!-- 02-§24.15 -->
 
 ---
+
+## 25. Image Loading Performance
+
+The site must use browser-native loading hints to improve perceived performance
+and reduce layout shift. No new client-side JavaScript is required.
+
+### 25.1 Lazy loading for below-fold images
+
+- All content images (class `content-img`) produced by the build must include
+  `loading="lazy"`. <!-- 02-§25.1 -->
+- The hero image (class `hero-img`) must NOT have `loading="lazy"` — it is
+  above the fold and must load immediately. <!-- 02-§25.2 -->
+
+### 25.2 Hero image preload and priority
+
+- The `<head>` of the homepage must include a `<link rel="preload" as="image">`
+  element whose `href` matches the hero image source. The path must not be
+  hardcoded — it is derived from the hero image extracted at build time. <!-- 02-§25.3 -->
+- The hero `<img>` tag must include `fetchpriority="high"`. <!-- 02-§25.4 -->
+
+---
