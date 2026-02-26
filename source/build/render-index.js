@@ -91,10 +91,10 @@ function convertMarkdown(md, headingOffset = 0, collapsible = false) {
     } else if (line.trim() === '---') {
       flushPara();
       blocks.push({ type: 'hr' });
-    } else if (line.startsWith('- ')) {
+    } else if (line.startsWith('- ') || line.startsWith('* ')) {
       flushPara();
       const items = [];
-      while (i < lines.length && lines[i].startsWith('- ')) {
+      while (i < lines.length && (lines[i].startsWith('- ') || lines[i].startsWith('* '))) {
         items.push(lines[i].slice(2));
         i++;
       }
