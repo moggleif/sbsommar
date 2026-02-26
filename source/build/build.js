@@ -48,7 +48,8 @@ if (!fs.existsSync(campsFile)) {
 const campsData = yaml.load(fs.readFileSync(campsFile, 'utf8'));
 const camps = campsData.camps;
 
-const activeCamp = resolveActiveCamp(camps);
+const BUILD_ENV = process.env.BUILD_ENV || undefined;
+const activeCamp = resolveActiveCamp(camps, undefined, BUILD_ENV);
 console.log(`Active camp: ${activeCamp.name} (${activeCamp.start_date} – ${activeCamp.end_date})`);
 
 // ── Load camp file ───────────────────────────────────────────────────────────
