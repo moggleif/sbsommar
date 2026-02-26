@@ -202,7 +202,8 @@ or render function.
 1. Reads `source/content/footer.md` at the start of the build, before rendering
    any page.
 2. Converts the Markdown to HTML using `convertMarkdown()` from
-   `source/build/render-index.js` (the same pipeline used for homepage sections).
+   `source/build/render-index.js` (powered by the `marked` library; the same
+   pipeline used for homepage sections).
 3. If the file does not exist, `footerHtml` is set to an empty string — no error,
    no crash.
 4. Passes `footerHtml` as an argument to every render function.
@@ -1215,6 +1216,41 @@ serialised as-is; no event data is modified.
 | File | Role |
 | ---- | ---- |
 | `source/scripts/validate-camps.js` | Validator script |
+
+---
+
+## 20. Markdown Converter (`marked`)
+
+The build converts Markdown content files to HTML using the `marked` library
+(production dependency, build-time only). This replaced a hand-rolled converter
+that only supported a subset of Markdown.
+
+### 20.1 Integration
+
+`source/build/render-index.js` creates a `Marked` instance with custom renderers:
+
+- **Heading offset**: shifts heading depth by `headingOffset` (capped at `h6`).
+- **Image class**: adds `class="content-img"` and `loading="lazy"` to all images.
+
+`convertMarkdown(input, headingOffset, collapsible)` calls `marked.parse()` and
+optionally post-processes the HTML for collapsible accordions.
+
+`inlineHtml(text)` uses `marked.parseInline()` for inline-only conversion
+(used by `renderLocationAccordions`).
+
+### 20.2 Collapsible mode
+
+When `collapsible: true`, the HTML output is split at the target heading level
+(`<h{2+offset}>`). Each segment starting with that heading becomes a
+`<details class="accordion">` element. Content before the first such heading
+is left unwrapped.
+
+### 20.3 Files
+
+| File | Role |
+| ---- | ---- |
+| `source/build/render-index.js` | `convertMarkdown()`, `inlineHtml()`, `createMarked()` |
+| `source/assets/cs/style.css` | Table styles for markdown-rendered tables |
 
 ---
 

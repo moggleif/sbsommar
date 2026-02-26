@@ -1429,3 +1429,48 @@ sync.
 - The validator must be importable as a module for use in tests. <!-- 02-§37.18 -->
 
 ---
+
+## 38. Replace Hand-Rolled Markdown Converter with marked
+
+The build-time markdown converter (`convertMarkdown()` and `inlineHtml()` in
+`render-index.js`) supports only a limited subset of markdown. Content authors
+write standard markdown (including tables) that the converter silently mangles.
+Replace the hand-rolled converter with the `marked` library.
+
+### 38.1 Library integration
+
+- The build must use `marked` as the markdown-to-HTML converter. <!-- 02-§38.1 -->
+- `marked` must be a production dependency (build-time only; no client-side
+  JS change). <!-- 02-§38.2 -->
+- No other new dependencies may be added. <!-- 02-§38.3 -->
+
+### 38.2 Preserved behaviours
+
+- Heading offset: the `headingOffset` parameter must shift all heading levels
+  (e.g. `## Foo` with offset 1 becomes `<h3>`), capped at `h6`. <!-- 02-§38.4 -->
+- Collapsible accordion: when `collapsible` is true, each `##`-level section
+  (after offset) must be wrapped in a
+  `<details class="accordion"><summary>…</summary>…</details>`
+  element. Content before the first `##` must not be wrapped. <!-- 02-§38.5 -->
+- Images rendered from markdown must have `class="content-img"` and
+  `loading="lazy"`. <!-- 02-§38.6 -->
+
+### 38.3 Full markdown support
+
+- Standard markdown features (tables, ordered lists, code blocks, nested lists,
+  emphasis, line breaks) must render correctly. <!-- 02-§38.7 -->
+- Existing content files must not be modified — the converter must handle them
+  as-is. <!-- 02-§38.8 -->
+
+### 38.4 Table styling
+
+- Tables rendered from markdown must have basic CSS styling using existing
+  design tokens. <!-- 02-§38.9 -->
+
+### 38.5 Quality
+
+- All existing tests must continue to pass (with assertion adjustments where
+  marked produces correct but different HTML). <!-- 02-§38.10 -->
+- Build, lint, and HTML validation must pass. <!-- 02-§38.11 -->
+
+---

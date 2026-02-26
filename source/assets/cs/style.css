@@ -922,6 +922,30 @@ details.accordion > summary:focus-visible {
   margin: var(--space-md) 0;
 }
 
+/* ── Tables (rendered from Markdown) ── */
+
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: var(--font-size-base);
+}
+
+.content th,
+.content td {
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.content th {
+  font-weight: 700;
+}
+
+.content thead th {
+  border-bottom-width: 2px;
+}
+
 /* ── Responsive ── */
 
 /* ── Edit link (injected by session.js) ── */
