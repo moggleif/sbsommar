@@ -1525,10 +1525,9 @@ alerts.
 
 ## 40. Zero-Downtime Static Site Deploy
 
-The current deploy uploads the static site via FTP with `dangerous-clean-slate`,
-which deletes all files on the server before re-uploading everything. This causes
-60+ seconds of downtime per deploy. The deploy must be changed to a staging-and-swap
-strategy that reduces downtime to milliseconds.
+The static site deploy must use a staging-and-swap strategy that limits
+downtime to milliseconds. The build output is uploaded to a staging directory
+via SCP, then swapped into the live web root with server-side `mv` operations.
 
 ### 40.1 Deploy method (site requirements)
 
