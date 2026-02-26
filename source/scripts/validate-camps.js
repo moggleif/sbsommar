@@ -38,7 +38,7 @@ function validateCamps(camps, files) {
   for (const camp of camps) {
     const ref = `camp "${camp.id || 'UNKNOWN'}"`;
 
-    // ── Required fields (02-§36.1) ────────────────────────────────────────
+    // ── Required fields (02-§37.1) ────────────────────────────────────────
     for (const field of REQUIRED_FIELDS) {
       if (camp[field] === undefined || camp[field] === null || camp[field] === '') {
         if (field === 'archived' && camp[field] === false) continue;
@@ -46,7 +46,7 @@ function validateCamps(camps, files) {
       }
     }
 
-    // ── Date format (02-§36.2) ────────────────────────────────────────────
+    // ── Date format (02-§37.2) ────────────────────────────────────────────
     for (const dateField of ['start_date', 'end_date', 'opens_for_editing']) {
       const val = camp[dateField];
       if (val !== undefined && val !== null && val !== '') {
@@ -57,21 +57,21 @@ function validateCamps(camps, files) {
       }
     }
 
-    // ── end_date >= start_date (02-§36.3) ─────────────────────────────────
+    // ── end_date >= start_date (02-§37.3) ─────────────────────────────────
     const startStr = String(camp.start_date || '');
     const endStr = String(camp.end_date || '');
     if (DATE_RE.test(startStr) && DATE_RE.test(endStr) && endStr < startStr) {
       errors.push(`${ref}: end_date (${endStr}) must be on or after start_date (${startStr})`);
     }
 
-    // ── archived is boolean (02-§36.4) ────────────────────────────────────
+    // ── archived is boolean (02-§37.4) ────────────────────────────────────
     if (camp.archived !== undefined && camp.archived !== null && camp.archived !== '') {
       if (typeof camp.archived !== 'boolean') {
         errors.push(`${ref}: archived must be a boolean, got "${typeof camp.archived}"`);
       }
     }
 
-    // ── Unique id (02-§36.5) ──────────────────────────────────────────────
+    // ── Unique id (02-§37.5) ──────────────────────────────────────────────
     if (camp.id) {
       if (seenIds.has(camp.id)) {
         errors.push(`${ref}: duplicate id "${camp.id}"`);
@@ -79,7 +79,7 @@ function validateCamps(camps, files) {
       seenIds.add(camp.id);
     }
 
-    // ── Unique file (02-§36.6) ────────────────────────────────────────────
+    // ── Unique file (02-§37.6) ────────────────────────────────────────────
     if (camp.file) {
       if (seenFiles.has(camp.file)) {
         errors.push(`${ref}: duplicate file "${camp.file}"`);
@@ -88,23 +88,23 @@ function validateCamps(camps, files) {
     }
   }
 
-  // ── Stop here if validation errors found (02-§36.7) ─────────────────────
+  // ── Stop here if validation errors found (02-§37.7) ─────────────────────
   if (errors.length > 0) {
     return { ok: false, errors, log };
   }
 
-  // ── File creation and sync (02-§36.8–36.15) ────────────────────────────
+  // ── File creation and sync (02-§37.8–36.15) ────────────────────────────
   if (files) {
     for (const camp of camps) {
       const filename = camp.file;
       if (!filename) continue;
 
       if (!(filename in files)) {
-        // Create new file (02-§36.8, 02-§36.9, 02-§36.10, 02-§36.11)
+        // Create new file (02-§37.8, 02-§37.9, 02-§37.10, 02-§37.11)
         files[filename] = serializeCampFile(camp, []);
         log.push(`Created ${filename}`);
       } else {
-        // Check and sync header (02-§36.13, 02-§36.14, 02-§36.15)
+        // Check and sync header (02-§37.13, 02-§37.14, 02-§37.15)
         const existing = files[filename];
         let data;
         try {
@@ -124,7 +124,7 @@ function validateCamps(camps, files) {
           return String(data.camp[field] || '') !== String(camp[field] || '');
         });
 
-        // Check field order (02-§36.15) by comparing key positions
+        // Check field order (02-§37.15) by comparing key positions
         const existingKeys = Object.keys(data.camp);
         const headerKeys = CAMP_HEADER_FIELDS.filter(k => k in data.camp);
         const orderCorrect = headerKeys.every((key, i) => existingKeys.indexOf(key) === i);
@@ -145,7 +145,7 @@ function validateCamps(camps, files) {
 
 // ── YAML serialisation ──────────────────────────────────────────────────────
 
-// Produces a camp file YAML string with correct field order (02-§36.11).
+// Produces a camp file YAML string with correct field order (02-§37.11).
 function serializeCampFile(camp, events) {
   const campHeader = {
     id: camp.id,

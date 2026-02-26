@@ -32,7 +32,7 @@ function run(camps, files = {}) {
 
 // ── 36.1 — Required fields ─────────────────────────────────────────────────
 
-describe('validateCamps – required fields (02-§36.1)', () => {
+describe('validateCamps – required fields (02-§37.1)', () => {
   const REQUIRED = ['id', 'name', 'start_date', 'end_date', 'opens_for_editing', 'location', 'file', 'archived'];
 
   for (const field of REQUIRED) {
@@ -48,7 +48,7 @@ describe('validateCamps – required fields (02-§36.1)', () => {
 
 // ── 36.2 — Date format ─────────────────────────────────────────────────────
 
-describe('validateCamps – date format (02-§36.2)', () => {
+describe('validateCamps – date format (02-§37.2)', () => {
   it('VCMP-09: rejects invalid start_date format', () => {
     const result = run([makeCamp({ start_date: '2026/08/01' })]);
     assert.equal(result.ok, false);
@@ -75,7 +75,7 @@ describe('validateCamps – date format (02-§36.2)', () => {
 
 // ── 36.3 — end_date >= start_date ───────────────────────────────────────────
 
-describe('validateCamps – date ordering (02-§36.3)', () => {
+describe('validateCamps – date ordering (02-§37.3)', () => {
   it('VCMP-13: rejects end_date before start_date', () => {
     const result = run([makeCamp({ start_date: '2026-08-10', end_date: '2026-08-01' })]);
     assert.equal(result.ok, false);
@@ -90,7 +90,7 @@ describe('validateCamps – date ordering (02-§36.3)', () => {
 
 // ── 36.4 — archived is boolean ─────────────────────────────────────────────
 
-describe('validateCamps – archived type (02-§36.4)', () => {
+describe('validateCamps – archived type (02-§37.4)', () => {
   it('VCMP-15: rejects non-boolean archived', () => {
     const result = run([makeCamp({ archived: 'yes' })]);
     assert.equal(result.ok, false);
@@ -105,7 +105,7 @@ describe('validateCamps – archived type (02-§36.4)', () => {
 
 // ── 36.5 — Unique IDs ──────────────────────────────────────────────────────
 
-describe('validateCamps – unique ids (02-§36.5)', () => {
+describe('validateCamps – unique ids (02-§37.5)', () => {
   it('VCMP-17: rejects duplicate camp ids', () => {
     const a = makeCamp({ id: 'dup', file: 'a.yaml' });
     const b = makeCamp({ id: 'dup', file: 'b.yaml' });
@@ -117,7 +117,7 @@ describe('validateCamps – unique ids (02-§36.5)', () => {
 
 // ── 36.6 — Unique file values ───────────────────────────────────────────────
 
-describe('validateCamps – unique file values (02-§36.6)', () => {
+describe('validateCamps – unique file values (02-§37.6)', () => {
   it('VCMP-18: rejects duplicate file references', () => {
     const a = makeCamp({ id: 'a', file: 'same.yaml' });
     const b = makeCamp({ id: 'b', file: 'same.yaml' });
@@ -129,7 +129,7 @@ describe('validateCamps – unique file values (02-§36.6)', () => {
 
 // ── 36.7 — Non-zero exit on error (tested via ok: false) ───────────────────
 
-describe('validateCamps – exit behaviour (02-§36.7)', () => {
+describe('validateCamps – exit behaviour (02-§37.7)', () => {
   it('VCMP-19: returns ok:false when validation fails', () => {
     const camp = makeCamp();
     delete camp.id;
@@ -147,7 +147,7 @@ describe('validateCamps – exit behaviour (02-§36.7)', () => {
 
 // ── 36.8 — Missing file creation ───────────────────────────────────────────
 
-describe('validateCamps – file creation (02-§36.8)', () => {
+describe('validateCamps – file creation (02-§37.8)', () => {
   it('VCMP-21: creates entry in files map when file is missing', () => {
     const files = {};
     const result = run([makeCamp()], files);
@@ -158,7 +158,7 @@ describe('validateCamps – file creation (02-§36.8)', () => {
 
 // ── 36.9 — Created file has camp header from camps.yaml ────────────────────
 
-describe('validateCamps – created file content (02-§36.9)', () => {
+describe('validateCamps – created file content (02-§37.9)', () => {
   it('VCMP-22: created file has correct camp header', () => {
     const files = {};
     const camp = makeCamp();
@@ -174,7 +174,7 @@ describe('validateCamps – created file content (02-§36.9)', () => {
 
 // ── 36.10 — Created file has empty events ───────────────────────────────────
 
-describe('validateCamps – created file events (02-§36.10)', () => {
+describe('validateCamps – created file events (02-§37.10)', () => {
   it('VCMP-23: created file has events: []', () => {
     const files = {};
     run([makeCamp()], files);
@@ -185,7 +185,7 @@ describe('validateCamps – created file events (02-§36.10)', () => {
 
 // ── 36.11 — Field order ────────────────────────────────────────────────────
 
-describe('validateCamps – field order (02-§36.11)', () => {
+describe('validateCamps – field order (02-§37.11)', () => {
   it('VCMP-24: camp header fields appear in correct order', () => {
     const files = {};
     run([makeCamp()], files);
@@ -204,7 +204,7 @@ describe('validateCamps – field order (02-§36.11)', () => {
 
 // ── 36.12–36.13 — Source of truth / comparison ─────────────────────────────
 
-describe('validateCamps – camp header sync (02-§36.12, 02-§36.13)', () => {
+describe('validateCamps – camp header sync (02-§37.12, 02-§37.13)', () => {
   it('VCMP-25: detects when existing file header differs from camps.yaml', () => {
     const camp = makeCamp();
     const files = {
@@ -227,7 +227,7 @@ describe('validateCamps – camp header sync (02-§36.12, 02-§36.13)', () => {
 
 // ── 36.14 — Sync updates, preserves events ─────────────────────────────────
 
-describe('validateCamps – sync preserves events (02-§36.14)', () => {
+describe('validateCamps – sync preserves events (02-§37.14)', () => {
   it('VCMP-26: syncs header but preserves events section', () => {
     const camp = makeCamp({ name: 'New Name' });
     const files = {
@@ -259,7 +259,7 @@ describe('validateCamps – sync preserves events (02-§36.14)', () => {
 
 // ── 36.15 — Field order after sync ─────────────────────────────────────────
 
-describe('validateCamps – field order after sync (02-§36.15)', () => {
+describe('validateCamps – field order after sync (02-§37.15)', () => {
   it('VCMP-27: synced header has correct field order', () => {
     const camp = makeCamp();
     const files = {
@@ -289,7 +289,7 @@ describe('validateCamps – field order after sync (02-§36.15)', () => {
 
 // ── 36.17 — Logging ────────────────────────────────────────────────────────
 
-describe('validateCamps – logging (02-§36.17)', () => {
+describe('validateCamps – logging (02-§37.17)', () => {
   it('VCMP-28: returns log messages for actions taken', () => {
     const files = {};
     const result = run([makeCamp()], files);
@@ -301,7 +301,7 @@ describe('validateCamps – logging (02-§36.17)', () => {
 
 // ── 36.18 — Module import ──────────────────────────────────────────────────
 
-describe('validateCamps – module API (02-§36.18)', () => {
+describe('validateCamps – module API (02-§37.18)', () => {
   it('VCMP-29: exports validateCamps function', () => {
     assert.equal(typeof validateCamps, 'function');
   });

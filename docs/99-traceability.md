@@ -676,24 +676,24 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§35.8` | Accordions appear in `local.yaml` order | 03-ARCHITECTURE.md §16 | LOC-07 | `render-index.js` — `renderLocationAccordions()` | covered |
 | `02-§35.9` | Build passes full location data to index pipeline | 03-ARCHITECTURE.md §16 | LOC-01 (indirect) | `build.js` — `allLocations` → `renderLocationAccordions()` | covered |
 | `02-§35.10` | `collapsible: true` removed from lokaler in sections.yaml | 03-ARCHITECTURE.md §16 | manual: file diff | `sections.yaml` | implemented |
-| `02-§36.1` | camps.yaml entries have all required fields | 03-ARCHITECTURE.md §19 | VCMP-01..08 | `validate-camps.js` | covered |
-| `02-§36.2` | Date fields are valid YYYY-MM-DD | 03-ARCHITECTURE.md §19 | VCMP-09..12 | `validate-camps.js` | covered |
-| `02-§36.3` | end_date on or after start_date | 03-ARCHITECTURE.md §19 | VCMP-13..14 | `validate-camps.js` | covered |
-| `02-§36.4` | archived is boolean | 03-ARCHITECTURE.md §19 | VCMP-15..16 | `validate-camps.js` | covered |
-| `02-§36.5` | Camp id values are unique | 03-ARCHITECTURE.md §19 | VCMP-17 | `validate-camps.js` | covered |
-| `02-§36.6` | Camp file values are unique | 03-ARCHITECTURE.md §19 | VCMP-18 | `validate-camps.js` | covered |
-| `02-§36.7` | Non-zero exit on validation error | 03-ARCHITECTURE.md §19 | VCMP-19..20 | `validate-camps.js` | covered |
-| `02-§36.8` | Missing camp files created automatically | 03-ARCHITECTURE.md §19 | VCMP-21 | `validate-camps.js` | covered |
-| `02-§36.9` | Created files have camp header from camps.yaml | 03-ARCHITECTURE.md §19 | VCMP-22 | `validate-camps.js` | covered |
-| `02-§36.10` | Created files have empty events section | 03-ARCHITECTURE.md §19 | VCMP-23 | `validate-camps.js` | covered |
-| `02-§36.11` | Field order: id, name, location, start_date, end_date | 03-ARCHITECTURE.md §19 | VCMP-24 | `validate-camps.js` | covered |
-| `02-§36.12` | camps.yaml is single source of truth | 03-ARCHITECTURE.md §19 | VCMP-25 | `validate-camps.js` | covered |
-| `02-§36.13` | Validator compares camp header against camps.yaml | 03-ARCHITECTURE.md §19 | VCMP-25 | `validate-camps.js` | covered |
-| `02-§36.14` | Validator updates camp file to match camps.yaml | 03-ARCHITECTURE.md §19 | VCMP-26 | `validate-camps.js` | covered |
-| `02-§36.15` | Field order preserved after sync | 03-ARCHITECTURE.md §19 | VCMP-27 | `validate-camps.js` | covered |
-| `02-§36.16` | Runnable as npm run validate:camps | 03-ARCHITECTURE.md §19 | manual: `npm run validate:camps` | `package.json` | implemented |
-| `02-§36.17` | Logs each action to stdout | 03-ARCHITECTURE.md §19 | VCMP-28 | `validate-camps.js` | covered |
-| `02-§36.18` | Importable as module for tests | 03-ARCHITECTURE.md §19 | VCMP-29 | `validate-camps.js` | covered |
+| `02-§37.1` | camps.yaml entries have all required fields | 03-ARCHITECTURE.md §19 | VCMP-01..08 | `validate-camps.js` | covered |
+| `02-§37.2` | Date fields are valid YYYY-MM-DD | 03-ARCHITECTURE.md §19 | VCMP-09..12 | `validate-camps.js` | covered |
+| `02-§37.3` | end_date on or after start_date | 03-ARCHITECTURE.md §19 | VCMP-13..14 | `validate-camps.js` | covered |
+| `02-§37.4` | archived is boolean | 03-ARCHITECTURE.md §19 | VCMP-15..16 | `validate-camps.js` | covered |
+| `02-§37.5` | Camp id values are unique | 03-ARCHITECTURE.md §19 | VCMP-17 | `validate-camps.js` | covered |
+| `02-§37.6` | Camp file values are unique | 03-ARCHITECTURE.md §19 | VCMP-18 | `validate-camps.js` | covered |
+| `02-§37.7` | Non-zero exit on validation error | 03-ARCHITECTURE.md §19 | VCMP-19..20 | `validate-camps.js` | covered |
+| `02-§37.8` | Missing camp files created automatically | 03-ARCHITECTURE.md §19 | VCMP-21 | `validate-camps.js` | covered |
+| `02-§37.9` | Created files have camp header from camps.yaml | 03-ARCHITECTURE.md §19 | VCMP-22 | `validate-camps.js` | covered |
+| `02-§37.10` | Created files have empty events section | 03-ARCHITECTURE.md §19 | VCMP-23 | `validate-camps.js` | covered |
+| `02-§37.11` | Field order: id, name, location, start_date, end_date | 03-ARCHITECTURE.md §19 | VCMP-24 | `validate-camps.js` | covered |
+| `02-§37.12` | camps.yaml is single source of truth | 03-ARCHITECTURE.md §19 | VCMP-25 | `validate-camps.js` | covered |
+| `02-§37.13` | Validator compares camp header against camps.yaml | 03-ARCHITECTURE.md §19 | VCMP-25 | `validate-camps.js` | covered |
+| `02-§37.14` | Validator updates camp file to match camps.yaml | 03-ARCHITECTURE.md §19 | VCMP-26 | `validate-camps.js` | covered |
+| `02-§37.15` | Field order preserved after sync | 03-ARCHITECTURE.md §19 | VCMP-27 | `validate-camps.js` | covered |
+| `02-§37.16` | Runnable as npm run validate:camps | 03-ARCHITECTURE.md §19 | manual: `npm run validate:camps` | `package.json` | implemented |
+| `02-§37.17` | Logs each action to stdout | 03-ARCHITECTURE.md §19 | VCMP-28 | `validate-camps.js` | covered |
+| `02-§37.18` | Importable as module for tests | 03-ARCHITECTURE.md §19 | VCMP-29 | `validate-camps.js` | covered |
 
 ---
 
@@ -831,9 +831,9 @@ Matrix cleanup (2026-02-25):
     coverage-structural, coverage-edit-event.
   Categories: homepage, layout, display mode, today view, add/edit forms,
     schedule render, CSS design tokens, structural cross-page, edit-event API.
-18 requirements added for camps.yaml validator (02-§36.1–36.18):
+18 requirements added for camps.yaml validator (02-§37.1–37.18):
   17 covered (VCMP-01..32): validation, file creation, header sync.
-  1 implemented (manual, npm script): 02-§36.16.
+  1 implemented (manual, npm script): 02-§37.16.
 ```
 
 ---
@@ -953,15 +953,15 @@ Matrix cleanup (2026-02-25):
 | EEC-09..13 | `tests/coverage-edit-event.test.js` | isOutsideEditingPeriod time-gate logic |
 | EEC-14..17 | `tests/coverage-edit-event.test.js` | mergeIds session cookie deduplication |
 | EEC-18..26 | `tests/coverage-edit-event.test.js` | Session cookie properties (02-§18.4, 02-§18.5, 02-§18.7, 02-§18.41) |
-| VCMP-01..08 | `tests/validate-camps.test.js` | `validateCamps – required fields (02-§36.1)` |
-| VCMP-09..12 | `tests/validate-camps.test.js` | `validateCamps – date format (02-§36.2)` |
-| VCMP-13..14 | `tests/validate-camps.test.js` | `validateCamps – date ordering (02-§36.3)` |
-| VCMP-15..16 | `tests/validate-camps.test.js` | `validateCamps – archived type (02-§36.4)` |
-| VCMP-17 | `tests/validate-camps.test.js` | `validateCamps – unique ids (02-§36.5)` |
-| VCMP-18 | `tests/validate-camps.test.js` | `validateCamps – unique file values (02-§36.6)` |
-| VCMP-19..20 | `tests/validate-camps.test.js` | `validateCamps – exit behaviour (02-§36.7)` |
-| VCMP-21..24 | `tests/validate-camps.test.js` | `validateCamps – file creation and field order (02-§36.8–36.11)` |
-| VCMP-25..27 | `tests/validate-camps.test.js` | `validateCamps – camp header sync (02-§36.12–36.15)` |
-| VCMP-28 | `tests/validate-camps.test.js` | `validateCamps – logging (02-§36.17)` |
-| VCMP-29 | `tests/validate-camps.test.js` | `validateCamps – module API (02-§36.18)` |
+| VCMP-01..08 | `tests/validate-camps.test.js` | `validateCamps – required fields (02-§37.1)` |
+| VCMP-09..12 | `tests/validate-camps.test.js` | `validateCamps – date format (02-§37.2)` |
+| VCMP-13..14 | `tests/validate-camps.test.js` | `validateCamps – date ordering (02-§37.3)` |
+| VCMP-15..16 | `tests/validate-camps.test.js` | `validateCamps – archived type (02-§37.4)` |
+| VCMP-17 | `tests/validate-camps.test.js` | `validateCamps – unique ids (02-§37.5)` |
+| VCMP-18 | `tests/validate-camps.test.js` | `validateCamps – unique file values (02-§37.6)` |
+| VCMP-19..20 | `tests/validate-camps.test.js` | `validateCamps – exit behaviour (02-§37.7)` |
+| VCMP-21..24 | `tests/validate-camps.test.js` | `validateCamps – file creation and field order (02-§37.8–37.11)` |
+| VCMP-25..27 | `tests/validate-camps.test.js` | `validateCamps – camp header sync (02-§37.12–37.15)` |
+| VCMP-28 | `tests/validate-camps.test.js` | `validateCamps – logging (02-§37.17)` |
+| VCMP-29 | `tests/validate-camps.test.js` | `validateCamps – module API (02-§37.18)` |
 | VCMP-30..32 | `tests/validate-camps.test.js` | `validateCamps – edge cases` |
