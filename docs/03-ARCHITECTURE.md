@@ -1340,7 +1340,7 @@ backend is determined solely by the `API_URL` environment variable set in each
 GitHub Environment:
 
 - Local development: `npm start` → Node.js API at `http://localhost:3000`
-- `qa-node` environment: Node.js API on a Node.js-capable host
+- `qanode` environment: Node.js API on a Node.js-capable host
 - `qa` environment: PHP API on Loopia (`https://qa.sbsommar.se/api/add-event`)
 - `production` environment: PHP API on Loopia (`https://sbsommar.se/api/add-event`)
 

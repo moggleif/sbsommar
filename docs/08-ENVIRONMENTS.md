@@ -13,7 +13,7 @@ For CI/CD workflow details, see [04-OPERATIONS.md](04-OPERATIONS.md).
 | -------------- | ----------- | --------- | ---------------------------- | ---------------------- | ------------------------------- |
 | **Local**      | localhost   | Node.js   | `npm start`                  | N/A                    | `.env` file                     |
 | **QA**         | Loopia      | PHP       | Auto on push to `main`       | Auto on event PR merge | GitHub Environment `qa`         |
-| **QA-Node**    | Node.js VPS | Node.js   | Auto on push to `main`       | Auto on event PR merge | GitHub Environment `qa-node`    |
+| **QA-Node**    | Node.js VPS | Node.js   | Auto on push to `main`       | Auto on event PR merge | GitHub Environment `qanode`     |
 | **Production** | Loopia      | PHP       | Manual (`workflow_dispatch`) | Auto on event PR merge | GitHub Environment `production` |
 
 **Key rule:** code changes reach Production only when manually triggered.
@@ -91,7 +91,7 @@ file on the server is managed manually and contains the `GITHUB_*`,
 `ALLOWED_ORIGIN`, `QA_ORIGIN`, `COOKIE_DOMAIN`, and `BUILD_ENV` variables
 needed by the PHP API at runtime.
 
-### GitHub Environment: `qa-node` (Node.js host — preserved)
+### GitHub Environment: `qanode` (Node.js host — preserved)
 
 | Secret            | Purpose                                          |
 | ----------------- | ------------------------------------------------ |

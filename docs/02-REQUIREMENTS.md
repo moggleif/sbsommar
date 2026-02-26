@@ -1949,6 +1949,6 @@ that supports Node.js.
   configuration, and how to set it up on a new host. <!-- 02-§44.37 -->
 - `docs/08-ENVIRONMENTS.md` must document the `qa` GitHub Environment
   (PHP on Loopia) and its secrets. The previous Node.js QA setup is
-  preserved as the `qa-node` environment. <!-- 02-§44.38 -->
+  preserved as the `qanode` environment. <!-- 02-§44.38 -->
 - `docs/03-ARCHITECTURE.md` must note the dual API architecture (Node.js
   for local dev and Node.js hosts, PHP for shared hosting). <!-- 02-§44.39 -->
