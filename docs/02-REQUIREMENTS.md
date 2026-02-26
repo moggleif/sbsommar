@@ -1503,9 +1503,9 @@ alerts.
 
 ### 39.2 Workflow permissions (deploy)
 
-- `deploy.yml` must declare an explicit `permissions` block with minimal
-  scope. The workflow reads repository contents and deploys via external
-  FTP/SSH (no GitHub Pages token needed), so `contents: read` is
+- `deploy-reusable.yml` must declare an explicit `permissions` block with
+  minimal scope. The workflow reads repository contents and deploys via
+  external FTP/SSH (no GitHub Pages token needed), so `contents: read` is
   sufficient. <!-- 02-§39.2 -->
 
 ### 39.3 ReDoS-safe slugify

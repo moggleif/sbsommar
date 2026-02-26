@@ -685,7 +685,7 @@ curl --upload-file "deploy-output/public/$FILE" \
 `dangerous-clean-slate` mode would delete the entire site. `curl` is available on
 `ubuntu-latest` without any additional installation.
 
-Reuses the same secrets as `deploy.yml`: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
+Reuses the same secrets as the deploy workflows: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
 `FTP_TARGET_DIR`, `API_URL`.
 
 ### 11.5 Relationship to existing workflows
@@ -693,13 +693,15 @@ Reuses the same secrets as `deploy.yml`: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWO
 | Workflow | Trigger | Scope |
 | --- | --- | --- |
 | `ci.yml` | All branches + PRs | Lint (JS, Markdown, CSS, HTML), test, build (skips lint+test for data-only changes) |
-| `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | Lint YAML + security scan + build + targeted FTP |
-| `deploy.yml` | Push to `main` (ignores `source/data/**.yaml`-only changes) | Full build + clean-slate FTP + SSH restart |
+| `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | Lint YAML + security scan + build + targeted FTP to QA and Production |
+| `deploy-qa.yml` | Push to `main` (ignores `source/data/**.yaml`-only changes) | Full build + SCP/SSH swap + FTP app restart (QA) |
+| `deploy-prod.yml` | Manual `workflow_dispatch` | Full build + SCP/SSH swap + FTP app restart (Production) |
+| `deploy-reusable.yml` | Called by `deploy-qa.yml` / `deploy-prod.yml` | Shared build-and-deploy logic |
 
 `ci.yml` and `event-data-deploy.yml` both run on the same event PRs. This is by design:
 `ci.yml` provides the general build check; `event-data-deploy.yml` provides data-specific
-validation and early deployment. `deploy.yml` uses `paths-ignore` so that pushes to `main`
-containing only YAML data file changes do not trigger a full site deploy — the four schema
+validation and early deployment. `deploy-qa.yml` uses `paths-ignore` so that pushes to `main`
+containing only YAML data file changes do not trigger a full site deploy — the schema
 files are already deployed by `event-data-deploy.yml` during the PR phase.
 
 ### 11.6 Checkout depth
@@ -721,7 +723,7 @@ step so the three-dot diff can find a common ancestor.
 - The four new job names must be added as required status checks in branch protection for
   `main` after the workflow has run at least once (check names only appear in the UI
   after a run exists).
-- No new secrets are needed beyond the five already used by `deploy.yml`.
+- No new secrets are needed beyond the existing deploy secrets (now scoped per GitHub Environment; see [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md)).
 
 ---
 
@@ -1040,7 +1042,7 @@ is read from the `SITE_URL` environment variable (e.g.
 `renderEventPage()`. If `SITE_URL` is not set, the build fails with a clear
 error message.
 
-CI workflows (`deploy.yml`, `event-data-deploy.yml`) pass `SITE_URL` as a
+CI and deploy workflows (`deploy-reusable.yml`, `event-data-deploy.yml`) pass `SITE_URL` as a
 secret alongside `API_URL`.
 
 ### 17.3 Feed structure
@@ -1096,7 +1098,7 @@ convention).
 | File | Change |
 | --- | --- |
 | `source/build/build.js` | Read `SITE_URL`; call `renderRssFeed()`; write `public/schema.rss` |
-| `.github/workflows/deploy.yml` | Pass `SITE_URL` secret to the build step |
+| `.github/workflows/deploy-reusable.yml` | Pass `SITE_URL` secret to the build step |
 | `.github/workflows/event-data-deploy.yml` | Pass `SITE_URL` secret to the build step |
 
 ---
