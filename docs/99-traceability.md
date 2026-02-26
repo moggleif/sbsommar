@@ -508,7 +508,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§24.14` | Expanded menu closable by clicking outside | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – document `click` listener closes when outside nav | implemented |
 | `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-DESIGN.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | `source/assets/css/style.css` – `.nav-toggle { display: none }` at `@media (min-width: 768px)` | implemented |
 
-| `02-§25.1` | Content images have `loading="lazy"` (except first section) | 03-ARCHITECTURE.md §4b | IMG-01 | `source/build/render-index.js` – `inlineHtml()` adds `loading="lazy"`; `renderIndexPage()` strips it from first section | covered |
+| `02-§25.1` | Content images have `loading="lazy"` (except first section) | 03-ARCHITECTURE.md §4b | IMG-01 | `source/build/render-index.js` – `marked` custom image renderer adds `loading="lazy"`; `renderIndexPage()` strips it from first section | covered |
 | `02-§25.2` | Hero image must NOT have `loading="lazy"` | 03-ARCHITECTURE.md §4b | IMG-02 | `source/build/render-index.js` – hero uses separate template without `loading="lazy"` | covered |
 | `02-§25.3` | Homepage head includes `<link rel="preload">` for hero image | 03-ARCHITECTURE.md §4b | IMG-03, IMG-04, IMG-05 | `source/build/render-index.js` – `preloadHtml` variable | covered |
 | `02-§25.4` | Hero image has `fetchpriority="high"` | 03-ARCHITECTURE.md §4b | IMG-06 | `source/build/render-index.js` – hero `<img>` template | covered |
@@ -694,15 +694,26 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§37.16` | Runnable as npm run validate:camps | 03-ARCHITECTURE.md §19 | manual: `npm run validate:camps` | `package.json` | implemented |
 | `02-§37.17` | Logs each action to stdout | 03-ARCHITECTURE.md §19 | VCMP-28 | `validate-camps.js` | covered |
 | `02-§37.18` | Importable as module for tests | 03-ARCHITECTURE.md §19 | VCMP-29 | `validate-camps.js` | covered |
+| `02-§38.1` | Build uses `marked` as markdown converter | 03-ARCHITECTURE.md §20 | RNI-01..38 | `source/build/render-index.js` – `require('marked')` | covered |
+| `02-§38.2` | `marked` is a production dependency (build-time only) | 03-ARCHITECTURE.md §20 | — | `package.json` dependencies | implemented |
+| `02-§38.3` | No other new dependencies added | 03-ARCHITECTURE.md §20 | — | `package.json` | implemented |
+| `02-§38.4` | Heading offset shifts heading levels, capped at h6 | 03-ARCHITECTURE.md §20 | RNI-17..21 | `render-index.js` – `createMarked()` custom heading renderer | covered |
+| `02-§38.5` | Collapsible accordion wraps ##-level sections in `<details>` | 03-ARCHITECTURE.md §20 | RNI-22..28 | `render-index.js` – `convertMarkdown()` post-processing | covered |
+| `02-§38.6` | Images have `class="content-img"` and `loading="lazy"` | 03-ARCHITECTURE.md §20 | RNI-03, IMG-01 | `render-index.js` – custom image renderer | covered |
+| `02-§38.7` | Standard markdown features render correctly | 03-ARCHITECTURE.md §20 | manual: verify `food.md` table in built HTML | `render-index.js` – `marked.parse()` | implemented |
+| `02-§38.8` | Existing content files are not modified | 03-ARCHITECTURE.md §20 | — | No content files in diff | implemented |
+| `02-§38.9` | Tables have basic CSS styling using design tokens | 03-ARCHITECTURE.md §20 | manual: visual check | `source/assets/cs/style.css` – `.content table` rules | implemented |
+| `02-§38.10` | All existing tests pass | 03-ARCHITECTURE.md §20 | 780/780 pass | — | covered |
+| `02-§38.11` | Build, lint, and HTML validation pass | 03-ARCHITECTURE.md §20 | manual: CI | — | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             560
-Covered (implemented + tested): 286
-Implemented, not tested:        273
+Total requirements:             571
+Covered (implemented + tested): 291
+Implemented, not tested:        279
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -834,6 +845,9 @@ Matrix cleanup (2026-02-25):
 18 requirements added for camps.yaml validator (02-§37.1–37.18):
   17 covered (VCMP-01..32): validation, file creation, header sync.
   1 implemented (manual, npm script): 02-§37.16.
+11 requirements added for marked markdown converter (02-§38.1–38.11):
+  5 covered (existing RNI/IMG tests): 02-§38.1, 02-§38.4–38.6, 02-§38.10.
+  6 implemented (manual/structural): 02-§38.2, 02-§38.3, 02-§38.7–38.9, 02-§38.11.
 ```
 
 ---
