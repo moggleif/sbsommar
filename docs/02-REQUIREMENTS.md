@@ -1520,3 +1520,60 @@ alerts.
 
 - After the changes are merged, `gh api repos/{owner}/{repo}/code-scanning/alerts?state=open`
   must return fewer open alerts (ideally zero). <!-- 02-§39.7 -->
+
+---
+
+## 40. Zero-Downtime Static Site Deploy
+
+The current deploy uploads the static site via FTP with `dangerous-clean-slate`,
+which deletes all files on the server before re-uploading everything. This causes
+60+ seconds of downtime per deploy. The deploy must be changed to a staging-and-swap
+strategy that reduces downtime to milliseconds.
+
+### 40.1 Deploy method (site requirements)
+
+- The static site must be uploaded to a staging directory on the server
+  via `scp` over SSH, not via FTP. <!-- 02-§40.1 -->
+- After upload, an SSH command must swap the staging directory into
+  the live web root (`public_html`). <!-- 02-§40.2 -->
+- The swap must preserve the hosting infrastructure `domains/` directory
+  inside `public_html` by moving it into the new release before the
+  swap. <!-- 02-§40.3 -->
+- Downtime during the swap must be limited to the time needed for two
+  `mv` operations on the same filesystem (milliseconds, not seconds). <!-- 02-§40.4 -->
+- Leftover directories from the previous release (`public_html_old`)
+  and from any previous failed deploy (`release_new`) must be cleaned
+  up automatically. <!-- 02-§40.5 -->
+
+### 40.2 Build packaging (site requirements)
+
+- The build output must be packaged into a single `tar.gz` archive
+  before upload, to avoid per-file transfer overhead. <!-- 02-§40.6 -->
+- The archive must be extracted on the server side into the staging
+  directory. <!-- 02-§40.7 -->
+- The archive must be deleted from the server after extraction. <!-- 02-§40.8 -->
+
+### 40.3 Secrets and configuration (site requirements)
+
+- The deploy must use the existing SSH secrets: `SERVER_HOST`,
+  `SERVER_USER`, `SERVER_SSH_KEY`, `SERVER_SSH_PORT`. <!-- 02-§40.9 -->
+- A new secret `DEPLOY_DIR` must be added, pointing to the domain
+  directory on the server (the parent of `public_html`). <!-- 02-§40.10 -->
+- The FTP static-site upload step and `FTP_TARGET_DIR` validation
+  step must be removed from the workflow. <!-- 02-§40.11 -->
+
+### 40.4 Unchanged behaviour (site requirements)
+
+- The server app deploy (FTP + SSH restart) must remain unchanged. <!-- 02-§40.12 -->
+- The build step (checkout, node setup, npm ci, npm run build) must
+  remain unchanged. <!-- 02-§40.13 -->
+- The workflow trigger (push to `main`, paths-ignore data files) must
+  remain unchanged. <!-- 02-§40.14 -->
+
+### 40.5 Error handling (site requirements)
+
+- The SSH swap script must use `set -e` so any failing command aborts
+  the deploy immediately. <!-- 02-§40.15 -->
+- If the swap fails mid-way, the state must be recoverable by a
+  subsequent deploy (clean-up of stale directories at the start of
+  the script). <!-- 02-§40.16 -->
