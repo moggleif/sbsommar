@@ -1172,6 +1172,11 @@ body.modal-open {
   .event-row { padding: 5px var(--space-sm); }
   .event-extra { padding: 5px var(--space-sm) 8px; }
   .field-row { flex-direction: column; gap: 0; }
+
+  /* Tighter form spacing on mobile */
+  .intro { margin-bottom: var(--space-xs); }
+  .intro:last-of-type { margin-bottom: var(--space-md); }
+  .field { margin-bottom: var(--space-xs); }
 }
 
 /* ── Upcoming camps ── */
