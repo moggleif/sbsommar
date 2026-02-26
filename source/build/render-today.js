@@ -7,6 +7,8 @@ const { escapeHtml, toDateString } = require('./render');
  * All events are embedded as JSON; client-side JS filters to the current day.
  * Uses display-mode (dark) styling for screen/projector use.
  * No navigation or site footer – clean display layout with QR code sidebar.
+ * Optimised for portrait-orientation screens: heading lives in the sidebar so
+ * events use the full height; event rows are compact for maximum row count.
  * Sidebar shows a live clock and last-updated time; page auto-reloads at
  * midnight and on new version detection via version.json polling.
  */
@@ -39,8 +41,6 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
 </head>
 <body class="display-mode">
 
-  <h1 id="today-heading">Dagens schema</h1>
-
   <div class="dagens-layout">
 
     <div class="dagens-events">
@@ -48,6 +48,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
     </div>
 
     <aside class="dagens-sidebar">
+      <h1 id="today-heading" class="sidebar-heading"></h1>
       <div class="status-bar">
         <span class="status-clock" id="live-clock"></span>
         <span class="status-updated" id="build-info"></span>
@@ -58,7 +59,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
 
   </div>
 
-  <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Dagens schema'; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true; window.__BUILD_TIME__ = '${safeBuildTime}'; window.__VERSION__ = '${safeBuildTime}';</script>
+  <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = ''; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true; window.__BUILD_TIME__ = '${safeBuildTime}'; window.__VERSION__ = '${safeBuildTime}';</script>
   <script src="events-today.js"></script>
 </body>
 </html>

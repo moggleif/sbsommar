@@ -84,9 +84,9 @@ describe('02-§4.7 — Display view is non-interactive', () => {
 // ── 02-§4.13  Today view has no day navigation ─────────────────────────────
 
 describe('02-§4.13 — No day navigation in display view', () => {
-  it('DIS-10: heading is fixed "Dagens schema"', () => {
+  it('DIS-10: heading element with id "today-heading" is present', () => {
     const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
-    assert.ok(html.includes('<h1 id="today-heading">Dagens schema</h1>'), 'fixed heading');
+    assert.ok(html.includes('id="today-heading"'), 'today-heading element present');
   });
 });
 
@@ -109,9 +109,9 @@ describe('Display view — event data embedding', () => {
     assert.ok(events[0].start, 'start present');
   });
 
-  it('DIS-13: heading prefix set to "Dagens schema"', () => {
+  it('DIS-13: heading prefix is empty (date shown without page-title prefix)', () => {
     const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
-    assert.ok(html.includes("window.__HEADING_PREFIX__ = 'Dagens schema'"), 'heading prefix');
+    assert.ok(html.includes("window.__HEADING_PREFIX__ = ''"), 'empty heading prefix');
   });
 
   it('DIS-14: activity-count footer flag is set in display mode', () => {
@@ -155,6 +155,26 @@ describe('02-§4.15 — Status bar with live clock is present', () => {
   it('DIS-23: live-clock element with id "live-clock" is present', () => {
     const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
     assert.ok(html.includes('id="live-clock"'), 'live-clock element present');
+  });
+});
+
+// ── 02-§4.19/4.20  Heading in sidebar, date-only ────────────────────────────
+
+describe('02-§4.19/4.20 — Heading is in sidebar with no prefix', () => {
+  it('DIS-24: today-heading element is inside the sidebar', () => {
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    const sidebarStart = html.indexOf('class="dagens-sidebar"');
+    const headingPos = html.indexOf('id="today-heading"');
+    assert.ok(sidebarStart !== -1, 'sidebar element present');
+    assert.ok(headingPos > sidebarStart, 'heading is inside or after sidebar start');
+  });
+
+  it('DIS-25: today-heading is not present above the layout (before dagens-layout)', () => {
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    const layoutStart = html.indexOf('class="dagens-layout"');
+    const headingPos = html.indexOf('id="today-heading"');
+    assert.ok(layoutStart !== -1, 'layout element present');
+    assert.ok(headingPos > layoutStart, 'heading is inside the layout, not before it');
   });
 });
 

@@ -222,11 +222,7 @@ body.display-mode {
   color: #dce6f0;
 }
 
-body.display-mode h1 {
-  color: var(--color-sage);
-  font-size: 48px;
-  margin-bottom: var(--space-md);
-}
+/* h1 now lives inside the sidebar; global display-mode h1 rule removed */
 
 body.display-mode .today-card {
   background: #1a2633;
@@ -235,7 +231,9 @@ body.display-mode .today-card {
 
 body.display-mode .event-row {
   border-bottom-color: rgba(255, 255, 255, 0.06);
-  font-size: 15px;
+  font-size: 13px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 body.display-mode .ev-time {
@@ -274,14 +272,24 @@ body.display-mode .event-extra {
 }
 
 .dagens-events {
-  flex: 7;
+  flex: 3;
   min-width: 0;
 }
 
 .dagens-sidebar {
-  flex: 3;
+  flex: 1;
   position: sticky;
   top: var(--space-md);
+}
+
+/* ── Sidebar heading (day + date, replaces full-width h1) ── */
+
+.sidebar-heading {
+  color: var(--color-sage);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 var(--space-sm);
 }
 
 /* ── Display mode status bar (live clock + last-updated) ── */
@@ -333,7 +341,7 @@ body.display-mode .event-extra {
 }
 
 @media (max-width: 690px) {
-  body.display-mode h1 { font-size: 28px; }
+  .sidebar-heading { font-size: 18px; }
   .dagens-layout { flex-direction: column; }
   .dagens-sidebar { position: static; order: -1; }
   .qr-wrap svg { width: 120px; height: 120px; }
