@@ -1,6 +1,11 @@
 name: Deploy to QA (Node.js)
 
 on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'source/data/**.yaml'
   workflow_dispatch:
 
 permissions:
