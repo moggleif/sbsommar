@@ -32,21 +32,27 @@ function escapeXml(str) {
 }
 
 /**
- * Builds a human-readable description for an RSS item.
+ * Builds a structured multi-line description for an RSS item.
+ *
+ * Line 1: formatted date, start–end (no labels)
+ * Line 2: Plats: {location} · Ansvarig: {responsible}
+ * Line 3: description (only if set)
+ * Line 4: link (only if set)
  */
 function buildDescription(event) {
-  const parts = [];
-  parts.push(formatDate(toDateString(event.date)));
+  const lines = [];
   const timeStr = event.end
     ? `${event.start}–${event.end}`
     : String(event.start);
-  parts.push(timeStr);
-  parts.push(event.location);
-  parts.push(event.responsible);
+  lines.push(`${formatDate(toDateString(event.date))}, ${timeStr}`);
+  lines.push(`Plats: ${event.location} · Ansvarig: ${event.responsible}`);
   if (event.description) {
-    parts.push(event.description.trim());
+    lines.push(event.description.trim());
   }
-  return parts.join(' · ');
+  if (event.link) {
+    lines.push(event.link);
+  }
+  return lines.join('\n');
 }
 
 /**
