@@ -48,6 +48,10 @@ jobs:
         if: steps.changes.outputs.has_code == 'true'
         run: npm test
 
+      - name: Validate camps
+        if: steps.changes.outputs.has_code == 'true'
+        run: npm run validate:camps
+
       - name: Build
         run: npm run build
         env:
