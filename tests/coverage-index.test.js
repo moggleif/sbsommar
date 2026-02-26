@@ -5,8 +5,6 @@ const assert = require('node:assert/strict');
 
 const {
   renderIndexPage,
-  convertMarkdown,
-  renderUpcomingCampsHtml,
 } = require('../source/build/render-index');
 
 // ── Shared fixtures ─────────────────────────────────────────────────────────

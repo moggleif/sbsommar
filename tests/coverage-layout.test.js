@@ -3,12 +3,11 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { pageNav, pageFooter } = require('../source/build/layout');
+const { pageNav } = require('../source/build/layout');
 const { renderSchedulePage } = require('../source/build/render');
 const { renderAddPage } = require('../source/build/render-add');
 const { renderEditPage } = require('../source/build/render-edit');
 const { renderIdagPage } = require('../source/build/render-idag');
-const { renderIndexPage } = require('../source/build/render-index');
 
 // ── Shared fixtures ─────────────────────────────────────────────────────────
 

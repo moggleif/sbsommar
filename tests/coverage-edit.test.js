@@ -3,7 +3,7 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { renderEditPage, editApiUrl } = require('../source/build/render-edit');
+const { renderEditPage } = require('../source/build/render-edit');
 
 // ── Shared fixtures ─────────────────────────────────────────────────────────
 
