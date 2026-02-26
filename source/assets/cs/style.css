@@ -1172,6 +1172,7 @@ body.modal-open {
   .event-row { padding: 5px var(--space-sm); }
   .event-extra { padding: 5px var(--space-sm) 8px; }
   .field-row { flex-direction: column; gap: 0; }
+  .field-row .field { flex-basis: auto; }
 
   /* Tighter form spacing on mobile */
   .intro { margin-bottom: var(--space-xs); }
