@@ -676,6 +676,24 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§35.8` | Accordions appear in `local.yaml` order | 03-ARCHITECTURE.md §16 | LOC-07 | `render-index.js` — `renderLocationAccordions()` | covered |
 | `02-§35.9` | Build passes full location data to index pipeline | 03-ARCHITECTURE.md §16 | LOC-01 (indirect) | `build.js` — `allLocations` → `renderLocationAccordions()` | covered |
 | `02-§35.10` | `collapsible: true` removed from lokaler in sections.yaml | 03-ARCHITECTURE.md §16 | manual: file diff | `sections.yaml` | implemented |
+| `02-§36.1` | camps.yaml entries have all required fields | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.2` | Date fields are valid YYYY-MM-DD | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.3` | end_date on or after start_date | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.4` | archived is boolean | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.5` | Camp id values are unique | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.6` | Camp file values are unique | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.7` | Non-zero exit on validation error | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.8` | Missing camp files created automatically | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.9` | Created files have camp header from camps.yaml | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.10` | Created files have empty events section | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.11` | Field order: id, name, location, start_date, end_date | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.12` | camps.yaml is single source of truth | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.13` | Validator compares camp header against camps.yaml | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.14` | Validator updates camp file to match camps.yaml | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.15` | Field order preserved after sync | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.16` | Runnable as npm run validate:camps | 03-ARCHITECTURE.md §19 | manual: `npm run validate:camps` | — | gap |
+| `02-§36.17` | Logs each action to stdout | 03-ARCHITECTURE.md §19 | gap | — | gap |
+| `02-§36.18` | Importable as module for tests | 03-ARCHITECTURE.md §19 | gap | — | gap |
 
 ---
 

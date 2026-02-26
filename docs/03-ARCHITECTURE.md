@@ -1164,6 +1164,60 @@ must be updated to include:
 
 ---
 
+## 19. camps.yaml Validator (`source/scripts/validate-camps.js`)
+
+A validation and sync tool that enforces `camps.yaml` as the single source of
+truth for camp metadata. It runs as a standalone script and is importable as a
+module for tests.
+
+### 19.1 What it does
+
+1. **Validates `camps.yaml`** — checks required fields, date formats, date
+   ordering, boolean types, and uniqueness of `id` and `file` values.
+2. **Creates missing camp files** — if a camp's `file` does not exist in
+   `source/data/`, the script creates it with a `camp:` header derived from
+   `camps.yaml` and an empty `events: []` section.
+3. **Syncs camp headers** — if a camp file exists but its `camp:` header
+   differs from `camps.yaml`, the script rewrites the header to match.
+   The `events:` section is preserved unchanged.
+
+### 19.2 Field mapping
+
+The `camp:` header in each camp file contains exactly five fields, derived
+from `camps.yaml`:
+
+| Camp file field | `camps.yaml` source field |
+| --------------- | ------------------------- |
+| `id`            | `id`                      |
+| `name`          | `name`                    |
+| `location`      | `location`                |
+| `start_date`    | `start_date`              |
+| `end_date`      | `end_date`                |
+
+Field order in the generated header: `id`, `name`, `location`, `start_date`,
+`end_date`. This matches the data contract example (05-DATA_CONTRACT.md §7).
+
+### 19.3 YAML serialisation
+
+Camp files are written using `js-yaml` `dump()` with explicit string quoting
+for date values to preserve `'YYYY-MM-DD'` format. The `events:` section is
+serialised as-is; no event data is modified.
+
+### 19.4 Integration
+
+- CLI: `node source/scripts/validate-camps.js`
+- npm: `npm run validate:camps`
+- Module: `const { validateCamps } = require('./validate-camps')`
+- Exit code: 0 on success, 1 on validation errors
+
+### 19.5 Files
+
+| File | Role |
+| ---- | ---- |
+| `source/scripts/validate-camps.js` | Validator script |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
