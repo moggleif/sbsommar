@@ -29,4 +29,4 @@ Vår RFSB server är indelad i kategorier och beroende på roll så kommer man �
   * Ändra ditt namn till ditt riktiga
   * Tack så mycket!
 * Lite saker att tänka på står i detta meddelande på servern.
-  *[https://discord.com/channels/992817044527534181/993132173156683786/993167168982237294](https://discord.com/channels/992817044527534181/993132173156683786/993167168982237294)
+  * [https://discord.com/channels/992817044527534181/993132173156683786/993167168982237294](https://discord.com/channels/992817044527534181/993132173156683786/993167168982237294)
