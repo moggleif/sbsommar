@@ -1,17 +1,19 @@
 'use strict';
 
 const { escapeHtml, toDateString } = require('./render');
-const { pageFooter } = require('./layout');
 
 /**
  * Renders the "Dagens schema" page.
  * All events are embedded as JSON; client-side JS filters to the current day.
  * Uses display-mode (dark) styling for screen/projector use.
- * No navigation – clean display layout with QR code sidebar.
+ * No navigation or site footer – clean display layout with QR code sidebar.
+ * Sidebar shows a live clock and last-updated time; page auto-reloads at
+ * midnight and on new version detection via version.json polling.
  */
-function renderTodayPage(camp, events, qrSvg, footerHtml = '', siteUrl = '') {
+function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
   const campName = escapeHtml(camp.name);
   const siteHost = siteUrl ? escapeHtml(siteUrl.replace(/^https?:\/\//, '').replace(/\/+$/, '')) : '';
+  const safeBuildTime = escapeHtml(buildTime);
 
   const eventsJson = JSON.stringify(
     events.map((e) => ({
@@ -46,15 +48,18 @@ function renderTodayPage(camp, events, qrSvg, footerHtml = '', siteUrl = '') {
     </div>
 
     <aside class="dagens-sidebar">
+      <div class="status-bar">
+        <span class="status-clock" id="live-clock"></span>
+        <span class="status-updated" id="build-info"></span>
+      </div>
       <p class="sidebar-text">Detta är schemat för aktiviteter som sker idag. För kartor, information och schema andra dagar – besök ${siteHost} eller skanna QR-koden.</p>
       <div class="qr-wrap">${qrSvg}</div>
     </aside>
 
   </div>
 
-  <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Dagens schema'; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true;</script>
+  <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Dagens schema'; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true; window.__BUILD_TIME__ = '${safeBuildTime}'; window.__VERSION__ = '${safeBuildTime}';</script>
   <script src="events-today.js"></script>
-${pageFooter(footerHtml)}
 </body>
 </html>
 `;

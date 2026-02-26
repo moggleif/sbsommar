@@ -82,20 +82,18 @@ describe('renderSchedulePage – site footer (02-§22.1, §22.3, §22.5)', () =>
 
 // ── renderTodayPage ──────────────────────────────────────────────────────────
 
-describe('renderTodayPage – site footer (02-§22.1, §22.3, §22.5)', () => {
-  it('FTR-06: includes <footer class="site-footer"> when footerHtml is provided', () => {
-    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, FOOTER_HTML);
-    assert.ok(
-      html.includes('<footer class="site-footer">'),
-      'Expected <footer class="site-footer"> in dagens-schema.html output',
-    );
-    assert.ok(html.includes(FOOTER_HTML), 'Expected footer content in dagens-schema.html output');
+describe('renderTodayPage – no site footer (02-§4.14)', () => {
+  it('FTR-06: display page never includes site-footer (footer removed per 02-§4.14)', () => {
+    // renderTodayPage no longer accepts footerHtml; site footer is intentionally absent.
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    assert.ok(html.includes('<!DOCTYPE html>'), 'Expected valid HTML document');
+    assert.ok(!html.includes('site-footer'), 'Expected no site-footer in display mode');
   });
 
-  it('FTR-07: renders without crashing and omits site-footer when footerHtml is empty', () => {
-    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, '');
-    assert.ok(html.includes('<!DOCTYPE html>'), 'Expected valid HTML document');
-    assert.ok(!html.includes('site-footer'), 'Expected no site-footer when footerHtml is empty');
+  it('FTR-07: display page renders correctly without any footer argument', () => {
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    assert.ok(html.includes('class="display-mode"'), 'Expected display-mode body class');
+    assert.ok(!html.includes('site-footer'), 'Expected no site-footer in display mode');
   });
 });
 

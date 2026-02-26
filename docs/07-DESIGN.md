@@ -171,6 +171,15 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 - Clear time display: bold start time, lighter end time. <!-- 07-§6.31 -->
 - Location as small text below. <!-- 07-§6.32 -->
 
+### Display sidebar status widget
+
+The sidebar of `/dagens-schema.html` shows a compact status widget above the descriptive text and QR code.
+
+- The widget contains a live clock (current time, updated every second) and a line showing when events were last updated. <!-- 07-§6.40 -->
+- Clock text: sage green (`var(--color-sage)`), `48px`, `700` weight, tabular-nums, line-height `1`. <!-- 07-§6.41 -->
+- Update time text: `12px`, muted white (`rgba(255,255,255,0.4)`), block, margin-top `var(--space-xs)`. <!-- 07-§6.42 -->
+- The widget sits above the existing sidebar text and QR code, separated by `var(--space-md)` margin-bottom. <!-- 07-§6.43 -->
+
 ### Form field errors (inline)
 
 Per-field validation errors appear directly below the input they relate to. <!-- 07-§6.34 -->

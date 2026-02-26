@@ -47,7 +47,7 @@ describe('meta robots noindex (02-§1a.2)', () => {
   });
 
   it('ROB-02: renderTodayPage includes meta robots noindex', () => {
-    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, FOOTER_HTML);
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
     assert.ok(html.includes(META_ROBOTS), 'Expected meta robots noindex in dagens-schema.html');
   });
 
@@ -101,7 +101,7 @@ describe('no discoverability metadata (02-§1a.3)', () => {
   });
 
   it('ROB-09: renderTodayPage has no discoverability metadata', () => {
-    assertNoDiscoverability(renderTodayPage(CAMP, EVENTS, QR_SVG, FOOTER_HTML), 'dagens-schema.html');
+    assertNoDiscoverability(renderTodayPage(CAMP, EVENTS, QR_SVG), 'dagens-schema.html');
   });
 
   it('ROB-10: renderIdagPage has no discoverability metadata', () => {

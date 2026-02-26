@@ -112,6 +112,11 @@ The goal is that a parent visiting for the first time leaves thinking:
 - Shows today's activities on a dark, full-screen layout for shared screens around the camp.
 - Must be legible at a distance: dark background, large text, minimal interface chrome. <!-- 02-§4.6 -->
 - Must not require any interaction to stay useful — it should be readable at a glance. <!-- 02-§4.7 -->
+- Shows no site-level footer. <!-- 02-§4.14 -->
+- Shows a live clock of the current time in the sidebar, updated every second. <!-- 02-§4.15 -->
+- Shows when events were last updated; the timestamp is embedded at build time and shown below the clock. <!-- 02-§4.16 -->
+- Polls `version.json` every 5 minutes and reloads the page automatically if a newer build is detected. <!-- 02-§4.17 -->
+- Automatically reloads shortly after midnight to show the new day's events. <!-- 02-§4.18 -->
 
 ### All schedule views
 
