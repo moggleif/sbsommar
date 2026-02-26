@@ -166,7 +166,7 @@ jobs:
     name: Build & deploy to QA Node
     runs-on: ubuntu-latest
     needs: security-check
-    environment: qa-node
+    environment: qanode
 
     steps:
       - uses: actions/checkout@v4
