@@ -48,16 +48,10 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
 ${pageNav('schema.html', navSections)}
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
   <h1>${title}</h1>
-  <dl class="event-detail">
-    <dt>Datum</dt>
-    <dd>${date}</dd>
-    <dt>Tid</dt>
-    <dd>${timeStr}</dd>
-    <dt>Plats</dt>
-    <dd>${escapeHtml(event.location)}</dd>
-    <dt>Ansvarig</dt>
-    <dd>${escapeHtml(event.responsible)}</dd>
-  </dl>
+  <div class="event-detail">
+    <p>${date}, ${timeStr}</p>
+    <p>Plats: ${escapeHtml(event.location)} · Ansvarig: ${escapeHtml(event.responsible)}</p>
+  </div>
 ${descriptionHtml}${linkHtml}  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
