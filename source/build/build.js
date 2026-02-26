@@ -135,7 +135,7 @@ async function main() {
     .replace(/<\?xml[^?]*\?>\s*/g, '')
     .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
-  const todayHtml = renderTodayPage(camp, events, qrSvg, footerHtml);
+  const todayHtml = renderTodayPage(camp, events, qrSvg, footerHtml, SITE_URL);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
   console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
 

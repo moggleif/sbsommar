@@ -33,7 +33,7 @@ Man får utgå från sin egen situation och planera vad som fungerar bäst. Bor 
 Lunch levereras till campingen i värmeskåp runt kl 12.00 dagligen.
 Middag levereras runt 16.30.
 
-Det kommer även gå att beställa Thaimat från samma leverantör. Priser på Thaimat som beställs direkt från Thai-vagnen kommer att stå i menyn på deras hemsida. Mer information under “[Restaurang och take away](https://sbsommar.se/#service)“.
+Det kommer även gå att beställa Thaimat från samma leverantör. Priser på Thaimat som beställs direkt från Thai-vagnen kommer att stå i menyn på deras hemsida. Mer information under “[Restaurang och take away](/#service)”.
 
 #### Födoämnesintolleranser / allergier
 
