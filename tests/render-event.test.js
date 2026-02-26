@@ -148,14 +148,18 @@ describe('renderEventPage (02-§36)', () => {
   it('EVT-19 (02-§36.11): uses structured layout with date+time line and plats+ansvarig line', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     assert.ok(!html.includes('<dl'), 'should not use definition list');
-    assert.ok(html.includes('måndag 29 juni 2026, 10:00–12:00'), 'line 1 should have date and time range');
-    assert.ok(html.includes('Plats: Planen · Ansvarig: Erik'), 'line 2 should have labelled plats and ansvarig');
+    assert.ok(html.includes('måndag 29 juni 2026'), 'line 1 should have formatted date');
+    assert.ok(html.includes('10:00–12:00'), 'line 1 should have time range');
+    assert.ok(html.includes('<strong>Plats:</strong> Planen'), 'line 2 should have bold Plats label');
+    assert.ok(html.includes('<strong>Ansvarig:</strong> Erik'), 'line 2 should have bold Ansvarig label');
   });
 
   it('EVT-20 (02-§36.11): structured layout omits description and link lines when absent', () => {
     const html = renderEventPage(minimalEvent, camp, siteUrl);
-    assert.ok(html.includes('måndag 29 juni 2026, 08:00–09:00'), 'line 1 should have date and time range');
-    assert.ok(html.includes('Plats: Matsalen · Ansvarig: Kocken'), 'line 2 should have labelled plats and ansvarig');
+    assert.ok(html.includes('måndag 29 juni 2026'), 'line 1 should have formatted date');
+    assert.ok(html.includes('08:00–09:00'), 'line 1 should have time range');
+    assert.ok(html.includes('<strong>Plats:</strong> Matsalen'), 'line 2 should have bold Plats label');
+    assert.ok(html.includes('<strong>Ansvarig:</strong> Kocken'), 'line 2 should have bold Ansvarig label');
     assert.ok(!html.includes('class="event-description"'), 'should not render description section');
     assert.ok(!html.includes('class="event-ext-link"'), 'should not render external link');
   });
