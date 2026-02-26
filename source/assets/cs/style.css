@@ -1058,7 +1058,9 @@ body.modal-open {
 }
 
 .camp-item {
-  line-height: var(--line-height-body);
+  margin: 0;
+  padding: 0;
+  line-height: 1.3;
 }
 
 .camp-icon::after {
@@ -1093,6 +1095,7 @@ body.modal-open {
 }
 
 .camp-item .camp-meta {
+  display: inline;
   font-size: var(--font-size-small);
   color: var(--color-charcoal);
 }
