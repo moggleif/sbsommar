@@ -114,7 +114,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§2.1` | Homepage exists and is served at `/` | 03-ARCHITECTURE.md §5, §6 | COV-01..05 | `source/build/render-index.js`, `source/build/build.js` → `public/index.html` | covered |
 | `02-§2.2` | Weekly schedule page exists at `/schema.html` | 03-ARCHITECTURE.md §5 | SNP-01 | `source/build/render.js`, `source/build/build.js` → `public/schema.html` | covered |
 | `02-§2.4` | Today view at `/idag.html` shows today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | IDAG-05..18 | `source/build/render-idag.js`, `source/build/build.js` → `public/idag.html` | covered |
-| `02-§2.4a` | Display view at `/dagens-schema.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | DIS-01..18 | `source/build/render-today.js`, `source/build/build.js` → `public/dagens-schema.html` | covered |
+| `02-§2.4a` | Display view at `/dagens-schema.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | DIS-01..25 | `source/build/render-today.js`, `source/build/build.js` → `public/dagens-schema.html` | covered |
 | `02-§2.5` | Add-activity form exists at `/lagg-till.html` | 03-ARCHITECTURE.md §3, §6 | RADD-01..04 | `source/build/render-add.js`, `source/build/build.js` → `public/lagg-till.html` | covered |
 | `02-§2.6` | Archive page exists at `/arkiv.html` | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js`, `source/build/build.js` → `public/arkiv.html` | covered |
 | `02-§2.7` | RSS feed exists at `/schema.rss` | 03-ARCHITECTURE.md §17 | RSS-01 | `source/build/render-rss.js`, `source/build/build.js` → `public/schema.rss` | covered |
@@ -137,6 +137,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§4.16` | Display view shows when events were last updated; timestamp embedded at build time | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.40 | DIS-20, DIS-21 | `source/build/build.js` – `buildTime = new Date().toISOString()`; `source/build/render-today.js` – `window.__BUILD_TIME__`, `window.__VERSION__`; `events-today.js` – `buildInfoEl.textContent` | covered |
 | `02-§4.17` | Display view polls `version.json` every 5 minutes and reloads if a newer build is detected | 02-REQUIREMENTS.md §4 | — (manual: deploy a new build while page is open; confirm reload within 5 min) | `source/assets/js/client/events-today.js` – `pollVersion()` via `setInterval`; `source/build/build.js` – writes `public/version.json` | implemented |
 | `02-§4.18` | Display view reloads automatically shortly after midnight to show the new day's events | 02-REQUIREMENTS.md §4 | — (manual: advance system clock past 00:00 and confirm page reloads) | `source/assets/js/client/events-today.js` – `scheduleMidnightReload()` via `setTimeout` | implemented |
+| `02-§4.19` | Display view heading shows only the current day and date, without a page-title prefix | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.46 | DIS-13, DIS-24 | `source/build/render-today.js` – `window.__HEADING_PREFIX__ = ''`; `source/assets/js/client/events-today.js` – ternary skips prefix when empty | covered |
+| `02-§4.20` | Display view heading is positioned inside the sidebar, not above the event list | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.44 | DIS-24, DIS-25 | `source/build/render-today.js` – `<h1 id="today-heading" class="sidebar-heading">` inside `<aside class="dagens-sidebar">` | covered |
+| `02-§4.21` | Display view is optimised for portrait screens; event rows are compact | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.45, §6.48 | — (manual: open `/dagens-schema.html` in a portrait viewport ~1080×1920 and confirm event rows are compact and the sidebar is narrow) | `source/assets/cs/style.css` – `.dagens-events { flex: 3 }`, `.dagens-sidebar { flex: 1 }`, `body.display-mode .event-row { font-size: 13px; padding: 6px }` | implemented |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | RDC-05..06 | No exclusion logic in `source/build/render.js`; CSS handles layout | covered |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -272,7 +275,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§12.3` | All event submissions are permanently recorded in Git history as a full audit trail | 03-ARCHITECTURE.md §3 | — | `source/api/github.js` – every submission creates a Git commit via the Contents API | implemented |
 | `02-§15.2` | The RSS feed reflects the current state of the schedule | 03-ARCHITECTURE.md §17 | RSS-04 | `source/build/render-rss.js` — built from active camp events | covered |
 | `02-§16.4` | The archive must be usable and complete, not a placeholder | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js` – interactive timeline with accordion per camp | covered |
-| `02-§17.3` | The site is readable on shared display screens | 07-DESIGN.md §6 | DIS-01..18 | `source/build/render-today.js` – display mode view; `source/assets/cs/style.css` | covered |
+| `02-§17.3` | The site is readable on shared display screens | 07-DESIGN.md §6 | DIS-01..25 | `source/build/render-today.js` – display mode view; `source/assets/cs/style.css` | covered |
 | `05-§1.4` | The `file` field in `camps.yaml` references a YAML file in `source/data/` | 06-EVENT_DATA_MODEL.md §1 | — | `source/build/build.js` – loads camp file via `camps.yaml` `file` field | implemented |
 | `05-§1.5` | The camp `id` is permanent and must never change after the camp is first created | 06-EVENT_DATA_MODEL.md §3 | — | — (no enforcement; enforced by convention and docs) | implemented |
 | `05-§3.2` | Each camp file's `camp:` block must include `id`, `name`, `location`, `start_date`, and `end_date` | 06-EVENT_DATA_MODEL.md §3 | — | `source/build/build.js` – reads and uses all five fields; no build-time schema validator | implemented |
@@ -849,9 +852,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 ## Summary
 
 ```text
-Total requirements:             707
-Covered (implemented + tested): 312
-Implemented, not tested:        391
+Total requirements:             710
+Covered (implemented + tested): 314
+Implemented, not tested:        392
 Gap (no implementation):          4
 Orphan tests (no requirement):    0
 
@@ -1026,6 +1029,10 @@ Matrix cleanup (2026-02-25):
   3 covered (DIS-19..23): 02-§4.14 (no site footer), 02-§4.15 (live clock), 02-§4.16 (build time).
   2 implemented (browser/manual): 02-§4.17 (version.json polling), 02-§4.18 (midnight reload).
   Design tokens documented in 07-DESIGN.md §6.40–6.43.
+3 requirements added and implemented for portrait layout optimisation (02-§4.19–4.21):
+  2 covered (DIS-13, DIS-24, DIS-25): 02-§4.19 (date-only heading), 02-§4.20 (heading in sidebar).
+  1 implemented (manual visual check): 02-§4.21 (compact event rows, flex 3:1 layout).
+  Design documented in 07-DESIGN.md §6.44–6.48.
 ```
 
 ---
@@ -1126,7 +1133,7 @@ Matrix cleanup (2026-02-25):
 | LOC-01..10 | `tests/render-locations.test.js` | `renderLocationAccordions` |
 | COV-01..16 | `tests/coverage-index.test.js` | Homepage render tests (02-§2.1, 02-§3.1, CL-§3.1, CL-§3.3, 02-§2.9, 02-§14.1) |
 | LAY-01..15 | `tests/coverage-layout.test.js` | Layout component tests (CL-§2.4, CL-§2.5, CL-§3.4, 02-§2.8, 02-§24.10) |
-| DIS-01..18 | `tests/coverage-today.test.js` | Display mode view tests (02-§2.4a, 02-§2.10, 02-§4.6, 02-§4.7, 02-§4.13, 02-§17.3) |
+| DIS-01..25 | `tests/coverage-today.test.js` | Display mode view tests (02-§2.4a, 02-§2.10, 02-§4.6, 02-§4.7, 02-§4.13, 02-§17.3) |
 | IDAG-01..18 | `tests/coverage-idag.test.js` | Today standard view tests (02-§2.4, 02-§4.5, 02-§4.13, 02-§14.1) |
 | RADD-01..30 | `tests/coverage-add.test.js` | Add-activity form tests (02-§2.5, 02-§6.1–6.4, 02-§8.2, 02-§14.1, 02-§26.13) |
 | REDT-01..28 | `tests/coverage-edit.test.js` | Edit-activity form tests (02-§2.11, 02-§18.20, 02-§18.23, 02-§18.27, 02-§18.36) |

@@ -27,7 +27,7 @@
   var label = weekdays[now.getDay()] + ' ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
 
   var heading = document.getElementById('today-heading');
-  if (heading) heading.textContent = headingPrefix + ' – ' + label;
+  if (heading) heading.textContent = headingPrefix ? headingPrefix + ' – ' + label : label;
 
   var todayEvents = events.filter(function (e) { return e.date === today; });
   todayEvents.sort(function (a, b) { return a.start.localeCompare(b.start); });
