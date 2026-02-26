@@ -85,24 +85,6 @@ jobs:
             # Cleanup
             rm -rf "$DEPLOY_DIR/public_html_old"
 
-      # Stage only the server files that need to run on Inleed via Passenger.
-      - name: Stage server files for upload
-        run: |
-          mkdir -p ./staging/source/api
-          cp app.js ./staging/
-          cp package.json ./staging/
-          cp source/api/github.js ./staging/source/api/
-          cp source/api/validate.js ./staging/source/api/
-
-      - name: Upload server app to FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_APP_DIR }}
-          local-dir: ./staging/
-
       - name: Deploy API via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
