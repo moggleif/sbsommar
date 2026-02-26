@@ -109,7 +109,7 @@ function validateCamps(camps, files) {
         let data;
         try {
           data = yaml.load(existing);
-        } catch (_e) {
+        } catch {
           log.push(`WARNING: Could not parse ${filename}, skipping sync`);
           continue;
         }
