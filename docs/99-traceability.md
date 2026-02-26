@@ -148,6 +148,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§6.6` | Submit button is disabled and shows a visual indicator while submission is in progress | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – `submitBtn.disabled = true`; `textContent = 'Sparar...'` | implemented |
 | `02-§6.7` | A clear success confirmation is shown after submission | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – reveals `#result` section with activity title | implemented |
 | `02-§6.8` | Network failure shows a clear error and allows retry; submissions are never silently lost | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – `.catch()` re-enables button and shows error | implemented |
+| `02-§6.9` | Date field shows an inline error immediately on `change` if the value is in the past | 07-DESIGN.md §6.34–6.39 | — | — | gap |
+| `02-§6.10` | End-time field shows an inline error immediately on `change` if start is filled and end ≤ start | 07-DESIGN.md §6.34–6.39 | — | — | gap |
+| `02-§6.11` | Any required field shows an inline error on `blur` if it is empty | 07-DESIGN.md §6.34–6.39 | — | — | gap |
+| `02-§6.12` | A live-validation error is cleared as soon as the user starts editing the field (`input`/`change`) | 07-DESIGN.md §6.34–6.39 | — | — | gap |
 | `02-§7.1` | Only administrators can edit or remove activities (via YAML directly; no participant editing UI) | 04-OPERATIONS.md (Disaster Recovery) | — | No editing UI exists; enforced by absence, not access control | implemented |
 | `02-§8.1` | Location names are consistent throughout the week; defined only in `source/data/local.yaml` | 03-ARCHITECTURE.md §6 | RADD-16 | `source/build/build.js` (loads `local.yaml`); `source/build/render-add.js` (uses those names) | covered |
 | `02-§8.2` | One "Annat" option allows a free-text location not in the predefined list | 03-ARCHITECTURE.md §6 | RADD-13..15 | `source/build/render-add.js` – "Annat" always appended last | covered |
@@ -843,10 +847,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 ## Summary
 
 ```text
-Total requirements:             701
+Total requirements:             705
 Covered (implemented + tested): 312
 Implemented, not tested:        385
-Gap (no implementation):          4
+Gap (no implementation):          8
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1000,6 +1004,12 @@ Matrix cleanup (2026-02-25):
   1 gap (02-§43.14: manual QA FTP secret cleanup after validation).
   QA event data deploy switches from FTP/curl to SCP/SSH.
   Redundant FTP upload step removed from API server deploy.
+4 requirements added for live form validation (02-§6.9–6.12):
+  all 4 gap (browser-only DOM events; cannot be unit-tested in Node.js).
+  Manual checkpoint: open /lagg-till.html, select a past date → error shown immediately.
+  Manual checkpoint: fill start time, change end time to before start → error shown.
+  Manual checkpoint: tab through required fields without filling them → errors shown.
+  Manual checkpoint: start editing a field with an error → error clears immediately.
 39 requirements added for PHP API (02-§44.1–44.39):
   35 implemented (PHP code, docs, coexistence).
   4 gaps (02-§44.28 Apache verify, 02-§44.29–30 deploy workflow, 02-§44.32 env secrets).
