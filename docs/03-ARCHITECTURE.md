@@ -1133,6 +1133,14 @@ The `owner` and `meta` fields are never rendered.
 
 A "← Tillbaka till schemat" link points to `/schema.html`.
 
+The event detail body uses the same structured layout as the RSS description
+(see §17.3 / 02-§15.15):
+
+- Line 1: formatted date, start–end time (no labels)
+- Line 2: `Plats:` value ` · ` `Ansvarig:` value (with labels)
+- Line 3: description text (only if set)
+- Line 4: external link (only if set)
+
 ### 18.3 Layout
 
 Event pages use the shared `pageNav()` and `pageFooter()` from `layout.js`,
