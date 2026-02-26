@@ -116,7 +116,7 @@ describe('renderRssFeed (02-§15)', () => {
     // Line 3: description text
     assert.ok(xml.includes('Alla är välkomna!'), 'line 3 should have description');
     // Line 4: link
-    assert.ok(xml.includes('https://example.com/fotboll'), 'line 4 should have link');
+    assert.ok(xml.includes('Alla är välkomna!\nhttps://example.com/fotboll'), 'line 4 should have link after description');
 
     // Event without description or link (Frukost)
     assert.ok(xml.includes('måndag 29 juni 2026, 08:00–09:00'), 'should have date+time for Frukost');
