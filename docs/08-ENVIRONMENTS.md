@@ -1,6 +1,6 @@
 # SB Sommar – Environments
 
-Three environments serve different stages of the development-to-production pipeline.
+Four environments serve different stages of the development-to-production pipeline.
 All environments deploy from the `main` branch.
 
 For CI/CD workflow details, see [04-OPERATIONS.md](04-OPERATIONS.md).
@@ -9,11 +9,12 @@ For CI/CD workflow details, see [04-OPERATIONS.md](04-OPERATIONS.md).
 
 ## Overview
 
-| Environment    | Full site deploy            | Event data deploy           | Secrets source             |
-| -------------- | --------------------------- | --------------------------- | -------------------------- |
-| **Local**      | `npm start`                 | N/A                         | `.env` file                |
-| **QA**         | Auto on push to `main`      | Auto on event PR merge      | GitHub Environment `qa`    |
-| **Production** | Manual (`workflow_dispatch`) | Auto on event PR merge      | GitHub Environment `production` |
+| Environment    | Host        | API stack | Full site deploy             | Event data deploy      | Secrets source                  |
+| -------------- | ----------- | --------- | ---------------------------- | ---------------------- | ------------------------------- |
+| **Local**      | localhost   | Node.js   | `npm start`                  | N/A                    | `.env` file                     |
+| **QA**         | Loopia      | PHP       | Auto on push to `main`       | Auto on event PR merge | GitHub Environment `qa`         |
+| **QA-Node**    | Node.js VPS | Node.js   | Auto on push to `main`       | Auto on event PR merge | GitHub Environment `qa-node`    |
+| **Production** | Loopia      | PHP       | Manual (`workflow_dispatch`) | Auto on event PR merge | GitHub Environment `production` |
 
 **Key rule:** code changes reach Production only when manually triggered.
 Event data reaches both QA and Production immediately — because events are
@@ -70,24 +71,40 @@ the secrets.
 | ---------- | ---------- | ------------------------------------------------- |
 | `SITE_URL` | `ci.yml`   | Any valid URL — just needs to pass the build step |
 
-### GitHub Environment: `qa`
+### GitHub Environment: `qa` (PHP on Loopia)
+
+| Secret            | Purpose                          |
+| ----------------- | -------------------------------- |
+| `SITE_URL`        | QA base URL                      |
+| `API_URL`         | QA PHP API endpoint              |
+| `SERVER_HOST`     | QA SSH/SCP host                  |
+| `SERVER_USER`     | QA SSH username                  |
+| `SERVER_SSH_KEY`  | QA SSH private key               |
+| `SERVER_SSH_PORT` | QA SSH port                      |
+| `DEPLOY_DIR`      | QA deploy directory              |
+
+Example values: `SITE_URL=https://qa.sbsommar.se`,
+`API_URL=https://qa.sbsommar.se/api/add-event`.
+
+The PHP API is deployed alongside the static site via SCP. The `api/.env`
+file on the server is managed manually and contains the `GITHUB_*`,
+`ALLOWED_ORIGIN`, `QA_ORIGIN`, `COOKIE_DOMAIN`, and `BUILD_ENV` variables
+needed by the PHP API at runtime.
+
+### GitHub Environment: `qa-node` (Node.js host — preserved)
 
 | Secret            | Purpose                                          |
 | ----------------- | ------------------------------------------------ |
-| `SITE_URL`        | QA base URL (e.g. `https://sommar.qa.example.com`)          |
-| `API_URL`         | QA API endpoint (e.g. `https://api.sommar.qa.example.com/add-event`) |
+| `SITE_URL`        | QA base URL for the Node.js host                 |
+| `API_URL`         | QA Node.js API endpoint                          |
 | `SERVER_HOST`     | QA SSH/SCP host                                  |
 | `SERVER_USER`     | QA SSH username                                  |
 | `SERVER_SSH_KEY`  | QA SSH private key                               |
 | `SERVER_SSH_PORT` | QA SSH port                                      |
 | `DEPLOY_DIR`      | QA deploy directory                              |
 
-QA no longer uses FTP. Event data pages are deployed via SCP using the
-same SSH secrets as the full site deploy. The target is `DEPLOY_DIR/public_html/`.
-
-The FTP secrets (`FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_APP_DIR`,
-`FTP_TARGET_DIR`) can be removed from the `qa` environment after verifying
-the SCP deploy works.
+This environment preserves the original Node.js QA setup. It is not
+actively deployed but kept as a fallback.
 
 ### GitHub Environment: `production`
 
