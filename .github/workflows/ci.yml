@@ -28,9 +28,15 @@ jobs:
         id: changes
         run: |
           git fetch origin main
-          git diff --name-only origin/main...HEAD | grep -qvE '^source/data/' \
-            && echo "has_code=true" >> $GITHUB_OUTPUT \
-            || echo "has_code=false" >> $GITHUB_OUTPUT
+          diff=$(git diff --name-only origin/main...HEAD)
+          if [ -z "$diff" ]; then
+            echo "has_code=false" >> $GITHUB_OUTPUT
+          elif echo "$diff" | grep -qvE '^source/data/' || \
+               echo "$diff" | grep -qE '^source/data/(camps|local)\.yaml$'; then
+            echo "has_code=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_code=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Lint JavaScript
         if: steps.changes.outputs.has_code == 'true'
