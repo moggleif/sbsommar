@@ -130,10 +130,13 @@ describe('Display view — QR code', () => {
   });
 
   it('DIS-16: sidebar with descriptive text is present', () => {
-    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, '', 'https://sommar.example.com');
+    const siteUrl = 'https://sommar.example.com';
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, '', siteUrl);
     assert.ok(html.includes('class="dagens-sidebar"'), 'sidebar present');
     assert.ok(html.includes('class="sidebar-text"'), 'sidebar text present');
-    assert.ok(html.includes('sommar.example.com'), 'site URL hostname mentioned in description');
+    // Verify the rendered sidebar contains the hostname extracted from SITE_URL
+    const expectedHost = new URL(siteUrl).hostname;
+    assert.match(html, new RegExp(expectedHost), 'site URL hostname mentioned in description');
   });
 });
 
