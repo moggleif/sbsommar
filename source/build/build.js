@@ -15,6 +15,15 @@ const { renderRssFeed } = require('./render-rss');
 const { renderEventPage } = require('./render-event');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 
+// ── Load .env if present (local dev) ─────────────────────────────────────────
+const envPath = path.join(__dirname, '../..', '.env');
+if (fs.existsSync(envPath)) {
+  for (const line of fs.readFileSync(envPath, 'utf8').split('\n')) {
+    const m = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*$/);
+    if (m && !(m[1] in process.env)) process.env[m[1]] = m[2];
+  }
+}
+
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const CONTENT_DIR = path.join(__dirname, '..', 'content');
 const ASSETS_DIR = path.join(__dirname, '..', 'assets');
