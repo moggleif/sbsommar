@@ -1658,3 +1658,97 @@ event data reaches both environments immediately.
   variables. <!-- 02-§41.18 -->
 - `.env.example` must document the environment management
   setup. <!-- 02-§41.19 -->
+
+---
+
+## 42. QA Camp Isolation
+
+QA and Production share the same `camps.yaml` registry and the same git branch.
+A dedicated QA camp allows testing the full event flow (form submission, schedule
+rendering, today view) without polluting production data. The QA camp must be
+invisible to production builds and APIs, and must always be the active camp in
+QA environments.
+
+### 42.1 Data model (data requirements)
+
+- `camps.yaml` entries may include an optional `qa` field of type
+  boolean. <!-- 02-§42.1 -->
+- When `qa` is omitted or `false`, the camp is a normal production
+  camp. <!-- 02-§42.2 -->
+- When `qa` is `true`, the camp is a QA-only camp. <!-- 02-§42.3 -->
+
+### 42.2 QA camp entry (data requirements)
+
+- The existing `2026-02-testar` camp must be renamed to
+  `id: qa-testcamp`. <!-- 02-§42.4 -->
+- Its `file` must be renamed to `qa-testcamp.yaml`. <!-- 02-§42.5 -->
+- Its date range must span the full calendar year (e.g.
+  `start_date: 2026-01-01`, `end_date: 2026-12-31`) so that events
+  submitted on any day of the year pass date validation. <!-- 02-§42.6 -->
+- Its `opens_for_editing` must be set to the start of the year so the
+  form is always open. <!-- 02-§42.7 -->
+- It must have `qa: true`. <!-- 02-§42.8 -->
+- The corresponding data file must be renamed from
+  `2026-02-testar.yaml` to `qa-testcamp.yaml`, with the camp header
+  updated to match. <!-- 02-§42.9 -->
+- Existing events in the file are preserved (they are test
+  data). <!-- 02-§42.10 -->
+
+### 42.3 Production filtering (site requirements)
+
+- In production (`BUILD_ENV=production`), the build must exclude all
+  camps with `qa: true` before resolving the active
+  camp. <!-- 02-§42.11 -->
+- In production, the API must exclude all camps with `qa: true` before
+  resolving the active camp for add-event and edit-event
+  requests. <!-- 02-§42.12 -->
+- QA camps must never appear in production schedule pages, today view,
+  archive, or RSS feed. <!-- 02-§42.13 -->
+
+### 42.4 QA resolution (site requirements)
+
+- In QA (`BUILD_ENV=qa`), if a camp with `qa: true` exists and its
+  dates cover today, it must win the active camp resolution regardless
+  of other camps' dates. <!-- 02-§42.14 -->
+- The resolution priority in QA is: QA camp on dates first, then
+  normal derivation rules for remaining camps. <!-- 02-§42.15 -->
+- This ensures the QA camp is always active in QA, even when a real
+  production camp's dates also cover today. <!-- 02-§42.16 -->
+
+### 42.5 Environment signal (site requirements)
+
+- The build must read a `BUILD_ENV` environment variable to determine
+  the environment (`qa` or `production`). <!-- 02-§42.17 -->
+- `deploy-reusable.yml` must pass the environment name as `BUILD_ENV`
+  to the build step. <!-- 02-§42.18 -->
+- The API (`app.js`) must read `BUILD_ENV` from its environment to
+  apply the correct filtering. <!-- 02-§42.19 -->
+- `.env.example` must document the `BUILD_ENV` variable. <!-- 02-§42.20 -->
+- When `BUILD_ENV` is not set (local development), no filtering is
+  applied — all camps are included, and normal derivation rules
+  apply. <!-- 02-§42.21 -->
+
+### 42.6 Resolve function changes (site requirements)
+
+- `resolveActiveCamp()` must accept an optional `environment`
+  parameter (e.g. `'qa'`, `'production'`). <!-- 02-§42.22 -->
+- When `environment` is `'production'`, camps with `qa: true` are
+  filtered out before resolution. <!-- 02-§42.23 -->
+- When `environment` is `'qa'`, QA camps that are on dates take
+  priority over non-QA camps. <!-- 02-§42.24 -->
+- When `environment` is not set, the function behaves as it does
+  today (no filtering, no QA priority). <!-- 02-§42.25 -->
+
+### 42.7 Validation (site requirements)
+
+- `lint-yaml.js` must accept `qa` as a valid optional boolean field
+  in `camps.yaml` entries. <!-- 02-§42.26 -->
+- The camps.yaml validator (`validate-camps.js`) must accept `qa` as
+  a valid optional boolean field. <!-- 02-§42.27 -->
+
+### 42.8 Yearly maintenance (operational)
+
+- Once per year, the QA camp's date range should be updated to cover
+  the new calendar year. <!-- 02-§42.28 -->
+- This is a manual one-line change in `camps.yaml` — no automation
+  is required. <!-- 02-§42.29 -->
