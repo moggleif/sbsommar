@@ -3,6 +3,9 @@ name: Deploy to QA (Node.js)
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: deploy-qa-node
   cancel-in-progress: true
