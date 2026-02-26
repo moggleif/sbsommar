@@ -1478,3 +1478,45 @@ Replace the hand-rolled converter with the `marked` library.
 - Build, lint, and HTML validation must pass. <!-- 02-§38.11 -->
 
 ---
+
+## 39. CodeQL Alert Remediation
+
+GitHub CodeQL static analysis reports six alerts across workflows, server code,
+and test files. All must be resolved so the repository reaches zero open CodeQL
+alerts.
+
+### 39.1 Workflow permissions (CI)
+
+- `ci.yml` must declare an explicit `permissions` block with minimal
+  scope. The workflow only reads repository contents, so `contents: read`
+  is sufficient. <!-- 02-§39.1 -->
+
+### 39.2 Workflow permissions (deploy)
+
+- `deploy.yml` must declare an explicit `permissions` block with minimal
+  scope. The workflow reads repository contents and deploys via external
+  FTP/SSH (no GitHub Pages token needed), so `contents: read` is
+  sufficient. <!-- 02-§39.2 -->
+
+### 39.3 ReDoS-safe slugify
+
+- The `slugify()` function in `source/api/github.js` must not contain
+  regex patterns that CodeQL flags as polynomial-time backtracking risks.
+  The current `/^-+|-+$/g` alternation must be replaced with an equivalent
+  that avoids backtracking. <!-- 02-§39.3 -->
+- The replacement must produce identical output for all existing test
+  cases. <!-- 02-§39.4 -->
+
+### 39.4 Test assertion specificity
+
+- Test assertions that check for URL substrings must be specific enough
+  that CodeQL does not flag them as incomplete URL sanitisation. <!-- 02-§39.5 -->
+- Assertions in `tests/render.test.js` and `tests/github.test.js` that
+  use bare `includes('https://…')` must be changed to match a surrounding
+  context (e.g. `includes('href="https://…"')` or
+  `includes('link: https://…')`). <!-- 02-§39.6 -->
+
+### 39.5 Verification
+
+- After the changes are merged, `gh api repos/{owner}/{repo}/code-scanning/alerts?state=open`
+  must return fewer open alerts (ideally zero). <!-- 02-§39.7 -->

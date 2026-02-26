@@ -15,7 +15,8 @@ function slugify(str) {
     .replace(/[åä]/g, 'a')
     .replace(/ö/g, 'o')
     .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
     .slice(0, 48);
 }
 

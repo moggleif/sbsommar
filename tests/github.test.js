@@ -189,7 +189,7 @@ describe('buildEventYaml', () => {
 
   it('writes link value when link is present', () => {
     const yaml = buildEventYaml(baseEvent({ link: 'https://example.com' }));
-    assert.ok(yaml.includes('https://example.com'), `Got: ${yaml}`);
+    assert.ok(yaml.includes("link: 'https://example.com'"), `Got: ${yaml}`);
   });
 
   it('includes owner name', () => {

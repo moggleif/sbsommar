@@ -201,7 +201,7 @@ describe('eventExtraHtml', () => {
   it('renders both description and link', () => {
     const html = eventExtraHtml({ description: 'Details.', link: 'https://example.com' });
     assert.ok(html.includes('Details.'), 'Expected description');
-    assert.ok(html.includes('https://example.com'), 'Expected link');
+    assert.ok(html.includes('href="https://example.com"'), 'Expected link');
   });
 
   it('escapes HTML in description', () => {
@@ -269,7 +269,7 @@ describe('renderEventRow', () => {
     };
     const html = renderEventRow(e);
     assert.ok(html.includes('<details class="event-row"'), 'Expected details element');
-    assert.ok(html.includes('https://maps.example.com'), 'Expected link URL');
+    assert.ok(html.includes('href="https://maps.example.com"'), 'Expected link URL');
   });
 
   it('omits the en-dash when end time is missing', () => {
