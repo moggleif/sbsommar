@@ -825,7 +825,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§44.30` | composer install --no-dev runs in CI or vendor/ included in archive | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | gap |
 | `02-§44.31` | .env on server managed manually, not in deploy archive | 04-OPERATIONS.md | manual: verify | — | implemented |
 | `02-§44.32` | API_URL points to PHP API path for PHP environments | 08-ENVIRONMENTS.md | manual: check GitHub Environment | GitHub Environment secrets | gap |
-| `02-§44.33` | Node.js API_URL format remains valid for Node.js environments | 08-ENVIRONMENTS.md | manual: check | GitHub Environment `qa-node` | implemented |
+| `02-§44.33` | Node.js API_URL format remains valid for Node.js environments | 08-ENVIRONMENTS.md | manual: check | GitHub Environment `qanode` | implemented |
 | `02-§44.34` | Node.js API unchanged | 03-ARCHITECTURE.md §21 | existing Node.js tests | `app.js`, `source/api/` | implemented |
 | `02-§44.35` | Local dev continues to use npm start | 04-OPERATIONS.md | manual: run locally | `app.js` | implemented |
 | `02-§44.36` | API backend choice determined by API_URL only | 03-ARCHITECTURE.md §21 | manual: inspect build | `source/build/render-add.js` | implemented |
