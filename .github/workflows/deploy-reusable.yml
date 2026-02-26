@@ -53,8 +53,8 @@ jobs:
           source: site.tar.gz
           target: ${{ secrets.DEPLOY_DIR }}
 
-      # Zero-downtime swap: extract into staging dir, move hosting
-      # infrastructure (domains/) into it, then swap with two mv ops.
+      # Zero-downtime swap: extract into staging dir, back up the PHP API
+      # .env, then swap with two mv ops.
       # Stale dirs from previous failed deploys are cleaned first.
       - name: Deploy with zero-downtime swap
         uses: appleboy/ssh-action@v1.0.3
@@ -77,9 +77,9 @@ jobs:
             tar -xzf "$DEPLOY_DIR/site.tar.gz" -C "$RELEASE_DIR"
             rm "$DEPLOY_DIR/site.tar.gz"
 
-            # Preserve hosting infrastructure
-            if [ -d "$PUBLIC_DIR/domains" ]; then
-              mv "$PUBLIC_DIR/domains" "$RELEASE_DIR/domains"
+            # Preserve PHP API .env (server-managed, not in repo)
+            if [ -f "$PUBLIC_DIR/api/.env" ]; then
+              cp "$PUBLIC_DIR/api/.env" "$DEPLOY_DIR/.env.api.bak"
             fi
 
             # Swap (millisecond downtime)
@@ -89,7 +89,20 @@ jobs:
             # Cleanup
             rm -rf "$DEPLOY_DIR/public_html_old"
 
-      - name: Deploy API via SSH
+      - name: Package PHP API for upload
+        run: tar -czf api.tar.gz --exclude='.env' --exclude='.env.example' --exclude='vendor' -C api .
+
+      - name: Upload API archive via SCP
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_SSH_PORT }}
+          source: api.tar.gz
+          target: ${{ secrets.DEPLOY_DIR }}
+
+      - name: Deploy PHP API
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -97,8 +110,34 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}/nodeapps/sbsommar
-            git pull
-            npm install --production
-            mkdir -p tmp
-            touch tmp/restart.txt
+            set -e
+            DEPLOY_DIR="${{ secrets.DEPLOY_DIR }}"
+            PUBLIC_DIR="$DEPLOY_DIR/public_html"
+            API_STAGING="$DEPLOY_DIR/api_new"
+
+            # Clean up any previous failed deploy
+            rm -rf "$API_STAGING"
+
+            # Extract new API files
+            mkdir -p "$API_STAGING"
+            tar -xzf "$DEPLOY_DIR/api.tar.gz" -C "$API_STAGING"
+            rm "$DEPLOY_DIR/api.tar.gz"
+
+            # Restore server-managed .env (backed up during static site swap)
+            if [ -f "$DEPLOY_DIR/.env.api.bak" ]; then
+              mv "$DEPLOY_DIR/.env.api.bak" "$API_STAGING/.env"
+            fi
+
+            # Install PHP dependencies
+            cd "$API_STAGING"
+            composer install --no-dev --no-interaction --optimize-autoloader
+
+            # Swap
+            rm -rf "$PUBLIC_DIR/api_old"
+            if [ -d "$PUBLIC_DIR/api" ]; then
+              mv "$PUBLIC_DIR/api" "$PUBLIC_DIR/api_old"
+            fi
+            mv "$API_STAGING" "$PUBLIC_DIR/api"
+
+            # Cleanup
+            rm -rf "$PUBLIC_DIR/api_old"
