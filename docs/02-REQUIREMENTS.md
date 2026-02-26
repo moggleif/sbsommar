@@ -1503,9 +1503,9 @@ alerts.
 
 ### 39.2 Workflow permissions (deploy)
 
-- `deploy.yml` must declare an explicit `permissions` block with minimal
-  scope. The workflow reads repository contents and deploys via external
-  FTP/SSH (no GitHub Pages token needed), so `contents: read` is
+- `deploy-reusable.yml` must declare an explicit `permissions` block with
+  minimal scope. The workflow reads repository contents and deploys via
+  external FTP/SSH (no GitHub Pages token needed), so `contents: read` is
   sufficient. <!-- 02-§39.2 -->
 
 ### 39.3 ReDoS-safe slugify
@@ -1586,3 +1586,75 @@ via SCP, then swapped into the live web root with server-side `mv` operations.
 - If the swap fails mid-way, the state must be recoverable by a
   subsequent deploy (clean-up of stale directories at the start of
   the script). <!-- 02-§40.16 -->
+
+---
+
+## 41. Environment Management
+
+The project uses three environments — Local, QA, and Production — deployed
+from a single `main` branch. Code changes are promoted to Production manually;
+event data reaches both environments immediately.
+
+### 41.1 Environments (site requirements)
+
+- The project must define three environments: Local, QA, and
+  Production. <!-- 02-§41.1 -->
+- QA deploys the full site automatically on every push to
+  `main`. <!-- 02-§41.2 -->
+- Production deploys the full site only via a manual
+  `workflow_dispatch` trigger. <!-- 02-§41.3 -->
+- Both QA and Production deploy from the `main` branch; no separate
+  production branch exists. <!-- 02-§41.4 -->
+- Event data submitted via the API always commits to `main`, regardless
+  of which environment the API runs in. <!-- 02-§41.5 -->
+
+### 41.2 GitHub Environments (site requirements)
+
+- QA deploy secrets must be scoped to a GitHub Environment named
+  `qa`. <!-- 02-§41.6 -->
+- Production deploy secrets must be scoped to a GitHub Environment
+  named `production`. <!-- 02-§41.7 -->
+- Each environment must have its own independent values for:
+  `SITE_URL`, `API_URL`, `SERVER_HOST`, `SERVER_USER`,
+  `SERVER_SSH_KEY`, `SERVER_SSH_PORT`, `DEPLOY_DIR`, `FTP_HOST`,
+  `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_APP_DIR`,
+  `FTP_TARGET_DIR`. <!-- 02-§41.8 -->
+
+### 41.3 Reusable deploy workflow (site requirements)
+
+- A reusable workflow (`.github/workflows/deploy-reusable.yml`) must
+  contain the shared build-and-deploy logic. <!-- 02-§41.9 -->
+- The reusable workflow must accept the environment name as an
+  input. <!-- 02-§41.10 -->
+- `deploy-qa.yml` must call the reusable workflow with environment
+  `qa`. <!-- 02-§41.11 -->
+- `deploy-prod.yml` must call the reusable workflow with environment
+  `production`. <!-- 02-§41.12 -->
+- The original `deploy.yml` must be removed after the split is
+  complete. <!-- 02-§41.13 -->
+
+### 41.4 Event data deploy (site requirements)
+
+- When an event PR merges, `event-data-deploy.yml` must deploy the
+  event data pages to both QA and Production in
+  parallel. <!-- 02-§41.14 -->
+- Each parallel deploy job must build with its own environment's
+  `SITE_URL` and `API_URL` so that per-event page links point to the
+  correct domain. <!-- 02-§41.15 -->
+
+### 41.5 Hardcoded URL fix (site requirements)
+
+- The QR code URL in `build.js` must use the `SITE_URL` environment
+  variable instead of a hardcoded domain. <!-- 02-§41.16 -->
+
+### 41.6 CI workflow (site requirements)
+
+- `ci.yml` does not need environment-scoped secrets; its `SITE_URL`
+  remains a repository-level secret. <!-- 02-§41.17 -->
+
+### 41.7 Local development (site requirements)
+
+- Local development uses `.env` for all environment
+  variables. <!-- 02-§41.18 -->
+- `.env.example` must document the environment management
+  setup. <!-- 02-§41.19 -->

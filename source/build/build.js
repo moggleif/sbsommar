@@ -131,7 +131,7 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
-  const qrSvg = (await QRCode.toString('https://sbsommar.se', { type: 'svg', margin: 2 }))
+  const qrSvg = (await QRCode.toString(SITE_URL, { type: 'svg', margin: 2 }))
     .replace(/<\?xml[^?]*\?>\s*/g, '')
     .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
