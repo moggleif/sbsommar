@@ -267,11 +267,15 @@
     });
   }
 
-  // Re-check past-time on start when date changes to today (02-§6.14).
+  // Re-check past-time on start whenever date changes (02-§6.14).
+  // Clear any stale past-time error first (e.g. user switches from today to tomorrow).
   if (dateInput) {
     dateInput.addEventListener('change', function () {
-      if (startInput && startInput.value && isPastTimeToday(startInput.value)) {
-        setFieldError('start', 'Starttiden har redan passerat – menade du imorgon?');
+      if (startInput && startInput.value) {
+        setFieldError('start', null);
+        if (isPastTimeToday(startInput.value)) {
+          setFieldError('start', 'Starttiden har redan passerat – menade du imorgon?');
+        }
       }
     });
   }
