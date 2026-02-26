@@ -706,12 +706,12 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§38.9` | Tables have basic CSS styling using design tokens | 03-ARCHITECTURE.md §20 | manual: visual check | `source/assets/cs/style.css` – `.content table` rules | implemented |
 | `02-§38.10` | All existing tests pass | 03-ARCHITECTURE.md §20 | 785/785 pass | — | covered |
 | `02-§38.11` | Build, lint, and HTML validation pass | 03-ARCHITECTURE.md §20 | manual: CI | — | implemented |
-| `02-§39.1` | ci.yml declares explicit `permissions: contents: read` | CL-§5.11 | manual: CI workflow inspection | `.github/workflows/ci.yml` | gap |
-| `02-§39.2` | deploy.yml declares explicit `permissions: contents: read` | CL-§5.11 | manual: CI workflow inspection | `.github/workflows/deploy.yml` | gap |
-| `02-§39.3` | slugify() has no polynomial-backtracking regex | CL-§5.3 | GH-SLG-01..11 | `source/api/github.js` – `slugify()` | gap |
-| `02-§39.4` | slugify replacement produces identical output for all tests | CL-§5.3 | GH-SLG-01..11 | `source/api/github.js` – `slugify()` | gap |
-| `02-§39.5` | Test URL assertions are specific enough to avoid CodeQL false positives | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | gap |
-| `02-§39.6` | Bare `includes('https://…')` replaced with context-aware assertions | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | gap |
+| `02-§39.1` | ci.yml declares explicit `permissions: contents: read` | CL-§5.11 | manual: CI workflow inspection | `.github/workflows/ci.yml` | implemented |
+| `02-§39.2` | deploy.yml declares explicit `permissions: contents: read` | CL-§5.11 | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§39.3` | slugify() has no polynomial-backtracking regex | CL-§5.3 | GH-SLG-01..11 | `source/api/github.js` – `slugify()` | covered |
+| `02-§39.4` | slugify replacement produces identical output for all tests | CL-§5.3 | GH-SLG-01..11 | `source/api/github.js` – `slugify()` | covered |
+| `02-§39.5` | Test URL assertions are specific enough to avoid CodeQL false positives | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
+| `02-§39.6` | Bare `includes('https://…')` replaced with context-aware assertions | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
 | `02-§39.7` | Zero open CodeQL alerts after merge | CL-§5.11 | manual: `gh api` | — | gap |
 
 ---
@@ -720,9 +720,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 
 ```text
 Total requirements:             578
-Covered (implemented + tested): 292
-Implemented, not tested:        278
-Gap (no implementation):          7
+Covered (implemented + tested): 294
+Implemented, not tested:        282
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
