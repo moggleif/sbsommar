@@ -39,7 +39,7 @@ and APIs filter out QA camps entirely. See `02-REQUIREMENTS.md §42`.
 1. A participant submits an event via the form.
 2. The API commits the event to `main` and opens an auto-merge PR.
 3. When the PR merges, `event-data-deploy.yml` triggers.
-4. Two parallel jobs build and deploy the event data pages — one to QA, one to Production.
+4. Two parallel jobs build and deploy the event data pages — one to QA (via SCP), one to Production (via FTP).
 5. Each job builds with its own environment's `SITE_URL` and `API_URL` so that per-event page links point to the correct domain.
 
 Production receives event data within minutes of the PR merging — no manual step needed.
@@ -81,11 +81,13 @@ the secrets.
 | `SERVER_SSH_KEY`  | QA SSH private key                               |
 | `SERVER_SSH_PORT` | QA SSH port                                      |
 | `DEPLOY_DIR`      | QA deploy directory                              |
-| `FTP_HOST`        | QA FTP host                                      |
-| `FTP_USERNAME`    | QA FTP username                                  |
-| `FTP_PASSWORD`    | QA FTP password                                  |
-| `FTP_APP_DIR`     | QA FTP app directory (must end with `/`)         |
-| `FTP_TARGET_DIR`  | QA FTP target dir for event data (must end with `/`) |
+
+QA no longer uses FTP. Event data pages are deployed via SCP using the
+same SSH secrets as the full site deploy. The target is `DEPLOY_DIR/public_html/`.
+
+The FTP secrets (`FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_APP_DIR`,
+`FTP_TARGET_DIR`) can be removed from the `qa` environment after verifying
+the SCP deploy works.
 
 ### GitHub Environment: `production`
 
