@@ -21,16 +21,17 @@ camps:
       Claude code har nu fixat systemet. Ingen wordpress längre. Ren kod endast för våra behov. Kanske kan vi snart skriva önskemål och det införs nästan automatiskt.
     file: 2026-06-syssleback.yaml
     archived: false
-  - id: 2026-02-testar
-    name: SB vinter 2026 februari
-    start_date: '2026-02-22'
-    end_date: '2026-02-27'
-    opens_for_editing: '2026-02-15'
+  - id: qa-testcamp
+    name: QA Testläger
+    start_date: '2026-01-01'
+    end_date: '2026-12-31'
+    opens_for_editing: '2026-01-01'
     location: Testar
     link: ""
     information: ""
-    file: 2026-02-testar.yaml
+    file: qa-testcamp.yaml
     archived: false
+    qa: true
   - id: 2025-08-syssleback
     name: SB sommar 2025 augusti
     start_date: '2025-08-03'

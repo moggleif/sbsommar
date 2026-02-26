@@ -71,6 +71,13 @@ function validateCamps(camps, files) {
       }
     }
 
+    // ── qa is optional boolean (02-§42.27) ────────────────────────────────
+    if (camp.qa !== undefined && camp.qa !== null) {
+      if (typeof camp.qa !== 'boolean') {
+        errors.push(`${ref}: qa must be a boolean, got "${typeof camp.qa}"`);
+      }
+    }
+
     // ── Unique id (02-§37.5) ──────────────────────────────────────────────
     if (camp.id) {
       if (seenIds.has(camp.id)) {

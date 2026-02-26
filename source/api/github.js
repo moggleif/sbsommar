@@ -238,7 +238,8 @@ async function addEventToActiveCamp(body) {
   // Step 1: resolve active camp from main
   const { content: campsYaml } = await getFile(CAMPS_PATH);
   const campsData = yaml.load(campsYaml);
-  const camp = resolveActiveCamp(campsData.camps || []);
+  const buildEnv = process.env.BUILD_ENV || undefined;
+  const camp = resolveActiveCamp(campsData.camps || [], undefined, buildEnv);
   const campFilePath = `source/data/${camp.file}`;
 
   // Step 2: fetch camp file + SHA (reads from main via GITHUB_BRANCH)
@@ -268,7 +269,8 @@ async function updateEventInActiveCamp(eventId, updates) {
   // Step 1: resolve active camp
   const { content: campsYaml } = await getFile(CAMPS_PATH);
   const campsData = yaml.load(campsYaml);
-  const camp = resolveActiveCamp(campsData.camps || []);
+  const buildEnv = process.env.BUILD_ENV || undefined;
+  const camp = resolveActiveCamp(campsData.camps || [], undefined, buildEnv);
   const campFilePath = `source/data/${camp.file}`;
 
   // Step 2: fetch camp file

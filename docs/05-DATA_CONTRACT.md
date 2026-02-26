@@ -21,11 +21,12 @@ camps:
     location: string     # place name displayed on the archive page
     file: string         # filename in source/data/ (e.g. 2026-06-syssleback.yaml)
     archived: boolean    # true once the camp has ended
+    qa: boolean | null   # optional; true marks a QA-only camp (filtered out in production)
     information: string | null   # optional descriptive text shown on archive page
     link: string | null          # optional URL (e.g. Facebook group) shown on archive page
 ```
 
-All fields except `information` and `link` are required for each entry. <!-- 05-§1.1 -->
+All fields except `information`, `link`, and `qa` are required for each entry. <!-- 05-§1.1 -->
 
 The `opens_for_editing` field defines the first date on which the add-activity and
 edit-activity forms are available. The submission period closes at the end of

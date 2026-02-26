@@ -18,7 +18,8 @@ const app = express();
 
 const campsPath = path.join(__dirname, 'source', 'data', 'camps.yaml');
 const campsData = yaml.load(fs.readFileSync(campsPath, 'utf8'));
-const activeCamp = resolveActiveCamp(campsData.camps || []);
+const BUILD_ENV = process.env.BUILD_ENV || undefined;
+const activeCamp = resolveActiveCamp(campsData.camps || [], undefined, BUILD_ENV);
 
 // ── Middleware ───────────────────────────────────────────────────────────────
 

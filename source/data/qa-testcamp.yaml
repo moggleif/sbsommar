@@ -1,9 +1,9 @@
 camp:
-  id: 2026-02-testar
-  name: SB vinter 2026 februari
+  id: qa-testcamp
+  name: QA Testläger
   location: Testar
-  start_date: '2026-02-22'
-  end_date: '2026-02-27'
+  start_date: '2026-01-01'
+  end_date: '2026-12-31'
 events:
   - id: valkommen-2026-02-22-1200
     title: Välkommen
