@@ -320,8 +320,12 @@ Each item must include: <!-- 02-§15.7 -->
 - `<title>` — event title
 - `<link>` — absolute URL to the event's per-event detail page (see §36)
 - `<guid isPermaLink="true">` — same URL as `<link>`
-- `<description>` — a human-readable summary including date, time, location,
-  responsible person, and description (if set)
+- `<description>` — a structured, multi-line human-readable summary formatted
+  as follows: <!-- 02-§15.15 -->
+  - Line 1: formatted date, start–end time (no labels)
+  - Line 2: `Plats:` value ` · ` `Ansvarig:` value (with labels)
+  - Line 3: event description (only if set, no label)
+  - Line 4: event link (only if set, no label)
 - `<pubDate>` — the event date and start time, formatted as RFC 822
 
 Items must be sorted chronologically (same order as the weekly schedule). <!-- 02-§15.8 -->
