@@ -171,6 +171,15 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 - Clear time display: bold start time, lighter end time. <!-- 07-§6.31 -->
 - Location as small text below. <!-- 07-§6.32 -->
 
+### Display sidebar — portrait layout
+
+`/dagens-schema.html` is optimised for portrait-orientation screens (e.g. 1080 × 1920 px). The heading moves into the sidebar so events use the full available height from the top of the page. <!-- 07-§6.44 -->
+
+- Layout: two columns. Events column `flex: 3`; sidebar `flex: 1` (~75 % / 25 %). <!-- 07-§6.45 -->
+- The heading (`h1#today-heading`) sits at the top of the sidebar. It shows only the current day and date; no page-title prefix. <!-- 07-§6.46 -->
+- Sidebar heading: sage green (`var(--color-sage)`), `22px`, `700`, line-height `1.2`, margin-bottom `var(--space-sm)`. <!-- 07-§6.47 -->
+- Display-mode event rows are compact: `font-size: 13px`, reduced vertical padding (`6px` top/bottom). <!-- 07-§6.48 -->
+
 ### Display sidebar status widget
 
 The sidebar of `/dagens-schema.html` shows a compact status widget above the descriptive text and QR code.
