@@ -1,15 +1,15 @@
 # Vad finns det att göra på lägret?
 
-Alla aktiviter är deltagarstyrda och skapas av de som är på lägret. Några dagar före lägret öppnas schemat för att kunna lägga in aktiviteter. Kom ihåg att eget ansvar gäller och att föräldrar behöver stötta sina egna barns deltagande när det behövs. Läs [lägerregler](#lagerregler).
+Alla aktiviter är deltagarstyrda och skapas av de som är på lägret. Några dagar före lägret öppnas schemat för att kunna lägga in aktiviteter. Kom ihåg att eget ansvar gäller och att föräldrar behöver stötta sina egna barns deltagande när det behövs. Läs [lägerregler](#regler).
 
 ## Schema
 
 Att det händer något på lägret och finns något att göra bygger på eget intresse och dela med sig av detta. Ofta det lilla.
 
-* [Lägg till aktivitet](https://sbsommar.se/lagg-till-aktivitet/)
-* [Kolla dagens schema](https://sbsommar.se/idag/)
-* [Se hela veckans schema](https://sbsommar.se/schema/)
-* [Bli inspirerad av föregående år](https://sbsommar.se/gamla-scheman/)
+* [Lägg till aktivitet](lagg-till.html)
+* [Kolla dagens schema](idag.html)
+* [Se hela veckans schema](schema.html)
+* [Bli inspirerad av föregående år](arkiv.html)
 
 ## Övrigt
 
