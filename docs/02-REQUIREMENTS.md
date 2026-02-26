@@ -117,6 +117,9 @@ The goal is that a parent visiting for the first time leaves thinking:
 - Shows when events were last updated; the timestamp is embedded at build time and shown below the clock. <!-- 02-§4.16 -->
 - Polls `version.json` every 5 minutes and reloads the page automatically if a newer build is detected. <!-- 02-§4.17 -->
 - Automatically reloads shortly after midnight to show the new day's events. <!-- 02-§4.18 -->
+- The heading shows only the current day and date (e.g. "måndag 26 februari 2026") without a page-title prefix. <!-- 02-§4.19 -->
+- The heading is positioned inside the sidebar, not above the event list, so events use the full available height. <!-- 02-§4.20 -->
+- The layout is optimised for portrait-orientation screens; event rows are compact to maximise the number of visible events. <!-- 02-§4.21 -->
 
 ### All schedule views
 
