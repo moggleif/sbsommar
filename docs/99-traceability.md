@@ -132,6 +132,11 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§4.5` | Today view (`/idag.html`) shows only today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | IDAG-09..11 | `source/build/render-idag.js`, `source/assets/js/client/events-today.js` | covered |
 | `02-§4.6` | Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | DIS-07, CSS-37 | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` → `/dagens-schema.html` | covered |
 | `02-§4.7` | Display view requires no interaction to stay useful | 03-ARCHITECTURE.md §3 | DIS-08..09 | `source/build/render-today.js` – no day controls rendered | covered |
+| `02-§4.14` | Display view shows no site-level footer | 02-REQUIREMENTS.md §4 | DIS-19 | — | gap |
+| `02-§4.15` | Display view shows a live clock of the current time in the sidebar, updated every second | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.40 | DIS-22, DIS-23 | — | gap |
+| `02-§4.16` | Display view shows when events were last updated; timestamp embedded at build time | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.40 | DIS-20 | — | gap |
+| `02-§4.17` | Display view polls `version.json` every 5 minutes and reloads if a newer build is detected | 02-REQUIREMENTS.md §4 | — (manual: deploy a new build while page is open; confirm reload within 5 min) | — | gap |
+| `02-§4.18` | Display view reloads automatically shortly after midnight to show the new day's events | 02-REQUIREMENTS.md §4 | — (manual: advance system clock past 00:00 and confirm page reloads) | — | gap |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | RDC-05..06 | No exclusion logic in `source/build/render.js`; CSS handles layout | covered |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -838,10 +843,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 ## Summary
 
 ```text
-Total requirements:             696
+Total requirements:             701
 Covered (implemented + tested): 309
 Implemented, not tested:        383
-Gap (no implementation):          4
+Gap (no implementation):          9
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -998,6 +1003,13 @@ Matrix cleanup (2026-02-25):
 39 requirements added for PHP API (02-§44.1–44.39):
   35 implemented (PHP code, docs, coexistence).
   4 gaps (02-§44.28 Apache verify, 02-§44.29–30 deploy workflow, 02-§44.32 env secrets).
+5 requirements added for display sidebar status widget and auto-reload (02-§4.14–4.18):
+  all 5 gap (no implementation yet).
+  02-§4.14: no site footer on display view.
+  02-§4.15–4.16: live clock + last-updated timestamp in sidebar above QR code.
+  02-§4.17: version.json polling every 5 min; reload on new build.
+  02-§4.18: automatic reload shortly after midnight.
+  Design tokens documented in 07-DESIGN.md §6.40–6.43.
 ```
 
 ---
