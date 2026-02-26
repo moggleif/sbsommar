@@ -24,14 +24,14 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   let descriptionHtml = '';
   if (event.description) {
     const paragraphs = event.description.trim().split(/\n\n+/)
-      .map((p) => `    <p>${escapeHtml(p.trim())}</p>`)
+      .map((p) => `      <p>${escapeHtml(p.trim())}</p>`)
       .join('\n');
-    descriptionHtml = `  <div class="event-description">\n${paragraphs}\n  </div>\n`;
+    descriptionHtml = `    <div class="event-description">\n      <p class="event-section-label">Beskrivning</p>\n${paragraphs}\n    </div>\n`;
   }
 
   let linkHtml = '';
   if (event.link) {
-    linkHtml = `  <a class="event-ext-link" href="${escapeHtml(String(event.link))}" target="_blank" rel="noopener noreferrer">Extern länk →</a>\n`;
+    linkHtml = `    <p class="event-link-row"><a class="event-ext-link" href="${escapeHtml(String(event.link))}" target="_blank" rel="noopener noreferrer">Extern länk (för diskussion etc) →</a></p>\n`;
   }
 
   return `<!DOCTYPE html>
@@ -49,10 +49,10 @@ ${pageNav('schema.html', navSections)}
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
   <h1>${title}</h1>
   <div class="event-detail">
-    <p>${date}, ${timeStr}</p>
-    <p>Plats: ${escapeHtml(event.location)} · Ansvarig: ${escapeHtml(event.responsible)}</p>
-  </div>
-${descriptionHtml}${linkHtml}  <script src="nav.js" defer></script>
+    <p>📅 ${date} 🕐 ${timeStr}</p>
+    <p>📍 <strong>Plats:</strong> ${escapeHtml(event.location)} · 👤 <strong>Ansvarig:</strong> ${escapeHtml(event.responsible)}</p>
+${descriptionHtml}${linkHtml}  </div>
+  <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>
