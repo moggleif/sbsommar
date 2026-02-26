@@ -6,6 +6,9 @@
 # Node
 node_modules/
 
+# PHP (Composer)
+api/vendor/
+
 # Logs
 *.log
 

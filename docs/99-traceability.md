@@ -793,16 +793,55 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§43.13` | Secrets schema notes which FTP secrets are production-only | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
 | `02-§43.14` | After validation, QA FTP secrets removed from GitHub Environment | — | manual: check GitHub Environment after cleanup | — (manual operational step) | gap |
 | `02-§43.15` | QA FTP secret cleanup is manual, no automation required | — | — | — | implemented |
+| `02-§44.1` | PHP API implements POST /api/add-event | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php`, `api/src/GitHub.php` | implemented |
+| `02-§44.2` | PHP API implements POST /api/edit-event | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php`, `api/src/GitHub.php` | implemented |
+| `02-§44.3` | Both endpoints return JSON with Content-Type: application/json | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.4` | GET /api/health returns status JSON | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.5` | All §10 validation rules replicated in PHP | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/Validate.php` | implemented |
+| `02-§44.6` | Camp date range validation enforced | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/Validate.php` | implemented |
+| `02-§44.7` | Past-date blocking enforced | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/Validate.php` | implemented |
+| `02-§44.8` | Edit requests require non-empty id field | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/Validate.php` | implemented |
+| `02-§44.9` | Time-gating enforced (opens_for_editing..end_date + 1 day) | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/TimeGate.php` | implemented |
+| `02-§44.10` | HTTP 403 with Swedish error when outside editing period | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.11` | Commits new events via GitHub Contents API (ephemeral branch + PR + auto-merge) | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/GitHub.php` | implemented |
+| `02-§44.12` | Edit requests patch existing event in YAML | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/GitHub.php` | implemented |
+| `02-§44.13` | Active camp resolved from camps.yaml on GitHub | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/ActiveCamp.php` | implemented |
+| `02-§44.14` | YAML serialisation compatible with data contract | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/GitHub.php` | implemented |
+| `02-§44.15` | Reads and writes sb_session cookie (JSON array, URL-encoded) | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/Session.php` | implemented |
+| `02-§44.16` | Cookie attributes match Node.js (Path, Max-Age, Secure, SameSite, Domain) | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/src/Session.php` | implemented |
+| `02-§44.17` | Edit requests verify event ID in session cookie; 403 if not | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.18` | Cookie only set when cookieConsent is true | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.19` | CORS headers set for ALLOWED_ORIGIN and QA_ORIGIN | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.20` | OPTIONS preflight returns 204 with CORS headers | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.21` | Config from env vars (same names as Node.js) | 03-ARCHITECTURE.md §21 | manual: inspect code | `api/index.php` | implemented |
+| `02-§44.22` | Loads .env file at startup if it exists | 03-ARCHITECTURE.md §21 | manual: deploy and verify | `api/index.php` | implemented |
+| `02-§44.23` | Secrets never appear in error responses | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php` | implemented |
+| `02-§44.24` | PHP API lives in api/ at project root | 03-ARCHITECTURE.md §21 | manual: inspect structure | `api/` | implemented |
+| `02-§44.25` | Dependencies managed via Composer | 03-ARCHITECTURE.md §21 | manual: inspect | `api/composer.json` | implemented |
+| `02-§44.26` | Directory structure: index.php, src/, composer.json, .env | 03-ARCHITECTURE.md §21 | manual: inspect structure | `api/` | implemented |
+| `02-§44.27` | .htaccess routes all requests to index.php | 03-ARCHITECTURE.md §21 | manual: deploy and verify | `api/.htaccess` | implemented |
+| `02-§44.28` | .htaccess works on Apache 2.4 with mod_rewrite | 03-ARCHITECTURE.md §21 | manual: deploy and verify | `api/.htaccess` | gap |
+| `02-§44.29` | Deploy workflow uploads api/ with vendor/ | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | gap |
+| `02-§44.30` | composer install --no-dev runs in CI or vendor/ included in archive | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | gap |
+| `02-§44.31` | .env on server managed manually, not in deploy archive | 04-OPERATIONS.md | manual: verify | — | implemented |
+| `02-§44.32` | API_URL points to PHP API path for PHP environments | 08-ENVIRONMENTS.md | manual: check GitHub Environment | GitHub Environment secrets | gap |
+| `02-§44.33` | Node.js API_URL format remains valid for Node.js environments | 08-ENVIRONMENTS.md | manual: check | GitHub Environment `qa-node` | implemented |
+| `02-§44.34` | Node.js API unchanged | 03-ARCHITECTURE.md §21 | existing Node.js tests | `app.js`, `source/api/` | implemented |
+| `02-§44.35` | Local dev continues to use npm start | 04-OPERATIONS.md | manual: run locally | `app.js` | implemented |
+| `02-§44.36` | API backend choice determined by API_URL only | 03-ARCHITECTURE.md §21 | manual: inspect build | `source/build/render-add.js` | implemented |
+| `02-§44.37` | 04-OPERATIONS.md documents PHP API | 04-OPERATIONS.md | manual: read doc | `docs/04-OPERATIONS.md` | implemented |
+| `02-§44.38` | 08-ENVIRONMENTS.md documents qa environment and secrets | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
+| `02-§44.39` | 03-ARCHITECTURE.md notes dual API architecture | 03-ARCHITECTURE.md §21 | manual: read doc | `docs/03-ARCHITECTURE.md` | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             657
+Total requirements:             696
 Covered (implemented + tested): 309
-Implemented, not tested:        347
-Gap (no implementation):          1
+Implemented, not tested:        383
+Gap (no implementation):          4
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -956,6 +995,9 @@ Matrix cleanup (2026-02-25):
   1 gap (02-§43.14: manual QA FTP secret cleanup after validation).
   QA event data deploy switches from FTP/curl to SCP/SSH.
   Redundant FTP upload step removed from API server deploy.
+39 requirements added for PHP API (02-§44.1–44.39):
+  35 implemented (PHP code, docs, coexistence).
+  4 gaps (02-§44.28 Apache verify, 02-§44.29–30 deploy workflow, 02-§44.32 env secrets).
 ```
 
 ---

@@ -1,6 +1,6 @@
 # SB Sommar – Architecture Overview
 
-This project is a static, YAML-driven camp platform with a small Node.js API server for live event submissions.
+This project is a static, YAML-driven camp platform with a small API server for live event submissions. Two API implementations exist: a Node.js version (`app.js`) for local development and Node.js-capable hosts, and a PHP version (`api/`) for shared hosting environments (e.g. Loopia) that do not support Node.js.
 
 The system is intentionally simple:
 
@@ -317,9 +317,10 @@ At build time:
 source/data/      YAML source files (camps registry, per-camp events, locations)
 source/content/   Markdown page sections
 source/build/     Build scripts → generates public/
-source/api/       API handlers (github.js, validate.js)
+source/api/       Node.js API handlers (github.js, validate.js)
+api/              PHP API (alternative backend for shared hosting)
 public/           Generated output — do not edit directly
-app.js            Express server entry point
+app.js            Express server entry point (Node.js)
 ```
 
 Key files:
@@ -330,6 +331,7 @@ Key files:
 | `source/data/local.yaml` | Predefined location list — the only place locations are defined |
 | `source/data/YYYY-MM-name.yaml` | Per-camp event files, referenced from `camps.yaml` |
 | `app.js` | Express (Node.js web server) — serves `public/`, handles `POST /add-event` and `POST /edit-event` |
+| `api/index.php` | PHP API entry point — handles `POST /api/add-event` and `POST /api/edit-event` |
 | `public/events.json` | Generated at build time; all public event fields for the active camp |
 
 ---
@@ -1281,6 +1283,75 @@ is left unwrapped.
 | ---- | ---- |
 | `source/build/render-index.js` | `convertMarkdown()`, `inlineHtml()`, `createMarked()` |
 | `source/assets/cs/style.css` | Table styles for markdown-rendered tables |
+
+---
+
+## 21. PHP API for Shared Hosting
+
+### Motivation
+
+The Node.js API (`app.js`) requires Passenger or a similar process manager on
+the host. Loopia (the target webhotell) supports PHP and Apache but not Node.js.
+A PHP implementation of the same API allows the entire site — static files and
+API — to be served from a single shared hosting account.
+
+### Architecture
+
+The PHP API mirrors the Node.js API endpoint-for-endpoint:
+
+| Node.js route | PHP route | Behaviour |
+| --- | --- | --- |
+| `POST /add-event` | `POST /api/add-event` | Validate → respond → commit to GitHub |
+| `POST /edit-event` | `POST /api/edit-event` | Validate → verify ownership → commit to GitHub |
+| `GET /` (health) | `GET /api/health` | Returns `{"status":"API running"}` |
+
+The PHP API lives in `api/` at the project root:
+
+```text
+api/
+  index.php          Front-controller: routing, CORS, JSON I/O
+  .htaccess          Apache rewrite rules → index.php
+  src/
+    Validate.php     Input validation (mirrors source/api/validate.js)
+    GitHub.php       GitHub Contents API + PR + auto-merge (mirrors source/api/github.js)
+    Session.php      sb_session cookie read/write (mirrors source/api/session.js)
+    TimeGate.php     Editing period enforcement (mirrors source/api/time-gate.js)
+    ActiveCamp.php   Camp resolution (mirrors source/scripts/resolve-active-camp.js)
+    Yaml.php         YAML read/write (uses symfony/yaml)
+  composer.json      Dependencies (symfony/yaml, vlucas/phpdotenv)
+  .env               Server-only, not committed (same env vars as Node.js)
+```
+
+### Routing
+
+Apache `mod_rewrite` in `api/.htaccess` routes all requests to `index.php`.
+The router reads `$_SERVER['REQUEST_URI']` and dispatches to the correct handler.
+
+### Configuration
+
+Same environment variables as the Node.js API: `GITHUB_OWNER`, `GITHUB_REPO`,
+`GITHUB_BRANCH`, `GITHUB_TOKEN`, `ALLOWED_ORIGIN`, `QA_ORIGIN`, `COOKIE_DOMAIN`,
+`BUILD_ENV`. Loaded from `api/.env` via `vlucas/phpdotenv`.
+
+### Coexistence
+
+Both API implementations exist in the repository simultaneously. The choice of
+backend is determined solely by the `API_URL` environment variable set in each
+GitHub Environment:
+
+- Local development: `npm start` → Node.js API at `http://localhost:3000`
+- `qa-node` environment: Node.js API on a Node.js-capable host
+- `qa` environment: PHP API on Loopia (`https://qa.sbsommar.se/api/add-event`)
+- `production` environment: PHP API on Loopia (`https://sbsommar.se/api/add-event`)
+
+No code in the static site needs to know which backend serves the API.
+The form JavaScript reads `data-api-url` from the HTML and submits to that URL.
+
+### Deployment
+
+The deploy workflow uploads the `api/` directory (with `vendor/` from
+`composer install --no-dev`) alongside the static site via SCP. The `api/.env`
+file is managed manually on the server — it is not part of the deploy archive.
 
 ---
 

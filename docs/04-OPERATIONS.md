@@ -88,16 +88,30 @@ Never define locations inside individual camp files.
 
 ### Infrastructure
 
-The site is split into two parts deployed to the same host:
+Two deployment models are supported, depending on the host:
+
+**Node.js host** (e.g. a VPS with Passenger):
 
 | Part                    | Deployment method | Location on host                     |
 | ----------------------- | ----------------- | ------------------------------------ |
 | Static site (`public/`) | SCP + SSH swap    | Web root (`DEPLOY_DIR/public_html`)  |
 | API server (`app.js`)   | SSH only          | App directory (git repo on host)     |
 
-The API server runs as a persistent Node.js process via Passenger.
+The Node.js API runs as a persistent process via Passenger.
 The deploy SSHes into the host, runs `git pull` and `npm install`, then
 touches `tmp/restart.txt` to trigger a Passenger restart.
+
+**Shared hosting / PHP host** (e.g. Loopia):
+
+| Part                    | Deployment method | Location on host                        |
+| ----------------------- | ----------------- | --------------------------------------- |
+| Static site (`public/`) | SCP + SSH swap    | Web root (`DEPLOY_DIR/public_html`)     |
+| PHP API (`api/`)        | SCP (with site)   | Web root (`DEPLOY_DIR/public_html/api`) |
+
+The PHP API runs via Apache `mod_rewrite` + PHP 8.4. No process manager needed.
+The `api/` directory (including `vendor/` from `composer install --no-dev`)
+is uploaded alongside the static site. The `api/.env` file on the server is
+managed manually and is not part of the deploy archive.
 
 ### CI/CD Workflows
 
