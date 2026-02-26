@@ -442,3 +442,18 @@ events:
     meta:
       created_at: 2026-02-26 15:16
       updated_at: 2026-02-26 15:53
+  - id: qanode-test-2026-02-26-2000
+    title: qanode test
+    date: '2026-02-26'
+    start: '20:00'
+    end: '21:00'
+    location: AndreasTältet
+    responsible: morgn
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-26 18:16
+      updated_at: 2026-02-26 18:16
