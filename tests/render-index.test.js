@@ -68,7 +68,8 @@ describe('convertMarkdown – block types', () => {
 
   it('renders a blockquote', () => {
     const html = convertMarkdown('> A quote.');
-    assert.ok(html.includes('<blockquote>A quote.</blockquote>'), `Got: ${html}`);
+    assert.ok(html.includes('<blockquote>'), `Got: ${html}`);
+    assert.ok(html.includes('A quote.'), `Got: ${html}`);
   });
 
   it('renders a horizontal rule', () => {
@@ -265,6 +266,41 @@ describe('extractH1', () => {
   it('trims whitespace from heading text', () => {
     const md = '#   Spaces Around   \n\nText.';
     assert.strictEqual(extractH1(md), 'Spaces Around');
+  });
+});
+
+// ── convertMarkdown – standard markdown features (02-§38.7) ──────────────────
+
+describe('convertMarkdown – standard markdown features (02-§38.7)', () => {
+  it('MKD-01: renders a markdown table to <table>', () => {
+    const md = '| A | B |\n| --- | --- |\n| 1 | 2 |';
+    const html = convertMarkdown(md);
+    assert.ok(html.includes('<table>'), `Expected <table>, got: ${html}`);
+    assert.ok(html.includes('<th>A</th>'), `Expected <th>A</th>, got: ${html}`);
+    assert.ok(html.includes('<td>1</td>'), `Expected <td>1</td>, got: ${html}`);
+  });
+
+  it('MKD-02: renders an ordered list', () => {
+    const html = convertMarkdown('1. First\n2. Second\n3. Third');
+    assert.ok(html.includes('<ol>'), `Expected <ol>, got: ${html}`);
+    assert.ok(html.includes('<li>First</li>'), `Expected <li>First</li>, got: ${html}`);
+  });
+
+  it('MKD-03: renders a fenced code block', () => {
+    const html = convertMarkdown('```\nconst x = 1;\n```');
+    assert.ok(html.includes('<code>'), `Expected <code>, got: ${html}`);
+    assert.ok(html.includes('const x = 1;'), `Expected code content, got: ${html}`);
+  });
+
+  it('MKD-04: renders emphasis (italic)', () => {
+    const html = convertMarkdown('*emphasis*');
+    assert.ok(html.includes('<em>emphasis</em>'), `Expected <em>, got: ${html}`);
+  });
+
+  it('MKD-05: renders email autolink', () => {
+    const html = convertMarkdown('<user@example.com>');
+    assert.ok(html.includes('mailto:'), `Expected mailto: link, got: ${html}`);
+    assert.ok(html.includes('user@example.com'), `Expected email, got: ${html}`);
   });
 });
 
