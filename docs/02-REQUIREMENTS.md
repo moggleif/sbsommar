@@ -184,6 +184,18 @@ it is about reducing confusion and frustration.
   The user should not be left wondering whether it worked. <!-- 02-§6.7 -->
 - **Network failure:** if the submission cannot reach the server, the user is
   told clearly that it failed and can try again. Submissions must not be silently lost. <!-- 02-§6.8 -->
+- **Live date validation:** when the user selects a date value (on `change`), the
+  date field must immediately show an inline error if the value is in the past,
+  without requiring a submit attempt. <!-- 02-§6.9 -->
+- **Live end-time validation:** when the user changes the end time (on `change`),
+  the end-time field must immediately show an inline error if start time is already
+  filled and end ≤ start. If start is not yet filled, this check is deferred to
+  submit. <!-- 02-§6.10 -->
+- **Live required-field validation:** when the user leaves any required field
+  (on `blur`), the field must immediately show an inline error if it is empty. <!-- 02-§6.11 -->
+- **Live error clearing:** an inline error shown by live validation must be
+  cleared as soon as the user starts editing that field again (on `input` or
+  `change`). <!-- 02-§6.12 -->
 
 ---
 
