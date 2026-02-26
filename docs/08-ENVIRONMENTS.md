@@ -54,12 +54,18 @@ Production receives event data within minutes of the PR merging — no manual st
 | `ci.yml`                  | Every push and PR                                      | — (repo-level)       |
 | `deploy-qa.yml`           | Push to `main` (paths-ignore data YAMLs)               | `qa`                 |
 | `deploy-prod.yml`         | `workflow_dispatch` (manual)                            | `production`         |
+| `deploy-qa-node.yml`      | Push to `main` (paths-ignore data YAMLs)               | `qanode`             |
 | `event-data-deploy.yml`   | PR from `event/` or `event-edit/` changing data YAMLs  | `qa` + `production`  |
 
 `deploy-qa.yml` and `deploy-prod.yml` both call the shared reusable workflow
-`deploy-reusable.yml`, which contains the full build-and-deploy logic.
+`deploy-reusable.yml`, which builds the static site, deploys it via SCP,
+and deploys the PHP API (with `composer install` on the server).
 The only difference is the trigger and the GitHub Environment that provides
 the secrets.
+
+`deploy-qa-node.yml` is self-contained and does not use the reusable workflow.
+It builds and deploys the static site via SCP, then deploys the Node.js API
+separately (`git pull` + `npm install` + restart).
 
 ---
 
@@ -103,8 +109,8 @@ needed by the PHP API at runtime.
 | `SERVER_SSH_PORT` | QA SSH port                                      |
 | `DEPLOY_DIR`      | QA deploy directory                              |
 
-This environment preserves the original Node.js QA setup. It is not
-actively deployed but kept as a fallback.
+This environment powers the Node.js QA host. It auto-deploys on push
+to `main` via `deploy-qa-node.yml`.
 
 ### GitHub Environment: `production`
 
