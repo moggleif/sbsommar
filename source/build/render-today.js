@@ -9,8 +9,9 @@ const { pageFooter } = require('./layout');
  * Uses display-mode (dark) styling for screen/projector use.
  * No navigation – clean display layout with QR code sidebar.
  */
-function renderTodayPage(camp, events, qrSvg, footerHtml = '') {
+function renderTodayPage(camp, events, qrSvg, footerHtml = '', siteUrl = '') {
   const campName = escapeHtml(camp.name);
+  const siteHost = siteUrl ? escapeHtml(siteUrl.replace(/^https?:\/\//, '').replace(/\/+$/, '')) : '';
 
   const eventsJson = JSON.stringify(
     events.map((e) => ({
@@ -45,7 +46,7 @@ function renderTodayPage(camp, events, qrSvg, footerHtml = '') {
     </div>
 
     <aside class="dagens-sidebar">
-      <p class="sidebar-text">Detta är schemat för aktiviteter som sker idag. För kartor, information och schema andra dagar – besök sbsommar.se eller skanna QR-koden.</p>
+      <p class="sidebar-text">Detta är schemat för aktiviteter som sker idag. För kartor, information och schema andra dagar – besök ${siteHost} eller skanna QR-koden.</p>
       <div class="qr-wrap">${qrSvg}</div>
     </aside>
 
