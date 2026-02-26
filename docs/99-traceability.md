@@ -725,7 +725,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§40.9` | Deploy uses existing SSH secrets | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§40.10` | New `DEPLOY_DIR` secret for domain directory path | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§40.11` | FTP static-site upload step and validation removed | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
-| `02-§40.12` | Server app deploy (FTP + SSH restart) unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.12` | Server app deploy (FTP + SSH restart) unchanged — **superseded by 02-§43.6–43.8** | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§40.13` | Build step unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§40.14` | Workflow trigger unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§40.15` | SSH swap script uses `set -e` | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
@@ -778,15 +778,30 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§42.27` | `validate-camps.js` accepts `qa` as valid optional boolean | — | VCMP-33..36 | `source/scripts/validate-camps.js` | covered |
 | `02-§42.28` | Yearly: QA camp date range updated to new year | — | manual: annual maintenance | `source/data/camps.yaml` | implemented |
 | `02-§42.29` | Yearly update is manual one-line change, no automation | — | — | — | implemented |
+| `02-§43.1` | QA event data deploy uses SCP over SSH instead of FTP | 08-ENVIRONMENTS.md | manual: trigger event PR, verify QA pages update via SCP | `.github/workflows/event-data-deploy.yml` – `deploy-qa` job | implemented |
+| `02-§43.2` | QA event data upload uses existing SSH secrets | 08-ENVIRONMENTS.md | manual: inspect workflow secrets references | `.github/workflows/event-data-deploy.yml` | implemented |
+| `02-§43.3` | QA target dir derived from `DEPLOY_DIR` + `/public_html/` | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | implemented |
+| `02-§43.4` | Upload includes same files as before (schema pages, detail pages, RSS) | 08-ENVIRONMENTS.md | manual: compare uploaded files before/after | `.github/workflows/event-data-deploy.yml` | implemented |
+| `02-§43.5` | `FTP_TARGET_DIR` validation step removed from QA job | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | implemented |
+| `02-§43.6` | Redundant FTP upload step removed from `deploy-reusable.yml` | 04-OPERATIONS.md | manual: inspect workflow | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§43.7` | Staging step for FTP upload removed from `deploy-reusable.yml` | 04-OPERATIONS.md | manual: inspect workflow | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§43.8` | SSH restart step (`Deploy API via SSH`) unchanged | 04-OPERATIONS.md | manual: inspect workflow | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§43.9` | Production event data deploy continues to use FTP | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` – `deploy-prod` job | implemented |
+| `02-§43.10` | Production FTP secrets remain in production environment | 08-ENVIRONMENTS.md | manual: check GitHub Environment secrets | GitHub Environment `production` | implemented |
+| `02-§43.11` | `08-ENVIRONMENTS.md` updated for QA FTP removal | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
+| `02-§43.12` | `04-OPERATIONS.md` updated for QA deploy method | 04-OPERATIONS.md | manual: read doc | `docs/04-OPERATIONS.md` | implemented |
+| `02-§43.13` | Secrets schema notes which FTP secrets are production-only | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
+| `02-§43.14` | After validation, QA FTP secrets removed from GitHub Environment | — | manual: check GitHub Environment after cleanup | — (manual operational step) | gap |
+| `02-§43.15` | QA FTP secret cleanup is manual, no automation required | — | — | — | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             642
+Total requirements:             657
 Covered (implemented + tested): 309
-Implemented, not tested:        332
+Implemented, not tested:        347
 Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
@@ -936,6 +951,11 @@ Matrix cleanup (2026-02-25):
   Dedicated QA camp with qa: true field, filtered out in production.
   resolveActiveCamp() gains environment-aware filtering.
   BUILD_ENV plumbed through deploy workflow and API.
+15 requirements added for FTP-to-SSH QA migration (02-§43.1–43.15):
+  14 implemented (workflow changes, doc updates, production unchanged).
+  1 gap (02-§43.14: manual QA FTP secret cleanup after validation).
+  QA event data deploy switches from FTP/curl to SCP/SSH.
+  Redundant FTP upload step removed from API server deploy.
 ```
 
 ---

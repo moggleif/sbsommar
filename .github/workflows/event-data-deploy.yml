@@ -6,7 +6,7 @@ name: Event Data Deploy
 # Jobs:
 #   1. lint-yaml      – structural validation of the changed YAML file
 #   2. security-check – injection scan and link protocol validation
-#   3. deploy-qa      – build with QA secrets + FTP upload to QA
+#   3. deploy-qa      – build with QA secrets + SCP upload to QA
 #   4. deploy-prod    – build with production secrets + FTP upload to production
 #   (3 and 4 run in parallel after 2 passes)
 
@@ -88,7 +88,7 @@ jobs:
       - name: Security scan
         run: node source/scripts/check-yaml-security.js "${{ steps.changed.outputs.yaml_file }}"
 
-  # Build with QA secrets and deploy event data pages to QA.
+  # Build with QA secrets and deploy event data pages to QA via SCP.
   deploy-qa:
     name: Build & deploy to QA
     runs-on: ubuntu-latest
@@ -113,43 +113,35 @@ jobs:
           SITE_URL: ${{ secrets.SITE_URL }}
           BUILD_ENV: qa
 
-      - name: Validate FTP_TARGET_DIR format
+      # Stage only event-data-derived files for upload.
+      - name: Stage event data pages
         run: |
-          if [[ "${{ secrets.FTP_TARGET_DIR }}" != */ ]]; then
-            echo "Error: FTP_TARGET_DIR must end with a '/'"
-            exit 1
-          fi
-        shell: bash
-
-      # Upload event-data-derived files using curl.
-      # SamKirkland/FTP-Deploy-Action is intentionally not used here: its
-      # dangerous-clean-slate mode would delete the entire site.
-      # upload-artifact is no longer needed — each job builds independently.
-      - name: Upload schema pages via FTP
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
-        run: |
+          mkdir -p staging
           for FILE in schema.html idag.html dagens-schema.html events.json schema.rss; do
-            curl --ftp-create-dirs \
-                 --upload-file "public/$FILE" \
-                 --user "$FTP_USERNAME:$FTP_PASSWORD" \
-                 "ftp://$FTP_HOST${FTP_TARGET_DIR}$FILE"
-            echo "Uploaded: $FILE"
+            if [ -f "public/$FILE" ]; then
+              cp "public/$FILE" "staging/$FILE"
+              echo "Staged: $FILE"
+            fi
           done
-          # Upload per-event detail pages
           if [ -d "public/schema" ]; then
             find public/schema -name 'index.html' | while read -r PAGE; do
               REL="${PAGE#public/}"
-              curl --ftp-create-dirs \
-                   --upload-file "$PAGE" \
-                   --user "$FTP_USERNAME:$FTP_PASSWORD" \
-                   "ftp://$FTP_HOST${FTP_TARGET_DIR}$REL"
-              echo "Uploaded: $REL"
+              mkdir -p "staging/$(dirname "$REL")"
+              cp "$PAGE" "staging/$REL"
+              echo "Staged: $REL"
             done
           fi
+
+      - name: Upload event data pages via SCP
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_SSH_PORT }}
+          source: staging/*
+          target: ${{ secrets.DEPLOY_DIR }}/public_html
+          strip_components: 1
 
   # Build with production secrets and deploy event data pages to production.
   deploy-prod:

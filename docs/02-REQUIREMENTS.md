@@ -865,7 +865,8 @@ It applies only to PRs from branches matching `event/**` (add-event) and
 - On successful validation, the pipeline must build the site and deploy only the four
   event-data-derived files: `schema.html`, `idag.html`, `dagens-schema.html`, and
   `events.json`. <!-- 02-§23.11 -->
-- No other files may be touched by this pipeline's FTP upload step. <!-- 02-§23.12 -->
+- No other files may be touched by this pipeline's upload step (FTP for
+  production, SCP for QA — see §43). <!-- 02-§23.12 -->
 - This deployment must happen while the PR is open (before auto-merge), so the updated
   schedule is visible to participants without waiting for the full site deploy. <!-- 02-§23.13 -->
 
@@ -1573,7 +1574,9 @@ via SCP, then swapped into the live web root with server-side `mv` operations.
 
 ### 40.4 Unchanged behaviour (site requirements)
 
-- The server app deploy (FTP + SSH restart) must remain unchanged. <!-- 02-§40.12 -->
+- The server app deploy (FTP + SSH restart) must remain unchanged.
+  **Superseded by 02-§43.6–43.8**: the FTP step is now removed; SSH
+  restart is sufficient. <!-- 02-§40.12 -->
 - The build step (checkout, node setup, npm ci, npm run build) must
   remain unchanged. <!-- 02-§40.13 -->
 - The workflow trigger (push to `main`, paths-ignore data files) must
@@ -1616,9 +1619,10 @@ event data reaches both environments immediately.
   named `production`. <!-- 02-§41.7 -->
 - Each environment must have its own independent values for:
   `SITE_URL`, `API_URL`, `SERVER_HOST`, `SERVER_USER`,
-  `SERVER_SSH_KEY`, `SERVER_SSH_PORT`, `DEPLOY_DIR`, `FTP_HOST`,
-  `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_APP_DIR`,
-  `FTP_TARGET_DIR`. <!-- 02-§41.8 -->
+  `SERVER_SSH_KEY`, `SERVER_SSH_PORT`, `DEPLOY_DIR`.
+  Production additionally requires: `FTP_HOST`, `FTP_USERNAME`,
+  `FTP_PASSWORD`, `FTP_APP_DIR`, `FTP_TARGET_DIR`.
+  QA no longer uses FTP secrets (see §43). <!-- 02-§41.8 -->
 
 ### 41.3 Reusable deploy workflow (site requirements)
 
@@ -1752,3 +1756,62 @@ QA environments.
   the new calendar year. <!-- 02-§42.28 -->
 - This is a manual one-line change in `camps.yaml` — no automation
   is required. <!-- 02-§42.29 -->
+
+---
+
+## 43. Replace FTP with SSH for QA Deploys
+
+FTP transmits credentials in cleartext and requires a separate set of secrets
+(`FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`). The static site deploy already
+uses SCP/SSH. This section migrates the remaining FTP-based deploy steps to
+SSH for the QA environment, reducing the attack surface and the number of
+secrets to manage. Production remains on FTP until QA is validated.
+
+### 43.1 Event data deploy — QA (site requirements)
+
+- The `deploy-qa` job in `event-data-deploy.yml` must upload event data
+  pages via SCP over SSH instead of FTP. <!-- 02-§43.1 -->
+- The upload must use the existing QA SSH secrets: `SERVER_HOST`,
+  `SERVER_USER`, `SERVER_SSH_KEY`, `SERVER_SSH_PORT`. <!-- 02-§43.2 -->
+- The target directory must be derived from `DEPLOY_DIR` (the same
+  secret the full site deploy uses), with `/public_html/` appended,
+  instead of requiring a separate `FTP_TARGET_DIR` secret. <!-- 02-§43.3 -->
+- The upload must include the same files as today: `schema.html`,
+  `idag.html`, `dagens-schema.html`, `events.json`, `schema.rss`,
+  and per-event detail pages under `schema/`. <!-- 02-§43.4 -->
+- The `FTP_TARGET_DIR` validation step must be removed from the QA
+  job. <!-- 02-§43.5 -->
+
+### 43.2 API server deploy — remove redundant FTP step (site requirements)
+
+- The "Upload server app to FTP" step in `deploy-reusable.yml` must
+  be removed. <!-- 02-§43.6 -->
+- The "Stage server files for upload" step must also be removed, since
+  it only exists to feed the FTP step. <!-- 02-§43.7 -->
+- The SSH restart step (`Deploy API via SSH`) must remain unchanged —
+  it already performs `git pull` and `npm install`, which is sufficient
+  to deploy the API server. <!-- 02-§43.8 -->
+
+### 43.3 Production unchanged (site requirements)
+
+- The `deploy-prod` job in `event-data-deploy.yml` must continue to
+  use FTP for event data uploads, unchanged. <!-- 02-§43.9 -->
+- Production FTP secrets (`FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
+  `FTP_APP_DIR`, `FTP_TARGET_DIR`) must remain in the production
+  GitHub Environment. <!-- 02-§43.10 -->
+
+### 43.4 Documentation (site requirements)
+
+- `docs/08-ENVIRONMENTS.md` must be updated to reflect that QA no longer
+  requires FTP secrets for event data deploy. <!-- 02-§43.11 -->
+- `docs/04-OPERATIONS.md` must be updated to describe the new QA event
+  data deploy method (SCP instead of FTP). <!-- 02-§43.12 -->
+- The secrets schema in `08-ENVIRONMENTS.md` must note which FTP secrets
+  are production-only and which are shared. <!-- 02-§43.13 -->
+
+### 43.5 QA FTP secret cleanup (operational)
+
+- After verifying the QA SCP deploy works, the FTP secrets (`FTP_HOST`,
+  `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_APP_DIR`, `FTP_TARGET_DIR`) should
+  be removed from the `qa` GitHub Environment. <!-- 02-§43.14 -->
+- This is a manual step — no automation required. <!-- 02-§43.15 -->
