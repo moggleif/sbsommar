@@ -383,6 +383,16 @@ Each event page must show: <!-- 02-§36.3 -->
 
 Fields with no value must not appear. <!-- 02-§36.4 -->
 
+The event detail body must use a structured layout matching the RSS
+description format (see §15.15): <!-- 02-§36.11 -->
+
+- Line 1: formatted date, start–end time (no labels)
+- Line 2: `Plats:` value ` · ` `Ansvarig:` value (with labels)
+- Line 3: description text (only if set, no label)
+- Line 4: external link (only if set)
+
+This replaces the previous definition-list (`<dl>`) layout.
+
 The `owner` and `meta` fields must never appear on event pages. <!-- 02-§36.5 -->
 
 ### 36.3 Layout and navigation
