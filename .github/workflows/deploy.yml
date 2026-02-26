@@ -1,4 +1,4 @@
-name: Deploy Website via FTP
+name: Deploy Website
 
 on:
   push:
@@ -38,23 +38,54 @@ jobs:
           API_URL: ${{ secrets.API_URL }}
           SITE_URL: ${{ secrets.SITE_URL }}
 
-      - name: Validate FTP_TARGET_DIR format
-        run: |
-          if [[ "${{ secrets.FTP_TARGET_DIR }}" != */ ]]; then
-            echo "❌ Error: FTP_TARGET_DIR must end with a '/'"
-            exit 1
-          fi
-        shell: bash
+      - name: Package site for upload
+        run: tar -czf site.tar.gz -C public .
 
-      - name: Upload static site to FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Upload site archive via SCP
+        uses: appleboy/scp-action@v1
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_TARGET_DIR }}
-          local-dir: ./public/
-          dangerous-clean-slate: true
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_SSH_PORT }}
+          source: site.tar.gz
+          target: ${{ secrets.DEPLOY_DIR }}
+
+      # Zero-downtime swap: extract into staging dir, move hosting
+      # infrastructure (domains/) into it, then swap with two mv ops.
+      # Stale dirs from previous failed deploys are cleaned first.
+      - name: Deploy with zero-downtime swap
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_SSH_PORT }}
+          script: |
+            set -e
+            DEPLOY_DIR="${{ secrets.DEPLOY_DIR }}"
+            RELEASE_DIR="$DEPLOY_DIR/release_new"
+            PUBLIC_DIR="$DEPLOY_DIR/public_html"
+
+            # Clean up any previous failed deploy
+            rm -rf "$RELEASE_DIR" "$DEPLOY_DIR/public_html_old"
+
+            # Extract new release
+            mkdir -p "$RELEASE_DIR"
+            tar -xzf "$DEPLOY_DIR/site.tar.gz" -C "$RELEASE_DIR"
+            rm "$DEPLOY_DIR/site.tar.gz"
+
+            # Preserve hosting infrastructure
+            if [ -d "$PUBLIC_DIR/domains" ]; then
+              mv "$PUBLIC_DIR/domains" "$RELEASE_DIR/domains"
+            fi
+
+            # Swap (millisecond downtime)
+            mv "$PUBLIC_DIR" "$DEPLOY_DIR/public_html_old"
+            mv "$RELEASE_DIR" "$PUBLIC_DIR"
+
+            # Cleanup
+            rm -rf "$DEPLOY_DIR/public_html_old"
 
       # Stage only the server files that need to run on Inleed via Passenger.
       # FTP_APP_DIR is a repo secret: e.g. /domains/sbsommar.se/app/

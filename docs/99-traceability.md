@@ -713,15 +713,31 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§39.5` | Test URL assertions are specific enough to avoid CodeQL false positives | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
 | `02-§39.6` | Bare `includes('https://…')` replaced with context-aware assertions | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
 | `02-§39.7` | Zero open CodeQL alerts after merge | CL-§5.11 | manual: `gh api` | — | gap |
+| `02-§40.1` | Static site uploaded via SCP over SSH, not FTP | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.2` | SSH command swaps staging directory into live web root | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.3` | Swap preserves hosting `domains/` directory | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.4` | Downtime limited to two `mv` operations (milliseconds) | 04-OPERATIONS.md §Production | manual: deploy observation | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.5` | Stale directories cleaned up automatically | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.6` | Build output packaged into single tar.gz archive | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.7` | Archive extracted on server into staging directory | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.8` | Archive deleted from server after extraction | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.9` | Deploy uses existing SSH secrets | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.10` | New `DEPLOY_DIR` secret for domain directory path | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.11` | FTP static-site upload step and validation removed | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.12` | Server app deploy (FTP + SSH restart) unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.13` | Build step unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.14` | Workflow trigger unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.15` | SSH swap script uses `set -e` | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§40.16` | Failed deploy recoverable by subsequent deploy | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             578
+Total requirements:             594
 Covered (implemented + tested): 294
-Implemented, not tested:        282
+Implemented, not tested:        298
 Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
@@ -856,6 +872,10 @@ Matrix cleanup (2026-02-25):
 11 requirements added for marked markdown converter (02-§38.1–38.11):
   6 covered (existing RNI/IMG tests + MKD-01..05): 02-§38.1, 02-§38.4–38.7, 02-§38.10.
   5 implemented (manual/structural): 02-§38.2, 02-§38.3, 02-§38.8, 02-§38.9, 02-§38.11.
+16 requirements added for zero-downtime deploy (02-§40.1–40.16):
+  all 16 implemented (CI/infrastructure, manual verification only).
+  Static site deploy changed from FTP to SCP + SSH swap.
+  Server app deploy unchanged.
 ```
 
 ---

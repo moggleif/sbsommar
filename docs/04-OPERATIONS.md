@@ -89,10 +89,10 @@ Never define locations inside individual camp files.
 
 The site is split into two parts deployed to the same host:
 
-| Part                    | Deployment method | Location on host              |
-| ----------------------- | ----------------- | ----------------------------- |
-| Static site (`public/`) | FTP               | Web root (`FTP_TARGET_DIR`)   |
-| API server (`app.js`)   | FTP + SSH         | App directory (`FTP_APP_DIR`) |
+| Part                    | Deployment method | Location on host                     |
+| ----------------------- | ----------------- | ------------------------------------ |
+| Static site (`public/`) | SCP + SSH swap    | Web root (`DEPLOY_DIR/public_html`)  |
+| API server (`app.js`)   | FTP + SSH         | App directory (`FTP_APP_DIR`)        |
 
 The API server runs as a persistent Node.js process via Passenger.
 Passenger restarts automatically when new files are uploaded.
@@ -106,7 +106,7 @@ CD (Continuous Deployment) deploys the site automatically after a successful mer
 | ----------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ci.yml`                | Every push and PR                                              | Lint + test + build. Lint/test skipped for data-only commits (per-camp event files only; config files like `camps.yaml` and `local.yaml` trigger full CI). Uses `fetch-depth: 0` to compare against `main`. |
 | `event-data-deploy.yml` | PRs from `event/`, `event-edit/` changing `source/data/*.yaml` | Lint YAML + security scan + build + targeted FTP deploy. Uses `fetch-depth: 0` to detect changed files.                                                                                                     |
-| `deploy.yml`            | Push to `main`                                                 | Build → FTP static files → FTP + SSH app server restart                                                                                                                                                     |
+| `deploy.yml`            | Push to `main`                                                 | Build → SCP archive → SSH swap into web root → FTP + SSH app server restart                                                                                                                                 |
 
 ```mermaid
 flowchart TD
@@ -118,7 +118,8 @@ flowchart TD
     E --> F
 
     subgraph F [Deploy on push to main]
-        G[Build public/] --> H[FTP: static files to web root]
+        G[Build public/] --> H[tar + SCP archive to server]
+        H --> K[SSH: extract · swap · cleanup]
         G --> I[FTP: app.js to app dir]
         I --> J[SSH: npm install · Passenger restart]
     end
