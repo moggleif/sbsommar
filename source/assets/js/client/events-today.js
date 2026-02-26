@@ -1,11 +1,15 @@
 /**
  * Shared client-side script for "Idag" and "Dagens schema" pages.
  *
- * Expects three globals set by an inline <script> before this file loads:
+ * Expects globals set by an inline <script> before this file loads:
  *   window.__EVENTS__         – array of event objects (JSON from build)
  *   window.__HEADING_PREFIX__ – string to prepend to the date in the h1
  *   window.__EMPTY_CLASS__    – CSS class for the "no events" paragraph
  *   window.__SHOW_FOOTER__    – boolean; if true, renders an activity count footer
+ *
+ * Display-mode only (set only in dagens-schema.html):
+ *   window.__BUILD_TIME__     – ISO timestamp of the last build (for display)
+ *   window.__VERSION__        – same timestamp, used for version-change detection
  */
 (function () {
   var events = window.__EVENTS__ || [];
@@ -78,4 +82,53 @@
     output += '<p class="display-footer">' + todayEvents.length + ' aktiviteter schemalagda idag.</p>';
   }
   container.innerHTML = output;
+
+  // ── Status bar and auto-reload (display mode only) ────────────────────────
+  // Only active when __BUILD_TIME__ is defined, which only happens in
+  // dagens-schema.html. On idag.html these features are intentionally absent.
+
+  if (window.__BUILD_TIME__) {
+
+    // Live clock — updates every second
+    var clockEl = document.getElementById('live-clock');
+    function updateClock() {
+      if (!clockEl) return;
+      var t = new Date();
+      clockEl.textContent = pad(t.getHours()) + ':' + pad(t.getMinutes()) + ':' + pad(t.getSeconds());
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Last-updated display — formatted in Swedish
+    var buildInfoEl = document.getElementById('build-info');
+    if (buildInfoEl) {
+      var shortMonths = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+      var bt = new Date(window.__BUILD_TIME__);
+      var dateStr = bt.getDate() + ' ' + shortMonths[bt.getMonth()] + ' ' + bt.getFullYear();
+      var timeStr = pad(bt.getHours()) + ':' + pad(bt.getMinutes());
+      buildInfoEl.textContent = 'Uppdaterad ' + dateStr + ' ' + timeStr;
+    }
+
+    // Version polling — reload page if a new build has been deployed
+    var loadedVersion = window.__VERSION__;
+    function pollVersion() {
+      fetch('version.json?t=' + Date.now())
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (loadedVersion && data.version && data.version !== loadedVersion) {
+            location.reload();
+          }
+        })
+        .catch(function () {}); // network error — fail silently
+    }
+    setInterval(pollVersion, 5 * 60 * 1000);
+
+    // Midnight reload — automatically switch to next day's events
+    function scheduleMidnightReload() {
+      var n = new Date();
+      var midnight = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0, 30);
+      setTimeout(function () { location.reload(); }, midnight.getTime() - n.getTime());
+    }
+    scheduleMidnightReload();
+  }
 }());

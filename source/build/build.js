@@ -108,6 +108,10 @@ async function main() {
   cleanOutputDir(OUTPUT_DIR);
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
+  // ── Build timestamp — embedded in dagens-schema.html and version.json ───────
+  // Used by the display page to show last-updated time and detect new deploys.
+  const buildTime = new Date().toISOString();
+
   // ── Load footer from content/footer.md ────────────────────────────────────
   // Falls back to empty string if the file is missing — pages render without a footer.
   const footerMdPath = path.join(CONTENT_DIR, 'footer.md');
@@ -136,9 +140,13 @@ async function main() {
     .replace(/<\?xml[^?]*\?>\s*/g, '')
     .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
-  const todayHtml = renderTodayPage(camp, events, qrSvg, footerHtml, SITE_URL);
+  const todayHtml = renderTodayPage(camp, events, qrSvg, SITE_URL, buildTime);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
   console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
+
+  // ── Write version.json — polled by dagens-schema.html for live reload ────────
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'version.json'), JSON.stringify({ version: buildTime }), 'utf8');
+  console.log('Built: public/version.json');
 
   const idagHtml = renderIdagPage(camp, events, footerHtml, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
