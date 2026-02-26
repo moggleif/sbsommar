@@ -1,3 +1,9 @@
+camp:
+  id: 2019-06-syssleback
+  name: SB sommar 2019 juni
+  location: Sysslebäck
+  start_date: '2019-06-24'
+  end_date: '2019-07-01'
 events:
 - date: '2019-06-24'
   description: null
