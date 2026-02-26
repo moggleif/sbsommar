@@ -110,7 +110,7 @@ describe('renderRssFeed (02-§15)', () => {
 
     // Event with description and link (Fotboll)
     // Line 1: date, start–end (no labels)
-    assert.ok(xml.includes('Måndag 29 juni 2026, 10:00–12:00'), 'line 1 should have date and time range');
+    assert.ok(xml.includes('måndag 29 juni 2026, 10:00–12:00'), 'line 1 should have date and time range');
     // Line 2: labelled location and responsible
     assert.ok(xml.includes('Plats: Planen · Ansvarig: Erik'), 'line 2 should have labelled plats and ansvarig');
     // Line 3: description text
@@ -119,27 +119,29 @@ describe('renderRssFeed (02-§15)', () => {
     assert.ok(xml.includes('https://example.com/fotboll'), 'line 4 should have link');
 
     // Event without description or link (Frukost)
-    assert.ok(xml.includes('Måndag 29 juni 2026, 08:00–09:00'), 'should have date+time for Frukost');
+    assert.ok(xml.includes('måndag 29 juni 2026, 08:00–09:00'), 'should have date+time for Frukost');
     assert.ok(xml.includes('Plats: Matsalen · Ansvarig: Kocken'), 'should have labelled plats+ansvarig for Frukost');
   });
 
   it('RSS-14 (02-§15.15): lines are separated by newlines', () => {
     const xml = renderRssFeed(camp, events, siteUrl);
-    // Extract a description element content for Fotboll (has all 4 lines)
-    const descMatch = xml.match(/<description>([\s\S]*?Planen[\s\S]*?)<\/description>/);
-    assert.ok(descMatch, 'should find description containing Planen');
-    const desc = descMatch[1];
-    const lines = desc.split('\n').map((l) => l.trim()).filter(Boolean);
+    // Extract all description elements
+    const descriptions = [...xml.matchAll(/<description>([^]*?)<\/description>/g)].map((m) => m[1]);
+    // Fotboll is the second event (after Frukost, same date, later start)
+    const fotbollDesc = descriptions.find((d) => d.includes('Planen'));
+    assert.ok(fotbollDesc, 'should find description containing Planen');
+    const lines = fotbollDesc.split('\n').map((l) => l.trim()).filter(Boolean);
     assert.strictEqual(lines.length, 4, `should have 4 lines, got: ${JSON.stringify(lines)}`);
   });
 
   it('RSS-15 (02-§15.15): description omits lines for missing optional fields', () => {
     const xml = renderRssFeed(camp, events, siteUrl);
-    // Extract description for Frukost (no description, no link)
-    const descMatch = xml.match(/<description>([\s\S]*?Matsalen[\s\S]*?)<\/description>/);
-    assert.ok(descMatch, 'should find description containing Matsalen');
-    const desc = descMatch[1];
-    const lines = desc.split('\n').map((l) => l.trim()).filter(Boolean);
+    // Extract all description elements
+    const descriptions = [...xml.matchAll(/<description>([^]*?)<\/description>/g)].map((m) => m[1]);
+    // Frukost (no description, no link)
+    const frukostDesc = descriptions.find((d) => d.includes('Matsalen'));
+    assert.ok(frukostDesc, 'should find description containing Matsalen');
+    const lines = frukostDesc.split('\n').map((l) => l.trim()).filter(Boolean);
     assert.strictEqual(lines.length, 2, `should have 2 lines when no description/link, got: ${JSON.stringify(lines)}`);
   });
 
