@@ -196,6 +196,18 @@ it is about reducing confusion and frustration.
 - **Live error clearing:** an inline error shown by live validation must be
   cleared as soon as the user starts editing that field again (on `input` or
   `change`). <!-- 02-§6.12 -->
+- **Live start-time cross-check:** when the user changes the start time (on
+  `change`), the end-time field must immediately be re-evaluated: if end is
+  filled and end ≤ new start, the error must be shown on end; if end > new
+  start (or end is empty), any existing end-time cross-check error must be
+  cleared. <!-- 02-§6.13 -->
+- **Past start-time on today:** when the selected date is today and the user
+  changes the start time (on `change`), an inline error must be shown
+  immediately if the start time is more than 2 hours in the past. The same
+  check must be applied to an already-set start time when the user changes the
+  date to today. A 2-hour buffer is used because the user may be entering data
+  for an activity that started recently or may have selected today by mistake
+  when meaning tomorrow. <!-- 02-§6.14 -->
 
 ---
 
