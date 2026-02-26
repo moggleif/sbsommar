@@ -177,6 +177,64 @@
     for (var i = 0; i < fields.length; i++) { setFieldError(fields[i], null); }
   }
 
+  // ── Live validation (02-§6.9–6.12) ──────────────────────────────────────────
+
+  var REQUIRED_FIELDS = ['title', 'date', 'start', 'end', 'location', 'responsible'];
+
+  // Clear error as soon as the user starts editing a field again.
+  REQUIRED_FIELDS.forEach(function (name) {
+    var input = form.querySelector('#f-' + name);
+    if (!input) return;
+    var clearEvent = (input.tagName === 'SELECT' || input.type === 'date' || input.type === 'time')
+      ? 'change' : 'input';
+    input.addEventListener(clearEvent, function () {
+      setFieldError(name, null);
+    });
+  });
+
+  // Show error when the user leaves a required field empty (02-§6.11).
+  REQUIRED_FIELDS.forEach(function (name) {
+    var input = form.querySelector('#f-' + name);
+    if (!input) return;
+    input.addEventListener('blur', function () {
+      if (!input.value) {
+        var labels = {
+          title:       'Rubrik är obligatoriskt.',
+          date:        'Datum är obligatoriskt.',
+          start:       'Starttid är obligatorisk.',
+          end:         'Sluttid är obligatorisk.',
+          location:    'Plats är obligatoriskt.',
+          responsible: 'Ansvarig är obligatoriskt.',
+        };
+        setFieldError(name, labels[name]);
+      }
+    });
+  });
+
+  // Validate date immediately on change (02-§6.9).
+  var dateInput = form.querySelector('#f-date');
+  if (dateInput) {
+    dateInput.addEventListener('change', function () {
+      if (!dateInput.value) return; // blur handles the empty case
+      var today = new Date().toISOString().slice(0, 10);
+      if (dateInput.value < today) {
+        setFieldError('date', 'Datum kan inte vara i det förflutna.');
+      }
+    });
+  }
+
+  // Validate end time immediately on change (02-§6.10).
+  var endInput = form.querySelector('#f-end');
+  if (endInput) {
+    endInput.addEventListener('change', function () {
+      if (!endInput.value) return; // blur handles the empty case
+      var startVal = (form.elements.start || {}).value;
+      if (startVal && endInput.value <= startVal) {
+        setFieldError('end', 'Sluttid måste vara efter starttid.');
+      }
+    });
+  }
+
   // ── Submit handler ───────────────────────────────────────────────────────────
 
   form.addEventListener('submit', function (e) {
