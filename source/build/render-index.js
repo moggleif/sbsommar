@@ -1,18 +1,23 @@
 'use strict';
 
+const { Marked } = require('marked');
 const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml } = require('./utils');
 
 /**
- * Converts inline Markdown (images, links, bold) to HTML.
+ * Converts inline Markdown (images, links, bold) to HTML using marked.
  * Content files are author-controlled so no HTML escaping is applied.
  */
 function inlineHtml(text) {
-  return text
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="content-img" loading="lazy">')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/<([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})>/g, '<a href="mailto:$1">$1</a>');
+  const md = new Marked();
+  md.use({
+    renderer: {
+      image({ href, text: alt }) {
+        return `<img src="${href}" alt="${alt || ''}" class="content-img" loading="lazy">`;
+      },
+    },
+  });
+  return md.parseInline(text);
 }
 
 /**
@@ -37,106 +42,67 @@ function extractH1(md) {
   return match ? match[1].trim() : null;
 }
 
-function renderBlock(b) {
-  switch (b.type) {
-    case 'h':         return `<h${b.level}>${inlineHtml(b.text)}</h${b.level}>`;
-    case 'blockquote': return `<blockquote>${inlineHtml(b.text)}</blockquote>`;
-    case 'hr':        return '<hr>';
-    case 'ul':
-      return `<ul>\n${b.items.map((it) => `  <li>${inlineHtml(it)}</li>`).join('\n')}\n</ul>`;
-    case 'p':         return `<p>${inlineHtml(b.text)}</p>`;
-    default:          return '';
-  }
+/**
+ * Creates a configured Marked instance with heading offset and image class.
+ */
+function createMarked(headingOffset) {
+  const md = new Marked();
+  md.use({
+    renderer: {
+      heading({ tokens, depth }) {
+        const level = Math.min(depth + headingOffset, 6);
+        const text = this.parser.parseInline(tokens);
+        return `<h${level}>${text}</h${level}>\n`;
+      },
+      image({ href, text: alt }) {
+        return `<img src="${href}" alt="${alt || ''}" class="content-img" loading="lazy">`;
+      },
+    },
+  });
+  return md;
 }
 
 /**
- * Converts a Markdown subset to HTML.
- * Handles: headings (h1–h3), blockquotes, hr, unordered lists, paragraphs.
+ * Converts Markdown to HTML using the marked library.
  *
  * headingOffset shifts all heading levels down (pass 1 for non-primary sections).
  *
- * collapsible: when true, wraps each ## section (after offset) in
+ * collapsible: when true, wraps each ##-level section in
  * <details class="accordion"><summary>…</summary>…</details>.
  * Closed by default. Add `collapsible: true` in sections.yaml to enable.
  */
-function convertMarkdown(md, headingOffset = 0, collapsible = false) {
-  const lines = md.split('\n');
-  const blocks = [];
-  let paraLines = [];
+function convertMarkdown(input, headingOffset = 0, collapsible = false) {
+  if (!input || !input.trim()) return '';
 
-  function flushPara() {
-    const text = paraLines.join(' ').trim();
-    if (text) blocks.push({ type: 'p', text });
-    paraLines = [];
-  }
+  const md = createMarked(headingOffset);
+  const html = md.parse(input).trim();
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+  if (!collapsible) return html;
 
-    if (line.startsWith('#### ')) {
-      flushPara();
-      blocks.push({ type: 'h', level: Math.min(4 + headingOffset, 6), text: line.slice(5).trim() });
-    } else if (line.startsWith('### ')) {
-      flushPara();
-      blocks.push({ type: 'h', level: Math.min(3 + headingOffset, 6), text: line.slice(4).trim() });
-    } else if (line.startsWith('## ')) {
-      flushPara();
-      blocks.push({ type: 'h', level: Math.min(2 + headingOffset, 6), text: line.slice(3).trim() });
-    } else if (line.startsWith('# ')) {
-      flushPara();
-      blocks.push({ type: 'h', level: Math.min(1 + headingOffset, 6), text: line.slice(2).trim() });
-    } else if (line.startsWith('> ')) {
-      flushPara();
-      blocks.push({ type: 'blockquote', text: line.slice(2) });
-    } else if (line.trim() === '---') {
-      flushPara();
-      blocks.push({ type: 'hr' });
-    } else if (line.startsWith('- ') || line.startsWith('* ')) {
-      flushPara();
-      const items = [];
-      while (i < lines.length && (lines[i].startsWith('- ') || lines[i].startsWith('* '))) {
-        items.push(lines[i].slice(2));
-        i++;
-      }
-      i--;
-      blocks.push({ type: 'ul', items });
-    } else if (line.trim() === '') {
-      flushPara();
-    } else {
-      paraLines.push(line);
-    }
-  }
-  flushPara();
-
-  if (!collapsible) {
-    return blocks.map(renderBlock).join('\n');
-  }
-
-  // Group content by the ## heading level (= 2 + headingOffset after rendering).
-  // Each group becomes a <details> accordion. Content before the first ## is
-  // rendered normally (e.g. the section h1/h2 title stays visible).
+  // Post-process: split on the ## heading level (after offset) to build accordions.
   const splitLevel = 2 + headingOffset;
-  const groups = [];
-  let current = { accordion: false, summary: null, blocks: [] };
+  const splitTag = `<h${splitLevel}>`;
+  const splitCloseTag = `</h${splitLevel}>`;
 
-  for (const block of blocks) {
-    if (block.type === 'h' && block.level === splitLevel) {
-      groups.push(current);
-      current = { accordion: true, summary: block.text, blocks: [] };
-    } else {
-      current.blocks.push(block);
-    }
-  }
-  groups.push(current);
+  // Split the HTML into segments at the target heading level.
+  const escapedTag = splitTag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const parts = html.split(new RegExp(`(?=${escapedTag})`));
 
-  return groups
-    .map((g) => {
-      const inner = g.blocks.map(renderBlock).join('\n');
-      if (!g.accordion) return inner;
-      const indented = inner.split('\n').map((l) => (l ? '    ' + l : '')).join('\n');
+  if (parts.length <= 1) return html;
+
+  return parts
+    .map((part) => {
+      if (!part.startsWith(splitTag)) return part;
+
+      // Extract the summary text from the heading.
+      const headingEnd = part.indexOf(splitCloseTag);
+      const summaryHtml = part.slice(splitTag.length, headingEnd);
+      const body = part.slice(headingEnd + splitCloseTag.length).trim();
+
+      const indented = body.split('\n').map((l) => (l ? '    ' + l : '')).join('\n');
       return [
         '<details class="accordion">',
-        `  <summary>${inlineHtml(g.summary)}</summary>`,
+        `  <summary>${summaryHtml}</summary>`,
         '  <div class="accordion-body">',
         indented,
         '  </div>',
