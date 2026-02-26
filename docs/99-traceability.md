@@ -152,6 +152,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§6.10` | End-time field shows an inline error immediately on `change` if start is filled and end ≤ start | 07-DESIGN.md §6.34–6.39 | LVD-02 | `source/assets/js/client/lagg-till.js` – `change` listener on `#f-end` | implemented |
 | `02-§6.11` | Any required field shows an inline error on `blur` if it is empty | 07-DESIGN.md §6.34–6.39 | LVD-03 | `source/assets/js/client/lagg-till.js` – `blur` listeners on all required fields | implemented |
 | `02-§6.12` | A live-validation error is cleared as soon as the user starts editing the field (`input`/`change`) | 07-DESIGN.md §6.34–6.39 | LVD-04 | `source/assets/js/client/lagg-till.js` – `input`/`change` clear listener per field | implemented |
+| `02-§6.13` | When start time changes, end-time cross-check is re-evaluated immediately (show or clear error) | 07-DESIGN.md §6.34–6.39 | LVD-05 | `source/assets/js/client/lagg-till.js` – `change` listener on `#f-start` re-validates `#f-end` | implemented |
+| `02-§6.14` | When date = today and start time is more than 2 hours in the past, show inline error; same check re-runs when date changes to today | 07-DESIGN.md §6.34–6.39 | LVD-06 | `source/assets/js/client/lagg-till.js` – `isPastTimeToday()` called from start and date `change` listeners | implemented |
 | `02-§7.1` | Only administrators can edit or remove activities (via YAML directly; no participant editing UI) | 04-OPERATIONS.md (Disaster Recovery) | — | No editing UI exists; enforced by absence, not access control | implemented |
 | `02-§8.1` | Location names are consistent throughout the week; defined only in `source/data/local.yaml` | 03-ARCHITECTURE.md §6 | RADD-16 | `source/build/build.js` (loads `local.yaml`); `source/build/render-add.js` (uses those names) | covered |
 | `02-§8.2` | One "Annat" option allows a free-text location not in the predefined list | 03-ARCHITECTURE.md §6 | RADD-13..15 | `source/build/render-add.js` – "Annat" always appended last | covered |
@@ -847,9 +849,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 ## Summary
 
 ```text
-Total requirements:             705
+Total requirements:             707
 Covered (implemented + tested): 312
-Implemented, not tested:        389
+Implemented, not tested:        391
 Gap (no implementation):          4
 Orphan tests (no requirement):    0
 
@@ -1011,6 +1013,12 @@ Matrix cleanup (2026-02-25):
   Manual checkpoint: fill start time, change end time to before start → error shown.
   Manual checkpoint: tab through required fields without filling them → errors shown.
   Manual checkpoint: start editing a field with an error → error clears immediately.
+2 requirements added and implemented for start-time cross-check and past-time hysteresis (02-§6.13–6.14):
+  all 2 implemented (browser-only DOM events; cannot be unit-tested in Node.js).
+  Manual checkpoint: fill end time, change start to after end → end-time error appears.
+  Manual checkpoint: fill end time, change start to before end → end-time error clears.
+  Manual checkpoint: pick today's date and a start time > 2 h ago → error shown.
+  Manual checkpoint: pick a future date → no past-time error on start.
 39 requirements added for PHP API (02-§44.1–44.39):
   35 implemented (PHP code, docs, coexistence).
   4 gaps (02-§44.28 Apache verify, 02-§44.29–30 deploy workflow, 02-§44.32 env secrets).
@@ -1156,4 +1164,4 @@ Matrix cleanup (2026-02-25):
 | QA-09..10 | `tests/qa-camp.test.js` | `resolveActiveCamp – qa field defaults (02-§42.2)` |
 | QA-11 | `tests/qa-camp.test.js` | `resolveActiveCamp – edge cases` |
 | MKD-01..05 | `tests/render-index.test.js` | `convertMarkdown – standard markdown features (02-§38.7)` |
-| LVD-01..04 | `tests/live-form-validation.test.js` | live form validation source checks (02-§6.9–6.12) |
+| LVD-01..06 | `tests/live-form-validation.test.js` | live form validation source checks (02-§6.9–6.14) |

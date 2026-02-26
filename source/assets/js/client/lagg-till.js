@@ -235,6 +235,51 @@
     });
   }
 
+  // Returns true if date = today and time is more than 120 minutes in the past.
+  function isPastTimeToday(timeVal) {
+    if (!dateInput || !dateInput.value || !timeVal) return false;
+    var today = new Date().toISOString().slice(0, 10);
+    if (dateInput.value !== today) return false;
+    var now = new Date();
+    var cutoffMinutes = now.getHours() * 60 + now.getMinutes() - 120;
+    var parts = timeVal.split(':');
+    var timeMinutes = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    return timeMinutes < cutoffMinutes;
+  }
+
+  // Re-evaluate end-time cross-check and past-time check when start changes
+  // (02-§6.13, 02-§6.14).
+  var startInput = form.querySelector('#f-start');
+  if (startInput) {
+    startInput.addEventListener('change', function () {
+      // Re-evaluate end time cross-check.
+      if (endInput && endInput.value) {
+        if (startInput.value && endInput.value <= startInput.value) {
+          setFieldError('end', 'Sluttid måste vara efter starttid.');
+        } else {
+          setFieldError('end', null);
+        }
+      }
+      // Check for start time too far in the past on today's date.
+      if (isPastTimeToday(startInput.value)) {
+        setFieldError('start', 'Starttiden har redan passerat – menade du imorgon?');
+      }
+    });
+  }
+
+  // Re-check past-time on start whenever date changes (02-§6.14).
+  // Clear any stale past-time error first (e.g. user switches from today to tomorrow).
+  if (dateInput) {
+    dateInput.addEventListener('change', function () {
+      if (startInput && startInput.value) {
+        setFieldError('start', null);
+        if (isPastTimeToday(startInput.value)) {
+          setFieldError('start', 'Starttiden har redan passerat – menade du imorgon?');
+        }
+      }
+    });
+  }
+
   // ── Submit handler ───────────────────────────────────────────────────────────
 
   form.addEventListener('submit', function (e) {
