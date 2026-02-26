@@ -1619,9 +1619,10 @@ event data reaches both environments immediately.
   named `production`. <!-- 02-§41.7 -->
 - Each environment must have its own independent values for:
   `SITE_URL`, `API_URL`, `SERVER_HOST`, `SERVER_USER`,
-  `SERVER_SSH_KEY`, `SERVER_SSH_PORT`, `DEPLOY_DIR`, `FTP_HOST`,
-  `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_APP_DIR`,
-  `FTP_TARGET_DIR`. <!-- 02-§41.8 -->
+  `SERVER_SSH_KEY`, `SERVER_SSH_PORT`, `DEPLOY_DIR`.
+  Production additionally requires: `FTP_HOST`, `FTP_USERNAME`,
+  `FTP_PASSWORD`, `FTP_APP_DIR`, `FTP_TARGET_DIR`.
+  QA no longer uses FTP secrets (see §43). <!-- 02-§41.8 -->
 
 ### 41.3 Reusable deploy workflow (site requirements)
 
