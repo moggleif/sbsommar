@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+ob_start();
+
 // ── Bootstrap ────────────────────────────────────────────────────────────
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -127,16 +129,13 @@ function handleAddEvent(?array $activeCamp): void
     if ($consentGiven) {
         $existing = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
         $updated  = Session::mergeIds($existing, $eventId);
-        header('Set-Cookie: ' . Session::buildSetCookieHeader($updated, $_ENV['COOKIE_DOMAIN'] ?? null));
+        $cookieDomain = !empty($_ENV['COOKIE_DOMAIN']) ? $_ENV['COOKIE_DOMAIN'] : null;
+        header('Set-Cookie: ' . Session::buildSetCookieHeader($updated, $cookieDomain));
     }
 
     // Respond immediately, then commit in background
     jsonResponse(['success' => true, 'eventId' => $eventId]);
-
-    // Flush output to client before GitHub work
-    if (function_exists('fastcgi_finish_request')) {
-        fastcgi_finish_request();
-    }
+    flushToClient();
 
     // Background: commit to GitHub
     try {
@@ -200,10 +199,7 @@ function handleEditEvent(?array $activeCamp): void
     }
 
     jsonResponse(['success' => true]);
-
-    if (function_exists('fastcgi_finish_request')) {
-        fastcgi_finish_request();
-    }
+    flushToClient();
 
     try {
         $gh = new GitHub();
@@ -232,4 +228,24 @@ function jsonResponse(array $data, int $status = 200): void
 {
     http_response_code($status);
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
+}
+
+/**
+ * Flush the response to the client so the GitHub work happens after
+ * the user sees the result. Works on both PHP-FPM and mod_php (Apache).
+ */
+function flushToClient(): void
+{
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+
+        return;
+    }
+
+    // Apache / mod_php fallback
+    ignore_user_abort(true);
+    header('Content-Length: ' . ob_get_length());
+    header('Connection: close');
+    ob_end_flush();
+    flush();
 }
