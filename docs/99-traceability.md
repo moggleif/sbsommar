@@ -651,6 +651,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§15.12` | Build reads SITE_URL from environment variable | 03-ARCHITECTURE.md §17.2 | manual: build output | `source/build/build.js` — `process.env.SITE_URL` | implemented |
 | `02-§15.13` | Build fails if SITE_URL is not set | 03-ARCHITECTURE.md §17.2 | manual: run build without SITE_URL | `source/build/build.js` — `process.exit(1)` | implemented |
 | `02-§15.14` | CI workflows pass SITE_URL alongside API_URL | 03-ARCHITECTURE.md §17.7 | manual: CI workflow config | `.github/workflows/deploy.yml`, `ci.yml`, `event-data-deploy.yml` | implemented |
+| `02-§15.15` | RSS description uses structured multi-line format: date+time, plats+ansvarig, description, link | 03-ARCHITECTURE.md §17.3 | RSS-13 | `source/build/render-rss.js` — `buildDescription()` | gap |
 | `02-§36.1` | Each event has its own static HTML page | 03-ARCHITECTURE.md §18 | EVT-01 | `source/build/render-event.js` | covered |
 | `02-§36.2` | Event pages at `/schema/{event-id}/index.html` | 03-ARCHITECTURE.md §18 | manual: build output | `source/build/build.js` — creates dirs | implemented |
 | `02-§36.3` | Event page shows title, date, time, location, responsible, description, link | 03-ARCHITECTURE.md §18.2 | EVT-01..07 | `source/build/render-event.js` | covered |

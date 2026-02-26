@@ -1057,7 +1057,12 @@ secret alongside `API_URL`.
       <title>{event title}</title>
       <link>{SITE_URL}/schema/{event-id}/</link>
       <guid isPermaLink="true">{SITE_URL}/schema/{event-id}/</guid>
-      <description>{date, time, location, responsible, description}</description>
+      <description>
+        {formatted date}, {start}–{end}
+        Plats: {location} · Ansvarig: {responsible}
+        {description, if set}
+        {link, if set}
+      </description>
       <pubDate>{RFC 822 date}</pubDate>
     </item>
     ...
