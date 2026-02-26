@@ -457,3 +457,18 @@ events:
     meta:
       created_at: 2026-02-26 18:16
       updated_at: 2026-02-26 18:16
+  - id: rest-2026-02-26-1200
+    title: rest
+    date: '2026-02-26'
+    start: '12:00'
+    end: '13:00'
+    location: Nerf-arena
+    responsible: frtgyh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-26 20:41
+      updated_at: 2026-02-26 20:41
