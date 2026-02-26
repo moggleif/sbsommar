@@ -1,23 +1,20 @@
-name: Deploy Website
+name: Deploy (reusable)
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'source/data/**.yaml'
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
 
 permissions:
   contents: read
 
-concurrency:
-  group: deploy
-  cancel-in-progress: true
-
 jobs:
   deploy:
-    name: Build & Upload to Webhotel
+    name: Build & Deploy to ${{ inputs.environment }}
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     steps:
       - uses: actions/checkout@v4
@@ -88,10 +85,6 @@ jobs:
             rm -rf "$DEPLOY_DIR/public_html_old"
 
       # Stage only the server files that need to run on Inleed via Passenger.
-      # FTP_APP_DIR is a repo secret: e.g. /domains/sbsommar.se/app/
-      # After the first deploy, SSH into the server and run:
-      #   npm install --omit=dev
-      # Passenger restarts automatically when new files are uploaded.
       - name: Stage server files for upload
         run: |
           mkdir -p ./staging/source/api
