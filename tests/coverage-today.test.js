@@ -114,9 +114,47 @@ describe('Display view — event data embedding', () => {
     assert.ok(html.includes("window.__HEADING_PREFIX__ = 'Dagens schema'"), 'heading prefix');
   });
 
-  it('DIS-14: footer shown in display mode', () => {
+  it('DIS-14: activity-count footer flag is set in display mode', () => {
     const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
     assert.ok(html.includes('window.__SHOW_FOOTER__ = true'), 'show footer is true');
+  });
+});
+
+// ── 02-§4.14  No site footer in display view ────────────────────────────────
+
+describe('02-§4.14 — Display view has no site footer', () => {
+  it('DIS-19: site-footer element is absent from display mode HTML', () => {
+    // Pass a non-empty siteUrl so any footer-rendering path would have content to work with.
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, 'https://sommar.example.com');
+    assert.ok(!html.includes('class="site-footer"'), 'no site-footer in display mode');
+  });
+});
+
+// ── 02-§4.16  Build time embedded ───────────────────────────────────────────
+
+describe('02-§4.16 — Build time embedded at build', () => {
+  it('DIS-20: window.__BUILD_TIME__ is present in the page', () => {
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    assert.ok(html.includes('window.__BUILD_TIME__'), '__BUILD_TIME__ embedded');
+  });
+
+  it('DIS-21: window.__VERSION__ is present in the page', () => {
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    assert.ok(html.includes('window.__VERSION__'), '__VERSION__ embedded');
+  });
+});
+
+// ── 02-§4.15  Live clock element ────────────────────────────────────────────
+
+describe('02-§4.15 — Status bar with live clock is present', () => {
+  it('DIS-22: status-bar container is present in the sidebar', () => {
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    assert.ok(html.includes('class="status-bar"'), 'status-bar element present');
+  });
+
+  it('DIS-23: live-clock element with id "live-clock" is present', () => {
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG);
+    assert.ok(html.includes('id="live-clock"'), 'live-clock element present');
   });
 });
 
@@ -131,7 +169,7 @@ describe('Display view — QR code', () => {
 
   it('DIS-16: sidebar with descriptive text is present', () => {
     const siteUrl = 'https://sommar.example.com';
-    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, '', siteUrl);
+    const html = renderTodayPage(CAMP, EVENTS, QR_SVG, siteUrl);
     assert.ok(html.includes('class="dagens-sidebar"'), 'sidebar present');
     assert.ok(html.includes('class="sidebar-text"'), 'sidebar text present');
     // Verify the rendered sidebar contains the hostname extracted from SITE_URL
