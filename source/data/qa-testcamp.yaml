@@ -501,3 +501,19 @@ events:
     meta:
       created_at: '2026-02-26 20:41'
       updated_at: '2026-02-26 20:44'
+  - id: nu-kor-vi-2026-02-26-2147
+    title: Nu kör vi
+    date: '2026-02-26'
+    start: '21:47'
+    end: '23:47'
+    location: GA Stilla hyllan
+    responsible: Någon
+    description: |
+      En hel massa saker
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-26 20:48
+      updated_at: 2026-02-26 20:48
