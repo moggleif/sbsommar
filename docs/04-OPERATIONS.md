@@ -102,11 +102,11 @@ Passenger restarts automatically when new files are uploaded.
 CI (Continuous Integration) runs automated checks on every push and pull request.
 CD (Continuous Deployment) deploys the site automatically after a successful merge to `main`.
 
-| Workflow                | Trigger                                                        | What it does                                                                                                   |
-| ----------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `ci.yml`                | Every push and PR                                              | Lint + test + build. Lint/test skipped for data-only commits. Uses `fetch-depth: 0` to compare against `main`. |
-| `event-data-deploy.yml` | PRs from `event/`, `event-edit/` changing `source/data/*.yaml` | Lint YAML + security scan + build + targeted FTP deploy. Uses `fetch-depth: 0` to detect changed files.        |
-| `deploy.yml`            | Push to `main`                                                 | Build → FTP static files → FTP + SSH app server restart                                                        |
+| Workflow                | Trigger                                                        | What it does                                                                                                                                                                                                |
+| ----------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ci.yml`                | Every push and PR                                              | Lint + test + build. Lint/test skipped for data-only commits (per-camp event files only; config files like `camps.yaml` and `local.yaml` trigger full CI). Uses `fetch-depth: 0` to compare against `main`. |
+| `event-data-deploy.yml` | PRs from `event/`, `event-edit/` changing `source/data/*.yaml` | Lint YAML + security scan + build + targeted FTP deploy. Uses `fetch-depth: 0` to detect changed files.                                                                                                     |
+| `deploy.yml`            | Push to `main`                                                 | Build → FTP static files → FTP + SSH app server restart                                                                                                                                                     |
 
 ```mermaid
 flowchart TD
