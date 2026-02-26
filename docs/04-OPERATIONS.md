@@ -3,6 +3,7 @@
 How to develop, run, and deploy the site.
 
 For a full description of the system's architecture and data flow, see [03-ARCHITECTURE.md](03-ARCHITECTURE.md).
+For environment management (Local, QA, Production), secrets schema, and GitHub Environments setup, see [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md).
 
 ---
 
@@ -100,13 +101,16 @@ Passenger restarts automatically when new files are uploaded.
 ### CI/CD Workflows
 
 CI (Continuous Integration) runs automated checks on every push and pull request.
-CD (Continuous Deployment) deploys the site automatically after a successful merge to `main`.
+CD (Continuous Deployment) deploys to QA automatically after a merge to `main`;
+Production deploys are triggered manually. See [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md) for the full environment model.
 
-| Workflow                | Trigger                                                        | What it does                                                                                                                                                                                                |
-| ----------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ci.yml`                | Every push and PR                                              | Lint + test + build. Lint/test skipped for data-only commits (per-camp event files only; config files like `camps.yaml` and `local.yaml` trigger full CI). Uses `fetch-depth: 0` to compare against `main`. |
-| `event-data-deploy.yml` | PRs from `event/`, `event-edit/` changing `source/data/*.yaml` | Lint YAML + security scan + build + targeted FTP deploy. Uses `fetch-depth: 0` to detect changed files.                                                                                                     |
-| `deploy.yml`            | Push to `main`                                                 | Build → SCP archive → SSH swap into web root → FTP + SSH app server restart                                                                                                                                 |
+| Workflow                  | Trigger                                                        | What it does                                                                                                                                                                                                |
+| ------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ci.yml`                  | Every push and PR                                              | Lint + test + build. Lint/test skipped for data-only commits (per-camp event files only; config files like `camps.yaml` and `local.yaml` trigger full CI). Uses `fetch-depth: 0` to compare against `main`. |
+| `event-data-deploy.yml`   | PRs from `event/`, `event-edit/` changing `source/data/*.yaml` | Lint YAML + security scan + build + targeted FTP deploy to both QA and Production. Uses `fetch-depth: 0` to detect changed files.                                                                           |
+| `deploy-qa.yml`           | Push to `main` (paths-ignore data YAMLs)                       | Calls `deploy-reusable.yml` with environment `qa`. Build → SCP → SSH swap → FTP app → SSH restart.                                                                                                          |
+| `deploy-prod.yml`         | Manual (`workflow_dispatch`)                                    | Calls `deploy-reusable.yml` with environment `production`. Same steps as QA.                                                                                                                               |
+| `deploy-reusable.yml`     | Called by `deploy-qa.yml` / `deploy-prod.yml`                   | Shared logic: Build → SCP archive → SSH swap into web root → FTP + SSH app server restart.                                                                                                                 |
 
 ```mermaid
 flowchart TD
@@ -116,12 +120,20 @@ flowchart TD
     D --> B
     C -- Yes --> E[Open PR · merge to main]
     E --> F
+    E --> G
 
-    subgraph F [Deploy on push to main]
-        G[Build public/] --> H[tar + SCP archive to server]
-        H --> K[SSH: extract · swap · cleanup]
-        G --> I[FTP: app.js to app dir]
-        I --> J[SSH: npm install · Passenger restart]
+    subgraph F [QA: auto-deploy on push to main]
+        F1[Build public/] --> F2[tar + SCP archive to QA server]
+        F2 --> F3[SSH: extract · swap · cleanup]
+        F1 --> F4[FTP: app.js to QA app dir]
+        F4 --> F5[SSH: npm install · Passenger restart]
+    end
+
+    subgraph G [Production: manual workflow_dispatch]
+        G1[Build public/] --> G2[tar + SCP archive to prod server]
+        G2 --> G3[SSH: extract · swap · cleanup]
+        G1 --> G4[FTP: app.js to prod app dir]
+        G4 --> G5[SSH: npm install · Passenger restart]
     end
 ```
 

@@ -730,16 +730,35 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§40.14` | Workflow trigger unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
 | `02-§40.15` | SSH swap script uses `set -e` | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
 | `02-§40.16` | Failed deploy recoverable by subsequent deploy | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§41.1` | Three environments defined: Local, QA, Production | 08-ENVIRONMENTS.md §Overview | — | — | gap |
+| `02-§41.2` | QA deploys full site automatically on push to `main` | 08-ENVIRONMENTS.md §Overview | — | — | gap |
+| `02-§41.3` | Production deploys full site only via manual `workflow_dispatch` | 08-ENVIRONMENTS.md §Overview | — | — | gap |
+| `02-§41.4` | Both QA and Production deploy from `main`; no production branch | 08-ENVIRONMENTS.md §Overview | — | — | gap |
+| `02-§41.5` | Event data commits to `main` regardless of environment | 08-ENVIRONMENTS.md §Event data flow | — | — | gap |
+| `02-§41.6` | QA secrets scoped to GitHub Environment `qa` | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
+| `02-§41.7` | Production secrets scoped to GitHub Environment `production` | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
+| `02-§41.8` | Each environment has independent secret values | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
+| `02-§41.9` | Reusable workflow contains shared deploy logic | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
+| `02-§41.10` | Reusable workflow accepts environment name as input | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
+| `02-§41.11` | `deploy-qa.yml` calls reusable with environment `qa` | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
+| `02-§41.12` | `deploy-prod.yml` calls reusable with environment `production` | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
+| `02-§41.13` | Original `deploy.yml` removed | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
+| `02-§41.14` | Event data deploy targets both QA and Production in parallel | 08-ENVIRONMENTS.md §Event data flow | — | — | gap |
+| `02-§41.15` | Each event data deploy builds with its environment's `SITE_URL` and `API_URL` | 08-ENVIRONMENTS.md §Event data flow | — | — | gap |
+| `02-§41.16` | QR code URL uses `SITE_URL` instead of hardcoded domain | 08-ENVIRONMENTS.md | — | — | gap |
+| `02-§41.17` | `ci.yml` uses repository-level `SITE_URL` secret | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
+| `02-§41.18` | Local development uses `.env` for environment variables | 08-ENVIRONMENTS.md §Local development | — | — | gap |
+| `02-§41.19` | `.env.example` documents the environment management setup | 08-ENVIRONMENTS.md §Local development | — | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             594
+Total requirements:             613
 Covered (implemented + tested): 294
 Implemented, not tested:        298
-Gap (no implementation):          1
+Gap (no implementation):         20
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -877,6 +896,11 @@ Matrix cleanup (2026-02-25):
   all 16 implemented (CI/infrastructure, manual verification only).
   Static site deploy changed from FTP to SCP + SSH swap.
   Server app deploy unchanged.
+19 requirements added for environment management (02-§41.1–41.19):
+  all 19 gap (not yet implemented).
+  Splits deploy into QA (auto) and Production (manual workflow_dispatch).
+  Event data deploys to both environments in parallel.
+  Fixes hardcoded QR code URL.
 ```
 
 ---
