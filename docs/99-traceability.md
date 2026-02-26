@@ -749,35 +749,35 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§41.17` | `ci.yml` uses repository-level `SITE_URL` secret | 08-ENVIRONMENTS.md §Secrets schema | manual: inspect `ci.yml` | `.github/workflows/ci.yml` (unchanged) | implemented |
 | `02-§41.18` | Local development uses `.env` for environment variables | 08-ENVIRONMENTS.md §Local development | manual: verify `.env` works for local build | `.env.example`, `source/build/build.js` (loads `.env`) | implemented |
 | `02-§41.19` | `.env.example` documents the environment management setup | 08-ENVIRONMENTS.md §Local development | manual: inspect `.env.example` | `.env.example` | implemented |
-| `02-§42.1` | `camps.yaml` entries may include optional `qa` boolean field | 05-DATA_CONTRACT.md §1, 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.2` | When `qa` omitted or false, camp is a normal production camp | 05-DATA_CONTRACT.md §1 | — | — | gap |
-| `02-§42.3` | When `qa` is true, camp is QA-only | 05-DATA_CONTRACT.md §1 | — | — | gap |
-| `02-§42.4` | Rename `2026-02-testar` to `id: qa-testcamp` | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
-| `02-§42.5` | QA camp file renamed to `qa-testcamp.yaml` | — | manual: inspect `source/data/` | `source/data/qa-testcamp.yaml` | gap |
-| `02-§42.6` | QA camp date range spans full calendar year | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
-| `02-§42.7` | QA camp `opens_for_editing` set to start of year | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
-| `02-§42.8` | QA camp has `qa: true` | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
-| `02-§42.9` | Data file renamed with camp header updated | — | manual: inspect `qa-testcamp.yaml` | `source/data/qa-testcamp.yaml` | gap |
-| `02-§42.10` | Existing events in QA camp file preserved | — | manual: inspect `qa-testcamp.yaml` | `source/data/qa-testcamp.yaml` | gap |
-| `02-§42.11` | Production build excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.12` | Production API excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.13` | QA camps never appear in production output | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.14` | In QA, `qa: true` camp on dates wins resolution | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.15` | QA resolution: QA camp first, then normal rules | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.16` | QA camp always active in QA even when production camp overlaps | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.17` | Build reads `BUILD_ENV` environment variable | 08-ENVIRONMENTS.md | — | — | gap |
-| `02-§42.18` | `deploy-reusable.yml` passes environment as `BUILD_ENV` | 08-ENVIRONMENTS.md | — | — | gap |
-| `02-§42.19` | API reads `BUILD_ENV` for correct filtering | 08-ENVIRONMENTS.md | — | — | gap |
-| `02-§42.20` | `.env.example` documents `BUILD_ENV` variable | 08-ENVIRONMENTS.md | — | — | gap |
-| `02-§42.21` | When `BUILD_ENV` unset, no filtering applied | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.22` | `resolveActiveCamp()` accepts optional `environment` param | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.23` | When environment is `production`, `qa: true` camps filtered out | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.24` | When environment is `qa`, QA camps on dates take priority | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.25` | When environment unset, function behaves as today | 03-ARCHITECTURE.md §2 | — | — | gap |
-| `02-§42.26` | `lint-yaml.js` accepts `qa` as valid optional boolean | — | — | — | gap |
-| `02-§42.27` | `validate-camps.js` accepts `qa` as valid optional boolean | — | — | — | gap |
-| `02-§42.28` | Yearly: QA camp date range updated to new year | — | manual: annual maintenance | `source/data/camps.yaml` | gap |
-| `02-§42.29` | Yearly update is manual one-line change, no automation | — | — | — | gap |
+| `02-§42.1` | `camps.yaml` entries may include optional `qa` boolean field | 05-DATA_CONTRACT.md §1, 03-ARCHITECTURE.md §2 | QA-09, QA-10 | `source/scripts/resolve-active-camp.js`, `source/data/camps.yaml` | covered |
+| `02-§42.2` | When `qa` omitted or false, camp is a normal production camp | 05-DATA_CONTRACT.md §1 | QA-09, QA-10 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.3` | When `qa` is true, camp is QA-only | 05-DATA_CONTRACT.md §1 | QA-01, QA-04 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.4` | Rename `2026-02-testar` to `id: qa-testcamp` | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | implemented |
+| `02-§42.5` | QA camp file renamed to `qa-testcamp.yaml` | — | manual: inspect `source/data/` | `source/data/qa-testcamp.yaml` | implemented |
+| `02-§42.6` | QA camp date range spans full calendar year | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | implemented |
+| `02-§42.7` | QA camp `opens_for_editing` set to start of year | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | implemented |
+| `02-§42.8` | QA camp has `qa: true` | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | implemented |
+| `02-§42.9` | Data file renamed with camp header updated | — | manual: inspect `qa-testcamp.yaml` | `source/data/qa-testcamp.yaml` | implemented |
+| `02-§42.10` | Existing events in QA camp file preserved | — | manual: inspect `qa-testcamp.yaml` | `source/data/qa-testcamp.yaml` | implemented |
+| `02-§42.11` | Production build excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | QA-01, QA-03 | `source/scripts/resolve-active-camp.js`, `source/build/build.js` | covered |
+| `02-§42.12` | Production API excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | QA-01 (same logic) | `source/api/github.js`, `app.js` | covered |
+| `02-§42.13` | QA camps never appear in production output | 03-ARCHITECTURE.md §2 | QA-01, QA-03 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.14` | In QA, `qa: true` camp on dates wins resolution | 03-ARCHITECTURE.md §2 | QA-04, QA-05 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.15` | QA resolution: QA camp first, then normal rules | 03-ARCHITECTURE.md §2 | QA-04, QA-06 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.16` | QA camp always active in QA even when production camp overlaps | 03-ARCHITECTURE.md §2 | QA-05 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.17` | Build reads `BUILD_ENV` environment variable | 08-ENVIRONMENTS.md | manual: inspect `build.js` | `source/build/build.js` | implemented |
+| `02-§42.18` | `deploy-reusable.yml` passes environment as `BUILD_ENV` | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§42.19` | API reads `BUILD_ENV` for correct filtering | 08-ENVIRONMENTS.md | manual: inspect `app.js`, `github.js` | `app.js`, `source/api/github.js` | implemented |
+| `02-§42.20` | `.env.example` documents `BUILD_ENV` variable | 08-ENVIRONMENTS.md | manual: inspect `.env.example` | `.env.example` | implemented |
+| `02-§42.21` | When `BUILD_ENV` unset, no filtering applied | 03-ARCHITECTURE.md §2 | QA-07, QA-08 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.22` | `resolveActiveCamp()` accepts optional `environment` param | 03-ARCHITECTURE.md §2 | QA-01..11 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.23` | When environment is `production`, `qa: true` camps filtered out | 03-ARCHITECTURE.md §2 | QA-01, QA-03, QA-11 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.24` | When environment is `qa`, QA camps on dates take priority | 03-ARCHITECTURE.md §2 | QA-04, QA-05 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.25` | When environment unset, function behaves as today | 03-ARCHITECTURE.md §2 | QA-07, QA-08 | `source/scripts/resolve-active-camp.js` | covered |
+| `02-§42.26` | `lint-yaml.js` accepts `qa` as valid optional boolean | — | N/A: `qa` lives in `camps.yaml`, not per-camp files; `lint-yaml.js` validates per-camp files only | — | implemented |
+| `02-§42.27` | `validate-camps.js` accepts `qa` as valid optional boolean | — | VCMP-33..36 | `source/scripts/validate-camps.js` | covered |
+| `02-§42.28` | Yearly: QA camp date range updated to new year | — | manual: annual maintenance | `source/data/camps.yaml` | implemented |
+| `02-§42.29` | Yearly update is manual one-line change, no automation | — | — | — | implemented |
 
 ---
 
@@ -785,9 +785,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 
 ```text
 Total requirements:             642
-Covered (implemented + tested): 294
-Implemented, not tested:        317
-Gap (no implementation):         30
+Covered (implemented + tested): 309
+Implemented, not tested:        332
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -931,7 +931,8 @@ Matrix cleanup (2026-02-25):
   Event data deploys to both environments in parallel.
   Fixes hardcoded QR code URL to use SITE_URL.
 29 requirements added for QA camp isolation (02-§42.1–42.29):
-  all 29 gap (not yet implemented).
+  15 covered (QA-01..11, VCMP-33..36): filtering, resolution priority, field defaults.
+  14 implemented (manual/infrastructure): data rename, BUILD_ENV plumbing, workflow, docs.
   Dedicated QA camp with qa: true field, filtered out in production.
   resolveActiveCamp() gains environment-aware filtering.
   BUILD_ENV plumbed through deploy workflow and API.
@@ -1066,4 +1067,10 @@ Matrix cleanup (2026-02-25):
 | VCMP-28 | `tests/validate-camps.test.js` | `validateCamps – logging (02-§37.17)` |
 | VCMP-29 | `tests/validate-camps.test.js` | `validateCamps – module API (02-§37.18)` |
 | VCMP-30..32 | `tests/validate-camps.test.js` | `validateCamps – edge cases` |
+| VCMP-33..36 | `tests/validate-camps.test.js` | `validateCamps – qa field (02-§42.27)` |
+| QA-01..03 | `tests/qa-camp.test.js` | `resolveActiveCamp – production filtering (02-§42.11)` |
+| QA-04..06 | `tests/qa-camp.test.js` | `resolveActiveCamp – QA priority (02-§42.14)` |
+| QA-07..08 | `tests/qa-camp.test.js` | `resolveActiveCamp – no environment (02-§42.25)` |
+| QA-09..10 | `tests/qa-camp.test.js` | `resolveActiveCamp – qa field defaults (02-§42.2)` |
+| QA-11 | `tests/qa-camp.test.js` | `resolveActiveCamp – edge cases` |
 | MKD-01..05 | `tests/render-index.test.js` | `convertMarkdown – standard markdown features (02-§38.7)` |
