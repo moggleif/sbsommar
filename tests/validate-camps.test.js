@@ -307,6 +307,33 @@ describe('validateCamps – module API (02-§37.18)', () => {
   });
 });
 
+// ── 42.27 — qa field acceptance ──────────────────────────────────────────────
+
+describe('validateCamps – qa field (02-§42.27)', () => {
+  it('VCMP-33: accepts camp with qa: true', () => {
+    const result = run([makeCamp({ qa: true })]);
+    assert.equal(result.ok, true);
+  });
+
+  it('VCMP-34: accepts camp with qa: false', () => {
+    const result = run([makeCamp({ qa: false })]);
+    assert.equal(result.ok, true);
+  });
+
+  it('VCMP-35: accepts camp without qa field', () => {
+    const camp = makeCamp();
+    delete camp.qa;
+    const result = run([camp]);
+    assert.equal(result.ok, true);
+  });
+
+  it('VCMP-36: rejects camp with non-boolean qa value', () => {
+    const result = run([makeCamp({ qa: 'yes' })]);
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e => e.includes('qa')));
+  });
+});
+
 // ── Edge cases ──────────────────────────────────────────────────────────────
 
 describe('validateCamps – edge cases', () => {
