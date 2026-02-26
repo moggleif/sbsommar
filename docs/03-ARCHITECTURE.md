@@ -69,6 +69,21 @@ If two camps overlap, the one with the earlier `start_date` wins.
 The derivation logic lives in `source/scripts/resolve-active-camp.js` and is
 shared by `build.js` and the API (`github.js`).
 
+### QA camp isolation
+
+Camps may have an optional `qa: true` field. QA camps are filtered based on
+the `BUILD_ENV` environment variable:
+
+- **Production** (`BUILD_ENV=production`): QA camps are excluded before
+  resolution. They never appear in production builds or API responses.
+- **QA** (`BUILD_ENV=qa`): QA camps that are on dates take priority over
+  non-QA camps, ensuring the QA camp is always active in QA.
+- **Local** (`BUILD_ENV` unset): No filtering — all camps are included
+  and normal derivation rules apply.
+
+The QA camp (`qa-testcamp`) uses a full-year date range so that events
+submitted on any day pass date validation. See `02-REQUIREMENTS.md §42`.
+
 ---
 
 ## 3. Active Camp and Event Submissions

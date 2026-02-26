@@ -19,6 +19,10 @@ For CI/CD workflow details, see [04-OPERATIONS.md](04-OPERATIONS.md).
 Event data reaches both QA and Production immediately — because events are
 time-sensitive (camp is running).
 
+**QA camp isolation:** A dedicated QA camp (`qa: true` in `camps.yaml`) allows
+testing the full event flow without polluting production data. Production builds
+and APIs filter out QA camps entirely. See `02-REQUIREMENTS.md §42`.
+
 ---
 
 ## Deploy triggers

@@ -749,16 +749,45 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§41.17` | `ci.yml` uses repository-level `SITE_URL` secret | 08-ENVIRONMENTS.md §Secrets schema | manual: inspect `ci.yml` | `.github/workflows/ci.yml` (unchanged) | implemented |
 | `02-§41.18` | Local development uses `.env` for environment variables | 08-ENVIRONMENTS.md §Local development | manual: verify `.env` works for local build | `.env.example`, `source/build/build.js` (loads `.env`) | implemented |
 | `02-§41.19` | `.env.example` documents the environment management setup | 08-ENVIRONMENTS.md §Local development | manual: inspect `.env.example` | `.env.example` | implemented |
+| `02-§42.1` | `camps.yaml` entries may include optional `qa` boolean field | 05-DATA_CONTRACT.md §1, 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.2` | When `qa` omitted or false, camp is a normal production camp | 05-DATA_CONTRACT.md §1 | — | — | gap |
+| `02-§42.3` | When `qa` is true, camp is QA-only | 05-DATA_CONTRACT.md §1 | — | — | gap |
+| `02-§42.4` | Rename `2026-02-testar` to `id: qa-testcamp` | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
+| `02-§42.5` | QA camp file renamed to `qa-testcamp.yaml` | — | manual: inspect `source/data/` | `source/data/qa-testcamp.yaml` | gap |
+| `02-§42.6` | QA camp date range spans full calendar year | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
+| `02-§42.7` | QA camp `opens_for_editing` set to start of year | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
+| `02-§42.8` | QA camp has `qa: true` | — | manual: inspect `camps.yaml` | `source/data/camps.yaml` | gap |
+| `02-§42.9` | Data file renamed with camp header updated | — | manual: inspect `qa-testcamp.yaml` | `source/data/qa-testcamp.yaml` | gap |
+| `02-§42.10` | Existing events in QA camp file preserved | — | manual: inspect `qa-testcamp.yaml` | `source/data/qa-testcamp.yaml` | gap |
+| `02-§42.11` | Production build excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.12` | Production API excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.13` | QA camps never appear in production output | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.14` | In QA, `qa: true` camp on dates wins resolution | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.15` | QA resolution: QA camp first, then normal rules | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.16` | QA camp always active in QA even when production camp overlaps | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.17` | Build reads `BUILD_ENV` environment variable | 08-ENVIRONMENTS.md | — | — | gap |
+| `02-§42.18` | `deploy-reusable.yml` passes environment as `BUILD_ENV` | 08-ENVIRONMENTS.md | — | — | gap |
+| `02-§42.19` | API reads `BUILD_ENV` for correct filtering | 08-ENVIRONMENTS.md | — | — | gap |
+| `02-§42.20` | `.env.example` documents `BUILD_ENV` variable | 08-ENVIRONMENTS.md | — | — | gap |
+| `02-§42.21` | When `BUILD_ENV` unset, no filtering applied | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.22` | `resolveActiveCamp()` accepts optional `environment` param | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.23` | When environment is `production`, `qa: true` camps filtered out | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.24` | When environment is `qa`, QA camps on dates take priority | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.25` | When environment unset, function behaves as today | 03-ARCHITECTURE.md §2 | — | — | gap |
+| `02-§42.26` | `lint-yaml.js` accepts `qa` as valid optional boolean | — | — | — | gap |
+| `02-§42.27` | `validate-camps.js` accepts `qa` as valid optional boolean | — | — | — | gap |
+| `02-§42.28` | Yearly: QA camp date range updated to new year | — | manual: annual maintenance | `source/data/camps.yaml` | gap |
+| `02-§42.29` | Yearly update is manual one-line change, no automation | — | — | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             613
+Total requirements:             642
 Covered (implemented + tested): 294
 Implemented, not tested:        317
-Gap (no implementation):          1
+Gap (no implementation):         30
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -901,6 +930,11 @@ Matrix cleanup (2026-02-25):
   Splits deploy into QA (auto) and Production (manual workflow_dispatch).
   Event data deploys to both environments in parallel.
   Fixes hardcoded QR code URL to use SITE_URL.
+29 requirements added for QA camp isolation (02-§42.1–42.29):
+  all 29 gap (not yet implemented).
+  Dedicated QA camp with qa: true field, filtered out in production.
+  resolveActiveCamp() gains environment-aware filtering.
+  BUILD_ENV plumbed through deploy workflow and API.
 ```
 
 ---
