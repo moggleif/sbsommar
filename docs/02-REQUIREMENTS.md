@@ -1815,3 +1815,140 @@ secrets to manage. Production remains on FTP until QA is validated.
   `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_APP_DIR`, `FTP_TARGET_DIR`) should
   be removed from the `qa` GitHub Environment. <!-- 02-§43.14 -->
 - This is a manual step — no automation required. <!-- 02-§43.15 -->
+
+---
+
+## 44. PHP API for Shared Hosting
+
+The Node.js API server (`app.js`) requires a Node.js-capable host with Passenger
+or a similar process manager. Loopia (the target webhotell) supports PHP and
+Apache but not Node.js. This section adds a PHP implementation of the same API
+so that the entire site — static files and API — can be served from a single
+shared hosting account.
+
+The Node.js API is kept intact for local development and for any future host
+that supports Node.js.
+
+### 44.1 PHP API endpoints (site requirements)
+
+- The PHP API must implement `POST /api/add-event` with the same request body,
+  validation rules, and response format as the Node.js `POST /add-event`. <!-- 02-§44.1 -->
+- The PHP API must implement `POST /api/edit-event` with the same request body,
+  validation rules, and response format as the Node.js `POST /edit-event`. <!-- 02-§44.2 -->
+- Both endpoints must return JSON responses with `Content-Type: application/json`. <!-- 02-§44.3 -->
+- A `GET /api/health` endpoint must return `{"status":"API running"}` for
+  monitoring and deploy verification. <!-- 02-§44.4 -->
+
+### 44.2 Input validation (site requirements)
+
+- All validation rules from §10 (required fields, type checks, length limits,
+  YAML safety) must be replicated in the PHP implementation. <!-- 02-§44.5 -->
+- Camp date range validation (event date must fall within the active camp's
+  `start_date..end_date`) must be enforced. <!-- 02-§44.6 -->
+- Past-date blocking (§27) must be enforced for both add and edit. <!-- 02-§44.7 -->
+- Edit requests must require a non-empty `id` field. <!-- 02-§44.8 -->
+
+### 44.3 Time-gating (site requirements)
+
+- The PHP API must enforce the same time-gating rules as the Node.js API
+  (§26): submissions are accepted only when today falls within
+  `opens_for_editing..end_date + 1 day`. <!-- 02-§44.9 -->
+- When outside the editing period, both endpoints must return HTTP 403 with
+  the same Swedish error message as the Node.js implementation. <!-- 02-§44.10 -->
+
+### 44.4 GitHub integration (site requirements)
+
+- The PHP API must commit new events to the active camp's YAML file via the
+  GitHub Contents API, using the same ephemeral-branch → PR → auto-merge
+  pipeline as the Node.js implementation. <!-- 02-§44.11 -->
+- Edit requests must patch the existing event in the YAML file using the
+  same field replacement logic as the Node.js `patchEventInYaml`. <!-- 02-§44.12 -->
+- The active camp must be resolved by reading `source/data/camps.yaml` from
+  GitHub (not from a local file), using the same derivation rules as
+  `resolveActiveCamp`. <!-- 02-§44.13 -->
+- YAML serialisation must produce output compatible with the existing data
+  contract (05-DATA_CONTRACT.md). <!-- 02-§44.14 -->
+
+### 44.5 Session cookies (site requirements)
+
+- The PHP API must read and write the `sb_session` cookie using the same
+  format (JSON-encoded array of event IDs, URL-encoded) as the Node.js
+  implementation. <!-- 02-§44.15 -->
+- Cookie attributes must match: `Path=/`, `Max-Age=604800`, `Secure`,
+  `SameSite=Strict`, and optional `Domain` when `COOKIE_DOMAIN` is set. <!-- 02-§44.16 -->
+- Edit requests must verify that the event ID is present in the session
+  cookie; return HTTP 403 if not. <!-- 02-§44.17 -->
+- The cookie is only set when the client signals consent
+  (`cookieConsent: true` in the request body). <!-- 02-§44.18 -->
+
+### 44.6 CORS (site requirements)
+
+- The PHP API must set CORS headers (`Access-Control-Allow-Origin`,
+  `Access-Control-Allow-Methods`, `Access-Control-Allow-Headers`,
+  `Access-Control-Allow-Credentials`) for origins listed in
+  `ALLOWED_ORIGIN` and `QA_ORIGIN` environment variables. <!-- 02-§44.19 -->
+- `OPTIONS` preflight requests must return HTTP 204 with the correct
+  CORS headers. <!-- 02-§44.20 -->
+
+### 44.7 Configuration (site requirements)
+
+- The PHP API must read configuration from environment variables with the
+  same names as the Node.js API: `GITHUB_OWNER`, `GITHUB_REPO`,
+  `GITHUB_BRANCH`, `GITHUB_TOKEN`, `ALLOWED_ORIGIN`, `QA_ORIGIN`,
+  `COOKIE_DOMAIN`, `BUILD_ENV`. <!-- 02-§44.21 -->
+- On Loopia, environment variables are provided via a `.env` file in the
+  API directory. The PHP API must load this file at startup if it
+  exists. <!-- 02-§44.22 -->
+- `GITHUB_TOKEN` and other secrets must never appear in error responses
+  or logs visible to end users. <!-- 02-§44.23 -->
+
+### 44.8 File structure (site requirements)
+
+- The PHP API must live in an `api/` directory at the project root,
+  separate from the Node.js source. <!-- 02-§44.24 -->
+- Dependencies are managed via Composer (`api/composer.json`). <!-- 02-§44.25 -->
+- The directory structure must be: `api/index.php` (router/entry point),
+  `api/src/` (modules), `api/composer.json`, `api/.env` (not committed,
+  git-ignored). <!-- 02-§44.26 -->
+
+### 44.9 Apache routing (site requirements)
+
+- An `.htaccess` file in the `api/` directory must route all requests
+  to `index.php` (front-controller pattern). <!-- 02-§44.27 -->
+- The `.htaccess` must work on Loopia's Apache 2.4 with `mod_rewrite`
+  enabled. <!-- 02-§44.28 -->
+
+### 44.10 Deployment (site requirements)
+
+- The deploy workflow must upload the `api/` directory (including
+  `vendor/`) to the server alongside the static site. <!-- 02-§44.29 -->
+- `composer install --no-dev` must run either locally in CI or the
+  `vendor/` directory must be included in the deploy archive. <!-- 02-§44.30 -->
+- The `.env` file on the server is managed manually — it is not part
+  of the deploy archive. <!-- 02-§44.31 -->
+
+### 44.11 Build integration (site requirements)
+
+- The build must set `API_URL` to point to the PHP API path
+  (e.g. `https://sbsommar.se/api/add-event`) when building for
+  environments that use the PHP API. <!-- 02-§44.32 -->
+- The existing Node.js `API_URL` format remains valid for environments
+  that still use the Node.js API. <!-- 02-§44.33 -->
+
+### 44.12 Coexistence with Node.js API (site requirements)
+
+- The Node.js API (`app.js`, `source/api/`) must remain fully functional
+  and unmodified. <!-- 02-§44.34 -->
+- Local development continues to use `npm start` (Node.js). <!-- 02-§44.35 -->
+- The choice of API backend is determined solely by the `API_URL`
+  environment variable in each GitHub Environment. <!-- 02-§44.36 -->
+
+### 44.13 Documentation (site requirements)
+
+- `docs/04-OPERATIONS.md` must document the PHP API: directory structure,
+  configuration, and how to set it up on a new host. <!-- 02-§44.37 -->
+- `docs/08-ENVIRONMENTS.md` must document the `qa` GitHub Environment
+  (PHP on Loopia) and its secrets. The previous Node.js QA setup is
+  preserved as the `qa-node` environment. <!-- 02-§44.38 -->
+- `docs/03-ARCHITECTURE.md` must note the dual API architecture (Node.js
+  for local dev and Node.js hosts, PHP for shared hosting). <!-- 02-§44.39 -->
