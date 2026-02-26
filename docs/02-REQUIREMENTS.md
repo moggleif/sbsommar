@@ -1380,3 +1380,52 @@ visible; only the individual locations are collapsible.
   section (individual location accordions replace it). <!-- 02-§35.10 -->
 
 ---
+
+## 37. camps.yaml Validator
+
+A validation and sync tool that enforces `camps.yaml` as the single source of truth
+for camp metadata, ensures referenced camp files exist, and keeps camp headers in
+sync.
+
+### 37.1 camps.yaml validation
+
+- The validator must check that every entry in `camps.yaml` has all required fields:
+  `id`, `name`, `start_date`, `end_date`, `opens_for_editing`, `location`, `file`,
+  `archived`. <!-- 02-§37.1 -->
+- `start_date`, `end_date`, and `opens_for_editing` must be valid `YYYY-MM-DD`
+  dates. <!-- 02-§37.2 -->
+- `end_date` must be on or after `start_date`. <!-- 02-§37.3 -->
+- `archived` must be a boolean. <!-- 02-§37.4 -->
+- Camp `id` values must be unique across all entries. <!-- 02-§37.5 -->
+- Camp `file` values must be unique across all entries. <!-- 02-§37.6 -->
+- The validator must exit with a non-zero code if any validation error is
+  found. <!-- 02-§37.7 -->
+
+### 37.2 Camp file creation
+
+- If a camp entry's `file` does not exist in `source/data/`, the validator must
+  create it automatically. <!-- 02-§37.8 -->
+- The created file must contain a `camp:` header with `id`, `name`, `location`,
+  `start_date`, and `end_date` — all sourced from `camps.yaml`. <!-- 02-§37.9 -->
+- The created file must contain an empty `events: []` section. <!-- 02-§37.10 -->
+- Field order in the `camp:` header must be: `id`, `name`, `location`,
+  `start_date`, `end_date`. <!-- 02-§37.11 -->
+
+### 37.3 Camp header sync
+
+- `camps.yaml` is the single source of truth for camp metadata. <!-- 02-§37.12 -->
+- When a camp file exists, the validator must compare its `camp:` header fields
+  (`id`, `name`, `location`, `start_date`, `end_date`) against `camps.yaml`. <!-- 02-§37.13 -->
+- If any field differs, the validator must update the camp file to match
+  `camps.yaml`, preserving the `events:` section unchanged. <!-- 02-§37.14 -->
+- The field order after sync must be: `id`, `name`, `location`, `start_date`,
+  `end_date`. <!-- 02-§37.15 -->
+
+### 37.4 Integration
+
+- The validator must be runnable as `npm run validate:camps`. <!-- 02-§37.16 -->
+- The validator must log each action (created file, synced header, validation error)
+  to stdout. <!-- 02-§37.17 -->
+- The validator must be importable as a module for use in tests. <!-- 02-§37.18 -->
+
+---

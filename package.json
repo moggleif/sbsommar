@@ -11,6 +11,7 @@
     "lint": "eslint source tests eslint.config.js",
     "lint:fix": "eslint source tests eslint.config.js --fix",
     "lint:yaml": "node source/scripts/lint-yaml.js",
+    "validate:camps": "node source/scripts/validate-camps.js",
     "check:security": "node source/scripts/check-yaml-security.js",
     "lint:md": "markdownlint \"content/**/*.md\" \"docs/**/*.md\" README.md CLAUDE.md",
     "lint:css": "stylelint \"source/assets/cs/**/*.css\"",
