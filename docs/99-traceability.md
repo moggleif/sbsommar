@@ -196,7 +196,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `CL-§5.3` | JavaScript linting runs in CI; build fails if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – `npm run lint` (ESLint) | implemented |
 | `CL-§5.5` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | LNT-01..23 | `source/scripts/lint-yaml.js` – validates required fields, dates, time format, camp range, duplicate IDs, unique (title+date+start), active+archived; runs in CI via `event-data-deploy.yml` | covered |
 | `CL-§9.1` | Built output lives in `/public` | 04-OPERATIONS.md (System Overview) | — | `source/build/build.js` – `OUTPUT_DIR = …/public` | implemented |
-| `CL-§9.2` | GitHub Actions builds and validates; deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml`, `.github/workflows/deploy.yml` | implemented |
+| `CL-§9.2` | GitHub Actions builds and validates; deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml`, `.github/workflows/deploy-reusable.yml` | implemented |
 | `CL-§9.3` | Deployment happens only after successful CI | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/deploy.yml` – triggered only on push to `main` after CI passes | implemented |
 | `CL-§9.4` | For data-only commits (per-camp event files only), CI runs build only — lint and tests are skipped. Configuration files (`camps.yaml`, `local.yaml`) trigger full CI despite living in `source/data/` | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – data-only path check with config-file exclusion; `.github/workflows/deploy.yml` – `paths-ignore: source/data/**.yaml` | implemented |
 | `CL-§9.5` | CI workflows that compare branches must check out with enough git history for the diff to succeed (`fetch-depth: 0`) | 03-ARCHITECTURE.md §11.6 | — (CI end-to-end: open a PR and confirm the diff step succeeds) | `.github/workflows/ci.yml` – `fetch-depth: 0`; `.github/workflows/event-data-deploy.yml` – `fetch-depth: 0` on lint-yaml and security-check | implemented |
@@ -708,47 +708,47 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§38.10` | All existing tests pass | 03-ARCHITECTURE.md §20 | 785/785 pass | — | covered |
 | `02-§38.11` | Build, lint, and HTML validation pass | 03-ARCHITECTURE.md §20 | manual: CI | — | implemented |
 | `02-§39.1` | ci.yml declares explicit `permissions: contents: read` | CL-§5.11 | manual: CI workflow inspection | `.github/workflows/ci.yml` | implemented |
-| `02-§39.2` | deploy.yml declares explicit `permissions: contents: read` | CL-§5.11 | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
+| `02-§39.2` | deploy.yml declares explicit `permissions: contents: read` | CL-§5.11 | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§39.3` | slugify() has no polynomial-backtracking regex | CL-§5.3 | GH-SLG-01..11 | `source/api/github.js` – `slugify()` | covered |
 | `02-§39.4` | slugify replacement produces identical output for all tests | CL-§5.3 | GH-SLG-01..11 | `source/api/github.js` – `slugify()` | covered |
 | `02-§39.5` | Test URL assertions are specific enough to avoid CodeQL false positives | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
 | `02-§39.6` | Bare `includes('https://…')` replaced with context-aware assertions | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
 | `02-§39.7` | Zero open CodeQL alerts after merge | CL-§5.11 | manual: `gh api` | — | gap |
-| `02-§40.1` | Static site uploaded via SCP over SSH, not FTP | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.2` | SSH command swaps staging directory into live web root | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.3` | Swap preserves hosting `domains/` directory | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.4` | Downtime limited to two `mv` operations (milliseconds) | 04-OPERATIONS.md §Production | manual: deploy observation | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.5` | Stale directories cleaned up automatically | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.6` | Build output packaged into single tar.gz archive | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.7` | Archive extracted on server into staging directory | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.8` | Archive deleted from server after extraction | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.9` | Deploy uses existing SSH secrets | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.10` | New `DEPLOY_DIR` secret for domain directory path | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.11` | FTP static-site upload step and validation removed | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.12` | Server app deploy (FTP + SSH restart) unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.13` | Build step unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.14` | Workflow trigger unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.15` | SSH swap script uses `set -e` | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§40.16` | Failed deploy recoverable by subsequent deploy | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy.yml` | implemented |
-| `02-§41.1` | Three environments defined: Local, QA, Production | 08-ENVIRONMENTS.md §Overview | — | — | gap |
-| `02-§41.2` | QA deploys full site automatically on push to `main` | 08-ENVIRONMENTS.md §Overview | — | — | gap |
-| `02-§41.3` | Production deploys full site only via manual `workflow_dispatch` | 08-ENVIRONMENTS.md §Overview | — | — | gap |
-| `02-§41.4` | Both QA and Production deploy from `main`; no production branch | 08-ENVIRONMENTS.md §Overview | — | — | gap |
-| `02-§41.5` | Event data commits to `main` regardless of environment | 08-ENVIRONMENTS.md §Event data flow | — | — | gap |
-| `02-§41.6` | QA secrets scoped to GitHub Environment `qa` | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
-| `02-§41.7` | Production secrets scoped to GitHub Environment `production` | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
-| `02-§41.8` | Each environment has independent secret values | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
-| `02-§41.9` | Reusable workflow contains shared deploy logic | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
-| `02-§41.10` | Reusable workflow accepts environment name as input | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
-| `02-§41.11` | `deploy-qa.yml` calls reusable with environment `qa` | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
-| `02-§41.12` | `deploy-prod.yml` calls reusable with environment `production` | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
-| `02-§41.13` | Original `deploy.yml` removed | 08-ENVIRONMENTS.md §Workflows | — | — | gap |
-| `02-§41.14` | Event data deploy targets both QA and Production in parallel | 08-ENVIRONMENTS.md §Event data flow | — | — | gap |
-| `02-§41.15` | Each event data deploy builds with its environment's `SITE_URL` and `API_URL` | 08-ENVIRONMENTS.md §Event data flow | — | — | gap |
-| `02-§41.16` | QR code URL uses `SITE_URL` instead of hardcoded domain | 08-ENVIRONMENTS.md | — | — | gap |
-| `02-§41.17` | `ci.yml` uses repository-level `SITE_URL` secret | 08-ENVIRONMENTS.md §Secrets schema | — | — | gap |
-| `02-§41.18` | Local development uses `.env` for environment variables | 08-ENVIRONMENTS.md §Local development | — | — | gap |
-| `02-§41.19` | `.env.example` documents the environment management setup | 08-ENVIRONMENTS.md §Local development | — | — | gap |
+| `02-§40.1` | Static site uploaded via SCP over SSH, not FTP | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.2` | SSH command swaps staging directory into live web root | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.3` | Swap preserves hosting `domains/` directory | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.4` | Downtime limited to two `mv` operations (milliseconds) | 04-OPERATIONS.md §Production | manual: deploy observation | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.5` | Stale directories cleaned up automatically | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.6` | Build output packaged into single tar.gz archive | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.7` | Archive extracted on server into staging directory | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.8` | Archive deleted from server after extraction | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.9` | Deploy uses existing SSH secrets | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.10` | New `DEPLOY_DIR` secret for domain directory path | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.11` | FTP static-site upload step and validation removed | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.12` | Server app deploy (FTP + SSH restart) unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.13` | Build step unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.14` | Workflow trigger unchanged | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.15` | SSH swap script uses `set -e` | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§40.16` | Failed deploy recoverable by subsequent deploy | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§41.1` | Three environments defined: Local, QA, Production | 08-ENVIRONMENTS.md §Overview | manual: inspect workflow files and docs | `docs/08-ENVIRONMENTS.md`, `.github/workflows/deploy-qa.yml`, `deploy-prod.yml` | implemented |
+| `02-§41.2` | QA deploys full site automatically on push to `main` | 08-ENVIRONMENTS.md §Overview | manual: push to `main`, confirm `deploy-qa.yml` runs | `.github/workflows/deploy-qa.yml` | implemented |
+| `02-§41.3` | Production deploys full site only via manual `workflow_dispatch` | 08-ENVIRONMENTS.md §Overview | manual: Actions tab shows "Run workflow" on `deploy-prod.yml` | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§41.4` | Both QA and Production deploy from `main`; no production branch | 08-ENVIRONMENTS.md §Overview | manual: inspect workflow triggers | `.github/workflows/deploy-qa.yml`, `deploy-prod.yml` | implemented |
+| `02-§41.5` | Event data commits to `main` regardless of environment | 08-ENVIRONMENTS.md §Event data flow | manual: submit event, verify PR targets `main` | `source/api/github.js` (uses `GITHUB_BRANCH`) | implemented |
+| `02-§41.6` | QA secrets scoped to GitHub Environment `qa` | 08-ENVIRONMENTS.md §Secrets schema | manual: check GitHub Settings > Environments | `.github/workflows/deploy-qa.yml`, `event-data-deploy.yml` | implemented |
+| `02-§41.7` | Production secrets scoped to GitHub Environment `production` | 08-ENVIRONMENTS.md §Secrets schema | manual: check GitHub Settings > Environments | `.github/workflows/deploy-prod.yml`, `event-data-deploy.yml` | implemented |
+| `02-§41.8` | Each environment has independent secret values | 08-ENVIRONMENTS.md §Secrets schema | manual: check GitHub Settings > Environments | `docs/08-ENVIRONMENTS.md` | implemented |
+| `02-§41.9` | Reusable workflow contains shared deploy logic | 08-ENVIRONMENTS.md §Workflows | manual: inspect `deploy-reusable.yml` | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§41.10` | Reusable workflow accepts environment name as input | 08-ENVIRONMENTS.md §Workflows | manual: inspect `deploy-reusable.yml` inputs | `.github/workflows/deploy-reusable.yml` | implemented |
+| `02-§41.11` | `deploy-qa.yml` calls reusable with environment `qa` | 08-ENVIRONMENTS.md §Workflows | manual: inspect `deploy-qa.yml` | `.github/workflows/deploy-qa.yml` | implemented |
+| `02-§41.12` | `deploy-prod.yml` calls reusable with environment `production` | 08-ENVIRONMENTS.md §Workflows | manual: inspect `deploy-prod.yml` | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§41.13` | Original `deploy.yml` removed | 08-ENVIRONMENTS.md §Workflows | manual: verify file does not exist | `.github/workflows/deploy.yml` deleted | implemented |
+| `02-§41.14` | Event data deploy targets both QA and Production in parallel | 08-ENVIRONMENTS.md §Event data flow | manual: event PR triggers two parallel deploy jobs | `.github/workflows/event-data-deploy.yml` (`deploy-qa` + `deploy-prod` jobs) | implemented |
+| `02-§41.15` | Each event data deploy builds with its environment's `SITE_URL` and `API_URL` | 08-ENVIRONMENTS.md §Event data flow | manual: inspect `event-data-deploy.yml` build steps | `.github/workflows/event-data-deploy.yml` | implemented |
+| `02-§41.16` | QR code URL uses `SITE_URL` instead of hardcoded domain | 08-ENVIRONMENTS.md | manual: `SITE_URL=https://example.com npm run build`, check QR in `dagens-schema.html` | `source/build/build.js` line 134 | implemented |
+| `02-§41.17` | `ci.yml` uses repository-level `SITE_URL` secret | 08-ENVIRONMENTS.md §Secrets schema | manual: inspect `ci.yml` | `.github/workflows/ci.yml` (unchanged) | implemented |
+| `02-§41.18` | Local development uses `.env` for environment variables | 08-ENVIRONMENTS.md §Local development | manual: verify `.env` works for local build | `.env.example`, `source/build/build.js` (loads `.env`) | implemented |
+| `02-§41.19` | `.env.example` documents the environment management setup | 08-ENVIRONMENTS.md §Local development | manual: inspect `.env.example` | `.env.example` | implemented |
 
 ---
 
@@ -757,8 +757,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 ```text
 Total requirements:             613
 Covered (implemented + tested): 294
-Implemented, not tested:        298
-Gap (no implementation):         20
+Implemented, not tested:        317
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -897,10 +897,10 @@ Matrix cleanup (2026-02-25):
   Static site deploy changed from FTP to SCP + SSH swap.
   Server app deploy unchanged.
 19 requirements added for environment management (02-§41.1–41.19):
-  all 19 gap (not yet implemented).
+  all 19 implemented (CI/infrastructure, manual verification only).
   Splits deploy into QA (auto) and Production (manual workflow_dispatch).
   Event data deploys to both environments in parallel.
-  Fixes hardcoded QR code URL.
+  Fixes hardcoded QR code URL to use SITE_URL.
 ```
 
 ---
