@@ -905,6 +905,12 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§48.16` | Edit form hidden until specific event selected | 02-REQUIREMENTS.md §48.5 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
 | `02-§48.17` | Existing edit behaviour preserved with id param | 02-REQUIREMENTS.md §48.6 | existing REDT tests | `source/assets/js/client/redigera.js` | covered |
 | `02-§48.18` | Event list shown above edit form when editing | 02-REQUIREMENTS.md §48.6 | CEH-05 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
+| `02-§49.1` | API validates free-text fields for injection patterns before accepting the request | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `scanForInjection()` in `validateFields()` | gap |
+| `02-§49.2` | Injection patterns rejected: `<script`, `javascript:`, `on*=`, `<iframe`, `<object`, `<embed`, `data:text/html` | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `INJECTION_PATTERNS` array | gap |
+| `02-§49.3` | Error message identifies offending field and pattern category | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – error string includes field name and pattern label | gap |
+| `02-§49.4` | Non-empty link must start with `http://` or `https://` | 03-ARCHITECTURE.md §11.8 | ASEC-08..10 | `source/api/validate.js` – protocol regex check on `link` field | gap |
+| `02-§49.5` | Injection and link checks identical in Node.js and PHP implementations | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | gap |
+| `02-§49.6` | Both implementations produce equivalent error messages | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | gap |
 
 ---
 
@@ -1263,3 +1269,7 @@ Matrix cleanup (2026-02-25):
 | CEH-06..07 | `tests/cookie-enhancements.test.js` | `Auto-fill responsible person (02-§48.1–48.3)` |
 | CEH-08..09 | `tests/cookie-enhancements.test.js` | `Dynamic cookie paragraph swap (02-§48.5)` |
 | CEH-10..11 | `tests/cookie-enhancements.test.js` | `Edit page handles missing id param (02-§48.10)` |
+| ASEC-01..07 | `tests/validate.test.js` | `validateEventRequest – injection pattern scanning (02-§49.1–49.2)` |
+| ASEC-08..10 | `tests/validate.test.js` | `validateEventRequest – link protocol validation (02-§49.4)` |
+| ASEC-11..14 | `tests/validate.test.js` | `validateEditRequest – injection scanning (02-§49.1–49.2)` |
+| ASEC-15..16 | `tests/validate.test.js` | `validateEditRequest – link protocol validation (02-§49.4)` |

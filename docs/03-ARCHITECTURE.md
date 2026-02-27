@@ -92,7 +92,7 @@ During camp week, participants submit activities through the `/lagg-till.html` f
 
 The API server (`app.js`) handles each submission as follows:
 
-1. Validates the incoming event data.
+1. Validates the incoming event data, including security scanning for injection patterns and link protocol validation (see §11.8).
 2. Responds immediately with a success confirmation — the form does not wait for the rest of the process.
 3. Reads `source/data/camps.yaml` from GitHub via the Contents API.
 4. Derives the active camp from dates and reads its YAML file from GitHub.
@@ -741,6 +741,24 @@ step so the three-dot diff can find a common ancestor.
   `main` after the workflow has run at least once (check names only appear in the UI
   after a run exists).
 - No new secrets are needed beyond the existing deploy secrets (now scoped per GitHub Environment; see [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md)).
+
+### 11.8 API-layer security validation
+
+The injection pattern scan and link protocol check described in §11.2 are also
+performed at the API layer, inside `validateFields()` in `source/api/validate.js`
+(Node.js) and `api/src/Validate.php` (PHP). This means dangerous payloads are
+rejected with HTTP 400 **before** any data reaches the git repository.
+
+The checks are identical to those in `check-yaml-security.js`:
+
+- **Injection patterns** (case-insensitive): `<script`, `javascript:`, `on\w+=`,
+  `<iframe`, `<object`, `<embed`, `data:text/html`.
+- **Fields scanned**: `title`, `location`, `responsible`, `description`.
+- **Link protocol**: non-empty `link` must start with `http://` or `https://`.
+
+The CI security scan (`check-yaml-security.js`) remains as a defence-in-depth layer
+and will be removed in a future pipeline optimisation once the API-layer check has
+been proven in production.
 
 ---
 
