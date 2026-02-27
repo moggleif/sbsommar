@@ -10,6 +10,20 @@ const MAX_LENGTHS = {
   link:        500,
 };
 
+// Fields rendered in public HTML — scanned for injection patterns (02-§49.1).
+const TEXT_FIELDS = ['title', 'location', 'responsible', 'description'];
+
+// Patterns indicating potential injection attempts (02-§49.2).
+const INJECTION_PATTERNS = [
+  { re: /<script/i,         label: '<script>' },
+  { re: /javascript:/i,     label: 'javascript: URI' },
+  { re: /on\w+\s*=/i,       label: 'event handler (on*=)' },
+  { re: /<iframe/i,         label: '<iframe>' },
+  { re: /<object/i,         label: '<object>' },
+  { re: /<embed/i,          label: '<embed>' },
+  { re: /data:text\/html/i, label: 'data:text/html URI' },
+];
+
 function isDatePast(dateStr) {
   const today = new Date().toISOString().slice(0, 10);
   return dateStr < today;
@@ -77,6 +91,25 @@ function validateFields(body, { requireId = false } = {}, campDates) {
   }
   if (body.ownerName !== undefined && typeof body.ownerName !== 'string') {
     return fail('ownerName måste vara en sträng');
+  }
+
+  // Injection pattern scanning (02-§49.1, 02-§49.2, 02-§49.3)
+  for (const field of TEXT_FIELDS) {
+    const val = typeof body[field] === 'string' ? body[field] : '';
+    if (!val) continue;
+    for (const { re, label } of INJECTION_PATTERNS) {
+      if (re.test(val)) {
+        return fail(`${field} innehåller otillåtet mönster: ${label}`);
+      }
+    }
+  }
+
+  // Link protocol validation (02-§49.4)
+  if (typeof body.link === 'string') {
+    const link = body.link.trim();
+    if (link.length > 0 && !/^https?:\/\//i.test(link)) {
+      return fail('link måste använda http:// eller https://');
+    }
   }
 
   return { ok: true };

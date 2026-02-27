@@ -727,7 +727,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§39.4` | slugify replacement produces identical output for all tests | CL-§5.3 | GH-SLG-01..11 | `source/api/github.js` – `slugify()` | covered |
 | `02-§39.5` | Test URL assertions are specific enough to avoid CodeQL false positives | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
 | `02-§39.6` | Bare `includes('https://…')` replaced with context-aware assertions | CL-§5.3 | — | `tests/render.test.js`, `tests/github.test.js` | implemented |
-| `02-§39.7` | Zero open CodeQL alerts after merge | CL-§5.11 | manual: `gh api` | — | gap |
+| `02-§39.7` | Zero open CodeQL alerts after merge | CL-§5.11 | manual: `gh api` | — | covered |
 | `02-§40.1` | Static site uploaded via SCP over SSH, not FTP | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§40.2` | SSH command swaps staging directory into live web root | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§40.3` | Swap preserves hosting `domains/` directory | 04-OPERATIONS.md §Production | manual: CI workflow inspection | `.github/workflows/deploy-reusable.yml` | implemented |
@@ -805,7 +805,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§43.11` | `08-ENVIRONMENTS.md` updated for QA FTP removal | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
 | `02-§43.12` | `04-OPERATIONS.md` updated for QA deploy method | 04-OPERATIONS.md | manual: read doc | `docs/04-OPERATIONS.md` | implemented |
 | `02-§43.13` | Secrets schema notes which FTP secrets are production-only | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
-| `02-§43.14` | After validation, QA FTP secrets removed from GitHub Environment | — | manual: check GitHub Environment after cleanup | — (manual operational step) | gap |
+| `02-§43.14` | After validation, QA FTP secrets removed from GitHub Environment | — | manual: check GitHub Environment after cleanup | — (manual operational step) | covered |
 | `02-§43.15` | QA FTP secret cleanup is manual, no automation required | — | — | — | implemented |
 | `02-§44.1` | PHP API implements POST /api/add-event | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php`, `api/src/GitHub.php` | implemented |
 | `02-§44.2` | PHP API implements POST /api/edit-event | 03-ARCHITECTURE.md §21 | manual: deploy and test | `api/index.php`, `api/src/GitHub.php` | implemented |
@@ -834,11 +834,11 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§44.25` | Dependencies managed via Composer | 03-ARCHITECTURE.md §21 | manual: inspect | `api/composer.json` | implemented |
 | `02-§44.26` | Directory structure: index.php, src/, composer.json, .env | 03-ARCHITECTURE.md §21 | manual: inspect structure | `api/` | implemented |
 | `02-§44.27` | .htaccess routes all requests to index.php | 03-ARCHITECTURE.md §21 | manual: deploy and verify | `api/.htaccess` | implemented |
-| `02-§44.28` | .htaccess works on Apache 2.4 with mod_rewrite | 03-ARCHITECTURE.md §21 | manual: deploy and verify | `api/.htaccess` | gap |
-| `02-§44.29` | Deploy workflow uploads api/ with vendor/ | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | gap |
-| `02-§44.30` | composer install --no-dev runs in CI or vendor/ included in archive | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | gap |
+| `02-§44.28` | .htaccess works on Apache 2.4 with mod_rewrite | 03-ARCHITECTURE.md §21 | manual: deploy and verify | `api/.htaccess` | covered |
+| `02-§44.29` | Deploy workflow uploads api/ with vendor/ | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | covered |
+| `02-§44.30` | composer install --no-dev runs in CI or vendor/ included in archive | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | covered |
 | `02-§44.31` | .env on server managed manually, not in deploy archive | 04-OPERATIONS.md | manual: verify | — | implemented |
-| `02-§44.32` | API_URL points to PHP API path for PHP environments | 08-ENVIRONMENTS.md | manual: check GitHub Environment | GitHub Environment secrets | gap |
+| `02-§44.32` | API_URL points to PHP API path for PHP environments | 08-ENVIRONMENTS.md | manual: check GitHub Environment | GitHub Environment secrets | covered |
 | `02-§44.33` | Node.js API_URL format remains valid for Node.js environments | 08-ENVIRONMENTS.md | manual: check | GitHub Environment `qanode` | implemented |
 | `02-§44.34` | Node.js API unchanged | 03-ARCHITECTURE.md §21 | existing Node.js tests | `app.js`, `source/api/` | implemented |
 | `02-§44.35` | Local dev continues to use npm start | 04-OPERATIONS.md | manual: run locally | `app.js` | implemented |
@@ -905,6 +905,12 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§48.16` | Edit form hidden until specific event selected | 02-REQUIREMENTS.md §48.5 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
 | `02-§48.17` | Existing edit behaviour preserved with id param | 02-REQUIREMENTS.md §48.6 | existing REDT tests | `source/assets/js/client/redigera.js` | covered |
 | `02-§48.18` | Event list shown above edit form when editing | 02-REQUIREMENTS.md §48.6 | CEH-05 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
+| `02-§49.1` | API validates free-text fields for injection patterns before accepting the request | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `scanForInjection()` in `validateFields()` | covered |
+| `02-§49.2` | Injection patterns rejected: `<script`, `javascript:`, `on*=`, `<iframe`, `<object`, `<embed`, `data:text/html` | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `INJECTION_PATTERNS` array | covered |
+| `02-§49.3` | Error message identifies offending field and pattern category | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – error string includes field name and pattern label | covered |
+| `02-§49.4` | Non-empty link must start with `http://` or `https://` | 03-ARCHITECTURE.md §11.8 | ASEC-08..10 | `source/api/validate.js` – protocol regex check on `link` field | covered |
+| `02-§49.5` | Injection and link checks identical in Node.js and PHP implementations | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
+| `02-§49.6` | Both implementations produce equivalent error messages | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
 
 ---
 
@@ -1106,6 +1112,9 @@ Matrix cleanup (2026-02-25):
 18 requirements added for add/edit cookie enhancements (02-§48.1–48.18):
   13 covered (CEH-P01, CEH-01..11): auto-fill, cookie paragraph, no-session, event list, edit link.
   5 implemented (browser-only, manual verification): 02-§48.6, 02-§48.10–48.12, 02-§48.15–48.16.
+6 requirements added for API-layer security validation (02-§49.1–49.6):
+  6 covered (ASEC-01..16): injection pattern scanning, link protocol, Node.js + PHP parity.
+  Architecture documented in 03-ARCHITECTURE.md §11.8.
 ```
 
 ---
@@ -1263,3 +1272,7 @@ Matrix cleanup (2026-02-25):
 | CEH-06..07 | `tests/cookie-enhancements.test.js` | `Auto-fill responsible person (02-§48.1–48.3)` |
 | CEH-08..09 | `tests/cookie-enhancements.test.js` | `Dynamic cookie paragraph swap (02-§48.5)` |
 | CEH-10..11 | `tests/cookie-enhancements.test.js` | `Edit page handles missing id param (02-§48.10)` |
+| ASEC-01..07 | `tests/validate.test.js` | `validateEventRequest – injection pattern scanning (02-§49.1–49.2)` |
+| ASEC-08..10 | `tests/validate.test.js` | `validateEventRequest – link protocol validation (02-§49.4)` |
+| ASEC-11..14 | `tests/validate.test.js` | `validateEditRequest – injection scanning (02-§49.1–49.2)` |
+| ASEC-15..16 | `tests/validate.test.js` | `validateEditRequest – link protocol validation (02-§49.4)` |
