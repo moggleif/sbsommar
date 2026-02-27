@@ -117,4 +117,40 @@ describe('renderSchedulePage', () => {
     assert.ok(html.includes('webcal://sommar.example.com/schema.ics'), 'should use webcal scheme');
     assert.ok(!html.includes('https://sommar.example.com/schema.ics'), 'should not use https for webcal link');
   });
+
+  it('SNP-09 (02-§46.1): schedule header has SVG calendar icon', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    assert.ok(html.includes('<svg'), 'should have inline SVG icon');
+    assert.ok(html.includes('ical-icon'), 'should have ical-icon class');
+  });
+
+  it('SNP-10 (02-§46.3): calendar icon has no text label', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    assert.ok(!html.includes('📆'), 'should not have calendar emoji');
+  });
+
+  it('SNP-11 (02-§46.4): calendar icon links to kalender.html', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    assert.ok(html.includes('href="kalender.html"'), 'should link to kalender.html');
+  });
+
+  it('SNP-12 (02-§46.5): event rows include per-event iCal download link', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    assert.ok(html.includes('schema/frukost-22/event.ics'), 'should link to frukost event.ics');
+    assert.ok(html.includes('schema/workshop-22/event.ics'), 'should link to workshop event.ics');
+  });
+
+  it('SNP-13 (02-§46.8): per-event iCal links have download attribute', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    const icalLinks = html.match(/<a [^>]*event\.ics[^>]*>/g) || [];
+    assert.ok(icalLinks.length > 0, 'should have event.ics links');
+    for (const link of icalLinks) {
+      assert.ok(link.includes('download'), 'each event.ics link should have download attribute');
+    }
+  });
+
+  it('SNP-14 (02-§46.9): schedule page links to kalender.html for subscription guide', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    assert.ok(html.includes('kalender.html'), 'should reference kalender.html');
+  });
 });

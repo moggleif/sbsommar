@@ -81,4 +81,20 @@ describe('renderKalenderPage (02-§45.15–45.19)', () => {
     const html = renderKalenderPage(camp, siteUrl);
     assert.ok(html.includes('schema.ics'), 'should reference schema.ics');
   });
+
+  it('KAL-13 (02-§46.11): page uses card-based layout', () => {
+    const html = renderKalenderPage(camp, siteUrl);
+    assert.ok(html.includes('kalender-card'), 'should have kalender-card class');
+  });
+
+  it('KAL-14 (02-§46.12): platform sections are visually separated', () => {
+    const html = renderKalenderPage(camp, siteUrl);
+    const cardCount = (html.match(/kalender-card/g) || []).length;
+    assert.ok(cardCount >= 4, 'should have at least 4 card elements (one per platform)');
+  });
+
+  it('KAL-15 (02-§46.13): webcal URL in a code block', () => {
+    const html = renderKalenderPage(camp, siteUrl);
+    assert.ok(html.includes('ical-url-block'), 'should have ical-url-block class for code block');
+  });
 });
