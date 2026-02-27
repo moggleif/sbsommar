@@ -51,6 +51,7 @@ ${pageNav('schema.html', navSections)}
   <div class="event-detail">
     <p>📅 ${date} 🕐 ${timeStr}</p>
     <p>📍 <strong>Plats:</strong> ${escapeHtml(event.location)} · 👤 <strong>Ansvarig:</strong> ${escapeHtml(event.responsible)}</p>
+    <p>📆 <a href="schema/${escapeHtml(String(event.id))}/event.ics" download>Lägg till i kalender (.ics)</a></p>
 ${descriptionHtml}${linkHtml}  </div>
   <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}

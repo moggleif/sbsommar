@@ -86,10 +86,16 @@ function renderDaySection(date, dayEvents) {
   ].join('\n');
 }
 
-function renderSchedulePage(camp, events, footerHtml = '', navSections = []) {
+function renderSchedulePage(camp, events, footerHtml = '', navSections = [], siteUrl = '') {
   const { dates, byDate } = groupAndSortEvents(events);
   const daySections = dates.map((date) => renderDaySection(date, byDate[date])).join('\n\n');
   const campName = escapeHtml(camp.name);
+
+  let webcalHtml = '';
+  if (siteUrl) {
+    const webcalUrl = escapeHtml(siteUrl.replace(/^https?:\/\//, 'webcal://') + '/schema.ics');
+    webcalHtml = `\n    <a href="${webcalUrl}" class="ical-link" title="Prenumerera i kalender">📆 iCal</a>`;
+  }
 
   return `<!DOCTYPE html>
 <html lang="sv">
@@ -104,7 +110,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = []) {
 ${pageNav('schema.html', navSections)}
   <div class="schedule-header">
     <h1>Schema – ${campName}</h1>
-    <a href="schema.rss" class="rss-link" title="RSS-feed"><img src="images/RSS-logo.webp" alt="RSS" class="rss-icon"></a>
+    <a href="schema.rss" class="rss-link" title="RSS-feed"><img src="images/RSS-logo.webp" alt="RSS" class="rss-icon"></a>${webcalHtml}
   </div>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
   <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>
