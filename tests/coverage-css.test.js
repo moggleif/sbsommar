@@ -221,6 +221,34 @@ describe('07-§4.14 — CSS Grid', () => {
   });
 });
 
+// ── 02-§47.1–47.2  Heading and link colors ─────────────────────────────────
+
+describe('02-§47.1–47.2 — Heading and link colors', () => {
+  it('HDC-01: h1 uses terracotta color (02-§47.1)', () => {
+    const m = CSS.match(/(?:^|\n)\s*h1\s*\{([^}]+)\}/);
+    assert.ok(m, 'h1 rule block exists');
+    assert.ok(m[1].includes('var(--color-terracotta)'), 'h1 color is terracotta');
+  });
+
+  it('HDC-02: h2 uses terracotta color (02-§47.1)', () => {
+    const m = CSS.match(/(?:^|\n)\s*h2\s*\{([^}]+)\}/);
+    assert.ok(m, 'h2 rule block exists');
+    assert.ok(m[1].includes('var(--color-terracotta)'), 'h2 color is terracotta');
+  });
+
+  it('HDC-03: h3 uses terracotta color (02-§47.1)', () => {
+    const m = CSS.match(/(?:^|\n)\s*h3\s*\{([^}]+)\}/);
+    assert.ok(m, 'h3 rule block exists');
+    assert.ok(m[1].includes('var(--color-terracotta)'), 'h3 color is terracotta');
+  });
+
+  it('HDC-04: content links have permanent underline (02-§47.2)', () => {
+    const m = CSS.match(/\.content\s+a\s*\{([^}]+)\}/);
+    assert.ok(m, '.content a rule block exists');
+    assert.ok(m[1].includes('text-decoration: underline'), '.content a has text-decoration: underline');
+  });
+});
+
 // ── Display mode (02-§4.6) ──────────────────────────────────────────────────
 
 describe('02-§4.6 — Display mode dark styles', () => {

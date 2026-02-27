@@ -46,7 +46,7 @@ body {
 h1 {
   font-size: 40px;
   font-weight: 700;
-  color: var(--color-sage);
+  color: var(--color-terracotta);
   margin: 0 0 var(--space-xs);
 }
 
@@ -120,14 +120,14 @@ h1 {
 h2 {
   font-size: 35px;
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--color-terracotta);
   margin: 0 0 var(--space-sm);
 }
 
 h3 {
   font-size: 30px;
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--color-terracotta);
   margin: 0 0 var(--space-xs);
 }
 
@@ -1085,7 +1085,7 @@ details.accordion > summary:focus-visible {
 
 .content a {
   color: var(--color-terracotta);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .content a:hover {

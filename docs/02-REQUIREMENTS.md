@@ -2139,3 +2139,19 @@ includes a `DTSTAMP` property (RFC 5545 §3.6.1). <!-- 02-§46.14 -->
 
 The value is a UTC timestamp representing the build time, formatted as
 `YYYYMMDDTHHMMSSZ`. <!-- 02-§46.15 -->
+
+---
+
+## 47. Heading and Link Color Update
+
+### 47.1 Site requirements
+
+All heading elements (h1–h6) use terracotta (`var(--color-terracotta)`)
+as their text color. <!-- 02-§47.1 -->
+
+Content links (`.content a`) are styled with terracotta color and a
+permanent underline (`text-decoration: underline`), not only on
+hover. <!-- 02-§47.2 -->
+
+Navigation links, back-links, and other non-content links retain their
+existing styles. <!-- 02-§47.3 -->
