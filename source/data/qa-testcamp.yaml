@@ -517,3 +517,18 @@ events:
     meta:
       created_at: 2026-02-26 20:48
       updated_at: 2026-02-26 20:48
+  - id: ar-det-enkelt-2026-02-27-1932
+    title: 'Är det enkelt?'
+    date: '2026-02-27'
+    start: '19:32'
+    end: '22:32'
+    location: GA Stilla hyllan
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-27 18:32
+      updated_at: 2026-02-27 18:32
