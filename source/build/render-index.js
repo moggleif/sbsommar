@@ -168,6 +168,7 @@ function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, 
   <meta name="robots" content="noindex, nofollow">
   <title>SB Sommar</title>
   <link rel="stylesheet" href="style.css">${preloadHtml}
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
 </head>
 <body>
 ${pageNav('index.html', navSections)}${heroHtml}

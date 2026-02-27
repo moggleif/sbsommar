@@ -144,6 +144,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
   <meta name="robots" content="noindex, nofollow">
   <title>Arkiv – SB Sommar</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
 </head>
 <body>
 ${pageNav('arkiv.html', navSections)}

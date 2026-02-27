@@ -39,6 +39,7 @@ function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = 
   <meta name="robots" content="noindex, nofollow">
   <title>Redigera aktivitet – ${campName}</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
 </head>
 <body>
 ${pageNav('redigera.html', navSections)}

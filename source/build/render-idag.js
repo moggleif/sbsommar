@@ -32,6 +32,7 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = []) {
   <meta name="robots" content="noindex, nofollow">
   <title>Idag – ${campName}</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
 </head>
 <body>
 ${pageNav('idag.html', navSections)}
