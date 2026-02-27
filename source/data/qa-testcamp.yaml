@@ -563,3 +563,19 @@ events:
     meta:
       created_at: 2026-02-27 22:19
       updated_at: 2026-02-27 22:19
+  - id: mitt-nam-2026-02-28-0044
+    title: Mitt nam
+    date: '2026-02-28'
+    start: '00:44'
+    end: '02:44'
+    location: Kaffetält
+    responsible: Morgan
+    description: |
+      Eller hur
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-27 23:44
+      updated_at: 2026-02-27 23:44
