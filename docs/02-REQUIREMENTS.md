@@ -56,6 +56,8 @@ The following pages must exist:
 | `02-§2.6` | Archive | `/arkiv.html` | Prospective families, returning participants |
 | `02-§2.7` | RSS feed | `/schema.rss` | Anyone subscribing to the schedule |
 | `02-§2.11` | Edit activity | `/redigera.html` | Participants who submitted the event |
+| `02-§2.12` | iCal feed | `/schema.ics` | Anyone subscribing to the schedule |
+| `02-§2.13` | Calendar tips | `/kalender.html` | Participants wanting to sync the schedule |
 
 The homepage, schedule pages, add-activity form, and archive share the same header and navigation. <!-- 02-§2.8 -->
 None require login. <!-- 02-§2.9 -->
@@ -1984,3 +1986,100 @@ that supports Node.js.
   preserved as the `qanode` environment. <!-- 02-§44.38 -->
 - `docs/03-ARCHITECTURE.md` must note the dual API architecture (Node.js
   for local dev and Node.js hosts, PHP for shared hosting). <!-- 02-§44.39 -->
+
+---
+
+## 45. iCal Calendar Export
+
+The activity schedule must be available as iCalendar (`.ics`) files so
+participants can sync events to their phone or desktop calendar. <!-- 02-§45.1 -->
+
+### 45.1 Per-event iCal file
+
+Each event in the active camp must have a static `.ics` file generated at
+build time, located alongside the event detail page: <!-- 02-§45.2 -->
+
+```text
+/schema/{event-id}/event.ics
+```
+
+The `.ics` file must be valid iCalendar format (RFC 5545). <!-- 02-§45.3 -->
+
+Each per-event `.ics` file must include exactly one `VEVENT` with: <!-- 02-§45.4 -->
+
+- `DTSTART` / `DTEND` — event start and end time
+- `SUMMARY` — event title
+- `LOCATION` — event location
+- `DESCRIPTION` — responsible person, followed by description text if set
+- `URL` — absolute URL to the event detail page
+- `UID` — `{event-id}@{hostname}` (stable, unique)
+
+All times must use floating local format (`YYYYMMDDTHHMMSS` with no `Z`
+suffix and no `TZID`) — consistent with the no-timezone policy
+(05-§4.5). <!-- 02-§45.5 -->
+
+When `end` is null, `DTEND` must be omitted. <!-- 02-§45.6 -->
+
+The iCal renderer must not depend on any external iCal library — the
+format is simple enough to emit directly. <!-- 02-§45.7 -->
+
+### 45.2 Per-event iCal link on event detail page
+
+The event detail page (§36) must include a download link to the per-event
+`.ics` file. <!-- 02-§45.8 -->
+
+The link must appear as a third line in the event detail body, after the
+existing Plats/Ansvarig line, styled consistently with those
+lines. <!-- 02-§45.9 -->
+
+### 45.3 Full-camp iCal feed
+
+A complete iCalendar file containing all events in the active camp must be
+generated at build time at `/schema.ics`. <!-- 02-§45.10 -->
+
+The full-camp `.ics` file must contain one `VEVENT` per event, using the
+same field mapping as per-event files (§45.4). <!-- 02-§45.11 -->
+
+The `VCALENDAR` must include: <!-- 02-§45.12 -->
+
+- `PRODID` — identifies the generator (e.g. `-//SB Sommar//Schema//SV`)
+- `X-WR-CALNAME` — `Schema – {camp name}`
+- `METHOD` — `PUBLISH`
+
+### 45.4 Webcal link on schedule page
+
+The weekly schedule page must include a webcal subscription link to the
+full-camp iCal feed, alongside the existing RSS link. <!-- 02-§45.13 -->
+
+The link must use the `webcal://` protocol scheme (replacing `https://` in
+the site URL). <!-- 02-§45.14 -->
+
+### 45.5 Calendar tips page
+
+A static page must exist at `/kalender.html`. <!-- 02-§45.15 -->
+
+The page must include step-by-step instructions for subscribing to the
+camp calendar on: iOS Calendar, Android / Google Calendar, Gmail (web),
+and Outlook. <!-- 02-§45.16 -->
+
+The page must explain the difference between subscribing to the full camp
+calendar (auto-updates) and downloading individual event files
+(one-time import). <!-- 02-§45.17 -->
+
+The page must be written in Swedish. <!-- 02-§45.18 -->
+
+The page must use the shared site layout: header, navigation, and
+footer. <!-- 02-§45.19 -->
+
+### 45.6 Build integration
+
+The iCal renderer must be a separate module (`render-ical.js`), following
+the same pattern as `render-rss.js`. <!-- 02-§45.20 -->
+
+The tips page renderer must be a separate module
+(`render-kalender.js`). <!-- 02-§45.21 -->
+
+Both must be wired into `build.js`. <!-- 02-§45.22 -->
+
+iCal generation reuses the existing `SITE_URL` environment variable — no
+new configuration is needed. <!-- 02-§45.23 -->
