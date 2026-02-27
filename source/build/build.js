@@ -13,6 +13,8 @@ const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpc
 const { renderArkivPage } = require('./render-arkiv');
 const { renderRssFeed } = require('./render-rss');
 const { renderEventPage } = require('./render-event');
+const { renderEventIcal, renderIcalFeed } = require('./render-ical');
+const { renderKalenderPage } = require('./render-kalender');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 
 // ── Load .env if present (local dev) ─────────────────────────────────────────
@@ -132,7 +134,7 @@ async function main() {
     .filter((def) => def.id && def.nav)
     .map((def) => ({ id: def.id, navLabel: def.nav }));
 
-  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections);
+  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections, SITE_URL);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
@@ -195,15 +197,28 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.rss'), rssXml, 'utf8');
   console.log(`Built: public/schema.rss  (${events.length} events)`);
 
-  // ── Render per-event detail pages ───────────────────────────────────────
+  // ── Render iCal feed ────────────────────────────────────────────────────
+  const icalFeed = renderIcalFeed(camp, events, SITE_URL);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.ics'), icalFeed, 'utf8');
+  console.log(`Built: public/schema.ics  (${events.length} events)`);
+
+  // ── Render per-event detail pages and iCal files ──────────────────────
   const schemaDir = path.join(OUTPUT_DIR, 'schema');
   for (const e of events) {
     const eventDir = path.join(schemaDir, String(e.id));
     fs.mkdirSync(eventDir, { recursive: true });
     const eventHtml = renderEventPage(e, camp, SITE_URL, footerHtml, navSections);
     fs.writeFileSync(path.join(eventDir, 'index.html'), eventHtml, 'utf8');
+    const eventIcs = renderEventIcal(e, camp, SITE_URL);
+    fs.writeFileSync(path.join(eventDir, 'event.ics'), eventIcs, 'utf8');
   }
   console.log(`Built: public/schema/*/index.html  (${events.length} event pages)`);
+  console.log(`Built: public/schema/*/event.ics  (${events.length} event iCal files)`);
+
+  // ── Render calendar tips page ─────────────────────────────────────────
+  const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerHtml, navSections);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'kalender.html'), kalenderHtml, 'utf8');
+  console.log('Built: public/kalender.html');
 
   // ── Render index.html from content/sections.yaml ─────────────────────────
   // sectionsConfig already loaded above for navSections.

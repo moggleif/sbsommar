@@ -135,14 +135,14 @@ jobs:
       - name: Stage event data pages
         run: |
           mkdir -p staging
-          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss; do
+          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
             if [ -f "public/$FILE" ]; then
               cp "public/$FILE" "staging/$FILE"
               echo "Staged: $FILE"
             fi
           done
           if [ -d "public/schema" ]; then
-            find public/schema -name 'index.html' | while read -r PAGE; do
+            find public/schema \( -name 'index.html' -o -name 'event.ics' \) | while read -r PAGE; do
               REL="${PAGE#public/}"
               mkdir -p "staging/$(dirname "$REL")"
               cp "$PAGE" "staging/$REL"
@@ -190,14 +190,14 @@ jobs:
       - name: Stage event data pages
         run: |
           mkdir -p staging
-          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss; do
+          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
             if [ -f "public/$FILE" ]; then
               cp "public/$FILE" "staging/$FILE"
               echo "Staged: $FILE"
             fi
           done
           if [ -d "public/schema" ]; then
-            find public/schema -name 'index.html' | while read -r PAGE; do
+            find public/schema \( -name 'index.html' -o -name 'event.ics' \) | while read -r PAGE; do
               REL="${PAGE#public/}"
               mkdir -p "staging/$(dirname "$REL")"
               cp "$PAGE" "staging/$REL"
@@ -259,7 +259,7 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_TARGET_DIR: ${{ secrets.FTP_TARGET_DIR }}
         run: |
-          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss; do
+          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
             curl --ftp-create-dirs \
                  --upload-file "public/$FILE" \
                  --user "$FTP_USERNAME:$FTP_PASSWORD" \
@@ -268,7 +268,7 @@ jobs:
           done
           # Upload per-event detail pages
           if [ -d "public/schema" ]; then
-            find public/schema -name 'index.html' | while read -r PAGE; do
+            find public/schema \( -name 'index.html' -o -name 'event.ics' \) | while read -r PAGE; do
               REL="${PAGE#public/}"
               curl --ftp-create-dirs \
                    --upload-file "$PAGE" \

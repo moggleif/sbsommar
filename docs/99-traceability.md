@@ -846,15 +846,40 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§44.37` | 04-OPERATIONS.md documents PHP API | 04-OPERATIONS.md | manual: read doc | `docs/04-OPERATIONS.md` | implemented |
 | `02-§44.38` | 08-ENVIRONMENTS.md documents qa environment and secrets | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
 | `02-§44.39` | 03-ARCHITECTURE.md notes dual API architecture | 03-ARCHITECTURE.md §21 | manual: read doc | `docs/03-ARCHITECTURE.md` | implemented |
+| `02-§2.12` | iCal feed exists at `/schema.ics` | 03-ARCHITECTURE.md §22 | ICAL-21 | `source/build/render-ical.js` – `renderIcalFeed()`, `source/build/build.js` → `public/schema.ics` | covered |
+| `02-§2.13` | Calendar tips page exists at `/kalender.html` | 03-ARCHITECTURE.md §22 | KAL-01 | `source/build/render-kalender.js` – `renderKalenderPage()`, `source/build/build.js` → `public/kalender.html` | covered |
+| `02-§45.1` | Activity schedule available as iCalendar `.ics` files | 03-ARCHITECTURE.md §22 | ICAL-06, ICAL-21 | `source/build/render-ical.js`, `source/build/build.js` | covered |
+| `02-§45.2` | Per-event `.ics` file at `/schema/{event-id}/event.ics` | 03-ARCHITECTURE.md §22 | ICAL-06, ICAL-07 | `source/build/render-ical.js` – `renderEventIcal()`, `source/build/build.js` | covered |
+| `02-§45.3` | Per-event `.ics` is valid iCalendar (RFC 5545) | 03-ARCHITECTURE.md §22 | ICAL-06 | `source/build/render-ical.js` – `renderEventIcal()` | covered |
+| `02-§45.4` | VEVENT includes DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION, URL, UID | 03-ARCHITECTURE.md §22 | ICAL-08..15 | `source/build/render-ical.js` – `renderVevent()` | covered |
+| `02-§45.5` | Times use floating local format (no Z, no TZID) | 03-ARCHITECTURE.md §22 | ICAL-16 | `source/build/render-ical.js` – `toIcalDatetime()` | covered |
+| `02-§45.6` | DTEND omitted when end is null | 03-ARCHITECTURE.md §22 | ICAL-17, ICAL-18 | `source/build/render-ical.js` – `renderVevent()` | covered |
+| `02-§45.7` | iCal renderer has no external library dependency | 03-ARCHITECTURE.md §22 | ICAL-28 | `source/build/render-ical.js` (source inspection) | covered |
+| `02-§45.8` | Event detail page includes iCal download link | 03-ARCHITECTURE.md §22 | EVT-21 | `source/build/render-event.js` | covered |
+| `02-§45.9` | iCal link styled consistently with Plats/Ansvarig line | 03-ARCHITECTURE.md §22 | EVT-22 | `source/build/render-event.js` — same `<p>` pattern with emoji prefix | covered |
+| `02-§45.10` | Full-camp `.ics` at `/schema.ics` with all events | 03-ARCHITECTURE.md §22 | ICAL-21, ICAL-22 | `source/build/render-ical.js` – `renderIcalFeed()`, `source/build/build.js` | covered |
+| `02-§45.11` | Full-camp VEVENT uses same field mapping as per-event | 03-ARCHITECTURE.md §22 | ICAL-27 | `source/build/render-ical.js` – shared `renderVevent()` | covered |
+| `02-§45.12` | VCALENDAR includes PRODID, X-WR-CALNAME, METHOD | 03-ARCHITECTURE.md §22 | ICAL-23, ICAL-24, ICAL-25 | `source/build/render-ical.js` – `renderIcalFeed()` | covered |
+| `02-§45.13` | Schedule page includes webcal subscription link | 03-ARCHITECTURE.md §22 | SNP-07 | `source/build/render.js` – `renderSchedulePage()` | covered |
+| `02-§45.14` | Webcal link uses webcal:// protocol scheme | 03-ARCHITECTURE.md §22 | SNP-08 | `source/build/render.js` – `renderSchedulePage()` | covered |
+| `02-§45.15` | Calendar tips page at `/kalender.html` | 03-ARCHITECTURE.md §22 | KAL-01 | `source/build/render-kalender.js` – `renderKalenderPage()` | covered |
+| `02-§45.16` | Tips page covers iOS, Android, Gmail, Outlook | 03-ARCHITECTURE.md §22 | KAL-02..05 | `source/build/render-kalender.js` – `renderKalenderPage()` | covered |
+| `02-§45.17` | Tips page explains subscription vs download difference | 03-ARCHITECTURE.md §22 | KAL-06 | `source/build/render-kalender.js` – `renderKalenderPage()` | covered |
+| `02-§45.18` | Tips page in Swedish | 03-ARCHITECTURE.md §22 | KAL-07 | `source/build/render-kalender.js` – `renderKalenderPage()` | covered |
+| `02-§45.19` | Tips page uses shared layout (header, nav, footer) | 03-ARCHITECTURE.md §22 | KAL-08, KAL-09 | `source/build/render-kalender.js` – `pageNav()`, `pageFooter()` | covered |
+| `02-§45.20` | iCal renderer in separate module `render-ical.js` | 03-ARCHITECTURE.md §22 | ICAL-28 | `source/build/render-ical.js` | covered |
+| `02-§45.21` | Tips page renderer in separate module `render-kalender.js` | 03-ARCHITECTURE.md §22 | KAL-01 | `source/build/render-kalender.js` | covered |
+| `02-§45.22` | Both renderers wired into `build.js` | 03-ARCHITECTURE.md §22 | manual: run build | `source/build/build.js` – imports and calls both renderers | implemented |
+| `02-§45.23` | iCal generation reuses SITE_URL — no new config | 03-ARCHITECTURE.md §22 | manual: inspect build.js | `source/build/build.js` – passes existing `SITE_URL` | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             710
-Covered (implemented + tested): 314
-Implemented, not tested:        392
+Total requirements:             735
+Covered (implemented + tested): 337
+Implemented, not tested:        394
 Gap (no implementation):          4
 Orphan tests (no requirement):    0
 
@@ -1033,6 +1058,10 @@ Matrix cleanup (2026-02-25):
   2 covered (DIS-13, DIS-24, DIS-25): 02-§4.19 (date-only heading), 02-§4.20 (heading in sidebar).
   1 implemented (manual visual check): 02-§4.21 (compact event rows, flex 3:1 layout).
   Design documented in 07-DESIGN.md §6.44–6.48.
+25 requirements added for iCal calendar export (02-§2.12–2.13, 02-§45.1–45.23):
+  23 covered (ICAL-01..28, KAL-01..12, EVT-21..22, SNP-07..08).
+  2 implemented (manual: build.js wiring, SITE_URL reuse).
+  Architecture documented in 03-ARCHITECTURE.md §22.
 ```
 
 ---
@@ -1172,3 +1201,10 @@ Matrix cleanup (2026-02-25):
 | QA-11 | `tests/qa-camp.test.js` | `resolveActiveCamp – edge cases` |
 | MKD-01..05 | `tests/render-index.test.js` | `convertMarkdown – standard markdown features (02-§38.7)` |
 | LVD-01..06 | `tests/live-form-validation.test.js` | live form validation source checks (02-§6.9–6.14) |
+| ICAL-01..05 | `tests/render-ical.test.js` | `escapeIcal (02-§45)` |
+| ICAL-06..20 | `tests/render-ical.test.js` | `renderEventIcal – per-event .ics (02-§45.2–45.6)` |
+| ICAL-21..27 | `tests/render-ical.test.js` | `renderIcalFeed – full-camp .ics (02-§45.10–45.12)` |
+| ICAL-28 | `tests/render-ical.test.js` | `render-ical.js source (02-§45.7)` |
+| KAL-01..12 | `tests/render-kalender.test.js` | `renderKalenderPage (02-§45.15–45.19)` |
+| EVT-21..22 | `tests/render-event.test.js` | `renderEventPage (02-§45.8–45.9)` |
+| SNP-07..08 | `tests/snapshot.test.js` | `renderSchedulePage (02-§45.13–45.14)` |

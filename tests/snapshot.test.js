@@ -105,4 +105,16 @@ describe('renderSchedulePage', () => {
     const html = renderSchedulePage(CAMP, EVENTS);
     matchSnapshot(html, 'renderSchedulePage');
   });
+
+  it('SNP-07 (02-§45.13): includes webcal link when siteUrl is provided', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    assert.ok(html.includes('webcal://'), 'should have webcal:// link');
+    assert.ok(html.includes('webcal://sommar.example.com/schema.ics'), 'should link to schema.ics via webcal');
+  });
+
+  it('SNP-08 (02-§45.14): webcal link replaces https with webcal scheme', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://sommar.example.com');
+    assert.ok(html.includes('webcal://sommar.example.com/schema.ics'), 'should use webcal scheme');
+    assert.ok(!html.includes('https://sommar.example.com/schema.ics'), 'should not use https for webcal link');
+  });
 });
