@@ -887,24 +887,24 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§47.1` | All headings (h1–h6) use terracotta color | 07-DESIGN.md §3 | HDC-01..03 | `source/assets/cs/style.css` – h1, h2, h3 rules | covered |
 | `02-§47.2` | Content links have permanent underline | 07-DESIGN.md §6 | HDC-04 | `source/assets/cs/style.css` – `.content a` rule | covered |
 | `02-§47.3` | Nav/back-links retain existing styles | 07-DESIGN.md §6 | manual: visual check | no change to `.nav-link` or `.back-link` rules | implemented |
-| `02-§48.1` | Save "Ansvarig" to localStorage on successful submit | 02-REQUIREMENTS.md §48.1 | manual: browser localStorage check | `public/lagg-till.js` | gap |
-| `02-§48.2` | Pre-fill "Ansvarig" from localStorage on page load | 02-REQUIREMENTS.md §48.1 | manual: reload add form after submit | `public/lagg-till.js` | gap |
-| `02-§48.3` | Update stored responsible on every successful submit | 02-REQUIREMENTS.md §48.1 | manual: submit two events with different names | `public/lagg-till.js` | gap |
-| `02-§48.4` | Cookie paragraph exists in add form intro text | 02-REQUIREMENTS.md §48.2 | RADD tests | `public/lagg-till.html` | gap |
-| `02-§48.5` | Replace cookie paragraph with edit link if consent given | 02-REQUIREMENTS.md §48.2 | manual: accept cookies, reload page | `public/lagg-till.js` | gap |
-| `02-§48.6` | Keep cookie paragraph unchanged if no consent | 02-REQUIREMENTS.md §48.2 | manual: clear localStorage, reload page | `public/lagg-till.html` | gap |
-| `02-§48.7` | Replacement is done client-side on page load | 02-REQUIREMENTS.md §48.2 | manual: check page source vs rendered | `public/lagg-till.js` | gap |
-| `02-§48.8` | Edit page without cookie or id shows explanation text | 02-REQUIREMENTS.md §48.3 | CEH-01 | `public/redigera.html`, `public/redigera.js` | gap |
-| `02-§48.9` | Explanation text is in Swedish | 02-REQUIREMENTS.md §48.3 | CEH-02 | `public/redigera.html` | gap |
-| `02-§48.10` | Loading spinner hidden when no id param | 02-REQUIREMENTS.md §48.3 | manual: visit /redigera.html without params | `public/redigera.js` | gap |
-| `02-§48.11` | Cookie with no matching events shows empty-state message | 02-REQUIREMENTS.md §48.4 | manual: set cookie with expired IDs | `public/redigera.js` | gap |
-| `02-§48.12` | Loading spinner hidden for empty-state | 02-REQUIREMENTS.md §48.4 | manual: visit /redigera.html with cookie | `public/redigera.js` | gap |
-| `02-§48.13` | Cookie with matching events shows event list | 02-REQUIREMENTS.md §48.5 | CEH-03 | `public/redigera.js` | gap |
-| `02-§48.14` | List items show title as link to redigera.html?id= | 02-REQUIREMENTS.md §48.5 | CEH-04 | `public/redigera.js` | gap |
-| `02-§48.15` | Past events filtered out of list | 02-REQUIREMENTS.md §48.5 | manual: mix past and future event IDs | `public/redigera.js` | gap |
-| `02-§48.16` | Edit form hidden until specific event selected | 02-REQUIREMENTS.md §48.5 | manual: visit /redigera.html with cookie | `public/redigera.js` | gap |
-| `02-§48.17` | Existing edit behaviour preserved with id param | 02-REQUIREMENTS.md §48.6 | existing REDT tests | `public/redigera.js` | gap |
-| `02-§48.18` | Event list shown above edit form when editing | 02-REQUIREMENTS.md §48.6 | CEH-05 | `public/redigera.js` | gap |
+| `02-§48.1` | Save "Ansvarig" to localStorage on successful submit | 02-REQUIREMENTS.md §48.1 | CEH-06, CEH-07 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.2` | Pre-fill "Ansvarig" from localStorage on page load | 02-REQUIREMENTS.md §48.1 | CEH-06 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.3` | Update stored responsible on every successful submit | 02-REQUIREMENTS.md §48.1 | CEH-07 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.4` | Cookie paragraph exists in add form intro text | 02-REQUIREMENTS.md §48.2 | CEH-P01 | `source/build/render-add.js` | covered |
+| `02-§48.5` | Replace cookie paragraph with edit link if consent given | 02-REQUIREMENTS.md §48.2 | CEH-08, CEH-09 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.6` | Keep cookie paragraph unchanged if no consent | 02-REQUIREMENTS.md §48.2 | manual: clear localStorage, reload page | `source/build/render-add.js` | implemented |
+| `02-§48.7` | Replacement is done client-side on page load | 02-REQUIREMENTS.md §48.2 | CEH-08 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.8` | Edit page without cookie or id shows explanation text | 02-REQUIREMENTS.md §48.3 | CEH-01, CEH-10 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
+| `02-§48.9` | Explanation text is in Swedish | 02-REQUIREMENTS.md §48.3 | CEH-02 | `source/build/render-edit.js` | covered |
+| `02-§48.10` | Loading spinner hidden when no id param | 02-REQUIREMENTS.md §48.3 | manual: visit /redigera.html without params | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.11` | Cookie with no matching events shows empty-state message | 02-REQUIREMENTS.md §48.4 | manual: set cookie with expired IDs | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.12` | Loading spinner hidden for empty-state | 02-REQUIREMENTS.md §48.4 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.13` | Cookie with matching events shows event list | 02-REQUIREMENTS.md §48.5 | CEH-03, CEH-11 | `source/assets/js/client/redigera.js` | covered |
+| `02-§48.14` | List items show title as link to redigera.html?id= | 02-REQUIREMENTS.md §48.5 | CEH-04 | `source/assets/js/client/redigera.js` | covered |
+| `02-§48.15` | Past events filtered out of list | 02-REQUIREMENTS.md §48.5 | manual: mix past and future event IDs | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.16` | Edit form hidden until specific event selected | 02-REQUIREMENTS.md §48.5 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.17` | Existing edit behaviour preserved with id param | 02-REQUIREMENTS.md §48.6 | existing REDT tests | `source/assets/js/client/redigera.js` | covered |
+| `02-§48.18` | Event list shown above edit form when editing | 02-REQUIREMENTS.md §48.6 | CEH-05 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
 
 ---
 
@@ -912,9 +912,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 
 ```text
 Total requirements:             770
-Covered (implemented + tested): 351
-Implemented, not tested:        397
-Gap (no implementation):         22
+Covered (implemented + tested): 364
+Implemented, not tested:        402
+Gap (no implementation):          4
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1104,7 +1104,8 @@ Matrix cleanup (2026-02-25):
   2 covered (HDC-01..04): 02-§47.1 (heading colors), 02-§47.2 (link underline).
   1 implemented (manual visual check): 02-§47.3 (nav/back-links unchanged).
 18 requirements added for add/edit cookie enhancements (02-§48.1–48.18):
-  all 18 gap (pending implementation).
+  13 covered (CEH-P01, CEH-01..11): auto-fill, cookie paragraph, no-session, event list, edit link.
+  5 implemented (browser-only, manual verification): 02-§48.6, 02-§48.10–48.12, 02-§48.15–48.16.
 ```
 
 ---
@@ -1255,3 +1256,10 @@ Matrix cleanup (2026-02-25):
 | KAL-13..15 | `tests/render-kalender.test.js` | `renderKalenderPage (02-§46.11–46.13)` |
 | ICAL-29..31 | `tests/render-ical.test.js` | `DTSTAMP in VEVENT (02-§46.14–46.15)` |
 | HDC-01..04 | `tests/coverage-css.test.js` | `Heading and link colors (02-§47.1–47.2)` |
+| CEH-P01 | `tests/cookie-enhancements.test.js` | `Cookie paragraph in add form (02-§48.4)` |
+| CEH-01..02 | `tests/cookie-enhancements.test.js` | `Edit page no-cookie state (02-§48.8–48.9)` |
+| CEH-03..04 | `tests/cookie-enhancements.test.js` | `Event list container on edit page (02-§48.13–48.14)` |
+| CEH-05 | `tests/cookie-enhancements.test.js` | `Event list visible during edit (02-§48.18)` |
+| CEH-06..07 | `tests/cookie-enhancements.test.js` | `Auto-fill responsible person (02-§48.1–48.3)` |
+| CEH-08..09 | `tests/cookie-enhancements.test.js` | `Dynamic cookie paragraph swap (02-§48.5)` |
+| CEH-10..11 | `tests/cookie-enhancements.test.js` | `Edit page handles missing id param (02-§48.10)` |
