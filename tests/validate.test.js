@@ -468,3 +468,113 @@ describe('validateEventRequest – happy path', () => {
     assert.deepStrictEqual(r, { ok: true });
   });
 });
+
+// ── Injection pattern scanning (02-§49.1, 02-§49.2, 02-§49.3) ──────────────
+
+describe('validateEventRequest – injection pattern scanning', () => {
+  it('ASEC-01: rejects <script> tag in title', () => {
+    const r = validateEventRequest(valid({ title: '<script>alert(1)</script>' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('title'));
+  });
+
+  it('ASEC-02: rejects javascript: URI in description', () => {
+    const r = validateEventRequest(valid({ description: 'javascript:alert(1)' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('description'));
+  });
+
+  it('ASEC-03: rejects on*= event handler in location', () => {
+    const r = validateEventRequest(valid({ location: 'Room onerror=alert(1)' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('location'));
+  });
+
+  it('ASEC-04: rejects <iframe> in responsible', () => {
+    const r = validateEventRequest(valid({ responsible: '<iframe src="x">' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('responsible'));
+  });
+
+  it('ASEC-05: rejects <object> in title', () => {
+    const r = validateEventRequest(valid({ title: '<object data="x">' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('title'));
+  });
+
+  it('ASEC-06: rejects <embed> in description', () => {
+    const r = validateEventRequest(valid({ description: '<embed src="x">' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('description'));
+  });
+
+  it('ASEC-07: rejects data:text/html in description', () => {
+    const r = validateEventRequest(valid({ description: 'data:text/html,<h1>x</h1>' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('description'));
+  });
+});
+
+// ── Link protocol validation (02-§49.4) ─────────────────────────────────────
+
+describe('validateEventRequest – link protocol validation', () => {
+  it('ASEC-08: rejects javascript: link', () => {
+    const r = validateEventRequest(valid({ link: 'javascript:alert(1)' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('link'));
+  });
+
+  it('ASEC-09: rejects ftp:// link', () => {
+    const r = validateEventRequest(valid({ link: 'ftp://example.com/file' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('link'));
+  });
+
+  it('ASEC-10: rejects relative link (no protocol)', () => {
+    const r = validateEventRequest(valid({ link: '/some/path' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('link'));
+  });
+});
+
+// ── Edit request: injection + link protocol (02-§49.5) ──────────────────────
+
+describe('validateEditRequest – injection pattern scanning', () => {
+  it('ASEC-11: rejects <script> tag in title', () => {
+    const r = validateEditRequest(validEdit({ title: '<script>alert(1)</script>' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('title'));
+  });
+
+  it('ASEC-12: rejects javascript: URI in description', () => {
+    const r = validateEditRequest(validEdit({ description: 'javascript:alert(1)' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('description'));
+  });
+
+  it('ASEC-13: rejects on*= event handler in location', () => {
+    const r = validateEditRequest(validEdit({ location: 'Room onclick=x' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('location'));
+  });
+
+  it('ASEC-14: rejects <embed> in responsible', () => {
+    const r = validateEditRequest(validEdit({ responsible: '<embed src="x">' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('responsible'));
+  });
+});
+
+describe('validateEditRequest – link protocol validation', () => {
+  it('ASEC-15: rejects ftp:// link', () => {
+    const r = validateEditRequest(validEdit({ link: 'ftp://example.com' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('link'));
+  });
+
+  it('ASEC-16: rejects data: link', () => {
+    const r = validateEditRequest(validEdit({ link: 'data:text/html,<h1>x</h1>' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('link'));
+  });
+});
