@@ -45,9 +45,9 @@ Avoid bright or saturated colors outside this palette. The warmth comes from res
 
 | ID | Element | Size | Weight | Color | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `07-§3.4` | H1 | 40px | 700 | `#192A3D` | Page titles, hero heading |
-| `07-§3.5` | H2 | 35px | 700 | `#192A3D` | Section headings |
-| `07-§3.6` | H3 | 30px | 700 | `#192A3D` | Sub-section headings |
+| `07-§3.4` | H1 | 40px | 700 | `#C76D48` | Page titles, hero heading |
+| `07-§3.5` | H2 | 35px | 700 | `#C76D48` | Section headings |
+| `07-§3.6` | H3 | 30px | 700 | `#C76D48` | Sub-section headings |
 | `07-§3.7` | Body | 16px | 400 | `#3B3A38` | All running text |
 | `07-§3.8` | Small / meta | 14px | 400 | `#3B3A38` | Dates, labels, captions |
 | `07-§3.9` | Pull quote | 25px | 600 | `#3B3A38` | Georgia serif, italic |

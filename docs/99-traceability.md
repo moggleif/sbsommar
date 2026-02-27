@@ -884,6 +884,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§46.13` | Webcal URL in copy-friendly code block | 07-DESIGN.md | KAL-15 | `source/build/render-kalender.js` – `.ical-url-block` | covered |
 | `02-§46.14` | Every VEVENT includes DTSTAMP (RFC 5545 §3.6.1) | 03-ARCHITECTURE.md §22 | ICAL-29, ICAL-31 | `source/build/render-ical.js` – `buildDtstamp()` | covered |
 | `02-§46.15` | DTSTAMP is UTC build-time timestamp (YYYYMMDDTHHMMSSZ) | 03-ARCHITECTURE.md §22 | ICAL-30 | `source/build/render-ical.js` – `buildDtstamp()` | covered |
+| `02-§47.1` | All headings (h1–h6) use terracotta color | 07-DESIGN.md §3 | HDC-01..03 | `source/assets/cs/style.css` – h1, h2, h3 rules | gap |
+| `02-§47.2` | Content links have permanent underline | 07-DESIGN.md §6 | HDC-04 | `source/assets/cs/style.css` – `.content a` rule | gap |
+| `02-§47.3` | Nav/back-links retain existing styles | 07-DESIGN.md §6 | manual: visual check | — | gap |
 
 ---
 
