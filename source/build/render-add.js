@@ -31,6 +31,7 @@ function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = [
   <meta name="robots" content="noindex, nofollow">
   <title>Lägg till aktivitet – ${campName}</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
 </head>
 <body>
 ${pageNav('lagg-till.html', navSections)}
