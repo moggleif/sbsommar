@@ -5,2598 +5,2598 @@ camp:
   start_date: '2024-06-23'
   end_date: '2024-06-30'
 events:
-  - date: '2024-06-24'
-    description: null
+  - id: lunch-2024-06-24-1200
+    title: Lunch
+    date: '2024-06-24'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2024-06-24-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:39:15'
       updated_at: '2024-01-17 09:39:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2024-06-25-1200
     title: Lunch
-  - date: '2024-06-25'
-    description: null
+    date: '2024-06-25'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2024-06-25-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:39:16'
       updated_at: '2024-01-17 09:39:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2024-06-26-1200
     title: Lunch
-  - date: '2024-06-26'
-    description: null
+    date: '2024-06-26'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2024-06-26-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:39:16'
       updated_at: '2024-01-17 09:39:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2024-06-27-1200
     title: Lunch
-  - date: '2024-06-27'
-    description: null
+    date: '2024-06-27'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2024-06-27-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:39:16'
       updated_at: '2024-01-17 09:39:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2024-06-28-1200
     title: Lunch
-  - date: '2024-06-28'
-    description: null
+    date: '2024-06-28'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2024-06-28-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:39:16'
       updated_at: '2024-01-17 09:39:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2024-06-29-1200
     title: Lunch
-  - date: '2024-06-29'
-    description: null
+    date: '2024-06-29'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2024-06-29-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:39:16'
       updated_at: '2024-01-17 09:39:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2024-06-30-1200
     title: Lunch
-  - date: '2024-06-30'
-    description: null
+    date: '2024-06-30'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2024-06-30-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:39:16'
       updated_at: '2024-01-17 09:39:16'
-    owner:
-      email: ''
-      name: ''
+  - id: middag-2024-06-24-1700
+    title: Middag
+    date: '2024-06-24'
+    start: '17:00'
+    end: '18:00'
+    location: Servicehus
     responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2024-01-17 09:41:04'
+      updated_at: '2024-01-17 09:41:04'
+  - id: middag-2024-06-25-1700
+    title: Middag
+    date: '2024-06-25'
+    start: '17:00'
+    end: '18:00'
+    location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2024-01-17 09:41:04'
+      updated_at: '2024-01-17 09:41:04'
+  - id: middag-2024-06-26-1700
+    title: Middag
+    date: '2024-06-26'
+    start: '17:00'
+    end: '18:00'
+    location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2024-01-17 09:41:04'
+      updated_at: '2024-01-17 09:41:04'
+  - id: middag-2024-06-27-1700
+    title: Middag
+    date: '2024-06-27'
+    start: '17:00'
+    end: '18:00'
+    location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2024-01-17 09:41:04'
+      updated_at: '2024-01-17 09:41:04'
+  - id: middag-2024-06-28-1700
+    title: Middag
+    date: '2024-06-28'
+    start: '17:00'
+    end: '18:00'
+    location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2024-01-17 09:41:04'
+      updated_at: '2024-01-17 09:41:04'
+  - id: middag-2024-06-29-1700
+    title: Middag
+    date: '2024-06-29'
+    start: '17:00'
+    end: '18:00'
+    location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2024-01-17 09:41:04'
+      updated_at: '2024-01-17 09:41:04'
+  - id: valkommen-2024-06-23-1200
+    title: Välkommen
+    date: '2024-06-23'
     start: '12:00'
-    title: Lunch
-  - date: '2024-06-24'
-    description: null
-    end: '18:00'
-    id: middag-2024-06-24-1700
-    link: null
-    location: Servicehus
-    meta:
-      created_at: '2024-01-17 09:41:04'
-      updated_at: '2024-01-17 09:41:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2024-06-25'
-    description: null
-    end: '18:00'
-    id: middag-2024-06-25-1700
-    link: null
-    location: Servicehus
-    meta:
-      created_at: '2024-01-17 09:41:04'
-      updated_at: '2024-01-17 09:41:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2024-06-26'
-    description: null
-    end: '18:00'
-    id: middag-2024-06-26-1700
-    link: null
-    location: Servicehus
-    meta:
-      created_at: '2024-01-17 09:41:04'
-      updated_at: '2024-01-17 09:41:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2024-06-27'
-    description: null
-    end: '18:00'
-    id: middag-2024-06-27-1700
-    link: null
-    location: Servicehus
-    meta:
-      created_at: '2024-01-17 09:41:04'
-      updated_at: '2024-01-17 09:41:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2024-06-28'
-    description: null
-    end: '18:00'
-    id: middag-2024-06-28-1700
-    link: null
-    location: Servicehus
-    meta:
-      created_at: '2024-01-17 09:41:04'
-      updated_at: '2024-01-17 09:41:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2024-06-29'
-    description: null
-    end: '18:00'
-    id: middag-2024-06-29-1700
-    link: null
-    location: Servicehus
-    meta:
-      created_at: '2024-01-17 09:41:04'
-      updated_at: '2024-01-17 09:41:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2024-06-23'
-    description: null
     end: '23:30'
-    id: valkommen-2024-06-23-1200
-    link: null
     location: Annat
+    responsible: Alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:42:23'
       updated_at: '2024-01-17 09:42:23'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alla
-    start: '12:00'
-    title: Välkommen
-  - date: '2024-06-24'
-    description: null
+  - id: sista-for-idag-2024-06-24-2355
+    title: Sista för idag
+    date: '2024-06-24'
+    start: '23:55'
     end: '23:59'
-    id: sista-for-idag-2024-06-24-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:44:46'
       updated_at: '2024-01-17 09:44:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2024-06-25-2355
     title: Sista för idag
-  - date: '2024-06-25'
-    description: null
+    date: '2024-06-25'
+    start: '23:55'
     end: '23:59'
-    id: sista-for-idag-2024-06-25-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:44:46'
       updated_at: '2024-01-17 09:44:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2024-06-26-2355
     title: Sista för idag
-  - date: '2024-06-26'
-    description: null
+    date: '2024-06-26'
+    start: '23:55'
     end: '23:59'
-    id: sista-for-idag-2024-06-26-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:44:46'
       updated_at: '2024-01-17 09:44:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2024-06-27-2355
     title: Sista för idag
-  - date: '2024-06-27'
-    description: null
+    date: '2024-06-27'
+    start: '23:55'
     end: '23:59'
-    id: sista-for-idag-2024-06-27-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:44:46'
       updated_at: '2024-01-17 09:44:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2024-06-28-2355
     title: Sista för idag
-  - date: '2024-06-28'
-    description: null
+    date: '2024-06-28'
+    start: '23:55'
     end: '23:59'
-    id: sista-for-idag-2024-06-28-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:44:46'
       updated_at: '2024-01-17 09:44:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2024-06-29-2355
     title: Sista för idag
-  - date: '2024-06-29'
-    description: null
+    date: '2024-06-29'
+    start: '23:55'
     end: '23:59'
-    id: sista-for-idag-2024-06-29-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:44:46'
       updated_at: '2024-01-17 09:44:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
-    title: Sista för idag
-  - date: '2024-06-23'
-    description: null
+  - id: rigga-talt-och-stalla-i-ordning-ga-hall-2024-06-23-1900
+    title: Rigga tält och ställa i ordning GA-hall
+    date: '2024-06-23'
+    start: '19:00'
     end: '20:45'
-    id: rigga-talt-och-stalla-i-ordning-ga-hall-2024-06-23-1900
-    link: null
     location: Annat
+    responsible: Alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:46:06'
       updated_at: '2024-01-17 09:46:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alla
-    start: '19:00'
-    title: Rigga tält och ställa i ordning GA-hall
-  - date: '2024-06-30'
-    description: null
+  - id: glass-pa-chokladfabriken-2024-06-30-1200
+    title: Glass på chokladfabriken
+    date: '2024-06-30'
+    start: '12:00'
     end: '15:00'
-    id: glass-pa-chokladfabriken-2024-06-30-1200
-    link: null
     location: Annat
+    responsible: Eget ansvar
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:48:03'
       updated_at: '2024-01-17 09:48:03'
-    owner:
-      email: ''
-      name: ''
-    responsible: Eget ansvar
-    start: '12:00'
-    title: Glass på chokladfabriken
-  - date: '2024-06-24'
-    description: null
+  - id: valkomstmote-2024-06-24-1000
+    title: Välkomstmöte
+    date: '2024-06-24'
+    start: '10:00'
     end: '10:30'
-    id: valkomstmote-2024-06-24-1000
-    link: null
     location: GA Idrott
+    responsible: Andreas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-01-17 09:49:11'
       updated_at: '2024-01-17 09:49:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas
+  - id: simhall-abonnerad-for-rfsb-2024-06-25-1000
+    title: Simhall abonnerad för RFSB
+    date: '2024-06-25'
     start: '10:00'
-    title: Välkomstmöte
-  - date: '2024-06-25'
-    description: null
     end: '15:00'
-    id: simhall-abonnerad-for-rfsb-2024-06-25-1000
-    link: null
     location: Annat
+    responsible: vuxna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-05-22 20:15:28'
       updated_at: '2024-05-22 20:15:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: vuxna
-    start: '10:00'
+  - id: simhall-abonnerad-for-rfsb-2024-06-26-1000
     title: Simhall abonnerad för RFSB
-  - date: '2024-06-26'
-    description: null
+    date: '2024-06-26'
+    start: '10:00'
     end: '15:00'
-    id: simhall-abonnerad-for-rfsb-2024-06-26-1000
-    link: null
     location: Annat
+    responsible: vuxna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-05-22 20:15:28'
       updated_at: '2024-05-22 20:15:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: vuxna
-    start: '10:00'
+  - id: simhall-abonnerad-for-rfsb-2024-06-28-1000
     title: Simhall abonnerad för RFSB
-  - date: '2024-06-28'
-    description: null
+    date: '2024-06-28'
+    start: '10:00'
     end: '15:00'
-    id: simhall-abonnerad-for-rfsb-2024-06-28-1000
-    link: null
     location: Annat
+    responsible: vuxna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-05-22 20:15:28'
       updated_at: '2024-05-22 20:15:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: vuxna
-    start: '10:00'
-    title: Simhall abonnerad för RFSB
-  - date: '2024-06-24'
-    description: null
+  - id: rfsb-lokalforeningar-2024-06-24-1400
+    title: RFSB lokalföreningar
+    date: '2024-06-24'
+    start: '14:00'
     end: '15:00'
-    id: rfsb-lokalforeningar-2024-06-24-1400
-    link: null
     location: GA Idrott
+    responsible: Föräldrar
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-17 14:55:06'
       updated_at: '2024-06-17 14:55:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Föräldrar
+  - id: molles-rollspelskampanj-ordna-karaktarer-2024-06-24-1400
+    title: 'Molles rollspelskampanj, ordna karaktärer'
+    date: '2024-06-24'
     start: '14:00'
-    title: RFSB lokalföreningar
-  - date: '2024-06-24'
-    description: null
     end: '15:00'
-    id: molles-rollspelskampanj-ordna-karaktarer-2024-06-24-1400
-    link: null
     location: Rollspelstält2
+    responsible: Molle
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-19 11:35:09'
       updated_at: '2024-06-19 11:35:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: Molle
+  - id: selmas-kampanj-ordna-karaktarer-2024-06-24-1400
+    title: Selmas kampanj - ordna karaktärer
+    date: '2024-06-24'
     start: '14:00'
-    title: Molles rollspelskampanj, ordna karaktärer
-  - date: '2024-06-24'
-    description: null
     end: '15:00'
-    id: selmas-kampanj-ordna-karaktarer-2024-06-24-1400
-    link: null
     location: Rollspelstält1
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-19 11:44:16'
       updated_at: '2024-06-19 11:44:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '14:00'
-    title: Selmas kampanj - ordna karaktärer
-  - date: '2024-06-24'
-    description: null
+  - id: dubbelkampanjen-ordna-karaktarer-2024-06-24-1500
+    title: 'Dubbelkampanjen- ordna karaktärer '
+    date: '2024-06-24'
+    start: '15:00'
     end: '17:00'
-    id: dubbelkampanjen-ordna-karaktarer-2024-06-24-1500
-    link: null
     location: Rollspelstält1
+    responsible: 'Viktor Ängquist '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-19 23:32:46'
       updated_at: '2024-06-19 23:32:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Viktor Ängquist '
-    start: '15:00'
-    title: 'Dubbelkampanjen- ordna karaktärer '
-  - date: '2024-06-25'
-    description: null
+  - id: molles-rollspelskampanj-session-1-2024-06-25-1000
+    title: Molles rollspelskampanj - Session 1
+    date: '2024-06-25'
+    start: '10:00'
     end: '13:00'
-    id: molles-rollspelskampanj-session-1-2024-06-25-1000
-    link: null
     location: Rollspelstält2
+    responsible: Molle
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-19 23:36:04'
       updated_at: '2024-06-19 23:36:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Molle
+  - id: selmas-rollspelskampanj-session-1-2024-06-25-1000
+    title: Selmas rollspelskampanj - Session 1
+    date: '2024-06-25'
     start: '10:00'
-    title: Molles rollspelskampanj - Session 1
-  - date: '2024-06-25'
-    description: null
     end: '13:00'
-    id: selmas-rollspelskampanj-session-1-2024-06-25-1000
-    link: null
     location: Rollspelstält1
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-19 23:37:17'
       updated_at: '2024-06-19 23:37:17'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '10:00'
-    title: Selmas rollspelskampanj - Session 1
-  - date: '2024-06-25'
-    description: null
+  - id: japansk-bakning-1-fullbokad-2024-06-25-1400
+    title: 'JAPANSK BAKNING #1 - FULLBOKAD'
+    date: '2024-06-25'
+    start: '14:00'
     end: '16:00'
-    id: japansk-bakning-1-fullbokad-2024-06-25-1400
-    link: null
     location: Servicehus
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 10:18:48'
       updated_at: '2024-06-20 10:18:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '14:00'
-    title: 'JAPANSK BAKNING #1 - FULLBOKAD'
-  - date: '2024-06-24'
-    description: null
+  - id: bradspel-2024-06-24-1900
+    title: Brädspel
+    date: '2024-06-24'
+    start: '19:00'
     end: '22:00'
-    id: bradspel-2024-06-24-1900
-    link: null
     location: Kaffetält
+    responsible: Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 12:25:33'
       updated_at: '2024-06-20 12:25:33'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta
-    start: '19:00'
+  - id: bradspel-2024-06-28-1900
     title: Brädspel
-  - date: '2024-06-28'
-    description: null
+    date: '2024-06-28'
+    start: '19:00'
     end: '22:00'
-    id: bradspel-2024-06-28-1900
-    link: null
     location: Kaffetält
+    responsible: Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 12:30:45'
       updated_at: '2024-06-20 12:30:45'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta
-    start: '19:00'
+  - id: bradspel-2024-06-26-1900
     title: Brädspel
-  - date: '2024-06-26'
-    description: null
+    date: '2024-06-26'
+    start: '19:00'
     end: '22:00'
-    id: bradspel-2024-06-26-1900
-    link: null
     location: Kaffetält
+    responsible: Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 13:03:48'
       updated_at: '2024-06-20 13:03:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta
-    start: '19:00'
-    title: Brädspel
-  - date: '2024-06-25'
-    description: null
+  - id: grillfest-vid-klaralven-2024-06-25-1830
+    title: Grillfest vid Klarälven
+    date: '2024-06-25'
+    start: '18:30'
     end: '23:00'
-    id: grillfest-vid-klaralven-2024-06-25-1830
-    link: null
     location: Grillplats
+    responsible: 'Malin Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 16:46:25'
       updated_at: '2024-06-20 16:46:25'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin Isenfors '
-    start: '18:30'
-    title: Grillfest vid Klarälven
-  - date: '2024-06-26'
-    description: null
+  - id: bokcirkel-fallet-av-albert-camus-2024-06-26-1600
+    title: 'Bokcirkel "Fallet" av Albert Camus'
+    date: '2024-06-26'
+    start: '16:00'
     end: '17:00'
-    id: bokcirkel-fallet-av-albert-camus-2024-06-26-1600
-    link: null
     location: Kaffetält
+    responsible: 'Christina '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 17:09:37'
       updated_at: '2024-06-20 17:09:37'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Christina '
-    start: '16:00'
-    title: Bokcirkel "Fallet" av Albert Camus
-  - date: '2024-06-27'
-    description: null
+  - id: japansk-bakning-2-fullbokad-2024-06-27-1400
+    title: 'JAPANSK BAKNING #2 - FULLBOKAD'
+    date: '2024-06-27'
+    start: '14:00'
     end: '17:00'
-    id: japansk-bakning-2-fullbokad-2024-06-27-1400
-    link: null
     location: Servicehus
+    responsible: Lisa Lautrup
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 19:55:15'
       updated_at: '2024-06-20 19:55:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lisa Lautrup
+  - id: japansk-bakning-3-ledare-behovs-2024-06-29-1400
+    title: 'JAPANSK BAKNING #3 - ??? - ledare behövs'
+    date: '2024-06-29'
     start: '14:00'
-    title: 'JAPANSK BAKNING #2 - FULLBOKAD'
-  - date: '2024-06-29'
-    description: null
     end: '17:00'
-    id: japansk-bakning-3-ledare-behovs-2024-06-29-1400
-    link: null
     location: Servicehus
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 19:58:34'
       updated_at: '2024-06-20 19:58:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '14:00'
-    title: 'JAPANSK BAKNING #3 - ??? - ledare behövs'
-  - date: '2024-06-24'
-    description: null
+  - id: bast-i-test-2024-06-24-1500
+    title: Bäst i test
+    date: '2024-06-24'
+    start: '15:00'
     end: '17:00'
-    id: bast-i-test-2024-06-24-1500
-    link: null
     location: Nerf-arena
+    responsible: 'Christina '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-20 20:09:15'
       updated_at: '2024-06-20 20:09:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Christina '
-    start: '15:00'
-    title: Bäst i test
-  - date: '2024-06-26'
-    description: null
+  - id: molles-rollspelskampanj-session-2-2024-06-26-1000
+    title: Molles rollspelskampanj - Session 2
+    date: '2024-06-26'
+    start: '10:00'
     end: '13:00'
-    id: molles-rollspelskampanj-session-2-2024-06-26-1000
-    link: null
     location: Rollspelstält2
+    responsible: Molle
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 00:16:58'
       updated_at: '2024-06-21 00:16:58'
-    owner:
-      email: ''
-      name: ''
-    responsible: Molle
+  - id: selmas-rollspelskampanj-session-3-2024-06-27-1000
+    title: Selmas rollspelskampanj – Session 3
+    date: '2024-06-27'
     start: '10:00'
-    title: Molles rollspelskampanj - Session 2
-  - date: '2024-06-27'
-    description: null
     end: '13:00'
-    id: selmas-rollspelskampanj-session-3-2024-06-27-1000
-    link: null
     location: Rollspelstält1
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:26:17'
       updated_at: '2024-06-21 08:26:17'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '10:00'
-    title: Selmas rollspelskampanj – Session 3
-  - date: '2024-06-27'
-    description: null
+  - id: dubbelkampanjen-session-3-2024-06-27-1330
+    title: Dubbelkampanjen – Session 3
+    date: '2024-06-27'
+    start: '13:30'
     end: '16:30'
-    id: dubbelkampanjen-session-3-2024-06-27-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:31:45'
       updated_at: '2024-06-21 08:31:45'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald Ängquist
+  - id: dubbelkampanjen-session-4-2024-06-28-1330
+    title: Dubbelkampanjen – Session 4
+    date: '2024-06-28'
     start: '13:30'
-    title: Dubbelkampanjen – Session 3
-  - date: '2024-06-28'
-    description: null
     end: '16:30'
-    id: dubbelkampanjen-session-4-2024-06-28-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:32:56'
       updated_at: '2024-06-21 08:32:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald Ängquist
+  - id: dubbelkampanjen-session-5-2024-06-29-1330
+    title: Dubbelkampanjen – Session 5
+    date: '2024-06-29'
     start: '13:30'
-    title: Dubbelkampanjen – Session 4
-  - date: '2024-06-29'
-    description: null
     end: '16:30'
-    id: dubbelkampanjen-session-5-2024-06-29-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:33:58'
       updated_at: '2024-06-21 08:33:58'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald Ängquist
-    start: '13:30'
-    title: Dubbelkampanjen – Session 5
-  - date: '2024-06-25'
-    description: null
+  - id: spelledarkurs-grupp-1o2-ordna-karaktarer-2024-06-25-1830
+    title: Spelledarkurs – Grupp 1o2 - Ordna karaktärer
+    date: '2024-06-25'
+    start: '18:30'
     end: '20:00'
-    id: spelledarkurs-grupp-1o2-ordna-karaktarer-2024-06-25-1830
-    link: null
     location: Rollspelstält1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:46:46'
       updated_at: '2024-06-21 08:46:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
+  - id: spelledarkurs-grupp-1-session-2-2024-06-26-1830
+    title: Spelledarkurs – Grupp 1 - session 2
+    date: '2024-06-26'
     start: '18:30'
-    title: Spelledarkurs – Grupp 1o2 - Ordna karaktärer
-  - date: '2024-06-26'
-    description: null
     end: '21:00'
-    id: spelledarkurs-grupp-1-session-2-2024-06-26-1830
-    link: null
     location: Rollspelstält1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:47:52'
       updated_at: '2024-06-21 08:47:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
+  - id: spelledarkurs-grupp-2-session-1-2024-06-27-1830
+    title: Spelledarkurs – Grupp 2 - Session 1
+    date: '2024-06-27'
     start: '18:30'
-    title: Spelledarkurs – Grupp 1 - session 2
-  - date: '2024-06-27'
-    description: null
     end: '21:00'
-    id: spelledarkurs-grupp-2-session-1-2024-06-27-1830
-    link: null
     location: Rollspelstält1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:49:06'
       updated_at: '2024-06-21 08:49:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
+  - id: spelledarkurs-grupp-2-session-2-2024-06-28-1830
+    title: Spelledarkurs – Grupp 2 - Session 2
+    date: '2024-06-28'
     start: '18:30'
-    title: Spelledarkurs – Grupp 2 - Session 1
-  - date: '2024-06-28'
-    description: null
     end: '21:00'
-    id: spelledarkurs-grupp-2-session-2-2024-06-28-1830
-    link: null
     location: Rollspelstält1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:50:34'
       updated_at: '2024-06-21 08:50:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
-    start: '18:30'
-    title: Spelledarkurs – Grupp 2 - Session 2
-  - date: '2024-06-27'
-    description: null
+  - id: prova-pa-kampanj-2-2024-06-27-1000
+    title: Prova-på-kampanj 2
+    date: '2024-06-27'
+    start: '10:00'
     end: '12:30'
-    id: prova-pa-kampanj-2-2024-06-27-1000
-    link: null
     location: Rollspelstält2
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 08:59:50'
       updated_at: '2024-06-21 08:59:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
-    start: '10:00'
-    title: Prova-på-kampanj 2
-  - date: '2024-06-25'
-    description: null
+  - id: dubbelkampanjen-session-1-2024-06-25-1330
+    title: Dubbelkampanjen - Session 1
+    date: '2024-06-25'
+    start: '13:30'
     end: '16:30'
-    id: dubbelkampanjen-session-1-2024-06-25-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 09:23:54'
       updated_at: '2024-06-21 09:23:54'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald Ängquist
-    start: '13:30'
-    title: Dubbelkampanjen - Session 1
-  - date: '2024-06-26'
-    description: null
+  - id: selmas-rollspelskampanj-session-2-2024-06-26-1000
+    title: Selmas rollspelskampanj - Session 2
+    date: '2024-06-26'
+    start: '10:00'
     end: '13:00'
-    id: selmas-rollspelskampanj-session-2-2024-06-26-1000
-    link: null
     location: Rollspelstält1
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 09:24:00'
       updated_at: '2024-06-21 09:24:00'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '10:00'
-    title: Selmas rollspelskampanj - Session 2
-  - date: '2024-06-26'
-    description: null
+  - id: dubbelkampanjen-session-2-2024-06-26-1330
+    title: Dubbelkampanjen - Session 2
+    date: '2024-06-26'
+    start: '13:30'
     end: '16:30'
-    id: dubbelkampanjen-session-2-2024-06-26-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 09:24:09'
       updated_at: '2024-06-21 09:24:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald Ängquist
-    start: '13:30'
-    title: Dubbelkampanjen - Session 2
-  - date: '2024-06-24'
-    description: null
+  - id: spelledarkurs-oppen-forelasning-att-leda-rollspel-2024-06-24-1830
+    title: Spelledarkurs - Öppen föreläsning - Att leda rollspel
+    date: '2024-06-24'
+    start: '18:30'
     end: '21:00'
-    id: spelledarkurs-oppen-forelasning-att-leda-rollspel-2024-06-24-1830
-    link: null
     location: Rollspelstält1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 10:14:15'
       updated_at: '2024-06-21 10:14:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
-    start: '18:30'
-    title: Spelledarkurs - Öppen föreläsning - Att leda rollspel
-  - date: '2024-06-25'
-    description: null
+  - id: diamond-painting-2024-06-25-1000
+    title: Diamond painting
+    date: '2024-06-25'
+    start: '10:00'
     end: '11:55'
-    id: diamond-painting-2024-06-25-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Karin
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 10:27:14'
       updated_at: '2024-06-21 10:27:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: Karin
-    start: '10:00'
-    title: Diamond painting
-  - date: '2024-06-25'
-    description: null
+  - id: 5d-schack-2024-06-25-1330
+    title: 5D schack
+    date: '2024-06-25'
+    start: '13:30'
     end: '14:30'
-    id: 5d-schack-2024-06-25-1330
-    link: null
     location: GA Datorsal
+    responsible: Birgitta/Lukas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 14:44:34'
       updated_at: '2024-06-21 14:44:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta/Lukas
-    start: '13:30'
-    title: 5D schack
-  - date: '2024-06-26'
-    description: null
+  - id: open-stage-2024-06-26-2000
+    title: Open Stage
+    date: '2024-06-26'
+    start: '20:00'
     end: '22:30'
-    id: open-stage-2024-06-26-2000
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-21 23:41:01'
       updated_at: '2024-06-21 23:41:01'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '20:00'
-    title: Open Stage
-  - date: '2024-06-28'
-    description: null
+  - id: sysscon-2024-marknad-och-loppis-2024-06-28-1200
+    title: SyssCon 2024 - Marknad och loppis
+    date: '2024-06-28'
+    start: '12:00'
     end: '20:00'
-    id: sysscon-2024-marknad-och-loppis-2024-06-28-1200
-    link: null
     location: GA Idrott
+    responsible: Lotta Tyldhed
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 13:27:43'
       updated_at: '2024-06-22 13:27:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lotta Tyldhed
-    start: '12:00'
-    title: SyssCon 2024 - Marknad och loppis
-  - date: '2024-06-28'
-    description: null
+  - id: sysscon-2024-cosplay-parad-2024-06-28-1900
+    title: SyssCon 2024 - Cosplay-parad
+    date: '2024-06-28'
+    start: '19:00'
     end: '19:30'
-    id: sysscon-2024-cosplay-parad-2024-06-28-1900
-    link: null
     location: GA Idrott
+    responsible: Lotta Tyldhed
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 13:35:38'
       updated_at: '2024-06-22 13:35:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lotta Tyldhed
-    start: '19:00'
-    title: SyssCon 2024 - Cosplay-parad
-  - date: '2024-06-24'
-    description: null
+  - id: schackspel-med-klocka-2024-06-24-1300
+    title: Schackspel med klocka
+    date: '2024-06-24'
+    start: '13:00'
     end: '14:00'
-    id: schackspel-med-klocka-2024-06-24-1300
-    link: null
     location: Kaffetält
+    responsible: Hampus Sommerfeld
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 16:06:01'
       updated_at: '2024-06-22 16:06:01'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus Sommerfeld
+  - id: vinyltryck-2024-06-24-1300
+    title: Vinyltryck
+    date: '2024-06-24'
     start: '13:00'
-    title: Schackspel med klocka
-  - date: '2024-06-24'
-    description: null
     end: '15:00'
-    id: vinyltryck-2024-06-24-1300
-    link: null
     location: GA Stilla hyllan
+    responsible: D Tiger Gruneau
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 16:35:46'
       updated_at: '2024-06-22 16:35:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: D Tiger Gruneau
+  - id: vinyltryckning-2024-06-25-1300
+    title: Vinyltryckning
+    date: '2024-06-25'
     start: '13:00'
-    title: Vinyltryck
-  - date: '2024-06-25'
-    description: null
     end: '15:00'
-    id: vinyltryckning-2024-06-25-1300
-    link: null
     location: GA Stilla hyllan
+    responsible: D Tiger Gruneau
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 16:38:48'
       updated_at: '2024-06-22 16:38:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: D Tiger Gruneau
-    start: '13:00'
+  - id: vinyltryckning-2024-06-26-1300
     title: Vinyltryckning
-  - date: '2024-06-26'
-    description: null
+    date: '2024-06-26'
+    start: '13:00'
     end: '15:00'
-    id: vinyltryckning-2024-06-26-1300
-    link: null
     location: GA Stilla hyllan
+    responsible: D Tiger Gruneau
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 16:40:27'
       updated_at: '2024-06-22 16:40:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: D Tiger Gruneau
-    start: '13:00'
-    title: Vinyltryckning
-  - date: '2024-06-29'
-    description: null
+  - id: prova-pa-rollspel-2024-06-29-1000
+    title: Prova-på-rollspel
+    date: '2024-06-29'
+    start: '10:00'
     end: '12:30'
-    id: prova-pa-rollspel-2024-06-29-1000
-    link: null
     location: Rollspelstält1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 17:14:08'
       updated_at: '2024-06-22 17:14:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
-    start: '10:00'
-    title: Prova-på-rollspel
-  - date: '2024-06-24'
-    description: null
+  - id: mala-och-spela-spacehulk-2024-06-24-1500
+    title: 'Måla och spela spacehulk '
+    date: '2024-06-24'
+    start: '15:00'
     end: '17:00'
-    id: mala-och-spela-spacehulk-2024-06-24-1500
-    link: null
     location: Servicehus
+    responsible: 'Magnus carlsson '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 17:35:57'
       updated_at: '2024-06-22 17:35:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Magnus carlsson '
-    start: '15:00'
-    title: 'Måla och spela spacehulk '
-  - date: '2024-06-24'
-    description: null
+  - id: lara-kanna-bingo-2024-06-24-0915
+    title: 'Lära känna Bingo '
+    date: '2024-06-24'
+    start: '09:15'
     end: '10:00'
-    id: lara-kanna-bingo-2024-06-24-0915
-    link: null
     location: Servicehus
+    responsible: RFSB Stockholm/Mälardalen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 18:04:26'
       updated_at: '2024-06-22 18:04:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: RFSB Stockholm/Mälardalen
-    start: '09:15'
-    title: 'Lära känna Bingo '
-  - date: '2024-06-25'
-    description: null
+  - id: spelledarkurs-grupp-1-session-1-2024-06-25-2000
+    title: Spelledarkurs – Grupp 1 - Session 1
+    date: '2024-06-25'
+    start: '20:00'
     end: '22:30'
-    id: spelledarkurs-grupp-1-session-1-2024-06-25-2000
-    link: null
     location: Rollspelstält1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 18:16:30'
       updated_at: '2024-06-22 18:16:30'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor Ängquist
-    start: '20:00'
-    title: Spelledarkurs – Grupp 1 - Session 1
-  - date: '2024-06-29'
-    description: null
+  - id: avslutningsmote-alla-deltar-2024-06-29-1800
+    title: Avslutningsmöte (alla deltar)
+    date: '2024-06-29'
+    start: '18:00'
     end: '20:00'
-    id: avslutningsmote-alla-deltar-2024-06-29-1800
-    link: null
     location: Annat
+    responsible: Andreas (Lägernissen)
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-22 22:31:14'
       updated_at: '2024-06-22 22:31:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas (Lägernissen)
-    start: '18:00'
-    title: Avslutningsmöte (alla deltar)
-  - date: '2024-06-24'
-    description: null
+  - id: bygg-ditt-egna-bradspel-2024-06-24-1830
+    title: 'Bygg ditt egna brädspel!'
+    date: '2024-06-24'
+    start: '18:30'
     end: '20:00'
-    id: bygg-ditt-egna-bradspel-2024-06-24-1830
-    link: null
     location: GA Stilla hyllan
+    responsible: Ivar och Harald Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 00:20:37'
       updated_at: '2024-06-23 00:20:37'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ivar och Harald Ängquist
-    start: '18:30'
-    title: Bygg ditt egna brädspel!
-  - date: '2024-06-24'
-    description: null
+  - id: musikjam-sang-och-musik-2024-06-24-1600
+    title: Musikjam - sång och musik
+    date: '2024-06-24'
+    start: '16:00'
     end: '17:00'
-    id: musikjam-sang-och-musik-2024-06-24-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 10:14:57'
       updated_at: '2024-06-23 10:14:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
+  - id: musikjam-sang-och-musik-2024-06-25-1600
+    title: Musikjam – sång och musik
+    date: '2024-06-25'
     start: '16:00'
-    title: Musikjam - sång och musik
-  - date: '2024-06-25'
-    description: null
     end: '17:00'
-    id: musikjam-sang-och-musik-2024-06-25-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 10:16:23'
       updated_at: '2024-06-23 10:16:23'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
+  - id: musikjam-sang-och-musik-2024-06-26-1500
     title: Musikjam – sång och musik
-  - date: '2024-06-26'
-    description: null
+    date: '2024-06-26'
+    start: '15:00'
     end: '16:00'
-    id: musikjam-sang-och-musik-2024-06-26-1500
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 10:19:28'
       updated_at: '2024-06-23 10:19:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '15:00'
+  - id: musikjam-sang-och-musik-2024-06-27-1600
     title: Musikjam – sång och musik
-  - date: '2024-06-27'
-    description: null
+    date: '2024-06-27'
+    start: '16:00'
     end: '17:00'
-    id: musikjam-sang-och-musik-2024-06-27-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 10:21:03'
       updated_at: '2024-06-23 10:21:03'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
+  - id: musikjam-sang-och-musik-2024-06-28-1600
     title: Musikjam – sång och musik
-  - date: '2024-06-28'
-    description: null
+    date: '2024-06-28'
+    start: '16:00'
     end: '17:00'
-    id: musikjam-sang-och-musik-2024-06-28-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 10:21:58'
       updated_at: '2024-06-23 10:21:58'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
+  - id: musikjam-sang-och-musik-2024-06-29-1600
     title: Musikjam – sång och musik
-  - date: '2024-06-29'
-    description: null
+    date: '2024-06-29'
+    start: '16:00'
     end: '17:00'
-    id: musikjam-sang-och-musik-2024-06-29-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 10:23:07'
       updated_at: '2024-06-23 10:23:07'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
-    title: Musikjam – sång och musik
-  - date: '2024-06-24'
-    description: null
+  - id: i-wanna-rock-elgitarr-for-nyborjare-2024-06-24-1400
+    title: 'I WANNA ROCK! – Elgitarr för nybörjare'
+    date: '2024-06-24'
+    start: '14:00'
     end: '15:45'
-    id: i-wanna-rock-elgitarr-for-nyborjare-2024-06-24-1400
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 10:47:55'
       updated_at: '2024-06-23 10:47:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '14:00'
-    title: I WANNA ROCK! – Elgitarr för nybörjare
-  - date: '2024-06-23'
-    description: null
+  - id: sista-for-idag-2024-06-23-2350
+    title: Sista för idag
+    date: '2024-06-23'
+    start: '23:50'
     end: '23:55'
-    id: sista-for-idag-2024-06-23-2350
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 11:57:13'
       updated_at: '2024-06-23 11:57:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:50'
-    title: Sista för idag
-  - date: '2024-06-24'
-    description: null
+  - id: baka-tunnbrod-2024-06-24-1300
+    title: 'Baka tunnbröd '
+    date: '2024-06-24'
+    start: '13:00'
     end: '15:00'
-    id: baka-tunnbrod-2024-06-24-1300
-    link: null
     location: Grillplats
+    responsible: 'Charlotte Anderberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 13:42:35'
       updated_at: '2024-06-23 13:42:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Charlotte Anderberg '
-    start: '13:00'
-    title: 'Baka tunnbröd '
-  - date: '2024-06-25'
-    description: null
+  - id: fota-med-systemkamera-2024-06-25-1030
+    title: 'Fota med systemkamera '
+    date: '2024-06-25'
+    start: '10:30'
     end: '11:30'
-    id: fota-med-systemkamera-2024-06-25-1030
-    link: null
     location: Annat
+    responsible: 'Elin Sommerfeld '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 14:13:13'
       updated_at: '2024-06-23 14:13:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Elin Sommerfeld '
-    start: '10:30'
-    title: 'Fota med systemkamera '
-  - date: '2024-06-24'
-    description: null
+  - id: dansa-till-ava-max-2024-06-24-1530
+    title: Dansa till Ava Max
+    date: '2024-06-24'
+    start: '15:30'
     end: '16:00'
-    id: dansa-till-ava-max-2024-06-24-1530
-    link: null
     location: Kaffetält
+    responsible: Jessica Larsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 22:36:46'
       updated_at: '2024-06-23 22:36:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Jessica Larsson
-    start: '15:30'
-    title: Dansa till Ava Max
-  - date: '2024-06-25'
-    description: null
+  - id: papperslera-drop-in-2024-06-25-1400
+    title: Papperslera (drop in)
+    date: '2024-06-25'
+    start: '14:00'
     end: '15:30'
-    id: papperslera-drop-in-2024-06-25-1400
-    link: null
     location: Kaffetält
+    responsible: Caroline och Kerstin Bastholm
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-23 23:03:31'
       updated_at: '2024-06-23 23:03:31'
-    owner:
-      email: ''
-      name: ''
-    responsible: Caroline och Kerstin Bastholm
-    start: '14:00'
-    title: Papperslera (drop in)
-  - date: '2024-06-24'
-    description: null
+  - id: lagerdans-2024-06-24-1100
+    title: Lägerdans
+    date: '2024-06-24'
+    start: '11:00'
     end: '11:45'
-    id: lagerdans-2024-06-24-1100
-    link: null
     location: Servicehus
+    responsible: Christina Falk
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 00:02:10'
       updated_at: '2024-06-24 00:02:10'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christina Falk
-    start: '11:00'
-    title: Lägerdans
-  - date: '2024-06-25'
-    description: null
+  - id: strid-med-lajvvapen-2024-06-25-1510
+    title: Strid med lajvvapen
+    date: '2024-06-25'
+    start: '15:10'
     end: '16:10'
-    id: strid-med-lajvvapen-2024-06-25-1510
-    link: null
     location: Nerf-arena
+    responsible: Astor och Martin
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 10:55:14'
       updated_at: '2024-06-24 10:55:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: Astor och Martin
-    start: '15:10'
-    title: Strid med lajvvapen
-  - date: '2024-06-24'
-    description: null
+  - id: vi-gor-stora-sapbubblor-vid-lekplatsen-2024-06-24-1130
+    title: Vi gör stora såpbubblor - vid lekplatsen.
+    date: '2024-06-24'
+    start: '11:30'
     end: '12:30'
-    id: vi-gor-stora-sapbubblor-vid-lekplatsen-2024-06-24-1130
-    link: null
     location: Annat
+    responsible: Robert Sabelström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 11:30:31'
       updated_at: '2024-06-24 11:30:31'
-    owner:
-      email: ''
-      name: ''
-    responsible: Robert Sabelström
-    start: '11:30'
-    title: Vi gör stora såpbubblor - vid lekplatsen.
-  - date: '2024-06-25'
-    description: null
+  - id: accelration-radikalaccelation-i-praktiken-2024-06-25-1030
+    title: Accelration/radikalaccelation i praktiken
+    date: '2024-06-25'
+    start: '10:30'
     end: '12:00'
-    id: accelration-radikalaccelation-i-praktiken-2024-06-25-1030
-    link: null
     location: Tält1
+    responsible: 'Malin, Simon'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 11:31:04'
       updated_at: '2024-06-24 11:31:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin, Simon
-    start: '10:30'
-    title: Accelration/radikalaccelation i praktiken
-  - date: '2024-06-25'
-    description: null
+  - id: skapa-i-krympplast-drop-in-pa-vandrarhemmet-2024-06-25-1300
+    title: Skapa i krympplast (drop in på vandrarhemmet)
+    date: '2024-06-25'
+    start: '13:00'
     end: '14:30'
-    id: skapa-i-krympplast-drop-in-pa-vandrarhemmet-2024-06-25-1300
-    link: null
     location: Annat
+    responsible: 'Familjen Thulemark '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:03:20'
       updated_at: '2024-06-24 12:03:20'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Familjen Thulemark '
-    start: '13:00'
-    title: Skapa i krympplast (drop in på vandrarhemmet)
-  - date: '2024-06-24'
-    description: null
+  - id: planeringsmote-rollspelsfika-foraldrar-vardnadshavare-2024-06-24-1600
+    title: 'Planeringsmöte rollspelsfika-föräldrar/vårdnadshavare '
+    date: '2024-06-24'
+    start: '16:00'
     end: '16:30'
-    id: planeringsmote-rollspelsfika-foraldrar-vardnadshavare-2024-06-24-1600
-    link: null
     location: GA Stilla hyllan
+    responsible: Anna Björnson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:24:32'
       updated_at: '2024-06-24 12:24:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anna Björnson
-    start: '16:00'
-    title: 'Planeringsmöte rollspelsfika-föräldrar/vårdnadshavare '
-  - date: '2024-06-26'
-    description: null
+  - id: angest-hos-barn-2024-06-26-1000
+    title: Ångest hos barn
+    date: '2024-06-26'
+    start: '10:00'
     end: '11:00'
-    id: angest-hos-barn-2024-06-26-1000
-    link: null
     location: Tält1
+    responsible: 'Linda Backman '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:51:28'
       updated_at: '2024-06-24 12:51:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Linda Backman '
-    start: '10:00'
-    title: Ångest hos barn
-  - date: '2024-06-27'
-    description: null
+  - id: braingames-2024-06-27-1830
+    title: Braingames
+    date: '2024-06-27'
+    start: '18:30'
     end: '20:30'
-    id: braingames-2024-06-27-1830
-    link: null
     location: GA Idrott
+    responsible: Ivar Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:53:06'
       updated_at: '2024-06-24 12:53:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ivar Ängquist
-    start: '18:30'
-    title: Braingames
-  - date: '2024-06-24'
-    description: null
+  - id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-24-1000
+    title: Syhörna -drop in (föräldrar assistera gärna)
+    date: '2024-06-24'
+    start: '10:00'
     end: '13:00'
-    id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-24-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Helena
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:59:59'
       updated_at: '2024-06-24 12:59:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena
-    start: '10:00'
+  - id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-25-1000
     title: Syhörna -drop in (föräldrar assistera gärna)
-  - date: '2024-06-25'
-    description: null
+    date: '2024-06-25'
+    start: '10:00'
     end: '13:00'
-    id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-25-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Helena
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:59:59'
       updated_at: '2024-06-24 12:59:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena
-    start: '10:00'
+  - id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-26-1000
     title: Syhörna -drop in (föräldrar assistera gärna)
-  - date: '2024-06-26'
-    description: null
+    date: '2024-06-26'
+    start: '10:00'
     end: '13:00'
-    id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-26-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Helena
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:59:59'
       updated_at: '2024-06-24 12:59:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena
-    start: '10:00'
+  - id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-27-1000
     title: Syhörna -drop in (föräldrar assistera gärna)
-  - date: '2024-06-27'
-    description: null
+    date: '2024-06-27'
+    start: '10:00'
     end: '13:00'
-    id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-27-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Helena
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:59:59'
       updated_at: '2024-06-24 12:59:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena
-    start: '10:00'
+  - id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-28-1000
     title: Syhörna -drop in (föräldrar assistera gärna)
-  - date: '2024-06-28'
-    description: null
+    date: '2024-06-28'
+    start: '10:00'
     end: '13:00'
-    id: syhorna-drop-in-foraldrar-assistera-garna-2024-06-28-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Helena
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 12:59:59'
       updated_at: '2024-06-24 12:59:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena
-    start: '10:00'
-    title: Syhörna -drop in (föräldrar assistera gärna)
-  - date: '2024-06-24'
-    description: null
+  - id: nail-art-alla-aldrar-2024-06-24-1700
+    title: Nail Art ( alla åldrar )
+    date: '2024-06-24'
+    start: '17:00'
     end: '18:30'
-    id: nail-art-alla-aldrar-2024-06-24-1700
-    link: null
     location: GA Kreativ hörna
+    responsible: Robert Sabelström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 15:35:42'
       updated_at: '2024-06-24 15:35:42'
-    owner:
-      email: ''
-      name: ''
-    responsible: Robert Sabelström
-    start: '17:00'
-    title: Nail Art ( alla åldrar )
-  - date: '2024-06-26'
-    description: null
+  - id: foraldrafika-2e-sarskild-begavning-och-npf-2024-06-26-1500
+    title: Föräldrafika - 2e (särskild begåvning och npf)
+    date: '2024-06-26'
+    start: '15:00'
     end: '16:00'
-    id: foraldrafika-2e-sarskild-begavning-och-npf-2024-06-26-1500
-    link: null
     location: Tält1
+    responsible: Anne och Anna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 17:37:57'
       updated_at: '2024-06-24 17:37:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anne och Anna
-    start: '15:00'
-    title: Föräldrafika - 2e (särskild begåvning och npf)
-  - date: '2024-06-27'
-    description: null
+  - id: foraldrafika-provning-uppflytt-att-ta-studenten-vid-16-2024-06-27-1000
+    title: 'Föräldrafika - prövning, uppflytt, att ta studenten vid 16'
+    date: '2024-06-27'
+    start: '10:00'
     end: '11:00'
-    id: foraldrafika-provning-uppflytt-att-ta-studenten-vid-16-2024-06-27-1000
-    link: null
     location: Tält1
+    responsible: Anne och Anna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 17:43:01'
       updated_at: '2024-06-24 17:43:01'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anne och Anna
+  - id: foraldrafika-dyslexi-och-sarskild-begavning-2024-06-29-1000
+    title: 'Föräldrafika - dyslexi och särskild begåvning '
+    date: '2024-06-29'
     start: '10:00'
-    title: Föräldrafika - prövning, uppflytt, att ta studenten vid 16
-  - date: '2024-06-29'
-    description: null
     end: '11:00'
-    id: foraldrafika-dyslexi-och-sarskild-begavning-2024-06-29-1000
-    link: null
     location: Tält1
+    responsible: Anna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 17:49:58'
       updated_at: '2024-06-24 17:49:58'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anna
-    start: '10:00'
-    title: 'Föräldrafika - dyslexi och särskild begåvning '
-  - date: '2024-06-24'
-    description: null
+  - id: tecknarstudio-en-lugn-stund-anmalan-behovs-2024-06-24-2000
+    title: Tecknarstudio en lugn stund. Anmälan behövs
+    date: '2024-06-24'
+    start: '20:00'
     end: '22:00'
-    id: tecknarstudio-en-lugn-stund-anmalan-behovs-2024-06-24-2000
-    link: null
     location: GA Stilla hyllan
+    responsible: 'Tilde, Albin, Malin, Karin'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 18:27:21'
       updated_at: '2024-06-24 18:27:21'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Malin, Karin
-    start: '20:00'
-    title: Tecknarstudio en lugn stund. Anmälan behövs
-  - date: '2024-06-26'
-    description: null
+  - id: stick-fika-2024-06-26-1315
+    title: Stick-fika
+    date: '2024-06-26'
+    start: '13:15'
     end: '14:30'
-    id: stick-fika-2024-06-26-1315
-    link: null
     location: Kaffetält
+    responsible: 'Kerstin Eiman '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 18:29:25'
       updated_at: '2024-06-24 18:29:25'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Kerstin Eiman '
-    start: '13:15'
-    title: Stick-fika
-  - date: '2024-06-25'
-    description: null
+  - id: kalligrafi-2024-06-25-1300
+    title: Kalligrafi
+    date: '2024-06-25'
+    start: '13:00'
     end: '13:30'
-    id: kalligrafi-2024-06-25-1300
-    link: null
     location: Rollspelstält2
+    responsible: Malin
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 18:32:22'
       updated_at: '2024-06-24 18:32:22'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin
-    start: '13:00'
-    title: Kalligrafi
-  - date: '2024-06-25'
-    description: null
+  - id: 5d-schack-2024-06-25-1530
+    title: 5d schack
+    date: '2024-06-25'
+    start: '15:30'
     end: '16:15'
-    id: 5d-schack-2024-06-25-1530
-    link: null
     location: GA Datorsal
+    responsible: Lukas/Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 19:05:57'
       updated_at: '2024-06-24 19:05:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lukas/Birgitta
-    start: '15:30'
-    title: 5d schack
-  - date: '2024-06-27'
-    description: null
+  - id: musikquiz-2024-06-27-2045
+    title: Musikquiz
+    date: '2024-06-27'
+    start: '20:45'
     end: '22:15'
-    id: musikquiz-2024-06-27-2045
-    link: null
     location: Servicehus
+    responsible: Ola Hammar
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 20:08:17'
       updated_at: '2024-06-24 20:08:17'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ola Hammar
-    start: '20:45'
-    title: Musikquiz
-  - date: '2024-06-25'
-    description: null
+  - id: lagerdans-2024-06-25-1100
+    title: Lägerdans
+    date: '2024-06-25'
+    start: '11:00'
     end: '11:30'
-    id: lagerdans-2024-06-25-1100
-    link: null
     location: Servicehus
+    responsible: Christina Falk
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 20:17:43'
       updated_at: '2024-06-24 20:17:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christina Falk
-    start: '11:00'
-    title: Lägerdans
-  - date: '2024-06-25'
-    description: null
+  - id: kalligrafi-2024-06-25-1330
+    title: Kalligrafi
+    date: '2024-06-25'
+    start: '13:30'
     end: '13:45'
-    id: kalligrafi-2024-06-25-1330
-    link: null
     location: GA Stilla hyllan
+    responsible: Malin Tvedt
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 20:38:12'
       updated_at: '2024-06-24 20:38:12'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Tvedt
-    start: '13:30'
-    title: Kalligrafi
-  - date: '2024-06-25'
-    description: null
+  - id: teckna-ett-realistiskt-oga-2024-06-25-1500
+    title: Teckna ett realistiskt öga
+    date: '2024-06-25'
+    start: '15:00'
     end: '15:50'
-    id: teckna-ett-realistiskt-oga-2024-06-25-1500
-    link: null
     location: GA Stilla hyllan
+    responsible: Malin Tvedt
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 21:19:24'
       updated_at: '2024-06-24 21:19:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Tvedt
-    start: '15:00'
-    title: Teckna ett realistiskt öga
-  - date: '2024-06-25'
-    description: null
+  - id: akvarell-2024-06-25-1600
+    title: Akvarell
+    date: '2024-06-25'
+    start: '16:00'
     end: '16:50'
-    id: akvarell-2024-06-25-1600
-    link: null
     location: GA Stilla hyllan
+    responsible: Malin Tvedt
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 21:24:03'
       updated_at: '2024-06-24 21:24:03'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Tvedt
-    start: '16:00'
-    title: Akvarell
-  - date: '2024-06-26'
-    description: null
+  - id: pyssel-infor-sysscon-2024-06-26-1300
+    title: Pyssel inför SyssCon
+    date: '2024-06-26'
+    start: '13:00'
     end: '15:00'
-    id: pyssel-infor-sysscon-2024-06-26-1300
-    link: null
     location: GA Kreativ hörna
+    responsible: 'Annelie, Charlotte, Christina'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 22:01:15'
       updated_at: '2024-06-24 22:01:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: Annelie, Charlotte, Christina
-    start: '13:00'
+  - id: pyssel-infor-sysscon-2024-06-27-1300
     title: Pyssel inför SyssCon
-  - date: '2024-06-27'
-    description: null
+    date: '2024-06-27'
+    start: '13:00'
     end: '15:00'
-    id: pyssel-infor-sysscon-2024-06-27-1300
-    link: null
     location: GA Kreativ hörna
+    responsible: 'Annelie, Charlotte, Christina'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 22:03:09'
       updated_at: '2024-06-24 22:03:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: Annelie, Charlotte, Christina
-    start: '13:00'
-    title: Pyssel inför SyssCon
-  - date: '2024-06-27'
-    description: null
+  - id: bradspel-2024-06-27-2000
+    title: Brädspel
+    date: '2024-06-27'
+    start: '20:00'
     end: '22:30'
-    id: bradspel-2024-06-27-2000
-    link: null
     location: Kaffetält
+    responsible: 'Birgitta '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 22:20:52'
       updated_at: '2024-06-24 22:20:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Birgitta '
-    start: '20:00'
-    title: Brädspel
-  - date: '2024-06-26'
-    description: null
+  - id: nagelstudio-2024-06-26-1900
+    title: Nagelstudio
+    date: '2024-06-26'
+    start: '19:00'
     end: '20:00'
-    id: nagelstudio-2024-06-26-1900
-    link: null
     location: Servicehus
+    responsible: 'Malin och Rebecca Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 22:28:34'
       updated_at: '2024-06-24 22:28:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin och Rebecca Isenfors '
-    start: '19:00'
-    title: Nagelstudio
-  - date: '2024-06-26'
-    description: null
+  - id: prova-pa-frigorande-dans-2024-06-26-1600
+    title: PROVA PÅ FRIGÖRANDE DANS
+    date: '2024-06-26'
+    start: '16:00'
     end: '17:00'
-    id: prova-pa-frigorande-dans-2024-06-26-1600
-    link: null
     location: Annat
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 23:19:50'
       updated_at: '2024-06-24 23:19:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '16:00'
-    title: PROVA PÅ FRIGÖRANDE DANS
-  - date: '2024-06-27'
-    description: null
+  - id: fotografering-2024-06-27-1630
+    title: Fotografering
+    date: '2024-06-27'
+    start: '16:30'
     end: '17:30'
-    id: fotografering-2024-06-27-1630
-    link: null
     location: Annat
+    responsible: Elin Sommerfeld
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 23:29:32'
       updated_at: '2024-06-24 23:29:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: Elin Sommerfeld
-    start: '16:30'
-    title: Fotografering
-  - date: '2024-06-25'
-    description: null
+  - id: schack-for-nyborjare-2024-06-25-1400
+    title: Schack för nybörjare
+    date: '2024-06-25'
+    start: '14:00'
     end: '16:00'
-    id: schack-for-nyborjare-2024-06-25-1400
-    link: null
     location: Kaffetält
+    responsible: 'Hampus Sommerfeld '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 23:34:46'
       updated_at: '2024-06-24 23:34:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Hampus Sommerfeld '
-    start: '14:00'
-    title: Schack för nybörjare
-  - date: '2024-06-30'
-    description: null
+  - id: sista-for-idag-2024-06-30-2355
+    title: Sista för idag
+    date: '2024-06-30'
+    start: '23:55'
     end: '23:59'
-    id: sista-for-idag-2024-06-30-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-24 23:52:11'
       updated_at: '2024-06-24 23:52:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
-    title: Sista för idag
-  - date: '2024-06-25'
-    description: null
+  - id: japansk-snodd-2024-06-25-1600
+    title: Japansk snodd
+    date: '2024-06-25'
+    start: '16:00'
     end: '17:00'
-    id: japansk-snodd-2024-06-25-1600
-    link: null
     location: Tält2
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 00:24:05'
       updated_at: '2024-06-25 00:24:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '16:00'
-    title: Japansk snodd
-  - date: '2024-06-25'
-    description: null
+  - id: ukrainska-mat-och-kultur-5-platser-kvar-2024-06-25-1700
+    title: 'Ukrainska mat och kultur. 5 platser kvar '
+    date: '2024-06-25'
+    start: '17:00'
     end: '17:00'
-    id: ukrainska-mat-och-kultur-5-platser-kvar-2024-06-25-1700
-    link: null
     location: Servicehus
+    responsible: 'Rosanna Grytsan '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 09:26:12'
       updated_at: '2024-06-25 09:26:12'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Rosanna Grytsan '
-    start: '17:00'
-    title: 'Ukrainska mat och kultur. 5 platser kvar '
-  - date: '2024-06-28'
-    description: null
+  - id: planering-av-klurumlager-2025-2024-06-28-2130
+    title: Planering av Klurumläger 2025
+    date: '2024-06-28'
+    start: '21:30'
     end: '22:15'
-    id: planering-av-klurumlager-2025-2024-06-28-2130
-    link: null
     location: Rollspelstält1
+    responsible: Jenny von Bahr
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 10:24:10'
       updated_at: '2024-06-25 10:24:10'
-    owner:
-      email: ''
-      name: ''
-    responsible: Jenny von Bahr
-    start: '21:30'
-    title: Planering av Klurumläger 2025
-  - date: '2024-06-26'
-    description: null
+  - id: vi-fortsatter-att-mala-modellerna-till-bradspelet-spacehulk-2024-06-26-1500
+    title: 'Vi fortsätter att måla modellerna till brädspelet Spacehulk '
+    date: '2024-06-26'
+    start: '15:00'
     end: '17:00'
-    id: vi-fortsatter-att-mala-modellerna-till-bradspelet-spacehulk-2024-06-26-1500
-    link: null
     location: Servicehus
+    responsible: 'Magnus Carlsson '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 10:50:54'
       updated_at: '2024-06-25 10:50:54'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Magnus Carlsson '
-    start: '15:00'
-    title: 'Vi fortsätter att måla modellerna till brädspelet Spacehulk '
-  - date: '2024-06-27'
-    description: null
+  - id: schacktavling-i-blixt-2024-06-27-1400
+    title: Schacktävling i blixt
+    date: '2024-06-27'
+    start: '14:00'
     end: '16:00'
-    id: schacktavling-i-blixt-2024-06-27-1400
-    link: null
     location: Kaffetält
+    responsible: 'Hampus Sommerfeld '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 11:38:54'
       updated_at: '2024-06-25 11:38:54'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Hampus Sommerfeld '
-    start: '14:00'
-    title: Schacktävling i blixt
-  - date: '2024-06-28'
-    description: null
+  - id: schacktavling-i-snabb-2024-06-28-1300
+    title: Schacktävling i snabb
+    date: '2024-06-28'
+    start: '13:00'
     end: '16:00'
-    id: schacktavling-i-snabb-2024-06-28-1300
-    link: null
     location: Kaffetält
+    responsible: 'Hampus Sommerfeld '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 11:47:13'
       updated_at: '2024-06-25 11:47:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Hampus Sommerfeld '
-    start: '13:00'
-    title: Schacktävling i snabb
-  - date: '2024-06-26'
-    description: null
+  - id: mer-diamond-painting-2024-06-26-1000
+    title: Mer diamond painting
+    date: '2024-06-26'
+    start: '10:00'
     end: '12:00'
-    id: mer-diamond-painting-2024-06-26-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Karin
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 12:17:29'
       updated_at: '2024-06-25 12:17:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: Karin
-    start: '10:00'
-    title: Mer diamond painting
-  - date: '2024-06-25'
-    description: null
+  - id: familjetraning-vid-pingisbordet-utomhus-2024-06-25-1730
+    title: Familjeträning vid pingisbordet utomhus
+    date: '2024-06-25'
+    start: '17:30'
     end: '18:00'
-    id: familjetraning-vid-pingisbordet-utomhus-2024-06-25-1730
-    link: null
     location: Annat
+    responsible: Petter Åström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 12:30:08'
       updated_at: '2024-06-25 12:30:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: Petter Åström
-    start: '17:30'
-    title: Familjeträning vid pingisbordet utomhus
-  - date: '2024-06-26'
-    description: null
+  - id: dansa-till-ava-max-2024-06-26-1130
+    title: Dansa till Ava Max
+    date: '2024-06-26'
+    start: '11:30'
     end: '12:00'
-    id: dansa-till-ava-max-2024-06-26-1130
-    link: null
     location: Kaffetält
+    responsible: 'Jessica Larsson '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 22:14:53'
       updated_at: '2024-06-25 22:14:53'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Jessica Larsson '
-    start: '11:30'
-    title: Dansa till Ava Max
-  - date: '2024-06-26'
-    description: null
+  - id: rubiks-kub-prova-pa-2024-06-26-1330
+    title: Rubiks kub prova på
+    date: '2024-06-26'
+    start: '13:30'
     end: '14:30'
-    id: rubiks-kub-prova-pa-2024-06-26-1330
-    link: null
     location: Tält1
+    responsible: Gustav Eklöf
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 22:29:01'
       updated_at: '2024-06-25 22:29:01'
-    owner:
-      email: ''
-      name: ''
-    responsible: Gustav Eklöf
+  - id: 5d-schack-turnering-2024-06-26-1330
+    title: '5d schack turnering '
+    date: '2024-06-26'
     start: '13:30'
-    title: Rubiks kub prova på
-  - date: '2024-06-26'
-    description: null
     end: '15:30'
-    id: 5d-schack-turnering-2024-06-26-1330
-    link: null
     location: GA Datorsal
+    responsible: Lukas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 23:00:24'
       updated_at: '2024-06-25 23:00:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lukas
-    start: '13:30'
-    title: '5d schack turnering '
-  - date: '2024-06-26'
-    description: null
+  - id: mattelektion-grafteori-2024-06-26-1800
+    title: Mattelektion - Grafteori
+    date: '2024-06-26'
+    start: '18:00'
     end: '19:00'
-    id: mattelektion-grafteori-2024-06-26-1800
-    link: null
     location: Tält1
+    responsible: Ivar Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 23:12:04'
       updated_at: '2024-06-25 23:12:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ivar Ängquist
-    start: '18:00'
-    title: Mattelektion - Grafteori
-  - date: '2024-06-26'
-    description: null
+  - id: krympplast-drop-in-i-vandrarhemmet-2024-06-26-1300
+    title: Krympplast (drop in i vandrarhemmet)
+    date: '2024-06-26'
+    start: '13:00'
     end: '14:00'
-    id: krympplast-drop-in-i-vandrarhemmet-2024-06-26-1300
-    link: null
     location: Annat
+    responsible: 'Elli Thulemark '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-25 23:50:38'
       updated_at: '2024-06-25 23:50:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Elli Thulemark '
-    start: '13:00'
-    title: Krympplast (drop in i vandrarhemmet)
-  - date: '2024-06-26'
-    description: null
+  - id: pappersblomma-2024-06-26-1800
+    title: Pappersblomma
+    date: '2024-06-26'
+    start: '18:00'
     end: '19:30'
-    id: pappersblomma-2024-06-26-1800
-    link: null
     location: GA Stilla hyllan
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 01:04:18'
       updated_at: '2024-06-26 01:04:18'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '18:00'
-    title: Pappersblomma
-  - date: '2024-06-26'
-    description: null
+  - id: tecknarstudio-anmalan-kravs-2024-06-26-2230
+    title: Tecknarstudio - Anmälan KRÄVS
+    date: '2024-06-26'
+    start: '22:30'
     end: '00:30'
-    id: tecknarstudio-anmalan-kravs-2024-06-26-2230
-    link: null
     location: GA Stilla hyllan
+    responsible: 'Tilde, Albin, Moa, Karin'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 03:21:09'
       updated_at: '2024-06-26 03:21:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Moa, Karin
-    start: '22:30'
-    title: Tecknarstudio - Anmälan KRÄVS
-  - date: '2024-06-26'
-    description: null
+  - id: familjetraning-samling-vid-pingisbordet-utomhus-2024-06-26-1730
+    title: Familjeträning - samling vid pingisbordet utomhus
+    date: '2024-06-26'
+    start: '17:30'
     end: '18:00'
-    id: familjetraning-samling-vid-pingisbordet-utomhus-2024-06-26-1730
-    link: null
     location: Annat
+    responsible: Petter Åström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 09:03:26'
       updated_at: '2024-06-26 09:03:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: Petter Åström
-    start: '17:30'
-    title: Familjeträning - samling vid pingisbordet utomhus
-  - date: '2024-06-26'
-    description: null
+  - id: slass-med-lajvvapen-2024-06-26-1400
+    title: Slåss med lajvvapen
+    date: '2024-06-26'
+    start: '14:00'
     end: '15:00'
-    id: slass-med-lajvvapen-2024-06-26-1400
-    link: null
     location: Nerf-arena
+    responsible: 'Martin &amp; Astor'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 09:38:48'
       updated_at: '2024-06-26 09:38:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: Martin &amp; Astor
-    start: '14:00'
-    title: Slåss med lajvvapen
-  - date: '2024-06-27'
-    description: null
+  - id: goteborgsfika-2024-06-27-1330
+    title: Göteborgsfika
+    date: '2024-06-27'
+    start: '13:30'
     end: '14:30'
-    id: goteborgsfika-2024-06-27-1330
-    link: null
     location: Kaffetält
+    responsible: 'Kerstin Eiman '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 11:21:52'
       updated_at: '2024-06-26 11:21:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Kerstin Eiman '
-    start: '13:30'
-    title: Göteborgsfika
-  - date: '2024-06-27'
-    description: null
+  - id: fa-och-ge-boktips-2024-06-27-1400
+    title: 'Få och ge boktips '
+    date: '2024-06-27'
+    start: '14:00'
     end: '15:00'
-    id: fa-och-ge-boktips-2024-06-27-1400
-    link: null
     location: Annat
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 13:11:18'
       updated_at: '2024-06-26 13:11:18'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
+  - id: angest-for-unga-2024-06-27-1400
+    title: Ångest för unga.
+    date: '2024-06-27'
     start: '14:00'
-    title: 'Få och ge boktips '
-  - date: '2024-06-27'
-    description: null
     end: '15:00'
-    id: angest-for-unga-2024-06-27-1400
-    link: null
     location: Annat
+    responsible: Linda Backman
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 13:47:36'
       updated_at: '2024-06-26 13:47:36'
-    owner:
-      email: ''
-      name: ''
-    responsible: Linda Backman
-    start: '14:00'
-    title: Ångest för unga.
-  - date: '2024-06-26'
-    description: null
+  - id: datahang-dar-vi-spelar-minecraft-2024-06-26-2300
+    title: 'Datahäng där vi spelar Minecraft '
+    date: '2024-06-26'
+    start: '23:00'
     end: '02:00'
-    id: datahang-dar-vi-spelar-minecraft-2024-06-26-2300
-    link: null
     location: GA Datorsal
+    responsible: Anne och Linda
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 14:00:50'
       updated_at: '2024-06-26 14:00:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anne och Linda
-    start: '23:00'
-    title: 'Datahäng där vi spelar Minecraft '
-  - date: '2024-06-28'
-    description: null
+  - id: foraldrafika-problematisk-skolnarvaro-hemmasittare-2024-06-28-1000
+    title: Föräldrafika - problematisk skolnärvaro (hemmasittare)
+    date: '2024-06-28'
+    start: '10:00'
     end: '11:00'
-    id: foraldrafika-problematisk-skolnarvaro-hemmasittare-2024-06-28-1000
-    link: null
     location: Tält1
+    responsible: Anna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 17:33:04'
       updated_at: '2024-06-26 17:33:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anna
-    start: '10:00'
-    title: Föräldrafika - problematisk skolnärvaro (hemmasittare)
-  - date: '2024-06-29'
-    description: null
+  - id: oppet-samtal-om-sarbegavningens-psykologi-2024-06-29-1130
+    title: Öppet samtal om särbegåvningens psykologi
+    date: '2024-06-29'
+    start: '11:30'
     end: '12:30'
-    id: oppet-samtal-om-sarbegavningens-psykologi-2024-06-29-1130
-    link: null
     location: Tält1
+    responsible: 'Emma Neal '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-26 22:33:58'
       updated_at: '2024-06-26 22:33:58'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Emma Neal '
-    start: '11:30'
-    title: Öppet samtal om särbegåvningens psykologi
-  - date: '2024-06-28'
-    description: null
+  - id: beredskap-och-prepping-hur-da-2024-06-28-1100
+    title: 'Beredskap och prepping, hur då? '
+    date: '2024-06-28'
+    start: '11:00'
     end: '12:00'
-    id: beredskap-och-prepping-hur-da-2024-06-28-1100
-    link: null
     location: Tält1
+    responsible: 'Malin Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 00:39:15'
       updated_at: '2024-06-27 00:39:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin Isenfors '
-    start: '11:00'
-    title: 'Beredskap och prepping, hur då? '
-  - date: '2024-06-28'
-    description: null
+  - id: vad-ar-en-sten-2024-06-28-1400
+    title: 'VAD ÄR EN STEN?'
+    date: '2024-06-28'
+    start: '14:00'
     end: '16:00'
-    id: vad-ar-en-sten-2024-06-28-1400
-    link: null
     location: Annat
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 08:56:40'
       updated_at: '2024-06-27 08:56:40'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '14:00'
-    title: VAD ÄR EN STEN?
-  - date: '2024-06-27'
-    description: null
+  - id: utflykt-till-digerfallet-13-min-bilresa-finns-extra-platser-i-bil-2024-06-27-1105
+    title: Utflykt till Digerfallet (13 min bilresa - finns extra platser i bil)
+    date: '2024-06-27'
+    start: '11:05'
     end: '12:30'
-    id: utflykt-till-digerfallet-13-min-bilresa-finns-extra-platser-i-bil-2024-06-27-1105
-    link: null
     location: Annat
+    responsible: Sebastian Senning
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 09:53:43'
       updated_at: '2024-06-27 09:53:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: Sebastian Senning
-    start: '11:05'
-    title: Utflykt till Digerfallet (13 min bilresa - finns extra platser i bil)
-  - date: '2024-06-27'
-    description: null
+  - id: familjetraning-samling-vid-pingisbordet-utomhus-2024-06-27-1730
+    title: Familjeträning - samling vid pingisbordet utomhus
+    date: '2024-06-27'
+    start: '17:30'
     end: '18:00'
-    id: familjetraning-samling-vid-pingisbordet-utomhus-2024-06-27-1730
-    link: null
     location: Annat
+    responsible: Petter Åström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 09:58:44'
       updated_at: '2024-06-27 09:58:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: Petter Åström
-    start: '17:30'
-    title: Familjeträning - samling vid pingisbordet utomhus
-  - date: '2024-06-27'
-    description: null
+  - id: nerf-arenan-stadas-av-nerfare-2024-06-27-2030
+    title: Nerf-arenan städas av Nerfare
+    date: '2024-06-27'
+    start: '20:30'
     end: '20:45'
-    id: nerf-arenan-stadas-av-nerfare-2024-06-27-2030
-    link: null
     location: Nerf-arena
+    responsible: Nerf-spelare och deras vuxna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 11:52:19'
       updated_at: '2024-06-27 11:52:19'
-    owner:
-      email: ''
-      name: ''
-    responsible: Nerf-spelare och deras vuxna
-    start: '20:30'
+  - id: nerf-arenan-stadas-av-nerfare-2024-06-28-2030
     title: Nerf-arenan städas av Nerfare
-  - date: '2024-06-28'
-    description: null
+    date: '2024-06-28'
+    start: '20:30'
     end: '20:45'
-    id: nerf-arenan-stadas-av-nerfare-2024-06-28-2030
-    link: null
     location: Nerf-arena
+    responsible: Nerf-spelare och deras vuxna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 11:52:19'
       updated_at: '2024-06-27 11:52:19'
-    owner:
-      email: ''
-      name: ''
-    responsible: Nerf-spelare och deras vuxna
-    start: '20:30'
-    title: Nerf-arenan städas av Nerfare
-  - date: '2024-06-29'
-    description: null
+  - id: att-resa-med-tag-i-europa-2024-06-29-1300
+    title: Att resa med tåg i Europa
+    date: '2024-06-29'
+    start: '13:00'
     end: '14:00'
-    id: att-resa-med-tag-i-europa-2024-06-29-1300
-    link: null
     location: Kaffetält
+    responsible: Anna Björnson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 13:06:05'
       updated_at: '2024-06-27 13:06:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anna Björnson
-    start: '13:00'
-    title: Att resa med tåg i Europa
-  - date: '2024-06-27'
-    description: null
+  - id: maffia-varulvar-2024-06-27-1530
+    title: Maffia/varulvar
+    date: '2024-06-27'
+    start: '15:30'
     end: '16:30'
-    id: maffia-varulvar-2024-06-27-1530
-    link: null
     location: Tält1
+    responsible: Karin F
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 14:05:47'
       updated_at: '2024-06-27 14:05:47'
-    owner:
-      email: ''
-      name: ''
-    responsible: Karin F
-    start: '15:30'
-    title: Maffia/varulvar
-  - date: '2024-06-28'
-    description: null
+  - id: provspelar-spacehulk-2024-06-28-1400
+    title: Provspelar Spacehulk
+    date: '2024-06-28'
+    start: '14:00'
     end: '17:00'
-    id: provspelar-spacehulk-2024-06-28-1400
-    link: null
     location: Servicehus
+    responsible: 'Magnus Carlsson '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 14:29:52'
       updated_at: '2024-06-27 14:29:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Magnus Carlsson '
-    start: '14:00'
-    title: Provspelar Spacehulk
-  - date: '2024-06-27'
-    description: null
+  - id: fotografering-andrad-plats-vandrarhemmet-2024-06-27-1630
+    title: 'Fotografering ÄNDRAD PLATS - vandrarhemmet '
+    date: '2024-06-27'
+    start: '16:30'
     end: '17:30'
-    id: fotografering-andrad-plats-vandrarhemmet-2024-06-27-1630
-    link: null
     location: Annat
+    responsible: Elin
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 15:52:27'
       updated_at: '2024-06-27 15:52:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Elin
-    start: '16:30'
-    title: 'Fotografering ÄNDRAD PLATS - vandrarhemmet '
-  - date: '2024-06-28'
-    description: null
+  - id: stockholm-malardalen-hostplanering-av-aktiviteter-2024-06-28-1600
+    title: 'Stockholm/Mälardalen Höstplanering av aktiviteter '
+    date: '2024-06-28'
+    start: '16:00'
     end: '17:00'
-    id: stockholm-malardalen-hostplanering-av-aktiviteter-2024-06-28-1600
-    link: null
     location: Tält1
+    responsible: 'RFSB Stockholm/Mälardalen '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 16:54:43'
       updated_at: '2024-06-27 16:54:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'RFSB Stockholm/Mälardalen '
-    start: '16:00'
-    title: 'Stockholm/Mälardalen Höstplanering av aktiviteter '
-  - date: '2024-06-28'
-    description: null
+  - id: konversation-om-rymden-2024-06-28-1000
+    title: Konversation om rymden
+    date: '2024-06-28'
+    start: '10:00'
     end: '11:00'
-    id: konversation-om-rymden-2024-06-28-1000
-    link: null
     location: Tält2
+    responsible: Seméli Papadogiannakis
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 18:00:27'
       updated_at: '2024-06-27 18:00:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Seméli Papadogiannakis
-    start: '10:00'
-    title: Konversation om rymden
-  - date: '2024-06-29'
-    description: null
+  - id: paverka-politiker-t-ex-infor-valet-2024-06-29-1400
+    title: Påverka politiker - t.ex. inför valet
+    date: '2024-06-29'
+    start: '14:00'
     end: '15:00'
-    id: paverka-politiker-t-ex-infor-valet-2024-06-29-1400
-    link: null
     location: Tält1
+    responsible: Annelie Mattson-Djos och Cecilia Löfgreen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 18:58:35'
       updated_at: '2024-06-27 18:58:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: Annelie Mattson-Djos och Cecilia Löfgreen
-    start: '14:00'
-    title: Påverka politiker - t.ex. inför valet
-  - date: '2024-06-29'
-    description: null
+  - id: experimentell-akvarell-anmalan-behovs-2024-06-29-1200
+    title: Experimentell Akvarell (anmälan behövs)
+    date: '2024-06-29'
+    start: '12:00'
     end: '13:00'
-    id: experimentell-akvarell-anmalan-behovs-2024-06-29-1200
-    link: null
     location: Annat
+    responsible: Malin Tvedt
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 19:19:04'
       updated_at: '2024-06-27 19:19:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Tvedt
-    start: '12:00'
-    title: Experimentell Akvarell (anmälan behövs)
-  - date: '2024-06-29'
-    description: null
+  - id: akvarell-anmalan-behovs-2024-06-29-1430
+    title: Akvarell (anmälan behövs)
+    date: '2024-06-29'
+    start: '14:30'
     end: '16:00'
-    id: akvarell-anmalan-behovs-2024-06-29-1430
-    link: null
     location: Annat
+    responsible: Malin Tvedt
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 19:25:30'
       updated_at: '2024-06-27 19:25:30'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Tvedt
-    start: '14:30'
-    title: Akvarell (anmälan behövs)
-  - date: '2024-06-28'
-    description: null
+  - id: traff-for-de-som-ska-till-narcon-2024-06-28-1830
+    title: Träff för de som ska till NärCon
+    date: '2024-06-28'
+    start: '18:30'
     end: '18:45'
-    id: traff-for-de-som-ska-till-narcon-2024-06-28-1830
-    link: null
     location: GA Idrott
+    responsible: Jenny von Bahr
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 19:29:48'
       updated_at: '2024-06-27 19:29:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: Jenny von Bahr
-    start: '18:30'
-    title: Träff för de som ska till NärCon
-  - date: '2024-06-27'
-    description: null
+  - id: kvalls-nattpass-minecraft-2024-06-27-2230
+    title: Kvälls/nattpass Minecraft
+    date: '2024-06-27'
+    start: '22:30'
     end: '01:00'
-    id: kvalls-nattpass-minecraft-2024-06-27-2230
-    link: null
     location: GA Datorsal
+    responsible: 'Alexander Wilén Löfgreen '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-27 22:30:11'
       updated_at: '2024-06-27 22:30:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Alexander Wilén Löfgreen '
-    start: '22:30'
-    title: Kvälls/nattpass Minecraft
-  - date: '2024-06-29'
-    description: null
+  - id: syhorna-avslutning-foraldrar-assistera-garna-2024-06-29-1000
+    title: Syhörna - avslutning (föräldrar assistera gärna)
+    date: '2024-06-29'
+    start: '10:00'
     end: '11:30'
-    id: syhorna-avslutning-foraldrar-assistera-garna-2024-06-29-1000
-    link: null
     location: GA Stilla hyllan
+    responsible: Helena
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 00:03:05'
       updated_at: '2024-06-28 00:03:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena
-    start: '10:00'
-    title: Syhörna - avslutning (föräldrar assistera gärna)
-  - date: '2024-06-28'
-    description: null
+  - id: taekwondo-2024-06-28-1500
+    title: Taekwondo
+    date: '2024-06-28'
+    start: '15:00'
     end: '15:45'
-    id: taekwondo-2024-06-28-1500
-    link: null
     location: GA Idrott
+    responsible: Linn Sjöström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 00:21:04'
       updated_at: '2024-06-28 00:21:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Linn Sjöström
-    start: '15:00'
-    title: Taekwondo
-  - date: '2024-06-29'
-    description: null
+  - id: prata-och-spekulera-om-hur-ai-kommer-ha-paverkat-oss-om-10-15-ar-2024-06-29-1300
+    title: Prata och spekulera om hur AI kommer ha påverkat oss om 10-15 år
+    date: '2024-06-29'
+    start: '13:00'
     end: '14:00'
-    id: prata-och-spekulera-om-hur-ai-kommer-ha-paverkat-oss-om-10-15-ar-2024-06-29-1300
-    link: null
     location: Tält2
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 01:06:39'
       updated_at: '2024-06-28 01:06:39'
-    owner:
-      email: ''
-      name: ''
-    responsible: Morgan
-    start: '13:00'
-    title: Prata och spekulera om hur AI kommer ha påverkat oss om 10-15 år
-  - date: '2024-06-28'
-    description: null
+  - id: installt-tecknarstudio-tonaringar-anmalan-kravs-2024-06-28-1330
+    title: INSTÄLLT - Tecknarstudio tonåringar. Anmälan krävs
+    date: '2024-06-28'
+    start: '13:30'
     end: '15:30'
-    id: installt-tecknarstudio-tonaringar-anmalan-kravs-2024-06-28-1330
-    link: null
     location: Annat
+    responsible: 'Tilde, Albin, Karin'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 10:11:45'
       updated_at: '2024-06-28 10:11:45'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Karin
-    start: '13:30'
-    title: INSTÄLLT - Tecknarstudio tonåringar. Anmälan krävs
-  - date: '2024-06-28'
-    description: null
+  - id: open-stage-med-lank-till-anmalningsformular-2024-06-28-1930
+    title: Open Stage (med länk till anmälningsformulär)
+    date: '2024-06-28'
+    start: '19:30'
     end: '21:30'
-    id: open-stage-med-lank-till-anmalningsformular-2024-06-28-1930
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 12:14:24'
       updated_at: '2024-06-28 12:14:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '19:30'
-    title: Open Stage (med länk till anmälningsformulär)
-  - date: '2024-06-29'
-    description: null
+  - id: blixttal-max-5-min-talare-lank-till-anmalan-2024-06-29-1500
+    title: 'Blixttal (max 5 min/talare, länk till anmälan)'
+    date: '2024-06-29'
+    start: '15:00'
     end: '16:00'
-    id: blixttal-max-5-min-talare-lank-till-anmalan-2024-06-29-1500
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 12:36:05'
       updated_at: '2024-06-28 12:36:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '15:00'
-    title: Blixttal (max 5 min/talare, länk till anmälan)
-  - date: '2024-06-28'
-    description: null
+  - id: pop-up-nagelstudio-pa-sysscon-2024-06-28-1600
+    title: Pop Up Nagelstudio på SyssCon
+    date: '2024-06-28'
+    start: '16:00'
     end: '17:30'
-    id: pop-up-nagelstudio-pa-sysscon-2024-06-28-1600
-    link: null
     location: GA Idrott
+    responsible: 'Rebecca och Malin Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 14:30:46'
       updated_at: '2024-06-28 14:30:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Rebecca och Malin Isenfors '
-    start: '16:00'
-    title: Pop Up Nagelstudio på SyssCon
-  - date: '2024-06-28'
-    description: null
+  - id: familjetraning-samling-vid-pingisbordet-och-petter-behover-hjalp-med-att-nagon-annan-vuxen-leder-passet-idag-2024-06-28-1730
+    title: Familjeträning - samling vid pingisbordet och Petter behöver hjälp med att någon annan vuxen leder passet idag
+    date: '2024-06-28'
+    start: '17:30'
     end: '18:00'
-    id: familjetraning-samling-vid-pingisbordet-och-petter-behover-hjalp-med-att-nagon-annan-vuxen-leder-passet-idag-2024-06-28-1730
-    link: null
     location: Annat
+    responsible: Petter Åström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 14:33:20'
       updated_at: '2024-06-28 14:33:20'
-    owner:
-      email: ''
-      name: ''
-    responsible: Petter Åström
-    start: '17:30'
-    title: Familjeträning - samling vid pingisbordet och Petter behöver hjälp med att någon annan vuxen leder passet idag
-  - date: '2024-06-28'
-    description: null
+  - id: tecknarstudio-tonaringar-2024-06-28-2200
+    title: Tecknarstudio (tonåringar)
+    date: '2024-06-28'
+    start: '22:00'
     end: '01:00'
-    id: tecknarstudio-tonaringar-2024-06-28-2200
-    link: null
     location: GA Stilla hyllan
+    responsible: 'Tilde, Albin, Karin'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 19:31:18'
       updated_at: '2024-06-28 19:31:18'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Karin
+  - id: kvalls-nattpass-minecraft-2024-06-28-2200
+    title: Kvälls/nattpass MineCraft
+    date: '2024-06-28'
     start: '22:00'
-    title: Tecknarstudio (tonåringar)
-  - date: '2024-06-28'
-    description: null
     end: '01:00'
-    id: kvalls-nattpass-minecraft-2024-06-28-2200
-    link: null
     location: GA Datorsal
+    responsible: 'Alexander Wilén Löfgreen '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-28 21:37:09'
       updated_at: '2024-06-28 21:37:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Alexander Wilén Löfgreen '
-    start: '22:00'
-    title: Kvälls/nattpass MineCraft
-  - date: '2024-06-29'
-    description: null
+  - id: dalarna-gavleborg-glass-fika-samt-input-kring-aktiviteter-2024-06-29-1400
+    title: 'Dalarna Gävleborg, Glass/fika samt input kring aktiviteter'
+    date: '2024-06-29'
+    start: '14:00'
     end: '15:30'
-    id: dalarna-gavleborg-glass-fika-samt-input-kring-aktiviteter-2024-06-29-1400
-    link: null
     location: Annat
+    responsible: Jessica Larsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-29 00:33:30'
       updated_at: '2024-06-29 00:33:30'
-    owner:
-      email: ''
-      name: ''
-    responsible: Jessica Larsson
-    start: '14:00'
-    title: Dalarna Gävleborg, Glass/fika samt input kring aktiviteter
-  - date: '2024-06-29'
-    description: null
+  - id: sista-tecknarstudion-tonaringar-2024-06-29-1300
+    title: Sista Tecknarstudion (tonåringar)
+    date: '2024-06-29'
+    start: '13:00'
     end: '14:30'
-    id: sista-tecknarstudion-tonaringar-2024-06-29-1300
-    link: null
     location: Annat
+    responsible: 'Tilde, Albin, Karin'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-29 02:53:13'
       updated_at: '2024-06-29 02:53:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Karin
-    start: '13:00'
-    title: Sista Tecknarstudion (tonåringar)
-  - date: '2024-06-29'
-    description: null
+  - id: familjetraning-obs-kl-17-samling-vid-pingisbordet-utomhus-2024-06-29-1700
+    title: Familjeträning OBS kl 17 - samling vid pingisbordet utomhus
+    date: '2024-06-29'
+    start: '17:00'
     end: '17:30'
-    id: familjetraning-obs-kl-17-samling-vid-pingisbordet-utomhus-2024-06-29-1700
-    link: null
     location: Annat
+    responsible: Petter Åström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-29 09:07:10'
       updated_at: '2024-06-29 09:07:10'
-    owner:
-      email: ''
-      name: ''
-    responsible: Petter Åström
-    start: '17:00'
-    title: Familjeträning OBS kl 17 - samling vid pingisbordet utomhus
-  - date: '2024-06-29'
-    description: null
+  - id: hattleken-nu-med-beskrivning-vad-det-ar-2024-06-29-1500
+    title: Hattleken -nu med beskrivning vad det är
+    date: '2024-06-29'
+    start: '15:00'
     end: '16:00'
-    id: hattleken-nu-med-beskrivning-vad-det-ar-2024-06-29-1500
-    link: null
     location: Tält2
+    responsible: Martina och Linn
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-29 09:31:27'
       updated_at: '2024-06-29 09:31:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Martina och Linn
-    start: '15:00'
-    title: Hattleken -nu med beskrivning vad det är
-  - date: '2024-06-29'
-    description: null
+  - id: jonglering-2-3-4-bollar-2024-06-29-1400
+    title: Jonglering 2 / 3 / (4) bollar
+    date: '2024-06-29'
+    start: '14:00'
     end: '15:00'
-    id: jonglering-2-3-4-bollar-2024-06-29-1400
-    link: null
     location: GA Idrott
+    responsible: Christina Falk
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-29 10:12:29'
       updated_at: '2024-06-29 10:12:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christina Falk
-    start: '14:00'
-    title: Jonglering 2 / 3 / (4) bollar
-  - date: '2024-06-29'
-    description: null
+  - id: natur-djur-geografi-quiz-2024-06-29-1600
+    title: Natur - Djur - Geografi Quiz
+    date: '2024-06-29'
+    start: '16:00'
     end: '16:45'
-    id: natur-djur-geografi-quiz-2024-06-29-1600
-    link: null
     location: Tält2
+    responsible: 'Isak, Manfred, Embla och Enok'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-29 11:12:52'
       updated_at: '2024-06-29 11:12:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: Isak, Manfred, Embla och Enok
-    start: '16:00'
-    title: Natur - Djur - Geografi Quiz
-  - date: '2024-06-29'
-    description: null
+  - id: vattenkrig-2024-06-29-1700
+    title: Vattenkrig
+    date: '2024-06-29'
+    start: '17:00'
     end: '18:00'
-    id: vattenkrig-2024-06-29-1700
-    link: null
     location: Annat
+    responsible: Sarah
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2024-06-29 12:45:39'
       updated_at: '2024-06-29 12:45:39'
-    owner:
-      email: ''
-      name: ''
-    responsible: Sarah
-    start: '17:00'
-    title: Vattenkrig

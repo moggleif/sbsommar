@@ -5,93 +5,1531 @@ camp:
   start_date: '2021-06-27'
   end_date: '2021-07-04'
 events:
-  - date: '2021-06-27'
-    description: null
-    end: null
-    id: middag-2021-06-27-1630
-    link: null
-    location: GA-hallen
-    meta:
-      created_at: null
-      updated_at: null
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '16:30'
-    title: Middag
-  - date: '2021-06-28'
-    description: null
-    end: '10:00'
-    id: titta-pa-sommarlov-2021-06-28-0900
-    link: null
-    location: TV-rummet
-    meta:
-      created_at: null
-      updated_at: null
-    owner:
-      email: ''
-      name: ''
-    responsible: Servicehuset
-    start: '09:00'
-    title: Titta på sommarlov
-  - date: '2021-06-28'
-    description: Vi väljer gemensamt ut roliga spel att spela.
-    end: '10:30'
-    id: bradspel-2021-06-28-0930
-    link: null
-    location: Speltältet
-    meta:
-      created_at: null
-      updated_at: null
-    owner:
-      email: ''
-      name: ''
-    responsible: Ivar
-    start: '09:30'
-    title: Brädspel
-  - date: '2021-06-28'
-    description: null
-    end: '11:30'
-    id: valkomstmote-2021-06-28-1100
-    link: null
-    location: Gräsplanen
-    meta:
-      created_at: null
-      updated_at: null
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas
-    start: '11:00'
-    title: Välkomstmöte
-  - date: '2021-06-28'
-    description: null
-    end: '12:30'
-    id: varulvarna-i-klagerup-2021-06-28-1130
-    link: null
-    location: Tält 1
-    meta:
-      created_at: null
-      updated_at: null
-    owner:
-      email: ''
-      name: ''
-    responsible: Emilia
-    start: '11:30'
-    title: Varulvarna i Klågerup
-  - date: '2021-06-28'
-    description: null
-    end: null
-    id: lunch-2021-06-28-1230
-    link: null
-    location: Servicehuset
-    meta:
-      created_at: null
-      updated_at: null
-    owner:
-      email: ''
-      name: ''
-    responsible: ''
-    start: '12:30'
-    title: Lunch
+- id: middag-2021-06-27-1630
+  title: Middag
+  date: '2021-06-27'
+  start: '16:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: titta-pa-sommarlov-2021-06-28-0900
+  title: Titta på sommarlov
+  date: '2021-06-28'
+  start: 09:00
+  end: '10:00'
+  location: Servicehuset
+  responsible: null
+  description: TV-rummet
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bradspel-2021-06-28-0930
+  title: Brädspel
+  date: '2021-06-28'
+  start: 09:30
+  end: null
+  location: Speltältet
+  responsible: Ivar
+  description: Vi väljer gemensamt ut roliga spel att spela.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: valkomstmote-2021-06-28-1100
+  title: Välkomstmöte
+  date: '2021-06-28'
+  start: '11:00'
+  end: null
+  location: Gräsplanen
+  responsible: Andreas
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: varulvarna-i-klagerup-2021-06-28-1130
+  title: Varulvarna i Klågerup
+  date: '2021-06-28'
+  start: '11:30'
+  end: null
+  location: Tält 112:30 Lunch
+  responsible: Emilia
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: prova-pa-rollspel-2021-06-28-1330
+  title: Prova-på-rollspel
+  date: '2021-06-28'
+  start: '13:30'
+  end: '15:30'
+  location: DnD-tältet
+  responsible: Viktor+Harald
+  description: 10-19 år. 5 platser
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: foraldrafika-radikalacceleration-erfarenheter-for-och-nackdelar-2021-06-28-1430
+  title: Föräldrafika Radikalacceleration, erfarenheter, för- och nackdelar
+  date: '2021-06-28'
+  start: '14:30'
+  end: null
+  location: DnD-tältet
+  responsible: Viktor
+  description: 13-22 år. 5 platser
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bast-i-test-2021-06-28-1530
+  title: Bäst i test
+  date: '2021-06-28'
+  start: '15:30'
+  end: '16:30'
+  location: Gräsplanen
+  responsible: Disa Rönnkvist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-gangkrig-2021-06-28-1530
+  title: Nerf-gängkrig
+  date: '2021-06-28'
+  start: '15:30'
+  end: '16:30'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: middag-2021-06-28-1630
+  title: Middag
+  date: '2021-06-28'
+  start: '16:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: retro-tp-2021-06-28-1800
+  title: Retro-TP
+  date: '2021-06-28'
+  start: '18:00'
+  end: null
+  location: DnD-tältet
+  responsible: Harald
+  description: 10-16 år. 5-platser.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: werewolf-pa-engelska-2021-06-28-2000
+  title: Werewolf på engelska
+  date: '2021-06-28'
+  start: '20:00'
+  end: null
+  location: Tält 1
+  responsible: Mida
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: titta-pa-sommarlov-2021-06-29-0900
+  title: Titta på sommarlov
+  date: '2021-06-29'
+  start: 09:00
+  end: '10:00'
+  location: TV-rummet Servicehuset
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: gor-din-karaktar-infor-rollspelskampanjen-elementaroarna-2021-06-29-0930
+  title: Gör din karaktär inför rollspelskampanjen Elementaröarna
+  date: '2021-06-29'
+  start: 09:30
+  end: '10:30'
+  location: DnD-tältet
+  responsible: null
+  description: Viktor+Harald
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bradspel-2021-06-29-1000
+  title: Brädspel
+  date: '2021-06-29'
+  start: '10:00'
+  end: null
+  location: null
+  responsible: null
+  description: Samling
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: i-idrottshallen-2021-06-29-1000
+  title: i idrottshallen
+  date: '2021-06-29'
+  start: '10:00'
+  end: null
+  location: GA-hallen
+  responsible: Ivar
+  description: Vi väljer gemensamt ut roliga spel att spela. 10:00-
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-snallkrig-2021-06-29-1100
+  title: Nerf-snällkrig
+  date: '2021-06-29'
+  start: '11:00'
+  end: '12:00'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: gor-din-karaktar-infor-langa-kampanjen-2021-06-29-1130
+  title: Gör din karaktär inför Långa kampanjen
+  date: '2021-06-29'
+  start: '11:30'
+  end: '12:30'
+  location: DnD-tältet
+  responsible: null
+  description: .
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: ryska-2021-06-29-1200
+  title: Ryska
+  date: '2021-06-29'
+  start: '12:00'
+  end: null
+  location: DnD-tältet
+  responsible: Rosanna Varjag
+  description: Tält 110.30-11.30 Gör din karaktär inför rollspelskampanjen Grottor
+    och grådvärgar
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: lunch-2021-06-29-1230
+  title: Lunch
+  date: '2021-06-29'
+  start: '12:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-elementaroarna-fyra-platser-2021-06-29-1330
+  title: 12-timmars kampanj Elementaröarna Fyra platser
+  date: '2021-06-29'
+  start: '13:30'
+  end: '16:30'
+  location: DnD-tältet
+  responsible: Harald
+  description: 10-16 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-grottor-och-gradvargar-2021-06-29-1330
+  title: 12-timmars kampanj Grottor och grådvärgar
+  date: '2021-06-29'
+  start: '13:30'
+  end: '16:30'
+  location: Speltältet
+  responsible: Viktor
+  description: Fyra platser. 14-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: roda-vita-rosen-alder-7-12-2021-06-29-1330
+  title: Röda-vita rosen ålder 7-12
+  date: '2021-06-29'
+  start: '13:30'
+  end: null
+  location: Samling vid Servicehuset
+  responsible: Morgans och Pakravan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: foraldrafika-2e-vi-byter-erfarenheter-och-tips-och-tricks-2021-06-29-1400
+  title: Föräldrafika 2E - Vi byter erfarenheter och tips och tricks
+  date: '2021-06-29'
+  start: '14:00'
+  end: null
+  location: Nerfarenan
+  responsible: Lillemor Birgersson
+  description: '(Sandra Stenhede) Från 11 år : Tält 215:30-16:30 Nerf-gängkrig'
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: middag-2021-06-29-1630
+  title: Middag
+  date: '2021-06-29'
+  start: '16:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 15-timmars-kampanj-lang-rollspelskampanj-2021-06-29-1830
+  title: 15-timmars kampanj Lång rollspelskampanj
+  date: '2021-06-29'
+  start: '18:30'
+  end: '21:30'
+  location: DnD-tältet
+  responsible: Viktor och Harald
+  description: Fyra platser. 12-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: fortsattning-bast-i-test-2021-06-29-1830
+  title: Fortsättning Bäst i test
+  date: '2021-06-29'
+  start: '18:30'
+  end: null
+  location: null
+  responsible: Disa Rönnkvist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: spel-nar-da-da-alt-retro-tp-2021-06-29-1900
+  title: Spel När då då alt Retro-TP
+  date: '2021-06-29'
+  start: '19:00'
+  end: null
+  location: Servicehuset
+  responsible: Lillemor Birgersson
+  description: Tält 119:30 Nagellacksmålning (Malin Isenfors)
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: fotbolls-em-attondelsfinal-sverige-ukraina-2021-06-29-2045
+  title: Fotbolls-EM åttondelsfinal Sverige - Ukraina
+  date: '2021-06-29'
+  start: '20:45'
+  end: '23:00'
+  location: TV under tak vid servicehuset
+  responsible: Morgan Johansson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: teleskop-kolla-in-manen-och-kanske-mars-2021-06-29-0000
+  title: Teleskop - kolla in månen, och kanske Mars…
+  date: '2021-06-29'
+  start: null
+  end: null
+  location: null
+  responsible: Jessica Malmberg
+  description: Inställt
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: titta-pa-sommarlov-2021-06-30-0900
+  title: Titta på sommarlov
+  date: '2021-06-30'
+  start: 09:00
+  end: '10:00'
+  location: TV-rummet Servicehuset
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: trummeditation-2021-06-30-0900
+  title: Trummeditation
+  date: '2021-06-30'
+  start: 09:00
+  end: '10:30'
+  location: Grillplatsen
+  responsible: Elisabeth Ejeblad
+  description: vid älven
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: excel-datacheck-installationshjalp-etc-2021-06-30-0930
+  title: '- Excel datacheck, installationshjälp etc'
+  date: '2021-06-30'
+  start: 09:30
+  end: null
+  location: Fritidsgården
+  responsible: Patrik Von Knorring
+  description: 'Det går att fixa utvärderingslicenser från Microsoft = gratis 30 dagar
+    Målgrupp ungdom-vuxen; Krav: dator med fysisk installation av MS Excel (inte anpassat
+    för att köra i browser eller med Google Sheets men går säkert hjälpligt)'
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bradspel-2021-06-30-1000
+  title: Brädspel
+  date: '2021-06-30'
+  start: '10:00'
+  end: null
+  location: null
+  responsible: null
+  description: Samling
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: excel-grunder-inga-forkunskapskrav-patrik-von-knorring-malgrupp-ungdom-vuxen-2021-06-30-1000
+  title: Excel Grunder - inga förkunskapskrav (Patrik von Knorring) Målgrupp ungdom-vuxen
+  date: '2021-06-30'
+  start: '10:00'
+  end: null
+  location: Fritidsgården
+  responsible: Blad
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: i-idrottshallen-2021-06-30-1000
+  title: i idrottshallen
+  date: '2021-06-30'
+  start: '10:00'
+  end: null
+  location: GA-hallen
+  responsible: Ivar
+  description: Vi väljer gemensamt ut roliga spel att spela.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: jag-tar-med-stekhall-och-tankte-baka-tunnbrod-vid-grillplatsen-2021-06-30-1030
+  title: Jag tar med stekhäll och tänkte baka tunnbröd vid grillplatsen
+  date: '2021-06-30'
+  start: '10:30'
+  end: '12:30'
+  location: null
+  responsible: Charlotte Anderberg
+  description: Lite kavling och häng runt elden. Ställer in/flyttar vid regn. Utrustningen
+    begränsar ju antalet som kan göra samtidigt men lite drop-in princip borde fungera.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: naturpromenad-4-9-ar-2021-06-30-1030
+  title: Naturpromenad 4-9 år
+  date: '2021-06-30'
+  start: '10:30'
+  end: null
+  location: Samling vid lekplatsen
+  responsible: Disa Rönnkvist
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: varulvarna-med-modifierade-regler-och-nya-roller-tekla-fran-11-ar-2021-06-30-1100
+  title: Varulvarna med modifierade regler och nya roller (Tekla) Från 11 år
+  date: '2021-06-30'
+  start: '11:00'
+  end: '12:30'
+  location: Tält 2 vid GA-hallens ingång
+  responsible: Bland Annat Två Roller och Två Liv Per Spelare
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: att-lamna-den-svenska-skolplikten-2021-06-30-1130
+  title: Att lämna den svenska skolplikten
+  date: '2021-06-30'
+  start: '11:30'
+  end: '12:30'
+  location: Tält 1 vid GA-hallens ingång
+  responsible: Niclas Nilsson
+  description: Alternativa skolsystem och andra lärandeformer som finns utanför Sveriges
+    gränser
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: lunch-2021-06-30-1230
+  title: Lunch
+  date: '2021-06-30'
+  start: '12:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-elementaroarna-fyra-platser-2021-06-30-1330
+  title: 12-timmars kampanj Elementaröarna Fyra platser
+  date: '2021-06-30'
+  start: '13:30'
+  end: '16:30'
+  location: DnD-tältet
+  responsible: Harald
+  description: 10-16 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-grottor-och-gradvargar-2021-06-30-1330
+  title: 12-timmars kampanj Grottor och grådvärgar
+  date: '2021-06-30'
+  start: '13:30'
+  end: '16:30'
+  location: Speltältet
+  responsible: Viktor
+  description: Fyra platser. 14-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: complex-werewolf-in-english-2021-06-30-1330
+  title: Complex Werewolf in English
+  date: '2021-06-30'
+  start: '13:30'
+  end: '15:00'
+  location: Fritidsgården
+  responsible: Mida
+  description: Ta med egen dator (Daniel Nilede)
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: historiestund-2021-06-30-1330
+  title: Historiestund
+  date: '2021-06-30'
+  start: '13:30'
+  end: '14:00'
+  location: Gräsplan vid björkarna
+  responsible: Christina Ebeling
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: foraldrafika-goda-exempel-2021-06-30-1400
+  title: Föräldrafika Goda exempel
+  date: '2021-06-30'
+  start: '14:00'
+  end: null
+  location: Älven
+  responsible: Marie Johansson
+  description: '(Sandra Stenhede) Från 11 år : Tält 215:00 Simstund. Christina är
+    simlärare och kommer ha en liten “Simstund” för barn som håller på att lära sig
+    att simma nere vid lagunen. Målgrupp: barn som håller på att lära sig att simma,
+    med förälder. Ta gärna med flytkorv eller liknande. (Christina Falk)'
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: forandringsarbete-for-sarskilt-begavade-barn-du-behovs-samarbete-foraldrar-emellan-med-rfsb-som-bas-2021-06-30-1500
+  title: Förändringsarbete för särskilt begåvade barn - du behövs! Samarbete föräldrar
+    emellan, med RFSB som bas
+  date: '2021-06-30'
+  start: '15:00'
+  end: null
+  location: Servicehuset
+  responsible: Johan och Andreas
+  description: Hur vi jobbar, vad vi jobbar för och hur mycket bättre vi skulle kunna
+    bli med fler engagerade. . Preliminärt vid servicehuset.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: middag-2021-06-30-1630
+  title: Middag
+  date: '2021-06-30'
+  start: '16:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 15-timmars-kampanj-lang-rollspelskampanj-2021-06-30-1830
+  title: 15-timmars kampanj Lång rollspelskampanj
+  date: '2021-06-30'
+  start: '18:30'
+  end: '21:30'
+  location: DnD-tältet
+  responsible: Viktor och Harald
+  description: Fyra platser. 12-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 10-policyatgarder-som-kan-radda-klimatet-2021-06-30-1900
+  title: 10 policyåtgärder som kan rädda klimatet
+  date: '2021-06-30'
+  start: '19:00'
+  end: '20:30'
+  location: Tält 1
+  responsible: Jenny
+  description: Fördelar och nackdelar. Föredrag med diskussion efteråt. Rekommenderad
+    ålder 13-100 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: titta-pa-sommarlov-2021-07-01-0900
+  title: Titta på sommarlov
+  date: '2021-07-01'
+  start: 09:00
+  end: '10:00'
+  location: TV-rummet Servicehuset
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bradspel-2021-07-01-1000
+  title: Brädspel
+  date: '2021-07-01'
+  start: '10:00'
+  end: null
+  location: null
+  responsible: null
+  description: Samling
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: i-idrottshallen-2021-07-01-1000
+  title: i idrottshallen
+  date: '2021-07-01'
+  start: '10:00'
+  end: null
+  location: GA-hallen
+  responsible: Ivar
+  description: Vi väljer gemensamt ut roliga spel att spela.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: labbiga-lagar-ruggig-ratt-fran-7-ar-2021-07-01-1030
+  title: Läbbiga lagar, ruggig rätt… Från 7 år
+  date: '2021-07-01'
+  start: '10:30'
+  end: '12:00'
+  location: Skolans gympasal
+  responsible: Sara Varda St Vincent
+  description: OBS! Minsta selen Daniel har kräver ett midjemått på minst 62 cm. (Daniel
+    Nilede)
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: gitarr-spela-tillsammans-ar-kul-vi-satter-oss-i-graset-spelar-tillsammans-och-lar-av-varandra-niclas-nilsson-2021-07-01-1100
+  title: Gitarr Spela tillsammans är kul! Vi sätter oss i gräset, spelar tillsammans
+    och lär av varandra! (Niclas Nilsson)
+  date: '2021-07-01'
+  start: '11:00'
+  end: null
+  location: I skuggan under träden, bredvid gungorna i slänten nedanför ”nerfstugorna”
+  responsible: och Kanske Andra Instrument
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-snallkrig-2021-07-01-1100
+  title: Nerf-snällkrig
+  date: '2021-07-01'
+  start: '11:00'
+  end: '12:00'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: lunch-2021-07-01-1230
+  title: Lunch
+  date: '2021-07-01'
+  start: '12:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: complex-werewolf-in-english-2021-07-01-1330
+  title: Complex Werewolf in English
+  date: '2021-07-01'
+  start: '13:30'
+  end: '15:00'
+  location: Tält 1
+  responsible: Mida
+  description: Tält 213:30-15:00 Internetsäkerhet, kryptering och matematiken bakom
+    (Niclas Nilsson)
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: foraldrafika-hur-kan-man-paverka-politik-och-kommun-for-att-satta-sarskild-begavning-pa-dagordningen-2021-07-01-1500
+  title: Föräldrafika Hur kan man påverka politik och kommun för att sätta särskild
+    begåvning på dagordningen
+  date: '2021-07-01'
+  start: '15:00'
+  end: null
+  location: Fritidsgård...den
+  responsible: Cecilia Löfgreen
+  description: Tält 115:00 Bygg en chiffergenerator i excel (bör ha grunder, kunna
+    vad en funktion/formel är) Patrik von Knorring) Målgrupp ungdom-vuxen
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-gangkrig-2021-07-01-1530
+  title: Nerf-gängkrig
+  date: '2021-07-01'
+  start: '15:30'
+  end: '16:30'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: middag-2021-07-01-1630
+  title: Middag
+  date: '2021-07-01'
+  start: '16:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: grillkvall-med-trubadurer-2021-07-01-1800
+  title: Grillkväll med trubadurer
+  date: '2021-07-01'
+  start: '18:00'
+  end: null
+  location: Älvstranden
+  responsible: Isenfors
+  description: Ta med egen mat och dryck.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 15-timmars-kampanj-lang-rollspelskampanj-2021-07-01-1830
+  title: 15-timmars kampanj Lång rollspelskampanj
+  date: '2021-07-01'
+  start: '18:30'
+  end: '21:30'
+  location: DnD-tältet
+  responsible: Viktor och Harald
+  description: Fyra platser. 12-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: varulvarna-med-modifierade-regler-och-nya-roller-tekla-fran-11-ar-2021-07-01-1830
+  title: Varulvarna med modifierade regler och nya roller (Tekla) Från 11 år
+  date: '2021-07-01'
+  start: '18:30'
+  end: null
+  location: Tält 2 vid GA-hallens ingång
+  responsible: Bland Annat Två Roller och Två Liv Per Spelare
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: musikquiz-2021-07-01-2030
+  title: Musikquiz
+  date: '2021-07-01'
+  start: '20:30'
+  end: null
+  location: Älvstranden
+  responsible: Lillemor Birgersson & Sandra Stenhede
+  description: Generationskriget- Frågor från både generation X och Z
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: teleskop-kolla-in-manen-och-kanske-mars-2021-07-01-0000
+  title: Teleskop - kolla in månen, och kanske Mars…
+  date: '2021-07-01'
+  start: null
+  end: null
+  location: null
+  responsible: Jessica Malmberg
+  description: Inställt
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: titta-pa-sommarlov-2021-07-02-0900
+  title: Titta på sommarlov
+  date: '2021-07-02'
+  start: 09:00
+  end: '10:00'
+  location: TV-rummet Servicehuset
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: trummeditation-2021-07-02-0900
+  title: Trummeditation
+  date: '2021-07-02'
+  start: 09:00
+  end: '10:30'
+  location: Grillplatsen
+  responsible: Elisabeth Ejeblad
+  description: vid älven
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bradspel-2021-07-02-1000
+  title: Brädspel
+  date: '2021-07-02'
+  start: '10:00'
+  end: null
+  location: null
+  responsible: null
+  description: Samling
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: i-idrottshallen-2021-07-02-1000
+  title: i idrottshallen
+  date: '2021-07-02'
+  start: '10:00'
+  end: null
+  location: GA-hallen
+  responsible: Ivar
+  description: Vi väljer gemensamt ut roliga spel att spela.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: kortleksutmaning-ett-rorelse-traningspass-med-enkla-ovningar-som-passar-alla-2021-07-02-1000
+  title: Kortleksutmaning! Ett rörelse-/träningspass med enkla övningar som passar
+    alla
+  date: '2021-07-02'
+  start: '10:00'
+  end: null
+  location: Gräsplanen
+  responsible: Från 7-8 År
+  description: Vuxna och barn tränar tillsammans . Musik, samarbete, svett och skratt!
+    (Sara von Knorring)
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: hinderbana-4-6-ar-2021-07-02-1100
+  title: Hinderbana 4-6 år
+  date: '2021-07-02'
+  start: '11:00'
+  end: null
+  location: Gräsplanen
+  responsible: Sara och Cecilia
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-snallkrig-2021-07-02-1100
+  title: Nerf-snällkrig
+  date: '2021-07-02'
+  start: '11:00'
+  end: '12:00'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: schack-alla-schackintresserade-lat-oss-traffas-och-spela-med-varandra-i-bradspelstaltet-2021-07-02-1100
+  title: Schack - alla schackintresserade, låt oss träffas och spela med varandra
+    i brädspelstältet!
+  date: '2021-07-02'
+  start: '11:00'
+  end: null
+  location: Brädspelstältet
+  responsible: Molle
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: lunch-2021-07-02-1230
+  title: Lunch
+  date: '2021-07-02'
+  start: '12:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-elementaroarna-fyra-platser-2021-07-02-1330
+  title: 12-timmars kampanj Elementaröarna Fyra platser
+  date: '2021-07-02'
+  start: '13:30'
+  end: '16:30'
+  location: DnD-tältet
+  responsible: Harald
+  description: 10-16 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-grottor-och-gradvargar-2021-07-02-1330
+  title: 12-timmars kampanj Grottor och grådvärgar
+  date: '2021-07-02'
+  start: '13:30'
+  end: '16:30'
+  location: Speltältet
+  responsible: Viktor
+  description: Fyra platser. 14-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: foraldrafika-vi-som-ar-har-for-forsta-gangen-2021-07-02-1400
+  title: Föräldrafika Vi som är här för första gången
+  date: '2021-07-02'
+  start: '14:00'
+  end: null
+  location: Tält 115:00-16:00 Prova på SUP i badkanalen vid älven (Annelie & Johan
+    Mattson-Djos) Alla åldrar
+  responsible: Stand Up Paddelboard
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: avancerad-excel-anpassas-efter-deltagares-onskemal-men-fokus-troligen-pa-dataanalys-avancerade-formler-listmatchning-pivottabeller-datamodeller-malgrupp-ungdom-vuxen-2021-07-02-1500
+  title: Avancerad Excel - anpassas efter deltagares önskemål, men fokus troligen
+    på dataanalys, avancerade formler, listmatchning, pivottabeller & datamodeller
+    Målgrupp ungdom-vuxen
+  date: '2021-07-02'
+  start: '15:00'
+  end: null
+  location: Fritidsgården
+  responsible: Patrik Von Knorring
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-gangkrig-2021-07-02-1530
+  title: Nerf-gängkrig
+  date: '2021-07-02'
+  start: '15:30'
+  end: '16:30'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: middag-2021-07-02-1630
+  title: Middag
+  date: '2021-07-02'
+  start: '16:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: teckning-2021-07-02-1730
+  title: Teckning
+  date: '2021-07-02'
+  start: '17:30'
+  end: null
+  location: DnD-tältet
+  responsible: 'Penna och Papper : Tält 118:30-21:30 15-timmars Kampanj Med Viktor
+    och Harald'
+  description: Skiss till färdigt ansikte. Ta Lång rollspelskampanj. Fyra platser.
+    12-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: charader-2021-07-02-1830
+  title: Charader
+  date: '2021-07-02'
+  start: '18:30'
+  end: null
+  location: DnD-tältet
+  responsible: Eva Brunhage
+  description: Tält 219:00 Hur det är att behöva gå iväg och vara ensam - En tonårings
+    berättelse (Alex)
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nagelmalarverkstad-2021-07-02-1900
+  title: Nagelmålarverkstad
+  date: '2021-07-02'
+  start: '19:00'
+  end: '21:00'
+  location: Servicehuset
+  responsible: Malin Isenfors
+  description: 20:00-21:30. Spela spelet One Night Revolution som påminner om den
+    klassiska leken
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bast-i-test-2021-07-02-1930
+  title: Bäst i test
+  date: '2021-07-02'
+  start: '19:30'
+  end: null
+  location: Gräsplanen
+  responsible: Christina Johansson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: titta-pa-sommarlov-2021-07-03-0900
+  title: Titta på sommarlov
+  date: '2021-07-03'
+  start: 09:00
+  end: '10:00'
+  location: TV-rummet Servicehuset
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 15-timmars-kampanj-lang-rollspelskampanj-2021-07-03-0930
+  title: 15-timmars kampanj Lång rollspelskampanj
+  date: '2021-07-03'
+  start: 09:30
+  end: '12:30'
+  location: DnD-tältet
+  responsible: Viktor och Harald
+  description: Fyra platser. 12-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: bradspel-2021-07-03-1000
+  title: Brädspel
+  date: '2021-07-03'
+  start: '10:00'
+  end: null
+  location: null
+  responsible: null
+  description: Samling
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: i-idrottshallen-2021-07-03-1000
+  title: i idrottshallen
+  date: '2021-07-03'
+  start: '10:00'
+  end: null
+  location: GA-hallen
+  responsible: Ivar
+  description: Vi väljer gemensamt ut roliga spel att spela.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-snallkrig-2021-07-03-1100
+  title: Nerf-snällkrig
+  date: '2021-07-03'
+  start: '11:00'
+  end: '12:00'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: lunch-2021-07-03-1230
+  title: Lunch
+  date: '2021-07-03'
+  start: '12:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-elementaroarna-fyra-platser-2021-07-03-1330
+  title: 12-timmars kampanj Elementaröarna Fyra platser
+  date: '2021-07-03'
+  start: '13:30'
+  end: '16:30'
+  location: DnD-tältet
+  responsible: Harald
+  description: 10-16 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: 12-timmars-kampanj-grottor-och-gradvargar-2021-07-03-1330
+  title: 12-timmars kampanj Grottor och grådvärgar
+  date: '2021-07-03'
+  start: '13:30'
+  end: '16:30'
+  location: Speltältet
+  responsible: Viktor
+  description: Fyra platser. 14-22 år
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: historiestund-2021-07-03-1330
+  title: Historiestund
+  date: '2021-07-03'
+  start: '13:30'
+  end: '14:00'
+  location: GA-hallen
+  responsible: Christina Ebeling
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: vi-kor-ett-pass-charader-igen-fast-denna-gang-utan-lag-och-tavlingsmoment-2021-07-03-1400
+  title: Vi kör ett pass charader igen, fast denna gång utan lag och tävlingsmoment
+  date: '2021-07-03'
+  start: '14:00'
+  end: '15:00'
+  location: Nerfarenan
+  responsible: Eva och Elvira
+  description: 'Vi samarbetar när vi gissar vad som gestaltas. Från 10 år : Tält 115:00
+    Vattenkrig vuxna vs barn'
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: nerf-gangkrig-2021-07-03-1530
+  title: Nerf-gängkrig
+  date: '2021-07-03'
+  start: '15:30'
+  end: '16:30'
+  location: Nerfarenan
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: middag-2021-07-03-1630
+  title: Middag
+  date: '2021-07-03'
+  start: '16:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: avslutningsmote-2021-07-03-1800
+  title: Avslutningsmöte
+  date: '2021-07-03'
+  start: '18:00'
+  end: null
+  location: null
+  responsible: Andreas & Johan
+  description: Avetablering Gemensam översyn på området med iordningställande och
+    städ
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: titta-pa-sommarlov-2021-07-04-0900
+  title: Titta på sommarlov
+  date: '2021-07-04'
+  start: 09:00
+  end: '10:00'
+  location: TV-rummet Servicehuset
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
+- id: lunch-2021-07-04-1230
+  title: Lunch
+  date: '2021-07-04'
+  start: '12:30'
+  end: null
+  location: null
+  responsible: null
+  description: 'maffia (varulv). 10 platser. 9-100 år. Ansvarig: Ivar : Speltältet'
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-02-27 14:58:42'
+    updated_at: '2026-02-27 17:34:13'
