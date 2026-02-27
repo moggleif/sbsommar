@@ -1,34 +1,19 @@
 camp:
   id: 2018-06-syssleback
-  name: SB sommar 2018 juni
+  name: SB Sommar Juni 2018
   location: Sysslebäck
   start_date: '2018-06-17'
   end_date: '2018-06-20'
 events:
 - date: '2018-06-17'
-  description: null
-  end: null
-  id: varulvarna-i-klagerup-2018-06-17-1030
-  link: https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/?comment_id=2179133798975512&comment_tracking=%7B%22tn%22%3A%22R9%22%7D
-  location: Matt-tältet
-  meta:
-    created_at: '2026-02-23 23:06:02.569842'
-    updated_at: '2026-02-23 23:06:02.569854'
-  owner:
-    email: ''
-    name: ''
-  responsible: Emilia
-  start: '10:30'
-  title: Varulvarna i Klågerup
-- date: '2018-06-17'
-  description: null
+  description: föranmälan på lista i GA-hallen
   end: null
   id: scratch-for-nyborjare-2018-06-17-1030
   link: null
   location: Fritidsgården
   meta:
     created_at: '2026-02-23 23:06:02.569860'
-    updated_at: '2026-02-23 23:06:02.569862'
+    updated_at: '2026-02-27 16:33:32'
   owner:
     email: ''
     name: ''
@@ -38,16 +23,31 @@ events:
 - date: '2018-06-17'
   description: null
   end: null
+  id: varulvarna-i-klagerup-2018-06-17-1030
+  link: https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/?comment_id=2179133798975512&comment_tracking=%7B%22tn%22%3A%22R9%22%7D
+  location: Matt-tältet
+  meta:
+    created_at: '2026-02-23 23:06:02.569842'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Emilia
+  start: '10:30'
+  title: Varulvarna i Klågerup
+- date: '2018-06-17'
+  description: utanför bollsargen. Ledare saknas – någon frivillig? Vid regn GA-hallen.
+  end: null
   id: yoga-2018-06-17-1030
   link: null
   location: Grillplatsen
   meta:
     created_at: '2026-02-23 23:06:02.569867'
-    updated_at: '2026-02-23 23:06:02.569869'
+    updated_at: '2026-02-27 16:33:32'
   owner:
     email: ''
     name: ''
-  responsible: None (ledare saknas)
+  responsible: null
   start: '10:30'
   title: Yoga
 - date: '2018-06-17'
@@ -73,22 +73,37 @@ events:
   location: Nerfarenan
   meta:
     created_at: '2026-02-23 23:06:02.569880'
-    updated_at: '2026-02-23 23:06:02.569882'
+    updated_at: '2026-02-27 16:33:32'
   owner:
     email: ''
     name: ''
-  responsible: null
+  responsible: miniaturhusen
   start: '11:00'
   title: Nerf Snällkrig
 - date: '2018-06-17'
-  description: null
+  description: föranmälan på lista i GA-hallen
+  end: null
+  id: cirkus-skola-2018-06-17-1400
+  link: https://www.facebook.com/events/2076104085945151/permalink/2186850811537144/?ref=1&action_history=null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-23 23:06:02.569893'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Jenny vB
+  start: '14:00'
+  title: Cirkus-skola
+- date: '2018-06-17'
+  description: trampolinmadrassen
   end: null
   id: sagostund-for-de-yngsta-2018-06-17-1400
   link: null
   location: GA-hallen
   meta:
     created_at: '2026-02-23 23:06:02.569887'
-    updated_at: '2026-02-23 23:06:02.569889'
+    updated_at: '2026-02-27 16:33:32'
   owner:
     email: ''
     name: ''
@@ -98,15 +113,705 @@ events:
 - date: '2018-06-17'
   description: null
   end: null
-  id: cirkus-skola-2018-06-17-1400
-  link: https://www.facebook.com/events/2076104085945151/permalink/2186850811537144/?ref=1&action_history=null
-  location: GA-hallen
+  id: harry-potter-trivial-pursuit-2018-06-17-1600
+  link: null
+  location: Matt-tältet
   meta:
-    created_at: '2026-02-23 23:06:02.569893'
-    updated_at: '2026-02-23 23:06:02.569895'
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
   owner:
     email: ''
     name: ''
-  responsible: Jenny vB
+  responsible: null
+  start: '16:00'
+  title: Harry Potter Trivial Pursuit
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: nerf-gangkrig-2018-06-17-1600
+  link: null
+  location: Nerfarenan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: miniaturhusen
+  start: '16:00'
+  title: Nerf Gängkrig
+- date: '2018-06-17'
+  description: Hatha
+  end: null
+  id: yoga-hatha-2018-06-17-1600
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Gisela
+  start: '16:00'
+  title: Yoga (Hatha)
+- date: '2018-06-17'
+  description: null
+  end: null
+  id: dungeons-och-dragons-2018-06-17-1800
+  link: null
+  location: Matt-tältet
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Jennifer Ls grupp
+  start: '18:00'
+  title: "Dungeons & Dragons"
+- date: '2018-06-18'
+  description: utanför bollsargen och/eller terrassen
+  end: null
+  id: dungeons-and-dragons-drop-in-2018-06-18-1000
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '10:00'
+  title: Dungeons and Dragons Drop In
+- date: '2018-06-18'
+  description: utanför bollsargen
+  end: null
+  id: yoga-2018-06-18-1030
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Johan H
+  start: '10:30'
+  title: Yoga
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: hundpromenad-2018-06-18-1100
+  link: null
+  location: Grillplatsen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:00'
+  title: Hundpromenad
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: nerf-snallkrig-2018-06-18-1100
+  link: null
+  location: Nerfarenan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: miniaturhusen
+  start: '11:00'
+  title: Nerf Snällkrig
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: improvisationsteater-2018-06-18-1130
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:30'
+  title: Improvisationsteater
+- date: '2018-06-18'
+  description: Samling hästhagen. Emma, ca 45 min. Obs att det finns rejält allergiska på lägret, så se till att byta kläder efteråt och tvätta av det värsta innan ni beträder andra lägeroffentliga utrymmen efteråt.
+  end: null
+  id: hastbekantskap-emma-ca-45min-2018-06-18-1300
+  link: null
+  location: Hästhagen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '13:00'
+  title: Hästbekantskap
+- date: '2018-06-18'
+  description: sal10. Se FB och anslag i GA-hallen, ca 2h.
+  end: null
+  id: scratch-fortsattning-2018-06-18-1300
+  link: null
+  location: Kvistbergsskolan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '13:00'
+  title: Scratch fortsättning
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: improvisationsteater-2018-06-18-1400
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
   start: '14:00'
-  title: Cirkus-skola
+  title: Improvisationsteater
+- date: '2018-06-18'
+  description: Under sparkbollsmatchen. OM några föräldrar kan ta på sig att övervaka och se till att det blir röjt efter. Samordna på FB under dagen.
+  end: null
+  id: klattring-hinderbana-och-kanske-inomhusnerf-och-biljard-2018-06-18-1400
+  link: null
+  location: Kvistbergsskolans gymnastiksal
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '14:00'
+  title: Klättring, hinderbana och kanske inomhusnerf och biljard
+- date: '2018-06-18'
+  description: trampolinmadrassen
+  end: null
+  id: sagostund-for-de-yngsta-2018-06-18-1400
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Nemi
+  start: '14:00'
+  title: Sagostund för de yngsta
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: titta-pa-sparkboll-2018-06-18-1400
+  link: null
+  location: Soffrummet på skolan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Niclas N
+  start: '14:00'
+  title: Titta på sparkboll
+- date: '2018-06-18'
+  description: för barn & föräldrar, ca 1h, mer info på FB
+  end: null
+  id: en-annorlunda-naturpromenad-2018-06-18-1430
+  link: null
+  location: Grillplatsen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '14:30'
+  title: En annorlunda naturpromenad
+- date: '2018-06-18'
+  description: begränsat antal platser
+  end: null
+  id: harry-potter-trivial-pursuit-final-begransat-antal-platser-2018-06-18-1600
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '16:00'
+  title: Harry Potter Trivial Pursuit – final
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: nerf-gangkrig-2018-06-18-1600
+  link: null
+  location: Nerfarenan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: miniaturhusen
+  start: '16:00'
+  title: Nerf Gängkrig
+- date: '2018-06-18'
+  description: korta matcher
+  end: null
+  id: pingisturnering-2018-06-18-1600
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '16:00'
+  title: Pingisturnering
+- date: '2018-06-18'
+  description: Hatha; eller matt-tältet
+  end: null
+  id: yoga-hatha-2018-06-18-1600
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Gisela
+  start: '16:00'
+  title: Yoga (Hatha)
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: dungeons-och-dragons-2018-06-18-1800
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Jennifer Ls grupp
+  start: '18:00'
+  title: "Dungeons & Dragons"
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: innebandy-2018-06-18-1800
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Sofia B
+  start: '18:00'
+  title: Innebandy
+- date: '2018-06-18'
+  description: null
+  end: null
+  id: att-losa-spel-och-andra-mattegator-en-stund-av-utmanade-problemlosning-med-matematikern-pontus-s-2018-06-18-1900
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '19:00'
+  title: Att lösa spel och andra mattegåtor – en stund av utmanande problemlösning med matematikern Pontus S
+- date: '2018-06-19'
+  description: utanför bollsargen och/eller terrassen
+  end: null
+  id: dungeons-and-dragons-drop-in-2018-06-19-1000
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '10:00'
+  title: Dungeons and Dragons Drop In
+- date: '2018-06-19'
+  description: 7–15 år, ca 1½h. Se anslag i GA-hallen.
+  end: null
+  id: cirkus-skola-nr-2-se-anslag-i-ga-hallen-ca11-2h-2018-06-19-1015
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Jenny, Ivar & Viktor
+  start: '10:15'
+  title: Cirkus-skola nr.2
+- date: '2018-06-19'
+  description: utanför bollsargen eller matt-tältet
+  end: null
+  id: yoga-2018-06-19-1030
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Johan H
+  start: '10:30'
+  title: Yoga
+- date: '2018-06-19'
+  description: sal 10, ca 1h
+  end: null
+  id: fraga-psykologen-2018-06-19-1100
+  link: null
+  location: Kvistbergsskolan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Leigh och Noor
+  start: '11:00'
+  title: Fråga psykologen
+- date: '2018-06-19'
+  description: null
+  end: null
+  id: hundpromenad-2018-06-19-1100
+  link: null
+  location: Grillplatsen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:00'
+  title: Hundpromenad
+- date: '2018-06-19'
+  description: miniatyrhusen
+  end: null
+  id: nerf-snallkrig-2018-06-19-1100
+  link: null
+  location: Nerfarenan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:00'
+  title: Nerf Snällkrig
+- date: '2018-06-19'
+  description: null
+  end: null
+  id: improvisationsteater-2018-06-19-1130
+  link: null
+  location: Matt-tältet
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:30'
+  title: Improvisationsteater
+- date: '2018-06-19'
+  description: kl. 16:00 berättar Maria om företaget och tillverkningen
+  end: '17:00'
+  id: chokladfabriken-kl-16-00-berattar-maria-om-foretaget-och-tillverkningen-2018-06-19-1400
+  link: null
+  location: null
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '14:00'
+  title: Chokladfabriken
+- date: '2018-06-19'
+  description: null
+  end: null
+  id: improvisationsteater-2018-06-19-1400
+  link: null
+  location: Matt-tältet
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '14:00'
+  title: Improvisationsteater
+- date: '2018-06-19'
+  description: Obs att det finns rejält allergiska på lägret, så se till att byta kläder efteråt och tvätta av det värsta innan ni beträder andra lägeroffentliga utrymmen efteråt.
+  end: null
+  id: ponnyridning-20kr-2018-06-19-1400
+  link: null
+  location: Hästhagen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Emma
+  start: '14:00'
+  title: Ponnyridning (20kr)
+- date: '2018-06-19'
+  description: trampolinmadrassen
+  end: null
+  id: kurs-i-rovarspraket-2018-06-19-1600
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Mira
+  start: '16:00'
+  title: Kurs i rövarspråket
+- date: '2018-06-19'
+  description: miniatyrhusen
+  end: null
+  id: nerf-gangkrig-2018-06-19-1600
+  link: null
+  location: Nerfarenan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '16:00'
+  title: Nerf Gängkrig
+- date: '2018-06-19'
+  description: Hatha; eller matt-tältet
+  end: null
+  id: yoga-hatha-2018-06-19-1600
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Gisela
+  start: '16:00'
+  title: Yoga (Hatha)
+- date: '2018-06-19'
+  description: null
+  end: null
+  id: dungeons-och-dragons-2018-06-19-1800
+  link: null
+  location: GA-salen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Jennifer Ls grupp
+  start: '18:00'
+  title: "Dungeons & Dragons"
+- date: '2018-06-19'
+  description: sal10
+  end: null
+  id: hjarna-och-beteende-2018-06-19-1800
+  link: null
+  location: Kvistbergsskolan
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Sarah H
+  start: '18:00'
+  title: Hjärna och beteende
+- date: '2018-06-19'
+  description: vuxendiskussion
+  end: null
+  id: skolflyktingar-hemundervisning-pa-aland-och-andra-alternativ-vuxendiskussion-2018-06-19-2000
+  link: null
+  location: Matt-tältet
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Susanna N mfl
+  start: '20:00'
+  title: 'Skolflyktingar: Hemundervisning på Åland och andra alternativ'
+- date: '2018-06-20'
+  description: Samling utanför GA-hallen
+  end: null
+  id: foto-for-nyborjare-2018-06-20-1000
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Andreas H
+  start: '10:00'
+  title: Foto för nybörjare
+- date: '2018-06-20'
+  description: null
+  end: null
+  id: varulvarna-i-klagerup-2018-06-20-1030
+  link: null
+  location: Matt-tältet
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Märta
+  start: '10:30'
+  title: Varulvarna i Klågerup
+- date: '2018-06-20'
+  description: barn mot vuxna (eller alla mot alla)?
+  end: null
+  id: vattenkrig-2018-06-20-1130
+  link: null
+  location: null
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '11:30'
+  title: Vattenkrig
+- date: '2018-06-20'
+  description: Knepiga utmaningar i lag (GeniCampen)
+  end: null
+  id: braingames-genicampen-2018-06-20-1400
+  link: null
+  location: null
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: CJ och Pontus S
+  start: '14:00'
+  title: Braingames (GeniCampen)
+- date: '2018-06-20'
+  description: lite mer avancerad
+  end: null
+  id: programmering-lite-mer-avancerad-2018-06-20-1400
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: Niclas
+  start: '14:00'
+  title: Programmering (lite mer avancerad)
+- date: '2018-06-20'
+  description: barn mot vuxna
+  end: null
+  id: nerf-krig-2018-06-20-1830
+  link: null
+  location: null
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '18:30'
+  title: Nerf-krig
+- date: '2018-06-20'
+  description: null
+  end: null
+  id: forandringsarbete-och-aktivitetsorganisering-lokalt-och-nationellt-2018-06-20-2000
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: null
+  start: '20:00'
+  title: Förändringsarbete och aktivitetsorganisering, lokalt och nationellt
+- date: '2018-06-20'
+  description: Vad tycker du?
+  end: null
+  id: frageladan-2018-06-20-2000
+  link: null
+  location: GA-hallen
+  meta:
+    created_at: '2026-02-27 16:07:22'
+    updated_at: '2026-02-27 16:33:32'
+  owner:
+    email: ''
+    name: ''
+  responsible: bollsidan
+  start: '20:00'
+  title: Frågelådan
