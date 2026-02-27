@@ -37,13 +37,18 @@ and APIs filter out QA camps entirely. See `02-REQUIREMENTS.md §42`.
 
 ## Event data flow
 
-1. A participant submits an event via the form.
-2. The API commits the event to `main` and opens an auto-merge PR.
-3. When the PR merges, `event-data-deploy.yml` triggers.
-4. Two parallel jobs build and deploy the event data pages — one to QA (via SCP), one to Production (via FTP).
-5. Each job builds with its own environment's `SITE_URL` and `API_URL` so that per-event page links point to the correct domain.
+1. A participant submits an event via the form. The API validates the data (injection
+   patterns, link protocol, length limits) and rejects invalid input immediately.
+2. The API commits the validated event to a temporary branch and opens an auto-merge PR.
+3. `event-data-deploy.yml` runs a no-op check that satisfies branch protection.
+4. The PR auto-merges to `main`.
+5. `event-data-deploy-post-merge.yml` triggers: three parallel jobs build inside
+   a pre-built Docker image and deploy event-data pages via SCP — one each to
+   QA, QA Node, and Production.
+6. Each job builds with its own environment's `SITE_URL` and `API_URL` so that
+   per-event page links point to the correct domain.
 
-Production receives event data within minutes of the PR merging — no manual step needed.
+All environments receive event data within minutes of submission — no manual step needed.
 
 ---
 
@@ -55,7 +60,9 @@ Production receives event data within minutes of the PR merging — no manual st
 | `deploy-qa.yml`           | Push to `main` (paths-ignore data YAMLs)               | `qa`                 |
 | `deploy-prod.yml`         | `workflow_dispatch` (manual)                            | `production`         |
 | `deploy-qa-node.yml`      | Push to `main` (paths-ignore data YAMLs)               | `qanode`             |
-| `event-data-deploy.yml`   | PR from `event/` or `event-edit/` changing data YAMLs  | `qa` + `production`  |
+| `event-data-deploy.yml`   | PR from `event/` or `event-edit/` changing data YAMLs  | — (no-op gate)       |
+| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only)              | `qa` + `qanode` + `production` |
+| `docker-build.yml`        | Push to `main` (package.json or Dockerfile)            | — (GHCR)             |
 
 `deploy-qa.yml` and `deploy-prod.yml` both call the shared reusable workflow
 `deploy-reusable.yml`, which builds the static site, deploys it via SCP,
@@ -125,11 +132,6 @@ Same secret names as `qa`, but with production values:
 | `SERVER_SSH_KEY`  | Production SSH private key                            |
 | `SERVER_SSH_PORT` | Production SSH port                                   |
 | `DEPLOY_DIR`      | Production deploy directory                           |
-| `FTP_HOST`        | Production FTP host                                   |
-| `FTP_USERNAME`    | Production FTP username                               |
-| `FTP_PASSWORD`    | Production FTP password                               |
-| `FTP_APP_DIR`     | Production FTP app directory (must end with `/`)      |
-| `FTP_TARGET_DIR`  | Production FTP target dir for event data (must end with `/`) |
 
 ---
 

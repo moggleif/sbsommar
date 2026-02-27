@@ -98,10 +98,11 @@ The API server (`app.js`) handles each submission as follows:
 4. Derives the active camp from dates and reads its YAML file from GitHub.
 5. Appends the new event and commits it to a temporary branch. The serialised YAML block is indented to match the existing `events:` list so the file remains valid YAML.
 6. Opens a pull request with auto-merge enabled.
-7. The event data CI pipeline runs (see §11): YAML lint → security scan → build → targeted FTP upload of the four schema files.
-8. The PR merges automatically via auto-merge. The full deploy pipeline then rebuilds and re-uploads the entire site (idempotent for the schema files).
+7. The event data PR check (see §11) runs — a no-op that satisfies branch protection.
+8. The PR merges automatically via auto-merge.
+9. The post-merge event data deploy workflow (see §11) builds the site inside a pre-built Docker image and uploads event-data pages to QA, QA Node, and Production via SCP.
 
-The targeted FTP upload in step 7 makes the updated schedule visible to participants while the PR is still open — typically within a minute of submission.
+The updated schedule is visible to participants within minutes of submission.
 
 The active camp's YAML file is always version-controlled. Git history provides a full audit trail of every event submitted through the form.
 
@@ -113,12 +114,12 @@ flowchart TD
     D --> E[Read active camp YAML]
     E --> F[Append event · create ephemeral branch]
     F --> G[Open PR · enable auto-merge]
-    G --> H["Event data CI pipeline (§11):\nLint YAML → Security scan\n→ Build → FTP upload 4 files"]
+    G --> H["No-op PR check (§11)\n— branch protection gate"]
     H --> I[Auto-merge to main]
     I --> J
 
-    subgraph J [Full deploy on push to main]
-        K[Build public/] --> L[FTP: full site re-upload]
+    subgraph J [Post-merge event data deploy]
+        K[Docker image: build site] --> L[SCP: event pages to QA + QA Node + Prod]
     end
 ```
 
@@ -621,144 +622,110 @@ button. Form data is preserved so the user can correct and resubmit.
 ## 11. Event Data CI Pipeline
 
 When a participant submits or edits an activity, `source/api/github.js` opens an ephemeral
-PR from a branch named `event/**` (add) or `event-edit/**` (edit). The event data CI
-pipeline (`.github/workflows/event-data-deploy.yml`) intercepts these PRs and runs four
-sequential jobs:
+PR from a branch named `event/**` (add) or `event-edit/**` (edit). The pipeline has two
+phases:
 
-### 11.1 Job: Lint event YAML (`source/scripts/lint-yaml.js`)
+1. **PR check** (`.github/workflows/event-data-deploy.yml`) — a no-op job that satisfies
+   branch protection so auto-merge can proceed.
+2. **Post-merge deploy** (`.github/workflows/event-data-deploy-post-merge.yml`) — builds the
+   site inside a pre-built Docker image and deploys event-data pages to all environments
+   via SCP.
 
-Parses and structurally validates the changed per-camp YAML file using `js-yaml`.
+All event data validation (injection patterns, link protocol, length limits, structural
+checks) runs in the API layer at submission time (see §11.6). Data that reaches git is
+already validated.
 
-Checks:
+### 11.1 Docker build image
 
-- YAML is syntactically valid (js-yaml throws on parse error)
-- Top-level `camp` key present with all required fields
-- Camp `start_date` / `end_date` in YYYY-MM-DD format; end ≥ start
-- `events` is an array
-- Every event has all required fields: `id`, `title`, `date`, `start`, `end`, `location`, `responsible`
-- No duplicate `id` values within the file
-- `date` is a valid calendar date within the camp's date range
-- `start` and `end` match HH:MM; `end` is strictly after `start`
-- Optional fields (`description`, `link`) are string or null if present
+A Docker image (`ghcr.io/<owner>/<repo>`) contains Node.js 20 and the project's production
+dependencies (`js-yaml`, `marked`, `qrcode`) pre-installed. The Dockerfile lives in
+`.github/docker/Dockerfile`.
 
-If this job fails, all downstream jobs are skipped.
+A separate workflow (`.github/workflows/docker-build.yml`) builds and pushes the image
+when `package.json` or the Dockerfile changes on push to `main`. Images are tagged with
+both `latest` and the git SHA.
 
-### 11.2 Job: Security scan (`source/scripts/check-yaml-security.js`)
+### 11.2 PR check (event-data-deploy.yml)
 
-Scans free-text event fields for content that would be dangerous if injected into the
-rendered HTML.
+A single job that:
 
-Fields scanned: `title`, `location`, `responsible`, `description`.
+- Triggers on PRs to `main` with path `source/data/**.yaml`, filtered to branches
+  matching `event/` or `event-edit/` prefixes.
+- Logs "Validated at API layer" and exits successfully.
 
-Patterns that cause failure:
+This job exists solely to satisfy branch protection. No validation, build, or deploy
+runs during the PR phase.
 
-- `<script` — script tags
-- `javascript:` — javascript URI scheme
-- `on\w+=` — event handler attributes (`onerror=`, `onclick=`, etc.)
-- `<iframe`, `<object`, `<embed` — embedding elements
-- `data:text/html` — inline HTML data URIs
+### 11.3 Post-merge deploy (event-data-deploy-post-merge.yml)
 
-Link validation:
+Triggers on push to `main` with path filter `source/data/**.yaml`. Uses the pre-built
+Docker image instead of `setup-node` + `npm ci`.
 
-- If `link` is non-empty it must begin with `http://` or `https://`.
+Steps in the detect job:
 
-Length limits (generous, to reject abuse):
+1. Detect the changed per-camp YAML file by comparing `HEAD~1..HEAD`.
+2. Determine whether the file belongs to a QA camp (`is_qa` output).
 
-- `title`, `location`, `responsible`: 200 characters
-- `description`: 2 000 characters
-- `link`: 500 characters
+Three parallel deploy jobs follow (each uses the Docker image):
 
-Fields not scanned: `owner.name`, `owner.email` — these are never rendered in public HTML.
+- **deploy-qa** — builds with QA environment secrets, uploads via SCP.
+- **deploy-qa-node** — builds with QA Node environment secrets, uploads via SCP.
+- **deploy-prod** — builds with production environment secrets, uploads via SCP.
+  Skipped when `is_qa` is true.
 
-If this job fails, build and deploy are skipped.
+Each deploy job:
 
-### 11.3 Job: Build
+1. Checks out the repository.
+2. Runs `node source/build/build.js`.
+3. Stages only event-data-derived files: `schema.html`, `idag.html`,
+   `dagens-schema.html`, `events.json`, `schema.rss`, `schema.ics`,
+   `kalender.html`, and per-event pages under `schema/`.
+4. Uploads the staged files via SCP to the target environment.
 
-Runs `npm run build` (the full site build). The four event-data-derived files are then
-captured as a workflow artefact:
+### 11.4 CI workflow for data-only changes
 
-- `public/schema.html`
-- `public/idag.html`
-- `public/dagens-schema.html`
-- `public/events.json`
-
-The other pages (`index.html`, `lagg-till.html`, `redigera.html`, `arkiv.html`) are built
-but not deployed — they are not affected by event data changes.
-
-### 11.4 Job: Targeted FTP deploy
-
-Downloads the artefact and uploads only the four files to FTP using `curl`:
-
-```bash
-curl --upload-file "deploy-output/public/$FILE" \
-     --user "$FTP_USERNAME:$FTP_PASSWORD" \
-     "ftp://$FTP_HOST${FTP_TARGET_DIR}$FILE"
-```
-
-`upload-artifact` preserves the workspace-relative path, so files land at
-`deploy-output/public/<file>` (not `deploy-output/<file>`).
-
-`SamKirkland/FTP-Deploy-Action` is intentionally not used here: that action's
-`dangerous-clean-slate` mode would delete the entire site. `curl` is available on
-`ubuntu-latest` without any additional installation.
-
-Reuses the same secrets as the deploy workflows: `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
-`FTP_TARGET_DIR`, `API_URL`.
+`ci.yml` detects data-only changes (`has_code == false`) and skips `npm ci` and
+`npm run build` entirely. The job passes after the detect step. Building event-data
+changes is the responsibility of the post-merge deploy workflow.
 
 ### 11.5 Relationship to existing workflows
 
 | Workflow | Trigger | Scope |
 | --- | --- | --- |
-| `ci.yml` | All branches + PRs | Lint (JS, Markdown, CSS, HTML), test, build (skips lint+test for data-only changes) |
-| `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | Lint YAML + security scan + build + targeted FTP to QA and Production |
-| `deploy-qa.yml` | Push to `main` (ignores `source/data/**.yaml`-only changes) | Full build + SCP/SSH swap + FTP app restart (QA) |
-| `deploy-prod.yml` | Manual `workflow_dispatch` | Full build + SCP/SSH swap + FTP app restart (Production) |
+| `ci.yml` | All branches + PRs | Lint, test, build for code changes; pass-through for data-only |
+| `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | No-op branch protection gate |
+| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only) | Docker build + SCP deploy to QA, QA Node, Production |
+| `deploy-qa.yml` | Push to `main` (ignores data YAMLs) | Full build + SCP/SSH swap (QA) |
+| `deploy-qa-node.yml` | Push to `main` (ignores data YAMLs) | Full build + SCP/SSH swap (QA Node) |
+| `deploy-prod.yml` | Manual `workflow_dispatch` | Full build + SCP/SSH swap (Production) |
 | `deploy-reusable.yml` | Called by `deploy-qa.yml` / `deploy-prod.yml` | Shared build-and-deploy logic |
+| `docker-build.yml` | Push to `main` (package.json or Dockerfile) | Build and push Docker image to GHCR |
 
-`ci.yml` and `event-data-deploy.yml` both run on the same event PRs. This is by design:
-`ci.yml` provides the general build check; `event-data-deploy.yml` provides data-specific
-validation and early deployment. `deploy-qa.yml` uses `paths-ignore` so that pushes to `main`
-containing only YAML data file changes do not trigger a full site deploy — the schema
-files are already deployed by `event-data-deploy.yml` during the PR phase.
+`deploy-qa.yml` uses `paths-ignore` so that pushes to `main` containing only YAML data
+file changes do not trigger a full site deploy — the event-data pages are deployed by
+`event-data-deploy-post-merge.yml`.
 
-### 11.6 Checkout depth
+### 11.6 API-layer security validation
 
-Both `ci.yml` and `event-data-deploy.yml` compare the PR branch to `main` using a
-three-dot diff (`origin/main...HEAD`). This requires a merge base — a common ancestor
-commit — to exist in the local clone.
+The injection pattern scan and link protocol check are performed at the API layer,
+inside `validateFields()` in `source/api/validate.js` (Node.js) and
+`api/src/Validate.php` (PHP). Dangerous payloads are rejected with HTTP 400
+**before** any data reaches the git repository.
 
-GitHub Actions' `actions/checkout@v4` defaults to `fetch-depth: 1` (shallow clone).
-With a shallow checkout, the diff has no merge base and fails with
-`fatal: origin/main...HEAD: no merge base`.
-
-Both workflows must therefore use `fetch-depth: 0` (full history) on their checkout
-step so the three-dot diff can find a common ancestor.
-
-### 11.7 Required repository settings
-
-- **"Allow auto-merge"** must be enabled in Settings > General > Pull Requests.
-- The four new job names must be added as required status checks in branch protection for
-  `main` after the workflow has run at least once (check names only appear in the UI
-  after a run exists).
-- No new secrets are needed beyond the existing deploy secrets (now scoped per GitHub Environment; see [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md)).
-
-### 11.8 API-layer security validation
-
-The injection pattern scan and link protocol check described in §11.2 are also
-performed at the API layer, inside `validateFields()` in `source/api/validate.js`
-(Node.js) and `api/src/Validate.php` (PHP). This means dangerous payloads are
-rejected with HTTP 400 **before** any data reaches the git repository.
-
-The checks are identical to those in `check-yaml-security.js`:
+Checks:
 
 - **Injection patterns** (case-insensitive): `<script`, `javascript:`, `on\w+=`,
   `<iframe`, `<object`, `<embed`, `data:text/html`.
 - **Fields scanned**: `title`, `location`, `responsible`, `description`.
 - **Link protocol**: non-empty `link` must start with `http://` or `https://`.
 
-The CI security scan (`check-yaml-security.js`) remains as a defence-in-depth layer
-and will be removed in a future pipeline optimisation once the API-layer check has
-been proven in production.
+### 11.7 Required repository settings
+
+- **"Allow auto-merge"** must be enabled in Settings > General > Pull Requests.
+- The `event-data-deploy.yml` job name must be a required status check in branch
+  protection for `main`.
+- No new secrets are needed beyond the existing SSH deploy secrets (scoped per
+  GitHub Environment; see [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md)).
 
 ---
 

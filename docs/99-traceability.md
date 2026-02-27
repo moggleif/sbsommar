@@ -492,19 +492,19 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§22.5` | If `footer.md` is missing at build time, all pages render with an empty footer and the build does not crash | 03-ARCHITECTURE.md §4b | FTR-01, FTR-05, FTR-07, FTR-09, FTR-11, FTR-13, FTR-15, FTR-17 | `source/build/build.js` – `fs.existsSync()` fallback to `''`; `pageFooter('')` returns `''` | covered |
 | `02-§22.6` | Updating `footer.md` and running the build changes the footer on all pages without modifying any other file | 03-ARCHITECTURE.md §4b | — (follows from §22.3; no separate test needed) | Verified structurally: `footerHtml` flows from `footer.md` through `convertMarkdown()` into every page | implemented |
 
-| `02-§23.1` | CI must parse and structurally validate the changed event YAML file on event-branch PRs before merge | 03-ARCHITECTURE.md §11 | LNT-01 | `source/scripts/lint-yaml.js` – `validateYaml()` parses with js-yaml; `.github/workflows/event-data-deploy.yml` – `lint-yaml` job | covered |
-| `02-§23.2` | Lint validates all required fields (id, title, date, start, end, location, responsible) are present and non-empty | 03-ARCHITECTURE.md §11.1 | LNT-02..09 | `source/scripts/lint-yaml.js` – `EVENT_REQUIRED` field loop | covered |
-| `02-§23.3` | Lint validates that date is YYYY-MM-DD, calendar-valid, and within the camp's date range | 03-ARCHITECTURE.md §11.1 | LNT-10..13 | `source/scripts/lint-yaml.js` – `DATE_RE` check + `isNaN(new Date(d))` + camp range comparison | covered |
-| `02-§23.4` | Lint validates start and end match HH:MM and end is strictly after start | 03-ARCHITECTURE.md §11.1 | LNT-14..17 | `source/scripts/lint-yaml.js` – `TIME_RE` checks + `e <= s` comparison | covered |
-| `02-§23.5` | Lint rejects files with duplicate event IDs | 03-ARCHITECTURE.md §11.1 | LNT-18 | `source/scripts/lint-yaml.js` – `seenIds` Set with duplicate detection | covered |
-| `02-§23.6` | Security scan checks free-text fields for injection patterns (script tags, javascript: URIs, on*= attributes, embedding elements, data: HTML URIs) | 03-ARCHITECTURE.md §11.2 | SEC-01..06 | `source/scripts/check-yaml-security.js` – `INJECTION_PATTERNS` array + field loop | covered |
-| `02-§23.7` | Security scan rejects non-empty link values that do not start with http:// or https:// | 03-ARCHITECTURE.md §11.2 | SEC-07..09 | `source/scripts/check-yaml-security.js` – `/^https?:\/\//i` protocol check on `link` field | covered |
-| `02-§23.8` | Security scan rejects text fields exceeding their character limits | 03-ARCHITECTURE.md §11.2 | SEC-10..13 | `source/scripts/check-yaml-security.js` – `MAX_LENGTHS` object + length checks | covered |
-| `02-§23.9` | If the lint job fails, security scan, build, and deploy jobs must not run | 03-ARCHITECTURE.md §11 | — (CI end-to-end: submit a PR with invalid YAML and confirm only lint-yaml check fails) | `.github/workflows/event-data-deploy.yml` – `security-check` has `needs: lint-yaml`; `deploy-qa`/`deploy-prod` have `needs: security-check` | implemented |
-| `02-§23.10` | If the security scan job fails, build and deploy jobs must not run | 03-ARCHITECTURE.md §11 | — (CI end-to-end: submit a PR with injected content and confirm lint passes but security fails) | `.github/workflows/event-data-deploy.yml` – `deploy-qa` and `deploy-prod` both depend on `security-check` via `needs:` | implemented |
-| `02-§23.11` | On successful validation the pipeline deploys schema.html, idag.html, dagens-schema.html, and events.json to FTP | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: submit a test event and verify pages update on FTP before PR merges) | `.github/workflows/event-data-deploy.yml` – `deploy-qa` and `deploy-prod` jobs upload files via curl | implemented |
-| `02-§23.12` | The targeted FTP upload must not modify any files outside the four schema-derived files | 03-ARCHITECTURE.md §11.4 | — (CI end-to-end: confirm no other FTP files are touched after an event PR) | `.github/workflows/event-data-deploy.yml` – deploy jobs explicitly name only the schema-derived files in the curl loop | implemented |
-| `02-§23.13` | The targeted deployment must complete while the PR is still open (before auto-merge) | 03-ARCHITECTURE.md §11 | — (CI end-to-end: confirm FTP files update before the PR shows as merged) | `.github/workflows/event-data-deploy.yml` – triggered by `pull_request` event (not `push` to main), so it runs on the PR branch before merge | implemented |
+| `02-§23.1` | CI must parse and structurally validate the changed event YAML file on event-branch PRs before merge — **superseded by 02-§49.1 (API-layer validation)** | 03-ARCHITECTURE.md §11.6 | LNT-01 | `source/scripts/lint-yaml.js` (retained as library); validation now in API layer | covered |
+| `02-§23.2` | Lint validates all required fields — **superseded by API-layer validation** | 03-ARCHITECTURE.md §11.6 | LNT-02..09 | `source/scripts/lint-yaml.js` | covered |
+| `02-§23.3` | Lint validates date format and range — **superseded by API-layer validation** | 03-ARCHITECTURE.md §11.6 | LNT-10..13 | `source/scripts/lint-yaml.js` | covered |
+| `02-§23.4` | Lint validates time format and ordering — **superseded by API-layer validation** | 03-ARCHITECTURE.md §11.6 | LNT-14..17 | `source/scripts/lint-yaml.js` | covered |
+| `02-§23.5` | Lint rejects duplicate IDs — **superseded by API-layer validation** | 03-ARCHITECTURE.md §11.6 | LNT-18 | `source/scripts/lint-yaml.js` | covered |
+| `02-§23.6` | Security scan for injection patterns — **superseded by 02-§49.1–49.2 (API-layer validation)** | 03-ARCHITECTURE.md §11.6 | SEC-01..06 | `source/scripts/check-yaml-security.js` (retained as library); validation now in API layer | covered |
+| `02-§23.7` | Security scan rejects invalid link protocols — **superseded by 02-§49.4** | 03-ARCHITECTURE.md §11.6 | SEC-07..09 | `source/scripts/check-yaml-security.js` | covered |
+| `02-§23.8` | Security scan rejects fields exceeding length limits — **superseded by API-layer validation** | 03-ARCHITECTURE.md §11.6 | SEC-10..13 | `source/scripts/check-yaml-security.js` | covered |
+| `02-§23.9` | If lint fails, downstream jobs skip — **superseded: CI no longer runs lint/security on event PRs** | — | — | — | implemented |
+| `02-§23.10` | If security scan fails, build/deploy skip — **superseded: CI no longer runs security scan on event PRs** | — | — | — | implemented |
+| `02-§23.11` | Pipeline deploys event-data files — **superseded by 02-§50.16–50.18 (post-merge SCP deploy)** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§23.12` | Upload must not modify files outside event-data set — **superseded by 02-§50.16** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§23.13` | Deploy completes while PR is open — **superseded by 02-§50.11 (deploy now post-merge)** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§23.14` | CI workflows that diff against `main` must check out with sufficient git history for the three-dot diff to find a merge base | 03-ARCHITECTURE.md §11.6 | — (CI end-to-end: open an event PR and confirm the detect-changed-file step succeeds) | `.github/workflows/event-data-deploy.yml` – `fetch-depth: 0` on lint-yaml and security-check checkout steps | implemented |
 | `02-§24.1` | Every page must include the same navigation header | 03-ARCHITECTURE.md §12 | NAV-01, NAV-01a..f | `source/build/layout.js` – `pageNav()`; all render functions accept and pass `navSections` | covered |
 | `02-§24.2` | Navigation appears once per page, before page content | 03-ARCHITECTURE.md §12.1 | NAV-02 | `source/build/layout.js` – `pageNav()` emits a single `<nav>` element | covered |
@@ -800,8 +800,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§43.6` | Redundant FTP upload step removed from `deploy-reusable.yml` | 04-OPERATIONS.md | manual: inspect workflow | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§43.7` | Staging step for FTP upload removed from `deploy-reusable.yml` | 04-OPERATIONS.md | manual: inspect workflow | `.github/workflows/deploy-reusable.yml` | implemented |
 | `02-§43.8` | SSH restart step (`Deploy API via SSH`) unchanged | 04-OPERATIONS.md | manual: inspect workflow | `.github/workflows/deploy-reusable.yml` | implemented |
-| `02-§43.9` | Production event data deploy continues to use FTP | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` – `deploy-prod` job | implemented |
-| `02-§43.10` | Production FTP secrets remain in production environment | 08-ENVIRONMENTS.md | manual: check GitHub Environment secrets | GitHub Environment `production` | implemented |
+| `02-§43.9` | Production event data deploy uses FTP — **superseded by 02-§50.19 (production uses SCP)** | 08-ENVIRONMENTS.md | — | — | implemented |
+| `02-§43.10` | Production FTP secrets remain — **superseded by 02-§50.22 (FTP secrets removed)** | 08-ENVIRONMENTS.md | — | — | implemented |
 | `02-§43.11` | `08-ENVIRONMENTS.md` updated for QA FTP removal | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
 | `02-§43.12` | `04-OPERATIONS.md` updated for QA deploy method | 04-OPERATIONS.md | manual: read doc | `docs/04-OPERATIONS.md` | implemented |
 | `02-§43.13` | Secrets schema notes which FTP secrets are production-only | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
@@ -911,16 +911,38 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§49.4` | Non-empty link must start with `http://` or `https://` | 03-ARCHITECTURE.md §11.8 | ASEC-08..10 | `source/api/validate.js` – protocol regex check on `link` field | covered |
 | `02-§49.5` | Injection and link checks identical in Node.js and PHP implementations | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
 | `02-§49.6` | Both implementations produce equivalent error messages | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
+| `02-§50.1` | Docker image contains Node.js 20 and production dependencies | 03-ARCHITECTURE.md §11.1 | manual: inspect `.github/docker/Dockerfile` | `.github/docker/Dockerfile` | gap |
+| `02-§50.2` | Image based on `node:20` (full, not slim) | 03-ARCHITECTURE.md §11.1 | manual: inspect Dockerfile FROM line | `.github/docker/Dockerfile` | gap |
+| `02-§50.3` | Dockerfile lives in `.github/docker/Dockerfile` | 03-ARCHITECTURE.md §11.1 | manual: file exists at path | `.github/docker/Dockerfile` | gap |
+| `02-§50.4` | Image published to GHCR | 03-ARCHITECTURE.md §11.1 | manual: check GHCR packages | `.github/workflows/docker-build.yml` | gap |
+| `02-§50.5` | Docker build workflow triggers on package.json or Dockerfile changes | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow triggers | `.github/workflows/docker-build.yml` | gap |
+| `02-§50.6` | Image tagged with `latest` and git SHA | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow tags | `.github/workflows/docker-build.yml` | gap |
+| `02-§50.7` | Docker workflow has `packages: write` and `contents: read` permissions | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow permissions | `.github/workflows/docker-build.yml` | gap |
+| `02-§50.8` | `event-data-deploy.yml` contains a single no-op job logging "Validated at API layer" | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | gap |
+| `02-§50.9` | No-op job retains same trigger and branch filter | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow on/if | `.github/workflows/event-data-deploy.yml` | gap |
+| `02-§50.11` | Post-merge workflow triggers on push to `main` with data YAML path filter | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow triggers | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.12` | Post-merge workflow uses Docker image from GHCR | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow container | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.13` | Changed YAML file detected via `HEAD~1..HEAD` | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.14` | QA camp detection sets `is_qa` output | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.15` | Build runs `node source/build/build.js` | 03-ARCHITECTURE.md §11.3 | manual: inspect build step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.16` | Only event-data-derived files staged for upload | 03-ARCHITECTURE.md §11.3 | manual: inspect staging step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.17` | QA and QA Node deploy via SCP in parallel | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow jobs | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.18` | Production deploys via SCP, skipped for QA camps | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow if condition | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.19` | Production event data uses SCP over SSH | 03-ARCHITECTURE.md §11.3 | manual: inspect production deploy job | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.20` | Production uses SSH secrets (SERVER_HOST, etc.) | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow secrets | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.22` | FTP secrets removed from production environment (manual step) | — | manual: check GitHub Environment secrets | — (manual operational step) | gap |
+| `02-§50.23` | `ci.yml` skips `npm ci` and build for data-only changes | 03-ARCHITECTURE.md §11.4 | manual: inspect ci.yml conditional steps | `.github/workflows/ci.yml` | gap |
+| `02-§50.24` | Post-merge workflow is responsible for building event-data changes | 03-ARCHITECTURE.md §11.4 | manual: inspect workflow | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             770
+Total requirements:             793
 Covered (implemented + tested): 364
 Implemented, not tested:        402
-Gap (no implementation):          4
+Gap (no implementation):         27
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1115,6 +1137,15 @@ Matrix cleanup (2026-02-25):
 6 requirements added for API-layer security validation (02-§49.1–49.6):
   6 covered (ASEC-01..16): injection pattern scanning, link protocol, Node.js + PHP parity.
   Architecture documented in 03-ARCHITECTURE.md §11.8.
+23 requirements added for Docker-based event data CI pipeline (02-§50.1–50.24):
+  all 23 gap (new workflow files and CI changes not yet implemented).
+  02-§23.1–23.10 superseded (validation moved to API layer).
+  02-§23.11–23.12 superseded by 02-§50.16–50.18 (SCP post-merge).
+  02-§23.13 superseded by 02-§50.11 (deploy is post-merge).
+  02-§43.9–43.10 superseded by 02-§50.19–50.22 (production SCP, FTP removed).
+  Architecture rewritten in 03-ARCHITECTURE.md §11.
+  CLAUDE.md §9.4 updated.
+  08-ENVIRONMENTS.md updated: event data flow, workflows table, FTP secrets removed.
 ```
 
 ---
