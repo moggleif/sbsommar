@@ -871,16 +871,29 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§45.21` | Tips page renderer in separate module `render-kalender.js` | 03-ARCHITECTURE.md §22 | KAL-01 | `source/build/render-kalender.js` | covered |
 | `02-§45.22` | Both renderers wired into `build.js` | 03-ARCHITECTURE.md §22 | manual: run build | `source/build/build.js` – imports and calls both renderers | implemented |
 | `02-§45.23` | iCal generation reuses SITE_URL — no new config | 03-ARCHITECTURE.md §22 | manual: inspect build.js | `source/build/build.js` – passes existing `SITE_URL` | implemented |
+| `02-§46.1` | Schedule header calendar icon is inline SVG, 38 px height | 07-DESIGN.md | | `source/build/render.js` | gap |
+| `02-§46.3` | Calendar icon has no text label | 07-DESIGN.md | | `source/build/render.js` | gap |
+| `02-§46.4` | Calendar icon links to `kalender.html` | 03-ARCHITECTURE.md §22 | | `source/build/render.js` | gap |
+| `02-§46.5` | Every schedule event row has per-event `.ics` download link | 03-ARCHITECTURE.md §22 | | `source/build/render.js` | gap |
+| `02-§46.6` | Per-event iCal link labelled "iCal", at end of row | 07-DESIGN.md | | `source/build/render.js` | gap |
+| `02-§46.7` | Per-event iCal link styled like `.ev-meta` | 07-DESIGN.md | | `source/assets/cs/style.css` | gap |
+| `02-§46.8` | Per-event iCal link uses `download` attribute | 03-ARCHITECTURE.md §22 | | `source/build/render.js` | gap |
+| `02-§46.9` | Schedule page links to `kalender.html` | 03-ARCHITECTURE.md §22 | | `source/build/render.js` | gap |
+| `02-§46.11` | Calendar tips page uses card-based layout | 07-DESIGN.md | | `source/build/render-kalender.js`, `source/assets/cs/style.css` | gap |
+| `02-§46.12` | Platform sections visually separated | 07-DESIGN.md | | `source/build/render-kalender.js` | gap |
+| `02-§46.13` | Webcal URL in copy-friendly code block | 07-DESIGN.md | | `source/build/render-kalender.js` | gap |
+| `02-§46.14` | Every VEVENT includes DTSTAMP (RFC 5545 §3.6.1) | 03-ARCHITECTURE.md §22 | | `source/build/render-ical.js` | gap |
+| `02-§46.15` | DTSTAMP is UTC build-time timestamp (YYYYMMDDTHHMMSSZ) | 03-ARCHITECTURE.md §22 | | `source/build/render-ical.js` | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             735
+Total requirements:             749
 Covered (implemented + tested): 337
 Implemented, not tested:        394
-Gap (no implementation):          4
+Gap (no implementation):         18
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1062,6 +1075,9 @@ Matrix cleanup (2026-02-25):
   23 covered (ICAL-01..28, KAL-01..12, EVT-21..22, SNP-07..08).
   2 implemented (manual: build.js wiring, SITE_URL reuse).
   Architecture documented in 03-ARCHITECTURE.md §22.
+14 requirements added for iCal presentation and compliance (02-§46.1–46.15):
+  all 14 gap (pending implementation).
+  Schedule header icon, per-event iCal links, tips page layout, DTSTAMP.
 ```
 
 ---
