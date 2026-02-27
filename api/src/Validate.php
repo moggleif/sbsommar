@@ -19,6 +19,20 @@ final class Validate
         'link'        => 500,
     ];
 
+    /** Fields rendered in public HTML — scanned for injection patterns (02-§49.1). */
+    private const TEXT_FIELDS = ['title', 'location', 'responsible', 'description'];
+
+    /** Patterns indicating potential injection attempts (02-§49.2). */
+    private const INJECTION_PATTERNS = [
+        '/<script/i'         => '<script>',
+        '/javascript:/i'     => 'javascript: URI',
+        '/on\w+\s*=/i'       => 'event handler (on*=)',
+        '/<iframe/i'         => '<iframe>',
+        '/<object/i'         => '<object>',
+        '/<embed/i'          => '<embed>',
+        '/data:text\/html/i' => 'data:text/html URI',
+    ];
+
     /**
      * @param array<string,mixed>      $body
      * @param array{start_date?:string,end_date?:string}|null $campDates
@@ -149,6 +163,31 @@ final class Validate
         }
         if (array_key_exists('ownerName', $body) && !is_string($body['ownerName'])) {
             return self::fail('ownerName måste vara en sträng');
+        }
+
+        // Injection pattern scanning (02-§49.1, 02-§49.2, 02-§49.3)
+        foreach (self::TEXT_FIELDS as $field) {
+            $val = is_string($body[$field] ?? null) ? $body[$field] : '';
+            if ($val === '') {
+                continue;
+            }
+            foreach (self::INJECTION_PATTERNS as $pattern => $label) {
+                if (preg_match($pattern, $val)) {
+                    return self::fail(sprintf(
+                        '%s innehåller otillåtet mönster: %s',
+                        $field,
+                        $label,
+                    ));
+                }
+            }
+        }
+
+        // Link protocol validation (02-§49.4)
+        if (is_string($body['link'] ?? null)) {
+            $link = trim($body['link']);
+            if ($link !== '' && !preg_match('/^https?:\/\//i', $link)) {
+                return self::fail('link måste använda http:// eller https://');
+            }
         }
 
         return ['ok' => true];
