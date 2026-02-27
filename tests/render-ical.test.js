@@ -224,6 +224,29 @@ describe('renderIcalFeed – full-camp .ics (02-§45.10–45.12)', () => {
   });
 });
 
+// ── DTSTAMP (02-§46.14–46.15) ────────────────────────────────────────────────
+
+describe('DTSTAMP in VEVENT (02-§46.14–46.15)', () => {
+  it('ICAL-29 (02-§46.14): per-event .ics includes DTSTAMP', () => {
+    const ics = renderEventIcal(fullEvent, camp, siteUrl);
+    assert.ok(ics.includes('DTSTAMP:'), 'should have DTSTAMP property');
+  });
+
+  it('ICAL-30 (02-§46.15): DTSTAMP is UTC format with Z suffix', () => {
+    const ics = renderEventIcal(fullEvent, camp, siteUrl);
+    const match = ics.match(/DTSTAMP:(\S+)/);
+    assert.ok(match, 'should have DTSTAMP value');
+    assert.match(match[1], /^\d{8}T\d{6}Z$/, 'DTSTAMP should be YYYYMMDDTHHMMSSZ');
+  });
+
+  it('ICAL-31 (02-§46.14): full-camp .ics includes DTSTAMP in every VEVENT', () => {
+    const ics = renderIcalFeed(camp, events, siteUrl);
+    const veventCount = (ics.match(/BEGIN:VEVENT/g) || []).length;
+    const dtstampCount = (ics.match(/DTSTAMP:/g) || []).length;
+    assert.strictEqual(dtstampCount, veventCount, 'every VEVENT should have DTSTAMP');
+  });
+});
+
 // ── No external iCal library (02-§45.7) ─────────────────────────────────────
 
 describe('render-ical.js source (02-§45.7)', () => {

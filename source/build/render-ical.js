@@ -50,6 +50,16 @@ function buildDescription(event) {
 }
 
 /**
+ * Returns the current UTC time as an iCalendar DTSTAMP value (YYYYMMDDTHHMMSSZ).
+ */
+function buildDtstamp() {
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${now.getUTCFullYear()}${pad(now.getUTCMonth() + 1)}${pad(now.getUTCDate())}`
+       + `T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}${pad(now.getUTCSeconds())}Z`;
+}
+
+/**
  * Renders the VEVENT lines for a single event.
  */
 function renderVevent(event, siteUrl) {
@@ -62,6 +72,7 @@ function renderVevent(event, siteUrl) {
     lines.push(`DTEND:${toIcalDatetime(event.date, event.end)}`);
   }
   lines.push(
+    `DTSTAMP:${buildDtstamp()}`,
     `SUMMARY:${escapeIcal(event.title)}`,
     `LOCATION:${escapeIcal(event.location)}`,
     `DESCRIPTION:${escapeIcal(buildDescription(event))}`,

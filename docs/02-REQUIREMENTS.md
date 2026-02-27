@@ -2083,3 +2083,59 @@ Both must be wired into `build.js`. <!-- 02-§45.22 -->
 
 iCal generation reuses the existing `SITE_URL` environment variable — no
 new configuration is needed. <!-- 02-§45.23 -->
+
+---
+
+## 46. iCal Presentation and Compliance
+
+### 46.1 Schedule page calendar icon
+
+The schedule page header displays a calendar icon that links to the
+calendar tips page (`kalender.html`). <!-- 02-§46.4 -->
+
+The icon is an inline SVG, matching the RSS icon height
+(38 px). <!-- 02-§46.1 -->
+
+No text label accompanies the icon — the title attribute and visual
+design provide sufficient affordance. <!-- 02-§46.3 -->
+
+### 46.2 Per-event iCal link in schedule rows
+
+Every event row on the weekly schedule page includes a download link to
+its `.ics` file. <!-- 02-§46.5 -->
+
+The link appears at the end of the row, after location and responsible
+metadata, as a small text link labelled "iCal". <!-- 02-§46.6 -->
+
+It is styled consistently with `.ev-meta` (small font, terracotta colour)
+and does not disrupt the existing row layout. <!-- 02-§46.7 -->
+
+The link uses the `download` attribute so the browser saves the file
+rather than navigating. <!-- 02-§46.8 -->
+
+### 46.3 Calendar tips page discoverability
+
+The weekly schedule page includes a visible link to `kalender.html` near
+the header or intro text so users can find instructions for subscribing
+to the calendar. <!-- 02-§46.9 -->
+
+### 46.4 Calendar tips page layout
+
+The calendar tips page uses the card-based layout style used elsewhere on
+the site (white background, rounded corners, card shadow, sage left
+border). <!-- 02-§46.11 -->
+
+Each platform section (iOS, Android, Gmail, Outlook) is visually
+separated as its own card or clearly delineated
+section. <!-- 02-§46.12 -->
+
+The webcal URL is displayed in a copy-friendly code block styled
+consistently with existing code blocks on the site. <!-- 02-§46.13 -->
+
+### 46.5 DTSTAMP in VEVENT blocks
+
+Every `VEVENT` block in both per-event and full-camp `.ics` files
+includes a `DTSTAMP` property (RFC 5545 §3.6.1). <!-- 02-§46.14 -->
+
+The value is a UTC timestamp representing the build time, formatted as
+`YYYYMMDDTHHMMSSZ`. <!-- 02-§46.15 -->

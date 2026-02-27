@@ -1384,6 +1384,7 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 DTSTART:20260630T163000
 DTEND:20260630T180000
+DTSTAMP:20260228T120000Z
 SUMMARY:{title}
 LOCATION:{location}
 DESCRIPTION:Ansvarig: {responsible}\n{description}
@@ -1397,6 +1398,9 @@ END:VCALENDAR
 Times use floating local format (`YYYYMMDDTHHMMSS`, no `Z`, no `TZID`)
 consistent with the no-timezone policy (05-§4.5).
 
+`DTSTAMP` is a UTC timestamp set to the build time. RFC 5545 §3.6.1
+requires it in every `VEVENT`.
+
 When `end` is null, `DTEND` is omitted.
 
 ### 22.4 iCal text escaping
@@ -1405,11 +1409,18 @@ iCalendar content lines escape commas, semicolons, and backslashes with a
 backslash prefix. Newlines in `DESCRIPTION` are encoded as literal `\n`.
 The renderer provides an `escapeIcal()` helper for this.
 
-### 22.5 Webcal link
+### 22.5 Schedule page integration
 
-The schedule page header includes a webcal subscription link alongside the
-existing RSS icon. The URL replaces the `https://` scheme in `SITE_URL`
-with `webcal://`.
+The schedule page header displays two icons beside the title: an RSS icon
+and a calendar icon. The calendar icon is an inline SVG (38 px, matching
+the RSS icon) that links to `kalender.html`.
+
+Each event row on the schedule page includes a small "iCal" text link at
+the end of the row. The link downloads the per-event `.ics` file directly
+(using the `download` attribute).
+
+A text link to `kalender.html` also appears near the intro text so users
+can discover subscription instructions.
 
 ### 22.6 Event detail page
 
@@ -1422,6 +1433,10 @@ after the existing Plats/Ansvarig line, styled consistently.
 static page with step-by-step instructions in Swedish for subscribing to
 the camp calendar on iOS, Android, Gmail, and Outlook. Uses the shared
 `pageNav()` and `pageFooter()` layout.
+
+The page uses card-based layout (white background, card shadow, sage left
+border) with each platform section as a visually separate card. The webcal
+URL is displayed in a copy-friendly dark code block.
 
 ### 22.8 Files
 
