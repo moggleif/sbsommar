@@ -5,83 +5,2178 @@ camp:
   start_date: '2019-06-24'
   end_date: '2019-07-01'
 events:
-- date: '2019-06-24'
-  description: null
-  end: null
-  link: null
-  location: 'obs: Förbokade platser'
-  responsible: Gisela Wanek
-  start: '10:30'
-  title: Studiebesök 3D-printing
-- date: '2019-06-24'
-  description: null
-  end: '17:00'
-  link: null
-  location: GA-Hallen
-  responsible: Gisela Wanek
-  start: '15:30'
-  title: Välkomstaktiviteter
-- date: '2019-06-24'
-  description: null
-  end: '20:00'
-  link: null
-  location: null
-  responsible: null
-  start: '16:00'
-  title: Badhuset
-- date: '2019-06-24'
-  description: null
-  end: '18:30'
-  link: null
-  location: null
-  responsible: null
-  start: '17:00'
-  title: Middag
-- date: '2019-06-24'
-  description: null
-  end: null
-  link: null
-  location: Fritidsgården
-  responsible: Sara Varda & Ingemar Lindh
-  start: '19:00'
-  title: Musik – uppstart
-- date: '2019-06-24'
-  description: null
-  end: null
-  link: null
-  location: Grillplatsen
-  responsible: Gabriel Olsson & Elisabeth Ejeblad
-  start: '20:00'
-  title: Lägereld, sång & trummeditation
-- date: '2019-06-25'
-  description: null
-  end: null
-  link: null
-  location: TV-rummet Servicehuset
-  responsible: Niclas Nilsson
-  start: '9:00'
-  title: Titta på sommarlov
-- date: '2019-06-25'
-  description: null
-  end: '12:00'
-  link: null
-  location: GA-Hallen
-  responsible: null
-  start: '9:00'
-  title: Datasalen
-- date: '2019-06-25'
-  description: null
-  end: null
-  link: null
-  location: GA-Hallen
-  responsible: CJ & Andreas
-  start: '10:00'
-  title: Välkomstmöte
-- date: '2019-06-25'
-  description: null
-  end: '11:30'
-  link: null
-  location: GA-Hallen Bollsidan
-  responsible: Gabriel Olsson
-  start: '10:30'
-  title: Frågelådan
+  - id: studiebesok-3d-printing-2019-06-24-1030
+    title: Studiebesök 3D-printing
+    date: '2019-06-24'
+    start: '10:30'
+    end: null
+    location: null
+    responsible: Gisela Wanek
+    description: 'Obs: Förbokade platser'
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: valkomstaktiviteter-2019-06-24-1530
+    title: Välkomstaktiviteter
+    date: '2019-06-24'
+    start: '15:30'
+    end: '17:00'
+    location: GA-hallen
+    responsible: Gisela Wanek
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-06-24-1600
+    title: Badhuset
+    date: '2019-06-24'
+    start: '16:00'
+    end: '20:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: middag-2019-06-24-1700
+    title: Middag
+    date: '2019-06-24'
+    start: '17:00'
+    end: '18:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: musik-2019-06-24-1900
+    title: Musik
+    date: '2019-06-24'
+    start: '19:00'
+    end: null
+    location: uppstart Fritidsgården
+    responsible: Sara Varda & Ingemar Lindh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lagereld-sang-trummeditation-2019-06-24-2000
+    title: Lägereld, sång & trummeditation
+    date: '2019-06-24'
+    start: '20:00'
+    end: null
+    location: Grillplatsen
+    responsible: Gabriel Olsson & Elisabeth Ejeblad
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-25-0900
+    title: Datasalen
+    date: '2019-06-25'
+    start: '09:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: titta-pa-sommarlov-2019-06-25-0900
+    title: Titta på sommarlov
+    date: '2019-06-25'
+    start: '09:00'
+    end: null
+    location: Servicehuset
+    responsible: Niclas Nilsson
+    description: TV-rummet
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: valkomstmote-2019-06-25-1000
+    title: Välkomstmöte
+    date: '2019-06-25'
+    start: '10:00'
+    end: null
+    location: GA-hallen
+    responsible: CJ & Andreas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: frageladan-ga-hallen-bollsidan-2019-06-25-1030
+    title: Frågelådan GA-Hallen Bollsidan
+    date: '2019-06-25'
+    start: '10:30'
+    end: '11:30'
+    location: null
+    responsible: Gabriel Olsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-snallkrig-2019-06-25-1100
+    title: Nerf-snällkrig
+    date: '2019-06-25'
+    start: '11:00'
+    end: '12:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunch-2019-06-25-1130
+    title: Lunch
+    date: '2019-06-25'
+    start: '11:30'
+    end: '13:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: traningsbradspel-korridoren-till-badet-2019-06-25-1330
+    title: Träningsbrädspel korridoren till badet
+    date: '2019-06-25'
+    start: '13:30'
+    end: null
+    location: null
+    responsible: Ivar Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: wizzards-unit-2019-06-25-1330
+    title: Wizzards unit
+    date: '2019-06-25'
+    start: '13:30'
+    end: null
+    location: Samling tälten/dörren
+    responsible: Niklas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-25-1400
+    title: Datasalen
+    date: '2019-06-25'
+    start: '14:00'
+    end: '17:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: forelasning-bin-biodling-2019-06-25-1400
+    title: 'Föreläsning: Bin & Biodling'
+    date: '2019-06-25'
+    start: '14:00'
+    end: '14:45'
+    location: Tält 1
+    responsible: Sandra Stenhede
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: studiebesok-3d-printing-2019-06-25-1400
+    title: Studiebesök 3D-printing
+    date: '2019-06-25'
+    start: '14:00'
+    end: null
+    location: null
+    responsible: Gisela Wanek
+    description: 'Obs: förbokade platser'
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: foraldrafika-amne-2e-2019-06-25-1500
+    title: 'Föräldrafika ämne: 2E'
+    date: '2019-06-25'
+    start: '15:00'
+    end: null
+    location: Tält 2
+    responsible: David Wemmert
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rollspel-uppstart-13-20ar-2019-06-25-1530
+    title: Rollspel uppstart (13-20år)
+    date: '2019-06-25'
+    start: '15:30'
+    end: '17:30'
+    location: Tält 1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: tjejtraff-9-12ar-2019-06-25-1530
+    title: Tjejträff 9-12år
+    date: '2019-06-25'
+    start: '15:30'
+    end: '16:15'
+    location: Servicehuset
+    responsible: Elvira Brunhage
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-06-25-1600
+    title: Badhuset
+    date: '2019-06-25'
+    start: '16:00'
+    end: '20:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-gangkrig-2019-06-25-1600
+    title: Nerf-gängkrig
+    date: '2019-06-25'
+    start: '16:00'
+    end: '17:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: middag-2019-06-25-1700
+    title: Middag
+    date: '2019-06-25'
+    start: '17:00'
+    end: '18:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: harry-potter-cosplay-med-honungsolbryggning-2019-06-25-1830
+    title: Harry Potter Cosplay med honungsölbryggning
+    date: '2019-06-25'
+    start: '18:30'
+    end: null
+    location: NERF-arenan
+    responsible: CJ
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: tonarstraff-2019-06-25-1830
+    title: Tonårsträff
+    date: '2019-06-25'
+    start: '18:30'
+    end: null
+    location: OBS! Ny lokal
+    responsible: stuga 19 + Nathan Wemmert
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: musikquiz-2019-06-25-1930
+    title: Musikquiz
+    date: '2019-06-25'
+    start: '19:30'
+    end: null
+    location: GA-hallen
+    responsible: Lillemor & Ella Birgersson
+    description: Bollsidan
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: vuxenhang-2019-06-25-2000
+    title: Vuxenhäng
+    date: '2019-06-25'
+    start: '20:00'
+    end: null
+    location: Tält 2
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-26-0900
+    title: Datasalen
+    date: '2019-06-26'
+    start: '09:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: titta-pa-sommarlov-tv-rummet-2019-06-26-0900
+    title: Titta på sommarlov TV-rummet
+    date: '2019-06-26'
+    start: '09:00'
+    end: null
+    location: Servicehuset
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: hund-promenad-2019-06-26-1000
+    title: (Hund)promenad
+    date: '2019-06-26'
+    start: '10:00'
+    end: null
+    location: Grillplatsen
+    responsible: Gabriel Olsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: scratch-programmering-2019-06-26-1000
+    title: Scratch-programmering
+    date: '2019-06-26'
+    start: '10:00'
+    end: '11:30'
+    location: Klassrum 1
+    responsible: Daniel Nilede
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: studiebesok-3d-printing-2019-06-26-1030
+    title: Studiebesök 3D-printing
+    date: '2019-06-26'
+    start: '10:30'
+    end: null
+    location: null
+    responsible: Gisela Wanek
+    description: 'Obs: förbokade platser'
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: varulvarna-i-klagerup-2019-06-26-1030
+    title: Varulvarna i Klågerup
+    date: '2019-06-26'
+    start: '10:30'
+    end: '11:30'
+    location: Tält 1
+    responsible: Ingemar Lindh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-snallkrig-2019-06-26-1100
+    title: Nerf-snällkrig
+    date: '2019-06-26'
+    start: '11:00'
+    end: '12:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rubikskubtraff-kuber-finns-till-utlaning-2019-06-26-1100
+    title: Rubikskubträff (Kuber finns till utlåning)
+    date: '2019-06-26'
+    start: '11:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: Gisela Wanek
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: sagostund-2019-06-26-1100
+    title: Sagostund
+    date: '2019-06-26'
+    start: '11:00'
+    end: '11:30'
+    location: Tält 2
+    responsible: Petra Signell
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: samtal-kring-kompenserad-dyslexi-2019-06-26-1100
+    title: Samtal kring kompenserad dyslexi
+    date: '2019-06-26'
+    start: '11:00'
+    end: null
+    location: Stuga 6
+    responsible: Anna Björnson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunch-2019-06-26-1130
+    title: Lunch
+    date: '2019-06-26'
+    start: '11:30'
+    end: '13:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: tecknarstudio-2019-06-26-1230
+    title: Tecknarstudio
+    date: '2019-06-26'
+    start: '12:30'
+    end: null
+    location: Pysselrummet på Fritidsgården
+    responsible: se tråd RFSB sommarläger + Karin Bergström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: wizards-unite-promenad-2019-06-26-1330
+    title: Wizards Unite-promenad
+    date: '2019-06-26'
+    start: '13:30'
+    end: null
+    location: utanför GA-Hallen/tälten
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: improvisationsteater-talt-2019-06-26-1345
+    title: Improvisationsteater Tält
+    date: '2019-06-26'
+    start: '13:45'
+    end: '14:45'
+    location: null
+    responsible: Nathan Wemmert
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-26-1400
+    title: Datasalen
+    date: '2019-06-26'
+    start: '14:00'
+    end: '17:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rfsb-arsmote-2019-06-26-1400
+    title: RFSB-årsmöte
+    date: '2019-06-26'
+    start: '14:00'
+    end: '16:00'
+    location: Klassrum 1
+    responsible: CJ & Andreas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: handarbetstraff-2019-06-26-1430
+    title: Handarbetsträff
+    date: '2019-06-26'
+    start: '14:30'
+    end: null
+    location: Tält 1
+    responsible: Virkning Petra Signell, stickning Katalin Szasz
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: foraldrafika-amne-skolflyktingar-2019-06-26-1500
+    title: 'Föräldrafika ämne: Skolflyktingar'
+    date: '2019-06-26'
+    start: '15:00'
+    end: null
+    location: Hemskolning utomlands Tält 2
+    responsible: Maria Alfredsson & Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rollspel-13-20ar-2019-06-26-1500
+    title: Rollspel (13-20år)
+    date: '2019-06-26'
+    start: '15:00'
+    end: '17:30'
+    location: Tält 1
+    responsible: Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: musiktraff-2019-06-26-1530
+    title: Musikträff
+    date: '2019-06-26'
+    start: '15:30'
+    end: null
+    location: Fritidsgården
+    responsible: Ingemar Lindh & Sara Varda
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-06-26-1600
+    title: Badhuset
+    date: '2019-06-26'
+    start: '16:00'
+    end: '20:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-gangkrig-2019-06-26-1600
+    title: Nerf-gängkrig
+    date: '2019-06-26'
+    start: '16:00'
+    end: '17:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rfsb-sthlm-arsmote-2019-06-26-1600
+    title: RFSB STHLM-årsmöte
+    date: '2019-06-26'
+    start: '16:00'
+    end: '17:00'
+    location: Klassrum 1
+    responsible: CJ & Andreas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: middag-2019-06-26-1700
+    title: Middag
+    date: '2019-06-26'
+    start: '17:00'
+    end: '18:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: sb-vuxna-2019-06-26-1900
+    title: SB-Vuxna
+    date: '2019-06-26'
+    start: '19:00'
+    end: null
+    location: Klassrum 1
+    responsible: David Wemmert
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: tecknarstudio-2019-06-26-1900
+    title: Tecknarstudio
+    date: '2019-06-26'
+    start: '19:00'
+    end: null
+    location: se inlägg RFSB sommarläger Klassrum 2
+    responsible: Karin Bergström
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: tp-2019-06-26-1900
+    title: TP
+    date: '2019-06-26'
+    start: '19:00'
+    end: null
+    location: Harry Potter Tält 1
+    responsible: Ingemar Lindh + Petra Signell
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-27-0900
+    title: Datasalen
+    date: '2019-06-27'
+    start: '09:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: titta-pa-sommarlov-tv-rummet-2019-06-27-0900
+    title: Titta på sommarlov TV-rummet
+    date: '2019-06-27'
+    start: '09:00'
+    end: null
+    location: Servicehuset
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: klattervaggen-2019-06-27-1000
+    title: Klätterväggen
+    date: '2019-06-27'
+    start: '10:00'
+    end: '12:00'
+    location: Fritidsgården
+    responsible: Daniel Niled
+    description: vid skolan
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: python-programmering-2019-06-27-1000
+    title: Python-Programmering
+    date: '2019-06-27'
+    start: '10:00'
+    end: '11:30'
+    location: Klassrum 1
+    responsible: Johan Sommerfeld
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: trummeditation-2019-06-27-1000
+    title: Trummeditation
+    date: '2019-06-27'
+    start: '10:00'
+    end: '11:00'
+    location: Samling badhusentrén
+    responsible: Elisabeth Ejeblad
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: fotboll-yngre-2019-06-27-1100
+    title: Fotboll (yngre)
+    date: '2019-06-27'
+    start: '11:00'
+    end: '12:00'
+    location: Fotbollsplan
+    responsible: vid regn GA-hallen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-snallkrig-2019-06-27-1100
+    title: Nerf-snällkrig
+    date: '2019-06-27'
+    start: '11:00'
+    end: '12:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: sagostund-2019-06-27-1100
+    title: Sagostund
+    date: '2019-06-27'
+    start: '11:00'
+    end: '11:30'
+    location: Tält 2
+    responsible: Petra Signell
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: varulvarna-i-klagerup-2019-06-27-1100
+    title: Varulvarna i Klågerup
+    date: '2019-06-27'
+    start: '11:00'
+    end: '12:00'
+    location: null
+    responsible: Tält 1 Ingemar Lindh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunch-2019-06-27-1130
+    title: Lunch
+    date: '2019-06-27'
+    start: '11:30'
+    end: '13:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: wizards-unite-promenad-utanfor-ga-hallen-talten-2019-06-27-1330
+    title: Wizards Unite-promenad utanför GA-Hallen/tälten
+    date: '2019-06-27'
+    start: '13:30'
+    end: null
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: braingames-ga-hallen-bollsidan-2019-06-27-1400
+    title: Braingames GA-Hallen Bollsidan
+    date: '2019-06-27'
+    start: '14:00'
+    end: '17:00'
+    location: null
+    responsible: Pontus & CJ
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-27-1400
+    title: Datasalen
+    date: '2019-06-27'
+    start: '14:00'
+    end: '17:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: tjejtraff-9-12ar-uteplatsen-2019-06-27-1500
+    title: Tjejträff 9-12år Uteplatsen
+    date: '2019-06-27'
+    start: '15:00'
+    end: '16:00'
+    location: Servicehuset
+    responsible: Elvira Brunhage
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-06-27-1600
+    title: Badhuset
+    date: '2019-06-27'
+    start: '16:00'
+    end: '20:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: foraldrafika-amne-arskursupphoppning-2019-06-27-1600
+    title: 'Föräldrafika ämne: årskursupphoppning'
+    date: '2019-06-27'
+    start: '16:00'
+    end: null
+    location: Tält 2
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-gangkrig-2019-06-27-1600
+    title: Nerf-gängkrig
+    date: '2019-06-27'
+    start: '16:00'
+    end: '17:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: middag-2019-06-27-1700
+    title: Middag
+    date: '2019-06-27'
+    start: '17:00'
+    end: '18:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: grillkvall-i-klaralvsbyn-2019-06-27-1830
+    title: Grillkväll i klarälvsbyn
+    date: '2019-06-27'
+    start: '18:30'
+    end: null
+    location: alla är välkomna!
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: retro-tp-2019-06-27-1900
+    title: Retro-TP
+    date: '2019-06-27'
+    start: '19:00'
+    end: null
+    location: Tält 2
+    responsible: Ingemar Lindh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: warhammer-40-000-2019-06-27-1900
+    title: Warhammer 40.000
+    date: '2019-06-27'
+    start: '19:00'
+    end: null
+    location: Brädspelspresentation GA-hallen
+    responsible: Magnus Carlsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-28-0900
+    title: Datasalen
+    date: '2019-06-28'
+    start: '09:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: titta-pa-sommarlov-tv-rummet-2019-06-28-0900
+    title: Titta på sommarlov TV-rummet
+    date: '2019-06-28'
+    start: '09:00'
+    end: null
+    location: Servicehuset
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: fotboll-yngre-2019-06-28-1100
+    title: Fotboll (yngre)
+    date: '2019-06-28'
+    start: '11:00'
+    end: '12:00'
+    location: Fotbollsplan
+    responsible: vid regn GA-hallen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: improvisationsteater-2019-06-28-1100
+    title: Improvisationsteater
+    date: '2019-06-28'
+    start: '11:00'
+    end: '12:00'
+    location: Tält 1
+    responsible: Nathan Wemmert
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-snallkrig-2019-06-28-1100
+    title: Nerf-snällkrig
+    date: '2019-06-28'
+    start: '11:00'
+    end: '12:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: sagostund-2019-06-28-1100
+    title: Sagostund
+    date: '2019-06-28'
+    start: '11:00'
+    end: '11:30'
+    location: Tält 2
+    responsible: Malin Isenfjord
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunch-2019-06-28-1130
+    title: Lunch
+    date: '2019-06-28'
+    start: '11:30'
+    end: '13:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunchgrillning-vid-klaralven-2019-06-28-1130
+    title: Lunchgrillning vid Klarälven
+    date: '2019-06-28'
+    start: '11:30'
+    end: '13:30'
+    location: Grillplatsen
+    responsible: Marie Källman
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: fraga-pykologen-2019-06-28-1300
+    title: FRÅGA PYKOLOGEN
+    date: '2019-06-28'
+    start: '13:00'
+    end: null
+    location: Klassrum 2
+    responsible: Leigh Jamison
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rovarsprakskurs-2019-06-28-1330
+    title: Rövarspråkskurs
+    date: '2019-06-28'
+    start: '13:30'
+    end: null
+    location: GA-hallen
+    responsible: Mira
+    description: vid blädderblocket
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: wizards-unite-promenad-utanfor-ga-hallen-talten-2019-06-28-1330
+    title: Wizards Unite-promenad utanför GA-Hallen/tälten
+    date: '2019-06-28'
+    start: '13:30'
+    end: null
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-28-1400
+    title: Datasalen
+    date: '2019-06-28'
+    start: '14:00'
+    end: '17:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: hbtq-prat-pyssel-50ars-dagen-av-stonewall-riot-2019-06-28-1400
+    title: HBTQ+ prat & pyssel (50års dagen av stonewall-riot)
+    date: '2019-06-28'
+    start: '14:00'
+    end: null
+    location: Tält1
+    responsible: Nathan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: matematiklektion-ca10ar-2019-06-28-1400
+    title: Matematiklektion (ca10år+)
+    date: '2019-06-28'
+    start: '14:00'
+    end: null
+    location: Tält 2
+    responsible: Pontus Strimling
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: foraldrafika-amne-lyckade-anpassningar-i-skolan-2019-06-28-1500
+    title: 'Föräldrafika ämne: Lyckade anpassningar i skolan'
+    date: '2019-06-28'
+    start: '15:00'
+    end: null
+    location: Tält 2
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rollspel-2019-06-28-1500
+    title: Rollspel
+    date: '2019-06-28'
+    start: '15:00'
+    end: '17:30'
+    location: null
+    responsible: 13-20år + Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: hinderbana-2019-06-28-1515
+    title: Hinderbana
+    date: '2019-06-28'
+    start: '15:15'
+    end: null
+    location: Gymnastiksalen
+    responsible: Elvira Brunhage & Indra Jonson
+    description: fritidsgårdden
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-06-28-1600
+    title: Badhuset
+    date: '2019-06-28'
+    start: '16:00'
+    end: '20:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-gangkrig-2019-06-28-1600
+    title: Nerf-gängkrig
+    date: '2019-06-28'
+    start: '16:00'
+    end: '17:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: tecknarstudio-se-trad-i-rfsb-sommar-2019-06-28-1600
+    title: Tecknarstudio (se tråd i RFSB sommar..)
+    date: '2019-06-28'
+    start: '16:00'
+    end: null
+    location: Klassrum 1
+    responsible: Karin Bergström
+    description: '0'
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: middag-2019-06-28-1700
+    title: Middag
+    date: '2019-06-28'
+    start: '17:00'
+    end: '18:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: partytrix-uppvisning-och-utlarning-2019-06-28-1900
+    title: Partytrix, uppvisning och utlärning
+    date: '2019-06-28'
+    start: '19:00'
+    end: null
+    location: Tält 1
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: ansiktsmalning-vid-lagerelden-2019-06-28-2000
+    title: Ansiktsmålning vid lägerelden
+    date: '2019-06-28'
+    start: '20:00'
+    end: null
+    location: null
+    responsible: Nathan Wemmert & Cecilia
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lagereld-sang-trummeditation-2019-06-28-2000
+    title: Lägereld, sång & trummeditation
+    date: '2019-06-28'
+    start: '20:00'
+    end: null
+    location: Grillplatsen
+    responsible: Gabriel Olsson & Elisabeth Ejeblad
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: retro-tp-2019-06-28-2000
+    title: Retro-TP
+    date: '2019-06-28'
+    start: '20:00'
+    end: null
+    location: Tält 2
+    responsible: Ingemar Lindh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-29-0900
+    title: Datasalen
+    date: '2019-06-29'
+    start: '09:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: titta-pa-sommarlov-tv-rummet-2019-06-29-0900
+    title: Titta på sommarlov TV-rummet
+    date: '2019-06-29'
+    start: '09:00'
+    end: null
+    location: Servicehuset
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: set-turnering-2019-06-29-1000
+    title: SET-Turnering
+    date: '2019-06-29'
+    start: '10:00'
+    end: null
+    location: GA-hallen
+    responsible: Anna B + Gabriel Olsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: trummedition-2019-06-29-1000
+    title: Trummedition
+    date: '2019-06-29'
+    start: '10:00'
+    end: '11:00'
+    location: Samling badhusentren
+    responsible: Elisabeth Ejeblad
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: flugfiskelektion-2019-06-29-1100
+    title: Flugfiskelektion
+    date: '2019-06-29'
+    start: '11:00'
+    end: null
+    location: samling campingsreception
+    responsible: Fiskvårdsstyrelsen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: fotboll-yngre-2019-06-29-1100
+    title: Fotboll (yngre)
+    date: '2019-06-29'
+    start: '11:00'
+    end: '12:00'
+    location: Fotbollsplan
+    responsible: vid regn GA-hallen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-snallkrig-2019-06-29-1100
+    title: Nerf-snällkrig
+    date: '2019-06-29'
+    start: '11:00'
+    end: '12:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: sagostund-2019-06-29-1100
+    title: Sagostund
+    date: '2019-06-29'
+    start: '11:00'
+    end: '11:30'
+    location: Tält 2
+    responsible: Malin Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: varulvarna-i-klagerup-2019-06-29-1100
+    title: Varulvarna i Klågerup
+    date: '2019-06-29'
+    start: '11:00'
+    end: '12:00'
+    location: Tält 1
+    responsible: Emilia Lindh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunch-2019-06-29-1130
+    title: Lunch
+    date: '2019-06-29'
+    start: '11:30'
+    end: '13:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-06-29-1200
+    title: Badhuset
+    date: '2019-06-29'
+    start: '12:00'
+    end: '16:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: naturpromenad-4-6ar-samling-grillplatsen-vid-alven-2019-06-29-1245
+    title: Naturpromenad (4-6år) samling grillplatsen vid älven
+    date: '2019-06-29'
+    start: '12:45'
+    end: null
+    location: null
+    responsible: Anna Björnson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: funktionell-programmering-se-trad-i-rfsb-sommar-2019-06-29-1300
+    title: Funktionell-programmering (se tråd i RFSB sommar..)
+    date: '2019-06-29'
+    start: '13:00'
+    end: null
+    location: Klassrum 1
+    responsible: Niclas Nilsson
+    description: '0'
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: wizards-unite-promenad-utanfor-ga-hallen-talten-2019-06-29-1330
+    title: Wizards Unite-promenad utanför GA-Hallen/tälten
+    date: '2019-06-29'
+    start: '13:30'
+    end: null
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-29-1400
+    title: Datasalen
+    date: '2019-06-29'
+    start: '14:00'
+    end: '17:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: foraldrafika-amne-lagaffektivt-bemotande-2019-06-29-1500
+    title: 'Föräldrafika ämne: lågaffektivt bemötande'
+    date: '2019-06-29'
+    start: '15:00'
+    end: null
+    location: Klassrum 5
+    responsible: David Wemmert
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: rollspel-2019-06-29-1500
+    title: Rollspel
+    date: '2019-06-29'
+    start: '15:00'
+    end: '17:30'
+    location: null
+    responsible: 13-20år + Viktor Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-gangkrig-2019-06-29-1600
+    title: Nerf-gängkrig
+    date: '2019-06-29'
+    start: '16:00'
+    end: '17:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: pokemon-go-2019-06-29-1600
+    title: Pokemon Go
+    date: '2019-06-29'
+    start: '16:00'
+    end: '19:00'
+    location: Event Samling Tälten
+    responsible: Birgitta Kadin
+    description: Inställt
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: foraldratraff-140-gruppen-2019-06-29-1630
+    title: Föräldraträff, 140+gruppen
+    date: '2019-06-29'
+    start: '16:30'
+    end: null
+    location: Fritidsgården
+    responsible: Gabriel Olsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: middag-2019-06-29-1700
+    title: Middag
+    date: '2019-06-29'
+    start: '17:00'
+    end: '18:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: warhammer-40-000-2019-06-29-1900
+    title: Warhammer 40.000
+    date: '2019-06-29'
+    start: '19:00'
+    end: null
+    location: Brädspelspresentation GA-hallen
+    responsible: Magnus Carlsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: vuxenhang-2019-06-29-2000
+    title: Vuxenhäng
+    date: '2019-06-29'
+    start: '20:00'
+    end: null
+    location: Tält 2
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-30-0900
+    title: Datasalen
+    date: '2019-06-30'
+    start: '09:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: titta-pa-sommarlov-tv-rummet-2019-06-30-0900
+    title: Titta på sommarlov TV-rummet
+    date: '2019-06-30'
+    start: '09:00'
+    end: null
+    location: Servicehuset
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: bombdesarmering-2019-06-30-1100
+    title: BOMBDESARMERING
+    date: '2019-06-30'
+    start: '11:00'
+    end: '12:00'
+    location: GA-hallen
+    responsible: Martin Jacobson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: charader-2019-06-30-1100
+    title: Charader
+    date: '2019-06-30'
+    start: '11:00'
+    end: '12:00'
+    location: Tält 1
+    responsible: Eva Brunhage
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: fotboll-yngre-2019-06-30-1100
+    title: Fotboll (yngre)
+    date: '2019-06-30'
+    start: '11:00'
+    end: '12:00'
+    location: Fotbollsplan
+    responsible: vid regn GA-hallen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-snallkrig-2019-06-30-1100
+    title: Nerf-snällkrig
+    date: '2019-06-30'
+    start: '11:00'
+    end: '12:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: sagostund-2019-06-30-1100
+    title: Sagostund
+    date: '2019-06-30'
+    start: '11:00'
+    end: '11:30'
+    location: Tält 2
+    responsible: Malin Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunch-2019-06-30-1130
+    title: Lunch
+    date: '2019-06-30'
+    start: '11:30'
+    end: '13:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-06-30-1200
+    title: Badhuset
+    date: '2019-06-30'
+    start: '12:00'
+    end: '16:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: varulvarna-i-klagerup-2019-06-30-1330
+    title: Varulvarna i Klågerup
+    date: '2019-06-30'
+    start: '13:30'
+    end: null
+    location: Tält 1
+    responsible: Nathan Wemmert
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: wizards-unite-promenad-utanfor-ga-hallen-talten-2019-06-30-1330
+    title: Wizards Unite-promenad utanför GA-Hallen/tälten
+    date: '2019-06-30'
+    start: '13:30'
+    end: null
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: datasalen-2019-06-30-1400
+    title: Datasalen
+    date: '2019-06-30'
+    start: '14:00'
+    end: '17:00'
+    location: GA-hallen
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: vattenkrig-2019-06-30-1400
+    title: VATTENKRIG
+    date: '2019-06-30'
+    start: '14:00'
+    end: null
+    location: vuxna VS barn Nerf-arenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: foraldrafika-amne-sarskild-provning-2019-06-30-1500
+    title: 'Föräldrafika ämne: Särskild prövning'
+    date: '2019-06-30'
+    start: '15:00'
+    end: null
+    location: Tält 2
+    responsible: Anna B
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-gangkrig-2019-06-30-1600
+    title: Nerf-gängkrig
+    date: '2019-06-30'
+    start: '16:00'
+    end: '17:00'
+    location: Nerfarenan
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: middag-2019-06-30-1700
+    title: Middag
+    date: '2019-06-30'
+    start: '17:00'
+    end: '18:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: avetablerings-samling-2019-06-30-1900
+    title: AVETABLERINGS SAMLING
+    date: '2019-06-30'
+    start: '19:00'
+    end: null
+    location: GA-hallen
+    responsible: Alla + ANDREAS & JOHAN
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: nerf-2019-06-30-2200
+    title: Nerf
+    date: '2019-06-30'
+    start: '22:00'
+    end: null
+    location: catch the flag (Alla åldrar välkomna) samling lekplatsen/nerf-arenan. Arrangeras av tonåringarna!
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: titta-pa-sommarlov-tv-rummet-2019-07-01-0900
+    title: Titta på sommarlov TV-rummet
+    date: '2019-07-01'
+    start: '09:00'
+    end: null
+    location: Servicehuset
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: badhuset-2019-07-01-1000
+    title: Badhuset
+    date: '2019-07-01'
+    start: '10:00'
+    end: '16:00'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: lunch-2019-07-01-1130
+    title: Lunch
+    date: '2019-07-01'
+    start: '11:30'
+    end: '13:30'
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'
+  - id: gemensam-oversyn-pa-omradet-med-iordningstallande-och-stad-2019-07-01-0000
+    title: Gemensam översyn på området med iordningställande och städ
+    date: '2019-07-01'
+    start: null
+    end: null
+    location: null
+    responsible: null
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2026-02-27 15:49:30'
+      updated_at: '2026-02-27 17:30:06'

@@ -5,2538 +5,2538 @@ camp:
   start_date: '2025-06-22'
   end_date: '2025-06-29'
 events:
-  - date: '2025-06-23'
-    description: null
+  - id: lunch-2025-06-23-1200
+    title: Lunch
+    date: '2025-06-23'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2025-06-23-1200
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:13:28'
       updated_at: '2025-05-05 20:13:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '12:00'
+  - id: lunch-2025-06-24-1200
     title: Lunch
-  - date: '2025-06-24'
-    description: null
+    date: '2025-06-24'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2025-06-24-1200
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:13:28'
       updated_at: '2025-05-05 20:13:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '12:00'
+  - id: lunch-2025-06-25-1200
     title: Lunch
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2025-06-25-1200
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:13:28'
       updated_at: '2025-05-05 20:13:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '12:00'
+  - id: lunch-2025-06-26-1200
     title: Lunch
-  - date: '2025-06-26'
-    description: null
+    date: '2025-06-26'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2025-06-26-1200
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:13:28'
       updated_at: '2025-05-05 20:13:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '12:00'
+  - id: lunch-2025-06-27-1200
     title: Lunch
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2025-06-27-1200
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:13:28'
       updated_at: '2025-05-05 20:13:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '12:00'
+  - id: lunch-2025-06-28-1200
     title: Lunch
-  - date: '2025-06-28'
-    description: null
+    date: '2025-06-28'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2025-06-28-1200
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:13:28'
       updated_at: '2025-05-05 20:13:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '12:00'
-    title: Lunch
-  - date: '2025-06-22'
-    description: null
+  - id: sista-for-idag-2025-06-22-2359
+    title: Sista för idag
+    date: '2025-06-22'
+    start: '23:59'
     end: '23:59'
-    id: sista-for-idag-2025-06-22-2359
-    link: null
     location: Annat
+    responsible: myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:17:14'
       updated_at: '2025-05-05 20:17:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: myggorna
-    start: '23:59'
+  - id: sista-for-idag-2025-06-23-2359
     title: Sista för idag
-  - date: '2025-06-23'
-    description: null
+    date: '2025-06-23'
+    start: '23:59'
     end: '23:59'
-    id: sista-for-idag-2025-06-23-2359
-    link: null
     location: Annat
+    responsible: myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:17:14'
       updated_at: '2025-05-05 20:17:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: myggorna
-    start: '23:59'
+  - id: sista-for-idag-2025-06-24-2359
     title: Sista för idag
-  - date: '2025-06-24'
-    description: null
+    date: '2025-06-24'
+    start: '23:59'
     end: '23:59'
-    id: sista-for-idag-2025-06-24-2359
-    link: null
     location: Annat
+    responsible: myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:17:14'
       updated_at: '2025-05-05 20:17:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: myggorna
-    start: '23:59'
+  - id: sista-for-idag-2025-06-25-2359
     title: Sista för idag
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '23:59'
     end: '23:59'
-    id: sista-for-idag-2025-06-25-2359
-    link: null
     location: Annat
+    responsible: myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:17:14'
       updated_at: '2025-05-05 20:17:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: myggorna
-    start: '23:59'
+  - id: sista-for-idag-2025-06-26-2359
     title: Sista för idag
-  - date: '2025-06-26'
-    description: null
+    date: '2025-06-26'
+    start: '23:59'
     end: '23:59'
-    id: sista-for-idag-2025-06-26-2359
-    link: null
     location: Annat
+    responsible: myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:17:14'
       updated_at: '2025-05-05 20:17:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: myggorna
-    start: '23:59'
+  - id: sista-for-idag-2025-06-27-2359
     title: Sista för idag
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '23:59'
     end: '23:59'
-    id: sista-for-idag-2025-06-27-2359
-    link: null
     location: Annat
+    responsible: myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:17:14'
       updated_at: '2025-05-05 20:17:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: myggorna
-    start: '23:59'
+  - id: sista-for-idag-2025-06-28-2359
     title: Sista för idag
-  - date: '2025-06-28'
-    description: null
+    date: '2025-06-28'
+    start: '23:59'
     end: '23:59'
-    id: sista-for-idag-2025-06-28-2359
-    link: null
     location: Annat
+    responsible: myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:17:14'
       updated_at: '2025-05-05 20:17:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: myggorna
-    start: '23:59'
-    title: Sista för idag
-  - date: '2025-06-23'
-    description: null
+  - id: middag-2025-06-23-1700
+    title: Middag
+    date: '2025-06-23'
+    start: '17:00'
     end: '18:00'
-    id: middag-2025-06-23-1700
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:18:43'
       updated_at: '2025-05-05 20:18:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '17:00'
+  - id: middag-2025-06-24-1700
     title: Middag
-  - date: '2025-06-24'
-    description: null
+    date: '2025-06-24'
+    start: '17:00'
     end: '18:00'
-    id: middag-2025-06-24-1700
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:18:43'
       updated_at: '2025-05-05 20:18:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '17:00'
+  - id: middag-2025-06-25-1700
     title: Middag
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '17:00'
     end: '18:00'
-    id: middag-2025-06-25-1700
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:18:43'
       updated_at: '2025-05-05 20:18:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '17:00'
+  - id: middag-2025-06-26-1700
     title: Middag
-  - date: '2025-06-26'
-    description: null
+    date: '2025-06-26'
+    start: '17:00'
     end: '18:00'
-    id: middag-2025-06-26-1700
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:18:43'
       updated_at: '2025-05-05 20:18:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '17:00'
+  - id: middag-2025-06-27-1700
     title: Middag
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '17:00'
     end: '18:00'
-    id: middag-2025-06-27-1700
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:18:43'
       updated_at: '2025-05-05 20:18:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '17:00'
+  - id: middag-2025-06-28-1700
     title: Middag
-  - date: '2025-06-28'
-    description: null
+    date: '2025-06-28'
+    start: '17:00'
     end: '18:00'
-    id: middag-2025-06-28-1700
-    link: null
     location: Servicehus
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:18:44'
       updated_at: '2025-05-05 20:18:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '17:00'
-    title: Middag
-  - date: '2025-06-22'
-    description: null
+  - id: valkommen-2025-06-22-1200
+    title: Välkommen
+    date: '2025-06-22'
+    start: '12:00'
     end: '23:30'
-    id: valkommen-2025-06-22-1200
-    link: null
     location: Annat
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:20:28'
       updated_at: '2025-05-05 20:20:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
+  - id: glass-pa-chokladfabriken-2025-06-29-1200
+    title: Glass på chokladfabriken
+    date: '2025-06-29'
     start: '12:00'
-    title: Välkommen
-  - date: '2025-06-29'
-    description: null
     end: '15:00'
-    id: glass-pa-chokladfabriken-2025-06-29-1200
-    link: null
     location: Annat
+    responsible: alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:22:16'
       updated_at: '2025-05-05 20:22:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: alla
-    start: '12:00'
-    title: Glass på chokladfabriken
-  - date: '2025-06-23'
-    description: null
+  - id: valkomstmote-2025-06-23-1000
+    title: Välkomstmöte
+    date: '2025-06-23'
+    start: '10:00'
     end: '10:30'
-    id: valkomstmote-2025-06-23-1000
-    link: null
     location: GA Idrott
+    responsible: Lägernissen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-05-05 20:44:56'
       updated_at: '2025-05-05 20:44:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lägernissen
-    start: '10:00'
-    title: Välkomstmöte
-  - date: '2025-06-28'
-    description: null
+  - id: simhall-abonnerad-gratis-2025-06-28-1400
+    title: Simhall abonnerad (gratis)
+    date: '2025-06-28'
+    start: '14:00'
     end: '16:00'
-    id: simhall-abonnerad-gratis-2025-06-28-1400
-    link: null
     location: Annat
+    responsible: vuxna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-12 21:42:45'
       updated_at: '2025-06-12 21:42:45'
-    owner:
-      email: ''
-      name: ''
-    responsible: vuxna
-    start: '14:00'
-    title: Simhall abonnerad (gratis)
-  - date: '2025-06-23'
-    description: null
+  - id: lokalforeningstraff-rfsb-inga-andra-aktiviteter-samma-tid-2025-06-23-1600
+    title: Lokalföreningsträff RFSB (inga andra aktiviteter samma tid)
+    date: '2025-06-23'
+    start: '16:00'
     end: '17:00'
-    id: lokalforeningstraff-rfsb-inga-andra-aktiviteter-samma-tid-2025-06-23-1600
-    link: null
     location: Tält3
+    responsible: Cecilia (ordförande RFSB)
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-15 19:58:57'
       updated_at: '2025-06-15 19:58:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia (ordförande RFSB)
-    start: '16:00'
-    title: Lokalföreningsträff RFSB (inga andra aktiviteter samma tid)
-  - date: '2025-06-28'
-    description: null
+  - id: avslutningsmote-alla-deltar-2025-06-28-1800
+    title: Avslutningsmöte (alla deltar)
+    date: '2025-06-28'
+    start: '18:00'
     end: '20:00'
-    id: avslutningsmote-alla-deltar-2025-06-28-1800
-    link: null
     location: Annat
+    responsible: Andreas (lägernissen)
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-16 18:10:05'
       updated_at: '2025-06-16 18:10:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas (lägernissen)
-    start: '18:00'
-    title: Avslutningsmöte (alla deltar)
-  - date: '2025-06-24'
-    description: null
+  - id: barndans-2025-06-24-1000
+    title: 'Barndans '
+    date: '2025-06-24'
+    start: '10:00'
     end: '10:30'
-    id: barndans-2025-06-24-1000
-    link: null
     location: GA Idrott
+    responsible: 'Sofia Wiklund '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-16 21:11:54'
       updated_at: '2025-06-16 21:11:54'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Sofia Wiklund '
-    start: '10:00'
-    title: 'Barndans '
-  - date: '2025-06-23'
-    description: null
+  - id: bradspel-kunskap-2025-06-23-1930
+    title: 'Brädspel kunskap '
+    date: '2025-06-23'
+    start: '19:30'
     end: '23:00'
-    id: bradspel-kunskap-2025-06-23-1930
-    link: null
     location: Kaffetält
+    responsible: 'Birgitta '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-16 22:04:02'
       updated_at: '2025-06-16 22:04:02'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Birgitta '
-    start: '19:30'
+  - id: bradspel-kunskap-2025-06-24-1930
     title: 'Brädspel kunskap '
-  - date: '2025-06-24'
-    description: null
+    date: '2025-06-24'
+    start: '19:30'
     end: '23:00'
-    id: bradspel-kunskap-2025-06-24-1930
-    link: null
     location: Kaffetält
+    responsible: 'Birgitta '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-16 22:05:13'
       updated_at: '2025-06-16 22:05:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Birgitta '
-    start: '19:30'
+  - id: bradspel-kunskap-2025-06-27-1900
     title: 'Brädspel kunskap '
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '19:00'
     end: '23:00'
-    id: bradspel-kunskap-2025-06-27-1900
-    link: null
     location: Kaffetält
+    responsible: 'Birgitta '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-16 22:09:00'
       updated_at: '2025-06-16 22:09:00'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Birgitta '
-    start: '19:00'
-    title: 'Brädspel kunskap '
-  - date: '2025-06-24'
-    description: null
+  - id: japansk-bakning-1-2025-06-24-1400
+    title: 'JAPANSK BAKNING #1'
+    date: '2025-06-24'
+    start: '14:00'
     end: '17:00'
-    id: japansk-bakning-1-2025-06-24-1400
-    link: null
     location: Servicehus
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-17 17:24:55'
       updated_at: '2025-06-17 17:24:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
+  - id: japansk-bakning-2-2025-06-26-1400
+    title: 'JAPANSK BAKNING #2'
+    date: '2025-06-26'
     start: '14:00'
-    title: 'JAPANSK BAKNING #1'
-  - date: '2025-06-26'
-    description: null
     end: '17:00'
-    id: japansk-bakning-2-2025-06-26-1400
-    link: null
     location: Servicehus
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-17 17:26:34'
       updated_at: '2025-06-17 17:26:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
+  - id: japansk-bakning-3-2025-06-28-1400
+    title: 'JAPANSK BAKNING #3'
+    date: '2025-06-28'
     start: '14:00'
-    title: 'JAPANSK BAKNING #2'
-  - date: '2025-06-28'
-    description: null
     end: '17:00'
-    id: japansk-bakning-3-2025-06-28-1400
-    link: null
     location: Servicehus
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-17 17:28:37'
       updated_at: '2025-06-17 17:28:37'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '14:00'
-    title: 'JAPANSK BAKNING #3'
-  - date: '2025-06-25'
-    description: null
+  - id: sa-kul-med-lager-vill-vi-ha-fler-2025-06-25-1600
+    title: 'Så kul med läger! – vill vi ha fler?'
+    date: '2025-06-25'
+    start: '16:00'
     end: '17:00'
-    id: sa-kul-med-lager-vill-vi-ha-fler-2025-06-25-1600
-    link: null
     location: Kaffetält
+    responsible: Cecilia Löfgreen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-18 10:13:41'
       updated_at: '2025-06-18 10:13:41'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia Löfgreen
-    start: '16:00'
-    title: Så kul med läger! – vill vi ha fler?
-  - date: '2025-06-23'
-    description: null
+  - id: strid-med-lajv-svard-2025-06-23-1700
+    title: 'Strid med lajv svärd!  '
+    date: '2025-06-23'
+    start: '17:00'
     end: '18:00'
-    id: strid-med-lajv-svard-2025-06-23-1700
-    link: null
     location: Nerf-arena
+    responsible: Astor/Selma/Martin
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-20 21:48:05'
       updated_at: '2025-06-20 21:48:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: Astor/Selma/Martin
-    start: '17:00'
-    title: 'Strid med lajv svärd!  '
-  - date: '2025-06-25'
-    description: null
+  - id: artbestamning-i-gammelskog-2025-06-25-1000
+    title: ARTBESTÄMNING I GAMMELSKOG
+    date: '2025-06-25'
+    start: '10:00'
     end: '14:00'
-    id: artbestamning-i-gammelskog-2025-06-25-1000
-    link: null
     location: Annat
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 09:23:43'
       updated_at: '2025-06-21 09:23:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '10:00'
-    title: ARTBESTÄMNING I GAMMELSKOG
-  - date: '2025-06-23'
-    description: null
+  - id: skapa-karaktarer-rollspel-hampus-kampanj-2025-06-23-1300
+    title: Skapa karaktärer rollspel Hampus kampanj
+    date: '2025-06-23'
+    start: '13:00'
     end: '15:00'
-    id: skapa-karaktarer-rollspel-hampus-kampanj-2025-06-23-1300
-    link: null
     location: Rollspelstält1
+    responsible: Hampus Sommerfeld
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 12:37:08'
       updated_at: '2025-06-21 12:37:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus Sommerfeld
+  - id: skapa-karaktarer-rollspel-astors-kampanj-2025-06-23-1300
+    title: Skapa karaktärer rollspel Astors kampanj
+    date: '2025-06-23'
     start: '13:00'
-    title: Skapa karaktärer rollspel Hampus kampanj
-  - date: '2025-06-23'
-    description: null
     end: '15:00'
-    id: skapa-karaktarer-rollspel-astors-kampanj-2025-06-23-1300
-    link: null
     location: Rollspelstält2
+    responsible: Astor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 12:42:48'
       updated_at: '2025-06-21 12:42:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: Astor
-    start: '13:00'
-    title: Skapa karaktärer rollspel Astors kampanj
-  - date: '2025-06-23'
-    description: null
+  - id: skapa-karaktarer-rollspel-xanders-kampanj-2025-06-23-1500
+    title: Skapa karaktärer rollspel Xanders kampanj
+    date: '2025-06-23'
+    start: '15:00'
     end: '17:00'
-    id: skapa-karaktarer-rollspel-xanders-kampanj-2025-06-23-1500
-    link: null
     location: Rollspelstält2
+    responsible: Xander
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 12:44:37'
       updated_at: '2025-06-21 12:44:37'
-    owner:
-      email: ''
-      name: ''
-    responsible: Xander
-    start: '15:00'
-    title: Skapa karaktärer rollspel Xanders kampanj
-  - date: '2025-06-25'
-    description: null
+  - id: surrning-for-vissa-forkunskaper-kravs-2025-06-25-1400
+    title: Surrning för vissa förkunskaper krävs
+    date: '2025-06-25'
+    start: '14:00'
     end: '17:00'
-    id: surrning-for-vissa-forkunskaper-kravs-2025-06-25-1400
-    link: null
     location: Annat
+    responsible: Johanna Fransila
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 14:01:13'
       updated_at: '2025-06-21 14:01:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: Johanna Fransila
-    start: '14:00'
-    title: Surrning för vissa förkunskaper krävs
-  - date: '2025-06-26'
-    description: null
+  - id: schackturnering-blixt-2025-06-26-1330
+    title: Schackturnering blixt
+    date: '2025-06-26'
+    start: '13:30'
     end: '17:00'
-    id: schackturnering-blixt-2025-06-26-1330
-    link: null
     location: Kaffetält
+    responsible: Hampus
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 14:50:25'
       updated_at: '2025-06-21 14:50:25'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus
-    start: '13:30'
-    title: Schackturnering blixt
-  - date: '2025-06-25'
-    description: null
+  - id: rollspel-wilhelms-kampanj-2025-06-25-1000
+    title: Rollspel Wilhelms kampanj
+    date: '2025-06-25'
+    start: '10:00'
     end: '13:00'
-    id: rollspel-wilhelms-kampanj-2025-06-25-1000
-    link: null
     location: Rollspelstält1
+    responsible: Wilhelm
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 14:59:48'
       updated_at: '2025-06-21 14:59:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: Wilhelm
-    start: '10:00'
+  - id: rollspel-wilhelms-kampanj-2025-06-24-1000
     title: Rollspel Wilhelms kampanj
-  - date: '2025-06-24'
-    description: null
+    date: '2025-06-24'
+    start: '10:00'
     end: '13:00'
-    id: rollspel-wilhelms-kampanj-2025-06-24-1000
-    link: null
     location: Rollspelstält1
+    responsible: Wilhelm
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 15:00:50'
       updated_at: '2025-06-21 15:00:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: Wilhelm
-    start: '10:00'
+  - id: rollspel-wilhelms-kampanj-2025-06-26-1000
     title: Rollspel Wilhelms kampanj
-  - date: '2025-06-26'
-    description: null
+    date: '2025-06-26'
+    start: '10:00'
     end: '13:00'
-    id: rollspel-wilhelms-kampanj-2025-06-26-1000
-    link: null
     location: Rollspelstält1
+    responsible: Wilhelm
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 15:01:38'
       updated_at: '2025-06-21 15:01:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: Wilhelm
-    start: '10:00'
-    title: Rollspel Wilhelms kampanj
-  - date: '2025-06-22'
-    description: null
+  - id: obs-alla-deltar-nya-lite-extra-rigga-talt-och-stalla-i-ordning-ga-hall-2025-06-22-1800
+    title: '(OBS! Alla deltar, nya lite extra) Rigga tält och ställa i ordning GA-hall'
+    date: '2025-06-22'
+    start: '18:00'
     end: '20:30'
-    id: obs-alla-deltar-nya-lite-extra-rigga-talt-och-stalla-i-ordning-ga-hall-2025-06-22-1800
-    link: null
     location: Annat
+    responsible: Alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 17:28:53'
       updated_at: '2025-06-21 17:28:53'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alla
-    start: '18:00'
-    title: (OBS! Alla deltar, nya lite extra) Rigga tält och ställa i ordning GA-hall
-  - date: '2025-06-22'
-    description: null
+  - id: middag-2025-06-22-1700
+    title: Middag
+    date: '2025-06-22'
+    start: '17:00'
     end: '18:00'
-    id: middag-2025-06-22-1700
-    link: null
     location: Servicehus
+    responsible: Alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 17:38:36'
       updated_at: '2025-06-21 17:38:36'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alla
-    start: '17:00'
-    title: Middag
-  - date: '2025-06-29'
-    description: null
+  - id: lunch-2025-06-29-1200
+    title: Lunch
+    date: '2025-06-29'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2025-06-29-1200
-    link: null
     location: Servicehus
+    responsible: Alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 17:39:52'
       updated_at: '2025-06-21 17:39:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alla
-    start: '12:00'
-    title: Lunch
-  - date: '2025-06-24'
-    description: null
+  - id: bokcirkel-diskutera-djurens-gard-george-orwell-2025-06-24-1600
+    title: Bokcirkel - Diskutera djurens gård (George Orwell)
+    date: '2025-06-24'
+    start: '16:00'
     end: '17:00'
-    id: bokcirkel-diskutera-djurens-gard-george-orwell-2025-06-24-1600
-    link: null
     location: AndreasTältet
+    responsible: Amanda och Stina
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-21 17:45:59'
       updated_at: '2025-06-21 17:45:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Amanda och Stina
-    start: '16:00'
-    title: Bokcirkel - Diskutera djurens gård (George Orwell)
-  - date: '2025-06-23'
-    description: null
+  - id: skapa-karaktarer-rollspel-wilhelms-kampanj-2025-06-23-1500
+    title: Skapa karaktärer rollspel Wilhelms kampanj
+    date: '2025-06-23'
+    start: '15:00'
     end: '17:00'
-    id: skapa-karaktarer-rollspel-wilhelms-kampanj-2025-06-23-1500
-    link: null
     location: Rollspelstält1
+    responsible: Wilhelm
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:09:55'
       updated_at: '2025-06-22 11:09:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: Wilhelm
-    start: '15:00'
-    title: Skapa karaktärer rollspel Wilhelms kampanj
-  - date: '2025-06-24'
-    description: null
+  - id: rollspel-astors-kampanj-2025-06-24-1330
+    title: Rollspel Astors kampanj
+    date: '2025-06-24'
+    start: '13:30'
     end: '16:00'
-    id: rollspel-astors-kampanj-2025-06-24-1330
-    link: null
     location: Rollspelstält2
+    responsible: Astor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:14:27'
       updated_at: '2025-06-22 11:14:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Astor
-    start: '13:30'
+  - id: rollspel-astors-kampanj-2025-06-25-1330
     title: Rollspel Astors kampanj
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '13:30'
     end: '16:00'
-    id: rollspel-astors-kampanj-2025-06-25-1330
-    link: null
     location: Rollspelstält2
+    responsible: Astor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:15:19'
       updated_at: '2025-06-22 11:15:19'
-    owner:
-      email: ''
-      name: ''
-    responsible: Astor
-    start: '13:30'
+  - id: rollspel-astors-kampanj-2025-06-26-1330
     title: Rollspel Astors kampanj
-  - date: '2025-06-26'
-    description: null
+    date: '2025-06-26'
+    start: '13:30'
     end: '16:00'
-    id: rollspel-astors-kampanj-2025-06-26-1330
-    link: null
     location: Rollspelstält2
+    responsible: Astor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:16:06'
       updated_at: '2025-06-22 11:16:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Astor
-    start: '13:30'
-    title: Rollspel Astors kampanj
-  - date: '2025-06-23'
-    description: null
+  - id: lar-kanna-varandra-lagret-och-campingen-2025-06-23-0900
+    title: 'Lär känna varandra, lägret och campingen!'
+    date: '2025-06-23'
+    start: '09:00'
     end: '09:30'
-    id: lar-kanna-varandra-lagret-och-campingen-2025-06-23-0900
-    link: null
     location: Servicehus
+    responsible: Cecilia (ordf RFSB)
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:17:16'
       updated_at: '2025-06-22 11:17:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia (ordf RFSB)
-    start: '09:00'
-    title: Lär känna varandra, lägret och campingen!
-  - date: '2025-06-24'
-    description: null
+  - id: rollspel-hampus-kampanj-2025-06-24-1330
+    title: Rollspel Hampus kampanj
+    date: '2025-06-24'
+    start: '13:30'
     end: '16:30'
-    id: rollspel-hampus-kampanj-2025-06-24-1330
-    link: null
     location: Rollspelstält1
+    responsible: Hampus
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:17:55'
       updated_at: '2025-06-22 11:17:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus
-    start: '13:30'
+  - id: rollspel-hampus-kampanj-2025-06-25-1330
     title: Rollspel Hampus kampanj
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '13:30'
     end: '16:30'
-    id: rollspel-hampus-kampanj-2025-06-25-1330
-    link: null
     location: Rollspelstält1
+    responsible: Hampus
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:18:52'
       updated_at: '2025-06-22 11:18:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus
-    start: '13:30'
+  - id: rollspel-hampus-kampanj-2025-06-27-1330
     title: Rollspel Hampus kampanj
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '13:30'
     end: '16:30'
-    id: rollspel-hampus-kampanj-2025-06-27-1330
-    link: null
     location: Rollspelstält1
+    responsible: Hampus
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:19:46'
       updated_at: '2025-06-22 11:19:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus
-    start: '13:30'
+  - id: rollspel-hampus-kampanj-2025-06-28-1330
     title: Rollspel Hampus kampanj
-  - date: '2025-06-28'
-    description: null
+    date: '2025-06-28'
+    start: '13:30'
     end: '16:30'
-    id: rollspel-hampus-kampanj-2025-06-28-1330
-    link: null
     location: Rollspelstält1
+    responsible: Hampus
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:20:31'
       updated_at: '2025-06-22 11:20:31'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus
-    start: '13:30'
-    title: Rollspel Hampus kampanj
-  - date: '2025-06-25'
-    description: null
+  - id: grillkvall-vid-alven-2025-06-25-1700
+    title: Grillkväll vid älven
+    date: '2025-06-25'
+    start: '17:00'
     end: '23:55'
-    id: grillkvall-vid-alven-2025-06-25-1700
-    link: null
     location: Grillplats
+    responsible: Malin Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 11:54:07'
       updated_at: '2025-06-22 11:54:07'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Isenfors
-    start: '17:00'
-    title: Grillkväll vid älven
-  - date: '2025-06-24'
-    description: null
+  - id: fotbollsspel-2025-06-24-1530
+    title: Fotbollsspel
+    date: '2025-06-24'
+    start: '15:30'
     end: '16:30'
-    id: fotbollsspel-2025-06-24-1530
-    link: null
     location: Fotbollsplan
+    responsible: 'Fredrik Julius '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 12:32:35'
       updated_at: '2025-06-22 12:32:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Fredrik Julius '
-    start: '15:30'
+  - id: fotbollsspel-2025-06-25-1530
     title: Fotbollsspel
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '15:30'
     end: '16:30'
-    id: fotbollsspel-2025-06-25-1530
-    link: null
     location: Fotbollsplan
+    responsible: Fredrik Julius
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 12:37:10'
       updated_at: '2025-06-22 12:37:10'
-    owner:
-      email: ''
-      name: ''
-    responsible: Fredrik Julius
-    start: '15:30'
-    title: Fotbollsspel
-  - date: '2025-06-26'
-    description: null
+  - id: prova-pa-surrning-2025-06-26-1000
+    title: Prova-på surrning
+    date: '2025-06-26'
+    start: '10:00'
     end: '12:00'
-    id: prova-pa-surrning-2025-06-26-1000
-    link: null
     location: Annat
+    responsible: Johanna Fransila
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 13:27:40'
       updated_at: '2025-06-22 13:27:40'
-    owner:
-      email: ''
-      name: ''
-    responsible: Johanna Fransila
-    start: '10:00'
-    title: Prova-på surrning
-  - date: '2025-06-25'
-    description: null
+  - id: demo-5d-schack-2025-06-25-1100
+    title: Demo 5D schack
+    date: '2025-06-25'
+    start: '11:00'
     end: '12:00'
-    id: demo-5d-schack-2025-06-25-1100
-    link: null
     location: GA Datorsal
+    responsible: Lukas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 14:00:09'
       updated_at: '2025-06-22 14:00:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lukas
-    start: '11:00'
-    title: Demo 5D schack
-  - date: '2025-06-27'
-    description: null
+  - id: fotbollsspel-2025-06-27-1530
+    title: 'Fotbollsspel '
+    date: '2025-06-27'
+    start: '15:30'
     end: '16:30'
-    id: fotbollsspel-2025-06-27-1530
-    link: null
     location: Fotbollsplan
+    responsible: Fredrik Julius
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 15:28:10'
       updated_at: '2025-06-22 15:28:10'
-    owner:
-      email: ''
-      name: ''
-    responsible: Fredrik Julius
-    start: '15:30'
+  - id: fotbollsspel-2025-06-28-1530
     title: 'Fotbollsspel '
-  - date: '2025-06-28'
-    description: null
+    date: '2025-06-28'
+    start: '15:30'
     end: '16:30'
-    id: fotbollsspel-2025-06-28-1530
-    link: null
     location: Fotbollsplan
+    responsible: Fredrik Julius
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-22 15:30:02'
       updated_at: '2025-06-22 15:30:02'
-    owner:
-      email: ''
-      name: ''
-    responsible: Fredrik Julius
-    start: '15:30'
-    title: 'Fotbollsspel '
-  - date: '2025-06-24'
-    description: null
+  - id: bokhorna-2025-06-24-1330
+    title: BOKHÖRNA
+    date: '2025-06-24'
+    start: '13:30'
     end: '14:30'
-    id: bokhorna-2025-06-24-1330
-    link: null
     location: GA Idrott
+    responsible: Kerstin Mossed
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 09:45:34'
       updated_at: '2025-06-23 09:45:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: Kerstin Mossed
+  - id: ryktet-gar-rolig-ritlek-for-alla-som-inte-maste-vinna-2025-06-25-1330
+    title: Ryktet går - rolig ritlek för alla som inte måste vinna
+    date: '2025-06-25'
     start: '13:30'
-    title: BOKHÖRNA
-  - date: '2025-06-25'
-    description: null
     end: '14:30'
-    id: ryktet-gar-rolig-ritlek-for-alla-som-inte-maste-vinna-2025-06-25-1330
-    link: null
     location: Nerf-arena
+    responsible: 'Kerstin Mossed '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 10:01:36'
       updated_at: '2025-06-23 10:01:36'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Kerstin Mossed '
-    start: '13:30'
-    title: Ryktet går - rolig ritlek för alla som inte måste vinna
-  - date: '2025-06-24'
-    description: null
+  - id: bradspel-2025-06-24-1030
+    title: 'Brädspel '
+    date: '2025-06-24'
+    start: '10:30'
     end: '17:30'
-    id: bradspel-2025-06-24-1030
-    link: null
     location: GA Idrott
+    responsible: 'Kerstin Mossed '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 10:08:22'
       updated_at: '2025-06-23 10:08:22'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Kerstin Mossed '
-    start: '10:30'
-    title: 'Brädspel '
-  - date: '2025-06-23'
-    description: null
+  - id: flata-vidars-har-2025-06-23-1120
+    title: Fläta Vidars hår
+    date: '2025-06-23'
+    start: '11:20'
     end: '12:00'
-    id: flata-vidars-har-2025-06-23-1120
-    link: null
     location: Annat
+    responsible: Mika
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 11:19:05'
       updated_at: '2025-06-23 11:19:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: Mika
-    start: '11:20'
-    title: Fläta Vidars hår
-  - date: '2025-06-23'
-    description: null
+  - id: accelration-radikalaccelation-i-praktiken-2025-06-23-1400
+    title: Accelration/radikalaccelation i praktiken
+    date: '2025-06-23'
+    start: '14:00'
     end: '15:00'
-    id: accelration-radikalaccelation-i-praktiken-2025-06-23-1400
-    link: null
     location: Tält2
+    responsible: Malin Isenfors och Johan Nyh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 11:26:28'
       updated_at: '2025-06-23 11:26:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Isenfors och Johan Nyh
-    start: '14:00'
-    title: Accelration/radikalaccelation i praktiken
-  - date: '2025-06-27'
-    description: null
+  - id: sarskilt-begavades-emotionalitet-och-familjelivets-konflikter-med-barnets-behov-i-centrum-2025-06-27-1330
+    title: Särskilt begåvades emotionalitet och Familjelivets konflikter med barnets behov i centrum
+    date: '2025-06-27'
+    start: '13:30'
     end: '15:00'
-    id: sarskilt-begavades-emotionalitet-och-familjelivets-konflikter-med-barnets-behov-i-centrum-2025-06-27-1330
-    link: null
     location: Kaffetält
+    responsible: 'Emma Neal '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 11:29:40'
       updated_at: '2025-06-23 11:29:40'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Emma Neal '
-    start: '13:30'
-    title: Särskilt begåvades emotionalitet och Familjelivets konflikter med barnets behov i centrum
-  - date: '2025-06-23'
-    description: null
+  - id: lufttorkad-lera-2025-06-23-1300
+    title: 'Lufttorkad lera '
+    date: '2025-06-23'
+    start: '13:00'
     end: '15:00'
-    id: lufttorkad-lera-2025-06-23-1300
-    link: null
     location: Tält1
+    responsible: 'Seméli Papadogiannakis '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 11:30:59'
       updated_at: '2025-06-23 11:30:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Seméli Papadogiannakis '
+  - id: talj-en-penna-eller-vad-som-helst-2025-06-24-1300
+    title: 'Tälj en penna eller vad som helst!'
+    date: '2025-06-24'
     start: '13:00'
-    title: 'Lufttorkad lera '
-  - date: '2025-06-24'
-    description: null
     end: '15:00'
-    id: talj-en-penna-eller-vad-som-helst-2025-06-24-1300
-    link: null
     location: Tält1
+    responsible: 'Christer Pertun '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 11:52:46'
       updated_at: '2025-06-23 11:52:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Christer Pertun '
-    start: '13:00'
-    title: Tälj en penna eller vad som helst!
-  - date: '2025-06-23'
-    description: null
+  - id: stick-fika-2025-06-23-1330
+    title: Stick-fika
+    date: '2025-06-23'
+    start: '13:30'
     end: '15:00'
-    id: stick-fika-2025-06-23-1330
-    link: null
     location: Kaffetält
+    responsible: Kerstin Eiman
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:25:01'
       updated_at: '2025-06-23 12:25:01'
-    owner:
-      email: ''
-      name: ''
-    responsible: Kerstin Eiman
-    start: '13:30'
-    title: Stick-fika
-  - date: '2025-06-23'
-    description: null
+  - id: lokalforening-dalarna-gavleborg-2025-06-23-1600
+    title: 'Lokalförening: Dalarna Gävleborg'
+    date: '2025-06-23'
+    start: '16:00'
     end: '16:30'
-    id: lokalforening-dalarna-gavleborg-2025-06-23-1600
-    link: null
     location: Kaffetält
+    responsible: Lotta Tyldhed
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:45:59'
       updated_at: '2025-06-23 12:45:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lotta Tyldhed
+  - id: musikjam-2025-06-26-1600
+    title: 'Musikjam!'
+    date: '2025-06-26'
     start: '16:00'
-    title: 'Lokalförening: Dalarna Gävleborg'
-  - date: '2025-06-26'
-    description: null
     end: '17:00'
-    id: musikjam-2025-06-26-1600
-    link: null
     location: AndreasTältet
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:51:07'
       updated_at: '2025-06-23 12:51:07'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
-    title: Musikjam!
-  - date: '2025-06-25'
-    description: null
+  - id: bland-tanketroll-och-kanslomonster-om-angest-hos-barn-och-unga-2025-06-25-1500
+    title: Bland Tanketroll och Känslomonster - om ångest hos barn och unga.
+    date: '2025-06-25'
+    start: '15:00'
     end: '16:00'
-    id: bland-tanketroll-och-kanslomonster-om-angest-hos-barn-och-unga-2025-06-25-1500
-    link: null
     location: Tält2
+    responsible: 'Linda Backman '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:52:06'
       updated_at: '2025-06-23 12:52:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Linda Backman '
-    start: '15:00'
-    title: Bland Tanketroll och Känslomonster - om ångest hos barn och unga.
-  - date: '2025-06-27'
-    description: null
+  - id: musikjam-2025-06-27-1600
+    title: 'Musikjam!'
+    date: '2025-06-27'
+    start: '16:00'
     end: '17:00'
-    id: musikjam-2025-06-27-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:52:33'
       updated_at: '2025-06-23 12:52:33'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
+  - id: musikjam-2025-06-24-1600
+    title: 'Musikjam!'
+    date: '2025-06-24'
     start: '16:00'
-    title: Musikjam!
-  - date: '2025-06-24'
-    description: null
     end: '17:00'
-    id: musikjam-2025-06-24-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:53:29'
       updated_at: '2025-06-23 12:53:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
-    title: Musikjam!
-  - date: '2025-06-23'
-    description: null
+  - id: tecknarstudio-anmalan-kravs-2025-06-23-1800
+    title: Tecknarstudio - Anmälan KRÄVS
+    date: '2025-06-23'
+    start: '18:00'
     end: '20:00'
-    id: tecknarstudio-anmalan-kravs-2025-06-23-1800
-    link: null
     location: GA Stilla hyllan
+    responsible: 'Tilde, Albin, Moa, (Karin)'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:53:59'
       updated_at: '2025-06-23 12:53:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Moa, (Karin)
-    start: '18:00'
-    title: Tecknarstudio - Anmälan KRÄVS
-  - date: '2025-06-28'
-    description: null
+  - id: musikjam-2025-06-28-1600
+    title: 'Musikjam!'
+    date: '2025-06-28'
+    start: '16:00'
     end: '17:00'
-    id: musikjam-2025-06-28-1600
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:55:07'
       updated_at: '2025-06-23 12:55:07'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
+  - id: musikjam-2025-06-25-1600
+    title: 'Musikjam!'
+    date: '2025-06-25'
     start: '16:00'
-    title: Musikjam!
-  - date: '2025-06-25'
-    description: null
     end: '17:00'
-    id: musikjam-2025-06-25-1600
-    link: null
     location: AndreasTältet
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 12:57:49'
       updated_at: '2025-06-23 12:57:49'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
-    title: Musikjam!
-  - date: '2025-06-24'
-    description: null
+  - id: gellitryck-2025-06-24-1300
+    title: Gellitryck
+    date: '2025-06-24'
+    start: '13:00'
     end: '16:00'
-    id: gellitryck-2025-06-24-1300
-    link: null
     location: Tält1
+    responsible: Helena Frejdevi
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 13:05:22'
       updated_at: '2025-06-23 13:05:22'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena Frejdevi
-    start: '13:00'
-    title: Gellitryck
-  - date: '2025-06-24'
-    description: null
+  - id: stationer-brain-games-2025-06-24-1100
+    title: 'Stationer Brain Games '
+    date: '2025-06-24'
+    start: '11:00'
     end: '12:00'
-    id: stationer-brain-games-2025-06-24-1100
-    link: null
     location: Kaffetält
+    responsible: 'Birgitta '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 13:09:15'
       updated_at: '2025-06-23 13:09:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Birgitta '
-    start: '11:00'
-    title: 'Stationer Brain Games '
-  - date: '2025-06-23'
-    description: null
+  - id: diamond-painting-2025-06-23-1815
+    title: 'Diamond painting '
+    date: '2025-06-23'
+    start: '18:15'
     end: '20:00'
-    id: diamond-painting-2025-06-23-1815
-    link: null
     location: Tält1
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 13:09:34'
       updated_at: '2025-06-23 13:09:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '18:15'
-    title: 'Diamond painting '
-  - date: '2025-06-26'
-    description: null
+  - id: brain-games-2025-06-26-1930
+    title: 'Brain Games '
+    date: '2025-06-26'
+    start: '19:30'
     end: '21:00'
-    id: brain-games-2025-06-26-1930
-    link: null
     location: GA Idrott
+    responsible: 'Birgitta '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 13:11:29'
       updated_at: '2025-06-23 13:11:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Birgitta '
-    start: '19:30'
-    title: 'Brain Games '
-  - date: '2025-06-26'
-    description: null
+  - id: samling-stationsvardar-brain-games-2025-06-26-1845
+    title: 'Samling stationsvärdar Brain Games '
+    date: '2025-06-26'
+    start: '18:45'
     end: '19:30'
-    id: samling-stationsvardar-brain-games-2025-06-26-1845
-    link: null
     location: GA Idrott
+    responsible: Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 13:12:52'
       updated_at: '2025-06-23 13:12:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta
-    start: '18:45'
-    title: 'Samling stationsvärdar Brain Games '
-  - date: '2025-06-23'
-    description: null
+  - id: mafia-2025-06-23-1800
+    title: MAFIA
+    date: '2025-06-23'
+    start: '18:00'
     end: '19:00'
-    id: mafia-2025-06-23-1800
-    link: null
     location: GA Idrott
+    responsible: Elli och Lou
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 13:26:08'
       updated_at: '2025-06-23 13:26:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: Elli och Lou
-    start: '18:00'
-    title: MAFIA
-  - date: '2025-06-23'
-    description: null
+  - id: latt-och-svar-eurovisionquiz-vi-borjar-med-den-latta-2025-06-23-1900
+    title: Lätt och svår Eurovisionquiz. Vi börjar med den lätta.
+    date: '2025-06-23'
+    start: '19:00'
     end: '20:30'
-    id: latt-och-svar-eurovisionquiz-vi-borjar-med-den-latta-2025-06-23-1900
-    link: null
     location: AndreasTältet
+    responsible: 'Milo o Anneli '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 14:25:43'
       updated_at: '2025-06-23 14:25:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Milo o Anneli '
-    start: '19:00'
-    title: Lätt och svår Eurovisionquiz. Vi börjar med den lätta.
-  - date: '2025-06-23'
-    description: null
+  - id: rfsb-syd-lokalforeningstraff-2025-06-23-1600
+    title: Rfsb Syd lokalföreningsträff
+    date: '2025-06-23'
+    start: '16:00'
     end: '17:00'
-    id: rfsb-syd-lokalforeningstraff-2025-06-23-1600
-    link: null
     location: Servicehus
+    responsible: 'Johanna,  Michelle och Emma'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 15:46:16'
       updated_at: '2025-06-23 15:46:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: Johanna,  Michelle och Emma
-    start: '16:00'
-    title: Rfsb Syd lokalföreningsträff
-  - date: '2025-06-23'
-    description: null
+  - id: nagelstudio-2025-06-23-1800
+    title: Nagelstudio
+    date: '2025-06-23'
+    start: '18:00'
     end: '19:00'
-    id: nagelstudio-2025-06-23-1800
-    link: null
     location: AndreasTältet
+    responsible: Malin och Rebecca Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 16:51:22'
       updated_at: '2025-06-23 16:51:22'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin och Rebecca Isenfors
-    start: '18:00'
-    title: Nagelstudio
-  - date: '2025-06-25'
-    description: null
+  - id: pda-2025-06-25-1100
+    title: PDA
+    date: '2025-06-25'
+    start: '11:00'
     end: '12:00'
-    id: pda-2025-06-25-1100
-    link: null
     location: Tält3
+    responsible: Mikael Eiman
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 17:26:18'
       updated_at: '2025-06-23 17:26:18'
-    owner:
-      email: ''
-      name: ''
-    responsible: Mikael Eiman
+  - id: goteborgstraff-rfsb-vast-2025-06-24-1100
+    title: Göteborgsträff - RFSB Väst
+    date: '2025-06-24'
     start: '11:00'
-    title: PDA
-  - date: '2025-06-24'
-    description: null
     end: '12:00'
-    id: goteborgstraff-rfsb-vast-2025-06-24-1100
-    link: null
     location: AndreasTältet
+    responsible: Kerstin Eiman
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 17:40:59'
       updated_at: '2025-06-23 17:40:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Kerstin Eiman
+  - id: tradgardssnack-2025-06-27-1100
+    title: Trädgårdssnack
+    date: '2025-06-27'
     start: '11:00'
-    title: Göteborgsträff - RFSB Väst
-  - date: '2025-06-27'
-    description: null
     end: '12:00'
-    id: tradgardssnack-2025-06-27-1100
-    link: null
     location: Kaffetält
+    responsible: 'Kerstin Eiman '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 17:47:32'
       updated_at: '2025-06-23 17:47:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Kerstin Eiman '
-    start: '11:00'
-    title: Trädgårdssnack
-  - date: '2025-06-24'
-    description: null
+  - id: rollspel-xanders-kampanj-2025-06-24-1000
+    title: Rollspel Xanders kampanj
+    date: '2025-06-24'
+    start: '10:00'
     end: '13:00'
-    id: rollspel-xanders-kampanj-2025-06-24-1000
-    link: null
     location: Rollspelstält2
+    responsible: Xander
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 18:24:27'
       updated_at: '2025-06-23 18:24:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Xander
-    start: '10:00'
+  - id: rollspel-xanders-kampanj-2025-06-25-1000
     title: Rollspel Xanders kampanj
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '10:00'
     end: '13:00'
-    id: rollspel-xanders-kampanj-2025-06-25-1000
-    link: null
     location: Rollspelstält2
+    responsible: Xander
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 18:25:13'
       updated_at: '2025-06-23 18:25:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: Xander
-    start: '10:00'
+  - id: rollspel-xanders-kampanj-2025-06-27-1000
     title: Rollspel Xanders kampanj
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '10:00'
     end: '13:00'
-    id: rollspel-xanders-kampanj-2025-06-27-1000
-    link: null
     location: Rollspelstält2
+    responsible: Xander
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 18:25:59'
       updated_at: '2025-06-23 18:25:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Xander
-    start: '10:00'
-    title: Rollspel Xanders kampanj
-  - date: '2025-06-24'
-    description: null
+  - id: parkour-2025-06-24-1400
+    title: Parkour
+    date: '2025-06-24'
+    start: '14:00'
     end: '15:00'
-    id: parkour-2025-06-24-1400
-    link: null
     location: GA Idrott
+    responsible: 'Joel Tegnander '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 18:26:33'
       updated_at: '2025-06-23 18:26:33'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Joel Tegnander '
-    start: '14:00'
-    title: Parkour
-  - date: '2025-06-28'
-    description: null
+  - id: rollspel-xanders-kampanj-2025-06-28-1000
+    title: Rollspel Xanders kampanj
+    date: '2025-06-28'
+    start: '10:00'
     end: '13:00'
-    id: rollspel-xanders-kampanj-2025-06-28-1000
-    link: null
     location: Rollspelstält2
+    responsible: Xander
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 18:26:37'
       updated_at: '2025-06-23 18:26:37'
-    owner:
-      email: ''
-      name: ''
-    responsible: Xander
-    start: '10:00'
-    title: Rollspel Xanders kampanj
-  - date: '2025-06-25'
-    description: null
+  - id: gellitryck-2025-06-25-1300
+    title: Gellitryck
+    date: '2025-06-25'
+    start: '13:00'
     end: '16:00'
-    id: gellitryck-2025-06-25-1300
-    link: null
     location: Tält1
+    responsible: Helena Frejdevi
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 19:00:26'
       updated_at: '2025-06-23 19:00:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena Frejdevi
+  - id: gelliprint-2025-06-26-1300
+    title: Gelliprint
+    date: '2025-06-26'
     start: '13:00'
-    title: Gellitryck
-  - date: '2025-06-26'
-    description: null
     end: '16:00'
-    id: gelliprint-2025-06-26-1300
-    link: null
     location: Tält1
+    responsible: Helena Frejdevi
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 19:03:04'
       updated_at: '2025-06-23 19:03:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Helena Frejdevi
+  - id: rubiks-kub-2025-06-24-1300
+    title: Rubiks kub
+    date: '2025-06-24'
     start: '13:00'
-    title: Gelliprint
-  - date: '2025-06-24'
-    description: null
     end: '14:00'
-    id: rubiks-kub-2025-06-24-1300
-    link: null
     location: Tält2
+    responsible: Vilhard
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 20:06:35'
       updated_at: '2025-06-23 20:06:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: Vilhard
-    start: '13:00'
-    title: Rubiks kub
-  - date: '2025-06-24'
-    description: null
+  - id: japansk-snodd-2025-06-24-1030
+    title: Japansk snodd
+    date: '2025-06-24'
+    start: '10:30'
     end: '11:30'
-    id: japansk-snodd-2025-06-24-1030
-    link: null
     location: GA Kreativ hörna
+    responsible: 'Caroline, Kerstin, Marina, Linn'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 20:40:27'
       updated_at: '2025-06-23 20:40:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Caroline, Kerstin, Marina, Linn
-    start: '10:30'
-    title: Japansk snodd
-  - date: '2025-06-27'
-    description: null
+  - id: skattjakt-for-de-yngsta-cirka-4-7-ar-2025-06-27-1530
+    title: Skattjakt för de yngsta (cirka 4-7 år)
+    date: '2025-06-27'
+    start: '15:30'
     end: '16:30'
-    id: skattjakt-for-de-yngsta-cirka-4-7-ar-2025-06-27-1530
-    link: null
     location: Nerf-arena
+    responsible: Kristin Wallin Hägglund
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 21:31:05'
       updated_at: '2025-06-23 21:31:05'
-    owner:
-      email: ''
-      name: ''
-    responsible: Kristin Wallin Hägglund
-    start: '15:30'
-    title: Skattjakt för de yngsta (cirka 4-7 år)
-  - date: '2025-06-25'
-    description: null
+  - id: gor-din-egen-trollstav-ca-4-10-ar-2025-06-25-1100
+    title: 'Gör din egen trollstav! (ca 4-10 år)'
+    date: '2025-06-25'
+    start: '11:00'
     end: '12:00'
-    id: gor-din-egen-trollstav-ca-4-10-ar-2025-06-25-1100
-    link: null
     location: GA Kreativ hörna
+    responsible: 'Kristin Wallin Hägglund '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-23 23:17:09'
       updated_at: '2025-06-23 23:17:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Kristin Wallin Hägglund '
-    start: '11:00'
-    title: Gör din egen trollstav! (ca 4-10 år)
-  - date: '2025-06-25'
-    description: null
+  - id: hemmakampare-hur-hitta-gnistan-igen-2025-06-25-1330
+    title: 'Hemmakämpare - hur hitta gnistan igen? '
+    date: '2025-06-25'
+    start: '13:30'
     end: '14:30'
-    id: hemmakampare-hur-hitta-gnistan-igen-2025-06-25-1330
-    link: null
     location: Tält2
+    responsible: 'Karin och Fredrik '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 00:04:55'
       updated_at: '2025-06-24 00:04:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Karin och Fredrik '
-    start: '13:30'
-    title: 'Hemmakämpare - hur hitta gnistan igen? '
-  - date: '2025-06-26'
-    description: null
+  - id: blixttal-2025-06-26-1400
+    title: Blixttal
+    date: '2025-06-26'
+    start: '14:00'
     end: '15:00'
-    id: blixttal-2025-06-26-1400
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 10:11:22'
       updated_at: '2025-06-24 10:11:22'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '14:00'
-    title: Blixttal
-  - date: '2025-06-24'
-    description: null
+  - id: nagelstudio-2025-06-24-1800
+    title: Nagelstudio
+    date: '2025-06-24'
+    start: '18:00'
     end: '19:30'
-    id: nagelstudio-2025-06-24-1800
-    link: null
     location: AndreasTältet
+    responsible: 'Malin och Rebecca Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 13:30:56'
       updated_at: '2025-06-24 13:30:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin och Rebecca Isenfors '
-    start: '18:00'
-    title: Nagelstudio
-  - date: '2025-06-24'
-    description: null
+  - id: varulven-spel-2025-06-24-1430
+    title: Varulven spel
+    date: '2025-06-24'
+    start: '14:30'
     end: '16:30'
-    id: varulven-spel-2025-06-24-1430
-    link: null
     location: GA Kreativ hörna
+    responsible: Alex och Becca Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 13:32:46'
       updated_at: '2025-06-24 13:32:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alex och Becca Isenfors
-    start: '14:30'
-    title: Varulven spel
-  - date: '2025-06-27'
-    description: null
+  - id: powerpoint-karaoke-2025-06-27-1500
+    title: 'Powerpoint Karaoke!'
+    date: '2025-06-27'
+    start: '15:00'
     end: '16:00'
-    id: powerpoint-karaoke-2025-06-27-1500
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 13:43:38'
       updated_at: '2025-06-24 13:43:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '15:00'
-    title: Powerpoint Karaoke!
-  - date: '2025-06-24'
-    description: null
+  - id: rollspel-selmas-kampanj-2025-06-24-1330
+    title: Rollspel Selmas kampanj
+    date: '2025-06-24'
+    start: '13:30'
     end: '16:00'
-    id: rollspel-selmas-kampanj-2025-06-24-1330
-    link: null
     location: Kaffetält
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 13:54:29'
       updated_at: '2025-06-24 13:54:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '13:30'
+  - id: rollspel-selmas-kampanj-2025-06-25-1330
     title: Rollspel Selmas kampanj
-  - date: '2025-06-25'
-    description: null
+    date: '2025-06-25'
+    start: '13:30'
     end: '16:00'
-    id: rollspel-selmas-kampanj-2025-06-25-1330
-    link: null
     location: Kaffetält
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 13:56:35'
       updated_at: '2025-06-24 13:56:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '13:30'
+  - id: rollspel-selmas-kampanj-2025-06-26-1330
     title: Rollspel Selmas kampanj
-  - date: '2025-06-26'
-    description: null
+    date: '2025-06-26'
+    start: '13:30'
     end: '16:00'
-    id: rollspel-selmas-kampanj-2025-06-26-1330
-    link: null
     location: Rollspelstält1
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 14:08:20'
       updated_at: '2025-06-24 14:08:20'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '13:30'
+  - id: rollspel-selmas-kampanj-2025-06-27-1330
     title: Rollspel Selmas kampanj
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '13:30'
     end: '16:00'
-    id: rollspel-selmas-kampanj-2025-06-27-1330
-    link: null
     location: Rollspelstält2
+    responsible: Selma
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 14:08:56'
       updated_at: '2025-06-24 14:08:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: Selma
-    start: '13:30'
-    title: Rollspel Selmas kampanj
-  - date: '2025-06-25'
-    description: null
+  - id: street-dance-2025-06-25-1600
+    title: Street dance
+    date: '2025-06-25'
+    start: '16:00'
     end: '17:00'
-    id: street-dance-2025-06-25-1600
-    link: null
     location: GA Idrott
+    responsible: Christina och Selma Falk
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 14:42:40'
       updated_at: '2025-06-24 14:42:40'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christina och Selma Falk
-    start: '16:00'
-    title: Street dance
-  - date: '2025-06-24'
-    description: null
+  - id: programmerarhang-2025-06-24-1830
+    title: Programmerarhäng
+    date: '2025-06-24'
+    start: '18:30'
     end: '19:30'
-    id: programmerarhang-2025-06-24-1830
-    link: null
     location: Kaffetält
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 15:05:17'
       updated_at: '2025-06-24 15:05:17'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '18:30'
-    title: Programmerarhäng
-  - date: '2025-06-24'
-    description: null
+  - id: mafia-2025-06-24-1900
+    title: MAFIA
+    date: '2025-06-24'
+    start: '19:00'
     end: '20:00'
-    id: mafia-2025-06-24-1900
-    link: null
     location: Servicehus
+    responsible: 'Elli och Lou '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 15:41:14'
       updated_at: '2025-06-24 15:41:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Elli och Lou '
+  - id: artstudion-2025-06-24-1900
+    title: Artstudion
+    date: '2025-06-24'
     start: '19:00'
-    title: MAFIA
-  - date: '2025-06-24'
-    description: null
     end: '21:00'
-    id: artstudion-2025-06-24-1900
-    link: null
     location: GA Stilla hyllan
+    responsible: 'Tilde, Moa, Albin, (Karin)'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 16:08:47'
       updated_at: '2025-06-24 16:08:47'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Moa, Albin, (Karin)
+  - id: reiki-behandling-2025-06-24-1900
+    title: Reiki behandling
+    date: '2025-06-24'
     start: '19:00'
-    title: Artstudion
-  - date: '2025-06-24'
-    description: null
     end: '21:00'
-    id: reiki-behandling-2025-06-24-1900
-    link: null
     location: Servicehus
+    responsible: Lee Nolan-Lönn
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 16:52:43'
       updated_at: '2025-06-24 16:52:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lee Nolan-Lönn
-    start: '19:00'
+  - id: reiki-behandling-2025-06-26-1900
     title: Reiki behandling
-  - date: '2025-06-26'
-    description: null
+    date: '2025-06-26'
+    start: '19:00'
     end: '21:00'
-    id: reiki-behandling-2025-06-26-1900
-    link: null
     location: Servicehus
+    responsible: Lee Nolan-Lönn
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 16:53:49'
       updated_at: '2025-06-24 16:53:49'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lee Nolan-Lönn
-    start: '19:00'
-    title: Reiki behandling
-  - date: '2025-06-24'
-    description: null
+  - id: mafia-2025-06-24-1830
+    title: MAFIA
+    date: '2025-06-24'
+    start: '18:30'
     end: '19:30'
-    id: mafia-2025-06-24-1830
-    link: null
     location: GA Idrott
+    responsible: Elli och Lou
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 18:15:36'
       updated_at: '2025-06-24 18:15:36'
-    owner:
-      email: ''
-      name: ''
-    responsible: Elli och Lou
-    start: '18:30'
-    title: MAFIA
-  - date: '2025-06-25'
-    description: null
+  - id: baka-tunnbrod-vid-grillplatsen-vid-alven-2025-06-25-1300
+    title: 'Baka tunnbröd vid grillplatsen vid älven '
+    date: '2025-06-25'
+    start: '13:00'
     end: '15:00'
-    id: baka-tunnbrod-vid-grillplatsen-vid-alven-2025-06-25-1300
-    link: null
     location: Grillplats
+    responsible: 'Charlotte Anderberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 19:18:58'
       updated_at: '2025-06-24 19:18:58'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Charlotte Anderberg '
-    start: '13:00'
-    title: 'Baka tunnbröd vid grillplatsen vid älven '
-  - date: '2025-06-26'
-    description: null
+  - id: schack-for-nyborjare-2025-06-26-1000
+    title: Schack för nybörjare
+    date: '2025-06-26'
+    start: '10:00'
     end: '11:00'
-    id: schack-for-nyborjare-2025-06-26-1000
-    link: null
     location: Kaffetält
+    responsible: Hampus
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 19:36:35'
       updated_at: '2025-06-24 19:36:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hampus
-    start: '10:00'
-    title: Schack för nybörjare
-  - date: '2025-06-27'
-    description: null
+  - id: elektronik-lab-2025-06-27-1600
+    title: Elektronik lab
+    date: '2025-06-27'
+    start: '16:00'
     end: '17:00'
-    id: elektronik-lab-2025-06-27-1600
-    link: null
     location: GA Stilla hyllan
+    responsible: Ragnar och David
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 19:40:50'
       updated_at: '2025-06-24 19:40:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ragnar och David
-    start: '16:00'
-    title: Elektronik lab
-  - date: '2025-06-26'
-    description: null
+  - id: trum-meditation-2025-06-26-0800
+    title: 'Trum meditation '
+    date: '2025-06-26'
+    start: '08:00'
     end: '09:00'
-    id: trum-meditation-2025-06-26-0800
-    link: null
     location: Tält2
+    responsible: 'Elisabeth Ejeblad '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 23:27:47'
       updated_at: '2025-06-24 23:27:47'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Elisabeth Ejeblad '
-    start: '08:00'
-    title: 'Trum meditation '
-  - date: '2025-06-25'
-    description: null
+  - id: strid-med-lajvsvard-och-strumpor-2025-06-25-1615
+    title: 'Strid med lajvsvärd och *strumpor*! '
+    date: '2025-06-25'
+    start: '16:15'
     end: '17:30'
-    id: strid-med-lajvsvard-och-strumpor-2025-06-25-1615
-    link: null
     location: Nerf-arena
+    responsible: 'Martin / David och Astor '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-24 23:55:55'
       updated_at: '2025-06-24 23:55:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martin / David och Astor '
-    start: '16:15'
-    title: 'Strid med lajvsvärd och *strumpor*! '
-  - date: '2025-06-25'
-    description: null
+  - id: diamond-painting-2025-06-25-1030
+    title: 'Diamond painting '
+    date: '2025-06-25'
+    start: '10:30'
     end: '12:00'
-    id: diamond-painting-2025-06-25-1030
-    link: null
     location: Tält1
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 00:04:06'
       updated_at: '2025-06-25 00:04:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '10:30'
-    title: 'Diamond painting '
-  - date: '2025-06-25'
-    description: null
+  - id: stand-up-comedy-vad-ar-det-och-hur-gor-man-ett-skamt-2025-06-25-1600
+    title: 'Stand up comedy - vad är det och hur gör man ett skämt?'
+    date: '2025-06-25'
+    start: '16:00'
     end: '17:00'
-    id: stand-up-comedy-vad-ar-det-och-hur-gor-man-ett-skamt-2025-06-25-1600
-    link: null
     location: Tält2
+    responsible: 'Annelie Mattson-Djos, Kristin Wallin Hägglund'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 00:05:22'
       updated_at: '2025-06-25 00:05:22'
-    owner:
-      email: ''
-      name: ''
-    responsible: Annelie Mattson-Djos, Kristin Wallin Hägglund
-    start: '16:00'
-    title: Stand up comedy - vad är det och hur gör man ett skämt?
-  - date: '2025-06-24'
-    description: null
+  - id: musikquiz-2025-06-24-1000
+    title: Musikquiz
+    date: '2025-06-24'
+    start: '10:00'
     end: '12:00'
-    id: musikquiz-2025-06-24-1000
-    link: null
     location: AndreasTältet
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 00:18:55'
       updated_at: '2025-06-25 00:18:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '10:00'
+  - id: musikquiz-2025-06-28-1000
     title: Musikquiz
-  - date: '2025-06-28'
-    description: null
+    date: '2025-06-28'
+    start: '10:00'
     end: '12:00'
-    id: musikquiz-2025-06-28-1000
-    link: null
     location: AndreasTältet
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 00:23:49'
       updated_at: '2025-06-25 00:23:49'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '10:00'
-    title: Musikquiz
-  - date: '2025-06-26'
-    description: null
+  - id: fotografering-fotopromenad-2025-06-26-1500
+    title: Fotografering-fotopromenad
+    date: '2025-06-26'
+    start: '15:00'
     end: '16:00'
-    id: fotografering-fotopromenad-2025-06-26-1500
-    link: null
     location: Annat
+    responsible: 'Elin '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 00:40:20'
       updated_at: '2025-06-25 00:40:20'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Elin '
-    start: '15:00'
-    title: Fotografering-fotopromenad
-  - date: '2025-06-25'
-    description: null
+  - id: familjetraning-utomhus-nedanfor-beachvolleyplan-nara-gungorna-2025-06-25-1015
+    title: 'Familjeträning utomhus, nedanför beachvolleyplan, nära gungorna'
+    date: '2025-06-25'
+    start: '10:15'
     end: '10:45'
-    id: familjetraning-utomhus-nedanfor-beachvolleyplan-nara-gungorna-2025-06-25-1015
-    link: null
     location: Annat
+    responsible: Agnes Granberg
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 09:50:56'
       updated_at: '2025-06-25 09:50:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: Agnes Granberg
-    start: '10:15'
-    title: Familjeträning utomhus, nedanför beachvolleyplan, nära gungorna
-  - date: '2025-06-25'
-    description: null
+  - id: taljning-2025-06-25-1300
+    title: Täljning
+    date: '2025-06-25'
+    start: '13:00'
     end: '15:00'
-    id: taljning-2025-06-25-1300
-    link: null
     location: Tält1
+    responsible: 'Christer Pertun '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 09:52:20'
       updated_at: '2025-06-25 09:52:20'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Christer Pertun '
+  - id: varulven-2025-06-25-1300
+    title: Varulven
+    date: '2025-06-25'
     start: '13:00'
-    title: Täljning
-  - date: '2025-06-25'
-    description: null
     end: '14:30'
-    id: varulven-2025-06-25-1300
-    link: null
     location: GA Kreativ hörna
+    responsible: 'Becca &amp; Alex Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 10:09:30'
       updated_at: '2025-06-25 10:09:30'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Becca &amp; Alex Isenfors '
-    start: '13:00'
-    title: Varulven
-  - date: '2025-06-27'
-    description: null
+  - id: reiki-behandling-2025-06-27-1830
+    title: Reiki behandling
+    date: '2025-06-27'
+    start: '18:30'
     end: '20:00'
-    id: reiki-behandling-2025-06-27-1830
-    link: null
     location: Servicehus
+    responsible: Lee Nolan-Lönn
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 10:15:44'
       updated_at: '2025-06-25 10:15:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lee Nolan-Lönn
-    start: '18:30'
-    title: Reiki behandling
-  - date: '2025-06-26'
-    description: null
+  - id: ai-ett-samtal-om-framtid-ideer-och-manniskan-2025-06-26-1400
+    title: 'AI – ett samtal om framtid, idéer och människan'
+    date: '2025-06-26'
+    start: '14:00'
     end: '15:00'
-    id: ai-ett-samtal-om-framtid-ideer-och-manniskan-2025-06-26-1400
-    link: null
     location: Tält2
+    responsible: 'Ingimar &amp; David '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 10:20:46'
       updated_at: '2025-06-25 10:20:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Ingimar &amp; David '
-    start: '14:00'
-    title: AI – ett samtal om framtid, idéer och människan
-  - date: '2025-06-26'
-    description: null
+  - id: familjedans-till-vastafrikanska-rytmer-2025-06-26-1000
+    title: Familjedans till västafrikanska rytmer
+    date: '2025-06-26'
+    start: '10:00'
     end: '11:00'
-    id: familjedans-till-vastafrikanska-rytmer-2025-06-26-1000
-    link: null
     location: GA Idrott
+    responsible: Hanna Walsö
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 10:55:41'
       updated_at: '2025-06-25 10:55:41'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hanna Walsö
-    start: '10:00'
-    title: Familjedans till västafrikanska rytmer
-  - date: '2025-06-27'
-    description: null
+  - id: prisutdelning-brain-games-2025-06-27-2015
+    title: 'Prisutdelning Brain Games '
+    date: '2025-06-27'
+    start: '20:15'
     end: '20:30'
-    id: prisutdelning-brain-games-2025-06-27-2015
-    link: null
     location: GA Idrott
+    responsible: Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 12:28:57'
       updated_at: '2025-06-25 12:28:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta
-    start: '20:15'
-    title: 'Prisutdelning Brain Games '
-  - date: '2025-06-27'
-    description: null
+  - id: spelutveckling-med-godot-en-kort-intro-2025-06-27-1330
+    title: 'Spelutveckling med Godot, en kort intro'
+    date: '2025-06-27'
+    start: '13:30'
     end: '14:30'
-    id: spelutveckling-med-godot-en-kort-intro-2025-06-27-1330
-    link: null
     location: GA Stilla hyllan
+    responsible: Mikael E
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 12:35:29'
       updated_at: '2025-06-25 12:35:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: Mikael E
-    start: '13:30'
-    title: Spelutveckling med Godot, en kort intro
-  - date: '2025-06-27'
-    description: null
+  - id: skapa-pappersblommor-2025-06-27-0930
+    title: Skapa pappersblommor
+    date: '2025-06-27'
+    start: '09:30'
     end: '11:00'
-    id: skapa-pappersblommor-2025-06-27-0930
-    link: null
     location: Tält1
+    responsible: 'Malin, Caroline, Kerstin'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 12:47:01'
       updated_at: '2025-06-25 12:47:01'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin, Caroline, Kerstin
-    start: '09:30'
-    title: Skapa pappersblommor
-  - date: '2025-06-26'
-    description: null
+  - id: stand-up-comedy-vad-ar-det-och-hur-gor-man-ett-skamt-2025-06-26-1100
+    title: 'Stand up comedy - vad är det och hur gör man ett skämt?'
+    date: '2025-06-26'
+    start: '11:00'
     end: '12:00'
-    id: stand-up-comedy-vad-ar-det-och-hur-gor-man-ett-skamt-2025-06-26-1100
-    link: null
     location: Tält2
+    responsible: Annelie Mattson-Djos
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 14:24:27'
       updated_at: '2025-06-25 14:24:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Annelie Mattson-Djos
+  - id: jobbigt-att-prata-infor-klassen-kollegorna-publik-kom-hit-for-lite-tips-2025-06-27-1100
+    title: 'Jobbigt att prata inför klassen, kollegorna, publik - kom hit för lite tips'
+    date: '2025-06-27'
     start: '11:00'
-    title: Stand up comedy - vad är det och hur gör man ett skämt?
-  - date: '2025-06-27'
-    description: null
     end: '12:00'
-    id: jobbigt-att-prata-infor-klassen-kollegorna-publik-kom-hit-for-lite-tips-2025-06-27-1100
-    link: null
     location: GA Stilla hyllan
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 15:14:09'
       updated_at: '2025-06-25 15:14:09'
-    owner:
-      email: ''
-      name: ''
-    responsible: Morgan
-    start: '11:00'
-    title: Jobbigt att prata inför klassen, kollegorna, publik - kom hit för lite tips
-  - date: '2025-06-26'
-    description: null
+  - id: fotbollsturnering-2025-06-26-1600
+    title: Fotbollsturnering
+    date: '2025-06-26'
+    start: '16:00'
     end: '17:00'
-    id: fotbollsturnering-2025-06-26-1600
-    link: null
     location: Fotbollsplan
+    responsible: 'Amanda, Mika och Mirabelle'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 16:59:56'
       updated_at: '2025-06-25 16:59:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: Amanda, Mika och Mirabelle
-    start: '16:00'
-    title: Fotbollsturnering
-  - date: '2025-06-26'
-    description: null
+  - id: gor-din-egen-miljovanliga-matforvaring-2025-06-26-1630
+    title: 'Gör din egen miljövänliga matförvaring '
+    date: '2025-06-26'
+    start: '16:30'
     end: '18:30'
-    id: gor-din-egen-miljovanliga-matforvaring-2025-06-26-1630
-    link: null
     location: Tält1
+    responsible: 'Mija '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 21:18:43'
       updated_at: '2025-06-25 21:18:43'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Mija '
-    start: '16:30'
-    title: 'Gör din egen miljövänliga matförvaring '
-  - date: '2025-06-26'
-    description: null
+  - id: vattenkrig-2025-06-26-1700
+    title: Vattenkrig
+    date: '2025-06-26'
+    start: '17:00'
     end: '17:30'
-    id: vattenkrig-2025-06-26-1700
-    link: null
     location: Nerf-arena
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-25 22:21:08'
       updated_at: '2025-06-25 22:21:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '17:00'
-    title: Vattenkrig
-  - date: '2025-06-26'
-    description: null
+  - id: artstudio-aldre-tonaringar-unga-vuxna-chokladfabriken-naturpralinen-2025-06-26-1300
+    title: Artstudio äldre tonåringar/unga vuxna - Chokladfabriken/Naturpralinen
+    date: '2025-06-26'
+    start: '13:00'
     end: '15:30'
-    id: artstudio-aldre-tonaringar-unga-vuxna-chokladfabriken-naturpralinen-2025-06-26-1300
-    link: null
     location: Annat
+    responsible: 'Tilde, Albin, Moa, (Karin)'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 10:59:46'
       updated_at: '2025-06-26 10:59:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Moa, (Karin)
-    start: '13:00'
-    title: Artstudio äldre tonåringar/unga vuxna - Chokladfabriken/Naturpralinen
-  - date: '2025-06-27'
-    description: null
+  - id: frigorande-dans-2025-06-27-1000
+    title: 'FRIGÖRANDE DANS '
+    date: '2025-06-27'
+    start: '10:00'
     end: '11:00'
-    id: frigorande-dans-2025-06-27-1000
-    link: null
     location: GA Idrott
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 11:40:11'
       updated_at: '2025-06-26 11:40:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '10:00'
-    title: 'FRIGÖRANDE DANS '
-  - date: '2025-06-26'
-    description: null
+  - id: antika-raknemaskiner-workshop-2025-06-26-1300
+    title: Antika räknemaskiner workshop
+    date: '2025-06-26'
+    start: '13:00'
     end: '13:30'
-    id: antika-raknemaskiner-workshop-2025-06-26-1300
-    link: null
     location: AndreasTältet
+    responsible: CJ
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 11:40:24'
       updated_at: '2025-06-26 11:40:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: CJ
-    start: '13:00'
-    title: Antika räknemaskiner workshop
-  - date: '2025-06-28'
-    description: null
+  - id: frigorande-dans-2025-06-28-1100
+    title: FRIGÖRANDE DANS
+    date: '2025-06-28'
+    start: '11:00'
     end: '12:00'
-    id: frigorande-dans-2025-06-28-1100
-    link: null
     location: GA Idrott
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 11:43:44'
       updated_at: '2025-06-26 11:43:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '11:00'
-    title: FRIGÖRANDE DANS
-  - date: '2025-06-26'
-    description: null
+  - id: varulvar-2025-06-26-1500
+    title: Varulvar
+    date: '2025-06-26'
+    start: '15:00'
     end: '16:30'
-    id: varulvar-2025-06-26-1500
-    link: null
     location: GA Kreativ hörna
+    responsible: Alex och Rebecca Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 12:20:11'
       updated_at: '2025-06-26 12:20:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alex och Rebecca Isenfors
-    start: '15:00'
+  - id: varulvar-2025-06-27-1500
     title: Varulvar
-  - date: '2025-06-27'
-    description: null
+    date: '2025-06-27'
+    start: '15:00'
     end: '16:30'
-    id: varulvar-2025-06-27-1500
-    link: null
     location: GA Kreativ hörna
+    responsible: Alex och Rebecca Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 18:42:44'
       updated_at: '2025-06-26 18:42:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alex och Rebecca Isenfors
-    start: '15:00'
-    title: Varulvar
-  - date: '2025-06-27'
-    description: null
+  - id: parkour-2025-06-27-1400
+    title: Parkour
+    date: '2025-06-27'
+    start: '14:00'
     end: '15:00'
-    id: parkour-2025-06-27-1400
-    link: null
     location: GA Idrott
+    responsible: 'Joel Tegnander '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 19:02:08'
       updated_at: '2025-06-26 19:02:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Joel Tegnander '
-    start: '14:00'
-    title: Parkour
-  - date: '2025-06-27'
-    description: null
+  - id: vi-startar-upp-rfsb-vast-2025-06-27-1200
+    title: ' Vi startar upp RFSB Väst!'
+    date: '2025-06-27'
+    start: '12:00'
     end: '12:30'
-    id: vi-startar-upp-rfsb-vast-2025-06-27-1200
-    link: null
     location: Kaffetält
+    responsible: 'Thomas Ringnér '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 19:22:38'
       updated_at: '2025-06-26 19:22:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Thomas Ringnér '
-    start: '12:00'
-    title: ' Vi startar upp RFSB Väst!'
-  - date: '2025-06-27'
-    description: null
+  - id: it-projekt-agila-ramverk-m-m-informellt-snack-2025-06-27-1000
+    title: 'IT-projekt, agila ramverk m.m. Informellt snack'
+    date: '2025-06-27'
+    start: '10:00'
     end: '11:00'
-    id: it-projekt-agila-ramverk-m-m-informellt-snack-2025-06-27-1000
-    link: null
     location: Kaffetält
+    responsible: Jonas Lindstrii Ingvarsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-26 21:13:40'
       updated_at: '2025-06-26 21:13:40'
-    owner:
-      email: ''
-      name: ''
-    responsible: Jonas Lindstrii Ingvarsson
-    start: '10:00'
-    title: IT-projekt, agila ramverk m.m. Informellt snack
-  - date: '2025-06-28'
-    description: null
+  - id: prepping-hur-och-varfor-2025-06-28-1300
+    title: 'Prepping, hur och varför? '
+    date: '2025-06-28'
+    start: '13:00'
     end: '14:30'
-    id: prepping-hur-och-varfor-2025-06-28-1300
-    link: null
     location: Tält2
+    responsible: Malin och Ingimar Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 00:49:11'
       updated_at: '2025-06-27 00:49:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin och Ingimar Isenfors
+  - id: diamond-painting-bokning-2025-06-27-1300
+    title: Diamond painting-bokning
+    date: '2025-06-27'
     start: '13:00'
-    title: 'Prepping, hur och varför? '
-  - date: '2025-06-27'
-    description: null
     end: '15:00'
-    id: diamond-painting-bokning-2025-06-27-1300
-    link: null
     location: Tält1
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 01:58:53'
       updated_at: '2025-06-27 01:58:53'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '13:00'
-    title: Diamond painting-bokning
-  - date: '2025-06-27'
-    description: null
+  - id: inkluderad-till-exkludering-repris-fran-den-internationella-begavningskonferensen-i-karlstad-tidigare-i-sommar-2025-06-27-1600
+    title: Inkluderad till exkludering (repris från den internationella begåvningskonferensen i Karlstad tidigare i sommar)
+    date: '2025-06-27'
+    start: '16:00'
     end: '16:30'
-    id: inkluderad-till-exkludering-repris-fran-den-internationella-begavningskonferensen-i-karlstad-tidigare-i-sommar-2025-06-27-1600
-    link: null
     location: GA Idrott
+    responsible: CJ
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 03:49:41'
       updated_at: '2025-06-27 03:49:41'
-    owner:
-      email: ''
-      name: ''
-    responsible: CJ
-    start: '16:00'
-    title: Inkluderad till exkludering (repris från den internationella begåvningskonferensen i Karlstad tidigare i sommar)
-  - date: '2025-06-27'
-    description: null
+  - id: neurodiversitet-2e-iq-begreppet-bra-att-veta-om-hur-psykologer-kan-tanka-2025-06-27-1800
+    title: 'Neurodiversitet, 2E, IQ-begreppet, bra att veta om hur psykologer kan tänka'
+    date: '2025-06-27'
+    start: '18:00'
     end: '18:45'
-    id: neurodiversitet-2e-iq-begreppet-bra-att-veta-om-hur-psykologer-kan-tanka-2025-06-27-1800
-    link: null
     location: Annat
+    responsible: Agnes Granberg
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 10:00:55'
       updated_at: '2025-06-27 10:00:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: Agnes Granberg
-    start: '18:00'
-    title: Neurodiversitet, 2E, IQ-begreppet, bra att veta om hur psykologer kan tänka
-  - date: '2025-06-28'
-    description: null
+  - id: skapa-pappersblommor-2025-06-28-1300
+    title: Skapa pappersblommor
+    date: '2025-06-28'
+    start: '13:00'
     end: '14:30'
-    id: skapa-pappersblommor-2025-06-28-1300
-    link: null
     location: Tält1
+    responsible: 'Malin, Kerstin och Caroline '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 11:36:02'
       updated_at: '2025-06-27 11:36:02'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin, Kerstin och Caroline '
-    start: '13:00'
-    title: Skapa pappersblommor
-  - date: '2025-06-27'
-    description: null
+  - id: open-stage-med-anmalningslank-2025-06-27-2030
+    title: 'Open Stage - med anmälningslänk!'
+    date: '2025-06-27'
+    start: '20:30'
     end: '22:30'
-    id: open-stage-med-anmalningslank-2025-06-27-2030
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 11:52:55'
       updated_at: '2025-06-27 11:52:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '20:30'
-    title: Open Stage - med anmälningslänk!
-  - date: '2025-06-27'
-    description: null
+  - id: karaoke-med-anmalningslank-2025-06-27-1800
+    title: 'Karaoke - med anmälningslänk!'
+    date: '2025-06-27'
+    start: '18:00'
     end: '20:00'
-    id: karaoke-med-anmalningslank-2025-06-27-1800
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 11:55:33'
       updated_at: '2025-06-27 11:55:33'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
+  - id: artstudio-2025-06-27-1800
+    title: Artstudio
+    date: '2025-06-27'
     start: '18:00'
-    title: Karaoke - med anmälningslänk!
-  - date: '2025-06-27'
-    description: null
     end: '20:00'
-    id: artstudio-2025-06-27-1800
-    link: null
     location: Annat
+    responsible: 'Tilde, Albin, Moa, (Karin)'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 15:30:24'
       updated_at: '2025-06-27 15:30:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Albin, Moa, (Karin)
-    start: '18:00'
-    title: Artstudio
-  - date: '2025-06-28'
-    description: null
+  - id: tank-dig-innanfor-boxen-tillfalle-2-2025-06-28-1700
+    title: 'Tänk dig innanför boxen! Tillfälle 2'
+    date: '2025-06-28'
+    start: '17:00'
     end: '18:00'
-    id: tank-dig-innanfor-boxen-tillfalle-2-2025-06-28-1700
-    link: null
     location: AndreasTältet
+    responsible: 'Charlie Rexgård '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 17:07:10'
       updated_at: '2025-06-27 17:07:10'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Charlie Rexgård '
-    start: '17:00'
-    title: Tänk dig innanför boxen! Tillfälle 2
-  - date: '2025-06-28'
-    description: null
+  - id: tank-dig-innanfor-boxen-tillfalle-1-2025-06-28-1300
+    title: 'Tänk dig innanför boxen! Tillfälle 1'
+    date: '2025-06-28'
+    start: '13:00'
     end: '14:00'
-    id: tank-dig-innanfor-boxen-tillfalle-1-2025-06-28-1300
-    link: null
     location: AndreasTältet
+    responsible: 'Charlie Rexgård '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 17:09:15'
       updated_at: '2025-06-27 17:09:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Charlie Rexgård '
-    start: '13:00'
-    title: Tänk dig innanför boxen! Tillfälle 1
-  - date: '2025-06-27'
-    description: null
+  - id: artstudio-hantverkstaltet-2025-06-27-1800
+    title: 'Artstudio - Hantverkstältet '
+    date: '2025-06-27'
+    start: '18:00'
     end: '20:00'
-    id: artstudio-hantverkstaltet-2025-06-27-1800
-    link: null
     location: Annat
+    responsible: 'Tilde, Moa, Albin, (Karin)'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 17:11:53'
       updated_at: '2025-06-27 17:11:53'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde, Moa, Albin, (Karin)
-    start: '18:00'
-    title: 'Artstudio - Hantverkstältet '
-  - date: '2025-06-28'
-    description: null
+  - id: powerpoint-karaoke-2-a-tillfallet-2025-06-28-1430
+    title: 'Powerpoint-Karaoke, 2:a tillfället'
+    date: '2025-06-28'
+    start: '14:30'
     end: '15:30'
-    id: powerpoint-karaoke-2-a-tillfallet-2025-06-28-1430
-    link: null
     location: GA Idrott
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 18:49:13'
       updated_at: '2025-06-27 18:49:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '14:30'
-    title: Powerpoint-Karaoke, 2:a tillfället
-  - date: '2025-06-28'
-    description: null
+  - id: hundsnack-2025-06-28-1100
+    title: Hundsnack
+    date: '2025-06-28'
+    start: '11:00'
     end: '11:45'
-    id: hundsnack-2025-06-28-1100
-    link: null
     location: Tält2
+    responsible: 'Anna-Karin Jäderberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 19:48:37'
       updated_at: '2025-06-27 19:48:37'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Anna-Karin Jäderberg '
+  - id: fa-hjalp-med-att-ga-med-i-rfsb-discord-kan-bli-grejen-framover-samma-som-de-yngre-https-discord-gg-gbcfxsek-2025-06-28-1100
+    title: 'Få hjälp med att gå med i RFSB Discord (kan bli grejen framöver, samma som de yngre) - https://discord.gg/gBCfxseK'
+    date: '2025-06-28'
     start: '11:00'
-    title: Hundsnack
-  - date: '2025-06-28'
-    description: null
     end: '12:00'
-    id: fa-hjalp-med-att-ga-med-i-rfsb-discord-kan-bli-grejen-framover-samma-som-de-yngre-https-discord-gg-gbcfxsek-2025-06-28-1100
-    link: null
     location: KaffePaviljongen
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-27 22:51:37'
       updated_at: '2025-06-27 22:51:37'
-    owner:
-      email: ''
-      name: ''
-    responsible: Morgan
-    start: '11:00'
-    title: Få hjälp med att gå med i RFSB Discord (kan bli grejen framöver, samma som de yngre) - https://discord.gg/gBCfxseK
-  - date: '2025-06-28'
-    description: null
+  - id: svenskarna-samtiden-och-framtiden-2025-06-28-1530
+    title: 'Svenskarna, samtiden och framtiden '
+    date: '2025-06-28'
+    start: '15:30'
     end: '16:30'
-    id: svenskarna-samtiden-och-framtiden-2025-06-28-1530
-    link: null
     location: GA Idrott
+    responsible: 'Cecilia Löfgreen '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-28 01:12:46'
       updated_at: '2025-06-28 01:12:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Cecilia Löfgreen '
-    start: '15:30'
-    title: 'Svenskarna, samtiden och framtiden '
-  - date: '2025-06-28'
-    description: null
+  - id: musikquiz-2025-06-28-2030
+    title: Musikquiz
+    date: '2025-06-28'
+    start: '20:30'
     end: '23:00'
-    id: musikquiz-2025-06-28-2030
-    link: null
     location: Servicehus
+    responsible: 'Martina Sjöström '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-28 13:36:32'
       updated_at: '2025-06-28 13:36:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Martina Sjöström '
-    start: '20:30'
-    title: Musikquiz
-  - date: '2025-06-29'
-    description: null
+  - id: gissa-vem-jag-ar-2025-06-29-0100
+    title: Gissa vem jag är
+    date: '2025-06-29'
+    start: '01:00'
     end: '01:10'
-    id: gissa-vem-jag-ar-2025-06-29-0100
-    link: null
     location: Nerf-arena
+    responsible: //Pelle
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2025-06-29 00:50:00'
       updated_at: '2025-06-29 00:50:00'
-    owner:
-      email: ''
-      name: ''
-    responsible: //Pelle
-    start: '01:00'
-    title: Gissa vem jag är

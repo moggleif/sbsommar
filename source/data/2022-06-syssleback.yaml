@@ -5,2103 +5,2103 @@ camp:
   start_date: '2022-06-26'
   end_date: '2022-07-03'
 events:
-  - date: '2022-06-26'
-    description: null
+  - id: valkommen-2022-06-26-1200
+    title: Välkommen
+    date: '2022-06-26'
+    start: '12:00'
     end: '23:30'
-    id: valkommen-2022-06-26-1200
-    link: null
     location: Annat
+    responsible: Alla
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-05-31 21:58:04'
       updated_at: '2022-05-31 21:58:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Alla
-    start: '12:00'
-    title: Välkommen
-  - date: '2022-06-27'
-    description: null
+  - id: valkomstmote-2022-06-27-1100
+    title: Välkomstmöte
+    date: '2022-06-27'
+    start: '11:00'
     end: '11:15'
-    id: valkomstmote-2022-06-27-1100
-    link: null
     location: Annat
+    responsible: Andreas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-05-31 22:59:39'
       updated_at: '2022-05-31 22:59:39'
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas
-    start: '11:00'
-    title: Välkomstmöte
-  - date: '2022-06-27'
-    description: null
+  - id: lunch-2022-06-27-1200
+    title: Lunch
+    date: '2022-06-27'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2022-06-27-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:30:55'
       updated_at: '2022-06-02 14:30:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2022-06-28-1200
     title: Lunch
-  - date: '2022-06-28'
-    description: null
+    date: '2022-06-28'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2022-06-28-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:30:55'
       updated_at: '2022-06-02 14:30:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2022-06-29-1200
     title: Lunch
-  - date: '2022-06-29'
-    description: null
+    date: '2022-06-29'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2022-06-29-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:30:55'
       updated_at: '2022-06-02 14:30:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2022-06-30-1200
     title: Lunch
-  - date: '2022-06-30'
-    description: null
+    date: '2022-06-30'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2022-06-30-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:30:55'
       updated_at: '2022-06-02 14:30:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2022-07-01-1200
     title: Lunch
-  - date: '2022-07-01'
-    description: null
+    date: '2022-07-01'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2022-07-01-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:30:55'
       updated_at: '2022-06-02 14:30:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2022-07-02-1200
     title: Lunch
-  - date: '2022-07-02'
-    description: null
+    date: '2022-07-02'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2022-07-02-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:30:55'
       updated_at: '2022-06-02 14:30:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
+  - id: lunch-2022-07-03-1200
     title: Lunch
-  - date: '2022-07-03'
-    description: null
+    date: '2022-07-03'
+    start: '12:00'
     end: '13:00'
-    id: lunch-2022-07-03-1200
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:30:55'
       updated_at: '2022-06-02 14:30:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '12:00'
-    title: Lunch
-  - date: '2022-06-27'
-    description: null
+  - id: middag-2022-06-27-1700
+    title: Middag
+    date: '2022-06-27'
+    start: '17:00'
     end: '18:00'
-    id: middag-2022-06-27-1700
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:33:38'
       updated_at: '2022-06-02 14:33:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
+  - id: middag-2022-06-28-1700
     title: Middag
-  - date: '2022-06-28'
-    description: null
+    date: '2022-06-28'
+    start: '17:00'
     end: '18:00'
-    id: middag-2022-06-28-1700
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:33:38'
       updated_at: '2022-06-02 14:33:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
+  - id: middag-2022-06-29-1700
     title: Middag
-  - date: '2022-06-29'
-    description: null
+    date: '2022-06-29'
+    start: '17:00'
     end: '18:00'
-    id: middag-2022-06-29-1700
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:33:38'
       updated_at: '2022-06-02 14:33:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
+  - id: middag-2022-06-30-1700
     title: Middag
-  - date: '2022-06-30'
-    description: null
+    date: '2022-06-30'
+    start: '17:00'
     end: '18:00'
-    id: middag-2022-06-30-1700
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:33:38'
       updated_at: '2022-06-02 14:33:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
+  - id: middag-2022-07-01-1700
     title: Middag
-  - date: '2022-07-01'
-    description: null
+    date: '2022-07-01'
+    start: '17:00'
     end: '18:00'
-    id: middag-2022-07-01-1700
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:33:38'
       updated_at: '2022-06-02 14:33:38'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
+  - id: middag-2022-07-02-1700
     title: Middag
-  - date: '2022-07-02'
-    description: null
+    date: '2022-07-02'
+    start: '17:00'
     end: '18:00'
-    id: middag-2022-07-02-1700
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:33:39'
       updated_at: '2022-06-02 14:33:39'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2022-06-27'
-    description: null
+  - id: titta-pa-sommarlov-2022-06-27-0900
+    title: Titta på sommarlov
+    date: '2022-06-27'
+    start: '09:00'
     end: '10:00'
-    id: titta-pa-sommarlov-2022-06-27-0900
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:39:13'
       updated_at: '2022-06-02 14:39:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '09:00'
+  - id: titta-pa-sommarlov-2022-06-28-0900
     title: Titta på sommarlov
-  - date: '2022-06-28'
-    description: null
+    date: '2022-06-28'
+    start: '09:00'
     end: '10:00'
-    id: titta-pa-sommarlov-2022-06-28-0900
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:39:13'
       updated_at: '2022-06-02 14:39:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '09:00'
+  - id: titta-pa-sommarlov-2022-06-29-0900
     title: Titta på sommarlov
-  - date: '2022-06-29'
-    description: null
+    date: '2022-06-29'
+    start: '09:00'
     end: '10:00'
-    id: titta-pa-sommarlov-2022-06-29-0900
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:39:13'
       updated_at: '2022-06-02 14:39:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '09:00'
+  - id: titta-pa-sommarlov-2022-06-30-0900
     title: Titta på sommarlov
-  - date: '2022-06-30'
-    description: null
+    date: '2022-06-30'
+    start: '09:00'
     end: '10:00'
-    id: titta-pa-sommarlov-2022-06-30-0900
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:39:13'
       updated_at: '2022-06-02 14:39:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '09:00'
+  - id: titta-pa-sommarlov-2022-07-01-0900
     title: Titta på sommarlov
-  - date: '2022-07-01'
-    description: null
+    date: '2022-07-01'
+    start: '09:00'
     end: '10:00'
-    id: titta-pa-sommarlov-2022-07-01-0900
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:39:13'
       updated_at: '2022-06-02 14:39:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '09:00'
+  - id: titta-pa-sommarlov-2022-07-02-0900
     title: Titta på sommarlov
-  - date: '2022-07-02'
-    description: null
+    date: '2022-07-02'
+    start: '09:00'
     end: '10:00'
-    id: titta-pa-sommarlov-2022-07-02-0900
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:39:13'
       updated_at: '2022-06-02 14:39:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '09:00'
+  - id: titta-pa-sommarlov-2022-07-03-0900
     title: Titta på sommarlov
-  - date: '2022-07-03'
-    description: null
+    date: '2022-07-03'
+    start: '09:00'
     end: '10:00'
-    id: titta-pa-sommarlov-2022-07-03-0900
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:39:13'
       updated_at: '2022-06-02 14:39:13'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '09:00'
-    title: Titta på sommarlov
-  - date: '2022-07-02'
-    description: null
+  - id: avslutningsmote-2022-07-02-1800
+    title: Avslutningsmöte
+    date: '2022-07-02'
+    start: '18:00'
     end: '20:00'
-    id: avslutningsmote-2022-07-02-1800
-    link: null
     location: Annat
+    responsible: Andreas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 14:50:44'
       updated_at: '2022-06-02 14:50:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas
-    start: '18:00'
-    title: Avslutningsmöte
-  - date: '2022-06-26'
-    description: null
+  - id: middag-2022-06-26-1700
+    title: Middag
+    date: '2022-06-26'
+    start: '17:00'
     end: '18:00'
-    id: middag-2022-06-26-1700
-    link: null
     location: Servicehus
+    responsible: ' '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-02 22:45:14'
       updated_at: '2022-06-02 22:45:14'
-    owner:
-      email: ''
-      name: ''
-    responsible: ' '
-    start: '17:00'
-    title: Middag
-  - date: '2022-06-27'
-    description: null
+  - id: japansk-bakkurs-glutenfritt-2022-06-27-1315
+    title: 'Japansk bakkurs - glutenfritt '
+    date: '2022-06-27'
+    start: '13:15'
     end: '15:45'
-    id: japansk-bakkurs-glutenfritt-2022-06-27-1315
-    link: null
     location: Skolsal
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-23 21:35:58'
       updated_at: '2022-06-23 21:35:58'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '13:15'
-    title: 'Japansk bakkurs - glutenfritt '
-  - date: '2022-06-27'
-    description: null
+  - id: holjes-rallycrossbana-2022-06-27-1500
+    title: Höljes rallycrossbana
+    date: '2022-06-27'
+    start: '15:00'
     end: '15:00'
-    id: holjes-rallycrossbana-2022-06-27-1500
-    link: null
     location: Annat
+    responsible: Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-23 21:39:54'
       updated_at: '2022-06-23 21:39:54'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta
-    start: '15:00'
-    title: Höljes rallycrossbana
-  - date: '2022-06-29'
-    description: null
+  - id: japansk-bakkurs-2022-06-29-1315
+    title: Japansk bakkurs
+    date: '2022-06-29'
+    start: '13:15'
     end: '15:45'
-    id: japansk-bakkurs-2022-06-29-1315
-    link: null
     location: Skolsal
+    responsible: 'Lisa Lautrup '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-23 21:40:16'
       updated_at: '2022-06-23 21:40:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lisa Lautrup '
-    start: '13:15'
-    title: Japansk bakkurs
-  - date: '2022-06-27'
-    description: null
+  - id: qudditch-match-2022-06-27-1400
+    title: Qudditch match
+    date: '2022-06-27'
+    start: '14:00'
     end: '15:00'
-    id: qudditch-match-2022-06-27-1400
-    link: null
     location: Nerf-arena
+    responsible: 'Rönnkvist '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-23 21:44:08'
       updated_at: '2022-06-23 21:44:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Rönnkvist '
-    start: '14:00'
-    title: Qudditch match
-  - date: '2022-06-27'
-    description: null
+  - id: rollspel-fm-viktor-2022-06-27-0900
+    title: 'Rollspel fm, Viktor'
+    date: '2022-06-27'
+    start: '09:00'
     end: '12:00'
-    id: rollspel-fm-viktor-2022-06-27-0900
-    link: null
     location: Rollspelstält1
+    responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-24 09:45:46'
       updated_at: '2022-06-24 09:45:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor
-    start: '09:00'
-    title: Rollspel fm, Viktor
-  - date: '2022-06-29'
-    description: null
+  - id: bast-i-test-flyttad-2022-06-29-1300
+    title: Bäst i test (flyttad)
+    date: '2022-06-29'
+    start: '13:00'
     end: '17:00'
-    id: bast-i-test-flyttad-2022-06-29-1300
-    link: null
     location: Nerf-arena
+    responsible: 'Christina Johansson '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-24 10:23:32'
       updated_at: '2022-06-24 10:23:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Christina Johansson '
-    start: '13:00'
-    title: Bäst i test (flyttad)
-  - date: '2022-06-30'
-    description: null
+  - id: arsmote-rfsb-2022-06-30-1400
+    title: Årsmöte RFSB
+    date: '2022-06-30'
+    start: '14:00'
     end: '17:00'
-    id: arsmote-rfsb-2022-06-30-1400
-    link: null
     location: Annat
+    responsible: J Nyh
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-24 13:32:32'
       updated_at: '2022-06-24 13:32:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: J Nyh
-    start: '14:00'
-    title: Årsmöte RFSB
-  - date: '2022-06-29'
-    description: null
+  - id: lagerarmband-rfsb-2022-06-29-1100
+    title: Lägerarmband RFSB
+    date: '2022-06-29'
+    start: '11:00'
     end: '12:30'
-    id: lagerarmband-rfsb-2022-06-29-1100
-    link: null
     location: Servicehus
+    responsible: 'Jessica Malmberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 09:40:48'
       updated_at: '2022-06-25 09:40:48'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Jessica Malmberg '
-    start: '11:00'
-    title: Lägerarmband RFSB
-  - date: '2022-06-27'
-    description: null
+  - id: uppgifts-runda-lara-kanna-aktivitet-2022-06-27-0930
+    title: Uppgifts-runda - Lära känna aktivitet
+    date: '2022-06-27'
+    start: '09:30'
     end: '10:15'
-    id: uppgifts-runda-lara-kanna-aktivitet-2022-06-27-0930
-    link: null
     location: Servicehus
+    responsible: Cecilia Löfgreen
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 10:47:16'
       updated_at: '2022-06-25 10:47:16'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia Löfgreen
-    start: '09:30'
-    title: Uppgifts-runda - Lära känna aktivitet
-  - date: '2022-06-28'
-    description: null
+  - id: prova-pa-rollspel-2022-06-28-0900
+    title: Prova på rollspel
+    date: '2022-06-28'
+    start: '09:00'
     end: '12:00'
-    id: prova-pa-rollspel-2022-06-28-0900
-    link: null
     location: Rollspelstält2
+    responsible: Hedda
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 11:05:24'
       updated_at: '2022-06-25 11:05:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hedda
+  - id: rollspel-minikampanj-2022-06-30-0900
+    title: 'Rollspel, minikampanj'
+    date: '2022-06-30'
     start: '09:00'
-    title: Prova på rollspel
-  - date: '2022-06-30'
-    description: null
     end: '12:00'
-    id: rollspel-minikampanj-2022-06-30-0900
-    link: null
     location: Rollspelstält2
+    responsible: Hedda
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 11:13:27'
       updated_at: '2022-06-25 11:13:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hedda
+  - id: rollspel-minikampanj-2022-07-01-0900
+    title: 'Rollspel, minikampanj'
+    date: '2022-07-01'
     start: '09:00'
-    title: Rollspel, minikampanj
-  - date: '2022-07-01'
-    description: null
     end: '12:00'
-    id: rollspel-minikampanj-2022-07-01-0900
-    link: null
     location: Rollspelstält2
+    responsible: Hedda
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 11:16:24'
       updated_at: '2022-06-25 11:16:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: Hedda
-    start: '09:00'
-    title: Rollspel, minikampanj
-  - date: '2022-06-27'
-    description: null
+  - id: rollspel-stor-grupp-viktor-och-harald-2022-06-27-1330
+    title: 'Rollspel, stor grupp, Viktor och Harald'
+    date: '2022-06-27'
+    start: '13:30'
     end: '17:00'
-    id: rollspel-stor-grupp-viktor-och-harald-2022-06-27-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 15:48:52'
       updated_at: '2022-06-25 15:48:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald
-    start: '13:30'
-    title: Rollspel, stor grupp, Viktor och Harald
-  - date: '2022-06-27'
-    description: null
+  - id: rollspel-kvall-viktor-2022-06-27-1830
+    title: 'Rollspel kväll, Viktor'
+    date: '2022-06-27'
+    start: '18:30'
     end: '21:30'
-    id: rollspel-kvall-viktor-2022-06-27-1830
-    link: null
     location: Rollspelstält1
+    responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 16:06:32'
       updated_at: '2022-06-25 16:06:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor
-    start: '18:30'
-    title: Rollspel kväll, Viktor
-  - date: '2022-06-26'
-    description: null
+  - id: resa-tva-rollspelstalt-2022-06-26-2000
+    title: Resa två rollspelstält.
+    date: '2022-06-26'
+    start: '20:00'
     end: '20:45'
-    id: resa-tva-rollspelstalt-2022-06-26-2000
-    link: null
     location: Annat
+    responsible: Jenny och Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 16:10:27'
       updated_at: '2022-06-25 16:10:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Jenny och Viktor
-    start: '20:00'
-    title: Resa två rollspelstält.
-  - date: '2022-06-27'
-    description: null
+  - id: rollspel-kvall-harald-2022-06-27-1830
+    title: 'Rollspel kväll, Harald'
+    date: '2022-06-27'
+    start: '18:30'
     end: '21:30'
-    id: rollspel-kvall-harald-2022-06-27-1830
-    link: null
     location: Rollspelstält2
+    responsible: Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 16:22:21'
       updated_at: '2022-06-25 16:22:21'
-    owner:
-      email: ''
-      name: ''
-    responsible: Harald
-    start: '18:30'
-    title: Rollspel kväll, Harald
-  - date: '2022-07-01'
-    description: null
+  - id: holjes-rallycrossbana-tavling-2022-07-01-1430
+    title: Höljes rallycrossbana tävling
+    date: '2022-07-01'
+    start: '14:30'
     end: '18:30'
-    id: holjes-rallycrossbana-tavling-2022-07-01-1430
-    link: null
     location: Annat
+    responsible: Birgitta
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 20:30:32'
       updated_at: '2022-06-25 20:30:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: Birgitta
-    start: '14:30'
-    title: Höljes rallycrossbana tävling
-  - date: '2022-06-28'
-    description: null
+  - id: foredrag-och-diskussion-radikalacceleration-i-praktiken-2022-06-28-1030
+    title: 'Föredrag och diskussion: Radikalacceleration i praktiken'
+    date: '2022-06-28'
+    start: '10:30'
     end: '11:30'
-    id: foredrag-och-diskussion-radikalacceleration-i-praktiken-2022-06-28-1030
-    link: null
     location: Tält1
+    responsible: Malin Isenfors
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 21:10:17'
       updated_at: '2022-06-25 21:10:17'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin Isenfors
-    start: '10:30'
-    title: 'Föredrag och diskussion: Radikalacceleration i praktiken'
-  - date: '2022-06-26'
-    description: null
+  - id: nagelfix-2022-06-26-1600
+    title: Nagelfix
+    date: '2022-06-26'
+    start: '16:00'
     end: '18:00'
-    id: nagelfix-2022-06-26-1600
-    link: null
     location: Servicehus
+    responsible: Malin
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 23:01:50'
       updated_at: '2022-06-25 23:01:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: Malin
-    start: '16:00'
-    title: Nagelfix
-  - date: '2022-06-29'
-    description: null
+  - id: geometri-problemlosningsstuga-2022-06-29-1030
+    title: Geometri - Problemlösningsstuga
+    date: '2022-06-29'
+    start: '10:30'
     end: '12:00'
-    id: geometri-problemlosningsstuga-2022-06-29-1030
-    link: null
     location: Skolsal
+    responsible: Ivar Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-25 23:04:53'
       updated_at: '2022-06-25 23:04:53'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ivar Ängquist
-    start: '10:30'
-    title: Geometri - Problemlösningsstuga
-  - date: '2022-06-28'
-    description: null
+  - id: rollspel-kvall-viktor-2022-06-28-1830
+    title: 'Rollspel kväll, Viktor'
+    date: '2022-06-28'
+    start: '18:30'
     end: '21:00'
-    id: rollspel-kvall-viktor-2022-06-28-1830
-    link: null
     location: Rollspelstält1
+    responsible: 'Viktor '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-26 10:38:17'
       updated_at: '2022-06-26 10:38:17'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Viktor '
+  - id: rollspel-kvall-harald-2022-06-28-1830
+    title: 'Rollspel kväll, Harald'
+    date: '2022-06-28'
     start: '18:30'
-    title: Rollspel kväll, Viktor
-  - date: '2022-06-28'
-    description: null
     end: '21:30'
-    id: rollspel-kvall-harald-2022-06-28-1830
-    link: null
     location: Rollspelstält2
+    responsible: Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-26 10:46:29'
       updated_at: '2022-06-26 10:46:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: Harald
-    start: '18:30'
-    title: Rollspel kväll, Harald
-  - date: '2022-06-29'
-    description: null
+  - id: testa-stop-motion-2022-06-29-1315
+    title: Testa Stop motion.
+    date: '2022-06-29'
+    start: '13:15'
     end: '16:45'
-    id: testa-stop-motion-2022-06-29-1315
-    link: null
     location: GA-hall
+    responsible: 'Kalle Kalle@sandzen.se '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-26 13:30:02'
       updated_at: '2022-06-26 13:30:02'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Kalle Kalle@sandzen.se '
-    start: '13:15'
-    title: Testa Stop motion.
-  - date: '2022-06-27'
-    description: null
+  - id: fotbollstraning-2022-06-27-1830
+    title: 'Fotbollsträning '
+    date: '2022-06-27'
+    start: '18:30'
     end: '19:30'
-    id: fotbollstraning-2022-06-27-1830
-    link: null
     location: Fotbollsplan
+    responsible: 'Dillner '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-26 14:25:55'
       updated_at: '2022-06-26 14:25:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Dillner '
-    start: '18:30'
-    title: 'Fotbollsträning '
-  - date: '2022-06-26'
-    description: null
+  - id: rigga-talt1-talt2-och-datorsal-2022-06-26-1900
+    title: 'Rigga Tält1, Tält2 och datorsal. '
+    date: '2022-06-26'
+    start: '19:00'
     end: '20:45'
-    id: rigga-talt1-talt2-och-datorsal-2022-06-26-1900
-    link: null
     location: Annat
+    responsible: Andreas
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-26 18:14:07'
       updated_at: '2022-06-26 18:14:07'
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas
-    start: '19:00'
-    title: 'Rigga Tält1, Tält2 och datorsal. '
-  - date: '2022-06-27'
-    description: null
+  - id: matematiklektion-rakna-med-modulo-2022-06-27-1530
+    title: Matematiklektion - räkna med modulo
+    date: '2022-06-27'
+    start: '15:30'
     end: '16:30'
-    id: matematiklektion-rakna-med-modulo-2022-06-27-1530
-    link: null
     location: Tält1
+    responsible: Ivar Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-26 22:49:51'
       updated_at: '2022-06-26 22:49:51'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ivar Ängquist
-    start: '15:30'
-    title: Matematiklektion - räkna med modulo
-  - date: '2022-06-27'
-    description: null
+  - id: uppstartsmote-datasal-for-spelare-och-spelares-foraldrar-2022-06-27-1115
+    title: Uppstartsmöte datasal - för spelare och spelares föräldrar
+    date: '2022-06-27'
+    start: '11:15'
     end: '11:45'
-    id: uppstartsmote-datasal-for-spelare-och-spelares-foraldrar-2022-06-27-1115
-    link: null
     location: Datorsal
+    responsible: Niclas Nilsson och Johan Sommerfeld
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-26 23:30:36'
       updated_at: '2022-06-26 23:30:36'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson och Johan Sommerfeld
-    start: '11:15'
-    title: Uppstartsmöte datasal - för spelare och spelares föräldrar
-  - date: '2022-06-28'
-    description: null
+  - id: beatbox-workshop-for-nyborjare-2022-06-28-1500
+    title: Beatbox Workshop (För nybörjare)
+    date: '2022-06-28'
+    start: '15:00'
     end: '17:00'
-    id: beatbox-workshop-for-nyborjare-2022-06-28-1500
-    link: null
     location: Tält2
+    responsible: Vincent Söder Willhans
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 11:20:55'
       updated_at: '2022-06-27 11:20:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: Vincent Söder Willhans
-    start: '15:00'
-    title: Beatbox Workshop (För nybörjare)
-  - date: '2022-06-28'
-    description: null
+  - id: charader-2022-06-28-1000
+    title: Charader
+    date: '2022-06-28'
+    start: '10:00'
     end: '11:00'
-    id: charader-2022-06-28-1000
-    link: null
     location: Tält2
+    responsible: 'Christina '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 12:55:41'
       updated_at: '2022-06-27 12:55:41'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Christina '
-    start: '10:00'
-    title: Charader
-  - date: '2022-06-27'
-    description: null
+  - id: bygg-lego-och-prova-stop-motion-2022-06-27-1330
+    title: 'Bygg Lego och prova stop motion '
+    date: '2022-06-27'
+    start: '13:30'
     end: '15:00'
-    id: bygg-lego-och-prova-stop-motion-2022-06-27-1330
-    link: null
     location: GA-hall
+    responsible: 'Lotta Jonsson '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 12:59:12'
       updated_at: '2022-06-27 12:59:12'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Lotta Jonsson '
-    start: '13:30'
-    title: 'Bygg Lego och prova stop motion '
-  - date: '2022-06-29'
-    description: null
+  - id: introduktion-sarskild-begavning-2022-06-29-1500
+    title: Introduktion Särskild Begåvning
+    date: '2022-06-29'
+    start: '15:00'
     end: '16:30'
-    id: introduktion-sarskild-begavning-2022-06-29-1500
-    link: null
     location: Skolsal
+    responsible: 'Leigh Jamison, psykolog '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 13:19:32'
       updated_at: '2022-06-27 13:19:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Leigh Jamison, psykolog '
+  - id: forelasning-2022-07-01-1500
+    title: 'Föreläsning '
+    date: '2022-07-01'
     start: '15:00'
-    title: Introduktion Särskild Begåvning
-  - date: '2022-07-01'
-    description: null
     end: '16:30'
-    id: forelasning-2022-07-01-1500
-    link: null
     location: Skolsal
+    responsible: Leigh Jamison
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 13:23:19'
       updated_at: '2022-06-27 13:23:19'
-    owner:
-      email: ''
-      name: ''
-    responsible: Leigh Jamison
-    start: '15:00'
-    title: 'Föreläsning '
-  - date: '2022-06-29'
-    description: null
+  - id: discgolf-frisbeegolf-2022-06-29-1100
+    title: Discgolf frisbeegolf
+    date: '2022-06-29'
+    start: '11:00'
     end: '13:00'
-    id: discgolf-frisbeegolf-2022-06-29-1100
-    link: null
     location: Annat
+    responsible: Pia Olsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 14:22:29'
       updated_at: '2022-06-27 14:22:29'
-    owner:
-      email: ''
-      name: ''
-    responsible: Pia Olsson
-    start: '11:00'
-    title: Discgolf frisbeegolf
-  - date: '2022-06-28'
-    description: null
+  - id: prova-pa-programmering-i-python-2022-06-28-1300
+    title: Prova på-programmering i Python
+    date: '2022-06-28'
+    start: '13:00'
     end: '15:00'
-    id: prova-pa-programmering-i-python-2022-06-28-1300
-    link: null
     location: Datorsal
+    responsible: 'Christoffer Modée, Gustav Kalander'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 16:23:18'
       updated_at: '2022-06-27 16:23:18'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christoffer Modée, Gustav Kalander
-    start: '13:00'
-    title: Prova på-programmering i Python
-  - date: '2022-06-28'
-    description: null
+  - id: hogskolestudier-tips-och-trix-2022-06-28-1900
+    title: Högskolestudier - tips och trix
+    date: '2022-06-28'
+    start: '19:00'
     end: '20:30'
-    id: hogskolestudier-tips-och-trix-2022-06-28-1900
-    link: null
     location: Tält1
+    responsible: Jenny vB
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 19:38:42'
       updated_at: '2022-06-27 19:38:42'
-    owner:
-      email: ''
-      name: ''
-    responsible: Jenny vB
+  - id: dokumentarvisning-samma-tis-och-tors-2022-06-28-1900
+    title: Dokumentärvisning (samma tis och tors)
+    date: '2022-06-28'
     start: '19:00'
-    title: Högskolestudier - tips och trix
-  - date: '2022-06-28'
-    description: null
     end: '20:00'
-    id: dokumentarvisning-samma-tis-och-tors-2022-06-28-1900
-    link: null
     location: Skolsal
+    responsible: Cecilia Pakravan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 20:16:56'
       updated_at: '2022-06-27 20:16:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia Pakravan
-    start: '19:00'
+  - id: dokumentarvisning-samma-tis-och-tors-2022-06-30-1900
     title: Dokumentärvisning (samma tis och tors)
-  - date: '2022-06-30'
-    description: null
+    date: '2022-06-30'
+    start: '19:00'
     end: '20:00'
-    id: dokumentarvisning-samma-tis-och-tors-2022-06-30-1900
-    link: null
     location: Skolsal
+    responsible: Cecilia Pakravan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 20:17:53'
       updated_at: '2022-06-27 20:17:53'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia Pakravan
-    start: '19:00'
-    title: Dokumentärvisning (samma tis och tors)
-  - date: '2022-06-28'
-    description: null
+  - id: pitch-perfect-inspirerad-kor-2022-06-28-1000
+    title: Pitch perfect inspirerad kör
+    date: '2022-06-28'
+    start: '10:00'
     end: '11:00'
-    id: pitch-perfect-inspirerad-kor-2022-06-28-1000
-    link: null
     location: Skolsal
+    responsible: 'Leija /Charlotte Anderberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 20:57:41'
       updated_at: '2022-06-27 20:57:41'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Leija /Charlotte Anderberg '
-    start: '10:00'
+  - id: pitch-perfect-inspirerad-kor-2022-06-29-1000
     title: Pitch perfect inspirerad kör
-  - date: '2022-06-29'
-    description: null
+    date: '2022-06-29'
+    start: '10:00'
     end: '11:00'
-    id: pitch-perfect-inspirerad-kor-2022-06-29-1000
-    link: null
     location: Skolsal
+    responsible: 'Leija/ Lotta Anderberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 21:00:15'
       updated_at: '2022-06-27 21:00:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Leija/ Lotta Anderberg '
-    start: '10:00'
+  - id: pitch-perfect-inspirerad-kor-2022-06-30-1000
     title: Pitch perfect inspirerad kör
-  - date: '2022-06-30'
-    description: null
+    date: '2022-06-30'
+    start: '10:00'
     end: '11:00'
-    id: pitch-perfect-inspirerad-kor-2022-06-30-1000
-    link: null
     location: Skolsal
+    responsible: 'Leija, Lotta Anderberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 21:01:51'
       updated_at: '2022-06-27 21:01:51'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Leija, Lotta Anderberg '
-    start: '10:00'
+  - id: pitch-perfect-inspirerad-kor-2022-07-01-1000
     title: Pitch perfect inspirerad kör
-  - date: '2022-07-01'
-    description: null
+    date: '2022-07-01'
+    start: '10:00'
     end: '11:00'
-    id: pitch-perfect-inspirerad-kor-2022-07-01-1000
-    link: null
     location: Skolsal
+    responsible: 'Leija, Lotta Anderberg '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 21:05:00'
       updated_at: '2022-06-27 21:05:00'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Leija, Lotta Anderberg '
-    start: '10:00'
-    title: Pitch perfect inspirerad kör
-  - date: '2022-06-28'
-    description: null
+  - id: teckensprak-2022-06-28-1400
+    title: 'Teckenspråk '
+    date: '2022-06-28'
+    start: '14:00'
     end: '15:00'
-    id: teckensprak-2022-06-28-1400
-    link: null
     location: Tält1
+    responsible: 'Mohammed '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 21:07:10'
       updated_at: '2022-06-27 21:07:10'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Mohammed '
-    start: '14:00'
-    title: 'Teckenspråk '
-  - date: '2022-06-28'
-    description: null
+  - id: pokemontraff-2022-06-28-1000
+    title: Pokemonträff
+    date: '2022-06-28'
+    start: '10:00'
     end: '10:30'
-    id: pokemontraff-2022-06-28-1000
-    link: null
     location: Tält1
+    responsible: 'Malin Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 21:29:52'
       updated_at: '2022-06-27 21:29:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin Isenfors '
-    start: '10:00'
-    title: Pokemonträff
-  - date: '2022-07-03'
-    description: null
+  - id: glass-pa-chokladfabriken-2022-07-03-1200
+    title: Glass på chokladfabriken
+    date: '2022-07-03'
+    start: '12:00'
     end: '15:00'
-    id: glass-pa-chokladfabriken-2022-07-03-1200
-    link: null
     location: Annat
+    responsible: Eget ansvar
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 22:07:49'
       updated_at: '2022-06-27 22:07:49'
-    owner:
-      email: ''
-      name: ''
-    responsible: Eget ansvar
-    start: '12:00'
-    title: Glass på chokladfabriken
-  - date: '2022-06-28'
-    description: null
+  - id: prova-klattra-pa-klattervag-2022-06-28-1330
+    title: Prova klättra på klätterväg
+    date: '2022-06-28'
+    start: '13:30'
     end: '16:30'
-    id: prova-klattra-pa-klattervag-2022-06-28-1330
-    link: null
     location: Fritidsgård
+    responsible: Daniel och Björn
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-27 22:44:27'
       updated_at: '2022-06-27 22:44:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Daniel och Björn
+  - id: rollspel-stor-grupp-viktor-och-harald-2022-06-28-1330
+    title: 'Rollspel, stor grupp, Viktor och Harald'
+    date: '2022-06-28'
     start: '13:30'
-    title: Prova klättra på klätterväg
-  - date: '2022-06-28'
-    description: null
     end: '17:00'
-    id: rollspel-stor-grupp-viktor-och-harald-2022-06-28-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald
+  - id: rollspel-stor-grupp-viktor-och-harald-2022-06-29-1330
+    title: 'Rollspel, stor grupp, Viktor och Harald'
+    date: '2022-06-29'
     start: '13:30'
-    title: Rollspel, stor grupp, Viktor och Harald
-  - date: '2022-06-29'
-    description: null
     end: '17:00'
-    id: rollspel-stor-grupp-viktor-och-harald-2022-06-29-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald
+  - id: rollspel-stor-grupp-viktor-och-harald-2022-06-30-1330
+    title: 'Rollspel, stor grupp, Viktor och Harald'
+    date: '2022-06-30'
     start: '13:30'
-    title: Rollspel, stor grupp, Viktor och Harald
-  - date: '2022-06-30'
-    description: null
     end: '17:00'
-    id: rollspel-stor-grupp-viktor-och-harald-2022-06-30-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald
+  - id: rollspel-stor-grupp-viktor-och-harald-2022-07-01-1330
+    title: 'Rollspel, stor grupp, Viktor och Harald'
+    date: '2022-07-01'
     start: '13:30'
-    title: Rollspel, stor grupp, Viktor och Harald
-  - date: '2022-07-01'
-    description: null
     end: '17:00'
-    id: rollspel-stor-grupp-viktor-och-harald-2022-07-01-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald
+  - id: rollspel-stor-grupp-viktor-och-harald-2022-07-02-1330
+    title: 'Rollspel, stor grupp, Viktor och Harald'
+    date: '2022-07-02'
     start: '13:30'
-    title: Rollspel, stor grupp, Viktor och Harald
-  - date: '2022-07-02'
-    description: null
     end: '17:00'
-    id: rollspel-stor-grupp-viktor-och-harald-2022-07-02-1330
-    link: null
     location: Rollspelstält1
+    responsible: Viktor och Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor och Harald
-    start: '13:30'
-    title: Rollspel, stor grupp, Viktor och Harald
-  - date: '2022-06-30'
-    description: null
+  - id: rollspel-kvall-harald-2022-06-30-1830
+    title: 'Rollspel kväll, Harald'
+    date: '2022-06-30'
+    start: '18:30'
     end: '21:30'
-    id: rollspel-kvall-harald-2022-06-30-1830
-    link: null
     location: Rollspelstält2
+    responsible: Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:21:15'
       updated_at: '2022-06-28 00:21:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: Harald
+  - id: rollspel-kvall-harald-2022-07-01-1830
+    title: 'Rollspel kväll, Harald'
+    date: '2022-07-01'
     start: '18:30'
-    title: Rollspel kväll, Harald
-  - date: '2022-07-01'
-    description: null
     end: '21:30'
-    id: rollspel-kvall-harald-2022-07-01-1830
-    link: null
     location: Rollspelstält2
+    responsible: Harald
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:21:15'
       updated_at: '2022-06-28 00:21:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: Harald
-    start: '18:30'
-    title: Rollspel kväll, Harald
-  - date: '2022-06-28'
-    description: null
+  - id: rollspel-fm-viktor-2022-06-28-0900
+    title: 'Rollspel fm, Viktor'
+    date: '2022-06-28'
+    start: '09:00'
     end: '12:00'
-    id: rollspel-fm-viktor-2022-06-28-0900
-    link: null
     location: Rollspelstält1
+    responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:21:54'
       updated_at: '2022-06-28 00:21:54'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor
+  - id: rollspel-fm-viktor-2022-06-29-0900
+    title: 'Rollspel fm, Viktor'
+    date: '2022-06-29'
     start: '09:00'
-    title: Rollspel fm, Viktor
-  - date: '2022-06-29'
-    description: null
     end: '12:00'
-    id: rollspel-fm-viktor-2022-06-29-0900
-    link: null
     location: Rollspelstält1
+    responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:21:54'
       updated_at: '2022-06-28 00:21:54'
-    owner:
-      email: ''
-      name: ''
+  - id: rollspel-kvall-viktor-2022-06-30-1830
+    title: 'Rollspel kväll, Viktor'
+    date: '2022-06-30'
+    start: '18:30'
+    end: '21:00'
+    location: Rollspelstält1
     responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2022-06-28 00:22:27'
+      updated_at: '2022-06-28 00:22:27'
+  - id: rollspel-kvall-viktor-2022-07-01-1830
+    title: 'Rollspel kväll, Viktor'
+    date: '2022-07-01'
+    start: '18:30'
+    end: '21:00'
+    location: Rollspelstält1
+    responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: '2022-06-28 00:22:27'
+      updated_at: '2022-06-28 00:22:27'
+  - id: rollspel-fm-viktor-2022-07-01-0900
+    title: 'Rollspel fm, Viktor'
+    date: '2022-07-01'
     start: '09:00'
-    title: Rollspel fm, Viktor
-  - date: '2022-06-30'
-    description: null
-    end: '21:00'
-    id: rollspel-kvall-viktor-2022-06-30-1830
-    link: null
-    location: Rollspelstält1
-    meta:
-      created_at: '2022-06-28 00:22:27'
-      updated_at: '2022-06-28 00:22:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor
-    start: '18:30'
-    title: Rollspel kväll, Viktor
-  - date: '2022-07-01'
-    description: null
-    end: '21:00'
-    id: rollspel-kvall-viktor-2022-07-01-1830
-    link: null
-    location: Rollspelstält1
-    meta:
-      created_at: '2022-06-28 00:22:27'
-      updated_at: '2022-06-28 00:22:27'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor
-    start: '18:30'
-    title: Rollspel kväll, Viktor
-  - date: '2022-07-01'
-    description: null
     end: '12:00'
-    id: rollspel-fm-viktor-2022-07-01-0900
-    link: null
     location: Rollspelstält1
+    responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:22:56'
       updated_at: '2022-06-28 00:22:56'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor
+  - id: rollspel-fm-viktor-2022-07-02-0900
+    title: 'Rollspel fm, Viktor'
+    date: '2022-07-02'
     start: '09:00'
-    title: Rollspel fm, Viktor
-  - date: '2022-07-02'
-    description: null
     end: '12:00'
-    id: rollspel-fm-viktor-2022-07-02-0900
-    link: null
     location: Rollspelstält1
+    responsible: Viktor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 00:22:57'
       updated_at: '2022-06-28 00:22:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: Viktor
-    start: '09:00'
-    title: Rollspel fm, Viktor
-  - date: '2022-06-28'
-    description: null
+  - id: ritaktiviteter-2022-06-28-1600
+    title: Ritaktiviteter
+    date: '2022-06-28'
+    start: '16:00'
     end: '17:00'
-    id: ritaktiviteter-2022-06-28-1600
-    link: null
     location: GA-hall
+    responsible: 'Petra Hultman '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 02:10:50'
       updated_at: '2022-06-28 02:10:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Petra Hultman '
-    start: '16:00'
-    title: Ritaktiviteter
-  - date: '2022-06-28'
-    description: null
+  - id: schack-2022-06-28-1900
+    title: Schack
+    date: '2022-06-28'
+    start: '19:00'
     end: '20:30'
-    id: schack-2022-06-28-1900
-    link: null
     location: GA-hall
+    responsible: Christina Falk
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 07:30:12'
       updated_at: '2022-06-28 07:30:12'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christina Falk
-    start: '19:00'
-    title: Schack
-  - date: '2022-07-02'
-    description: null
+  - id: foraldrafika-framgangsfaktorer-for-en-lyckad-skolgang-och-sarskild-provning-2022-07-02-1000
+    title: Föräldrafika – framgångsfaktorer för en lyckad skolgång och särskild prövning
+    date: '2022-07-02'
+    start: '10:00'
     end: '11:00'
-    id: foraldrafika-framgangsfaktorer-for-en-lyckad-skolgang-och-sarskild-provning-2022-07-02-1000
-    link: null
     location: Annat
+    responsible: Cecilia P och Cecilia L
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 09:06:03'
       updated_at: '2022-06-28 09:06:03'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia P och Cecilia L
+  - id: foraldrafika-hemmasittare-livspusslet-och-vagen-tillbaka-kaffetaltet-bredvid-stuga-6-2022-07-01-1000
+    title: 'Föräldrafika – Hemmasittare, livspusslet och vägen tillbaka (Kaffetältet, bredvid stuga 6)'
+    date: '2022-07-01'
     start: '10:00'
-    title: Föräldrafika – framgångsfaktorer för en lyckad skolgång och särskild prövning
-  - date: '2022-07-01'
-    description: null
     end: '11:00'
-    id: foraldrafika-hemmasittare-livspusslet-och-vagen-tillbaka-kaffetaltet-bredvid-stuga-6-2022-07-01-1000
-    link: null
     location: Annat
+    responsible: Cecilia och Cecilia
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 09:08:36'
       updated_at: '2022-06-28 09:08:36'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia och Cecilia
+  - id: rfsb-fler-lokala-aktiviteter-2022-06-30-1000
+    title: RFSB – fler lokala aktiviteter
+    date: '2022-06-30'
     start: '10:00'
-    title: Föräldrafika – Hemmasittare, livspusslet och vägen tillbaka (Kaffetältet, bredvid stuga 6)
-  - date: '2022-06-30'
-    description: null
     end: '11:00'
-    id: rfsb-fler-lokala-aktiviteter-2022-06-30-1000
-    link: null
     location: Tält1
+    responsible: Cecilia och Cecilia
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 09:11:20'
       updated_at: '2022-06-28 09:11:20'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia och Cecilia
+  - id: foraldrafika-sarbegavning-och-vanner-kaffetaltet-bredvid-stuga-6-2022-06-29-1000
+    title: Föräldrafika – särbegåvning och vänner (Kaffetältet - bredvid stuga 6)
+    date: '2022-06-29'
     start: '10:00'
-    title: RFSB – fler lokala aktiviteter
-  - date: '2022-06-29'
-    description: null
     end: '11:00'
-    id: foraldrafika-sarbegavning-och-vanner-kaffetaltet-bredvid-stuga-6-2022-06-29-1000
-    link: null
     location: Annat
+    responsible: Cecilia och Cecilia mfl
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 09:13:04'
       updated_at: '2022-06-28 09:13:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: Cecilia och Cecilia mfl
-    start: '10:00'
-    title: Föräldrafika – särbegåvning och vänner (Kaffetältet - bredvid stuga 6)
-  - date: '2022-06-28'
-    description: null
+  - id: tecknarstudio-13-ar-och-uppat-2022-06-28-2000
+    title: Tecknarstudio (13 år och uppåt)
+    date: '2022-06-28'
+    start: '20:00'
     end: '21:30'
-    id: tecknarstudio-13-ar-och-uppat-2022-06-28-2000
-    link: null
     location: Fritidsgård
+    responsible: Tilde ( Karin )
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 11:04:06'
       updated_at: '2022-06-28 11:04:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tilde ( Karin )
-    start: '20:00'
-    title: Tecknarstudio (13 år och uppåt)
-  - date: '2022-06-30'
-    description: null
+  - id: skolan-och-sb-ur-en-kurators-perspektiv-2022-06-30-1100
+    title: 'Skolan och SB - ur en kurators perspektiv '
+    date: '2022-06-30'
+    start: '11:00'
     end: '12:00'
-    id: skolan-och-sb-ur-en-kurators-perspektiv-2022-06-30-1100
-    link: null
     location: Tält1
+    responsible: 'Linda Backman '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 12:06:15'
       updated_at: '2022-06-28 12:06:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Linda Backman '
-    start: '11:00'
-    title: 'Skolan och SB - ur en kurators perspektiv '
-  - date: '2022-06-28'
-    description: null
+  - id: music-jam-2022-06-28-1800
+    title: Music Jam
+    date: '2022-06-28'
+    start: '18:00'
     end: '19:00'
-    id: music-jam-2022-06-28-1800
-    link: null
     location: Annat
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 12:29:33'
       updated_at: '2022-06-28 12:29:33'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '18:00'
+  - id: music-jam-2022-06-29-1600
     title: Music Jam
-  - date: '2022-06-29'
-    description: null
+    date: '2022-06-29'
+    start: '16:00'
     end: '17:00'
-    id: music-jam-2022-06-29-1600
-    link: null
     location: Annat
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 12:44:06'
       updated_at: '2022-06-28 12:44:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
+  - id: music-jam-2022-06-30-1600
     title: Music Jam
-  - date: '2022-06-30'
-    description: null
+    date: '2022-06-30'
+    start: '16:00'
     end: '17:00'
-    id: music-jam-2022-06-30-1600
-    link: null
     location: Annat
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 12:44:06'
       updated_at: '2022-06-28 12:44:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
+  - id: music-jam-2022-07-01-1600
     title: Music Jam
-  - date: '2022-07-01'
-    description: null
+    date: '2022-07-01'
+    start: '16:00'
     end: '17:00'
-    id: music-jam-2022-07-01-1600
-    link: null
     location: Annat
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 12:44:06'
       updated_at: '2022-06-28 12:44:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
+  - id: music-jam-2022-07-02-1600
     title: Music Jam
-  - date: '2022-07-02'
-    description: null
+    date: '2022-07-02'
+    start: '16:00'
     end: '17:00'
-    id: music-jam-2022-07-02-1600
-    link: null
     location: Annat
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 12:44:06'
       updated_at: '2022-06-28 12:44:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '16:00'
-    title: Music Jam
-  - date: '2022-06-29'
-    description: null
+  - id: traningspass-familjefys-2022-06-29-1115
+    title: Träningspass/familjefys
+    date: '2022-06-29'
+    start: '11:15'
     end: '12:00'
-    id: traningspass-familjefys-2022-06-29-1115
-    link: null
     location: Fotbollsplan
+    responsible: Sara v K
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 13:59:19'
       updated_at: '2022-06-28 13:59:19'
-    owner:
-      email: ''
-      name: ''
-    responsible: Sara v K
-    start: '11:15'
-    title: Träningspass/familjefys
-  - date: '2022-06-29'
-    description: null
+  - id: yoga-i-rorelse-2022-06-29-0900
+    title: 'Yoga i rörelse '
+    date: '2022-06-29'
+    start: '09:00'
     end: '09:50'
-    id: yoga-i-rorelse-2022-06-29-0900
-    link: null
     location: Grillplatsen
+    responsible: Ulrica Liavor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 14:25:46'
       updated_at: '2022-06-28 14:25:46'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ulrica Liavor
-    start: '09:00'
-    title: 'Yoga i rörelse '
-  - date: '2022-06-28'
-    description: null
+  - id: hemundervisning-pa-aland-2022-06-28-1600
+    title: Hemundervisning på Åland
+    date: '2022-06-28'
+    start: '16:00'
     end: '17:00'
-    id: hemundervisning-pa-aland-2022-06-28-1600
-    link: null
     location: Tält1
+    responsible: Maria Alfredsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 14:31:06'
       updated_at: '2022-06-28 14:31:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Maria Alfredsson
-    start: '16:00'
-    title: Hemundervisning på Åland
-  - date: '2022-06-28'
-    description: null
+  - id: sista-for-idag-2022-06-28-2355
+    title: Sista för idag
+    date: '2022-06-28'
+    start: '23:55'
     end: '23:55'
-    id: sista-for-idag-2022-06-28-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 15:30:26'
       updated_at: '2022-06-28 15:30:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2022-06-29-2355
     title: Sista för idag
-  - date: '2022-06-29'
-    description: null
+    date: '2022-06-29'
+    start: '23:55'
     end: '23:55'
-    id: sista-for-idag-2022-06-29-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 15:30:26'
       updated_at: '2022-06-28 15:30:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2022-06-30-2355
     title: Sista för idag
-  - date: '2022-06-30'
-    description: null
+    date: '2022-06-30'
+    start: '23:55'
     end: '23:55'
-    id: sista-for-idag-2022-06-30-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 15:30:26'
       updated_at: '2022-06-28 15:30:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2022-07-01-2355
     title: Sista för idag
-  - date: '2022-07-01'
-    description: null
+    date: '2022-07-01'
+    start: '23:55'
     end: '23:55'
-    id: sista-for-idag-2022-07-01-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 15:30:26'
       updated_at: '2022-06-28 15:30:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
+  - id: sista-for-idag-2022-07-02-2355
     title: Sista för idag
-  - date: '2022-07-02'
-    description: null
+    date: '2022-07-02'
+    start: '23:55'
     end: '23:55'
-    id: sista-for-idag-2022-07-02-2355
-    link: null
     location: Annat
+    responsible: Myggorna
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 15:30:26'
       updated_at: '2022-06-28 15:30:26'
-    owner:
-      email: ''
-      name: ''
-    responsible: Myggorna
-    start: '23:55'
-    title: Sista för idag
-  - date: '2022-06-28'
-    description: null
+  - id: fotboll-sverige-brasilien-2022-06-28-1830
+    title: 'Fotboll Sverige-Brasilien '
+    date: '2022-06-28'
+    start: '18:30'
     end: '20:30'
-    id: fotboll-sverige-brasilien-2022-06-28-1830
-    link: null
     location: Skolsal
+    responsible: Amanda Gruneau
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 18:06:12'
       updated_at: '2022-06-28 18:06:12'
-    owner:
-      email: ''
-      name: ''
-    responsible: Amanda Gruneau
-    start: '18:30'
-    title: 'Fotboll Sverige-Brasilien '
-  - date: '2022-06-28'
-    description: null
+  - id: filmkvall-familjen-mitchell-mot-maskinerna-2022-06-28-2000
+    title: 'Filmkväll, familjen Mitchell mot maskinerna'
+    date: '2022-06-28'
+    start: '20:00'
     end: '22:00'
-    id: filmkvall-familjen-mitchell-mot-maskinerna-2022-06-28-2000
-    link: null
     location: GA-hall
+    responsible: 'Andreas? :)'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 18:44:20'
       updated_at: '2022-06-28 18:44:20'
-    owner:
-      email: ''
-      name: ''
-    responsible: Andreas? :)
-    start: '20:00'
-    title: Filmkväll, familjen Mitchell mot maskinerna
-  - date: '2022-07-01'
-    description: null
+  - id: qudditch-match-2022-07-01-1100
+    title: 'Qudditch match '
+    date: '2022-07-01'
+    start: '11:00'
     end: '12:00'
-    id: qudditch-match-2022-07-01-1100
-    link: null
     location: Nerf-arena
+    responsible: 'Rönnkvist '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 18:56:25'
       updated_at: '2022-06-28 18:56:25'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Rönnkvist '
+  - id: lar-dig-spela-flojt-2022-06-29-1100
+    title: 'Lär dig spela flöjt '
+    date: '2022-06-29'
     start: '11:00'
-    title: 'Qudditch match '
-  - date: '2022-06-29'
-    description: null
     end: '12:00'
-    id: lar-dig-spela-flojt-2022-06-29-1100
-    link: null
     location: Tält1
+    responsible: 'Alexandra och Rebecca Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 20:32:35'
       updated_at: '2022-06-28 20:32:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Alexandra och Rebecca Isenfors '
-    start: '11:00'
-    title: 'Lär dig spela flöjt '
-  - date: '2022-07-01'
-    description: null
+  - id: hopp-och-lek-for-de-yngre-2022-07-01-1300
+    title: 'Hopp och lek för de yngre '
+    date: '2022-07-01'
+    start: '13:00'
     end: '14:00'
-    id: hopp-och-lek-for-de-yngre-2022-07-01-1300
-    link: null
     location: GA-hall
+    responsible: Lova Gruneau och Amanda Johansson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 21:53:32'
       updated_at: '2022-06-28 21:53:32'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lova Gruneau och Amanda Johansson
-    start: '13:00'
-    title: 'Hopp och lek för de yngre '
-  - date: '2022-06-30'
-    description: null
+  - id: tillsammans-odling-av-gronsaker-2022-06-30-0900
+    title: 'Tillsammans-odling av grönsaker '
+    date: '2022-06-30'
+    start: '09:00'
     end: '09:50'
-    id: tillsammans-odling-av-gronsaker-2022-06-30-0900
-    link: null
     location: Kaffetältet
+    responsible: Lotta Jonsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 22:02:55'
       updated_at: '2022-06-28 22:02:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: Lotta Jonsson
-    start: '09:00'
-    title: 'Tillsammans-odling av grönsaker '
-  - date: '2022-06-29'
-    description: null
+  - id: grillfest-gemensam-grillfest-vid-klaralven-2022-06-29-1800
+    title: 'GRILLFEST - Gemensam grillfest vid Klarälven. '
+    date: '2022-06-29'
+    start: '18:00'
     end: '03:00'
-    id: grillfest-gemensam-grillfest-vid-klaralven-2022-06-29-1800
-    link: null
     location: Grillplatsen
+    responsible: 'Malin Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-28 22:45:18'
       updated_at: '2022-06-28 22:45:18'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin Isenfors '
-    start: '18:00'
-    title: 'GRILLFEST - Gemensam grillfest vid Klarälven. '
-  - date: '2022-07-01'
-    description: null
+  - id: sjalvforsvarsintro-for-alla-2022-07-01-1000
+    title: Självförsvarsintro för alla
+    date: '2022-07-01'
+    start: '10:00'
     end: '11:00'
-    id: sjalvforsvarsintro-for-alla-2022-07-01-1000
-    link: null
     location: Annat
+    responsible: Samuel Modée
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 08:04:44'
       updated_at: '2022-06-29 08:04:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: Samuel Modée
-    start: '10:00'
-    title: Självförsvarsintro för alla
-  - date: '2022-07-01'
-    description: null
+  - id: grundlaggande-bollkontroll-2022-07-01-1130
+    title: Grundläggande bollkontroll
+    date: '2022-07-01'
+    start: '11:30'
     end: '12:00'
-    id: grundlaggande-bollkontroll-2022-07-01-1130
-    link: null
     location: GA-hall
+    responsible: Björn Maude
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 08:59:35'
       updated_at: '2022-06-29 08:59:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: Björn Maude
-    start: '11:30'
+  - id: grundlaggande-bollkontroll-2022-07-02-1130
     title: Grundläggande bollkontroll
-  - date: '2022-07-02'
-    description: null
+    date: '2022-07-02'
+    start: '11:30'
     end: '12:00'
-    id: grundlaggande-bollkontroll-2022-07-02-1130
-    link: null
     location: GA-hall
+    responsible: Björn Maude
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 09:02:25'
       updated_at: '2022-06-29 09:02:25'
-    owner:
-      email: ''
-      name: ''
-    responsible: Björn Maude
-    start: '11:30'
-    title: Grundläggande bollkontroll
-  - date: '2022-07-01'
-    description: null
+  - id: diskussion-om-dyslexi-hos-sarskilt-begavade-barn-2022-07-01-1330
+    title: 'Diskussion om dyslexi hos särskilt begåvade barn '
+    date: '2022-07-01'
+    start: '13:30'
     end: '14:30'
-    id: diskussion-om-dyslexi-hos-sarskilt-begavade-barn-2022-07-01-1330
-    link: null
     location: Kaffetältet
+    responsible: Anna B
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 10:37:40'
       updated_at: '2022-06-29 10:37:40'
-    owner:
-      email: ''
-      name: ''
-    responsible: Anna B
-    start: '13:30'
-    title: 'Diskussion om dyslexi hos särskilt begåvade barn '
-  - date: '2022-06-30'
-    description: null
+  - id: teckensprak-2022-06-30-1800
+    title: 'Teckenspråk '
+    date: '2022-06-30'
+    start: '18:00'
     end: '19:00'
-    id: teckensprak-2022-06-30-1800
-    link: null
     location: Tält1
+    responsible: 'Mohammed '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 11:52:24'
       updated_at: '2022-06-29 11:52:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Mohammed '
-    start: '18:00'
-    title: 'Teckenspråk '
-  - date: '2022-06-29'
-    description: null
+  - id: volleyboll-for-stora-och-sma-2022-06-29-1600
+    title: Volleyboll för stora och små
+    date: '2022-06-29'
+    start: '16:00'
     end: '17:00'
-    id: volleyboll-for-stora-och-sma-2022-06-29-1600
-    link: null
     location: Nerf-arena
+    responsible: Annie
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 12:41:54'
       updated_at: '2022-06-29 12:41:54'
-    owner:
-      email: ''
-      name: ''
-    responsible: Annie
-    start: '16:00'
-    title: Volleyboll för stora och små
-  - date: '2022-06-30'
-    description: null
+  - id: traningspass-familjefys-2022-06-30-1115
+    title: Träningspass/familjefys
+    date: '2022-06-30'
+    start: '11:15'
     end: '12:00'
-    id: traningspass-familjefys-2022-06-30-1115
-    link: null
     location: Annat
+    responsible: Sara v K
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 14:46:34'
       updated_at: '2022-06-29 14:46:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: Sara v K
-    start: '11:15'
-    title: Träningspass/familjefys
-  - date: '2022-07-01'
-    description: null
+  - id: ai-workshop-2022-07-01-1300
+    title: AI-workshop
+    date: '2022-07-01'
+    start: '13:00'
     end: '16:00'
-    id: ai-workshop-2022-07-01-1300
-    link: null
     location: Skolsal
+    responsible: 'Samuel Modée, Christoffer Modée, Gustav Kalander'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 15:09:59'
       updated_at: '2022-06-29 15:09:59'
-    owner:
-      email: ''
-      name: ''
-    responsible: Samuel Modée, Christoffer Modée, Gustav Kalander
-    start: '13:00'
-    title: AI-workshop
-  - date: '2022-06-30'
-    description: null
+  - id: virk-workshop-flyttad-2022-06-30-1830
+    title: Virk-workshop (Flyttad)
+    date: '2022-06-30'
+    start: '18:30'
     end: '20:30'
-    id: virk-workshop-flyttad-2022-06-30-1830
-    link: null
     location: Tält2
+    responsible: Ines och Katharina Bjerke
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 15:24:11'
       updated_at: '2022-06-29 15:24:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ines och Katharina Bjerke
-    start: '18:30'
-    title: Virk-workshop (Flyttad)
-  - date: '2022-06-30'
-    description: null
+  - id: andning-hur-den-hanger-ihop-med-spanda-axlar-tex-2022-06-30-1500
+    title: 'Andning - hur den hänger ihop med spända axlar tex '
+    date: '2022-06-30'
+    start: '15:00'
     end: '16:00'
-    id: andning-hur-den-hanger-ihop-med-spanda-axlar-tex-2022-06-30-1500
-    link: null
     location: Grillplatsen
+    responsible: Ulrica Liavor
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 21:02:31'
       updated_at: '2022-06-29 21:02:31'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ulrica Liavor
-    start: '15:00'
-    title: 'Andning - hur den hänger ihop med spända axlar tex '
-  - date: '2022-06-30'
-    description: null
+  - id: fotbollstraning-2022-06-30-1830
+    title: 'Fotbollsträning '
+    date: '2022-06-30'
+    start: '18:30'
     end: '19:30'
-    id: fotbollstraning-2022-06-30-1830
-    link: null
     location: Fotbollsplan
+    responsible: 'Dillner '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 22:52:41'
       updated_at: '2022-06-29 22:52:41'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Dillner '
-    start: '18:30'
-    title: 'Fotbollsträning '
-  - date: '2022-06-30'
-    description: null
+  - id: tecknarstudio-tonaringar-anmalan-behovs-goras-2022-06-30-1400
+    title: Tecknarstudio Tonåringar. Anmälan behövs göras.
+    date: '2022-06-30'
+    start: '14:00'
     end: '17:00'
-    id: tecknarstudio-tonaringar-anmalan-behovs-goras-2022-06-30-1400
-    link: null
     location: Annat
+    responsible: 'Tilde '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-29 23:45:35'
       updated_at: '2022-06-29 23:45:35'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Tilde '
-    start: '14:00'
-    title: Tecknarstudio Tonåringar. Anmälan behövs göras.
-  - date: '2022-06-30'
-    description: null
+  - id: minecraft-mods-demos-och-annat-2022-06-30-1300
+    title: 'Minecraft - mods, demos och annat'
+    date: '2022-06-30'
+    start: '13:00'
     end: '14:00'
-    id: minecraft-mods-demos-och-annat-2022-06-30-1300
-    link: null
     location: Datorsal
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 10:04:25'
       updated_at: '2022-06-30 10:04:25'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '13:00'
-    title: Minecraft - mods, demos och annat
-  - date: '2022-07-01'
-    description: null
+  - id: traningspass-familjefys-2022-07-01-1115
+    title: Träningspass/familjefys
+    date: '2022-07-01'
+    start: '11:15'
     end: '12:00'
-    id: traningspass-familjefys-2022-07-01-1115
-    link: null
     location: Annat
+    responsible: Sara v K
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 13:10:33'
       updated_at: '2022-06-30 13:10:33'
-    owner:
-      email: ''
-      name: ''
-    responsible: Sara v K
-    start: '11:15'
-    title: Träningspass/familjefys
-  - date: '2022-07-01'
-    description: null
+  - id: funktionell-programmering-i-clojure-2022-07-01-1800
+    title: Funktionell programmering i Clojure
+    date: '2022-07-01'
+    start: '18:00'
     end: '20:00'
-    id: funktionell-programmering-i-clojure-2022-07-01-1800
-    link: null
     location: Skolsal
+    responsible: Niclas Nilsson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 16:02:23'
       updated_at: '2022-06-30 16:02:23'
-    owner:
-      email: ''
-      name: ''
-    responsible: Niclas Nilsson
-    start: '18:00'
-    title: Funktionell programmering i Clojure
-  - date: '2022-07-01'
-    description: null
+  - id: discodans-2022-07-01-1415
+    title: Discodans
+    date: '2022-07-01'
+    start: '14:15'
     end: '15:00'
-    id: discodans-2022-07-01-1415
-    link: null
     location: Annat
+    responsible: 'Ida (elin) Sommerfeld '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 16:14:25'
       updated_at: '2022-06-30 16:14:25'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Ida (elin) Sommerfeld '
-    start: '14:15'
-    title: Discodans
-  - date: '2022-06-30'
-    description: null
+  - id: komplicerad-varulv-2022-06-30-1900
+    title: Komplicerad varulv
+    date: '2022-06-30'
+    start: '19:00'
     end: '21:00'
-    id: komplicerad-varulv-2022-06-30-1900
-    link: null
     location: Tält1
+    responsible: Tekla och Nemi Nilede
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 17:04:57'
       updated_at: '2022-06-30 17:04:57'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tekla och Nemi Nilede
-    start: '19:00'
+  - id: komplicerad-varulv-2022-07-01-1900
     title: Komplicerad varulv
-  - date: '2022-07-01'
-    description: null
+    date: '2022-07-01'
+    start: '19:00'
     end: '21:00'
-    id: komplicerad-varulv-2022-07-01-1900
-    link: null
     location: Tält1
+    responsible: Tekla och Nemi
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 17:10:11'
       updated_at: '2022-06-30 17:10:11'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tekla och Nemi
-    start: '19:00'
-    title: Komplicerad varulv
-  - date: '2022-07-01'
-    description: null
+  - id: dirigering-2022-07-01-1100
+    title: Dirigering
+    date: '2022-07-01'
+    start: '11:00'
     end: '11:00'
-    id: dirigering-2022-07-01-1100
-    link: null
     location: Skolsal
+    responsible: 'Charlotta Savander '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 18:38:04'
       updated_at: '2022-06-30 18:38:04'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Charlotta Savander '
-    start: '11:00'
-    title: Dirigering
-  - date: '2022-07-01'
-    description: null
+  - id: nagelfix-2022-07-01-1830
+    title: Nagelfix
+    date: '2022-07-01'
+    start: '18:30'
     end: '19:30'
-    id: nagelfix-2022-07-01-1830
-    link: null
     location: Servicehus
+    responsible: 'Malin Isenfors '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 18:50:55'
       updated_at: '2022-06-30 18:50:55'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Malin Isenfors '
-    start: '18:30'
-    title: Nagelfix
-  - date: '2022-07-01'
-    description: null
+  - id: traff-for-stockholm-malardalen-2022-07-01-1645
+    title: Träff för Stockholm/Mälardalen
+    date: '2022-07-01'
+    start: '16:45'
     end: '17:30'
-    id: traff-for-stockholm-malardalen-2022-07-01-1645
-    link: null
     location: Tält1
+    responsible: 'RFSB Stockholm (Cecilia, Sara och Jesscia)'
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 22:03:47'
       updated_at: '2022-06-30 22:03:47'
-    owner:
-      email: ''
-      name: ''
-    responsible: RFSB Stockholm (Cecilia, Sara och Jesscia)
-    start: '16:45'
-    title: Träff för Stockholm/Mälardalen
-  - date: '2022-07-01'
-    description: null
+  - id: ansiktsmalning-2022-07-01-1630
+    title: Ansiktsmålning
+    date: '2022-07-01'
+    start: '16:30'
     end: '18:00'
-    id: ansiktsmalning-2022-07-01-1630
-    link: null
     location: Tält2
+    responsible: Christina Falk
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-06-30 23:03:24'
       updated_at: '2022-06-30 23:03:24'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christina Falk
-    start: '16:30'
-    title: Ansiktsmålning
-  - date: '2022-07-01'
-    description: null
+  - id: friday-game-night-bradspelsafton-2022-07-01-2000
+    title: FRIDAY = GAME NIGHT (Brädspelsafton)
+    date: '2022-07-01'
+    start: '20:00'
     end: '23:45'
-    id: friday-game-night-bradspelsafton-2022-07-01-2000
-    link: null
     location: GA-hall
+    responsible: 'Gabriel Olsson '
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-01 14:53:50'
       updated_at: '2022-07-01 14:53:50'
-    owner:
-      email: ''
-      name: ''
-    responsible: 'Gabriel Olsson '
-    start: '20:00'
-    title: FRIDAY = GAME NIGHT (Brädspelsafton)
-  - date: '2022-07-02'
-    description: null
+  - id: att-leva-med-sarbegavning-for-foraldrar-och-unga-vuxna-2022-07-02-1100
+    title: Att leva med särbegåvning. (För föräldrar och unga vuxna).
+    date: '2022-07-02'
+    start: '11:00'
     end: '12:00'
-    id: att-leva-med-sarbegavning-for-foraldrar-och-unga-vuxna-2022-07-02-1100
-    link: null
     location: Tält1
+    responsible: Tobias Ander
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-01 18:45:19'
       updated_at: '2022-07-01 18:45:19'
-    owner:
-      email: ''
-      name: ''
-    responsible: Tobias Ander
-    start: '11:00'
-    title: Att leva med särbegåvning. (För föräldrar och unga vuxna).
-  - date: '2022-07-02'
-    description: null
+  - id: undervisningside-pullout-en-dag-i-veckan-2022-07-02-1400
+    title: Undervisningside Pullout en dag i veckan
+    date: '2022-07-02'
+    start: '14:00'
     end: '15:00'
-    id: undervisningside-pullout-en-dag-i-veckan-2022-07-02-1400
-    link: null
     location: Tält1
+    responsible: Martin Jacobson
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-01 18:59:44'
       updated_at: '2022-07-01 18:59:44'
-    owner:
-      email: ''
-      name: ''
-    responsible: Martin Jacobson
-    start: '14:00'
-    title: Undervisningside Pullout en dag i veckan
-  - date: '2022-07-02'
-    description: null
+  - id: vattenkrig-2022-07-02-1300
+    title: 'Vattenkrig!'
+    date: '2022-07-02'
+    start: '13:00'
     end: '14:00'
-    id: vattenkrig-2022-07-02-1300
-    link: null
     location: Annat
+    responsible: Maria Gröndahl
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-01 22:40:15'
       updated_at: '2022-07-01 22:40:15'
-    owner:
-      email: ''
-      name: ''
-    responsible: Maria Gröndahl
-    start: '13:00'
-    title: Vattenkrig!
-  - date: '2022-07-02'
-    description: null
+  - id: japanska-for-nyborjare-2022-07-02-1400
+    title: Japanska för nybörjare
+    date: '2022-07-02'
+    start: '14:00'
     end: '15:00'
-    id: japanska-for-nyborjare-2022-07-02-1400
-    link: null
     location: Tält1
+    responsible: Charlotte Tyldhed
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-01 22:55:52'
       updated_at: '2022-07-01 22:55:52'
-    owner:
-      email: ''
-      name: ''
-    responsible: Charlotte Tyldhed
-    start: '14:00'
-    title: Japanska för nybörjare
-  - date: '2022-07-02'
-    description: null
+  - id: vi-testar-hinderbanan-2022-07-02-1115
+    title: 'Vi testar hinderbanan '
+    date: '2022-07-02'
+    start: '11:15'
     end: '12:00'
-    id: vi-testar-hinderbanan-2022-07-02-1115
-    link: null
     location: Annat
+    responsible: Amanda G
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-02 10:12:34'
       updated_at: '2022-07-02 10:12:34'
-    owner:
-      email: ''
-      name: ''
-    responsible: Amanda G
-    start: '11:15'
-    title: 'Vi testar hinderbanan '
-  - date: '2022-07-02'
-    description: null
+  - id: rond-2-vattenkrig-2022-07-02-1515
+    title: Rond 2 Vattenkrig
+    date: '2022-07-02'
+    start: '15:15'
     end: '16:00'
-    id: rond-2-vattenkrig-2022-07-02-1515
-    link: null
     location: Rollspelstält1
+    responsible: Christina Ebeling
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-02 12:04:08'
       updated_at: '2022-07-02 12:04:08'
-    owner:
-      email: ''
-      name: ''
-    responsible: Christina Ebeling
-    start: '15:15'
-    title: Rond 2 Vattenkrig
-  - date: '2022-07-02'
-    description: null
+  - id: filosofidiskussion-2022-07-02-2015
+    title: Filosofidiskussion
+    date: '2022-07-02'
+    start: '20:15'
     end: '22:15'
-    id: filosofidiskussion-2022-07-02-2015
-    link: null
     location: Grillplatsen
+    responsible: Ivar Ängquist
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
     meta:
       created_at: '2022-07-02 16:09:06'
       updated_at: '2022-07-02 16:09:06'
-    owner:
-      email: ''
-      name: ''
-    responsible: Ivar Ängquist
-    start: '20:15'
-    title: Filosofidiskussion
