@@ -2261,3 +2261,71 @@ identical check. The CI scan will be removed in a future pipeline optimisation.
   in both `source/api/validate.js` and `api/src/Validate.php`. <!-- 02-§49.5 -->
 - Both implementations must produce equivalent error messages for the same
   invalid input. <!-- 02-§49.6 -->
+
+---
+
+## 50. Docker-Based Event Data CI Pipeline
+
+Event data validation (injection patterns, link protocol, length limits) runs in the
+API layer at submission time. Data that reaches git is already validated. The CI
+pipeline for event-data PRs provides a branch-protection gate, and a post-merge
+workflow builds and deploys via a pre-built Docker image.
+
+### 50.1 Docker build image (site requirements)
+
+- A Docker image containing Node.js 20 and the project's production dependencies
+  (`js-yaml`, `marked`, `qrcode`) must be available for CI workflows. <!-- 02-§50.1 -->
+- The image must be based on `node:20` (full image, not slim). <!-- 02-§50.2 -->
+- The Dockerfile must live in `.github/docker/Dockerfile`. <!-- 02-§50.3 -->
+- The image must be published to GitHub Container Registry
+  (`ghcr.io/<owner>/<repo>`). <!-- 02-§50.4 -->
+
+### 50.2 Docker image build workflow (site requirements)
+
+- A workflow (`.github/workflows/docker-build.yml`) must build and push the Docker
+  image when `package.json` or `.github/docker/Dockerfile` changes on push to
+  `main`. <!-- 02-§50.5 -->
+- The workflow must tag images with both `latest` and the git SHA. <!-- 02-§50.6 -->
+- The workflow must have `packages: write` and `contents: read` permissions. <!-- 02-§50.7 -->
+
+### 50.3 Event data PR check (site requirements)
+
+- `event-data-deploy.yml` must contain a single job that logs "Validated at API
+  layer" and passes. <!-- 02-§50.8 -->
+- The workflow must trigger on PRs to `main` with path `source/data/**.yaml` and
+  only for branches matching `event/` and `event-edit/` prefixes. <!-- 02-§50.9 -->
+
+### 50.4 Post-merge event data deploy (site requirements)
+
+- A workflow (`.github/workflows/event-data-deploy-post-merge.yml`) must trigger
+  on push to `main` with path filter `source/data/**.yaml`. <!-- 02-§50.11 -->
+- The workflow must use the pre-built Docker image from GHCR instead of
+  `setup-node` + `npm ci`. <!-- 02-§50.12 -->
+- The workflow must detect which per-camp YAML file changed by comparing
+  `HEAD~1..HEAD`. <!-- 02-§50.13 -->
+- The workflow must determine whether the changed file belongs to a QA camp
+  and set an `is_qa` output. <!-- 02-§50.14 -->
+- The workflow must build the site using `node source/build/build.js`. <!-- 02-§50.15 -->
+- The workflow must stage only event-data-derived files for upload: `schema.html`,
+  `idag.html`, `dagens-schema.html`, `events.json`, `schema.rss`, `schema.ics`,
+  `kalender.html`, and per-event pages under `schema/`. <!-- 02-§50.16 -->
+- The workflow must deploy to QA and QA Node via SCP in parallel jobs. <!-- 02-§50.17 -->
+- The workflow must deploy to Production via SCP, skipped when the changed
+  file belongs to a QA camp. <!-- 02-§50.18 -->
+
+### 50.5 Production event data deploy method (site requirements)
+
+- Production event data deploy must use SCP over SSH. <!-- 02-§50.19 -->
+- The deploy must use the existing SSH secrets: `SERVER_HOST`, `SERVER_USER`,
+  `SERVER_SSH_KEY`, `SERVER_SSH_PORT`, `DEPLOY_DIR`. <!-- 02-§50.20 -->
+- After validation, the FTP secrets (`FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
+  `FTP_APP_DIR`, `FTP_TARGET_DIR`) should be removed from the production GitHub
+  Environment. This is a manual step. <!-- 02-§50.22 -->
+
+### 50.6 CI workflow for data-only changes (site requirements)
+
+- For data-only event changes (`has_code == false`), `ci.yml` must skip
+  `npm ci` and `npm run build`, letting the job pass after the detect
+  step. <!-- 02-§50.23 -->
+- Building event-data changes is the responsibility of the post-merge
+  deploy workflow (§50.4). <!-- 02-§50.24 -->
