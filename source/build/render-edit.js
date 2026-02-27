@@ -48,6 +48,17 @@ ${pageNav('redigera.html', navSections)}
     <p>Laddar aktivitet…</p>
   </div>
 
+  <div id="edit-no-session" hidden>
+    <h1>Redigera aktivitet</h1>
+    <p class="intro">Den här sidan är till för att redigera aktiviteter du har lagt till. För att det ska fungera behöver du tillåta cookie när du <a href="lagg-till.html">lägger till en aktivitet</a>.</p>
+  </div>
+
+  <div id="edit-my-events" hidden>
+    <h1>Mina aktiviteter</h1>
+    <p class="intro" id="my-events-empty">Här dyker dina redigerbara aktiviteter upp.</p>
+    <ul id="my-events-list"></ul>
+  </div>
+
   <div id="edit-error" hidden>
     <p class="form-error-msg" id="edit-error-msg">Aktiviteten kunde inte laddas.</p>
     <a href="schema.html">Tillbaka till schemat</a>

@@ -2155,3 +2155,72 @@ hover. <!-- 02-§47.2 -->
 
 Navigation links, back-links, and other non-content links retain their
 existing styles. <!-- 02-§47.3 -->
+
+---
+
+## 48. Add-Activity and Edit-Activity Cookie Enhancements
+
+Participants who have accepted the session cookie should get a smoother
+experience when adding and editing activities. The add form remembers
+the responsible person, and the edit page shows a list of owned events
+without requiring the user to navigate from the schedule.
+
+### 48.1 Auto-fill responsible person on the add form
+
+- When a participant successfully submits an activity after accepting the
+  cookie, the value of the "Ansvarig" field is saved to `localStorage`
+  under the key `sb_responsible`. <!-- 02-§48.1 -->
+- On page load of `/lagg-till.html`, if `sb_responsible` exists in
+  `localStorage` and the "Ansvarig" field is empty, the field is
+  pre-filled with the stored value. <!-- 02-§48.2 -->
+- The stored value is updated on every successful submission, so it
+  always reflects the most recently used name. <!-- 02-§48.3 -->
+
+### 48.2 Dynamic intro text on the add form
+
+- The add form shows a paragraph (line 46 in the current HTML) explaining
+  that a temporary ID will be saved so the user can edit their activity
+  later. This is the "cookie paragraph". <!-- 02-§48.4 -->
+- If the user has already accepted cookie consent (`sb_cookie_consent`
+  is `'accepted'` in `localStorage`), the cookie paragraph is replaced
+  with a message stating that the user can edit their submitted activities,
+  with a link to `/redigera.html`. <!-- 02-§48.5 -->
+- If consent has not been given, the paragraph remains unchanged. <!-- 02-§48.6 -->
+- The replacement is done client-side on page load. <!-- 02-§48.7 -->
+
+### 48.3 Edit page without cookie
+
+- When `/redigera.html` is loaded without a URL `id` parameter and the
+  user has no session cookie (`sb_session`), the page shows a text
+  explaining that this page is for editing activities and that it
+  requires accepting the cookie when adding an activity. <!-- 02-§48.8 -->
+- The text is written in Swedish. <!-- 02-§48.9 -->
+- The loading spinner is hidden; the edit form is not shown. <!-- 02-§48.10 -->
+
+### 48.4 Edit page with cookie but no editable events
+
+- When `/redigera.html` is loaded without a URL `id` parameter and the
+  user has a session cookie, but none of the owned event IDs match
+  current, non-past events in `/events.json`, the page shows a message
+  saying that the user's editable activities will appear here. <!-- 02-§48.11 -->
+- The loading spinner is hidden; the edit form is not shown. <!-- 02-§48.12 -->
+
+### 48.5 Edit page with cookie and editable events
+
+- When `/redigera.html` is loaded without a URL `id` parameter and the
+  user has a session cookie containing event IDs that match current,
+  non-past events in `/events.json`, the page shows a list of those
+  events. <!-- 02-§48.13 -->
+- Each list item shows only the event title and is a link to
+  `/redigera.html?id={eventId}`. <!-- 02-§48.14 -->
+- Events whose date has already passed are filtered out entirely. <!-- 02-§48.15 -->
+- The loading spinner is hidden; the edit form is not shown until the
+  user clicks a specific event link. <!-- 02-§48.16 -->
+
+### 48.6 Edit page with a specific event selected
+
+- When `/redigera.html` is loaded with a URL `id` parameter, the
+  existing behaviour is preserved: ownership check, event loading,
+  form population. <!-- 02-§48.17 -->
+- If the user also has other editable events, the event list from §48.5
+  is shown above the edit form so the user can switch between events. <!-- 02-§48.18 -->
