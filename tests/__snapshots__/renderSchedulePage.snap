@@ -38,12 +38,14 @@
       <span class="ev-time">08:00–09:00</span>
       <span class="ev-title">Frukost</span>
       <span class="ev-meta"> · Matsalen · alla</span>
+      <a href="schema/frukost-22/event.ics" class="ev-ical" download title="Ladda ner iCal">iCal</a>
     </div>
     <details class="event-row" data-event-id="workshop-22" data-event-date="2025-06-22">
       <summary>
         <span class="ev-time">10:00–12:00</span>
         <span class="ev-title">Workshop</span>
         <span class="ev-meta"> · Salen · Bob</span>
+        <a href="schema/workshop-22/event.ics" class="ev-ical" download title="Ladda ner iCal">iCal</a>
       </summary>
       <div class="event-extra"><p class="event-desc">A useful workshop.</p><p class="event-desc">Bring your laptop.</p><a class="event-ext-link" href="https://example.com" target="_blank" rel="noopener">Extern länk →</a></div>
     </details>
@@ -51,6 +53,7 @@
       <span class="ev-time">20:00–22:00</span>
       <span class="ev-title">Kvällsmys</span>
       <span class="ev-meta"> · Stugan · Anna</span>
+      <a href="schema/kväll-22/event.ics" class="ev-ical" download title="Ladda ner iCal">iCal</a>
     </div>
     </div>
   </details>
@@ -62,6 +65,7 @@
       <span class="ev-time">18:00</span>
       <span class="ev-title">Evening Swim</span>
       <span class="ev-meta"> · Sjön · alla</span>
+      <a href="schema/swim-23/event.ics" class="ev-ical" download title="Ladda ner iCal">iCal</a>
     </div>
     </div>
   </details>

@@ -29,30 +29,34 @@ function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = []) {
 <body>
 ${pageNav('kalender.html', navSections)}
   <h1>Synka schemat till din kalender</h1>
-  <div class="kalender-tips">
+
+  <div class="kalender-card">
     <p>Du kan prenumerera på hela lägerschemat så att alla aktiviteter dyker upp
     i din kalenderapp — och uppdateras automatiskt om schemat ändras.</p>
-
     <p>Du kan också ladda ner enskilda aktiviteter som engångsimport från varje
-    aktivitets detaljsida.</p>
+    aktivitets detaljsida i <a href="schema.html">schemat</a>.</p>
+  </div>
 
+  <div class="kalender-card">
     <h2>Prenumerera på hela schemat</h2>
     <p>Kopiera den här länken och lägg till den som en kalenderprenumeration:</p>
-    <p class="ical-url"><code>${escapeHtml(webcalUrl)}</code></p>
+    <div class="ical-url-block"><pre>${escapeHtml(webcalUrl)}</pre></div>
     <p><a href="${escapeHtml(webcalUrl)}">Öppna direkt i kalenderappen →</a></p>
     <p>Alternativt kan du ladda ner hela schemat som en fil:
     <a href="schema.ics">Ladda ner schema.ics</a></p>
+  </div>
 
-    <h2>Så här gör du</h2>
-
-    <h3>iPhone / iPad (iOS Kalender)</h3>
+  <div class="kalender-card">
+    <h2>iPhone / iPad (iOS Kalender)</h2>
     <ol>
       <li>Tryck på länken ovan — "Öppna direkt i kalenderappen".</li>
       <li>iOS frågar om du vill prenumerera. Tryck <strong>Prenumerera</strong>.</li>
       <li>Klart! Schemat dyker upp som en egen kalender och uppdateras automatiskt.</li>
     </ol>
+  </div>
 
-    <h3>Android (Google Kalender)</h3>
+  <div class="kalender-card">
+    <h2>Android (Google Kalender)</h2>
     <ol>
       <li>Öppna <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer">Google Kalender</a> i en webbläsare (inte appen).</li>
       <li>Klicka på <strong>+</strong> bredvid "Andra kalendrar" i vänstermenyn.</li>
@@ -60,13 +64,17 @@ ${pageNav('kalender.html', navSections)}
       <li>Klistra in: <code>${icsUrl}</code></li>
       <li>Klicka <strong>Lägg till kalender</strong>. Det kan ta några minuter innan den synkas till appen.</li>
     </ol>
+  </div>
 
-    <h3>Gmail (webbversion)</h3>
+  <div class="kalender-card">
+    <h2>Gmail (webbversion)</h2>
     <ol>
       <li>Samma steg som Android ovan — Google Kalender på webben hanterar prenumerationer.</li>
     </ol>
+  </div>
 
-    <h3>Outlook</h3>
+  <div class="kalender-card">
+    <h2>Outlook</h2>
     <ol>
       <li>Öppna Outlook (app eller <a href="https://outlook.live.com/calendar" target="_blank" rel="noopener noreferrer">webben</a>).</li>
       <li>Gå till Kalender-vyn.</li>
@@ -74,7 +82,9 @@ ${pageNav('kalender.html', navSections)}
       <li>Klistra in: <code>${icsUrl}</code></li>
       <li>Ge kalendern ett namn och klicka <strong>Importera</strong>.</li>
     </ol>
+  </div>
 
+  <div class="kalender-card">
     <h2>Prenumeration vs. engångsimport</h2>
     <p><strong>Prenumeration</strong> (webcal) — din kalenderapp hämtar schemat automatiskt
     med jämna mellanrum. Om en aktivitet läggs till eller ändras ser du det utan att
@@ -83,6 +93,8 @@ ${pageNav('kalender.html', navSections)}
     den i kalendern en gång. Ändringar i schemat syns inte automatiskt. Bra om du bara
     vill ha en enstaka aktivitet.</p>
   </div>
+
+  <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
   <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>

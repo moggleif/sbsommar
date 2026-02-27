@@ -37,12 +37,18 @@ function eventExtraHtml(e) {
   return `<div class="event-extra">${parts.join('')}</div>`;
 }
 
+function icalDownloadLink(e) {
+  if (!e.id) return '';
+  return `<a href="schema/${escapeHtml(String(e.id))}/event.ics" class="ev-ical" download title="Ladda ner iCal">iCal</a>`;
+}
+
 function renderEventRow(e) {
   const timeStr = e.end
     ? `${escapeHtml(String(e.start))}–${escapeHtml(String(e.end))}`
     : escapeHtml(String(e.start));
   const metaParts = [e.location, e.responsible].filter(Boolean).map(escapeHtml);
   const metaEl = metaParts.length ? `<span class="ev-meta"> · ${metaParts.join(' · ')}</span>` : '';
+  const icalEl = icalDownloadLink(e);
   const hasExtra = e.description || e.link;
 
   const idAttr = e.id ? ` data-event-id="${escapeHtml(String(e.id))}"` : '';
@@ -55,6 +61,7 @@ function renderEventRow(e) {
       `        <span class="ev-time">${timeStr}</span>`,
       `        <span class="ev-title">${escapeHtml(e.title)}</span>`,
       metaEl ? `        ${metaEl}` : '',
+      icalEl ? `        ${icalEl}` : '',
       '      </summary>',
       `      ${eventExtraHtml(e)}`,
       '    </details>',
@@ -67,6 +74,7 @@ function renderEventRow(e) {
       `      <span class="ev-time">${timeStr}</span>`,
       `      <span class="ev-title">${escapeHtml(e.title)}</span>`,
       metaEl ? `      ${metaEl}` : '',
+      icalEl ? `      ${icalEl}` : '',
       '    </div>',
     ]
       .filter(Boolean)
@@ -91,11 +99,17 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
   const daySections = dates.map((date) => renderDaySection(date, byDate[date])).join('\n\n');
   const campName = escapeHtml(camp.name);
 
+  let icalIconHtml = '';
   let webcalHtml = '';
   if (siteUrl) {
     const webcalUrl = escapeHtml(siteUrl.replace(/^https?:\/\//, 'webcal://') + '/schema.ics');
-    webcalHtml = `\n    <a href="${webcalUrl}" class="ical-link" title="Prenumerera i kalender">📆 iCal</a>`;
+    webcalHtml = webcalUrl;
+    icalIconHtml = `\n    <a href="kalender.html" class="ical-link" title="Prenumerera i kalender"><svg class="ical-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><line x1="9" y1="17" x2="9" y2="17.01"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg></a>`;
   }
+
+  const guideHtml = siteUrl
+    ? `\n  <p class="intro"><a href="kalender.html">Guide: Synka schemat till din kalender</a> · <a href="${webcalHtml}">Prenumerera direkt (webcal)</a></p>`
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="sv">
@@ -110,10 +124,10 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
 ${pageNav('schema.html', navSections)}
   <div class="schedule-header">
     <h1>Schema – ${campName}</h1>
-    <a href="schema.rss" class="rss-link" title="RSS-feed"><img src="images/RSS-logo.webp" alt="RSS" class="rss-icon"></a>${webcalHtml}
+    <a href="schema.rss" class="rss-link" title="RSS-feed"><img src="images/RSS-logo.webp" alt="RSS" class="rss-icon"></a>${icalIconHtml}
   </div>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
-  <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>
+  <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>${guideHtml}
 
 ${daySections}
   <script src="session.js"></script>
