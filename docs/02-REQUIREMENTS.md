@@ -852,57 +852,17 @@ time. <!-- 02-§21.22 -->
 
 ---
 
-## 23. Event Data CI Pipeline
+## 23. Event Data CI Pipeline — superseded by §50
 
-When a participant submits or edits an activity, the API creates an ephemeral Git branch,
-commits the updated YAML, and opens a pull request. The CI pipeline must intercept these
-PRs and validate the data before the merge completes.
-
-This section covers requirements for that targeted CI pipeline.
-It applies only to PRs from branches matching `event/**` (add-event) and
-`event-edit/**` (edit-event).
+> **Note:** §23.1–23.10 are superseded by §49 (API-layer validation) and §50
+> (Docker-based pipeline). §23.11–23.13 are superseded by §50.4 (post-merge
+> SCP deploy). §23.14 still applies to `ci.yml`.
 
 ### 23.0 Git history for branch comparison
 
 - CI workflows that compare the PR branch to `main` to detect changed files must check out
   with sufficient git history for the three-dot diff (`origin/main...HEAD`) to find a merge
   base. A shallow checkout (depth 1) is not sufficient. <!-- 02-§23.14 -->
-
-### 23.1 YAML structural validation
-
-- The CI pipeline must parse and structurally validate the changed event YAML file before
-  the PR is merged. <!-- 02-§23.1 -->
-- Validation must check all required fields are present and non-empty: `id`, `title`,
-  `date`, `start`, `end`, `location`, `responsible`. <!-- 02-§23.2 -->
-- Validation must check that `date` is a valid YYYY-MM-DD calendar date within the
-  camp's start/end date range. <!-- 02-§23.3 -->
-- Validation must check that `start` and `end` match HH:MM format and `end` is strictly
-  after `start`. <!-- 02-§23.4 -->
-- Validation must check for duplicate event IDs within the file. <!-- 02-§23.5 -->
-
-### 23.2 Security scan
-
-- The CI pipeline must scan all free-text event fields for injection patterns (script
-  tags, JavaScript URIs, event handler attributes) before the PR is merged. <!-- 02-§23.6 -->
-- The `link` field, when non-empty, must use `http://` or `https://` protocol; any other
-  protocol must be rejected. <!-- 02-§23.7 -->
-- Text fields must be length-limited; payloads exceeding reasonable limits must be
-  rejected. <!-- 02-§23.8 -->
-
-### 23.3 Failure gates
-
-- If the YAML lint step fails, the security scan, build, and deploy steps must not run. <!-- 02-§23.9 -->
-- If the security scan step fails, the build and deploy steps must not run. <!-- 02-§23.10 -->
-
-### 23.4 Targeted deployment
-
-- On successful validation, the pipeline must build the site and deploy only the four
-  event-data-derived files: `schema.html`, `idag.html`, `dagens-schema.html`, and
-  `events.json`. <!-- 02-§23.11 -->
-- No other files may be touched by this pipeline's upload step (FTP for
-  production, SCP for QA — see §43). <!-- 02-§23.12 -->
-- This deployment must happen while the PR is open (before auto-merge), so the updated
-  schedule is visible to participants without waiting for the full site deploy. <!-- 02-§23.13 -->
 
 ---
 
@@ -1826,13 +1786,10 @@ secrets to manage. Production remains on FTP until QA is validated.
   it already performs `git pull` and `npm install`, which is sufficient
   to deploy the API server. <!-- 02-§43.8 -->
 
-### 43.3 Production unchanged (site requirements)
+### 43.3 Production — superseded by §50.5
 
-- The `deploy-prod` job in `event-data-deploy.yml` must continue to
-  use FTP for event data uploads, unchanged. <!-- 02-§43.9 -->
-- Production FTP secrets (`FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
-  `FTP_APP_DIR`, `FTP_TARGET_DIR`) must remain in the production
-  GitHub Environment. <!-- 02-§43.10 -->
+> **Note:** Production event data deploy now uses SCP (§50.5).
+> `02-§43.9` and `02-§43.10` are superseded by `02-§50.19`–`02-§50.22`.
 
 ### 43.4 Documentation (site requirements)
 
@@ -2261,3 +2218,71 @@ identical check. The CI scan will be removed in a future pipeline optimisation.
   in both `source/api/validate.js` and `api/src/Validate.php`. <!-- 02-§49.5 -->
 - Both implementations must produce equivalent error messages for the same
   invalid input. <!-- 02-§49.6 -->
+
+---
+
+## 50. Docker-Based Event Data CI Pipeline
+
+Event data validation (injection patterns, link protocol, length limits) runs in the
+API layer at submission time. Data that reaches git is already validated. The CI
+pipeline for event-data PRs provides a branch-protection gate, and a post-merge
+workflow builds and deploys via a pre-built Docker image.
+
+### 50.1 Docker build image (site requirements)
+
+- A Docker image containing Node.js 20 and the project's production dependencies
+  (`js-yaml`, `marked`, `qrcode`) must be available for CI workflows. <!-- 02-§50.1 -->
+- The image must be based on `node:20` (full image, not slim). <!-- 02-§50.2 -->
+- The Dockerfile must live in `.github/docker/Dockerfile`. <!-- 02-§50.3 -->
+- The image must be published to GitHub Container Registry
+  (`ghcr.io/<owner>/<repo>`). <!-- 02-§50.4 -->
+
+### 50.2 Docker image build workflow (site requirements)
+
+- A workflow (`.github/workflows/docker-build.yml`) must build and push the Docker
+  image when `package.json` or `.github/docker/Dockerfile` changes on push to
+  `main`. <!-- 02-§50.5 -->
+- The workflow must tag images with both `latest` and the git SHA. <!-- 02-§50.6 -->
+- The workflow must have `packages: write` and `contents: read` permissions. <!-- 02-§50.7 -->
+
+### 50.3 Event data PR check (site requirements)
+
+- `event-data-deploy.yml` must contain a single job that logs "Validated at API
+  layer" and passes. <!-- 02-§50.8 -->
+- The workflow must trigger on PRs to `main` with path `source/data/**.yaml` and
+  only for branches matching `event/` and `event-edit/` prefixes. <!-- 02-§50.9 -->
+
+### 50.4 Post-merge event data deploy (site requirements)
+
+- A workflow (`.github/workflows/event-data-deploy-post-merge.yml`) must trigger
+  on push to `main` with path filter `source/data/**.yaml`. <!-- 02-§50.11 -->
+- The workflow must use the pre-built Docker image from GHCR instead of
+  `setup-node` + `npm ci`. <!-- 02-§50.12 -->
+- The workflow must detect which per-camp YAML file changed by comparing
+  `HEAD~1..HEAD`. <!-- 02-§50.13 -->
+- The workflow must determine whether the changed file belongs to a QA camp
+  and set an `is_qa` output. <!-- 02-§50.14 -->
+- The workflow must build the site using `node source/build/build.js`. <!-- 02-§50.15 -->
+- The workflow must stage only event-data-derived files for upload: `schema.html`,
+  `idag.html`, `dagens-schema.html`, `events.json`, `schema.rss`, `schema.ics`,
+  `kalender.html`, and per-event pages under `schema/`. <!-- 02-§50.16 -->
+- The workflow must deploy to QA and QA Node via SCP in parallel jobs. <!-- 02-§50.17 -->
+- The workflow must deploy to Production via SCP, skipped when the changed
+  file belongs to a QA camp. <!-- 02-§50.18 -->
+
+### 50.5 Production event data deploy method (site requirements)
+
+- Production event data deploy must use SCP over SSH. <!-- 02-§50.19 -->
+- The deploy must use the existing SSH secrets: `SERVER_HOST`, `SERVER_USER`,
+  `SERVER_SSH_KEY`, `SERVER_SSH_PORT`, `DEPLOY_DIR`. <!-- 02-§50.20 -->
+- After validation, the FTP secrets (`FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD`,
+  `FTP_APP_DIR`, `FTP_TARGET_DIR`) should be removed from the production GitHub
+  Environment. This is a manual step. <!-- 02-§50.22 -->
+
+### 50.6 CI workflow for data-only changes (site requirements)
+
+- For data-only event changes (`has_code == false`), `ci.yml` must skip
+  `npm ci` and `npm run build`, letting the job pass after the detect
+  step. <!-- 02-§50.23 -->
+- Building event-data changes is the responsibility of the post-merge
+  deploy workflow (§50.4). <!-- 02-§50.24 -->

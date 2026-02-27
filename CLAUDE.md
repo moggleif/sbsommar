@@ -185,7 +185,7 @@ Non-technical contributors must be able to:
 - Built output lives in /public. <!-- CL-§9.1 -->
 - GitHub Actions builds and validates. <!-- CL-§9.2 -->
 - Deployment happens only after successful CI. <!-- CL-§9.3 -->
-- For commits that modify only per-camp event files in `source/data/` (e.g. `2025-08-syssleback.yaml`), CI runs build only — lint and tests are skipped. Configuration files in the same directory (`camps.yaml`, `local.yaml`) are not considered data-only and trigger full CI. <!-- CL-§9.4 -->
+- For commits that modify only per-camp event files in `source/data/` (e.g. `2025-08-syssleback.yaml`), `ci.yml` skips `npm ci`, build, lint, and tests — the job passes after the detect step. Building and deploying event-data changes is handled by `event-data-deploy-post-merge.yml`. Configuration files in the same directory (`camps.yaml`, `local.yaml`) are not considered data-only and trigger full CI. <!-- CL-§9.4 -->
 - CI workflows that compare the current branch to `main` (e.g. to detect changed files) must check out with enough git history for the comparison to succeed (`fetch-depth: 0` or equivalent). <!-- CL-§9.5 -->
 
 ---
