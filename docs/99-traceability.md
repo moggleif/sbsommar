@@ -846,6 +846,31 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§44.37` | 04-OPERATIONS.md documents PHP API | 04-OPERATIONS.md | manual: read doc | `docs/04-OPERATIONS.md` | implemented |
 | `02-§44.38` | 08-ENVIRONMENTS.md documents qa environment and secrets | 08-ENVIRONMENTS.md | manual: read doc | `docs/08-ENVIRONMENTS.md` | implemented |
 | `02-§44.39` | 03-ARCHITECTURE.md notes dual API architecture | 03-ARCHITECTURE.md §21 | manual: read doc | `docs/03-ARCHITECTURE.md` | implemented |
+| `02-§2.12` | iCal feed exists at `/schema.ics` | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§2.13` | Calendar tips page exists at `/kalender.html` | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.1` | Activity schedule available as iCalendar `.ics` files | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.2` | Per-event `.ics` file at `/schema/{event-id}/event.ics` | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.3` | Per-event `.ics` is valid iCalendar (RFC 5545) | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.4` | VEVENT includes DTSTART, DTEND, SUMMARY, LOCATION, DESCRIPTION, URL, UID | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.5` | Times use floating local format (no Z, no TZID) | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.6` | DTEND omitted when end is null | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.7` | iCal renderer has no external library dependency | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.8` | Event detail page includes iCal download link | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.9` | iCal link styled consistently with Plats/Ansvarig line | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.10` | Full-camp `.ics` at `/schema.ics` with all events | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.11` | Full-camp VEVENT uses same field mapping as per-event | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.12` | VCALENDAR includes PRODID, X-WR-CALNAME, METHOD | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.13` | Schedule page includes webcal subscription link | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.14` | Webcal link uses webcal:// protocol scheme | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.15` | Calendar tips page at `/kalender.html` | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.16` | Tips page covers iOS, Android, Gmail, Outlook | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.17` | Tips page explains subscription vs download difference | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.18` | Tips page in Swedish | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.19` | Tips page uses shared layout (header, nav, footer) | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.20` | iCal renderer in separate module `render-ical.js` | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.21` | Tips page renderer in separate module `render-kalender.js` | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.22` | Both renderers wired into `build.js` | 03-ARCHITECTURE.md §22 | — | — | gap |
+| `02-§45.23` | iCal generation reuses SITE_URL — no new config | 03-ARCHITECTURE.md §22 | — | — | gap |
 
 ---
 

@@ -1355,6 +1355,92 @@ file is managed manually on the server — it is not part of the deploy archive.
 
 ---
 
+## 22. iCal Calendar Export
+
+At build time, `source/build/render-ical.js` produces iCalendar (`.ics`)
+files that allow participants to subscribe to or import the camp schedule
+into their phone or desktop calendar app.
+
+### 22.1 Data source
+
+The renderer receives the same `camp`, `events`, and `SITE_URL` already
+loaded by `build.js` — no additional file reads are needed.
+
+### 22.2 Output files
+
+| File | Content |
+| --- | --- |
+| `public/schema.ics` | Full-camp feed — one `VEVENT` per event |
+| `public/schema/{event-id}/event.ics` | Single-event file |
+
+### 22.3 iCalendar structure
+
+```ics
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SB Sommar//Schema//SV
+X-WR-CALNAME:Schema – {camp name}
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:20260630T163000
+DTEND:20260630T180000
+SUMMARY:{title}
+LOCATION:{location}
+DESCRIPTION:Ansvarig: {responsible}\n{description}
+URL:{SITE_URL}/schema/{event-id}/
+UID:{event-id}@{hostname}
+END:VEVENT
+...
+END:VCALENDAR
+```
+
+Times use floating local format (`YYYYMMDDTHHMMSS`, no `Z`, no `TZID`)
+consistent with the no-timezone policy (05-§4.5).
+
+When `end` is null, `DTEND` is omitted.
+
+### 22.4 iCal text escaping
+
+iCalendar content lines escape commas, semicolons, and backslashes with a
+backslash prefix. Newlines in `DESCRIPTION` are encoded as literal `\n`.
+The renderer provides an `escapeIcal()` helper for this.
+
+### 22.5 Webcal link
+
+The schedule page header includes a webcal subscription link alongside the
+existing RSS icon. The URL replaces the `https://` scheme in `SITE_URL`
+with `webcal://`.
+
+### 22.6 Event detail page
+
+The per-event detail page adds a calendar download link as a third line
+after the existing Plats/Ansvarig line, styled consistently.
+
+### 22.7 Calendar tips page
+
+`source/build/render-kalender.js` produces `public/kalender.html` — a
+static page with step-by-step instructions in Swedish for subscribing to
+the camp calendar on iOS, Android, Gmail, and Outlook. Uses the shared
+`pageNav()` and `pageFooter()` layout.
+
+### 22.8 Files
+
+| File | Role |
+| --- | --- |
+| `source/build/render-ical.js` | Renders `.ics` files at build time |
+| `source/build/render-kalender.js` | Renders the calendar tips page |
+
+### 22.9 Files changed
+
+| File | Change |
+| --- | --- |
+| `source/build/build.js` | Call `renderIcalFeed()`, `renderEventIcal()`, `renderKalenderPage()`; write output files |
+| `source/build/render-event.js` | Add iCal download link to event detail page |
+| `source/build/render.js` | Add webcal link alongside RSS link in schedule header |
+| `.github/workflows/event-data-deploy.yml` | Add `schema.ics` to the artefact and FTP deploy |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
