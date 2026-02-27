@@ -502,8 +502,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§23.8` | Security scan rejects fields exceeding length limits — **superseded by API-layer validation** | 03-ARCHITECTURE.md §11.6 | SEC-10..13 | `source/scripts/check-yaml-security.js` | covered |
 | `02-§23.9` | If lint fails, downstream jobs skip — **superseded: CI no longer runs lint/security on event PRs** | — | — | — | implemented |
 | `02-§23.10` | If security scan fails, build/deploy skip — **superseded: CI no longer runs security scan on event PRs** | — | — | — | implemented |
-| `02-§23.11` | Pipeline deploys event-data files — **superseded by 02-§50.16–50.18 (post-merge SCP deploy)** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§23.12` | Upload must not modify files outside event-data set — **superseded by 02-§50.16** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§23.11` | Pipeline deploys event-data files — **superseded by 02-§50.16–50.18 (post-merge SCP deploy)** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§23.12` | Upload must not modify files outside event-data set — **superseded by 02-§50.16** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§23.13` | Deploy completes while PR is open — **superseded by 02-§50.11 (deploy now post-merge)** | 03-ARCHITECTURE.md §11.3 | — | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§23.14` | CI workflows that diff against `main` must check out with sufficient git history for the three-dot diff to find a merge base | 03-ARCHITECTURE.md §11.6 | — (CI end-to-end: open an event PR and confirm the detect-changed-file step succeeds) | `.github/workflows/event-data-deploy.yml` – `fetch-depth: 0` on lint-yaml and security-check checkout steps | implemented |
 | `02-§24.1` | Every page must include the same navigation header | 03-ARCHITECTURE.md §12 | NAV-01, NAV-01a..f | `source/build/layout.js` – `pageNav()`; all render functions accept and pass `navSections` | covered |
@@ -911,28 +911,28 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§49.4` | Non-empty link must start with `http://` or `https://` | 03-ARCHITECTURE.md §11.8 | ASEC-08..10 | `source/api/validate.js` – protocol regex check on `link` field | covered |
 | `02-§49.5` | Injection and link checks identical in Node.js and PHP implementations | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
 | `02-§49.6` | Both implementations produce equivalent error messages | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
-| `02-§50.1` | Docker image contains Node.js 20 and production dependencies | 03-ARCHITECTURE.md §11.1 | manual: inspect `.github/docker/Dockerfile` | `.github/docker/Dockerfile` | gap |
-| `02-§50.2` | Image based on `node:20` (full, not slim) | 03-ARCHITECTURE.md §11.1 | manual: inspect Dockerfile FROM line | `.github/docker/Dockerfile` | gap |
-| `02-§50.3` | Dockerfile lives in `.github/docker/Dockerfile` | 03-ARCHITECTURE.md §11.1 | manual: file exists at path | `.github/docker/Dockerfile` | gap |
-| `02-§50.4` | Image published to GHCR | 03-ARCHITECTURE.md §11.1 | manual: check GHCR packages | `.github/workflows/docker-build.yml` | gap |
-| `02-§50.5` | Docker build workflow triggers on package.json or Dockerfile changes | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow triggers | `.github/workflows/docker-build.yml` | gap |
-| `02-§50.6` | Image tagged with `latest` and git SHA | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow tags | `.github/workflows/docker-build.yml` | gap |
-| `02-§50.7` | Docker workflow has `packages: write` and `contents: read` permissions | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow permissions | `.github/workflows/docker-build.yml` | gap |
-| `02-§50.8` | `event-data-deploy.yml` contains a single no-op job logging "Validated at API layer" | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | gap |
-| `02-§50.9` | No-op job retains same trigger and branch filter | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow on/if | `.github/workflows/event-data-deploy.yml` | gap |
-| `02-§50.11` | Post-merge workflow triggers on push to `main` with data YAML path filter | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow triggers | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.12` | Post-merge workflow uses Docker image from GHCR | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow container | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.13` | Changed YAML file detected via `HEAD~1..HEAD` | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.14` | QA camp detection sets `is_qa` output | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.15` | Build runs `node source/build/build.js` | 03-ARCHITECTURE.md §11.3 | manual: inspect build step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.16` | Only event-data-derived files staged for upload | 03-ARCHITECTURE.md §11.3 | manual: inspect staging step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.17` | QA and QA Node deploy via SCP in parallel | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow jobs | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.18` | Production deploys via SCP, skipped for QA camps | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow if condition | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.19` | Production event data uses SCP over SSH | 03-ARCHITECTURE.md §11.3 | manual: inspect production deploy job | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§50.20` | Production uses SSH secrets (SERVER_HOST, etc.) | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow secrets | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.1` | Docker image contains Node.js 20 and production dependencies | 03-ARCHITECTURE.md §11.1 | manual: inspect `.github/docker/Dockerfile` | `.github/docker/Dockerfile` | implemented |
+| `02-§50.2` | Image based on `node:20` (full, not slim) | 03-ARCHITECTURE.md §11.1 | manual: inspect Dockerfile FROM line | `.github/docker/Dockerfile` | implemented |
+| `02-§50.3` | Dockerfile lives in `.github/docker/Dockerfile` | 03-ARCHITECTURE.md §11.1 | manual: file exists at path | `.github/docker/Dockerfile` | implemented |
+| `02-§50.4` | Image published to GHCR | 03-ARCHITECTURE.md §11.1 | manual: check GHCR packages | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.5` | Docker build workflow triggers on package.json or Dockerfile changes | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow triggers | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.6` | Image tagged with `latest` and git SHA | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow tags | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.7` | Docker workflow has `packages: write` and `contents: read` permissions | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow permissions | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.8` | `event-data-deploy.yml` contains a single no-op job logging "Validated at API layer" | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | implemented |
+| `02-§50.9` | No-op job retains same trigger and branch filter | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow on/if | `.github/workflows/event-data-deploy.yml` | implemented |
+| `02-§50.11` | Post-merge workflow triggers on push to `main` with data YAML path filter | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow triggers | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.12` | Post-merge workflow uses Docker image from GHCR | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow container | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.13` | Changed YAML file detected via `HEAD~1..HEAD` | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.14` | QA camp detection sets `is_qa` output | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.15` | Build runs `node source/build/build.js` | 03-ARCHITECTURE.md §11.3 | manual: inspect build step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.16` | Only event-data-derived files staged for upload | 03-ARCHITECTURE.md §11.3 | manual: inspect staging step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.17` | QA and QA Node deploy via SCP in parallel | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow jobs | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.18` | Production deploys via SCP, skipped for QA camps | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow if condition | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.19` | Production event data uses SCP over SSH | 03-ARCHITECTURE.md §11.3 | manual: inspect production deploy job | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.20` | Production uses SSH secrets (SERVER_HOST, etc.) | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow secrets | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.22` | FTP secrets removed from production environment (manual step) | — | manual: check GitHub Environment secrets | — (manual operational step) | gap |
-| `02-§50.23` | `ci.yml` skips `npm ci` and build for data-only changes | 03-ARCHITECTURE.md §11.4 | manual: inspect ci.yml conditional steps | `.github/workflows/ci.yml` | gap |
-| `02-§50.24` | Post-merge workflow is responsible for building event-data changes | 03-ARCHITECTURE.md §11.4 | manual: inspect workflow | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§50.23` | `ci.yml` skips `npm ci` and build for data-only changes | 03-ARCHITECTURE.md §11.4 | manual: inspect ci.yml conditional steps | `.github/workflows/ci.yml` | implemented |
+| `02-§50.24` | Post-merge workflow is responsible for building event-data changes | 03-ARCHITECTURE.md §11.4 | manual: inspect workflow | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 
 ---
 
@@ -940,9 +940,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 
 ```text
 Total requirements:             793
-Covered (implemented + tested): 364
-Implemented, not tested:        402
-Gap (no implementation):         27
+Covered (implemented + tested): 368
+Implemented, not tested:        424
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1138,7 +1138,8 @@ Matrix cleanup (2026-02-25):
   6 covered (ASEC-01..16): injection pattern scanning, link protocol, Node.js + PHP parity.
   Architecture documented in 03-ARCHITECTURE.md §11.8.
 23 requirements added for Docker-based event data CI pipeline (02-§50.1–50.24):
-  all 23 gap (new workflow files and CI changes not yet implemented).
+  22 implemented (workflow files, Dockerfile, CI config; manual verification only).
+  1 gap (02-§50.22: manual FTP secret cleanup after validation).
   02-§23.1–23.10 superseded (validation moved to API layer).
   02-§23.11–23.12 superseded by 02-§50.16–50.18 (SCP post-merge).
   02-§23.13 superseded by 02-§50.11 (deploy is post-merge).
@@ -1146,6 +1147,7 @@ Matrix cleanup (2026-02-25):
   Architecture rewritten in 03-ARCHITECTURE.md §11.
   CLAUDE.md §9.4 updated.
   08-ENVIRONMENTS.md updated: event data flow, workflows table, FTP secrets removed.
+  Previous gap count corrected: 02-§44.28–30, 02-§44.32 were already covered.
 ```
 
 ---
