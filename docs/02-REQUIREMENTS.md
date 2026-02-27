@@ -2224,3 +2224,40 @@ without requiring the user to navigate from the schedule.
   form population. <!-- 02-§48.17 -->
 - If the user also has other editable events, the event list from §48.5
   is shown above the edit form so the user can switch between events. <!-- 02-§48.18 -->
+
+---
+
+## 49. API-Layer Security Validation
+
+The event security scan (injection patterns, link protocol, length limits) currently
+runs only in CI as a post-commit check. This means malicious payloads can reach the
+git repository before being caught. Moving these checks into the API request
+validation layer rejects dangerous input at submission time — before any data is
+written to git.
+
+This change does not remove the existing CI security scan; it adds an earlier,
+identical check. The CI scan will be removed in a future pipeline optimisation.
+
+### 49.1 Injection pattern scanning in the API
+
+- The API request validation (`validateEventRequest` / `validateEditRequest`) must
+  scan the free-text fields `title`, `location`, `responsible`, and `description`
+  for injection patterns before accepting the request. <!-- 02-§49.1 -->
+- The following patterns must be rejected (case-insensitive): `<script`, `javascript:`,
+  event handler attributes (`on*=`), `<iframe`, `<object`, `<embed`,
+  `data:text/html`. <!-- 02-§49.2 -->
+- A request containing any injection pattern must be rejected with an error message
+  identifying the offending field and pattern category. <!-- 02-§49.3 -->
+
+### 49.2 Link protocol validation in the API
+
+- When the `link` field is a non-empty string, the API must verify that it starts
+  with `http://` or `https://` (case-insensitive). Any other protocol or a missing
+  protocol must be rejected. <!-- 02-§49.4 -->
+
+### 49.3 Parity between Node.js and PHP implementations
+
+- The injection patterns and link protocol checks must be implemented identically
+  in both `source/api/validate.js` and `api/src/Validate.php`. <!-- 02-§49.5 -->
+- Both implementations must produce equivalent error messages for the same
+  invalid input. <!-- 02-§49.6 -->
