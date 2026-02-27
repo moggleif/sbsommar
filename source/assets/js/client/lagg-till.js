@@ -8,6 +8,27 @@
   var modalHeading = document.getElementById('modal-heading');
   var modalContent = document.getElementById('modal-content');
 
+  // ── Auto-fill responsible from localStorage (02-§48.2) ────────────────────
+
+  var responsibleInput = form.querySelector('#f-responsible');
+  if (responsibleInput && !responsibleInput.value) {
+    try {
+      var savedResponsible = localStorage.getItem('sb_responsible');
+      if (savedResponsible) responsibleInput.value = savedResponsible;
+    } catch { /* localStorage may be unavailable */ }
+  }
+
+  // ── Dynamic cookie paragraph swap (02-§48.5–48.7) ─────────────────────────
+
+  var cookieInfoEl = document.getElementById('cookie-info');
+  if (cookieInfoEl) {
+    try {
+      if (localStorage.getItem('sb_cookie_consent') === 'accepted') {
+        cookieInfoEl.innerHTML = 'Har du redan lagt till aktiviteter? Du kan <a href="redigera.html">redigera dina aktiviteter här</a>.';
+      }
+    } catch { /* localStorage may be unavailable */ }
+  }
+
   // ── Time-gating (02-§26.3–26.8) ───────────────────────────────────────────
 
   var opensDate = form.dataset.opens;
@@ -356,6 +377,8 @@
             setModalError(json.error || 'Något gick fel.');
             return;
           }
+          // Save responsible name for auto-fill on next visit (02-§48.1, 02-§48.3)
+          try { localStorage.setItem('sb_responsible', responsible); } catch { /* ignore */ }
           setModalSuccess(title, consentGiven);
         })
         .catch(function () {

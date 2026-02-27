@@ -7,6 +7,10 @@
   var errorEl      = document.getElementById('edit-error');
   var errorMsg     = document.getElementById('edit-error-msg');
   var sectionEl    = document.getElementById('edit-section');
+  var noSessionEl  = document.getElementById('edit-no-session');
+  var myEventsEl   = document.getElementById('edit-my-events');
+  var myEventsList = document.getElementById('my-events-list');
+  var myEventsEmpty = document.getElementById('my-events-empty');
   var form         = document.getElementById('edit-form');
   var fieldset     = form ? form.querySelector('fieldset') : null;
   var submitBtn    = form ? form.querySelector('button[type="submit"]') : null;
@@ -188,17 +192,67 @@
     }
   }
 
+  // ── Event list helper (02-§48.13–48.18) ─────────────────────────────────────
+
+  function renderMyEvents(events, ownedIds, today) {
+    var editable = [];
+    for (var i = 0; i < events.length; i++) {
+      var ev = events[i];
+      if (ownedIds.indexOf(ev.id) !== -1 && ev.date >= today) {
+        editable.push(ev);
+      }
+    }
+    if (editable.length === 0) {
+      if (myEventsEmpty) myEventsEmpty.hidden = false;
+      if (myEventsList) myEventsList.hidden = true;
+      return editable;
+    }
+    if (myEventsEmpty) myEventsEmpty.hidden = true;
+    if (myEventsList) {
+      myEventsList.innerHTML = '';
+      for (var j = 0; j < editable.length; j++) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = 'redigera.html?id=' + encodeURIComponent(editable[j].id);
+        a.textContent = editable[j].title;
+        li.appendChild(a);
+        myEventsList.appendChild(li);
+      }
+      myEventsList.hidden = false;
+    }
+    return editable;
+  }
+
   // ── Init ─────────────────────────────────────────────────────────────────────
 
   var eventId = getParam('id');
   var today = new Date().toISOString().slice(0, 10);
+  var ownedIds = readSessionIds();
 
   if (!eventId) {
-    showError('Inget aktivitets-ID angivet.');
+    // No specific event selected — show browse mode
+    loadingEl.hidden = true;
+
+    if (ownedIds.length === 0) {
+      // No cookie — show explanation (02-§48.8)
+      if (noSessionEl) noSessionEl.hidden = false;
+      return;
+    }
+
+    // Has cookie — fetch events and show list (02-§48.13)
+    if (myEventsEl) myEventsEl.hidden = false;
+    fetch('/events.json')
+      .then(function (r) { return r.json(); })
+      .then(function (events) {
+        renderMyEvents(events, ownedIds, today);
+      })
+      .catch(function () {
+        if (myEventsEmpty) myEventsEmpty.textContent = 'Kunde inte hämta schemadata.';
+      });
     return;
   }
 
-  var ownedIds = readSessionIds();
+  // Specific event selected — existing edit behaviour (02-§48.17)
   if (ownedIds.indexOf(eventId) === -1) {
     showError('Du har inte rättighet att redigera denna aktivitet.');
     return;
@@ -221,6 +275,12 @@
       if (event.date < today) {
         showError('Aktiviteten har redan ägt rum och kan inte redigeras.');
         return;
+      }
+
+      // Show event list above form if user has other events (02-§48.18)
+      if (myEventsEl) {
+        var editable = renderMyEvents(events, ownedIds, today);
+        if (editable.length > 0) myEventsEl.hidden = false;
       }
 
       populate(event);
