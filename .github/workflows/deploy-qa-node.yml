@@ -55,7 +55,7 @@ jobs:
           target: ${{ secrets.DEPLOY_DIR }}
 
       - name: Deploy static site
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
@@ -88,7 +88,7 @@ jobs:
             rm -rf "$DEPLOY_DIR/public_html_old"
 
       - name: Deploy Node.js API
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
