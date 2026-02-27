@@ -1,6 +1,6 @@
 FROM node:20
 
-WORKDIR /app
+WORKDIR /deps
 
 # Copy only package files to leverage Docker layer caching.
 COPY package.json package-lock.json ./
@@ -8,5 +8,7 @@ COPY package.json package-lock.json ./
 # Install production dependencies only (js-yaml, marked, qrcode).
 RUN npm ci --omit=dev
 
-# The repository is mounted at runtime via actions/checkout,
-# so no application source is baked into the image.
+# Make installed modules visible from any working directory.
+# actions/checkout places the repo in /github/workspace (container default),
+# so node_modules must be reachable via NODE_PATH.
+ENV NODE_PATH=/deps/node_modules
