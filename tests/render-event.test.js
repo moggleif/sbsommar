@@ -171,4 +171,17 @@ describe('renderEventPage (02-§36)', () => {
     assert.ok(titleMatch[1].includes('Fotboll'), 'title should include event name');
     assert.ok(titleMatch[1].includes(camp.name), 'title should include camp name');
   });
+
+  it('EVT-21 (02-§45.8): page includes iCal download link', () => {
+    const html = renderEventPage(fullEvent, camp, siteUrl);
+    assert.ok(html.includes('event.ics'), 'should link to event.ics');
+  });
+
+  it('EVT-22 (02-§45.9): iCal link is inside the event-detail section', () => {
+    const html = renderEventPage(fullEvent, camp, siteUrl);
+    const detailStart = html.indexOf('class="event-detail"');
+    const icalPos = html.indexOf('event.ics');
+    assert.ok(detailStart > 0, 'should have event-detail div');
+    assert.ok(icalPos > detailStart, 'iCal link should be inside event-detail');
+  });
 });
