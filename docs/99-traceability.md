@@ -933,14 +933,14 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§50.22` | FTP secrets removed from production environment (manual step) | — | manual: check GitHub Environment secrets | — (manual operational step) | gap |
 | `02-§50.23` | `ci.yml` skips `npm ci` and build for data-only changes | 03-ARCHITECTURE.md §11.4 | manual: inspect ci.yml conditional steps | `.github/workflows/ci.yml` | implemented |
 | `02-§50.24` | Post-merge workflow is responsible for building event-data changes | 03-ARCHITECTURE.md §11.4 | manual: inspect workflow | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§51.1` | No separate `detect` job in post-merge workflow | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow jobs | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§51.2` | Each deploy job performs inline detection of changed event data files | 03-ARCHITECTURE.md §11.3 | manual: inspect gate step in each deploy job | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§51.3` | All deploy jobs start immediately in parallel (no serial dependency) | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow — no `needs:` between deploy jobs | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§51.4` | Each deploy job checks out with `fetch-depth: 2` | 03-ARCHITECTURE.md §11.3 | manual: inspect checkout step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§51.5` | Inline detection uses same `git diff` logic as previous detect job | 03-ARCHITECTURE.md §11.3 | manual: inspect gate step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§51.6` | Job skips build and deploy if no event data file changed | 03-ARCHITECTURE.md §11.3 | manual: inspect `if:` conditions on build/stage/upload steps | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§51.7` | Production job checks if changed file belongs to a QA camp | 03-ARCHITECTURE.md §11.3 | manual: inspect production gate step | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
-| `02-§51.8` | Production job skips build and deploy for QA camp files | 03-ARCHITECTURE.md §11.3 | manual: inspect production `if:` conditions | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§51.1` | No separate `detect` job in post-merge workflow | 03-ARCHITECTURE.md §11.3 | EDW-01 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§51.2` | Each deploy job performs inline detection of changed event data files | 03-ARCHITECTURE.md §11.3 | EDW-08..10 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§51.3` | All deploy jobs start immediately in parallel (no serial dependency) | 03-ARCHITECTURE.md §11.3 | EDW-02..04 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§51.4` | Each deploy job checks out with `fetch-depth: 2` | 03-ARCHITECTURE.md §11.3 | EDW-05..07 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§51.5` | Inline detection uses same `git diff` logic as previous detect job | 03-ARCHITECTURE.md §11.3 | EDW-08..10 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§51.6` | Job skips build and deploy if no event data file changed | 03-ARCHITECTURE.md §11.3 | EDW-11..13 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§51.7` | Production job checks if changed file belongs to a QA camp | 03-ARCHITECTURE.md §11.3 | EDW-14 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§51.8` | Production job skips build and deploy for QA camp files | 03-ARCHITECTURE.md §11.3 | EDW-14..15 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§51.9` | `02-§50.13` superseded by inline detection (§51.2, §51.5) | — | — | — | implemented |
 | `02-§51.10` | `02-§50.14` superseded by inline QA check (§51.7) | — | — | — | implemented |
 
@@ -950,9 +950,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 
 ```text
 Total requirements:             803
-Covered (implemented + tested): 368
+Covered (implemented + tested): 376
 Implemented, not tested:        426
-Gap (no implementation):          9
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1159,7 +1159,7 @@ Matrix cleanup (2026-02-25):
   08-ENVIRONMENTS.md updated: event data flow, workflows table, FTP secrets removed.
   Previous gap count corrected: 02-§44.28–30, 02-§44.32 were already covered.
 10 requirements added for event-data deploy detect elimination (02-§51.1–51.10):
-  8 gaps (02-§51.1–51.8: workflow restructuring, not yet implemented).
+  8 covered (EDW-01..15): workflow structure, inline detection, QA gating.
   2 implemented (02-§51.9–51.10: supersession notes for §50.13 and §50.14).
   02-§50.13 superseded by 02-§51.2, 02-§51.5 (inline detection per job).
   02-§50.14 superseded by 02-§51.7 (inline QA check in production job).
@@ -1325,3 +1325,9 @@ Matrix cleanup (2026-02-25):
 | ASEC-08..10 | `tests/validate.test.js` | `validateEventRequest – link protocol validation (02-§49.4)` |
 | ASEC-11..14 | `tests/validate.test.js` | `validateEditRequest – injection scanning (02-§49.1–49.2)` |
 | ASEC-15..16 | `tests/validate.test.js` | `validateEditRequest – link protocol validation (02-§49.4)` |
+| EDW-01 | `tests/event-deploy-workflow.test.js` | `02-§51.1 — No separate detect job` |
+| EDW-02..04 | `tests/event-deploy-workflow.test.js` | `02-§51.3 — Deploy jobs have no inter-job dependencies` |
+| EDW-05..07 | `tests/event-deploy-workflow.test.js` | `02-§51.4 — Checkout with fetch-depth: 2` |
+| EDW-08..10 | `tests/event-deploy-workflow.test.js` | `02-§51.2/51.5 — Inline event-data detection per job` |
+| EDW-11..13 | `tests/event-deploy-workflow.test.js` | `02-§51.6 — Build step gated on detection output` |
+| EDW-14..15 | `tests/event-deploy-workflow.test.js` | `02-§51.7/51.8 — Production QA camp gating` |
