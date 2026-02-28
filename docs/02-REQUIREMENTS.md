@@ -193,19 +193,20 @@ it is about reducing confusion and frustration.
   date field must immediately show an inline error if the value is in the past,
   without requiring a submit attempt. <!-- 02-§6.9 -->
 - **Live end-time validation:** when the user changes the end time (on `change`),
-  the end-time field must immediately show an inline error if start time is already
-  filled and end ≤ start. If start is not yet filled, this check is deferred to
-  submit. <!-- 02-§6.10 -->
+  the end-time field must immediately be evaluated if start time is already filled.
+  If end ≤ start, the midnight-crossing rule (§54) applies: a valid crossing shows
+  a green info message; an invalid crossing shows a red error. If start is not yet
+  filled, this check is deferred to submit. <!-- 02-§6.10 -->
 - **Live required-field validation:** when the user leaves any required field
   (on `blur`), the field must immediately show an inline error if it is empty. <!-- 02-§6.11 -->
 - **Live error clearing:** an inline error shown by live validation must be
   cleared as soon as the user starts editing that field again (on `input` or
   `change`). <!-- 02-§6.12 -->
 - **Live start-time cross-check:** when the user changes the start time (on
-  `change`), the end-time field must immediately be re-evaluated: if end is
-  filled and end ≤ new start, the error must be shown on end; if end > new
-  start (or end is empty), any existing end-time cross-check error must be
-  cleared. <!-- 02-§6.13 -->
+  `change`), the end-time field must immediately be re-evaluated using the
+  midnight-crossing rule (§54): a valid crossing shows a green info message,
+  an invalid crossing shows a red error, and a normal end > start clears any
+  message. If end is empty, no action is taken. <!-- 02-§6.13 -->
 - **Past start-time on today:** when the selected date is today and the user
   changes the start time (on `change`), an inline error must be shown
   immediately if the start time is more than 2 hours in the past. The same
@@ -248,7 +249,8 @@ When a participant submits an activity, the following must be verified:
 - `title` is present and non-empty. <!-- 02-§9.1 -->
 - `date` falls within the active camp's date range. <!-- 02-§9.2 -->
 - `start` is in valid `HH:MM` format. <!-- 02-§9.3 -->
-- `end` is present, in valid `HH:MM` format, and is after `start`. <!-- 02-§9.4 -->
+- `end` is present, in valid `HH:MM` format, and is after `start` — or represents
+  a valid midnight crossing per the midnight-crossing rule (§54). <!-- 02-§9.4 -->
 - `location` is present and non-empty. <!-- 02-§9.5 -->
 - `responsible` is present and non-empty. <!-- 02-§9.6 -->
 
@@ -2438,3 +2440,54 @@ before the backup step runs.
   backup (`.env.api.bak`) is missing. <!-- 02-§53.13 -->
 - The persistent backup must not be deleted by the restore step
   (`cp`, not `mv`). <!-- 02-§53.14 -->
+
+---
+
+## 54. Midnight-Crossing Events
+
+Events at a summer camp can legitimately cross midnight (e.g. an evening party
+starting at 23:00 and ending at 01:00). The system must allow these while
+catching likely user mistakes (e.g. entering 16:00→14:00 when 16:00→17:00 was
+intended).
+
+### 54.1 Midnight-crossing rule (event/data requirements)
+
+- When `end < start` (string comparison on HH:MM values), the system must
+  interpret the event as crossing midnight and calculate the implied duration
+  as `(24 × 60 − startMinutes) + endMinutes`. <!-- 02-§54.1 -->
+- A midnight-crossing event with a calculated duration of **1 020 minutes
+  (17 hours) or less** must be accepted by all validation layers (client live,
+  client submit, server API, build-time lint). <!-- 02-§54.2 -->
+- A midnight-crossing event with a calculated duration **greater than
+  1 020 minutes** must be rejected with a clear error message indicating the
+  times appear incorrect. <!-- 02-§54.3 -->
+- When `end == start`, the event must always be rejected — zero-length events
+  remain invalid regardless of the midnight-crossing rule. <!-- 02-§54.4 -->
+- When `end > start` (normal case), behaviour must remain unchanged — no info
+  message, no duration calculation. <!-- 02-§54.5 -->
+
+### 54.2 User feedback (user requirements)
+
+- When a valid midnight crossing is detected during live validation, the
+  end-time field must show a **green informational message**:
+  *"Tolkas som att aktiviteten slutar nästa dag."* — not a red
+  error. <!-- 02-§54.6 -->
+- The informational message must use sage-green styling (`.field-info` class)
+  and must **not** set `aria-invalid="true"` on the input — the input border
+  must remain normal. <!-- 02-§54.7 -->
+- When a midnight crossing exceeds the threshold, the end-time field must
+  show a red error: *"Aktiviteten verkar vara för lång. Kontrollera start-
+  och sluttid."* <!-- 02-§54.8 -->
+- The informational or error message must be cleared when the user edits the
+  start or end field again. <!-- 02-§54.9 -->
+
+### 54.3 Edit form (site requirements)
+
+- The edit form (`redigera.js`) submit validation must apply the same
+  midnight-crossing logic as the add form. <!-- 02-§54.10 -->
+
+### 54.4 Build-time lint (site requirements)
+
+- The build-time YAML linter (`lint-yaml.js`) must apply the same
+  midnight-crossing threshold when checking existing event
+  files. <!-- 02-§54.11 -->

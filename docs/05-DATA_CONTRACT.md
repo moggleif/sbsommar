@@ -120,7 +120,9 @@ The `owner` and `meta` fields are for internal use only and must never be displa
 - `date` must fall within the camp's `start_date` and `end_date` (inclusive). <!-- 05-§4.1 -->
 - `start` must use 24-hour format: `"HH:MM"`. <!-- 05-§4.2 -->
 - `end` must be `"HH:MM"`. <!-- 05-§4.4 -->
-- `end` must be after `start`. <!-- 05-§4.3 -->
+- `end` must be after `start`. Exception: if `end < start` (midnight crossing),
+  the implied duration `(24 × 60 − startMinutes) + endMinutes` must not exceed
+  1 020 minutes (17 hours). <!-- 05-§4.3 -->
 - No timezone handling. All times are local. <!-- 05-§4.5 -->
 
 ---
