@@ -610,3 +610,19 @@ events:
     meta:
       created_at: 2026-02-28 06:08
       updated_at: 2026-02-28 06:08
+  - id: nu-2026-02-28-1108
+    title: 'Nu?'
+    date: '2026-02-28'
+    start: '11:08'
+    end: '12:08'
+    location: GA Stilla hyllan
+    responsible: Morgan
+    description: |
+      Hallå
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-28 09:08
+      updated_at: 2026-02-28 09:08
