@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-28 (14 gap requirements added for synchronous API errors and deploy safety, 02-§53.1–53.14).
+Audit date: 2026-02-24. Last updated: 2026-02-28 (11 gap requirements added for midnight-crossing events, 02-§54.1–54.11).
 
 ---
 
@@ -152,10 +152,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (14 gap requirements added for 
 | `02-§6.7` | A clear success confirmation is shown after submission | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – reveals `#result` section with activity title | implemented |
 | `02-§6.8` | Network failure shows a clear error and allows retry; submissions are never silently lost | 03-ARCHITECTURE.md §3 | — | `source/assets/js/client/lagg-till.js` – `.catch()` re-enables button and shows error | implemented |
 | `02-§6.9` | Date field shows an inline error immediately on `change` if the value is in the past | 07-DESIGN.md §6.34–6.39 | LVD-01 | `source/assets/js/client/lagg-till.js` – `change` listener on `#f-date` | implemented |
-| `02-§6.10` | End-time field shows an inline error immediately on `change` if start is filled and end ≤ start | 07-DESIGN.md §6.34–6.39 | LVD-02 | `source/assets/js/client/lagg-till.js` – `change` listener on `#f-end` | implemented |
+| `02-§6.10` | End-time field evaluated on `change` using midnight-crossing rule (§54); shows info or error | 07-DESIGN.md §6.34–6.39, §6.44a–6.44g | LVD-02 | `source/assets/js/client/lagg-till.js` – `change` listener on `#f-end` | implemented |
 | `02-§6.11` | Any required field shows an inline error on `blur` if it is empty | 07-DESIGN.md §6.34–6.39 | LVD-03 | `source/assets/js/client/lagg-till.js` – `blur` listeners on all required fields | implemented |
 | `02-§6.12` | A live-validation error is cleared as soon as the user starts editing the field (`input`/`change`) | 07-DESIGN.md §6.34–6.39 | LVD-04 | `source/assets/js/client/lagg-till.js` – `input`/`change` clear listener per field | implemented |
-| `02-§6.13` | When start time changes, end-time cross-check is re-evaluated immediately (show or clear error) | 07-DESIGN.md §6.34–6.39 | LVD-05 | `source/assets/js/client/lagg-till.js` – `change` listener on `#f-start` re-validates `#f-end` | implemented |
+| `02-§6.13` | When start time changes, end-time re-evaluated using midnight-crossing rule (§54); shows info, error, or clears | 07-DESIGN.md §6.34–6.39, §6.44a–6.44g | LVD-05 | `source/assets/js/client/lagg-till.js` – `change` listener on `#f-start` re-validates `#f-end` | implemented |
 | `02-§6.14` | When date = today and start time is more than 2 hours in the past, show inline error; same check re-runs when date changes to today | 07-DESIGN.md §6.34–6.39 | LVD-06 | `source/assets/js/client/lagg-till.js` – `isPastTimeToday()` called from start and date `change` listeners | implemented |
 | `02-§7.1` | Only administrators can edit or remove activities (via YAML directly; no participant editing UI) | 04-OPERATIONS.md (Disaster Recovery) | — | No editing UI exists; enforced by absence, not access control | implemented |
 | `02-§8.1` | Location names are consistent throughout the week; defined only in `source/data/local.yaml` | 03-ARCHITECTURE.md §6 | RADD-16 | `source/build/build.js` (loads `local.yaml`); `source/build/render-add.js` (uses those names) | covered |
@@ -163,7 +163,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (14 gap requirements added for 
 | `02-§9.1` | `title` is present and non-empty before form submission | 05-DATA_CONTRACT.md §3 | VLD-04..06 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
 | `02-§9.2` | `date` falls within the active camp's date range | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `min`/`max` (browser-enforced only; not in submit handler) | implemented |
 | `02-§9.3` | `start` is in valid `HH:MM` format | 05-DATA_CONTRACT.md §4 | — | `source/build/render-add.js` – `type="time"` (browser-enforced only; not validated by server — see `05-§4.2`) | implemented |
-| `02-§9.4` | `end` is present, in valid `HH:MM` format, and is after `start` | 05-DATA_CONTRACT.md §4 | VLD-16..20, VLD-27..32 | `source/assets/js/client/lagg-till.js` and `redigera.js` (client); `source/api/validate.js` – `validateEventRequest()` and `validateEditRequest()` (server, tested) | covered |
+| `02-§9.4` | `end` is present, valid `HH:MM`, after `start` or valid midnight crossing (§54) | 05-DATA_CONTRACT.md §4 | VLD-16..20, VLD-27..32 | `source/assets/js/client/lagg-till.js` and `redigera.js` (client); `source/api/validate.js` – `validateEventRequest()` and `validateEditRequest()` (server, tested) | covered |
 | `02-§9.5` | `location` is present and non-empty | 05-DATA_CONTRACT.md §3 | VLD-10 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
 | `02-§9.6` | `responsible` is present and non-empty | 05-DATA_CONTRACT.md §3 | VLD-11 | `source/assets/js/client/lagg-till.js` (client); `source/api/validate.js` (server, tested) | covered |
 | `02-§10.1` | All required fields are present and of correct type before any write begins | 03-ARCHITECTURE.md §3 | VLD-01..11 | `source/api/validate.js` – `validateEventRequest()`; `app.js` – returns HTTP 400 on failure | covered |
@@ -966,15 +966,26 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (14 gap requirements added for 
 | `02-§53.12` | Deploy workflow maintains `.env.api.persistent` backup | 04-OPERATIONS.md | ENV-01 | `.github/workflows/deploy-reusable.yml` | covered |
 | `02-§53.13` | Restore falls back to `.env.api.persistent` if `.bak` missing | 04-OPERATIONS.md | ENV-02 | `.github/workflows/deploy-reusable.yml` | covered |
 | `02-§53.14` | Persistent backup not deleted by restore step (`cp`, not `mv`) | 04-OPERATIONS.md | ENV-03 | `.github/workflows/deploy-reusable.yml` | covered |
+| `02-§54.1` | When `end < start`, calculate duration as `(24×60 − startMins) + endMins` | 05-DATA_CONTRACT.md §4.3 | VLD-56..58 | `source/api/validate.js` `timeToMinutes()`, `source/assets/js/client/lagg-till.js` `checkEndTime()`, `source/scripts/lint-yaml.js` | covered |
+| `02-§54.2` | Midnight-crossing ≤ 1 020 min accepted by all validation layers | 05-DATA_CONTRACT.md §4.3 | VLD-56..58, VLD-62, LNT-24 | `validate.js`, `lagg-till.js`, `redigera.js`, `lint-yaml.js` | covered |
+| `02-§54.3` | Midnight-crossing > 1 020 min rejected with clear error | 05-DATA_CONTRACT.md §4.3 | VLD-59, VLD-63, LNT-25 | `validate.js`, `lagg-till.js`, `redigera.js`, `lint-yaml.js` | covered |
+| `02-§54.4` | `end == start` always rejected (zero-length invalid) | 05-DATA_CONTRACT.md §4.3 | VLD-60 | `validate.js`, `lagg-till.js`, `redigera.js`, `lint-yaml.js` | covered |
+| `02-§54.5` | Normal `end > start` behaviour unchanged | 05-DATA_CONTRACT.md §4.3 | VLD-61 | `validate.js`, `lagg-till.js`, `redigera.js` | covered |
+| `02-§54.6` | Valid midnight crossing shows green info message on end field | 07-DESIGN.md §6.44a–6.44g | LVD-07 | `source/assets/js/client/lagg-till.js` `setFieldInfo()`, `checkEndTime()` | covered |
+| `02-§54.7` | Info message uses `.field-info` class, no `aria-invalid` | 07-DESIGN.md §6.44a–6.44g | LVD-09 | `source/assets/cs/style.css` `.field-info`, `lagg-till.js` `setFieldInfo()` | covered |
+| `02-§54.8` | Invalid crossing shows red error on end field | 07-DESIGN.md §6.34–6.39 | VLD-59, VLD-63 | `lagg-till.js`, `redigera.js` `checkEndTime()` | covered |
+| `02-§54.9` | Info/error cleared when user edits start or end | 07-DESIGN.md §6.34–6.39 | manual: browser check | `lagg-till.js` REQUIRED_FIELDS clear listener | implemented |
+| `02-§54.10` | Edit form applies same midnight-crossing logic | 05-DATA_CONTRACT.md §4.3 | VLD-62..63 | `source/assets/js/client/redigera.js` `checkEndTime()` | covered |
+| `02-§54.11` | Build-time YAML linter applies midnight-crossing threshold | 05-DATA_CONTRACT.md §4.3 | LNT-24..25 | `source/scripts/lint-yaml.js` | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             812
-Covered (implemented + tested): 383
-Implemented, not tested:        428
+Total requirements:             823
+Covered (implemented + tested): 393
+Implemented, not tested:        429
 Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
@@ -1199,6 +1210,14 @@ Matrix cleanup (2026-02-25):
   API: synchronous GitHub operations, real error messages to user.
   Client: progress step list with green checkboxes during submission.
   Deploy: persistent .env backup outside public_html.
+11 requirements added for midnight-crossing events (02-§54.1–54.11):
+  10 covered (VLD-56..63, LNT-24..25, LVD-07..09): server, client, lint validation.
+  1 implemented (02-§54.9: browser-only clearing, manual verification).
+  Events crossing midnight (e.g. 23:00→01:00) allowed if duration ≤ 17 h.
+  Green info message for valid crossings; red error for invalid.
+  Affects: client forms, server API, build-time YAML linter.
+  Design tokens documented in 07-DESIGN.md §6.44a–6.44g.
+  02-§6.10, 02-§6.13, 02-§9.4, 05-§4.3 updated.
 ```
 
 ---
@@ -1380,3 +1399,7 @@ Matrix cleanup (2026-02-25):
 | PROG-01..02 | `tests/submit-progress.test.js` | `02-§53.6 — Progress stage messages` |
 | PROG-03..04 | `tests/submit-progress.test.js` | `02-§53.11 — Progress in both forms` |
 | BUILD-QA-01 | `tests/build-qa-filter.test.js` | `build.js QA camp filtering (02-§42.13, 02-§42.30)` |
+| VLD-56..61 | `tests/validate.test.js` | `validateEventRequest – midnight crossing (02-§54.1–54.5)` |
+| VLD-62..63 | `tests/validate.test.js` | `validateEditRequest – midnight crossing (02-§54.10)` |
+| LNT-24..25 | `tests/lint-yaml.test.js` | `validateYaml – midnight crossing (05-§4.3)` |
+| LVD-07..09 | `tests/live-form-validation.test.js` | `midnight crossing source checks (02-§54.1, 02-§54.6)` |

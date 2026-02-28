@@ -129,12 +129,21 @@ function validateYaml(content) {
       }
     }
 
-    // End after start
+    // End after start (midnight crossing allowed if duration ≤ 17 h / 1020 min)
     if (event.start && event.end) {
       const s = String(event.start);
       const e = String(event.end);
-      if (TIME_RE.test(s) && TIME_RE.test(e) && e <= s) {
-        errors.push(`${ref}: end "${e}" must be strictly after start "${s}"`);
+      if (TIME_RE.test(s) && TIME_RE.test(e)) {
+        if (e === s) {
+          errors.push(`${ref}: end "${e}" must be strictly after start "${s}"`);
+        } else if (e < s) {
+          const sMins = parseInt(s.slice(0, 2), 10) * 60 + parseInt(s.slice(3), 10);
+          const eMins = parseInt(e.slice(0, 2), 10) * 60 + parseInt(e.slice(3), 10);
+          const dur = (1440 - sMins) + eMins;
+          if (dur > 1020) {
+            errors.push(`${ref}: end "${e}" must be strictly after start "${s}"`);
+          }
+        }
       }
     }
 

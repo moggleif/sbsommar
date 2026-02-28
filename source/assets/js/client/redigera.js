@@ -359,13 +359,29 @@
     var span  = document.getElementById('err-' + name);
     if (message) {
       input.setAttribute('aria-invalid', 'true');
+      span.className = 'field-error';
       span.textContent = message;
       span.hidden = false;
     } else {
       input.removeAttribute('aria-invalid');
+      span.className = 'field-error';
       span.textContent = '';
       span.hidden = true;
     }
+  }
+
+  function timeToMinutes(hhmm) {
+    var parts = hhmm.split(':');
+    return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+  }
+
+  // Returns { state: 'ok'|'info'|'error', message: string|null }
+  function checkEndTime(startVal, endVal) {
+    if (endVal === startVal) return { state: 'error', message: 'Sluttid måste vara efter starttid.' };
+    if (endVal > startVal) return { state: 'ok', message: null };
+    var dur = (1440 - timeToMinutes(startVal)) + timeToMinutes(endVal);
+    if (dur <= 1020) return { state: 'info', message: 'Tolkas som att aktiviteten slutar nästa dag.' };
+    return { state: 'error', message: 'Aktiviteten verkar vara för lång. Kontrollera start- och sluttid.' };
   }
 
   function clearAllErrors() {
@@ -403,7 +419,10 @@
       else if (date < submitToday) fail('date', 'Datum kan inte vara i det förflutna.');
       if (!start)              fail('start', 'Starttid är obligatorisk.');
       if (!end)                fail('end', 'Sluttid är obligatorisk.');
-      else if (end <= start)   fail('end', 'Sluttid måste vara efter starttid.');
+      else if (start) {
+        var endResult = checkEndTime(start, end);
+        if (endResult.state === 'error') fail('end', endResult.message);
+      }
       if (!location)    fail('location', 'Plats är obligatoriskt.');
       if (!responsible) fail('responsible', 'Ansvarig är obligatoriskt.');
 

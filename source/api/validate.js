@@ -2,6 +2,11 @@
 
 const TIME_RE = /^\d{2}:\d{2}$/;
 
+function timeToMinutes(hhmm) {
+  const parts = hhmm.split(':');
+  return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+}
+
 const MAX_LENGTHS = {
   title:       200,
   location:    200,
@@ -62,7 +67,12 @@ function validateFields(body, { requireId = false } = {}, campDates) {
   if (!TIME_RE.test(start)) return fail('start måste vara HH:MM');
   if (!end)         return fail('end är obligatoriskt');
   if (!TIME_RE.test(end))   return fail('end måste vara HH:MM');
-  if (end <= start) return fail('end måste vara efter start');
+  if (end === start) return fail('end måste vara efter start');
+  if (end < start) {
+    // Midnight crossing: allow if duration ≤ 17 h (1020 min), reject otherwise.
+    const dur = (1440 - timeToMinutes(start)) + timeToMinutes(end);
+    if (dur > 1020) return fail('end måste vara efter start');
+  }
   if (!location)    return fail('location är obligatoriskt');
   if (!responsible) return fail('responsible är obligatoriskt');
 
