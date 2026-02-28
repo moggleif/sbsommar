@@ -775,8 +775,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§42.10` | Existing events in QA camp file preserved | — | manual: inspect `qa-testcamp.yaml` | `source/data/qa-testcamp.yaml` | implemented |
 | `02-§42.11` | Production build excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | QA-01, QA-03 | `source/scripts/resolve-active-camp.js`, `source/build/build.js` | covered |
 | `02-§42.12` | Production API excludes `qa: true` camps | 03-ARCHITECTURE.md §2 | QA-01 (same logic) | `source/api/github.js`, `app.js` | covered |
-| `02-§42.13` | QA camps never appear in production output (schedule, index, archive, RSS, calendar) | 03-ARCHITECTURE.md §2 | QA-01, QA-03, BUILD-QA-01 | `source/build/build.js` | gap |
-| `02-§42.30` | `build.js` filters `qa: true` camps from array before all rendering | 03-ARCHITECTURE.md §2 | BUILD-QA-01 | `source/build/build.js` | gap |
+| `02-§42.13` | QA camps never appear in production output (schedule, index, archive, RSS, calendar) | 03-ARCHITECTURE.md §2 | QA-01, QA-03, BUILD-QA-01 | `source/build/build.js` | covered |
+| `02-§42.30` | `build.js` filters `qa: true` camps from array before all rendering | 03-ARCHITECTURE.md §2 | BUILD-QA-01 | `source/build/build.js` | covered |
 | `02-§42.14` | In QA, `qa: true` camp on dates wins resolution | 03-ARCHITECTURE.md §2 | QA-04, QA-05 | `source/scripts/resolve-active-camp.js` | covered |
 | `02-§42.15` | QA resolution: QA camp first, then normal rules | 03-ARCHITECTURE.md §2 | QA-04, QA-06 | `source/scripts/resolve-active-camp.js` | covered |
 | `02-§42.16` | QA camp always active in QA even when production camp overlaps | 03-ARCHITECTURE.md §2 | QA-05 | `source/scripts/resolve-active-camp.js` | covered |
@@ -959,9 +959,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 
 ```text
 Total requirements:             812
-Covered (implemented + tested): 381
+Covered (implemented + tested): 383
 Implemented, not tested:        428
-Gap (no implementation):          3
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
