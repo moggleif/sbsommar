@@ -80,6 +80,7 @@ jobs:
             # Preserve PHP API .env (server-managed, not in repo)
             if [ -f "$PUBLIC_DIR/api/.env" ]; then
               cp "$PUBLIC_DIR/api/.env" "$DEPLOY_DIR/.env.api.bak"
+              cp "$PUBLIC_DIR/api/.env" "$DEPLOY_DIR/.env.api.persistent"
             fi
 
             # Swap (millisecond downtime)
@@ -126,6 +127,9 @@ jobs:
             # Restore server-managed .env (backed up during static site swap)
             if [ -f "$DEPLOY_DIR/.env.api.bak" ]; then
               mv "$DEPLOY_DIR/.env.api.bak" "$API_STAGING/.env"
+            elif [ -f "$DEPLOY_DIR/.env.api.persistent" ]; then
+              cp "$DEPLOY_DIR/.env.api.persistent" "$API_STAGING/.env"
+              echo "Restored .env from persistent backup"
             fi
 
             # Install PHP dependencies

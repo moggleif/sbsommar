@@ -72,17 +72,77 @@
     if (preFocusEl) preFocusEl.focus();
   }
 
+  // ── Progress steps (02-§53.6–53.11) ─────────────────────────────────────────
+
+  var PROGRESS_STEPS = [
+    { text: 'Skickar till servern\u2026', delay: 0 },
+    { text: 'Kontrollerar aktiviteten\u2026', delay: 500 },
+    { text: 'Sparar aktiviteten\u2026', delay: 2000 },
+  ];
+
+  var progressTimers = [];
+
+  function buildProgressHtml() {
+    var html = '<ul class="submit-progress" role="status" aria-live="polite">';
+    for (var i = 0; i < PROGRESS_STEPS.length; i++) {
+      html += '<li class="progress-step" id="progress-step-' + i + '">' +
+        '<span class="step-icon" aria-hidden="true">\u25CB</span> ' +
+        '<span class="step-text">' + PROGRESS_STEPS[i].text + '</span></li>';
+    }
+    html += '</ul>';
+    return html;
+  }
+
+  function activateStep(index) {
+    var el = document.getElementById('progress-step-' + index);
+    if (!el) return;
+    el.classList.add('step-active');
+    el.querySelector('.step-icon').textContent = '\u25C9';
+  }
+
+  function completeStep(index) {
+    var el = document.getElementById('progress-step-' + index);
+    if (!el) return;
+    el.classList.remove('step-active');
+    el.classList.add('step-done');
+    el.querySelector('.step-icon').textContent = '\u2713';
+  }
+
+  function completeAllSteps() {
+    for (var i = 0; i < PROGRESS_STEPS.length; i++) {
+      completeStep(i);
+    }
+  }
+
+  function clearProgressTimers() {
+    for (var i = 0; i < progressTimers.length; i++) {
+      clearTimeout(progressTimers[i]);
+    }
+    progressTimers = [];
+  }
+
   // ── Modal states ──────────────────────────────────────────────────────────────
 
   function setModalLoading() {
-    modalHeading.textContent = 'Sparar…';
-    modalContent.innerHTML =
-      '<div class="modal-spinner" aria-hidden="true"></div>' +
-      '<p class="modal-status">Sparar till GitHub…</p>';
+    modalHeading.textContent = 'Sparar\u2026';
+    modalContent.innerHTML = buildProgressHtml();
+    activateStep(0);
+
+    for (var i = 1; i < PROGRESS_STEPS.length; i++) {
+      (function (prev, curr, delay) {
+        progressTimers.push(setTimeout(function () {
+          completeStep(prev);
+          activateStep(curr);
+        }, delay));
+      })(i - 1, i, PROGRESS_STEPS[i].delay);
+    }
+
     openModal();
   }
 
   function setModalSuccess(title) {
+    clearProgressTimers();
+    completeAllSteps();
     modalHeading.textContent = 'Aktiviteten är uppdaterad!';
     modalContent.innerHTML =
       '<p class="intro"><strong>' + escHtml(title) + '</strong>' +
@@ -94,6 +154,7 @@
   }
 
   function setModalError(message) {
+    clearProgressTimers();
     modalHeading.textContent = 'Något gick fel';
     modalContent.innerHTML =
       '<p class="form-error-msg">' + escHtml(message) + '</p>' +
