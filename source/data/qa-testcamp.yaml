@@ -692,3 +692,18 @@ events:
     meta:
       created_at: 2026-02-28 19:37
       updated_at: 2026-02-28 19:37
+  - id: en-till-2026-02-28-2314
+    title: en till
+    date: '2026-02-28'
+    start: '23:14'
+    end: '23:47'
+    location: GA Datorsal
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-28 19:40
+      updated_at: 2026-02-28 19:40
