@@ -142,7 +142,9 @@ async function main() {
     .filter((def) => def.id && def.nav)
     .map((def) => ({ id: def.id, navLabel: def.nav }));
 
-  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections, SITE_URL);
+  const cookieDomain = process.env.COOKIE_DOMAIN || '';
+
+  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections, SITE_URL, cookieDomain);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
@@ -158,7 +160,7 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'version.json'), JSON.stringify({ version: buildTime }), 'utf8');
   console.log('Built: public/version.json');
 
-  const idagHtml = renderIdagPage(camp, events, footerHtml, navSections);
+  const idagHtml = renderIdagPage(camp, events, footerHtml, navSections, cookieDomain);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
   console.log(`Built: public/idag.html  (${events.length} events)`);
 

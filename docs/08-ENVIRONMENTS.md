@@ -85,6 +85,7 @@ the secrets.
 | ----------------- | -------------------------------- |
 | `SITE_URL`        | QA base URL                      |
 | `API_URL`         | QA PHP API endpoint              |
+| `COOKIE_DOMAIN`   | Session cookie domain (e.g. `sbsommar.se`) — injected at build time |
 | `SERVER_HOST`     | QA SSH/SCP host                  |
 | `SERVER_USER`     | QA SSH username                  |
 | `SERVER_SSH_KEY`  | QA SSH private key               |
@@ -107,6 +108,7 @@ Same secret names as `qa`, but with production values:
 | ----------------- | ----------------------------------------------------- |
 | `SITE_URL`        | Production base URL (e.g. `https://sommar.example.com`)          |
 | `API_URL`         | Production API endpoint (e.g. `https://api.sommar.example.com/add-event`) |
+| `COOKIE_DOMAIN`   | Session cookie domain (e.g. `sbsommar.se`) — injected at build time |
 | `SERVER_HOST`     | Production SSH/SCP host                               |
 | `SERVER_USER`     | Production SSH username                               |
 | `SERVER_SSH_KEY`  | Production SSH private key                            |

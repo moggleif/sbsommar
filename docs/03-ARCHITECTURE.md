@@ -378,6 +378,8 @@ edit events they do not own.
 4. On every page load, `source/assets/js/client/session.js` reads the
    cookie, removes IDs for events whose dates have passed, and writes the
    cleaned cookie back (or deletes it if the array becomes empty).
+   The write-back must include the same `Domain` attribute the server used,
+   read from a `data-cookie-domain` attribute injected on `<body>` at build time.
 5. Schedule pages read the cookie and attach "Redigera" links to matching
    event rows.
 

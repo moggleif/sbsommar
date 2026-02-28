@@ -4,6 +4,11 @@
   var COOKIE_NAME = 'sb_session';
   var MAX_AGE_SECONDS = 7 * 24 * 60 * 60; // 7 days
 
+  // Read the cookie domain injected at build time (02-§18.47).
+  // Must match the Domain the server uses when setting the cookie.
+  var cookieDomain = (document.body.dataset.cookieDomain || '').trim();
+  var domainPart = cookieDomain ? '; Domain=' + cookieDomain : '';
+
   // ── Cookie helpers ──────────────────────────────────────────────────────────
 
   function readSessionIds() {
@@ -27,12 +32,12 @@
   function writeSessionIds(ids) {
     if (!ids || ids.length === 0) {
       // Delete the cookie by setting Max-Age=0
-      document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; Secure; SameSite=Strict';
+      document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; Secure; SameSite=Strict' + domainPart;
       return;
     }
     var value = encodeURIComponent(JSON.stringify(ids));
     document.cookie = COOKIE_NAME + '=' + value +
-      '; Path=/; Max-Age=' + MAX_AGE_SECONDS + '; Secure; SameSite=Strict';
+      '; Path=/; Max-Age=' + MAX_AGE_SECONDS + '; Secure; SameSite=Strict' + domainPart;
   }
 
   // ── Expiry cleanup ──────────────────────────────────────────────────────────
