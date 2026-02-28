@@ -43,8 +43,8 @@ app.use((req, res, next) => {
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 
-// Health check
-app.get('/', (req, res) => {
+// Health check (on /api/health so that / serves index.html via express.static)
+app.get('/api/health', (req, res) => {
   res.json({ status: 'API running' });
 });
 
