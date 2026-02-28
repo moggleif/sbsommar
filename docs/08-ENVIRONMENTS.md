@@ -1,6 +1,6 @@
 # SB Sommar – Environments
 
-Four environments serve different stages of the development-to-production pipeline.
+Three environments serve different stages of the development-to-production pipeline.
 All environments deploy from the `main` branch.
 
 For CI/CD workflow details, see [04-OPERATIONS.md](04-OPERATIONS.md).
@@ -13,7 +13,6 @@ For CI/CD workflow details, see [04-OPERATIONS.md](04-OPERATIONS.md).
 | -------------- | ----------- | --------- | ---------------------------- | ---------------------- | ------------------------------- |
 | **Local**      | localhost   | Node.js   | `npm start`                  | N/A                    | `.env` file                     |
 | **QA**         | Loopia      | PHP       | Auto on push to `main`       | Auto on event PR merge | GitHub Environment `qa`         |
-| **QA-Node**    | Node.js VPS | Node.js   | Auto on push to `main`       | Auto on event PR merge | GitHub Environment `qanode`     |
 | **Production** | Loopia      | PHP       | Manual (`workflow_dispatch`) | Auto on event PR merge | GitHub Environment `production` |
 
 **Key rule:** code changes reach Production only when manually triggered.
@@ -42,10 +41,10 @@ and APIs filter out QA camps entirely. See `02-REQUIREMENTS.md §42`.
 2. The API commits the validated event to a temporary branch and opens an auto-merge PR.
 3. `event-data-deploy.yml` runs a no-op check that satisfies branch protection.
 4. The PR auto-merges to `main`.
-5. `event-data-deploy-post-merge.yml` triggers: three parallel jobs install
+5. `event-data-deploy-post-merge.yml` triggers: two parallel jobs install
    production dependencies via `setup-node` + `npm ci --omit=dev`, build the
-   site, and deploy event-data pages via SCP — one each to QA, QA Node, and
-   Production.
+   site, and deploy event-data pages — one each to QA (rsync) and
+   Production (SCP).
 6. Each job builds with its own environment's `SITE_URL` and `API_URL` so that
    per-event page links point to the correct domain.
 
@@ -60,9 +59,8 @@ All environments receive event data within minutes of submission — no manual s
 | `ci.yml`                  | Every push and PR                                      | — (repo-level)       |
 | `deploy-qa.yml`           | Push to `main` (paths-ignore data YAMLs)               | `qa`                 |
 | `deploy-prod.yml`         | `workflow_dispatch` (manual)                            | `production`         |
-| `deploy-qa-node.yml`      | Push to `main` (paths-ignore data YAMLs)               | `qanode`             |
 | `event-data-deploy.yml`   | PR from `event/` or `event-edit/` changing data YAMLs  | — (no-op gate)       |
-| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only)              | `qa` + `qanode` + `production` |
+| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only)              | `qa` + `production`  |
 | `docker-build.yml`        | Push to `main` (package.json or Dockerfile)            | — (GHCR, no longer used by event-data deploy) |
 
 `deploy-qa.yml` and `deploy-prod.yml` both call the shared reusable workflow
@@ -70,10 +68,6 @@ All environments receive event data within minutes of submission — no manual s
 and deploys the PHP API (with `composer install` on the server).
 The only difference is the trigger and the GitHub Environment that provides
 the secrets.
-
-`deploy-qa-node.yml` is self-contained and does not use the reusable workflow.
-It builds and deploys the static site via SCP, then deploys the Node.js API
-separately (`git pull` + `npm install` + restart).
 
 ---
 
@@ -104,21 +98,6 @@ The PHP API is deployed alongside the static site via SCP. The `api/.env`
 file on the server is managed manually and contains the `GITHUB_*`,
 `ALLOWED_ORIGIN`, `QA_ORIGIN`, `COOKIE_DOMAIN`, and `BUILD_ENV` variables
 needed by the PHP API at runtime.
-
-### GitHub Environment: `qanode` (Node.js host — preserved)
-
-| Secret            | Purpose                                          |
-| ----------------- | ------------------------------------------------ |
-| `SITE_URL`        | QA base URL for the Node.js host                 |
-| `API_URL`         | QA Node.js API endpoint                          |
-| `SERVER_HOST`     | QA SSH/SCP host                                  |
-| `SERVER_USER`     | QA SSH username                                  |
-| `SERVER_SSH_KEY`  | QA SSH private key                               |
-| `SERVER_SSH_PORT` | QA SSH port                                      |
-| `DEPLOY_DIR`      | QA deploy directory                              |
-
-This environment powers the Node.js QA host. It auto-deploys on push
-to `main` via `deploy-qa-node.yml`.
 
 ### GitHub Environment: `production`
 

@@ -127,17 +127,15 @@ describe('02-§51.7 — Production job checks QA camp status (EDW-14..15)', () =
     );
   });
 
-  it('EDW-15: QA deploy jobs do NOT check camps.yaml for qa field', () => {
-    for (const name of ['deploy-qa', 'deploy-qa-node']) {
-      const job = workflow.jobs[name];
-      if (!job) continue;
-      const gate = (job.steps || []).find((s) => s.id === 'gate');
-      if (!gate) continue;
-      assert.ok(
-        !gate.run.includes('camps.yaml'),
-        `${name} gate should not check camps.yaml (QA always deploys)`
-      );
-    }
+  it('EDW-15: QA deploy job does NOT check camps.yaml for qa field', () => {
+    const job = workflow.jobs['deploy-qa'];
+    assert.ok(job, 'deploy-qa job must exist');
+    const gate = (job.steps || []).find((s) => s.id === 'gate');
+    assert.ok(gate, 'deploy-qa must have a gate step');
+    assert.ok(
+      !gate.run.includes('camps.yaml'),
+      'deploy-qa gate should not check camps.yaml (QA always deploys)'
+    );
   });
 });
 
@@ -215,21 +213,19 @@ describe('02-§52.4 — No packages:read permission (EDW-25)', () => {
 // ── 02-§52.5 / 02-§52.6  Conditional vs unconditional setup-node ──────────
 
 describe('02-§52.5–52.6 — setup-node conditionality (EDW-26..28)', () => {
-  for (const name of ['deploy-qa', 'deploy-qa-node']) {
-    it(`EDW-26: ${name} setup-node is conditional on gate`, () => {
-      const job = workflow.jobs[name];
-      if (!job) return;
-      const steps = job.steps || [];
-      const setupNode = steps.find(
-        (s) => s.uses && s.uses.startsWith('actions/setup-node')
-      );
-      assert.ok(setupNode, `${name} must have a setup-node step`);
-      assert.ok(
-        setupNode.if && setupNode.if.includes('gate'),
-        `${name} setup-node must be conditional on gate output`
-      );
-    });
-  }
+  it('EDW-26: deploy-qa setup-node is conditional on gate', () => {
+    const job = workflow.jobs['deploy-qa'];
+    assert.ok(job, 'deploy-qa job must exist');
+    const steps = job.steps || [];
+    const setupNode = steps.find(
+      (s) => s.uses && s.uses.startsWith('actions/setup-node')
+    );
+    assert.ok(setupNode, 'deploy-qa must have a setup-node step');
+    assert.ok(
+      setupNode.if && setupNode.if.includes('gate'),
+      'deploy-qa setup-node must be conditional on gate output'
+    );
+  });
 
   it('EDW-28: deploy-prod setup-node is unconditional', () => {
     const prod = workflow.jobs['deploy-prod'];

@@ -88,20 +88,7 @@ Never define locations inside individual camp files.
 
 ### Infrastructure
 
-Two deployment models are supported, depending on the host:
-
-**Node.js host** (e.g. a VPS with Passenger):
-
-| Part                    | Deployment method | Location on host                     |
-| ----------------------- | ----------------- | ------------------------------------ |
-| Static site (`public/`) | SCP + SSH swap    | Web root (`DEPLOY_DIR/public_html`)  |
-| API server (`app.js`)   | SSH only          | App directory (git repo on host)     |
-
-The Node.js API runs as a persistent process via Passenger.
-The deploy SSHes into the host, runs `git pull` and `npm install`, then
-touches `tmp/restart.txt` to trigger a Passenger restart.
-
-**Shared hosting / PHP host** (e.g. Loopia):
+The site is deployed to shared PHP hosting (Loopia):
 
 | Part                    | Deployment method | Location on host                        |
 | ----------------------- | ----------------- | --------------------------------------- |
@@ -125,7 +112,7 @@ Production deploys are triggered manually. See [08-ENVIRONMENTS.md](08-ENVIRONME
 | `event-data-deploy.yml`   | PRs from `event/`, `event-edit/` changing `source/data/*.yaml` | Lint YAML + security scan + build + targeted deploy to both QA (SCP) and Production (FTP). Uses `fetch-depth: 0` to detect changed files.                                                                   |
 | `deploy-qa.yml`           | Push to `main` (paths-ignore data YAMLs)                       | Calls `deploy-reusable.yml` with environment `qa`. Build → SCP → SSH swap → SSH restart.                                                                                                                    |
 | `deploy-prod.yml`         | Manual (`workflow_dispatch`)                                    | Calls `deploy-reusable.yml` with environment `production`. Same steps as QA.                                                                                                                               |
-| `deploy-reusable.yml`     | Called by `deploy-qa.yml` / `deploy-prod.yml`                   | Shared logic: Build → SCP archive → SSH swap into web root → SSH app server restart.                                                                                                                       |
+| `deploy-reusable.yml`     | Called by `deploy-qa.yml` / `deploy-prod.yml`                   | Shared logic: Build → SCP archive → SSH swap into web root → deploy PHP API.                                                                                                                               |
 
 ```mermaid
 flowchart TD
@@ -140,13 +127,13 @@ flowchart TD
     subgraph F [QA: auto-deploy on push to main]
         F1[Build public/] --> F2[tar + SCP archive to QA server]
         F2 --> F3[SSH: extract · swap · cleanup]
-        F3 --> F5[SSH: git pull · npm install · Passenger restart]
+        F3 --> F4[SSH: deploy PHP API · composer install]
     end
 
     subgraph G [Production: manual workflow_dispatch]
         G1[Build public/] --> G2[tar + SCP archive to prod server]
         G2 --> G3[SSH: extract · swap · cleanup]
-        G3 --> G5[SSH: git pull · npm install · Passenger restart]
+        G3 --> G4[SSH: deploy PHP API · composer install]
     end
 ```
 
@@ -167,14 +154,6 @@ flowchart TD
 `API_URL`, `ALLOWED_ORIGIN`, `COOKIE_DOMAIN`, `GITHUB_*`, and SSH credentials are stored as GitHub Actions secrets and server environment variables. They are not needed for local development. Without `API_URL` set, the built form will have no submit endpoint — this is expected in local builds. Without `GITHUB_*` set, event submission via the API will fail; all other functionality works normally.
 
 **`COOKIE_DOMAIN`**: required when the API and the static site are deployed on different subdomains (e.g. `api.sommar.example.com` and `sommar.example.com`). Set it to the shared parent domain — e.g. `sommar.digitalasynctransparency.com`. This causes the session cookie to include `Domain=<value>` so that client-side JavaScript on the static site can read it. Omit the variable for single-origin deployments.
-
-### Manual Production Startup (first time or after server wipe)
-
-```bash
-npm install --omit=dev
-npm run build
-npm start
-```
 
 ---
 
@@ -239,6 +218,6 @@ Git history provides a full audit trail of all changes, including every event su
 
 ### Server not responding
 
-1. Check Passenger logs on the host.
-2. Verify `app.js` and `node_modules/` are present in the app directory.
-3. Re-run the manual startup steps if needed.
+1. Check Apache/PHP error logs on the host.
+2. Verify the `api/.env` file exists and contains valid credentials.
+3. Re-deploy via `workflow_dispatch` if the static site is missing.

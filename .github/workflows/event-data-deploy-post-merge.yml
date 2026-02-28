@@ -8,8 +8,7 @@ name: Event Data Deploy (Post-Merge)
 #
 # Jobs:
 #   1. deploy-qa      – detect inline + build + rsync to QA
-#   2. deploy-qa-node – detect inline + build + SCP to QA Node
-#   3. deploy-prod    – detect inline + QA check + build + SCP to Production
+#   2. deploy-prod    – detect inline + QA check + build + SCP to Production
 
 permissions:
   contents: read
@@ -93,79 +92,6 @@ jobs:
             staging/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DEPLOY_DIR }}/public_html/
           rm -f deploy_key
-
-  deploy-qa-node:
-    name: Build & deploy to QA Node
-    runs-on: ubuntu-latest
-    environment: qanode
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Detect changed event data file
-        id: gate
-        run: |
-          CHANGED=$(git diff --name-only HEAD~1..HEAD \
-            | grep '^source/data/' | grep '\.yaml$' \
-            | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
-          if [ -z "$CHANGED" ]; then
-            echo "No event YAML file changed"
-            echo "skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-            echo "Detected changed file: $CHANGED"
-          fi
-
-      - uses: actions/setup-node@v4
-        if: steps.gate.outputs.skip != 'true'
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install production dependencies
-        if: steps.gate.outputs.skip != 'true'
-        run: npm ci --omit=dev
-
-      - name: Build site
-        if: steps.gate.outputs.skip != 'true'
-        run: node source/build/build.js
-        env:
-          API_URL: ${{ secrets.API_URL }}
-          SITE_URL: ${{ secrets.SITE_URL }}
-          BUILD_ENV: qa
-
-      - name: Stage event data pages
-        if: steps.gate.outputs.skip != 'true'
-        run: |
-          mkdir -p staging
-          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
-            if [ -f "public/$FILE" ]; then
-              cp "public/$FILE" "staging/$FILE"
-              echo "Staged: $FILE"
-            fi
-          done
-          if [ -d "public/schema" ]; then
-            find public/schema \( -name 'index.html' -o -name 'event.ics' \) | while read -r PAGE; do
-              REL="${PAGE#public/}"
-              mkdir -p "staging/$(dirname "$REL")"
-              cp "$PAGE" "staging/$REL"
-              echo "Staged: $REL"
-            done
-          fi
-
-      - name: Upload event data pages via SCP
-        if: steps.gate.outputs.skip != 'true'
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_SSH_PORT }}
-          source: staging/*
-          target: ${{ secrets.DEPLOY_DIR }}/public_html
-          strip_components: 1
 
   deploy-prod:
     name: Build & deploy to Production
