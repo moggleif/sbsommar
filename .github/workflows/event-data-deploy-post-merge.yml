@@ -42,6 +42,7 @@ jobs:
       - name: Detect changed event YAML file
         id: changed
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           CHANGED=$(git diff --name-only HEAD~1..HEAD \
             | grep '^source/data/' | grep '\.yaml$' \
             | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
