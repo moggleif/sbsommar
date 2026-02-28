@@ -966,17 +966,17 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (11 gap requirements added for 
 | `02-§53.12` | Deploy workflow maintains `.env.api.persistent` backup | 04-OPERATIONS.md | ENV-01 | `.github/workflows/deploy-reusable.yml` | covered |
 | `02-§53.13` | Restore falls back to `.env.api.persistent` if `.bak` missing | 04-OPERATIONS.md | ENV-02 | `.github/workflows/deploy-reusable.yml` | covered |
 | `02-§53.14` | Persistent backup not deleted by restore step (`cp`, not `mv`) | 04-OPERATIONS.md | ENV-03 | `.github/workflows/deploy-reusable.yml` | covered |
-| `02-§54.1` | When `end < start`, calculate duration as `(24×60 − startMins) + endMins` | 05-DATA_CONTRACT.md §4.3 | — | — | gap |
-| `02-§54.2` | Midnight-crossing ≤ 1 020 min accepted by all validation layers | 05-DATA_CONTRACT.md §4.3 | — | — | gap |
-| `02-§54.3` | Midnight-crossing > 1 020 min rejected with clear error | 05-DATA_CONTRACT.md §4.3 | — | — | gap |
-| `02-§54.4` | `end == start` always rejected (zero-length invalid) | 05-DATA_CONTRACT.md §4.3 | — | — | gap |
-| `02-§54.5` | Normal `end > start` behaviour unchanged | 05-DATA_CONTRACT.md §4.3 | — | — | gap |
-| `02-§54.6` | Valid midnight crossing shows green info message on end field | 07-DESIGN.md §6.44a–6.44g | — | — | gap |
-| `02-§54.7` | Info message uses `.field-info` class, no `aria-invalid` | 07-DESIGN.md §6.44a–6.44g | — | — | gap |
-| `02-§54.8` | Invalid crossing shows red error on end field | 07-DESIGN.md §6.34–6.39 | — | — | gap |
-| `02-§54.9` | Info/error cleared when user edits start or end | 07-DESIGN.md §6.34–6.39 | — | — | gap |
-| `02-§54.10` | Edit form applies same midnight-crossing logic | 05-DATA_CONTRACT.md §4.3 | — | — | gap |
-| `02-§54.11` | Build-time YAML linter applies midnight-crossing threshold | 05-DATA_CONTRACT.md §4.3 | — | — | gap |
+| `02-§54.1` | When `end < start`, calculate duration as `(24×60 − startMins) + endMins` | 05-DATA_CONTRACT.md §4.3 | VLD-56..58 | `source/api/validate.js` `timeToMinutes()`, `source/assets/js/client/lagg-till.js` `checkEndTime()`, `source/scripts/lint-yaml.js` | covered |
+| `02-§54.2` | Midnight-crossing ≤ 1 020 min accepted by all validation layers | 05-DATA_CONTRACT.md §4.3 | VLD-56..58, VLD-62, LNT-24 | `validate.js`, `lagg-till.js`, `redigera.js`, `lint-yaml.js` | covered |
+| `02-§54.3` | Midnight-crossing > 1 020 min rejected with clear error | 05-DATA_CONTRACT.md §4.3 | VLD-59, VLD-63, LNT-25 | `validate.js`, `lagg-till.js`, `redigera.js`, `lint-yaml.js` | covered |
+| `02-§54.4` | `end == start` always rejected (zero-length invalid) | 05-DATA_CONTRACT.md §4.3 | VLD-60 | `validate.js`, `lagg-till.js`, `redigera.js`, `lint-yaml.js` | covered |
+| `02-§54.5` | Normal `end > start` behaviour unchanged | 05-DATA_CONTRACT.md §4.3 | VLD-61 | `validate.js`, `lagg-till.js`, `redigera.js` | covered |
+| `02-§54.6` | Valid midnight crossing shows green info message on end field | 07-DESIGN.md §6.44a–6.44g | LVD-07 | `source/assets/js/client/lagg-till.js` `setFieldInfo()`, `checkEndTime()` | covered |
+| `02-§54.7` | Info message uses `.field-info` class, no `aria-invalid` | 07-DESIGN.md §6.44a–6.44g | LVD-09 | `source/assets/cs/style.css` `.field-info`, `lagg-till.js` `setFieldInfo()` | covered |
+| `02-§54.8` | Invalid crossing shows red error on end field | 07-DESIGN.md §6.34–6.39 | VLD-59, VLD-63 | `lagg-till.js`, `redigera.js` `checkEndTime()` | covered |
+| `02-§54.9` | Info/error cleared when user edits start or end | 07-DESIGN.md §6.34–6.39 | manual: browser check | `lagg-till.js` REQUIRED_FIELDS clear listener | implemented |
+| `02-§54.10` | Edit form applies same midnight-crossing logic | 05-DATA_CONTRACT.md §4.3 | VLD-62..63 | `source/assets/js/client/redigera.js` `checkEndTime()` | covered |
+| `02-§54.11` | Build-time YAML linter applies midnight-crossing threshold | 05-DATA_CONTRACT.md §4.3 | LNT-24..25 | `source/scripts/lint-yaml.js` | covered |
 
 ---
 
@@ -984,9 +984,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (11 gap requirements added for 
 
 ```text
 Total requirements:             823
-Covered (implemented + tested): 383
-Implemented, not tested:        428
-Gap (no implementation):         12
+Covered (implemented + tested): 393
+Implemented, not tested:        429
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1211,7 +1211,8 @@ Matrix cleanup (2026-02-25):
   Client: progress step list with green checkboxes during submission.
   Deploy: persistent .env backup outside public_html.
 11 requirements added for midnight-crossing events (02-§54.1–54.11):
-  All 11 gap (pending implementation).
+  10 covered (VLD-56..63, LNT-24..25, LVD-07..09): server, client, lint validation.
+  1 implemented (02-§54.9: browser-only clearing, manual verification).
   Events crossing midnight (e.g. 23:00→01:00) allowed if duration ≤ 17 h.
   Green info message for valid crossings; red error for invalid.
   Affects: client forms, server API, build-time YAML linter.
@@ -1398,3 +1399,7 @@ Matrix cleanup (2026-02-25):
 | PROG-01..02 | `tests/submit-progress.test.js` | `02-§53.6 — Progress stage messages` |
 | PROG-03..04 | `tests/submit-progress.test.js` | `02-§53.11 — Progress in both forms` |
 | BUILD-QA-01 | `tests/build-qa-filter.test.js` | `build.js QA camp filtering (02-§42.13, 02-§42.30)` |
+| VLD-56..61 | `tests/validate.test.js` | `validateEventRequest – midnight crossing (02-§54.1–54.5)` |
+| VLD-62..63 | `tests/validate.test.js` | `validateEditRequest – midnight crossing (02-§54.10)` |
+| LNT-24..25 | `tests/lint-yaml.test.js` | `validateYaml – midnight crossing (05-§4.3)` |
+| LVD-07..09 | `tests/live-form-validation.test.js` | `midnight crossing source checks (02-§54.1, 02-§54.6)` |
