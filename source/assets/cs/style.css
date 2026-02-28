@@ -1235,6 +1235,10 @@ details.accordion > summary:focus-visible {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .modal-box { animation: none; }
+}
+
 .modal-heading {
   margin: 0 0 var(--space-sm);
   color: var(--color-navy);
