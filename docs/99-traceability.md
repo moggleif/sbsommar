@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requirements moved from implemented to covered).
+Audit date: 2026-02-24. Last updated: 2026-02-28 (14 gap requirements added for synchronous API errors and deploy safety, 02-§53.1–53.14).
 
 ---
 
@@ -952,6 +952,20 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§52.6` | Production job: setup-node and npm ci unconditional (gate needs js-yaml) | 03-ARCHITECTURE.md §11.1 | EDW-28 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§52.7` | `02-§50.1`–`02-§50.7` superseded (Docker no longer used) | — | — | — | implemented |
 | `02-§52.8` | `02-§50.12` superseded by `02-§52.1` (setup-node replaces Docker) | — | — | — | implemented |
+| `02-§53.1` | Add-event endpoint completes GitHub operation before responding | — | — | `api/index.php` | gap |
+| `02-§53.2` | Edit-event endpoint completes GitHub operation before responding | — | — | `api/index.php` | gap |
+| `02-§53.3` | GitHub failure returns `{ success: false }` with HTTP 500 | — | — | `api/index.php` | gap |
+| `02-§53.4` | Error message is in Swedish, no internal details exposed | — | — | `api/index.php` | gap |
+| `02-§53.5` | `flushToClient()` and `ob_start()` removed | — | — | `api/index.php` | gap |
+| `02-§53.6` | Modal shows step-by-step progress list during submission | — | — | `source/assets/js/client/lagg-till.js`, `source/assets/js/client/redigera.js` | gap |
+| `02-§53.7` | Each stage transitions from unchecked to green check mark | — | — | `source/assets/js/client/lagg-till.js` | gap |
+| `02-§53.8` | Stage timing is client-side: 0 s, 0.5 s, 2 s | — | — | `source/assets/js/client/lagg-till.js` | gap |
+| `02-§53.9` | On success, all stages show green checks and success message appears | — | — | `source/assets/js/client/lagg-till.js` | gap |
+| `02-§53.10` | On error, progress stops and error message displayed | — | — | `source/assets/js/client/lagg-till.js` | gap |
+| `02-§53.11` | Progress list used for both add-event and edit-event forms | — | — | `source/assets/js/client/redigera.js` | gap |
+| `02-§53.12` | Deploy workflow maintains `.env.api.persistent` backup | 04-OPERATIONS.md | — | `.github/workflows/deploy-reusable.yml` | gap |
+| `02-§53.13` | Restore falls back to `.env.api.persistent` if `.bak` missing | 04-OPERATIONS.md | — | `.github/workflows/deploy-reusable.yml` | gap |
+| `02-§53.14` | Persistent backup not deleted by restore step (`cp`, not `mv`) | 04-OPERATIONS.md | — | `.github/workflows/deploy-reusable.yml` | gap |
 
 ---
 
@@ -1179,6 +1193,11 @@ Matrix cleanup (2026-02-25):
   02-§50.1–50.7 superseded by 02-§52.1 (Docker no longer used by event-data deploy).
   02-§50.12 superseded by 02-§52.1 (setup-node + npm cache replaces Docker).
   Architecture updated in 03-ARCHITECTURE.md §11.1, §11.3, §11.5.
+14 requirements added for synchronous API errors and deploy safety (02-§53.1–53.14):
+  all 14 gap (pending implementation).
+  API: synchronous GitHub operations, real error messages to user.
+  Client: progress step list with green checkboxes during submission.
+  Deploy: persistent .env backup outside public_html.
 ```
 
 ---
