@@ -245,13 +245,45 @@
     var span  = document.getElementById('err-' + name);
     if (message) {
       input.setAttribute('aria-invalid', 'true');
+      span.className = 'field-error';
       span.textContent = message;
       span.hidden = false;
     } else {
       input.removeAttribute('aria-invalid');
+      span.className = 'field-error';
       span.textContent = '';
       span.hidden = true;
     }
+  }
+
+  function setFieldInfo(name, message) {
+    var input = form.querySelector('#f-' + name);
+    var span  = document.getElementById('err-' + name);
+    if (message) {
+      input.removeAttribute('aria-invalid');
+      span.className = 'field-info';
+      span.textContent = message;
+      span.hidden = false;
+    } else {
+      span.className = 'field-error';
+      span.textContent = '';
+      span.hidden = true;
+    }
+  }
+
+  function timeToMinutes(hhmm) {
+    var parts = hhmm.split(':');
+    return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+  }
+
+  // Returns { state: 'ok'|'info'|'error', message: string|null }
+  function checkEndTime(startVal, endVal) {
+    if (endVal === startVal) return { state: 'error', message: 'Sluttid måste vara efter starttid.' };
+    if (endVal > startVal) return { state: 'ok', message: null };
+    // end < start → midnight crossing; check duration ≤ 17 h (1020 min)
+    var dur = (1440 - timeToMinutes(startVal)) + timeToMinutes(endVal);
+    if (dur <= 1020) return { state: 'info', message: 'Tolkas som att aktiviteten slutar nästa dag.' };
+    return { state: 'error', message: 'Aktiviteten verkar vara för lång. Kontrollera start- och sluttid.' };
   }
 
   function clearAllErrors() {
@@ -305,14 +337,20 @@
     });
   }
 
-  // Validate end time immediately on change (02-§6.10).
+  // Validate end time immediately on change (02-§6.10, 02-§54.1–54.9).
   var endInput = form.querySelector('#f-end');
   if (endInput) {
     endInput.addEventListener('change', function () {
       if (!endInput.value) return; // blur handles the empty case
       var startVal = (form.elements.start || {}).value;
-      if (startVal && endInput.value <= startVal) {
-        setFieldError('end', 'Sluttid måste vara efter starttid.');
+      if (!startVal) return;
+      var result = checkEndTime(startVal, endInput.value);
+      if (result.state === 'error') {
+        setFieldError('end', result.message);
+      } else if (result.state === 'info') {
+        setFieldInfo('end', result.message);
+      } else {
+        setFieldError('end', null);
       }
     });
   }
@@ -334,13 +372,18 @@
   var startInput = form.querySelector('#f-start');
   if (startInput) {
     startInput.addEventListener('change', function () {
-      // Re-evaluate end time cross-check.
-      if (endInput && endInput.value) {
-        if (startInput.value && endInput.value <= startInput.value) {
-          setFieldError('end', 'Sluttid måste vara efter starttid.');
+      // Re-evaluate end time cross-check (02-§6.13, 02-§54.1–54.9).
+      if (endInput && endInput.value && startInput.value) {
+        var result = checkEndTime(startInput.value, endInput.value);
+        if (result.state === 'error') {
+          setFieldError('end', result.message);
+        } else if (result.state === 'info') {
+          setFieldInfo('end', result.message);
         } else {
           setFieldError('end', null);
         }
+      } else if (endInput && endInput.value) {
+        setFieldError('end', null);
       }
       // Check for start time too far in the past on today's date.
       if (isPastTimeToday(startInput.value)) {
@@ -391,7 +434,10 @@
     else if (date < today) fail('date', 'Datum kan inte vara i det förflutna.');
     if (!start)            fail('start', 'Starttid är obligatorisk.');
     if (!end)              fail('end', 'Sluttid är obligatorisk.');
-    else if (end <= start) fail('end', 'Sluttid måste vara efter starttid.');
+    else if (start) {
+      var endResult = checkEndTime(start, end);
+      if (endResult.state === 'error') fail('end', endResult.message);
+    }
     if (!location)         fail('location', 'Plats är obligatoriskt.');
     if (!responsible)      fail('responsible', 'Ansvarig är obligatoriskt.');
 

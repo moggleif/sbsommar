@@ -921,6 +921,19 @@ textarea {
   border-bottom: 2px solid var(--color-terracotta);
 }
 
+/* ── Per-field info messages (07-§6.44a–6.44g) ── */
+
+.field-info {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  background: color-mix(in srgb, var(--color-sage) 20%, var(--color-cream));
+  border-left: 3px solid var(--color-sage);
+  border-radius: var(--radius-sm);
+  padding: 4px var(--space-xs);
+}
+
 /* ── Success state ── */
 
 .success-box {
