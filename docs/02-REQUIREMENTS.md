@@ -2286,3 +2286,50 @@ workflow builds and deploys via a pre-built Docker image.
   step. <!-- 02-§50.23 -->
 - Building event-data changes is the responsibility of the post-merge
   deploy workflow (§50.4). <!-- 02-§50.24 -->
+
+---
+
+## 51. Event Data Deploy — Eliminate Serial Detect Job
+
+The post-merge event-data deploy workflow (§50.4) currently runs a serial
+`detect` job before starting the three parallel deploy jobs. This adds
+~15 seconds to the critical path because the deploy jobs must wait for
+`detect` to finish before they can start. Each environment requires its
+own build (different `SITE_URL` and `BUILD_ENV`), so sharing build
+artifacts is not possible. Eliminating the serial dependency is the
+primary lever for reducing deploy latency.
+
+### 51.1 Workflow structure (site requirements)
+
+- The post-merge event-data deploy workflow must NOT have a separate
+  `detect` job that other jobs depend on. <!-- 02-§51.1 -->
+- Each deploy job must perform its own inline detection of changed event
+  data files as its first step. <!-- 02-§51.2 -->
+- All deploy jobs must start immediately in parallel when the workflow
+  triggers — no serial dependency between them. <!-- 02-§51.3 -->
+
+### 51.2 Inline detection (site requirements)
+
+- Each deploy job must check out with `fetch-depth: 2` to support
+  `HEAD~1..HEAD` comparison. <!-- 02-§51.4 -->
+- Each deploy job must detect changed per-camp YAML files using the same
+  `git diff` logic previously in the `detect` job: filter for
+  `source/data/*.yaml`, exclude `camps.yaml` and `local.yaml`. <!-- 02-§51.5 -->
+- If no event data file changed, the job must skip build and deploy
+  steps (exit cleanly). <!-- 02-§51.6 -->
+
+### 51.3 Production QA gating (site requirements)
+
+- The production deploy job must additionally determine whether the
+  changed file belongs to a QA camp, using the same `camps.yaml` lookup
+  as the previous `detect` job. <!-- 02-§51.7 -->
+- If the changed file belongs to a QA camp, the production deploy job
+  must skip build and deploy steps. <!-- 02-§51.8 -->
+
+### 51.4 Superseded requirements
+
+- `02-§50.13` (detect via `HEAD~1..HEAD` in a dedicated job) is
+  superseded by `02-§51.2` and `02-§51.5` (inline detection per
+  job). <!-- 02-§51.9 -->
+- `02-§50.14` (QA detection sets `is_qa` output) is superseded by
+  `02-§51.7` (inline QA check in production job only). <!-- 02-§51.10 -->
