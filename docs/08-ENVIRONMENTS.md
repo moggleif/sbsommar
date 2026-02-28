@@ -42,9 +42,10 @@ and APIs filter out QA camps entirely. See `02-REQUIREMENTS.md §42`.
 2. The API commits the validated event to a temporary branch and opens an auto-merge PR.
 3. `event-data-deploy.yml` runs a no-op check that satisfies branch protection.
 4. The PR auto-merges to `main`.
-5. `event-data-deploy-post-merge.yml` triggers: three parallel jobs build inside
-   a pre-built Docker image and deploy event-data pages via SCP — one each to
-   QA, QA Node, and Production.
+5. `event-data-deploy-post-merge.yml` triggers: three parallel jobs install
+   production dependencies via `setup-node` + `npm ci --omit=dev`, build the
+   site, and deploy event-data pages via SCP — one each to QA, QA Node, and
+   Production.
 6. Each job builds with its own environment's `SITE_URL` and `API_URL` so that
    per-event page links point to the correct domain.
 
@@ -62,7 +63,7 @@ All environments receive event data within minutes of submission — no manual s
 | `deploy-qa-node.yml`      | Push to `main` (paths-ignore data YAMLs)               | `qanode`             |
 | `event-data-deploy.yml`   | PR from `event/` or `event-edit/` changing data YAMLs  | — (no-op gate)       |
 | `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only)              | `qa` + `qanode` + `production` |
-| `docker-build.yml`        | Push to `main` (package.json or Dockerfile)            | — (GHCR)             |
+| `docker-build.yml`        | Push to `main` (package.json or Dockerfile)            | — (GHCR, no longer used by event-data deploy) |
 
 `deploy-qa.yml` and `deploy-prod.yml` both call the shared reusable workflow
 `deploy-reusable.yml`, which builds the static site, deploys it via SCP,

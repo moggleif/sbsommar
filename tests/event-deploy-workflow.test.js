@@ -140,3 +140,109 @@ describe('02-§51.7 — Production job checks QA camp status (EDW-14..15)', () =
     }
   });
 });
+
+// ── 02-§52.3  No Docker container ──────────────────────────────────────────
+
+describe('02-§52.3 — No Docker container in any job (EDW-16..18)', () => {
+  const deployJobs = jobNames.filter((n) => n.startsWith('deploy'));
+
+  for (const name of deployJobs) {
+    it(`EDW-16: ${name} has no container key`, () => {
+      assert.strictEqual(
+        workflow.jobs[name].container,
+        undefined,
+        `${name} must not use a Docker container`
+      );
+    });
+  }
+});
+
+// ── 02-§52.1  setup-node present ───────────────────────────────────────────
+
+describe('02-§52.1 — Each deploy job uses setup-node (EDW-19..21)', () => {
+  const deployJobs = jobNames.filter((n) => n.startsWith('deploy'));
+
+  for (const name of deployJobs) {
+    it(`EDW-19: ${name} has a setup-node step`, () => {
+      const steps = workflow.jobs[name].steps || [];
+      const setupNode = steps.find(
+        (s) => s.uses && s.uses.startsWith('actions/setup-node')
+      );
+      assert.ok(setupNode, `${name} must have a setup-node step`);
+      assert.strictEqual(
+        setupNode.with?.['node-version'],
+        '20',
+        `${name} setup-node must use node-version 20`
+      );
+      assert.strictEqual(
+        setupNode.with?.cache,
+        'npm',
+        `${name} setup-node must enable npm cache`
+      );
+    });
+  }
+});
+
+// ── 02-§52.2  npm ci --omit=dev ────────────────────────────────────────────
+
+describe('02-§52.2 — Each deploy job runs npm ci --omit=dev (EDW-22..24)', () => {
+  const deployJobs = jobNames.filter((n) => n.startsWith('deploy'));
+
+  for (const name of deployJobs) {
+    it(`EDW-22: ${name} has an npm ci --omit=dev step`, () => {
+      const steps = workflow.jobs[name].steps || [];
+      const npmCi = steps.find(
+        (s) => s.run && s.run.includes('npm ci --omit=dev')
+      );
+      assert.ok(npmCi, `${name} must have an npm ci --omit=dev step`);
+    });
+  }
+});
+
+// ── 02-§52.4  No packages:read permission ──────────────────────────────────
+
+describe('02-§52.4 — No packages:read permission (EDW-25)', () => {
+  it('EDW-25: workflow permissions do not include packages', () => {
+    const perms = workflow.permissions || {};
+    assert.strictEqual(
+      perms.packages,
+      undefined,
+      'workflow must not require packages permission'
+    );
+  });
+});
+
+// ── 02-§52.5 / 02-§52.6  Conditional vs unconditional setup-node ──────────
+
+describe('02-§52.5–52.6 — setup-node conditionality (EDW-26..28)', () => {
+  for (const name of ['deploy-qa', 'deploy-qa-node']) {
+    it(`EDW-26: ${name} setup-node is conditional on gate`, () => {
+      const job = workflow.jobs[name];
+      if (!job) return;
+      const steps = job.steps || [];
+      const setupNode = steps.find(
+        (s) => s.uses && s.uses.startsWith('actions/setup-node')
+      );
+      assert.ok(setupNode, `${name} must have a setup-node step`);
+      assert.ok(
+        setupNode.if && setupNode.if.includes('gate'),
+        `${name} setup-node must be conditional on gate output`
+      );
+    });
+  }
+
+  it('EDW-28: deploy-prod setup-node is unconditional', () => {
+    const prod = workflow.jobs['deploy-prod'];
+    assert.ok(prod, 'deploy-prod job must exist');
+    const steps = prod.steps || [];
+    const setupNode = steps.find(
+      (s) => s.uses && s.uses.startsWith('actions/setup-node')
+    );
+    assert.ok(setupNode, 'deploy-prod must have a setup-node step');
+    assert.strictEqual(
+      setupNode.if,
+      undefined,
+      'deploy-prod setup-node must be unconditional'
+    );
+  });
+});

@@ -1,7 +1,7 @@
 name: Event Data Deploy (Post-Merge)
 
 # Builds and deploys event-data pages after an event PR merges to main.
-# Uses a pre-built Docker image from GHCR to skip npm ci.
+# Uses setup-node with npm cache to install only production dependencies.
 #
 # All deploy jobs start immediately in parallel — no serial detect job.
 # Each job performs its own inline detection of changed event data files.
@@ -13,7 +13,6 @@ name: Event Data Deploy (Post-Merge)
 
 permissions:
   contents: read
-  packages: read
 
 on:
   push:
@@ -26,11 +25,6 @@ jobs:
   deploy-qa:
     name: Build & deploy to QA
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
     environment: qa
 
     steps:
@@ -41,7 +35,6 @@ jobs:
       - name: Detect changed event data file
         id: gate
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           CHANGED=$(git diff --name-only HEAD~1..HEAD \
             | grep '^source/data/' | grep '\.yaml$' \
             | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
@@ -52,6 +45,16 @@ jobs:
             echo "skip=false" >> $GITHUB_OUTPUT
             echo "Detected changed file: $CHANGED"
           fi
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.skip != 'true'
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install production dependencies
+        if: steps.gate.outputs.skip != 'true'
+        run: npm ci --omit=dev
 
       - name: Build site
         if: steps.gate.outputs.skip != 'true'
@@ -95,11 +98,6 @@ jobs:
   deploy-qa-node:
     name: Build & deploy to QA Node
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
     environment: qanode
 
     steps:
@@ -110,7 +108,6 @@ jobs:
       - name: Detect changed event data file
         id: gate
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           CHANGED=$(git diff --name-only HEAD~1..HEAD \
             | grep '^source/data/' | grep '\.yaml$' \
             | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
@@ -121,6 +118,16 @@ jobs:
             echo "skip=false" >> $GITHUB_OUTPUT
             echo "Detected changed file: $CHANGED"
           fi
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.skip != 'true'
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install production dependencies
+        if: steps.gate.outputs.skip != 'true'
+        run: npm ci --omit=dev
 
       - name: Build site
         if: steps.gate.outputs.skip != 'true'
@@ -164,11 +171,6 @@ jobs:
   deploy-prod:
     name: Build & deploy to Production
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
     environment: production
 
     steps:
@@ -176,10 +178,17 @@ jobs:
         with:
           fetch-depth: 2
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install production dependencies
+        run: npm ci --omit=dev
+
       - name: Detect changed event data file and check QA status
         id: gate
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           CHANGED=$(git diff --name-only HEAD~1..HEAD \
             | grep '^source/data/' | grep '\.yaml$' \
             | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
