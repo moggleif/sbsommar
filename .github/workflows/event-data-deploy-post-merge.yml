@@ -88,7 +88,7 @@ jobs:
         run: |
           install -m 600 /dev/null deploy_key
           echo "${{ secrets.SERVER_SSH_KEY }}" > deploy_key
-          rsync -avz --delete \
+          rsync -avz \
             -e "ssh -p ${{ secrets.SERVER_SSH_PORT }} -o StrictHostKeyChecking=no -i deploy_key" \
             staging/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DEPLOY_DIR }}/public_html/
