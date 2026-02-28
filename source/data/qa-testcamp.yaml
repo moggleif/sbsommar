@@ -579,3 +579,19 @@ events:
     meta:
       created_at: 2026-02-27 23:44
       updated_at: 2026-02-27 23:44
+  - id: hur-snabbt-nu-2026-02-28-0702
+    title: Hur snabbt nu
+    date: '2026-02-28'
+    start: '07:02'
+    end: '08:02'
+    location: KaffePaviljongen
+    responsible: Morgan
+    description: |
+      Händer grejer
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-28 06:03
+      updated_at: 2026-02-28 06:03
