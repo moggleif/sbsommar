@@ -641,3 +641,33 @@ events:
     meta:
       created_at: 2026-02-28 12:30
       updated_at: 2026-02-28 12:30
+  - id: nytt-flode-2026-02-28-1800
+    title: nytt flöde
+    date: '2026-02-28'
+    start: '18:00'
+    end: '19:00'
+    location: AndreasTältet
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-28 16:52
+      updated_at: 2026-02-28 16:52
+  - id: oj-gick-det-sa-fort-2026-02-28-1800
+    title: oj gick det så fort
+    date: '2026-02-28'
+    start: '18:00'
+    end: '19:00'
+    location: GA Datorsal
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-28 16:53
+      updated_at: 2026-02-28 16:53
