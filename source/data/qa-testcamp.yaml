@@ -664,7 +664,7 @@ events:
   -
     id: oj-gick-det-sa-fort-2026-02-28-1800
     title: 'oj gick det så fort eller inte'
-    date: '2026-02-28'
+    date: '2026-03-01'
     start: '18:00'
     end: '19:00'
     location: 'GA Datorsal'
@@ -676,34 +676,36 @@ events:
       email: ''
     meta:
       created_at: '2026-02-28 16:53'
-      updated_at: '2026-02-28 19:07'
-  - id: en-sista-grej-2026-02-28-2100
-    title: en sista grej
+      updated_at: '2026-02-28 19:40'
+  -
+    id: en-sista-grej-2026-02-28-2100
+    title: 'en sista grej'
     date: '2026-02-28'
     start: '21:00'
     end: '21:04'
-    location: GA Idrott
+    location: 'GA Idrott'
     responsible: Morgan
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-02-28 19:37
-      updated_at: 2026-02-28 19:37
-  - id: en-till-2026-02-28-2314
-    title: en till
+      created_at: '2026-02-28 19:37'
+      updated_at: '2026-02-28 19:37'
+  -
+    id: en-till-2026-02-28-2314
+    title: 'en till'
     date: '2026-02-28'
     start: '23:14'
     end: '23:47'
-    location: GA Datorsal
+    location: 'GA Datorsal'
     responsible: Morgan
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-02-28 19:40
-      updated_at: 2026-02-28 19:40
+      created_at: '2026-02-28 19:40'
+      updated_at: '2026-02-28 19:40'
