@@ -69,6 +69,7 @@ function validateFields(body, { requireId = false } = {}, campDates) {
   if (!TIME_RE.test(end))   return fail('end måste vara HH:MM');
   if (end === start) return fail('end måste vara efter start');
   if (end < start) {
+    // Midnight crossing: allow if duration ≤ 17 h (1020 min), reject otherwise.
     const dur = (1440 - timeToMinutes(start)) + timeToMinutes(end);
     if (dur > 1020) return fail('end måste vara efter start');
   }
