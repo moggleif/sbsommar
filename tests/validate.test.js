@@ -152,6 +152,54 @@ describe('validateEventRequest – time ordering', () => {
   });
 });
 
+// ── Midnight crossing (02-§54.1–54.5) ────────────────────────────────────────
+
+describe('validateEventRequest – midnight crossing', () => {
+  it('VLD-56: accepts 90-min midnight crossing (23:00 → 00:30)', () => {
+    const r = validateEventRequest(valid({ start: '23:00', end: '00:30' }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-57: accepts 60-min midnight crossing (23:17 → 00:17)', () => {
+    const r = validateEventRequest(valid({ start: '23:17', end: '00:17' }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-58: accepts crossing at threshold (07:00 → 00:00 = 1020 min)', () => {
+    const r = validateEventRequest(valid({ start: '07:00', end: '00:00' }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-59: rejects crossing over threshold (06:59 → 00:00 = 1021 min)', () => {
+    const r = validateEventRequest(valid({ start: '06:59', end: '00:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('end'));
+  });
+
+  it('VLD-60: still rejects end equal to start', () => {
+    const r = validateEventRequest(valid({ start: '09:00', end: '09:00' }));
+    assert.strictEqual(r.ok, false);
+  });
+
+  it('VLD-61: still accepts normal end > start (regression)', () => {
+    const r = validateEventRequest(valid({ start: '08:00', end: '17:00' }));
+    assert.strictEqual(r.ok, true);
+  });
+});
+
+describe('validateEditRequest – midnight crossing', () => {
+  it('VLD-62: accepts midnight crossing (23:00 → 00:30)', () => {
+    const r = validateEditRequest(validEdit({ start: '23:00', end: '00:30' }));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('VLD-63: rejects crossing over threshold (06:00 → 00:00 = 1080 min)', () => {
+    const r = validateEditRequest(validEdit({ start: '06:00', end: '00:00' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('end'));
+  });
+});
+
 // ── Optional fields ───────────────────────────────────────────────────────────
 
 describe('validateEventRequest – optional fields', () => {

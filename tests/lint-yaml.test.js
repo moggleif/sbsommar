@@ -193,6 +193,21 @@ describe('validateYaml – time validation (02-§23.4)', () => {
   });
 });
 
+// ── LNT-24..25: Midnight crossing (05-§4.3) ─────────────────────────────────
+
+describe('validateYaml – midnight crossing (05-§4.3)', () => {
+  it('LNT-24: accepts midnight crossing (23:00 → 00:30)', () => {
+    const r = validateYaml(makeYaml([validEvent({ start: '23:00', end: '00:30' })]));
+    assert.strictEqual(r.ok, true);
+  });
+
+  it('LNT-25: rejects crossing over threshold (06:00 → 00:00 = 1080 min)', () => {
+    const r = validateYaml(makeYaml([validEvent({ start: '06:00', end: '00:00' })]));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.errors.some((e) => /end|after|start/i.test(e)));
+  });
+});
+
 // ── LNT-18: Duplicate IDs (02-§23.5) ──────────────────────────────────────────
 
 describe('validateYaml – duplicate event IDs (02-§23.5)', () => {

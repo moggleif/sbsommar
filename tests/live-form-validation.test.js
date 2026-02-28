@@ -81,4 +81,36 @@ describe('live form validation — source checks (02-§6.9–6.14)', () => {
       "source must contain the 2-hour (120-minute) cutoff constant",
     );
   });
+
+  // ── Midnight crossing (02-§54.1–54.9) ────────────────────────────────────
+
+  // Manual checkpoints (must be verified in a browser):
+  //   LVD-07 (02-§54.6): on /lagg-till.html, set Starttid to 23:00 and Sluttid
+  //     to 00:30 → green info message "Tolkas som att aktiviteten slutar nästa
+  //     dag." appears on the Sluttid field (not a red error).
+  //   LVD-08 (02-§54.2): set Starttid to 07:00 and Sluttid to 00:00 → info
+  //     message appears (exactly 1020 min, at threshold).
+  //   LVD-09 (02-§54.3): set Starttid to 06:59 and Sluttid to 00:00 → red error
+  //     appears (1021 min, over threshold).
+
+  it("LVD-07: lagg-till.js contains checkEndTime helper (02-§54.1)", () => {
+    assert.ok(
+      SRC.includes('checkEndTime'),
+      "source must contain a checkEndTime function for midnight-crossing logic",
+    );
+  });
+
+  it("LVD-08: lagg-till.js contains timeToMinutes helper (02-§54.1)", () => {
+    assert.ok(
+      SRC.includes('timeToMinutes'),
+      "source must contain a timeToMinutes helper for duration calculation",
+    );
+  });
+
+  it("LVD-09: lagg-till.js contains setFieldInfo function (02-§54.6)", () => {
+    assert.ok(
+      SRC.includes('setFieldInfo'),
+      "source must contain a setFieldInfo function for green info messages",
+    );
+  });
 });
