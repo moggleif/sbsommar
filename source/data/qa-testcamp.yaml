@@ -595,3 +595,18 @@ events:
     meta:
       created_at: 2026-02-28 06:03
       updated_at: 2026-02-28 06:03
+  - id: forsvinner-2026-02-28-0708
+    title: 'Försvinner?'
+    date: '2026-02-28'
+    start: '07:08'
+    end: '09:08'
+    location: GA Lego
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-28 06:08
+      updated_at: 2026-02-28 06:08
