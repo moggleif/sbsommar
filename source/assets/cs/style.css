@@ -959,6 +959,7 @@ textarea {
 
 .success-actions {
   display: flex;
+  justify-content: center;
   gap: var(--space-sm);
   flex-wrap: wrap;
   margin-top: var(--space-md);
@@ -1242,6 +1243,10 @@ details.accordion > summary:focus-visible {
 
 .modal-heading:focus {
   outline: none;
+}
+
+.modal-content {
+  text-align: center;
 }
 
 .modal-spinner {
