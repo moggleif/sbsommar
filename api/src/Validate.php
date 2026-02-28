@@ -116,8 +116,17 @@ final class Validate
         if (!preg_match(self::TIME_RE, $end)) {
             return self::fail('end måste vara HH:MM');
         }
-        if ($end <= $start) {
+        if ($end === $start) {
             return self::fail('end måste vara efter start');
+        }
+        if ($end < $start) {
+            // Midnight crossing: allow if duration ≤ 17 h (1020 min), reject otherwise.
+            $sMins = (int) substr($start, 0, 2) * 60 + (int) substr($start, 3, 2);
+            $eMins = (int) substr($end, 0, 2) * 60 + (int) substr($end, 3, 2);
+            $dur   = (1440 - $sMins) + $eMins;
+            if ($dur > 1020) {
+                return self::fail('end måste vara efter start');
+            }
         }
         if ($location === '') {
             return self::fail('location är obligatoriskt');
