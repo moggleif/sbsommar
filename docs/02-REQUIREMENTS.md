@@ -2491,3 +2491,24 @@ intended).
 - The build-time YAML linter (`lint-yaml.js`) must apply the same
   midnight-crossing threshold when checking existing event
   files. <!-- 02-§54.11 -->
+
+---
+
+## 55. Submit modal design polish
+
+The submit progress modal (used in add-activity and edit-activity forms) needs
+visual polish to look clean and consistent with the rest of the site design.
+
+### 55.1 Site requirements
+
+- The modal heading must not show a browser focus outline when
+  programmatically focused. The heading uses `tabindex="-1"` for
+  programmatic focus only and is not an interactive element. <!-- 02-§55.1 -->
+- The modal box must use `--radius-lg` (16 px) border-radius for a softer,
+  more modern appearance. <!-- 02-§55.2 -->
+- The modal box must use `--space-lg` top/bottom padding for more generous
+  internal spacing. <!-- 02-§55.3 -->
+- The modal heading and progress steps must be center-aligned. <!-- 02-§55.4 -->
+- The modal box must appear with a subtle entry animation (fade in + slide
+  up) lasting no more than 300 ms, consistent with the design constraint
+  in `07-§10.2`. <!-- 02-§55.5 -->

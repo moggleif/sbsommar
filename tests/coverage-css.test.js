@@ -256,3 +256,60 @@ describe('02-§4.6 — Display mode dark styles', () => {
     assert.ok(CSS.includes('.display-mode'), 'display-mode class defined');
   });
 });
+
+// ── 02-§54.1–54.5  Modal design polish ──────────────────────────────────────
+
+describe('02-§54.1–54.5 — Modal design polish', () => {
+  it('MDP-01: modal heading suppresses focus outline (02-§54.1)', () => {
+    assert.ok(
+      CSS.includes('.modal-heading:focus'),
+      '.modal-heading:focus rule exists'
+    );
+    const m = CSS.match(/\.modal-heading:focus\s*\{([^}]+)\}/);
+    assert.ok(m, '.modal-heading:focus block found');
+    assert.ok(m[1].includes('outline'), 'outline property set');
+  });
+
+  it('MDP-02: modal box uses --radius-lg (02-§54.2)', () => {
+    const m = CSS.match(/\.modal-box\s*\{([^}]+)\}/);
+    assert.ok(m, '.modal-box rule block exists');
+    assert.ok(
+      m[1].includes('var(--radius-lg)'),
+      'border-radius uses --radius-lg token'
+    );
+  });
+
+  it('MDP-03: modal box uses --space-lg for vertical padding (02-§54.3)', () => {
+    const m = CSS.match(/\.modal-box\s*\{([^}]+)\}/);
+    assert.ok(m, '.modal-box rule block exists');
+    assert.ok(
+      m[1].includes('var(--space-lg)'),
+      'padding uses --space-lg token'
+    );
+  });
+
+  it('MDP-04: modal heading is center-aligned (02-§54.4)', () => {
+    const m = CSS.match(/\.modal-heading\s*\{([^}]+)\}/);
+    assert.ok(m, '.modal-heading rule block exists');
+    assert.ok(
+      m[1].includes('text-align: center'),
+      'heading is center-aligned'
+    );
+  });
+
+  it('MDP-05: submit progress is center-aligned (02-§54.4)', () => {
+    const m = CSS.match(/\.submit-progress\s*\{([^}]+)\}/);
+    assert.ok(m, '.submit-progress rule block exists');
+    assert.ok(
+      m[1].includes('text-align: center'),
+      'progress list is center-aligned'
+    );
+  });
+
+  it('MDP-06: modal box has entry animation keyframes (02-§54.5)', () => {
+    assert.ok(
+      CSS.includes('@keyframes modal-enter'),
+      'modal-enter keyframes defined'
+    );
+  });
+});

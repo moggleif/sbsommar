@@ -211,6 +211,17 @@ the same `<span>` element as errors but with a different class. <!-- 07-§6.44a 
 - Info does **not** set `aria-invalid` on the input — the input border remains normal. <!-- 07-§6.44f -->
 - When switching between error and info states, the previous class must be removed (toggle `span.className` between `field-error` and `field-info`). <!-- 07-§6.44g -->
 
+### Submit modal (progress / success / error)
+
+The submit modal overlays the page during form submission and shows progress, success, or error states. <!-- 07-§6.49 -->
+
+- Box: white background, `--radius-lg` (16 px) border-radius, generous shadow (`0 8px 32px rgba(0,0,0,0.16)`). <!-- 07-§6.50 -->
+- Padding: `--space-lg` top/bottom, `--space-md` left/right — extra vertical breathing room. <!-- 07-§6.51 -->
+- Heading and progress steps are center-aligned. <!-- 07-§6.52 -->
+- The heading receives programmatic focus (`tabindex="-1"`) but must not display a visible focus outline since it is not interactive. <!-- 07-§6.53 -->
+- Entry animation: fade-in + slide-up, 250 ms, `ease-out`. Within the 300 ms ceiling in `07-§10.2`. <!-- 07-§6.54 -->
+- Backdrop: semi-transparent navy using `color-mix(in srgb, var(--color-navy) 60%, transparent)`. <!-- 07-§6.55 -->
+
 ---
 
 ## 7. CSS Strategy

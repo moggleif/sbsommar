@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-28 (11 gap requirements added for midnight-crossing events, 02-§54.1–54.11).
+Audit date: 2026-02-24. Last updated: 2026-02-28 (5 gap requirements added for modal design polish, 02-§55.1–55.5).
 
 ---
 
@@ -977,6 +977,11 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (11 gap requirements added for 
 | `02-§54.9` | Info/error cleared when user edits start or end | 07-DESIGN.md §6.34–6.39 | manual: browser check | `lagg-till.js` REQUIRED_FIELDS clear listener | implemented |
 | `02-§54.10` | Edit form applies same midnight-crossing logic | 05-DATA_CONTRACT.md §4.3 | VLD-62..63 | `source/assets/js/client/redigera.js` `checkEndTime()` | covered |
 | `02-§54.11` | Build-time YAML linter applies midnight-crossing threshold | 05-DATA_CONTRACT.md §4.3 | LNT-24..25 | `source/scripts/lint-yaml.js` | covered |
+| `02-§55.1` | Modal heading has no visible focus outline | 07-DESIGN.md §6.53 | MDP-01 | `source/assets/cs/style.css` `.modal-heading:focus` | covered |
+| `02-§55.2` | Modal box uses `--radius-lg` (16 px) border-radius | 07-DESIGN.md §6.50 | MDP-02 | `source/assets/cs/style.css` `.modal-box` | covered |
+| `02-§55.3` | Modal box uses `--space-lg` top/bottom padding | 07-DESIGN.md §6.51 | MDP-03 | `source/assets/cs/style.css` `.modal-box` | covered |
+| `02-§55.4` | Modal heading and progress steps are center-aligned | 07-DESIGN.md §6.52 | MDP-04..05 | `source/assets/cs/style.css` `.modal-heading`, `.submit-progress` | covered |
+| `02-§55.5` | Modal entry animation: fade + slide-up, ≤ 300 ms | 07-DESIGN.md §6.54 | MDP-06 | `source/assets/cs/style.css` `.modal-box` | covered |
 
 ---
 
@@ -1218,6 +1223,9 @@ Matrix cleanup (2026-02-25):
   Affects: client forms, server API, build-time YAML linter.
   Design tokens documented in 07-DESIGN.md §6.44a–6.44g.
   02-§6.10, 02-§6.13, 02-§9.4, 05-§4.3 updated.
+5 requirements added for modal design polish (02-§55.1–55.5):
+  5 covered (MDP-01..06): focus outline, border-radius, padding, alignment, animation.
+  Design documented in 07-DESIGN.md §6.49–6.55.
 ```
 
 ---
@@ -1403,3 +1411,4 @@ Matrix cleanup (2026-02-25):
 | VLD-62..63 | `tests/validate.test.js` | `validateEditRequest – midnight crossing (02-§54.10)` |
 | LNT-24..25 | `tests/lint-yaml.test.js` | `validateYaml – midnight crossing (05-§4.3)` |
 | LVD-07..09 | `tests/live-form-validation.test.js` | `midnight crossing source checks (02-§54.1, 02-§54.6)` |
+| MDP-01..06 | `tests/coverage-css.test.js` | `02-§55.1–55.5 — Modal design polish` |
