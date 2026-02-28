@@ -12,7 +12,10 @@ events:
     end: '23:30'
     location: Annat
     responsible: Alla
-    description: null
+    description: |-
+      Första dagen. Besökare kommer vid olika tider. På eftermiddagen och kvällen hjälps vi åt att bygga tält, rigga datorsal, GA-hall med mera och komma iordning inför lägret.
+
+      Ta hand om varandra och tänk lite extra om ni ser nya ansikten. Ta kontakt.
     link: null
     owner:
       name: ''
@@ -27,7 +30,11 @@ events:
     end: '11:15'
     location: Annat
     responsible: Andreas
-    description: null
+    description: |-
+      Lägeransvariga hälsar alla välkomna och presenterar upplägget för den här veckan och påminner om hur vi skapar lägret tillsammans.
+
+      Gräsytan mellan tälten och lekplatsen.
+      Vid dåligt väder, GA-hallen.
     link: null
     owner:
       name: ''
@@ -42,7 +49,12 @@ events:
     end: '13:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -57,7 +69,12 @@ events:
     end: '13:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -72,7 +89,12 @@ events:
     end: '13:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -87,7 +109,12 @@ events:
     end: '13:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -102,7 +129,12 @@ events:
     end: '13:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -117,7 +149,12 @@ events:
     end: '13:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -132,7 +169,12 @@ events:
     end: '13:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -147,7 +189,12 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -162,7 +209,12 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -177,7 +229,12 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -192,7 +249,12 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -207,7 +269,12 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -222,7 +289,12 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -237,7 +309,7 @@ events:
     end: '10:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: En chans att titta på sommarlovsmorgon i TV-rummet (i serviceshuset) med andra på lägret. Först dit startar TV:n.
     link: null
     owner:
       name: ''
@@ -252,7 +324,7 @@ events:
     end: '10:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: En chans att titta på sommarlovsmorgon i TV-rummet (i serviceshuset) med andra på lägret. Först dit startar TV:n.
     link: null
     owner:
       name: ''
@@ -267,7 +339,7 @@ events:
     end: '10:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: En chans att titta på sommarlovsmorgon i TV-rummet (i serviceshuset) med andra på lägret. Först dit startar TV:n.
     link: null
     owner:
       name: ''
@@ -282,7 +354,7 @@ events:
     end: '10:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: En chans att titta på sommarlovsmorgon i TV-rummet (i serviceshuset) med andra på lägret. Först dit startar TV:n.
     link: null
     owner:
       name: ''
@@ -297,7 +369,7 @@ events:
     end: '10:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: En chans att titta på sommarlovsmorgon i TV-rummet (i serviceshuset) med andra på lägret. Först dit startar TV:n.
     link: null
     owner:
       name: ''
@@ -312,7 +384,7 @@ events:
     end: '10:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: En chans att titta på sommarlovsmorgon i TV-rummet (i serviceshuset) med andra på lägret. Först dit startar TV:n.
     link: null
     owner:
       name: ''
@@ -327,7 +399,7 @@ events:
     end: '10:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: En chans att titta på sommarlovsmorgon i TV-rummet (i serviceshuset) med andra på lägret. Först dit startar TV:n.
     link: null
     owner:
       name: ''
@@ -342,7 +414,24 @@ events:
     end: '20:00'
     location: Annat
     responsible: Andreas
-    description: null
+    description: |-
+      <strong>Möte:
+      </strong>Vi börjar med avetablering, alla hjälps åt!
+      När vi är klara så samlas vi för att lyssna på vad lägeransvariga har att säga.
+      Ofta en gemensam bild på alla deltagare.
+      <strong>
+      Avetablering:
+      </strong>Gemensam översyn på området med iordningställande och städ.
+      Alla tält packas ner.
+      All utrustning tas om hand.
+      Alla gemensamma ytor sopas.
+      Gräsytor utomhus gås igenom och skräp plockas upp.
+
+      Lost and found, vid ingång till GA-hallen.
+
+      Plats:
+      Gräsytan mellan tälten och lekplatsen.
+      Vid dåligt väder, GA-hallen.
     link: null
     owner:
       name: ''
@@ -357,7 +446,12 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: ' '
-    description: null
+    description: |-
+      Beställd mat hämtas vid servicehuset. Lunch och middagslådor levereras samtidigt till värmeskåpen. Maten levereras inför lunchen. Familjer väljer själva när dessa hämtas och äts.
+
+      Övriga fixar mat på egen hand.
+
+      Se tiden som en riktlinje då vi försöker att inte ha några aktiviteter igång. Man får givetvis äta precis när man vill.
     link: null
     owner:
       name: ''
@@ -372,7 +466,11 @@ events:
     end: '15:45'
     location: Skolsal
     responsible: 'Lisa Lautrup '
-    description: null
+    description: |-
+      <p>Vi bakar Mochi Mochi donuts och lagar bobs-te efter Ai Venturas bok ”Baka Kawaii”. Barn under 10 år i vuxens sällskap. Max 9 st deltagare. Anmälan endast i Fb-gruppen.</p>
+      <p>OBS! Just nu är kursen fullbokad men om intresset är stort kan vi säkert köra fler tillfällen.</p>
+      <p>&nbsp;</p>
+      Kommer vara i hemkunskapssalen i skolan.
     link: null
     owner:
       name: ''
@@ -387,7 +485,9 @@ events:
     end: '15:00'
     location: Annat
     responsible: Birgitta
-    description: null
+    description: |-
+      <p>Studiebesök Höljes.</p>
+      <p>På plats i Höljes 15.00</p>
     link: null
     owner:
       name: ''
@@ -402,7 +502,7 @@ events:
     end: '15:45'
     location: Skolsal
     responsible: 'Lisa Lautrup '
-    description: null
+    description: "<p>Vi bakar Mochi Mochi donuts och lagar boba-te efter Ai Venturas bok ”Baka kawaii”. Barn under 10 år i vuxens sällskap. Max 9 deltagare. Anmälan sker i Fb-gruppen.\_<br /><br /></p>\n<p>OBS! Kursen är just nu fullbokad men om intresset är stort kanske vi kan ordna fler tillfällen.</p>\nKommer vara i hemkunskapssal i skolan."
     link: null
     owner:
       name: ''
@@ -417,7 +517,7 @@ events:
     end: '15:00'
     location: Nerf-arena
     responsible: 'Rönnkvist '
-    description: null
+    description: "<p>Välkommen till årets qudditch match för mugglare. Medtag egen kvast (pinne, gren eller dylikt). Regelgenomgång och lagindelning sker på plats.\_</p>\n<p>Tänk på att ha kläder som tål rörelse och en vattenflaska.\_</p>"
     link: null
     owner:
       name: ''
@@ -426,13 +526,13 @@ events:
       created_at: '2022-06-23 21:44:08'
       updated_at: '2022-06-23 21:44:08'
   - id: rollspel-fm-viktor-2022-06-27-0900
-    title: 'Rollspel fm, Viktor'
+    title: Rollspel fm, Viktor
     date: '2022-06-27'
     start: '09:00'
     end: '12:00'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: "<p>Fullbokad<br />Deltagare: Ivar, Edgar, Elias, Anton och Simon.\_<br />Första gången kommer främst vara till för att göra karaktärer.<br />Paus för informationsmöte</p>"
     link: null
     owner:
       name: ''
@@ -447,7 +547,7 @@ events:
     end: '17:00'
     location: Nerf-arena
     responsible: 'Christina Johansson '
-    description: null
+    description: "<p>En omgång Bäst i test liknade tv-programmet. Vi samlas utanför GA-hallen och gör lagindelning på plats.\_</p>\n<br>\n<a href=\"https://m.facebook.com/groups/639094320468722/permalink/735023300875823/\">FB-tråd</a>"
     link: null
     owner:
       name: ''
@@ -462,7 +562,10 @@ events:
     end: '17:00'
     location: Annat
     responsible: J Nyh
-    description: null
+    description: |-
+      Årsmöte för RFSB (följt av årsmöte för lokalföreningen i Stockholm/Mälardalen), enligt tidigare utskickad inbjudan (som nytillkomna medlemmar inte fått, men ändå är välkomna till årsmötet).
+
+      I kaffetältet (vid stuga 6).
     link: null
     owner:
       name: ''
@@ -477,7 +580,7 @@ events:
     end: '12:30'
     location: Servicehus
     responsible: 'Jessica Malmberg '
-    description: null
+    description: "<p>Vi pärlar egna läger armband, bokstavspärlor RFSB och andra blandade pärlor.\_</p>\n<ol>\n<li>Ta gärna med eget glas eller tallrik att lägga lite pärlor på så att de i te rullar iväg när ni pärlar.\_</li>\n</ol>"
     link: null
     owner:
       name: ''
@@ -492,8 +595,17 @@ events:
     end: '10:15'
     location: Servicehus
     responsible: Cecilia Löfgreen
-    description: null
-    link: null
+    description: |-
+      <p><strong>Uppgifts-runda - Lära känna aktivitet kl 09:30-10:15</strong></p>
+      <p>&nbsp;</p>
+      <p>09:30-10:15 på måndag så kan alla barn gå en uppgifts-runda, mindre barn kan behöva vuxenstöd. Vi möts vid sittplatserna vid servicehusets kortsida.</p>
+      <p>&nbsp;</p>
+      <p>Det är drop-in och målsättningen är att alla som deltar ska få chansen att lära känna andra barn på lägret. Därför vill vi gärna blanda grupperna med barn som är på lägret första gången och barn som varit med förut. Ålder är bara en siffra, men vi kommer ändå försöka hålla vissa åldersspann på grupperna.</p>
+      <p>&nbsp;</p>
+      <p>Grupperna kommer vara 4-6 barn och man får vänta vid servicehuset tills man har hittat en grupp att gå med – oroa er inte, vi kommer hjälpa till och se till att alla som vill har en grupp att gå med.</p>
+      <p>&nbsp;</p>
+      <p>Alla som deltar får glass efter genomförd uppgiftsrunda.</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/739949180383235/
     owner:
       name: ''
       email: ''
@@ -507,7 +619,10 @@ events:
     end: '12:00'
     location: Rollspelstält2
     responsible: Hedda
-    description: null
+    description: |-
+      <blockquote>
+      <p>Aktiviteten är fullbokad. Deltagare på denna gång är Ines, Hulda, Albin, Alvin och Ludvig.</p>
+      </blockquote>
     link: null
     owner:
       name: ''
@@ -516,13 +631,15 @@ events:
       created_at: '2022-06-25 11:05:24'
       updated_at: '2022-06-25 11:05:24'
   - id: rollspel-minikampanj-2022-06-30-0900
-    title: 'Rollspel, minikampanj'
+    title: Rollspel, minikampanj
     date: '2022-06-30'
     start: '09:00'
     end: '12:00'
     location: Rollspelstält2
     responsible: Hedda
-    description: null
+    description: |-
+      <p>Aktiviteten är fullbokad. Deltagare på denna gång är Xander, Louis, Tom, Thor och Sam.</p>
+      <p>Detta är första delen av kampanjen och det förväntas att deltagarna är med även på andra delen, som är dagen efter.</p>
     link: null
     owner:
       name: ''
@@ -531,13 +648,15 @@ events:
       created_at: '2022-06-25 11:13:27'
       updated_at: '2022-06-25 11:13:27'
   - id: rollspel-minikampanj-2022-07-01-0900
-    title: 'Rollspel, minikampanj'
+    title: Rollspel, minikampanj
     date: '2022-07-01'
     start: '09:00'
     end: '12:00'
     location: Rollspelstält2
     responsible: Hedda
-    description: null
+    description: |-
+      <p>Aktiviteten är fullbokad. Deltagare på denna gång är Xander, Louis, Tom, Thor och Sam.</p>
+      <p>Detta är andra delen av kampanjen och det förväntas att deltagarna är med även på första delen, som är dagen före.</p>
     link: null
     owner:
       name: ''
@@ -546,13 +665,13 @@ events:
       created_at: '2022-06-25 11:16:24'
       updated_at: '2022-06-25 11:16:24'
   - id: rollspel-stor-grupp-viktor-och-harald-2022-06-27-1330
-    title: 'Rollspel, stor grupp, Viktor och Harald'
+    title: Rollspel, stor grupp, Viktor och Harald
     date: '2022-06-27'
     start: '13:30'
     end: '17:00'
     location: Rollspelstält1
     responsible: Viktor och Harald
-    description: null
+    description: "<p>Fullbokad\_</p>\n<p>Deltagare: Tekla, Nemi, Wille, Hedda, Vidar Samuel, Jonathan, Salt och Emilia.</p>\n<p>Under första omgången kommer det finnas tid till att göra karaktärer.</p>\n<p>Lokal: Rollspelstält 1 och 2</p>"
     link: null
     owner:
       name: ''
@@ -561,13 +680,16 @@ events:
       created_at: '2022-06-25 15:48:52'
       updated_at: '2022-06-25 15:48:52'
   - id: rollspel-kvall-viktor-2022-06-27-1830
-    title: 'Rollspel kväll, Viktor'
+    title: Rollspel kväll, Viktor
     date: '2022-06-27'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: |-
+      <p>Fullbokad</p>
+      <p>Deltagare: Johan, Astor, Gabriel, Ebbe och Harry.</p>
+      <p>Under första omgången kommer det finnas tid till att göra karaktärer.</p>
     link: null
     owner:
       name: ''
@@ -582,7 +704,7 @@ events:
     end: '20:45'
     location: Annat
     responsible: Jenny och Viktor
-    description: null
+    description: "<p>Resa två partytält samt hämta alla bänkar och bord till dem.<strong>\_</strong>Plats: Mellan GA-hallen och lekplatsen.\_</p>"
     link: null
     owner:
       name: ''
@@ -591,13 +713,16 @@ events:
       created_at: '2022-06-25 16:10:27'
       updated_at: '2022-06-25 16:10:27'
   - id: rollspel-kvall-harald-2022-06-27-1830
-    title: 'Rollspel kväll, Harald'
+    title: Rollspel kväll, Harald
     date: '2022-06-27'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält2
     responsible: Harald
-    description: null
+    description: |-
+      <p>Fullbokad</p>
+      <p>Deltagare: Lo, Selma, Tova, Molle och Mida.</p>
+      <p>Under första omgången kommer det finnas tid för att göra karaktärer.</p>
     link: null
     owner:
       name: ''
@@ -612,7 +737,11 @@ events:
     end: '18:30'
     location: Annat
     responsible: Birgitta
-    description: null
+    description: |-
+      <p>För de som var med på måndagens studiebesök.</p>
+      Mer information kommer.
+      <br>
+      <a href="https://m.facebook.com/groups/639094320468722/permalink/734177770960376/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -627,7 +756,7 @@ events:
     end: '11:30'
     location: Tält1
     responsible: Malin Isenfors
-    description: null
+    description: "<p>Jag heter Malin och har en son som flyttat upp 3 år. Jag har också en dotter som sedan flyttat upp 2 år. Med den erfarenheten i bagaget har jag varit med vid flera skolmöten och hjälpt andra familjer få till uppflytt.</p>\n<ol>\n<li>Jag berättar och svarar på frågor, men hoppas framförallt att det ska bli en allmän diskussion.\_</li>\n</ol>\n<p>&nbsp;</p>"
     link: null
     owner:
       name: ''
@@ -642,7 +771,7 @@ events:
     end: '18:00'
     location: Servicehus
     responsible: Malin
-    description: null
+    description: "<p>Sugen på att piffa till dig lite extra? Kom och måla dina naglar vid servicehuset. Eller varför inte bli överraska dig själv genom att låta någon annan måla dina naglar? Alla hjälps åt.\_</p>"
     link: null
     owner:
       name: ''
@@ -657,7 +786,10 @@ events:
     end: '12:00'
     location: Skolsal
     responsible: Ivar Ängquist
-    description: null
+    description: |-
+      <p>Något av det roligaste jag vet är att lösa matematiska problem. För att dela denna gädje har jag sammanställt drygt ett dussin kluriga geometriproblem med en stor variation av olika svårhetsgrader. Jag har noggrant valt ut de problem jag tror är utmanande på ett rättvist sätt och ger de bästa "aha"-upplevelserna. Problemlösning innebär att det inte handlar om att kunna en specifik formel eller metod. Istället gäller det att hitta på en egen metod för varje problem. Jag rekommenderar workshopen för alla matteintresserade som går på eller har gått ut högstadiet. Även vuxna är varmt välkomna.</p>
+      <br>
+      <a href="https://www.facebook.com/groups/639094320468722/permalink/740051673706319/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -666,13 +798,13 @@ events:
       created_at: '2022-06-25 23:04:53'
       updated_at: '2022-06-25 23:04:53'
   - id: rollspel-kvall-viktor-2022-06-28-1830
-    title: 'Rollspel kväll, Viktor'
+    title: Rollspel kväll, Viktor
     date: '2022-06-28'
     start: '18:30'
     end: '21:00'
     location: Rollspelstält1
     responsible: 'Viktor '
-    description: null
+    description: "<p>Fullbokad\_</p>\n<p>Deltagare: Astor, Johan, Harry, Gabriel och Ebbe.</p>"
     link: null
     owner:
       name: ''
@@ -681,13 +813,13 @@ events:
       created_at: '2022-06-26 10:38:17'
       updated_at: '2022-06-26 10:38:17'
   - id: rollspel-kvall-harald-2022-06-28-1830
-    title: 'Rollspel kväll, Harald'
+    title: Rollspel kväll, Harald
     date: '2022-06-28'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält2
     responsible: Harald
-    description: null
+    description: "<p>Fullbokad\_</p>\n<p>Deltagare: Lo, Selma, Tova, Molle och Mida</p>"
     link: null
     owner:
       name: ''
@@ -702,7 +834,7 @@ events:
     end: '16:45'
     location: GA-hall
     responsible: 'Kalle Kalle@sandzen.se '
-    description: null
+    description: "<p>Prova stop motion i programmet Dragonframe. Jag (Kalle Sandzen, lektor i animation på Stockholms Konstnärliga Högskola) ställer upp en station för att animera teckningar eller modelllera. Kom och prova! Kommer bara använda ett hörn inomhus om någon vill ha andra aktiviteter samtidigt i skolsalen.\_</p>"
     link: null
     owner:
       name: ''
@@ -717,7 +849,7 @@ events:
     end: '19:30'
     location: Fotbollsplan
     responsible: 'Dillner '
-    description: null
+    description: <p>Fotboll för alla åldrar.</p>
     link: null
     owner:
       name: ''
@@ -732,7 +864,7 @@ events:
     end: '20:45'
     location: Annat
     responsible: Andreas
-    description: null
+    description: <p>Vi samlas utanför GA-hallen för att rigga lägret!</p>
     link: null
     owner:
       name: ''
@@ -747,8 +879,8 @@ events:
     end: '16:30'
     location: Tält1
     responsible: Ivar Ängquist
-    description: null
-    link: null
+    description: '<p class="p1" style="text-align: left"><span class="s1">När man räknar med modulo ligger talen på en cirkel istället för på en tallinje. Jag tänker gå igenom hur addition subtraktion, multiplikation, division och potenser fungerar på denna cirkel och visa hur man kan lösa några problem med detta matematiska verktyg. Lektionen kommer ha ett högt tempo, men kräver inga särskilda förkunskaper. Beroende på vilken tid och energi som finns kvar kan vi dyka ännu djupare i ämnet.</span></p>'
+    link: https://m.facebook.com/groups/639094320468722/permalink/740969193614567/?fs=0&amp;focus_composer=0&amp;m_entstream_source=group
     owner:
       name: ''
       email: ''
@@ -762,7 +894,14 @@ events:
     end: '11:45'
     location: Datorsal
     responsible: Niclas Nilsson och Johan Sommerfeld
-    description: null
+    description: |-
+      <p class="p1">Spelarna:<br /><br />Under uppstartsmötet kommer spelarna att få bestämma:</p>
+      <ul class="ul1">
+      <li class="li1">Om ni skall köra en ny värld eller bygga vidare i förra årets värld.</li>
+      <li class="li1">Vilka inställningar som skall gälla på servern.</li>
+      </ul>
+      <p class="p1">Er uppgift är att tänka på att så många som möjligt skall trivas. En del är hardcore minecrafters, andra är casual players. En del kanske kommer sitta många timmar varje dag, andra kommer spela när de har en lucka mellan andra aktiviteter. Det är viktigt att ni ser till helheten och inte bara till personliga preferenser. Ha också tekniskt strul för andra i åtanke om det blir tal om mods. Vi vill att det skall flyta på så bra som möjligt och att alla skall ha kul.</p>
+      <p class="p1">Föräldrarna:<br /><br />Föräldrarna kommer i sin tur att få komma överens om vuxenschemat i datasalen. Datasalen kommer bara vara öppen när det finns en vuxen där och ni bestämmer tillsammans öppettider. Den vuxnes uppgift är inte att vara teknisk support (om den inte råkar vilja/kunna), utan att ha koll på om något barn verkar bli plötsligt ledsen eller upprörd och då ta reda på vad som hänt, och eventuellt hjälpa till att reda ut problemet med de andra spelarna. Man kan som vuxen inte sitta och slösurfa utan ens jobb är att ha koll på barnens välmående, då detta är mycket viktiga och känslomässiga saker för många.</p>
     link: null
     owner:
       name: ''
@@ -793,7 +932,7 @@ events:
     location: Tält2
     responsible: 'Christina '
     description: null
-    link: null
+    link: https://m.facebook.com/groups/639094320468722/permalink/735023300875823/
     owner:
       name: ''
       email: ''
@@ -807,8 +946,8 @@ events:
     end: '15:00'
     location: GA-hall
     responsible: 'Lotta Jonsson '
-    description: null
-    link: null
+    description: "<p class=\"p1\">\_</p>\n<p class=\"p1\">Hej!\_</p>\n<p>Från 13:30 finns det möjlighet att bygga med Lego o GA hallen. Möjlighet finns att prova Lego stop motion för den som vill. Lasse visar gärna lite grunder. \_</p>\n<p class=\"p1\">Det finns Lego satser (Classic, City och Friends) att använda.\_</p>\n<p class=\"p1\"><span class=\"s1\">Bygget man gör kan bli en scen till en stopmotion film eller vad som helst. </span></p>\n<p class=\"p1\"><span class=\"s1\">Det går bra att ta med sitt eget Lego om man vill.</span></p>\n<p class=\"p1\"><span class=\"s1\">Det kommer finnas snickrade ställ för mobilen att använda vid filmning. Lasse kan visa grunderna hur man gör. </span></p>\n<p class=\"p1\"><span class=\"s1\">Appen Stop Motion studios (den blå gratis versionen funkar) är att rekommendera att man laddar ner.</span></p>\n<p class=\"p1\"><span class=\"s1\">Regler:<br /></span></p>\n<ul>\n<li class=\"p1\"><span class=\"s1\">Öppna lådor försiktigt. Vi förvarar i dessa så länge det går. <br /></span></li>\n<li class=\"p1\"><span class=\"s1\">Blanda inte bitar förutom Classic som är till för att blanda. (Får se hur det blir om denna regel ändras men kul att hålla satserna intakta ett tag). </span></li>\n<li class=\"p1\"><span class=\"s1\">Bygg själv eller tillsammans. Bjud gärna in varandra.</span></li>\n<li><span class=\"s1\"><span class=\"s1\">Lägg lapp med namnet på om du vill komma tillbaka senare.\_<br /></span></span>Håll inte Legot längre än du behöver så fler kan bygga samma legosats.</li>\n</ul>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/741321473579339/
     owner:
       name: ''
       email: ''
@@ -822,7 +961,7 @@ events:
     end: '16:30'
     location: Skolsal
     responsible: 'Leigh Jamison, psykolog '
-    description: null
+    description: <p>Översikt över särskild begåvning i Sverige - praxis, forskning, vården, skola</p>
     link: null
     owner:
       name: ''
@@ -837,7 +976,7 @@ events:
     end: '16:30'
     location: Skolsal
     responsible: Leigh Jamison
-    description: null
+    description: <p>Föreläsning, tema bestäms vid onsdagsföreläsningen!</p>
     link: null
     owner:
       name: ''
@@ -852,7 +991,12 @@ events:
     end: '13:00'
     location: Annat
     responsible: Pia Olsson
-    description: null
+    description: |-
+      <p>Discgolf i Branäs.</p>
+      <p>Kommer att tillbringa heldag där men börjar med discgolf. Enligt Branäs-hemsidan och appen UDisc så är det en 9-hålsbana. Spelade 2 rundor där förra året.</p>
+      <p>Stannar kvar och grillar efteråt och cyklar MTB.</p>
+      <p>Det går att hyra frisbees i Branäs enligt hemsidan om man inte har egna själv.</p>
+      <p>Har frisbees i min bil och visar gärna grunderna om någon är intresserad att testa innan.</p>
     link: null
     owner:
       name: ''
@@ -866,8 +1010,11 @@ events:
     start: '13:00'
     end: '15:00'
     location: Datorsal
-    responsible: 'Christoffer Modée, Gustav Kalander'
-    description: null
+    responsible: Christoffer Modée, Gustav Kalander
+    description: |-
+      <p>Introduktionskurs i programmering med Python. Rekommenderas till dig som provat lite programmering tidigare, dig som är lite rostig eller dig som bara är nyfiken och vill prova på. Den passar också utmärkt för dig som vill förbereda dig för den AI-workshop som kommer anordnas senare under veckan.</p>
+      <br>
+      <a href="https://www.facebook.com/groups/639094320468722/permalink/740192703692216">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -882,7 +1029,19 @@ events:
     end: '20:30'
     location: Tält1
     responsible: Jenny vB
-    description: null
+    description: |-
+      <p>Gruppdiskussion där vi delar med oss av tips och erfarenheter kring särbegåvning och högskolestudier. Frågor att diskutera:</p>
+      <p>- Läsa i snabbare tempo på högskolan, kan man tenta av hela kurser, läsa dubbelt osv?</p>
+      <p>- Komma in på olika högskoleutbildningar på högskolan i Sverige och utomlands (tex USA)</p>
+      <p>- Bästa högskolestudierna för särbegåvade (upplägg, tempo)?</p>
+      <p>- Distansstudier, online studier. Bästa valen och hur gör man?</p>
+      <p>- Publicera egna papers. Hur gör man? Vad krävs?</p>
+      <p>- Börja högskolestudier parallellt med gymnasiet. Hur gör man?</p>
+      <p>- Finns det fallgropar att undvika?</p>
+      <p>- Andra frågeställningar som har med särbegåvning och högskolestudier att göra.</p>
+      <p>Särskilt välkomnas alla äldre ungdomar, föräldrar till äldre ungdomar samt personer som har koll på högskolan av andra skäl.</p>
+      <br>
+      <a href="https://www.facebook.com/groups/639094320468722/permalink/741470240231129/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -897,7 +1056,7 @@ events:
     end: '20:00'
     location: Skolsal
     responsible: Cecilia Pakravan
-    description: null
+    description: <a href="https://www.facebook.com/groups/639094320468722/permalink/741480866896733/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -912,7 +1071,7 @@ events:
     end: '20:00'
     location: Skolsal
     responsible: Cecilia Pakravan
-    description: null
+    description: <a href="https://www.facebook.com/groups/639094320468722/permalink/741480866896733/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -927,8 +1086,8 @@ events:
     end: '11:00'
     location: Skolsal
     responsible: 'Leija /Charlotte Anderberg '
-    description: null
-    link: null
+    description: "<p>Hej!\_</p>\n<p>Älskar du liksom jag musik och att sjunga? Med inspiration från filmen Pitch perfect och de låtarna undrar jag om det finns några som skulle tycka att det var roligt att under lägret tillsammans öva in fyra låtar från filmen? Målet är en mini-konsert i slutet av veckan.\_</p>\n<p>Från ca. 8 år.</p>\n<p>Jag har med mig låttexter.\_</p>\n<p>Vi började öva lite under måndagen men det är inte för sent om fler vill hänga på.\_</p>\n<p>Vi sjunger 10-11 varje dag, med reservation för justeringar.\_</p>\n<p>/Leija 10 år</p>\n<p>&nbsp;</p>"
+    link: https://m.facebook.com/groups/639094320468722/permalink/738396160538537/
     owner:
       name: ''
       email: ''
@@ -942,7 +1101,7 @@ events:
     end: '11:00'
     location: Skolsal
     responsible: 'Leija/ Lotta Anderberg '
-    description: null
+    description: "<p>Hej!\_</p>\n<p>Älskar du liksom jag musik och att sjunga? Med inspiration från filmen Pitch perfect och de låtarna undrar jag om det finns några som skulle tycka att det var roligt att under lägret tillsammans öva in fyra låtar från filmen? Målet är en mini-konsert i slutet av veckan.\_</p>\n<p>Från ca. 8 år.</p>\n<p>Jag har med mig låttexter.\_</p>\n<p>Vi började öva lite under måndagen men det är inte för sent om fler vill hänga på.\_</p>\n<p>Vi sjunger 10-11 varje dag, med reservation för justeringar.\_</p>\n<p>/Leija 10 år</p>\n<br>\n<a href=\"https://m.facebook.com/groups/639094320468722/permalink/738396160538537/\">FB-tråd</a>"
     link: null
     owner:
       name: ''
@@ -957,7 +1116,7 @@ events:
     end: '11:00'
     location: Skolsal
     responsible: 'Leija, Lotta Anderberg '
-    description: null
+    description: "<p>Hej!\_</p>\n<p>&nbsp;</p>\n<p>Älskar du liksom jag musik och att sjunga? Med inspiration från filmen Pitch perfect och de låtarna undrar jag om det finns några som skulle tycka att det var roligt att under lägret tillsammans öva in fyra låtar från filmen? Målet är en mini-konsert i slutet av veckan.\_</p>\n<p>&nbsp;</p>\n<p>Från ca. 8 år.</p>\n<p>Jag har med mig låttexter.\_</p>\n<p>Vi sjunger 10-11 varje dag, med reservation för justeringar.\_</p>\n<p>/Leija 10 år</p>\n<br>\n<a href=\"https://m.facebook.com/groups/639094320468722/permalink/738396160538537/\">FB-tråd</a>"
     link: null
     owner:
       name: ''
@@ -972,7 +1131,7 @@ events:
     end: '11:00'
     location: Skolsal
     responsible: 'Leija, Lotta Anderberg '
-    description: null
+    description: "<p>Hej!\_</p>\n<p>Älskar du liksom jag musik och att sjunga? Med inspiration från filmen Pitch perfect och de låtarna undrar jag om det finns några som skulle tycka att det var roligt att under lägret tillsammans öva in fyra låtar från filmen? Målet är en mini-konsert i slutet av veckan.\_</p>\n<p>Från ca. 8 år.</p>\n<p>Jag har med mig låttexter.</p>\n<p>Vi sjunger 10-11 varje dag, med reservation för justeringar.\_</p>\n<p>/Leija 10 år</p>\n<a href=\"https://m.facebook.com/groups/639094320468722/permalink/738396160538537/\">FB-tråd</a>"
     link: null
     owner:
       name: ''
@@ -987,7 +1146,10 @@ events:
     end: '15:00'
     location: Tält1
     responsible: 'Mohammed '
-    description: null
+    description: |-
+      <p>Teckenspråk enkla tecken</p>
+      <br>
+      <a href="https://www.facebook.com/groups/639094320468722/permalink/741558740222279/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -1002,8 +1164,8 @@ events:
     end: '10:30'
     location: Tält1
     responsible: 'Malin Isenfors '
-    description: null
-    link: null
+    description: "<p>Liten träff för alla oss som spelar Pokemon Go, så vi får se varandra och kan bli vänner i spelet.\_</p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/740821633629323/
     owner:
       name: ''
       email: ''
@@ -1017,7 +1179,11 @@ events:
     end: '15:00'
     location: Annat
     responsible: Eget ansvar
-    description: null
+    description: |-
+      Många brukar besöka Chokladfabriken för att äta lite glass som avrundning och hej då.<br>
+      Det finns parkering för de som vill vara redo för "hemfärd".<br>
+      Annars är det en lagom promenad på vägen bakom receptionen.<br>
+      Tiden är för det brukar vara lite "drop-in".
     link: null
     owner:
       name: ''
@@ -1032,7 +1198,7 @@ events:
     end: '16:30'
     location: Fritidsgård
     responsible: Daniel och Björn
-    description: null
+    description: "<p>Prova på att klättra på klättervägg. Lilla gympahallen som är uppe på skolan Kvistbergsvägen 30.\_ Alla åldrar välkomna.</p>"
     link: null
     owner:
       name: ''
@@ -1041,13 +1207,13 @@ events:
       created_at: '2022-06-27 22:44:27'
       updated_at: '2022-06-27 22:44:27'
   - id: rollspel-stor-grupp-viktor-och-harald-2022-06-28-1330
-    title: 'Rollspel, stor grupp, Viktor och Harald'
+    title: Rollspel, stor grupp, Viktor och Harald
     date: '2022-06-28'
     start: '13:30'
     end: '17:00'
     location: Rollspelstält1
     responsible: Viktor och Harald
-    description: null
+    description: "<p>Fullbokad</p>\n<p>Deltagare: Tekla, Nemi, Wille, Hedda, Vidar, Samuel, Jonathan, Salt och Emilia.\_</p>"
     link: null
     owner:
       name: ''
@@ -1056,13 +1222,13 @@ events:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
   - id: rollspel-stor-grupp-viktor-och-harald-2022-06-29-1330
-    title: 'Rollspel, stor grupp, Viktor och Harald'
+    title: Rollspel, stor grupp, Viktor och Harald
     date: '2022-06-29'
     start: '13:30'
     end: '17:00'
     location: Rollspelstält1
     responsible: Viktor och Harald
-    description: null
+    description: "<p>Fullbokad</p>\n<p>Deltagare: Tekla, Nemi, Wille, Hedda, Vidar, Samuel, Jonathan, Salt och Emilia.\_</p>"
     link: null
     owner:
       name: ''
@@ -1071,13 +1237,13 @@ events:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
   - id: rollspel-stor-grupp-viktor-och-harald-2022-06-30-1330
-    title: 'Rollspel, stor grupp, Viktor och Harald'
+    title: Rollspel, stor grupp, Viktor och Harald
     date: '2022-06-30'
     start: '13:30'
     end: '17:00'
     location: Rollspelstält1
     responsible: Viktor och Harald
-    description: null
+    description: "<p>Fullbokad</p>\n<p>Deltagare: Tekla, Nemi, Wille, Hedda, Vidar, Samuel, Jonathan, Salt och Emilia.\_</p>"
     link: null
     owner:
       name: ''
@@ -1086,13 +1252,13 @@ events:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
   - id: rollspel-stor-grupp-viktor-och-harald-2022-07-01-1330
-    title: 'Rollspel, stor grupp, Viktor och Harald'
+    title: Rollspel, stor grupp, Viktor och Harald
     date: '2022-07-01'
     start: '13:30'
     end: '17:00'
     location: Rollspelstält1
     responsible: Viktor och Harald
-    description: null
+    description: "<p>Fullbokad</p>\n<p>Deltagare: Tekla, Nemi, Wille, Hedda, Vidar, Samuel, Jonathan, Salt och Emilia.\_</p>"
     link: null
     owner:
       name: ''
@@ -1101,13 +1267,13 @@ events:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
   - id: rollspel-stor-grupp-viktor-och-harald-2022-07-02-1330
-    title: 'Rollspel, stor grupp, Viktor och Harald'
+    title: Rollspel, stor grupp, Viktor och Harald
     date: '2022-07-02'
     start: '13:30'
     end: '17:00'
     location: Rollspelstält1
     responsible: Viktor och Harald
-    description: null
+    description: "<p>Fullbokad</p>\n<p>Deltagare: Tekla, Nemi, Wille, Hedda, Vidar, Samuel, Jonathan, Salt och Emilia.\_</p>"
     link: null
     owner:
       name: ''
@@ -1116,13 +1282,13 @@ events:
       created_at: '2022-06-28 00:18:28'
       updated_at: '2022-06-28 00:18:28'
   - id: rollspel-kvall-harald-2022-06-30-1830
-    title: 'Rollspel kväll, Harald'
+    title: Rollspel kväll, Harald
     date: '2022-06-30'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält2
     responsible: Harald
-    description: null
+    description: "<p>Fullbokad\_</p>\n<p>Deltagare: Lo, Selma, Tova, Molle och Mida</p>"
     link: null
     owner:
       name: ''
@@ -1131,13 +1297,13 @@ events:
       created_at: '2022-06-28 00:21:15'
       updated_at: '2022-06-28 00:21:15'
   - id: rollspel-kvall-harald-2022-07-01-1830
-    title: 'Rollspel kväll, Harald'
+    title: Rollspel kväll, Harald
     date: '2022-07-01'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält2
     responsible: Harald
-    description: null
+    description: "<p>Fullbokad\_</p>\n<p>Deltagare: Lo, Selma, Tova, Molle och Mida</p>"
     link: null
     owner:
       name: ''
@@ -1146,13 +1312,15 @@ events:
       created_at: '2022-06-28 00:21:15'
       updated_at: '2022-06-28 00:21:15'
   - id: rollspel-fm-viktor-2022-06-28-0900
-    title: 'Rollspel fm, Viktor'
+    title: Rollspel fm, Viktor
     date: '2022-06-28'
     start: '09:00'
     end: '12:00'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: |-
+      <p>Fullbokad</p>
+      <p>Deltagare: Ivar, Edgar, Elias, Anton och Simon.<!--more--></p>
     link: null
     owner:
       name: ''
@@ -1161,13 +1329,15 @@ events:
       created_at: '2022-06-28 00:21:54'
       updated_at: '2022-06-28 00:21:54'
   - id: rollspel-fm-viktor-2022-06-29-0900
-    title: 'Rollspel fm, Viktor'
+    title: Rollspel fm, Viktor
     date: '2022-06-29'
     start: '09:00'
     end: '12:00'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: |-
+      <p>Fullbokad</p>
+      <p>Deltagare: Ivar, Edgar, Elias, Anton och Simon.<!--more--></p>
     link: null
     owner:
       name: ''
@@ -1176,13 +1346,13 @@ events:
       created_at: '2022-06-28 00:21:54'
       updated_at: '2022-06-28 00:21:54'
   - id: rollspel-kvall-viktor-2022-06-30-1830
-    title: 'Rollspel kväll, Viktor'
+    title: Rollspel kväll, Viktor
     date: '2022-06-30'
     start: '18:30'
     end: '21:00'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: "<p>&nbsp;</p>\n<p>Fullbokad\_</p>\n<p>Deltagare: Astor, Johan, Harry, Gabriel och Ebbe.</p>"
     link: null
     owner:
       name: ''
@@ -1191,13 +1361,13 @@ events:
       created_at: '2022-06-28 00:22:27'
       updated_at: '2022-06-28 00:22:27'
   - id: rollspel-kvall-viktor-2022-07-01-1830
-    title: 'Rollspel kväll, Viktor'
+    title: Rollspel kväll, Viktor
     date: '2022-07-01'
     start: '18:30'
     end: '21:00'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: "<p>&nbsp;</p>\n<p>Fullbokad\_</p>\n<p>Deltagare: Astor, Johan, Harry, Gabriel och Ebbe.</p>"
     link: null
     owner:
       name: ''
@@ -1206,13 +1376,15 @@ events:
       created_at: '2022-06-28 00:22:27'
       updated_at: '2022-06-28 00:22:27'
   - id: rollspel-fm-viktor-2022-07-01-0900
-    title: 'Rollspel fm, Viktor'
+    title: Rollspel fm, Viktor
     date: '2022-07-01'
     start: '09:00'
     end: '12:00'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: |-
+      <p>Fullbokad</p>
+      <p>Deltagare: Ivar, Edgar, Elias, Anton och Simon.</p>
     link: null
     owner:
       name: ''
@@ -1221,13 +1393,15 @@ events:
       created_at: '2022-06-28 00:22:56'
       updated_at: '2022-06-28 00:22:56'
   - id: rollspel-fm-viktor-2022-07-02-0900
-    title: 'Rollspel fm, Viktor'
+    title: Rollspel fm, Viktor
     date: '2022-07-02'
     start: '09:00'
     end: '12:00'
     location: Rollspelstält1
     responsible: Viktor
-    description: null
+    description: |-
+      <p>Fullbokad</p>
+      <p>Deltagare: Ivar, Edgar, Elias, Anton och Simon.</p>
     link: null
     owner:
       name: ''
@@ -1242,7 +1416,10 @@ events:
     end: '17:00'
     location: GA-hall
     responsible: 'Petra Hultman '
-    description: null
+    description: |-
+      <p>Vi har med oss papper och pennor som vi placerar i sporthallen för alla. För de som vill kan jag hålla i lite kollektiva ritaktiviteter för alla åldrar. I morgon Tisdag vid 16 finns jag på plats med lite övningar. Om ni vill vara med så ta med ett föremål som ryms i handflatan!</p>
+      <br>
+      <a href="https://www.facebook.com/groups/639094320468722/permalink/741584896886330/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -1257,7 +1434,7 @@ events:
     end: '20:30'
     location: GA-hall
     responsible: Christina Falk
-    description: null
+    description: "<p>Schackintresserade träffas och spelar. Ta gärna med schackbräden, de som har.\_<br />Om fler vill kan vi planera in en schackturnering.\_</p>\n<br>\n<a href=\"https://www.facebook.com/groups/639094320468722/permalink/741514133560073/\">FB-tråd</a>"
     link: null
     owner:
       name: ''
@@ -1272,7 +1449,7 @@ events:
     end: '11:00'
     location: Annat
     responsible: Cecilia P och Cecilia L
-    description: null
+    description: <a href="https://www.facebook.com/groups/639094320468722/permalink/741849993526487/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -1281,14 +1458,14 @@ events:
       created_at: '2022-06-28 09:06:03'
       updated_at: '2022-06-28 09:06:03'
   - id: foraldrafika-hemmasittare-livspusslet-och-vagen-tillbaka-kaffetaltet-bredvid-stuga-6-2022-07-01-1000
-    title: 'Föräldrafika – Hemmasittare, livspusslet och vägen tillbaka (Kaffetältet, bredvid stuga 6)'
+    title: Föräldrafika – Hemmasittare, livspusslet och vägen tillbaka (Kaffetältet, bredvid stuga 6)
     date: '2022-07-01'
     start: '10:00'
     end: '11:00'
     location: Annat
     responsible: Cecilia och Cecilia
     description: null
-    link: null
+    link: https://Skicka%20i%20Messenger%20https://www.facebook.com/groups/639094320468722/permalink/741849656859854/
     owner:
       name: ''
       email: ''
@@ -1302,7 +1479,7 @@ events:
     end: '11:00'
     location: Tält1
     responsible: Cecilia och Cecilia
-    description: null
+    description: <a href="https://www.facebook.com/groups/639094320468722/permalink/741849196859900/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -1317,7 +1494,7 @@ events:
     end: '11:00'
     location: Annat
     responsible: Cecilia och Cecilia mfl
-    description: null
+    description: <a href="https://www.facebook.com/groups/639094320468722/permalink/741846076860212/">FB-tråd</a>
     link: null
     owner:
       name: ''
@@ -1332,7 +1509,7 @@ events:
     end: '21:30'
     location: Fritidsgård
     responsible: Tilde ( Karin )
-    description: null
+    description: "<p><strong>En lugn stund att teckna tillsammans.\_</strong></p>\n<p dir=\"ltr\">✏️📋 anmälan behövs. (Vet hur många när jag vet lokal).</p>\n<p dir=\"ltr\">Vi har olika papper, blyerts i olika mjukhet, lite kol, stompf, akvarellfärg och några penslar, färgpennor av olika slag (ej alkoholiserade men ta gärna med om du har)</p>\n<p dir=\"ltr\">Om du har egna saker du vill använda så ta med dem. <br />Tecknat du digitalt på platta så ta med det.</p>\n<p dir=\"ltr\">Lillasyster Linn 13 år är också med.</p>\n<br>\n<a href=\"https://m.facebook.com/groups/639094320468722/permalink/741895436855276/\">FB-tråd</a>"
     link: null
     owner:
       name: ''
@@ -1347,7 +1524,7 @@ events:
     end: '12:00'
     location: Tält1
     responsible: 'Linda Backman '
-    description: null
+    description: "<p>Föreläsning/diskussion/seminarium. Stort fokus på era funderingar.\_</p>\n<br>\n<a href=\"https://m.facebook.com/groups/639094320468722/permalink/741870253524461/\">FB-tråd</a>"
     link: null
     owner:
       name: ''
@@ -1362,7 +1539,7 @@ events:
     end: '19:00'
     location: Annat
     responsible: Niclas Nilsson
-    description: null
+    description: "<p class=\"p1\">Alla musikintresserade som gillar och vill spela/sjunga tillsammans kan ta med sig instrument/röst så spelar vi ihop, lär varandra saker, testar lite låtar tillsammans och helt enkelt jammar och har kul.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\">Samling <strong>under björkarna vid lekplatsen</strong> vid bra väder, och längs bort i korridoren i GA-hallen om det är mindre bra väder.</p>\n<p class=\"p1\">Repeteras varje eftermiddag 16:00-17:00 (förutom idag tisdag då vi kör 18:00-19:00 då många av oss säkert vill lära oss Beatboxa).<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\"><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741917626853057/\">https://www.facebook.com/groups/639094320468722/permalink/741917626853057/</a></p>"
     link: null
     owner:
       name: ''
@@ -1377,8 +1554,8 @@ events:
     end: '17:00'
     location: Annat
     responsible: Niclas Nilsson
-    description: null
-    link: null
+    description: "<p class=\"p1\">Alla musikintresserade som gillar och vill spela/sjunga tillsammans kan ta med sig instrument/röst så spelar vi ihop, lär varandra saker, testar lite låtar tillsammans och helt enkelt jammar och har kul.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\">Samling <strong>under björkarna vid lekplatsen</strong> vid bra väder, och längs bort i korridoren i GA-hallen om det är mindre bra väder.</p>\n<p class=\"p1\">Repeteras varje eftermiddag 16:00-17:00.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\"><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741917626853057/\">https://www.facebook.com/groups/639094320468722/permalink/741917626853057/</a></p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/741917626853057/
     owner:
       name: ''
       email: ''
@@ -1392,8 +1569,8 @@ events:
     end: '17:00'
     location: Annat
     responsible: Niclas Nilsson
-    description: null
-    link: null
+    description: "<p class=\"p1\">Alla musikintresserade som gillar och vill spela/sjunga tillsammans kan ta med sig instrument/röst så spelar vi ihop, lär varandra saker, testar lite låtar tillsammans och helt enkelt jammar och har kul.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\">Samling <strong>under björkarna vid lekplatsen</strong> vid bra väder, och längs bort i korridoren i GA-hallen om det är mindre bra väder.</p>\n<p class=\"p1\">Repeteras varje eftermiddag 16:00-17:00.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\"><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741917626853057/\">https://www.facebook.com/groups/639094320468722/permalink/741917626853057/</a></p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/741917626853057/
     owner:
       name: ''
       email: ''
@@ -1407,8 +1584,8 @@ events:
     end: '17:00'
     location: Annat
     responsible: Niclas Nilsson
-    description: null
-    link: null
+    description: "<p class=\"p1\">Alla musikintresserade som gillar och vill spela/sjunga tillsammans kan ta med sig instrument/röst så spelar vi ihop, lär varandra saker, testar lite låtar tillsammans och helt enkelt jammar och har kul.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\">Samling <strong>under björkarna vid lekplatsen</strong> vid bra väder, och längs bort i korridoren i GA-hallen om det är mindre bra väder.</p>\n<p class=\"p1\">Repeteras varje eftermiddag 16:00-17:00.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\"><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741917626853057/\">https://www.facebook.com/groups/639094320468722/permalink/741917626853057/</a></p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/741917626853057/
     owner:
       name: ''
       email: ''
@@ -1422,8 +1599,8 @@ events:
     end: '17:00'
     location: Annat
     responsible: Niclas Nilsson
-    description: null
-    link: null
+    description: "<p class=\"p1\">Alla musikintresserade som gillar och vill spela/sjunga tillsammans kan ta med sig instrument/röst så spelar vi ihop, lär varandra saker, testar lite låtar tillsammans och helt enkelt jammar och har kul.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\">Samling <strong>under björkarna vid lekplatsen</strong> vid bra väder, och längs bort i korridoren i GA-hallen om det är mindre bra väder.</p>\n<p class=\"p1\">Repeteras varje eftermiddag 16:00-17:00.<span class=\"Apple-converted-space\">\_</span></p>\n<p class=\"p1\"><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741917626853057/\">https://www.facebook.com/groups/639094320468722/permalink/741917626853057/</a></p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/741917626853057/
     owner:
       name: ''
       email: ''
@@ -1437,7 +1614,7 @@ events:
     end: '12:00'
     location: Fotbollsplan
     responsible: Sara v K
-    description: null
+    description: "<p>Ett enkelt träningspass till musik där en kortlek avgör vilka övningar och hur många repetitioner man gör! Passar alla åldrar men under 8 behöver förälder/vuxen med sig.\_</p>\n<p>https://www.facebook.com/groups/639094320468722/permalink/741986896846130/</p>"
     link: null
     owner:
       name: ''
@@ -1452,7 +1629,7 @@ events:
     end: '09:50'
     location: Grillplatsen
     responsible: Ulrica Liavor
-    description: null
+    description: "<p>Jag tänker lära ut en 17 minuters flödessekvens som inte kräver vana. Den stretchar ut kroppen ffa delar som öppnar andning och lymfa och ger energi. Den innehåller inga traditionella yogaasanas, men bygger på samma system. Vem som helst kan vara med. Mest tänker jag en liten oas för vuxna, men alla är välkomna.</p>\n<p>\_FLÖDESSEKVENS <br />10 min förklaring och genomgång <br />17 min själva flödessekvensen <br />10 min vila <br /><br />Efteråt pratar jag gärna och svarar på frågor, men avslutar så att alla hinner till föräldramötet med ny energi eller funnen trötthet;)\_</p>\n<p>Ca 45-50 min\_</p>\n<p>Vi ses vid älven nedanför grillplatsen.\_<br />Ta med en handduk, filt eller något annat att kunna ligga på under vilan.\_</p>\n<p>&nbsp;</p>"
     link: null
     owner:
       name: ''
@@ -1467,7 +1644,9 @@ events:
     end: '17:00'
     location: Tält1
     responsible: Maria Alfredsson
-    description: null
+    description: |-
+      <p>Jag hemundervisar mina två barn på Åland sedan fyra år tillbaka. Jag har massor av erfarenheter av vad som fungerar väl och vad som inte fungerar alls. Kanske någon av er som kommer på lägret funderar över att hemundervisa utomlands? I så fall kan jag gärna bidra med att berätta om våra erfarenheter från hur det går till på lilla Åland.</p>
+      <p><br />https://www.facebook.com/groups/639094320468722/permalink/739538220424331/</p>
     link: null
     owner:
       name: ''
@@ -1482,7 +1661,7 @@ events:
     end: '23:55'
     location: Annat
     responsible: Myggorna
-    description: null
+    description: En "hållare" för att synliggöra på skärmen vid servicehuset att alla aktiviter för dagen syns.
     link: null
     owner:
       name: ''
@@ -1497,7 +1676,7 @@ events:
     end: '23:55'
     location: Annat
     responsible: Myggorna
-    description: null
+    description: En "hållare" för att synliggöra på skärmen vid servicehuset att alla aktiviter för dagen syns.
     link: null
     owner:
       name: ''
@@ -1512,7 +1691,7 @@ events:
     end: '23:55'
     location: Annat
     responsible: Myggorna
-    description: null
+    description: En "hållare" för att synliggöra på skärmen vid servicehuset att alla aktiviter för dagen syns.
     link: null
     owner:
       name: ''
@@ -1527,7 +1706,7 @@ events:
     end: '23:55'
     location: Annat
     responsible: Myggorna
-    description: null
+    description: En "hållare" för att synliggöra på skärmen vid servicehuset att alla aktiviter för dagen syns.
     link: null
     owner:
       name: ''
@@ -1542,7 +1721,7 @@ events:
     end: '23:55'
     location: Annat
     responsible: Myggorna
-    description: null
+    description: En "hållare" för att synliggöra på skärmen vid servicehuset att alla aktiviter för dagen syns.
     link: null
     owner:
       name: ''
@@ -1557,8 +1736,8 @@ events:
     end: '20:30'
     location: Skolsal
     responsible: Amanda Gruneau
-    description: null
-    link: null
+    description: <p>Vi kollar på genrepet inför fotbolls-EM tillsammans. Sverige möter Brasilien på Friends arena. Vi är i ett klassrum i skolan. Ring Amanda om ni inte hittar oss 0733661233</p>
+    link: https://facebook.com/events/s/fotboll-sverige-brasilien/544869620456242/
     owner:
       name: ''
       email: ''
@@ -1566,12 +1745,12 @@ events:
       created_at: '2022-06-28 18:06:12'
       updated_at: '2022-06-28 18:06:12'
   - id: filmkvall-familjen-mitchell-mot-maskinerna-2022-06-28-2000
-    title: 'Filmkväll, familjen Mitchell mot maskinerna'
+    title: Filmkväll, familjen Mitchell mot maskinerna
     date: '2022-06-28'
     start: '20:00'
     end: '22:00'
     location: GA-hall
-    responsible: 'Andreas? :)'
+    responsible: Andreas? :)
     description: null
     link: null
     owner:
@@ -1587,7 +1766,7 @@ events:
     end: '12:00'
     location: Nerf-arena
     responsible: 'Rönnkvist '
-    description: null
+    description: "<p>Vi bjuder upp till ny match i Quidditch för mugglare. Ta med vattenflaska för påfyllnad och gärna egen kvast.\_</p>\n<p>Lagindelning och regler på plats.\_</p>\n<p>Välkomna\_</p>"
     link: null
     owner:
       name: ''
@@ -1602,8 +1781,8 @@ events:
     end: '12:00'
     location: Tält1
     responsible: 'Alexandra och Rebecca Isenfors '
-    description: null
-    link: null
+    description: "<p>Kom och prova på att spela blockflöjt.\_</p>"
+    link: https://m.facebook.com/groups/639094320468722/permalink/742262996818520/
     owner:
       name: ''
       email: ''
@@ -1617,7 +1796,7 @@ events:
     end: '14:00'
     location: GA-hall
     responsible: Lova Gruneau och Amanda Johansson
-    description: null
+    description: <p>Här kan barn 3-8 år komma och leka olika lekar och köra hinderbana.</p>
     link: null
     owner:
       name: ''
@@ -1632,8 +1811,8 @@ events:
     end: '09:50'
     location: Kaffetältet
     responsible: Lotta Jonsson
-    description: null
-    link: null
+    description: "<p>09:00 - 10:00</p>\n<p>Rakt upp och ner berättelse i dialog om hur vi kom igång, hur vi organiserar oss, hur vi löste vatten, grävning, gödsel, \_och förhåller oss till familjeliv, egen ork och miljö … och hur det gått med skörden trots diverse odlardilemmor. \_Väl mött\_Lotta\_</p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/731080067936813/
     owner:
       name: ''
       email: ''
@@ -1647,8 +1826,8 @@ events:
     end: '03:00'
     location: Grillplatsen
     responsible: 'Malin Isenfors '
-    description: null
-    link: null
+    description: "<p>Vi står för eld och bjuder barnen på popcorn och marshmellows.\_</p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/742447090133444/
     owner:
       name: ''
       email: ''
@@ -1662,8 +1841,21 @@ events:
     end: '11:00'
     location: Annat
     responsible: Samuel Modée
-    description: null
-    link: null
+    description: |-
+      <p>Samuel har varit instruktör i ju-jutsu i många år och håller en introduktionskurs i praktiskt självförsvar. Om vädret tillåter håller vi till utomhus på gräsplanen nedanför gympasalen: https://goo.gl/maps/SmFuCcmLcfEcnqF56</p>
+      <ul>
+      <li>
+      <div class="bi6gxh9e"><span class="d2edcug0 hpfvmrgz qv66sw1b c1et5uql lr9zc1uh jq4qci2q a3bd9o3v b1v8xokw oo9gr5id">Alla är välkomna oavsett ålder, färg eller form</span></div>
+      </li>
+      <li>
+      <div class="bi6gxh9e"><span class="d2edcug0 hpfvmrgz qv66sw1b c1et5uql lr9zc1uh jq4qci2q a3bd9o3v b1v8xokw oo9gr5id">Ha kläder ni är bekväma att röra er (och kanske svettas) i</span></div>
+      </li>
+      <li>
+      <div class="bi6gxh9e"><span class="d2edcug0 hpfvmrgz qv66sw1b c1et5uql lr9zc1uh jq4qci2q a3bd9o3v b1v8xokw oo9gr5id">Då vi kommer ha kroppskontakt får man avstå om man känner sjukdomssymptom</span></div>
+      </li>
+      </ul>
+      <p>&nbsp;</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/741423583569128
     owner:
       name: ''
       email: ''
@@ -1677,8 +1869,10 @@ events:
     end: '12:00'
     location: GA-hall
     responsible: Björn Maude
-    description: null
-    link: null
+    description: |-
+      <p>Jag har ett förflutet som basketspelare och tio års erfarenhet som ungdoms- och damlagstränare, så det är med viss basket-koppling och handhållen bollkontroll.</p>
+      <p>Inga förkunskaper behövs.. Det finns 20-nånting basketbollar, så det borde räcka.</p>
+    link: https://m.facebook.com/groups/639094320468722/permalink/742696900108463/
     owner:
       name: ''
       email: ''
@@ -1692,8 +1886,10 @@ events:
     end: '12:00'
     location: GA-hall
     responsible: Björn Maude
-    description: null
-    link: null
+    description: |-
+      <p>Jag har ett förflutet som basketspelare och tio års erfarenhet som ungdoms- och damlagstränare, så det är med viss basket-koppling och handhållen bollkontroll.</p>
+      <p>Inga förkunskaper behövs. Det finns 20-nånting basketbollar, så det borde räcka.</p>
+    link: https://m.facebook.com/groups/639094320468722/permalink/742696900108463/
     owner:
       name: ''
       email: ''
@@ -1707,8 +1903,8 @@ events:
     end: '14:30'
     location: Kaffetältet
     responsible: Anna B
-    description: null
-    link: null
+    description: "<p>Vi pratar om dyslexi hos särskilt begåvade barn.\_</p>"
+    link: https://m.facebook.com/groups/639094320468722/permalink/741865913524895/?m_entstream_source=group&amp;anchor_composer=false&amp;mds=%2Fedit%2Fpost%2Fdialog%2F%3Fcid%3DS%253A_I100000502885401%253AVK%253A741865913524895%26ct%3D2%26nodeID%3Dm_story_permalink_view%26redir%3D%252Fstory_chevron_menu%252F%253Fis_menu_registered%253Dfalse%26perm%26loc%3Dpermalink&amp;mdf=1
     owner:
       name: ''
       email: ''
@@ -1722,8 +1918,10 @@ events:
     end: '19:00'
     location: Tält1
     responsible: 'Mohammed '
-    description: null
-    link: null
+    description: |-
+      <p>Teckenspråk flyttat till Torsdag pga Grillkväll onsdag.</p>
+      <p>Ni är välkomna!</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/741558740222279/
     owner:
       name: ''
       email: ''
@@ -1738,7 +1936,7 @@ events:
     location: Nerf-arena
     responsible: Annie
     description: null
-    link: null
+    link: https://www.facebook.com/groups/639094320468722/permalink/742699333441553/
     owner:
       name: ''
       email: ''
@@ -1752,8 +1950,8 @@ events:
     end: '12:00'
     location: Annat
     responsible: Sara v K
-    description: null
-    link: null
+    description: "<p>Enkelt träningspass för alla åldrar!(under 8 med förälder)\_</p>\n<p><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741986896846130/\">Läs mer i tråden </a></p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/741986896846130/
     owner:
       name: ''
       email: ''
@@ -1766,9 +1964,12 @@ events:
     start: '13:00'
     end: '16:00'
     location: Skolsal
-    responsible: 'Samuel Modée, Christoffer Modée, Gustav Kalander'
-    description: null
-    link: null
+    responsible: Samuel Modée, Christoffer Modée, Gustav Kalander
+    description: |-
+      <p>På fredag kl 13-16 håller vi (Christoffer Modée, Gustav Kalander och jag) en workshop i datorhörnan där vi bygger AI och låter dem tävla mot varandra. Det kommer vara tillgängligt för alla från nybörjare till experter och alla kommer kunna utmana sig själva på sin nivå.</p>
+      <p><br />Varje lag som deltar behöver ha med sig en dator. Vi rekommenderar att man är 2-3 personer i ett lag. Har du möjlighet att se till att Python (åtminstone version 3.8) redan är installerat på datorn så är det jättebra. Annars fixar vi det i början av workshopen.</p>
+      <p><br />Pris kommer finnas åt alla AI som deltar. Men eftersom AI inte uppskattar materiella saker så delas priserna ut till er konstruktörer istället 🙂</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/742859533425533
     owner:
       name: ''
       email: ''
@@ -1782,7 +1983,7 @@ events:
     end: '20:30'
     location: Tält2
     responsible: Ines och Katharina Bjerke
-    description: null
+    description: "<p>Vi börjar kl 18.30 och håller på så länge någon har lust.\_</p>\n<p>Kom och virka en amigurumi-nyckelring eller vad du har lust med. Vi har garn och virknålar. Vi ses i tält 1, om det blåser mycket flyttar vi in i GA-hallen.</p>\n<p>&nbsp;</p>\n<p><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741517190226434/\">Facebooklänk</a></p>"
     link: null
     owner:
       name: ''
@@ -1797,8 +1998,11 @@ events:
     end: '16:00'
     location: Grillplatsen
     responsible: Ulrica Liavor
-    description: null
-    link: null
+    description: |-
+      <p>Torsdag kl 15 - ANDNING - MANETERNA - pass/workshop som går igenom hur vi med enkla medel kan få en fördjupad andning, vilket kan förändra andningsmönster som belastar de sekundära andningsmusklerna, vilket skapar spänning i bröst, nacke, axlar och även påverkar hjärtat då diafragman inte får vara dynamisk osv väldigt kort förklarat.</p>
+      <p>Ca 45 m-60 min med frågor och samtal för den som vill.</p>
+      <p>Vi ses vid älven. Medtag handduk, liggunderlag eller stol (eg det allra bästa).</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/743027133408773/
     owner:
       name: ''
       email: ''
@@ -1812,7 +2016,7 @@ events:
     end: '19:30'
     location: Fotbollsplan
     responsible: 'Dillner '
-    description: null
+    description: <p>Fotboll för alla</p>
     link: null
     owner:
       name: ''
@@ -1827,8 +2031,8 @@ events:
     end: '17:00'
     location: Annat
     responsible: 'Tilde '
-    description: null
-    link: null
+    description: "<p>Tilde har Tecknarstudio för tonåringar torsdag kl 14.00 i bildsalen i skolan. Bredvid entrén.\_</p>\n<p>✏️📋Anmälan behövs då det inte får plats hur många som helst.</p>\n<p>Petra kommer och köra lite kreativa teckningsövningar och visa lite saker för de som är intresserade.</p>\n<p>Det kommer finnas olika blyerts, färgpennor, tuschpennor, akvarell och kol. <br />Olika typer av papper m.m.</p>\n<p>Har du eget som du vill använda så ta med det. 😀</p>"
+    link: https://m.facebook.com/groups/639094320468722/permalink/741895436855276/
     owner:
       name: ''
       email: ''
@@ -1836,14 +2040,17 @@ events:
       created_at: '2022-06-29 23:45:35'
       updated_at: '2022-06-29 23:45:35'
   - id: minecraft-mods-demos-och-annat-2022-06-30-1300
-    title: 'Minecraft - mods, demos och annat'
+    title: Minecraft - mods, demos och annat
     date: '2022-06-30'
     start: '13:00'
     end: '14:00'
     location: Datorsal
     responsible: Niclas Nilsson
-    description: null
-    link: null
+    description: |-
+      <p>Minecraft, mods, tips/tricks m.m.</p>
+      <p>Har du mods du vill visa? Har du några coola Minecraft tricks som kanske inte alla kan? Eller något annat du skulle vilja visa?</p>
+      <p>Vi tar en timme 13:00 idag och tar en paus ifrån det vanliga Minecraftandet och visar varandra lite saker.</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/743337766711043/
     owner:
       name: ''
       email: ''
@@ -1857,7 +2064,7 @@ events:
     end: '12:00'
     location: Annat
     responsible: Sara v K
-    description: null
+    description: "<p>Enkelt och roligt träningspass för alla åldrar! (under 8 med förälder)\_</p>\n<p><a href=\"https://www.facebook.com/groups/639094320468722/permalink/741986896846130/\">Läs mer i tråden </a></p>"
     link: null
     owner:
       name: ''
@@ -1872,8 +2079,12 @@ events:
     end: '20:00'
     location: Skolsal
     responsible: Niclas Nilsson
-    description: null
-    link: null
+    description: |-
+      <p>Vi kör en session med köra en funktionell programmering i Clojure (en Lisp som kompilerar ned till Java/Javascript/.NET).</p>
+      <p>Det är definitivt inte tänkt som en nybörjarsession utan målgruppen är ungdomar och vuxna som programmerat ett tag, men som kanske ännu inte stött på en Lisp och/eller är nyfikna på hur ett dynamiskt funktionellt språk ser ut och fungerar.</p>
+      <p>”Lisp is worth learning for the profound enlightenment experience you will have when you finally get it; that experience will make you a better programmer for the rest of your days, even if you never actually use Lisp itself a lot.” - Eric Raymond</p>
+      <p>Förberedelser: Installera VS Code och https://calva.io</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/743177456727074/
     owner:
       name: ''
       email: ''
@@ -1887,7 +2098,7 @@ events:
     end: '15:00'
     location: Annat
     responsible: 'Ida (elin) Sommerfeld '
-    description: null
+    description: "<p class=\"p1\"><span class=\"s1\">Prova på disco (nivå 8-11 år)<br /></span>Uppvärmning, discosteg och en liten koreografi.</p>\n<p>utomhus om vädret tillåter annars i GA-hallen.\_</p>"
     link: null
     owner:
       name: ''
@@ -1902,7 +2113,7 @@ events:
     end: '21:00'
     location: Tält1
     responsible: Tekla och Nemi Nilede
-    description: null
+    description: <p>Komplicerad varulv klockan 19 på torsdag och fredag, om fler än 13 kommer så lottar vi vem som får vara med de som eventuellt inte får vara med på torsdagen har förtur på fredagen. Från 10 år.</p>
     link: null
     owner:
       name: ''
@@ -1917,7 +2128,7 @@ events:
     end: '21:00'
     location: Tält1
     responsible: Tekla och Nemi
-    description: null
+    description: <p>Komplicerad varulv med Tekla och Nemi klockan 19 på fredag. Max 13 deltagare. Tältet utanför GA-hallen. Från 13 år.</p>
     link: null
     owner:
       name: ''
@@ -1932,7 +2143,7 @@ events:
     end: '11:00'
     location: Skolsal
     responsible: 'Charlotta Savander '
-    description: null
+    description: <p>Prova att dirigera? Vad och hur gör en dirigent? Kom och prova, vi turas om att bli dirigerade och att dirigera. Kan du röra på armarna kan du dirigera. Nivå efter deltagarna men kanske helst från skolåldern.</p>
     link: null
     owner:
       name: ''
@@ -1947,7 +2158,7 @@ events:
     end: '19:30'
     location: Servicehus
     responsible: 'Malin Isenfors '
-    description: null
+    description: "<p>Kom och fixa dina naglar!\_</p>"
     link: null
     owner:
       name: ''
@@ -1961,9 +2172,9 @@ events:
     start: '16:45'
     end: '17:30'
     location: Tält1
-    responsible: 'RFSB Stockholm (Cecilia, Sara och Jesscia)'
+    responsible: RFSB Stockholm (Cecilia, Sara och Jesscia)
     description: null
-    link: null
+    link: https://www.facebook.com/groups/639094320468722/permalink/743679183343568/
     owner:
       name: ''
       email: ''
@@ -1977,8 +2188,8 @@ events:
     end: '18:00'
     location: Tält2
     responsible: Christina Falk
-    description: null
-    link: null
+    description: "<p>Den som vill bli målad får en ansiktsmålning.\_<br />se facebook-tråden för anmälan att få vara med och måla. Jag behöver några hjälpredor.\_</p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/743303006714519/
     owner:
       name: ''
       email: ''
@@ -1992,8 +2203,8 @@ events:
     end: '23:45'
     location: GA-hall
     responsible: 'Gabriel Olsson '
-    description: null
-    link: null
+    description: <p>Brädspelsafton i GA-HALLEN från kl.20 fram tills alla vännerna gått hem.</p>
+    link: https://m.facebook.com/groups/639094320468722/permalink/744101359968017/
     owner:
       name: ''
       email: ''
@@ -2007,8 +2218,10 @@ events:
     end: '12:00'
     location: Tält1
     responsible: Tobias Ander
-    description: null
-    link: null
+    description: |-
+      <p>Att leva med särbegåvning. (För föräldrar och unga vuxna).<br />Tobias (Ander) har vetat om min begåvning i 28 år och det har på många olika sätt påverkat vardagen, arbetslivet och livet i stort. (Jag har även 3 särskilt begåvade barn vilket i sig blir intresant).</p>
+      <p>Har du frågor och funderingar du skulle vilja fråga en särbegåvad som du inte törs fråga annars, ställ dem här under denna aktivitet, eller om du är bara allmänt nyfiken så välkommen att delta.</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/743634950014658/
     owner:
       name: ''
       email: ''
@@ -2022,8 +2235,8 @@ events:
     end: '15:00'
     location: Tält1
     responsible: Martin Jacobson
-    description: null
-    link: null
+    description: "<p>Undervisningskoncept Pullout\_</p>\n<p>Hej! Jag skulle vilja hålla prat om Pull Out undervisning. Dvs att köra separat undervisning för SB tvärs åldrar och skolor en gång i veckan. Vi tittar på att dra igång en pilot i Stockholm med dröm om att göra det för hela landet.</p>\n<p>Jag skulle vilja få input - innehåll, ideer, farhågor, kanske ide om vem som kan hjälpa till vara pedagog eller familjer som skulle vilja vara med. Målgruppen är barn i åldrarna 7 till 15.</p>\n<p>Fokuset jag tänker mig är Lusten till lärande och Att bygga en självkänsla / identitet.</p>"
+    link: https://m.facebook.com/groups/639094320468722/permalink/744286516616168/
     owner:
       name: ''
       email: ''
@@ -2031,14 +2244,16 @@ events:
       created_at: '2022-07-01 18:59:44'
       updated_at: '2022-07-01 18:59:44'
   - id: vattenkrig-2022-07-02-1300
-    title: 'Vattenkrig!'
+    title: Vattenkrig!
     date: '2022-07-02'
     start: '13:00'
     end: '14:00'
     location: Annat
     responsible: Maria Gröndahl
-    description: null
-    link: null
+    description: |-
+      <p>Traditionsenligt vattenkrig! Vuxna mot barn. Vi samlas vid uteduscharna lördag kl. 13.</p>
+      <p>https://www.facebook.com/groups/639094320468722/permalink/744377203273766/</p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/744377203273766/
     owner:
       name: ''
       email: ''
@@ -2052,8 +2267,8 @@ events:
     end: '15:00'
     location: Tält1
     responsible: Charlotte Tyldhed
-    description: null
-    link: null
+    description: "<p>Hampus och Vera bjuder in till en introduktion i japanska. Lär dig räkna, säga vad klockan är och vad du heter. Inga förkunskaper krävs.\_</p>"
+    link: https://www.facebook.com/groups/639094320468722/permalink/743426573368829
     owner:
       name: ''
       email: ''
@@ -2067,8 +2282,8 @@ events:
     end: '12:00'
     location: Annat
     responsible: Amanda G
-    description: null
-    link: null
+    description: <p><a href="https://www.facebook.com/groups/639094320468722/permalink/744363199941833/">Läs mer i tråden</a></p>
+    link: https://www.facebook.com/groups/639094320468722/permalink/744363199941833/
     owner:
       name: ''
       email: ''
@@ -2082,7 +2297,7 @@ events:
     end: '16:00'
     location: Rollspelstält1
     responsible: Christina Ebeling
-    description: null
+    description: <p>Mera vattenkrig, barn vs vuxna :-)!</p>
     link: null
     owner:
       name: ''
@@ -2097,7 +2312,7 @@ events:
     end: '22:15'
     location: Grillplatsen
     responsible: Ivar Ängquist
-    description: null
+    description: "<p class=\"p1\" style=\"text-align: center\"><span class=\"s1\">Efter den gemensamma städningen tycker jag att vi som inte har bråttom med ännu mer städning kan\_delta i en filosofidiskussion. Jag har förberett gott med tankeväckande frågor varav hälften handlar om rättvisa och hälften om känslor. Så länge vi blir tillräckligt många borde vi kunna dela in oss grupper så att både barn och vuxna kan diskutera med andra som har samma ålder och filosofisk erfarenhet. Vi ses nere vid bänkarna vid vattnet.</span></p>"
     link: null
     owner:
       name: ''
