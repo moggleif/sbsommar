@@ -423,8 +423,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§18.40` | The add-activity submit handler must only reference form elements that exist in the HTML form; accessing a missing element via `form.elements` returns `undefined` and calling `.value` on it throws a TypeError that aborts submission | 03-ARCHITECTURE.md §7 | — (no automated test: `form.elements` is a browser DOM API not available in Node.js; manual: open `lagg-till.html` in a browser and submit the form — confirm it submits without TypeError and the consent banner appears and responds correctly) | `source/assets/js/client/lagg-till.js` – `ownerName` line removed from `JSON.stringify` body | implemented |
 | `02-§18.46` | The edit form must submit to the `/edit-event` endpoint; the build derives the edit URL from `API_URL` by replacing a trailing `/add-event` with `/edit-event`, falling back to `/edit-event` | 03-ARCHITECTURE.md §7 | BUILD-01..04 | `source/build/render-edit.js` – `editApiUrl()`; `source/build/build.js` – passes `editApiUrl(process.env.API_URL)` | covered |
 | `02-§18.45` | The edit form fetch must use `credentials: 'include'` so the `sb_session` cookie is sent to the cross-origin API | 03-ARCHITECTURE.md §7 | — (manual: open `redigera.html` in a browser, submit an edit, and verify the request carries the cookie and returns HTTP 200) | `source/assets/js/client/redigera.js` – `credentials: 'include'` | implemented |
-| `02-§18.47` | Client-side cookie write-back must include the same `Domain` attribute the server used; the domain is read from a `data-cookie-domain` attribute on `<body>`, injected at build time; if absent, no `Domain` is included | 03-ARCHITECTURE.md §7 | — | — | gap |
-| `02-§18.48` | The build process must read `COOKIE_DOMAIN` env var and inject it as `data-cookie-domain` on `<body>` of every page that loads `session.js` | 03-ARCHITECTURE.md §7 | — | — | gap |
+| `02-§18.47` | Client-side cookie write-back must include the same `Domain` attribute the server used; the domain is read from a `data-cookie-domain` attribute on `<body>`, injected at build time; if absent, no `Domain` is included | 03-ARCHITECTURE.md §7 | — (manual: deploy to QA with `COOKIE_DOMAIN` set, create an event, visit schema.html, check DevTools → Cookies for matching `Domain`) | `source/assets/js/client/session.js` – reads `document.body.dataset.cookieDomain` and appends `; Domain=…` to cookie writes | implemented |
+| `02-§18.48` | The build process must read `COOKIE_DOMAIN` env var and inject it as `data-cookie-domain` on `<body>` of every page that loads `session.js` | 03-ARCHITECTURE.md §7 | CDI-01..04 | `source/build/render.js` – `cookieDomain` param on `<body>`; `source/build/render-idag.js` – same; `source/build/build.js` – reads `process.env.COOKIE_DOMAIN` | covered |
 | `02-§19.1` | When validation passes and submission begins, all form inputs and the submit button are immediately disabled | 03-ARCHITECTURE.md §8 | ADD-02; manual: press Skicka and confirm all inputs are disabled before the modal opens | `source/assets/js/client/lagg-till.js` – `lock()` sets `fieldset.disabled = true` and `submitBtn.disabled = true` | implemented |
 | `02-§19.2` | Disabled form elements are visually distinct (reduced opacity / grayed out) | 03-ARCHITECTURE.md §8 | — (manual: confirm visual appearance of disabled fieldset) | `source/assets/cs/style.css` – `.event-form fieldset:disabled { opacity: 0.5 }` | implemented |
 | `02-§19.3` | The consent prompt is shown as a modal dialog while the form is locked, reusing the `#submit-modal` element | 03-ARCHITECTURE.md §8 | — (manual: submit form without prior consent and confirm consent appears in modal) | `source/assets/js/client/cookie-consent.js` – `showConsentModal()` renders consent content into `#submit-modal` via `modalApi` | implemented |
@@ -991,9 +991,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             825
-Covered (implemented + tested): 393
-Implemented, not tested:        429
-Gap (no implementation):          3
+Covered (implemented + tested): 394
+Implemented, not tested:        430
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
