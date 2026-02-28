@@ -497,8 +497,9 @@ that requires no login.
   JavaScript is the only layer that can read the cookie and show or hide edit links
   per event. Server-side validation on every edit request compensates for the
   absence of `httpOnly`. This trade-off is explicit and documented. <!-- 02-§18.5 -->
-- The session cookie is set only by the server — never written directly by
-  client-side JavaScript. <!-- 02-§18.6 -->
+- The session cookie is initially set only by the server. Client-side JavaScript
+  may write back the cookie solely during expiry cleanup (§18.14), but must never
+  create a new session or add event IDs. <!-- 02-§18.6 -->
 - The cookie name is `sb_session`. <!-- 02-§18.7 -->
 - When the API server and the static site are deployed on different subdomains
   (e.g. `api.sommar.example.com` and `sommar.example.com`), the session cookie
@@ -528,6 +529,13 @@ that requires no login.
   any event IDs whose date has already passed. <!-- 02-§18.13 -->
 - The cleaned cookie is written back. If no event IDs remain after cleaning, the
   cookie is deleted. <!-- 02-§18.14 -->
+- When the client writes back the cleaned cookie, it must include the same
+  `Domain` attribute the server used. The domain value is injected at build time
+  via a `data-cookie-domain` attribute on the `<body>` element. If the attribute
+  is absent or empty, no `Domain` is included (single-origin fallback). <!-- 02-§18.47 -->
+- The build process must read the `COOKIE_DOMAIN` environment variable and inject
+  it as a `data-cookie-domain` attribute on the `<body>` element of every page
+  that loads `session.js`. <!-- 02-§18.48 -->
 - "Passed" means the event's date is strictly before today's local date. <!-- 02-§18.15 -->
 
 ### 18.4 Edit links on schedule pages
