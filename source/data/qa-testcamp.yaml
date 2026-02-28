@@ -631,11 +631,11 @@ events:
       updated_at: '2026-02-28 09:08'
   -
     id: supersnabbt-2026-02-28-1400
-    title: 'supersnabbt eller hur...'
+    title: 'supersnabbt eller hur...23'
     date: '2026-02-28'
     start: '14:00'
     end: '15:00'
-    location: AndreasTältet
+    location: Tält1
     responsible: Morgan
     description: ~
     link: ~
@@ -644,7 +644,7 @@ events:
       email: ''
     meta:
       created_at: '2026-02-28 12:30'
-      updated_at: '2026-02-28 17:11'
+      updated_at: '2026-02-28 17:49'
   -
     id: nytt-flode-2026-02-28-1800
     title: 'nytt flöde'
