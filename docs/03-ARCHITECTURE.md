@@ -100,7 +100,7 @@ The API server (`app.js`) handles each submission as follows:
 6. Opens a pull request with auto-merge enabled.
 7. The event data PR check (see §11) runs — a no-op that satisfies branch protection.
 8. The PR merges automatically via auto-merge.
-9. The post-merge event data deploy workflow (see §11) builds the site inside a pre-built Docker image and uploads event-data pages to QA, QA Node, and Production via SCP.
+9. The post-merge event data deploy workflow (see §11) installs production dependencies via `setup-node` + `npm ci --omit=dev`, builds the site, and uploads event-data pages to QA, QA Node, and Production via SCP.
 
 The updated schedule is visible to participants within minutes of submission.
 
@@ -119,7 +119,7 @@ flowchart TD
     I --> J
 
     subgraph J [Post-merge event data deploy]
-        K[Docker image: build site] --> L[SCP: event pages to QA + QA Node + Prod]
+        K[setup-node + npm ci: build site] --> L[SCP: event pages to QA + QA Node + Prod]
     end
 ```
 
@@ -627,23 +627,26 @@ phases:
 
 1. **PR check** (`.github/workflows/event-data-deploy.yml`) — a no-op job that satisfies
    branch protection so auto-merge can proceed.
-2. **Post-merge deploy** (`.github/workflows/event-data-deploy-post-merge.yml`) — builds the
-   site inside a pre-built Docker image and deploys event-data pages to all environments
-   via SCP.
+2. **Post-merge deploy** (`.github/workflows/event-data-deploy-post-merge.yml`) — installs
+   production dependencies via `setup-node` + `npm ci --omit=dev`, builds the site, and
+   deploys event-data pages to all environments via SCP.
 
 All event data validation (injection patterns, link protocol, length limits, structural
 checks) runs in the API layer at submission time (see §11.6). Data that reaches git is
 already validated.
 
-### 11.1 Docker build image
+### 11.1 Dependency installation
 
-A Docker image (`ghcr.io/<owner>/<repo>`) contains Node.js 20 and the project's production
-dependencies (`js-yaml`, `marked`, `qrcode`) pre-installed. The Dockerfile lives in
-`.github/docker/Dockerfile`.
+Each deploy job uses `actions/setup-node@v4` with `node-version: '20'` and `cache: 'npm'`
+to install Node.js and restore the npm cache. Production dependencies (`js-yaml`, `marked`,
+`qrcode`) are installed via `npm ci --omit=dev`.
 
-A separate workflow (`.github/workflows/docker-build.yml`) builds and pushes the image
-when `package.json` or the Dockerfile changes on push to `main`. Images are tagged with
-both `latest` and the git SHA.
+For the QA and QA Node jobs, setup-node and npm ci are conditional on the gate step —
+skipped when no event data file changed. For the production job they run unconditionally
+because the gate step itself uses `node -e` with `js-yaml` to check QA camp status.
+
+> **Note:** §11.1 previously described a Docker build image (`ghcr.io/<owner>/<repo>`).
+> That approach was replaced by setup-node + npm cache (see 02-REQUIREMENTS.md §52).
 
 ### 11.2 PR check (event-data-deploy.yml)
 
@@ -658,8 +661,8 @@ runs during the PR phase.
 
 ### 11.3 Post-merge deploy (event-data-deploy-post-merge.yml)
 
-Triggers on push to `main` with path filter `source/data/**.yaml`. Uses the pre-built
-Docker image instead of `setup-node` + `npm ci`.
+Triggers on push to `main` with path filter `source/data/**.yaml`. Uses
+`actions/setup-node@v4` with npm cache and `npm ci --omit=dev` for dependency installation.
 
 Three deploy jobs start immediately in parallel — there is no separate detect job.
 Each job performs its own inline detection as a first step:
@@ -697,12 +700,12 @@ changes is the responsibility of the post-merge deploy workflow.
 | --- | --- | --- |
 | `ci.yml` | All branches + PRs | Lint, test, build for code changes; pass-through for data-only |
 | `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | No-op branch protection gate |
-| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only) | Docker build + SCP deploy to QA, QA Node, Production |
+| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only) | setup-node + npm ci + build + SCP deploy to QA, QA Node, Production |
 | `deploy-qa.yml` | Push to `main` (ignores data YAMLs) | Full build + SCP/SSH swap (QA) |
 | `deploy-qa-node.yml` | Push to `main` (ignores data YAMLs) | Full build + SCP/SSH swap (QA Node) |
 | `deploy-prod.yml` | Manual `workflow_dispatch` | Full build + SCP/SSH swap (Production) |
 | `deploy-reusable.yml` | Called by `deploy-qa.yml` / `deploy-prod.yml` | Shared build-and-deploy logic |
-| `docker-build.yml` | Push to `main` (package.json or Dockerfile) | Build and push Docker image to GHCR |
+| `docker-build.yml` | Push to `main` (package.json or Dockerfile) | Build and push Docker image to GHCR (no longer used by event-data deploy) |
 
 `deploy-qa.yml` uses `paths-ignore` so that pushes to `main` containing only YAML data
 file changes do not trigger a full site deploy — the event-data pages are deployed by

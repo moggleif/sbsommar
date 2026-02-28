@@ -911,17 +911,17 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§49.4` | Non-empty link must start with `http://` or `https://` | 03-ARCHITECTURE.md §11.8 | ASEC-08..10 | `source/api/validate.js` – protocol regex check on `link` field | covered |
 | `02-§49.5` | Injection and link checks identical in Node.js and PHP implementations | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
 | `02-§49.6` | Both implementations produce equivalent error messages | 03-ARCHITECTURE.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
-| `02-§50.1` | Docker image contains Node.js 20 and production dependencies | 03-ARCHITECTURE.md §11.1 | manual: inspect `.github/docker/Dockerfile` | `.github/docker/Dockerfile` | implemented |
-| `02-§50.2` | Image based on `node:20` (full, not slim) | 03-ARCHITECTURE.md §11.1 | manual: inspect Dockerfile FROM line | `.github/docker/Dockerfile` | implemented |
-| `02-§50.3` | Dockerfile lives in `.github/docker/Dockerfile` | 03-ARCHITECTURE.md §11.1 | manual: file exists at path | `.github/docker/Dockerfile` | implemented |
-| `02-§50.4` | Image published to GHCR | 03-ARCHITECTURE.md §11.1 | manual: check GHCR packages | `.github/workflows/docker-build.yml` | implemented |
-| `02-§50.5` | Docker build workflow triggers on package.json or Dockerfile changes | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow triggers | `.github/workflows/docker-build.yml` | implemented |
-| `02-§50.6` | Image tagged with `latest` and git SHA | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow tags | `.github/workflows/docker-build.yml` | implemented |
-| `02-§50.7` | Docker workflow has `packages: write` and `contents: read` permissions | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow permissions | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.1` | Docker image contains Node.js 20 and production dependencies — **superseded by 02-§52.1 (setup-node + npm cache)** | 03-ARCHITECTURE.md §11.1 | manual: inspect `.github/docker/Dockerfile` | `.github/docker/Dockerfile` | implemented |
+| `02-§50.2` | Image based on `node:20` (full, not slim) — **superseded by 02-§52.1** | 03-ARCHITECTURE.md §11.1 | manual: inspect Dockerfile FROM line | `.github/docker/Dockerfile` | implemented |
+| `02-§50.3` | Dockerfile lives in `.github/docker/Dockerfile` — **superseded by 02-§52.1** | 03-ARCHITECTURE.md §11.1 | manual: file exists at path | `.github/docker/Dockerfile` | implemented |
+| `02-§50.4` | Image published to GHCR — **superseded by 02-§52.1** | 03-ARCHITECTURE.md §11.1 | manual: check GHCR packages | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.5` | Docker build workflow triggers on package.json or Dockerfile changes — **superseded by 02-§52.1** | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow triggers | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.6` | Image tagged with `latest` and git SHA — **superseded by 02-§52.1** | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow tags | `.github/workflows/docker-build.yml` | implemented |
+| `02-§50.7` | Docker workflow has `packages: write` and `contents: read` permissions — **superseded by 02-§52.1** | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow permissions | `.github/workflows/docker-build.yml` | implemented |
 | `02-§50.8` | `event-data-deploy.yml` contains a single no-op job logging "Validated at API layer" | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | implemented |
 | `02-§50.9` | No-op job retains same trigger and branch filter | 03-ARCHITECTURE.md §11.2 | manual: inspect workflow on/if | `.github/workflows/event-data-deploy.yml` | implemented |
 | `02-§50.11` | Post-merge workflow triggers on push to `main` with data YAML path filter | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow triggers | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§50.12` | Post-merge workflow uses Docker image from GHCR | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow container | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.12` | Post-merge workflow uses Docker image from GHCR — **superseded by 02-§52.1 (setup-node + npm cache)** | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow container | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.13` | Changed YAML file detected via `HEAD~1..HEAD` — **superseded by 02-§51.2, 02-§51.5 (inline detection per job)** | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.14` | QA camp detection sets `is_qa` output — **superseded by 02-§51.7 (inline QA check in production job)** | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.15` | Build runs `node source/build/build.js` | 03-ARCHITECTURE.md §11.3 | manual: inspect build step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
@@ -943,15 +943,23 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§51.8` | Production job skips build and deploy for QA camp files | 03-ARCHITECTURE.md §11.3 | EDW-14..15 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§51.9` | `02-§50.13` superseded by inline detection (§51.2, §51.5) | — | — | — | implemented |
 | `02-§51.10` | `02-§50.14` superseded by inline QA check (§51.7) | — | — | — | implemented |
+| `02-§52.1` | Post-merge workflow uses `setup-node@v4` with node 20 and npm cache | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow steps | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§52.2` | Each deploy job runs `npm ci --omit=dev` | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow steps | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§52.3` | No Docker container (`container:` key absent from all jobs) | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow YAML | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§52.4` | No `packages: read` permission required | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow permissions | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§52.5` | QA/QA Node jobs: setup-node and npm ci conditional on gate step | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow if conditions | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§52.6` | Production job: setup-node and npm ci unconditional (gate needs js-yaml) | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow step order | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§52.7` | `02-§50.1`–`02-§50.7` superseded (Docker no longer used) | — | — | — | implemented |
+| `02-§52.8` | `02-§50.12` superseded by `02-§52.1` (setup-node replaces Docker) | — | — | — | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             803
+Total requirements:             811
 Covered (implemented + tested): 376
-Implemented, not tested:        426
+Implemented, not tested:        434
 Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
@@ -1164,6 +1172,11 @@ Matrix cleanup (2026-02-25):
   02-§50.13 superseded by 02-§51.2, 02-§51.5 (inline detection per job).
   02-§50.14 superseded by 02-§51.7 (inline QA check in production job).
   Architecture updated in 03-ARCHITECTURE.md §11.3.
+8 requirements added for setup-node replacement (02-§52.1–52.8):
+  8 implemented (manual verification only).
+  02-§50.1–50.7 superseded by 02-§52.1 (Docker no longer used by event-data deploy).
+  02-§50.12 superseded by 02-§52.1 (setup-node + npm cache replaces Docker).
+  Architecture updated in 03-ARCHITECTURE.md §11.1, §11.3, §11.5.
 ```
 
 ---
