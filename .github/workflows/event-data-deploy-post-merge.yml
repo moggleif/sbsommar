@@ -3,11 +3,13 @@ name: Event Data Deploy (Post-Merge)
 # Builds and deploys event-data pages after an event PR merges to main.
 # Uses a pre-built Docker image from GHCR to skip npm ci.
 #
+# All deploy jobs start immediately in parallel — no serial detect job.
+# Each job performs its own inline detection of changed event data files.
+#
 # Jobs:
-#   1. detect     – identify changed YAML file and QA-camp status
-#   2. deploy-qa  – build + SCP to QA (parallel)
-#   3. deploy-qa-node – build + SCP to QA Node (parallel)
-#   4. deploy-prod – build + SCP to Production (parallel, skipped for QA camps)
+#   1. deploy-qa      – detect inline + build + SCP to QA
+#   2. deploy-qa-node – detect inline + build + SCP to QA Node
+#   3. deploy-prod    – detect inline + QA check + build + SCP to Production
 
 permissions:
   contents: read
@@ -21,60 +23,9 @@ on:
       - 'source/data/**.yaml'
 
 jobs:
-  detect:
-    name: Detect changed file
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      yaml_file: ${{ steps.changed.outputs.yaml_file }}
-      is_qa: ${{ steps.qa-check.outputs.is_qa }}
-      has_event_data: ${{ steps.changed.outputs.has_event_data }}
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Detect changed event YAML file
-        id: changed
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          CHANGED=$(git diff --name-only HEAD~1..HEAD \
-            | grep '^source/data/' | grep '\.yaml$' \
-            | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
-          if [ -z "$CHANGED" ]; then
-            echo "No event YAML file changed"
-            echo "has_event_data=false" >> $GITHUB_OUTPUT
-          else
-            echo "yaml_file=$CHANGED" >> $GITHUB_OUTPUT
-            echo "has_event_data=true" >> $GITHUB_OUTPUT
-            echo "Detected changed file: $CHANGED"
-          fi
-
-      - name: Check if changed file belongs to a QA camp
-        id: qa-check
-        if: steps.changed.outputs.has_event_data == 'true'
-        run: |
-          BASENAME=$(basename "${{ steps.changed.outputs.yaml_file }}")
-          IS_QA=$(node -e "
-            const fs = require('fs');
-            const yaml = require('js-yaml');
-            const camps = yaml.load(fs.readFileSync('source/data/camps.yaml','utf8'));
-            const match = camps.camps.find(c => c.file === '$BASENAME');
-            console.log(match && match.qa === true ? 'true' : 'false');
-          ")
-          echo "is_qa=$IS_QA" >> $GITHUB_OUTPUT
-          echo "File $BASENAME is QA camp: $IS_QA"
-
   deploy-qa:
     name: Build & deploy to QA
     runs-on: ubuntu-latest
-    needs: detect
-    if: needs.detect.outputs.has_event_data == 'true'
     container:
       image: ghcr.io/${{ github.repository }}:latest
       credentials:
@@ -84,8 +35,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed event data file
+        id: gate
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          CHANGED=$(git diff --name-only HEAD~1..HEAD \
+            | grep '^source/data/' | grep '\.yaml$' \
+            | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
+          if [ -z "$CHANGED" ]; then
+            echo "No event YAML file changed"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "Detected changed file: $CHANGED"
+          fi
 
       - name: Build site
+        if: steps.gate.outputs.skip != 'true'
         run: node source/build/build.js
         env:
           API_URL: ${{ secrets.API_URL }}
@@ -93,6 +62,7 @@ jobs:
           BUILD_ENV: qa
 
       - name: Stage event data pages
+        if: steps.gate.outputs.skip != 'true'
         run: |
           mkdir -p staging
           for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
@@ -111,6 +81,7 @@ jobs:
           fi
 
       - name: Upload event data pages via SCP
+        if: steps.gate.outputs.skip != 'true'
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -124,8 +95,6 @@ jobs:
   deploy-qa-node:
     name: Build & deploy to QA Node
     runs-on: ubuntu-latest
-    needs: detect
-    if: needs.detect.outputs.has_event_data == 'true'
     container:
       image: ghcr.io/${{ github.repository }}:latest
       credentials:
@@ -135,8 +104,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed event data file
+        id: gate
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          CHANGED=$(git diff --name-only HEAD~1..HEAD \
+            | grep '^source/data/' | grep '\.yaml$' \
+            | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
+          if [ -z "$CHANGED" ]; then
+            echo "No event YAML file changed"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "Detected changed file: $CHANGED"
+          fi
 
       - name: Build site
+        if: steps.gate.outputs.skip != 'true'
         run: node source/build/build.js
         env:
           API_URL: ${{ secrets.API_URL }}
@@ -144,6 +131,7 @@ jobs:
           BUILD_ENV: qa
 
       - name: Stage event data pages
+        if: steps.gate.outputs.skip != 'true'
         run: |
           mkdir -p staging
           for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
@@ -162,6 +150,7 @@ jobs:
           fi
 
       - name: Upload event data pages via SCP
+        if: steps.gate.outputs.skip != 'true'
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -175,8 +164,6 @@ jobs:
   deploy-prod:
     name: Build & deploy to Production
     runs-on: ubuntu-latest
-    needs: detect
-    if: needs.detect.outputs.has_event_data == 'true' && needs.detect.outputs.is_qa != 'true'
     container:
       image: ghcr.io/${{ github.repository }}:latest
       credentials:
@@ -186,8 +173,39 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed event data file and check QA status
+        id: gate
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          CHANGED=$(git diff --name-only HEAD~1..HEAD \
+            | grep '^source/data/' | grep '\.yaml$' \
+            | grep -v 'camps\.yaml' | grep -v 'local\.yaml' | head -1)
+          if [ -z "$CHANGED" ]; then
+            echo "No event YAML file changed"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            BASENAME=$(basename "$CHANGED")
+            IS_QA=$(node -e "
+              const fs = require('fs');
+              const yaml = require('js-yaml');
+              const camps = yaml.load(fs.readFileSync('source/data/camps.yaml','utf8'));
+              const match = camps.camps.find(c => c.file === '$BASENAME');
+              console.log(match && match.qa === true ? 'true' : 'false');
+            ")
+            if [ "$IS_QA" = "true" ]; then
+              echo "File $BASENAME belongs to QA camp — skipping production deploy"
+              echo "skip=true" >> $GITHUB_OUTPUT
+            else
+              echo "skip=false" >> $GITHUB_OUTPUT
+              echo "Detected changed file: $CHANGED (not QA)"
+            fi
+          fi
 
       - name: Build site
+        if: steps.gate.outputs.skip != 'true'
         run: node source/build/build.js
         env:
           API_URL: ${{ secrets.API_URL }}
@@ -195,6 +213,7 @@ jobs:
           BUILD_ENV: production
 
       - name: Stage event data pages
+        if: steps.gate.outputs.skip != 'true'
         run: |
           mkdir -p staging
           for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
@@ -213,6 +232,7 @@ jobs:
           fi
 
       - name: Upload event data pages via SCP
+        if: steps.gate.outputs.skip != 'true'
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
