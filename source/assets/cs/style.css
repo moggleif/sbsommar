@@ -1219,18 +1219,29 @@ details.accordion > summary:focus-visible {
 .modal-box {
   position: relative;
   background: var(--color-white);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
-  padding: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
   max-width: 480px;
   width: calc(100% - var(--space-md) * 2);
   max-height: 90vh;
   overflow-y: auto;
+  animation: modal-enter 250ms ease-out;
+}
+
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .modal-heading {
   margin: 0 0 var(--space-sm);
   color: var(--color-navy);
+  text-align: center;
+}
+
+.modal-heading:focus {
+  outline: none;
 }
 
 .modal-spinner {
@@ -1259,6 +1270,7 @@ details.accordion > summary:focus-visible {
   list-style: none;
   padding: 0;
   margin: 0 0 var(--space-sm);
+  text-align: center;
 }
 
 .progress-step {
