@@ -199,6 +199,18 @@ Per-field validation errors appear directly below the input they relate to. <!--
 - Each error span is linked to its input with `aria-describedby` so screen readers announce the error in context. <!-- 07-§6.38 -->
 - On successful revalidation (next submit attempt), the error text is removed, `aria-invalid` is cleared, and the border returns to normal. <!-- 07-§6.39 -->
 
+### Form field info messages (inline)
+
+Per-field informational messages (non-error) appear below the input, reusing
+the same `<span>` element as errors but with a different class. <!-- 07-§6.44a -->
+
+- The `.field-info` class provides non-error informational feedback. <!-- 07-§6.44b -->
+- Info text color: `var(--color-charcoal)`. <!-- 07-§6.44c -->
+- Info background: `color-mix(in srgb, var(--color-sage) 20%, var(--color-cream))`. <!-- 07-§6.44d -->
+- Info left border: `3px solid var(--color-sage)`. <!-- 07-§6.44e -->
+- Info does **not** set `aria-invalid` on the input — the input border remains normal. <!-- 07-§6.44f -->
+- When switching between error and info states, the previous class must be removed (toggle `span.className` between `field-error` and `field-info`). <!-- 07-§6.44g -->
+
 ---
 
 ## 7. CSS Strategy
