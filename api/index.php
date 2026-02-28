@@ -122,15 +122,6 @@ function handleAddEvent(?array $activeCamp): void
     $start   = trim((string) ($body['start'] ?? ''));
     $eventId = GitHub::slugify($title) . "-{$date}-" . str_replace(':', '', $start);
 
-    // Session cookie (only if consent given)
-    $consentGiven = ($body['cookieConsent'] ?? false) === true;
-    if ($consentGiven) {
-        $existing = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
-        $updated  = Session::mergeIds($existing, $eventId);
-        $cookieDomain = !empty($_ENV['COOKIE_DOMAIN']) ? $_ENV['COOKIE_DOMAIN'] : null;
-        header('Set-Cookie: ' . Session::buildSetCookieHeader($updated, $cookieDomain));
-    }
-
     // Commit to GitHub synchronously so the user sees errors
     try {
         $gh = new GitHub();
@@ -140,6 +131,16 @@ function handleAddEvent(?array $activeCamp): void
         jsonResponse(['success' => false, 'error' => 'Aktiviteten kunde inte sparas. Försök igen om en stund.'], 500);
 
         return;
+    }
+
+    // Session cookie (only if consent given) — set AFTER successful GitHub
+    // commit so the browser never stores an ID for an event that failed to save.
+    $consentGiven = ($body['cookieConsent'] ?? false) === true;
+    if ($consentGiven) {
+        $existing = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
+        $updated  = Session::mergeIds($existing, $eventId);
+        $cookieDomain = !empty($_ENV['COOKIE_DOMAIN']) ? $_ENV['COOKIE_DOMAIN'] : null;
+        header('Set-Cookie: ' . Session::buildSetCookieHeader($updated, $cookieDomain));
     }
 
     jsonResponse(['success' => true, 'eventId' => $eventId]);
