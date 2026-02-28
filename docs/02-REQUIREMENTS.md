@@ -1946,8 +1946,7 @@ that supports Node.js.
 - `docs/04-OPERATIONS.md` must document the PHP API: directory structure,
   configuration, and how to set it up on a new host. <!-- 02-§44.37 -->
 - `docs/08-ENVIRONMENTS.md` must document the `qa` GitHub Environment
-  (PHP on Loopia) and its secrets. The previous Node.js QA setup is
-  preserved as the `qanode` environment. <!-- 02-§44.38 -->
+  (PHP on Loopia) and its secrets. <!-- 02-§44.38 -->
 - `docs/03-ARCHITECTURE.md` must note the dual API architecture (Node.js
   for local dev and Node.js hosts, PHP for shared hosting). <!-- 02-§44.39 -->
 
@@ -2273,7 +2272,7 @@ workflow builds and deploys via a pre-built Docker image.
 - The workflow must stage only event-data-derived files for upload: `schema.html`,
   `idag.html`, `dagens-schema.html`, `events.json`, `schema.rss`, `schema.ics`,
   `kalender.html`, and per-event pages under `schema/`. <!-- 02-§50.16 -->
-- The workflow must deploy to QA and QA Node via SCP in parallel jobs. <!-- 02-§50.17 -->
+- The workflow must deploy to QA via rsync in a parallel job. <!-- 02-§50.17 -->
 - The workflow must deploy to Production via SCP, skipped when the changed
   file belongs to a QA camp. <!-- 02-§50.18 -->
 
@@ -2368,7 +2367,7 @@ production packages in ~3 seconds.
 
 ### 52.2 Conditional vs unconditional installation (site requirements)
 
-- For the QA and QA Node deploy jobs, `setup-node` and `npm ci` must be
+- For the QA deploy job, `setup-node` and `npm ci` must be
   conditional on the gate step output — skipped when no event data file
   changed. <!-- 02-§52.5 -->
 - For the production deploy job, `setup-node` and `npm ci` must run

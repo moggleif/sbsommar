@@ -840,7 +840,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (5 gap requirements added for m
 | `02-§44.30` | composer install --no-dev runs in CI or vendor/ included in archive | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | covered |
 | `02-§44.31` | .env on server managed manually, not in deploy archive | 04-OPERATIONS.md | manual: verify | — | implemented |
 | `02-§44.32` | API_URL points to PHP API path for PHP environments | 08-ENVIRONMENTS.md | manual: check GitHub Environment | GitHub Environment secrets | covered |
-| `02-§44.33` | Node.js API_URL format remains valid for Node.js environments | 08-ENVIRONMENTS.md | manual: check | GitHub Environment `qanode` | implemented |
+| `02-§44.33` | Node.js API_URL format remains valid for Node.js environments — **removed: qanode environment decommissioned** | — | — | — | removed |
 | `02-§44.34` | Node.js API unchanged | 03-ARCHITECTURE.md §21 | existing Node.js tests | `app.js`, `source/api/` | implemented |
 | `02-§44.35` | Local dev continues to use npm start | 04-OPERATIONS.md | manual: run locally | `app.js` | implemented |
 | `02-§44.36` | API backend choice determined by API_URL only | 03-ARCHITECTURE.md §21 | manual: inspect build | `source/build/render-add.js` | implemented |
@@ -927,7 +927,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (5 gap requirements added for m
 | `02-§50.14` | QA camp detection sets `is_qa` output — **superseded by 02-§51.7 (inline QA check in production job)** | 03-ARCHITECTURE.md §11.3 | manual: inspect detect step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.15` | Build runs `node source/build/build.js` | 03-ARCHITECTURE.md §11.3 | manual: inspect build step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.16` | Only event-data-derived files staged for upload | 03-ARCHITECTURE.md §11.3 | manual: inspect staging step | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§50.17` | QA and QA Node deploy via SCP in parallel | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow jobs | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§50.17` | QA deploy via rsync in parallel job | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow jobs | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.18` | Production deploys via SCP, skipped for QA camps | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow if condition | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.19` | Production event data uses SCP over SSH | 03-ARCHITECTURE.md §11.3 | manual: inspect production deploy job | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
 | `02-§50.20` | Production uses SSH secrets (SERVER_HOST, etc.) | 03-ARCHITECTURE.md §11.3 | manual: inspect workflow secrets | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
@@ -948,7 +948,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (5 gap requirements added for m
 | `02-§52.2` | Each deploy job runs `npm ci --omit=dev` | 03-ARCHITECTURE.md §11.1 | EDW-22..24 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§52.3` | No Docker container (`container:` key absent from all jobs) | 03-ARCHITECTURE.md §11.1 | EDW-16..18 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§52.4` | No `packages: read` permission required | 03-ARCHITECTURE.md §11.1 | EDW-25 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
-| `02-§52.5` | QA/QA Node jobs: setup-node and npm ci conditional on gate step | 03-ARCHITECTURE.md §11.1 | EDW-26..27 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§52.5` | QA job: setup-node and npm ci conditional on gate step | 03-ARCHITECTURE.md §11.1 | EDW-26 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§52.6` | Production job: setup-node and npm ci unconditional (gate needs js-yaml) | 03-ARCHITECTURE.md §11.1 | EDW-28 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§52.7` | `02-§50.1`–`02-§50.7` superseded (Docker no longer used) | — | — | — | implemented |
 | `02-§52.8` | `02-§50.12` superseded by `02-§52.1` (setup-node replaces Docker) | — | — | — | implemented |

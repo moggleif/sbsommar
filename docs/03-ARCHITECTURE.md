@@ -103,7 +103,7 @@ The API server (`app.js`) handles each submission as follows:
 6. Opens a pull request with auto-merge enabled.
 7. The event data PR check (see §11) runs — a no-op that satisfies branch protection.
 8. The PR merges automatically via auto-merge.
-9. The post-merge event data deploy workflow (see §11) installs production dependencies via `setup-node` + `npm ci --omit=dev`, builds the site, and uploads event-data pages to QA, QA Node, and Production via SCP.
+9. The post-merge event data deploy workflow (see §11) installs production dependencies via `setup-node` + `npm ci --omit=dev`, builds the site, and uploads event-data pages to QA and Production.
 
 The updated schedule is visible to participants within minutes of submission.
 
@@ -122,7 +122,7 @@ flowchart TD
     I --> J
 
     subgraph J [Post-merge event data deploy]
-        K[setup-node + npm ci: build site] --> L[SCP: event pages to QA + QA Node + Prod]
+        K[setup-node + npm ci: build site] --> L[Deploy event pages to QA + Prod]
     end
 ```
 
@@ -644,7 +644,7 @@ Each deploy job uses `actions/setup-node@v4` with `node-version: '20'` and `cach
 to install Node.js and restore the npm cache. Production dependencies (`js-yaml`, `marked`,
 `qrcode`) are installed via `npm ci --omit=dev`.
 
-For the QA and QA Node jobs, setup-node and npm ci are conditional on the gate step —
+For the QA job, setup-node and npm ci are conditional on the gate step —
 skipped when no event data file changed. For the production job they run unconditionally
 because the gate step itself uses `node -e` with `js-yaml` to check QA camp status.
 
@@ -667,13 +667,11 @@ runs during the PR phase.
 Triggers on push to `main` with path filter `source/data/**.yaml`. Uses
 `actions/setup-node@v4` with npm cache and `npm ci --omit=dev` for dependency installation.
 
-Three deploy jobs start immediately in parallel — there is no separate detect job.
+Two deploy jobs start immediately in parallel — there is no separate detect job.
 Each job performs its own inline detection as a first step:
 
 - **deploy-qa** — detects changed file inline, builds with QA environment secrets,
-  uploads via SCP.
-- **deploy-qa-node** — detects changed file inline, builds with QA Node environment
-  secrets, uploads via SCP.
+  uploads via rsync.
 - **deploy-prod** — detects changed file inline and checks QA camp status; skips
   build and deploy when the file belongs to a QA camp. Otherwise builds with
   production environment secrets and uploads via SCP.
@@ -703,9 +701,8 @@ changes is the responsibility of the post-merge deploy workflow.
 | --- | --- | --- |
 | `ci.yml` | All branches + PRs | Lint, test, build for code changes; pass-through for data-only |
 | `event-data-deploy.yml` | PRs from `event/**`, `event-edit/**` | No-op branch protection gate |
-| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only) | setup-node + npm ci + build + SCP deploy to QA, QA Node, Production |
+| `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only) | setup-node + npm ci + build + deploy to QA, Production |
 | `deploy-qa.yml` | Push to `main` (ignores data YAMLs) | Full build + SCP/SSH swap (QA) |
-| `deploy-qa-node.yml` | Push to `main` (ignores data YAMLs) | Full build + SCP/SSH swap (QA Node) |
 | `deploy-prod.yml` | Manual `workflow_dispatch` | Full build + SCP/SSH swap (Production) |
 | `deploy-reusable.yml` | Called by `deploy-qa.yml` / `deploy-prod.yml` | Shared build-and-deploy logic |
 | `docker-build.yml` | Push to `main` (package.json or Dockerfile) | Build and push Docker image to GHCR (no longer used by event-data deploy) |
@@ -1334,7 +1331,6 @@ backend is determined solely by the `API_URL` environment variable set in each
 GitHub Environment:
 
 - Local development: `npm start` → Node.js API at `http://localhost:3000`
-- `qanode` environment: Node.js API on a Node.js-capable host
 - `qa` environment: PHP API on Loopia (`https://qa.sbsommar.se/api/add-event`)
 - `production` environment: PHP API on Loopia (`https://sbsommar.se/api/add-event`)
 
