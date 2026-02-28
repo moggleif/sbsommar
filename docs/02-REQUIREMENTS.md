@@ -1701,7 +1701,12 @@ QA environments.
   resolving the active camp for add-event and edit-event
   requests. <!-- 02-§42.12 -->
 - QA camps must never appear in production schedule pages, today view,
-  archive, or RSS feed. <!-- 02-§42.13 -->
+  archive, RSS feed, or the upcoming-camps list on the index
+  page. <!-- 02-§42.13 -->
+- In production, `build.js` must filter `qa: true` camps from the
+  camps array before passing it to any rendering function, so that
+  all downstream output is QA-free without per-renderer
+  checks. <!-- 02-§42.30 -->
 
 ### 42.4 QA resolution (site requirements)
 

@@ -74,8 +74,11 @@ shared by `build.js` and the API (`github.js`).
 Camps may have an optional `qa: true` field. QA camps are filtered based on
 the `BUILD_ENV` environment variable:
 
-- **Production** (`BUILD_ENV=production`): QA camps are excluded before
-  resolution. They never appear in production builds or API responses.
+- **Production** (`BUILD_ENV=production`): QA camps are excluded from
+  the camps array at the top of `build.js`, before the array is passed
+  to `resolveActiveCamp()` or any rendering function. This ensures QA
+  camps never appear in production output (schedule, index camp list,
+  archive, RSS, calendar, or API responses).
 - **QA** (`BUILD_ENV=qa`): QA camps that are on dates take priority over
   non-QA camps, ensuring the QA camp is always active in QA.
 - **Local** (`BUILD_ENV` unset): No filtering — all camps are included

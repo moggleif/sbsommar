@@ -48,9 +48,17 @@ if (!fs.existsSync(campsFile)) {
 }
 
 const campsData = yaml.load(fs.readFileSync(campsFile, 'utf8'));
-const camps = campsData.camps;
 
 const BUILD_ENV = process.env.BUILD_ENV || undefined;
+
+// In production, filter out QA camps from all downstream rendering (02-§42.30).
+// resolveActiveCamp already handles this internally, but the camps array is also
+// passed directly to renderUpcomingCampsHtml, renderArkivPage, and the countdown
+// logic — those must never see QA camps in production.
+const camps = BUILD_ENV === 'production'
+  ? campsData.camps.filter((c) => !c.qa)
+  : campsData.camps;
+
 const activeCamp = resolveActiveCamp(camps, undefined, BUILD_ENV);
 console.log(`Active camp: ${activeCamp.name} (${activeCamp.start_date} – ${activeCamp.end_date})`);
 
