@@ -661,26 +661,29 @@ runs during the PR phase.
 Triggers on push to `main` with path filter `source/data/**.yaml`. Uses the pre-built
 Docker image instead of `setup-node` + `npm ci`.
 
-Steps in the detect job:
+Three deploy jobs start immediately in parallel — there is no separate detect job.
+Each job performs its own inline detection as a first step:
 
-1. Detect the changed per-camp YAML file by comparing `HEAD~1..HEAD`.
-2. Determine whether the file belongs to a QA camp (`is_qa` output).
-
-Three parallel deploy jobs follow (each uses the Docker image):
-
-- **deploy-qa** — builds with QA environment secrets, uploads via SCP.
-- **deploy-qa-node** — builds with QA Node environment secrets, uploads via SCP.
-- **deploy-prod** — builds with production environment secrets, uploads via SCP.
-  Skipped when `is_qa` is true.
+- **deploy-qa** — detects changed file inline, builds with QA environment secrets,
+  uploads via SCP.
+- **deploy-qa-node** — detects changed file inline, builds with QA Node environment
+  secrets, uploads via SCP.
+- **deploy-prod** — detects changed file inline and checks QA camp status; skips
+  build and deploy when the file belongs to a QA camp. Otherwise builds with
+  production environment secrets and uploads via SCP.
 
 Each deploy job:
 
-1. Checks out the repository.
-2. Runs `node source/build/build.js`.
-3. Stages only event-data-derived files: `schema.html`, `idag.html`,
+1. Checks out the repository with `fetch-depth: 2`.
+2. Detects the changed per-camp YAML file by comparing `HEAD~1..HEAD`.
+   If no event data file changed, the remaining steps are skipped.
+3. (Production only) Determines whether the changed file belongs to a QA
+   camp. If so, the remaining steps are skipped.
+4. Runs `node source/build/build.js`.
+5. Stages only event-data-derived files: `schema.html`, `idag.html`,
    `dagens-schema.html`, `events.json`, `schema.rss`, `schema.ics`,
    `kalender.html`, and per-event pages under `schema/`.
-4. Uploads the staged files via SCP to the target environment.
+6. Uploads the staged files via SCP to the target environment.
 
 ### 11.4 CI workflow for data-only changes
 
