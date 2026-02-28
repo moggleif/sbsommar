@@ -1240,6 +1240,34 @@ details.accordion > summary:focus-visible {
   margin: 0 0 var(--space-sm);
 }
 
+/* ── Submit progress steps (02-§53.6–53.10) ─────────────────────────────── */
+
+.submit-progress {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-sm);
+}
+
+.progress-step {
+  padding: var(--space-xs) 0;
+  color: var(--color-charcoal);
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.progress-step.step-active {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.progress-step.step-done {
+  opacity: 1;
+}
+
+.progress-step.step-done .step-icon {
+  color: var(--color-sage);
+}
+
 /* Prevent page scroll while modal is open */
 body.modal-open {
   overflow: hidden;

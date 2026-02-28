@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requirements moved from implemented to covered).
+Audit date: 2026-02-24. Last updated: 2026-02-28 (14 gap requirements added for synchronous API errors and deploy safety, 02-§53.1–53.14).
 
 ---
 
@@ -952,6 +952,20 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§52.6` | Production job: setup-node and npm ci unconditional (gate needs js-yaml) | 03-ARCHITECTURE.md §11.1 | EDW-28 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§52.7` | `02-§50.1`–`02-§50.7` superseded (Docker no longer used) | — | — | — | implemented |
 | `02-§52.8` | `02-§50.12` superseded by `02-§52.1` (setup-node replaces Docker) | — | — | — | implemented |
+| `02-§53.1` | Add-event endpoint completes GitHub operation before responding | — | SYNC-03 | `api/index.php` `handleAddEvent()` | covered |
+| `02-§53.2` | Edit-event endpoint completes GitHub operation before responding | — | SYNC-04 | `api/index.php` `handleEditEvent()` | covered |
+| `02-§53.3` | GitHub failure returns `{ success: false }` with HTTP 500 | — | SYNC-05 | `api/index.php` `handleAddEvent()` catch block | covered |
+| `02-§53.4` | Error message is in Swedish, no internal details exposed | — | SYNC-06 | `api/index.php` `handleEditEvent()` catch block | covered |
+| `02-§53.5` | `flushToClient()` and `ob_start()` removed | — | SYNC-01..02 | `api/index.php` | covered |
+| `02-§53.6` | Modal shows step-by-step progress list during submission | — | PROG-01..02 | `source/assets/js/client/lagg-till.js`, `source/assets/js/client/redigera.js` | covered |
+| `02-§53.7` | Each stage transitions from unchecked to green check mark | — | manual: browser visual check | `source/assets/js/client/lagg-till.js`, `source/assets/cs/style.css` | implemented |
+| `02-§53.8` | Stage timing is client-side: 0 s, 0.5 s, 2 s | — | manual: browser timing check | `source/assets/js/client/lagg-till.js` | implemented |
+| `02-§53.9` | On success, all stages show green checks and success message appears | — | manual: browser visual check | `source/assets/js/client/lagg-till.js` `setModalSuccess()` | implemented |
+| `02-§53.10` | On error, progress stops and error message displayed | — | manual: disconnect API and submit | `source/assets/js/client/lagg-till.js` `setModalError()` | implemented |
+| `02-§53.11` | Progress list used for both add-event and edit-event forms | — | PROG-03..04 | `source/assets/js/client/redigera.js` | covered |
+| `02-§53.12` | Deploy workflow maintains `.env.api.persistent` backup | 04-OPERATIONS.md | ENV-01 | `.github/workflows/deploy-reusable.yml` | covered |
+| `02-§53.13` | Restore falls back to `.env.api.persistent` if `.bak` missing | 04-OPERATIONS.md | ENV-02 | `.github/workflows/deploy-reusable.yml` | covered |
+| `02-§53.14` | Persistent backup not deleted by restore step (`cp`, not `mv`) | 04-OPERATIONS.md | ENV-03 | `.github/workflows/deploy-reusable.yml` | covered |
 
 ---
 
@@ -1179,6 +1193,12 @@ Matrix cleanup (2026-02-25):
   02-§50.1–50.7 superseded by 02-§52.1 (Docker no longer used by event-data deploy).
   02-§50.12 superseded by 02-§52.1 (setup-node + npm cache replaces Docker).
   Architecture updated in 03-ARCHITECTURE.md §11.1, §11.3, §11.5.
+14 requirements added for synchronous API errors and deploy safety (02-§53.1–53.14):
+  10 covered (SYNC-01..06, PROG-01..04, ENV-01..03): API sync flow, progress UI, deploy backup.
+  4 implemented (browser-only visual/timing, manual verification): 02-§53.7–53.10.
+  API: synchronous GitHub operations, real error messages to user.
+  Client: progress step list with green checkboxes during submission.
+  Deploy: persistent .env backup outside public_html.
 ```
 
 ---
@@ -1351,4 +1371,12 @@ Matrix cleanup (2026-02-25):
 | EDW-22..24 | `tests/event-deploy-workflow.test.js` | `02-§52.2 — Each deploy job runs npm ci --omit=dev` |
 | EDW-25 | `tests/event-deploy-workflow.test.js` | `02-§52.4 — No packages:read permission` |
 | EDW-26..28 | `tests/event-deploy-workflow.test.js` | `02-§52.5/52.6 — setup-node conditionality` |
+| SYNC-01..02 | `tests/api-sync-errors.test.js` | `02-§53.5 — flushToClient and ob_start removed` |
+| SYNC-03..04 | `tests/api-sync-errors.test.js` | `02-§53.1/53.2 — GitHub operation before response` |
+| SYNC-05..06 | `tests/api-sync-errors.test.js` | `02-§53.3/53.4 — Error response on GitHub failure` |
+| ENV-01 | `tests/deploy-env-backup.test.js` | `02-§53.12 — Persistent .env backup created` |
+| ENV-02 | `tests/deploy-env-backup.test.js` | `02-§53.13 — Restore fallback to persistent` |
+| ENV-03 | `tests/deploy-env-backup.test.js` | `02-§53.14 — Persistent uses cp not mv` |
+| PROG-01..02 | `tests/submit-progress.test.js` | `02-§53.6 — Progress stage messages` |
+| PROG-03..04 | `tests/submit-progress.test.js` | `02-§53.11 — Progress in both forms` |
 | BUILD-QA-01 | `tests/build-qa-filter.test.js` | `build.js QA camp filtering (02-§42.13, 02-§42.30)` |

@@ -2380,3 +2380,61 @@ production packages in ~3 seconds.
   image. <!-- 02-§52.7 -->
 - `02-§50.12` (workflow must use Docker image from GHCR) is superseded
   by `02-§52.1` (setup-node + npm cache). <!-- 02-§52.8 -->
+
+---
+
+## 53. Synchronous API Error Visibility and Deploy Safety
+
+Background: the add-event and edit-event API endpoints respond with
+`{ success: true }` before the GitHub write completes. If the GitHub
+operation fails (missing credentials, network error, invalid token), the
+user sees a success confirmation but the event is silently lost. This
+violates `02-§6.8` ("Submissions must not be silently lost"). Additionally,
+the deploy workflow's `.env` backup can be lost if `public_html` is wiped
+before the backup step runs.
+
+### 53.1 Synchronous GitHub commit (API requirements)
+
+- The add-event endpoint (`POST /add-event`) must complete the full GitHub
+  operation (create branch, commit, create PR, enable auto-merge) before
+  returning a response to the client. <!-- 02-§53.1 -->
+- The edit-event endpoint (`POST /edit-event`) must complete the full GitHub
+  operation before returning a response to the client. <!-- 02-§53.2 -->
+- If any step of the GitHub operation fails, the endpoint must return
+  `{ "success": false, "error": "<user-facing message>" }` with HTTP
+  status 500. <!-- 02-§53.3 -->
+- The user-facing error message must be in Swedish and must not expose
+  internal details (e.g. no stack traces, no GitHub API error
+  messages). <!-- 02-§53.4 -->
+- The `flushToClient()` function and `ob_start()` call must be removed —
+  they exist only to support the fire-and-forget pattern. <!-- 02-§53.5 -->
+
+### 53.2 Progress feedback during submission (user requirements)
+
+- While the form submission is in progress, the modal must display a
+  step-by-step progress list with the following stages: <!-- 02-§53.6 -->
+  1. "Skickar till servern…"
+  2. "Kontrollerar aktiviteten…"
+  3. "Sparar aktiviteten…"
+- Each stage must begin with an unchecked indicator and transition to a
+  green check mark (✓) after its allotted time. <!-- 02-§53.7 -->
+- The timing is client-side (not streamed from the server). Stages
+  transition at approximately 0 s, 0.5 s, and 2 s. <!-- 02-§53.8 -->
+- When the API responds with success, all remaining stages must immediately
+  show green check marks and a final success message must
+  appear. <!-- 02-§53.9 -->
+- When the API responds with an error, progress must stop at the current
+  stage and the error message from the API must be displayed below the
+  progress list. <!-- 02-§53.10 -->
+- The progress list must be used for both the add-event and edit-event
+  forms. <!-- 02-§53.11 -->
+
+### 53.3 Persistent .env backup (site requirements)
+
+- The reusable deploy workflow must maintain a persistent copy of the PHP
+  API `.env` file at `$DEPLOY_DIR/.env.api.persistent`, updated on every
+  successful deploy where the `.env` file exists. <!-- 02-§53.12 -->
+- The restore step must fall back to `.env.api.persistent` if the primary
+  backup (`.env.api.bak`) is missing. <!-- 02-§53.13 -->
+- The persistent backup must not be deleted by the restore step
+  (`cp`, not `mv`). <!-- 02-§53.14 -->

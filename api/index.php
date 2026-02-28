@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-ob_start();
-
 // ── Bootstrap ────────────────────────────────────────────────────────────
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -124,7 +122,19 @@ function handleAddEvent(?array $activeCamp): void
     $start   = trim((string) ($body['start'] ?? ''));
     $eventId = GitHub::slugify($title) . "-{$date}-" . str_replace(':', '', $start);
 
-    // Session cookie (only if consent given)
+    // Commit to GitHub synchronously so the user sees errors
+    try {
+        $gh = new GitHub();
+        $gh->addEventToActiveCamp($body);
+    } catch (\Throwable $e) {
+        error_log('POST /add-event error: ' . $e->getMessage());
+        jsonResponse(['success' => false, 'error' => 'Aktiviteten kunde inte sparas. Försök igen om en stund.'], 500);
+
+        return;
+    }
+
+    // Session cookie (only if consent given) — set AFTER successful GitHub
+    // commit so the browser never stores an ID for an event that failed to save.
     $consentGiven = ($body['cookieConsent'] ?? false) === true;
     if ($consentGiven) {
         $existing = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
@@ -133,17 +143,7 @@ function handleAddEvent(?array $activeCamp): void
         header('Set-Cookie: ' . Session::buildSetCookieHeader($updated, $cookieDomain));
     }
 
-    // Respond immediately, then commit in background
     jsonResponse(['success' => true, 'eventId' => $eventId]);
-    flushToClient();
-
-    // Background: commit to GitHub
-    try {
-        $gh = new GitHub();
-        $gh->addEventToActiveCamp($body);
-    } catch (\Throwable $e) {
-        error_log('POST /add-event background error: ' . $e->getMessage());
-    }
 }
 
 function handleEditEvent(?array $activeCamp): void
@@ -198,15 +198,18 @@ function handleEditEvent(?array $activeCamp): void
         return;
     }
 
-    jsonResponse(['success' => true]);
-    flushToClient();
-
+    // Commit to GitHub synchronously so the user sees errors
     try {
         $gh = new GitHub();
         $gh->updateEventInActiveCamp($eventId, $body);
     } catch (\Throwable $e) {
-        error_log('POST /edit-event background error: ' . $e->getMessage());
+        error_log('POST /edit-event error: ' . $e->getMessage());
+        jsonResponse(['success' => false, 'error' => 'Ändringen kunde inte sparas. Försök igen om en stund.'], 500);
+
+        return;
     }
+
+    jsonResponse(['success' => true]);
 }
 
 // ── Utilities ────────────────────────────────────────────────────────────
@@ -228,24 +231,4 @@ function jsonResponse(array $data, int $status = 200): void
 {
     http_response_code($status);
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
-}
-
-/**
- * Flush the response to the client so the GitHub work happens after
- * the user sees the result. Works on both PHP-FPM and mod_php (Apache).
- */
-function flushToClient(): void
-{
-    if (function_exists('fastcgi_finish_request')) {
-        fastcgi_finish_request();
-
-        return;
-    }
-
-    // Apache / mod_php fallback
-    ignore_user_abort(true);
-    header('Content-Length: ' . ob_get_length());
-    header('Connection: close');
-    ob_end_flush();
-    flush();
 }
