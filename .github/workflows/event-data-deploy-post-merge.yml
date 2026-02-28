@@ -7,7 +7,7 @@ name: Event Data Deploy (Post-Merge)
 # Each job performs its own inline detection of changed event data files.
 #
 # Jobs:
-#   1. deploy-qa      – detect inline + build + SCP to QA
+#   1. deploy-qa      – detect inline + build + rsync to QA
 #   2. deploy-qa-node – detect inline + build + SCP to QA Node
 #   3. deploy-prod    – detect inline + QA check + build + SCP to Production
 
@@ -83,17 +83,16 @@ jobs:
             done
           fi
 
-      - name: Upload event data pages via SCP
+      - name: Upload event data pages via rsync
         if: steps.gate.outputs.skip != 'true'
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_SSH_PORT }}
-          source: staging/*
-          target: ${{ secrets.DEPLOY_DIR }}/public_html
-          strip_components: 1
+        run: |
+          install -m 600 /dev/null deploy_key
+          echo "${{ secrets.SERVER_SSH_KEY }}" > deploy_key
+          rsync -avz --delete \
+            -e "ssh -p ${{ secrets.SERVER_SSH_PORT }} -o StrictHostKeyChecking=no -i deploy_key" \
+            staging/ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DEPLOY_DIR }}/public_html/
+          rm -f deploy_key
 
   deploy-qa-node:
     name: Build & deploy to QA Node
