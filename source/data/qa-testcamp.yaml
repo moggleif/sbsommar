@@ -677,3 +677,18 @@ events:
     meta:
       created_at: '2026-02-28 16:53'
       updated_at: '2026-02-28 19:07'
+  - id: en-sista-grej-2026-02-28-2100
+    title: en sista grej
+    date: '2026-02-28'
+    start: '21:00'
+    end: '21:04'
+    location: GA Idrott
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-02-28 19:37
+      updated_at: 2026-02-28 19:37
