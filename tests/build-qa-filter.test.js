@@ -23,13 +23,6 @@ describe('build.js QA camp filtering (02-§42.13, 02-§42.30)', () => {
       || /\.filter\(\(?.*\)?\s*=>\s*!.*\.qa\b/.test(SRC);
     assert.ok(hasQaFilter, 'build.js must filter qa: true camps from the camps array');
 
-    // 2. The render functions that receive the full camp list must NOT
-    //    receive the raw `campsData.camps` or unfiltered `camps` variable
-    //    after the filtering point.  We check that renderUpcomingCampsHtml,
-    //    renderArkivPage, and the future-camps filter use the filtered name.
-    //    Specifically: after the filter line, raw `camps` should not appear
-    //    as an argument to render functions or in .filter() calls.
-
     // 2. The filtering must be conditional on BUILD_ENV === 'production'
     const hasProductionGuard = /BUILD_ENV\s*===\s*'production'/.test(SRC);
     assert.ok(hasProductionGuard, 'QA filtering must be guarded by BUILD_ENV === \'production\'');
