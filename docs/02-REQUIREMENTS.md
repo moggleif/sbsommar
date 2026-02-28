@@ -2333,3 +2333,45 @@ primary lever for reducing deploy latency.
   job). <!-- 02-§51.9 -->
 - `02-§50.14` (QA detection sets `is_qa` output) is superseded by
   `02-§51.7` (inline QA check in production job only). <!-- 02-§51.10 -->
+
+---
+
+## 52. Replace Docker Container with setup-node + npm Cache
+
+The post-merge event-data deploy workflow (§50.4) previously used a
+pre-built Docker image from GHCR to avoid running `npm ci` on every
+deploy. While this eliminated `npm ci` time, pulling the Docker image
+itself added ~20 seconds per job. Replacing the Docker container with
+`actions/setup-node` and the built-in npm cache achieves the same
+dependency-availability goal with lower overhead: cache restore takes
+~2–3 seconds on cache hit, and `npm ci --omit=dev` installs four small
+production packages in ~3 seconds.
+
+### 52.1 Dependency installation method (site requirements)
+
+- The post-merge event-data deploy workflow must use
+  `actions/setup-node@v4` with `node-version: '20'` and `cache: 'npm'`
+  instead of a Docker container. <!-- 02-§52.1 -->
+- Each deploy job must run `npm ci --omit=dev` to install only production
+  dependencies. <!-- 02-§52.2 -->
+- The workflow must NOT use a Docker container (`container:` key must be
+  absent from all jobs). <!-- 02-§52.3 -->
+- The workflow must NOT require `packages: read` permission (no GHCR
+  access needed). <!-- 02-§52.4 -->
+
+### 52.2 Conditional vs unconditional installation (site requirements)
+
+- For the QA and QA Node deploy jobs, `setup-node` and `npm ci` must be
+  conditional on the gate step output — skipped when no event data file
+  changed. <!-- 02-§52.5 -->
+- For the production deploy job, `setup-node` and `npm ci` must run
+  unconditionally (before the gate step), because the gate step itself
+  uses `node -e` with `js-yaml` to check QA camp status. <!-- 02-§52.6 -->
+
+### 52.3 Superseded requirements
+
+- `02-§50.1`–`02-§50.7` (Docker image and Docker build workflow) are
+  superseded — the event-data deploy workflow no longer uses a Docker
+  image. <!-- 02-§52.7 -->
+- `02-§50.12` (workflow must use Docker image from GHCR) is superseded
+  by `02-§52.1` (setup-node + npm cache). <!-- 02-§52.8 -->
