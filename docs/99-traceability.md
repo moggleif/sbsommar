@@ -943,12 +943,12 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 | `02-§51.8` | Production job skips build and deploy for QA camp files | 03-ARCHITECTURE.md §11.3 | EDW-14..15 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§51.9` | `02-§50.13` superseded by inline detection (§51.2, §51.5) | — | — | — | implemented |
 | `02-§51.10` | `02-§50.14` superseded by inline QA check (§51.7) | — | — | — | implemented |
-| `02-§52.1` | Post-merge workflow uses `setup-node@v4` with node 20 and npm cache | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow steps | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§52.2` | Each deploy job runs `npm ci --omit=dev` | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow steps | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§52.3` | No Docker container (`container:` key absent from all jobs) | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow YAML | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§52.4` | No `packages: read` permission required | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow permissions | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§52.5` | QA/QA Node jobs: setup-node and npm ci conditional on gate step | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow if conditions | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
-| `02-§52.6` | Production job: setup-node and npm ci unconditional (gate needs js-yaml) | 03-ARCHITECTURE.md §11.1 | manual: inspect workflow step order | `.github/workflows/event-data-deploy-post-merge.yml` | implemented |
+| `02-§52.1` | Post-merge workflow uses `setup-node@v4` with node 20 and npm cache | 03-ARCHITECTURE.md §11.1 | EDW-19..21 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§52.2` | Each deploy job runs `npm ci --omit=dev` | 03-ARCHITECTURE.md §11.1 | EDW-22..24 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§52.3` | No Docker container (`container:` key absent from all jobs) | 03-ARCHITECTURE.md §11.1 | EDW-16..18 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§52.4` | No `packages: read` permission required | 03-ARCHITECTURE.md §11.1 | EDW-25 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§52.5` | QA/QA Node jobs: setup-node and npm ci conditional on gate step | 03-ARCHITECTURE.md §11.1 | EDW-26..27 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
+| `02-§52.6` | Production job: setup-node and npm ci unconditional (gate needs js-yaml) | 03-ARCHITECTURE.md §11.1 | EDW-28 | `.github/workflows/event-data-deploy-post-merge.yml` | covered |
 | `02-§52.7` | `02-§50.1`–`02-§50.7` superseded (Docker no longer used) | — | — | — | implemented |
 | `02-§52.8` | `02-§50.12` superseded by `02-§52.1` (setup-node replaces Docker) | — | — | — | implemented |
 
@@ -958,8 +958,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-25 (240 new tests — 75 requireme
 
 ```text
 Total requirements:             811
-Covered (implemented + tested): 376
-Implemented, not tested:        434
+Covered (implemented + tested): 382
+Implemented, not tested:        428
 Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
@@ -1173,7 +1173,8 @@ Matrix cleanup (2026-02-25):
   02-§50.14 superseded by 02-§51.7 (inline QA check in production job).
   Architecture updated in 03-ARCHITECTURE.md §11.3.
 8 requirements added for setup-node replacement (02-§52.1–52.8):
-  8 implemented (manual verification only).
+  6 covered (EDW-16..28): no container, setup-node, npm ci, permissions, conditionality.
+  2 implemented (02-§52.7–52.8: supersession notes).
   02-§50.1–50.7 superseded by 02-§52.1 (Docker no longer used by event-data deploy).
   02-§50.12 superseded by 02-§52.1 (setup-node + npm cache replaces Docker).
   Architecture updated in 03-ARCHITECTURE.md §11.1, §11.3, §11.5.
@@ -1344,3 +1345,8 @@ Matrix cleanup (2026-02-25):
 | EDW-08..10 | `tests/event-deploy-workflow.test.js` | `02-§51.2/51.5 — Inline event-data detection per job` |
 | EDW-11..13 | `tests/event-deploy-workflow.test.js` | `02-§51.6 — Build step gated on detection output` |
 | EDW-14..15 | `tests/event-deploy-workflow.test.js` | `02-§51.7/51.8 — Production QA camp gating` |
+| EDW-16..18 | `tests/event-deploy-workflow.test.js` | `02-§52.3 — No Docker container in any job` |
+| EDW-19..21 | `tests/event-deploy-workflow.test.js` | `02-§52.1 — Each deploy job uses setup-node` |
+| EDW-22..24 | `tests/event-deploy-workflow.test.js` | `02-§52.2 — Each deploy job runs npm ci --omit=dev` |
+| EDW-25 | `tests/event-deploy-workflow.test.js` | `02-§52.4 — No packages:read permission` |
+| EDW-26..28 | `tests/event-deploy-workflow.test.js` | `02-§52.5/52.6 — setup-node conditionality` |
