@@ -2692,3 +2692,43 @@ overridden — a broken size hierarchy where h3 appears larger than h2.
   not a library API reference. <!-- 02-§59.5 -->
 - The link text and URL must be identical in `/lagg-till.html` and
   `/redigera.html`. <!-- 02-§59.6 -->
+
+---
+
+## 60. Release and Deployment Documentation
+
+### Background
+
+The project has a working CI/CD pipeline (QA auto-deploy, production manual
+trigger) but no contributor-facing documentation explaining the deploy flow,
+how to release to production, or who is authorized to do so. A new contributor
+who is not familiar with the GitHub Actions setup cannot determine how their
+changes reach users.
+
+### 60.1 Contributor documentation requirements
+
+- The contributor guide (`01-CONTRIBUTORS.md`) must include a section
+  explaining what happens after a PR is merged: QA auto-deploy for code,
+  dual auto-deploy for event data, and manual trigger for
+  production. <!-- 02-§60.1 -->
+- The contributor guide must link to the release guide for production
+  deploy steps. <!-- 02-§60.2 -->
+
+### 60.2 Environment protection requirements
+
+- The environments document (`08-ENVIRONMENTS.md`) must document the
+  required reviewers configuration for the `production`
+  environment. <!-- 02-§60.3 -->
+- The environments document must name the current production
+  approver(s). <!-- 02-§60.4 -->
+
+### 60.3 Release guide requirements
+
+- A dedicated release guide (`09-RELEASING.md`) must exist with
+  step-by-step instructions for deploying to production. <!-- 02-§60.5 -->
+- The guide must cover: verifying QA, triggering the production deploy,
+  verifying production, and rollback. <!-- 02-§60.6 -->
+- The guide must be usable without Claude Code — written for GitHub UI
+  and standard CLI. <!-- 02-§60.7 -->
+- The guide must document release tagging conventions for
+  milestones. <!-- 02-§60.8 -->
