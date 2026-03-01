@@ -994,16 +994,29 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§56.8` | `.event-description p` no longer applies `font-style: italic` | — | MKD-CSS-01 | `source/assets/cs/style.css` | covered |
 | `02-§56.9` | Description CSS uses existing design tokens only | 07-DESIGN.md §7 | manual: inspect CSS for hardcoded values | `source/assets/cs/style.css` — no new custom properties added | implemented |
 | `02-§56.10` | Shared helper provides `renderDescriptionHtml()` and `stripMarkdown()` | 03-ARCHITECTURE.md §20.3 | MKD-D15, MKD-D24 | `source/build/markdown.js` | covered |
+| `02-§57.1` | Users can apply formatting via toolbar without knowing Markdown syntax | — | manual: open form, click each button, verify syntax inserted | `source/assets/js/client/markdown-toolbar.js` | gap |
+| `02-§57.2` | Clicking a toolbar button wraps selected text with Markdown syntax | — | MDT-01..06 | `source/assets/js/client/markdown-toolbar.js` | gap |
+| `02-§57.3` | With no selection, toolbar inserts syntax with placeholder and selects it | — | MDT-07..12 | `source/assets/js/client/markdown-toolbar.js` | gap |
+| `02-§57.4` | List and quote buttons apply prefix per line for multi-line selections | — | MDT-13..15 | `source/assets/js/client/markdown-toolbar.js` | gap |
+| `02-§57.5` | Toolbar appears above description textarea in both forms | — | MDT-16..17 | `public/lagg-till.html`, `public/redigera.html` | gap |
+| `02-§57.6` | Buttons appear in order: Bold, Italic, Heading, Bullet, Numbered, Quote | — | MDT-18 | `source/assets/js/client/markdown-toolbar.js` | gap |
+| `02-§57.7` | Each button displays an inline SVG icon | — | MDT-19 | `source/assets/js/client/markdown-toolbar.js` | gap |
+| `02-§57.8` | Each button has an accessible `aria-label` | — | MDT-20 | `source/assets/js/client/markdown-toolbar.js` | gap |
+| `02-§57.9` | Toolbar styled with existing design tokens (no hardcoded values) | 07-DESIGN.md §6 | manual: inspect CSS for hardcoded values | `source/assets/cs/style.css` | gap |
+| `02-§57.10` | Toolbar logic in shared `markdown-toolbar.js` loaded by both forms | — | MDT-21..22 | `public/lagg-till.html`, `public/redigera.html` | gap |
+| `02-§57.11` | No external dependencies added | — | manual: check package.json | — | gap |
+| `02-§57.12` | No live preview — toolbar only inserts syntax | — | manual: confirm no preview UI | — | gap |
+| `02-§57.13` | Toolbar buttons have visible focus indicators | — | MDT-23 | `source/assets/cs/style.css` | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             835
+Total requirements:             848
 Covered (implemented + tested): 403
 Implemented, not tested:        431
-Gap (no implementation):          1
+Gap (no implementation):         14
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).

@@ -222,6 +222,18 @@ The submit modal overlays the page during form submission and shows progress, su
 - Entry animation: fade-in + slide-up, 250 ms, `ease-out`. Within the 300 ms ceiling in `07-§10.2`. <!-- 07-§6.54 -->
 - Backdrop: semi-transparent navy using `color-mix(in srgb, var(--color-navy) 60%, transparent)`. <!-- 07-§6.55 -->
 
+### Markdown toolbar (description field)
+
+A row of small icon buttons directly above the description `<textarea>`. <!-- 07-§6.56 -->
+
+- Container (`.md-toolbar`): `display: flex`, `gap: 4px`, `padding: 4px`, background `var(--color-cream-light)`, border `1px solid rgba(0,0,0,0.1)`, `border-radius: var(--radius-sm) var(--radius-sm) 0 0` (top corners only). The textarea below it gets `border-radius: 0 0 var(--radius-sm) var(--radius-sm)` and `border-top: none` so they feel like one component. <!-- 07-§6.57 -->
+- Buttons: `background: transparent`, no border, `padding: 6px`, `border-radius: var(--radius-sm)`, `color: var(--color-charcoal)`, `cursor: pointer`. <!-- 07-§6.58 -->
+- Hover: `background: rgba(0,0,0,0.06)`. <!-- 07-§6.59 -->
+- Focus-visible: same outline as other interactive elements (`2px solid var(--color-terracotta)`, `outline-offset: 2px`). <!-- 07-§6.60 -->
+- Icons: `16px × 16px` inline SVGs, `stroke: currentColor`, `fill: none`, `stroke-width: 2`. <!-- 07-§6.61 -->
+- A thin `1px solid rgba(0,0,0,0.1)` separator between the toolbar and textarea is achieved by the toolbar's bottom border matching the textarea's side borders. <!-- 07-§6.62 -->
+- On narrow viewports the buttons simply wrap to a second row (flex-wrap). No special mobile treatment. <!-- 07-§6.63 -->
+
 ---
 
 ## 7. CSS Strategy
