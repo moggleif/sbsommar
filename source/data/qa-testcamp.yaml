@@ -802,3 +802,18 @@ events:
     meta:
       created_at: 2026-03-01 20:10
       updated_at: 2026-03-01 20:10
+  - id: testa-2026-03-01-2200
+    title: testa
+    date: '2026-03-01'
+    start: '22:00'
+    end: '23:00'
+    location: Tält2
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-03-01 20:18
+      updated_at: 2026-03-01 20:18
