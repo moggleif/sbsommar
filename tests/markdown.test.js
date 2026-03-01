@@ -92,6 +92,12 @@ describe('renderDescriptionHtml (02-§56.1, 02-§56.2, 02-§56.6, 02-§56.7)', (
     assert.strictEqual(html, '');
   });
 
+  it('MKD-D27 (02-§56.2): tel: link hyphens are replaced with non-breaking hyphens', () => {
+    const html = renderDescriptionHtml('Ring [0708-897998](tel:0708-897998)');
+    assert.ok(html.includes('&#8209;'), `Expected non-breaking hyphen, got: ${html}`);
+    assert.ok(!html.match(/<a[^>]*href="tel:[^"]*"[^>]*>[^<]*-[^<]*<\/a>/), `Regular hyphen should not remain in tel link text, got: ${html}`);
+  });
+
   it('MKD-D15 (02-§56.10): function is exported from markdown.js', () => {
     assert.strictEqual(typeof renderDescriptionHtml, 'function');
   });

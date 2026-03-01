@@ -38,6 +38,18 @@ function sanitizeHtml(html) {
 }
 
 /**
+ * Replaces regular hyphens with non-breaking hyphens (&#8209;) inside the
+ * text content of tel: links so phone numbers don't line-break at the hyphen
+ * and the html-validate tel-non-breaking rule passes.
+ */
+function fixTelHyphens(html) {
+  return html.replace(
+    /(<a\s[^>]*href="tel:[^"]*"[^>]*>)([^<]+)(<\/a>)/gi,
+    (_, open, text, close) => open + text.replace(/-/g, '&#8209;') + close,
+  );
+}
+
+/**
  * Converts a Markdown description string to sanitized HTML.
  * Returns empty string for null/empty input.
  *
@@ -48,7 +60,7 @@ function renderDescriptionHtml(text) {
   if (!text || !text.trim()) return '';
   const md = new Marked();
   const html = md.parse(text).trim();
-  return sanitizeHtml(html);
+  return fixTelHyphens(sanitizeHtml(html));
 }
 
 /**
