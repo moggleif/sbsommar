@@ -1013,10 +1013,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             848
+Total requirements:             863
 Covered (implemented + tested): 412
 Implemented, not tested:        435
-Gap (no implementation):          1
+Gap (no implementation):         16
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1460,3 +1460,19 @@ Matrix cleanup (2026-02-25):
 | MDT-20 | `tests/markdown-toolbar.test.js` | `02-§57.8 — Accessible aria-label` |
 | MDT-21..22 | `tests/markdown-toolbar.test.js` | `02-§57.10 — Shared markdown-toolbar.js` |
 | MDT-23 | `tests/markdown-toolbar.test.js` | `02-§57.13 — Focus indicator` |
+| | | **§58 — Markdown Preview for Description Field** |
+| `02-§58.1` | `gap` | Live preview below textarea |
+| `02-§58.2` | `gap` | Debounce ~300 ms |
+| `02-§58.3` | `gap` | Hidden when textarea empty |
+| `02-§58.4` | `gap` | Read-only preview |
+| `02-§58.5` | `gap` | Uses client-side `marked` library |
+| `02-§58.6` | `gap` | `marked.min.js` copied during build |
+| `02-§58.7` | `gap` | Loaded with `defer` attribute |
+| `02-§58.8` | `gap` | Same sanitization as build (02-§56.6) |
+| `02-§58.9` | `gap` | Logic in `markdown-preview.js` |
+| `02-§58.10` | `gap` | `aria-live="polite"` on preview area |
+| `02-§58.11` | `gap` | Accessible `aria-label` |
+| `02-§58.12` | `gap` | Present in both forms |
+| `02-§58.13` | `gap` | Visually distinct from textarea |
+| `02-§58.14` | `gap` | Matches `.event-description` styling |
+| `02-§58.15` | `gap` | Uses design tokens only |
