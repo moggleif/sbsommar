@@ -1485,11 +1485,11 @@ Matrix cleanup (2026-02-25):
 | SH-23..24 | `tests/scoped-headings.test.js` | `02-§59.5 — Guide link → markdownguide.org` |
 | SH-25 | `tests/scoped-headings.test.js` | `02-§59.6 — Identical link in both forms` |
 | | | **§60 — Release and Deployment Documentation** |
-| `02-§60.1` | gap | Contributor guide deploy flow section |
-| `02-§60.2` | gap | Contributor guide link to release guide |
-| `02-§60.3` | gap | Required reviewers documented in 08-ENVIRONMENTS.md |
-| `02-§60.4` | gap | Production approver(s) named |
-| `02-§60.5` | gap | 09-RELEASING.md exists |
-| `02-§60.6` | gap | Guide covers verify QA → deploy → verify prod → rollback |
-| `02-§60.7` | gap | Guide usable without Claude Code |
-| `02-§60.8` | gap | Release tagging conventions documented |
+| `02-§60.1` | covered | `docs/01-CONTRIBUTORS.md` — Deployment section with deploy triggers table |
+| `02-§60.2` | covered | `docs/01-CONTRIBUTORS.md` — links to `09-RELEASING.md` |
+| `02-§60.3` | covered | `docs/08-ENVIRONMENTS.md` — required reviewers setup in steps 7–8 |
+| `02-§60.4` | covered | `docs/08-ENVIRONMENTS.md` — Production approvers section with username table |
+| `02-§60.5` | covered | `docs/09-RELEASING.md` exists |
+| `02-§60.6` | covered | `docs/09-RELEASING.md` — Steps 1–4 + Rollback section |
+| `02-§60.7` | covered | `docs/09-RELEASING.md` — GitHub UI and CLI instructions, no Claude Code dependency |
+| `02-§60.8` | covered | `docs/09-RELEASING.md` — Release tags section with semver conventions |
