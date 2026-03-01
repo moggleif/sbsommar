@@ -787,3 +787,18 @@ events:
     meta:
       created_at: 2026-03-01 09:00
       updated_at: 2026-03-01 09:00
+  - id: funkar-det-pa-prod-2026-03-01-2115
+    title: 'Funkar det på prod?'
+    date: '2026-03-01'
+    start: '21:15'
+    end: '22:22'
+    location: GA Datorsal
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-03-01 20:10
+      updated_at: 2026-03-01 20:10
