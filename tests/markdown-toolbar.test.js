@@ -14,7 +14,7 @@
 //   MDT-M01 (02-§57.1): open /lagg-till.html, click each toolbar button,
 //     verify correct syntax is inserted into the description textarea.
 //   MDT-M02 (02-§57.9): inspect toolbar CSS — all values use design tokens.
-//   MDT-M03 (02-§57.12): confirm no live preview is rendered.
+//   MDT-M03 (02-§57.12): superseded by §58 — live preview now expected.
 //   MDT-M04 (02-§57.11): confirm no new entries in package.json dependencies.
 
 const { describe, it } = require('node:test');

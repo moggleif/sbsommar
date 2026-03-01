@@ -225,6 +225,9 @@
     els.responsible.value = event.responsible || '';
     els.description.value = event.description || '';
     els.link.value = event.link || '';
+
+    // Trigger preview update after populating description (02-§58.1)
+    els.description.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   // ── Time-gating (02-§26.9) ──────────────────────────────────────────────────

@@ -234,6 +234,16 @@ A row of small icon buttons directly above the description `<textarea>`. <!-- 07
 - A thin `1px solid rgba(0,0,0,0.1)` separator between the toolbar and textarea is achieved by the toolbar's bottom border matching the textarea's side borders. <!-- 07-§6.62 -->
 - On narrow viewports the buttons simply wrap to a second row (flex-wrap). No special mobile treatment. <!-- 07-§6.63 -->
 
+### Markdown preview (description field)
+
+A read-only preview area below the description `<textarea>` that shows live-rendered Markdown. <!-- 07-§6.64 -->
+
+- Container (`.md-preview`): `background: var(--color-cream-light)`, `border: 1px solid rgba(0,0,0,0.10)`, `border-radius: var(--radius-sm)`, `padding: var(--space-sm)`, `margin-top: var(--space-xs)`, `color: var(--color-charcoal)`. <!-- 07-§6.65 -->
+- A label line (`.md-preview-label`) above the rendered content: `font-size: var(--font-size-small)`, `font-weight: 700`, `text-transform: uppercase`, `letter-spacing: 0.04em`, `color: var(--color-charcoal)`, `opacity: 0.5`, `margin: 0 0 var(--space-xs)`, `padding-bottom: var(--space-xs)`, `border-bottom: 1px solid rgba(0,0,0,0.07)` — mirrors the `.event-section-label` pattern with a thin separator line below. <!-- 07-§6.66 -->
+- Inner content matches `.event-description` rules: paragraphs get `margin: 0 0 var(--space-xs)`, last paragraph `margin-bottom: 0`. <!-- 07-§6.67 -->
+- The preview is hidden (`hidden` attribute) when the textarea is empty. <!-- 07-§6.68 -->
+- `pointer-events: none` on inner content to enforce read-only behaviour. <!-- 07-§6.69 -->
+
 ---
 
 ## 7. CSS Strategy
