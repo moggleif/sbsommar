@@ -122,10 +122,10 @@ ${locationOptions}
           <label for="f-description">Beskrivning <span class="opt">(valfritt)</span></label>
           <div class="md-toolbar" role="toolbar" aria-label="Markdown-formatering"></div>
           <textarea id="f-description" name="description" rows="4"></textarea>
-          <div class="md-preview" aria-live="polite" aria-label="Förhandsgranskning av beskrivning" hidden>
+          <section class="md-preview" aria-live="polite" aria-label="Förhandsgranskning av beskrivning" hidden>
             <div class="md-preview-header"><span class="md-preview-label">Förhandsgranskning</span><span class="md-help">Ser det inte ut som du tänkt dig? Kolla <a href="https://marked.js.org/#usage" target="_blank" rel="noopener noreferrer">Markdown-guiden ↗</a></span></div>
             <div class="md-preview-content"></div>
-          </div>
+          </section>
         </div>
 
         <div class="field">
