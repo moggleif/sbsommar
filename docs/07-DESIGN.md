@@ -244,6 +244,21 @@ A read-only preview area below the description `<textarea>` that shows live-rend
 - The preview is hidden (`hidden` attribute) when the textarea is empty. <!-- 07-§6.68 -->
 - `pointer-events: none` on inner content to enforce read-only behaviour. <!-- 07-§6.69 -->
 
+### Scoped headings in descriptions
+
+Headings inside event descriptions (`.event-desc`, `.event-description`) and
+the Markdown preview (`.md-preview`) must be scaled down from the page-level
+heading sizes so they fit the smaller context and follow a strictly decreasing
+hierarchy. <!-- 07-§6.70 -->
+
+- h1: `1.4em`, `700`, `color: var(--color-terracotta)`, `margin: 0 0 var(--space-xs)`. <!-- 07-§6.71 -->
+- h2: `1.2em`, `700`, `color: var(--color-terracotta)`, `margin: 0 0 var(--space-xs)`. <!-- 07-§6.72 -->
+- h3: `1.1em`, `700`, `color: var(--color-terracotta)`, `margin: 0 0 var(--space-xs)`. <!-- 07-§6.73 -->
+- h4: `1em`, `700`, `color: inherit`, `margin: 0 0 var(--space-xs)`. <!-- 07-§6.74 -->
+
+Using `em` makes the headings proportional to the container's font-size
+(e.g. 13 px in `.event-extra`, 16 px in `.md-preview`). <!-- 07-§6.75 -->
+
 ---
 
 ## 7. CSS Strategy

@@ -2657,3 +2657,38 @@ shows the user how their Markdown will render.
   representation of the final output. <!-- 02-§58.14 -->
 - All styling must use existing design tokens from `07-DESIGN.md` — no
   hardcoded colours, spacing, or typography values. <!-- 02-§58.15 -->
+
+---
+
+## 59. Scoped Heading Sizes in Event Descriptions
+
+### Context
+
+The global heading styles (h1 = 40 px, h2 = 35 px, h3 = 30 px) are designed
+for page-level headings.  When Markdown descriptions containing headings are
+rendered inside event cards (`.event-desc`, `.event-description`) and the
+Markdown preview (`.md-preview`), those page-level sizes are applied,
+producing oversized headings and — in `.md-preview` where only h2 was
+overridden — a broken size hierarchy where h3 appears larger than h2.
+
+### 59.1 Heading size requirements
+
+- Headings h1–h4 inside `.md-preview`, `.event-desc`, and
+  `.event-description` must be visually smaller than the global page
+  headings and must follow a strictly decreasing size
+  order (h1 > h2 > h3 > h4). <!-- 02-§59.1 -->
+- The scoped sizes must use relative `em` units so they scale with the
+  container's font-size context (e.g. 13 px in `.event-extra` vs
+  16 px in `.md-preview`). <!-- 02-§59.2 -->
+- h4 must be the same size as body text but bold, to provide a clear
+  lower-bound heading level. <!-- 02-§59.3 -->
+- All scoped heading styles must use existing design tokens or plain
+  `em` values — no hardcoded pixel sizes. <!-- 02-§59.4 -->
+
+### 59.2 Markdown guide link
+
+- The help link in the Markdown preview header must point to a
+  beginner-friendly guide (`https://www.markdownguide.org/basic-syntax/`),
+  not a library API reference. <!-- 02-§59.5 -->
+- The link text and URL must be identical in `/lagg-till.html` and
+  `/redigera.html`. <!-- 02-§59.6 -->
