@@ -1008,26 +1008,26 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§57.12` | No live preview — toolbar only inserts syntax | — | manual: confirm no preview UI | — | implemented |
 | `02-§57.13` | Toolbar buttons have visible focus indicators | — | MDT-23 | `source/assets/cs/style.css` | covered |
 | | | **§61 — Mobile Navigation Improvements** | | | |
-| `02-§61.1` | Sticky nav on mobile (≤ 767 px) | 07-DESIGN.md §6.24-impl | — | — | gap |
-| `02-§61.2` | Sticky nav on desktop | 07-DESIGN.md §6.24-impl | — | — | gap |
-| `02-§61.3` | Terracotta hamburger button with white icon | 07-DESIGN.md §6.21-impl | — | — | gap |
-| `02-§61.4` | Rounded corners on hamburger button | 07-DESIGN.md §6.21-impl | — | — | gap |
-| `02-§61.5` | Terracotta menu panel with white text | 07-DESIGN.md §6.20-impl | — | — | gap |
-| `02-§61.6` | WCAG AA contrast (white on terracotta, 14 px bold) | 07-DESIGN.md §6.20-impl | — | — | gap |
-| `02-§61.7` | Floating card appearance (rounded corners, inset margins) | 07-DESIGN.md §6.20-impl | — | — | gap |
-| `02-§61.8` | Visual hierarchy: page links vs section links | 07-DESIGN.md §6.22-impl | — | — | gap |
-| `02-§61.9` | Smooth CSS transition (max-height, 250 ms) | 07-DESIGN.md §6.23-impl | — | — | gap |
-| `02-§61.10` | White focus outlines against terracotta | — | — | — | gap |
-| `02-§61.11` | Preserve keyboard/ARIA behaviour | — | — | — | gap |
+| `02-§61.1` | Sticky nav on mobile (≤ 767 px) | 07-DESIGN.md §6.24-impl | MN-01..03 | `source/assets/cs/style.css` | covered |
+| `02-§61.2` | Sticky nav on desktop | 07-DESIGN.md §6.24-impl | MN-01..03 | `source/assets/cs/style.css` | covered |
+| `02-§61.3` | Terracotta hamburger button with white icon | 07-DESIGN.md §6.21-impl | MN-04..05 | `source/assets/cs/style.css` | covered |
+| `02-§61.4` | Rounded corners on hamburger button | 07-DESIGN.md §6.21-impl | MN-06 | `source/assets/cs/style.css` | covered |
+| `02-§61.5` | Terracotta menu panel with white text | 07-DESIGN.md §6.20-impl | MN-07..08 | `source/assets/cs/style.css` | covered |
+| `02-§61.6` | WCAG AA contrast (white on terracotta, 14 px bold) | 07-DESIGN.md §6.20-impl | manual: verify 14 px bold white on terracotta | `source/assets/cs/style.css` | implemented |
+| `02-§61.7` | Floating card appearance (rounded corners, inset margins) | 07-DESIGN.md §6.20-impl | MN-09..10 | `source/assets/cs/style.css` | covered |
+| `02-§61.8` | Visual hierarchy: page links vs section links | 07-DESIGN.md §6.22-impl | MN-11..14 | `source/assets/cs/style.css` | covered |
+| `02-§61.9` | Smooth CSS transition (max-height, 250 ms) | 07-DESIGN.md §6.23-impl | MN-15..16 | `source/assets/cs/style.css` | covered |
+| `02-§61.10` | White focus outlines against terracotta | — | MN-17..18 | `source/assets/cs/style.css` | covered |
+| `02-§61.11` | Preserve keyboard/ARIA behaviour | — | manual: MN-M04 — Escape, click-outside, aria-expanded | `source/assets/js/client/nav.js` | implemented |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             863
-Covered (implemented + tested): 423
-Implemented, not tested:        440
+Total requirements:             874
+Covered (implemented + tested): 432
+Implemented, not tested:        442
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1269,6 +1269,12 @@ Matrix cleanup (2026-02-25):
   4 implemented (manual/visual): 02-§57.1 (UX), 02-§57.9 (design tokens), 02-§57.11
     (no deps), 02-§57.12 (no preview).
   Design documented in 07-DESIGN.md §6.56–6.63.
+11 requirements added for mobile navigation improvements (02-§61.1–61.11):
+  9 covered (MN-01..18): sticky nav, button design, menu panel, hierarchy,
+    transition, focus outlines.
+  2 implemented (manual/visual): 02-§61.6 (WCAG contrast check),
+    02-§61.11 (keyboard/ARIA behaviour preserved).
+  Design documented in 07-DESIGN.md §6.20-impl–§6.24-impl.
 ```
 
 ---
