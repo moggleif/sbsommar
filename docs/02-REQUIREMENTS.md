@@ -2599,7 +2599,61 @@ users write Markdown without memorising syntax.
 - The toolbar logic must live in a single shared JS file
   (`markdown-toolbar.js`) that is loaded by both forms. <!-- 02-§57.10 -->
 - The toolbar must not add any external dependencies. <!-- 02-§57.11 -->
-- There is no live preview of Markdown — the toolbar only inserts
-  syntax. <!-- 02-§57.12 -->
+- ~~There is no live preview of Markdown — the toolbar only inserts
+  syntax.~~ Superseded by §58 (Markdown Preview). <!-- 02-§57.12 -->
 - The toolbar buttons must have visible focus indicators that meet the
   existing focus-visible styling. <!-- 02-§57.13 -->
+
+---
+
+## 58. Markdown Preview for Description Field
+
+The description textarea in the add-activity form (`/lagg-till.html`) and
+the edit-activity form (`/redigera.html`) must include a live preview that
+shows the user how their Markdown will render.
+
+### 58.1 User requirements
+
+- The user must see a live preview of their description text rendered as
+  formatted HTML below the description textarea. <!-- 02-§58.1 -->
+- The preview must update as the user types, with a debounce delay of
+  approximately 300 ms so that rendering does not interfere with
+  typing. <!-- 02-§58.2 -->
+- When the description textarea is empty, the preview area must either be
+  hidden or show a discrete placeholder text (e.g. "Förhandsgranskning
+  visas här"). <!-- 02-§58.3 -->
+- The preview must be read-only — no user interaction (clicking, selecting,
+  editing) should be possible within the preview area. <!-- 02-§58.4 -->
+
+### 58.2 Site requirements
+
+- The preview must render using the same `marked` library used at build
+  time, loaded as a client-side script (`marked.min.js`), to guarantee
+  identical output. <!-- 02-§58.5 -->
+- The `marked.min.js` file must be copied from `node_modules` to the
+  public JS directory during the build step. <!-- 02-§58.6 -->
+- The `marked.min.js` script must be loaded with the `defer` attribute so
+  it does not block page rendering. <!-- 02-§58.7 -->
+- The preview must sanitize all rendered HTML using the same rules as
+  build-time rendering (02-§56.6): `<script>`, `<iframe>`, `<object>`,
+  `<embed>` tags, `on*` event-handler attributes, and `javascript:` URIs
+  must be removed. <!-- 02-§58.8 -->
+- The preview logic must live in a dedicated JS file
+  (`markdown-preview.js`) that is loaded by both forms. <!-- 02-§58.9 -->
+- The preview area must use `aria-live="polite"` so that screen readers
+  announce content changes without interrupting the user. <!-- 02-§58.10 -->
+- The preview area must have an accessible label
+  (`aria-label`). <!-- 02-§58.11 -->
+- The preview must appear in both `/lagg-till.html` and
+  `/redigera.html`. <!-- 02-§58.12 -->
+
+### 58.3 Design requirements
+
+- The preview area must be visually distinct from the textarea (e.g.
+  different background, border style) so the user can distinguish input
+  from output. <!-- 02-§58.13 -->
+- The inner content of the preview must match the `.event-description`
+  styling used in the schedule, so the user sees an accurate
+  representation of the final output. <!-- 02-§58.14 -->
+- All styling must use existing design tokens from `07-DESIGN.md` — no
+  hardcoded colours, spacing, or typography values. <!-- 02-§58.15 -->
