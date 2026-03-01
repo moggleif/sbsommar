@@ -72,6 +72,16 @@ describe('renderDescriptionHtml (02-§56.1, 02-§56.2, 02-§56.6, 02-§56.7)', (
     assert.ok(!html.includes('javascript:'), `javascript: URI must be removed, got: ${html}`);
   });
 
+  it('MKD-D25 (02-§56.6): nested/reconstructed script tags are sanitized', () => {
+    const html = renderDescriptionHtml('test <scr<script>ipt>alert(1)</script> end');
+    assert.ok(!html.includes('<script'), `nested script pattern must be removed, got: ${html}`);
+  });
+
+  it('MKD-D26 (02-§56.6): script end tag with whitespace is sanitized', () => {
+    const html = renderDescriptionHtml('test <script >alert(1)</script > end');
+    assert.ok(!html.includes('<script'), `script tag with whitespace must be removed, got: ${html}`);
+  });
+
   it('MKD-D13 (02-§56.7): null input returns empty string', () => {
     const html = renderDescriptionHtml(null);
     assert.strictEqual(html, '');

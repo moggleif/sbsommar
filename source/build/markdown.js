@@ -3,21 +3,38 @@
 const { Marked } = require('marked');
 
 /**
+ * Pattern matching dangerous HTML tags (with optional whitespace before >).
+ * Matches opening, closing, and self-closing forms of script, iframe, object, embed.
+ */
+const DANGEROUS_TAG_RE = /<\/?\s*(script|iframe|object|embed)\b[^>]*>/gi;
+
+/**
+ * Pattern matching on* event handler attributes.
+ */
+const EVENT_HANDLER_RE = /\s+on\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi;
+
+/**
+ * Pattern matching javascript: URIs in href/src attributes.
+ */
+const JS_URI_RE = /(href|src)\s*=\s*(["'])javascript:[^"']*\2/gi;
+
+/**
  * Sanitizes HTML output by removing dangerous tags and attributes.
  * Strips: <script>, <iframe>, <object>, <embed>, on* event handlers,
- * and javascript: URIs.
+ * and javascript: URIs. Runs in a loop to handle nested/reconstructed
+ * patterns (e.g. `<scr<script>ipt>`).
  */
 function sanitizeHtml(html) {
-  return html
-    // Remove <script>...</script> (including content)
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
-    // Remove self-closing or unclosed dangerous tags
-    .replace(/<\/?(script|iframe|object|embed)\b[^>]*>/gi, '')
-    // Remove on* event handler attributes
-    .replace(/\s+on\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi, '')
-    // Remove javascript: URIs in href/src attributes
-    .replace(/(href|src)\s*=\s*"javascript:[^"]*"/gi, '$1=""')
-    .replace(/(href|src)\s*=\s*'javascript:[^']*'/gi, "$1=''");
+  let result = html;
+  let prev;
+  do {
+    prev = result;
+    result = result
+      .replace(DANGEROUS_TAG_RE, '')
+      .replace(EVENT_HANDLER_RE, '')
+      .replace(JS_URI_RE, '$1=""');
+  } while (result !== prev);
+  return result;
 }
 
 /**
