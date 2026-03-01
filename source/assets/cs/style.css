@@ -945,15 +945,21 @@ textarea {
   color: var(--color-charcoal);
 }
 
+.md-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0 0 var(--space-xs);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
 .md-preview-label {
   font-size: var(--font-size-small);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--color-terracotta);
-  margin: 0 0 var(--space-xs);
-  padding-bottom: var(--space-xs);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .md-preview-content {
@@ -995,7 +1001,6 @@ textarea {
 .md-help {
   font-size: var(--font-size-small);
   color: color-mix(in srgb, var(--color-sage) 70%, var(--color-charcoal));
-  margin: var(--space-xs) 0 0;
 }
 
 .md-help a {
