@@ -89,6 +89,10 @@ ${locationOptions}
         <label for="f-description">Beskrivning <span class="opt">(valfritt)</span></label>
         <div class="md-toolbar" role="toolbar" aria-label="Markdown-formatering"></div>
         <textarea id="f-description" name="description" rows="4" placeholder="Beskriv aktiviteten, vad behövs, vad händer..."></textarea>
+        <div class="md-preview" aria-live="polite" aria-label="Förhandsgranskning av beskrivning" hidden>
+          <div class="md-preview-label">Förhandsgranskning</div>
+          <div class="md-preview-content"></div>
+        </div>
       </div>
 
       <div class="field">
@@ -112,6 +116,8 @@ ${locationOptions}
 
   <script src="cookie-consent.js"></script>
   <script src="markdown-toolbar.js"></script>
+  <script defer src="marked.umd.js"></script>
+  <script defer src="markdown-preview.js"></script>
   <script src="lagg-till.js"></script>
   <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}

@@ -331,7 +331,14 @@ async function main() {
     fs.mkdirSync(destAssets, { recursive: true });
     copyFlattened(srcAssets, destAssets);
     console.log('Copied: assets → public (flattened)');
-  } 
+  }
+
+  // ── Copy marked.umd.js → public (for client-side markdown preview) ────
+  const markedSrc = path.join(__dirname, '..', '..', 'node_modules', 'marked', 'lib', 'marked.umd.js');
+  if (fs.existsSync(markedSrc)) {
+    fs.copyFileSync(markedSrc, path.join(OUTPUT_DIR, 'marked.umd.js'));
+    console.log('Copied: marked.umd.js → public');
+  }
 }
 
 main().catch((err) => {

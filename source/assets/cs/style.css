@@ -934,6 +934,39 @@ textarea {
   display: block;
 }
 
+/* ── Markdown preview ── */
+
+.md-preview {
+  background: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  margin-top: var(--space-xs);
+  color: var(--color-charcoal);
+}
+
+.md-preview-label {
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-charcoal);
+  opacity: 0.5;
+  margin: 0 0 var(--space-xs);
+}
+
+.md-preview-content {
+  pointer-events: none;
+}
+
+.md-preview p {
+  margin: 0 0 var(--space-xs);
+}
+
+.md-preview p:last-child {
+  margin-bottom: 0;
+}
+
 /* ── Time-gating message ── */
 
 .form-gate-msg {
