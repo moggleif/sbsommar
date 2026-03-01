@@ -31,7 +31,7 @@ camps:
     information: ""
     file: qa-testcamp.yaml
     archived: false
-    qa: true
+    qa: false
   - id: 2025-08-syssleback
     name: SB sommar 2025 augusti
     start_date: '2025-08-03'
