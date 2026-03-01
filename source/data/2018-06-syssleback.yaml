@@ -40,10 +40,9 @@ events:
   date: '2018-06-17'
   start: '10:30'
   end: null
-  location: 'någon frivillig?) Vid regn: GA-hallen'
+  location: Grillplatsen (utanför bollsargen)
   responsible: null
-  description: utanför bollsargen Grillplatsen (ledare saknas (ledare saknas – någon
-    frivillig?)
+  description: Ledare saknas – någon frivillig? Vid regn i GA-hallen.
   link: null
   owner:
     name: ''
@@ -71,8 +70,8 @@ events:
   date: '2018-06-17'
   start: '11:00'
   end: null
-  location: Nerfarenan
-  responsible: miniaturhusen
+  location: Nerfarenan (miniaturhusen)
+  responsible: null
   description: null
   link: null
   owner:
@@ -131,8 +130,8 @@ events:
   date: '2018-06-17'
   start: '16:00'
   end: null
-  location: Nerfarenan
-  responsible: miniaturhusen
+  location: Nerfarenan (miniaturhusen)
+  responsible: null
   description: null
   link: null
   owner:
@@ -221,8 +220,8 @@ events:
   date: '2018-06-18'
   start: '11:00'
   end: null
-  location: Nerfarenan
-  responsible: miniaturhusen
+  location: Nerfarenan (miniaturhusen)
+  responsible: null
   description: null
   link: null
   owner:
@@ -255,9 +254,7 @@ events:
   responsible: null
   description: Samling hästhagen. Obs att det finns rejält allergiska på lägret, så
     se till att byta kläder efteråt och tvätta av det värsta innan ni beträder andra
-    lägeroffentliga utrymmen efteråt (Emma, ca 45min) Obs att det finns rejält allergiska
-    på lägret, så se till att byta kläder efteråt och tvätta av det värsta innan ni
-    beträder andra lägeroffentliga utrymmen efteråt
+    lägeroffentliga utrymmen efteråt.
   link: null
   owner:
     name: ''
@@ -300,10 +297,10 @@ events:
   date: '2018-06-18'
   start: '14:00'
   end: null
-  location: Kvistbergaskolans gymnastiksal OM några föräldrar kan ta på sig att övervaka
-    och se till att det blir röjt efter
-  responsible: samordna på FB under dagen
-  description: . Under sparkbollsmatchen
+  location: Kvistbergaskolans gymnastiksal
+  responsible: null
+  description: Under sparkbollsmatchen. OM några föräldrar kan ta på sig att övervaka
+    och se till att det blir röjt efter, samordna på FB under dagen.
   link: null
   owner:
     name: ''
@@ -376,8 +373,8 @@ events:
   date: '2018-06-18'
   start: '16:00'
   end: null
-  location: Nerfarenan
-  responsible: miniaturhusen
+  location: Nerfarenan (miniaturhusen)
+  responsible: null
   description: null
   link: null
   owner:
@@ -392,8 +389,8 @@ events:
   start: '16:00'
   end: null
   location: GA-hallen
-  responsible: korta matcher
-  description: null
+  responsible: null
+  description: Korta matcher
   link: null
   owner:
     name: ''
@@ -469,8 +466,7 @@ events:
   end: null
   location: GA-hallen
   responsible: null
-  description: (utanför bollsargen och/eller terrassen) (Dragons Drop In – GA-hallen
-    (utanför bollsargen och/eller terrassen)
+  description: Utanför bollsargen och/eller terrassen
   link: null
   owner:
     name: ''
@@ -568,14 +564,15 @@ events:
   meta:
     created_at: '2026-02-27 16:07:22'
     updated_at: '2026-02-27 16:33:32'
-- id: chokladfabriken-kl-16-00-berattar-maria-om-foretaget-och-tillverkningen-2018-06-19-1400
-  title: Chokladfabriken , kl. 16:00 berättar Maria om företaget och tillverkningen
+- id: chokladfabriken-2018-06-19-1400
+  title: Chokladfabriken
   date: '2018-06-19'
   start: '14:00'
   end: '17:00'
   location: null
-  responsible: bättre priser för oss
-  description: null
+  responsible: null
+  description: Kl. 16:00 berättar Maria om företaget och tillverkningen. Bättre priser
+    för oss.
   link: null
   owner:
     name: ''
@@ -605,11 +602,9 @@ events:
   end: null
   location: Hästhagen
   responsible: Emma
-  description: . Obs att det finns rejält allergiska på lägret, så se till att byta
+  description: Obs att det finns rejält allergiska på lägret, så se till att byta
     kläder efteråt och tvätta av det värsta innan ni beträder andra lägeroffentliga
-    utrymmen efteråt (20kr) Obs att det finns rejält allergiska på lägret, så se till
-    att byta kläder efteråt och tvätta av det värsta innan ni beträder andra lägeroffentliga
-    utrymmen efteråt
+    utrymmen efteråt.
   link: null
   owner:
     name: ''
@@ -817,8 +812,8 @@ events:
   date: '2018-06-20'
   start: '20:00'
   end: null
-  location: GA-hallen
-  responsible: bollsidan
+  location: GA-hallen (bollsidan)
+  responsible: null
   description: Vad tycker du?
   link: null
   owner:

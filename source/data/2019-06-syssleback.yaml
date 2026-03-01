@@ -70,7 +70,7 @@ events:
     date: '2019-06-24'
     start: '19:00'
     end: null
-    location: uppstart Fritidsgården
+    location: Fritidsgården
     responsible: Sara Varda & Ingemar Lindh
     description: null
     link: null
@@ -370,8 +370,8 @@ events:
     date: '2019-06-25'
     start: '18:30'
     end: null
-    location: OBS! Ny lokal
-    responsible: stuga 19 + Nathan Wemmert
+    location: Stuga 19
+    responsible: Nathan Wemmert
     description: null
     link: null
     owner:
@@ -581,8 +581,8 @@ events:
     start: '12:30'
     end: null
     location: Pysselrummet på Fritidsgården
-    responsible: se tråd RFSB sommarläger + Karin Bergström
-    description: null
+    responsible: Karin Bergström
+    description: Se tråd i RFSB sommarläger
     link: null
     owner:
       name: ''
@@ -656,8 +656,8 @@ events:
     start: '14:30'
     end: null
     location: Tält 1
-    responsible: Virkning Petra Signell, stickning Katalin Szasz
-    description: null
+    responsible: Petra Signell & Katalin Szasz
+    description: Virkning och stickning
     link: null
     owner:
       name: ''
@@ -670,7 +670,7 @@ events:
     date: '2019-06-26'
     start: '15:00'
     end: null
-    location: Hemskolning utomlands Tält 2
+    location: Tält 2
     responsible: Maria Alfredsson & Niclas Nilsson
     description: null
     link: null
@@ -790,7 +790,7 @@ events:
     date: '2019-06-26'
     start: '19:00'
     end: null
-    location: se inlägg RFSB sommarläger Klassrum 2
+    location: Klassrum 2
     responsible: Karin Bergström
     description: null
     link: null
@@ -805,8 +805,8 @@ events:
     date: '2019-06-26'
     start: '19:00'
     end: null
-    location: Harry Potter Tält 1
-    responsible: Ingemar Lindh + Petra Signell
+    location: Tält 1
+    responsible: Ingemar Lindh & Petra Signell
     description: null
     link: null
     owner:
@@ -896,8 +896,8 @@ events:
     start: '11:00'
     end: '12:00'
     location: Fotbollsplan
-    responsible: vid regn GA-hallen
-    description: null
+    responsible: null
+    description: Vid regn GA-hallen
     link: null
     owner:
       name: ''
@@ -941,7 +941,7 @@ events:
     start: '11:00'
     end: '12:00'
     location: null
-    responsible: Tält 1 Ingemar Lindh
+    responsible: Ingemar Lindh
     description: null
     link: null
     owner:
@@ -1166,8 +1166,8 @@ events:
     start: '11:00'
     end: '12:00'
     location: Fotbollsplan
-    responsible: vid regn GA-hallen
-    description: null
+    responsible: null
+    description: Vid regn GA-hallen
     link: null
     owner:
       name: ''
@@ -1361,8 +1361,8 @@ events:
     start: '15:00'
     end: '17:30'
     location: null
-    responsible: 13-20år + Viktor Ängquist
-    description: null
+    responsible: Viktor Ängquist
+    description: 13-20 år
     link: null
     owner:
       name: ''
@@ -1586,8 +1586,8 @@ events:
     start: '11:00'
     end: '12:00'
     location: Fotbollsplan
-    responsible: vid regn GA-hallen
-    description: null
+    responsible: null
+    description: Vid regn GA-hallen
     link: null
     owner:
       name: ''
@@ -1751,8 +1751,8 @@ events:
     start: '15:00'
     end: '17:30'
     location: null
-    responsible: 13-20år + Viktor Ängquist
-    description: null
+    responsible: Viktor Ängquist
+    description: 13-20 år
     link: null
     owner:
       name: ''
@@ -1825,9 +1825,9 @@ events:
     date: '2019-06-29'
     start: '19:00'
     end: null
-    location: Brädspelspresentation GA-hallen
+    location: GA-hallen
     responsible: Magnus Carlsson
-    description: null
+    description: Brädspelspresentation
     link: null
     owner:
       name: ''
@@ -1916,8 +1916,8 @@ events:
     start: '11:00'
     end: '12:00'
     location: Fotbollsplan
-    responsible: vid regn GA-hallen
-    description: null
+    responsible: null
+    description: Vid regn GA-hallen
     link: null
     owner:
       name: ''
@@ -2035,9 +2035,9 @@ events:
     date: '2019-06-30'
     start: '14:00'
     end: null
-    location: vuxna VS barn Nerf-arenan
+    location: Nerf-arenan
     responsible: null
-    description: null
+    description: Vuxna VS barn
     link: null
     owner:
       name: ''
@@ -2110,9 +2110,9 @@ events:
     date: '2019-06-30'
     start: '22:00'
     end: null
-    location: catch the flag (Alla åldrar välkomna) samling lekplatsen/nerf-arenan. Arrangeras av tonåringarna!
+    location: Samling lekplatsen/nerf-arenan
     responsible: null
-    description: null
+    description: Catch the flag. Alla åldrar välkomna. Arrangeras av tonåringarna!
     link: null
     owner:
       name: ''
