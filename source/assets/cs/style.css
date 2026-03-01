@@ -992,6 +992,17 @@ textarea {
   margin: 0 0 var(--space-xs);
 }
 
+.md-help {
+  font-size: var(--font-size-small);
+  color: color-mix(in srgb, var(--color-sage) 70%, var(--color-charcoal));
+  margin: var(--space-xs) 0 0;
+}
+
+.md-help a {
+  color: color-mix(in srgb, var(--color-sage) 60%, var(--color-charcoal));
+  text-decoration: underline;
+}
+
 /* ── Time-gating message ── */
 
 .form-gate-msg {
