@@ -753,6 +753,9 @@ details.event-row[open] > summary .ev-title {
   .nav-sections {
     flex-direction: column;
     gap: 2px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin-top: var(--space-xs);
+    padding-top: var(--space-sm);
   }
 
   .nav-link {
@@ -792,11 +795,6 @@ details.event-row[open] > summary .ev-title {
     opacity: 1;
   }
 
-  .nav-sections {
-    border-top: 2px solid rgba(255, 255, 255, 0.3);
-    margin-top: var(--space-xs);
-    padding-top: var(--space-sm);
-  }
 }
 
 /* ── Buttons ── */
