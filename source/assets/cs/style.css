@@ -937,7 +937,7 @@ textarea {
 /* ── Markdown preview ── */
 
 .md-preview {
-  background: var(--color-white);
+  background: var(--color-cream-light);
   border: 1px solid rgba(0, 0, 0, 0.10);
   border-radius: var(--radius-sm);
   padding: var(--space-sm);
@@ -953,6 +953,8 @@ textarea {
   color: var(--color-charcoal);
   opacity: 0.5;
   margin: 0 0 var(--space-xs);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .md-preview-content {
@@ -965,6 +967,30 @@ textarea {
 
 .md-preview p:last-child {
   margin-bottom: 0;
+}
+
+.md-preview ul,
+.md-preview ol {
+  margin: 0 0 var(--space-xs);
+  padding-left: var(--space-md);
+}
+
+.md-preview li {
+  margin-bottom: 4px;
+}
+
+.md-preview blockquote {
+  margin: 0 0 var(--space-xs);
+  padding-left: var(--space-sm);
+  border-left: 3px solid rgba(0, 0, 0, 0.15);
+  color: var(--color-charcoal);
+  opacity: 0.8;
+}
+
+.md-preview h2 {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  margin: 0 0 var(--space-xs);
 }
 
 /* ── Time-gating message ── */
