@@ -61,7 +61,7 @@ events:
     end: "HH:MM" | null
     location: string
     responsible: string
-    description: string | null
+    description: string (markdown) | null
     link: string | null
     owner:
       name: string
@@ -106,7 +106,7 @@ See §7 for a complete worked example.
 
 ### Optional for each event
 
-- `description`
+- `description` — markdown, parsed by `marked` (same variant as `content/*.md`). <!-- 05-§3.4 -->
 - `link`
 - `owner`
 - `meta`
@@ -182,6 +182,7 @@ events:
     description: >
       Öppet parti för alla åldrar.
       Ta med eget schackbräde om du vill.
+      **Nybörjare välkomna!**
     link: null
     owner:
       name: ""
