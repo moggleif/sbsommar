@@ -2519,3 +2519,43 @@ visual polish to look clean and consistent with the rest of the site design.
 - The modal box must appear with a subtle entry animation (fade in + slide
   up) lasting no more than 300 ms, consistent with the design constraint
   in `07-§10.2`. <!-- 02-§55.5 -->
+
+---
+
+## 56. Render Description as Markdown
+
+The `description` field in event YAML files may contain Markdown syntax
+(parsed by `marked`, the same library used for `content/*.md`). All
+rendering paths must treat the description as Markdown and produce
+appropriate output for each context.
+
+### 56.1 Site requirements
+
+- In the event detail page, the description must be rendered as formatted
+  HTML produced by `marked.parse()`. <!-- 02-§56.1 -->
+- In the weekly schedule (schema.html), the description inside the
+  expandable event row must be rendered as formatted HTML produced by
+  `marked.parse()`. <!-- 02-§56.2 -->
+- In the today view (idag.html / dagens-schema.html), the description
+  must be rendered as formatted HTML. The HTML must be pre-rendered at
+  build time and delivered in the JSON payload to avoid shipping the
+  `marked` library to the client. <!-- 02-§56.3 -->
+- In the RSS feed (schema.rss), the description must be stripped of
+  Markdown syntax and included as plain text in the `<description>`
+  element. <!-- 02-§56.4 -->
+- In iCal output (schema.ics and per-event .ics files), the description
+  must be stripped of Markdown syntax and included as plain text in the
+  `DESCRIPTION` property. <!-- 02-§56.5 -->
+- All Markdown-to-HTML output must be sanitized: `<script>`, `<iframe>`,
+  `<object>`, `<embed>` tags, `on*` event-handler attributes, and
+  `javascript:` URIs must be removed. <!-- 02-§56.6 -->
+- Descriptions that contain no Markdown syntax (plain text) must continue
+  to render correctly — `marked` wraps them in `<p>` tags, which is
+  acceptable. <!-- 02-§56.7 -->
+- The `.event-description p` rule must no longer apply `font-style:
+  italic`, so that Markdown emphasis renders distinctly. <!-- 02-§56.8 -->
+- CSS for rendered descriptions must use existing design tokens from
+  `07-DESIGN.md`. No new custom properties are introduced. <!-- 02-§56.9 -->
+- A shared build-time helper must provide both `renderDescriptionHtml()`
+  and `stripMarkdown()` to avoid duplicating Markdown processing logic
+  across render modules. <!-- 02-§56.10 -->
