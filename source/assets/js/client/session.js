@@ -43,11 +43,13 @@
   // ── Expiry cleanup ──────────────────────────────────────────────────────────
 
   // Remove IDs for events whose date is strictly before today.
+  // IDs not found in events.json are kept — a newly-submitted event may not
+  // yet appear because the event-data deploy is still in progress (02-§18.49).
   function removeExpiredIds(ids, events) {
     var today = new Date().toISOString().slice(0, 10);
     return ids.filter(function (id) {
       var ev = events[id];
-      if (!ev) return false; // unknown event — remove
+      if (!ev) return true; // unknown — keep (deploy may be in progress)
       return ev.date >= today;
     });
   }
