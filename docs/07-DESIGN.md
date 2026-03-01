@@ -116,8 +116,17 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
   until active/hover). <!-- 07-§6.17-impl -->
 - Row 2: section anchor links (no text-transform, `11px`, `700`, opacity `0.45` until hover). <!-- 07-§6.18-impl -->
 - Two rows separated by a `1px` rule in `rgba(0,0,0,0.06)`. <!-- 07-§6.19-impl -->
-- Mobile panel: `background: var(--color-cream)`, `box-shadow` beneath nav,
-  `z-index: 100`. <!-- 07-§6.20-impl -->
+- Mobile panel: `background: var(--color-terracotta)`, white text,
+  `z-index: 100`. Fully rounded corners (`--radius-lg`), horizontal inset
+  margins so it appears as a floating card. <!-- 07-§6.20-impl -->
+- Mobile hamburger button: `background: var(--color-terracotta)`, white icon
+  bars, `border-radius: var(--radius-md)`. <!-- 07-§6.21-impl -->
+- Mobile menu hierarchy: page links at `15px` / `700` / `opacity: 0.9`;
+  section links at `12px` / uppercase / `opacity: 0.6`. Separated by a
+  `2px solid rgba(255,255,255,0.3)` rule. <!-- 07-§6.22-impl -->
+- Mobile menu transition: `max-height` animation, `250ms ease`. <!-- 07-§6.23-impl -->
+- Navigation bar is `position: sticky; top: 0` on all viewports so it
+  remains visible when scrolling. <!-- 07-§6.24-impl -->
 
 ### Hero Section
 

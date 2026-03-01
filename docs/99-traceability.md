@@ -1007,6 +1007,18 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§57.11` | No external dependencies added | — | manual: check package.json | — | implemented |
 | `02-§57.12` | No live preview — toolbar only inserts syntax | — | manual: confirm no preview UI | — | implemented |
 | `02-§57.13` | Toolbar buttons have visible focus indicators | — | MDT-23 | `source/assets/cs/style.css` | covered |
+| | | **§61 — Mobile Navigation Improvements** | | | |
+| `02-§61.1` | Sticky nav on mobile (≤ 767 px) | 07-DESIGN.md §6.24-impl | — | — | gap |
+| `02-§61.2` | Sticky nav on desktop | 07-DESIGN.md §6.24-impl | — | — | gap |
+| `02-§61.3` | Terracotta hamburger button with white icon | 07-DESIGN.md §6.21-impl | — | — | gap |
+| `02-§61.4` | Rounded corners on hamburger button | 07-DESIGN.md §6.21-impl | — | — | gap |
+| `02-§61.5` | Terracotta menu panel with white text | 07-DESIGN.md §6.20-impl | — | — | gap |
+| `02-§61.6` | WCAG AA contrast (white on terracotta, 14 px bold) | 07-DESIGN.md §6.20-impl | — | — | gap |
+| `02-§61.7` | Floating card appearance (rounded corners, inset margins) | 07-DESIGN.md §6.20-impl | — | — | gap |
+| `02-§61.8` | Visual hierarchy: page links vs section links | 07-DESIGN.md §6.22-impl | — | — | gap |
+| `02-§61.9` | Smooth CSS transition (max-height, 250 ms) | 07-DESIGN.md §6.23-impl | — | — | gap |
+| `02-§61.10` | White focus outlines against terracotta | — | — | — | gap |
+| `02-§61.11` | Preserve keyboard/ARIA behaviour | — | — | — | gap |
 
 ---
 
