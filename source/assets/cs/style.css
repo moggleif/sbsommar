@@ -627,10 +627,13 @@ details.event-row[open] > summary .ev-title {
 /* ── Navigation ── */
 
 .page-nav {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 200;
   margin-bottom: var(--space-md);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding-bottom: var(--space-xs);
+  background: var(--color-cream);
 }
 
 /* Hamburger toggle – hidden on desktop, shown on mobile */
@@ -705,25 +708,40 @@ details.event-row[open] > summary .ev-title {
 
 /* Mobile: hamburger visible, menu hidden until toggled */
 @media (max-width: 767px) {
+  .page-nav {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
   .nav-toggle {
     display: block;
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    padding: 10px;
+    border-radius: var(--radius-md);
+  }
+
+  .nav-toggle:focus-visible {
+    outline-color: var(--color-white);
   }
 
   .nav-menu {
-    display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-cream);
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    padding: var(--space-md) var(--space-sm);
+    top: calc(100% + 4px);
+    left: var(--space-xs);
+    right: var(--space-xs);
+    background: var(--color-terracotta);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    padding: 0 var(--space-sm);
     z-index: 100;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 250ms ease, padding 250ms ease;
   }
 
   .nav-menu.is-open {
-    display: block;
+    max-height: 80vh;
+    padding: var(--space-md);
   }
 
   .nav-pages {
@@ -735,16 +753,48 @@ details.event-row[open] > summary .ev-title {
   .nav-sections {
     flex-direction: column;
     gap: 2px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin-top: var(--space-xs);
+    padding-top: var(--space-sm);
   }
 
-  .nav-link,
-  .nav-link--section {
+  .nav-link {
     font-size: 15px;
+    font-weight: 700;
     text-transform: none;
     letter-spacing: 0;
-    padding: 6px 0;
-    opacity: 0.75;
+    padding: 8px 0;
+    color: var(--color-white);
+    opacity: 0.9;
   }
+
+  .nav-link--section {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 6px 0;
+    color: var(--color-white);
+    opacity: 0.6;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-white);
+    opacity: 1;
+  }
+
+  .nav-link--section:hover {
+    color: var(--color-white);
+    opacity: 0.9;
+  }
+
+  .nav-link:focus-visible,
+  .nav-link--section:focus-visible {
+    outline-color: var(--color-white);
+    opacity: 1;
+  }
+
 }
 
 /* ── Buttons ── */
