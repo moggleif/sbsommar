@@ -85,7 +85,9 @@ jobs:
             fi
 
             # Swap (millisecond downtime)
-            mv "$PUBLIC_DIR" "$DEPLOY_DIR/public_html_old"
+            if [ -d "$PUBLIC_DIR" ]; then
+              mv "$PUBLIC_DIR" "$DEPLOY_DIR/public_html_old"
+            fi
             mv "$RELEASE_DIR" "$PUBLIC_DIR"
 
             # Cleanup
