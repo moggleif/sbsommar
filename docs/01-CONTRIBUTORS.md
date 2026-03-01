@@ -166,6 +166,43 @@ Before making structural changes, read:
 
 ---
 
+## Deployment
+
+Understanding how changes reach users helps you work with confidence.
+
+### What happens after merge?
+
+When your PR is merged to `main`, the deploy pipeline handles the rest —
+but what it does depends on *what* changed:
+
+| What changed | QA | Production |
+| --- | --- | --- |
+| Code (templates, CSS, JS, build) | Auto — full site rebuild and deploy | Manual — someone must trigger it |
+| Event data (YAML files from the form) | Auto — event pages rebuild | Auto — event pages rebuild |
+
+**Code changes** are deployed to QA automatically within a few minutes.
+Production requires a separate, manual step — see below.
+
+**Event data** (submitted via the activity form) is deployed to *both* QA
+and Production automatically. This is because events are time-sensitive
+during camp week and cannot wait for a manual step.
+
+### Verifying on QA
+
+After your PR is merged, check QA to confirm your changes look and work
+as expected. Open the QA site in a browser and verify manually.
+
+If something is wrong, fix it in a new PR. QA will update again on merge.
+
+### Releasing to production
+
+Production deploys require explicit approval. Only authorized approvers can
+trigger or approve a production release.
+
+For the full step-by-step process, see [09-RELEASING.md](09-RELEASING.md).
+
+---
+
 ## Questions and Issues
 
 If something is unclear or you find a bug, open an issue on GitHub or contact the maintainers directly.

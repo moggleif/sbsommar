@@ -24,6 +24,7 @@ These are the authoritative sources. CLAUDE.md summarises principles; the docs d
 | `docs/06-EVENT_DATA_MODEL.md` | Why the event data is shaped the way it is — ownership, metadata, stability reasoning |
 | `docs/07-DESIGN.md` | Color palette, typography scale, spacing tokens, component rules |
 | `docs/08-ENVIRONMENTS.md` | Local / QA / Production environments, secrets schema, GitHub Environments setup |
+| `docs/09-RELEASING.md` | Step-by-step guide for deploying to production, rollback, release tagging |
 
 Rules:
 
