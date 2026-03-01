@@ -984,16 +984,26 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§55.3` | Modal box uses `--space-lg` top/bottom padding | 07-DESIGN.md §6.51 | MDP-03 | `source/assets/cs/style.css` `.modal-box` | covered |
 | `02-§55.4` | Modal heading and progress steps are center-aligned | 07-DESIGN.md §6.52 | MDP-04..05 | `source/assets/cs/style.css` `.modal-heading`, `.submit-progress` | covered |
 | `02-§55.5` | Modal entry animation: fade + slide-up, ≤ 300 ms | 07-DESIGN.md §6.54 | MDP-06 | `source/assets/cs/style.css` `.modal-box` | covered |
+| `02-§56.1` | Event detail page renders description as Markdown → HTML | 03-ARCHITECTURE.md §18.2, §20.3 | — | — | gap |
+| `02-§56.2` | Weekly schedule renders description as Markdown → HTML | 03-ARCHITECTURE.md §20.3 | — | — | gap |
+| `02-§56.3` | Today view uses pre-rendered description HTML from build JSON | 03-ARCHITECTURE.md §20.3 | — | — | gap |
+| `02-§56.4` | RSS feed strips Markdown, uses plain text description | 03-ARCHITECTURE.md §17.3, §20.3 | — | — | gap |
+| `02-§56.5` | iCal strips Markdown, uses plain text description | 03-ARCHITECTURE.md §20.3 | — | — | gap |
+| `02-§56.6` | Markdown → HTML output is sanitized (no script/iframe/object/embed/on*/javascript:) | 03-ARCHITECTURE.md §20.3 | — | — | gap |
+| `02-§56.7` | Plain text descriptions render correctly (wrapped in `<p>`) | 03-ARCHITECTURE.md §20.3 | — | — | gap |
+| `02-§56.8` | `.event-description p` no longer applies `font-style: italic` | — | — | — | gap |
+| `02-§56.9` | Description CSS uses existing design tokens only | 07-DESIGN.md §7 | — | — | gap |
+| `02-§56.10` | Shared helper provides `renderDescriptionHtml()` and `stripMarkdown()` | 03-ARCHITECTURE.md §20.3 | — | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             825
+Total requirements:             835
 Covered (implemented + tested): 394
 Implemented, not tested:        430
-Gap (no implementation):          1
+Gap (no implementation):         11
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).

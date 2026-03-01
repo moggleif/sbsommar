@@ -1072,7 +1072,7 @@ secret alongside `API_URL`.
       <description>
         {formatted date}, {start}–{end}
         Plats: {location} · Ansvarig: {responsible}
-        {description, if set}
+        {description as plain text — Markdown syntax stripped}
         {link, if set}
       </description>
       <pubDate>{RFC 822 date}</pubDate>
@@ -1138,7 +1138,8 @@ Each page shows:
 - Start time – end time
 - Location
 - Responsible person
-- Description (if non-empty, rendered as paragraphs)
+- Description (if non-empty, rendered as Markdown → sanitized HTML via
+  `renderDescriptionHtml()` from `source/build/markdown.js`)
 - External link (if non-empty)
 
 The `owner` and `meta` fields are never rendered.
@@ -1150,7 +1151,8 @@ The event detail body uses the same structured layout as the RSS description
 
 - Line 1: formatted date, start–end time (no labels)
 - Line 2: `Plats:` value ` · ` `Ansvarig:` value (with labels)
-- Line 3: description text (only if set)
+- Line 3: description as Markdown → HTML (detail page, schedule, today view)
+  or Markdown → plain text (RSS, iCal)
 - Line 4: external link (only if set)
 
 ### 18.3 Layout
@@ -1270,12 +1272,27 @@ When `collapsible: true`, the HTML output is split at the target heading level
 `<details class="accordion">` element. Content before the first such heading
 is left unwrapped.
 
-### 20.3 Files
+### 20.3 Event description Markdown
+
+`source/build/markdown.js` provides two functions for processing the
+`description` field in event data:
+
+- **`renderDescriptionHtml(text)`** — converts Markdown to HTML via
+  `marked.parse()` and sanitizes the output by removing `<script>`,
+  `<iframe>`, `<object>`, `<embed>` tags, `on*` event-handler attributes,
+  and `javascript:` URIs. Used by `render-event.js`, `render.js`, and
+  `render-today.js`.
+- **`stripMarkdown(text)`** — removes Markdown syntax and returns plain text.
+  Used by `render-rss.js` and `render-ical.js` where formatted HTML is not
+  appropriate.
+
+### 20.4 Files
 
 | File | Role |
 | ---- | ---- |
 | `source/build/render-index.js` | `convertMarkdown()`, `inlineHtml()`, `createMarked()` |
-| `source/assets/cs/style.css` | Table styles for markdown-rendered tables |
+| `source/build/markdown.js` | `renderDescriptionHtml()`, `stripMarkdown()` |
+| `source/assets/css/style.css` | Table styles for markdown-rendered tables |
 
 ---
 
