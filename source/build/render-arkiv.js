@@ -2,6 +2,7 @@
 
 const { pageNav, pageFooter } = require('./layout');
 const { escapeHtml, toDateString, formatDate } = require('./utils');
+const { renderDescriptionHtml } = require('./markdown');
 
 const MONTHS_SV = [
   'januari', 'februari', 'mars', 'april', 'maj', 'juni',
@@ -39,10 +40,7 @@ function groupAndSortEvents(events) {
 function eventExtraHtml(ev) {
   const parts = [];
   if (ev.description) {
-    ev.description
-      .trim()
-      .split(/\n\n+/)
-      .forEach((p) => parts.push(`<p class="event-desc">${escapeHtml(p.trim())}</p>`));
+    parts.push(`<div class="event-desc">${renderDescriptionHtml(ev.description)}</div>`);
   }
   if (ev.link) {
     parts.push(
