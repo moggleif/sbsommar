@@ -1477,3 +1477,10 @@ Matrix cleanup (2026-02-25):
 | `02-§58.14` | implemented | Matches `.event-description` styling — `.md-preview p` in style.css |
 | MDP-21 | `tests/markdown-preview.test.js` | `02-§58.14 — .md-preview p rule exists` |
 | `02-§58.15` | covered | Uses design tokens only — MDP-20 verifies var() usage |
+| | | **§59 — Scoped Heading Sizes in Event Descriptions** |
+| `02-§59.1` | gap | Scoped h1–h4 sizes in `.md-preview`, `.event-desc`, `.event-description` |
+| `02-§59.2` | gap | Use relative `em` units |
+| `02-§59.3` | gap | h4 = body size, bold |
+| `02-§59.4` | gap | No hardcoded pixel sizes |
+| `02-§59.5` | gap | Guide link → markdownguide.org |
+| `02-§59.6` | gap | Identical link in both forms |
