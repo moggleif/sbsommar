@@ -1014,9 +1014,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             863
-Covered (implemented + tested): 412
-Implemented, not tested:        435
-Gap (no implementation):         16
+Covered (implemented + tested): 423
+Implemented, not tested:        440
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1461,18 +1461,19 @@ Matrix cleanup (2026-02-25):
 | MDT-21..22 | `tests/markdown-toolbar.test.js` | `02-§57.10 — Shared markdown-toolbar.js` |
 | MDT-23 | `tests/markdown-toolbar.test.js` | `02-§57.13 — Focus indicator` |
 | | | **§58 — Markdown Preview for Description Field** |
-| `02-§58.1` | `gap` | Live preview below textarea |
-| `02-§58.2` | `gap` | Debounce ~300 ms |
-| `02-§58.3` | `gap` | Hidden when textarea empty |
-| `02-§58.4` | `gap` | Read-only preview |
-| `02-§58.5` | `gap` | Uses client-side `marked` library |
-| `02-§58.6` | `gap` | `marked.min.js` copied during build |
-| `02-§58.7` | `gap` | Loaded with `defer` attribute |
-| `02-§58.8` | `gap` | Same sanitization as build (02-§56.6) |
-| `02-§58.9` | `gap` | Logic in `markdown-preview.js` |
-| `02-§58.10` | `gap` | `aria-live="polite"` on preview area |
-| `02-§58.11` | `gap` | Accessible `aria-label` |
-| `02-§58.12` | `gap` | Present in both forms |
-| `02-§58.13` | `gap` | Visually distinct from textarea |
-| `02-§58.14` | `gap` | Matches `.event-description` styling |
-| `02-§58.15` | `gap` | Uses design tokens only |
+| `02-§58.1` | manual | Live preview below textarea — MDP-M01: open form, type markdown, verify preview |
+| `02-§58.2` | manual | Debounce ~300 ms — MDP-M02: type quickly, confirm delayed update |
+| `02-§58.3` | manual | Hidden when textarea empty — MDP-M03: clear textarea, confirm preview hides |
+| `02-§58.4` | manual | Read-only preview — MDP-M04: try clicking in preview, confirm non-interactive |
+| MDP-01..02 | `tests/markdown-preview.test.js` | `02-§58.5 — marked.umd.js loaded in both forms` |
+| MDP-22 | `tests/markdown-preview.test.js` | `02-§58.6 — Build copies marked.umd.js` |
+| MDP-03..04 | `tests/markdown-preview.test.js` | `02-§58.7 — marked script uses defer` |
+| MDP-05..09 | `tests/markdown-preview.test.js` | `02-§58.8 — Sanitization parity with build` |
+| MDP-10..12 | `tests/markdown-preview.test.js` | `02-§58.9 — markdown-preview.js file and inclusion` |
+| MDP-13..14 | `tests/markdown-preview.test.js` | `02-§58.10 — aria-live="polite"` |
+| MDP-15..16 | `tests/markdown-preview.test.js` | `02-§58.11 — Accessible aria-label` |
+| MDP-17..18 | `tests/markdown-preview.test.js` | `02-§58.12 — Preview in both forms` |
+| MDP-19..20 | `tests/markdown-preview.test.js` | `02-§58.13 — Visually distinct, design tokens` |
+| `02-§58.14` | implemented | Matches `.event-description` styling — `.md-preview p` in style.css |
+| MDP-21 | `tests/markdown-preview.test.js` | `02-§58.14 — .md-preview p rule exists` |
+| `02-§58.15` | covered | Uses design tokens only — MDP-20 verifies var() usage |
