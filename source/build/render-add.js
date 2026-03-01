@@ -90,7 +90,7 @@ ${locationOptions}
         <div class="md-toolbar" role="toolbar" aria-label="Markdown-formatering"></div>
         <textarea id="f-description" name="description" rows="4" placeholder="Beskriv aktiviteten, vad behövs, vad händer..."></textarea>
         <section class="md-preview" aria-live="polite" aria-label="Förhandsgranskning av beskrivning" hidden>
-          <div class="md-preview-header"><span class="md-preview-label">Förhandsgranskning</span><span class="md-help">Ser det inte ut som du tänkt dig? Kolla <a href="https://marked.js.org/#usage" target="_blank" rel="noopener noreferrer">Markdown-guiden ↗</a></span></div>
+          <div class="md-preview-header"><span class="md-preview-label">Förhandsgranskning</span><span class="md-help">Ser det inte ut som du tänkt dig? Kolla <a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener noreferrer">Markdown-guiden ↗</a></span></div>
           <div class="md-preview-content"></div>
         </section>
       </div>
