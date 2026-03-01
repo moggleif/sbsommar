@@ -1484,3 +1484,12 @@ Matrix cleanup (2026-02-25):
 | SH-22 | `tests/scoped-headings.test.js` | `02-§59.4 — No hardcoded px sizes` |
 | SH-23..24 | `tests/scoped-headings.test.js` | `02-§59.5 — Guide link → markdownguide.org` |
 | SH-25 | `tests/scoped-headings.test.js` | `02-§59.6 — Identical link in both forms` |
+| | | **§60 — Release and Deployment Documentation** |
+| `02-§60.1` | gap | Contributor guide deploy flow section |
+| `02-§60.2` | gap | Contributor guide link to release guide |
+| `02-§60.3` | gap | Required reviewers documented in 08-ENVIRONMENTS.md |
+| `02-§60.4` | gap | Production approver(s) named |
+| `02-§60.5` | gap | 09-RELEASING.md exists |
+| `02-§60.6` | gap | Guide covers verify QA → deploy → verify prod → rollback |
+| `02-§60.7` | gap | Guide usable without Claude Code |
+| `02-§60.8` | gap | Release tagging conventions documented |
