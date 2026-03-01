@@ -2732,3 +2732,56 @@ changes reach users.
   and standard CLI. <!-- 02-§60.7 -->
 - The guide must document release tagging conventions for
   milestones. <!-- 02-§60.8 -->
+
+---
+
+## 61. Mobile Navigation Improvements
+
+### Motivation
+
+The mobile hamburger menu has usability problems on long pages: it scrolls
+out of view so users cannot access navigation without scrolling back to the
+top, and its visual design (same cream background as the page) makes it hard
+to distinguish from surrounding content. These issues were identified through
+manual testing on mobile devices.
+
+### 61.1 Sticky navigation requirements
+
+- On mobile viewports (≤ 767 px), the navigation bar must remain visible
+  at the top of the viewport when the user scrolls. <!-- 02-§61.1 -->
+- The sticky behaviour must also apply on desktop viewports so navigation
+  is always reachable. <!-- 02-§61.2 -->
+
+### 61.2 Hamburger button design requirements
+
+- The hamburger button must have a terracotta (`var(--color-terracotta)`)
+  background with white icon bars so it is clearly visible against the
+  page background. <!-- 02-§61.3 -->
+- The button must have rounded corners (`var(--radius-md)`) for a softer
+  appearance. <!-- 02-§61.4 -->
+
+### 61.3 Mobile menu panel design requirements
+
+- The dropdown menu panel must use a terracotta background with white
+  text. <!-- 02-§61.5 -->
+- Text colour must be `var(--color-white)` to meet WCAG AA contrast
+  for large text (14 px bold qualifies as large text; contrast ratio
+  ≥ 3:1). <!-- 02-§61.6 -->
+- The panel must have fully rounded corners (`var(--radius-lg)`) and
+  horizontal inset margins so it appears as a floating card. <!-- 02-§61.7 -->
+- Page links (top section) and section links (bottom section) must be
+  visually separated: page links at 15 px / 700 weight, section links
+  at 12 px / uppercase / reduced opacity, with a visible
+  divider. <!-- 02-§61.8 -->
+
+### 61.4 Menu transition requirements
+
+- Opening and closing the menu must use a smooth CSS transition
+  (max-height, 250 ms) instead of an abrupt display toggle. <!-- 02-§61.9 -->
+
+### 61.5 Accessibility requirements
+
+- Focus outlines on the hamburger button and menu links must remain
+  visible against the terracotta background (white outline). <!-- 02-§61.10 -->
+- Existing keyboard and ARIA behaviour (Escape to close, aria-expanded,
+  click-outside-to-close) must be preserved. <!-- 02-§61.11 -->
