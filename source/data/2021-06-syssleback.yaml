@@ -70,7 +70,7 @@ events:
   date: '2021-06-28'
   start: '11:30'
   end: null
-  location: Tält 112:30 Lunch
+  location: Tält 1
   responsible: Emilia
   description: null
   link: null
@@ -207,7 +207,7 @@ events:
   end: '10:30'
   location: DnD-tältet
   responsible: null
-  description: Viktor+Harald
+  description: null
   link: null
   owner:
     name: ''
@@ -230,14 +230,14 @@ events:
   meta:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
-- id: i-idrottshallen-2021-06-29-1000
-  title: i idrottshallen
+- id: lek-i-idrottshallen-2021-06-29-1000
+  title: Lek i idrottshallen
   date: '2021-06-29'
   start: '10:00'
   end: null
   location: GA-hallen
   responsible: Ivar
-  description: Vi väljer gemensamt ut roliga spel att spela. 10:00-
+  description: Vi väljer gemensamt ut roliga spel att spela.
   link: null
   owner:
     name: ''
@@ -267,7 +267,7 @@ events:
   end: '12:30'
   location: DnD-tältet
   responsible: null
-  description: .
+  description: null
   link: null
   owner:
     name: ''
@@ -282,8 +282,7 @@ events:
   end: null
   location: DnD-tältet
   responsible: Rosanna Varjag
-  description: Tält 110.30-11.30 Gör din karaktär inför rollspelskampanjen Grottor
-    och grådvärgar
+  description: null
   link: null
   owner:
     name: ''
@@ -358,7 +357,7 @@ events:
   end: null
   location: Nerfarenan
   responsible: Lillemor Birgersson
-  description: '(Sandra Stenhede) Från 11 år : Tält 215:30-16:30 Nerf-gängkrig'
+  description: Sandra Stenhede. Från 11 år.
   link: null
   owner:
     name: ''
@@ -418,7 +417,7 @@ events:
   end: null
   location: Servicehuset
   responsible: Lillemor Birgersson
-  description: Tält 119:30 Nagellacksmålning (Malin Isenfors)
+  description: null
   link: null
   owner:
     name: ''
@@ -487,7 +486,7 @@ events:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
 - id: excel-datacheck-installationshjalp-etc-2021-06-30-0930
-  title: '- Excel datacheck, installationshjälp etc'
+  title: Excel datacheck, installationshjälp etc
   date: '2021-06-30'
   start: 09:30
   end: null
@@ -533,8 +532,8 @@ events:
   meta:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
-- id: i-idrottshallen-2021-06-30-1000
-  title: i idrottshallen
+- id: lek-i-idrottshallen-2021-06-30-1000
+  title: Lek i idrottshallen
   date: '2021-06-30'
   start: '10:00'
   end: null
@@ -585,8 +584,8 @@ events:
   start: '11:00'
   end: '12:30'
   location: Tält 2 vid GA-hallens ingång
-  responsible: Bland Annat Två Roller och Två Liv Per Spelare
-  description: null
+  responsible: Tekla
+  description: Bland annat två roller och två liv per spelare
   link: null
   owner:
     name: ''
@@ -662,7 +661,7 @@ events:
   end: '15:00'
   location: Fritidsgården
   responsible: Mida
-  description: Ta med egen dator (Daniel Nilede)
+  description: null
   link: null
   owner:
     name: ''
@@ -692,10 +691,7 @@ events:
   end: null
   location: Älven
   responsible: Marie Johansson
-  description: '(Sandra Stenhede) Från 11 år : Tält 215:00 Simstund. Christina är
-    simlärare och kommer ha en liten “Simstund” för barn som håller på att lära sig
-    att simma nere vid lagunen. Målgrupp: barn som håller på att lära sig att simma,
-    med förälder. Ta gärna med flytkorv eller liknande. (Christina Falk)'
+  description: Sandra Stenhede. Från 11 år.
   link: null
   owner:
     name: ''
@@ -712,7 +708,7 @@ events:
   location: Servicehuset
   responsible: Johan och Andreas
   description: Hur vi jobbar, vad vi jobbar för och hur mycket bättre vi skulle kunna
-    bli med fler engagerade. . Preliminärt vid servicehuset.
+    bli med fler engagerade.
   link: null
   owner:
     name: ''
@@ -796,8 +792,8 @@ events:
   meta:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
-- id: i-idrottshallen-2021-07-01-1000
-  title: i idrottshallen
+- id: lek-i-idrottshallen-2021-07-01-1000
+  title: Lek i idrottshallen
   date: '2021-07-01'
   start: '10:00'
   end: null
@@ -811,15 +807,14 @@ events:
   meta:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
-- id: labbiga-lagar-ruggig-ratt-fran-7-ar-2021-07-01-1030
-  title: Läbbiga lagar, ruggig rätt… Från 7 år
+- id: labbiga-lagar-ruggig-ratt-2021-07-01-1030
+  title: Läbbiga lagar, ruggig rätt…
   date: '2021-07-01'
   start: '10:30'
   end: '12:00'
   location: Skolans gympasal
   responsible: Sara Varda St Vincent
-  description: OBS! Minsta selen Daniel har kräver ett midjemått på minst 62 cm. (Daniel
-    Nilede)
+  description: Från 7 år
   link: null
   owner:
     name: ''
@@ -834,8 +829,8 @@ events:
   start: '11:00'
   end: null
   location: I skuggan under träden, bredvid gungorna i slänten nedanför ”nerfstugorna”
-  responsible: och Kanske Andra Instrument
-  description: null
+  responsible: Niclas Nilsson
+  description: Gitarr och kanske andra instrument
   link: null
   owner:
     name: ''
@@ -880,8 +875,7 @@ events:
   end: '15:00'
   location: Tält 1
   responsible: Mida
-  description: Tält 213:30-15:00 Internetsäkerhet, kryptering och matematiken bakom
-    (Niclas Nilsson)
+  description: null
   link: null
   owner:
     name: ''
@@ -895,10 +889,9 @@ events:
   date: '2021-07-01'
   start: '15:00'
   end: null
-  location: Fritidsgård...den
+  location: Fritidsgården
   responsible: Cecilia Löfgreen
-  description: Tält 115:00 Bygg en chiffergenerator i excel (bör ha grunder, kunna
-    vad en funktion/formel är) Patrik von Knorring) Målgrupp ungdom-vuxen
+  description: null
   link: null
   owner:
     name: ''
@@ -972,8 +965,8 @@ events:
   start: '18:30'
   end: null
   location: Tält 2 vid GA-hallens ingång
-  responsible: Bland Annat Två Roller och Två Liv Per Spelare
-  description: null
+  responsible: Tekla
+  description: Bland annat två roller och två liv per spelare
   link: null
   owner:
     name: ''
@@ -1056,8 +1049,8 @@ events:
   meta:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
-- id: i-idrottshallen-2021-07-02-1000
-  title: i idrottshallen
+- id: lek-i-idrottshallen-2021-07-02-1000
+  title: Lek i idrottshallen
   date: '2021-07-02'
   start: '10:00'
   end: null
@@ -1078,9 +1071,9 @@ events:
   start: '10:00'
   end: null
   location: Gräsplanen
-  responsible: Från 7-8 År
-  description: Vuxna och barn tränar tillsammans . Musik, samarbete, svett och skratt!
-    (Sara von Knorring)
+  responsible: Sara von Knorring
+  description: Vuxna och barn tränar tillsammans. Musik, samarbete, svett och skratt!
+    Från 7-8 år.
   link: null
   owner:
     name: ''
@@ -1184,9 +1177,8 @@ events:
   date: '2021-07-02'
   start: '14:00'
   end: null
-  location: Tält 115:00-16:00 Prova på SUP i badkanalen vid älven (Annelie & Johan
-    Mattson-Djos) Alla åldrar
-  responsible: Stand Up Paddelboard
+  location: Tält 1
+  responsible: null
   description: null
   link: null
   owner:
@@ -1248,10 +1240,8 @@ events:
   start: '17:30'
   end: null
   location: DnD-tältet
-  responsible: 'Penna och Papper : Tält 118:30-21:30 15-timmars Kampanj Med Viktor
-    och Harald'
-  description: Skiss till färdigt ansikte. Ta Lång rollspelskampanj. Fyra platser.
-    12-22 år
+  responsible: null
+  description: Skiss till färdigt ansikte. Ta med penna och papper.
   link: null
   owner:
     name: ''
@@ -1266,8 +1256,7 @@ events:
   end: null
   location: DnD-tältet
   responsible: Eva Brunhage
-  description: Tält 219:00 Hur det är att behöva gå iväg och vara ensam - En tonårings
-    berättelse (Alex)
+  description: null
   link: null
   owner:
     name: ''
@@ -1282,8 +1271,7 @@ events:
   end: '21:00'
   location: Servicehuset
   responsible: Malin Isenfors
-  description: 20:00-21:30. Spela spelet One Night Revolution som påminner om den
-    klassiska leken
+  description: null
   link: null
   owner:
     name: ''
@@ -1351,8 +1339,8 @@ events:
   meta:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
-- id: i-idrottshallen-2021-07-03-1000
-  title: i idrottshallen
+- id: lek-i-idrottshallen-2021-07-03-1000
+  title: Lek i idrottshallen
   date: '2021-07-03'
   start: '10:00'
   end: null
@@ -1448,8 +1436,7 @@ events:
   end: '15:00'
   location: Nerfarenan
   responsible: Eva och Elvira
-  description: 'Vi samarbetar när vi gissar vad som gestaltas. Från 10 år : Tält 115:00
-    Vattenkrig vuxna vs barn'
+  description: Vi samarbetar när vi gissar vad som gestaltas. Från 10 år.
   link: null
   owner:
     name: ''
@@ -1525,7 +1512,7 @@ events:
   end: null
   location: null
   responsible: null
-  description: 'maffia (varulv). 10 platser. 9-100 år. Ansvarig: Ivar : Speltältet'
+  description: null
   link: null
   owner:
     name: ''
@@ -1533,3 +1520,186 @@ events:
   meta:
     created_at: '2026-02-27 14:58:42'
     updated_at: '2026-02-27 17:34:13'
+# --- Extracted events (were embedded in other events' fields) ---
+- id: lunch-2021-06-28-1230
+  title: Lunch
+  date: '2021-06-28'
+  start: '12:30'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: gor-din-karaktar-infor-rollspelskampanjen-grottor-och-gradvargar-2021-06-29-1030
+  title: Gör din karaktär inför rollspelskampanjen Grottor och grådvärgar
+  date: '2021-06-29'
+  start: '10:30'
+  end: '11:30'
+  location: Tält 1
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: nagellacksmalning-2021-06-29-1930
+  title: Nagellacksmålning
+  date: '2021-06-29'
+  start: '19:30'
+  end: null
+  location: Tält 1
+  responsible: Malin Isenfors
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: simstund-2021-06-30-1500
+  title: Simstund
+  date: '2021-06-30'
+  start: '15:00'
+  end: null
+  location: Lagunen vid älven
+  responsible: Christina Falk
+  description: Christina är simlärare och kommer ha en liten simstund för barn som
+    håller på att lära sig att simma. Målgrupp barn med förälder. Ta gärna med flytkorv
+    eller liknande.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: klattring-2021-07-01-1030
+  title: Klättring
+  date: '2021-07-01'
+  start: '10:30'
+  end: '12:00'
+  location: Skolans gympasal
+  responsible: Daniel Nilede
+  description: OBS! Minsta selen kräver ett midjemått på minst 62 cm. Från 7 år.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: internetsakerhet-kryptering-och-matematiken-bakom-2021-07-01-1330
+  title: Internetsäkerhet, kryptering och matematiken bakom
+  date: '2021-07-01'
+  start: '13:30'
+  end: '15:00'
+  location: Tält 2
+  responsible: Niclas Nilsson
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: bygg-en-chiffergenerator-i-excel-2021-07-01-1500
+  title: Bygg en chiffergenerator i Excel
+  date: '2021-07-01'
+  start: '15:00'
+  end: null
+  location: Tält 1
+  responsible: Patrik von Knorring
+  description: Bör ha grunder, kunna vad en funktion/formel är. Målgrupp ungdom-vuxen.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: prova-pa-sup-2021-07-02-1500
+  title: Prova på SUP
+  date: '2021-07-02'
+  start: '15:00'
+  end: '16:00'
+  location: Badkanalen vid älven
+  responsible: Annelie & Johan Mattson-Djos
+  description: Stand Up Paddelboard. Alla åldrar.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: hur-det-ar-att-behova-ga-ivag-och-vara-ensam-2021-07-02-1900
+  title: Hur det är att behöva gå iväg och vara ensam – En tonårings berättelse
+  date: '2021-07-02'
+  start: '19:00'
+  end: null
+  location: Tält 2
+  responsible: Alex
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: one-night-revolution-2021-07-02-2000
+  title: One Night Revolution
+  date: '2021-07-02'
+  start: '20:00'
+  end: '21:30'
+  location: Servicehuset
+  responsible: null
+  description: Spela spelet One Night Revolution som påminner om den klassiska leken.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: vattenkrig-vuxna-vs-barn-2021-07-03-1500
+  title: Vattenkrig vuxna vs barn
+  date: '2021-07-03'
+  start: '15:00'
+  end: null
+  location: null
+  responsible: null
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
+- id: maffia-2021-07-04-1230
+  title: Maffia (varulv)
+  date: '2021-07-04'
+  start: '12:30'
+  end: null
+  location: Speltältet
+  responsible: Ivar
+  description: 10 platser. 9-100 år.
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: '2026-03-01 00:00:00'
+    updated_at: '2026-03-01 00:00:00'
