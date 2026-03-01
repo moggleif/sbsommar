@@ -120,6 +120,7 @@ ${locationOptions}
 
         <div class="field">
           <label for="f-description">Beskrivning <span class="opt">(valfritt)</span></label>
+          <div class="md-toolbar" role="toolbar" aria-label="Markdown-formatering"></div>
           <textarea id="f-description" name="description" rows="4"></textarea>
         </div>
 
@@ -146,6 +147,7 @@ ${locationOptions}
     </div>
   </div>
 
+  <script src="markdown-toolbar.js"></script>
   <script src="redigera.js"></script>
   <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
