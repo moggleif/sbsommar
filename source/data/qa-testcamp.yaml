@@ -757,154 +757,147 @@ events:
     meta:
       created_at: '2026-02-28 21:01'
       updated_at: '2026-02-28 21:01'
-  - id: testar-markdown-2026-03-01-1100
-    title: Testar markdown
+  -
+    id: testar-markdown-2026-03-01-1100
+    title: 'Testar markdown'
     date: '2026-03-01'
     start: '11:00'
     end: '12:00'
-    location: GA Datorsal
+    location: 'GA Datorsal'
     responsible: Morgan
-    description: |
-      # rubrik 1
-      **fet text**
-      *kursiv text*
-      ## rubrik 2
-      Lite text.
-      ### Rubrik 3
-      - bullet
-      - kalle
-      #### rubrik 4
-      1. listelement
-      2. en till
-      3. och mera
-
-      > citat
-      > på flera rader
-    link: null
+    description: "# rubrik 1\n**fet text**\n*kursiv text*\n## rubrik 2\nLite text.\n### Rubrik 3\n- bullet\n- kalle\n#### rubrik 4\n1. listelement\n2. en till\n3. och mera\n\n> citat\n> på flera rader\n"
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 09:00
-      updated_at: 2026-03-01 09:00
-  - id: funkar-det-pa-prod-2026-03-01-2115
+      created_at: '2026-03-01 09:00'
+      updated_at: '2026-03-01 09:00'
+  -
+    id: funkar-det-pa-prod-2026-03-01-2115
     title: 'Funkar det på prod?'
     date: '2026-03-01'
     start: '21:15'
     end: '22:22'
-    location: GA Datorsal
+    location: 'GA Datorsal'
     responsible: Morgan
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 20:10
-      updated_at: 2026-03-01 20:10
-  - id: testa-2026-03-01-2200
+      created_at: '2026-03-01 20:10'
+      updated_at: '2026-03-01 20:10'
+  -
+    id: testa-2026-03-01-2200
     title: testa
     date: '2026-03-01'
     start: '22:00'
     end: '23:00'
     location: Tält2
     responsible: Morgan
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 20:18
-      updated_at: 2026-03-01 20:18
-  - id: fsaf-2026-03-01-2200
+      created_at: '2026-03-01 20:18'
+      updated_at: '2026-03-01 20:18'
+  -
+    id: fsaf-2026-03-01-2200
     title: fsaf
     date: '2026-03-01'
     start: '22:00'
     end: '23:00'
     location: Fotbollsplan
     responsible: jag
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 20:20
-      updated_at: 2026-03-01 20:20
-  - id: rfghjk-2026-03-01-2222
+      created_at: '2026-03-01 20:20'
+      updated_at: '2026-03-01 20:20'
+  -
+    id: rfghjk-2026-03-01-2222
     title: rfghjk
     date: '2026-03-01'
     start: '22:22'
     end: '23:23'
     location: Fritidsgården
     responsible: morg
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 20:37
-      updated_at: 2026-03-01 20:37
-  - id: test-nu-2026-03-01-2222
-    title: test nu
+      created_at: '2026-03-01 20:37'
+      updated_at: '2026-03-01 20:37'
+  -
+    id: test-nu-2026-03-01-2222
+    title: 'test nu'
     date: '2026-03-01'
     start: '22:22'
     end: '23:23'
     location: Servicehus
     responsible: morg
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 20:45
-      updated_at: 2026-03-01 20:45
-  - id: testar-redigera-och-cookies-2026-03-01-2200
-    title: Testar redigera och cookies
+      created_at: '2026-03-01 20:45'
+      updated_at: '2026-03-01 20:45'
+  -
+    id: testar-redigera-och-cookies-2026-03-01-2200
+    title: 'Testar redigera och cookies'
     date: '2026-03-01'
     start: '22:00'
     end: '23:00'
     location: Tält2
     responsible: Morgan
-    description: |
-      ja
-    link: null
+    description: "ja\n"
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 20:56
-      updated_at: 2026-03-01 20:56
-  - id: nu-2026-03-01-2230
+      created_at: '2026-03-01 20:56'
+      updated_at: '2026-03-01 20:56'
+  -
+    id: nu-2026-03-01-2230
     title: nu
     date: '2026-03-01'
     start: '22:30'
     end: '23:00'
     location: Fritidsgården
     responsible: Morgan
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 20:58
-      updated_at: 2026-03-01 20:58
-  - id: test-2026-03-01-2230
-    title: Test
+      created_at: '2026-03-01 20:58'
+      updated_at: '2026-03-01 20:58'
+  -
+    id: test-2026-03-01-2230
+    title: 'Test - och redigera'
     date: '2026-03-01'
     start: '22:30'
     end: '23:00'
     location: Fritidsgården
     responsible: Morgan
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-03-01 21:01
-      updated_at: 2026-03-01 21:01
+      created_at: '2026-03-01 21:01'
+      updated_at: '2026-03-01 21:02'
