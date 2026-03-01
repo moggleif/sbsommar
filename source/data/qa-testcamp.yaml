@@ -669,14 +669,14 @@ events:
     end: '19:00'
     location: 'GA Datorsal'
     responsible: Morgan
-    description: ~
+    description: "## En rubrik\n\n- och en lista\n- med flera punkter\n- än mer\n\n\n**fet text?**\n\n>lite citat\n> i en lång rad\n> med massa text"
     link: ~
     owner:
       name: ''
       email: ''
     meta:
       created_at: '2026-02-28 16:53'
-      updated_at: '2026-02-28 19:41'
+      updated_at: '2026-03-01 08:23'
   -
     id: en-sista-grej-2026-02-28-2100
     title: 'en sista grej'
@@ -709,48 +709,51 @@ events:
     meta:
       created_at: '2026-02-28 19:40'
       updated_at: '2026-02-28 19:40'
-  - id: testar-2026-02-28-2141
+  -
+    id: testar-2026-02-28-2141
     title: Testar
     date: '2026-02-28'
     start: '21:41'
     end: '22:41'
     location: Grillplats
     responsible: Morgan
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-02-28 20:42
-      updated_at: 2026-02-28 20:42
-  - id: testar-2026-02-28-2157
+      created_at: '2026-02-28 20:42'
+      updated_at: '2026-02-28 20:42'
+  -
+    id: testar-2026-02-28-2157
     title: Testar
     date: '2026-02-28'
     start: '21:57'
     end: '23:58'
     location: Grillplats
     responsible: Jag
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-02-28 20:58
-      updated_at: 2026-02-28 20:58
-  - id: natt-2026-02-28-2201
+      created_at: '2026-02-28 20:58'
+      updated_at: '2026-02-28 20:58'
+  -
+    id: natt-2026-02-28-2201
     title: Natt
     date: '2026-02-28'
     start: '22:01'
     end: '00:16'
-    location: GA Stilla hyllan
+    location: 'GA Stilla hyllan'
     responsible: Jag
-    description: null
-    link: null
+    description: ~
+    link: ~
     owner:
       name: ''
       email: ''
     meta:
-      created_at: 2026-02-28 21:01
-      updated_at: 2026-02-28 21:01
+      created_at: '2026-02-28 21:01'
+      updated_at: '2026-02-28 21:01'
