@@ -537,6 +537,10 @@ that requires no login.
   it as a `data-cookie-domain` attribute on the `<body>` element of every page
   that loads `session.js`. <!-- 02-§18.48 -->
 - "Passed" means the event's date is strictly before today's local date. <!-- 02-§18.15 -->
+- Event IDs present in the session cookie but not found in `events.json` must be
+  kept — not removed. A newly-submitted event may not yet appear in the JSON
+  because the event-data deploy is still in progress. Removing unknown IDs would
+  silently discard the session cookie the server just set. <!-- 02-§18.49 -->
 
 ### 18.4 Edit links on schedule pages
 
