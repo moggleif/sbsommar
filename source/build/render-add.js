@@ -87,6 +87,7 @@ ${locationOptions}
 
       <div class="field">
         <label for="f-description">Beskrivning <span class="opt">(valfritt)</span></label>
+        <div class="md-toolbar" role="toolbar" aria-label="Markdown-formatering"></div>
         <textarea id="f-description" name="description" rows="4" placeholder="Beskriv aktiviteten, vad behövs, vad händer..."></textarea>
       </div>
 
@@ -110,6 +111,7 @@ ${locationOptions}
   </div>
 
   <script src="cookie-consent.js"></script>
+  <script src="markdown-toolbar.js"></script>
   <script src="lagg-till.js"></script>
   <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}

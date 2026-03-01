@@ -888,6 +888,52 @@ textarea {
   line-height: 1.5;
 }
 
+/* ── Markdown toolbar (02-§57.5–57.13) ── */
+
+.md-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  background: var(--color-cream-light);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  border-bottom: none;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.md-toolbar + textarea {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.md-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-charcoal);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.md-toolbar-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.md-toolbar-btn:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
+.md-toolbar-btn svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 /* ── Time-gating message ── */
 
 .form-gate-msg {
