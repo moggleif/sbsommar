@@ -721,7 +721,7 @@ details.event-row[open] > summary .ev-title {
   }
 
   .nav-toggle:focus-visible {
-    outline-color: var(--color-terracotta);
+    outline-color: var(--color-white);
   }
 
   .nav-menu {
@@ -741,7 +741,7 @@ details.event-row[open] > summary .ev-title {
 
   .nav-menu.is-open {
     max-height: 80vh;
-    padding: var(--space-md) var(--space-md) var(--space-md);
+    padding: var(--space-md);
   }
 
   .nav-pages {
