@@ -72,6 +72,9 @@ try {
         $method === 'GET' && $route === '/health'
             => jsonResponse(['status' => 'API running']),
 
+        $method === 'GET' && $route === '/cleanup-cookies'
+            => handleCleanupCookies(),
+
         $method === 'POST' && $route === '/add-event'
             => handleAddEvent($activeCamp),
 
@@ -87,6 +90,33 @@ try {
 }
 
 // ── Route handlers ───────────────────────────────────────────────────────
+
+function handleCleanupCookies(): void
+{
+    // Expire known WordPress/Blocksy HttpOnly cookies left over from the
+    // previous site.  JavaScript cannot delete these — only the server can.
+    $stale = ['PHPSESSID', 'wordpress_test_cookie', 'wp_lang'];
+
+    // Also match dynamic WordPress cookies (e.g. wordpress_logged_in_<hash>).
+    foreach (array_keys($_COOKIE) as $name) {
+        if (str_starts_with($name, 'wordpress_') || str_starts_with($name, 'wp-')) {
+            $stale[] = $name;
+        }
+    }
+
+    $domain = !empty($_ENV['COOKIE_DOMAIN']) ? $_ENV['COOKIE_DOMAIN'] : '';
+
+    foreach (array_unique($stale) as $name) {
+        // Send multiple variations to cover however the cookie was originally set.
+        setcookie($name, '', ['expires' => 1, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+        if ($domain) {
+            setcookie($name, '', ['expires' => 1, 'path' => '/', 'domain' => $domain, 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+            setcookie($name, '', ['expires' => 1, 'path' => '/', 'domain' => '.' . $domain, 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+        }
+    }
+
+    jsonResponse(['cleaned' => count(array_unique($stale))]);
+}
 
 function handleAddEvent(?array $activeCamp): void
 {
