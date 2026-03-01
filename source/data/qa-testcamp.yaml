@@ -862,3 +862,19 @@ events:
     meta:
       created_at: 2026-03-01 20:45
       updated_at: 2026-03-01 20:45
+  - id: testar-redigera-och-cookies-2026-03-01-2200
+    title: Testar redigera och cookies
+    date: '2026-03-01'
+    start: '22:00'
+    end: '23:00'
+    location: Tält2
+    responsible: Morgan
+    description: |
+      ja
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-03-01 20:56
+      updated_at: 2026-03-01 20:56
