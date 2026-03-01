@@ -114,6 +114,7 @@ ${locationOptions}
     </div>
   </div>
 
+  <script src="wp-cleanup.js"></script>
   <script src="cookie-consent.js"></script>
   <script src="markdown-toolbar.js"></script>
   <script defer src="marked.umd.js"></script>
