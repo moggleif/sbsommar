@@ -257,3 +257,23 @@ describe('render-ical.js source (02-§45.7)', () => {
     assert.ok(!src.includes("require('node-ical"), 'should not import node-ical');
   });
 });
+
+// ── Markdown stripping in DESCRIPTION (02-§56.5) ─────────────────────────────
+
+describe('iCal DESCRIPTION markdown stripping (02-§56.5)', () => {
+  it('ICAL-32 (02-§56.5): markdown bold syntax is stripped from DESCRIPTION', () => {
+    const mdEvent = { ...fullEvent, description: 'This is **bold** and *italic* text' };
+    const ics = renderEventIcal(mdEvent, camp, siteUrl);
+    assert.ok(!ics.includes('**bold**'), 'bold markers should be stripped');
+    assert.ok(!ics.includes('*italic*'), 'italic markers should be stripped');
+    assert.ok(ics.includes('bold'), 'bold text should remain');
+    assert.ok(ics.includes('italic'), 'italic text should remain');
+  });
+
+  it('ICAL-33 (02-§56.5): markdown link syntax is stripped, text kept', () => {
+    const mdEvent = { ...fullEvent, description: 'See [the docs](https://example.com)' };
+    const ics = renderEventIcal(mdEvent, camp, siteUrl);
+    assert.ok(ics.includes('the docs'), 'link text should remain');
+    assert.ok(!ics.includes('[the docs]'), 'link brackets should be stripped');
+  });
+});

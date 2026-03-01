@@ -181,13 +181,14 @@ describe('groupAndSortEvents', () => {
 describe('eventExtraHtml', () => {
   it('renders a description paragraph', () => {
     const html = eventExtraHtml({ description: 'Bring sunscreen.', link: null });
-    assert.ok(html.includes('<p class="event-desc">Bring sunscreen.</p>'), 'Expected desc paragraph');
+    assert.ok(html.includes('Bring sunscreen.'), 'Expected desc text');
+    assert.ok(html.includes('class="event-desc"'), 'Expected event-desc class');
   });
 
   it('splits double newlines into separate paragraphs', () => {
     const html = eventExtraHtml({ description: 'First.\n\nSecond.', link: null });
-    assert.ok(html.includes('<p class="event-desc">First.</p>'), 'Expected first paragraph');
-    assert.ok(html.includes('<p class="event-desc">Second.</p>'), 'Expected second paragraph');
+    assert.ok(html.includes('<p>First.</p>'), 'Expected first paragraph');
+    assert.ok(html.includes('<p>Second.</p>'), 'Expected second paragraph');
   });
 
   it('renders an external link', () => {
@@ -204,10 +205,14 @@ describe('eventExtraHtml', () => {
     assert.ok(html.includes('href="https://example.com"'), 'Expected link');
   });
 
-  it('escapes HTML in description', () => {
-    const html = eventExtraHtml({ description: '<b>bold</b>', link: null });
-    assert.ok(html.includes('&lt;b&gt;bold&lt;/b&gt;'), 'Expected escaped HTML');
-    assert.ok(!html.includes('<b>'), 'Must not contain raw <b>');
+  it('renders markdown bold as <strong> in description (02-§56.2)', () => {
+    const html = eventExtraHtml({ description: 'This is **bold** text', link: null });
+    assert.ok(html.includes('<strong>bold</strong>'), `Expected <strong>, got: ${html}`);
+  });
+
+  it('sanitizes script tags in markdown description (02-§56.6)', () => {
+    const html = eventExtraHtml({ description: 'Hello <script>alert(1)</script>', link: null });
+    assert.ok(!html.includes('<script>'), `script tags must be stripped, got: ${html}`);
   });
 
   it('escapes HTML in link URL', () => {

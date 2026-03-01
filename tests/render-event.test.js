@@ -184,4 +184,22 @@ describe('renderEventPage (02-§36)', () => {
     assert.ok(detailStart > 0, 'should have event-detail div');
     assert.ok(icalPos > detailStart, 'iCal link should be inside event-detail');
   });
+
+  it('EVT-23 (02-§56.1): description with markdown renders as HTML', () => {
+    const mdEvent = { ...fullEvent, description: 'This is **bold** text' };
+    const html = renderEventPage(mdEvent, camp, siteUrl);
+    assert.ok(html.includes('<strong>bold</strong>'), 'markdown bold should render as <strong>');
+  });
+
+  it('EVT-24 (02-§56.6): description HTML is sanitized — no <script>', () => {
+    const xssEvent = { ...fullEvent, description: 'Hello <script>alert(1)</script>' };
+    const html = renderEventPage(xssEvent, camp, siteUrl);
+    assert.ok(!html.includes('<script>'), 'script tags must be stripped');
+  });
+
+  it('EVT-25 (02-§56.7): plain text description still renders correctly', () => {
+    const html = renderEventPage(fullEvent, camp, siteUrl);
+    assert.ok(html.includes('Alla är välkomna att spela fotboll.'), 'plain text should appear');
+    assert.ok(html.includes('class="event-description"'), 'description section should exist');
+  });
 });

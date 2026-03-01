@@ -199,4 +199,23 @@ describe('renderRssFeed (02-§15)', () => {
     assert.ok(/\w{3}, \d{2} \w{3} \d{4} \d{2}:\d{2}:\d{2} \+0000/.test(pubDateMatch[1]),
       `pubDate should be RFC 822 format, got: ${pubDateMatch[1]}`);
   });
+
+  it('RSS-16 (02-§56.4): markdown syntax is stripped from description', () => {
+    const mdEvents = [{
+      id: 'test-md-2026-06-29-0800',
+      title: 'Test',
+      date: '2026-06-29',
+      start: '08:00',
+      end: '09:00',
+      location: 'Salen',
+      responsible: 'Test',
+      description: 'This is **bold** and *italic* text',
+      link: null,
+    }];
+    const xml = renderRssFeed(camp, mdEvents, siteUrl);
+    assert.ok(!xml.includes('**bold**'), 'bold markers should be stripped');
+    assert.ok(!xml.includes('*italic*'), 'italic markers should be stripped');
+    assert.ok(xml.includes('bold'), 'bold text should remain');
+    assert.ok(xml.includes('italic'), 'italic text should remain');
+  });
 });
