@@ -1,6 +1,7 @@
 'use strict';
 
 const { escapeHtml, toDateString } = require('./render');
+const { renderDescriptionHtml } = require('./markdown');
 
 /**
  * Renders the "Dagens schema" page.
@@ -26,6 +27,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
       location: e.location || null,
       responsible: e.responsible || null,
       description: e.description || null,
+      descriptionHtml: e.description ? renderDescriptionHtml(e.description) : null,
       link: e.link || null,
     })),
   );

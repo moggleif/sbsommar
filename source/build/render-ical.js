@@ -1,6 +1,7 @@
 'use strict';
 
 const { toDateString } = require('./utils');
+const { stripMarkdown } = require('./markdown');
 
 /**
  * Escapes text for use in iCalendar content lines (RFC 5545 §3.3.11).
@@ -44,7 +45,7 @@ function extractHostname(url) {
 function buildDescription(event) {
   const parts = [`Ansvarig: ${event.responsible}`];
   if (event.description) {
-    parts.push(event.description.trim());
+    parts.push(stripMarkdown(event.description));
   }
   return parts.join('\n');
 }

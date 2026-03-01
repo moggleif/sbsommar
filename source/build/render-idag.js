@@ -2,6 +2,7 @@
 
 const { escapeHtml, toDateString } = require('./render');
 const { pageNav, pageFooter } = require('./layout');
+const { renderDescriptionHtml } = require('./markdown');
 
 /**
  * Renders the "Idag" page – today's schedule in the standard site layout.
@@ -20,6 +21,7 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieD
       location: e.location || null,
       responsible: e.responsible || null,
       description: e.description || null,
+      descriptionHtml: e.description ? renderDescriptionHtml(e.description) : null,
       link: e.link || null,
     })),
   );

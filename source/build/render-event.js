@@ -2,6 +2,7 @@
 
 const { escapeHtml, formatDate, toDateString } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
+const { renderDescriptionHtml } = require('./markdown');
 
 /**
  * Renders a static HTML detail page for a single event.
@@ -23,10 +24,8 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
 
   let descriptionHtml = '';
   if (event.description) {
-    const paragraphs = event.description.trim().split(/\n\n+/)
-      .map((p) => `      <p>${escapeHtml(p.trim())}</p>`)
-      .join('\n');
-    descriptionHtml = `    <div class="event-description">\n      <p class="event-section-label">Beskrivning</p>\n${paragraphs}\n    </div>\n`;
+    const rendered = renderDescriptionHtml(event.description);
+    descriptionHtml = `    <div class="event-description">\n      <p class="event-section-label">Beskrivning</p>\n      ${rendered}\n    </div>\n`;
   }
 
   let linkHtml = '';

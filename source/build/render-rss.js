@@ -1,6 +1,7 @@
 'use strict';
 
 const { toDateString, escapeHtml, formatDate } = require('./utils');
+const { stripMarkdown } = require('./markdown');
 
 const WEEKDAYS_RFC822 = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS_RFC822 = [
@@ -47,7 +48,7 @@ function buildDescription(event) {
   lines.push(`${formatDate(toDateString(event.date))}, ${timeStr}`);
   lines.push(`Plats: ${event.location} · Ansvarig: ${event.responsible}`);
   if (event.description) {
-    lines.push(event.description.trim());
+    lines.push(stripMarkdown(event.description));
   }
   if (event.link) {
     lines.push(event.link);

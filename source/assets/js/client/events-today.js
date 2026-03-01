@@ -49,16 +49,16 @@
     var timeStr = e.end ? esc(e.start) + '–' + esc(e.end) : esc(e.start);
     var metaParts = [e.location, e.responsible].filter(Boolean).map(esc);
     var metaEl = metaParts.length ? '<span class="ev-meta"> · ' + metaParts.join(' · ') + '</span>' : '';
-    var hasExtra = e.description || e.link;
+    var hasExtra = e.description || e.descriptionHtml || e.link;
     var idAttr = e.id ? ' data-event-id="' + esc(e.id) + '"' : '';
     var dateAttr = e.date ? ' data-event-date="' + esc(e.date) + '"' : '';
 
     if (hasExtra) {
       var extraParts = [];
-      if (e.description) {
-        e.description.trim().split(/\n\n+/).forEach(function (p) {
-          extraParts.push('<p class="event-desc">' + esc(p.trim()) + '</p>');
-        });
+      if (e.descriptionHtml) {
+        extraParts.push('<div class="event-desc">' + e.descriptionHtml + '</div>');
+      } else if (e.description) {
+        extraParts.push('<div class="event-desc"><p>' + esc(e.description) + '</p></div>');
       }
       if (e.link) {
         extraParts.push('<a class="event-ext-link" href="' + esc(e.link) + '" target="_blank" rel="noopener">Extern länk →</a>');

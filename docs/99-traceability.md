@@ -984,15 +984,25 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§55.3` | Modal box uses `--space-lg` top/bottom padding | 07-DESIGN.md §6.51 | MDP-03 | `source/assets/cs/style.css` `.modal-box` | covered |
 | `02-§55.4` | Modal heading and progress steps are center-aligned | 07-DESIGN.md §6.52 | MDP-04..05 | `source/assets/cs/style.css` `.modal-heading`, `.submit-progress` | covered |
 | `02-§55.5` | Modal entry animation: fade + slide-up, ≤ 300 ms | 07-DESIGN.md §6.54 | MDP-06 | `source/assets/cs/style.css` `.modal-box` | covered |
+| `02-§56.1` | Event detail page renders description as Markdown → HTML | 03-ARCHITECTURE.md §18.2, §20.3 | EVT-23, EVT-25 | `source/build/render-event.js` → `renderDescriptionHtml()` | covered |
+| `02-§56.2` | Weekly schedule renders description as Markdown → HTML | 03-ARCHITECTURE.md §20.3 | MKD-D02 (via eventExtraHtml) | `source/build/render.js` → `renderDescriptionHtml()` | covered |
+| `02-§56.3` | Today view uses pre-rendered description HTML from build JSON | 03-ARCHITECTURE.md §20.3 | DIS-26, DIS-27, IDAG-19 | `source/build/render-today.js`, `render-idag.js` → `descriptionHtml` in JSON; `events-today.js` → uses `e.descriptionHtml` | covered |
+| `02-§56.4` | RSS feed strips Markdown, uses plain text description | 03-ARCHITECTURE.md §17.3, §20.3 | RSS-16 | `source/build/render-rss.js` → `stripMarkdown()` | covered |
+| `02-§56.5` | iCal strips Markdown, uses plain text description | 03-ARCHITECTURE.md §20.3 | ICAL-32, ICAL-33 | `source/build/render-ical.js` → `stripMarkdown()` | covered |
+| `02-§56.6` | Markdown → HTML output is sanitized (no script/iframe/object/embed/on*/javascript:) | 03-ARCHITECTURE.md §20.3 | MKD-D07..12, EVT-24 | `source/build/markdown.js` → `sanitizeHtml()` | covered |
+| `02-§56.7` | Plain text descriptions render correctly (wrapped in `<p>`) | 03-ARCHITECTURE.md §20.3 | MKD-D01, MKD-D06, MKD-D13..14 | `source/build/markdown.js` → `renderDescriptionHtml()` | covered |
+| `02-§56.8` | `.event-description p` no longer applies `font-style: italic` | — | MKD-CSS-01 | `source/assets/cs/style.css` | covered |
+| `02-§56.9` | Description CSS uses existing design tokens only | 07-DESIGN.md §7 | manual: inspect CSS for hardcoded values | `source/assets/cs/style.css` — no new custom properties added | implemented |
+| `02-§56.10` | Shared helper provides `renderDescriptionHtml()` and `stripMarkdown()` | 03-ARCHITECTURE.md §20.3 | MKD-D15, MKD-D24 | `source/build/markdown.js` | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             825
-Covered (implemented + tested): 394
-Implemented, not tested:        430
+Total requirements:             835
+Covered (implemented + tested): 403
+Implemented, not tested:        431
 Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
@@ -1414,3 +1424,11 @@ Matrix cleanup (2026-02-25):
 | LNT-24..25 | `tests/lint-yaml.test.js` | `validateYaml – midnight crossing (05-§4.3)` |
 | LVD-07..09 | `tests/live-form-validation.test.js` | `midnight crossing source checks (02-§54.1, 02-§54.6)` |
 | MDP-01..06 | `tests/coverage-css.test.js` | `02-§55.1–55.5 — Modal design polish` |
+| MKD-D01..15 | `tests/markdown.test.js` | `renderDescriptionHtml (02-§56.1, 02-§56.6, 02-§56.7)` |
+| MKD-D16..24 | `tests/markdown.test.js` | `stripMarkdown (02-§56.4, 02-§56.5)` |
+| EVT-23..25 | `tests/render-event.test.js` | `renderEventPage – markdown description (02-§56.1, 02-§56.6, 02-§56.7)` |
+| RSS-16 | `tests/render-rss.test.js` | `renderRssFeed – markdown stripped (02-§56.4)` |
+| ICAL-32..33 | `tests/render-ical.test.js` | `iCal DESCRIPTION markdown stripped (02-§56.5)` |
+| DIS-26..27 | `tests/coverage-today.test.js` | `Today view pre-rendered descriptionHtml (02-§56.3)` |
+| IDAG-19 | `tests/coverage-idag.test.js` | `Idag page pre-rendered descriptionHtml (02-§56.3)` |
+| MKD-CSS-01 | `tests/coverage-css.test.js` | `02-§56.8 — .event-description p italic removed` |

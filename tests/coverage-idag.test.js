@@ -122,3 +122,19 @@ describe('Idag page — navSections', () => {
     assert.ok(html.includes('FAQ'), 'FAQ label present');
   });
 });
+
+// ── 02-§56.3  Pre-rendered description HTML in JSON ──────────────────────────
+
+describe('02-§56.3 — Idag page pre-renders description HTML', () => {
+  it('IDAG-19 (02-§56.3): embedded JSON includes descriptionHtml for events with description', () => {
+    const mdEvents = [
+      { id: 'e1', title: 'Test', date: '2099-07-01', start: '08:00', end: '09:00', location: 'Sal', responsible: 'A', description: 'This is **bold**', link: null },
+    ];
+    const html = renderIdagPage(CAMP, mdEvents);
+    const match = html.match(/window\.__EVENTS__\s*=\s*(\[.*?\]);/s);
+    assert.ok(match, 'events JSON found');
+    const events = JSON.parse(match[1]);
+    assert.ok(events[0].descriptionHtml, 'descriptionHtml field present');
+    assert.ok(events[0].descriptionHtml.includes('<strong>bold</strong>'), 'description rendered as HTML');
+  });
+});

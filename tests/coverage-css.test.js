@@ -313,3 +313,16 @@ describe('02-§54.1–54.5 — Modal design polish', () => {
     );
   });
 });
+
+// ── 02-§56.8  .event-description p no longer italic ──────────────────────────
+
+describe('02-§56.8 — Description paragraph italic removed', () => {
+  it('MKD-CSS-01 (02-§56.8): .event-description p does not set font-style: italic', () => {
+    // Find the .event-description p rule block
+    const m = CSS.match(/\.event-description\s+p\s*\{([^}]+)\}/);
+    if (m) {
+      assert.ok(!m[1].includes('font-style: italic'), '.event-description p must not set italic');
+    }
+    // If the rule doesn't exist at all, that's also fine
+  });
+});

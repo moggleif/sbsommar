@@ -596,7 +596,6 @@ details.event-row[open] > summary .ev-title {
 
 .event-description p {
   margin: 0 0 var(--space-xs);
-  font-style: italic;
 }
 
 .event-description p:last-child {

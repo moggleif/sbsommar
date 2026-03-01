@@ -2,6 +2,7 @@
 
 const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml, formatDate } = require('./utils');
+const { renderDescriptionHtml } = require('./markdown');
 
 /**
  * Groups events by date and sorts each day's events by start time.
@@ -24,10 +25,7 @@ function groupAndSortEvents(events) {
 function eventExtraHtml(e) {
   const parts = [];
   if (e.description) {
-    e.description
-      .trim()
-      .split(/\n\n+/)
-      .forEach((p) => parts.push(`<p class="event-desc">${escapeHtml(p.trim())}</p>`));
+    parts.push(`<div class="event-desc">${renderDescriptionHtml(e.description)}</div>`);
   }
   if (e.link) {
     parts.push(
