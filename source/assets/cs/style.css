@@ -950,8 +950,7 @@ textarea {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--color-charcoal);
-  opacity: 0.5;
+  color: var(--color-terracotta);
   margin: 0 0 var(--space-xs);
   padding-bottom: var(--space-xs);
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
