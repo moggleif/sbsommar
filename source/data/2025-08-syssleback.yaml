@@ -263,7 +263,7 @@ events:
     location: GA Idrott
     responsible: Lägernissen (Andreas)
     description: |-
-      <strong>Möte:</strong>
+      **Möte:**
 
       Vi börjar med avetablering, alla hjälps åt!
 
@@ -271,7 +271,7 @@ events:
 
       Ofta en gemensam bild på alla deltagare (som vill).
 
-      <strong>Avetablering:</strong>
+      **Avetablering:**
 
       Gemensam översyn på området med iordningställande och städ.
 
@@ -323,9 +323,12 @@ events:
     location: Annat
     responsible: Alla
     description: |-
-      Många brukar besöka Chokladfabriken för att äta lite glass som avrundning och hej då.<br />
-      Det finns parkering för de som vill vara redo för “hemfärd”.<br />
-      Annars är det en lagom promenad på vägen bakom receptionen.<br />
+      Många brukar besöka Chokladfabriken för att äta lite glass som avrundning och hej då.
+
+      Det finns parkering för de som vill vara redo för “hemfärd”.
+
+      Annars är det en lagom promenad på vägen bakom receptionen.
+
       Tiden är för det brukar vara lite “drop-in”.
     link: null
     owner:
@@ -450,19 +453,19 @@ events:
       Jag skulle gärna vilja höra om olika upplevelser av boken beroende på om man läser eller lyssnar, samt olika åldrar. Själv har jag läst den och tror att det gör att man får bättre uppfattning, eftersom att man då får mer tid att tänka på vad som faktiskt händer.
 
       Storytel:
-      <a href="https://www.storytel.com/se/books/fr%C3%A4mlingen-925079" target="_blank" rel="noopener">https://www.storytel.com/se/books/fr%C3%A4mlingen-925079</a>
+      https://www.storytel.com/se/books/fr%C3%A4mlingen-925079
       Nextory:
-      <a href="https://nextory.com/se/book/framlingen-2048198" target="_blank" rel="noopener">https://nextory.com/se/book/framlingen-2048198</a>
+      https://nextory.com/se/book/framlingen-2048198
       Bookbeat:
-      <a href="https://www.bookbeat.com/se/book/framlingen-246096" target="_blank" rel="noopener">https://www.bookbeat.com/se/book/framlingen-246096</a>
+      https://www.bookbeat.com/se/book/framlingen-246096
 
       Pdf på engelska:
-      <a href="https://www.slps.org/site/handlers/filedownload.ashx?moduleinstanceid=27607&amp;dataid=78367&amp;FileName=The%20Stranger%20-%20Albert%20Camus.pdf" target="_blank" rel="noopener">https://www.slps.org/site/handlers/filedownload.ashx?moduleinstanceid=27607&amp;dataid=78367&amp;FileName=The%20Stranger%20-%20Albert%20Camus.pdf</a>
+      https://www.slps.org/site/handlers/filedownload.ashx?moduleinstanceid=27607&dataid=78367&FileName=The%20Stranger%20-%20Albert%20Camus.pdf
 
       Finns säkerligen på ditt bibliotek som ebok att låna också.
       Biblio har den. Och dit är många bibliotek anslutna!
-      <a href="https://biblio.app/material/9789100188344" target="_blank" rel="noopener">https://biblio.app/material/9789100188344</a>
-    link: https://www.facebook.com/groups/syssleback2025/posts/1148232150668096/?__cft__%5B0%5D=AZUvkC1DoJJniPu7T7GkcI7qVkH_7r6NbjAtI0KHGDc_Z5MSTzQB-m6o2GNfVU7gwRdUSvAR0FmjJ2NmBWbH9Se9JydNGa7clifWBMqVieQ3N3NhHWoCh5V3o1hvQ5WtL6KG4sdPc8maK6t7jJuQU5xFj0_wJmEf7XhrcTWx7Vv4IT12Iop4lvE8yBbzMgXfvSWCZCYMBvwRiy_qkJ41rD9N&amp;__tn__=%2CO%2CP-R
+      https://biblio.app/material/9789100188344
+    link: https://www.facebook.com/groups/syssleback2025/posts/1148232150668096/?__cft__%5B0%5D=AZUvkC1DoJJniPu7T7GkcI7qVkH_7r6NbjAtI0KHGDc_Z5MSTzQB-m6o2GNfVU7gwRdUSvAR0FmjJ2NmBWbH9Se9JydNGa7clifWBMqVieQ3N3NhHWoCh5V3o1hvQ5WtL6KG4sdPc8maK6t7jJuQU5xFj0_wJmEf7XhrcTWx7Vv4IT12Iop4lvE8yBbzMgXfvSWCZCYMBvwRiy_qkJ41rD9N&__tn__=%2CO%2CP-R
     owner:
       name: ''
       email: ''
@@ -475,10 +478,11 @@ events:
     start: '14:00'
     end: '14:15'
     location: Tält1
-    responsible: Kajsa &amp; Theo (12)
+    responsible: Kajsa & Theo (12)
     description: |-
-      <p><span class="s1">Pokémon Go-träff. <br /></span></p>
-      <p><span class="s1">Finns det andra på lägret som spelar Pokémon go? Vi tar en kort träff och säger hej så att vi vet vem vi kan locka med på raider och annat under veckan. Både barn och vuxna välkomna!</span></p>
+      Pokémon Go-träff.
+
+      Finns det andra på lägret som spelar Pokémon go? Vi tar en kort träff och säger hej så att vi vet vem vi kan locka med på raider och annat under veckan. Både barn och vuxna välkomna!
     link: null
     owner:
       name: ''
@@ -493,7 +497,7 @@ events:
     end: '16:00'
     location: Tält2
     responsible: 'Christina Johansson '
-    description: <p>Kom och kör knasiga charader eller bara gissa på andras charader. Passar alla åldrar, barn och vuxna.</p>
+    description: 'Kom och kör knasiga charader eller bara gissa på andras charader. Passar alla åldrar, barn och vuxna.'
     link: null
     owner:
       name: ''
@@ -508,7 +512,7 @@ events:
     end: '17:00'
     location: Kaffetält
     responsible: 'Christina & Amanda '
-    description: <p>Kom och prata böcker, ge och få tips på bra böcker. Alla åldrar, alla sorters böcker får vara med.</p>
+    description: 'Kom och prata böcker, ge och få tips på bra böcker. Alla åldrar, alla sorters böcker får vara med.'
     link: null
     owner:
       name: ''
@@ -523,7 +527,7 @@ events:
     end: '14:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist
-    description: "<p style=\"text-align: left\">Ta fram karaktärer för Viktors DnD-kampanj (fm) för föranmälda spelare 13-16 år.\_</p>"
+    description: Ta fram karaktärer för Viktors DnD-kampanj (fm) för föranmälda spelare 13-16 år.
     link: https://Se%20Facebookgruppen
     owner:
       name: ''
@@ -553,7 +557,7 @@ events:
     end: '22:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist, 0730714200
-    description: <p>Session 1 av Viktors Daggerheartkampanj. Föranmälan. (Denna kampanj hålls normalt under eftermiddagen, men ej på måndagen pga informationsmötet).</p>
+    description: 'Session 1 av Viktors Daggerheartkampanj. Föranmälan. (Denna kampanj hålls normalt under eftermiddagen, men ej på måndagen pga informationsmötet).'
     link: https://www.facebook.com/share/p/1P1fKH83FP/?
     owner:
       name: ''
@@ -568,7 +572,10 @@ events:
     end: '16:30'
     location: GA Idrott
     responsible: Ivar Ängquist, 073-6413320
-    description: "<p><strong>BRAINGAMES</strong></p>\n<p>Den ultimata lagtävlingen där barn och vuxna tävlar i kluriga grenar. Lagen delas in på plats. Vi kommer även behöva ~15 funktionärer. Ingen föranmälan behövs. Ivar Ä, Anna B och Jenny v B ordnar.\_</p>"
+    description: |-
+      **BRAINGAMES**
+
+      Den ultimata lagtävlingen där barn och vuxna tävlar i kluriga grenar. Lagen delas in på plats. Vi kommer även behöva ~15 funktionärer. Ingen föranmälan behövs. Ivar Ä, Anna B och Jenny v B ordnar.
     link: null
     owner:
       name: ''
@@ -583,7 +590,7 @@ events:
     end: '22:00'
     location: Rollspelstält2
     responsible: Harald Ängquist, 0735045212
-    description: <p>Detta är den första sessionen för Haralds Daggerheart-kampanj. 16-20 år. Föranmälan. Kampanjen sker parallellt med Viktors kampanj, men det är två olika kampanjer.</p>
+    description: 'Detta är den första sessionen för Haralds Daggerheart-kampanj. 16-20 år. Föranmälan. Kampanjen sker parallellt med Viktors kampanj, men det är två olika kampanjer.'
     link: https://www.facebook.com/share/p/1P1fKH83FP/?
     owner:
       name: ''
@@ -598,7 +605,7 @@ events:
     end: '13:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist, 0730714200
-    description: "<p>Rollspel, Viktors DnD kampanj, 13-16 år. Föranmälan krävs.\_</p>"
+    description: 'Rollspel, Viktors DnD kampanj, 13-16 år. Föranmälan krävs.'
     link: null
     owner:
       name: ''
@@ -613,7 +620,7 @@ events:
     end: '18:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist 0730714200
-    description: "<p>Viktors Daggerheart-kampanj. 17-22 år. Föranmälan krävs.\_</p>"
+    description: Viktors Daggerheart-kampanj. 17-22 år. Föranmälan krävs.
     link: https://www.facebook.com/share/p/1BApBUFoh1/?
     owner:
       name: ''
@@ -628,7 +635,7 @@ events:
     end: '18:00'
     location: Rollspelstält2
     responsible: Harald Ängquist, 0735045212
-    description: "<p>Haralds Daggerheart-kampanj, session 2. 16-20 år. Endast föranmälda.\_</p>"
+    description: 'Haralds Daggerheart-kampanj, session 2. 16-20 år. Endast föranmälda.'
     link: https://www.facebook.com/share/p/1BApBUFoh1/?
     owner:
       name: ''
@@ -637,13 +644,13 @@ events:
       created_at: '2025-07-23 21:08:45'
       updated_at: '2025-07-23 21:08:45'
   - id: rollspel-gora-karaktarer-johan-d-amp-d-grupp-1-fm-rs-talt-2-2025-08-04-1300
-    title: Rollspel. Göra karaktärer. Johan D&amp;D grupp 1 fm. RS tält 2
+    title: Rollspel. Göra karaktärer. Johan D&D grupp 1 fm. RS tält 2
     date: '2025-08-04'
     start: '13:00'
     end: '14:00'
     location: Rollspelstält2
     responsible: Johann
-    description: <p>Vi gör karaktärer för morgondagens spel. Tänk gärna på i förväg vad du skulle vilja spela och kanske något kring karaktärernas bakgrund.</p>
+    description: Vi gör karaktärer för morgondagens spel. Tänk gärna på i förväg vad du skulle vilja spela och kanske något kring karaktärernas bakgrund.
     link: null
     owner:
       name: ''
@@ -652,13 +659,13 @@ events:
       created_at: '2025-07-25 10:37:22'
       updated_at: '2025-07-25 10:37:22'
   - id: rollspel-gora-karaktarer-johan-d-amp-d-grupp-2-kvall-2025-08-04-1400
-    title: Rollspel. Göra karaktärer, Johan D&amp;D grupp 2 kväll
+    title: Rollspel. Göra karaktärer, Johan D&D grupp 2 kväll
     date: '2025-08-04'
     start: '14:00'
     end: '15:00'
     location: Rollspelstält2
     responsible: Johan
-    description: <p>Rollspel. Göra karaktärer, Johan D&amp;D grupp 2 kväll</p>
+    description: 'Rollspel. Göra karaktärer, Johan D&D grupp 2 kväll'
     link: null
     owner:
       name: ''
@@ -667,13 +674,13 @@ events:
       created_at: '2025-07-25 10:41:18'
       updated_at: '2025-07-25 10:41:18'
   - id: spel-d-amp-d-session-1-grupp-1-2025-08-05-1000
-    title: Spel. D&amp;D session 1, grupp 1
+    title: Spel. D&D session 1, grupp 1
     date: '2025-08-05'
     start: '10:00'
     end: '13:00'
     location: Rollspelstält2
     responsible: Johan
-    description: <p>Spel. D&amp;D session 1, Johan, grupp 1</p>
+    description: 'Spel. D&D session 1, Johan, grupp 1'
     link: null
     owner:
       name: ''
@@ -682,13 +689,13 @@ events:
       created_at: '2025-07-25 10:45:19'
       updated_at: '2025-07-25 10:45:19'
   - id: spel-d-amp-d-session-1-grupp-2-2025-08-05-1830
-    title: Spel. D&amp;D session 1, grupp 2
+    title: Spel. D&D session 1, grupp 2
     date: '2025-08-05'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält2
     responsible: Johan
-    description: <p>Spel. D&amp;D session 1, grupp 2</p>
+    description: 'Spel. D&D session 1, grupp 2'
     link: null
     owner:
       name: ''
@@ -697,13 +704,13 @@ events:
       created_at: '2025-07-25 10:47:16'
       updated_at: '2025-07-25 10:47:16'
   - id: spel-d-amp-d-session-2-grupp-1-2025-08-06-1000
-    title: Spel. D&amp;D session 2, grupp 1
+    title: Spel. D&D session 2, grupp 1
     date: '2025-08-06'
     start: '10:00'
     end: '13:00'
     location: Rollspelstält2
     responsible: Johan
-    description: "<p>Rollspel, \_D&amp;D session 2, \_grupp 1</p>"
+    description: 'Rollspel, D&D session 2, grupp 1'
     link: null
     owner:
       name: ''
@@ -712,13 +719,13 @@ events:
       created_at: '2025-07-25 10:50:12'
       updated_at: '2025-07-25 10:50:12'
   - id: rollspel-d-amp-d-session-2-grupp-2-2025-08-06-1830
-    title: "Rollspel, \_D&amp;D session 2, \_grupp 2"
+    title: "Rollspel, D&D session 2, grupp 2"
     date: '2025-08-06'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält2
     responsible: Johan
-    description: "<p>Rollspel, \_D&amp;D session 2, \_grupp 2</p>"
+    description: 'Rollspel, D&D session 2, grupp 2'
     link: null
     owner:
       name: ''
@@ -727,13 +734,13 @@ events:
       created_at: '2025-07-25 10:52:05'
       updated_at: '2025-07-25 10:52:05'
   - id: rollspel-d-amp-d-session-3-grupp-1-2025-08-07-1000
-    title: "Rollspel, \_D&amp;D session 3, \_grupp 1"
+    title: "Rollspel, D&D session 3, grupp 1"
     date: '2025-08-07'
     start: '10:00'
     end: '13:00'
     location: Rollspelstält2
     responsible: Johan
-    description: "<p>Rollspel, \_D&amp;D session 3, grupp 1</p>"
+    description: 'Rollspel, D&D session 3, grupp 1'
     link: null
     owner:
       name: ''
@@ -742,13 +749,13 @@ events:
       created_at: '2025-07-25 10:54:11'
       updated_at: '2025-07-25 10:54:11'
   - id: rollspel-d-amp-d-session-3-grupp-2-2025-08-07-1830
-    title: "Rollspel, \_D&amp;D session 3,\_grupp 2"
+    title: "Rollspel, D&D session 3, grupp 2"
     date: '2025-08-07'
     start: '18:30'
     end: '21:30'
     location: Rollspelstält2
     responsible: Johan
-    description: "<p>Rollspel, \_D&amp;D session 3, grupp 2</p>"
+    description: 'Rollspel, D&D session 3, grupp 2'
     link: null
     owner:
       name: ''
@@ -763,7 +770,9 @@ events:
     end: '16:00'
     location: Servicehus
     responsible: 'Lisa Lautrup '
-    description: "<p>Vi bakar Princess Mochi tillsammans efter inspiration från Ai Venturas bok ”Baka Kawaii” och liknande bakelser från Oolong Tea House i Uppsala.\_<br /><br />För mer info se bifogad Fb-länk.\_</p>"
+    description: |-
+      Vi bakar Princess Mochi tillsammans efter inspiration från Ai Venturas bok ”Baka Kawaii” och liknande bakelser från Oolong Tea House i Uppsala.
+      För mer info se bifogad Fb-länk.
     link: https://www.facebook.com/share/p/14TCPJYFynM/?
     owner:
       name: ''
@@ -778,7 +787,10 @@ events:
     end: '16:00'
     location: Servicehus
     responsible: Lisa Lautrup
-    description: "<p>Vi bakar Princess Mochi tillsammans efter inspiration från Ai Venturas bok ”Baka Kawaii” och liknande bakelser från Oolong Tea House i Uppsala.\_</p>\n<p><br />För mer info se bifogad Fb-länk.\_</p>"
+    description: |-
+      Vi bakar Princess Mochi tillsammans efter inspiration från Ai Venturas bok ”Baka Kawaii” och liknande bakelser från Oolong Tea House i Uppsala.
+
+      För mer info se bifogad Fb-länk.
     link: https://www.facebook.com/share/p/14TCPJYFynM/?
     owner:
       name: ''
@@ -794,8 +806,9 @@ events:
     location: Tält1
     responsible: Lisa Lautrup
     description: |-
-      <p>Vi testar att virka African flower med 5-talig och 6-talig symmetri. Resultatet kan användas som applikation eller sammanfogas till större objekt som väskor, filtar eller gosedjur. Endast fantasin sätter gränserna!</p>
-      <p>Testmaterial kommer att finnas på plats men om du vill göra ett större arbete rekommenderar jag att du tar med eget garn.</p>
+      Vi testar att virka African flower med 5-talig och 6-talig symmetri. Resultatet kan användas som applikation eller sammanfogas till större objekt som väskor, filtar eller gosedjur. Endast fantasin sätter gränserna!
+
+      Testmaterial kommer att finnas på plats men om du vill göra ett större arbete rekommenderar jag att du tar med eget garn.
     link: null
     owner:
       name: ''
@@ -810,7 +823,12 @@ events:
     end: '09:45'
     location: Tält2
     responsible: 'Lisa Lautrup '
-    description: "<p>Prova på frigörande dans med fokus på flödande rörelsemönster!</p>\n<p>Vi dansar barfota med slutna ögon och fokus inåt. Du bestämmer helt dina rörelser efter kroppens behov. Jag bidrar med musik och inspiration.</p>\n<p>Denna typ av meditation i rörelse har varit till stor hjälp för egen del när tankarna snurrar.\_</p>"
+    description: |-
+      Prova på frigörande dans med fokus på flödande rörelsemönster!
+
+      Vi dansar barfota med slutna ögon och fokus inåt. Du bestämmer helt dina rörelser efter kroppens behov. Jag bidrar med musik och inspiration.
+
+      Denna typ av meditation i rörelse har varit till stor hjälp för egen del när tankarna snurrar.
     link: null
     owner:
       name: ''
@@ -825,7 +843,12 @@ events:
     end: '11:15'
     location: GA Idrott
     responsible: 'Lisa Lautrup '
-    description: "<p>Prova på frigörande dans med fokus på rytmer!</p>\n<p>Vi dansar barfota med slutna ögon och fokus inåt. Du bestämmer helt dina rörelser efter kroppens behov. Jag bidrar med musik och inspiration.</p>\n<p>Denna typ av meditation i rörelse har varit till stor hjälp för egen del när tankarna snurrar.\_</p>"
+    description: |-
+      Prova på frigörande dans med fokus på rytmer!
+
+      Vi dansar barfota med slutna ögon och fokus inåt. Du bestämmer helt dina rörelser efter kroppens behov. Jag bidrar med musik och inspiration.
+
+      Denna typ av meditation i rörelse har varit till stor hjälp för egen del när tankarna snurrar.
     link: null
     owner:
       name: ''
@@ -840,7 +863,14 @@ events:
     end: '16:15'
     location: GA Idrott
     responsible: 'Lisa Lautrup '
-    description: "<p>Prova på frigörande dans med fokus på lekfullhet!</p>\n<p>Vi dansar barfota och utforskar olika rörelser med hjälp av musik och gruppövningar på tema lekfullhet. Du bestämmer själv vad du vill delta i och kan fritt välja dina egna rörelser. Jag bidrar med musik, inspiration och förslag på övningar.\_</p>\n<p>Denna klass är mer extrovert än de tidigare och passar den som har stort rörelsebehov och som har barnasinnet i behåll.\_</p>\n<p>Ta med vattenflaska och räkna med att få upp pulsen rejält!</p>"
+    description: |-
+      Prova på frigörande dans med fokus på lekfullhet!
+
+      Vi dansar barfota och utforskar olika rörelser med hjälp av musik och gruppövningar på tema lekfullhet. Du bestämmer själv vad du vill delta i och kan fritt välja dina egna rörelser. Jag bidrar med musik, inspiration och förslag på övningar.
+
+      Denna klass är mer extrovert än de tidigare och passar den som har stort rörelsebehov och som har barnasinnet i behåll.
+
+      Ta med vattenflaska och räkna med att få upp pulsen rejält!
     link: null
     owner:
       name: ''
@@ -856,9 +886,9 @@ events:
     location: Fotbollsplan
     responsible: Lisel Næslund
     description: |-
-      <p>Alla som vill samlas för att spela lite fotboll! Vi kommer överens om form när vi ser hur många vi blir!</p>
-      <p>&nbsp;</p>
-      <p>Ta med vattenflaska.</p>
+      Alla som vill samlas för att spela lite fotboll! Vi kommer överens om form när vi ser hur många vi blir!
+
+      Ta med vattenflaska.
     link: null
     owner:
       name: ''
@@ -874,8 +904,9 @@ events:
     location: Fotbollsplan
     responsible: Lisel Næslund
     description: |-
-      <p>Alla som vill samlas för att spela lite fotboll! Vi kommer överens om form när vi ser hur många vi blir!</p>
-      <p>Ta med vattenflaska.</p>
+      Alla som vill samlas för att spela lite fotboll! Vi kommer överens om form när vi ser hur många vi blir!
+
+      Ta med vattenflaska.
     link: null
     owner:
       name: ''
@@ -890,7 +921,14 @@ events:
     end: '17:00'
     location: Fotbollsplan
     responsible: Christina Johansson, Lisel Naeslund
-    description: "<p>Kom alla som vill, vuxna som barn! Man behöver inte vara bra, ju fler desto bättre.</p>\n<p>Beroende på hur många vi blir kör vi 5mot5, möjligtvis 7mot7, och 12 minuters matcher.\_\_</p>\n<p>Vi kör en kort genomgång om fotbollsregler för de som är osäkra på dem, och delar in i lag på plats.</p>\n<p>Ta med vattenflaska!</p>"
+    description: |-
+      Kom alla som vill, vuxna som barn! Man behöver inte vara bra, ju fler desto bättre.
+
+      Beroende på hur många vi blir kör vi 5mot5, möjligtvis 7mot7, och 12 minuters matcher.
+
+      Vi kör en kort genomgång om fotbollsregler för de som är osäkra på dem, och delar in i lag på plats.
+
+      Ta med vattenflaska!
     link: https://www.facebook.com/share/p/1GPjiBeUN6/
     owner:
       name: ''
@@ -905,7 +943,7 @@ events:
     end: '13:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist
-    description: '<p>Rollspel med Viktors DnD-grupp. Session 2. Rollspelstält 1. Viktor: 073-0714200. Föranmälan krävs.</p>'
+    description: 'Rollspel med Viktors DnD-grupp. Session 2. Rollspelstält 1. Viktor: 073-0714200. Föranmälan krävs.'
     link: null
     owner:
       name: ''
@@ -920,7 +958,7 @@ events:
     end: '18:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist
-    description: '<p>Rollspel Viktors Dragonheart grupp. Session 3. Viktor: 073-0714200. Endast föranmälda.</p>'
+    description: 'Rollspel Viktors Dragonheart grupp. Session 3. Viktor: 073-0714200. Endast föranmälda.'
     link: null
     owner:
       name: ''
@@ -935,10 +973,7 @@ events:
     end: '18:00'
     location: Rollspelstält2
     responsible: Harald Ängquist
-    description: |-
-      <p>Haralds Dragonheart-kampanj. Session 3. Endast föranmälda. Harald: 073-5045212</p>
-      <p><!--more--></p>
-      <p><!--more--></p>
+    description: 'Haralds Dragonheart-kampanj. Session 3. Endast föranmälda. Harald: 073-5045212'
     link: null
     owner:
       name: ''
@@ -947,13 +982,65 @@ events:
       created_at: '2025-07-28 14:32:53'
       updated_at: '2025-07-28 14:32:53'
   - id: fem-fakta-pa-fem-minuter-open-stage-amp-popcorn-2025-08-06-1900
-    title: Fem fakta på fem minuter - open stage&amp;popcorn!
+    title: Fem fakta på fem minuter - open stage&popcorn!
     date: '2025-08-06'
     start: '19:00'
     end: '20:00'
     location: GA Scen
     responsible: Dante Naeslund, Lisel Naeslund
-    description: "<div><strong>För nyfikna i alla åldrar som älskar att upptäcka nya ämnen!</strong></div>\n<div>Kom som publik eller kom och dela med dig av kunskap om ett ämne som du gillar. Tänk som ett mini-Ted-talk blandat med en hiss-pitch. Vi ser fram emot inspireras av varandra!</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div>\_</div>\n</div>\n<div><em>Rekommenderade ramar för dig som vill berätta om ett ämne:</em></div>\n<div><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">- Presentera dig. Berätta fem fakta om ditt valda ämne. Avrunda gärna med tips om var vi kan lära oss mer om ämnet innan du avslutar och publiken applåderar :)</span></div>\n<div>- Max fem minuter på scenen, ingen undre gräns. Vi hjälper till att hålla tiden om du vill.</div>\n<div>- Alla åldrar är välkomna. Vill man vara flera personer på scenen går det självklart bra.</div>\n<div>- Det kommer att finnas en scen och troligen en mikrofon. Kanske möjlighet till att visa bildspel tex Powerpoint, säg till i god tid om du skulle vilja använda det så ska vi försöka lösa det!</div>\n<div>- Anmälan senast samma dag kl 17.00 på pm, i Facebooktråden eller direkt till Dante/Lisel. Den som blir sugen på att gå upp på scen spontant är också varmt välkommen och anmäler sig på plats, men vi är tacksamma för föranmälningar så att det går att få en uppfattning om ungefär hur många som kommer!</div>\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\">\_</div>\n<div>Popcorn till alla!</div>\n<div>\_</div>\n<div>\_</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><em><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Här är exempel på ämnen till </span>Fem fakta på fem minuter:</em></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\">\_</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Världens farligaste platser</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Typiska japanska maträtter</span></div>\n<div>Mest visade videor på Youtube</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Byggnadsvård</span></div>\n<div>Hur man bygger en låt</div>\n<div>Historiska händelser</div>\n<div>Svåraste sporterna</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Världens snabbaste tåg</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Hur man äter sushi på rätt sätt</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">De lyxigaste flygplanen</span></div>\n<div>Presidenter</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Vett och etikett</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Världens farligaste djur</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Djupast liggande vraken</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Svåra språk</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Giftiga ämnen</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Klockor</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Uppfinningar som förändrat världen</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Periodiska systemet</span></div>\n<div>AI</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Ord som böjs fel</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Misstag som ledde till uppfinningar</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Hur vi ska komma till Mars</span></div>\n</div>"
+    description: |-
+      **För nyfikna i alla åldrar som älskar att upptäcka nya ämnen!**
+      Kom som publik eller kom och dela med dig av kunskap om ett ämne som du gillar. Tänk som ett mini-Ted-talk blandat med en hiss-pitch. Vi ser fram emot inspireras av varandra!
+
+      *Rekommenderade ramar för dig som vill berätta om ett ämne:*
+      - Presentera dig. Berätta fem fakta om ditt valda ämne. Avrunda gärna med tips om var vi kan lära oss mer om ämnet innan du avslutar och publiken applåderar :)
+      - Max fem minuter på scenen, ingen undre gräns. Vi hjälper till att hålla tiden om du vill.
+      - Alla åldrar är välkomna. Vill man vara flera personer på scenen går det självklart bra.
+      - Det kommer att finnas en scen och troligen en mikrofon. Kanske möjlighet till att visa bildspel tex Powerpoint, säg till i god tid om du skulle vilja använda det så ska vi försöka lösa det!
+      - Anmälan senast samma dag kl 17.00 på pm, i Facebooktråden eller direkt till Dante/Lisel. Den som blir sugen på att gå upp på scen spontant är också varmt välkommen och anmäler sig på plats, men vi är tacksamma för föranmälningar så att det går att få en uppfattning om ungefär hur många som kommer!
+       Popcorn till alla!
+
+      *Här är exempel på ämnen till Fem fakta på fem minuter:*
+
+      Världens farligaste platser
+
+      Typiska japanska maträtter
+      Mest visade videor på Youtube
+
+      Byggnadsvård
+      Hur man bygger en låt
+      Historiska händelser
+      Svåraste sporterna
+
+      Världens snabbaste tåg
+
+      Hur man äter sushi på rätt sätt
+
+      De lyxigaste flygplanen
+      Presidenter
+
+      Vett och etikett
+
+      Världens farligaste djur
+
+      Djupast liggande vraken
+
+      Svåra språk
+
+      Giftiga ämnen
+
+      Klockor
+
+      Uppfinningar som förändrat världen
+
+      Periodiska systemet
+      AI
+
+      Ord som böjs fel
+
+      Misstag som ledde till uppfinningar
+
+      Hur vi ska komma till Mars
     link: https://www.facebook.com/share/p/16vUReRU91/
     owner:
       name: ''
@@ -967,8 +1054,8 @@ events:
     start: '15:00'
     end: '16:00'
     location: Servicehus
-    responsible: Eila Colling &amp; Kajsa Ögård
-    description: <p>Kom med och gör härligt fluffigt slime i olika färger - vi har tillbehören och visar hur. Mindre barn bör ha med en vuxen som hjälper till. Vuxna är varmt välkomna att själva göra slime i mån om plats.</p>
+    responsible: Eila Colling & Kajsa Ögård
+    description: Kom med och gör härligt fluffigt slime i olika färger - vi har tillbehören och visar hur. Mindre barn bör ha med en vuxen som hjälper till. Vuxna är varmt välkomna att själva göra slime i mån om plats.
     link: null
     owner:
       name: ''
@@ -983,7 +1070,7 @@ events:
     end: '13:00'
     location: Rollspelstält1
     responsible: 'Viktor Ängquist '
-    description: "<p>Rollspel, DnD Viktors kampanj.\_</p>"
+    description: 'Rollspel, DnD Viktors kampanj.'
     link: null
     owner:
       name: ''
@@ -998,7 +1085,7 @@ events:
     end: '21:30'
     location: Rollspelstält1
     responsible: Viktor Ängquist
-    description: "<p>Prova-på-rollspel. Endast en session. Förenklade regler. DnD. Föranmälan.\_</p>"
+    description: Prova-på-rollspel. Endast en session. Förenklade regler. DnD. Föranmälan.
     link: null
     owner:
       name: ''
@@ -1013,7 +1100,7 @@ events:
     end: '13:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist
-    description: <p>Rollspel, DnD, Sista sessionen.</p>
+    description: 'Rollspel, DnD, Sista sessionen.'
     link: null
     owner:
       name: ''
@@ -1028,7 +1115,7 @@ events:
     end: '18:00'
     location: Rollspelstält1
     responsible: Viktor Ängquist
-    description: "<p style=\"text-align: left\">Sista sessionen.\_</p>"
+    description: Sista sessionen.
     link: null
     owner:
       name: ''
@@ -1043,7 +1130,7 @@ events:
     end: '18:00'
     location: Rollspelstält2
     responsible: Harald Ängquist
-    description: <p>Sista sessionen!</p>
+    description: 'Sista sessionen!'
     link: null
     owner:
       name: ''
@@ -1058,7 +1145,10 @@ events:
     end: '08:00'
     location: GA Idrott
     responsible: Lisa Lautrup
-    description: "<p style=\"text-align: left\">För dig som kanske inte fick till den där törnrosasömnen som du hade tänkt dig börjar vi dagen med lite återhämtning i form av yoga nidra. Denna yogaform är en djupt avslappnande meditationsteknik där du guidas till ett tillstånd mellan vakenhet och sömn. Det leder till återhämtning, minskad stress och släpper ofta på spänningar i kroppen.</p>\n<p>Klassen utförs liggande och är 20 min lång. Ta med något att ligga på, mjuka kläder, gärna strumpor och en filt.\_</p>\n<p>&nbsp;</p>"
+    description: |-
+      För dig som kanske inte fick till den där törnrosasömnen som du hade tänkt dig börjar vi dagen med lite återhämtning i form av yoga nidra. Denna yogaform är en djupt avslappnande meditationsteknik där du guidas till ett tillstånd mellan vakenhet och sömn. Det leder till återhämtning, minskad stress och släpper ofta på spänningar i kroppen.
+
+      Klassen utförs liggande och är 20 min lång. Ta med något att ligga på, mjuka kläder, gärna strumpor och en filt.
     link: null
     owner:
       name: ''
@@ -1073,7 +1163,7 @@ events:
     end: '16:00'
     location: Tält1
     responsible: Petter Zonabend König
-    description: "<p>Du lär dig grunderna för att jonglera tre bollar. Har du egna bollar så ta med dem. Typ av boll spelar ingen roll. tennisbollar, golfbollar, innebandybollar, jonglerbollar. Bara de väger lika mycket.\_ ALLA kan lära sig jonglera, och självklart tar det lite olika lång tid. Det är lättare än du tror. Det finns vissa viktiga grunder som jag lär dig för att det ska sitta bra.\_<br />Petter Zonabend König, SMS: 070-69 59 49 7</p>"
+    description: 'Du lär dig grunderna för att jonglera tre bollar. Har du egna bollar så ta med dem. Typ av boll spelar ingen roll. tennisbollar, golfbollar, innebandybollar, jonglerbollar. Bara de väger lika mycket. ALLA kan lära sig jonglera, och självklart tar det lite olika lång tid. Det är lättare än du tror. Det finns vissa viktiga grunder som jag lär dig för att det ska sitta bra. Petter Zonabend König, SMS: 070-69 59 49 7'
     link: null
     owner:
       name: ''
@@ -1088,7 +1178,9 @@ events:
     end: '19:30'
     location: Tält1
     responsible: 'Petter Zonabend König, '
-    description: "<p>Tälja säkert, roligt och effektivt. Trä finns på plats, men du får gärna ta med eget. Ta gärna med egen kniv, det kommer även att finnas några knivar att låna. <br />Vi går igenom grunder och säkerhet. Olika täljgrepp. Vad är en bra kniv för barn/vuxna. Hur slipar jag min kniv? Lämna ev slö kniv vid stuga 1 på söndag em/kväll eller måndag, med namn och tel.numner så ska jag försöka hinna slipa den innan vi ses. Vass kniv = säker kniv. Har du ett bryne/slipsten så ta med det.\_<br />Petter Zonabend König. SMS: 070-69 59 49 7</p>"
+    description: |-
+      Tälja säkert, roligt och effektivt. Trä finns på plats, men du får gärna ta med eget. Ta gärna med egen kniv, det kommer även att finnas några knivar att låna.
+      Vi går igenom grunder och säkerhet. Olika täljgrepp. Vad är en bra kniv för barn/vuxna. Hur slipar jag min kniv? Lämna ev slö kniv vid stuga 1 på söndag em/kväll eller måndag, med namn och tel.numner så ska jag försöka hinna slipa den innan vi ses. Vass kniv = säker kniv. Har du ett bryne/slipsten så ta med det. Petter Zonabend König. SMS: 070-69 59 49 7
     link: null
     owner:
       name: ''
@@ -1103,7 +1195,7 @@ events:
     end: '17:00'
     location: Rollspelstält2
     responsible: Harald Ängquist
-    description: '<p>Vi gör karaktärer tillsammans. Föranmälan krävs. Harald: 073-5045212</p>'
+    description: 'Vi gör karaktärer tillsammans. Föranmälan krävs. Harald: 073-5045212'
     link: null
     owner:
       name: ''
@@ -1118,7 +1210,7 @@ events:
     end: '17:00'
     location: Annat
     responsible: Jonas Colling, stuga 16
-    description: "<p>Testa att måla med sprayfärg eller skapa ditt livs grafittikonstverk. Vi har färger, kartongskivor och skyddsutrustning för mun och ögon, du har oömma kläder och vill prova hur det funkar att jobba nära eller lite längre ifrån ytan, med olika munstycken och hur man kan förstärka med pennor. Lite tips och tricks och måla på varsin kartongskiva (c:a 90x50 cm). Inte så mycket konstnärlig handledning som prova på mediet och uttrycka sig fritt. Vi samlas vid ingången till hallen och går till ett ställe i lä. Om ni har något särskilt ni vill måla på, t ex en pannå eller vepa är det bara att ta med det.\_</p>"
+    description: 'Testa att måla med sprayfärg eller skapa ditt livs grafittikonstverk. Vi har färger, kartongskivor och skyddsutrustning för mun och ögon, du har oömma kläder och vill prova hur det funkar att jobba nära eller lite längre ifrån ytan, med olika munstycken och hur man kan förstärka med pennor. Lite tips och tricks och måla på varsin kartongskiva (c:a 90x50 cm). Inte så mycket konstnärlig handledning som prova på mediet och uttrycka sig fritt. Vi samlas vid ingången till hallen och går till ett ställe i lä. Om ni har något särskilt ni vill måla på, t ex en pannå eller vepa är det bara att ta med det.'
     link: null
     owner:
       name: ''
@@ -1133,7 +1225,7 @@ events:
     end: '11:30'
     location: Annat
     responsible: Jonas Colling, stuga 16
-    description: "<p>Testa att måla med sprayfärg eller skapa ditt livs grafittikonstverk. Vi har färger, kartongskivor och skyddsutrustning för mun och ögon, du har oömma kläder och vill prova hur det funkar att jobba nära eller lite längre ifrån ytan, med olika munstycken och hur man kan förstärka med pennor. Lite tips och tricks och måla på varsin kartongskiva (c:a 90x50 cm). Inte så mycket konstnärlig handledning som prova på mediet och uttrycka sig fritt. Vi samlas vid ingången till hallen och går till ett ställe i lä. Om ni har något särskilt ni vill måla på, t ex en pannå eller vepa är det bara att ta med det.\_</p>"
+    description: 'Testa att måla med sprayfärg eller skapa ditt livs grafittikonstverk. Vi har färger, kartongskivor och skyddsutrustning för mun och ögon, du har oömma kläder och vill prova hur det funkar att jobba nära eller lite längre ifrån ytan, med olika munstycken och hur man kan förstärka med pennor. Lite tips och tricks och måla på varsin kartongskiva (c:a 90x50 cm). Inte så mycket konstnärlig handledning som prova på mediet och uttrycka sig fritt. Vi samlas vid ingången till hallen och går till ett ställe i lä. Om ni har något särskilt ni vill måla på, t ex en pannå eller vepa är det bara att ta med det.'
     link: null
     owner:
       name: ''
@@ -1148,7 +1240,9 @@ events:
     end: '15:30'
     location: Grillplats
     responsible: 'Petter Zonabend König, Stuga 1. '
-    description: "<p>Vi lär oss tända eld med tändstål. Säkerhet och grunder i hur man startar en eld och hur man släcker den. Vad brinner bra och mindre bra. Eldtriangeln. \_Hur ska man tänka för att vara säker på att elden ”tar sig”? Med ett eldstål kan du alltid tända din eld. Det gör tex inget om det blivit blött.<br />//Petter Zonabend König, SMS: 070 - 69 59 49 7</p>"
+    description: |-
+      Vi lär oss tända eld med tändstål. Säkerhet och grunder i hur man startar en eld och hur man släcker den. Vad brinner bra och mindre bra. Eldtriangeln. Hur ska man tänka för att vara säker på att elden ”tar sig”? Med ett eldstål kan du alltid tända din eld. Det gör tex inget om det blivit blött.
+      //Petter Zonabend König, SMS: 070 - 69 59 49 7
     link: null
     owner:
       name: ''
@@ -1163,7 +1257,7 @@ events:
     end: '16:00'
     location: GA Idrott
     responsible: Petter Zonabend König, Stuga 1
-    description: "<p>Du lär dig grunderna för att jonglera med tre bollar. Har du egna bollar så ta med dem. Typ av boll spelar ingen roll. tennisbollar, golfbollar, innebandybollar, jonglerbollar. Bara de väger lika mycket.\_ Lånebollar finns.\_ ALLA kan lära sig jonglera, och självklart tar det lite olika lång tid. Det är lättare än du tror. Det finns vissa viktiga grunder som jag lär dig för att det ska sitta bra.\_<br />Petter Zonabend König,\_ SMS: 070-69 59 49 7</p>"
+    description: 'Du lär dig grunderna för att jonglera med tre bollar. Har du egna bollar så ta med dem. Typ av boll spelar ingen roll. tennisbollar, golfbollar, innebandybollar, jonglerbollar. Bara de väger lika mycket. Lånebollar finns. ALLA kan lära sig jonglera, och självklart tar det lite olika lång tid. Det är lättare än du tror. Det finns vissa viktiga grunder som jag lär dig för att det ska sitta bra. Petter Zonabend König, SMS: 070-69 59 49 7'
     link: null
     owner:
       name: ''
@@ -1178,7 +1272,7 @@ events:
     end: '13:25'
     location: GA Stilla hyllan
     responsible: Anna Björnson (070-2871415)
-    description: "<p>Föräldrar till rollspelarna samlas för att få information om rollspelsfikat samt för att bestämma vem som serverar fika när.\_</p>"
+    description: Föräldrar till rollspelarna samlas för att få information om rollspelsfikat samt för att bestämma vem som serverar fika när.
     link: null
     owner:
       name: ''
@@ -1193,7 +1287,16 @@ events:
     end: '09:45'
     location: Servicehus
     responsible: Cecilia (ordf RFSB, Kaffestugan)
-    description: "<p>09:15-09:45 på måndag så kan alla gå en uppgifts-runda. Vi möts vid sittplatserna vid servicehusets kortsida.</p>\n<p>För alla innebär det en möjlighet att lära känna fler, för nya innebär det även en liten rundtur av campingen och lägret.</p>\n<p>Det är drop-in och målsättningen är att alla som deltar ska få chansen att lära känna andra på lägret. Därför vill vi gärna blanda grupperna med deltagare som är på lägret första gången och de som varit med förut. Vi tänker att alla hjälper till med det, föräldrar får gärna gå i en egen grupp och släppa iväg barnen.</p>\n<p>Tanken är att grupperna är \_3-7 personer och man får vänta vid servicehuset tills man har hittat en grupp att gå med – oroa er inte, vi hjälps alla åt för att försöka bilda grupper eftersom så att alla som vill har en grupp att gå med.</p>\n<p>Alla som deltar får tandtrollsföda efter genomförd uppgiftsrunda.</p>"
+    description: |-
+      09:15-09:45 på måndag så kan alla gå en uppgifts-runda. Vi möts vid sittplatserna vid servicehusets kortsida.
+
+      För alla innebär det en möjlighet att lära känna fler, för nya innebär det även en liten rundtur av campingen och lägret.
+
+      Det är drop-in och målsättningen är att alla som deltar ska få chansen att lära känna andra på lägret. Därför vill vi gärna blanda grupperna med deltagare som är på lägret första gången och de som varit med förut. Vi tänker att alla hjälper till med det, föräldrar får gärna gå i en egen grupp och släppa iväg barnen.
+
+      Tanken är att grupperna är 3-7 personer och man får vänta vid servicehuset tills man har hittat en grupp att gå med – oroa er inte, vi hjälps alla åt för att försöka bilda grupper eftersom så att alla som vill har en grupp att gå med.
+
+      Alla som deltar får tandtrollsföda efter genomförd uppgiftsrunda.
     link: https://www.facebook.com/share/p/1Pt6BRSyxV/?
     owner:
       name: ''
@@ -1208,7 +1311,7 @@ events:
     end: '22:00'
     location: Kaffetält
     responsible: 'Karin och Fredrik '
-    description: "<p>Brädspel i kaffetältet. Trivial Pursuit, När då då m fl\_</p>"
+    description: 'Brädspel i kaffetältet. Trivial Pursuit, När då då m fl'
     link: null
     owner:
       name: ''
@@ -1223,7 +1326,7 @@ events:
     end: '22:00'
     location: Kaffetält
     responsible: 'Karin och Fredrik '
-    description: <p><span>Brädspel i kaffetältet. TP , När då då m fl</span></p>
+    description: 'Brädspel i kaffetältet. TP , När då då m fl'
     link: null
     owner:
       name: ''
@@ -1238,7 +1341,7 @@ events:
     end: '19:00'
     location: KaffePaviljongen
     responsible: Pia Olsson
-    description: <p>Pokémon go Lucia 5-stjärnig raid.</p>
+    description: Pokémon go Lucia 5-stjärnig raid.
     link: null
     owner:
       name: ''
@@ -1253,7 +1356,7 @@ events:
     end: '19:00'
     location: KaffePaviljongen
     responsible: 'Pia Olsson '
-    description: <p>Ny dynamax som släpps på spot hour. Omanyte är det som laddas om flitigt under en timme och fortsätter vara ute sen under veckan. Men alla power spots laddas med bara Omanyte under den timmen. Finns det ingen i närheten på campingen så kan vi knata till en om vädret tillåter.</p>
+    description: Ny dynamax som släpps på spot hour. Omanyte är det som laddas om flitigt under en timme och fortsätter vara ute sen under veckan. Men alla power spots laddas med bara Omanyte under den timmen. Finns det ingen i närheten på campingen så kan vi knata till en om vädret tillåter.
     link: null
     owner:
       name: ''
@@ -1269,10 +1372,15 @@ events:
     location: Grillplats
     responsible: Malin Isenfors
     description: |-
-      <p>GRILLKVÄLL Onsdag 17.00.</p>
-      <p>Vi hoppas att vädergudarna är med oss och låter oss få ha en underbar grillkväll även i år.<br />Just nu ligger den bokad på onsdag, men det kan ändras.</p>
-      <p>Välkommen ner, ta med vad mat och dricka ni vill ha. Vi startar eldarna kl 17.00.<br />Ta gärna med instrument.</p>
-      <p>EFTER att de flesta hunnit få i sina barn mat, så bjuder vi på lite popcorn och marshmellows.</p>
+      GRILLKVÄLL Onsdag 17.00.
+
+      Vi hoppas att vädergudarna är med oss och låter oss få ha en underbar grillkväll även i år.
+      Just nu ligger den bokad på onsdag, men det kan ändras.
+
+      Välkommen ner, ta med vad mat och dricka ni vill ha. Vi startar eldarna kl 17.00.
+      Ta gärna med instrument.
+
+      EFTER att de flesta hunnit få i sina barn mat, så bjuder vi på lite popcorn och marshmellows.
     link: https://www.facebook.com/share/p/1HcEQnq3RR/
     owner:
       name: ''
@@ -1287,7 +1395,7 @@ events:
     end: '11:00'
     location: Kaffetält
     responsible: Jonas Colling och Lisa Lautrup
-    description: <p>Vi ses, fikar och delar erfarenheter om frågor som rör regnbågsfamiljer och andra HBTQI+-frågor</p>
+    description: 'Vi ses, fikar och delar erfarenheter om frågor som rör regnbågsfamiljer och andra HBTQI+-frågor'
     link: null
     owner:
       name: ''
@@ -1302,7 +1410,14 @@ events:
     end: '22:00'
     location: Grillplats
     responsible: Anna Sohlman, Johan Sundell, Henrik Sohlman
-    description: "<p><strong>Gör egna facklor\_</strong></p>\n<p>Vi tillverkar facklor genom att smälta stearin och doppa remsor av lakan.\_</p>\n<p>Facklorna tänder vi i skymningen nere vid älven.</p>\n<p>cirka 15 platser, så först till kvarn. Är intresset stort ordnar vi ett till pass.\_</p>"
+    description: |-
+      **Gör egna facklor **
+
+      Vi tillverkar facklor genom att smälta stearin och doppa remsor av lakan.
+
+      Facklorna tänder vi i skymningen nere vid älven.
+
+      cirka 15 platser, så först till kvarn. Är intresset stort ordnar vi ett till pass.
     link: null
     owner:
       name: ''
@@ -1317,7 +1432,9 @@ events:
     end: '15:30'
     location: Annat
     responsible: familjen Wejbrandt
-    description: "<p>Kom och spela kubb med oss, eller chilla med hunden Semlan.\_<br /><br />Samling kl. 14.00 vid Servicehuset.</p>"
+    description: |-
+      Kom och spela kubb med oss, eller chilla med hunden Semlan.
+      Samling kl. 14.00 vid Servicehuset.
     link: null
     owner:
       name: ''
@@ -1332,7 +1449,24 @@ events:
     end: '16:30'
     location: GA Stilla hyllan
     responsible: Petter Åström
-    description: "<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Vi träffas på hyllan i GA-hallen kring AI. Vi väljer innehåll och nivå beroende på intresse, och planerar troligen in fler tillfällen under veckan.</span></div>\n</div>\n<div>\_</div>\n<div>Ta med dator för att kunna labba.</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\">\_</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Möjligt innehåll:</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<ul>\n<li class=\"html-li xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1n2onr6 x1sle589\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Vad är AI och hur funkar det?</span></div>\n</li>\n</ul>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<ul>\n<li class=\"html-li xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1n2onr6 x1sle589\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Hur intelligent är AI? Vad är egentligen intelligens?</span></div>\n</li>\n</ul>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<ul>\n<li class=\"html-li xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1n2onr6 x1sle589\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Etiska aspekter på AI</span></div>\n</li>\n</ul>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<ul>\n<li class=\"html-li xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1n2onr6 x1sle589\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Labba med ChatGPT och dess olika verktyg</span></div>\n</li>\n</ul>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<ul>\n<li class=\"html-li xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1n2onr6 x1sle589\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Använda verktyg från t ex Google för att utveckla med AI</span></div>\n</li>\n</ul>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<ul>\n<li class=\"html-li xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1n2onr6 x1sle589\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Träna egna modeller</span></div>\n</li>\n</ul>\n</div>"
+    description: |-
+      Vi träffas på hyllan i GA-hallen kring AI. Vi väljer innehåll och nivå beroende på intresse, och planerar troligen in fler tillfällen under veckan.
+
+       Ta med dator för att kunna labba.
+
+      Möjligt innehåll:
+
+      - Vad är AI och hur funkar det?
+
+      - Hur intelligent är AI? Vad är egentligen intelligens?
+
+      - Etiska aspekter på AI
+
+      - Labba med ChatGPT och dess olika verktyg
+
+      - Använda verktyg från t ex Google för att utveckla med AI
+
+      - Träna egna modeller
     link: https://www.facebook.com/groups/syssleback2025/permalink/1164087989082512/
     owner:
       name: ''
@@ -1347,7 +1481,16 @@ events:
     end: '20:00'
     location: Tält2
     responsible: Malin Isenfors
-    description: "<p>Prepping, hur och varför?</p>\n<p>En prepper är väl en galning som när katastrofen kommer sitter och kramar ett automatgevär i en bunker, omgiven av konservburkar? Eller?</p>\n<p>Var ska man börja? Vad kan jag peppa just utifrån mina förutsättningar.</p>\n<p>Kort föreläsning och sedan öppen diskussion.\_</p>\n<p>Malin och Ingimar Isenfors</p>\n<p>&nbsp;</p>"
+    description: |-
+      Prepping, hur och varför?
+
+      En prepper är väl en galning som när katastrofen kommer sitter och kramar ett automatgevär i en bunker, omgiven av konservburkar? Eller?
+
+      Var ska man börja? Vad kan jag peppa just utifrån mina förutsättningar.
+
+      Kort föreläsning och sedan öppen diskussion.
+
+      Malin och Ingimar Isenfors
     link: https://www.facebook.com/share/p/14DxSQHBay3/
     owner:
       name: ''
@@ -1363,8 +1506,9 @@ events:
     location: GA Idrott
     responsible: Lisa Lautrup
     description: |-
-      <p>Vi startar dagen med två kortare klasser (15 + 15 min) med fokus på ökad energi. Du väljer själv om du vill köra en eller två klasser.</p>
-      <p>Ta gärna med yogamatta om du har, ha mjuka kläder på dig och var beredd på att jobba igenom hela kroppen.</p>
+      Vi startar dagen med två kortare klasser (15 + 15 min) med fokus på ökad energi. Du väljer själv om du vill köra en eller två klasser.
+
+      Ta gärna med yogamatta om du har, ha mjuka kläder på dig och var beredd på att jobba igenom hela kroppen.
     link: null
     owner:
       name: ''
@@ -1379,7 +1523,12 @@ events:
     end: '08:00'
     location: GA Idrott
     responsible: Lisa Lautrup
-    description: "<p>Vi utforskar rörelser runt bröstryggen i ett friare flöde med syfte att mjuka upp och öka cirkulationen i området.</p>\n<p>Klassen är 20 min lång och börjar mjukt med fokus på nyfikenhet och utforskande.\_<br /><br /></p>\n<p>Ta gärna med yogamatta om du har!</p>"
+    description: |-
+      Vi utforskar rörelser runt bröstryggen i ett friare flöde med syfte att mjuka upp och öka cirkulationen i området.
+
+      Klassen är 20 min lång och börjar mjukt med fokus på nyfikenhet och utforskande.
+
+      Ta gärna med yogamatta om du har!
     link: null
     owner:
       name: ''
@@ -1394,7 +1543,10 @@ events:
     end: '08:00'
     location: GA Idrott
     responsible: 'Lisa Lautrup '
-    description: "<p>Vi börjar dagen med en kraftfull klass med stora rörelser för att höja energin och skapa skärpa.\_<br /><br /></p>\n<p>Ta gärna med yogamatta om du har och var beredd på en ordentlig genomkörare.</p>"
+    description: |-
+      Vi börjar dagen med en kraftfull klass med stora rörelser för att höja energin och skapa skärpa.
+
+      Ta gärna med yogamatta om du har och var beredd på en ordentlig genomkörare.
     link: null
     owner:
       name: ''
@@ -1409,7 +1561,10 @@ events:
     end: '08:00'
     location: GA Idrott
     responsible: 'Lisa Lautrup '
-    description: "<p>Vi utforskar gäspar och suckar och deras påverkan på vårt välbefinnande.</p>\n<p>Klassen utförs sittande och bidrar till lugn och ro samt mjukar upp andningsmuskulaturen.\_</p>"
+    description: |-
+      Vi utforskar gäspar och suckar och deras påverkan på vårt välbefinnande.
+
+      Klassen utförs sittande och bidrar till lugn och ro samt mjukar upp andningsmuskulaturen.
     link: null
     owner:
       name: ''
@@ -1424,7 +1579,38 @@ events:
     end: '12:00'
     location: GA Kreativ hörna
     responsible: Cecilia, RFSB
-    description: "<p style=\"font-weight: 400\">Geografisk / lokalföreningsträff</p>\n<p style=\"font-weight: 400\">\_</p>\n<p style=\"font-weight: 400\">Passa på att träffa personer som finns närmare samt fundera gärna över om det finns något ni kan och vill göra inom RFSB framåt. Tillsammans kan vi få mer lägerkänsla året runt.</p>\n<p style=\"font-weight: 400\">\_</p>\n<p style=\"font-weight: 400\">Stockholm Mälardalen träffas i Tält 1 (utanför GA Hallen)</p>\n<p style=\"font-weight: 400\">Väst träffas i Andreas tältet (servicehustältet)</p>\n<p style=\"font-weight: 400\">Syd träffas i Tält 2 (utanför GA Hallen)</p>\n<p style=\"font-weight: 400\">Övriga träffas i GA-hallen</p>\n<p style=\"font-weight: 400\">\_</p>\n<p style=\"font-weight: 400\">Nuvarande föreningar:</p>\n<ul>\n<li>Jämtland Härjedalen</li>\n<li>Dalarna Gävleborg</li>\n<li>Stockholm Mälardalen</li>\n<li>Väst (VGR + Värmland)</li>\n<li>Syd (Skåne + Blekinge)</li>\n</ul>\n<p style=\"font-weight: 400\">\_</p>\n<p style=\"font-weight: 400\">Naturliga framtida föreningar (kan gärna kombineras):</p>\n<ul>\n<li>Norrbotten</li>\n<li>Västerbotten</li>\n<li>Västernorrland</li>\n<li>Örebro</li>\n<li>Östergötland</li>\n<li>Jönköping</li>\n<li>Kronoberg</li>\n<li>Kalmar</li>\n<li>Blekinge</li>\n</ul>"
+    description: |-
+      Geografisk / lokalföreningsträff
+
+      Passa på att träffa personer som finns närmare samt fundera gärna över om det finns något ni kan och vill göra inom RFSB framåt. Tillsammans kan vi få mer lägerkänsla året runt.
+
+      Stockholm Mälardalen träffas i Tält 1 (utanför GA Hallen)
+
+      Väst träffas i Andreas tältet (servicehustältet)
+
+      Syd träffas i Tält 2 (utanför GA Hallen)
+
+      Övriga träffas i GA-hallen
+
+      Nuvarande föreningar:
+
+      - Jämtland Härjedalen
+      - Dalarna Gävleborg
+      - Stockholm Mälardalen
+      - Väst (VGR + Värmland)
+      - Syd (Skåne + Blekinge)
+
+      Naturliga framtida föreningar (kan gärna kombineras):
+
+      - Norrbotten
+      - Västerbotten
+      - Västernorrland
+      - Örebro
+      - Östergötland
+      - Jönköping
+      - Kronoberg
+      - Kalmar
+      - Blekinge
     link: https://www.facebook.com/share/p/1BP2WNoJAa/
     owner:
       name: ''
@@ -1440,10 +1626,11 @@ events:
     location: GA Idrott
     responsible: Lisa Lautrup
     description: |-
-      <p>Vi börjar dagen med ett klassiskt hatha yoga flöde med fokus på fötterna.</p>
-      <p>Passar bäst för dig som har yogat ett tag eller för dig som inte är rädd för en utmaning!</p>
-      <p>Klassen ges på engelska.</p>
-      <p>&nbsp;</p>
+      Vi börjar dagen med ett klassiskt hatha yoga flöde med fokus på fötterna.
+
+      Passar bäst för dig som har yogat ett tag eller för dig som inte är rädd för en utmaning!
+
+      Klassen ges på engelska.
     link: null
     owner:
       name: ''
@@ -1458,7 +1645,12 @@ events:
     end: '14:00'
     location: GA Kreativ hörna
     responsible: 'Alex och Rebecca Isenfors '
-    description: '<p>Varulvarna!<br />Kom och spela i GA-hallen mellan 14:30-16:30! <br />Ålder: Från 7 år<br />Ingen erfarenhet krävs, kom och gå hur ni vill, ha kul!<br />/Alex och Rebecca Isenfors</p>'
+    description: |-
+      Varulvarna!
+      Kom och spela i GA-hallen mellan 14:30-16:30!
+      Ålder: Från 7 år
+      Ingen erfarenhet krävs, kom och gå hur ni vill, ha kul!
+      /Alex och Rebecca Isenfors
     link: null
     owner:
       name: ''
@@ -1474,11 +1666,15 @@ events:
     location: GA Kreativ hörna
     responsible: 'Alex och Rebecca Isenfors '
     description: |-
-      <p>Varulvarna!</p>
-      <p>Kom och spela i GA-hallen 14:00</p>
-      <p>Ålder: Från 7 år</p>
-      <p>Ingen erfarenhet krävs, kom och gå när ni vill, ha kul!</p>
-      <p>/Alex och Rebecca Isenfors</p>
+      Varulvarna!
+
+      Kom och spela i GA-hallen 14:00
+
+      Ålder: Från 7 år
+
+      Ingen erfarenhet krävs, kom och gå när ni vill, ha kul!
+
+      /Alex och Rebecca Isenfors
     link: null
     owner:
       name: ''
@@ -1493,7 +1689,7 @@ events:
     end: '21:00'
     location: AndreasTältet
     responsible: Martina och Linn
-    description: "<p>Blandat musikquiz med äldre och nyare låtar. Försök blanda lagen, musikstil kanske är svårt att veta, men ålder kan vara lättare. Våga komma själv, du kommer hitta ett lag och antagligen bidra på något sätt.\_</p>\n<p>&nbsp;</p>"
+    description: 'Blandat musikquiz med äldre och nyare låtar. Försök blanda lagen, musikstil kanske är svårt att veta, men ålder kan vara lättare. Våga komma själv, du kommer hitta ett lag och antagligen bidra på något sätt.'
     link: null
     owner:
       name: ''
@@ -1509,8 +1705,9 @@ events:
     location: Tält2
     responsible: Anna Björnson
     description: |-
-      <p id="docs-internal-guid-aad8aeda-7fff-305e-afed-fac426c8d9dd" dir="ltr" style="line-height: 1.38;margin-top: 0.0pt;margin-bottom: 0.0pt"><span style="font-size: 11pt;font-family: Arial, sans-serif;color: #000000;background-color: transparent;vertical-align: baseline">Lägrets första föräldrafika, där vi delar erfarenheter och tips om 2e (npf i kombination med särskild begåvning), vi inkluderar dyslexi och PDA i diskussionen.</span></p>
-      <p dir="ltr" style="line-height: 1.38;margin-top: 0.0pt;margin-bottom: 0.0pt"><span style="font-size: 11pt;font-family: Arial, sans-serif;color: #000000;background-color: transparent;vertical-align: baseline">Du är välkommen både om ditt barn redan har en npf-diagnos eller om ni funderar på om barnet skulle vara 2e.</span></p>
+      Lägrets första föräldrafika, där vi delar erfarenheter och tips om 2e (npf i kombination med särskild begåvning), vi inkluderar dyslexi och PDA i diskussionen.
+
+      Du är välkommen både om ditt barn redan har en npf-diagnos eller om ni funderar på om barnet skulle vara 2e.
     link: null
     owner:
       name: ''
@@ -1525,7 +1722,12 @@ events:
     end: '11:00'
     location: Tält2
     responsible: Malin och Ingimar Isenfors
-    description: "<p id=\"docs-internal-guid-2f833aa5-7fff-5314-ff3a-10365b234e56\" dir=\"ltr\" style=\"line-height: 1.38;margin-top: 0.0pt;margin-bottom: 0.0pt\"><span style=\"font-size: 11pt;font-family: Arial, sans-serif;color: #000000;background-color: transparent;vertical-align: baseline\">Diskussion om Radikalaccelation i praktiken. Hur går det till, hur gör man rent praktiskt, vad finns det för fallgropar.\_</span></p>\n<p dir=\"ltr\" style=\"line-height: 1.38;margin-top: 0.0pt;margin-bottom: 0.0pt\"><span style=\"font-size: 11pt;font-family: Arial, sans-serif;color: #000000;background-color: transparent;vertical-align: baseline\">Radikalaccelation är när man flyttar upp 3 år eller mer i skolan, på en gång eller i steg.\_</span></p>\n<p dir=\"ltr\" style=\"line-height: 1.38;margin-top: 0.0pt;margin-bottom: 0.0pt\"><span style=\"font-size: 11pt;font-family: Arial, sans-serif;color: #000000;background-color: transparent;vertical-align: baseline\">Varmt välkomna!</span></p>"
+    description: |-
+      Diskussion om Radikalaccelation i praktiken. Hur går det till, hur gör man rent praktiskt, vad finns det för fallgropar.
+
+      Radikalaccelation är när man flyttar upp 3 år eller mer i skolan, på en gång eller i steg.
+
+      Varmt välkomna!
     link: null
     owner:
       name: ''
@@ -1540,7 +1742,7 @@ events:
     end: '11:00'
     location: Tält2
     responsible: Anna Björnson
-    description: '<p id="docs-internal-guid-68cea460-7fff-b95c-7bbd-2d4ade20abdd" dir="ltr" style="line-height: 1.38;margin-top: 0.0pt;margin-bottom: 0.0pt"><span style="font-size: 11pt;font-family: Arial, sans-serif;color: #000000;background-color: transparent;vertical-align: baseline">Vi delar erfarenheter och tips om uppflytt, särskild prövning samt vad man kan göra när man tagit studenten som 16-åring.</span></p>'
+    description: 'Vi delar erfarenheter och tips om uppflytt, särskild prövning samt vad man kan göra när man tagit studenten som 16-åring.'
     link: null
     owner:
       name: ''
@@ -1554,8 +1756,8 @@ events:
     start: '10:00'
     end: '11:00'
     location: Tält2
-    responsible: Maria AIfredsson och Susanna &amp; Niclas Nilsson
-    description: '<p id="docs-internal-guid-af3366d4-7fff-e565-207b-2b2283953736" dir="ltr" style="line-height: 1.38;margin-top: 0.0pt;margin-bottom: 0.0pt"><span style="font-size: 11pt;font-family: Arial, sans-serif;color: #000000;background-color: transparent;vertical-align: baseline">Maria AIfredsson och Susanna &amp; Niclas Nilsson delar med sig av erfarenheter av att lämna Sverige för att undervisa på annat sätt när skolan i Sverige inte fungerar.</span></p>'
+    responsible: Maria AIfredsson och Susanna & Niclas Nilsson
+    description: 'Maria AIfredsson och Susanna & Niclas Nilsson delar med sig av erfarenheter av att lämna Sverige för att undervisa på annat sätt när skolan i Sverige inte fungerar.'
     link: null
     owner:
       name: ''
@@ -1570,7 +1772,16 @@ events:
     end: '11:30'
     location: AndreasTältet
     responsible: Malin Isenfors
-    description: "<p>Popup nagelstudio!</p>\n<p>I tältet vid servicehuset kl 10.00 - 11.30 på tisdag.\_</p>\n<p>Måla dina egna naglar, eller någon annans!</p>\n<p>Barn som inte kan klara sig själva behöver komma med vuxet sällskap!\_</p>\n<p>- Det kommer fler tillfällen under veckan.</p>"
+    description: |-
+      Popup nagelstudio!
+
+      I tältet vid servicehuset kl 10.00 - 11.30 på tisdag.
+
+      Måla dina egna naglar, eller någon annans!
+
+      Barn som inte kan klara sig själva behöver komma med vuxet sällskap!
+
+      - Det kommer fler tillfällen under veckan.
     link: null
     owner:
       name: ''
@@ -1585,7 +1796,7 @@ events:
     end: '14:30'
     location: GA Stilla hyllan
     responsible: Niclas Nilsson
-    description: <p>En GPT är en sorts AI – en textbaserad samtalspartner som kan svara, förklara, föreslå och mycket mer. I den här sessionen bygger vi tillsammans en egen GPT med hjälp av ChatGPT:s inbyggda verktyg. Vi bestämmer vad den ska kunna, hur den ska uttrycka sig och vilken roll den ska ha. Vi gör det gemensamt på en projektor, men har ni en dator att ta med för att pröva själva också är det bara positivt.</p>
+    description: 'En GPT är en sorts AI – en textbaserad samtalspartner som kan svara, förklara, föreslå och mycket mer. I den här sessionen bygger vi tillsammans en egen GPT med hjälp av ChatGPT:s inbyggda verktyg. Vi bestämmer vad den ska kunna, hur den ska uttrycka sig och vilken roll den ska ha. Vi gör det gemensamt på en projektor, men har ni en dator att ta med för att pröva själva också är det bara positivt.'
     link: null
     owner:
       name: ''
@@ -1600,7 +1811,12 @@ events:
     end: '16:00'
     location: GA Stilla hyllan
     responsible: Ingimar Isenfors
-    description: "<p><strong>Skapa med ChatGPT (och andra AI)</strong></p>\n<p>Kom och se hur man kan använda AI-verktyg som ChatGPT och Suno för att skapa texter, bilder och musik – utan att vara expert. Jag visar exempel, vi pratar om hur det funkar och delar tips med varandra. Nyfiken eller redan igång? Alla är välkomna!</p>\n<p>Valfritt: Ta med egen dator\_</p>"
+    description: |-
+      **Skapa med ChatGPT (och andra AI)**
+
+      Kom och se hur man kan använda AI-verktyg som ChatGPT och Suno för att skapa texter, bilder och musik – utan att vara expert. Jag visar exempel, vi pratar om hur det funkar och delar tips med varandra. Nyfiken eller redan igång? Alla är välkomna!
+
+      Valfritt: Ta med egen dator
     link: null
     owner:
       name: ''
@@ -1615,7 +1831,16 @@ events:
     end: '12:30'
     location: Servicehus
     responsible: Christina Falk
-    description: "<p>Leker röda vita rosen (anpassade regler för lägret)</p>\n<ul>\n<li>Hela lägerområdet får användas för att gömma stormumriken</li>\n<li>Poängräkning</li>\n</ul>\n<p>Ingen åldergräns men deltagarna ska kunna</p>\n<ul>\n<li>Leka självständigt utan föräldrar</li>\n<li>Kunna behålla hemlighet\_</li>\n<li>Följa regler och vara lojal med laget</li>\n</ul>\n<p>Samling vid servicehuset klockan 11 då vi börjar med regelgenomgång och lagindelning.</p>"
+    description: |-
+      Leker röda vita rosen (anpassade regler för lägret)
+
+      - Hela lägerområdet får användas för att gömma stormumriken
+      - Poängräkning
+      Ingen åldergräns men deltagarna ska kunna
+
+      - Leka självständigt utan föräldrar
+      - Kunna behålla hemlighet - Följa regler och vara lojal med laget
+      Samling vid servicehuset klockan 11 då vi börjar med regelgenomgång och lagindelning.
     link: null
     owner:
       name: ''
@@ -1631,14 +1856,14 @@ events:
     location: AndreasTältet
     responsible: Malin Isenfors
     description: |-
-      Popup nagelstudio!<br />
-      <br />
-      I tältet vid servicehuset kl 10.00 – 11.30 på tisdag. <br />
-      <br />
-      Måla dina egna naglar, eller någon annans!<br />
-      <br />
-      Barn som inte kan klara sig själva behöver komma med vuxet sällskap! <br />
-      <br />
+      Popup nagelstudio!
+
+      I tältet vid servicehuset kl 10.00 – 11.30 på tisdag.
+
+      Måla dina egna naglar, eller någon annans!
+
+      Barn som inte kan klara sig själva behöver komma med vuxet sällskap!
+
       – Det kommer fler tillfällen under veckan.
     link: null
     owner:
@@ -1655,13 +1880,13 @@ events:
     location: AndreasTältet
     responsible: Christina Falk och Rikard Olofsson
     description: |-
-      Det är ett mysterium för mig hur världens roligaste kortspel, som kräver mer intelligens och strategi än något annat, har fått det oförtjänta ryktet som en dammig pensionärsaktivitet.<br />
-      <br />
-      Bridge är kortspelens motsvarighet till schack.<br />
-      <br />
-      Kom och spela med oss. Inga förkunskaper krävs, vi lär ut reglerna.<br />
-      Om vi blir minst 8 st kan vi spela en kort lagtävling.<br />
-      <br />
+      Det är ett mysterium för mig hur världens roligaste kortspel, som kräver mer intelligens och strategi än något annat, har fått det oförtjänta ryktet som en dammig pensionärsaktivitet.
+
+      Bridge är kortspelens motsvarighet till schack.
+
+      Kom och spela med oss. Inga förkunskaper krävs, vi lär ut reglerna.
+
+      Om vi blir minst 8 st kan vi spela en kort lagtävling.
     link: null
     owner:
       name: ''
@@ -1676,7 +1901,7 @@ events:
     end: '19:30'
     location: GA Stilla hyllan
     responsible: 'Elias '
-    description: "<p>Kom och spela YU-GI-O! Ingen erfarenhet behövs! /Elias Eellend\_</p>\n<p>&nbsp;</p>"
+    description: 'Kom och spela YU-GI-O! Ingen erfarenhet behövs! /Elias Eellend'
     link: null
     owner:
       name: ''
@@ -1691,7 +1916,7 @@ events:
     end: '15:15'
     location: GA Stilla hyllan
     responsible: Jinghong Sundell, Johan Sundell
-    description: <p>Lär dig spela Mahjong. 4 pers kan spela per omgång. https://sv.wikipedia.org/wiki/Mahjong</p>
+    description: 'Lär dig spela Mahjong. 4 pers kan spela per omgång. https://sv.wikipedia.org/wiki/Mahjong'
     link: null
     owner:
       name: ''
@@ -1705,8 +1930,8 @@ events:
     start: '19:30'
     end: '20:30'
     location: GA Kreativ hörna
-    responsible: Martina&amp;Linn
-    description: "<p>En speciell fläta med hjälp av garn och kartong.\_</p>"
+    responsible: Martina&Linn
+    description: En speciell fläta med hjälp av garn och kartong.
     link: null
     owner:
       name: ''
@@ -1722,9 +1947,11 @@ events:
     location: AndreasTältet
     responsible: Kajsa Ögård
     description: |-
-      <p class="p1"><span class="s1">Drop-in pyssel med lufttorkande lera i tältet vid servicehuset.</span></p>
-      <p class="p1"><span class="s1">Lera finns i vitt, svart och terracotta. När leran torkat (1-2 dygn) kan den målas med akryl- eller hobbyfärg.</span></p>
-      <p class="p1"><span class="s1">Ta gärna med saker som du eller andra kan använda för att forma och dekorera leran – till exempel små skålar, sugrör, svampar, penslar, grillpinnar, gem, fiskelina, nålar, skrapor/stekspadar etc. Extra knivar (vassa) och släta glasflaskor/burkar som kan användas som brödkavel är också extra välkommet!</span></p>
+      Drop-in pyssel med lufttorkande lera i tältet vid servicehuset.
+
+      Lera finns i vitt, svart och terracotta. När leran torkat (1-2 dygn) kan den målas med akryl- eller hobbyfärg.
+
+      Ta gärna med saker som du eller andra kan använda för att forma och dekorera leran – till exempel små skålar, sugrör, svampar, penslar, grillpinnar, gem, fiskelina, nålar, skrapor/stekspadar etc. Extra knivar (vassa) och släta glasflaskor/burkar som kan användas som brödkavel är också extra välkommet!
     link: https://www.facebook.com/share/p/19XiZX5fBE/?
     owner:
       name: ''
@@ -1739,7 +1966,10 @@ events:
     end: '12:30'
     location: GA Stilla hyllan
     responsible: Anna Björnson
-    description: "<p>Föräldrafika 2e fortsättning\_</p>\n<p>Vi fortsätter diskussionen från tisdagens föräldrafika.</p>"
+    description: |-
+      Föräldrafika 2e fortsättning
+
+      Vi fortsätter diskussionen från tisdagens föräldrafika.
     link: null
     owner:
       name: ''
@@ -1754,7 +1984,10 @@ events:
     end: '21:30'
     location: GA Stilla hyllan
     responsible: 'Alex Isenfors '
-    description: "<blockquote>\n<p>Kom till stilla hyllan och rita Manga tillsammans. Alex finns där, visar och ger tips.</p>\n<p>Ta med eget ritmaterial. Det går också bra att rita digitalt med en app om man vill.</p>\n</blockquote>\n<p>Det finns också möjlighet att låna lite material från pysselhörnan om man helt saknar.\_</p>"
+    description: |-
+      > Kom till stilla hyllan och rita Manga tillsammans. Alex finns där, visar och ger tips.
+      > Ta med eget ritmaterial. Det går också bra att rita digitalt med en app om man vill.
+      Det finns också möjlighet att låna lite material från pysselhörnan om man helt saknar.
     link: null
     owner:
       name: ''
@@ -1769,7 +2002,7 @@ events:
     end: '15:30'
     location: Tält2
     responsible: Anna Björnson
-    description: <p>Vi delar erfarenheter och tips kring "hemmasittare", eller som jag hellre säger, barn med problematisk skolnärvaro.</p>
+    description: 'Vi delar erfarenheter och tips kring "hemmasittare", eller som jag hellre säger, barn med problematisk skolnärvaro.'
     link: null
     owner:
       name: ''
@@ -1784,7 +2017,7 @@ events:
     end: '15:10'
     location: GA Idrott
     responsible: Jenny von Bahr
-    description: "<p>Planeringsmöte för stationerna 1-6. Vi ses vid GA-idrott och sätter oss i något hörn.\_</p>"
+    description: Planeringsmöte för stationerna 1-6. Vi ses vid GA-idrott och sätter oss i något hörn.
     link: null
     owner:
       name: ''
@@ -1799,7 +2032,7 @@ events:
     end: '12:00'
     location: GA Idrott
     responsible: Jenny von Bahr
-    description: <p>Planeringsmöte för station 7-12. Vi ses vid GA-hallen och sätter oss i något hörn.</p>
+    description: Planeringsmöte för station 7-12. Vi ses vid GA-hallen och sätter oss i något hörn.
     link: null
     owner:
       name: ''
@@ -1814,7 +2047,57 @@ events:
     end: '13:45'
     location: AndreasTältet
     responsible: Lisel Næslund, Dante Næslund
-    description: "<div><strong>För nyfikna i alla åldrar som älskar att upptäcka nya ämnen!</strong></div>\n<div>Kom som publik eller kom och dela med dig av kunskap om ett ämne som du gillar. Tänk som ett mini-Ted-talk blandat med en hiss-pitch. Vi ser fram emot att inspireras av varandra!</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div>\_</div>\n</div>\n<div><em>Rekommenderade ramar för dig som vill berätta om ett ämne:</em></div>\n<div><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">– Presentera dig. Berätta fem fakta om ditt valda ämne. Avrunda gärna med tips om var vi kan lära oss mer om ämnet innan du avslutar och publiken applåderar 🙂</span></div>\n<div>– Max fem minuter på scenen, ingen undre gräns. Vi hjälper till att hålla tiden om du vill.</div>\n<div>– Alla åldrar är välkomna. Vill man vara flera personer på scenen går det självklart bra.</div>\n<div>– Det kommer att finnas en plats att stå på och en mikrofon.\_</div>\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\">\_</div>\n<div>Popcorn till alla!</div>\n<div>\_</div>\n<div>\_</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><em><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Här är exempel på ämnen till\_</span>Fem fakta på fem minuter:</em></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\">\_</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Världens farligaste platser</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Typiska japanska maträtter</span></div>\n<div>Mest visade videor på Youtube</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Byggnadsvård</span></div>\n<div>Hur man bygger en låt</div>\n<div>Historiska händelser</div>\n<div>Svåraste sporterna</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Världens snabbaste tåg</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Hur man äter sushi på rätt sätt</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">De lyxigaste flygplanen</span></div>\n<div>Presidenter</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Vett och etikett</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Världens farligaste djur</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Djupast liggande vraken</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Svåra språk</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Giftiga ämnen</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Klockor</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Uppfinningar som förändrat världen</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Periodiska systemet</span></div>\n<div>AI</div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Ord som böjs fel</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Misstag som ledde till uppfinningar</span></div>\n</div>\n<div class=\"html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl\">\n<div class=\"html-div xdj266r x14z9mp x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x1e56ztr\"><span class=\"x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x6prxxf xvq8zen xo1l8bm xzsf02u\">Hur vi ska komma till Mars</span></div>\n</div>"
+    description: |-
+      **För nyfikna i alla åldrar som älskar att upptäcka nya ämnen!**
+      Kom som publik eller kom och dela med dig av kunskap om ett ämne som du gillar. Tänk som ett mini-Ted-talk blandat med en hiss-pitch. Vi ser fram emot att inspireras av varandra!
+
+      *Rekommenderade ramar för dig som vill berätta om ett ämne:*
+      – Presentera dig. Berätta fem fakta om ditt valda ämne. Avrunda gärna med tips om var vi kan lära oss mer om ämnet innan du avslutar och publiken applåderar 🙂
+      – Max fem minuter på scenen, ingen undre gräns. Vi hjälper till att hålla tiden om du vill.
+      – Alla åldrar är välkomna. Vill man vara flera personer på scenen går det självklart bra.
+      – Det kommer att finnas en plats att stå på och en mikrofon. Popcorn till alla!
+
+      *Här är exempel på ämnen till Fem fakta på fem minuter:*
+
+      Världens farligaste platser
+
+      Typiska japanska maträtter
+      Mest visade videor på Youtube
+
+      Byggnadsvård
+      Hur man bygger en låt
+      Historiska händelser
+      Svåraste sporterna
+
+      Världens snabbaste tåg
+
+      Hur man äter sushi på rätt sätt
+
+      De lyxigaste flygplanen
+      Presidenter
+
+      Vett och etikett
+
+      Världens farligaste djur
+
+      Djupast liggande vraken
+
+      Svåra språk
+
+      Giftiga ämnen
+
+      Klockor
+
+      Uppfinningar som förändrat världen
+
+      Periodiska systemet
+      AI
+
+      Ord som böjs fel
+
+      Misstag som ledde till uppfinningar
+
+      Hur vi ska komma till Mars
     link: null
     owner:
       name: ''
@@ -1829,10 +2112,7 @@ events:
     end: '12:00'
     location: Tält1
     responsible: Martina och Linn
-    description: |-
-      <blockquote>
-      <p>Diamond painting: pyssel med glitter, kan det bli bättre? Fungerar för yngre barn ta gärna med en förälder då. Flyttar borden i tält 1 inomhus till korridoren.</p>
-      </blockquote>
+    description: '> Diamond painting: pyssel med glitter, kan det bli bättre? Fungerar för yngre barn ta gärna med en förälder då. Flyttar borden i tält 1 inomhus till korridoren.'
     link: null
     owner:
       name: ''
@@ -1847,7 +2127,7 @@ events:
     end: '15:00'
     location: Tält1
     responsible: Martina och Linn
-    description: "<p>Diamond painting. Pyssla med diamanter. Finns nyckelringar och klistermärken, boka till glasunderlägg\_</p>"
+    description: 'Diamond painting. Pyssla med diamanter. Finns nyckelringar och klistermärken, boka till glasunderlägg'
     link: https://www.facebook.com/share/p/1CZWZcFnN7/
     owner:
       name: ''
@@ -1862,7 +2142,20 @@ events:
     end: '11:00'
     location: AndreasTältet
     responsible: Malin Isenfors
-    description: "<p style=\"text-align: left\">NYHET! Nagelmålning för fega föräldrar</p>\n<p style=\"text-align: left\">Nyhet! För första gången kör nagelstudion en speciell event - Nagelmålning för fega föräldrar!</p>\n<p style=\"text-align: left\">Vi riktar oss speciellt till DIG som inte riktigt vågat dig hit när alla coola kidsen är här.</p>\n<p style=\"text-align: left\">Måla dig själv, varandra eller ta med ett barn som kan stötta och hjälpa dig!!</p>\n<p style=\"text-align: left\">Vi kör 80-talshits.</p>\n<p style=\"text-align: left\">Låt din inre diva blomma ut, du vet att den finns där!!</p>\n<p style=\"text-align: left\">Servicehuset, Fredag kl 10-11.</p>\n<p style=\"text-align: left\">\_</p>"
+    description: |-
+      NYHET! Nagelmålning för fega föräldrar
+
+      Nyhet! För första gången kör nagelstudion en speciell event - Nagelmålning för fega föräldrar!
+
+      Vi riktar oss speciellt till DIG som inte riktigt vågat dig hit när alla coola kidsen är här.
+
+      Måla dig själv, varandra eller ta med ett barn som kan stötta och hjälpa dig!!
+
+      Vi kör 80-talshits.
+
+      Låt din inre diva blomma ut, du vet att den finns där!!
+
+      Servicehuset, Fredag kl 10-11.
     link: null
     owner:
       name: ''
@@ -1877,7 +2170,14 @@ events:
     end: '12:00'
     location: AndreasTältet
     responsible: Malin Isenfors
-    description: "<p>Popup nagelstudio</p>\n<p>I tältet vid servicehuset kl 11-12 på fredag.\_</p>\n<p>Måla dina egna naglar, eller någon annans!</p>\n<p>Barn som inte kan klara sig själva behöver komma med vuxet sällskap!\_</p>"
+    description: |-
+      Popup nagelstudio
+
+      I tältet vid servicehuset kl 11-12 på fredag.
+
+      Måla dina egna naglar, eller någon annans!
+
+      Barn som inte kan klara sig själva behöver komma med vuxet sällskap!
     link: null
     owner:
       name: ''
@@ -1892,7 +2192,7 @@ events:
     end: '14:30'
     location: GA Stilla hyllan
     responsible: Jonas o Petter
-    description: <p>Vi undersöker hur man kan använda olika AI-verktyg för skola och utbildning. Ta med dator för att labba!</p>
+    description: 'Vi undersöker hur man kan använda olika AI-verktyg för skola och utbildning. Ta med dator för att labba!'
     link: null
     owner:
       name: ''
@@ -1908,8 +2208,9 @@ events:
     location: GA Idrott
     responsible: 'Lisa Lautrup '
     description: |-
-      <p>Vi börjar dagen med en rutin för lymfsystemet med fokus på ökat flöde som bidrar till minskad svullnad och bättre immunförsvar.</p>
-      <p>Rutinen ”The Big 6” kan med fördel göras dagligen under hela året.</p>
+      Vi börjar dagen med en rutin för lymfsystemet med fokus på ökat flöde som bidrar till minskad svullnad och bättre immunförsvar.
+
+      Rutinen ”The Big 6” kan med fördel göras dagligen under hela året.
     link: null
     owner:
       name: ''
@@ -1925,8 +2226,9 @@ events:
     location: GA Kreativ hörna
     responsible: Julius Grassman
     description: |-
-      <p>Hur skapas film, hur använder man olika filmiska språk och hur gör man för att skapa filmen med bara en mobiltelefon.</p>
-      <p>Det tänkte jag presentera med lite övning och knep för att komma igång. Sedan är tanken att gruppen skapar en kort film. På eftermiddagen ca kl 16-17:30 samlas vi igen och redigerar/sätter ihop filmen i mobilen.</p>
+      Hur skapas film, hur använder man olika filmiska språk och hur gör man för att skapa filmen med bara en mobiltelefon.
+
+      Det tänkte jag presentera med lite övning och knep för att komma igång. Sedan är tanken att gruppen skapar en kort film. På eftermiddagen ca kl 16-17:30 samlas vi igen och redigerar/sätter ihop filmen i mobilen.
     link: null
     owner:
       name: ''
@@ -1941,7 +2243,10 @@ events:
     end: '18:00'
     location: AndreasTältet
     responsible: Kajsa Ögård
-    description: "<p class=\"p1\">Gör din egen slime i tältet vid servicehuset. Drop-in kl. 16:30-18. Mindre barn bör ha med en vuxen som hjälper till.</p>\n<p class=\"p1\"><span class=\"s2\">OBS! Ta med valfri skål och en matsked att blanda med - både ”riktiga” skålar och engångskärl som större yoghurtburkar i plast fungerar. (Engångsartiklarna som köptes in för omgång 1 är nästan slut och en stadig sked fungerar oavsett mycket bättre än en engångssked).\_</span></p>"
+    description: |-
+      Gör din egen slime i tältet vid servicehuset. Drop-in kl. 16:30-18. Mindre barn bör ha med en vuxen som hjälper till.
+
+      OBS! Ta med valfri skål och en matsked att blanda med - både ”riktiga” skålar och engångskärl som större yoghurtburkar i plast fungerar. (Engångsartiklarna som köptes in för omgång 1 är nästan slut och en stadig sked fungerar oavsett mycket bättre än en engångssked).
     link: https://www.facebook.com/share/p/19Der1uQL8/?
     owner:
       name: ''
@@ -2017,11 +2322,9 @@ events:
     location: AndreasTältet
     responsible: Maja & Ulrik
     description: |-
-      <p>För alla som vill leka med såpbubblor.</p>
-      <p>Vi är vid tältet utanför servicehuset.</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
+      För alla som vill leka med såpbubblor.
+
+      Vi är vid tältet utanför servicehuset.
     link: null
     owner:
       name: ''
@@ -2036,7 +2339,7 @@ events:
     end: '17:00'
     location: Annat
     responsible: Jonas Colling
-    description: "<p>Det är lite byigt och svårt att hitta lä, så vi kör bland buskarna bakom rollspelstälten där det är lite skydd och oöm omgivning\_</p>"
+    description: 'Det är lite byigt och svårt att hitta lä, så vi kör bland buskarna bakom rollspelstälten där det är lite skydd och oöm omgivning'
     link: null
     owner:
       name: ''
@@ -2066,7 +2369,7 @@ events:
     end: '17:30'
     location: GA Kreativ hörna
     responsible: Julius Grassman
-    description: <p>För de som deltagit i del 1 så samlas vi nu för redigering av filmat material i mobilen, sätter ihop en liten film av det man gjort med gruppen.</p>
+    description: 'För de som deltagit i del 1 så samlas vi nu för redigering av filmat material i mobilen, sätter ihop en liten film av det man gjort med gruppen.'
     link: https://www.facebook.com/share/p/1EpWBZPJCZ/?
     owner:
       name: ''
@@ -2081,7 +2384,7 @@ events:
     end: '14:00'
     location: Rollspelstält2
     responsible: 'Johan '
-    description: <p>Istället för onsdag kväll. Vi gör en kort paus för lunch för de som vill!</p>
+    description: 'Istället för onsdag kväll. Vi gör en kort paus för lunch för de som vill!'
     link: null
     owner:
       name: ''
@@ -2096,7 +2399,7 @@ events:
     end: '12:00'
     location: GA Stilla hyllan
     responsible: 'Jonas '
-    description: "<p>Upptäck hur du kan bygga kraftfulla appar med hjälp av Google AI Studio – utan att nödvändigtvis kunna koda! I denna praktiska workshop utforskar vi hur du kan använda AI för att skapa appar som i sig själva innehåller element av AI – snabbt, smart och enkelt. \_</p>"
+    description: 'Upptäck hur du kan bygga kraftfulla appar med hjälp av Google AI Studio – utan att nödvändigtvis kunna koda! I denna praktiska workshop utforskar vi hur du kan använda AI för att skapa appar som i sig själva innehåller element av AI – snabbt, smart och enkelt.'
     link: null
     owner:
       name: ''
@@ -2111,7 +2414,12 @@ events:
     end: '18:00'
     location: GA Stilla hyllan
     responsible: Tilde, Karin
-    description: "<p>Drop in artstudio från ca 16.30 (efter brain games) till ca 18.</p>\n<p>Man kan komma och gå lite fritt, barn 12 år och yngre I vuxet sällskap.\_</p>\n<p>Vuxna varmt välkomna att delta (både med och utan barn)</p>"
+    description: |-
+      Drop in artstudio från ca 16.30 (efter brain games) till ca 18.
+
+      Man kan komma och gå lite fritt, barn 12 år och yngre I vuxet sällskap.
+
+      Vuxna varmt välkomna att delta (både med och utan barn)
     link: null
     owner:
       name: ''
@@ -2127,8 +2435,9 @@ events:
     location: Tonårsstugan
     responsible: 'Antonia Ilke '
     description: |-
-      <p>Kom och improvisera! Vi har några idéer på lekar, det blir precis vad vi gör det till. Ta gärna med en bok med lustiga repliker och någon rekvisita. Ses där!</p>
-      <p>För tonåringar.</p>
+      Kom och improvisera! Vi har några idéer på lekar, det blir precis vad vi gör det till. Ta gärna med en bok med lustiga repliker och någon rekvisita. Ses där!
+
+      För tonåringar.
     link: https://0723459487
     owner:
       name: ''
@@ -2144,8 +2453,9 @@ events:
     location: Tonårsstugan
     responsible: Antonia Ilke, 072 543 9487
     description: |-
-      <p>Kom och improvisera! Vi har några idéer på lekar, det blir precis vad vi gör det till. Ta gärna med en bok med lustiga repliker och någon rekvisita. Ses där!</p>
-      <p>För tonåringar.</p>
+      Kom och improvisera! Vi har några idéer på lekar, det blir precis vad vi gör det till. Ta gärna med en bok med lustiga repliker och någon rekvisita. Ses där!
+
+      För tonåringar.
     link: null
     owner:
       name: ''
@@ -2160,7 +2470,7 @@ events:
     end: '11:30'
     location: Annat
     responsible: Jonas Colling
-    description: "<p>Vi kör spraymålningen bakom rollspelstälten\_</p>"
+    description: Vi kör spraymålningen bakom rollspelstälten
     link: null
     owner:
       name: ''
@@ -2176,8 +2486,8 @@ events:
     location: Kaffetält
     responsible: Morgan
     description: |-
-      Vad tänker vi pappor kring barn, särskild begåvning och utbildning?<br>
-      <br>
+      Vad tänker vi pappor kring barn, särskild begåvning och utbildning?
+
       Och framförallt. Vad heter alla? Vilka är här? Och hur är läget?
     link: null
     owner:
@@ -2193,7 +2503,16 @@ events:
     end: '21:00'
     location: AndreasTältet
     responsible: Christina Falk och Rikard Olofsson
-    description: "<p>Det är ett mysterium för mig hur världens roligaste kortspel, som kräver mer intelligens och strategi än något annat, har fått det oförtjänta ryktet som en dammig pensionärsaktivitet.</p>\n<p>Ett tillfälle till att lära sig bridge.\_</p>\n<p>Första 15 minutrarna ägnar vi åt introduktion, som man kan hoppa över om man kan grunderna.\_<br /><br />Bridge är kortspelens motsvarighet till schack.</p>\n<p>Kom och spela med oss. Inga förkunskaper krävs, vi lär ut reglerna.<br />Om vi blir minst 8 st kan vi spela en kort lagtävling.</p>"
+    description: |-
+      Det är ett mysterium för mig hur världens roligaste kortspel, som kräver mer intelligens och strategi än något annat, har fått det oförtjänta ryktet som en dammig pensionärsaktivitet.
+
+      Ett tillfälle till att lära sig bridge.
+
+      Första 15 minutrarna ägnar vi åt introduktion, som man kan hoppa över om man kan grunderna.
+      Bridge är kortspelens motsvarighet till schack.
+
+      Kom och spela med oss. Inga förkunskaper krävs, vi lär ut reglerna.
+      Om vi blir minst 8 st kan vi spela en kort lagtävling.
     link: null
     owner:
       name: ''
@@ -2208,7 +2527,7 @@ events:
     end: '22:00'
     location: Servicehus
     responsible: Petter Å
-    description: <p>Kul om några vill o spela o sjunga! Jag tar med en djembe och ser om fler kommer :)</p>
+    description: 'Kul om några vill o spela o sjunga! Jag tar med en djembe och ser om fler kommer :)'
     link: null
     owner:
       name: ''
@@ -2223,7 +2542,16 @@ events:
     end: '22:30'
     location: GA Stilla hyllan
     responsible: Cecilia (kaffestugan)
-    description: '<p><b>"A party game for horrible people".</b><br /><br />Cards Against Humanity är succespelet från USA och liknar inget annat! Ett partyspel för elaka personer. Till skillnad från andra partyspel så har detta mycket av svart humor, är elakt och verkligen udda för dig och dina vänner. Reglerna är enkla, i varje omgång ställer en spelare en fråga från svart kort och alla andra ska välja ord att svara med från de vita korten! På så vis fyller man i för att få ihopa en mening, och det kan blir riktigt galet. Garanterat många skratt på festen!<br /><br />Speltid: 30-90 min<br /><br />Antal spelare: 4-20<br /><br />Rekommenderad ålder: 17 och över</p>'
+    description: |-
+      **"A party game for horrible people".**
+
+      Cards Against Humanity är succespelet från USA och liknar inget annat! Ett partyspel för elaka personer. Till skillnad från andra partyspel så har detta mycket av svart humor, är elakt och verkligen udda för dig och dina vänner. Reglerna är enkla, i varje omgång ställer en spelare en fråga från svart kort och alla andra ska välja ord att svara med från de vita korten! På så vis fyller man i för att få ihopa en mening, och det kan blir riktigt galet. Garanterat många skratt på festen!
+
+      Speltid: 30-90 min
+
+      Antal spelare: 4-20
+
+      Rekommenderad ålder: 17 och över
     link: null
     owner:
       name: ''
@@ -2238,7 +2566,12 @@ events:
     end: '11:15'
     location: GA Idrott
     responsible: 'Lisa Lautrup '
-    description: "<p>Vi dansar barfota med slutna ögon och fokus inåt. Du bestämmer helt dina rörelser efter kroppens behov. Jag bidrar med musik och inspiration.</p>\n<p>I denna klass utforskar vi alla 7 rörelserytmer som ingår i den frigörande dansen.\_</p>\n<p>Denna typ av meditation i rörelse har varit till stor hjälp för egen del när tankarna snurrar.\_</p>"
+    description: |-
+      Vi dansar barfota med slutna ögon och fokus inåt. Du bestämmer helt dina rörelser efter kroppens behov. Jag bidrar med musik och inspiration.
+
+      I denna klass utforskar vi alla 7 rörelserytmer som ingår i den frigörande dansen.
+
+      Denna typ av meditation i rörelse har varit till stor hjälp för egen del när tankarna snurrar.
     link: null
     owner:
       name: ''
@@ -2247,13 +2580,20 @@ events:
       created_at: '2025-08-07 22:21:13'
       updated_at: '2025-08-07 22:21:13'
   - id: artstudio-tecknarstudio-drop-in-2025-08-08-1515
-    title: Artstudio  / Tecknarstudio drop in
+    title: Artstudio / Tecknarstudio drop in
     date: '2025-08-08'
     start: '15:15'
     end: '18:00'
     location: GA Stilla hyllan
     responsible: Tilde, Karin
-    description: "<p>Drop in artstudio från ca 15.15 till ca 18.</p>\n<p>&nbsp;</p>\n<p>Man kan komma och gå lite fritt, 12 år och yngre I vuxet sällskap.\_</p>\n<p>&nbsp;</p>\n<p>Lite material av olika sorter finns men man kan gärna ta med sig eget också :]</p>\n<p>&nbsp;</p>\n<p>Vuxna varmt välkomna att delta (både med och utan barn)</p>"
+    description: |-
+      Drop in artstudio från ca 15.15 till ca 18.
+
+      Man kan komma och gå lite fritt, 12 år och yngre I vuxet sällskap.
+
+      Lite material av olika sorter finns men man kan gärna ta med sig eget också :]
+
+      Vuxna varmt välkomna att delta (både med och utan barn)
     link: null
     owner:
       name: ''
@@ -2269,12 +2609,12 @@ events:
     location: GA Stilla hyllan
     responsible: Jonas
     description: |-
-      <p>Delvis en uppföljning av en AI-workshop där vi tittade på uppsättning av chattbottar för lärande. <br />Tanken är att detta tillfälle ska kunna vara en möjlighet att fundera vidare över potentiella digitala (evt AI-stödda) verktyg:</p>
-      <ul>
-      <li>som stöd till föräldrar?</li>
-      <li>som stöd till barn?</li>
-      </ul>
-      <p>samt att diskutera ambition, nivå, etc kring eventuella sådana verktyg.</p>
+      Delvis en uppföljning av en AI-workshop där vi tittade på uppsättning av chattbottar för lärande.
+      Tanken är att detta tillfälle ska kunna vara en möjlighet att fundera vidare över potentiella digitala (evt AI-stödda) verktyg:
+
+      - som stöd till föräldrar?
+      - som stöd till barn?
+      samt att diskutera ambition, nivå, etc kring eventuella sådana verktyg.
     link: null
     owner:
       name: ''
@@ -2290,8 +2630,9 @@ events:
     location: Fotbollsplan
     responsible: Fredrik och Arvid
     description: |-
-      <p>Vi kör ett fotbollspass idag också!</p>
-      <p>Alla, verkligen alla, kan vara med🙂</p>
+      Vi kör ett fotbollspass idag också!
+
+      Alla, verkligen alla, kan vara med🙂
     link: null
     owner:
       name: ''
@@ -2307,12 +2648,15 @@ events:
     location: GA Stilla hyllan
     responsible: Jonas
     description: |-
-      <p>Delvis en uppföljning av en AI-workshop där vi tittade på uppsättning av chattbottar för lärande.</p>
-      <p>Tanken är att detta tillfälle ska kunna vara en möjlighet att fundera vidare över potentiella digitala (evt AI-stödda) verktyg:</p>
-      <p>&nbsp;</p>
-      <p>som stöd till föräldrar?</p>
-      <p>som stöd till barn?</p>
-      <p>samt att diskutera ambition, nivå, etc kring eventuella sådana verktyg.</p>
+      Delvis en uppföljning av en AI-workshop där vi tittade på uppsättning av chattbottar för lärande.
+
+      Tanken är att detta tillfälle ska kunna vara en möjlighet att fundera vidare över potentiella digitala (evt AI-stödda) verktyg:
+
+      som stöd till föräldrar?
+
+      som stöd till barn?
+
+      samt att diskutera ambition, nivå, etc kring eventuella sådana verktyg.
     link: null
     owner:
       name: ''
@@ -2327,7 +2671,7 @@ events:
     end: '14:00'
     location: GA Stilla hyllan
     responsible: Jonas
-    description: "<p>Flyttade till imorgon\_</p>"
+    description: Flyttade till imorgon
     link: null
     owner:
       name: ''
@@ -2342,7 +2686,16 @@ events:
     end: '16:00'
     location: GA Kreativ hörna
     responsible: 'Alex och Rebecca Isenfors '
-    description: "<p>Varulvarna!</p>\n<p>Kom och spela i GA-hallen mellan 14:30-16:30!\_</p>\n<p>Ålder: Från 7 år</p>\n<p>Ingen erfarenhet krävs, kom och gå hur ni vill, ha kul!</p>\n<p>/Alex och Rebecca Isenfors</p>"
+    description: |-
+      Varulvarna!
+
+      Kom och spela i GA-hallen mellan 14:30-16:30!
+
+      Ålder: Från 7 år
+
+      Ingen erfarenhet krävs, kom och gå hur ni vill, ha kul!
+
+      /Alex och Rebecca Isenfors
     link: null
     owner:
       name: ''
@@ -2357,10 +2710,7 @@ events:
     end: '15:30'
     location: Tält1
     responsible: Martina Linn
-    description: |-
-      <blockquote>
-      <p>Avsluta glasunderlägg eller gör något lite klistermärke</p>
-      </blockquote>
+    description: '> Avsluta glasunderlägg eller gör något lite klistermärke'
     link: null
     owner:
       name: ''
@@ -2390,7 +2740,18 @@ events:
     end: '17:30'
     location: GA Stilla hyllan
     responsible: Tilde, Mida
-    description: "<p>Sista Artstudion för I år</p>\n<p>från ca 14.30 till ca 17.30</p>\n<p>Man kan komma och gå lite fritt,</p>\n<p>Är man 12 år eller yngre så behöver man vuxet sällskap.\_</p>\n<p>Lite material av olika sorter finns men man kan gärna ta med sig eget också :]</p>\n<p>Vuxna varmt välkomna att delta (både med och utan barn)</p>"
+    description: |-
+      Sista Artstudion för I år
+
+      från ca 14.30 till ca 17.30
+
+      Man kan komma och gå lite fritt,
+
+      Är man 12 år eller yngre så behöver man vuxet sällskap.
+
+      Lite material av olika sorter finns men man kan gärna ta med sig eget också :]
+
+      Vuxna varmt välkomna att delta (både med och utan barn)
     link: null
     owner:
       name: ''
@@ -2405,7 +2766,10 @@ events:
     end: '16:20'
     location: Kaffetält
     responsible: Malin och Gabriel Isenfors
-    description: "<p>IB - International Baccalaureate</p>\n<p>Kort information om denna lite ovanliga gymnasielinje. Anses av många vara bra för SB, speciellt de som är högpresterande. Linnen är 100% på engelska. Är det någon som vill veta mer, kanske inför gymnasievalet?\_</p>"
+    description: |-
+      IB - International Baccalaureate
+
+      Kort information om denna lite ovanliga gymnasielinje. Anses av många vara bra för SB, speciellt de som är högpresterande. Linnen är 100% på engelska. Är det någon som vill veta mer, kanske inför gymnasievalet?
     link: null
     owner:
       name: ''
@@ -2421,9 +2785,11 @@ events:
     location: Servicehus
     responsible: Peter Jonsson
     description: |-
-      <p>Skrädmjölsvåfflor med grädde och sylt vid servicehuset.</p>
-      <p>Laktosfri mjölk och grädde används och våfflorna är glutensnåla för den som är bara lite känslig, men dessvärre inte helt glutenfritt.</p>
-      <p>Ta med bestick om du inte vill få kladdiga fingrar. Några papptallrikar finns, men de kan ta slut så ta gärna med egen för säkerhets skull.</p>
+      Skrädmjölsvåfflor med grädde och sylt vid servicehuset.
+
+      Laktosfri mjölk och grädde används och våfflorna är glutensnåla för den som är bara lite känslig, men dessvärre inte helt glutenfritt.
+
+      Ta med bestick om du inte vill få kladdiga fingrar. Några papptallrikar finns, men de kan ta slut så ta gärna med egen för säkerhets skull.
     link: null
     owner:
       name: ''
