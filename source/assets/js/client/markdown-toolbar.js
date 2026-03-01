@@ -120,10 +120,10 @@
       var textarea = document.getElementById('f-description');
       if (!textarea) return;
 
-      var toolbar = document.createElement('div');
-      toolbar.className = 'md-toolbar';
-      toolbar.setAttribute('role', 'toolbar');
-      toolbar.setAttribute('aria-label', 'Markdown-formatering');
+      // The .md-toolbar container is rendered in the HTML by the build step.
+      // We populate it with buttons here.
+      var toolbar = textarea.parentNode.querySelector('.md-toolbar');
+      if (!toolbar) return;
 
       BUTTONS.forEach(function (btn) {
         var button = document.createElement('button');
@@ -157,9 +157,6 @@
 
         toolbar.appendChild(button);
       });
-
-      // Insert toolbar directly before the textarea.
-      textarea.parentNode.insertBefore(toolbar, textarea);
     });
   }
 
