@@ -2559,3 +2559,47 @@ appropriate output for each context.
 - A shared build-time helper must provide both `renderDescriptionHtml()`
   and `stripMarkdown()` to avoid duplicating Markdown processing logic
   across render modules. <!-- 02-§56.10 -->
+
+---
+
+## 57. Markdown Toolbar for Description Field
+
+The description textarea in the add-activity form (`/lagg-till.html`) and
+the edit-activity form (`/redigera.html`) must include a toolbar that helps
+users write Markdown without memorising syntax.
+
+### 57.1 User requirements
+
+- The user must be able to apply bold, italic, heading, bullet list,
+  numbered list, and block-quote formatting via toolbar buttons without
+  knowing Markdown syntax. <!-- 02-§57.1 -->
+- When the user has selected text in the description field, clicking a
+  toolbar button must wrap or prefix the selected text with the
+  corresponding Markdown syntax. <!-- 02-§57.2 -->
+- When no text is selected, clicking a toolbar button must insert the
+  Markdown syntax with a placeholder word and select that placeholder so
+  the user can type over it immediately. <!-- 02-§57.3 -->
+- For list and block-quote buttons, if the selection spans multiple lines,
+  the prefix must be applied to each line individually. <!-- 02-§57.4 -->
+
+### 57.2 Site requirements
+
+- The toolbar must appear as a single row of buttons directly above the
+  description textarea in both `/lagg-till.html` and
+  `/redigera.html`. <!-- 02-§57.5 -->
+- The buttons must appear in this order: Bold, Italic, Heading, Bullet
+  list, Numbered list, Block quote. <!-- 02-§57.6 -->
+- Each button must display an inline SVG icon (no icon font or external
+  image dependency). <!-- 02-§57.7 -->
+- Each button must have an accessible label (`aria-label`) describing its
+  action. <!-- 02-§57.8 -->
+- The toolbar must be styled using existing design tokens from
+  `07-DESIGN.md` — no hardcoded colours, spacing, or typography
+  values. <!-- 02-§57.9 -->
+- The toolbar logic must live in a single shared JS file
+  (`markdown-toolbar.js`) that is loaded by both forms. <!-- 02-§57.10 -->
+- The toolbar must not add any external dependencies. <!-- 02-§57.11 -->
+- There is no live preview of Markdown — the toolbar only inserts
+  syntax. <!-- 02-§57.12 -->
+- The toolbar buttons must have visible focus indicators that meet the
+  existing focus-visible styling. <!-- 02-§57.13 -->
