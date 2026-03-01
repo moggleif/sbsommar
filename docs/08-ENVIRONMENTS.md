@@ -127,10 +127,29 @@ After merging the environment management changes, set up GitHub Environments:
 4. Under **Environment secrets**, add each secret from the `qa` table above.
 5. Click **New environment** again, name it `production`, and click **Configure environment**.
 6. Under **Environment secrets**, add each secret from the `production` table above.
-7. Optionally, under **Environment protection rules** for `production`, add:
-   - **Required reviewers** — to require approval before production deploys.
-   - **Wait timer** — to add a delay before the deploy runs.
-8. Verify that `SITE_URL` also exists as a **repository-level** secret (Settings > Secrets and variables > Actions > Repository secrets). This is used by `ci.yml` for build validation.
+7. Under **Environment protection rules** for `production`, add
+   **Required reviewers** and enter the GitHub username(s) who may approve
+   production deploys (see the approvers list below).
+8. Optionally add a **Wait timer** (e.g. 5 minutes) for an extra safety window.
+9. Verify that `SITE_URL` also exists as a **repository-level** secret (Settings > Secrets and variables > Actions > Repository secrets). This is used by `ci.yml` for build validation.
+
+---
+
+## Production approvers
+
+Production deploys require approval from a **required reviewer** configured
+on the `production` GitHub Environment. When someone triggers the
+"Deploy to Production" workflow, GitHub pauses the run and notifies the
+approvers. The deploy proceeds only after an approver clicks "Approve".
+
+Current approvers:
+
+| GitHub username | Role |
+| --- | --- |
+| `moggleif` | Project maintainer |
+
+To add or remove approvers: go to **Settings → Environments → production →
+Required reviewers** and update the list.
 
 ---
 
