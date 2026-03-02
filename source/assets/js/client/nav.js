@@ -33,8 +33,13 @@
   var btn = document.querySelector('.scroll-top');
   if (!btn) return;
 
+  var wasHidden = true;
   window.addEventListener('scroll', function () {
-    btn.hidden = window.scrollY < 300;
+    var shouldHide = window.scrollY < 300;
+    if (shouldHide !== wasHidden) {
+      btn.hidden = shouldHide;
+      wasHidden = shouldHide;
+    }
   });
 
   btn.addEventListener('click', function () {

@@ -2071,6 +2071,10 @@ body.modal-open {
     display: none;
   }
 
+  .scroll-top:hover {
+    background: var(--color-sage-hover);
+  }
+
   .scroll-top:focus-visible {
     outline: 2px solid var(--color-white);
     outline-offset: 2px;
