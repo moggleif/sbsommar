@@ -373,3 +373,19 @@ events:
     meta:
       created_at: '2025-07-08 18:43'
       updated_at: '2025-07-08 18:53'
+  - id: deploy-till-sbsommar-se-2026-03-02-2200
+    title: Deploy till sbsommar.se
+    date: '2026-03-02'
+    start: '22:00'
+    end: '22:30'
+    location: Annat
+    responsible: Morgan
+    description: |
+      Dags för nästa version.
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-03-02 16:08
+      updated_at: 2026-03-02 16:08
