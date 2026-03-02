@@ -44,6 +44,8 @@ function pageNav(activeHref, navSections = []) {
     sectionRow = `\n    <div class="nav-sections">\n${sectionItems}\n    </div>`;
   }
 
+  const topLink = '\n    <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>';
+
   return `  <nav class="page-nav" aria-label="Sidnavigation">
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
       <span class="nav-toggle-bar"></span>
@@ -53,7 +55,7 @@ function pageNav(activeHref, navSections = []) {
     <div class="nav-menu" id="nav-menu">
       <div class="nav-pages">
 ${pageItems}
-      </div>${sectionRow}
+      </div>${sectionRow}${topLink}
     </div>
   </nav>`;
 }

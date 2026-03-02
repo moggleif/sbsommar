@@ -795,6 +795,34 @@ details.event-row[open] > summary .ev-title {
     opacity: 1;
   }
 
+  .nav-link--top {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+}
+
+/* ── Back-to-top link (02-§64.10–64.12) ── */
+
+.nav-link--top {
+  font-size: 11px;
+  opacity: 0.35;
+  margin-left: auto;
+  text-decoration: none;
+}
+
+.nav-link--top:hover {
+  opacity: 1;
+}
+
+.nav-link--top:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+  opacity: 1;
 }
 
 /* ── Buttons ── */
@@ -1275,6 +1303,36 @@ details.accordion > summary:focus-visible {
   border-top: none;
 }
 
+/* ── Alternating section backgrounds (02-§64.5–64.7) ── */
+
+.content section.section-alt {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-md);
+  box-shadow: var(--shadow-card);
+  border-top: none;
+}
+
+/* ── Decorative section headings (02-§64.8) ── */
+
+.content section h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--color-sage);
+  margin-top: var(--space-xs);
+  border-radius: 2px;
+}
+
+/* ── RFSB logo badge (02-§64.9) ── */
+
+.section-first .content-img {
+  max-width: 100px;
+  margin: var(--space-sm) 0;
+  border-radius: 0;
+}
+
 /* ── Content (prose pages) ── */
 
 .content p,
@@ -1317,6 +1375,42 @@ details.accordion > summary:focus-visible {
   border-radius: var(--radius-md);
   display: block;
   margin: var(--space-md) 0;
+}
+
+/* ── Testimonial cards (02-§64.1–64.4) ── */
+
+.testimonial-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  max-width: var(--container-narrow);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-img {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testimonial-card h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.testimonial-card blockquote {
+  margin: 0;
+  max-width: none;
 }
 
 /* ── Tables (rendered from Markdown) ── */

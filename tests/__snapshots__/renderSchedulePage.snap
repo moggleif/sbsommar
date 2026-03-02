@@ -23,6 +23,7 @@
       <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
       <a class="nav-link" href="arkiv.html">Arkiv</a>
       </div>
+    <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>
     </div>
   </nav>
   <div class="schedule-header">

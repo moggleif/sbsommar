@@ -145,14 +145,23 @@ function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, 
     .map((s, i) => {
       // First section is above the fold — don't lazy-load its images
       // (the RFSB logo there is the LCP element on mobile).
-      const sectionHtml = i === 0
+      let sectionHtml = i === 0
         ? s.html.replace(/ loading="lazy"/g, '')
         : s.html;
+
+      // Wrap testimonial cards for the testimonials section
+      if (s.id === 'testimonials') {
+        sectionHtml = wrapTestimonialCards(sectionHtml);
+      }
+
       const inner = sectionHtml
         .split('\n')
         .map((l) => (l ? '      ' + l : ''))
         .join('\n');
-      const cls = i === 0 ? ' class="section-first"' : '';
+      const classes = [];
+      if (i === 0) classes.push('section-first');
+      if (i > 0 && i % 2 === 1) classes.push('section-alt');
+      const cls = classes.length ? ` class="${classes.join(' ')}"` : '';
       return `    <section id="${s.id}"${cls}>\n${inner}\n    </section>`;
     })
     .join('\n\n');
@@ -297,4 +306,48 @@ function renderLocationAccordions(locations) {
   }).join('\n');
 }
 
-module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions };
+/**
+ * Post-processes testimonial section HTML: wraps each h3 + image + blockquote
+ * group in a `.testimonial-card` div with a header row (circular image + name).
+ *
+ * Expects HTML produced by convertMarkdown with headingOffset=1, where ## in
+ * the markdown becomes <h3>. Content before the first <h3> (e.g. the section
+ * heading) is preserved outside cards.
+ *
+ * @param {string} html - HTML string from convertMarkdown
+ * @returns {string} HTML with testimonial cards wrapped
+ */
+function wrapTestimonialCards(html) {
+  const parts = html.split(/(?=<h3>)/);
+  if (parts.length <= 1) return html;
+
+  return parts.map((part) => {
+    if (!part.startsWith('<h3>')) return part;
+
+    // Extract name from <h3>Name</h3>
+    const nameMatch = part.match(/<h3>(.*?)<\/h3>/);
+    const name = nameMatch ? nameMatch[1] : '';
+
+    // Extract image src and alt from <img ... class="content-img" ...>
+    const imgMatch = part.match(/<img\s+src="([^"]*)"[^>]*>/);
+    const imgSrc = imgMatch ? imgMatch[1] : '';
+    const imgAlt = name;
+
+    // Remove the original h3, the paragraph containing the image, and rebuild
+    let body = part;
+    // Remove the <p><img ...></p> block (image paragraph)
+    body = body.replace(/<p><img[^>]*class="content-img"[^>]*><\/p>\n?/, '');
+
+    // Build the card
+    const header = imgSrc
+      ? `<div class="testimonial-header">\n<img src="${imgSrc}" alt="${imgAlt}" class="testimonial-img">\n<h3>${name}</h3>\n</div>`
+      : `<div class="testimonial-header">\n<h3>${name}</h3>\n</div>`;
+
+    // Remove the original <h3>...</h3> from body since we placed it in the header
+    body = body.replace(/<h3>.*?<\/h3>\n?/, '');
+
+    return `<div class="testimonial-card">\n${header}\n${body.trim()}\n</div>`;
+  }).join('\n');
+}
+
+module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions, wrapTestimonialCards };
