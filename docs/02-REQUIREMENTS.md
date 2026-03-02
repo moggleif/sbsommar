@@ -2789,3 +2789,40 @@ manual testing on mobile devices.
   visible against the terracotta background (white outline). <!-- 02-§61.10 -->
 - Existing keyboard and ARIA behaviour (Escape to close, aria-expanded,
   click-outside-to-close) must be preserved. <!-- 02-§61.11 -->
+
+---
+
+## 62. Analytics
+
+Lightweight, cookie-free analytics to understand site usage (page views,
+visitor counts, traffic sources, popular pages). The solution must not
+degrade performance or require additional cookie consent.
+
+### 62.1 Analytics provider
+
+- The site uses Plausible Analytics — a lightweight, cookie-free, GDPR-compliant
+  analytics service. <!-- 02-§62.1 -->
+
+### 62.2 Script injection
+
+- Every HTML page produced by the build must include the Plausible tracking
+  script in the `<head>` section. <!-- 02-§62.2 -->
+- The script tag must use `defer` and must not block page rendering. <!-- 02-§62.3 -->
+- The script `src` must be `https://plausible.io/js/script.js`. <!-- 02-§62.4 -->
+- The `data-domain` attribute must be set to the value of the
+  `PLAUSIBLE_DOMAIN` environment variable. <!-- 02-§62.5 -->
+
+### 62.3 Environment gating
+
+- When `PLAUSIBLE_DOMAIN` is not set or is empty, no analytics script
+  is injected. The build must succeed without it. <!-- 02-§62.6 -->
+- The `PLAUSIBLE_DOMAIN` secret must be added to the `qa` and `production`
+  GitHub Environments alongside the existing secrets. <!-- 02-§62.7 -->
+
+### 62.4 Constraints
+
+- No cookies may be set by the analytics solution. <!-- 02-§62.8 -->
+- The analytics script must be the only addition — no tag managers,
+  tracking pixels, or additional third-party scripts. <!-- 02-§62.9 -->
+- The analytics integration must not affect the site's existing
+  `noindex, nofollow` crawler policy. <!-- 02-§62.10 -->
