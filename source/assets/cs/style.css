@@ -199,6 +199,7 @@ h3 {
   display: flex;
   align-items: flex-start;
   gap: var(--space-md);
+  max-width: 750px;
 }
 
 .camps-row .upcoming-camps {
@@ -638,9 +639,18 @@ details.event-row[open] > summary .ev-title {
   top: 0;
   z-index: 200;
   margin-bottom: var(--space-md);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding-bottom: var(--space-xs);
+}
+
+.page-nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -9999px;
+  right: -9999px;
   background: var(--color-cream);
+  z-index: -1;
 }
 
 /* Hamburger toggle – hidden on desktop, shown on mobile */
@@ -681,7 +691,6 @@ details.event-row[open] > summary .ev-title {
   flex-wrap: wrap;
   gap: 4px var(--space-sm);
   padding-top: 6px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .nav-link {
@@ -1252,6 +1261,7 @@ details.accordion {
   box-shadow: var(--shadow-card);
   margin-bottom: var(--space-xs);
   overflow: hidden;
+  max-width: 750px;
 }
 
 details.accordion > summary {
@@ -1300,10 +1310,6 @@ details.accordion > summary:focus-visible {
 
 /* ── Content sections ── */
 
-.content {
-  max-width: var(--container-narrow);
-}
-
 .content section {
   padding-top: var(--space-xl);
   margin-bottom: var(--space-xl);
@@ -1316,13 +1322,20 @@ details.accordion > summary:focus-visible {
 /* ── Alternating section backgrounds (02-§64.5–64.7) ── */
 
 .content section.section-alt {
-  background: var(--color-cream-light);
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  padding-left: calc(50vw - 50%);
-  padding-right: calc(50vw - 50%);
+  position: relative;
   padding-top: var(--space-xxl);
   padding-bottom: var(--space-xl);
+}
+
+.content section.section-alt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -9999px;
+  right: -9999px;
+  background: var(--color-cream-light);
+  z-index: -1;
 }
 
 
@@ -1333,15 +1346,21 @@ details.accordion > summary:focus-visible {
 
 .content p,
 .content ul {
+  max-width: 750px;
   margin: 0 0 var(--space-sm);
 }
 
 .content ul {
-  padding-left: var(--space-md);
+  padding-left: var(--space-lg);
 }
 
 .content li {
   margin-bottom: 4px;
+}
+
+.content ul ul {
+  list-style-type: '–  ';
+  font-size: var(--font-size-small);
 }
 
 .content hr {
@@ -1372,10 +1391,19 @@ details.accordion > summary:focus-visible {
   margin: var(--space-md) 0;
 }
 
+.content-img[alt="RFSBlogo"] {
+  float: left;
+  width: 70px;
+  max-width: 70px;
+  margin: 0 var(--space-sm) 0 0;
+  border-radius: 0;
+  display: inline;
+}
+
 /* ── Testimonial cards (02-§64.1–64.4) ── */
 
 .testimonial-card {
-  background: var(--color-cream-light);
+  background: var(--color-cream);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   padding: var(--space-md);
