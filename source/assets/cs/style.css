@@ -2073,5 +2073,14 @@ body.modal-open {
     outline: 2px solid var(--color-white);
     outline-offset: 2px;
   }
+
+  /* On mobile the body is already viewport-wide; extend pseudo-elements
+     only past the body padding instead of 9999px to avoid horizontal
+     overflow that mobile browsers fail to clip. */
+  .page-nav::before,
+  .content section.section-alt::before,
+  .site-footer::before {
+    inset: 0 calc(-1 * var(--space-sm));
+  }
 }
 
