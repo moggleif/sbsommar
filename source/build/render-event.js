@@ -14,7 +14,7 @@ const { renderDescriptionHtml } = require('./markdown');
  * @param {Array}  [navSections=[]] - Navigation sections
  * @returns {string} Full HTML page
  */
-function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []) {
+function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = [], analyticsTag = '') {
   const title = escapeHtml(event.title);
   const campName = escapeHtml(camp.name);
   const date = formatDate(toDateString(event.date));
@@ -42,7 +42,7 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   <base href="../../">
   <title>${title} – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body>
 ${pageNav('schema.html', navSections)}

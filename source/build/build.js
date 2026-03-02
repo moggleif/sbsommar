@@ -144,7 +144,13 @@ async function main() {
 
   const cookieDomain = process.env.COOKIE_DOMAIN || '';
 
-  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections, SITE_URL, cookieDomain);
+  // ── GoatCounter analytics (02-§62) ────────────────────────────────────────
+  const goatcounterUrl = (process.env.GOATCOUNTER_URL || '').trim();
+  const analyticsTag = goatcounterUrl
+    ? `\n  <script data-goatcounter="${goatcounterUrl}" async src="//gc.zgo.at/count.js"></script>`
+    : '';
+
+  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections, SITE_URL, cookieDomain, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
@@ -152,7 +158,7 @@ async function main() {
     .replace(/<\?xml[^?]*\?>\s*/g, '')
     .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
-  const todayHtml = renderTodayPage(camp, events, qrSvg, SITE_URL, buildTime);
+  const todayHtml = renderTodayPage(camp, events, qrSvg, SITE_URL, buildTime, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
   console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
 
@@ -160,15 +166,15 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'version.json'), JSON.stringify({ version: buildTime }), 'utf8');
   console.log('Built: public/version.json');
 
-  const idagHtml = renderIdagPage(camp, events, footerHtml, navSections, cookieDomain);
+  const idagHtml = renderIdagPage(camp, events, footerHtml, navSections, cookieDomain, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
   console.log(`Built: public/idag.html  (${events.length} events)`);
 
-  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerHtml, navSections);
+  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerHtml, navSections, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerHtml, navSections);
+  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerHtml, navSections, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 
@@ -182,7 +188,7 @@ async function main() {
     }
   }
 
-  const arkivHtml = renderArkivPage(camps, footerHtml, navSections, campEventsMap);
+  const arkivHtml = renderArkivPage(camps, footerHtml, navSections, campEventsMap, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'arkiv.html'), arkivHtml, 'utf8');
   const archivedCount = camps.filter((c) => c.archived === true).length;
   console.log(`Built: public/arkiv.html  (${archivedCount} archived camps)`);
@@ -217,7 +223,7 @@ async function main() {
   for (const e of events) {
     const eventDir = path.join(schemaDir, String(e.id));
     fs.mkdirSync(eventDir, { recursive: true });
-    const eventHtml = renderEventPage(e, camp, SITE_URL, footerHtml, navSections);
+    const eventHtml = renderEventPage(e, camp, SITE_URL, footerHtml, navSections, analyticsTag);
     fs.writeFileSync(path.join(eventDir, 'index.html'), eventHtml, 'utf8');
     const eventIcs = renderEventIcal(e, camp, SITE_URL);
     fs.writeFileSync(path.join(eventDir, 'event.ics'), eventIcs, 'utf8');
@@ -226,7 +232,7 @@ async function main() {
   console.log(`Built: public/schema/*/event.ics  (${events.length} event iCal files)`);
 
   // ── Render calendar tips page ─────────────────────────────────────────
-  const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerHtml, navSections);
+  const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerHtml, navSections, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'kalender.html'), kalenderHtml, 'utf8');
   console.log('Built: public/kalender.html');
 
@@ -295,7 +301,7 @@ async function main() {
     || (futureCamps.length > 0 && (futureCamps[0].link || '').trim())
     || null;
 
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml, navSections);
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml, navSections, analyticsTag);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 

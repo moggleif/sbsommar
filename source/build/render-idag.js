@@ -8,7 +8,7 @@ const { renderDescriptionHtml } = require('./markdown');
  * Renders the "Idag" page – today's schedule in the standard site layout.
  * All events are embedded as JSON; client-side JS filters to the current day.
  */
-function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieDomain = '') {
+function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieDomain = '', analyticsTag = '') {
   const campName = escapeHtml(camp.name);
 
   const eventsJson = JSON.stringify(
@@ -34,7 +34,7 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieD
   <meta name="robots" content="noindex, nofollow">
   <title>Idag – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('idag.html', navSections)}

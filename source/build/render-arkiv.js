@@ -95,7 +95,7 @@ ${daySections.join('\n')}
       </div>`;
 }
 
-function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEventsMap = {}) {
+function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEventsMap = {}, analyticsTag = '') {
   const camps = [...allCamps]
     .filter((c) => c.archived === true)
     .sort((a, b) => toDateString(b.start_date).localeCompare(toDateString(a.start_date)));
@@ -142,7 +142,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
   <meta name="robots" content="noindex, nofollow">
   <title>Arkiv – SB Sommar</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body>
 ${pageNav('arkiv.html', navSections)}

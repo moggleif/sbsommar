@@ -6,7 +6,7 @@ const { addOneDay } = require('../api/time-gate');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
-function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = []) {
+function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = [], analyticsTag = '') {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -31,7 +31,7 @@ function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = [
   <meta name="robots" content="noindex, nofollow">
   <title>Lägg till aktivitet – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body>
 ${pageNav('lagg-till.html', navSections)}

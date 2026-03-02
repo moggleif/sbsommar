@@ -40,6 +40,7 @@ jobs:
           SITE_URL: ${{ secrets.SITE_URL }}
           BUILD_ENV: ${{ inputs.build_env || inputs.environment }}
           COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
+          GOATCOUNTER_URL: ${{ secrets.GOATCOUNTER_URL }}
 
       - name: Package site for upload
         run: tar -czf site.tar.gz -C public .

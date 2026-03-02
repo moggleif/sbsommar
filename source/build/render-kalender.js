@@ -12,7 +12,7 @@ const { pageNav, pageFooter } = require('./layout');
  * @param {Array}  [navSections=[]] - Navigation sections
  * @returns {string} Full HTML page
  */
-function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = []) {
+function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = [], analyticsTag = '') {
   const campName = escapeHtml(camp.name);
   const webcalUrl = siteUrl.replace(/^https?:\/\//, 'webcal://') + '/schema.ics';
   const icsUrl = escapeHtml(siteUrl + '/schema.ics');
@@ -25,7 +25,7 @@ function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = []) {
   <meta name="robots" content="noindex, nofollow">
   <title>Kalendersynk – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body>
 ${pageNav('kalender.html', navSections)}

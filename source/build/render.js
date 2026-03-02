@@ -92,7 +92,7 @@ function renderDaySection(date, dayEvents) {
   ].join('\n');
 }
 
-function renderSchedulePage(camp, events, footerHtml = '', navSections = [], siteUrl = '', cookieDomain = '') {
+function renderSchedulePage(camp, events, footerHtml = '', navSections = [], siteUrl = '', cookieDomain = '', analyticsTag = '') {
   const { dates, byDate } = groupAndSortEvents(events);
   const daySections = dates.map((date) => renderDaySection(date, byDate[date])).join('\n\n');
   const campName = escapeHtml(camp.name);
@@ -117,7 +117,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
   <meta name="robots" content="noindex, nofollow">
   <title>Schema – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('schema.html', navSections)}

@@ -123,7 +123,7 @@ function convertMarkdown(input, headingOffset = 0, collapsible = false) {
  * @param {string|null} opts.countdownTarget - YYYY-MM-DD date for countdown
  * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
  */
-function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = []) {
+function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = [], analyticsTag = '') {
   const countdownHtml = countdownTarget
     ? `\n      <div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
     : '';
@@ -168,7 +168,7 @@ function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, 
   <meta name="robots" content="noindex, nofollow">
   <title>SB Sommar</title>
   <link rel="stylesheet" href="style.css">${preloadHtml}
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body>
 ${pageNav('index.html', navSections)}${heroHtml}

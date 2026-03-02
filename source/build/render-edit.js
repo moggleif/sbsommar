@@ -14,7 +14,7 @@ function editApiUrl(addUrl) {
   return addUrl.replace(/\/add-event$/, '/edit-event');
 }
 
-function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = []) {
+function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = [], analyticsTag = '') {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -39,7 +39,7 @@ function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = 
   <meta name="robots" content="noindex, nofollow">
   <title>Redigera aktivitet – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body>
 ${pageNav('redigera.html', navSections)}

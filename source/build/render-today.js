@@ -13,7 +13,7 @@ const { renderDescriptionHtml } = require('./markdown');
  * Sidebar shows a live clock and last-updated time; page auto-reloads at
  * midnight and on new version detection via version.json polling.
  */
-function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
+function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', analyticsTag = '') {
   const campName = escapeHtml(camp.name);
   const siteHost = siteUrl ? escapeHtml(siteUrl.replace(/^https?:\/\//, '').replace(/\/+$/, '')) : '';
   const safeBuildTime = escapeHtml(buildTime);
@@ -40,7 +40,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
   <meta name="robots" content="noindex, nofollow">
   <title>Dagens schema – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">${analyticsTag}
 </head>
 <body class="display-mode">
 
