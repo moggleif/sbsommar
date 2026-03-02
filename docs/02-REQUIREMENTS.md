@@ -2800,23 +2800,23 @@ degrade performance or require additional cookie consent.
 
 ### 62.1 Analytics provider
 
-- The site uses Plausible Analytics — a lightweight, cookie-free, GDPR-compliant
-  analytics service. <!-- 02-§62.1 -->
+- The site uses GoatCounter — a lightweight, open-source, cookie-free,
+  GDPR-compliant analytics service. <!-- 02-§62.1 -->
 
 ### 62.2 Script injection
 
-- Every HTML page produced by the build must include the Plausible tracking
+- Every HTML page produced by the build must include the GoatCounter tracking
   script in the `<head>` section. <!-- 02-§62.2 -->
-- The script tag must use `defer` and must not block page rendering. <!-- 02-§62.3 -->
-- The script `src` must be `https://plausible.io/js/script.js`. <!-- 02-§62.4 -->
-- The `data-domain` attribute must be set to the value of the
-  `PLAUSIBLE_DOMAIN` environment variable. <!-- 02-§62.5 -->
+- The script tag must use `async` and must not block page rendering. <!-- 02-§62.3 -->
+- The script `src` must be `//gc.zgo.at/count.js`. <!-- 02-§62.4 -->
+- The `data-goatcounter` attribute must be set to the value of the
+  `GOATCOUNTER_URL` environment variable. <!-- 02-§62.5 -->
 
 ### 62.3 Environment gating
 
-- When `PLAUSIBLE_DOMAIN` is not set or is empty, no analytics script
+- When `GOATCOUNTER_URL` is not set or is empty, no analytics script
   is injected. The build must succeed without it. <!-- 02-§62.6 -->
-- The `PLAUSIBLE_DOMAIN` secret must be added to the `qa` and `production`
+- The `GOATCOUNTER_URL` secret must be added to the `qa` and `production`
   GitHub Environments alongside the existing secrets. <!-- 02-§62.7 -->
 
 ### 62.4 Constraints
