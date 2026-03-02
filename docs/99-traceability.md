@@ -1585,3 +1585,16 @@ Matrix cleanup (2026-02-25):
 | VER-03..04 | `tests/version.test.js` | `buildLocalVersion (02-§62.8)` |
 | VER-05..09 | `tests/version.test.js` | `resolveVersionString (02-§62.9, 02-§62.15, 02-§62.16)` |
 | FTR-18..20 | `tests/footer.test.js` | `site-footer__version (02-§62.3)` |
+| | | **§64 — Index Page Design Improvements** |
+| `02-§64.1` | gap | Testimonial cards with white card styling |
+| `02-§64.2` | gap | Circular testimonial profile images (~60 px) |
+| `02-§64.3` | gap | Testimonial cards constrained to `--container-narrow` |
+| `02-§64.4` | gap | Card structure generated at build time from existing Markdown |
+| `02-§64.5` | gap | Alternating section backgrounds (white on cream) |
+| `02-§64.6` | gap | First section excluded from alternation |
+| `02-§64.7` | gap | Alternating sections suppress border-top |
+| `02-§64.8` | gap | Decorative sage line below H2 headings |
+| `02-§64.9` | gap | RFSB logo displayed as small badge (~100 px) |
+| `02-§64.10` | gap | "Till toppen" link in navigation |
+| `02-§64.11` | gap | Back-to-top link inside hamburger menu on mobile |
+| `02-§64.12` | gap | Back-to-top link scrolls to top of page |

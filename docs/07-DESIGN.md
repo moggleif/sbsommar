@@ -161,6 +161,11 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 - Box shadow: `0 4px 12px rgba(0, 0, 0, 0.04)`. <!-- 07-§6.21 -->
 - Padding: `24px`. <!-- 07-§6.22 -->
 - Testimonial cards: circular profile image (`border-radius: 50%`, ~`60px`). <!-- 07-§6.23 -->
+- Testimonial card layout: header row (image + name) above blockquote.
+  `.testimonial-card` wraps each testimonial, constrained to
+  `--container-narrow`. <!-- 07-§6.76 -->
+- The testimonial card structure is generated at build time by splitting
+  the Markdown output on h3 tags. Content Markdown files are unchanged. <!-- 07-§6.77 -->
 
 ### Accordion (FAQ)
 
@@ -172,8 +177,24 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 
 ### Section headings
 
-- H2 with a short decorative line or color block underneath (optional). <!-- 07-§6.29 -->
+- H2 with a short decorative sage-green line (`48px × 3px`) underneath,
+  via `::after` pseudo-element. <!-- 07-§6.29 -->
 - Or: a sage-green label above the heading at `12px` uppercase. <!-- 07-§6.30 -->
+
+### Alternating section backgrounds
+
+- Every other content section (starting from the second) receives a white
+  background with `--radius-lg` rounded corners and `--shadow-card`, creating
+  visual rhythm against the cream page background. Class: `.section-alt`. <!-- 07-§6.78 -->
+- The first section (`section-first`) is excluded from alternation. <!-- 07-§6.79 -->
+- Alternating sections suppress the default `border-top` divider. <!-- 07-§6.80 -->
+
+### Back-to-top link
+
+- A "Till toppen" link is the last item in the navigation, inside the
+  nav-menu so it is part of the mobile hamburger panel. <!-- 07-§6.81 -->
+- Styled as a subtle nav link on desktop; inside the terracotta menu
+  panel on mobile. <!-- 07-§6.82 -->
 
 ### Event / schedule items
 
