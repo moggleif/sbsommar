@@ -13,7 +13,7 @@ on:
       build_version:
         required: false
         type: string
-        description: 'Version string to embed in footer (e.g. "1.0.4" or "1.0 – QA PR212")'
+        description: 'Version string to embed in footer (e.g. "1.0.4" or "1.0.4 – QA PR212")'
 
 permissions:
   contents: read
