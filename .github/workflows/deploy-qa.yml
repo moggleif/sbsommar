@@ -24,19 +24,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Compute QA version string
         id: version
         run: |
           BASE=$(cat VERSION | tr -d '[:space:]')
+          # Resolve latest tag for full semver (e.g. 1.0.0 instead of 1.0)
+          LATEST=$(git tag --list "v${BASE}.*" --sort=-version:refname | head -1)
+          if [ -n "$LATEST" ]; then
+            FULL_VER=$(echo "$LATEST" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          else
+            FULL_VER="${BASE}.0"
+          fi
           # Extract PR number from merge commit message (e.g. "Merge pull request #212 from ...")
           PR_NUM=$(git log -1 --pretty=format:"%s" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
           if [ -n "$PR_NUM" ]; then
-            VERSION_STR="${BASE} – QA PR${PR_NUM}"
+            VERSION_STR="${FULL_VER} – QA PR${PR_NUM}"
           else
             SHA=$(git rev-parse --short HEAD)
-            VERSION_STR="${BASE} – QA ${SHA}"
+            VERSION_STR="${FULL_VER} – QA ${SHA}"
           fi
           echo "version_string=${VERSION_STR}" >> $GITHUB_OUTPUT
           echo "QA version: ${VERSION_STR}"
