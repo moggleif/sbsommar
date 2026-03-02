@@ -31,6 +31,8 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+html { overflow-x: hidden; }
+
 body {
   font-family: var(--font-sans);
   max-width: var(--container);
@@ -1308,10 +1310,11 @@ details.accordion > summary:focus-visible {
 
 .content section.section-alt {
   background: var(--color-cream-light);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl) var(--space-md);
-  box-shadow: var(--shadow-card);
   border-top: none;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
 }
 
 /* ── Decorative section headings (02-§64.8) ── */

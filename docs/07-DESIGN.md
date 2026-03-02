@@ -184,9 +184,11 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 ### Alternating section backgrounds
 
 - Every other content section (starting from the second) receives a
-  `--color-cream-light` background with `--radius-lg` rounded corners and
-  `--shadow-card`, creating subtle visual rhythm against the cream page
-  background. Class: `.section-alt`. <!-- 07-§6.78 -->
+  `--color-cream-light` background that stretches edge-to-edge across the
+  viewport, creating horizontal colour bands. Uses the full-bleed technique
+  (`margin-left: calc(-50vw + 50%)` etc.) to break out of the body
+  container. `html` has `overflow-x: hidden` to prevent scrollbar from the
+  `100vw` calculation. Class: `.section-alt`. <!-- 07-§6.78 -->
 - The first section (`section-first`) is excluded from alternation. <!-- 07-§6.79 -->
 - Alternating sections suppress the default `border-top` divider. <!-- 07-§6.80 -->
 
