@@ -2826,3 +2826,29 @@ degrade performance or require additional cookie consent.
   tracking pixels, or additional third-party scripts. <!-- 02-§62.9 -->
 - The analytics integration must not affect the site's existing
   `noindex, nofollow` crawler policy. <!-- 02-§62.10 -->
+
+### 62.5 Analytics questions
+
+The analytics implementation must answer these questions:
+
+- How many visitors per day/week? (page views — covered by base script) <!-- 02-§62.11 -->
+- Which pages are visited most? (page views — covered by base script) <!-- 02-§62.12 -->
+- Where does traffic come from? (referrer — covered by base script) <!-- 02-§62.13 -->
+- What devices/screen sizes are used? (covered by base script) <!-- 02-§62.14 -->
+- How many event submissions succeed? (custom event on form submit) <!-- 02-§62.15 -->
+- How many iCal downloads occur? (custom event on .ics link click) <!-- 02-§62.16 -->
+- Are social links (Discord, Facebook) clicked? (custom event) <!-- 02-§62.17 -->
+
+### 62.6 Custom event tracking
+
+- Successful form submissions on the add-activity and edit-activity pages
+  must fire a GoatCounter custom event. <!-- 02-§62.18 -->
+- Clicks on iCal download links (per-event `.ics`, full `schema.ics`,
+  webcal links) must fire a GoatCounter custom event. <!-- 02-§62.19 -->
+- Clicks on social links (Discord, Facebook) on the homepage must fire
+  a GoatCounter custom event. <!-- 02-§62.20 -->
+- Custom events must use `data-goatcounter-click` attributes on link
+  elements where possible, and `goatcounter.count()` in JS for
+  non-link actions (form submit). <!-- 02-§62.21 -->
+- All custom event calls must be guarded: no errors when GoatCounter
+  is not loaded (i.e. `GOATCOUNTER_URL` is unset). <!-- 02-§62.22 -->
