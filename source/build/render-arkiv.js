@@ -3,6 +3,7 @@
 const { pageNav, pageFooter } = require('./layout');
 const { escapeHtml, toDateString, formatDate } = require('./utils');
 const { renderDescriptionHtml } = require('./markdown');
+const { goatcounterScript } = require('./analytics');
 
 const MONTHS_SV = [
   'januari', 'februari', 'mars', 'april', 'maj', 'juni',
@@ -95,7 +96,7 @@ ${daySections.join('\n')}
       </div>`;
 }
 
-function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEventsMap = {}) {
+function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEventsMap = {}, goatcounterCode = '') {
   const camps = [...allCamps]
     .filter((c) => c.archived === true)
     .sort((a, b) => toDateString(b.start_date).localeCompare(toDateString(a.start_date)));
@@ -157,7 +158,7 @@ ${items}
   </div>
 
   <script src="arkiv.js"></script>
-  <script src="nav.js" defer></script>
+  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>`;

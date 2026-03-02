@@ -1038,15 +1038,53 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§62.15` | BUILD_VERSION env var accepted by build | — | VER-05 | `source/build/version.js` | covered |
 | `02-§62.16` | Local fallback: VERSION file + timestamp | — | VER-07..08 | `source/build/version.js` | covered |
 | `02-§62.17` | Version logic in separate testable module | — | VER-01..09 | `source/build/version.js` | covered |
+| | | **§63 — Site Analytics** | | | |
+| `02-§63.1` | GoatCounter as analytics tool | 03-ARCHITECTURE.md §23 | — | `source/build/analytics.js` | implemented |
+| `02-§63.2` | No cookies from analytics | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.3` | Analytics script < 5 KB | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.4` | Analytics only in production | 03-ARCHITECTURE.md §23.2 | — | `.env.example`, 08-ENVIRONMENTS.md | implemented |
+| `02-§63.5` | No analytics in local/QA | 03-ARCHITECTURE.md §23.2 | — | `.env.example`, 08-ENVIRONMENTS.md | implemented |
+| `02-§63.6` | Filter by production domain | 03-ARCHITECTURE.md §23.2 | — | GoatCounter dashboard setting | implemented |
+| `02-§63.7` | Script on all shared-layout pages | 03-ARCHITECTURE.md §23.2 | ANA-SH-* | `source/build/analytics.js`, render-*.js | covered |
+| `02-§63.8` | Script on display view | 03-ARCHITECTURE.md §23.2 | ANA-DIS-01 | `source/build/render-today.js` | covered |
+| `02-§63.9` | Script loads async, non-blocking | 03-ARCHITECTURE.md §23.2 | ANA-ASYNC-01 | `source/build/analytics.js` | covered |
+| `02-§63.10` | GOATCOUNTER_SITE_CODE env var | 03-ARCHITECTURE.md §23.2 | ANA-CODE-01 | `source/build/analytics.js` | covered |
+| `02-§63.11` | No script when env var absent | 03-ARCHITECTURE.md §23.2 | ANA-NO-* | `source/build/analytics.js` | covered |
+| `02-§63.12` | Page views per day/week | 03-ARCHITECTURE.md §23.1 | — | GoatCounter dashboard | implemented |
+| `02-§63.13` | Most visited pages | 03-ARCHITECTURE.md §23.1 | — | GoatCounter dashboard | implemented |
+| `02-§63.14` | Referrer tracking | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.15` | Device type and screen size | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.16` | Returning visitors | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.17` | 404 hits | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.18` | Page load times | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.19` | Traffic patterns over time | 03-ARCHITECTURE.md §23.1 | — | GoatCounter dashboard | implemented |
+| `02-§63.20` | Track form submission | 03-ARCHITECTURE.md §23.3 | — | GoatCounter page view | implemented |
+| `02-§63.21` | Track form abandonment | 03-ARCHITECTURE.md §23.3 | — | GoatCounter page view | implemented |
+| `02-§63.22` | Track today view page load | 03-ARCHITECTURE.md §23.3 | — | GoatCounter page view | implemented |
+| `02-§63.23` | Track display mode page load | 03-ARCHITECTURE.md §23.3 | — | GoatCounter page view | implemented |
+| `02-§63.24` | Track Discord link click | 03-ARCHITECTURE.md §23.3 | ANA-EVT-01, ANA-EVT-03 | `source/build/render-index.js` | covered |
+| `02-§63.25` | Track Facebook link click | 03-ARCHITECTURE.md §23.3 | ANA-EVT-02, ANA-EVT-04 | `source/build/render-index.js` | covered |
+| `02-§63.26` | Track iCal download | 03-ARCHITECTURE.md §23.3 | ANA-EVT-05 | `source/build/render.js` | covered |
+| `02-§63.27` | Track RSS link click | 03-ARCHITECTURE.md §23.3 | ANA-EVT-06 | `source/build/render.js` | covered |
+| `02-§63.28` | Track scroll depth on schedule | 03-ARCHITECTURE.md §23.3 | — | GoatCounter custom event (future) | implemented |
+| `02-§63.29` | QR codes data file exists | 03-ARCHITECTURE.md §23.5 | ANA-QR-01 | `source/data/qr-codes.yaml` | covered |
+| `02-§63.30` | QR file maintained manually | 03-ARCHITECTURE.md §23.5 | — | process/convention | implemented |
+| `02-§63.31` | QR entry has id + description | 03-ARCHITECTURE.md §23.5 | ANA-QR-02 | `source/data/qr-codes.yaml` | covered |
+| `02-§63.32` | QR URLs include ?ref= parameter | 03-ARCHITECTURE.md §23.4 | — | `source/build/build.js` | implemented |
+| `02-§63.33` | Display view QR uses tracked ref | 03-ARCHITECTURE.md §23.4 | ANA-QR-03 | `source/build/build.js` | covered |
+| `02-§63.34` | No personal data collected | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.35` | No cookie consent banner needed | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
+| `02-§63.36` | No wrapper JS libraries | 03-ARCHITECTURE.md §23.3 | — | convention | implemented |
+| `02-§63.37` | Use data-goatcounter-click attrs | 03-ARCHITECTURE.md §23.3 | ANA-EVT-01..06 | `source/build/render-index.js`, `render.js` | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             891
-Covered (implemented + tested): 440
-Implemented, not tested:        451
+Total requirements:             928
+Covered (implemented + tested): 453
+Implemented, not tested:        475
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1298,6 +1336,14 @@ Matrix cleanup (2026-02-25):
   8 covered (VER-01..09, FTR-18..20): VERSION file, footer display, local/CI resolution.
   9 implemented (workflow/manual): tagging, release, CSS visual, manual bump docs.
   VERSION file, footer display, automatic tagging, GitHub Release on bump.
+37 requirements added for site analytics (02-§63.1–63.37):
+  13 covered (ANA-SH-*, ANA-DIS-01, ANA-ASYNC-01, ANA-CODE-01, ANA-NO-*,
+    ANA-EVT-01..06, ANA-QR-01..03): script inclusion, tracking attrs, QR data.
+  24 implemented (GoatCounter built-in, dashboard, convention, manual):
+    tool choice, cookies, size, env gating, domain filter, traffic metrics,
+    page views, scroll depth, QR manual process.
+  GoatCounter hosted, custom events via data-goatcounter-click, QR referrer tracking.
+  Architecture documented in 03-ARCHITECTURE.md §23.
 ```
 
 ---

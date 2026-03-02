@@ -2858,3 +2858,87 @@ the footer solves this with minimal visual impact.
   local timestamp version. <!-- 02-§62.16 -->
 - The version logic must be in a separate module that can be
   unit-tested. <!-- 02-§62.17 -->
+
+---
+
+## 63. Site Analytics
+
+The site needs usage analytics to answer questions about traffic, visitor
+behaviour, and content effectiveness. Analytics must respect the static-site,
+no-backend, minimal-JS constraints.
+
+### 63.1 Tool choice
+
+- The analytics tool must be GoatCounter (hosted, free tier). <!-- 02-§63.1 -->
+- No cookies may be set by the analytics tool. <!-- 02-§63.2 -->
+- The analytics script must be lightweight (< 5 KB). <!-- 02-§63.3 -->
+
+### 63.2 Environment scope
+
+- Analytics must only collect data in the production environment. <!-- 02-§63.4 -->
+- Local development and QA must not send analytics data. <!-- 02-§63.5 -->
+- Filtering is by production domain — no separate configuration per
+  environment is needed. <!-- 02-§63.6 -->
+
+### 63.3 Script inclusion
+
+- The GoatCounter script tag must be included on every page that uses the
+  shared site layout (header/footer pages). <!-- 02-§63.7 -->
+- The display view (`/dagens-schema.html`) must also include the analytics
+  script, even though it has no shared layout. <!-- 02-§63.8 -->
+- The script must load asynchronously and must not block page
+  rendering. <!-- 02-§63.9 -->
+- The GoatCounter site code must be configurable via an environment variable
+  (`GOATCOUNTER_SITE_CODE`) so it is not hardcoded in source. <!-- 02-§63.10 -->
+- When the environment variable is not set (local dev), the script tag must
+  not be rendered. <!-- 02-§63.11 -->
+
+### 63.4 Basic traffic (automatic)
+
+GoatCounter provides these automatically — no custom code required:
+
+- Page views per day/week. <!-- 02-§63.12 -->
+- Most visited pages. <!-- 02-§63.13 -->
+- Referrer tracking. <!-- 02-§63.14 -->
+- Device type and screen size. <!-- 02-§63.15 -->
+- Returning visitors. <!-- 02-§63.16 -->
+- 404 hits. <!-- 02-§63.17 -->
+- Page load times. <!-- 02-§63.18 -->
+- Traffic patterns over time (before/during/after camp). <!-- 02-§63.19 -->
+
+### 63.5 Custom events (behaviour tracking)
+
+The following interactions must be tracked as GoatCounter custom events:
+
+- Activity form submission (successful). <!-- 02-§63.20 -->
+- Activity form abandonment (cancel/navigate away). <!-- 02-§63.21 -->
+- Today view page load. <!-- 02-§63.22 -->
+- Display mode page load. <!-- 02-§63.23 -->
+- Click on Discord link. <!-- 02-§63.24 -->
+- Click on Facebook link. <!-- 02-§63.25 -->
+- iCal file download. <!-- 02-§63.26 -->
+- RSS feed link click. <!-- 02-§63.27 -->
+- Scroll depth on schedule pages (25 %, 50 %, 75 %, 100 %). <!-- 02-§63.28 -->
+
+### 63.6 QR code referrer tracking
+
+- A data file in the repository (`source/data/qr-codes.yaml`) must list all
+  QR code identifiers. <!-- 02-§63.29 -->
+- The file is maintained manually — new rows are added when new QR codes are
+  printed. <!-- 02-§63.30 -->
+- Each QR code entry must have at minimum an `id` and a `description`
+  field. <!-- 02-§63.31 -->
+- QR code URLs must include the identifier as a query parameter (e.g.
+  `?ref=qr-affisch-01`) so GoatCounter records it as a distinct
+  referrer. <!-- 02-§63.32 -->
+- The existing QR code on the display view sidebar must use a tracked
+  referrer parameter from the QR codes data file. <!-- 02-§63.33 -->
+
+### 63.7 Constraints
+
+- No personal data may be collected. <!-- 02-§63.34 -->
+- No cookie consent banner is needed (GoatCounter is cookieless). <!-- 02-§63.35 -->
+- The analytics implementation must not increase the total JS payload
+  beyond what GoatCounter itself requires (no wrapper libraries). <!-- 02-§63.36 -->
+- Custom event tracking must use HTML `data-goatcounter-click` attributes
+  where possible, minimising inline JavaScript. <!-- 02-§63.37 -->

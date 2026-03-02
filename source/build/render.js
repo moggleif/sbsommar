@@ -3,6 +3,7 @@
 const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml, formatDate } = require('./utils');
 const { renderDescriptionHtml } = require('./markdown');
+const { goatcounterScript } = require('./analytics');
 
 /**
  * Groups events by date and sorts each day's events by start time.
@@ -37,7 +38,7 @@ function eventExtraHtml(e) {
 
 function icalDownloadLink(e) {
   if (!e.id) return '';
-  return `<a href="schema/${escapeHtml(String(e.id))}/event.ics" class="ev-ical" download title="Ladda ner iCal">iCal</a>`;
+  return `<a href="schema/${escapeHtml(String(e.id))}/event.ics" class="ev-ical" download title="Ladda ner iCal" data-goatcounter-click="download-ical">iCal</a>`;
 }
 
 function renderEventRow(e) {
@@ -92,7 +93,7 @@ function renderDaySection(date, dayEvents) {
   ].join('\n');
 }
 
-function renderSchedulePage(camp, events, footerHtml = '', navSections = [], siteUrl = '', cookieDomain = '') {
+function renderSchedulePage(camp, events, footerHtml = '', navSections = [], siteUrl = '', cookieDomain = '', goatcounterCode = '') {
   const { dates, byDate } = groupAndSortEvents(events);
   const daySections = dates.map((date) => renderDaySection(date, byDate[date])).join('\n\n');
   const campName = escapeHtml(camp.name);
@@ -123,7 +124,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
 ${pageNav('schema.html', navSections)}
   <div class="schedule-header">
     <h1>Schema – ${campName}</h1>
-    <a href="schema.rss" class="rss-link" title="RSS-feed"><img src="images/RSS-logo.webp" alt="RSS" class="rss-icon"></a>${icalIconHtml}
+    <a href="schema.rss" class="rss-link" title="RSS-feed" data-goatcounter-click="click-rss"><img src="images/RSS-logo.webp" alt="RSS" class="rss-icon"></a>${icalIconHtml}
   </div>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>
   <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>${guideHtml}
@@ -131,7 +132,7 @@ ${pageNav('schema.html', navSections)}
 ${daySections}
   <script src="wp-cleanup.js"></script>
   <script src="session.js"></script>
-  <script src="nav.js" defer></script>
+  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

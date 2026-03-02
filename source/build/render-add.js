@@ -3,10 +3,11 @@
 const { escapeHtml, toDateString } = require('./render');
 const { pageNav, pageFooter } = require('./layout');
 const { addOneDay } = require('../api/time-gate');
+const { goatcounterScript } = require('./analytics');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
-function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = []) {
+function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = [], goatcounterCode = '') {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -120,7 +121,7 @@ ${locationOptions}
   <script defer src="marked.umd.js"></script>
   <script defer src="markdown-preview.js"></script>
   <script src="lagg-till.js"></script>
-  <script src="nav.js" defer></script>
+  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>
