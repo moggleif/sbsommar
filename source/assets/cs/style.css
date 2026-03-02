@@ -37,7 +37,7 @@ body {
   font-family: var(--font-sans);
   max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-md) var(--space-sm);
+  padding: var(--space-md) var(--space-sm) 0;
   color: var(--color-charcoal);
   background: var(--color-cream);
   font-size: 16px;
@@ -1315,6 +1315,10 @@ details.accordion > summary:focus-visible {
   margin-bottom: var(--space-xl);
 }
 
+.content section:last-child {
+  margin-bottom: 0;
+}
+
 .content section.section-first {
   padding-top: 0;
 }
@@ -1384,11 +1388,33 @@ details.accordion > summary:focus-visible {
 }
 
 .content-img {
-  max-width: 100%;
+  max-width: 500px;
+  width: 100%;
   height: auto;
   border-radius: var(--radius-md);
   display: block;
   margin: var(--space-md) 0;
+}
+
+.content-img[alt="Discord"],
+.content-img[alt="Anita Kullander"] {
+  max-width: 250px;
+}
+
+p:has(> .content-img[alt="Anita Kullander"]) {
+  max-width: 250px;
+  text-align: center;
+}
+
+.content-img[alt="Servicehus"] {
+  max-width: var(--container-narrow);
+}
+
+.content-img[alt="Stuga"],
+.content-img[alt="Vandrarhem"],
+.content-img[alt="Campingplats"],
+.content-img[alt="Klarälvsbyn"] {
+  max-width: 250px;
 }
 
 .content-img[alt="RFSBlogo"] {
@@ -1440,6 +1466,7 @@ details.accordion > summary:focus-visible {
 
 .content table {
   width: 100%;
+  max-width: 750px;
   border-collapse: collapse;
   margin: var(--space-md) 0;
   font-size: var(--font-size-base);
@@ -1956,17 +1983,27 @@ body.modal-open {
 /* ── Site footer ── */
 
 .site-footer {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px var(--space-md);
   max-width: var(--container-narrow);
-  margin-top: var(--space-lg);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
+  margin-top: 0;
+  padding: var(--space-md) 0;
   font-size: var(--font-size-nav);
   color: var(--color-charcoal);
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -9999px;
+  right: -9999px;
+  background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
+  z-index: -1;
 }
 
 .site-footer p {
