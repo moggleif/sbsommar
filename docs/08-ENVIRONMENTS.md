@@ -91,6 +91,7 @@ the secrets.
 | `SERVER_SSH_KEY`  | QA SSH private key               |
 | `SERVER_SSH_PORT` | QA SSH port                      |
 | `DEPLOY_DIR`      | QA deploy directory              |
+| `GOATCOUNTER_URL` | GoatCounter endpoint (e.g. `https://sbsommar.goatcounter.com/count`) — optional, omit to disable analytics |
 
 Example values: `SITE_URL=https://qa.sbsommar.se`,
 `API_URL=https://qa.sbsommar.se/api/add-event`.
@@ -114,6 +115,7 @@ Same secret names as `qa`, but with production values:
 | `SERVER_SSH_KEY`  | Production SSH private key                            |
 | `SERVER_SSH_PORT` | Production SSH port                                   |
 | `DEPLOY_DIR`      | Production deploy directory                           |
+| `GOATCOUNTER_URL` | GoatCounter endpoint (e.g. `https://sbsommar.goatcounter.com/count`) — optional, omit to disable analytics |
 
 ---
 

@@ -1026,10 +1026,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             874
+Total requirements:             884
 Covered (implemented + tested): 432
 Implemented, not tested:        442
-Gap (no implementation):          0
+Gap (no implementation):         10
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1276,6 +1276,11 @@ Matrix cleanup (2026-02-25):
   2 implemented (manual/visual): 02-§61.6 (WCAG contrast check),
     02-§61.11 (keyboard/ARIA behaviour preserved).
   Design documented in 07-DESIGN.md §6.20-impl–§6.24-impl.
+10 requirements added for GoatCounter analytics (02-§62.1–62.10):
+  all 10 gap (not yet implemented).
+  Provider: GoatCounter (open-source, cookie-free, GDPR-compliant).
+  Script injection gated on GOATCOUNTER_URL environment variable.
+  Environments documented in 08-ENVIRONMENTS.md.
 ```
 
 ---
@@ -1512,3 +1517,14 @@ Matrix cleanup (2026-02-25):
 | `02-§60.6` | covered | `docs/09-RELEASING.md` — Steps 1–4 + Rollback section |
 | `02-§60.7` | covered | `docs/09-RELEASING.md` — GitHub UI and CLI instructions, no Claude Code dependency |
 | `02-§60.8` | covered | `docs/09-RELEASING.md` — Release tags section with semver conventions |
+| | | **§62 — Analytics (GoatCounter)** |
+| `02-§62.1` | gap | GoatCounter as analytics provider |
+| `02-§62.2` | gap | Every HTML page includes tracking script in `<head>` |
+| `02-§62.3` | gap | Script tag uses `async` attribute |
+| `02-§62.4` | gap | Script src is `//gc.zgo.at/count.js` |
+| `02-§62.5` | gap | `data-goatcounter` attribute set from `GOATCOUNTER_URL` env var |
+| `02-§62.6` | gap | No script when `GOATCOUNTER_URL` is unset; build succeeds without it |
+| `02-§62.7` | gap | `GOATCOUNTER_URL` secret added to `qa` and `production` GitHub Environments |
+| `02-§62.8` | gap | No cookies set by analytics |
+| `02-§62.9` | gap | No tag managers, tracking pixels, or additional third-party scripts |
+| `02-§62.10` | gap | Analytics must not affect `noindex, nofollow` crawler policy |
