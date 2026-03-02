@@ -796,6 +796,7 @@ details.event-row[open] > summary .ev-title {
   }
 
   .nav-link--top {
+    display: block;
     margin-top: var(--space-sm);
     padding-top: var(--space-sm);
     border-top: 2px solid rgba(255, 255, 255, 0.3);
