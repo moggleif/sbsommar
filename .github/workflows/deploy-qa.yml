@@ -16,8 +16,36 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  compute-version:
+    name: Compute QA version
+    runs-on: ubuntu-latest
+    outputs:
+      version_string: ${{ steps.version.outputs.version_string }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Compute QA version string
+        id: version
+        run: |
+          BASE=$(cat VERSION | tr -d '[:space:]')
+          # Extract PR number from merge commit message (e.g. "Merge pull request #212 from ...")
+          PR_NUM=$(git log -1 --pretty=format:"%s" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
+          if [ -n "$PR_NUM" ]; then
+            VERSION_STR="${BASE} – QA PR${PR_NUM}"
+          else
+            SHA=$(git rev-parse --short HEAD)
+            VERSION_STR="${BASE} – QA ${SHA}"
+          fi
+          echo "version_string=${VERSION_STR}" >> $GITHUB_OUTPUT
+          echo "QA version: ${VERSION_STR}"
+
   deploy:
+    name: Deploy to QA
+    needs: compute-version
     uses: ./.github/workflows/deploy-reusable.yml
     with:
       environment: qa
+      build_version: ${{ needs.compute-version.outputs.version_string }}
     secrets: inherit

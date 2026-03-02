@@ -1855,3 +1855,9 @@ body.modal-open {
   margin-bottom: 0;
 }
 
+.site-footer__version {
+  font-size: var(--font-size-nav);
+  opacity: 0.5;
+  margin-top: var(--space-xs);
+}
+

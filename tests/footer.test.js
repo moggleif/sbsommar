@@ -191,3 +191,26 @@ describe('renderIndexPage – site footer (02-§22.1, §22.3, §22.5)', () => {
     assert.ok(!html.includes('site-footer'), 'Expected no site-footer when footerHtml is empty');
   });
 });
+
+// ── site-footer__version ────────────────────────────────────────────────────
+
+describe('site-footer__version — version paragraph in footer (02-§62.3)', () => {
+  const VERSION_FOOTER = FOOTER_HTML + '\n<p class="site-footer__version">v1.0.4</p>';
+
+  it('FTR-18: version paragraph is present in rendered schedule page', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, VERSION_FOOTER);
+    assert.ok(html.includes('site-footer__version'), 'Expected site-footer__version class');
+    assert.ok(html.includes('v1.0.4'), 'Expected version string in footer');
+  });
+
+  it('FTR-19: version paragraph is present in rendered index page', () => {
+    const html = renderIndexPage({ heroSrc: null, heroAlt: null, sections: [] }, VERSION_FOOTER);
+    assert.ok(html.includes('site-footer__version'), 'Expected site-footer__version class');
+    assert.ok(html.includes('v1.0.4'), 'Expected version string in footer');
+  });
+
+  it('FTR-20: no version paragraph when footerHtml has no version', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, FOOTER_HTML);
+    assert.ok(!html.includes('site-footer__version'), 'Expected no version class without version');
+  });
+});
