@@ -173,7 +173,7 @@ describe('CSS – index design improvements', () => {
     assert.ok(css.includes('.testimonial-img'), 'Expected .testimonial-img CSS rule');
   });
 
-  it('IDX-17: .section-alt rule exists with white background', () => {
+  it('IDX-17: .section-alt rule exists with light background', () => {
     assert.ok(css.includes('.section-alt'), 'Expected .section-alt CSS rule');
   });
 

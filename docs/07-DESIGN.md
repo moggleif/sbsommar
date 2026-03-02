@@ -183,9 +183,10 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 
 ### Alternating section backgrounds
 
-- Every other content section (starting from the second) receives a white
-  background with `--radius-lg` rounded corners and `--shadow-card`, creating
-  visual rhythm against the cream page background. Class: `.section-alt`. <!-- 07-§6.78 -->
+- Every other content section (starting from the second) receives a
+  `--color-cream-light` background with `--radius-lg` rounded corners and
+  `--shadow-card`, creating subtle visual rhythm against the cream page
+  background. Class: `.section-alt`. <!-- 07-§6.78 -->
 - The first section (`section-first`) is excluded from alternation. <!-- 07-§6.79 -->
 - Alternating sections suppress the default `border-top` divider. <!-- 07-§6.80 -->
 

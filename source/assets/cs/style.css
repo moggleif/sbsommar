@@ -1307,7 +1307,7 @@ details.accordion > summary:focus-visible {
 /* ── Alternating section backgrounds (02-§64.5–64.7) ── */
 
 .content section.section-alt {
-  background: var(--color-white);
+  background: var(--color-cream-light);
   border-radius: var(--radius-lg);
   padding: var(--space-xl) var(--space-md);
   box-shadow: var(--shadow-card);
