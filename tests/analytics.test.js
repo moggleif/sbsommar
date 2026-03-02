@@ -2,6 +2,8 @@
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const { renderSchedulePage } = require('../source/build/render');
 const { renderAddPage } = require('../source/build/render-add');
@@ -152,4 +154,96 @@ describe('02-§62.10 — Analytics does not affect noindex, nofollow', () => {
       assert.ok(html.includes('noindex, nofollow'), `${name} should still have noindex, nofollow meta tag`);
     });
   }
+});
+
+// ── 02-§62.20  Social links fire GoatCounter event on click ─────────────────
+
+const INDEX_WITH_SOCIAL = {
+  heroSrc: 'images/hero.jpg',
+  heroAlt: 'Camp view',
+  discordUrl: 'https://discord.com/test',
+  facebookUrl: 'https://facebook.com/test',
+  countdownTarget: null,
+  sections: [{ id: 'start', navLabel: 'Start', html: '<p>Intro</p>' }],
+};
+
+describe('02-§62.20 — Social links have data-goatcounter-click when analytics enabled', () => {
+  const html = renderIndexPage(INDEX_WITH_SOCIAL, '', [], GOATCOUNTER_TAG);
+
+  it('ANA-SOCIAL-01: Discord link has data-goatcounter-click', () => {
+    assert.ok(html.includes('data-goatcounter-click="social-discord"'), 'Discord link should have goatcounter click tracking');
+  });
+
+  it('ANA-SOCIAL-02: Facebook link has data-goatcounter-click', () => {
+    assert.ok(html.includes('data-goatcounter-click="social-facebook"'), 'Facebook link should have goatcounter click tracking');
+  });
+});
+
+describe('02-§62.22 — Social links have no data-goatcounter-click when analytics disabled', () => {
+  const html = renderIndexPage(INDEX_WITH_SOCIAL, '', [], '');
+
+  it('ANA-SOCIAL-03: Discord link has no goatcounter attribute when disabled', () => {
+    assert.ok(!html.includes('data-goatcounter-click'), 'Should not have goatcounter click attributes');
+  });
+});
+
+// ── 02-§62.19  iCal links fire GoatCounter event on click ───────────────────
+
+describe('02-§62.19 — iCal links have data-goatcounter-click when analytics enabled', () => {
+  it('ANA-ICAL-01: event page .ics link has click tracking', () => {
+    const html = renderEventPage(EVENT, CAMP, 'https://example.com', '', [], GOATCOUNTER_TAG);
+    assert.ok(html.includes('data-goatcounter-click="ical-event"'), 'Per-event .ics link should have goatcounter click tracking');
+  });
+
+  it('ANA-ICAL-02: kalender page has .ics click tracking', () => {
+    const html = renderKalenderPage(CAMP, 'https://example.com', '', [], GOATCOUNTER_TAG);
+    assert.ok(html.includes('data-goatcounter-click="ical-subscribe"'), 'Webcal link should have goatcounter click tracking');
+  });
+
+  it('ANA-ICAL-03: kalender page .ics download has click tracking', () => {
+    const html = renderKalenderPage(CAMP, 'https://example.com', '', [], GOATCOUNTER_TAG);
+    assert.ok(html.includes('data-goatcounter-click="ical-download"'), 'Download link should have goatcounter click tracking');
+  });
+
+  it('ANA-ICAL-04: schedule page webcal link has click tracking', () => {
+    const html = renderSchedulePage(CAMP, EVENTS, '', [], 'https://example.com', '', GOATCOUNTER_TAG);
+    assert.ok(html.includes('data-goatcounter-click="ical-subscribe"'), 'Webcal link should have goatcounter click tracking');
+  });
+});
+
+describe('02-§62.22 — iCal links have no data-goatcounter-click when analytics disabled', () => {
+  it('ANA-ICAL-05: event page has no goatcounter attributes when disabled', () => {
+    const html = renderEventPage(EVENT, CAMP, 'https://example.com', '', [], '');
+    assert.ok(!html.includes('data-goatcounter-click'), 'Should not have goatcounter click attributes');
+  });
+
+  it('ANA-ICAL-06: kalender page has no goatcounter attributes when disabled', () => {
+    const html = renderKalenderPage(CAMP, 'https://example.com', '', [], '');
+    assert.ok(!html.includes('data-goatcounter-click'), 'Should not have goatcounter click attributes');
+  });
+});
+
+// ── 02-§62.18  Form submit fires GoatCounter event ─────────────────────────
+
+describe('02-§62.18 — Form submit JS contains guarded goatcounter.count()', () => {
+  const addJs = fs.readFileSync(path.join(__dirname, '../source/assets/js/client/lagg-till.js'), 'utf8');
+  const editJs = fs.readFileSync(path.join(__dirname, '../source/assets/js/client/redigera.js'), 'utf8');
+
+  it('ANA-SUBMIT-01: lagg-till.js calls goatcounter.count on success', () => {
+    assert.ok(addJs.includes('goatcounter'), 'lagg-till.js should reference goatcounter');
+    assert.ok(addJs.includes('goatcounter.count'), 'lagg-till.js should call goatcounter.count');
+  });
+
+  it('ANA-SUBMIT-02: redigera.js calls goatcounter.count on success', () => {
+    assert.ok(editJs.includes('goatcounter'), 'redigera.js should reference goatcounter');
+    assert.ok(editJs.includes('goatcounter.count'), 'redigera.js should call goatcounter.count');
+  });
+
+  it('ANA-SUBMIT-03: lagg-till.js guards goatcounter call', () => {
+    assert.ok(addJs.includes('window.goatcounter'), 'lagg-till.js should guard with window.goatcounter check');
+  });
+
+  it('ANA-SUBMIT-04: redigera.js guards goatcounter call', () => {
+    assert.ok(editJs.includes('window.goatcounter'), 'redigera.js should guard with window.goatcounter check');
+  });
 });
