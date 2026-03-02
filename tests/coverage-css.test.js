@@ -183,8 +183,8 @@ describe('07-§4.3 — Container centering', () => {
 // ── 07-§6.1–6.3  Hero grid layout ──────────────────────────────────────────
 
 describe('07-§6.1–6.3 — Hero layout', () => {
-  it('CSS-32: hero uses CSS grid with 2fr 1fr', () => {
-    assert.ok(CSS.includes('grid-template-columns: 2fr 1fr'), 'hero grid columns');
+  it('CSS-32: hero is constrained to container-narrow width', () => {
+    assert.ok(CSS.includes('.hero') && CSS.includes('container-narrow'), 'hero max-width');
   });
 
   it('CSS-33: hero image has object-fit: cover', () => {

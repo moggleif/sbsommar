@@ -2942,3 +2942,78 @@ The following interactions must be tracked as GoatCounter custom events:
   beyond what GoatCounter itself requires (no wrapper libraries). <!-- 02-§63.36 -->
 - Custom event tracking must use HTML `data-goatcounter-click` attributes
   where possible, minimising inline JavaScript. <!-- 02-§63.37 -->
+
+---
+
+## 64. Index Page Design Improvements
+
+Visual polish for the main landing page to reduce monotony on a long single-page
+scroll and better leverage existing design tokens.
+
+### 64.1 Testimonial cards
+
+- Each testimonial (name, photo, quote) must be wrapped in a white card with
+  `box-shadow`, `border-radius`, and `padding` matching the card component
+  spec (07-§6.19–22). <!-- 02-§64.1 -->
+- The testimonial photo must be displayed as a circular thumbnail (~60 px)
+  beside the name, matching 07-§6.23. <!-- 02-§64.2 -->
+- Testimonial cards must be constrained to `--container-narrow` max-width. <!-- 02-§64.3 -->
+- The card structure must be generated at build time from the existing
+  Markdown format (## Name + image + blockquote). Content files must not
+  need to change. <!-- 02-§64.4 -->
+
+### 64.2 Alternating section backgrounds
+
+- Every other content section on the index page must have a cream-light
+  background (`--color-cream-light`) using a full-bleed pseudo-element,
+  creating edge-to-edge colour bands. <!-- 02-§64.5 -->
+- The first section (section-first) is excluded from alternation. <!-- 02-§64.6 -->
+- Alternating sections must not display the default border-top divider. <!-- 02-§64.7 -->
+
+### 64.3 Decorative section headings
+
+- Section headings use the existing terracotta colour; no additional
+  decorative line is rendered. <!-- 02-§64.8 -->
+
+### 64.4 RFSB logo placement
+
+- The RFSB logo in the first section must be displayed as a small inline
+  floated image (~70 px wide) beside the opening paragraph. <!-- 02-§64.9 -->
+
+### 64.5 Back-to-top navigation
+
+- A "Till toppen" link must be present inside the navigation. <!-- 02-§64.10 -->
+- On mobile, the link must be inside the hamburger menu so it opens and
+  closes together with the menu panel. <!-- 02-§64.11 -->
+- The link must scroll to the top of the page. <!-- 02-§64.12 -->
+
+### 64.6 Consistent content image widths
+
+- General content images (`.content-img`) must be constrained to
+  max-width 500 px. <!-- 02-§64.13 -->
+- Accommodation images (Stuga, Vandrarhem, Campingplats, Klarälvsbyn)
+  must be constrained to 250 px. <!-- 02-§64.14 -->
+- The Servicehus image must match the hero width
+  (`--container-narrow`). <!-- 02-§64.15 -->
+
+### 64.7 Compact section spacing
+
+- Content sections must use compact vertical spacing (padding-top and
+  margin-bottom ≤ `--space-md`). <!-- 02-§64.16 -->
+- Section-alt padding must match regular section spacing. <!-- 02-§64.17 -->
+
+### 64.8 Full-bleed footer
+
+- The site footer must use a full-bleed pseudo-element background
+  (sage/cream mix) with no gap below the last content section. <!-- 02-§64.18 -->
+- Body must have no bottom padding. <!-- 02-§64.19 -->
+
+### 64.9 Mobile scroll-to-top button
+
+- A fixed-position scroll-to-top button must appear on mobile viewports
+  (≤ 767 px) after scrolling 300 px. <!-- 02-§64.20 -->
+- The button must match the hamburger toggle in size (42 × 42 px),
+  colour, and border-radius. <!-- 02-§64.21 -->
+- The button must be a separate element outside the nav, so it does not
+  affect the hamburger menu layout. <!-- 02-§64.22 -->
+- The button must smooth-scroll to the top on click. <!-- 02-§64.23 -->
