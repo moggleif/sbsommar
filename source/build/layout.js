@@ -57,7 +57,8 @@ function pageNav(activeHref, navSections = []) {
 ${pageItems}
       </div>${sectionRow}${topLink}
     </div>
-  </nav>`;
+  </nav>
+  <button type="button" class="scroll-top" aria-label="Till toppen" hidden>&#x2B06;</button>`;
 }
 
 /**

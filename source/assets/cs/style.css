@@ -2039,3 +2039,41 @@ body.modal-open {
   }
 }
 
+/* ── Scroll-to-top button (mobile only) ── */
+
+.scroll-top {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .scroll-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: var(--space-xs);
+    right: var(--space-sm);
+    width: 42px;
+    height: 42px;
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    z-index: 200;
+  }
+
+  .scroll-top[hidden] {
+    display: none;
+  }
+
+  .scroll-top:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
+  }
+}
+

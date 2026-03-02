@@ -27,3 +27,17 @@
     }
   });
 }());
+
+/* Scroll-to-top button – show after scrolling down */
+(function () {
+  var btn = document.querySelector('.scroll-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', function () {
+    btn.hidden = window.scrollY < 300;
+  });
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}());

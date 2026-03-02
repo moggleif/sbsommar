@@ -26,6 +26,7 @@
     <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>
     </div>
   </nav>
+  <button type="button" class="scroll-top" aria-label="Till toppen" hidden>&#x2B06;</button>
   <div class="schedule-header">
     <h1>Schema – Test Camp 2025</h1>
     <a href="schema.rss" class="rss-link" title="RSS-feed" data-goatcounter-click="click-rss"><img src="images/RSS-logo.webp" alt="RSS" class="rss-icon"></a>
