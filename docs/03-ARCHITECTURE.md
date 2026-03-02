@@ -1465,6 +1465,67 @@ URL is displayed in a copy-friendly dark code block.
 
 ---
 
+## 23. Site Analytics
+
+### 23.1 Overview
+
+GoatCounter (hosted, free tier) provides privacy-friendly analytics with no
+cookies and no personal data collection. The analytics script (~3.5 KB) loads
+asynchronously on every page.
+
+### 23.2 Script inclusion
+
+The GoatCounter `count.js` script is included via a `<script>` tag just
+before `</body>` on every page. Two inclusion points:
+
+1. **Shared layout pages** — the layout helper (`layoutTop`/`layoutBottom` or
+   equivalent) includes the script once, so all pages with the site header
+   and footer inherit it.
+2. **Display view** (`/dagens-schema.html`) — does not use the shared layout,
+   so its renderer includes the script separately.
+
+The script tag uses the `data-goatcounter` attribute pointing to the
+GoatCounter endpoint. The site code comes from the `GOATCOUNTER_SITE_CODE`
+environment variable, injected at build time. When the variable is absent
+(local dev, CI), no script tag is rendered.
+
+### 23.3 Custom events
+
+Behavioural tracking uses GoatCounter's `data-goatcounter-click` HTML
+attribute on interactive elements. No additional JS libraries are needed.
+
+For events that cannot be tracked via HTML attributes alone (form submission
+success, form abandonment, scroll depth), minimal inline JavaScript calls
+`window.goatcounter.count()` directly. This keeps the JS footprint to the
+GoatCounter script itself plus a few lines of glue code.
+
+### 23.4 QR code referrer tracking
+
+Physical QR codes include a `?ref=<id>` query parameter. GoatCounter
+records the full URL including query string, making each QR code identifiable
+as a distinct referrer source.
+
+The list of QR code identifiers lives in `source/data/qr-codes.yaml` and is
+maintained manually. The build reads this file only when generating the
+display view's QR code (to embed the correct `?ref=` parameter).
+
+### 23.5 Data file
+
+`source/data/qr-codes.yaml` schema:
+
+```yaml
+codes:
+  - id: qr-display-01
+    description: Dagens schema — skylt vid matsalen
+  - id: qr-affisch-01
+    description: Affisch i receptionen
+```
+
+Fields: `id` (string, unique, used in `?ref=` parameter), `description`
+(string, human-readable location/purpose).
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
