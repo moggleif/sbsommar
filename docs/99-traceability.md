@@ -1020,16 +1020,34 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§61.9` | Smooth CSS transition (max-height, 250 ms) | 07-DESIGN.md §6.23-impl | MN-15..16 | `source/assets/cs/style.css` | covered |
 | `02-§61.10` | White focus outlines against terracotta | — | MN-17..18 | `source/assets/cs/style.css` | covered |
 | `02-§61.11` | Preserve keyboard/ARIA behaviour | — | manual: MN-M04 — Escape, click-outside, aria-expanded | `source/assets/js/client/nav.js` | implemented |
+| | | **§62 — Footer Versioning** | | | |
+| `02-§62.1` | VERSION file in project root | — | — | `VERSION` | gap |
+| `02-§62.2` | Major/minor bumped manually | 09-RELEASING.md | — | `VERSION` | gap |
+| `02-§62.3` | Version `<p>` in site footer | — | — | `source/build/build.js` | gap |
+| `02-§62.4` | Version text visually subordinate | 07-DESIGN.md | — | `source/assets/cs/style.css` | gap |
+| `02-§62.5` | No version on pages without footer | — | — | `source/build/build.js` | gap |
+| `02-§62.6` | Production: full semver from tags | — | — | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.7` | QA: base version + PR number | — | — | `.github/workflows/deploy-qa.yml` | gap |
+| `02-§62.8` | Local: base version + timestamp | — | — | `source/build/version.js` | gap |
+| `02-§62.9` | Event-data deploy: no version shown | — | — | `source/build/version.js` | gap |
+| `02-§62.10` | Annotated git tag per prod deploy | — | — | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.11` | Tag created after successful deploy | — | — | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.12` | Tag skip if already exists | — | — | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.13` | Auto GitHub Release on new major/minor | — | — | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.14` | Patch deploys: no GitHub Release | — | — | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.15` | BUILD_VERSION env var accepted by build | — | — | `source/build/version.js` | gap |
+| `02-§62.16` | Local fallback: VERSION file + timestamp | — | — | `source/build/version.js` | gap |
+| `02-§62.17` | Version logic in separate testable module | — | — | `source/build/version.js` | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             874
+Total requirements:             891
 Covered (implemented + tested): 432
 Implemented, not tested:        442
-Gap (no implementation):          0
+Gap (no implementation):         17
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1276,6 +1294,9 @@ Matrix cleanup (2026-02-25):
   2 implemented (manual/visual): 02-§61.6 (WCAG contrast check),
     02-§61.11 (keyboard/ARIA behaviour preserved).
   Design documented in 07-DESIGN.md §6.20-impl–§6.24-impl.
+17 requirements added for footer versioning (02-§62.1–62.17):
+  all 17 gap (pending implementation).
+  VERSION file, footer display, automatic tagging, GitHub Release on bump.
 ```
 
 ---

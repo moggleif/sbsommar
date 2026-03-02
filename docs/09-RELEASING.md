@@ -122,35 +122,56 @@ manually — but prefer the git revert approach when possible.
 
 ---
 
-## Release tags (optional)
+## Automatic versioning
 
-Tags are not required for every deploy. Use them to mark milestones —
-major launches, end-of-camp snapshots, or significant feature releases.
+Every production deploy is automatically tagged and the version is shown
+in the site footer. No manual tagging is needed for regular deploys.
 
-### Creating a release
+### How it works
 
-```bash
-git checkout main
-git pull
-git tag v1.0.0
-git push origin v1.0.0
-```
+1. The `VERSION` file in the project root contains the major.minor
+   version (e.g. `1.0`).
+2. When the production deploy workflow runs, it finds the latest
+   `v1.0.*` tag, increments the patch number, and builds the site with
+   that version in the footer (e.g. `v1.0.4`).
+3. After a successful deploy, an annotated git tag is created and
+   pushed (e.g. `v1.0.4`).
 
-Then create a GitHub Release:
+### Version in the footer
 
-```bash
-gh release create v1.0.0 --title "v1.0.0" --notes "First production release."
-```
+The footer shows different version strings per environment:
+
+| Environment | Example | How |
+| --- | --- | --- |
+| Production | `v1.0.4` | Auto-incremented patch from git tags |
+| QA | `v1.0 – QA PR212` | Base version + PR number from merge commit |
+| Local | `v1.0 – Lokal 2026-03-02 14:30` | Base version + build timestamp |
+
+Event-data deploys do not update the version in the footer.
 
 ### Versioning convention
 
-Use [semantic versioning](https://semver.org/):
+[Semantic versioning](https://semver.org/):
 
-- **Patch** (`v1.0.1`) — bug fixes, text corrections, small tweaks.
+- **Patch** (`v1.0.1`) — auto-incremented on every production deploy.
 - **Minor** (`v1.1.0`) — new features, new pages, new form fields.
 - **Major** (`v2.0.0`) — breaking changes, major redesigns.
 
-Tags do not affect deployment. They are bookmarks in the git history.
+### Bumping the major or minor version
+
+When you want to mark a milestone (new feature set, significant redesign):
+
+1. Edit the `VERSION` file — change `1.0` to `1.1` (or `2.0`).
+2. Commit: `chore: bump version to 1.1`
+3. Merge to main via a PR.
+4. Trigger "Deploy to Production" as usual.
+5. The workflow detects no `v1.1.*` tags exist, tags as `v1.1.0`, and
+   **automatically creates a GitHub Release** with auto-generated notes
+   listing all PRs since the previous release.
+6. You can edit the release notes afterwards on GitHub if you want to
+   add a summary or personal touch.
+
+Patch-only deploys (the normal case) create only a tag, not a Release.
 
 ---
 
@@ -159,11 +180,12 @@ Tags do not affect deployment. They are bookmarks in the git history.
 ```text
 Merge to main
   → CI passes
-  → QA auto-deploys
+  → QA auto-deploys (footer: v1.0 – QA PR212)
   → You verify on QA
   → You trigger "Deploy to Production"
   → Approver approves
-  → Production deploys
+  → Production deploys (footer: v1.0.4)
+  → Git tag v1.0.4 created automatically
   → You verify on production
 ```
 
