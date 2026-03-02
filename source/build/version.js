@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 
 /**
  * Reads the VERSION file from the project root.
@@ -27,8 +27,8 @@ function readVersionFile(rootDir) {
  */
 function resolveLatestTag(base) {
   try {
-    const output = execSync(
-      `git tag --list "v${base}.*" --sort=-version:refname`,
+    const output = execFileSync(
+      'git', ['tag', '--list', `v${base}.*`, '--sort=-version:refname'],
       { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] },
     ).trim();
     const latest = output.split('\n')[0];
