@@ -106,7 +106,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
   }
 
   const guideHtml = siteUrl
-    ? `\n  <p class="intro"><a href="kalender.html">Guide: Synka schemat till din kalender</a> · <a href="${webcalHtml}">Prenumerera direkt (webcal)</a></p>`
+    ? `\n  <p class="intro"><a href="kalender.html">Guide: Synka schemat till din kalender</a> · <a href="${webcalHtml}"${analyticsTag ? ' data-goatcounter-click="ical-subscribe"' : ''}>Prenumerera direkt (webcal)</a></p>`
     : '';
 
   return `<!DOCTYPE html>

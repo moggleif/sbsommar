@@ -128,11 +128,14 @@ function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, 
     ? `\n      <div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
     : '';
 
+  const discordTrack = (discordUrl && analyticsTag) ? ' data-goatcounter-click="social-discord"' : '';
+  const facebookTrack = (facebookUrl && analyticsTag) ? ' data-goatcounter-click="social-facebook"' : '';
+
   const sidebarHtml = (discordUrl || facebookUrl || countdownTarget)
     ? `\n    <div class="hero-sidebar">${
-      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer">\n        <img src="images/DiscordLogo.webp" alt="Discord">\n      </a>` : ''
+      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer"${discordTrack}>\n        <img src="images/DiscordLogo.webp" alt="Discord">\n      </a>` : ''
     }${
-      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook">\n      </a>` : ''
+      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer"${facebookTrack}>\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook">\n      </a>` : ''
     }${countdownHtml}\n    </div>`
     : '';
 

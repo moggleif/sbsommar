@@ -486,6 +486,10 @@
           }
           // Save responsible name for auto-fill on next visit (02-§48.1, 02-§48.3)
           try { localStorage.setItem('sb_responsible', responsible); } catch { /* ignore */ }
+          // Track successful submission (02-§62.18)
+          if (window.goatcounter && window.goatcounter.count) {
+            window.goatcounter.count({ path: 'submit-add-event', title: 'Add event', event: true });
+          }
           setModalSuccess(title, consentGiven);
         })
         .catch(function () {

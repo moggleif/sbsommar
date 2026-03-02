@@ -42,9 +42,9 @@ ${pageNav('kalender.html', navSections)}
     <h2>Prenumerera på hela schemat</h2>
     <p>Kopiera den här länken och lägg till den som en kalenderprenumeration:</p>
     <div class="ical-url-block"><pre>${escapeHtml(webcalUrl)}</pre></div>
-    <p><a href="${escapeHtml(webcalUrl)}">Öppna direkt i kalenderappen →</a></p>
+    <p><a href="${escapeHtml(webcalUrl)}"${analyticsTag ? ' data-goatcounter-click="ical-subscribe"' : ''}>Öppna direkt i kalenderappen →</a></p>
     <p>Alternativt kan du ladda ner hela schemat som en fil:
-    <a href="schema.ics">Ladda ner schema.ics</a></p>
+    <a href="schema.ics"${analyticsTag ? ' data-goatcounter-click="ical-download"' : ''}>Ladda ner schema.ics</a></p>
   </div>
 
   <div class="kalender-card">

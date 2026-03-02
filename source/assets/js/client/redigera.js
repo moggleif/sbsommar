@@ -460,6 +460,10 @@
             setModalError(json.error || 'Något gick fel.');
             return;
           }
+          // Track successful submission (02-§62.18)
+          if (window.goatcounter && window.goatcounter.count) {
+            window.goatcounter.count({ path: 'submit-edit-event', title: 'Edit event', event: true });
+          }
           setModalSuccess(title);
         })
         .catch(function () {
