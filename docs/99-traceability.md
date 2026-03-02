@@ -1027,9 +1027,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             884
-Covered (implemented + tested): 432
-Implemented, not tested:        442
-Gap (no implementation):         10
+Covered (implemented + tested): 438
+Implemented, not tested:        446
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1277,7 +1277,8 @@ Matrix cleanup (2026-02-25):
     02-§61.11 (keyboard/ARIA behaviour preserved).
   Design documented in 07-DESIGN.md §6.20-impl–§6.24-impl.
 10 requirements added for GoatCounter analytics (02-§62.1–62.10):
-  all 10 gap (not yet implemented).
+  6 covered (ANA-* tests): script injection, async, src, data-goatcounter, env gating, noindex.
+  4 implemented (code review / design): provider choice, GitHub secrets, no cookies, no tag managers.
   Provider: GoatCounter (open-source, cookie-free, GDPR-compliant).
   Script injection gated on GOATCOUNTER_URL environment variable.
   Environments documented in 08-ENVIRONMENTS.md.
@@ -1518,13 +1519,21 @@ Matrix cleanup (2026-02-25):
 | `02-§60.7` | covered | `docs/09-RELEASING.md` — GitHub UI and CLI instructions, no Claude Code dependency |
 | `02-§60.8` | covered | `docs/09-RELEASING.md` — Release tags section with semver conventions |
 | | | **§62 — Analytics (GoatCounter)** |
-| `02-§62.1` | gap | GoatCounter as analytics provider |
-| `02-§62.2` | gap | Every HTML page includes tracking script in `<head>` |
-| `02-§62.3` | gap | Script tag uses `async` attribute |
-| `02-§62.4` | gap | Script src is `//gc.zgo.at/count.js` |
-| `02-§62.5` | gap | `data-goatcounter` attribute set from `GOATCOUNTER_URL` env var |
-| `02-§62.6` | gap | No script when `GOATCOUNTER_URL` is unset; build succeeds without it |
-| `02-§62.7` | gap | `GOATCOUNTER_URL` secret added to `qa` and `production` GitHub Environments |
-| `02-§62.8` | gap | No cookies set by analytics |
-| `02-§62.9` | gap | No tag managers, tracking pixels, or additional third-party scripts |
-| `02-§62.10` | gap | Analytics must not affect `noindex, nofollow` crawler policy |
+| `02-§62.1` | implemented | GoatCounter as analytics provider — verified by code review (`build.js`, `gc.zgo.at/count.js`) |
+| `02-§62.2` | covered | Every HTML page includes tracking script in `<head>` — ANA-*, ANA-HEAD-* |
+| `02-§62.3` | covered | Script tag uses `async` attribute — ANA-ASYNC |
+| `02-§62.4` | covered | Script src is `//gc.zgo.at/count.js` — ANA-SRC |
+| `02-§62.5` | covered | `data-goatcounter` attribute set from `GOATCOUNTER_URL` env var — ANA-ATTR |
+| `02-§62.6` | covered | No script when `GOATCOUNTER_URL` is unset; build succeeds without it — ANA-EMPTY-*, ANA-OMIT-* |
+| `02-§62.7` | implemented | `GOATCOUNTER_URL` secret added to workflow env blocks; GitHub Environments setup is manual |
+| `02-§62.8` | implemented | No cookies set by analytics — GoatCounter is cookie-free by design |
+| `02-§62.9` | implemented | No tag managers, tracking pixels, or additional third-party scripts — verified by code review |
+| `02-§62.10` | covered | Analytics must not affect `noindex, nofollow` crawler policy — ANA-ROBOTS-* |
+| ANA-* | `tests/analytics.test.js` | `02-§62.2 — GoatCounter script injected in <head> of every page` |
+| ANA-HEAD-* | `tests/analytics.test.js` | `02-§62.2 — GoatCounter script is inside <head>` |
+| ANA-ASYNC | `tests/analytics.test.js` | `02-§62.3 — GoatCounter script uses async` |
+| ANA-SRC | `tests/analytics.test.js` | `02-§62.4 — GoatCounter script src` |
+| ANA-ATTR | `tests/analytics.test.js` | `02-§62.5 — data-goatcounter attribute present` |
+| ANA-EMPTY-* | `tests/analytics.test.js` | `02-§62.6 — No analytics script when tag is empty` |
+| ANA-OMIT-* | `tests/analytics.test.js` | `02-§62.6 — No analytics script when tag is omitted` |
+| ANA-ROBOTS-* | `tests/analytics.test.js` | `02-§62.10 — Analytics does not affect noindex, nofollow` |
