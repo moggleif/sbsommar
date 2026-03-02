@@ -3017,3 +3017,28 @@ scroll and better leverage existing design tokens.
 - The button must be a separate element outside the nav, so it does not
   affect the hamburger menu layout. <!-- 02-§64.22 -->
 - The button must smooth-scroll to the top on click. <!-- 02-§64.23 -->
+
+---
+
+## 65. Client-Side Date and Regex Robustness
+
+### 65.1 Locale-independent date formatting
+
+- Client-side scripts that derive "today" must produce a guaranteed
+  `YYYY-MM-DD` string using `Intl.DateTimeFormat.formatToParts`, not
+  `toLocaleDateString`. <!-- 02-§65.1 -->
+- This applies to both the hero countdown script and the upcoming-camps
+  past-marking script. <!-- 02-§65.2 -->
+
+### 65.2 Countdown injection regex
+
+- The regex that wraps the upcoming-camps list and its companion script
+  in a `.camps-row` div must anchor on `</ul>` and `<script>`
+  explicitly. <!-- 02-§65.3 -->
+
+### 65.3 Testimonial image regex robustness
+
+- The image `src` extraction regex must not assume attribute
+  order. <!-- 02-§65.4 -->
+- The image-wrapping `<p>` removal regex must tolerate optional
+  whitespace inside the `<p>` element. <!-- 02-§65.5 -->

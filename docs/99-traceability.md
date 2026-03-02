@@ -1082,8 +1082,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             928
-Covered (implemented + tested): 453
+Total requirements:             933
+Covered (implemented + tested): 458
 Implemented, not tested:        475
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
@@ -1609,3 +1609,9 @@ Matrix cleanup (2026-02-25):
 | `02-§64.21` | implemented | Scroll-to-top matches hamburger size (42 × 42 px) — `.scroll-top` in style.css |
 | `02-§64.22` | implemented | Scroll-to-top is separate element outside nav — layout.js |
 | `02-§64.23` | implemented | Scroll-to-top smooth-scrolls to top — nav.js |
+| | | **§65 — Client-Side Date and Regex Robustness** |
+| ROB-01 | `tests/robustness.test.js` | `02-§65.1 — Countdown script uses formatToParts` |
+| ROB-02 | `tests/robustness.test.js` | `02-§65.2 — Camp-past script uses formatToParts` |
+| ROB-03 | `tests/robustness.test.js` | `02-§65.3 — Countdown regex anchors on </ul> + <script>` |
+| ROB-04 | `tests/robustness.test.js` | `02-§65.4 — Testimonial src extraction attribute-order-independent` |
+| ROB-05 | `tests/robustness.test.js` | `02-§65.5 — Testimonial <p> removal tolerates whitespace` |

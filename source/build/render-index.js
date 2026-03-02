@@ -153,7 +153,7 @@ function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, 
       if (i === 0 && countdownHtml) {
         if (sectionHtml.includes('upcoming-camps')) {
           sectionHtml = sectionHtml.replace(
-            /(<ul class="upcoming-camps">[\s\S]*?<\/script>)/,
+            /(<ul class="upcoming-camps">[\s\S]*?<\/ul>\s*<script>[\s\S]*?<\/script>)/,
             `<div class="camps-row">$1\n      ${countdownHtml}\n</div>`,
           );
         } else {
@@ -203,7 +203,8 @@ ${contentSections}
     var el = document.querySelector('.hero-countdown[data-target]');
     if (!el) return;
     var target = el.getAttribute('data-target');
-    var today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+    var p = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+    var today = p.find(function (x) { return x.type === 'year'; }).value + '-' + p.find(function (x) { return x.type === 'month'; }).value + '-' + p.find(function (x) { return x.type === 'day'; }).value;
     var diff = Math.ceil((new Date(target + 'T00:00:00') - new Date(today + 'T00:00:00')) / 86400000);
     if (diff < 0) { el.hidden = true; return; }
     el.querySelector('.hero-countdown-number').textContent = diff < 10 ? '0' + diff : String(diff);
@@ -271,7 +272,8 @@ ${items}
 </ul>
 <script>
 (function () {
-  var today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+  var p = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+  var today = p.find(function (x) { return x.type === 'year'; }).value + '-' + p.find(function (x) { return x.type === 'month'; }).value + '-' + p.find(function (x) { return x.type === 'day'; }).value;
   document.querySelectorAll('.camp-item[data-end]').forEach(function (el) {
     if (el.getAttribute('data-end') < today) el.classList.add('camp-past');
   });
@@ -341,14 +343,14 @@ function wrapTestimonialCards(html) {
     const name = nameMatch ? nameMatch[1] : '';
 
     // Extract image src and alt from <img ... class="content-img" ...>
-    const imgMatch = part.match(/<img\s+src="([^"]*)"[^>]*>/);
+    const imgMatch = part.match(/<img\s[^>]*?src="([^"]*)"[^>]*>/);
     const imgSrc = imgMatch ? imgMatch[1] : '';
     const imgAlt = name;
 
     // Remove the original h3, the paragraph containing the image, and rebuild
     let body = part;
     // Remove the <p><img ...></p> block (image paragraph)
-    body = body.replace(/<p><img[^>]*class="content-img"[^>]*><\/p>\n?/, '');
+    body = body.replace(/<p>\s*<img\s[^>]*class="content-img"[^>]*>\s*<\/p>\n?/, '');
 
     // Build the card
     const header = imgSrc
