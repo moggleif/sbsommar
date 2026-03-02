@@ -1240,7 +1240,7 @@ textarea {
 /* ── Accordion (collapsible sections: FAQ, Lokaler) ── */
 
 details.accordion {
-  background: var(--color-white);
+  background: var(--color-cream-light);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   margin-bottom: var(--space-xs);
@@ -1381,7 +1381,7 @@ details.accordion > summary:focus-visible {
 /* ── Testimonial cards (02-§64.1–64.4) ── */
 
 .testimonial-card {
-  background: var(--color-white);
+  background: var(--color-cream-light);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   padding: var(--space-md);
