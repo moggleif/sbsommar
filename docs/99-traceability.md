@@ -1026,10 +1026,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             884
+Total requirements:             896
 Covered (implemented + tested): 438
-Implemented, not tested:        446
-Gap (no implementation):          0
+Implemented, not tested:        450
+Gap (no implementation):          8
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1537,3 +1537,15 @@ Matrix cleanup (2026-02-25):
 | ANA-EMPTY-* | `tests/analytics.test.js` | `02-§62.6 — No analytics script when tag is empty` |
 | ANA-OMIT-* | `tests/analytics.test.js` | `02-§62.6 — No analytics script when tag is omitted` |
 | ANA-ROBOTS-* | `tests/analytics.test.js` | `02-§62.10 — Analytics does not affect noindex, nofollow` |
+| `02-§62.11` | implemented | Page views per day/week — covered by base GoatCounter script |
+| `02-§62.12` | implemented | Most visited pages — covered by base GoatCounter script |
+| `02-§62.13` | implemented | Traffic sources (referrer) — covered by base GoatCounter script |
+| `02-§62.14` | implemented | Device/screen data — covered by base GoatCounter script |
+| `02-§62.15` | gap | Form submission custom event |
+| `02-§62.16` | gap | iCal download custom event |
+| `02-§62.17` | gap | Social link click custom event |
+| `02-§62.18` | gap | Add/edit form fires GoatCounter event on success |
+| `02-§62.19` | gap | iCal links fire GoatCounter event on click |
+| `02-§62.20` | gap | Social links fire GoatCounter event on click |
+| `02-§62.21` | gap | Custom events use `data-goatcounter-click` or `goatcounter.count()` |
+| `02-§62.22` | gap | Custom event calls guarded when GoatCounter not loaded |
