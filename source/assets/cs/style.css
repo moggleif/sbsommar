@@ -1311,8 +1311,8 @@ details.accordion > summary:focus-visible {
 /* ── Content sections ── */
 
 .content section {
-  padding-top: var(--space-xl);
-  margin-bottom: var(--space-xl);
+  padding-top: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .content section:last-child {
@@ -1327,8 +1327,8 @@ details.accordion > summary:focus-visible {
 
 .content section.section-alt {
   position: relative;
-  padding-top: var(--space-xxl);
-  padding-bottom: var(--space-xl);
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
 }
 
 .content section.section-alt::before {
