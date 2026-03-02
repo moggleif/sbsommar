@@ -2964,21 +2964,21 @@ scroll and better leverage existing design tokens.
 
 ### 64.2 Alternating section backgrounds
 
-- Every other content section on the index page must have a white background
-  (`--color-white`) with padding and rounded corners, creating visual rhythm
-  against the cream page background. <!-- 02-§64.5 -->
+- Every other content section on the index page must have a cream-light
+  background (`--color-cream-light`) using a full-bleed pseudo-element,
+  creating edge-to-edge colour bands. <!-- 02-§64.5 -->
 - The first section (section-first) is excluded from alternation. <!-- 02-§64.6 -->
 - Alternating sections must not display the default border-top divider. <!-- 02-§64.7 -->
 
 ### 64.3 Decorative section headings
 
-- Every `h2` inside `.content section` must display a short decorative line
-  below the heading text, using `--color-sage` (matching 07-§6.29). <!-- 02-§64.8 -->
+- Section headings use the existing terracotta colour; no additional
+  decorative line is rendered. <!-- 02-§64.8 -->
 
 ### 64.4 RFSB logo placement
 
-- The RFSB logo in the first section must be displayed as a small badge
-  (~100 px wide), not as a full-width content image. <!-- 02-§64.9 -->
+- The RFSB logo in the first section must be displayed as a small inline
+  floated image (~70 px wide) beside the opening paragraph. <!-- 02-§64.9 -->
 
 ### 64.5 Back-to-top navigation
 
@@ -2986,3 +2986,34 @@ scroll and better leverage existing design tokens.
 - On mobile, the link must be inside the hamburger menu so it opens and
   closes together with the menu panel. <!-- 02-§64.11 -->
 - The link must scroll to the top of the page. <!-- 02-§64.12 -->
+
+### 64.6 Consistent content image widths
+
+- General content images (`.content-img`) must be constrained to
+  max-width 500 px. <!-- 02-§64.13 -->
+- Accommodation images (Stuga, Vandrarhem, Campingplats, Klarälvsbyn)
+  must be constrained to 250 px. <!-- 02-§64.14 -->
+- The Servicehus image must match the hero width
+  (`--container-narrow`). <!-- 02-§64.15 -->
+
+### 64.7 Compact section spacing
+
+- Content sections must use compact vertical spacing (padding-top and
+  margin-bottom ≤ `--space-md`). <!-- 02-§64.16 -->
+- Section-alt padding must match regular section spacing. <!-- 02-§64.17 -->
+
+### 64.8 Full-bleed footer
+
+- The site footer must use a full-bleed pseudo-element background
+  (sage/cream mix) with no gap below the last content section. <!-- 02-§64.18 -->
+- Body must have no bottom padding. <!-- 02-§64.19 -->
+
+### 64.9 Mobile scroll-to-top button
+
+- A fixed-position scroll-to-top button must appear on mobile viewports
+  (≤ 767 px) after scrolling 300 px. <!-- 02-§64.20 -->
+- The button must match the hamburger toggle in size (42 × 42 px),
+  colour, and border-radius. <!-- 02-§64.21 -->
+- The button must be a separate element outside the nav, so it does not
+  affect the hamburger menu layout. <!-- 02-§64.22 -->
+- The button must smooth-scroll to the top on click. <!-- 02-§64.23 -->

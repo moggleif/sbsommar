@@ -1590,11 +1590,22 @@ Matrix cleanup (2026-02-25):
 | IDX-03 | `tests/index-design.test.js` | `02-§64.2 — Circular testimonial profile images (~60 px)` |
 | IDX-15 | `tests/index-design.test.js` | `02-§64.3 — Testimonial cards constrained to --container-narrow` |
 | IDX-01, IDX-07 | `tests/index-design.test.js` | `02-§64.4 — Card structure generated at build time` |
-| IDX-09, IDX-11 | `tests/index-design.test.js` | `02-§64.5 — Alternating section backgrounds (white on cream)` |
+| IDX-09, IDX-11 | `tests/index-design.test.js` | `02-§64.5 — Alternating section backgrounds (cream-light, full-bleed)` |
 | IDX-08 | `tests/index-design.test.js` | `02-§64.6 — First section excluded from alternation` |
 | IDX-17 | `tests/index-design.test.js` | `02-§64.7 — Alternating sections suppress border-top (CSS)` |
-| IDX-18 | `tests/index-design.test.js` | `02-§64.8 — Decorative sage line below H2 headings (CSS)` |
-| `02-§64.9` | implemented | RFSB logo badge — `.section-first .content-img` in style.css (manual: confirm ~100 px in browser) |
+| IDX-18 | `tests/index-design.test.js` | `02-§64.8 — Section headings use terracotta colour (no decorative line)` |
+| `02-§64.9` | implemented | RFSB logo floated inline (~70 px) — `.content-img[alt="RFSBlogo"]` in style.css |
 | IDX-12 | `tests/index-design.test.js` | `02-§64.10 — "Till toppen" link in navigation` |
 | IDX-14 | `tests/index-design.test.js` | `02-§64.11 — Back-to-top link inside hamburger menu on mobile` |
 | IDX-13 | `tests/index-design.test.js` | `02-§64.12 — Back-to-top link has href="#"` |
+| `02-§64.13` | implemented | Content images max-width 500 px — `.content-img` in style.css |
+| `02-§64.14` | implemented | Accommodation images max-width 250 px — `.content-img[alt="Stuga"]` etc. in style.css |
+| `02-§64.15` | implemented | Servicehus image matches hero width — `.content-img[alt="Servicehus"]` in style.css |
+| `02-§64.16` | implemented | Compact section spacing — `.content section` padding/margin in style.css |
+| `02-§64.17` | implemented | Section-alt padding matches regular — `.content section.section-alt` in style.css |
+| `02-§64.18` | implemented | Full-bleed footer — `.site-footer::before` in style.css |
+| `02-§64.19` | implemented | Body has no bottom padding — `body` padding in style.css |
+| `02-§64.20` | implemented | Mobile scroll-to-top button appears after 300 px — nav.js + `.scroll-top` in style.css |
+| `02-§64.21` | implemented | Scroll-to-top matches hamburger size (42 × 42 px) — `.scroll-top` in style.css |
+| `02-§64.22` | implemented | Scroll-to-top is separate element outside nav — layout.js |
+| `02-§64.23` | implemented | Scroll-to-top smooth-scrolls to top — nav.js |
