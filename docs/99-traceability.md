@@ -1082,10 +1082,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             928
+Total requirements:             933
 Covered (implemented + tested): 453
 Implemented, not tested:        475
-Gap (no implementation):          0
+Gap (no implementation):          5
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1609,3 +1609,8 @@ Matrix cleanup (2026-02-25):
 | `02-§64.21` | implemented | Scroll-to-top matches hamburger size (42 × 42 px) — `.scroll-top` in style.css |
 | `02-§64.22` | implemented | Scroll-to-top is separate element outside nav — layout.js |
 | `02-§64.23` | implemented | Scroll-to-top smooth-scrolls to top — nav.js |
+| `02-§65.1` | gap | Client-side "today" uses `formatToParts` for guaranteed `YYYY-MM-DD` |
+| `02-§65.2` | gap | Applies to both countdown and camp-past scripts |
+| `02-§65.3` | gap | Countdown injection regex anchors on `</ul>` and `<script>` |
+| `02-§65.4` | gap | Testimonial image `src` extraction does not assume attribute order |
+| `02-§65.5` | gap | Testimonial `<p>` removal tolerates whitespace |
