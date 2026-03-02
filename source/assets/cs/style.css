@@ -145,6 +145,7 @@ h3 {
 
 .hero-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-sm);
   margin-bottom: var(--space-sm);
@@ -2074,13 +2075,35 @@ body.modal-open {
     outline-offset: 2px;
   }
 
-  /* On mobile the body is already viewport-wide; extend pseudo-elements
-     only past the body padding instead of 9999px to avoid horizontal
-     overflow that mobile browsers fail to clip. */
+  /* On mobile the body is already viewport-wide, so the full-bleed
+     pseudo-elements (inset: 0 -9999px) are not needed. Hide them and
+     set the background directly on the elements instead. */
   .page-nav::before,
   .content section.section-alt::before,
   .site-footer::before {
-    inset: 0 calc(-1 * var(--space-sm));
+    display: none;
+  }
+
+  .page-nav {
+    background: var(--color-cream);
+    margin: 0 calc(-1 * var(--space-sm));
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+
+  .content section.section-alt {
+    background: var(--color-cream-light);
+    margin-left: calc(-1 * var(--space-sm));
+    margin-right: calc(-1 * var(--space-sm));
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+
+  .site-footer {
+    background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
+    margin: 0 calc(-1 * var(--space-sm));
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
   }
 }
 
