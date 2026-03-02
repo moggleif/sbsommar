@@ -136,11 +136,8 @@ h3 {
 /* ── Hero ── */
 
 .hero {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--space-md);
-  margin: 0 0 var(--space-lg);
-  align-items: center;
+  max-width: var(--container-narrow);
+  margin: 0 auto var(--space-lg);
 }
 
 .hero-main {
@@ -158,7 +155,7 @@ h3 {
 
 .hero-img {
   width: 100%;
-  height: 380px;
+  height: 300px;
   object-fit: cover;
   object-position: center 60%;
   display: block;
@@ -167,9 +164,11 @@ h3 {
 
 .hero-sidebar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: var(--space-md);
+  margin-top: var(--space-md);
 }
 
 .hero-social-link {
@@ -188,8 +187,8 @@ h3 {
 }
 
 .hero-social-link img {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-full);
   object-fit: cover;
 }
@@ -200,37 +199,27 @@ h3 {
   align-items: center;
   background: var(--color-cream-light);
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   justify-content: center;
-  margin-top: var(--space-sm);
 }
 
 .hero-countdown-number {
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
   color: var(--color-terracotta);
   line-height: 1;
 }
 
 .hero-countdown-label {
-  font-size: var(--font-size-small);
+  font-size: 12px;
   color: var(--color-terracotta);
   font-weight: 600;
 }
 
 @media (max-width: 690px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-sidebar {
-    flex-direction: row;
-    justify-content: center;
-  }
-
   .hero-img {
-    height: 220px;
+    height: 200px;
   }
 }
 
@@ -1295,6 +1284,11 @@ details.accordion > summary:focus-visible {
 
 /* ── Content sections ── */
 
+.content {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+}
+
 .content section {
   padding-top: var(--space-xl);
   margin-bottom: var(--space-xl);
@@ -1341,7 +1335,6 @@ details.accordion > summary:focus-visible {
 
 .content p,
 .content ul {
-  max-width: 750px;
   margin: 0 0 var(--space-sm);
 }
 
