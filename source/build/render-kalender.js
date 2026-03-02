@@ -2,6 +2,7 @@
 
 const { escapeHtml } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
+const { goatcounterScript } = require('./analytics');
 
 /**
  * Renders the calendar tips page at /kalender.html.
@@ -12,7 +13,7 @@ const { pageNav, pageFooter } = require('./layout');
  * @param {Array}  [navSections=[]] - Navigation sections
  * @returns {string} Full HTML page
  */
-function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = []) {
+function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = [], goatcounterCode = '') {
   const campName = escapeHtml(camp.name);
   const webcalUrl = siteUrl.replace(/^https?:\/\//, 'webcal://') + '/schema.ics';
   const icsUrl = escapeHtml(siteUrl + '/schema.ics');
@@ -96,7 +97,7 @@ ${pageNav('kalender.html', navSections)}
   </div>
 
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
-  <script src="nav.js" defer></script>
+  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

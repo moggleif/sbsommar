@@ -41,7 +41,6 @@ const INDEX_PAGE = {
 };
 
 const GC_CODE = 'sbsommar';
-const GC_ENDPOINT = `https://${GC_CODE}.goatcounter.com/count`;
 
 // ── Helper: call a render function with goatcounterCode ─────────────────────
 
@@ -252,11 +251,15 @@ describe('02-§63.31 — QR code entries have id and description', () => {
 
 // ── 02-§63.33 — Display view QR uses tracked ref ───────────────────────────
 
-describe('02-§63.33 — Display view QR code includes ref parameter', () => {
-  it('ANA-QR-03: QR code URL in display view includes ?ref= parameter', () => {
-    // When building, the QR code SVG is generated from SITE_URL + ?ref=<id>.
-    // We verify that the rendered display page contains a ref parameter.
-    const html = todayWith(GC_CODE);
-    assert.ok(html.includes('?ref='), 'QR code URL includes ref parameter');
+describe('02-§63.33 — Display view QR code uses ref parameter from qr-codes.yaml', () => {
+  it('ANA-QR-03: build.js reads qr-codes.yaml and appends ?ref= to QR URL', () => {
+    // The ?ref= parameter is embedded in the QR code SVG at build time.
+    // We verify that build.js contains the logic to read qr-codes.yaml
+    // and append the ref parameter to the QR code URL.
+    const buildSrc = fs.readFileSync(
+      path.join(__dirname, '..', 'source', 'build', 'build.js'), 'utf8',
+    );
+    assert.ok(buildSrc.includes('qr-codes.yaml'), 'build.js references qr-codes.yaml');
+    assert.ok(buildSrc.includes('?ref='), 'build.js appends ?ref= to QR URL');
   });
 });

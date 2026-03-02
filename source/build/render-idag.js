@@ -3,12 +3,13 @@
 const { escapeHtml, toDateString } = require('./render');
 const { pageNav, pageFooter } = require('./layout');
 const { renderDescriptionHtml } = require('./markdown');
+const { goatcounterScript } = require('./analytics');
 
 /**
  * Renders the "Idag" page – today's schedule in the standard site layout.
  * All events are embedded as JSON; client-side JS filters to the current day.
  */
-function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieDomain = '') {
+function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieDomain = '', goatcounterCode = '') {
   const campName = escapeHtml(camp.name);
 
   const eventsJson = JSON.stringify(
@@ -47,7 +48,7 @@ ${pageNav('idag.html', navSections)}
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Idag'; window.__EMPTY_CLASS__ = 'intro'; window.__SHOW_FOOTER__ = false;</script>
   <script src="events-today.js"></script>
   <script src="session.js"></script>
-  <script src="nav.js" defer></script>
+  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

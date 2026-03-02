@@ -2,6 +2,7 @@
 
 const { escapeHtml, toDateString } = require('./render');
 const { renderDescriptionHtml } = require('./markdown');
+const { goatcounterScript } = require('./analytics');
 
 /**
  * Renders the "Dagens schema" page.
@@ -13,7 +14,7 @@ const { renderDescriptionHtml } = require('./markdown');
  * Sidebar shows a live clock and last-updated time; page auto-reloads at
  * midnight and on new version detection via version.json polling.
  */
-function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
+function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', goatcounterCode = '') {
   const campName = escapeHtml(camp.name);
   const siteHost = siteUrl ? escapeHtml(siteUrl.replace(/^https?:\/\//, '').replace(/\/+$/, '')) : '';
   const safeBuildTime = escapeHtml(buildTime);
@@ -63,7 +64,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '') {
   </div>
 
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = ''; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true; window.__BUILD_TIME__ = '${safeBuildTime}'; window.__VERSION__ = '${safeBuildTime}';</script>
-  <script src="events-today.js"></script>
+  <script src="events-today.js"></script>${goatcounterScript(goatcounterCode)}
 </body>
 </html>
 `;

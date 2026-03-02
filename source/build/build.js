@@ -41,6 +41,9 @@ if (!SITE_URL) {
 }
 
 
+// ── GoatCounter analytics (02-§63.10) ────────────────────────────────────────
+const GOATCOUNTER_CODE = process.env.GOATCOUNTER_SITE_CODE || '';
+
 // ── Load camps registry ──────────────────────────────────────────────────────
 
 const campsFile = path.join(DATA_DIR, 'camps.yaml');
@@ -152,15 +155,24 @@ async function main() {
 
   const cookieDomain = process.env.COOKIE_DOMAIN || '';
 
-  const scheduleHtml = renderSchedulePage(camp, events, footerWithVersion, navSections, SITE_URL, cookieDomain);
+  const scheduleHtml = renderSchedulePage(camp, events, footerWithVersion, navSections, SITE_URL, cookieDomain, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
-  const qrSvg = (await QRCode.toString(SITE_URL, { type: 'svg', margin: 2 }))
+  // ── QR code for display view — includes ?ref= for analytics tracking ────────
+  const qrCodesFile = path.join(DATA_DIR, 'qr-codes.yaml');
+  let displayQrRef = '';
+  if (fs.existsSync(qrCodesFile)) {
+    const qrData = yaml.load(fs.readFileSync(qrCodesFile, 'utf8'));
+    const firstCode = (qrData.codes || [])[0];
+    if (firstCode && firstCode.id) displayQrRef = firstCode.id;
+  }
+  const qrUrl = displayQrRef ? `${SITE_URL}?ref=${displayQrRef}` : SITE_URL;
+  const qrSvg = (await QRCode.toString(qrUrl, { type: 'svg', margin: 2 }))
     .replace(/<\?xml[^?]*\?>\s*/g, '')
     .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
-  const todayHtml = renderTodayPage(camp, events, qrSvg, SITE_URL, buildTime);
+  const todayHtml = renderTodayPage(camp, events, qrSvg, SITE_URL, buildTime, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
   console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
 
@@ -168,15 +180,15 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'version.json'), JSON.stringify({ version: buildTime }), 'utf8');
   console.log('Built: public/version.json');
 
-  const idagHtml = renderIdagPage(camp, events, footerWithVersion, navSections, cookieDomain);
+  const idagHtml = renderIdagPage(camp, events, footerWithVersion, navSections, cookieDomain, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
   console.log(`Built: public/idag.html  (${events.length} events)`);
 
-  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerWithVersion, navSections);
+  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerWithVersion, navSections);
+  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 
@@ -190,7 +202,7 @@ async function main() {
     }
   }
 
-  const arkivHtml = renderArkivPage(camps, footerWithVersion, navSections, campEventsMap);
+  const arkivHtml = renderArkivPage(camps, footerWithVersion, navSections, campEventsMap, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'arkiv.html'), arkivHtml, 'utf8');
   const archivedCount = camps.filter((c) => c.archived === true).length;
   console.log(`Built: public/arkiv.html  (${archivedCount} archived camps)`);
@@ -234,7 +246,7 @@ async function main() {
   console.log(`Built: public/schema/*/event.ics  (${events.length} event iCal files)`);
 
   // ── Render calendar tips page ─────────────────────────────────────────
-  const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerWithVersion, navSections);
+  const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'kalender.html'), kalenderHtml, 'utf8');
   console.log('Built: public/kalender.html');
 
@@ -303,7 +315,7 @@ async function main() {
     || (futureCamps.length > 0 && (futureCamps[0].link || '').trim())
     || null;
 
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerWithVersion, navSections);
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 

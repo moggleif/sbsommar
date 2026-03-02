@@ -3,6 +3,7 @@
 const { Marked } = require('marked');
 const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml } = require('./utils');
+const { goatcounterScript } = require('./analytics');
 
 /**
  * Converts inline Markdown (images, links, bold) to HTML using marked.
@@ -123,16 +124,16 @@ function convertMarkdown(input, headingOffset = 0, collapsible = false) {
  * @param {string|null} opts.countdownTarget - YYYY-MM-DD date for countdown
  * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
  */
-function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = []) {
+function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = [], goatcounterCode = '') {
   const countdownHtml = countdownTarget
     ? `\n      <div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
     : '';
 
   const sidebarHtml = (discordUrl || facebookUrl || countdownTarget)
     ? `\n    <div class="hero-sidebar">${
-      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer">\n        <img src="images/DiscordLogo.webp" alt="Discord">\n      </a>` : ''
+      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-discord">\n        <img src="images/DiscordLogo.webp" alt="Discord">\n      </a>` : ''
     }${
-      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook">\n      </a>` : ''
+      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-facebook">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook">\n      </a>` : ''
     }${countdownHtml}\n    </div>`
     : '';
 
@@ -186,7 +187,7 @@ ${contentSections}
     if (diff < 0) { el.hidden = true; return; }
     el.querySelector('.hero-countdown-number').textContent = diff < 10 ? '0' + diff : String(diff);
   })();
-  </script>` : ''}
+  </script>` : ''}${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>
