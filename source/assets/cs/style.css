@@ -1840,7 +1840,7 @@ body.modal-open {
 
 .site-footer {
   margin-top: var(--space-lg);
-  padding: var(--space-md) var(--space-sm);
+  padding: var(--space-sm);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   font-size: var(--font-size-small);
   color: var(--color-charcoal);
@@ -1848,16 +1848,15 @@ body.modal-open {
 }
 
 .site-footer p {
-  margin: 0 0 var(--space-xs);
+  margin: 0 0 4px;
 }
 
 .site-footer p:last-child {
   margin-bottom: 0;
 }
 
-.site-footer__version {
+.site-footer p.site-footer__version {
   font-size: var(--font-size-nav);
-  opacity: 0.5;
   margin-top: var(--space-xs);
 }
 

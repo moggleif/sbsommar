@@ -16,6 +16,7 @@ const { renderEventPage } = require('./render-event');
 const { renderEventIcal, renderIcalFeed } = require('./render-ical');
 const { renderKalenderPage } = require('./render-kalender');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
+const { resolveVersionString } = require('./version');
 
 // ── Load .env if present (local dev) ─────────────────────────────────────────
 const envPath = path.join(__dirname, '../..', '.env');
@@ -130,7 +131,6 @@ async function main() {
     : '';
 
   // ── Compute version string for footer (02-§62.3, 02-§62.15) ──────────────
-  const { resolveVersionString } = require('./version');
   const versionString = resolveVersionString(process.env, path.join(__dirname, '../..'));
   const footerWithVersion = versionString
     ? footerHtml + `\n<p class="site-footer__version">v${versionString}</p>`

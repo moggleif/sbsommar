@@ -27,12 +27,12 @@ jobs:
         id: version
         run: |
           BASE=$(cat VERSION | tr -d '[:space:]')
-          LATEST=$(git tag --list "v${BASE}.*" | sort -t. -k3 -n | tail -1)
+          LATEST=$(git tag --list "v${BASE}.*" --sort=-version:refname | head -1)
           if [ -z "$LATEST" ]; then
             PATCH=0
             IS_NEW_MINOR=true
           else
-            PREV_PATCH=$(echo "$LATEST" | sed "s/v${BASE}\.//")
+            PREV_PATCH=$(echo "$LATEST" | grep -oE '[0-9]+$')
             PATCH=$((PREV_PATCH + 1))
             IS_NEW_MINOR=false
           fi

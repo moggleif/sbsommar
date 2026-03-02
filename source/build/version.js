@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 /**
  * Reads the VERSION file from the project root.
@@ -17,10 +18,33 @@ function readVersionFile(rootDir) {
 }
 
 /**
- * Builds a local-dev version string: "1.0 – Lokal YYYY-MM-DD HH:MM"
+ * Finds the latest git tag matching "v{base}.*" and returns the full
+ * semver (e.g. "1.0.3"). Falls back to "{base}.0" if no tags exist
+ * or git is not available.
+ *
+ * @param {string} base - Major.minor from VERSION file, e.g. '1.0'
+ * @returns {string} e.g. '1.0.3'
+ */
+function resolveLatestTag(base) {
+  try {
+    const output = execSync(
+      `git tag --list "v${base}.*" --sort=-version:refname`,
+      { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] },
+    ).trim();
+    const latest = output.split('\n')[0];
+    if (latest) return latest.replace(/^v/, '');
+  } catch {
+    // git not available or not a repo — fall back
+  }
+  return `${base}.0`;
+}
+
+/**
+ * Builds a local-dev version string: "1.0.3 – Lokal YYYY-MM-DD HH:MM"
+ * Uses the latest git tag as the base version.
  * The date/time is in Europe/Stockholm time.
  *
- * @param {string} baseVersion - e.g. '1.0'
+ * @param {string} baseVersion - e.g. '1.0.3' (from resolveLatestTag)
  * @returns {string}
  */
 function buildLocalVersion(baseVersion) {
@@ -53,7 +77,8 @@ function buildLocalVersion(baseVersion) {
 function resolveVersionString(env, rootDir) {
   if (env.BUILD_VERSION) return env.BUILD_VERSION;
   if (env.GITHUB_ACTIONS) return null;
-  return buildLocalVersion(readVersionFile(rootDir));
+  const base = readVersionFile(rootDir);
+  return buildLocalVersion(resolveLatestTag(base));
 }
 
-module.exports = { readVersionFile, buildLocalVersion, resolveVersionString };
+module.exports = { readVersionFile, resolveLatestTag, buildLocalVersion, resolveVersionString };

@@ -4,8 +4,9 @@
 //
 // These verify:
 //   - readVersionFile reads the VERSION file or falls back to '0.0' (VER-01..02)
+//   - resolveLatestTag finds latest tag or falls back to base.0 (VER-10..11)
 //   - buildLocalVersion produces the correct format (VER-03..04)
-//   - resolveVersionString picks the right source per environment (VER-05..08)
+//   - resolveVersionString picks the right source per environment (VER-05..09)
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
@@ -13,7 +14,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const { readVersionFile, buildLocalVersion, resolveVersionString } = require('../source/build/version');
+const { readVersionFile, resolveLatestTag, buildLocalVersion, resolveVersionString } = require('../source/build/version');
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -35,6 +36,21 @@ describe('readVersionFile (02-§62.1, 02-§62.17)', () => {
     const dir = makeTmpDir();
     assert.strictEqual(readVersionFile(dir), '0.0');
     fs.rmSync(dir, { recursive: true });
+  });
+});
+
+// ── resolveLatestTag ─────────────────────────────────────────────────────────
+
+describe('resolveLatestTag (02-§62.8)', () => {
+  it('VER-10: returns full semver from existing tag in this repo', () => {
+    // This repo has v1.0.0 tagged — resolveLatestTag('1.0') should find it.
+    const result = resolveLatestTag('1.0');
+    assert.match(result, /^1\.0\.\d+$/, 'Expected 1.0.N format');
+  });
+
+  it('VER-11: falls back to base.0 for non-existent base', () => {
+    const result = resolveLatestTag('99.99');
+    assert.strictEqual(result, '99.99.0');
   });
 });
 
@@ -70,12 +86,13 @@ describe('resolveVersionString (02-§62.9, 02-§62.15, 02-§62.16)', () => {
     fs.rmSync(dir, { recursive: true });
   });
 
-  it('VER-07: returns local timestamp string when no env vars set', () => {
+  it('VER-07: returns local timestamp string with full semver when no env vars set', () => {
     const dir = makeTmpDir();
     fs.writeFileSync(path.join(dir, 'VERSION'), '1.0\n', 'utf8');
     const env = {};
     const result = resolveVersionString(env, dir);
-    assert.ok(result.startsWith('1.0'), 'Expected base version');
+    // resolveLatestTag('1.0') finds v1.0.0 in this repo, so version starts with '1.0.0'
+    assert.match(result, /^1\.0\.\d+/, 'Expected full semver (e.g. 1.0.0)');
     assert.ok(result.includes('Lokal'), 'Expected "Lokal" for local dev');
     fs.rmSync(dir, { recursive: true });
   });
