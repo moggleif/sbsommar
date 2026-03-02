@@ -16,6 +16,8 @@ const { renderEventPage } = require('./render-event');
 const { renderEventIcal, renderIcalFeed } = require('./render-ical');
 const { renderKalenderPage } = require('./render-kalender');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
+const { resolveVersionString } = require('./version');
+const { escapeHtml } = require('./utils');
 
 // ── Load .env if present (local dev) ─────────────────────────────────────────
 const envPath = path.join(__dirname, '../..', '.env');
@@ -129,6 +131,12 @@ async function main() {
     ? convertMarkdown(fs.readFileSync(footerMdPath, 'utf8'))
     : '';
 
+  // ── Compute version string for footer (02-§62.3, 02-§62.15) ──────────────
+  const versionString = resolveVersionString(process.env, path.join(__dirname, '../..'));
+  const footerWithVersion = versionString
+    ? footerHtml + `\n<p class="site-footer__version">v${escapeHtml(versionString)}</p>`
+    : footerHtml;
+
   // ── Load nav sections from content/sections.yaml ──────────────────────────
   // Resolved early so navSections can be passed to every render function.
   // Only sections with a nav: label are included.
@@ -144,7 +152,7 @@ async function main() {
 
   const cookieDomain = process.env.COOKIE_DOMAIN || '';
 
-  const scheduleHtml = renderSchedulePage(camp, events, footerHtml, navSections, SITE_URL, cookieDomain);
+  const scheduleHtml = renderSchedulePage(camp, events, footerWithVersion, navSections, SITE_URL, cookieDomain);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
   console.log(`Built: public/schema.html  (${events.length} events)`);
 
@@ -160,15 +168,15 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'version.json'), JSON.stringify({ version: buildTime }), 'utf8');
   console.log('Built: public/version.json');
 
-  const idagHtml = renderIdagPage(camp, events, footerHtml, navSections, cookieDomain);
+  const idagHtml = renderIdagPage(camp, events, footerWithVersion, navSections, cookieDomain);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'idag.html'), idagHtml, 'utf8');
   console.log(`Built: public/idag.html  (${events.length} events)`);
 
-  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerHtml, navSections);
+  const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerWithVersion, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerHtml, navSections);
+  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerWithVersion, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 
@@ -182,7 +190,7 @@ async function main() {
     }
   }
 
-  const arkivHtml = renderArkivPage(camps, footerHtml, navSections, campEventsMap);
+  const arkivHtml = renderArkivPage(camps, footerWithVersion, navSections, campEventsMap);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'arkiv.html'), arkivHtml, 'utf8');
   const archivedCount = camps.filter((c) => c.archived === true).length;
   console.log(`Built: public/arkiv.html  (${archivedCount} archived camps)`);
@@ -217,7 +225,7 @@ async function main() {
   for (const e of events) {
     const eventDir = path.join(schemaDir, String(e.id));
     fs.mkdirSync(eventDir, { recursive: true });
-    const eventHtml = renderEventPage(e, camp, SITE_URL, footerHtml, navSections);
+    const eventHtml = renderEventPage(e, camp, SITE_URL, footerWithVersion, navSections);
     fs.writeFileSync(path.join(eventDir, 'index.html'), eventHtml, 'utf8');
     const eventIcs = renderEventIcal(e, camp, SITE_URL);
     fs.writeFileSync(path.join(eventDir, 'event.ics'), eventIcs, 'utf8');
@@ -226,7 +234,7 @@ async function main() {
   console.log(`Built: public/schema/*/event.ics  (${events.length} event iCal files)`);
 
   // ── Render calendar tips page ─────────────────────────────────────────
-  const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerHtml, navSections);
+  const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerWithVersion, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'kalender.html'), kalenderHtml, 'utf8');
   console.log('Built: public/kalender.html');
 
@@ -295,7 +303,7 @@ async function main() {
     || (futureCamps.length > 0 && (futureCamps[0].link || '').trim())
     || null;
 
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml, navSections);
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerWithVersion, navSections);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 

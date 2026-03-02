@@ -2789,3 +2789,72 @@ manual testing on mobile devices.
   visible against the terracotta background (white outline). <!-- 02-§61.10 -->
 - Existing keyboard and ARIA behaviour (Escape to close, aria-expanded,
   click-outside-to-close) must be preserved. <!-- 02-§61.11 -->
+
+---
+
+## 62. Footer Versioning
+
+### 62.0 Motivation
+
+QA testers and administrators need to confirm which version of the site is
+deployed. Without a visible version indicator, there is no way to know whether
+a deploy has completed or which build is currently live. A version string in
+the footer solves this with minimal visual impact.
+
+### 62.1 VERSION file
+
+- The project root must contain a `VERSION` file with the major.minor version
+  (e.g. `1.0`). This file is the single source of truth for the base
+  version. <!-- 02-§62.1 -->
+- Major and minor numbers are bumped manually by editing the file. <!-- 02-§62.2 -->
+
+### 62.2 Footer version display
+
+- Every page that includes a site footer must display the version string
+  in a `<p class="site-footer__version">` element at the bottom of the
+  footer. <!-- 02-§62.3 -->
+- The version text must be visually subordinate to the main footer content:
+  smaller font size and reduced opacity. <!-- 02-§62.4 -->
+- Pages without a site footer (e.g. display mode) must not display a
+  version string. <!-- 02-§62.5 -->
+
+### 62.3 Version string per environment
+
+- **Production**: The version string must be the full semantic version
+  derived from git tags, e.g. `v1.0.4`. <!-- 02-§62.6 -->
+- **QA**: The version string must include the base version and the PR
+  number from the merge commit, e.g. `v1.0 – QA PR212`. If no PR number
+  can be extracted, the short commit SHA is used as
+  fallback. <!-- 02-§62.7 -->
+- **Local**: The version string must include the base version and a
+  Stockholm-timezone timestamp, e.g.
+  `v1.0 – Lokal 2026-03-02 14:30`. <!-- 02-§62.8 -->
+- **Event-data deploys**: When `BUILD_ENV` is set but `BUILD_VERSION` is
+  not (event-data deploys), no version string is rendered in the
+  footer. <!-- 02-§62.9 -->
+
+### 62.4 Automatic production tagging
+
+- Each successful production deploy must create an annotated git tag
+  with the computed version (e.g. `v1.0.4`). <!-- 02-§62.10 -->
+- The tag must be created only after a successful deploy, not
+  before. <!-- 02-§62.11 -->
+- If a tag already exists (re-run), the tagging step must skip
+  gracefully. <!-- 02-§62.12 -->
+
+### 62.5 Automatic GitHub Release on major/minor bump
+
+- When the first production deploy for a new major.minor version occurs
+  (no prior tags with that prefix), a GitHub Release must be created
+  automatically with `--generate-notes`. <!-- 02-§62.13 -->
+- Patch-only deploys must not create a GitHub Release. <!-- 02-§62.14 -->
+
+### 62.6 Build integration
+
+- The build must accept an optional `BUILD_VERSION` environment variable.
+  When set, it is used as the version string. <!-- 02-§62.15 -->
+- When `BUILD_VERSION` is not set and `BUILD_ENV` is not set (local
+  development), the build must read the `VERSION` file and generate a
+  local timestamp version. <!-- 02-§62.16 -->
+- The version logic must be in a separate module that can be
+  unit-tested. <!-- 02-§62.17 -->

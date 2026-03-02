@@ -1839,19 +1839,49 @@ body.modal-open {
 /* ── Site footer ── */
 
 .site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px var(--space-md);
+  max-width: var(--container-narrow);
   margin-top: var(--space-lg);
-  padding: var(--space-md) var(--space-sm);
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  font-size: var(--font-size-small);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
+  font-size: var(--font-size-nav);
   color: var(--color-charcoal);
-  opacity: 0.7;
 }
 
 .site-footer p {
-  margin: 0 0 var(--space-xs);
+  margin: 0;
 }
 
-.site-footer p:last-child {
-  margin-bottom: 0;
+.site-footer a {
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
+.site-footer p.site-footer__version {
+  margin-left: auto;
+  opacity: 0.75;
+}
+
+@media (max-width: 690px) {
+  .site-footer {
+    flex-direction: column;
+  }
+
+  .site-footer p.site-footer__version {
+    margin-left: 0;
+  }
 }
 

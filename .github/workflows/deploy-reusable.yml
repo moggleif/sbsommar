@@ -10,6 +10,10 @@ on:
         required: false
         type: string
         description: 'Override BUILD_ENV (defaults to environment name)'
+      build_version:
+        required: false
+        type: string
+        description: 'Version string to embed in footer (e.g. "1.0.4" or "1.0 – QA PR212")'
 
 permissions:
   contents: read
@@ -40,6 +44,7 @@ jobs:
           SITE_URL: ${{ secrets.SITE_URL }}
           BUILD_ENV: ${{ inputs.build_env || inputs.environment }}
           COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
+          BUILD_VERSION: ${{ inputs.build_version }}
 
       - name: Package site for upload
         run: tar -czf site.tar.gz -C public .

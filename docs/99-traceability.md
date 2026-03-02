@@ -1020,15 +1020,33 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§61.9` | Smooth CSS transition (max-height, 250 ms) | 07-DESIGN.md §6.23-impl | MN-15..16 | `source/assets/cs/style.css` | covered |
 | `02-§61.10` | White focus outlines against terracotta | — | MN-17..18 | `source/assets/cs/style.css` | covered |
 | `02-§61.11` | Preserve keyboard/ARIA behaviour | — | manual: MN-M04 — Escape, click-outside, aria-expanded | `source/assets/js/client/nav.js` | implemented |
+| | | **§62 — Footer Versioning** | | | |
+| `02-§62.1` | VERSION file in project root | — | VER-01..02 | `VERSION` | covered |
+| `02-§62.2` | Major/minor bumped manually | 09-RELEASING.md | — | `VERSION` | implemented |
+| `02-§62.3` | Version `<p>` in site footer | — | FTR-18..19 | `source/build/build.js` | covered |
+| `02-§62.4` | Version text visually subordinate | — | manual: verify footer version is small and subtle | `source/assets/cs/style.css` | implemented |
+| `02-§62.5` | No version on pages without footer | — | FTR-06..07 | `source/build/build.js` | covered |
+| `02-§62.6` | Production: full semver from tags | — | — | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.7` | QA: base version + PR number | — | — | `.github/workflows/deploy-qa.yml` | implemented |
+| `02-§62.8` | Local: base version + timestamp | — | VER-03..04, VER-07 | `source/build/version.js` | covered |
+| `02-§62.9` | Event-data deploy: no version shown | — | VER-06, VER-09 | `source/build/version.js` | covered |
+| `02-§62.10` | Annotated git tag per prod deploy | — | — | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.11` | Tag created after successful deploy | — | — | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.12` | Tag skip if already exists | — | — | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.13` | Auto GitHub Release on new major/minor | — | — | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.14` | Patch deploys: no GitHub Release | — | — | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.15` | BUILD_VERSION env var accepted by build | — | VER-05 | `source/build/version.js` | covered |
+| `02-§62.16` | Local fallback: VERSION file + timestamp | — | VER-07..08 | `source/build/version.js` | covered |
+| `02-§62.17` | Version logic in separate testable module | — | VER-01..09 | `source/build/version.js` | covered |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             874
-Covered (implemented + tested): 432
-Implemented, not tested:        442
+Total requirements:             891
+Covered (implemented + tested): 440
+Implemented, not tested:        451
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1276,6 +1294,10 @@ Matrix cleanup (2026-02-25):
   2 implemented (manual/visual): 02-§61.6 (WCAG contrast check),
     02-§61.11 (keyboard/ARIA behaviour preserved).
   Design documented in 07-DESIGN.md §6.20-impl–§6.24-impl.
+17 requirements added for footer versioning (02-§62.1–62.17):
+  8 covered (VER-01..09, FTR-18..20): VERSION file, footer display, local/CI resolution.
+  9 implemented (workflow/manual): tagging, release, CSS visual, manual bump docs.
+  VERSION file, footer display, automatic tagging, GitHub Release on bump.
 ```
 
 ---
@@ -1512,3 +1534,8 @@ Matrix cleanup (2026-02-25):
 | `02-§60.6` | covered | `docs/09-RELEASING.md` — Steps 1–4 + Rollback section |
 | `02-§60.7` | covered | `docs/09-RELEASING.md` — GitHub UI and CLI instructions, no Claude Code dependency |
 | `02-§60.8` | covered | `docs/09-RELEASING.md` — Release tags section with semver conventions |
+| | | **§62 — Footer Versioning** |
+| VER-01..02 | `tests/version.test.js` | `readVersionFile (02-§62.1, 02-§62.17)` |
+| VER-03..04 | `tests/version.test.js` | `buildLocalVersion (02-§62.8)` |
+| VER-05..09 | `tests/version.test.js` | `resolveVersionString (02-§62.9, 02-§62.15, 02-§62.16)` |
+| FTR-18..20 | `tests/footer.test.js` | `site-footer__version (02-§62.3)` |
