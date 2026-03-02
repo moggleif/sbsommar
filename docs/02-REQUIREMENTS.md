@@ -2942,3 +2942,47 @@ The following interactions must be tracked as GoatCounter custom events:
   beyond what GoatCounter itself requires (no wrapper libraries). <!-- 02-§63.36 -->
 - Custom event tracking must use HTML `data-goatcounter-click` attributes
   where possible, minimising inline JavaScript. <!-- 02-§63.37 -->
+
+---
+
+## 64. Index Page Design Improvements
+
+Visual polish for the main landing page to reduce monotony on a long single-page
+scroll and better leverage existing design tokens.
+
+### 64.1 Testimonial cards
+
+- Each testimonial (name, photo, quote) must be wrapped in a white card with
+  `box-shadow`, `border-radius`, and `padding` matching the card component
+  spec (07-§6.19–22). <!-- 02-§64.1 -->
+- The testimonial photo must be displayed as a circular thumbnail (~60 px)
+  beside the name, matching 07-§6.23. <!-- 02-§64.2 -->
+- Testimonial cards must be constrained to `--container-narrow` max-width. <!-- 02-§64.3 -->
+- The card structure must be generated at build time from the existing
+  Markdown format (## Name + image + blockquote). Content files must not
+  need to change. <!-- 02-§64.4 -->
+
+### 64.2 Alternating section backgrounds
+
+- Every other content section on the index page must have a white background
+  (`--color-white`) with padding and rounded corners, creating visual rhythm
+  against the cream page background. <!-- 02-§64.5 -->
+- The first section (section-first) is excluded from alternation. <!-- 02-§64.6 -->
+- Alternating sections must not display the default border-top divider. <!-- 02-§64.7 -->
+
+### 64.3 Decorative section headings
+
+- Every `h2` inside `.content section` must display a short decorative line
+  below the heading text, using `--color-sage` (matching 07-§6.29). <!-- 02-§64.8 -->
+
+### 64.4 RFSB logo placement
+
+- The RFSB logo in the first section must be displayed as a small badge
+  (~100 px wide), not as a full-width content image. <!-- 02-§64.9 -->
+
+### 64.5 Back-to-top navigation
+
+- A "Till toppen" link must be present inside the navigation. <!-- 02-§64.10 -->
+- On mobile, the link must be inside the hamburger menu so it opens and
+  closes together with the menu panel. <!-- 02-§64.11 -->
+- The link must scroll to the top of the page. <!-- 02-§64.12 -->
