@@ -14,7 +14,7 @@ Utöver deltagaravgiften så är det obligatoriskt med medlemskap i RFSB för de
 
 Faktura skickas ut för lägeravgift och eventuellt nya medlemsavgifter. Kontrollera er epost inklusive skräppost (fakturan kommer från <mail@eaccounting.vismaonline.com>), och hör av er till <ekonomi@rfsb.se> om något skulle vara fel.
 
-### Boende
+## Boende
 
 Det finns lite olika boende-alternativ. Nedan listas de som är relaterade till campingen som lägret hålls på. Boendemässigt finns en hög kapacitet, med tusentals bäddar tillgängliga vid Branäs (ca en mil från lägret) och i Sysslebäck kan det finnas stugor som hyrs ut via AirBnB eller annan tjänst. Detta fixas helt på egen hand. Tipsa gärna varandra i facebook-gruppen.
 
@@ -25,7 +25,7 @@ Lägerområdets centrala stug- och vandrarhemsplatser är få — de som anmäle
 **Betalning sker direkt till campingen vid ankomst för de som har boende enligt nedan.**
 Extra dagar före/efter veckan kan bokas direkt med campingen efter att stuga/vandrarhem tilldelats. Detsamma gäller campingplats. Uppge alltid att du ska på sommarläger för att få lägerpris alla dygnen.
 
-## Stugor
+### Stugor
 
 ![Stuga](images/stuga.webp)
 
@@ -37,7 +37,7 @@ Stuga på campingen är för de som deltager samtliga lägerdagar. Dessa fördel
 Stuga 4 bäddar 4200kr  
 Stuga 5 bäddar 4500kr
 
-## Vandrarhem
+### Vandrarhem
 
 ![Vandrarhem](images/vandrarhem.webp)
 
@@ -46,7 +46,7 @@ Vandrarhemsrum på campingen är för de som deltager samtliga lägerdagar. Dess
 **Pris:**  
 Stuga 4-5 bäddar. 3600:-
 
-## Camping
+### Camping
 
 ![Campingplats](images/camping.webp)
 
@@ -58,7 +58,7 @@ Stuga 4-5 bäddar. 3600:-
 Plats inkl el 220:-/dygn  
 Plats utan el 200:-/dygn
 
-## Klarälvsbyn
+### Klarälvsbyn
 
 ![Klarälvsbyn](images/klaralvsbyn.webp)
 

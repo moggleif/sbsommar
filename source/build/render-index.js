@@ -126,19 +126,19 @@ function convertMarkdown(input, headingOffset = 0, collapsible = false) {
  */
 function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = [], goatcounterCode = '') {
   const countdownHtml = countdownTarget
-    ? `\n      <div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
+    ? `<div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
     : '';
 
-  const sidebarHtml = (discordUrl || facebookUrl || countdownTarget)
-    ? `\n    <div class="hero-sidebar">${
+  const socialLinks = (discordUrl || facebookUrl)
+    ? `\n    <div class="hero-social">${
       discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-discord">\n        <img src="images/DiscordLogo.webp" alt="Discord">\n      </a>` : ''
     }${
       facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-facebook">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook">\n      </a>` : ''
-    }${countdownHtml}\n    </div>`
+    }\n    </div>`
     : '';
 
   const heroHtml = heroSrc
-    ? `\n  <div class="hero">\n    <div class="hero-main">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>\n      <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img" fetchpriority="high">\n    </div>${sidebarHtml}\n  </div>`
+    ? `\n  <div class="hero">\n    <div class="hero-header">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>${socialLinks}\n    </div>\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img" fetchpriority="high">\n  </div>`
     : '';
 
   const contentSections = sections
@@ -148,6 +148,18 @@ function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, 
       let sectionHtml = i === 0
         ? s.html.replace(/ loading="lazy"/g, '')
         : s.html;
+
+      // Inject countdown next to the upcoming camps list in the first section
+      if (i === 0 && countdownHtml) {
+        if (sectionHtml.includes('upcoming-camps')) {
+          sectionHtml = sectionHtml.replace(
+            /(<ul class="upcoming-camps">[\s\S]*?<\/script>)/,
+            `<div class="camps-row">$1\n      ${countdownHtml}\n</div>`,
+          );
+        } else {
+          sectionHtml = countdownHtml + '\n' + sectionHtml;
+        }
+      }
 
       // Wrap testimonial cards for the testimonials section
       if (s.id === 'testimonials') {

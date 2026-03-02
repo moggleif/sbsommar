@@ -140,17 +140,26 @@ h3 {
   margin: 0 0 var(--space-lg);
 }
 
-.hero-main {
+.hero-header {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .hero-title {
   font-size: 40px;
   font-weight: 700;
   color: var(--color-terracotta);
-  margin: 0 0 var(--space-sm);
+  margin: 0;
   font-family: var(--font-sans);
+}
+
+.hero-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-shrink: 0;
 }
 
 .hero-img {
@@ -160,14 +169,6 @@ h3 {
   object-position: center 60%;
   display: block;
   border-radius: var(--radius-lg);
-}
-
-.hero-sidebar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-top: var(--space-sm);
 }
 
 .hero-social-link {
@@ -186,10 +187,26 @@ h3 {
 }
 
 .hero-social-link img {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-full);
   object-fit: cover;
+}
+
+/* ── Camps row (camps list + countdown) ── */
+
+.camps-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.camps-row .upcoming-camps {
+  flex: 1;
+}
+
+.camps-row .hero-countdown {
+  flex-shrink: 0;
 }
 
 .hero-countdown {
@@ -1290,19 +1307,16 @@ details.accordion > summary:focus-visible {
 .content section {
   padding-top: var(--space-xl);
   margin-bottom: var(--space-xl);
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .content section.section-first {
   padding-top: 0;
-  border-top: none;
 }
 
 /* ── Alternating section backgrounds (02-§64.5–64.7) ── */
 
 .content section.section-alt {
   background: var(--color-cream-light);
-  border-top: none;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   padding-left: calc(50vw - 50%);

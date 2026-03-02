@@ -28,10 +28,10 @@ describe('hero section – layout structure (02-§29.1)', () => {
     assert.ok(html.includes('class="hero"'), `Expected .hero container, got: ${html.slice(0, 1500)}`);
   });
 
-  it('HERO-02: hero contains a .hero-main area and a .hero-sidebar', () => {
+  it('HERO-02: hero contains a .hero-header and social links', () => {
     const html = renderIndexPage(buildPage());
-    assert.ok(html.includes('class="hero-main"'), 'Expected .hero-main');
-    assert.ok(html.includes('class="hero-sidebar"'), 'Expected .hero-sidebar');
+    assert.ok(html.includes('class="hero-header"'), 'Expected .hero-header');
+    assert.ok(html.includes('class="hero-social"'), 'Expected .hero-social');
   });
 });
 
