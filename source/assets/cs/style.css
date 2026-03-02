@@ -645,10 +645,7 @@ details.event-row[open] > summary .ev-title {
 .page-nav::before {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -9999px;
-  right: -9999px;
+  inset: 0 -9999px;
   background: var(--color-cream);
   z-index: -1;
 }
@@ -1334,10 +1331,7 @@ details.accordion > summary:focus-visible {
 .content section.section-alt::before {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -9999px;
-  right: -9999px;
+  inset: 0 -9999px;
   background: var(--color-cream-light);
   z-index: -1;
 }
@@ -1998,10 +1992,7 @@ body.modal-open {
 .site-footer::before {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -9999px;
-  right: -9999px;
+  inset: 0 -9999px;
   background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
   z-index: -1;
 }
