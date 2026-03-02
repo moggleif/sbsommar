@@ -1027,9 +1027,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             896
-Covered (implemented + tested): 438
-Implemented, not tested:        450
-Gap (no implementation):          8
+Covered (implemented + tested): 443
+Implemented, not tested:        452
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1282,6 +1282,10 @@ Matrix cleanup (2026-02-25):
   Provider: GoatCounter (open-source, cookie-free, GDPR-compliant).
   Script injection gated on GOATCOUNTER_URL environment variable.
   Environments documented in 08-ENVIRONMENTS.md.
+12 requirements added for analytics questions and custom events (02-§62.11–62.22):
+  5 covered (ANA-SOCIAL-*, ANA-ICAL-*, ANA-SUBMIT-*): social clicks, iCal clicks, form submit.
+  7 implemented (code review / GoatCounter dashboard): pageviews, pages, referrer, devices,
+    form event, iCal event, social event, API choice, guard pattern.
 ```
 
 ---
@@ -1537,15 +1541,18 @@ Matrix cleanup (2026-02-25):
 | ANA-EMPTY-* | `tests/analytics.test.js` | `02-§62.6 — No analytics script when tag is empty` |
 | ANA-OMIT-* | `tests/analytics.test.js` | `02-§62.6 — No analytics script when tag is omitted` |
 | ANA-ROBOTS-* | `tests/analytics.test.js` | `02-§62.10 — Analytics does not affect noindex, nofollow` |
+| ANA-SOCIAL-* | `tests/analytics.test.js` | `02-§62.20 — Social links have data-goatcounter-click` |
+| ANA-ICAL-* | `tests/analytics.test.js` | `02-§62.19 — iCal links have data-goatcounter-click` |
+| ANA-SUBMIT-* | `tests/analytics.test.js` | `02-§62.18 — Form submit JS contains guarded goatcounter.count()` |
 | `02-§62.11` | implemented | Page views per day/week — covered by base GoatCounter script |
 | `02-§62.12` | implemented | Most visited pages — covered by base GoatCounter script |
 | `02-§62.13` | implemented | Traffic sources (referrer) — covered by base GoatCounter script |
 | `02-§62.14` | implemented | Device/screen data — covered by base GoatCounter script |
-| `02-§62.15` | gap | Form submission custom event |
-| `02-§62.16` | gap | iCal download custom event |
-| `02-§62.17` | gap | Social link click custom event |
-| `02-§62.18` | gap | Add/edit form fires GoatCounter event on success |
-| `02-§62.19` | gap | iCal links fire GoatCounter event on click |
-| `02-§62.20` | gap | Social links fire GoatCounter event on click |
-| `02-§62.21` | gap | Custom events use `data-goatcounter-click` or `goatcounter.count()` |
-| `02-§62.22` | gap | Custom event calls guarded when GoatCounter not loaded |
+| `02-§62.15` | implemented | Form submission custom event — `lagg-till.js`, `redigera.js` call `goatcounter.count()` |
+| `02-§62.16` | implemented | iCal download custom event — `data-goatcounter-click` on .ics links |
+| `02-§62.17` | implemented | Social link click custom event — `data-goatcounter-click` on Discord/Facebook links |
+| `02-§62.18` | covered | Add/edit form fires GoatCounter event on success — ANA-SUBMIT-* |
+| `02-§62.19` | covered | iCal links fire GoatCounter event on click — ANA-ICAL-* |
+| `02-§62.20` | covered | Social links fire GoatCounter event on click — ANA-SOCIAL-* |
+| `02-§62.21` | implemented | Custom events use `data-goatcounter-click` or `goatcounter.count()` — verified by code review |
+| `02-§62.22` | covered | Custom event calls guarded when GoatCounter not loaded — ANA-SOCIAL-03, ANA-ICAL-05/06, ANA-SUBMIT-03/04 |
