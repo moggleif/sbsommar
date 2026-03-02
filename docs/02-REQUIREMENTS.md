@@ -2822,10 +2822,10 @@ the footer solves this with minimal visual impact.
 
 - **Production**: The version string must be the full semantic version
   derived from git tags, e.g. `v1.0.4`. <!-- 02-§62.6 -->
-- **QA**: The version string must include the base version and the PR
-  number from the merge commit, e.g. `v1.0 – QA PR212`. If no PR number
-  can be extracted, the short commit SHA is used as
-  fallback. <!-- 02-§62.7 -->
+- **QA**: The version string must include the full semantic version
+  (matching the latest production tag) and the PR number from the merge
+  commit, e.g. `v1.0.4 – QA PR212`. If no PR number can be extracted,
+  the short commit SHA is used as fallback. <!-- 02-§62.7 -->
 - **Local**: The version string must include the base version and a
   Stockholm-timezone timestamp, e.g.
   `v1.0 – Lokal 2026-03-02 14:30`. <!-- 02-§62.8 -->
@@ -2858,6 +2858,16 @@ the footer solves this with minimal visual impact.
   local timestamp version. <!-- 02-§62.16 -->
 - The version logic must be in a separate module that can be
   unit-tested. <!-- 02-§62.17 -->
+
+### 62.7 QA redeploy after production deploy
+
+- After a successful production deploy and tagging, the production
+  deploy workflow must automatically trigger a QA redeploy so that
+  the QA version string reflects the new production
+  version. <!-- 02-§62.18 -->
+- The QA redeploy must use the newly created production version as
+  the base for the QA version string (e.g. if production tagged
+  `v1.0.1`, QA must show `v1.0.1 – QA PR216`). <!-- 02-§62.19 -->
 
 ---
 
