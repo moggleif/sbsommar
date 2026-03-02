@@ -1307,19 +1307,10 @@ details.accordion > summary:focus-visible {
   margin-right: calc(-50vw + 50%);
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xl);
 }
 
-/* ── Decorative section headings (02-§64.8) ── */
-
-.content section h2::after {
-  content: '';
-  display: block;
-  width: 48px;
-  height: 3px;
-  background: var(--color-sage);
-  margin-top: var(--space-xs);
-  border-radius: 2px;
-}
 
 /* ── RFSB logo badge (02-§64.9) ── */
 

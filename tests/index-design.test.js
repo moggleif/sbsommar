@@ -177,8 +177,8 @@ describe('CSS – index design improvements', () => {
     assert.ok(css.includes('.section-alt'), 'Expected .section-alt CSS rule');
   });
 
-  it('IDX-18: h2::after rule exists for decorative line', () => {
-    assert.ok(css.includes('h2::after'), 'Expected h2::after CSS rule for decorative line');
+  it('IDX-18: section-alt has extra vertical padding', () => {
+    assert.ok(css.includes('section-alt') && css.includes('padding-bottom'), 'Expected section-alt with vertical padding');
   });
 
   it('IDX-19: .nav-link--top rule exists', () => {
