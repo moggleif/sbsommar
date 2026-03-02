@@ -1038,8 +1038,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§62.15` | BUILD_VERSION env var accepted by build | — | VER-05 | `source/build/version.js` | covered |
 | `02-§62.16` | Local fallback: VERSION file + timestamp | — | VER-07..08 | `source/build/version.js` | covered |
 | `02-§62.17` | Version logic in separate testable module | — | VER-01..09 | `source/build/version.js` | covered |
-| `02-§62.18` | QA redeploy triggered after prod deploy | 09-RELEASING.md | — | `.github/workflows/deploy-prod.yml` | gap |
-| `02-§62.19` | QA version uses new prod version as base | 09-RELEASING.md | — | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.18` | QA redeploy triggered after prod deploy | 09-RELEASING.md | manual: trigger prod deploy and verify QA workflow runs | `.github/workflows/deploy-prod.yml` | gap |
+| `02-§62.19` | QA version uses new prod version as base | 09-RELEASING.md | manual: verify QA footer shows new prod version after redeploy | `.github/workflows/deploy-prod.yml` | gap |
 | | | **§63 — Site Analytics** | | | |
 | `02-§63.1` | GoatCounter as analytics tool | 03-ARCHITECTURE.md §23 | — | `source/build/analytics.js` | implemented |
 | `02-§63.2` | No cookies from analytics | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
