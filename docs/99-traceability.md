@@ -1038,16 +1038,54 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§62.15` | BUILD_VERSION env var accepted by build | — | VER-05 | `source/build/version.js` | covered |
 | `02-§62.16` | Local fallback: VERSION file + timestamp | — | VER-07..08 | `source/build/version.js` | covered |
 | `02-§62.17` | Version logic in separate testable module | — | VER-01..09 | `source/build/version.js` | covered |
+| | | **§63 — Site Analytics** | | | |
+| `02-§63.1` | GoatCounter as analytics tool | 03-ARCHITECTURE.md §23 | — | — | gap |
+| `02-§63.2` | No cookies from analytics | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.3` | Analytics script < 5 KB | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.4` | Analytics only in production | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.5` | No analytics in local/QA | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.6` | Filter by production domain | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.7` | Script on all shared-layout pages | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.8` | Script on display view | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.9` | Script loads async, non-blocking | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.10` | GOATCOUNTER_SITE_CODE env var | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.11` | No script when env var absent | 03-ARCHITECTURE.md §23.2 | — | — | gap |
+| `02-§63.12` | Page views per day/week | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.13` | Most visited pages | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.14` | Referrer tracking | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.15` | Device type and screen size | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.16` | Returning visitors | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.17` | 404 hits | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.18` | Page load times | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.19` | Traffic patterns over time | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.20` | Track form submission | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.21` | Track form abandonment | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.22` | Track today view page load | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.23` | Track display mode page load | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.24` | Track Discord link click | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.25` | Track Facebook link click | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.26` | Track iCal download | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.27` | Track RSS link click | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.28` | Track scroll depth on schedule | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.29` | QR codes data file exists | 03-ARCHITECTURE.md §23.5 | — | — | gap |
+| `02-§63.30` | QR file maintained manually | 03-ARCHITECTURE.md §23.5 | — | — | gap |
+| `02-§63.31` | QR entry has id + description | 03-ARCHITECTURE.md §23.5 | — | — | gap |
+| `02-§63.32` | QR URLs include ?ref= parameter | 03-ARCHITECTURE.md §23.4 | — | — | gap |
+| `02-§63.33` | Display view QR uses tracked ref | 03-ARCHITECTURE.md §23.4 | — | — | gap |
+| `02-§63.34` | No personal data collected | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.35` | No cookie consent banner needed | 03-ARCHITECTURE.md §23.1 | — | — | gap |
+| `02-§63.36` | No wrapper JS libraries | 03-ARCHITECTURE.md §23.3 | — | — | gap |
+| `02-§63.37` | Use data-goatcounter-click attrs | 03-ARCHITECTURE.md §23.3 | — | — | gap |
 
 ---
 
 ## Summary
 
 ```text
-Total requirements:             891
+Total requirements:             928
 Covered (implemented + tested): 440
 Implemented, not tested:        451
-Gap (no implementation):          0
+Gap (no implementation):         37
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1298,6 +1336,10 @@ Matrix cleanup (2026-02-25):
   8 covered (VER-01..09, FTR-18..20): VERSION file, footer display, local/CI resolution.
   9 implemented (workflow/manual): tagging, release, CSS visual, manual bump docs.
   VERSION file, footer display, automatic tagging, GitHub Release on bump.
+37 requirements added for site analytics (02-§63.1–63.37):
+  all 37 gap (no implementation yet).
+  GoatCounter hosted, custom events, QR code referrer tracking.
+  Architecture documented in 03-ARCHITECTURE.md §23.
 ```
 
 ---
