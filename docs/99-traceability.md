@@ -1086,9 +1086,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             949
-Covered (implemented + tested): 470
-Implemented, not tested:        479
+Total requirements:             954
+Covered (implemented + tested): 474
+Implemented, not tested:        480
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1349,6 +1349,10 @@ Matrix cleanup (2026-02-25):
     page views, scroll depth, QR manual process.
   GoatCounter hosted, custom events via data-goatcounter-click, QR referrer tracking.
   Architecture documented in 03-ARCHITECTURE.md §23.
+5 requirements added for main landmark element (02-§70.1–70.5):
+  4 covered (MAIN-01-*, MAIN-02-*, MAIN-03-*): one <main> per page, excludes nav/footer.
+  1 implemented (02-§70.4): no visual styling changes — semantic element only.
+  <main> added to all 9 render files. Design documented in 07-DESIGN.md §9.6.
 ```
 
 ---
@@ -1662,3 +1666,9 @@ Matrix cleanup (2026-02-25):
 | CACHE-09 | `tests/cache-headers.test.js` | `02-§69.3 — Hash is deterministic` |
 | `02-§69.4` | implemented | No render functions changed — post-processing in `build.js` `findHtmlFiles()` |
 | `02-§69.5` | covered | All 1182 existing tests pass — STR-CSS, EVT-13 still match |
+| | | **§70 — Main Landmark Element** |
+| MAIN-01-* | `tests/main-landmark.test.js` | `02-§70.1 — Every page has exactly one <main>` |
+| `02-§70.2` | covered | `<main>` wraps content between nav and footer (MAIN-01/02/03 verify placement) |
+| MAIN-02/03-* | `tests/main-landmark.test.js` | `02-§70.3 — <main> excludes <nav> and <footer>` |
+| `02-§70.4` | implemented | No CSS changes — `<main>` is semantic only |
+| `02-§70.5` | covered | MAIN-01-* tests verify exactly one `<main>` per page |

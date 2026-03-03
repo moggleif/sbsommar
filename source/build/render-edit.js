@@ -44,7 +44,7 @@ function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = 
 </head>
 <body>
 ${pageNav('redigera.html', navSections)}
-
+<main>
   <div id="edit-loading" role="status">
     <p>Laddar aktivitet…</p>
   </div>
@@ -151,7 +151,7 @@ ${locationOptions}
       <div id="modal-content" class="modal-content"></div>
     </div>
   </div>
-
+</main>
   <script src="markdown-toolbar.js"></script>
   <script defer src="marked.umd.js"></script>
   <script defer src="markdown-preview.js"></script>

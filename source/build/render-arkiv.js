@@ -147,7 +147,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
 </head>
 <body>
 ${pageNav('arkiv.html', navSections)}
-
+<main>
   <div class="page-content">
     <h1>Lägerarkiv</h1>
     <p class="intro">Alla tidigare läger. Klicka på ett läger för att se mer information.</p>
@@ -156,7 +156,7 @@ ${pageNav('arkiv.html', navSections)}
 ${items}
     </ol>
   </div>
-
+</main>
   <script src="arkiv.js"></script>
   <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}

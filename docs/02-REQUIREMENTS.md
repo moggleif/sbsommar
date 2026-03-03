@@ -3195,3 +3195,27 @@ the CSS URL so that any CSS change forces a cache miss.
   post-processing step in `build.js`. <!-- 02-§69.4 -->
 - Existing tests that verify `style.css` presence must continue to
   pass. <!-- 02-§69.5 -->
+
+---
+
+## 70. Main Landmark Element
+
+Every HTML page must contain a `<main>` landmark element so that screen
+readers can let users skip past navigation directly to the page content.
+This addresses the PageSpeed Accessibility audit flag for missing `<main>`
+landmark.
+
+### 70.1 Structural rules
+
+- Every page must have exactly one `<main>` element. <!-- 02-§70.1 -->
+- The `<main>` element must wrap all page content between the navigation
+  and the footer (or end of content if there is no footer). <!-- 02-§70.2 -->
+- The `<main>` element must NOT contain `<nav>` or `<footer>`
+  elements. <!-- 02-§70.3 -->
+
+### 70.2 Constraints
+
+- Adding `<main>` must not change any visual styling — it is a semantic
+  element only. <!-- 02-§70.4 -->
+- Only one `<main>` element is permitted per page (HTML spec
+  requirement). <!-- 02-§70.5 -->

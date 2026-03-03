@@ -27,6 +27,7 @@
     </div>
   </nav>
   <button type="button" class="scroll-top" aria-label="Till toppen" hidden>&#x2B06;</button>
+<main>
   <div class="schedule-header">
     <h1>Schema – Test Camp 2025</h1>
     <a href="schema.rss" class="rss-link" title="RSS-feed" data-goatcounter-click="click-rss"><img src="images/rss-logo.webp" alt="RSS" class="rss-icon" width="38" height="38"></a>
@@ -73,6 +74,7 @@
     </div>
     </div>
   </details>
+</main>
   <script src="wp-cleanup.js"></script>
   <script src="session.js"></script>
   <script src="nav.js" defer></script>

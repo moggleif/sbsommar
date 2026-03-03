@@ -45,6 +45,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', goat
 </head>
 <body class="display-mode">
 
+<main>
   <div class="dagens-layout">
 
     <div class="dagens-events">
@@ -62,7 +63,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', goat
     </aside>
 
   </div>
-
+</main>
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = ''; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true; window.__BUILD_TIME__ = '${safeBuildTime}'; window.__VERSION__ = '${safeBuildTime}';</script>
   <script src="events-today.js"></script>${goatcounterScript(goatcounterCode)}
 </body>

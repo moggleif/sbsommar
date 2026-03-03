@@ -39,12 +39,12 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieD
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('idag.html', navSections)}
-
+<main>
   <h1 id="today-heading">Idag</h1>
   <p class="intro">Aktiviteterna nedan är schemalagda för idag. Kolla gärna <a href="schema.html">hela schemat</a> för övriga dagar.</p>
 
   <div id="today-events"></div>
-
+</main>
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Idag'; window.__EMPTY_CLASS__ = 'intro'; window.__SHOW_FOOTER__ = false;</script>
   <script src="events-today.js"></script>
   <script src="session.js"></script>
