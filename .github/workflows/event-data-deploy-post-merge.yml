@@ -63,6 +63,7 @@ jobs:
           SITE_URL: ${{ secrets.SITE_URL }}
           BUILD_ENV: qa
           COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
+          GOATCOUNTER_SITE_CODE: ${{ secrets.GOATCOUNTER_SITE_CODE }}
 
       - name: Stage event data pages
         if: steps.gate.outputs.skip != 'true'
@@ -147,6 +148,7 @@ jobs:
           SITE_URL: ${{ secrets.SITE_URL }}
           BUILD_ENV: production
           COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
+          GOATCOUNTER_SITE_CODE: ${{ secrets.GOATCOUNTER_SITE_CODE }}
 
       - name: Stage event data pages
         if: steps.gate.outputs.skip != 'true'

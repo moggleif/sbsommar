@@ -2885,10 +2885,12 @@ no-backend, minimal-JS constraints.
 
 ### 63.2 Environment scope
 
-- Analytics must only collect data in the production environment. <!-- 02-§63.4 -->
-- Local development and QA must not send analytics data. <!-- 02-§63.5 -->
-- Filtering is by production domain — no separate configuration per
-  environment is needed. <!-- 02-§63.6 -->
+- Analytics must be collected in both production and QA
+  environments. <!-- 02-§63.4 -->
+- Each environment uses its own GoatCounter site code so data is kept
+  separate. <!-- 02-§63.5 -->
+- Local development must not send analytics data (environment variable
+  left unset). <!-- 02-§63.6 -->
 
 ### 63.3 Script inclusion
 
@@ -2952,6 +2954,9 @@ The following interactions must be tracked as GoatCounter custom events:
   beyond what GoatCounter itself requires (no wrapper libraries). <!-- 02-§63.36 -->
 - Custom event tracking must use HTML `data-goatcounter-click` attributes
   where possible, minimising inline JavaScript. <!-- 02-§63.37 -->
+- All deploy workflows that build site pages must pass
+  `GOATCOUNTER_SITE_CODE` to the build step so that rebuilt pages retain
+  the analytics script. <!-- 02-§63.38 -->
 
 ---
 
