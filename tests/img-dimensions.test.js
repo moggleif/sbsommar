@@ -14,6 +14,7 @@ const { renderSchedulePage } = require('../source/build/render');
 const { renderArkivPage } = require('../source/build/render-arkiv');
 
 const CONTENT_DIR = path.join(__dirname, '..', 'source', 'content');
+const FIXTURES_DIR = path.join(__dirname, 'fixtures');
 
 // ── Helper: build a minimal index page ──────────────────────────────────────
 
@@ -124,15 +125,15 @@ describe('02-§66.5 — Hero image dimensions', () => {
 // ── 02-§66.6 — Content images from markdown ────────────────────────────────
 
 describe('02-§66.6 — Content image dimensions from markdown', () => {
-  it('DIM-07: getImageDimensions returns dimensions for a real image', () => {
-    // This test validates the helper exists and works
+  it('DIM-07: getImageDimensions returns dimensions for a test fixture', () => {
+    // Uses a tiny 10x10 WebP stored directly in git (not LFS)
     const { getImageDimensions } = require('../source/build/image-dimensions');
-    const imgPath = path.join(CONTENT_DIR, 'images', 'klaralven.webp');
-    assert.ok(fs.existsSync(imgPath), `Test image must exist: ${imgPath}`);
+    const imgPath = path.join(FIXTURES_DIR, 'test-10x10.webp');
+    assert.ok(fs.existsSync(imgPath), `Test fixture must exist: ${imgPath}`);
     const dims = getImageDimensions(imgPath);
     assert.ok(dims, 'Expected dimensions object');
-    assert.ok(typeof dims.width === 'number' && dims.width > 0, `Expected positive width, got: ${dims.width}`);
-    assert.ok(typeof dims.height === 'number' && dims.height > 0, `Expected positive height, got: ${dims.height}`);
+    assert.strictEqual(dims.width, 10, `Expected width=10, got: ${dims.width}`);
+    assert.strictEqual(dims.height, 10, `Expected height=10, got: ${dims.height}`);
   });
 
   it('DIM-08: getImageDimensions returns null for non-existent file', () => {
@@ -146,13 +147,14 @@ describe('02-§66.6 — Content image dimensions from markdown', () => {
 
 describe('02-§66.7 — Location image dimensions', () => {
   it('DIM-09: location images have width and height attributes', () => {
+    // Uses test fixture directory so images resolve in CI (not LFS pointers)
     const locations = [{
       id: 'test-loc',
       name: 'Test Location',
       information: 'Info',
-      image_path: 'images/GA_idrott.webp',
+      image_path: 'test-10x10.webp',
     }];
-    const html = renderLocationAccordions(locations, CONTENT_DIR);
+    const html = renderLocationAccordions(locations, FIXTURES_DIR);
     const imgMatch = html.match(/<img[^>]*class="content-img"[^>]*>/);
     assert.ok(imgMatch, 'Expected content-img element');
     assert.ok(/width="\d+"/.test(imgMatch[0]), `Expected width attribute, got: ${imgMatch[0]}`);
