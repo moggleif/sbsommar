@@ -473,7 +473,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§21.15` | On narrow viewports the header metadata may wrap below the camp name but remains visually subdued | 03-ARCHITECTURE.md §4a | — (manual: resize viewport and verify `.timeline-meta` wraps) | `source/assets/cs/style.css` – `@media (max-width: 690px)` `.timeline-meta` rules | implemented |
 | `02-§21.16` | When a camp accordion is expanded, its timeline dot is visually highlighted (larger, accent color) | 03-ARCHITECTURE.md §4a | — (manual: open an accordion and verify dot grows) | `source/assets/js/client/arkiv.js` – toggles `.active` class; `source/assets/cs/style.css` – `.timeline-dot.active` | implemented |
 | `02-§21.17` | When the accordion is collapsed the dot returns to default size | 03-ARCHITECTURE.md §4a | — (manual: close accordion and verify dot shrinks) | `source/assets/js/client/arkiv.js` – removes `.active` class on close | implemented |
-| `02-§21.18` | Facebook logo image replaces text button when `link` is non-empty | 03-ARCHITECTURE.md §4a | ARK-12 | `source/build/render-arkiv.js` – `<img src="images/social-facebook-button-blue-icon-small.webp">` | covered |
+| `02-§21.18` | Facebook logo image replaces text button when `link` is non-empty | 03-ARCHITECTURE.md §4a | ARK-12 | `source/build/render-arkiv.js` – `<img src="images/facebook-ikon.webp">` | covered |
 | `02-§21.19` | Facebook logo is placed at top of panel content, before camp information | 03-ARCHITECTURE.md §4a | ARK-15 | `source/build/render-arkiv.js` – `linkHtml` rendered before `.camp-information` | covered |
 | `02-§21.20` | Facebook link opens in a new tab with `target="_blank"` and `rel="noopener noreferrer"` | 03-ARCHITECTURE.md §4a | ARK-14 | `source/build/render-arkiv.js` – `target="_blank" rel="noopener noreferrer"` on `<a>` | covered |
 | `02-§21.21` | Facebook logo image has accessible `alt` text | 03-ARCHITECTURE.md §4a | ARK-13 | `source/build/render-arkiv.js` – `alt="Facebookgrupp"` | covered |
@@ -599,10 +599,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§30.18` | Countdown has subtle cream/sand background | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: var(--color-cream-light) }` | implemented |
 | `02-§30.19` | All hero styling uses CSS custom properties | 07-DESIGN.md §7 | — (manual: CSS review) | `style.css` – all hero rules use `var(--…)` tokens | implemented |
 | `02-§30.20` | Countdown JS is minimal, no framework | 03-ARCHITECTURE.md §15.3 | — (manual: code review) | `source/build/render-index.js` – ~8-line inline `<script>` | implemented |
-| `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | `source/content/images/DiscordLogo.webp`, `social-facebook-button-blue-icon-small.webp` | implemented |
+| `02-§30.21` | Social icon images stored in source/content/images/ | 03-ARCHITECTURE.md §15.4 | — | `source/content/images/discord-ikon.webp`, `facebook-ikon.webp` | implemented |
 | `02-§30.22` | Social links provided at build time, not hardcoded | 03-ARCHITECTURE.md §15.2 | HERO-14, HERO-15 | `source/build/build.js` – passes `discordUrl`, `facebookUrl` to `renderIndexPage` | covered |
 | `02-§30.23` | Countdown background color is `#FAF7EF` (solid, not semi-transparent) | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero-countdown { background: var(--color-cream-light) }` | implemented |
-| `02-§30.24` | Discord icon uses `DiscordLogo.webp` | 03-ARCHITECTURE.md §15.4 | HERO-16 | `render-index.js` – `DiscordLogo.webp` in Discord link `<img>` | covered |
+| `02-§30.24` | Discord icon uses `discord-ikon.webp` | 03-ARCHITECTURE.md §15.4 | HERO-16 | `render-index.js` – `discord-ikon.webp` in Discord link `<img>` | covered |
 | `02-§30.25` | Sidebar vertically centered alongside hero image | 07-DESIGN.md §6 | — (manual: visual check) | `style.css` – `.hero { align-items: center }` | implemented |
 
 ### 31. Inline Camp Listing and Link Styling

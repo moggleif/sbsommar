@@ -162,7 +162,7 @@ Steps:
      location in subdued text to the right.
    - A hidden `<div>` panel with:
      - Facebook logo link (if `link` is non-empty), using the image at
-       `images/social-facebook-button-blue-icon-small.webp`.
+       `images/facebook-ikon.webp`.
      - Camp metadata (dates, location).
      - Information paragraph (if non-empty).
      - Event list grouped by day, using the same row format as the schedule page.

@@ -824,7 +824,7 @@ by the date range and location in subdued (gray) text to the right. <!-- 02-§21
 ### 21.6 Facebook logo link
 
 - When a camp has a non-empty `link` field, the expanded panel must show
-  the Facebook logo image (`images/social-facebook-button-blue-icon-small.webp`)
+  the Facebook logo image (`images/facebook-ikon.webp`)
   as a clickable link to the Facebook group, replacing the previous text
   button. <!-- 02-§21.18 -->
 - The logo must be placed at the top of the panel content, near the camp
@@ -1192,7 +1192,7 @@ and connects visitors to community channels.
 
 - The countdown background color is `#FAF7EF` (a near-white cream), not
   semi-transparent. <!-- 02-§30.23 -->
-- The Discord icon uses the image `DiscordLogo.webp`. <!-- 02-§30.24 -->
+- The Discord icon uses the image `discord-ikon.webp`. <!-- 02-§30.24 -->
 - The sidebar is vertically centered alongside the hero image (not
   top-aligned). <!-- 02-§30.25 -->
 
