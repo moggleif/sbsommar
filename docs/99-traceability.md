@@ -1044,9 +1044,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§63.1` | GoatCounter as analytics tool | 03-ARCHITECTURE.md §23 | — | `source/build/analytics.js` | implemented |
 | `02-§63.2` | No cookies from analytics | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
 | `02-§63.3` | Analytics script < 5 KB | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
-| `02-§63.4` | Analytics only in production | 03-ARCHITECTURE.md §23.2 | — | `.env.example`, 08-ENVIRONMENTS.md | implemented |
-| `02-§63.5` | No analytics in local/QA | 03-ARCHITECTURE.md §23.2 | — | `.env.example`, 08-ENVIRONMENTS.md | implemented |
-| `02-§63.6` | Filter by production domain | 03-ARCHITECTURE.md §23.2 | — | GoatCounter dashboard setting | implemented |
+| `02-§63.4` | Analytics in prod and QA | 03-ARCHITECTURE.md §23.2 | — | GitHub Environment secrets | implemented |
+| `02-§63.5` | Separate GoatCounter site codes | 03-ARCHITECTURE.md §23.2 | — | GitHub Environment secrets | implemented |
+| `02-§63.6` | No analytics in local dev | 03-ARCHITECTURE.md §23.2 | — | `.env.example` | implemented |
 | `02-§63.7` | Script on all shared-layout pages | 03-ARCHITECTURE.md §23.2 | ANA-SH-* | `source/build/analytics.js`, render-*.js | covered |
 | `02-§63.8` | Script on display view | 03-ARCHITECTURE.md §23.2 | ANA-DIS-01 | `source/build/render-today.js` | covered |
 | `02-§63.9` | Script loads async, non-blocking | 03-ARCHITECTURE.md §23.2 | ANA-ASYNC-01 | `source/build/analytics.js` | covered |
@@ -1078,6 +1078,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§63.35` | No cookie consent banner needed | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
 | `02-§63.36` | No wrapper JS libraries | 03-ARCHITECTURE.md §23.3 | — | convention | implemented |
 | `02-§63.37` | Use data-goatcounter-click attrs | 03-ARCHITECTURE.md §23.3 | ANA-EVT-01..06 | `source/build/render-index.js`, `render.js` | covered |
+| `02-§63.38` | All deploy workflows pass GOATCOUNTER_SITE_CODE | 03-ARCHITECTURE.md §23.2 | — | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
 
 ---
 
