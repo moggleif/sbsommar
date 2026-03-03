@@ -9,12 +9,12 @@ Sysslebäcks stugby & fiskecamping, Sysslebäcksbadet, GA-hallen
 
 ![Campingkarta](images/campingkarta.webp)
 
-![Hela campingplatsen](images/Campingplatsen_hela_kartan-1.webp)
+![Hela campingplatsen](images/campingplatsen-hela-kartan.webp)
 
 **Övre området**  
 Kvistbergskolan; Kom ihåg, det tar cirka 15-20 minuter att gå till skolan och fritidsgården från campingen (följ strecket).
 
-![Övre området](images/karta_skola-1.webp)
+![Övre området](images/karta-skola.webp)
 
 ## Lokaler
 

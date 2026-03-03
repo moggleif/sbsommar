@@ -2,7 +2,7 @@
 
 Anita Kullander startade det första sommarlägret 2012 – "Filurums sommarläger".
 
-![Anita Kullander](images/Anita-portrait.webp)
+![Anita Kullander](images/anita-kullander.webp)
 Foto: Anita Kullander
 
 Anita Kullander har organiserat lägerveckor under 2012-2017. Familjerna som var medlemmar i Filurum, kom med sina särskilt begåvade barn, med och utan npf-diagnoser. Från hela Sverige kom föräldrarna och c:a 150 barn i olika åldrar vimlade omkring på lägergården i olika aktiviteter. Föräldrarna var förstummade över hur deras barn snabbt hittade vänner. Ålder och kön (eller diagnos) var oviktigt. Det var de gemensamma intressena och funktionsnivåerna som avgjorde kamratskapen och aktiviteterna.

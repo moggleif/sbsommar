@@ -29,45 +29,45 @@ locations:
       * Biljardbord
       * Klättervägg
     image_path:
-      - "images/fritids_entre-1.webp"
-      - "images/fritids_tvrum.webp"
-      - "images/fritids_sal.webp"
-      - "images/fritids_biljard-1.webp"
-      - "images/fritids_klattervagg-rotated-1.webp"
-      - "images/karta_fritidsgard_kallare.webp"
-      - "images/karta_skola_overvaning.webp"
+      - "images/fritids-entre.webp"
+      - "images/fritids-tvrum.webp"
+      - "images/fritids-sal.webp"
+      - "images/fritids-biljard.webp"
+      - "images/fritids-klattervagg.webp"
+      - "images/karta-fritidsgard-kallare.webp"
+      - "images/karta-skola-overvaning.webp"
   - id: ga-datorsal
     name: GA Datorsal
     information: >
       Datorsalen brukar byggas upp på söndag kväll och måndag morgon, av
       aktiva barn och deras föräldrar. Regler sätts av dessa tillsammans.
-    image_path: "images/GA_datorsal.webp"
+    image_path: "images/ga-datorsal.webp"
   - id: ga-idrott
     name: GA Idrott
     information: >
       Ena halvan används för mer rörelse. Badminton, pingis, basket,
       innebandy, lekar, med mera. Vi hjälps åt att hålla ordning.
-    image_path: "images/GA_idrott.webp"
+    image_path: "images/ga-idrott.webp"
   - id: ga-kreativ-horna
     name: GA Kreativ hörna
     information: >
       En del av GA hallen brukar användas för att spela spel, pussla, pyssla,
       bygga lego, med mera.
-    image_path: "images/GA-kreativ.webp"
+    image_path: "images/ga-kreativ.webp"
   - id: ga-lego
     name: GA Lego
     information: >
       En del av GA hallen brukar användas för att spela spel, pussla, pyssla,
       bygga lego, med mera.
-    image_path: "images/GA-lego.webp"
+    image_path: "images/ga-lego.webp"
   - id: ga-stilla-hyllan
     name: GA Stilla hyllan
     information: >
       Uppe på hyllan finns det lite små bord, där kan det göras lugnare och
       mer fokuserade aktiviteter.
     image_path:
-      - "images/GA_stilla_hyllan.webp"
-      - "images/GA_laktare.webp"
+      - "images/ga-stilla-hyllan.webp"
+      - "images/ga-laktare.webp"
   - id: grillplats
     name: Grillplats
     information: >
@@ -76,7 +76,7 @@ locations:
       det är sedan gammalt.
     image_path:
       - "images/grillplatsen.webp"
-      - "images/camping_badplats.webp"
+      - "images/camping-badplats.webp"
   - id: kaffe-paviljongen
     name: KaffePaviljongen
     information: "Placerat framför stuga 6, där kaffe och te finns dygnet runt."
@@ -93,28 +93,28 @@ locations:
     name: Nerf-arena
     information: >
       Små timmerhus (~1½m höga) som det är tillåtet att gå in i och klättra på.
-    image_path: "images/Nerf-arena-scaled-e1687727666185.webp"
+    image_path: "images/nerf-arena.webp"
   - id: rollspelstalt-1
     name: Rollspelstält1
     information: >
       Det finns en hel del rollspel under lägret och för dessa finns det två
       tält. De som spelar rollspel brukar ansvara för att sätta upp och ta ner
       tälten.
-    image_path: "images/Rollspelstalt-scaled-2.webp"
+    image_path: "images/rollspelstalt.webp"
   - id: rollspelstalt-2
     name: Rollspelstält2
     information: >
       Det finns en hel del rollspel under lägret och för dessa finns det två
       tält. De som spelar rollspel brukar ansvara för att sätta upp och ta ner
       tälten.
-    image_path: "images/Rollspelstalt-scaled-2.webp"
+    image_path: "images/rollspelstalt.webp"
   - id: servicehus
     name: Servicehus
     information: >
       Här finns det bord att använda och tillgång till litet kök. Även ett
       litet TV-rum för barnen. En liten men mycket central plats, kanske
       “hjärtat”.
-    image_path: "images/servicehuset.webp"
+    image_path: "images/servicehus.webp"
   - id: skolan
     name: Skolan
     information: >
@@ -127,25 +127,25 @@ locations:
       * Bildsal
       * Hemkunskap
     image_path:
-      - "images/karta_skola-1.webp"
-      - "images/skolsal1.webp"
-      - "images/skolsal2.webp"
-      - "images/skolsal3.webp"
+      - "images/karta-skola.webp"
+      - "images/skolsal-1.webp"
+      - "images/skolsal-2.webp"
+      - "images/skolsal-3.webp"
       - "images/hemkunskap.webp"
-      - "images/hemkunskap_1.webp"
-      - "images/hemkunskap_2.webp"
+      - "images/hemkunskap-1.webp"
+      - "images/hemkunskap-2.webp"
   - id: talt-1
     name: Tält1
     information: "Tält 1 är närmast väggen."
-    image_path: "images/talt1_talt2-1.webp"
+    image_path: "images/talt-1-och-2.webp"
   - id: talt-2
     name: Tält2
     information: "Tält 2 är det vi ser mest av på bilden. I mitten."
-    image_path: "images/talt1_talt2-1.webp"
+    image_path: "images/talt-1-och-2.webp"
   - id: talt-3
     name: Tält3
     information: "Tält 3 inte med på bilden. Längst ut."
-    image_path: "images/talt1_talt2-1.webp"
+    image_path: "images/talt-1-och-2.webp"
   - id: tonarsstugan
     name: Tonårsstugan
     information: "Endast tillträde för ungdomar som har är 13år fyllda."

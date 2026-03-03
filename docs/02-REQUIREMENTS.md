@@ -824,7 +824,7 @@ by the date range and location in subdued (gray) text to the right. <!-- 02-§21
 ### 21.6 Facebook logo link
 
 - When a camp has a non-empty `link` field, the expanded panel must show
-  the Facebook logo image (`images/social-facebook-button-blue-icon-small.webp`)
+  the Facebook logo image (`images/facebook-ikon.webp`)
   as a clickable link to the Facebook group, replacing the previous text
   button. <!-- 02-§21.18 -->
 - The logo must be placed at the top of the panel content, near the camp
@@ -1192,7 +1192,7 @@ and connects visitors to community channels.
 
 - The countdown background color is `#FAF7EF` (a near-white cream), not
   semi-transparent. <!-- 02-§30.23 -->
-- The Discord icon uses the image `DiscordLogo.webp`. <!-- 02-§30.24 -->
+- The Discord icon uses the image `discord-ikon.webp`. <!-- 02-§30.24 -->
 - The sidebar is vertically centered alongside the hero image (not
   top-aligned). <!-- 02-§30.25 -->
 
@@ -3132,3 +3132,40 @@ to reduce repeat-visit load times. Cache rules are delivered via an Apache
 
 - This `.htaccess` is for the static site root only. The existing
   `api/.htaccess` (PHP routing) must not be modified. <!-- 02-§67.7 -->
+
+---
+
+## 68. Descriptive Image Filenames
+
+All image files in `source/content/images/` must have descriptive,
+human-readable filenames that follow a consistent naming convention. This
+makes markdown editing easier for non-technical contributors and aligns
+filenames with their natural alt-text descriptions.
+
+### 68.1 Naming convention
+
+- All lowercase. <!-- 02-§68.1 -->
+- Swedish characters replaced: ä→a, ö→o, å→a, é→e. <!-- 02-§68.2 -->
+- Words separated by hyphens (no underscores, no camelCase). <!-- 02-§68.3 -->
+- No numbering suffixes unless genuinely needed (e.g. multiple similar
+  images of the same subject). <!-- 02-§68.4 -->
+- The filename (without extension) should work as alt-text
+  directly. <!-- 02-§68.5 -->
+
+### 68.2 Reference consistency
+
+- Every image reference in markdown files (`source/content/*.md`) must
+  point to the renamed file. <!-- 02-§68.6 -->
+- Every `image_path` in `source/data/local.yaml` must point to the
+  renamed file. <!-- 02-§68.7 -->
+- Hardcoded image paths in build scripts (`render-index.js`,
+  `render.js`) must point to the renamed files. <!-- 02-§68.8 -->
+- CSS selectors using `[alt="..."]` must be updated if the corresponding
+  alt-text changes. <!-- 02-§68.9 -->
+
+### 68.3 Constraints
+
+- Image content and dimensions must not change — only
+  filenames. <!-- 02-§68.10 -->
+- No broken image references may exist after the rename — the build must
+  succeed and all images must render. <!-- 02-§68.11 -->

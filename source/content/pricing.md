@@ -4,7 +4,7 @@
 
 Deltagaravgiften för 2025 är **400 kr per deltagare** för hela lägret. Definitionen av *deltagare* är alltså deltagande vuxna och barn, där de allra yngsta (ca 0-2 år) är undantagna. Man är deltagare oavsett man bor på lägerområdet eller inte.
 
-![Servicehus](images/servicehuset.webp)
+![Servicehus](images/servicehus.webp)
 
 ### Medlem RFSB
 
@@ -48,7 +48,7 @@ Stuga 4-5 bäddar. 3600:-
 
 ### Camping
 
-![Campingplats](images/camping.webp)
+![Campingplats](images/campingplats.webp)
 
 > Husvagn/husbil/tält finns det i regel gott om plats för. Speciellt camping-pris gäller.
 >

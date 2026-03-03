@@ -50,7 +50,7 @@ Vi har ofta specialpriser för hela veckan på ordinarie öppettider (se hemsida
 
 Bassängen är 20*8m och 29 grader varm. Se länken ovan för detaljerad information om priser och öppettider.
 
-![Sysslebäcksbadet](images/bad.webp)
+![Sysslebäcksbadet](images/sysslebacksbadet.webp)
 
 ![Bubbelpool](images/bubbelpool.webp)
 
@@ -67,4 +67,4 @@ Gymmet är öppet 05.30 till 22.00 alla dagar, obemannat. Läs mer [här](https:
 
 Branäs ser vi från campingen söderut. På vintern en populär skidanläggning men som även har öppet på sommaren med till exempel discgolf, paddeltennis och mountainbike-leder. De öppnar vanligen vid midsommar. Kolla deras hemsida för mer information. [Branäs sommar](https://www.branas.se/sommar/)
 
-![Branäs sommar](images/branas_sommar-1.webp)
+![Branäs sommar](images/branas-sommar.webp)

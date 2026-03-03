@@ -142,11 +142,11 @@ describe('hero section – countdown (02-§29.13–29.17)', () => {
 // ── Discord icon image (02-§30.24) ──────────────────────────────────────────
 
 describe('hero section – Discord icon image (02-§30.24)', () => {
-  it('HERO-16: Discord link uses DiscordLogo.webp image', () => {
+  it('HERO-16: Discord link uses discord-ikon.webp image', () => {
     const html = renderIndexPage(buildPage());
     assert.ok(
-      html.includes('src="images/DiscordLogo.webp"'),
-      `Expected DiscordLogo.webp, got: ${html.match(/<img[^>]*Discord[^>]*>/)?.[0] || 'no match'}`,
+      html.includes('src="images/discord-ikon.webp"'),
+      `Expected discord-ikon.webp, got: ${html.match(/<img[^>]*Discord[^>]*>/)?.[0] || 'no match'}`,
     );
   });
 });
