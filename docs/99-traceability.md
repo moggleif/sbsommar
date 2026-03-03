@@ -1086,10 +1086,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             933
+Total requirements:             944
 Covered (implemented + tested): 458
 Implemented, not tested:        475
-Gap (no implementation):          0
+Gap (no implementation):         11
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1638,3 +1638,15 @@ Matrix cleanup (2026-02-25):
 | CACHE-05 | `tests/cache-headers.test.js` | `02-§67.5 — Build copies .htaccess to public/` |
 | `02-§67.6` | covered | `build.js` uses `fs.copyFileSync()` — CACHE-05 verifies reference |
 | CACHE-06 | `tests/cache-headers.test.js` | `02-§67.7 — api/.htaccess not modified` |
+| | | **§68 — Descriptive Image Filenames** |
+| `02-§68.1` | gap | All lowercase filenames |
+| `02-§68.2` | gap | Swedish characters replaced (ä→a, ö→o, å→a, é→e) |
+| `02-§68.3` | gap | Words separated by hyphens |
+| `02-§68.4` | gap | No unnecessary numbering suffixes |
+| `02-§68.5` | gap | Filename works as alt-text |
+| `02-§68.6` | gap | Markdown image references updated |
+| `02-§68.7` | gap | local.yaml image_path fields updated |
+| `02-§68.8` | gap | Build script image paths updated |
+| `02-§68.9` | gap | CSS alt-selectors updated if alt-text changes |
+| `02-§68.10` | gap | Image content and dimensions unchanged |
+| `02-§68.11` | gap | No broken image references after rename |
