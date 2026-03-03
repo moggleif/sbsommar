@@ -389,3 +389,18 @@ events:
     meta:
       created_at: 2026-03-02 16:08
       updated_at: 2026-03-02 16:08
+  - id: spela-schack-2026-03-04-1100
+    title: Spela schack
+    date: '2026-03-04'
+    start: '11:00'
+    end: '12:00'
+    location: KaffePaviljongen
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-03-03 21:52
+      updated_at: 2026-03-03 21:52
