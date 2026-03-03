@@ -404,3 +404,18 @@ events:
     meta:
       created_at: 2026-03-03 21:52
       updated_at: 2026-03-03 21:52
+  - id: baka-kaka-2026-03-04-1400
+    title: Baka kaka
+    date: '2026-03-04'
+    start: '14:00'
+    end: '16:00'
+    location: Servicehus
+    responsible: Morgan
+    description: null
+    link: null
+    owner:
+      name: ''
+      email: ''
+    meta:
+      created_at: 2026-03-03 21:56
+      updated_at: 2026-03-03 21:56
