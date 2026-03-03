@@ -35,20 +35,20 @@ Middag levereras runt 16.30.
 
 Det kommer även gå att beställa Thaimat från samma leverantör. Priser på Thaimat som beställs direkt från Thai-vagnen kommer att stå i menyn på deras hemsida. Mer information under “[Restaurang och take away](/#service)”.
 
-#### Födoämnesintolleranser / allergier
+### Födoämnesintolleranser / allergier
 
 Allt görs **laktosfritt**.
 Det står angivet i menyn vilka rätter som innehåller **gluten**.
 Övriga födoämnesintolleranser/ allergier får man själv hålla reda på utifrån menyn, köket kommer inte göra individuella anpassningar av rätterna.
 
-#### Beställ
+### Beställ
 
 Det kommer att vara stora portioner så räkna en portion till två yngre barn.
 Ange antal portioner per rätt och måltid i formuläret. (Om man vill ha mer än 6 portioner av ett mål en eller flera dagar så gör man en ytterligare beställning.)
 
 [Beställ mat (senast 30 juli 2025)](https://docs.google.com/forms/d/e/1FAIpQLSf_7qvDSueq_QaJcSPfeNN-5a61FBWchCdzxJp1Z3q3PVnu0Q/viewform)
 
-#### Betalning
+### Betalning
 
 Betalning görs med Swish direkt till Leverantören “***Baansuantakeaway Emma Lagerkvist**”* på **Swish nummer 123 179 54 91**
 **Beställ** och **betala** för maten senast onsdagen **30 juli** för att beställningen ska vara giltig, gärna innan det.
@@ -60,8 +60,6 @@ Märk betalningen med:
 
 Exempel: “Mat Anders Andersson 42”
 
-**Pris 130 kr per portion**
-
-***Räkna portionsantalet noga så att summan stämmer innan ni gör betalningen.***
-
-**Smaklig spis!**
+**Pris 130 kr per portion**  
+***Räkna portionsantalet noga så att summan stämmer innan ni gör betalningen.***  
+**Smaklig spis!**  
