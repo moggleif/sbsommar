@@ -13,7 +13,6 @@ const {
 const { renderSchedulePage } = require('../source/build/render');
 const { renderArkivPage } = require('../source/build/render-arkiv');
 
-const CONTENT_DIR = path.join(__dirname, '..', 'source', 'content');
 const FIXTURES_DIR = path.join(__dirname, 'fixtures');
 
 // ── Helper: build a minimal index page ──────────────────────────────────────
