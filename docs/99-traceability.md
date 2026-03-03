@@ -1656,3 +1656,9 @@ Matrix cleanup (2026-02-25):
 | `02-§68.9` | implemented | `.content-img[alt="RFSB logo"]` updated in style.css |
 | `02-§68.10` | implemented | Only filenames changed — manual: `git diff` shows no binary content changes |
 | FNM-09 | `tests/image-filenames.test.js` | `02-§68.11 — Every image file is referenced somewhere` |
+| | | **§69 — CSS Cache-Busting** |
+| `02-§69.1` | gap | Build reads `public/style.css` and computes content hash |
+| `02-§69.2` | gap | Build replaces `href="style.css"` with `href="style.css?v=<hash>"` in all HTML |
+| `02-§69.3` | gap | Hash is deterministic (same CSS → same hash) |
+| `02-§69.4` | gap | No render function signatures changed — post-processing in build.js |
+| `02-§69.5` | gap | Existing style.css tests still pass |
