@@ -144,7 +144,8 @@ The footer shows different version strings per environment:
 | Environment | Example | How |
 | --- | --- | --- |
 | Production | `v1.0.4` | Auto-incremented patch from git tags |
-| QA | `v1.0.4 – QA PR212` | Latest production version + PR number from merge commit |
+| QA (after PR merge) | `v1.0.4 – QA PR212` | Latest production version + PR number from merge commit |
+| QA (after prod deploy) | `v1.0.4` | Exact production version — confirms QA matches prod |
 | Local | `v1.0 – Lokal 2026-03-02 14:30` | Base version + build timestamp |
 
 Event-data deploys do not update the version in the footer.
@@ -186,7 +187,7 @@ Merge to main
   → Approver approves
   → Production deploys (footer: v1.0.4)
   → Git tag v1.0.4 created automatically
-  → QA auto-redeploys (footer: v1.0.4 – QA PR212)
+  → QA auto-redeploys (footer: v1.0.4 — matches prod)
   → You verify on production
 ```
 

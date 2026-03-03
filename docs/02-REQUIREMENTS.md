@@ -2863,11 +2863,14 @@ the footer solves this with minimal visual impact.
 
 - After a successful production deploy and tagging, the production
   deploy workflow must automatically trigger a QA redeploy so that
-  the QA version string reflects the new production
-  version. <!-- 02-§62.18 -->
-- The QA redeploy must use the newly created production version as
-  the base for the QA version string (e.g. if production tagged
-  `v1.0.1`, QA must show `v1.0.1 – QA PR216`). <!-- 02-§62.19 -->
+  QA runs the exact same build as production. <!-- 02-§62.18 -->
+- The QA redeploy must use the exact production version string
+  (e.g. if production tagged `v1.0.1`, QA must also show
+  `v1.0.1`). This makes it visible that QA is running the
+  production release with no additional changes. <!-- 02-§62.19 -->
+- When the next PR is merged to `main`, the normal QA deploy
+  (`deploy-qa.yml`) restores the QA-suffixed version string
+  (e.g. `v1.0.1 – QA PR217`). <!-- 02-§62.20 -->
 
 ---
 

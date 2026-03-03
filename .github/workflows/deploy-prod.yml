@@ -85,37 +85,11 @@ jobs:
             --title "$TAG" \
             --generate-notes
 
-  compute-qa-version:
-    name: Compute QA version
-    needs: [compute-version, tag]
-    runs-on: ubuntu-latest
-    outputs:
-      qa_version: ${{ steps.qa-ver.outputs.version_string }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Build QA version string
-        id: qa-ver
-        run: |
-          VER="${{ needs.compute-version.outputs.version_string }}"
-          # Extract PR number from merge commit (e.g. "Merge pull request #216 from ...")
-          PR_NUM=$(git log -1 --pretty=format:"%s" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
-          if [ -n "$PR_NUM" ]; then
-            VERSION_STR="${VER} – QA PR${PR_NUM}"
-          else
-            SHA=$(git rev-parse --short HEAD)
-            VERSION_STR="${VER} – QA ${SHA}"
-          fi
-          echo "version_string=${VERSION_STR}" >> $GITHUB_OUTPUT
-          echo "QA version after prod deploy: ${VERSION_STR}"
-
   redeploy-qa:
-    name: Redeploy QA
-    needs: compute-qa-version
+    name: Redeploy QA (same version as prod)
+    needs: [compute-version, tag]
     uses: ./.github/workflows/deploy-reusable.yml
     with:
       environment: qa
-      build_version: ${{ needs.compute-qa-version.outputs.qa_version }}
+      build_version: ${{ needs.compute-version.outputs.version_string }}
     secrets: inherit

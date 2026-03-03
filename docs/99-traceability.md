@@ -1039,7 +1039,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§62.16` | Local fallback: VERSION file + timestamp | — | VER-07..08 | `source/build/version.js` | covered |
 | `02-§62.17` | Version logic in separate testable module | — | VER-01..09 | `source/build/version.js` | covered |
 | `02-§62.18` | QA redeploy triggered after prod deploy | 09-RELEASING.md | manual: trigger prod deploy and verify QA workflow runs | `.github/workflows/deploy-prod.yml` | implemented |
-| `02-§62.19` | QA version uses new prod version as base | 09-RELEASING.md | manual: verify QA footer shows new prod version after redeploy | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.19` | QA redeploy uses exact prod version string | 09-RELEASING.md | manual: verify QA footer shows exact prod version after redeploy | `.github/workflows/deploy-prod.yml` | implemented |
+| `02-§62.20` | Normal QA deploy restores QA-suffixed version | — | manual: merge PR and verify QA footer shows QA suffix | `.github/workflows/deploy-qa.yml` | implemented |
 | | | **§63 — Site Analytics** | | | |
 | `02-§63.1` | GoatCounter as analytics tool | 03-ARCHITECTURE.md §23 | — | `source/build/analytics.js` | implemented |
 | `02-§63.2` | No cookies from analytics | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
@@ -1335,10 +1336,10 @@ Matrix cleanup (2026-02-25):
   2 implemented (manual/visual): 02-§61.6 (WCAG contrast check),
     02-§61.11 (keyboard/ARIA behaviour preserved).
   Design documented in 07-DESIGN.md §6.20-impl–§6.24-impl.
-19 requirements added for footer versioning (02-§62.1–62.19):
+20 requirements added for footer versioning (02-§62.1–62.20):
   8 covered (VER-01..09, FTR-18..20): VERSION file, footer display, local/CI resolution.
   9 implemented (workflow/manual): tagging, release, CSS visual, manual bump docs.
-  2 implemented (02-§62.18–62.19): QA redeploy after prod deploy.
+  3 implemented (02-§62.18–62.20): QA redeploy trigger, prod version match, normal QA suffix.
   VERSION file, footer display, automatic tagging, GitHub Release on bump.
 37 requirements added for site analytics (02-§63.1–63.37):
   13 covered (ANA-SH-*, ANA-DIS-01, ANA-ASYNC-01, ANA-CODE-01, ANA-NO-*,
