@@ -38,7 +38,7 @@ describe('02-§66.1 — Testimonial image dimensions', () => {
     const testimonialHtml = [
       '<h2>Omdömen</h2>',
       '<h3>Anita</h3>',
-      '<p><img src="images/Anita-portrait.webp" alt="Anita" class="content-img" loading="lazy"></p>',
+      '<p><img src="images/anita-kullander.webp" alt="Anita" class="content-img" loading="lazy"></p>',
       '<blockquote><p>Fantastiskt läger!</p></blockquote>',
     ].join('\n');
 

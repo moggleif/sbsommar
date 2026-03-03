@@ -15,15 +15,15 @@ describe('renderLocationAccordions', () => {
       id: 'ga-idrott',
       name: 'GA Idrott',
       information: 'Ena halvan används för mer rörelse.',
-      image_path: 'images/GA_idrott.webp',
+      image_path: 'images/ga-idrott.webp',
     },
     {
       id: 'fritidsgarden',
       name: 'Fritidsgården',
       information: 'Kom ihåg, det tar cirka 15-20 minuter.',
       image_path: [
-        'images/fritids_entre-1.webp',
-        'images/fritids_tvrum.webp',
+        'images/fritids-entre.webp',
+        'images/fritids-tvrum.webp',
       ],
     },
     {
@@ -56,7 +56,7 @@ describe('renderLocationAccordions', () => {
   it('LOC-04 (02-§35.6): single image_path renders one <img>', () => {
     const html = renderLocationAccordions(locations);
     assert.ok(
-      html.includes('<img src="images/GA_idrott.webp"'),
+      html.includes('<img src="images/ga-idrott.webp"'),
       `Expected single image, got: ${html}`,
     );
   });
@@ -64,11 +64,11 @@ describe('renderLocationAccordions', () => {
   it('LOC-05 (02-§35.6): array image_path renders multiple <img> elements', () => {
     const html = renderLocationAccordions(locations);
     assert.ok(
-      html.includes('<img src="images/fritids_entre-1.webp"'),
+      html.includes('<img src="images/fritids-entre.webp"'),
       `Expected first image, got: ${html}`,
     );
     assert.ok(
-      html.includes('<img src="images/fritids_tvrum.webp"'),
+      html.includes('<img src="images/fritids-tvrum.webp"'),
       `Expected second image, got: ${html}`,
     );
   });
