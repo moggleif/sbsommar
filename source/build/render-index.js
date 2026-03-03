@@ -1,24 +1,39 @@
 'use strict';
 
+const path = require('path');
 const { Marked } = require('marked');
 const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml } = require('./utils');
 const { goatcounterScript } = require('./analytics');
+const { getImageDimensions } = require('./image-dimensions');
 
 /**
  * Converts inline Markdown (images, links, bold) to HTML using marked.
  * Content files are author-controlled so no HTML escaping is applied.
  */
-function inlineHtml(text) {
+function inlineHtml(text, contentDir) {
   const md = new Marked();
   md.use({
     renderer: {
       image({ href, text: alt }) {
-        return `<img src="${href}" alt="${alt || ''}" class="content-img" loading="lazy">`;
+        const dimAttrs = resolveDimAttrs(href, contentDir);
+        return `<img src="${href}" alt="${alt || ''}" class="content-img"${dimAttrs} loading="lazy">`;
       },
     },
   });
   return md.parseInline(text);
+}
+
+/**
+ * Resolves width/height attributes for an image href relative to contentDir.
+ * Returns a string like ' width="800" height="600"' or '' if unavailable.
+ */
+function resolveDimAttrs(href, contentDir) {
+  if (!contentDir || !href) return '';
+  const absPath = path.join(contentDir, href);
+  const dims = getImageDimensions(absPath);
+  if (!dims) return '';
+  return ` width="${dims.width}" height="${dims.height}"`;
 }
 
 /**
@@ -46,7 +61,7 @@ function extractH1(md) {
 /**
  * Creates a configured Marked instance with heading offset and image class.
  */
-function createMarked(headingOffset) {
+function createMarked(headingOffset, contentDir) {
   const md = new Marked();
   md.use({
     renderer: {
@@ -56,7 +71,8 @@ function createMarked(headingOffset) {
         return `<h${level}>${text}</h${level}>\n`;
       },
       image({ href, text: alt }) {
-        return `<img src="${href}" alt="${alt || ''}" class="content-img" loading="lazy">`;
+        const dimAttrs = resolveDimAttrs(href, contentDir);
+        return `<img src="${href}" alt="${alt || ''}" class="content-img"${dimAttrs} loading="lazy">`;
       },
     },
   });
@@ -72,10 +88,10 @@ function createMarked(headingOffset) {
  * <details class="accordion"><summary>…</summary>…</details>.
  * Closed by default. Add `collapsible: true` in sections.yaml to enable.
  */
-function convertMarkdown(input, headingOffset = 0, collapsible = false) {
+function convertMarkdown(input, headingOffset = 0, collapsible = false, contentDir = null) {
   if (!input || !input.trim()) return '';
 
-  const md = createMarked(headingOffset);
+  const md = createMarked(headingOffset, contentDir);
   const html = md.parse(input).trim();
 
   if (!collapsible) return html;
@@ -124,21 +140,22 @@ function convertMarkdown(input, headingOffset = 0, collapsible = false) {
  * @param {string|null} opts.countdownTarget - YYYY-MM-DD date for countdown
  * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
  */
-function renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = [], goatcounterCode = '') {
+function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = [], goatcounterCode = '') {
   const countdownHtml = countdownTarget
     ? `<div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
     : '';
 
   const socialLinks = (discordUrl || facebookUrl)
     ? `\n    <div class="hero-social">${
-      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-discord">\n        <img src="images/DiscordLogo.webp" alt="Discord">\n      </a>` : ''
+      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-discord">\n        <img src="images/DiscordLogo.webp" alt="Discord" width="32" height="32">\n      </a>` : ''
     }${
-      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-facebook">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook">\n      </a>` : ''
+      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-facebook">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook" width="32" height="32">\n      </a>` : ''
     }\n    </div>`
     : '';
 
+  const heroDimAttrs = heroDims ? ` width="${heroDims.width}" height="${heroDims.height}"` : '';
   const heroHtml = heroSrc
-    ? `\n  <div class="hero">\n    <div class="hero-header">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>${socialLinks}\n    </div>\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img" fetchpriority="high">\n  </div>`
+    ? `\n  <div class="hero">\n    <div class="hero-header">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>${socialLinks}\n    </div>\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img"${heroDimAttrs} fetchpriority="high">\n  </div>`
     : '';
 
   const contentSections = sections
@@ -287,7 +304,7 @@ ${items}
  * @param {Array<{id: string, name: string, information: string, image_path: string|string[]}>} locations
  * @returns {string} HTML string of accordion elements
  */
-function renderLocationAccordions(locations) {
+function renderLocationAccordions(locations, contentDir) {
   if (!locations || locations.length === 0) return '';
 
   return locations.map((loc) => {
@@ -299,10 +316,11 @@ function renderLocationAccordions(locations) {
 
     const bodyParts = [];
     if (info) {
-      bodyParts.push(`<p>${inlineHtml(info)}</p>`);
+      bodyParts.push(`<p>${inlineHtml(info, contentDir)}</p>`);
     }
     for (const imgPath of paths) {
-      bodyParts.push(`<img src="${escapeHtml(imgPath)}" alt="${name}" class="content-img" loading="lazy">`);
+      const dimAttrs = resolveDimAttrs(imgPath, contentDir);
+      bodyParts.push(`<img src="${escapeHtml(imgPath)}" alt="${name}" class="content-img"${dimAttrs} loading="lazy">`);
     }
 
     const bodyHtml = bodyParts.length > 0
@@ -354,7 +372,7 @@ function wrapTestimonialCards(html) {
 
     // Build the card
     const header = imgSrc
-      ? `<div class="testimonial-header">\n<img src="${imgSrc}" alt="${imgAlt}" class="testimonial-img">\n<h3>${name}</h3>\n</div>`
+      ? `<div class="testimonial-header">\n<img src="${imgSrc}" alt="${imgAlt}" class="testimonial-img" width="60" height="60">\n<h3>${name}</h3>\n</div>`
       : `<div class="testimonial-header">\n<h3>${name}</h3>\n</div>`;
 
     // Remove the original <h3>...</h3> from body since we placed it in the header

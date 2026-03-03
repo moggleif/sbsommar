@@ -21,6 +21,7 @@ function buildPage(overrides = {}) {
   return {
     heroSrc: overrides.heroSrc ?? 'images/klaralven.webp',
     heroAlt: overrides.heroAlt ?? 'Klarälven',
+    heroDims: overrides.heroDims ?? { width: 960, height: 720 },
     sections: overrides.sections ?? [{ id: 'start', navLabel: 'Start', html: '<p>Hello</p>' }],
     discordUrl: overrides.discordUrl ?? 'https://discord.com/channels/1/2',
     facebookUrl: overrides.facebookUrl ?? 'https://facebook.com/groups/test',
