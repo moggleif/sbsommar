@@ -3169,3 +3169,29 @@ filenames with their natural alt-text descriptions.
   filenames. <!-- 02-§68.10 -->
 - No broken image references may exist after the rename — the build must
   succeed and all images must render. <!-- 02-§68.11 -->
+
+---
+
+## 69. CSS Cache-Busting
+
+HTML files are served with `Cache-Control: no-cache` and always revalidate,
+but CSS is cached for up to one week (02-§67.2). When a deploy changes CSS
+selectors or styles, browsers may serve stale CSS against fresh HTML,
+causing visual regressions. The build must append a content-based hash to
+the CSS URL so that any CSS change forces a cache miss.
+
+### 69.1 Build behaviour
+
+- After all HTML files and assets are written, the build must read
+  `public/style.css` and compute a short content hash. <!-- 02-§69.1 -->
+- The build must replace every `href="style.css"` in all HTML files
+  under `public/` with `href="style.css?v=<hash>"`. <!-- 02-§69.2 -->
+- The hash must be deterministic: identical CSS content must always
+  produce the same hash. <!-- 02-§69.3 -->
+
+### 69.2 Constraints
+
+- No render function signatures may change — the hash is applied as a
+  post-processing step in `build.js`. <!-- 02-§69.4 -->
+- Existing tests that verify `style.css` presence must continue to
+  pass. <!-- 02-§69.5 -->

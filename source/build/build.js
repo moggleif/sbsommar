@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const yaml = require('js-yaml');
 const QRCode = require('qrcode');
 const { renderSchedulePage, toDateString } = require('./render');
@@ -116,6 +117,17 @@ function copyFlattened(srcDir, destDir) {
       fs.copyFileSync(srcPath, path.join(destDir, entry.name));
     }
   }
+}
+
+// Returns all .html files under dir (recursive).
+function findHtmlFiles(dir) {
+  const results = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) results.push(...findHtmlFiles(full));
+    else if (entry.name.endsWith('.html')) results.push(full);
+  }
+  return results;
 }
 
 // ── Render and write ─────────────────────────────────────────────────────────
@@ -368,6 +380,25 @@ async function main() {
   if (fs.existsSync(htaccessSrc)) {
     fs.copyFileSync(htaccessSrc, path.join(OUTPUT_DIR, '.htaccess'));
     console.log('Copied: source/static/.htaccess → public/.htaccess');
+  }
+
+  // ── Post-process: CSS cache-busting (02-§69.1–69.3) ───────────────────
+  const cssOut = path.join(OUTPUT_DIR, 'style.css');
+  if (fs.existsSync(cssOut)) {
+    const cssHash = crypto.createHash('md5')
+      .update(fs.readFileSync(cssOut))
+      .digest('hex')
+      .slice(0, 8);
+    const htmlFiles = findHtmlFiles(OUTPUT_DIR);
+    for (const file of htmlFiles) {
+      const html = fs.readFileSync(file, 'utf8');
+      const updated = html.replace(
+        /href="style\.css"/g,
+        `href="style.css?v=${cssHash}"`,
+      );
+      if (updated !== html) fs.writeFileSync(file, updated, 'utf8');
+    }
+    console.log(`Cache-bust: style.css?v=${cssHash}  (${htmlFiles.length} pages)`);
   }
 }
 
