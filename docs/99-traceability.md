@@ -1078,7 +1078,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§63.35` | No cookie consent banner needed | 03-ARCHITECTURE.md §23.1 | — | GoatCounter built-in | implemented |
 | `02-§63.36` | No wrapper JS libraries | 03-ARCHITECTURE.md §23.3 | — | convention | implemented |
 | `02-§63.37` | Use data-goatcounter-click attrs | 03-ARCHITECTURE.md §23.3 | ANA-EVT-01..06 | `source/build/render-index.js`, `render.js` | covered |
-| `02-§63.38` | All deploy workflows pass GOATCOUNTER_SITE_CODE | 03-ARCHITECTURE.md §23.2 | — | `.github/workflows/event-data-deploy-post-merge.yml` | gap |
+| `02-§63.38` | All deploy workflows pass GOATCOUNTER_SITE_CODE | 03-ARCHITECTURE.md §23.2 | manual: add event, verify script on schema.html | `.github/workflows/event-data-deploy-post-merge.yml`, `deploy-reusable.yml` | implemented |
 
 ---
 
