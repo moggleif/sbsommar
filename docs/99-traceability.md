@@ -1620,3 +1620,21 @@ Matrix cleanup (2026-02-25):
 | ROB-03 | `tests/robustness.test.js` | `02-§65.3 — Countdown regex anchors on </ul> + <script>` |
 | ROB-04 | `tests/robustness.test.js` | `02-§65.4 — Testimonial src extraction attribute-order-independent` |
 | ROB-05 | `tests/robustness.test.js` | `02-§65.5 — Testimonial <p> removal tolerates whitespace` |
+| | | **§66 — Image Dimension Attributes** |
+| `02-§66.1` | gap | Testimonial images have width="60" height="60" |
+| `02-§66.2` | gap | Social icons have width="32" height="32" |
+| `02-§66.3` | gap | RSS icon has width and height matching natural aspect ratio |
+| `02-§66.4` | gap | Archive Facebook logo has width and height |
+| `02-§66.5` | gap | Hero image has width and height from natural pixel dimensions |
+| `02-§66.6` | gap | Content images have width/height read at build time |
+| `02-§66.7` | gap | Location/facility images have width/height read at build time |
+| `02-§66.8` | gap | Build uses lightweight image header parsing for dimensions |
+| `02-§66.9` | gap | Adding attributes does not change rendered appearance |
+| | | **§67 — Static Asset Cache Headers** |
+| `02-§67.1` | gap | Images cached for 1 year |
+| `02-§67.2` | gap | CSS/JS cached for 1 week |
+| `02-§67.3` | gap | HTML set to no-cache |
+| `02-§67.4` | gap | .htaccess lives at source/static/.htaccess |
+| `02-§67.5` | gap | Build copies .htaccess to public/ |
+| `02-§67.6` | gap | Copy uses explicit fs.copyFileSync() |
+| `02-§67.7` | gap | api/.htaccess not modified |

@@ -1526,6 +1526,86 @@ Fields: `id` (string, unique, used in `?ref=` parameter), `description`
 
 ---
 
+## 24. Image Dimension Attributes
+
+### 24.1 Why dimensions matter
+
+Every `<img>` must carry `width` and `height` attributes so the browser
+can reserve layout space before the image loads, preventing Cumulative
+Layout Shift (CLS).
+
+### 24.2 Dimension strategy
+
+Two categories:
+
+1. **Fixed-size images** — social icons, testimonial avatars, the RSS icon,
+   and the archive Facebook logo — have known display sizes determined by
+   CSS. Their `width` and `height` are hardcoded in the render templates.
+
+2. **Content images** — markdown content images (`content-img`) and
+   location/facility images — vary by source file. The build reads each
+   image's natural pixel dimensions at build time using the `image-size`
+   npm package, which parses only the image header (no full decode).
+
+### 24.3 Build-time dimension resolution
+
+`source/build/image-dimensions.js` exports a `getImageDimensions(filePath)`
+helper. It is called:
+
+- In the `image()` renderer of `createMarked()` and `inlineHtml()` inside
+  `render-index.js`, for markdown content images.
+- In `renderLocationAccordions()` for facility images from `local.yaml`.
+
+The hero image dimensions are also read at build time (not hardcoded).
+
+### 24.4 Image dimension files
+
+| File | Role |
+| ---- | ---- |
+| `source/build/image-dimensions.js` | `getImageDimensions()` — thin wrapper around `image-size` |
+| `source/build/render-index.js` | Passes dimensions to `<img>` tags for content, hero, social, testimonial images |
+| `source/build/render.js` | RSS icon dimensions |
+| `source/build/render-arkiv.js` | Facebook logo dimensions |
+
+---
+
+## 25. Static Asset Cache Headers
+
+### 25.1 Why cache headers
+
+Returning visitors re-download all static assets because no `Cache-Control`
+headers are set. Adding cache headers via `.htaccess` reduces repeat-visit
+load times.
+
+### 25.2 Cache rule tiers
+
+A static `.htaccess` file in `source/static/` is copied to `public/` during
+the build. It sets Apache `Cache-Control` headers:
+
+- Images: 1 year (`max-age=31536000`)
+- CSS/JS: 1 week (`max-age=604800`)
+- HTML: no caching (`no-cache`)
+
+### 25.3 Build copy step
+
+`build.js` copies `source/static/.htaccess` to `public/.htaccess` using an
+explicit `fs.copyFileSync()` call after the existing asset copy step.
+
+### 25.4 Separation from API .htaccess
+
+The static site `.htaccess` (`public/.htaccess`) is distinct from the PHP
+API routing file (`api/.htaccess`). They serve different purposes and are
+deployed to different directories.
+
+### 25.5 Cache header files
+
+| File | Role |
+| ---- | ---- |
+| `source/static/.htaccess` | Cache rules for Apache |
+| `source/build/build.js` | Copies `.htaccess` to `public/` |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
