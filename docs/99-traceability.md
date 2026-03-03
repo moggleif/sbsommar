@@ -1620,3 +1620,21 @@ Matrix cleanup (2026-02-25):
 | ROB-03 | `tests/robustness.test.js` | `02-§65.3 — Countdown regex anchors on </ul> + <script>` |
 | ROB-04 | `tests/robustness.test.js` | `02-§65.4 — Testimonial src extraction attribute-order-independent` |
 | ROB-05 | `tests/robustness.test.js` | `02-§65.5 — Testimonial <p> removal tolerates whitespace` |
+| | | **§66 — Image Dimension Attributes** |
+| DIM-01 | `tests/img-dimensions.test.js` | `02-§66.1 — Testimonial images width="60" height="60"` |
+| DIM-02..03 | `tests/img-dimensions.test.js` | `02-§66.2 — Social icons width="32" height="32"` |
+| DIM-04 | `tests/img-dimensions.test.js` | `02-§66.3 — RSS icon has width and height` |
+| DIM-05 | `tests/img-dimensions.test.js` | `02-§66.4 — Archive Facebook logo has width and height` |
+| DIM-06 | `tests/img-dimensions.test.js` | `02-§66.5 — Hero image has width and height` |
+| DIM-07..08 | `tests/img-dimensions.test.js` | `02-§66.6 — Content images width/height from build-time reading` |
+| DIM-09 | `tests/img-dimensions.test.js` | `02-§66.7 — Location images width/height from build-time reading` |
+| `02-§66.8` | covered | `image-dimensions.js` uses `image-size` (header-only parsing) — DIM-07 verifies |
+| `02-§66.9` | implemented | No CSS changes — manual: visual appearance unchanged |
+| | | **§67 — Static Asset Cache Headers** |
+| CACHE-02 | `tests/cache-headers.test.js` | `02-§67.1 — Images cached for 1 year (max-age=31536000)` |
+| CACHE-03 | `tests/cache-headers.test.js` | `02-§67.2 — CSS/JS cached for 1 week (max-age=604800)` |
+| CACHE-04 | `tests/cache-headers.test.js` | `02-§67.3 — HTML set to no-cache` |
+| CACHE-01 | `tests/cache-headers.test.js` | `02-§67.4 — .htaccess at source/static/.htaccess` |
+| CACHE-05 | `tests/cache-headers.test.js` | `02-§67.5 — Build copies .htaccess to public/` |
+| `02-§67.6` | covered | `build.js` uses `fs.copyFileSync()` — CACHE-05 verifies reference |
+| CACHE-06 | `tests/cache-headers.test.js` | `02-§67.7 — api/.htaccess not modified` |

@@ -1,0 +1,22 @@
+# Cache headers for static assets (02-§67.1–67.3)
+#
+# Images: 1 year (immutable content, filename changes on update)
+# CSS/JS: 1 week (may change between deploys)
+# HTML:   no caching (always revalidate for fresh content)
+
+<IfModule mod_headers.c>
+  # Images — 1 year
+  <FilesMatch "\.(webp|png|jpg|jpeg|ico)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+
+  # CSS and JS — 1 week
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+
+  # HTML — always revalidate
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

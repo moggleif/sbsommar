@@ -18,6 +18,7 @@ const { renderKalenderPage } = require('./render-kalender');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 const { resolveVersionString } = require('./version');
 const { escapeHtml } = require('./utils');
+const { getImageDimensions } = require('./image-dimensions');
 
 // ── Load .env if present (local dev) ─────────────────────────────────────────
 const envPath = path.join(__dirname, '../..', '.env');
@@ -281,7 +282,7 @@ async function main() {
       }
 
       const navLabel = def.nav || extractH1(md) || def.file;
-      let html = convertMarkdown(md, i === 0 ? 0 : 1, def.collapsible || false);
+      let html = convertMarkdown(md, i === 0 ? 0 : 1, def.collapsible || false, CONTENT_DIR);
 
       // Inject camp listings into the first section, right after the first <h4>.
       if (i === 0 && campListingHtml) {
@@ -290,7 +291,7 @@ async function main() {
 
       // Inject location accordions into the lokaler section.
       if (def.id === 'lokaler') {
-        const locationHtml = renderLocationAccordions(allLocations);
+        const locationHtml = renderLocationAccordions(allLocations, CONTENT_DIR);
         if (locationHtml) {
           html += '\n' + locationHtml;
         }
@@ -315,7 +316,8 @@ async function main() {
     || (futureCamps.length > 0 && (futureCamps[0].link || '').trim())
     || null;
 
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, sections, discordUrl, facebookUrl, countdownTarget }, footerWithVersion, navSections, GOATCOUNTER_CODE);
+  const heroDims = heroSrc ? getImageDimensions(path.join(CONTENT_DIR, heroSrc)) : null;
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget }, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 
@@ -358,6 +360,14 @@ async function main() {
   if (fs.existsSync(markedSrc)) {
     fs.copyFileSync(markedSrc, path.join(OUTPUT_DIR, 'marked.umd.js'));
     console.log('Copied: marked.umd.js → public');
+  }
+
+  // ── Copy source/static/.htaccess → public/.htaccess (02-§67.5) ────────
+  const STATIC_DIR = path.join(__dirname, '..', 'static');
+  const htaccessSrc = path.join(STATIC_DIR, '.htaccess');
+  if (fs.existsSync(htaccessSrc)) {
+    fs.copyFileSync(htaccessSrc, path.join(OUTPUT_DIR, '.htaccess'));
+    console.log('Copied: source/static/.htaccess → public/.htaccess');
   }
 }
 

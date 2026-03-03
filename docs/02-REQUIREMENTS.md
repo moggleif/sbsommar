@@ -3060,3 +3060,75 @@ scroll and better leverage existing design tokens.
   order. <!-- 02-§65.4 -->
 - The image-wrapping `<p>` removal regex must tolerate optional
   whitespace inside the `<p>` element. <!-- 02-§65.5 -->
+
+---
+
+## 66. Image Dimension Attributes
+
+Every `<img>` element in the rendered HTML must have explicit `width` and
+`height` attributes. This reserves layout space before the image loads,
+preventing Cumulative Layout Shift (CLS).
+
+### 66.1 Fixed-size images
+
+Images whose display size is constant (not responsive) must have hardcoded
+`width` and `height` attributes matching their CSS display dimensions:
+
+- Testimonial images (`.testimonial-img`): `width="60" height="60"`. <!-- 02-§66.1 -->
+- Social icons (`.hero-social-link img`): `width="32" height="32"`. <!-- 02-§66.2 -->
+- RSS icon (`.rss-icon`): dimensions matching the image's natural aspect
+  ratio at the CSS display height. <!-- 02-§66.3 -->
+- Facebook logo in archive (`.camp-fb-logo`): dimensions matching the
+  image's natural aspect ratio at the CSS display size. <!-- 02-§66.4 -->
+
+### 66.2 Hero image
+
+- The hero image (`.hero-img`) must have `width` and `height` attributes
+  reflecting its natural pixel dimensions. <!-- 02-§66.5 -->
+
+### 66.3 Content and facility images
+
+- Content images produced by the Markdown renderer (`content-img`) must
+  have `width` and `height` attributes set to the source image's natural
+  pixel dimensions, read at build time. <!-- 02-§66.6 -->
+- Location/facility images rendered from `local.yaml` must have `width`
+  and `height` attributes set to their natural pixel dimensions, read at
+  build time. <!-- 02-§66.7 -->
+- The build must use a lightweight method to read image dimensions (e.g.
+  parsing the image header) — it must not decode the full image
+  data. <!-- 02-§66.8 -->
+
+### 66.4 No CSS changes
+
+- Adding `width` and `height` attributes must not change the rendered
+  appearance of any image. Existing CSS rules control display
+  size. <!-- 02-§66.9 -->
+
+---
+
+## 67. Static Asset Cache Headers
+
+The site must serve static assets with appropriate `Cache-Control` headers
+to reduce repeat-visit load times. Cache rules are delivered via an Apache
+`.htaccess` file in the site root.
+
+### 67.1 Cache rules
+
+- Images (`.webp`, `.png`, `.jpg`, `.ico`): `Cache-Control: max-age=31536000`
+  (1 year). <!-- 02-§67.1 -->
+- CSS and JS files: `Cache-Control: max-age=604800` (1 week). <!-- 02-§67.2 -->
+- HTML files: `Cache-Control: no-cache` (always revalidate). <!-- 02-§67.3 -->
+
+### 67.2 Build integration
+
+- The `.htaccess` file must live at `source/static/.htaccess` in the source
+  tree. <!-- 02-§67.4 -->
+- The build must copy `source/static/.htaccess` to `public/.htaccess`
+  during the build step. <!-- 02-§67.5 -->
+- The copy must use an explicit `fs.copyFileSync()` call — not the
+  `copyFlattened()` helper which operates on `source/assets/`. <!-- 02-§67.6 -->
+
+### 67.3 Separation from API
+
+- This `.htaccess` is for the static site root only. The existing
+  `api/.htaccess` (PHP routing) must not be modified. <!-- 02-§67.7 -->
