@@ -6,7 +6,7 @@
 
 #### Lägren hålls på [Sysslebäcks camping](http://www.vildmarkscenter.com/sv/sommar-3/sysslebaeks-camping), läs mer nedan.
 
-![RFSBlogo](images/RFSBsommarLogo.webp) Vi arrangerar med stolthet familjeläger för särskilt begåvade barn i Sysslebäck. Lägret är fristående men genomförs i nära samarbete med RFSB, och deltagande förutsätter medlemskap i föreningen.
+![RFSB logo](images/rfsb-logo.webp) Vi arrangerar med stolthet familjeläger för särskilt begåvade barn i Sysslebäck. Lägret är fristående men genomförs i nära samarbete med RFSB, och deltagande förutsätter medlemskap i föreningen.
 
 Sedan 2012 (med undantag för 2020) har vi varje sommar välkomnat familjer under veckan som följer efter midsommar. Hos oss får ni uppleva genuin gemenskap, stimulerande aktiviteter och personlig utveckling i en trygg miljö.
 

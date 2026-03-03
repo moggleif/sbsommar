@@ -58,7 +58,7 @@ describe('02-§66.1 — Testimonial image dimensions', () => {
 describe('02-§66.2 — Social icon dimensions', () => {
   it('DIM-02: Discord icon has width="32" height="32"', () => {
     const html = renderIndexPage(buildPage());
-    const imgMatch = html.match(/<img[^>]*DiscordLogo\.webp[^>]*>/);
+    const imgMatch = html.match(/<img[^>]*discord-ikon\.webp[^>]*>/);
     assert.ok(imgMatch, 'Expected Discord icon img');
     assert.ok(imgMatch[0].includes('width="32"'), `Expected width="32", got: ${imgMatch[0]}`);
     assert.ok(imgMatch[0].includes('height="32"'), `Expected height="32", got: ${imgMatch[0]}`);
@@ -66,7 +66,7 @@ describe('02-§66.2 — Social icon dimensions', () => {
 
   it('DIM-03: Facebook icon has width="32" height="32"', () => {
     const html = renderIndexPage(buildPage());
-    const imgMatch = html.match(/<img[^>]*social-facebook[^>]*>/);
+    const imgMatch = html.match(/<img[^>]*facebook-ikon[^>]*>/);
     assert.ok(imgMatch, 'Expected Facebook icon img');
     assert.ok(imgMatch[0].includes('width="32"'), `Expected width="32", got: ${imgMatch[0]}`);
     assert.ok(imgMatch[0].includes('height="32"'), `Expected height="32", got: ${imgMatch[0]}`);

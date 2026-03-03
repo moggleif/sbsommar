@@ -41,7 +41,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', goat
   <meta name="robots" content="noindex, nofollow">
   <title>Dagens schema – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body class="display-mode">
 

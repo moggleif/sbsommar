@@ -1599,7 +1599,7 @@ Matrix cleanup (2026-02-25):
 | IDX-08 | `tests/index-design.test.js` | `02-§64.6 — First section excluded from alternation` |
 | IDX-17 | `tests/index-design.test.js` | `02-§64.7 — Alternating sections suppress border-top (CSS)` |
 | IDX-18 | `tests/index-design.test.js` | `02-§64.8 — Section headings use terracotta colour (no decorative line)` |
-| `02-§64.9` | implemented | RFSB logo floated inline (~70 px) — `.content-img[alt="RFSBlogo"]` in style.css |
+| `02-§64.9` | implemented | RFSB logo floated inline (~70 px) — `.content-img[alt="RFSB logo"]` in style.css |
 | IDX-12 | `tests/index-design.test.js` | `02-§64.10 — "Till toppen" link in navigation` |
 | IDX-14 | `tests/index-design.test.js` | `02-§64.11 — Back-to-top link inside hamburger menu on mobile` |
 | IDX-13 | `tests/index-design.test.js` | `02-§64.12 — Back-to-top link has href="#"` |

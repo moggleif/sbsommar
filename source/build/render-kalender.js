@@ -26,7 +26,7 @@ function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = [], go
   <meta name="robots" content="noindex, nofollow">
   <title>Kalendersynk – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body>
 ${pageNav('kalender.html', navSections)}

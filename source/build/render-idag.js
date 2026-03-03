@@ -35,7 +35,7 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieD
   <meta name="robots" content="noindex, nofollow">
   <title>Idag – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('idag.html', navSections)}

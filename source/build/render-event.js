@@ -42,7 +42,7 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   <base href="../../">
   <title>${title} – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body>
 ${pageNav('schema.html', navSections)}

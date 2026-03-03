@@ -115,7 +115,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
       : '';
 
     const linkHtml = link
-      ? `\n        <a class="camp-fb-link" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer"><img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebookgrupp" class="camp-fb-logo" width="24" height="24"></a>`
+      ? `\n        <a class="camp-fb-link" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer"><img src="images/facebook-ikon.webp" alt="Facebookgrupp" class="camp-fb-logo" width="24" height="24"></a>`
       : '';
 
     const campEvents = campEventsMap[camp.id] || [];
@@ -143,7 +143,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
   <meta name="robots" content="noindex, nofollow">
   <title>Arkiv – SB Sommar</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body>
 ${pageNav('arkiv.html', navSections)}

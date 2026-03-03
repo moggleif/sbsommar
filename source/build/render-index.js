@@ -147,9 +147,9 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
 
   const socialLinks = (discordUrl || facebookUrl)
     ? `\n    <div class="hero-social">${
-      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-discord">\n        <img src="images/DiscordLogo.webp" alt="Discord" width="32" height="32">\n      </a>` : ''
+      discordUrl ? `\n      <a href="${discordUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-discord">\n        <img src="images/discord-ikon.webp" alt="Discord" width="32" height="32">\n      </a>` : ''
     }${
-      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-facebook">\n        <img src="images/social-facebook-button-blue-icon-small.webp" alt="Facebook" width="32" height="32">\n      </a>` : ''
+      facebookUrl ? `\n      <a href="${facebookUrl}" class="hero-social-link" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-facebook">\n        <img src="images/facebook-ikon.webp" alt="Facebook" width="32" height="32">\n      </a>` : ''
     }\n    </div>`
     : '';
 
@@ -207,7 +207,7 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
   <meta name="robots" content="noindex, nofollow">
   <title>SB Sommar</title>
   <link rel="stylesheet" href="style.css">${preloadHtml}
-  <link rel="icon" type="image/webp" href="images/RFSBsommarLogo.webp">
+  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body>
 ${pageNav('index.html', navSections)}${heroHtml}

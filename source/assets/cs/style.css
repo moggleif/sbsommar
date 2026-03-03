@@ -1415,7 +1415,7 @@ p:has(> .content-img[alt="Anita Kullander"]) {
   max-width: 250px;
 }
 
-.content-img[alt="RFSBlogo"] {
+.content-img[alt="RFSB logo"] {
   float: left;
   width: 70px;
   max-width: 70px;

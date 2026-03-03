@@ -199,7 +199,7 @@ describe('renderArkivPage', () => {
   it('ARK-12 (02-§21.18): Facebook link uses logo image when link is present', () => {
     const html = renderArkivPage([campA]);
     assert.ok(
-      html.includes('social-facebook-button-blue-icon-small.webp'),
+      html.includes('facebook-ikon.webp'),
       'should reference the Facebook logo image',
     );
     assert.ok(
@@ -211,7 +211,7 @@ describe('renderArkivPage', () => {
   it('ARK-13 (02-§21.21): Facebook logo image has alt text', () => {
     const html = renderArkivPage([campA]);
     // Find the img tag for the Facebook logo
-    const imgMatch = html.match(/<img[^>]*social-facebook[^>]*>/);
+    const imgMatch = html.match(/<img[^>]*facebook-ikon[^>]*>/);
     assert.ok(imgMatch, 'should have an img tag for the Facebook logo');
     assert.ok(imgMatch[0].includes('alt='), 'should have an alt attribute');
   });
@@ -226,7 +226,7 @@ describe('renderArkivPage', () => {
 
   it('ARK-15 (02-§21.19): Facebook logo is placed near top of panel before camp-information', () => {
     const html = renderArkivPage([campA]);
-    const fbPos = html.indexOf('social-facebook');
+    const fbPos = html.indexOf('facebook-ikon');
     const infoPos = html.indexOf('class="camp-information"');
     assert.ok(fbPos > 0, 'should have Facebook logo');
     assert.ok(infoPos > 0, 'should have camp-information');
