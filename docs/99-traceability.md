@@ -1621,20 +1621,20 @@ Matrix cleanup (2026-02-25):
 | ROB-04 | `tests/robustness.test.js` | `02-§65.4 — Testimonial src extraction attribute-order-independent` |
 | ROB-05 | `tests/robustness.test.js` | `02-§65.5 — Testimonial <p> removal tolerates whitespace` |
 | | | **§66 — Image Dimension Attributes** |
-| `02-§66.1` | gap | Testimonial images have width="60" height="60" |
-| `02-§66.2` | gap | Social icons have width="32" height="32" |
-| `02-§66.3` | gap | RSS icon has width and height matching natural aspect ratio |
-| `02-§66.4` | gap | Archive Facebook logo has width and height |
-| `02-§66.5` | gap | Hero image has width and height from natural pixel dimensions |
-| `02-§66.6` | gap | Content images have width/height read at build time |
-| `02-§66.7` | gap | Location/facility images have width/height read at build time |
-| `02-§66.8` | gap | Build uses lightweight image header parsing for dimensions |
-| `02-§66.9` | gap | Adding attributes does not change rendered appearance |
+| DIM-01 | `tests/img-dimensions.test.js` | `02-§66.1 — Testimonial images width="60" height="60"` |
+| DIM-02..03 | `tests/img-dimensions.test.js` | `02-§66.2 — Social icons width="32" height="32"` |
+| DIM-04 | `tests/img-dimensions.test.js` | `02-§66.3 — RSS icon has width and height` |
+| DIM-05 | `tests/img-dimensions.test.js` | `02-§66.4 — Archive Facebook logo has width and height` |
+| DIM-06 | `tests/img-dimensions.test.js` | `02-§66.5 — Hero image has width and height` |
+| DIM-07..08 | `tests/img-dimensions.test.js` | `02-§66.6 — Content images width/height from build-time reading` |
+| DIM-09 | `tests/img-dimensions.test.js` | `02-§66.7 — Location images width/height from build-time reading` |
+| `02-§66.8` | covered | `image-dimensions.js` uses `image-size` (header-only parsing) — DIM-07 verifies |
+| `02-§66.9` | implemented | No CSS changes — manual: visual appearance unchanged |
 | | | **§67 — Static Asset Cache Headers** |
-| `02-§67.1` | gap | Images cached for 1 year |
-| `02-§67.2` | gap | CSS/JS cached for 1 week |
-| `02-§67.3` | gap | HTML set to no-cache |
-| `02-§67.4` | gap | .htaccess lives at source/static/.htaccess |
-| `02-§67.5` | gap | Build copies .htaccess to public/ |
-| `02-§67.6` | gap | Copy uses explicit fs.copyFileSync() |
-| `02-§67.7` | gap | api/.htaccess not modified |
+| CACHE-02 | `tests/cache-headers.test.js` | `02-§67.1 — Images cached for 1 year (max-age=31536000)` |
+| CACHE-03 | `tests/cache-headers.test.js` | `02-§67.2 — CSS/JS cached for 1 week (max-age=604800)` |
+| CACHE-04 | `tests/cache-headers.test.js` | `02-§67.3 — HTML set to no-cache` |
+| CACHE-01 | `tests/cache-headers.test.js` | `02-§67.4 — .htaccess at source/static/.htaccess` |
+| CACHE-05 | `tests/cache-headers.test.js` | `02-§67.5 — Build copies .htaccess to public/` |
+| `02-§67.6` | covered | `build.js` uses `fs.copyFileSync()` — CACHE-05 verifies reference |
+| CACHE-06 | `tests/cache-headers.test.js` | `02-§67.7 — api/.htaccess not modified` |
