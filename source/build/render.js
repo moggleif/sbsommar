@@ -122,6 +122,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('schema.html', navSections)}
+<main>
   <div class="schedule-header">
     <h1>Schema – ${campName}</h1>
     <a href="schema.rss" class="rss-link" title="RSS-feed" data-goatcounter-click="click-rss"><img src="images/rss-logo.webp" alt="RSS" class="rss-icon" width="38" height="38"></a>${icalIconHtml}
@@ -130,6 +131,7 @@ ${pageNav('schema.html', navSections)}
   <p class="intro">Lägret blir vad vi gör det till tillsammans, alla aktiviteter är deltagararrangerade. Känner man att det är någon aktivitet som man vill arrangera och behöver material till den, det kan vara allt ifrån bakingredienser till microbitar att programmera, kort sagt vad behöver ni som aktivitetsarrangör för att kunna hålla eran aktivitet? Kolla under <a href="lagg-till.html">Lägg till aktivitet</a>.</p>${guideHtml}
 
 ${daySections}
+</main>
   <script src="wp-cleanup.js"></script>
   <script src="session.js"></script>
   <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}

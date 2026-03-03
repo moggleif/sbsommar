@@ -210,10 +210,12 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body>
-${pageNav('index.html', navSections)}${heroHtml}
+${pageNav('index.html', navSections)}
+<main>${heroHtml}
   <div class="content">
 ${contentSections}
   </div>
+</main>
   <script src="nav.js" defer></script>${countdownTarget ? `
   <script>
   (function () {

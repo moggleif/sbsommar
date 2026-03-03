@@ -36,7 +36,7 @@ function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = [
 </head>
 <body>
 ${pageNav('lagg-till.html', navSections)}
-
+<main>
   <h1>Lägg till aktivitet</h1>
   <p class="intro">Kolla gärna <a href="schema.html">schemat</a> innan du lägger till din aktivitet – välj en tid som inte krockar med något annat.</p>
   <p class="intro">Behöver du material eller ingredienser till din aktivitet? Kontakta Andreas i förväg så ordnar han det.</p>
@@ -114,7 +114,7 @@ ${locationOptions}
       <div id="modal-content" class="modal-content"></div>
     </div>
   </div>
-
+</main>
   <script src="wp-cleanup.js"></script>
   <script src="cookie-consent.js"></script>
   <script src="markdown-toolbar.js"></script>

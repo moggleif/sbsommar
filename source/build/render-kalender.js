@@ -30,6 +30,7 @@ function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = [], go
 </head>
 <body>
 ${pageNav('kalender.html', navSections)}
+<main>
   <h1>Synka schemat till din kalender</h1>
 
   <div class="kalender-card">
@@ -97,6 +98,7 @@ ${pageNav('kalender.html', navSections)}
   </div>
 
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
+</main>
   <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>

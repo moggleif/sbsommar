@@ -46,6 +46,7 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
 </head>
 <body>
 ${pageNav('schema.html', navSections)}
+<main>
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
   <h1>${title}</h1>
   <div class="event-detail">
@@ -53,6 +54,7 @@ ${pageNav('schema.html', navSections)}
     <p>📍 <strong>Plats:</strong> ${escapeHtml(event.location)} · 👤 <strong>Ansvarig:</strong> ${escapeHtml(event.responsible)}</p>
     <p>📆 <a href="schema/${escapeHtml(String(event.id))}/event.ics" download>Lägg till i kalender (.ics)</a></p>
 ${descriptionHtml}${linkHtml}  </div>
+</main>
   <script src="nav.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
