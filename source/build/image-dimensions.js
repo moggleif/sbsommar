@@ -7,8 +7,8 @@ const { imageSize } = require('image-size');
  * Returns { width, height } for the image at filePath, or null if
  * the file cannot be read or parsed.
  *
- * Reads only the first 512 bytes — enough for image-size to parse
- * the header without decoding the full image.
+ * Uses image-size which parses only the image header — no pixel
+ * decoding or decompression.
  */
 function getImageDimensions(filePath) {
   try {
