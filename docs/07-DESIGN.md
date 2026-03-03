@@ -376,6 +376,7 @@ These variables make it trivial to adjust the design globally later.
 - Navigation must be keyboard accessible. <!-- 07-§9.3 -->
 - Images must have descriptive `alt` text. <!-- 07-§9.4 -->
 - Accordion items must use proper ARIA attributes (`aria-expanded`, `aria-controls`). Native `<details>/<summary>` elements satisfy this requirement — browsers expose expanded/collapsed state to assistive technology without explicit ARIA attributes. Custom accordion components (e.g. the archive timeline) must use explicit `aria-expanded` and `aria-controls`. <!-- 07-§9.5 -->
+- Every page must have exactly one `<main>` landmark element wrapping the primary content (between navigation and footer). This lets screen readers skip past navigation directly to content. <!-- 07-§9.6 -->
 
 ---
 

@@ -1086,10 +1086,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             949
+Total requirements:             954
 Covered (implemented + tested): 470
 Implemented, not tested:        479
-Gap (no implementation):          0
+Gap (no implementation):          5
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1662,3 +1662,9 @@ Matrix cleanup (2026-02-25):
 | CACHE-09 | `tests/cache-headers.test.js` | `02-§69.3 — Hash is deterministic` |
 | `02-§69.4` | implemented | No render functions changed — post-processing in `build.js` `findHtmlFiles()` |
 | `02-§69.5` | covered | All 1182 existing tests pass — STR-CSS, EVT-13 still match |
+| | | **§70 — Main Landmark Element** |
+| `02-§70.1` | gap | Each page must have exactly one `<main>` element |
+| `02-§70.2` | gap | `<main>` wraps content between nav and footer |
+| `02-§70.3` | gap | `<main>` must not contain `<nav>` or `<footer>` |
+| `02-§70.4` | gap | No visual styling changes |
+| `02-§70.5` | gap | Only one `<main>` per page (HTML spec) |
