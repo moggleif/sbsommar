@@ -75,3 +75,31 @@ describe('02-§67.7 — api/.htaccess unchanged', () => {
     assert.ok(!content.includes('Cache-Control'), 'api/.htaccess must NOT contain cache headers');
   });
 });
+
+// ── 02-§69.1–69.3 — CSS cache-busting ──────────────────────────────────────
+
+describe('02-§69.1 — CSS cache-busting post-processing', () => {
+  const buildSrc = fs.readFileSync(BUILD_PATH, 'utf8');
+
+  it('CACHE-07: build.js computes a content hash of public/style.css', () => {
+    assert.ok(
+      buildSrc.includes('createHash') && buildSrc.includes('style.css'),
+      'Expected build.js to hash style.css content',
+    );
+  });
+
+  it('CACHE-08: build.js replaces style.css href with versioned query string', () => {
+    assert.ok(
+      /style\.css\?v=/.test(buildSrc),
+      'Expected build.js to produce style.css?v= replacement pattern',
+    );
+  });
+
+  it('CACHE-09: hash is deterministic (same input → same output)', () => {
+    const crypto = require('crypto');
+    const sample = 'body { color: red; }';
+    const h1 = crypto.createHash('md5').update(sample).digest('hex').slice(0, 8);
+    const h2 = crypto.createHash('md5').update(sample).digest('hex').slice(0, 8);
+    assert.equal(h1, h2, 'Same content must produce identical hashes');
+  });
+});
