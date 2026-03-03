@@ -1086,9 +1086,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             944
-Covered (implemented + tested): 466
-Implemented, not tested:        478
+Total requirements:             949
+Covered (implemented + tested): 470
+Implemented, not tested:        479
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1657,8 +1657,8 @@ Matrix cleanup (2026-02-25):
 | `02-§68.10` | implemented | Only filenames changed — manual: `git diff` shows no binary content changes |
 | FNM-09 | `tests/image-filenames.test.js` | `02-§68.11 — Every image file is referenced somewhere` |
 | | | **§69 — CSS Cache-Busting** |
-| `02-§69.1` | gap | Build reads `public/style.css` and computes content hash |
-| `02-§69.2` | gap | Build replaces `href="style.css"` with `href="style.css?v=<hash>"` in all HTML |
-| `02-§69.3` | gap | Hash is deterministic (same CSS → same hash) |
-| `02-§69.4` | gap | No render function signatures changed — post-processing in build.js |
-| `02-§69.5` | gap | Existing style.css tests still pass |
+| CACHE-07 | `tests/cache-headers.test.js` | `02-§69.1 — build.js hashes style.css content` |
+| CACHE-08 | `tests/cache-headers.test.js` | `02-§69.2 — build.js produces style.css?v= pattern` |
+| CACHE-09 | `tests/cache-headers.test.js` | `02-§69.3 — Hash is deterministic` |
+| `02-§69.4` | implemented | No render functions changed — post-processing in `build.js` `findHtmlFiles()` |
+| `02-§69.5` | covered | All 1182 existing tests pass — STR-CSS, EVT-13 still match |
