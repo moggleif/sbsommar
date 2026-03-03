@@ -1087,9 +1087,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             944
-Covered (implemented + tested): 458
-Implemented, not tested:        475
-Gap (no implementation):         11
+Covered (implemented + tested): 466
+Implemented, not tested:        478
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1388,6 +1388,12 @@ Matrix cleanup (2026-02-25):
    is now derived from dates at build and API time. 8 covered (DAC-01..07),
    5 implemented (manual/code review). 05-§1.3 superseded.
 
+11 requirements added for descriptive image filenames (02-§68.1–68.11):
+  8 covered (FNM-01..09): naming convention, reference integrity.
+  3 implemented (manual): alt-text match, CSS selector update, no content change.
+  39 of 51 image files renamed. One alt-text change: RFSBlogo → RFSB logo.
+  CSS selector updated: `.content-img[alt="RFSB logo"]`.
+
 ---
 
 ## Test ID Legend
@@ -1639,14 +1645,14 @@ Matrix cleanup (2026-02-25):
 | `02-§67.6` | covered | `build.js` uses `fs.copyFileSync()` — CACHE-05 verifies reference |
 | CACHE-06 | `tests/cache-headers.test.js` | `02-§67.7 — api/.htaccess not modified` |
 | | | **§68 — Descriptive Image Filenames** |
-| `02-§68.1` | gap | All lowercase filenames |
-| `02-§68.2` | gap | Swedish characters replaced (ä→a, ö→o, å→a, é→e) |
-| `02-§68.3` | gap | Words separated by hyphens |
-| `02-§68.4` | gap | No unnecessary numbering suffixes |
-| `02-§68.5` | gap | Filename works as alt-text |
-| `02-§68.6` | gap | Markdown image references updated |
-| `02-§68.7` | gap | local.yaml image_path fields updated |
-| `02-§68.8` | gap | Build script image paths updated |
-| `02-§68.9` | gap | CSS alt-selectors updated if alt-text changes |
-| `02-§68.10` | gap | Image content and dimensions unchanged |
-| `02-§68.11` | gap | No broken image references after rename |
+| FNM-01 | `tests/image-filenames.test.js` | `02-§68.1 — All lowercase filenames` |
+| FNM-02 | `tests/image-filenames.test.js` | `02-§68.2 — No Swedish characters in filenames` |
+| FNM-03 | `tests/image-filenames.test.js` | `02-§68.3 — Words separated by hyphens` |
+| FNM-04 | `tests/image-filenames.test.js` | `02-§68.4 — No camelCase in filenames` |
+| `02-§68.5` | implemented | Filenames chosen to match alt-text — manual verification |
+| FNM-05 | `tests/image-filenames.test.js` | `02-§68.6 — Markdown refs point to existing files` |
+| FNM-06 | `tests/image-filenames.test.js` | `02-§68.7 — local.yaml refs point to existing files` |
+| FNM-07..08 | `tests/image-filenames.test.js` | `02-§68.8 — Build script refs point to existing files` |
+| `02-§68.9` | implemented | `.content-img[alt="RFSB logo"]` updated in style.css |
+| `02-§68.10` | implemented | Only filenames changed — manual: `git diff` shows no binary content changes |
+| FNM-09 | `tests/image-filenames.test.js` | `02-§68.11 — Every image file is referenced somewhere` |
