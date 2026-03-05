@@ -18,9 +18,11 @@ Faktura skickas ut för lägeravgift och eventuellt nya medlemsavgifter. Kontrol
 
 Det finns lite olika boende-alternativ. Nedan listas de som är relaterade till campingen som lägret hålls på. Boendemässigt finns en hög kapacitet, med tusentals bäddar tillgängliga vid Branäs (ca en mil från lägret) och i Sysslebäck kan det finnas stugor som hyrs ut via AirBnB eller annan tjänst. Detta fixas helt på egen hand. Tipsa gärna varandra i facebook-gruppen.
 
+> Under lägerveckorna bokas boende via lägret. Campingen är bokad och abbonerad under dessa veckor. Därför går det inte att boka via campingens hemsida.
+
 Lägerområdets tält- och husvagnsplatser har inte varit fulltecknade tidigare år.
 
-Lägerområdets centrala stug- och vandrarhemsplatser är få — de som anmäler sig på utsatt tid (se anmälan) och kommer vara med samtliga lägerdagar kan delta i fördelning av dessa. Besked om tilldelning av stuga/vandrarhemsplats på campingen skickas ut någon månad före lägret**.** Det går bra att avanmäla sig om man inte tilldelas boende. I sådana fall ordnar vi återbetalning av deltagaravgiften.
+Lägerområdets centrala stug- och vandrarhemsplatser är få — de som anmäler sig på utsatt tid (se anmälan) och kommer vara med samtliga lägerdagar kan delta i fördelning av dessa. Besked om tilldelning av stuga/vandrarhemsplats på campingen skickas ut någon månad före lägret. Det går bra att avanmäla sig om man inte tilldelas boende. I sådana fall ordnar vi återbetalning av deltagaravgiften.
 
 **Betalning sker direkt till campingen vid ankomst för de som har boende enligt nedan.**
 Extra dagar före/efter veckan kan bokas direkt med campingen efter att stuga/vandrarhem tilldelats. Detsamma gäller campingplats. Uppge alltid att du ska på sommarläger för att få lägerpris alla dygnen.

@@ -24,6 +24,10 @@ Ja, lägret är fristående men samarbetar med RFSB och stödjer deras verksamhe
 
 Ja, det får du. Hela familjen är välkommen. Ofta är det så att övriga barn är det också, men insikten finns inte ännu. Detta enligt Linda Silverman.
 
+## Måste man ha eget körkort och bil?
+
+Nä. Det måste man inte. Det finns deltagare som reser med buss och kollektivtrafik till lägret. Ett tips kan då vara att åka hem på måndag och kanske komma tidigare eller på måndagen. Väl på plats är det alltid någon som har bil och ska handla i mataffärer en bit ifrån. Ställ en fråga så går mycket att lösa.
+
 ## Vi kommer inte till start och deltar bara några dagar, hur gör jag då?
 
 Välkomna. Anmäl er som vanligt och skriv i anmälan vilka dagar ni är där. När ni kommer prata med vem som helst för att bli välkomnade. Därefter sök upp lägernissen, de ni välkomnas av hjälper er med detta.
