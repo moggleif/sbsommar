@@ -17,6 +17,7 @@ const { renderEventPage } = require('./render-event');
 const { renderEventIcal, renderIcalFeed } = require('./render-ical');
 const { renderKalenderPage } = require('./render-kalender');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
+const { addOneDay } = require('../api/time-gate');
 const { resolveVersionString } = require('./version');
 const { escapeHtml } = require('./utils');
 const { getImageDimensions } = require('./image-dimensions');
@@ -328,8 +329,16 @@ async function main() {
     || (futureCamps.length > 0 && (futureCamps[0].link || '').trim())
     || null;
 
+  // ── Editing period for hero action buttons (02-§71.4, 02-§71.5) ──────────
+  const opensForEditing = activeCamp.opens_for_editing
+    ? toDateString(activeCamp.opens_for_editing)
+    : null;
+  const editingCloses = activeCamp.end_date
+    ? addOneDay(toDateString(activeCamp.end_date))
+    : null;
+
   const heroDims = heroSrc ? getImageDimensions(path.join(CONTENT_DIR, heroSrc)) : null;
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget }, footerWithVersion, navSections, GOATCOUNTER_CODE);
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget, opensForEditing, editingCloses }, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 

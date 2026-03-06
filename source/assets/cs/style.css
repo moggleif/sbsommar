@@ -197,6 +197,37 @@ h3 {
   object-fit: cover;
 }
 
+/* ── Hero action buttons (02-§71) ── */
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.hero-actions-btn {
+  display: inline-block;
+  background: var(--color-terracotta);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  transition: background 200ms ease;
+}
+
+.hero-actions-btn:hover {
+  background: #b35e3a;
+}
+
+.hero-actions-btn:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
 /* ── Camps row (camps list + countdown) ── */
 
 .camps-row {

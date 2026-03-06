@@ -138,9 +138,11 @@ function convertMarkdown(input, headingOffset = 0, collapsible = false, contentD
  * @param {string|null} opts.discordUrl  - URL for Discord link
  * @param {string|null} opts.facebookUrl - URL for Facebook link
  * @param {string|null} opts.countdownTarget - YYYY-MM-DD date for countdown
+ * @param {string|null} opts.opensForEditing - YYYY-MM-DD first editing date
+ * @param {string|null} opts.editingCloses  - YYYY-MM-DD last editing date (end_date + 1)
  * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
  */
-function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget }, footerHtml = '', navSections = [], goatcounterCode = '') {
+function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget, opensForEditing, editingCloses }, footerHtml = '', navSections = [], goatcounterCode = '') {
   const countdownHtml = countdownTarget
     ? `<div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
     : '';
@@ -154,8 +156,13 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
     : '';
 
   const heroDimAttrs = heroDims ? ` width="${heroDims.width}" height="${heroDims.height}"` : '';
+
+  const actionButtonsHtml = (opensForEditing && editingCloses)
+    ? `\n    <div class="hero-actions" hidden data-opens="${opensForEditing}" data-closes="${editingCloses}">\n      <a href="schema.html" class="hero-actions-btn">Schema</a>\n      <a href="idag.html" class="hero-actions-btn">Idag</a>\n      <a href="lagg-till.html" class="hero-actions-btn">Lägg till aktivitet</a>\n    </div>`
+    : '';
+
   const heroHtml = heroSrc
-    ? `\n  <div class="hero">\n    <div class="hero-header">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>${socialLinks}\n    </div>\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img"${heroDimAttrs} fetchpriority="high">\n  </div>`
+    ? `\n  <div class="hero">\n    <div class="hero-header">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>${socialLinks}\n    </div>\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img"${heroDimAttrs} fetchpriority="high">${actionButtonsHtml}\n  </div>`
     : '';
 
   const contentSections = sections
@@ -227,6 +234,17 @@ ${contentSections}
     var diff = Math.ceil((new Date(target + 'T00:00:00') - new Date(today + 'T00:00:00')) / 86400000);
     if (diff < 0) { el.hidden = true; return; }
     el.querySelector('.hero-countdown-number').textContent = diff < 10 ? '0' + diff : String(diff);
+  })();
+  </script>` : ''}${(opensForEditing && editingCloses) ? `
+  <script>
+  (function () {
+    var el = document.querySelector('.hero-actions[data-opens]');
+    if (!el) return;
+    var opens = el.getAttribute('data-opens');
+    var closes = el.getAttribute('data-closes');
+    var p = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+    var today = p.find(function (x) { return x.type === 'year'; }).value + '-' + p.find(function (x) { return x.type === 'month'; }).value + '-' + p.find(function (x) { return x.type === 'day'; }).value;
+    if (today >= opens && today <= closes) el.removeAttribute('hidden');
   })();
   </script>` : ''}${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
