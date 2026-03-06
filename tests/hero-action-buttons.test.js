@@ -24,8 +24,8 @@ function buildPage(opts = {}) {
     discordUrl: null,
     facebookUrl: null,
     countdownTarget: null,
-    opensForEditing: opts.opensForEditing ?? '2026-06-14',
-    editingCloses: opts.editingCloses ?? '2026-06-22',
+    opensForEditing: 'opensForEditing' in opts ? opts.opensForEditing : '2026-06-14',
+    editingCloses: 'editingCloses' in opts ? opts.editingCloses : '2026-06-22',
   };
 }
 
