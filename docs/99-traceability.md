@@ -1672,3 +1672,16 @@ Matrix cleanup (2026-02-25):
 | MAIN-02/03-* | `tests/main-landmark.test.js` | `02-§70.3 — <main> excludes <nav> and <footer>` |
 | `02-§70.4` | implemented | No CSS changes — `<main>` is semantic only |
 | `02-§70.5` | covered | MAIN-01-* tests verify exactly one `<main>` per page |
+| | | **§71 — Hero Action Buttons** |
+| HERO-BTN-01 | `tests/hero-action-buttons.test.js` | `02-§71.1 — Buttons appear below hero image` |
+| HERO-BTN-02 | `tests/hero-action-buttons.test.js` | `02-§71.2 — Buttons link to schema, idag, lagg-till` |
+| HERO-BTN-03 | `tests/hero-action-buttons.test.js` | `02-§71.3 — Pill-shaped terracotta styling` |
+| HERO-BTN-04 | `tests/hero-action-buttons.test.js` | `02-§71.4 — Data attributes for editing period` |
+| `02-§71.5` | implemented | Inline script checks date against data-opens/data-closes |
+| `02-§71.6` | implemented | Container starts with hidden, script removes when in period |
+| HERO-BTN-05 | `tests/hero-action-buttons.test.js` | `02-§71.7 — CSS uses pill radius and terracotta` |
+| HERO-BTN-06 | `tests/hero-action-buttons.test.js` | `02-§71.8 — Flex row centred with gap` |
+| `02-§71.9` | implemented | flex-wrap: wrap on button row — manual: verify on mobile |
+| `02-§71.10` | covered | HERO-BTN-01 checks index.html only |
+| `02-§71.11` | implemented | Script is inline in renderIndexPage, no new JS files |
+| `02-§71.12` | covered | CSS uses var(--color-terracotta) and design tokens |

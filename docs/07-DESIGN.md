@@ -144,6 +144,23 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
   semi-transparent. <!-- 07-§6.11b -->
 - The sidebar is vertically centered alongside the hero image. <!-- 07-§6.11c -->
 
+### Hero Action Buttons
+
+- A row of pill-shaped action buttons appears below the hero image when
+  the camp editing period is active. <!-- 07-§6.78 -->
+- Three buttons: **Schema**, **Idag**, **Lägg till aktivitet**, linking
+  to `schema.html`, `idag.html`, `lagg-till.html`. <!-- 07-§6.79 -->
+- Background: `var(--color-terracotta)` (`#C76D48`), text white, `700`
+  weight, `border-radius: 999px`, `padding: 10px 24px`. <!-- 07-§6.80 -->
+- Hover: darken background to `#b35e3a`, `200ms ease`
+  transition. <!-- 07-§6.81 -->
+- The row is centred within the hero container using `display: flex;
+  justify-content: center; gap: var(--space-sm)`. <!-- 07-§6.82 -->
+- On mobile the buttons wrap and remain centred. <!-- 07-§6.83 -->
+- Visibility is controlled by inline client-side JS that reads
+  `data-opens` / `data-closes` attributes and toggles the `hidden`
+  attribute. <!-- 07-§6.84 -->
+
 ### Buttons
 
 - Min height: `40px`. <!-- 07-§6.12 -->
