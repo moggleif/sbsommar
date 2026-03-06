@@ -3219,3 +3219,47 @@ landmark.
   element only. <!-- 02-§70.4 -->
 - Only one `<main>` element is permitted per page (HTML spec
   requirement). <!-- 02-§70.5 -->
+
+---
+
+## 71. Hero Action Buttons
+
+When a camp is active and within its editing period, three quick-access
+action buttons must appear directly below the hero image on the index page.
+The buttons provide fast navigation to the most-used pages during an
+active camp.
+
+### 71.1 User requirements
+
+- A camp participant visiting the home page during an active editing
+  period must see three action buttons immediately below the hero
+  image. <!-- 02-§71.1 -->
+- The buttons must link to: Schema (`schema.html`), Idag (`idag.html`),
+  and Lägg till aktivitet (`lagg-till.html`). <!-- 02-§71.2 -->
+- The buttons must be visually prominent, using terracotta pill-shaped
+  styling. <!-- 02-§71.3 -->
+
+### 71.2 Visibility rules
+
+- The buttons must be rendered in the static HTML at build time with
+  data attributes for the editing period dates. <!-- 02-§71.4 -->
+- A client-side script must show the buttons only when the current date
+  falls within `[opens_for_editing, end_date + 1 day]`. <!-- 02-§71.5 -->
+- Outside the editing period the button container must be hidden
+  (`hidden` attribute). <!-- 02-§71.6 -->
+
+### 71.3 Styling
+
+- Each button must use pill-shaped border-radius (`border-radius: 999px`),
+  terracotta background, white text, bold weight. <!-- 02-§71.7 -->
+- The button row must be centred within the hero container and have
+  appropriate spacing between buttons. <!-- 02-§71.8 -->
+- The buttons must be responsive: wrapping naturally on smaller
+  screens. <!-- 02-§71.9 -->
+
+### 71.4 Constraints
+
+- The buttons must only appear on the index page. <!-- 02-§71.10 -->
+- No new JavaScript files may be added — the script must be inline in
+  `index.html`. <!-- 02-§71.11 -->
+- CSS must use existing design tokens from `07-DESIGN.md §7`. <!-- 02-§71.12 -->
