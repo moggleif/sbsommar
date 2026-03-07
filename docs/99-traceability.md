@@ -1086,10 +1086,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             975
+Total requirements:             978
 Covered (implemented + tested): 479
 Implemented, not tested:        496
-Gap (no implementation):          0
+Gap (no implementation):          3
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1716,3 +1716,7 @@ Matrix cleanup (2026-02-25):
 | `02-§73.19` | implemented | Manual: verify metadata in created GitHub Issue body |
 | `02-§73.20` | implemented | Node.js and PHP use identical validation patterns |
 | `02-§73.21` | implemented | Both use githubRequest() / githubRequest() for Issues API |
+| | | **§74 — Sticky Navigation Positioning** |
+| `02-§74.1` | gap | Nav bar same vertical position when sticky activates |
+| `02-§74.2` | gap | Nav bar same vertical position on every page load |
+| `02-§74.3` | gap | Anchor targets visible below sticky nav |
