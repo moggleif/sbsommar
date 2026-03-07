@@ -758,10 +758,14 @@ details.event-row[open] > summary .ev-title {
 @media (max-width: 767px) {
   .page-nav {
     padding: var(--space-xs) var(--space-sm);
+    min-height: 58px;
   }
 
   .nav-toggle {
     display: block;
+    position: absolute;
+    top: var(--space-xs);
+    left: var(--space-sm);
     background: var(--color-terracotta);
     color: var(--color-white);
     padding: 10px;
@@ -2304,6 +2308,10 @@ body.modal-open {
   .content section.section-alt::before,
   .site-footer::before {
     display: none;
+  }
+
+  body {
+    padding-top: 0;
   }
 
   .page-nav {
