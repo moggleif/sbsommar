@@ -480,7 +480,7 @@ details.day > summary::after {
 
 details.day[open] > summary::after { content: '−'; }
 
-details.day > summary:hover { background: #243d56; }
+details.day > summary:hover { background: var(--color-sage-hover); }
 
 details.day > summary:focus-visible {
   outline: 2px solid var(--color-terracotta);
@@ -736,7 +736,7 @@ details.event-row[open] > summary .ev-title {
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--color-navy);
+  color: var(--color-sage-hover);
 }
 
 .nav-link:focus-visible {
@@ -865,7 +865,7 @@ details.event-row[open] > summary .ev-title {
 }
 
 .nav-link--top:hover {
-  color: var(--color-navy);
+  color: var(--color-sage-hover);
 }
 
 .nav-link--top:focus-visible {
