@@ -730,14 +730,14 @@ details.event-row[open] > summary .ev-title {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-charcoal);
+  color: var(--color-terracotta);
   text-decoration: none;
   opacity: 0.5;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--color-navy);
+  color: var(--color-terracotta);
   opacity: 1;
 }
 
@@ -2088,10 +2088,9 @@ body.modal-open {
     padding: 10px;
     cursor: pointer;
     line-height: 0;
-    position: absolute;
+    position: fixed;
     top: var(--space-xs);
-    left: 50%;
-    transform: translateX(-50%);
+    right: var(--space-sm);
     z-index: 201;
   }
 
@@ -2267,9 +2266,10 @@ body.modal-open {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: var(--space-xs);
-    right: var(--space-sm);
+    left: 50%;
+    transform: translateX(-50%);
     width: 42px;
     height: 42px;
     background: var(--color-terracotta);
