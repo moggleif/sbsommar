@@ -3381,3 +3381,16 @@ implementation) and the same GitHub API primitives.
   produce equivalent error messages. <!-- 02-§73.20 -->
 - Both must use the existing `githubRequest()` / `githubRequest()`
   primitives for the GitHub Issues API call. <!-- 02-§73.21 -->
+
+## 74. Sticky Navigation Positioning
+
+### 74.1 Site requirements
+
+- The navigation bar remains at the same vertical position whether the
+  page is at the top or scrolled — no visible shift when sticky
+  positioning activates. <!-- 02-§74.1 -->
+- The navigation bar appears at the same vertical position on every
+  page load. <!-- 02-§74.2 -->
+- When a user clicks an anchor link in the navigation, the target
+  section is visible below the navigation bar, not hidden
+  behind it. <!-- 02-§74.3 -->
