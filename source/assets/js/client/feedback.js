@@ -81,6 +81,8 @@
 
   // ── Form view ───────────────────────────────────────────────────────────
 
+  var savedForm = { category: 'suggestion', title: '', description: '', name: '' };
+
   function showForm() {
     heading.textContent = 'Ge oss feedback';
     contentEl.innerHTML =
@@ -88,24 +90,24 @@
         '<fieldset>' +
           '<legend class="feedback-legend">Vad gäller det?</legend>' +
           '<div class="feedback-categories">' +
-            '<label class="feedback-cat"><input type="radio" name="category" value="bug"> Bugg</label>' +
-            '<label class="feedback-cat"><input type="radio" name="category" value="suggestion" checked> Förslag</label>' +
-            '<label class="feedback-cat"><input type="radio" name="category" value="question"> Fråga</label>' +
+            '<label class="feedback-cat"><input type="radio" name="category" value="bug"' + (savedForm.category === 'bug' ? ' checked' : '') + '> Bugg</label>' +
+            '<label class="feedback-cat"><input type="radio" name="category" value="suggestion"' + (savedForm.category === 'suggestion' ? ' checked' : '') + '> Förslag</label>' +
+            '<label class="feedback-cat"><input type="radio" name="category" value="question"' + (savedForm.category === 'question' ? ' checked' : '') + '> Fråga</label>' +
           '</div>' +
         '</fieldset>' +
         '<div class="field">' +
           '<label for="fb-title">Rubrik <span aria-hidden="true">*</span></label>' +
-          '<input type="text" id="fb-title" name="title" required aria-required="true" maxlength="200">' +
+          '<input type="text" id="fb-title" name="title" required aria-required="true" maxlength="200" value="' + esc(savedForm.title) + '">' +
           '<span class="field-error" id="err-fb-title" hidden></span>' +
         '</div>' +
         '<div class="field">' +
           '<label for="fb-description">Beskriv <span aria-hidden="true">*</span></label>' +
-          '<textarea id="fb-description" name="description" required aria-required="true" maxlength="2000" rows="5"></textarea>' +
+          '<textarea id="fb-description" name="description" required aria-required="true" maxlength="2000" rows="5">' + esc(savedForm.description) + '</textarea>' +
           '<span class="field-error" id="err-fb-description" hidden></span>' +
         '</div>' +
         '<div class="field">' +
           '<label for="fb-name">Namn eller kontaktuppgift (valfritt)</label>' +
-          '<input type="text" id="fb-name" name="name" maxlength="200">' +
+          '<input type="text" id="fb-name" name="name" maxlength="200" value="' + esc(savedForm.name) + '">' +
         '</div>' +
         '<div style="position:absolute;left:-9999px" aria-hidden="true">' +
           '<label for="fb-website">Website</label>' +
@@ -143,6 +145,9 @@
       if (!descIn.value.trim()) setErr('fb-description', 'Beskrivning är obligatoriskt.');
     });
 
+    // Sync button state on init (matters when restoring saved values)
+    updateSubmit();
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var title = titleIn.value.trim();
@@ -150,11 +155,17 @@
       if (!title || !desc) return;
 
       var catEl = form.querySelector('input[name="category"]:checked');
+      var cat   = catEl ? catEl.value : 'suggestion';
+      var name  = (document.getElementById('fb-name') || {}).value || '';
+
+      // Save form values so they survive error → retry
+      savedForm = { category: cat, title: title, description: desc, name: name };
+
       submitFeedback({
-        category:    catEl ? catEl.value : 'suggestion',
+        category:    cat,
         title:       title,
         description: desc,
-        name:        (document.getElementById('fb-name') || {}).value || '',
+        name:        name,
         website:     (document.getElementById('fb-website') || {}).value || '',
         url:         window.location.href,
         viewport:    window.innerWidth + 'x' + window.innerHeight,
@@ -245,6 +256,7 @@
   // ── Success view ────────────────────────────────────────────────────────
 
   function showSuccess(issueUrl) {
+    savedForm = { category: 'suggestion', title: '', description: '', name: '' };
     heading.textContent = 'Tack för din feedback!';
     var linkHtml = issueUrl
       ? '<p><a href="' + esc(issueUrl) + '" target="_blank" rel="noopener">Se din feedback på GitHub →</a></p>'
