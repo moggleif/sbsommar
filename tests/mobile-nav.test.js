@@ -61,15 +61,16 @@ describe('02-§61.1–61.2 — Sticky navigation', () => {
     );
   });
 
-  it('MN-02: .page-nav has top: 0 (02-§61.1, 02-§61.2)', () => {
-    // Find the .page-nav block specifically
+  it('MN-02: .page-nav top matches body padding (02-§74.1, 02-§74.2)', () => {
+    // The sticky top value must equal body's padding-top so the nav
+    // does not shift when sticky positioning activates.
     const navIdx = CSS.indexOf('.page-nav {');
     assert.ok(navIdx !== -1, '.page-nav rule exists');
     const closingBrace = CSS.indexOf('}', navIdx);
     const navBlock = CSS.slice(navIdx, closingBrace);
     assert.ok(
-      navBlock.includes('top: 0'),
-      'Expected top: 0 in .page-nav block',
+      navBlock.includes('top: var(--space-xs)'),
+      'Expected top: var(--space-xs) in .page-nav block',
     );
   });
 
@@ -81,6 +82,21 @@ describe('02-§61.1–61.2 — Sticky navigation', () => {
     assert.ok(
       /z-index:\s*\d+/.test(navBlock),
       'Expected z-index in .page-nav block',
+    );
+  });
+});
+
+// ── 02-§74.3 — Scroll-padding for anchor links ──────────────────────────────
+
+describe('02-§74.3 — Anchor targets not hidden behind sticky nav', () => {
+  it('MN-19: html has scroll-padding-top (02-§74.3)', () => {
+    const htmlIdx = CSS.indexOf('html {');
+    assert.ok(htmlIdx !== -1, 'html rule exists');
+    const closingBrace = CSS.indexOf('}', htmlIdx);
+    const htmlBlock = CSS.slice(htmlIdx, closingBrace);
+    assert.ok(
+      /scroll-padding-top:\s*.+/.test(htmlBlock),
+      'Expected scroll-padding-top on html',
     );
   });
 });
