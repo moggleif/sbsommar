@@ -736,7 +736,7 @@ details.event-row[open] > summary .ev-title {
 
 .nav-link:hover,
 .nav-link.active {
-  color: #b35e3a;
+  color: var(--color-navy);
 }
 
 .nav-link:focus-visible {
@@ -865,7 +865,7 @@ details.event-row[open] > summary .ev-title {
 }
 
 .nav-link--top:hover {
-  color: #b35e3a;
+  color: var(--color-navy);
 }
 
 .nav-link--top:focus-visible {
@@ -2117,7 +2117,7 @@ body.modal-open {
   }
 
   .feedback-btn:hover {
-    color: #b35e3a;
+    color: var(--color-navy);
   }
 
   .feedback-btn:focus-visible {
