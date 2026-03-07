@@ -1622,7 +1622,7 @@ Matrix cleanup (2026-02-25):
 | `02-§64.19` | implemented | Body has no bottom padding — `body` padding in style.css |
 | `02-§64.20` | implemented | Mobile scroll-to-top button appears after 300 px — nav.js + `.scroll-top` in style.css |
 | `02-§64.21` | implemented | Scroll-to-top matches hamburger size (42 × 42 px) — `.scroll-top` in style.css |
-| `02-§64.22` | implemented | Scroll-to-top is separate element outside nav — layout.js |
+| `02-§64.22` | implemented | Scroll-to-top is child of nav, centred horizontally — layout.js + style.css |
 | `02-§64.23` | implemented | Scroll-to-top smooth-scrolls to top — nav.js |
 | | | **§65 — Client-Side Date and Regex Robustness** |
 | ROB-01 | `tests/robustness.test.js` | `02-§65.1 — Countdown script uses formatToParts` |
@@ -1695,7 +1695,7 @@ Matrix cleanup (2026-02-25):
 | CPA-01, CPA-05 | `tests/close-past-accordions.test.js` | `02-§72.7 — All days rendered with open at build time` |
 | CPA-04 | `tests/close-past-accordions.test.js` | `02-§72.8 — Script targets only details.day, not event-row` |
 | | | **§73 — Feedback Button (GitHub Issues)** |
-| `02-§73.1` | covered | FB-01: feedback button present in pageNav output |
+| `02-§73.1` | covered | FB-01: feedback button present in layout output; mobile: fixed top-right, desktop: near content edge |
 | `02-§73.2` | implemented | Manual: click feedback button, verify modal opens |
 | `02-§73.3` | implemented | Manual: verify modal has category, title, description, name fields |
 | `02-§73.4` | implemented | Manual: submit feedback, verify issue link shown |

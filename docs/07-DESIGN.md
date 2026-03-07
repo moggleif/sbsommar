@@ -112,8 +112,8 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 - Active/hover: terracotta underline or color shift. <!-- 07-§6.6 -->
 - Mobile: hamburger button toggles a dropdown panel containing all links. <!-- 07-§6.7 -->
 - Desktop (≥ 768 px): hamburger hidden, all links visible in two rows. <!-- 07-§6.16-impl -->
-- Row 1: main page links (uppercase, `13px`, `700`, `letter-spacing: 0.06em`, opacity `0.5`
-  until active/hover). <!-- 07-§6.17-impl -->
+- Row 1: main page links (uppercase, `13px`, `700`, `letter-spacing: 0.06em`,
+  `color: var(--color-terracotta)`, opacity `0.5` until active/hover). <!-- 07-§6.17-impl -->
 - Row 2: section anchor links (no text-transform, `11px`, `700`, opacity `0.45` until hover). <!-- 07-§6.18-impl -->
 - Two rows separated by a `1px` rule in `rgba(0,0,0,0.06)`. <!-- 07-§6.19-impl -->
 - Mobile panel: `background: var(--color-terracotta)`, white text,
