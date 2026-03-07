@@ -291,4 +291,4 @@ async function updateEventInActiveCamp(eventId, updates) {
   await enableAutoMerge(pr.node_id);
 }
 
-module.exports = { addEventToActiveCamp, updateEventInActiveCamp, slugify, yamlScalar, buildEventYaml };
+module.exports = { addEventToActiveCamp, updateEventInActiveCamp, slugify, yamlScalar, buildEventYaml, githubRequest, env };

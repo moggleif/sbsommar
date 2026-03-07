@@ -250,6 +250,26 @@ final class GitHub
         return Yaml::dump($data, 4, 2, Yaml::DUMP_NULL_AS_TILDE);
     }
 
+    /**
+     * Create a GitHub Issue and return its HTML URL.
+     *
+     * @param string   $title  Issue title
+     * @param string   $body   Issue body (Markdown)
+     * @param string[] $labels Label names to apply
+     * @return string  The HTML URL of the created issue
+     */
+    public function createIssue(string $title, string $body, array $labels): string
+    {
+        $apiPath = "/repos/{$this->owner}/{$this->repo}/issues";
+        $data = $this->githubRequest('POST', $apiPath, [
+            'title'  => $title,
+            'body'   => $body,
+            'labels' => $labels,
+        ]);
+
+        return $data['html_url'] ?? '';
+    }
+
     // ── GitHub API primitives ────────────────────────────────────────────
 
     private static function env(string $name): string

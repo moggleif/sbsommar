@@ -1086,9 +1086,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             954
-Covered (implemented + tested): 474
-Implemented, not tested:        480
+Total requirements:             975
+Covered (implemented + tested): 479
+Implemented, not tested:        496
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1694,3 +1694,25 @@ Matrix cleanup (2026-02-25):
 | CPA-03 | `tests/close-past-accordions.test.js` | `02-§72.6 — Script is inline, no new JS files` |
 | CPA-01, CPA-05 | `tests/close-past-accordions.test.js` | `02-§72.7 — All days rendered with open at build time` |
 | CPA-04 | `tests/close-past-accordions.test.js` | `02-§72.8 — Script targets only details.day, not event-row` |
+| | | **§73 — Feedback Button (GitHub Issues)** |
+| `02-§73.1` | covered | FB-01: feedback button present in pageNav output |
+| `02-§73.2` | implemented | Manual: click feedback button, verify modal opens |
+| `02-§73.3` | implemented | Manual: verify modal has category, title, description, name fields |
+| `02-§73.4` | implemented | Manual: submit feedback, verify issue link shown |
+| `02-§73.5` | implemented | Manual: trigger error, verify retry button |
+| `02-§73.6` | implemented | Manual: verify progress steps during submission |
+| `02-§73.7` | implemented | `app.js` POST /feedback; `api/index.php` POST /api/feedback |
+| `02-§73.8` | implemented | `source/api/feedback.js` createFeedbackIssue; `api/src/Feedback.php` createIssue |
+| `02-§73.9` | implemented | Both endpoints return { success: true, issueUrl } |
+| `02-§73.10` | implemented | Manual: verify submit disabled until required fields filled |
+| `02-§73.11` | covered | FB-10..13: length limit tests for title, description, name |
+| `02-§73.12` | covered | FB-14..16: injection scan tests |
+| `02-§73.13` | covered | FB-17..19: honeypot flag tests |
+| `02-§73.14` | implemented | `source/api/feedback.js` isRateLimited; `api/src/Feedback.php` isRateLimited |
+| `02-§73.15` | implemented | Manual: verify role=dialog, aria-modal, focus trap |
+| `02-§73.16` | covered | FB-02: aria-label="Ge feedback" present |
+| `02-§73.17` | implemented | Manual: verify Escape, click outside, close button |
+| `02-§73.18` | implemented | Manual: verify labels and aria-required on form fields |
+| `02-§73.19` | implemented | Manual: verify metadata in created GitHub Issue body |
+| `02-§73.20` | implemented | Node.js and PHP use identical validation patterns |
+| `02-§73.21` | implemented | Both use githubRequest() / githubRequest() for Issues API |

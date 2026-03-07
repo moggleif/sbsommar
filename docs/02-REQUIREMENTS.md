@@ -3297,3 +3297,84 @@ current and future days open and past days closed.
   time, so that the page is fully usable without JavaScript. <!-- 02-§72.7 -->
 - The script must not affect event-row `<details>` elements, only
   day-level `<details class="day">` elements. <!-- 02-§72.8 -->
+
+---
+
+## 73. Feedback Button (GitHub Issues)
+
+A discreet feedback button in the navigation bar lets any visitor submit
+feedback that is automatically created as a GitHub Issue. The feature
+uses the same API patterns as add-event (Node.js + PHP dual
+implementation) and the same GitHub API primitives.
+
+### 73.1 User requirements
+
+- A feedback icon button (speech-bubble SVG, no text label) must be
+  visible in the navigation bar, positioned between the hamburger toggle
+  and the scroll-to-top button. <!-- 02-§73.1 -->
+- Clicking the button must open a modal dialog. <!-- 02-§73.2 -->
+- The modal must contain a form with the following fields: <!-- 02-§73.3 -->
+  - Category (radio buttons): Bugg, Förslag, Fråga — mapping to GitHub
+    labels `feedback:bug`, `feedback:suggestion`, `feedback:question`.
+  - Title (required, max 200 characters).
+  - Description (required, max 2 000 characters).
+  - Name / contact info (optional, max 200 characters).
+- On successful submission the modal must show a confirmation message
+  with a clickable link to the created GitHub Issue (opens in new
+  tab). <!-- 02-§73.4 -->
+- On failure the modal must show an error message with a retry
+  option. <!-- 02-§73.5 -->
+- The modal must show progress steps during submission, following the
+  same pattern as the add-event modal. <!-- 02-§73.6 -->
+
+### 73.2 API requirements
+
+- A `POST /feedback` endpoint (Node.js) and `POST /api/feedback`
+  endpoint (PHP) must accept the feedback form data. <!-- 02-§73.7 -->
+- The API must create a GitHub Issue with: <!-- 02-§73.8 -->
+  - Title: `[Feedback] {category}: {title}`
+  - Body: description text followed by a metadata table containing
+    category, page URL, viewport size, timestamp (ISO 8601), name/contact
+    (or "Ej angivet"), and User-Agent.
+  - Labels: `feedback:bug`, `feedback:suggestion`, or `feedback:question`
+    depending on the selected category.
+- The API must return `{ success: true, issueUrl: "<URL>" }` on success
+  so the client can link to the created issue. <!-- 02-§73.9 -->
+
+### 73.3 Validation requirements
+
+- Client-side: title and description are required; submit button is
+  disabled until both are filled; length limits are enforced
+  visually. <!-- 02-§73.10 -->
+- Server-side: title (≤ 200), description (≤ 2 000), name (≤ 200)
+  length limits must be enforced. <!-- 02-§73.11 -->
+- Server-side: the same injection-pattern scan as §49 must be applied
+  to title, description, and name fields. <!-- 02-§73.12 -->
+- A honeypot field ("website", hidden from users) must be included. If
+  filled, the API returns `200 OK` with `{ success: true }` but does
+  not create an issue. <!-- 02-§73.13 -->
+- Rate-limiting: max 5 requests per IP per hour (in-memory in Node.js,
+  simplest possible in PHP). <!-- 02-§73.14 -->
+
+### 73.4 Accessibility requirements
+
+- The modal must use `role="dialog"`, `aria-modal="true"`, and a
+  focus trap. <!-- 02-§73.15 -->
+- The button must have `aria-label="Ge feedback"`. <!-- 02-§73.16 -->
+- The modal must be closable with Escape, click outside, or a close
+  button. <!-- 02-§73.17 -->
+- All form fields must have associated `<label>` elements and
+  `aria-required` where applicable. <!-- 02-§73.18 -->
+
+### 73.5 Metadata collection
+
+- The form must silently collect and include in the API request: page
+  URL, viewport size (width × height), User-Agent string, and timestamp
+  (ISO 8601). <!-- 02-§73.19 -->
+
+### 73.6 Implementation parity
+
+- The Node.js and PHP implementations must validate identically and
+  produce equivalent error messages. <!-- 02-§73.20 -->
+- Both must use the existing `githubRequest()` / `githubRequest()`
+  primitives for the GitHub Issues API call. <!-- 02-§73.21 -->

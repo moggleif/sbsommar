@@ -10,6 +10,7 @@ const { validateEventRequest, validateEditRequest }              = require('./so
 const { isEventPast }                                            = require('./source/api/edit-event');
 const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
 const { isOutsideEditingPeriod }                                 = require('./source/api/time-gate');
+const { validateFeedbackRequest, createFeedbackIssue, isRateLimited } = require('./source/api/feedback');
 const { resolveActiveCamp }                                      = require('./source/scripts/resolve-active-camp');
 
 const app = express();
@@ -116,6 +117,36 @@ app.post('/edit-event', (req, res) => {
   updateEventInActiveCamp(eventId, req.body).catch((err) => {
     console.error('POST /edit-event background error:', err.message);
   });
+});
+
+app.post('/feedback', async (req, res) => {
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+  if (isRateLimited(ip)) {
+    return res.status(429).json({ success: false, error: 'För många förfrågningar. Försök igen senare.' });
+  }
+
+  const v = validateFeedbackRequest(req.body);
+  if (!v.ok) {
+    return res.status(400).json({ success: false, error: v.error });
+  }
+
+  // Honeypot triggered — pretend success
+  if (v.honeypot) {
+    return res.json({ success: true, issueUrl: '' });
+  }
+
+  if (BUILD_ENV !== 'production') {
+    console.log('[feedback dry-run]', JSON.stringify(req.body, null, 2));
+    return res.json({ success: true, issueUrl: '' });
+  }
+
+  try {
+    const issueUrl = await createFeedbackIssue(req.body);
+    res.json({ success: true, issueUrl });
+  } catch (err) {
+    console.error('POST /feedback error:', err.message);
+    res.status(500).json({ success: false, error: 'Kunde inte skapa feedback. Försök igen om en stund.' });
+  }
 });
 
 // Static LAST
