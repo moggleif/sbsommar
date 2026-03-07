@@ -63,7 +63,7 @@ describe('close-past-accordions – no new JS file (02-§72.6)', () => {
     const html = buildScheduleHtml(['2025-06-20']);
     // The close-past logic must not be loaded via <script src="...">
     // It should be inline within a <script> tag
-    const scriptTags = html.match(/<script[^>]*>[\s\S]*?<\/script>/gi) || [];
+    const scriptTags = html.match(/<script[^>]*>[\s\S]*?<\/script\s*>/gi) || [];
     const inlineWithDayLogic = scriptTags.some(
       (s) => !s.includes('src=') && s.includes('details.day'),
     );
@@ -76,7 +76,7 @@ describe('close-past-accordions – no new JS file (02-§72.6)', () => {
 describe('close-past-accordions – targets only day details (02-§72.8)', () => {
   it('CPA-04: script selector uses details.day, not bare details', () => {
     const html = buildScheduleHtml(['2025-06-20']);
-    const scriptTags = html.match(/<script[^>]*>[\s\S]*?<\/script>/gi) || [];
+    const scriptTags = html.match(/<script[^>]*>[\s\S]*?<\/script\s*>/gi) || [];
     const dayScript = scriptTags.find(
       (s) => !s.includes('src=') && s.includes('details.day'),
     );
