@@ -730,14 +730,14 @@ details.event-row[open] > summary .ev-title {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-terracotta);
+  color: var(--color-charcoal);
   text-decoration: none;
   opacity: 0.5;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--color-terracotta);
+  color: var(--color-navy);
   opacity: 1;
 }
 

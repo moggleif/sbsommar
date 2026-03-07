@@ -64,13 +64,13 @@ function pageNav(activeHref, navSections = []) {
       <span class="nav-toggle-bar"></span>
     </button>
     <button type="button" class="scroll-top" aria-label="Till toppen" hidden>&#x2B06;</button>
+${feedbackBtn}
     <div class="nav-menu" id="nav-menu">
       <div class="nav-pages">
 ${pageItems}
       </div>${sectionRow}${topLink}
     </div>
-  </nav>
-${feedbackBtn}`;
+  </nav>`;
 }
 
 /**
