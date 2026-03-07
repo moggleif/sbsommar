@@ -3263,3 +3263,37 @@ active camp.
 - No new JavaScript files may be added — the script must be inline in
   `index.html`. <!-- 02-§71.11 -->
 - CSS must use existing design tokens from `07-DESIGN.md §7`. <!-- 02-§71.12 -->
+
+---
+
+## 72. Close Past-Day Accordions on Schedule Page
+
+On the schedule page (`schema.html`), day accordions for dates that have
+already passed should be collapsed by default, so that the visitor sees
+current and future days open and past days closed.
+
+### 72.1 User requirements
+
+- When a participant opens the schedule page, day sections whose date
+  is before the visitor's current date must be collapsed
+  (closed). <!-- 02-§72.1 -->
+- Day sections for today and future dates must remain open. <!-- 02-§72.2 -->
+- The visitor must still be able to manually open a closed past-day
+  accordion by clicking it. <!-- 02-§72.3 -->
+
+### 72.2 Implementation rules
+
+- The comparison must use the visitor's local date (client-side),
+  not the build date. <!-- 02-§72.4 -->
+- The script must run on page load and close past days by removing
+  the `open` attribute from `<details class="day">` elements whose
+  `id` (ISO date) is before today. <!-- 02-§72.5 -->
+- The script must be inline in the schedule page — no new JS files
+  may be added. <!-- 02-§72.6 -->
+
+### 72.3 Constraints
+
+- All days must still be rendered with the `open` attribute at build
+  time, so that the page is fully usable without JavaScript. <!-- 02-§72.7 -->
+- The script must not affect event-row `<details>` elements, only
+  day-level `<details class="day">` elements. <!-- 02-§72.8 -->
