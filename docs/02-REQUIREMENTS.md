@@ -3028,12 +3028,13 @@ scroll and better leverage existing design tokens.
 
 ### 64.9 Mobile scroll-to-top button
 
-- A fixed-position scroll-to-top button must appear on mobile viewports
-  (≤ 767 px) after scrolling 300 px. <!-- 02-§64.20 -->
+- A scroll-to-top button must appear on mobile viewports (≤ 767 px)
+  after scrolling 300 px. <!-- 02-§64.20 -->
 - The button must match the hamburger toggle in size (42 × 42 px),
   colour, and border-radius. <!-- 02-§64.21 -->
-- The button must be a separate element outside the nav, so it does not
-  affect the hamburger menu layout. <!-- 02-§64.22 -->
+- The button must be a child of `<nav class="page-nav">`, centred
+  horizontally (`position: absolute; left: 50%;
+  transform: translateX(-50%)`). <!-- 02-§64.22 -->
 - The button must smooth-scroll to the top on click. <!-- 02-§64.23 -->
 
 ---
@@ -3310,8 +3311,10 @@ implementation) and the same GitHub API primitives.
 ### 73.1 User requirements
 
 - A feedback icon button (speech-bubble SVG, no text label) must be
-  visible in the navigation bar, positioned between the hamburger toggle
-  and the scroll-to-top button. <!-- 02-§73.1 -->
+  visible on every page. On mobile it is fixed at the top-right corner
+  (`position: fixed; top: var(--space-xs); right: var(--space-sm)`);
+  on desktop it is positioned near the content column
+  edge. <!-- 02-§73.1 -->
 - Clicking the button must open a modal dialog. <!-- 02-§73.2 -->
 - The modal must contain a form with the following fields: <!-- 02-§73.3 -->
   - Category (radio buttons): Bugg, Förslag, Fråga — mapping to GitHub

@@ -109,12 +109,13 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 - Background: white or cream, with a subtle bottom border or shadow. <!-- 07-§6.3 -->
 - Logo on the left. Navigation links on the right. <!-- 07-§6.4 -->
 - Nav links: uppercase, `12px`, `700` weight, spaced with `letter-spacing: 0.08em`. <!-- 07-§6.5 -->
-- Active/hover: terracotta underline or color shift. <!-- 07-§6.6 -->
+- Active/hover: navy (`var(--color-navy)`) color shift. <!-- 07-§6.6 -->
 - Mobile: hamburger button toggles a dropdown panel containing all links. <!-- 07-§6.7 -->
 - Desktop (≥ 768 px): hamburger hidden, all links visible in two rows. <!-- 07-§6.16-impl -->
-- Row 1: main page links (uppercase, `13px`, `700`, `letter-spacing: 0.06em`, opacity `0.5`
-  until active/hover). <!-- 07-§6.17-impl -->
-- Row 2: section anchor links (no text-transform, `11px`, `700`, opacity `0.45` until hover). <!-- 07-§6.18-impl -->
+- Row 1: main page links (uppercase, `13px`, `700`, `letter-spacing: 0.06em`,
+  `color: var(--color-terracotta)`, navy on active/hover). <!-- 07-§6.17-impl -->
+- Row 2: section anchor links (no text-transform, `11px`, `700`,
+  `color: var(--color-terracotta)`, navy on hover). <!-- 07-§6.18-impl -->
 - Two rows separated by a `1px` rule in `rgba(0,0,0,0.06)`. <!-- 07-§6.19-impl -->
 - Mobile panel: `background: var(--color-terracotta)`, white text,
   `z-index: 100`. Fully rounded corners (`--radius-lg`), horizontal inset

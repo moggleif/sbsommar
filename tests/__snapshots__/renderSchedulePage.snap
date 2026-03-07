@@ -15,6 +15,7 @@
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    <button type="button" class="scroll-top" aria-label="Till toppen" hidden>&#x2B06;</button>
     <button type="button" class="feedback-btn" aria-label="Ge feedback">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -31,7 +32,6 @@
     <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>
     </div>
   </nav>
-  <button type="button" class="scroll-top" aria-label="Till toppen" hidden>&#x2B06;</button>
 <main>
   <div class="schedule-header">
     <h1>Schema – Test Camp 2025</h1>
