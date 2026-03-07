@@ -1685,3 +1685,12 @@ Matrix cleanup (2026-02-25):
 | `02-§71.10` | covered | Only `renderIndexPage` renders action buttons; nav pages do not |
 | `02-§71.11` | implemented | Script is inline in `renderIndexPage`, no new JS files added |
 | `02-§71.12` | covered | CSS uses `var(--color-terracotta)` and spacing tokens from 07-DESIGN |
+| | | **§72 — Close Past-Day Accordions** |
+| `02-§72.1` | gap | Past-day accordions collapsed on schedule page |
+| `02-§72.2` | gap | Today and future days remain open |
+| `02-§72.3` | gap | Past days can be manually reopened |
+| `02-§72.4` | gap | Uses visitor's local date (client-side) |
+| `02-§72.5` | gap | Script removes `open` from past `<details class="day">` on load |
+| `02-§72.6` | gap | Script is inline — no new JS files |
+| `02-§72.7` | gap | All days rendered with `open` at build time (progressive enhancement) |
+| `02-§72.8` | gap | Script only affects day-level details, not event-row details |
