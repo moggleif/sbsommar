@@ -730,14 +730,14 @@ details.event-row[open] > summary .ev-title {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-charcoal);
+  color: var(--color-terracotta);
   text-decoration: none;
   opacity: 0.5;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--color-navy);
+  color: var(--color-terracotta);
   opacity: 1;
 }
 
@@ -2113,7 +2113,7 @@ body.modal-open {
     border: none;
     cursor: pointer;
     padding: 4px;
-    color: var(--color-charcoal);
+    color: var(--color-terracotta);
     opacity: 0.5;
     transition: opacity 0.2s;
     position: absolute;
