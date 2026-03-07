@@ -3394,3 +3394,6 @@ implementation) and the same GitHub API primitives.
 - When a user clicks an anchor link in the navigation, the target
   section is visible below the navigation bar, not hidden
   behind it. <!-- 02-§74.3 -->
+- The navigation bar remains at the same horizontal position when
+  navigating between pages, regardless of whether the page content
+  requires a scrollbar. <!-- 02-§74.4 -->

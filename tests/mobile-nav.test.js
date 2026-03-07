@@ -110,6 +110,21 @@ describe('02-§74.3 — Anchor targets not hidden behind sticky nav', () => {
   });
 });
 
+// ── 02-§74.4 — Stable scrollbar gutter ───────────────────────────────────────
+
+describe('02-§74.4 — No horizontal shift between pages', () => {
+  it('MN-20: html has scrollbar-gutter: stable (02-§74.4)', () => {
+    const htmlIdx = CSS.indexOf('html {');
+    assert.ok(htmlIdx !== -1, 'html rule exists');
+    const closingBrace = CSS.indexOf('}', htmlIdx);
+    const htmlBlock = CSS.slice(htmlIdx, closingBrace);
+    assert.ok(
+      htmlBlock.includes('scrollbar-gutter: stable'),
+      'Expected scrollbar-gutter: stable on html',
+    );
+  });
+});
+
 // ── 02-§61.3, §61.4 — Hamburger button design ───────────────────────────────
 
 describe('02-§61.3–61.4 — Hamburger button design', () => {
