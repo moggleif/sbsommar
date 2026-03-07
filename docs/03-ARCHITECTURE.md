@@ -799,10 +799,11 @@ The `.section-nav` CSS rule is also removed.
 
 ### 12.6 Sticky positioning
 
-`.page-nav` uses `position: sticky; top: var(--space-xs)`. The `top` value
-matches `body`'s `padding-top` so the bar occupies the same visual position
-whether it is in normal flow or stuck. This prevents a visible jump when the
-user scrolls or navigates via anchor links.
+`.page-nav` uses `position: sticky; top: 0` with `margin-top: calc(-1 * var(--space-xs))`
+and `padding-top: var(--space-xs)`. The negative margin pulls the element up into
+`body`'s padding, while the padding restores the content position. The result is
+that nav content sits at the same vertical offset in both normal flow and stuck
+mode — no visible jump. The background pseudo-element covers the full area.
 
 `html` has `scroll-padding-top` set to the approximate nav height so that
 anchor targets are not obscured by the sticky bar.

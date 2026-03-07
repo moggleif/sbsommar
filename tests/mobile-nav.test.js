@@ -61,16 +61,25 @@ describe('02-§61.1–61.2 — Sticky navigation', () => {
     );
   });
 
-  it('MN-02: .page-nav top matches body padding (02-§74.1, 02-§74.2)', () => {
-    // The sticky top value must equal body's padding-top so the nav
-    // does not shift when sticky positioning activates.
+  it('MN-02: .page-nav sticks at top: 0 with margin/padding compensation (02-§74.1, 02-§74.2)', () => {
+    // The nav uses negative margin-top + padding-top equal to body's
+    // padding-top so the content position is identical in normal flow
+    // and when stuck, while the background covers the full top area.
     const navIdx = CSS.indexOf('.page-nav {');
     assert.ok(navIdx !== -1, '.page-nav rule exists');
     const closingBrace = CSS.indexOf('}', navIdx);
     const navBlock = CSS.slice(navIdx, closingBrace);
     assert.ok(
-      navBlock.includes('top: var(--space-xs)'),
-      'Expected top: var(--space-xs) in .page-nav block',
+      navBlock.includes('top: 0'),
+      'Expected top: 0 in .page-nav block',
+    );
+    assert.ok(
+      navBlock.includes('margin-top: calc(-1 * var(--space-xs))'),
+      'Expected negative margin-top to pull nav into body padding',
+    );
+    assert.ok(
+      navBlock.includes('padding-top: var(--space-xs)'),
+      'Expected padding-top to compensate for negative margin',
     );
   });
 
