@@ -274,6 +274,14 @@ function handleFeedback(): void
         return;
     }
 
+    $buildEnv = $_ENV['BUILD_ENV'] ?? null;
+    if ($buildEnv !== 'production') {
+        error_log('[feedback dry-run] ' . json_encode($body, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        jsonResponse(['success' => true, 'issueUrl' => '']);
+
+        return;
+    }
+
     try {
         $issueUrl = Feedback::createIssue($body);
         jsonResponse(['success' => true, 'issueUrl' => $issueUrl]);

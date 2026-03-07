@@ -135,6 +135,11 @@ app.post('/feedback', async (req, res) => {
     return res.json({ success: true, issueUrl: '' });
   }
 
+  if (BUILD_ENV !== 'production') {
+    console.log('[feedback dry-run]', JSON.stringify(req.body, null, 2));
+    return res.json({ success: true, issueUrl: '' });
+  }
+
   try {
     const issueUrl = await createFeedbackIssue(req.body);
     res.json({ success: true, issueUrl });
