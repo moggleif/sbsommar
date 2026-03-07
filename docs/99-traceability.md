@@ -1086,8 +1086,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             975
-Covered (implemented + tested): 479
+Total requirements:             979
+Covered (implemented + tested): 483
 Implemented, not tested:        496
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
@@ -1716,3 +1716,8 @@ Matrix cleanup (2026-02-25):
 | `02-§73.19` | implemented | Manual: verify metadata in created GitHub Issue body |
 | `02-§73.20` | implemented | Node.js and PHP use identical validation patterns |
 | `02-§73.21` | implemented | Both use githubRequest() / githubRequest() for Issues API |
+| | | **§74 — Sticky Navigation Positioning** |
+| `02-§74.1` | covered | MN-02: `.page-nav` top matches body padding; `source/assets/cs/style.css` `top: var(--space-xs)` |
+| `02-§74.2` | covered | MN-02: same `top` value on all pages via shared CSS |
+| `02-§74.3` | covered | MN-19: `html` has `scroll-padding-top`; `source/assets/cs/style.css` `scroll-padding-top: 80px` |
+| `02-§74.4` | covered | MN-20: `html` has `scrollbar-gutter: stable` |

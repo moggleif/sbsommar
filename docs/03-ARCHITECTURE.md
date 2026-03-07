@@ -797,6 +797,17 @@ The `<nav class="section-nav">` previously rendered on the index page below the
 hero image is removed. All section navigation is now in the shared header nav.
 The `.section-nav` CSS rule is also removed.
 
+### 12.6 Sticky positioning
+
+`.page-nav` uses `position: sticky; top: 0` with `margin-top: calc(-1 * var(--space-xs))`
+and `padding-top: var(--space-xs)`. The negative margin pulls the element up into
+`body`'s padding, while the padding restores the content position. The result is
+that nav content sits at the same vertical offset in both normal flow and stuck
+mode — no visible jump. The background pseudo-element covers the full area.
+
+`html` has `scroll-padding-top` set to the approximate nav height so that
+anchor targets are not obscured by the sticky bar.
+
 ---
 
 ## 13. Form Time-Gating

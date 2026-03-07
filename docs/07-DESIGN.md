@@ -127,7 +127,12 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
   `2px solid rgba(255,255,255,0.3)` rule. <!-- 07-§6.22-impl -->
 - Mobile menu transition: `max-height` animation, `250ms ease`. <!-- 07-§6.23-impl -->
 - Navigation bar is `position: sticky; top: 0` on all viewports so it
-  remains visible when scrolling. <!-- 07-§6.24-impl -->
+  remains visible when scrolling. A negative `margin-top` equal to `body`
+  padding-top pulls the bar up, and an equal `padding-top` compensates, so
+  the bar content stays at the same vertical position in both normal flow
+  and stuck mode — no visible jump. <!-- 07-§6.24-impl -->
+- `html` has `scroll-padding-top` set to account for the sticky navigation
+  height, so anchor-link targets are not hidden behind the bar. <!-- 07-§6.25-impl -->
 
 ### Hero Section
 
