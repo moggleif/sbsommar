@@ -46,12 +46,19 @@ function pageNav(activeHref, navSections = []) {
 
   const topLink = '\n    <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>';
 
+  const feedbackBtn = `    <button type="button" class="feedback-btn" aria-label="Ge feedback">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    </button>`;
+
   return `  <nav class="page-nav" aria-label="Sidnavigation">
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+${feedbackBtn}
     <div class="nav-menu" id="nav-menu">
       <div class="nav-pages">
 ${pageItems}
