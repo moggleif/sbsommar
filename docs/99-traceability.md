@@ -1686,11 +1686,11 @@ Matrix cleanup (2026-02-25):
 | `02-§71.11` | implemented | Script is inline in `renderIndexPage`, no new JS files added |
 | `02-§71.12` | covered | CSS uses `var(--color-terracotta)` and spacing tokens from 07-DESIGN |
 | | | **§72 — Close Past-Day Accordions** |
-| `02-§72.1` | gap | Past-day accordions collapsed on schedule page |
-| `02-§72.2` | gap | Today and future days remain open |
-| `02-§72.3` | gap | Past days can be manually reopened |
-| `02-§72.4` | gap | Uses visitor's local date (client-side) |
-| `02-§72.5` | gap | Script removes `open` from past `<details class="day">` on load |
-| `02-§72.6` | gap | Script is inline — no new JS files |
-| `02-§72.7` | gap | All days rendered with `open` at build time (progressive enhancement) |
-| `02-§72.8` | gap | Script only affects day-level details, not event-row details |
+| `02-§72.1` | implemented | Past-day accordions collapsed on schedule page — manual: verify in browser |
+| `02-§72.2` | implemented | Today and future days remain open — manual: verify in browser |
+| `02-§72.3` | implemented | Past days can be manually reopened — native `<details>` behaviour |
+| `02-§72.4` | implemented | Uses visitor's `new Date()` (client-side) |
+| CPA-02 | `tests/close-past-accordions.test.js` | `02-§72.5 — Script removes open from past details.day on load` |
+| CPA-03 | `tests/close-past-accordions.test.js` | `02-§72.6 — Script is inline, no new JS files` |
+| CPA-01, CPA-05 | `tests/close-past-accordions.test.js` | `02-§72.7 — All days rendered with open at build time` |
+| CPA-04 | `tests/close-past-accordions.test.js` | `02-§72.8 — Script targets only details.day, not event-row` |
