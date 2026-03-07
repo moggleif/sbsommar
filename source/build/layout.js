@@ -16,6 +16,10 @@
  * @param {Array<{id: string, navLabel: string}>} [navSections=[]]
  *   - sections to render as anchor links; defaults to [] (no section row)
  */
+// Module-level config — set by build.js before rendering.
+let _feedbackUrl = '';
+function setFeedbackUrl(url) { _feedbackUrl = url || ''; }
+
 function pageNav(activeHref, navSections = []) {
   const pageLinks = [
     { href: 'index.html',     label: 'Hem' },
@@ -46,7 +50,8 @@ function pageNav(activeHref, navSections = []) {
 
   const topLink = '\n    <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>';
 
-  const feedbackBtn = `    <button type="button" class="feedback-btn" aria-label="Ge feedback">
+  const fbUrlAttr = _feedbackUrl ? ` data-api-url="${_feedbackUrl}"` : '';
+  const feedbackBtn = `    <button type="button" class="feedback-btn" aria-label="Ge feedback"${fbUrlAttr}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
@@ -80,4 +85,4 @@ function pageFooter(footerHtml) {
   return `  <footer class="site-footer">\n${trimmed}\n  </footer>`;
 }
 
-module.exports = { pageNav, pageFooter };
+module.exports = { pageNav, pageFooter, setFeedbackUrl };

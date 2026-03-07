@@ -99,7 +99,8 @@ ${pageNav('kalender.html', navSections)}
 
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
 </main>
-  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="nav.js" defer></script>
+  <script src="feedback.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

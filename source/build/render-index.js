@@ -223,7 +223,8 @@ ${pageNav('index.html', navSections)}
 ${contentSections}
   </div>
 </main>
-  <script src="nav.js" defer></script>${countdownTarget ? `
+  <script src="nav.js" defer></script>
+  <script src="feedback.js" defer></script>${countdownTarget ? `
   <script>
   (function () {
     var el = document.querySelector('.hero-countdown[data-target]');

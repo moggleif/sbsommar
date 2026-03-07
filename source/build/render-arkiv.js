@@ -158,7 +158,8 @@ ${items}
   </div>
 </main>
   <script src="arkiv.js"></script>
-  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="nav.js" defer></script>
+  <script src="feedback.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>`;

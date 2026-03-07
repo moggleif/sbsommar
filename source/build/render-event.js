@@ -56,6 +56,7 @@ ${pageNav('schema.html', navSections)}
 ${descriptionHtml}${linkHtml}  </div>
 </main>
   <script src="nav.js" defer></script>
+  <script src="feedback.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

@@ -7,6 +7,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/vendor/autoload.php';
 
 use SBSommar\ActiveCamp;
+use SBSommar\Feedback;
 use SBSommar\GitHub;
 use SBSommar\Session;
 use SBSommar\TimeGate;
@@ -80,6 +81,9 @@ try {
 
         $method === 'POST' && $route === '/edit-event'
             => handleEditEvent($activeCamp),
+
+        $method === 'POST' && $route === '/feedback'
+            => handleFeedback(),
 
         default
             => jsonResponse(['error' => 'Not found'], 404),
@@ -240,6 +244,46 @@ function handleEditEvent(?array $activeCamp): void
     }
 
     jsonResponse(['success' => true]);
+}
+
+function handleFeedback(): void
+{
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
+    if (Feedback::isRateLimited($ip)) {
+        jsonResponse([
+            'success' => false,
+            'error'   => 'För många förfrågningar. Försök igen senare.',
+        ], 429);
+
+        return;
+    }
+
+    $body = getJsonBody();
+    $v = Feedback::validate($body);
+
+    if (!$v['ok']) {
+        jsonResponse(['success' => false, 'error' => $v['error']], 400);
+
+        return;
+    }
+
+    // Honeypot triggered — pretend success
+    if (!empty($v['honeypot'])) {
+        jsonResponse(['success' => true, 'issueUrl' => '']);
+
+        return;
+    }
+
+    try {
+        $issueUrl = Feedback::createIssue($body);
+        jsonResponse(['success' => true, 'issueUrl' => $issueUrl]);
+    } catch (\Throwable $e) {
+        error_log('POST /feedback error: ' . $e->getMessage());
+        jsonResponse([
+            'success' => false,
+            'error'   => 'Kunde inte skapa feedback. Försök igen om en stund.',
+        ], 500);
+    }
 }
 
 // ── Utilities ────────────────────────────────────────────────────────────

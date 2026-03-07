@@ -1,8 +1,23 @@
 'use strict';
 
-// Feedback validation — mirrors the injection patterns from validate.js.
+// Feedback validation and GitHub Issue creation.
+// Mirrors the injection patterns from validate.js.
+
+const { githubRequest, env } = require('./github');
 
 const VALID_CATEGORIES = ['bug', 'suggestion', 'question'];
+
+const CATEGORY_LABELS = {
+  bug:        'feedback:bug',
+  suggestion: 'feedback:suggestion',
+  question:   'feedback:question',
+};
+
+const CATEGORY_DISPLAY = {
+  bug:        'Bugg',
+  suggestion: 'Förslag',
+  question:   'Fråga',
+};
 
 const MAX_LENGTHS = {
   title:       200,
@@ -21,6 +36,25 @@ const INJECTION_PATTERNS = [
   { re: /<embed/i,          label: '<embed>' },
   { re: /data:text\/html/i, label: 'data:text/html URI' },
 ];
+
+// ── Rate-limiting (in-memory) ────────────────────────────────────────────────
+
+const rateMap = new Map();   // ip → { count, resetAt }
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const entry = rateMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT;
+}
+
+// ── Validation ───────────────────────────────────────────────────────────────
 
 function validateFeedbackRequest(body) {
   if (!body || typeof body !== 'object') {
@@ -69,4 +103,44 @@ function validateFeedbackRequest(body) {
   return { ok: true };
 }
 
-module.exports = { validateFeedbackRequest };
+// ── GitHub Issue creation ────────────────────────────────────────────────────
+
+async function createFeedbackIssue(body) {
+  const owner = env('GITHUB_OWNER');
+  const repo  = env('GITHUB_REPO');
+  const token = env('GITHUB_TOKEN');
+
+  const category    = body.category.trim();
+  const title       = body.title.trim();
+  const description = body.description.trim();
+  const name        = typeof body.name === 'string' ? body.name.trim() : '';
+  const pageUrl     = typeof body.url  === 'string' ? body.url.trim()  : '';
+  const viewport    = typeof body.viewport  === 'string' ? body.viewport  : '';
+  const userAgent   = typeof body.userAgent === 'string' ? body.userAgent : '';
+  const timestamp   = typeof body.timestamp === 'string' ? body.timestamp : '';
+
+  const issueTitle = `[Feedback] ${CATEGORY_DISPLAY[category]}: ${title}`;
+  const issueBody = `${description}
+
+---
+
+| Metadata | Värde |
+|----------|-------|
+| Kategori | ${CATEGORY_DISPLAY[category]} |
+| Sida | ${pageUrl || 'Ej angivet'} |
+| Viewport | ${viewport || 'Ej angivet'} |
+| Tid | ${timestamp || 'Ej angivet'} |
+| Namn/kontakt | ${name || 'Ej angivet'} |
+| User-Agent | ${userAgent || 'Ej angivet'} |`;
+
+  const apiPath = `/repos/${owner}/${repo}/issues`;
+  const { data } = await githubRequest('POST', apiPath, {
+    title:  issueTitle,
+    body:   issueBody,
+    labels: [CATEGORY_LABELS[category]],
+  }, token);
+
+  return data.html_url;
+}
+
+module.exports = { validateFeedbackRequest, createFeedbackIssue, isRateLimited };

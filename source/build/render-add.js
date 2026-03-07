@@ -121,7 +121,8 @@ ${locationOptions}
   <script defer src="marked.umd.js"></script>
   <script defer src="markdown-preview.js"></script>
   <script src="lagg-till.js"></script>
-  <script src="nav.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="nav.js" defer></script>
+  <script src="feedback.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

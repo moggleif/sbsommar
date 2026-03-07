@@ -18,6 +18,7 @@ const { renderEventIcal, renderIcalFeed } = require('./render-ical');
 const { renderKalenderPage } = require('./render-kalender');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 const { addOneDay } = require('../api/time-gate');
+const { setFeedbackUrl } = require('./layout');
 const { resolveVersionString } = require('./version');
 const { escapeHtml } = require('./utils');
 const { getImageDimensions } = require('./image-dimensions');
@@ -168,6 +169,12 @@ async function main() {
     .map((def) => ({ id: def.id, navLabel: def.nav }));
 
   const cookieDomain = process.env.COOKIE_DOMAIN || '';
+
+  // Derive feedback API URL from the event API URL.
+  const apiUrl = process.env.API_URL || '';
+  if (apiUrl) {
+    setFeedbackUrl(apiUrl.replace(/\/add-event$/, '/feedback'));
+  }
 
   const scheduleHtml = renderSchedulePage(camp, events, footerWithVersion, navSections, SITE_URL, cookieDomain, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'schema.html'), scheduleHtml, 'utf8');
