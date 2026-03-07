@@ -21,7 +21,7 @@ const { validateFeedbackRequest } = require('../source/api/feedback');
 // ── Navigation: feedback button present (02-§73.1, §73.16) ──────────────────
 
 describe('pageNav – feedback button (02-§73.1, §73.16)', () => {
-  it('FB-01: renders a feedback button inside the nav', () => {
+  it('FB-01: renders a feedback button in the layout output', () => {
     const html = pageNav('index.html', []);
     assert.ok(html.includes('feedback-btn'), `Expected feedback-btn. Got: ${html}`);
   });
