@@ -1694,3 +1694,25 @@ Matrix cleanup (2026-02-25):
 | CPA-03 | `tests/close-past-accordions.test.js` | `02-§72.6 — Script is inline, no new JS files` |
 | CPA-01, CPA-05 | `tests/close-past-accordions.test.js` | `02-§72.7 — All days rendered with open at build time` |
 | CPA-04 | `tests/close-past-accordions.test.js` | `02-§72.8 — Script targets only details.day, not event-row` |
+| | | **§73 — Feedback Button (GitHub Issues)** |
+| `02-§73.1` | gap | Feedback icon button visible in navigation bar |
+| `02-§73.2` | gap | Clicking button opens modal dialog |
+| `02-§73.3` | gap | Modal contains category, title, description, name fields |
+| `02-§73.4` | gap | Success shows link to created GitHub Issue |
+| `02-§73.5` | gap | Failure shows error with retry option |
+| `02-§73.6` | gap | Progress steps during submission |
+| `02-§73.7` | gap | POST /feedback (Node.js) and POST /api/feedback (PHP) endpoints |
+| `02-§73.8` | gap | GitHub Issue created with correct title, body, labels |
+| `02-§73.9` | gap | API returns { success: true, issueUrl } |
+| `02-§73.10` | gap | Client-side: required fields, disabled submit until filled |
+| `02-§73.11` | gap | Server-side: length limits enforced |
+| `02-§73.12` | gap | Server-side: injection-pattern scan on text fields |
+| `02-§73.13` | gap | Honeypot field — filled = silent success, no issue created |
+| `02-§73.14` | gap | Rate-limit: max 5 per IP per hour |
+| `02-§73.15` | gap | Modal: role=dialog, aria-modal, focus trap |
+| `02-§73.16` | gap | Button: aria-label="Ge feedback" |
+| `02-§73.17` | gap | Modal closable with Escape, click outside, close button |
+| `02-§73.18` | gap | Form fields with labels and aria-required |
+| `02-§73.19` | gap | Metadata collected: URL, viewport, User-Agent, timestamp |
+| `02-§73.20` | gap | Node.js and PHP validate identically |
+| `02-§73.21` | gap | Both use githubRequest() for Issues API |

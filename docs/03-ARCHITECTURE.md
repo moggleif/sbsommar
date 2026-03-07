@@ -1606,6 +1606,71 @@ deployed to different directories.
 
 ---
 
+## 26. Feedback Button (GitHub Issues)
+
+### 26.1 Overview
+
+A feedback button in the navigation bar opens a modal form. Submissions
+create GitHub Issues via the Issues API. Both Node.js and PHP backends
+are supported.
+
+### 26.2 Client-side
+
+A new script `source/assets/js/client/feedback.js` manages:
+
+- Modal open/close with focus trap and Escape handling.
+- Form validation (required fields, length limits).
+- Honeypot field (hidden "website" input).
+- Metadata collection (page URL, viewport, User-Agent, timestamp).
+- POST to the feedback endpoint with progress steps in the modal.
+- On success: display a link to the created GitHub Issue.
+
+### 26.3 Navigation integration
+
+The feedback button is rendered by `pageNav()` in
+`source/build/layout.js`, positioned between the hamburger toggle and
+the scroll-to-top button. It is an inline SVG speech-bubble icon with
+`aria-label="Ge feedback"`.
+
+### 26.4 Node.js API (`source/api/feedback.js`)
+
+- Validates input: required fields, length limits, injection scan (reuses
+  patterns from `source/api/validate.js`).
+- Honeypot check: if `website` field is non-empty, return success without
+  creating an issue.
+- Rate-limit: in-memory Map, max 5 per IP per hour.
+- Creates a GitHub Issue via `githubRequest()` (exported from
+  `source/api/github.js`).
+- Route: `POST /feedback` registered in `app.js`.
+
+### 26.5 PHP API (`api/src/Feedback.php`)
+
+- Same validation and logic as Node.js.
+- Rate-limit: simplest possible (in-memory per request or file-based).
+- Uses `GitHub::createIssue()` (new public method on the existing class).
+- Route: `POST /api/feedback` registered in `api/index.php`.
+
+### 26.6 GitHub Issue format
+
+- Title: `[Feedback] {category}: {title}`
+- Body: description + metadata table (category, URL, viewport, timestamp,
+  name/contact, User-Agent).
+- Labels: one of `feedback:bug`, `feedback:suggestion`, `feedback:question`.
+
+### 26.7 Files
+
+| File | Role |
+| ---- | ---- |
+| `source/assets/js/client/feedback.js` | Client modal + form + submit |
+| `source/api/feedback.js` | Node.js validation + GitHub Issue creation |
+| `api/src/Feedback.php` | PHP validation + GitHub Issue creation |
+| `source/build/layout.js` | Feedback button in nav |
+| `source/assets/css/main.css` | Feedback button + modal styles |
+| `app.js` | `POST /feedback` route |
+| `api/index.php` | `POST /api/feedback` route |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
