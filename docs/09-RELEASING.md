@@ -122,6 +122,30 @@ manually — but prefer the git revert approach when possible.
 
 ---
 
+## Check current release status
+
+Before planning a release, check what has been deployed:
+
+```bash
+# Fetch tags from remote (local clone may not have them)
+git fetch --tags
+
+# Show the five most recent release tags
+git tag --sort=-v:refname | head -5
+
+# Show all PRs merged since the last minor/major release (e.g. v1.0.0)
+git log v1.0.0..HEAD --oneline --merges
+
+# Or use the GitHub CLI to list releases
+gh release list --limit 5
+```
+
+The first step — `git fetch --tags` — is essential. Tags are created by
+the deploy workflow on the remote; a local clone will not have them
+unless you fetch explicitly.
+
+---
+
 ## Automatic versioning
 
 Every production deploy is automatically tagged and the version is shown
@@ -155,12 +179,57 @@ Event-data deploys do not update the version in the footer.
 [Semantic versioning](https://semver.org/):
 
 - **Patch** (`v1.0.1`) — auto-incremented on every production deploy.
+  No manual action needed.
 - **Minor** (`v1.1.0`) — new features, new pages, new form fields.
+  Bump when one or more user-visible features have been added since the
+  last minor release.
 - **Major** (`v2.0.0`) — breaking changes, major redesigns.
+  Bump when the site has been fundamentally restructured or redesigned
+  in a way that would surprise returning users.
 
-### Bumping the major or minor version
+A minor bump is appropriate when the set of changes since the last
+`.0` release feels like a meaningful milestone — for example, a new
+page, a new schedule view, or a new form field. There is no fixed
+threshold; use judgement. When in doubt, a minor bump is better than
+letting patch numbers grow indefinitely.
 
-When you want to mark a milestone (new feature set, significant redesign):
+### Preparing a minor or major release
+
+Before bumping the version, review what has changed and draft release
+notes. This makes the automatically generated GitHub Release more
+useful and ensures nothing is forgotten.
+
+**1. Check what has changed since the last `.0` release:**
+
+```bash
+git fetch --tags
+
+# Find the base tag for the current version series
+git tag --sort=-v:refname | grep 'v1\.0\.' | tail -1   # e.g. v1.0.0
+
+# List merged PRs since that tag
+git log v1.0.0..HEAD --oneline --merges
+
+# Or for a more detailed diff
+git log v1.0.0..HEAD --oneline
+```
+
+Replace `v1.0.0` with the actual base tag of the current version
+series — this is the `.0` tag, not the latest patch.
+
+**2. Draft release notes:**
+
+Write a short summary of the release. Group changes by category:
+
+- **Nya funktioner** — user-visible features added.
+- **Förbättringar** — enhancements to existing features.
+- **Buggfixar** — issues resolved.
+- **Dokumentation** — significant doc updates (optional, skip if minor).
+
+Keep it concise — a few bullet points per category. The audience is
+someone who uses the site, not a developer.
+
+**3. Bump and merge:**
 
 1. Edit the `VERSION` file — change `1.0` to `1.1` (or `2.0`).
 2. Commit: `chore: bump version to 1.1`
@@ -169,8 +238,12 @@ When you want to mark a milestone (new feature set, significant redesign):
 5. The workflow detects no `v1.1.*` tags exist, tags as `v1.1.0`, and
    **automatically creates a GitHub Release** with auto-generated notes
    listing all PRs since the previous release.
-6. You can edit the release notes afterwards on GitHub if you want to
-   add a summary or personal touch.
+
+**4. Edit the GitHub Release:**
+
+After the deploy creates the release, open it on GitHub and replace or
+supplement the auto-generated notes with your drafted summary from
+step 2. This is the version that people will actually read.
 
 Patch-only deploys (the normal case) create only a tag, not a Release.
 
