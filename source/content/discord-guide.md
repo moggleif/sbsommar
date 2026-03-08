@@ -1,4 +1,4 @@
-# Discord guide
+# Kom igång med Discord
 
 ![Discord](images/discord-logo.webp)
 
