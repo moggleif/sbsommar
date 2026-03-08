@@ -1088,9 +1088,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             992
+Total requirements:             994
 Covered (implemented + tested): 494
-Implemented, not tested:        498
+Implemented, not tested:        500
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1700,7 +1700,7 @@ Matrix cleanup (2026-02-25):
 | | | **§73 — Feedback Button (GitHub Issues)** |
 | `02-§73.1` | covered | FB-01: feedback button present in layout output; mobile: fixed top-right, desktop: near content edge |
 | `02-§73.2` | implemented | Manual: click feedback button, verify modal opens |
-| `02-§73.3` | implemented | Manual: verify modal has category, title, description, name fields |
+| `02-§73.3` | implemented | Manual: verify modal has category (Bugg/Förslag/Övrigt), title, description, name fields; FB-09, FB-22 |
 | `02-§73.4` | implemented | Manual: submit feedback, verify issue link shown |
 | `02-§73.5` | implemented | Manual: trigger error, verify retry button |
 | `02-§73.6` | implemented | Manual: verify progress steps during submission |
@@ -1719,6 +1719,8 @@ Matrix cleanup (2026-02-25):
 | `02-§73.19` | implemented | Manual: verify metadata in created GitHub Issue body |
 | `02-§73.20` | implemented | Node.js and PHP use identical validation patterns |
 | `02-§73.21` | implemented | Both use githubRequest() / githubRequest() for Issues API |
+| `02-§73.22` | implemented | Manual: open feedback modal, verify heading "Feedback om hemsidan"; `feedback.js` lines 21, 88 |
+| `02-§73.23` | implemented | Manual: open feedback modal, verify help text; `feedback.js` line 90, `style.css` `.feedback-scope` |
 | | | **§74 — Sticky Navigation Positioning** |
 | `02-§74.1` | covered | MN-02: `.page-nav` top matches body padding; `source/assets/cs/style.css` `top: var(--space-xs)` |
 | `02-§74.2` | covered | MN-02: same `top` value on all pages via shared CSS |
