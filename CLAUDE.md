@@ -48,6 +48,11 @@ Rules:
 
 Clarity over cleverness. <!-- CL-§1.9 -->
 
+Language:
+
+- The site is in Swedish. All user-facing text — labels, headings, descriptions, error messages, confirmations — must be in Swedish. <!-- CL-§1.10 -->
+- When writing requirements in `docs/02-REQUIREMENTS.md`, describe the desired state — not "changes" or "improvements". <!-- CL-§1.11 -->
+
 ---
 
 # 2. Architecture Constraints
@@ -202,7 +207,7 @@ Non-technical contributors must be able to:
   git checkout -b branch-name
   ```
 
-- Choose a descriptive branch name (e.g. `fix/schedule-sort`, `feature/today-view`, `docs/update-contract`). <!-- CL-§10.3 -->
+- Choose a descriptive branch name (e.g. `fix/schedule-sort`, `feature/today-view`, `docs/update-contract`). When the task comes from a GitHub Issue, include the issue number (e.g. `feat/42-today-view`, `fix/17-sort-bug`). <!-- CL-§10.3 -->
 - After a branch has been merged and the merge has been pulled back via `main`, delete the local branch. <!-- CL-§10.4 -->
 
 ---
@@ -230,6 +235,14 @@ This applies throughout all phases — not only at Phase 7. The cost of rebasing
 Before writing requirements, discuss the request. <!-- CL-§11.0 -->
 This phase applies to all prompts — bugs, new features, refactors, data changes, documentation — anything. The user is not always right and should be told so when relevant.
 
+**GitHub Issue intake:**
+
+When the task is a GitHub Issue reference (e.g. "hämta issue #42"): <!-- CL-§11.27 -->
+
+- Fetch the issue with `gh issue view <number>`.
+- Read and understand the issue content — this becomes the request to align on.
+- The rest of Phase 0 applies as usual: understand, challenge, assess size, agree.
+
 **Understand and challenge the request:**
 
 - Read the prompt carefully. Identify anything unclear, ambiguous, or potentially wrong.
@@ -249,6 +262,11 @@ This phase applies to all prompts — bugs, new features, refactors, data change
 - Agree on scope and approach before writing any requirements.
 - This phase does not end with a commit. It ends with mutual understanding.
 - **Even when the fix seems obvious** — a one-liner, a typo, a clear bug — always pause to confirm: restate the problem, the proposed fix, and any trade-offs in one or two sentences. A misread prompt is harder to undo than a skipped step. Short messages are easy to misinterpret.
+
+**Issue comment (when task comes from a GitHub Issue):**
+
+After alignment is reached, post a comment on the issue summarizing the agreed solution from the user's perspective — not the technical approach. <!-- CL-§11.28 -->
+Use `gh issue comment <number> --body "..."`. This comment becomes visible context when the closing PR lands.
 
 Do not rubber-stamp prompts. If something seems off, say so. If something is too big, split it.
 
@@ -325,6 +343,7 @@ git rebase origin/main
 - Create the PR with `gh pr create`. <!-- CL-§11.18 -->
 - Title: short imperative phrase, under 70 characters.
 - Body: summary bullets, test plan checklist, Claude Code footer.
+- When the task comes from a GitHub Issue, include `Closes #<number>` in the PR body so the issue is closed automatically on merge. <!-- CL-§11.29 -->
 - No commit is needed for this phase — the PR itself is the deliverable.
 
 ## Phase 8 — CI, Merge, and Cleanup
@@ -333,7 +352,7 @@ After the PR is created, verify that CI passes and complete the merge. <!-- CL-�
 
 **Check CI:**
 
-- Run `gh pr checks <number>` and wait for all checks to pass. <!-- CL-§11.20 -->
+- Run `gh pr checks <number>` and wait for **all** checks to pass — including CodeQL (Analyze actions, Analyze javascript-typescript) and any other checks that may be added later. Do not merge while any check is pending or failing. <!-- CL-§11.20 -->
 - If any check fails, investigate the failure, fix the issue on the branch, push, and re-check. <!-- CL-§11.21 -->
 
 **Merge:**
