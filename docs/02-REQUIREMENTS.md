@@ -900,11 +900,21 @@ The navigation must contain links to all main pages: <!-- 02-§24.4 -->
 - Hem (`index.html`)
 - Schema (`schema.html`)
 - Idag (`idag.html`)
-- Lägg till aktivitet (`lagg-till.html`)
+- Lägg till (`lagg-till.html`)
 - Arkiv (`arkiv.html`)
 
 The link for the current page must be visually marked as active. <!-- 02-§24.5 -->
-These links must be identical on all pages, including the index page. <!-- 02-§24.6 -->
+
+On desktop, the page links use the short labels listed above and are
+displayed in uppercase via CSS (`text-transform: uppercase`). <!-- 02-§24.6 -->
+
+On mobile, the hamburger menu uses longer, more descriptive labels: <!-- 02-§24.16 -->
+
+- Hem
+- Lägrets schema
+- Dagens aktiviteter
+- Lägg till aktivitet
+- Lägerarkiv
 
 ### 24.3 Section links
 
@@ -3235,8 +3245,8 @@ active camp.
 - A camp participant visiting the home page during an active editing
   period must see three action buttons immediately below the hero
   image. <!-- 02-§71.1 -->
-- The buttons must link to: Schema (`schema.html`), Idag (`idag.html`),
-  and Lägg till aktivitet (`lagg-till.html`). <!-- 02-§71.2 -->
+- The buttons must link to, in this order: Idag (`idag.html`), Schema
+  (`schema.html`), and Lägg till (`lagg-till.html`). <!-- 02-§71.2 -->
 - The buttons must be visually prominent, using terracotta pill-shaped
   styling. <!-- 02-§71.3 -->
 
@@ -3397,3 +3407,40 @@ implementation) and the same GitHub API primitives.
 - The navigation bar remains at the same horizontal position when
   navigating between pages, regardless of whether the page content
   requires a scrollbar. <!-- 02-§74.4 -->
+
+---
+
+## 75. Consistent Navigation and Page Title Labels
+
+Navigation labels follow the principle: short where space is limited,
+descriptive where there is room.
+
+### 75.1 User requirements
+
+- A visitor on desktop sees short, uppercase navigation labels so the
+  menu stays compact. <!-- 02-§75.1 -->
+- A visitor using the mobile hamburger menu sees longer, descriptive
+  labels so every link is self-explanatory. <!-- 02-§75.2 -->
+- A visitor using hero quick-access buttons sees short labels in the
+  order Idag, Schema, Lägg till. <!-- 02-§75.3 -->
+
+### 75.2 Site requirements
+
+- The desktop navigation bar displays page links with short labels
+  (Hem, Schema, Idag, Lägg till, Arkiv) rendered in uppercase via
+  `text-transform: uppercase`. <!-- 02-§75.4 -->
+- The mobile hamburger menu displays page links with descriptive labels:
+  Hem, Lägrets schema, Dagens aktiviteter, Lägg till aktivitet,
+  Lägerarkiv. <!-- 02-§75.5 -->
+- The hero action buttons use short labels in this order: Idag, Schema,
+  Lägg till. <!-- 02-§75.6 -->
+- The `<h1>` page title on `schema.html` is
+  "Lägrets schema – {campName}". <!-- 02-§75.7 -->
+- The `<h1>` page title on `idag.html` is
+  "Dagens aktiviteter". <!-- 02-§75.8 -->
+- The `<title>` element on `schema.html` is
+  "Lägrets schema – {campName}". <!-- 02-§75.9 -->
+- The `<title>` element on `idag.html` is
+  "Dagens aktiviteter – {campName}". <!-- 02-§75.10 -->
+- The layout module renders separate label sets for desktop and
+  hamburger rather than sharing a single list. <!-- 02-§75.11 -->
