@@ -35,21 +35,25 @@
   });
 }());
 
-/* Scroll-to-top button – show after scrolling down */
+/* Scroll-to-top button and nav link – show after scrolling down */
 (function () {
   var btn = document.querySelector('.scroll-top');
-  if (!btn) return;
+  var topLink = document.querySelector('.nav-link--top');
+  if (!btn && !topLink) return;
 
   var wasHidden = true;
   window.addEventListener('scroll', function () {
     var shouldHide = window.scrollY < 300;
     if (shouldHide !== wasHidden) {
-      btn.hidden = shouldHide;
+      if (btn) btn.hidden = shouldHide;
+      if (topLink) topLink.hidden = shouldHide;
       wasHidden = shouldHide;
     }
   });
 
-  btn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  if (btn) {
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 }());

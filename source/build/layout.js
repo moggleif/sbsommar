@@ -48,7 +48,7 @@ function pageNav(activeHref, navSections = []) {
     sectionRow = `\n    <div class="nav-sections">\n${sectionItems}\n    </div>`;
   }
 
-  const topLink = '\n    <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>';
+  const topLink = '\n    <a class="nav-link nav-link--top" href="#" hidden>Till toppen &uarr;</a>';
 
   const fbUrlAttr = _feedbackUrl ? ` data-api-url="${_feedbackUrl}"` : '';
   const feedbackBtn = `    <button type="button" class="feedback-btn" aria-label="Ge feedback"${fbUrlAttr}>
