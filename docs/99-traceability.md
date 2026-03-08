@@ -1679,7 +1679,7 @@ Matrix cleanup (2026-02-25):
 | HERO-BTN-03 | `tests/hero-action-buttons.test.js` | `02-§71.3 — Pill-shaped terracotta styling` |
 | HERO-BTN-04 | `tests/hero-action-buttons.test.js` | `02-§71.4 — Data attributes for editing period` |
 | `02-§71.5` | implemented | Inline script in `render-index.js` checks date against data-opens/data-closes |
-| `02-§71.6` | implemented | Container starts with `hidden`, script removes when in period |
+| HERO-BTN-08 | `tests/hero-action-buttons.test.js` | `02-§71.6 — CSS does not override hidden attribute` |
 | HERO-BTN-05 | `tests/hero-action-buttons.test.js` | `02-§71.7 — CSS uses pill radius and terracotta` |
 | HERO-BTN-06 | `tests/hero-action-buttons.test.js` | `02-§71.8 — Flex row centred with gap` |
 | `02-§71.9` | implemented | `flex-wrap: wrap` on `.hero-actions` — manual: verify on mobile viewport |

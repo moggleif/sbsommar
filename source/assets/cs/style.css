@@ -209,6 +209,10 @@ h3 {
   margin-top: var(--space-sm);
 }
 
+.hero-actions[hidden] {
+  display: none;
+}
+
 .hero-actions-btn {
   display: inline-block;
   background: var(--color-terracotta);

@@ -123,6 +123,20 @@ describe('hero action buttons – layout (02-§71.8)', () => {
   });
 });
 
+// ── 02-§71.6 — hidden attribute must override display: flex ─────────────────
+
+describe('hero action buttons – hidden override (02-§71.6)', () => {
+  it('HERO-BTN-08: CSS includes .hero-actions[hidden] { display: none }', () => {
+    const match = CSS.match(/\.hero-actions\[hidden\]\s*\{([^}]+)\}/);
+    assert.ok(match, 'Expected .hero-actions[hidden] rule in CSS');
+    const block = match[1];
+    assert.ok(
+      /display\s*:\s*none/.test(block),
+      'Expected display: none in .hero-actions[hidden]',
+    );
+  });
+});
+
 // ── No action buttons when opensForEditing is null ──────────────────────────
 
 describe('hero action buttons – no editing period', () => {
