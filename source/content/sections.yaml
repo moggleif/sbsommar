@@ -20,7 +20,7 @@ sections:
     nav: Mat
   - file: pricing.md
     id: kostnad
-    nav: Kostnad
+    nav: Kostnader
   - file: local-info.md
     id: service
     nav: Service
@@ -34,5 +34,5 @@ sections:
     id: discord
     nav: Discord
   - file: how-it-started.md
-    id: historia
+    id: historik
     nav: Historik

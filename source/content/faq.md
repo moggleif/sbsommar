@@ -1,4 +1,4 @@
-# Vanliga frågor med korta svar
+# Vanliga frågor
 
 ## När börjar lägret?
 

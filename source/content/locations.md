@@ -1,4 +1,4 @@
-# Hur hittar jag olika lokaler och vilka finns?
+# Vilka lokaler finns och var?
 
 Huvudområdet är [Sysslebäcks camping](http://www.vildmarkscenter.com/sv/sommar-3/sysslebaeks-camping).
 
