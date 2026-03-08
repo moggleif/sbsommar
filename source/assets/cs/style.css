@@ -2213,6 +2213,13 @@ body.modal-open {
   outline: none;
 }
 
+.feedback-scope {
+  text-align: center;
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  margin: 0 0 var(--space-sm);
+}
+
 .feedback-legend {
   font-weight: 700;
   margin-bottom: var(--space-xs);

@@ -85,10 +85,16 @@ describe('validateFeedbackRequest – required fields (02-§73.11)', () => {
   });
 
   it('FB-09: accepts all three valid categories', () => {
-    for (const cat of ['bug', 'suggestion', 'question']) {
+    for (const cat of ['bug', 'suggestion', 'other']) {
       const r = validateFeedbackRequest(validFeedback({ category: cat }));
       assert.strictEqual(r.ok, true, `Expected ok for category '${cat}'`);
     }
+  });
+
+  it('FB-22: rejects old "question" category value', () => {
+    const r = validateFeedbackRequest(validFeedback({ category: 'question' }));
+    assert.strictEqual(r.ok, false);
+    assert.ok(r.error.includes('category'));
   });
 });
 

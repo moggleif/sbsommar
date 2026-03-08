@@ -5,18 +5,18 @@
 
 const { githubRequest, env } = require('./github');
 
-const VALID_CATEGORIES = ['bug', 'suggestion', 'question'];
+const VALID_CATEGORIES = ['bug', 'suggestion', 'other'];
 
 const CATEGORY_LABELS = {
   bug:        'feedback:bug',
   suggestion: 'feedback:suggestion',
-  question:   'feedback:question',
+  other:      'feedback:other',
 };
 
 const CATEGORY_DISPLAY = {
   bug:        'Bugg',
   suggestion: 'Förslag',
-  question:   'Fråga',
+  other:      'Övrigt',
 };
 
 const MAX_LENGTHS = {
@@ -73,7 +73,7 @@ function validateFeedbackRequest(body) {
   const name        = typeof body.name        === 'string' ? body.name.trim()        : '';
 
   if (!category || !VALID_CATEGORIES.includes(category)) {
-    return { ok: false, error: 'category måste vara bug, suggestion eller question' };
+    return { ok: false, error: 'category måste vara bug, suggestion eller other' };
   }
   if (!title) return { ok: false, error: 'title är obligatoriskt' };
   if (!description) return { ok: false, error: 'description är obligatoriskt' };
