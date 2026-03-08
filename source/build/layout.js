@@ -22,17 +22,17 @@ function setFeedbackUrl(url) { _feedbackUrl = url || ''; }
 
 function pageNav(activeHref, navSections = []) {
   const pageLinks = [
-    { href: 'index.html',     label: 'Hem' },
-    { href: 'schema.html',    label: 'Schema' },
-    { href: 'idag.html',      label: 'Idag' },
-    { href: 'lagg-till.html', label: 'Lägg till aktivitet' },
-    { href: 'arkiv.html',     label: 'Arkiv' },
+    { href: 'index.html',     label: 'Hem',        menuLabel: 'Hem' },
+    { href: 'schema.html',    label: 'Schema',     menuLabel: 'Lägrets schema' },
+    { href: 'idag.html',      label: 'Idag',       menuLabel: 'Dagens aktiviteter' },
+    { href: 'lagg-till.html', label: 'Lägg till',  menuLabel: 'Lägg till aktivitet' },
+    { href: 'arkiv.html',     label: 'Arkiv',      menuLabel: 'Lägerarkiv' },
   ];
 
   const pageItems = pageLinks
-    .map(({ href, label }) => {
+    .map(({ href, label, menuLabel }) => {
       const active = href === activeHref ? ' active' : '';
-      return `      <a class="nav-link${active}" href="${href}">${label}</a>`;
+      return `      <a class="nav-link${active}" href="${href}"><span class="nav-label-short">${label}</span><span class="nav-label-long">${menuLabel}</span></a>`;
     })
     .join('\n');
 

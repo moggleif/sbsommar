@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Schema – Test Camp 2025</title>
+  <title>Lägrets schema – Test Camp 2025</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
@@ -23,18 +23,18 @@
     </button>
     <div class="nav-menu" id="nav-menu">
       <div class="nav-pages">
-      <a class="nav-link" href="index.html">Hem</a>
-      <a class="nav-link active" href="schema.html">Schema</a>
-      <a class="nav-link" href="idag.html">Idag</a>
-      <a class="nav-link" href="lagg-till.html">Lägg till aktivitet</a>
-      <a class="nav-link" href="arkiv.html">Arkiv</a>
+      <a class="nav-link" href="index.html"><span class="nav-label-short">Hem</span><span class="nav-label-long">Hem</span></a>
+      <a class="nav-link active" href="schema.html"><span class="nav-label-short">Schema</span><span class="nav-label-long">Lägrets schema</span></a>
+      <a class="nav-link" href="idag.html"><span class="nav-label-short">Idag</span><span class="nav-label-long">Dagens aktiviteter</span></a>
+      <a class="nav-link" href="lagg-till.html"><span class="nav-label-short">Lägg till</span><span class="nav-label-long">Lägg till aktivitet</span></a>
+      <a class="nav-link" href="arkiv.html"><span class="nav-label-short">Arkiv</span><span class="nav-label-long">Lägerarkiv</span></a>
       </div>
     <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>
     </div>
   </nav>
 <main>
   <div class="schedule-header">
-    <h1>Schema – Test Camp 2025</h1>
+    <h1>Lägrets schema – Test Camp 2025</h1>
     <a href="schema.rss" class="rss-link" title="RSS-feed" data-goatcounter-click="click-rss"><img src="images/rss-logo.webp" alt="RSS" class="rss-icon" width="38" height="38"></a>
   </div>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>

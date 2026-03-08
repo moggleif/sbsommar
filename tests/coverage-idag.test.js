@@ -32,9 +32,9 @@ describe('02-§2.4 — Idag page rendered in standard layout', () => {
     assert.ok(html.includes('<html lang="sv">'), 'Swedish lang');
   });
 
-  it('IDAG-07: title includes "Idag" and camp name', () => {
+  it('IDAG-07: title includes "Dagens aktiviteter" and camp name', () => {
     const html = renderIdagPage(CAMP, EVENTS);
-    assert.ok(html.includes('<title>Idag'), 'Idag title');
+    assert.ok(html.includes('<title>Dagens aktiviteter'), 'Dagens aktiviteter title');
     assert.ok(html.includes('SB sommar 2099 juli'), 'camp name in title');
   });
 
@@ -57,9 +57,9 @@ describe('02-§4.5 — All events embedded for client-side day filtering', () =>
     assert.strictEqual(events.length, 2, 'all events embedded');
   });
 
-  it('IDAG-10: heading prefix set to "Idag"', () => {
+  it('IDAG-10: heading prefix set to "Dagens aktiviteter"', () => {
     const html = renderIdagPage(CAMP, EVENTS);
-    assert.ok(html.includes("window.__HEADING_PREFIX__ = 'Idag'"), 'heading prefix');
+    assert.ok(html.includes("window.__HEADING_PREFIX__ = 'Dagens aktiviteter'"), 'heading prefix');
   });
 
   it('IDAG-11: footer not shown (different from display mode)', () => {
@@ -71,9 +71,9 @@ describe('02-§4.5 — All events embedded for client-side day filtering', () =>
 // ── 02-§4.13  Today view has no day navigation ─────────────────────────────
 
 describe('02-§4.13 — No day navigation in Idag view', () => {
-  it('IDAG-12: heading is fixed "Idag"', () => {
+  it('IDAG-12: heading is fixed "Dagens aktiviteter"', () => {
     const html = renderIdagPage(CAMP, EVENTS);
-    assert.ok(html.includes('<h1 id="today-heading">Idag</h1>'), 'fixed heading');
+    assert.ok(html.includes('<h1 id="today-heading">Dagens aktiviteter</h1>'), 'fixed heading');
   });
 
   it('IDAG-13: no day-switcher controls', () => {

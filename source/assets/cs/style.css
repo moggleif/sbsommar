@@ -749,6 +749,10 @@ details.event-row[open] > summary .ev-title {
   opacity: 1;
 }
 
+.nav-label-long {
+  display: none;
+}
+
 .nav-link--section {
   font-size: 11px;
   text-transform: none;
@@ -809,6 +813,14 @@ details.event-row[open] > summary .ev-title {
     border-top: 2px solid rgba(255, 255, 255, 0.3);
     margin-top: var(--space-xs);
     padding-top: var(--space-sm);
+  }
+
+  .nav-label-short {
+    display: none;
+  }
+
+  .nav-label-long {
+    display: inline;
   }
 
   .nav-link {

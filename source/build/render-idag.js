@@ -33,19 +33,19 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Idag – ${campName}</title>
+  <title>Dagens aktiviteter – ${campName}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('idag.html', navSections)}
 <main>
-  <h1 id="today-heading">Idag</h1>
+  <h1 id="today-heading">Dagens aktiviteter</h1>
   <p class="intro">Aktiviteterna nedan är schemalagda för idag. Kolla gärna <a href="schema.html">hela schemat</a> för övriga dagar.</p>
 
   <div id="today-events"></div>
 </main>
-  <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Idag'; window.__EMPTY_CLASS__ = 'intro'; window.__SHOW_FOOTER__ = false;</script>
+  <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = 'Dagens aktiviteter'; window.__EMPTY_CLASS__ = 'intro'; window.__SHOW_FOOTER__ = false;</script>
   <script src="events-today.js"></script>
   <script src="session.js"></script>
   <script src="nav.js" defer></script>

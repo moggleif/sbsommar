@@ -68,8 +68,8 @@ describe('renderSchedulePage', () => {
     assert.ok(html.includes('<!DOCTYPE html>'), 'Expected doctype');
     assert.ok(html.includes('<html lang="sv">'), 'Expected html element');
     assert.ok(html.includes('</html>'), 'Expected closing html tag');
-    assert.ok(html.includes('<title>Schema – Test Camp 2025</title>'), 'Expected title');
-    assert.ok(html.includes('<h1>Schema – Test Camp 2025</h1>'), 'Expected h1');
+    assert.ok(html.includes('<title>Lägrets schema – Test Camp 2025</title>'), 'Expected title');
+    assert.ok(html.includes('<h1>Lägrets schema – Test Camp 2025</h1>'), 'Expected h1');
   });
 
   it('renders all events', () => {
