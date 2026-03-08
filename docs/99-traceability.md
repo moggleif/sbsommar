@@ -525,7 +525,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§24.13` | Expanded menu closable via Escape key | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – `keydown` listener closes on `Escape` | implemented |
 | `02-§24.14` | Expanded menu closable by clicking outside | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – document `click` listener closes when outside nav | implemented |
 | `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-DESIGN.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | `source/assets/css/style.css` – `.nav-toggle { display: none }` at `@media (min-width: 768px)` | implemented |
-| `02-§24.17` | Expanded menu closes on navigation link click | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – click listener on menu links closes menu | gap |
+| `02-§24.17` | Expanded menu closes on navigation link click | 03-ARCHITECTURE.md §12.4 | — (browser JS behaviour; manual: open hamburger menu, click a link, confirm menu closes) | `source/assets/js/client/nav.js` – click listener on menu `<a>` elements closes menu | implemented |
 
 | `02-§25.1` | Content images have `loading="lazy"` (except first section) | 03-ARCHITECTURE.md §4b | IMG-01 | `source/build/render-index.js` – `marked` custom image renderer adds `loading="lazy"`; `renderIndexPage()` strips it from first section | covered |
 | `02-§25.2` | Hero image must NOT have `loading="lazy"` | 03-ARCHITECTURE.md §4b | IMG-02 | `source/build/render-index.js` – hero uses separate template without `loading="lazy"` | covered |
