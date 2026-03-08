@@ -29,7 +29,7 @@
       <a class="nav-link" href="lagg-till.html"><span class="nav-label-short">Lägg till</span><span class="nav-label-long">Lägg till aktivitet</span></a>
       <a class="nav-link" href="arkiv.html"><span class="nav-label-short">Arkiv</span><span class="nav-label-long">Lägerarkiv</span></a>
       </div>
-    <a class="nav-link nav-link--top" href="#">Till toppen &uarr;</a>
+    <a class="nav-link nav-link--top" href="#" hidden>Till toppen &uarr;</a>
     </div>
   </nav>
 <main>
