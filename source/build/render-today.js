@@ -71,4 +71,24 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', goat
 `;
 }
 
-module.exports = { renderTodayPage };
+/**
+ * Renders a lightweight redirect page from the old dagens-schema.html URL
+ * to the new live.html URL.
+ */
+function renderRedirectPage() {
+  return `<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=live.html">
+  <title>Omdirigerar\u2026</title>
+</head>
+<body>
+  <p>Sidan har flyttat till <a href="live.html">live.html</a>.</p>
+  <script>location.replace('live.html');</script>
+</body>
+</html>
+`;
+}
+
+module.exports = { renderTodayPage, renderRedirectPage };
