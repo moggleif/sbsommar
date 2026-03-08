@@ -18,7 +18,7 @@
     '<div class="feedback-backdrop"></div>' +
     '<div class="feedback-dialog">' +
       '<button type="button" class="feedback-close" aria-label="Stäng">&times;</button>' +
-      '<h2 id="feedback-heading" tabindex="-1">Ge oss feedback</h2>' +
+      '<h2 id="feedback-heading" tabindex="-1">Feedback om hemsidan</h2>' +
       '<div id="feedback-content"></div>' +
     '</div>';
   document.body.appendChild(modal);
@@ -84,15 +84,16 @@
   var savedForm = { category: 'suggestion', title: '', description: '', name: '' };
 
   function showForm() {
-    heading.textContent = 'Ge oss feedback';
+    heading.textContent = 'Feedback om hemsidan';
     contentEl.innerHTML =
       '<form id="feedback-form" novalidate>' +
+        '<p class="feedback-scope">Gäller hemsidan och informationen här, inte själva lägret.</p>' +
         '<fieldset>' +
           '<legend class="feedback-legend">Vad gäller det?</legend>' +
           '<div class="feedback-categories">' +
             '<label class="feedback-cat"><input type="radio" name="category" value="bug"' + (savedForm.category === 'bug' ? ' checked' : '') + '> Bugg</label>' +
             '<label class="feedback-cat"><input type="radio" name="category" value="suggestion"' + (savedForm.category === 'suggestion' ? ' checked' : '') + '> Förslag</label>' +
-            '<label class="feedback-cat"><input type="radio" name="category" value="question"' + (savedForm.category === 'question' ? ' checked' : '') + '> Fråga</label>' +
+            '<label class="feedback-cat"><input type="radio" name="category" value="other"' + (savedForm.category === 'other' ? ' checked' : '') + '> Övrigt</label>' +
           '</div>' +
         '</fieldset>' +
         '<div class="field">' +

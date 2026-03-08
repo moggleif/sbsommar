@@ -9,18 +9,18 @@ namespace SBSommar;
  */
 final class Feedback
 {
-    private const VALID_CATEGORIES = ['bug', 'suggestion', 'question'];
+    private const VALID_CATEGORIES = ['bug', 'suggestion', 'other'];
 
     private const CATEGORY_LABELS = [
         'bug'        => 'feedback:bug',
         'suggestion' => 'feedback:suggestion',
-        'question'   => 'feedback:question',
+        'other'      => 'feedback:other',
     ];
 
     private const CATEGORY_DISPLAY = [
         'bug'        => 'Bugg',
         'suggestion' => 'Förslag',
-        'question'   => 'Fråga',
+        'other'      => 'Övrigt',
     ];
 
     private const MAX_LENGTHS = [
@@ -99,7 +99,7 @@ final class Feedback
         $name        = trim((string) ($body['name'] ?? ''));
 
         if ($category === '' || !in_array($category, self::VALID_CATEGORIES, true)) {
-            return ['ok' => false, 'error' => 'category måste vara bug, suggestion eller question'];
+            return ['ok' => false, 'error' => 'category måste vara bug, suggestion eller other'];
         }
         if ($title === '') {
             return ['ok' => false, 'error' => 'title är obligatoriskt'];
