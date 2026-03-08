@@ -3017,6 +3017,8 @@ scroll and better leverage existing design tokens.
 - On mobile, the link must be inside the hamburger menu so it opens and
   closes together with the menu panel. <!-- 02-§64.11 -->
 - The link must scroll to the top of the page. <!-- 02-§64.12 -->
+- On wide screens (desktop nav), the link must be hidden until the user
+  has scrolled down. <!-- 02-§64.15 -->
 
 ### 64.6 Consistent content image widths
 
