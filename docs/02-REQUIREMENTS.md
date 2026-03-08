@@ -934,6 +934,8 @@ index page. <!-- 02-§24.7 -->
   assistive technologies. <!-- 02-§24.12 -->
 - The expanded menu must be closable by pressing Escape. <!-- 02-§24.13 -->
 - The expanded menu must be closable by clicking outside it. <!-- 02-§24.14 -->
+- The expanded menu must close automatically when the user clicks a
+  navigation link inside it. <!-- 02-§24.17 -->
 
 ### 24.5 Desktop behaviour
 

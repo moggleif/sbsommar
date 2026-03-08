@@ -801,6 +801,7 @@ Each section in `sections.yaml` must have a `nav:` field with a concise label
 - Opens/closes the menu on button click.
 - Closes on click outside the nav.
 - Closes on Escape key.
+- Closes when a navigation link inside the menu is clicked.
 - Uses `aria-expanded` on the button for accessibility.
 
 This script is included at the bottom of `<body>` on every page that has a nav.
