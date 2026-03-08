@@ -51,7 +51,7 @@ The following pages must exist:
 | `02-§2.1` | Homepage | `/` | Prospective families, participants |
 | `02-§2.2` | Weekly schedule | `/schema.html` | Participants |
 | `02-§2.4` | Today view | `/idag.html` | Participants |
-| `02-§2.4a` | Display view | `/dagens-schema.html` | Shared screens |
+| `02-§2.4a` | Display view | `/live.html` | Shared screens |
 | `02-§2.5` | Add activity | `/lagg-till.html` | Participants |
 | `02-§2.6` | Archive | `/arkiv.html` | Prospective families, returning participants |
 | `02-§2.7` | RSS feed | `/schema.rss` | Anyone subscribing to the schedule |
@@ -63,7 +63,7 @@ The homepage, schedule pages, add-activity form, and archive share the same head
 None require login. <!-- 02-§2.9 -->
 
 The Today view (`/idag.html`) uses the standard site layout with header and navigation. <!-- 02-§2.4 -->
-The Display view (`/dagens-schema.html`) has no header or navigation — it is a minimal, full-screen display intended for shared screens around the camp. <!-- 02-§2.10 -->
+The Display view (`/live.html`) has no header or navigation — it is a minimal, full-screen display intended for shared screens around the camp. <!-- 02-§2.10 -->
 Both show today's activities; they differ only in presentation context.
 
 ---
@@ -109,7 +109,7 @@ The goal is that a parent visiting for the first time leaves thinking:
 - Shows only today's activities in the standard site layout. <!-- 02-§4.5 -->
 - No navigation to other days. This view is always today. <!-- 02-§4.13 -->
 
-### Display view (`/dagens-schema.html`)
+### Display view (`/live.html`)
 
 - Shows today's activities on a dark, full-screen layout for shared screens around the camp.
 - Must be legible at a distance: dark background, large text, minimal interface chrome. <!-- 02-§4.6 -->
@@ -122,6 +122,7 @@ The goal is that a parent visiting for the first time leaves thinking:
 - The heading shows only the current day and date (e.g. "måndag 26 februari 2026") without a page-title prefix. <!-- 02-§4.19 -->
 - The heading is positioned inside the sidebar, not above the event list, so events use the full available height. <!-- 02-§4.20 -->
 - The layout is optimised for portrait-orientation screens; event rows are compact to maximise the number of visible events. <!-- 02-§4.21 -->
+- The old URL `/dagens-schema.html` serves a redirect page that sends the visitor to `/live.html` via `<meta http-equiv="refresh">` and a JavaScript fallback. <!-- 02-§76.1 -->
 
 ### All schedule views
 
@@ -1800,8 +1801,8 @@ secrets to manage. Production remains on FTP until QA is validated.
   secret the full site deploy uses), with `/public_html/` appended,
   instead of requiring a separate `FTP_TARGET_DIR` secret. <!-- 02-§43.3 -->
 - The upload must include the same files as today: `schema.html`,
-  `idag.html`, `dagens-schema.html`, `events.json`, `schema.rss`,
-  and per-event detail pages under `schema/`. <!-- 02-§43.4 -->
+  `idag.html`, `live.html`, `dagens-schema.html`, `events.json`,
+  `schema.rss`, and per-event detail pages under `schema/`. <!-- 02-§43.4 -->
 - The `FTP_TARGET_DIR` validation step must be removed from the QA
   job. <!-- 02-§43.5 -->
 
@@ -2292,8 +2293,8 @@ workflow builds and deploys via a pre-built Docker image.
   and set an `is_qa` output. <!-- 02-§50.14 -->
 - The workflow must build the site using `node source/build/build.js`. <!-- 02-§50.15 -->
 - The workflow must stage only event-data-derived files for upload: `schema.html`,
-  `idag.html`, `dagens-schema.html`, `events.json`, `schema.rss`, `schema.ics`,
-  `kalender.html`, and per-event pages under `schema/`. <!-- 02-§50.16 -->
+  `idag.html`, `live.html`, `dagens-schema.html`, `events.json`, `schema.rss`,
+  `schema.ics`, `kalender.html`, and per-event pages under `schema/`. <!-- 02-§50.16 -->
 - The workflow must deploy to QA via rsync in a parallel job. <!-- 02-§50.17 -->
 - The workflow must deploy to Production via SCP, skipped when the changed
   file belongs to a QA camp. <!-- 02-§50.18 -->
@@ -2550,7 +2551,7 @@ appropriate output for each context.
 - In the weekly schedule (schema.html), the description inside the
   expandable event row must be rendered as formatted HTML produced by
   `marked.parse()`. <!-- 02-§56.2 -->
-- In the today view (idag.html / dagens-schema.html), the description
+- In the today view (idag.html / live.html), the description
   must be rendered as formatted HTML. The HTML must be pre-rendered at
   build time and delivered in the JSON payload to avoid shipping the
   `marked` library to the client. <!-- 02-§56.3 -->
@@ -2909,7 +2910,7 @@ no-backend, minimal-JS constraints.
 
 - The GoatCounter script tag must be included on every page that uses the
   shared site layout (header/footer pages). <!-- 02-§63.7 -->
-- The display view (`/dagens-schema.html`) must also include the analytics
+- The display view (`/live.html`) must also include the analytics
   script, even though it has no shared layout. <!-- 02-§63.8 -->
 - The script must load asynchronously and must not block page
   rendering. <!-- 02-§63.9 -->
