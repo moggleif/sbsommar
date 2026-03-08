@@ -19,6 +19,13 @@
     }
   });
 
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }
+  });
+
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && menu.classList.contains('is-open')) {
       toggle.setAttribute('aria-expanded', 'false');
