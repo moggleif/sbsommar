@@ -8,7 +8,7 @@ const QRCode = require('qrcode');
 const { renderSchedulePage, toDateString } = require('./render');
 const { renderAddPage } = require('./render-add');
 const { renderEditPage, editApiUrl } = require('./render-edit');
-const { renderTodayPage } = require('./render-today');
+const { renderTodayPage, renderRedirectPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions } = require('./render-index');
 const { renderArkivPage } = require('./render-arkiv');
@@ -138,7 +138,7 @@ async function main() {
   cleanOutputDir(OUTPUT_DIR);
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
-  // ── Build timestamp — embedded in dagens-schema.html and version.json ───────
+  // ── Build timestamp — embedded in live.html and version.json ────────────────
   // Used by the display page to show last-updated time and detect new deploys.
   const buildTime = new Date().toISOString();
 
@@ -194,10 +194,13 @@ async function main() {
     .replace(/<!DOCTYPE[^>]*>\s*/g, '');
 
   const todayHtml = renderTodayPage(camp, events, qrSvg, SITE_URL, buildTime, GOATCOUNTER_CODE);
-  fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), todayHtml, 'utf8');
-  console.log(`Built: public/dagens-schema.html  (${events.length} events)`);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'live.html'), todayHtml, 'utf8');
+  console.log(`Built: public/live.html  (${events.length} events)`);
 
-  // ── Write version.json — polled by dagens-schema.html for live reload ────────
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'dagens-schema.html'), renderRedirectPage(), 'utf8');
+  console.log('Built: public/dagens-schema.html  (redirect → live.html)');
+
+  // ── Write version.json — polled by live.html for live reload ─────────────────
   fs.writeFileSync(path.join(OUTPUT_DIR, 'version.json'), JSON.stringify({ version: buildTime }), 'utf8');
   console.log('Built: public/version.json');
 

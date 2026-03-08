@@ -7,7 +7,7 @@
  *   window.__EMPTY_CLASS__    – CSS class for the "no events" paragraph
  *   window.__SHOW_FOOTER__    – boolean; if true, renders an activity count footer
  *
- * Display-mode only (set only in dagens-schema.html):
+ * Display-mode only (set only in live.html):
  *   window.__BUILD_TIME__     – ISO timestamp of the last build (for display)
  *   window.__VERSION__        – same timestamp, used for version-change detection
  */
@@ -85,7 +85,7 @@
 
   // ── Status bar and auto-reload (display mode only) ────────────────────────
   // Only active when __BUILD_TIME__ is defined, which only happens in
-  // dagens-schema.html. On idag.html these features are intentionally absent.
+  // live.html. On idag.html these features are intentionally absent.
 
   if (window.__BUILD_TIME__) {
 
