@@ -1087,9 +1087,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             990
-Covered (implemented + tested): 483
-Implemented, not tested:        496
-Gap (no implementation):         11
+Covered (implemented + tested): 492
+Implemented, not tested:        498
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1722,14 +1722,14 @@ Matrix cleanup (2026-02-25):
 | `02-§74.3` | covered | MN-19: `html` has `scroll-padding-top`; `source/assets/cs/style.css` `scroll-padding-top: 80px` |
 | `02-§74.4` | covered | MN-20: `html` has `scrollbar-gutter: stable` |
 | | | **§75 — Consistent Navigation and Page Title Labels** |
-| `02-§75.1` | gap | Desktop nav shows short uppercase labels |
-| `02-§75.2` | gap | Mobile hamburger shows descriptive labels |
-| `02-§75.3` | gap | Hero buttons order: Idag, Schema, Lägg till |
-| `02-§75.4` | gap | Desktop labels: Hem, Schema, Idag, Lägg till, Arkiv (uppercase CSS) |
-| `02-§75.5` | gap | Mobile labels: Hem, Lägrets schema, Dagens aktiviteter, Lägg till aktivitet, Lägerarkiv |
-| `02-§75.6` | gap | Hero action buttons: Idag, Schema, Lägg till |
-| `02-§75.7` | gap | schema.html h1: "Lägrets schema – {campName}" |
-| `02-§75.8` | gap | idag.html h1: "Dagens aktiviteter" |
-| `02-§75.9` | gap | schema.html title: "Lägrets schema – {campName}" |
-| `02-§75.10` | gap | idag.html title: "Dagens aktiviteter – {campName}" |
-| `02-§75.11` | gap | Layout renders separate label sets for desktop and hamburger |
+| `02-§75.1` | implemented | Manual: open desktop, confirm short uppercase labels |
+| `02-§75.2` | implemented | Manual: open mobile, confirm descriptive labels in hamburger |
+| `02-§75.3` | covered | NL-04: hero buttons order Idag, Schema, Lägg till |
+| `02-§75.4` | covered | NL-01: desktop labels Hem, Schema, Idag, Lägg till, Arkiv; `style.css` `.nav-link { text-transform: uppercase }` |
+| `02-§75.5` | covered | NL-02: hamburger labels Hem, Lägrets schema, Dagens aktiviteter, Lägg till aktivitet, Lägerarkiv |
+| `02-§75.6` | covered | NL-04: hero action buttons Idag, Schema, Lägg till |
+| `02-§75.7` | covered | NL-05: schema h1 "Lägrets schema – {campName}"; `render.js` |
+| `02-§75.8` | covered | NL-07: idag h1 "Dagens aktiviteter"; `render-idag.js` |
+| `02-§75.9` | covered | NL-06: schema title "Lägrets schema – {campName}"; `render.js` |
+| `02-§75.10` | covered | NL-08: idag title "Dagens aktiviteter – {campName}"; `render-idag.js` |
+| `02-§75.11` | covered | NL-03: each nav link has both short and long label spans; `layout.js` |
