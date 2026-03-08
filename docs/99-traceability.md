@@ -140,7 +140,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§4.19` | Display view heading shows only the current day and date, without a page-title prefix | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.46 | DIS-13, DIS-24 | `source/build/render-today.js` – `window.__HEADING_PREFIX__ = ''`; `source/assets/js/client/events-today.js` – ternary skips prefix when empty | covered |
 | `02-§4.20` | Display view heading is positioned inside the sidebar, not above the event list | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.44 | DIS-24, DIS-25 | `source/build/render-today.js` – `<h1 id="today-heading" class="sidebar-heading">` inside `<aside class="dagens-sidebar">` | covered |
 | `02-§4.21` | Display view is optimised for portrait screens; event rows are compact | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.45, §6.48 | — (manual: open `/live.html` in a portrait viewport ~1080×1920 and confirm event rows are compact and the sidebar is narrow) | `source/assets/cs/style.css` – `.dagens-events { flex: 3 }`, `.dagens-sidebar { flex: 1 }`, `body.display-mode .event-row { font-size: 13px; padding: 6px }` | implemented |
-| `02-§76.1` | Old `/dagens-schema.html` URL redirects to `/live.html` | 02-REQUIREMENTS.md §4 | — | `source/build/build.js` → `public/dagens-schema.html` (redirect) | gap |
+| `02-§76.1` | Old `/dagens-schema.html` URL redirects to `/live.html` | 02-REQUIREMENTS.md §4 | RDR-01..04 | `source/build/render-today.js` – `renderRedirectPage()`; `source/build/build.js` → `public/dagens-schema.html` | covered |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | RDC-05..06 | No exclusion logic in `source/build/render.js`; CSS handles layout | covered |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -1088,9 +1088,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             991
-Covered (implemented + tested): 492
+Covered (implemented + tested): 493
 Implemented, not tested:        498
-Gap (no implementation):          1
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1734,5 +1734,5 @@ Matrix cleanup (2026-02-25):
 | `02-§75.9` | covered | NL-06: schema title "Lägrets schema – {campName}"; `render.js` |
 | `02-§75.10` | covered | NL-08: idag title "Dagens aktiviteter – {campName}"; `render-idag.js` |
 | `02-§75.11` | covered | NL-03: each nav link has both short and long label spans; `layout.js` |
-| | | **§76 — Rename display view to live.html** |
-| `02-§76.1` | gap | `source/build/build.js` → `public/dagens-schema.html` (redirect to `/live.html`) |
+| | | **§76 — Redirect from old display view URL** |
+| `02-§76.1` | covered | RDR-01..04: `renderRedirectPage()` produces redirect; `build.js` writes `public/dagens-schema.html` |
