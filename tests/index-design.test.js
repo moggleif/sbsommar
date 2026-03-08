@@ -160,6 +160,13 @@ describe('pageNav – back-to-top link (02-§64.10–64.12)', () => {
     const menuEnd = html.lastIndexOf('</div>');
     assert.ok(topLink > menuStart && topLink < menuEnd, 'Back-to-top link must be inside nav-menu');
   });
+
+  it('IDX-20: back-to-top link has hidden attribute by default (02-§64.24)', () => {
+    const html = pageNav('index.html', SECTIONS);
+    const match = html.match(/<a[^>]*nav-link--top[^>]*>/);
+    assert.ok(match, 'Expected nav-link--top element');
+    assert.ok(match[0].includes('hidden'), 'Back-to-top link must have hidden attribute');
+  });
 });
 
 // ── CSS rules (02-§64.1, §64.5, §64.8) ─────────────────────────────────────
