@@ -60,7 +60,7 @@ describe('hero action buttons – links (02-§71.2)', () => {
     );
     assert.ok(actionsBlock.includes('Schema'), 'Expected "Schema" label');
     assert.ok(actionsBlock.includes('Idag'), 'Expected "Idag" label');
-    assert.ok(actionsBlock.includes('Lägg till aktivitet'), 'Expected "Lägg till aktivitet" label');
+    assert.ok(actionsBlock.includes('Lägg till'), 'Expected "Lägg till" label');
   });
 });
 

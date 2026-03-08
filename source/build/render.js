@@ -116,7 +116,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Schema – ${campName}</title>
+  <title>Lägrets schema – ${campName}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>
@@ -124,7 +124,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
 ${pageNav('schema.html', navSections)}
 <main>
   <div class="schedule-header">
-    <h1>Schema – ${campName}</h1>
+    <h1>Lägrets schema – ${campName}</h1>
     <a href="schema.rss" class="rss-link" title="RSS-feed" data-goatcounter-click="click-rss"><img src="images/rss-logo.webp" alt="RSS" class="rss-icon" width="38" height="38"></a>${icalIconHtml}
   </div>
   <p class="intro">Om du klickar på en aktivitets rubrik så finns det ofta lite mer detaljerad information. När plats säger [annat], då ska platsen stå i den detaljerade informationen.</p>

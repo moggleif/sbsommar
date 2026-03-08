@@ -158,7 +158,7 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
   const heroDimAttrs = heroDims ? ` width="${heroDims.width}" height="${heroDims.height}"` : '';
 
   const actionButtonsHtml = (opensForEditing && editingCloses)
-    ? `\n    <div class="hero-actions" hidden data-opens="${opensForEditing}" data-closes="${editingCloses}">\n      <a href="schema.html" class="hero-actions-btn">Schema</a>\n      <a href="idag.html" class="hero-actions-btn">Idag</a>\n      <a href="lagg-till.html" class="hero-actions-btn">Lägg till aktivitet</a>\n    </div>`
+    ? `\n    <div class="hero-actions" hidden data-opens="${opensForEditing}" data-closes="${editingCloses}">\n      <a href="idag.html" class="hero-actions-btn">Idag</a>\n      <a href="schema.html" class="hero-actions-btn">Schema</a>\n      <a href="lagg-till.html" class="hero-actions-btn">Lägg till</a>\n    </div>`
     : '';
 
   const heroHtml = heroSrc
