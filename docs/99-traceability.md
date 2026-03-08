@@ -1088,10 +1088,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             991
+Total requirements:             992
 Covered (implemented + tested): 493
 Implemented, not tested:        498
-Gap (no implementation):          0
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1615,6 +1615,7 @@ Matrix cleanup (2026-02-25):
 | IDX-12 | `tests/index-design.test.js` | `02-§64.10 — "Till toppen" link in navigation` |
 | IDX-14 | `tests/index-design.test.js` | `02-§64.11 — Back-to-top link inside hamburger menu on mobile` |
 | IDX-13 | `tests/index-design.test.js` | `02-§64.12 — Back-to-top link has href="#"` |
+| `02-§64.24` | gap | Desktop nav "Till toppen" link hidden until scroll — `nav.js` + `layout.js` |
 | `02-§64.13` | implemented | Content images max-width 500 px — `.content-img` in style.css |
 | `02-§64.14` | implemented | Accommodation images max-width 250 px — `.content-img[alt="Stuga"]` etc. in style.css |
 | `02-§64.15` | implemented | Servicehus image matches hero width — `.content-img[alt="Servicehus"]` in style.css |
