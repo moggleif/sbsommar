@@ -3332,8 +3332,8 @@ implementation) and the same GitHub API primitives.
   edge. <!-- 02-§73.1 -->
 - Clicking the button must open a modal dialog. <!-- 02-§73.2 -->
 - The modal must contain a form with the following fields: <!-- 02-§73.3 -->
-  - Category (radio buttons): Bugg, Förslag, Fråga — mapping to GitHub
-    labels `feedback:bug`, `feedback:suggestion`, `feedback:question`.
+  - Category (radio buttons): Bugg, Förslag, Övrigt — mapping to GitHub
+    labels `feedback:bug`, `feedback:suggestion`, `feedback:other`.
   - Title (required, max 200 characters).
   - Description (required, max 2 000 characters).
   - Name / contact info (optional, max 200 characters).
@@ -3354,7 +3354,7 @@ implementation) and the same GitHub API primitives.
   - Body: description text followed by a metadata table containing
     category, page URL, viewport size, timestamp (ISO 8601), name/contact
     (or "Ej angivet"), and User-Agent.
-  - Labels: `feedback:bug`, `feedback:suggestion`, or `feedback:question`
+  - Labels: `feedback:bug`, `feedback:suggestion`, or `feedback:other`
     depending on the selected category.
 - The API must return `{ success: true, issueUrl: "<URL>" }` on success
   so the client can link to the created issue. <!-- 02-§73.9 -->
@@ -3396,6 +3396,15 @@ implementation) and the same GitHub API primitives.
   produce equivalent error messages. <!-- 02-§73.20 -->
 - Both must use the existing `githubRequest()` / `githubRequest()`
   primitives for the GitHub Issues API call. <!-- 02-§73.21 -->
+
+### 73.7 Clarity requirements
+
+- The modal heading must be "Feedback om hemsidan" so visitors
+  understand the feedback concerns the website, not the
+  camp. <!-- 02-§73.22 -->
+- A short help text must appear below the heading: "Gäller hemsidan
+  och informationen här, inte själva
+  lägret." <!-- 02-§73.23 -->
 
 ## 74. Sticky Navigation Positioning
 
