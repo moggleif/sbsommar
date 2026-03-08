@@ -69,7 +69,7 @@ jobs:
         if: steps.gate.outputs.skip != 'true'
         run: |
           mkdir -p staging
-          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
+          for FILE in schema.html idag.html live.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
             if [ -f "public/$FILE" ]; then
               cp "public/$FILE" "staging/$FILE"
               echo "Staged: $FILE"
@@ -154,7 +154,7 @@ jobs:
         if: steps.gate.outputs.skip != 'true'
         run: |
           mkdir -p staging
-          for FILE in schema.html idag.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
+          for FILE in schema.html idag.html live.html dagens-schema.html events.json schema.rss schema.ics kalender.html; do
             if [ -f "public/$FILE" ]; then
               cp "public/$FILE" "staging/$FILE"
               echo "Staged: $FILE"

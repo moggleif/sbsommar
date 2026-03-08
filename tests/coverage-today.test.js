@@ -3,7 +3,7 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { renderTodayPage } = require('../source/build/render-today');
+const { renderTodayPage, renderRedirectPage } = require('../source/build/render-today');
 
 // ── Shared fixtures ─────────────────────────────────────────────────────────
 
@@ -16,7 +16,7 @@ const EVENTS = [
 
 const QR_SVG = '<svg xmlns="http://www.w3.org/2000/svg"><rect/></svg>';
 
-// ── 02-§2.4a  Display view at /dagens-schema.html ───────────────────────────
+// ── 02-§2.4a  Display view at /live.html ─────────────────────────────────────
 
 describe('02-§2.4a — Display view rendered as display mode', () => {
   it('DIS-01: produces a <!DOCTYPE html> page', () => {
@@ -235,5 +235,28 @@ describe('02-§56.3 — Today view pre-renders description HTML', () => {
     const match = html.match(/window\.__EVENTS__\s*=\s*(\[.*?\]);/s);
     const events = JSON.parse(match[1]);
     assert.strictEqual(events[0].descriptionHtml, null, 'descriptionHtml should be null');
+  });
+});
+
+// ── 02-§76.1  Redirect from old dagens-schema.html URL ──────────────────────
+
+describe('02-§76.1 — Redirect page from dagens-schema.html to live.html', () => {
+  const html = renderRedirectPage();
+
+  it('RDR-01: produces a <!DOCTYPE html> page', () => {
+    assert.ok(html.startsWith('<!DOCTYPE html>'), 'starts with DOCTYPE');
+  });
+
+  it('RDR-02: has meta refresh pointing to live.html', () => {
+    assert.ok(html.includes('http-equiv="refresh"'), 'meta refresh present');
+    assert.ok(html.includes('url=live.html'), 'refresh target is live.html');
+  });
+
+  it('RDR-03: has JavaScript fallback redirect', () => {
+    assert.ok(html.includes("location.replace('live.html')"), 'JS redirect present');
+  });
+
+  it('RDR-04: has a visible link to live.html', () => {
+    assert.ok(html.includes('href="live.html"'), 'link to live.html present');
   });
 });

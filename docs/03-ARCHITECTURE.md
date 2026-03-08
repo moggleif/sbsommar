@@ -687,7 +687,7 @@ Each deploy job:
    camp. If so, the remaining steps are skipped.
 4. Runs `node source/build/build.js`.
 5. Stages only event-data-derived files: `schema.html`, `idag.html`,
-   `dagens-schema.html`, `events.json`, `schema.rss`, `schema.ics`,
+   `live.html`, `events.json`, `schema.rss`, `schema.ics`,
    `kalender.html`, and per-event pages under `schema/`.
 6. Uploads the staged files via SCP to the target environment.
 
@@ -1507,7 +1507,7 @@ before `</body>` on every page. Two inclusion points:
 1. **Shared layout pages** — the layout helper (`layoutTop`/`layoutBottom` or
    equivalent) includes the script once, so all pages with the site header
    and footer inherit it.
-2. **Display view** (`/dagens-schema.html`) — does not use the shared layout,
+2. **Display view** (`/live.html`) — does not use the shared layout,
    so its renderer includes the script separately.
 
 The script tag uses the `data-goatcounter` attribute pointing to the

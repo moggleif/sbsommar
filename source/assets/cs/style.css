@@ -302,7 +302,7 @@ blockquote {
   margin-bottom: var(--space-lg);
 }
 
-/* ── Today card (dagens-schema) ── */
+/* ── Today card (live / display view) ── */
 
 .today-card {
   background: var(--color-white);
@@ -312,7 +312,7 @@ blockquote {
   margin-bottom: var(--space-sm);
 }
 
-/* ── Display mode (dagens-schema dark theme for screens) ── */
+/* ── Display mode (live.html dark theme for screens) ── */
 
 body.display-mode {
   background: #0f1923;

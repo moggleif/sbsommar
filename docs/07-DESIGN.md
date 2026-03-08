@@ -229,7 +229,7 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 
 ### Display sidebar — portrait layout
 
-`/dagens-schema.html` is optimised for portrait-orientation screens (e.g. 1080 × 1920 px). The heading moves into the sidebar so events use the full available height from the top of the page. <!-- 07-§6.44 -->
+`/live.html` is optimised for portrait-orientation screens (e.g. 1080 × 1920 px). The heading moves into the sidebar so events use the full available height from the top of the page. <!-- 07-§6.44 -->
 
 - Layout: two columns. Events column `flex: 3`; sidebar `flex: 1` (~75 % / 25 %). <!-- 07-§6.45 -->
 - The heading (`h1#today-heading`) sits at the top of the sidebar. It shows only the current day and date; no page-title prefix. <!-- 07-§6.46 -->
@@ -238,7 +238,7 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 
 ### Display sidebar status widget
 
-The sidebar of `/dagens-schema.html` shows a compact status widget above the descriptive text and QR code.
+The sidebar of `/live.html` shows a compact status widget above the descriptive text and QR code.
 
 - The widget contains a live clock (current time, updated every second) and a line showing when events were last updated. <!-- 07-§6.40 -->
 - Clock text: sage green (`var(--color-sage)`), `48px`, `700` weight, tabular-nums, line-height `1`. <!-- 07-§6.41 -->

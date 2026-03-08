@@ -114,7 +114,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§2.1` | Homepage exists and is served at `/` | 03-ARCHITECTURE.md §5, §6 | COV-01..05 | `source/build/render-index.js`, `source/build/build.js` → `public/index.html` | covered |
 | `02-§2.2` | Weekly schedule page exists at `/schema.html` | 03-ARCHITECTURE.md §5 | SNP-01 | `source/build/render.js`, `source/build/build.js` → `public/schema.html` | covered |
 | `02-§2.4` | Today view at `/idag.html` shows today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | IDAG-05..18 | `source/build/render-idag.js`, `source/build/build.js` → `public/idag.html` | covered |
-| `02-§2.4a` | Display view at `/dagens-schema.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | DIS-01..25 | `source/build/render-today.js`, `source/build/build.js` → `public/dagens-schema.html` | covered |
+| `02-§2.4a` | Display view at `/live.html` uses dark background, large text, and no navigation | 03-ARCHITECTURE.md §3, 07-DESIGN.md §6 | DIS-01..25 | `source/build/render-today.js`, `source/build/build.js` → `public/live.html` | covered |
 | `02-§2.5` | Add-activity form exists at `/lagg-till.html` | 03-ARCHITECTURE.md §3, §6 | RADD-01..04 | `source/build/render-add.js`, `source/build/build.js` → `public/lagg-till.html` | covered |
 | `02-§2.6` | Archive page exists at `/arkiv.html` | 03-ARCHITECTURE.md §4a | ARK-01..08 | `source/build/render-arkiv.js`, `source/build/build.js` → `public/arkiv.html` | covered |
 | `02-§2.7` | RSS feed exists at `/schema.rss` | 03-ARCHITECTURE.md §17 | RSS-01 | `source/build/render-rss.js`, `source/build/build.js` → `public/schema.rss` | covered |
@@ -130,7 +130,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
 | `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
 | `02-§4.5` | Today view (`/idag.html`) shows only today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | IDAG-09..11 | `source/build/render-idag.js`, `source/assets/js/client/events-today.js` | covered |
-| `02-§4.6` | Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | DIS-07, CSS-37 | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` → `/dagens-schema.html` | covered |
+| `02-§4.6` | Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | DIS-07, CSS-37 | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` → `/live.html` | covered |
 | `02-§4.7` | Display view requires no interaction to stay useful | 03-ARCHITECTURE.md §3 | DIS-08..09 | `source/build/render-today.js` – no day controls rendered | covered |
 | `02-§4.14` | Display view shows no site-level footer | 02-REQUIREMENTS.md §4 | DIS-19 | `source/build/render-today.js` – `pageFooter` call and import removed; no `<footer>` in template | covered |
 | `02-§4.15` | Display view shows a live clock of the current time in the sidebar, updated every second | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.40 | DIS-22, DIS-23 | `source/build/render-today.js` – `<div class="status-bar">` with `id="live-clock"`; `source/assets/js/client/events-today.js` – `updateClock()` via `setInterval` | covered |
@@ -139,7 +139,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§4.18` | Display view reloads automatically shortly after midnight to show the new day's events | 02-REQUIREMENTS.md §4 | — (manual: advance system clock past 00:00 and confirm page reloads) | `source/assets/js/client/events-today.js` – `scheduleMidnightReload()` via `setTimeout` | implemented |
 | `02-§4.19` | Display view heading shows only the current day and date, without a page-title prefix | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.46 | DIS-13, DIS-24 | `source/build/render-today.js` – `window.__HEADING_PREFIX__ = ''`; `source/assets/js/client/events-today.js` – ternary skips prefix when empty | covered |
 | `02-§4.20` | Display view heading is positioned inside the sidebar, not above the event list | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.44 | DIS-24, DIS-25 | `source/build/render-today.js` – `<h1 id="today-heading" class="sidebar-heading">` inside `<aside class="dagens-sidebar">` | covered |
-| `02-§4.21` | Display view is optimised for portrait screens; event rows are compact | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.45, §6.48 | — (manual: open `/dagens-schema.html` in a portrait viewport ~1080×1920 and confirm event rows are compact and the sidebar is narrow) | `source/assets/cs/style.css` – `.dagens-events { flex: 3 }`, `.dagens-sidebar { flex: 1 }`, `body.display-mode .event-row { font-size: 13px; padding: 6px }` | implemented |
+| `02-§4.21` | Display view is optimised for portrait screens; event rows are compact | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.45, §6.48 | — (manual: open `/live.html` in a portrait viewport ~1080×1920 and confirm event rows are compact and the sidebar is narrow) | `source/assets/cs/style.css` – `.dagens-events { flex: 3 }`, `.dagens-sidebar { flex: 1 }`, `body.display-mode .event-row { font-size: 13px; padding: 6px }` | implemented |
+| `02-§76.1` | Old `/dagens-schema.html` URL redirects to `/live.html` | 02-REQUIREMENTS.md §4 | RDR-01..04 | `source/build/render-today.js` – `renderRedirectPage()`; `source/build/build.js` → `public/dagens-schema.html` | covered |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | RDC-05..06 | No exclusion logic in `source/build/render.js`; CSS handles layout | covered |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -762,7 +763,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§41.13` | Original `deploy.yml` removed | 08-ENVIRONMENTS.md §Workflows | manual: verify file does not exist | `.github/workflows/deploy.yml` deleted | implemented |
 | `02-§41.14` | Event data deploy targets both QA and Production in parallel | 08-ENVIRONMENTS.md §Event data flow | manual: event PR triggers two parallel deploy jobs | `.github/workflows/event-data-deploy.yml` (`deploy-qa` + `deploy-prod` jobs) | implemented |
 | `02-§41.15` | Each event data deploy builds with its environment's `SITE_URL` and `API_URL` | 08-ENVIRONMENTS.md §Event data flow | manual: inspect `event-data-deploy.yml` build steps | `.github/workflows/event-data-deploy.yml` | implemented |
-| `02-§41.16` | QR code URL uses `SITE_URL` instead of hardcoded domain | 08-ENVIRONMENTS.md | manual: `SITE_URL=https://example.com npm run build`, check QR in `dagens-schema.html` | `source/build/build.js` line 134 | implemented |
+| `02-§41.16` | QR code URL uses `SITE_URL` instead of hardcoded domain | 08-ENVIRONMENTS.md | manual: `SITE_URL=https://example.com npm run build`, check QR in `live.html` | `source/build/build.js` line 134 | implemented |
 | `02-§41.17` | `ci.yml` uses repository-level `SITE_URL` secret | 08-ENVIRONMENTS.md §Secrets schema | manual: inspect `ci.yml` | `.github/workflows/ci.yml` (unchanged) | implemented |
 | `02-§41.18` | Local development uses `.env` for environment variables | 08-ENVIRONMENTS.md §Local development | manual: verify `.env` works for local build | `.env.example`, `source/build/build.js` (loads `.env`) | implemented |
 | `02-§41.19` | `.env.example` documents the environment management setup | 08-ENVIRONMENTS.md §Local development | manual: inspect `.env.example` | `.env.example` | implemented |
@@ -1086,8 +1087,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             990
-Covered (implemented + tested): 492
+Total requirements:             991
+Covered (implemented + tested): 493
 Implemented, not tested:        498
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
@@ -1733,3 +1734,5 @@ Matrix cleanup (2026-02-25):
 | `02-§75.9` | covered | NL-06: schema title "Lägrets schema – {campName}"; `render.js` |
 | `02-§75.10` | covered | NL-08: idag title "Dagens aktiviteter – {campName}"; `render-idag.js` |
 | `02-§75.11` | covered | NL-03: each nav link has both short and long label spans; `layout.js` |
+| | | **§76 — Redirect from old display view URL** |
+| `02-§76.1` | covered | RDR-01..04: `renderRedirectPage()` produces redirect; `build.js` writes `public/dagens-schema.html` |
