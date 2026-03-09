@@ -262,7 +262,10 @@
     var linkHtml = issueUrl
       ? '<p><a href="' + esc(issueUrl) + '" target="_blank" rel="noopener">Se din feedback på GitHub →</a></p>'
       : '';
-    contentEl.innerHTML = linkHtml +
+    var dryRunHtml = issueUrl
+      ? ''
+      : '<p class="form-error-msg">OBS: Detta är en testsida. Din feedback sparades inte. Besök den riktiga siten för att skicka feedback.</p>';
+    contentEl.innerHTML = linkHtml + dryRunHtml +
       '<button type="button" class="btn-primary" id="fb-done">Stäng</button>';
     focusFirst();
     document.getElementById('fb-done').addEventListener('click', function () {
