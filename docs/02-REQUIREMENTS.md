@@ -1109,11 +1109,8 @@ visitors can see what is planned and what has already happened this year.
 
 - Each camp item shows: camp name, location, and formatted date range
   (e.g. "2 aug – 9 aug 2026"). <!-- 02-§28.11 -->
-- The camp name is rendered as plain text (not a clickable link).
-  The Facebook group link is available via the hero social icon and does
-  not need to be repeated on each camp item. <!-- 02-§28.12 -->
-- The camp name uses `var(--color-terracotta)` to visually distinguish it
-  from the location and date meta text. <!-- 02-§28.18 -->
+- The camp name is rendered as plain text, not a clickable link. <!-- 02-§28.12 -->
+- The camp name uses `var(--color-terracotta)`. <!-- 02-§28.18 -->
 - If the camp has a non-empty `information` field, the information text is
   shown below the camp entry. <!-- 02-§28.13 -->
 
