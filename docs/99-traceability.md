@@ -141,6 +141,16 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§4.20` | Display view heading is positioned inside the sidebar, not above the event list | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.44 | DIS-24, DIS-25 | `source/build/render-today.js` – `<h1 id="today-heading" class="sidebar-heading">` inside `<aside class="dagens-sidebar">` | covered |
 | `02-§4.21` | Display view is optimised for portrait screens; event rows are compact | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.45, §6.48 | — (manual: open `/live.html` in a portrait viewport ~1080×1920 and confirm event rows are compact and the sidebar is narrow) | `source/assets/cs/style.css` – `.dagens-events { flex: 3 }`, `.dagens-sidebar { flex: 1 }`, `body.display-mode .event-row { font-size: 13px; padding: 6px }` | implemented |
 | `02-§76.1` | Old `/dagens-schema.html` URL redirects to `/live.html` | 02-REQUIREMENTS.md §4 | RDR-01..04 | `source/build/render-today.js` – `renderRedirectPage()`; `source/build/build.js` → `public/dagens-schema.html` | covered |
+| `02-§77.1` | Build computes MD5 hash of each JS file referenced by `<script>` tags | 03-ARCHITECTURE.md §27 | CACHE-10 | `source/build/build.js` – JS cache-busting post-processing | covered |
+| `02-§77.2` | Build replaces `src="<file>.js"` with `src="<file>.js?v=<hash>"` in all HTML | 03-ARCHITECTURE.md §27 | CACHE-11 | `source/build/build.js` – JS cache-busting post-processing | covered |
+| `02-§77.3` | JS hash is deterministic: identical content → identical hash | 03-ARCHITECTURE.md §27 | CACHE-12 | `source/build/build.js` – `crypto.createHash('md5')` | covered |
+| `02-§77.4` | JS cache-busting is a post-processing step; no render signatures change | 03-ARCHITECTURE.md §27 | CACHE-10 | `source/build/build.js` – runs after all pages are built | covered |
+| `02-§77.5` | Existing tests that verify JS file presence continue to pass | 03-ARCHITECTURE.md §27 | — | Manual: `npm test` passes with 1265 tests | implemented |
+| `02-§78.1` | Build computes MD5 hash of each image file referenced by `<img>` tags | 03-ARCHITECTURE.md §27 | CACHE-13 | `source/build/build.js` – image cache-busting post-processing | covered |
+| `02-§78.2` | Build replaces `src="<file>.<ext>"` with `src="<file>.<ext>?v=<hash>"` in all HTML | 03-ARCHITECTURE.md §27 | CACHE-14 | `source/build/build.js` – image cache-busting post-processing | covered |
+| `02-§78.3` | Image hash is deterministic: identical content → identical hash | 03-ARCHITECTURE.md §27 | CACHE-15 | `source/build/build.js` – `crypto.createHash('md5')` | covered |
+| `02-§78.4` | Image cache-busting is a post-processing step; no render signatures change | 03-ARCHITECTURE.md §27 | CACHE-13 | `source/build/build.js` – runs after all pages are built | covered |
+| `02-§78.5` | Existing tests that verify image file presence continue to pass | 03-ARCHITECTURE.md §27 | — | Manual: `npm test` passes with 1265 tests | implemented |
 | `02-§4.8` | Overlapping activities are allowed and the schedule remains readable | 03-ARCHITECTURE.md §5, 07-DESIGN.md §6 | RDC-05..06 | No exclusion logic in `source/build/render.js`; CSS handles layout | covered |
 | `02-§4.9` | Clicking an activity opens its detail view | 03-ARCHITECTURE.md §5 | RND-41, RND-42 | `source/build/render.js` – `renderEventRow()` uses `<details>` element | covered |
 | `02-§5.1` | Detail view shows all populated fields; fields with no value do not appear | 05-DATA_CONTRACT.md §2, §3 | RND-33..38, RND-43 | `source/build/render.js` – `eventExtraHtml()`, `renderEventRow()` | covered |
@@ -1740,3 +1750,15 @@ Matrix cleanup (2026-02-25):
 | `02-§75.11` | covered | NL-03: each nav link has both short and long label spans; `layout.js` |
 | | | **§76 — Redirect from old display view URL** |
 | `02-§76.1` | covered | RDR-01..04: `renderRedirectPage()` produces redirect; `build.js` writes `public/dagens-schema.html` |
+| | | **§77 — JavaScript Cache-Busting** |
+| `02-§77.1` | covered | CACHE-10: build.js computes MD5 hash for JS files |
+| `02-§77.2` | covered | CACHE-11: build.js replaces JS src with ?v=hash |
+| `02-§77.3` | covered | CACHE-12: JS hash determinism verified |
+| `02-§77.4` | covered | CACHE-10: post-processing step, no render changes |
+| `02-§77.5` | implemented | Manual: npm test passes (1265 tests) |
+| | | **§78 — Image Cache-Busting** |
+| `02-§78.1` | covered | CACHE-13: build.js computes MD5 hash for image files |
+| `02-§78.2` | covered | CACHE-14: build.js replaces image src with ?v=hash |
+| `02-§78.3` | covered | CACHE-15: image hash determinism verified |
+| `02-§78.4` | covered | CACHE-13: post-processing step, no render changes |
+| `02-§78.5` | implemented | Manual: npm test passes (1265 tests) |

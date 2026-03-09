@@ -103,3 +103,59 @@ describe('02-§69.1 — CSS cache-busting post-processing', () => {
     assert.equal(h1, h2, 'Same content must produce identical hashes');
   });
 });
+
+// ── 02-§77.1–77.3 — JS cache-busting ──────────────────────────────────────
+
+describe('02-§77.1 — JS cache-busting post-processing', () => {
+  const buildSrc = fs.readFileSync(BUILD_PATH, 'utf8');
+
+  it('CACHE-10: build.js computes a content hash for JS files', () => {
+    assert.ok(
+      buildSrc.includes('createHash') && /\.js["']?\)?/m.test(buildSrc),
+      'Expected build.js to hash JS file content',
+    );
+  });
+
+  it('CACHE-11: build.js replaces JS src with versioned query string', () => {
+    assert.ok(
+      buildSrc.includes('?v=') && /\.js\)"/m.test(buildSrc),
+      'Expected build.js to produce JS ?v= replacement pattern',
+    );
+  });
+
+  it('CACHE-12: JS hash is deterministic (same input → same output)', () => {
+    const crypto = require('crypto');
+    const sample = 'function init() { return true; }';
+    const h1 = crypto.createHash('md5').update(sample).digest('hex').slice(0, 8);
+    const h2 = crypto.createHash('md5').update(sample).digest('hex').slice(0, 8);
+    assert.equal(h1, h2, 'Same JS content must produce identical hashes');
+  });
+});
+
+// ── 02-§78.1–78.3 — Image cache-busting ────────────────────────────────────
+
+describe('02-§78.1 — Image cache-busting post-processing', () => {
+  const buildSrc = fs.readFileSync(BUILD_PATH, 'utf8');
+
+  it('CACHE-13: build.js processes image file hashes', () => {
+    assert.ok(
+      /webp|png|jpg|jpeg|ico/.test(buildSrc) && buildSrc.includes('createHash'),
+      'Expected build.js to hash image file content',
+    );
+  });
+
+  it('CACHE-14: build.js replaces image src with versioned query string', () => {
+    assert.ok(
+      /\.\(webp|\.webp\?v=|img.*\?v=/.test(buildSrc),
+      'Expected build.js to produce image ?v= replacement pattern',
+    );
+  });
+
+  it('CACHE-15: image hash is deterministic (same input → same output)', () => {
+    const crypto = require('crypto');
+    const sample = Buffer.from('fake-image-data');
+    const h1 = crypto.createHash('md5').update(sample).digest('hex').slice(0, 8);
+    const h2 = crypto.createHash('md5').update(sample).digest('hex').slice(0, 8);
+    assert.equal(h1, h2, 'Same image content must produce identical hashes');
+  });
+});

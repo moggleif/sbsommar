@@ -419,6 +419,59 @@ async function main() {
     }
     console.log(`Cache-bust: style.css?v=${cssHash}  (${htmlFiles.length} pages)`);
   }
+
+  // ── Post-process: JS cache-busting (02-§77.1–77.3) ────────────────────
+  const htmlFiles2 = findHtmlFiles(OUTPUT_DIR);
+  const jsHashCache = new Map();
+  let jsReplacements = 0;
+  for (const file of htmlFiles2) {
+    let html = fs.readFileSync(file, 'utf8');
+    const updated = html.replace(/src="([^"]+\.js)"/g, (_match, jsFile) => {
+      const jsPath = path.join(OUTPUT_DIR, jsFile);
+      if (!fs.existsSync(jsPath)) return _match;
+      if (!jsHashCache.has(jsFile)) {
+        const hash = crypto.createHash('md5')
+          .update(fs.readFileSync(jsPath))
+          .digest('hex')
+          .slice(0, 8);
+        jsHashCache.set(jsFile, hash);
+      }
+      return `src="${jsFile}?v=${jsHashCache.get(jsFile)}"`;
+    });
+    if (updated !== html) {
+      fs.writeFileSync(file, updated, 'utf8');
+      jsReplacements++;
+    }
+  }
+  console.log(`Cache-bust: ${jsHashCache.size} JS files  (${jsReplacements} pages)`);
+
+  // ── Post-process: Image cache-busting (02-§78.1–78.3) ─────────────────
+  const htmlFiles3 = findHtmlFiles(OUTPUT_DIR);
+  const imgHashCache = new Map();
+  let imgReplacements = 0;
+  for (const file of htmlFiles3) {
+    let html = fs.readFileSync(file, 'utf8');
+    const updated = html.replace(
+      /src="([^"]+\.(webp|png|jpg|jpeg|ico))"/g,
+      (_match, imgFile) => {
+        const imgPath = path.join(OUTPUT_DIR, imgFile);
+        if (!fs.existsSync(imgPath)) return _match;
+        if (!imgHashCache.has(imgFile)) {
+          const hash = crypto.createHash('md5')
+            .update(fs.readFileSync(imgPath))
+            .digest('hex')
+            .slice(0, 8);
+          imgHashCache.set(imgFile, hash);
+        }
+        return `src="${imgFile}?v=${imgHashCache.get(imgFile)}"`;
+      },
+    );
+    if (updated !== html) {
+      fs.writeFileSync(file, updated, 'utf8');
+      imgReplacements++;
+    }
+  }
+  console.log(`Cache-bust: ${imgHashCache.size} image files  (${imgReplacements} pages)`);
 }
 
 main().catch((err) => {
