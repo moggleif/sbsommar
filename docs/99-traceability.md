@@ -1098,10 +1098,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:             994
+Total requirements:             999
 Covered (implemented + tested): 494
-Implemented, not tested:        500
-Gap (no implementation):          0
+Implemented, not tested:        501
+Gap (no implementation):          4
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1731,6 +1731,11 @@ Matrix cleanup (2026-02-25):
 | `02-§73.21` | implemented | Both use githubRequest() / githubRequest() for Issues API |
 | `02-§73.22` | implemented | Manual: open feedback modal, verify heading "Feedback om hemsidan"; `feedback.js` lines 21, 88 |
 | `02-§73.23` | implemented | Manual: open feedback modal, verify help text; `feedback.js` line 90, `style.css` `.feedback-scope` |
+| `02-§73.24` | gap | Show warning in success view when issueUrl is empty (dry-run) |
+| `02-§73.25` | gap | Warning text: "OBS: Detta är en testsida…" |
+| `02-§73.26` | gap | Warning uses `.form-error-msg` styling |
+| `02-§73.27` | gap | Warning must not include production URL |
+| `02-§73.28` | implemented | `app.js` line 138–140: dry-run when BUILD_ENV !== production; `api/index.php` line 277 |
 | | | **§74 — Sticky Navigation Positioning** |
 | `02-§74.1` | covered | MN-02: `.page-nav` top matches body padding; `source/assets/cs/style.css` `top: var(--space-xs)` |
 | `02-§74.2` | covered | MN-02: same `top` value on all pages via shared CSS |
