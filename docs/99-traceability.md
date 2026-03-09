@@ -563,7 +563,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§28.10` | Section positioned via `sections.yaml` | 03-ARCHITECTURE.md §14.4 | — (manual: verify `sections.yaml` has `type: upcoming-camps` entry) | `source/content/sections.yaml` – `type: upcoming-camps` entry; `source/build/build.js` – handles the type | implemented |
 | `02-§28.11` | Each item shows camp name, location, and date range | 03-ARCHITECTURE.md §14.3 | UC-06 | `source/build/render-index.js` – `.camp-name`, `.camp-meta` spans in `renderUpcomingCampsHtml()` | covered |
 | `02-§28.12` | Camp name is plain text, not a link | 03-ARCHITECTURE.md §14.3 | UC-07, UC-08 | `source/build/render-index.js` – plain text in `renderUpcomingCampsHtml()` | covered |
-| `02-§28.18` | Camp name uses `var(--color-terracotta)` | 03-ARCHITECTURE.md §14.6 | — (manual: inspect `.camp-name` in `style.css`) | `source/assets/cs/style.css` – `.camp-name` | gap |
+| `02-§28.18` | Camp name uses `var(--color-terracotta)` | 03-ARCHITECTURE.md §14.6 | CL-04 | `source/assets/cs/style.css` – `.camp-name` | covered |
 | `02-§28.13` | Information text shown when non-empty | 03-ARCHITECTURE.md §14.3 | UC-09, UC-10 | `source/build/render-index.js` – conditional `.camp-info` paragraph | covered |
 | `02-§28.14` | Past/upcoming status via client-side script with `data-end` attribute | 03-ARCHITECTURE.md §14.5 | UC-11 | `source/build/render-index.js` – `data-end` attribute on `<li>`; inline `<script>` applies `.camp-past` | covered |
 | `02-§28.15` | No daily rebuilds needed for status updates | 03-ARCHITECTURE.md §14.5 | — (architectural constraint; client-side JS evaluates dates at page load) | `source/build/render-index.js` – inline `<script>` runs on every page load | implemented |
@@ -1167,7 +1167,7 @@ End time is now required everywhere (add form, edit form, data contract).
   10 covered (UC-01..14): filtering, sorting, heading, content, data-end, indicators.
   7 implemented (browser-only or manual): past-marking, Stockholm time, CSS tokens,
     section placement, no-rebuild, minimal JS.
-  1 gap: 02-§28.18 (camp name terracotta color).
+  1 covered: 02-§28.18 (camp name terracotta color, CL-04).
 02-§6.5 moved from gap to covered (ILE-01..04, ILE-E01..E04):
   per-field inline validation errors on add and edit forms.
 22 requirements added for hero section redesign (02-§30.1–30.22):
