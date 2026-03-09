@@ -3461,7 +3461,7 @@ descriptive where there is room.
 
 ---
 
-## 76. JavaScript Cache-Busting
+## 77. JavaScript Cache-Busting
 
 HTML files are served with `Cache-Control: no-cache` and always revalidate,
 but JS is cached for up to one week (02-§67.2). When a deploy changes
@@ -3470,27 +3470,27 @@ causing broken behaviour. The build must append a content-based hash to
 JS URLs so that any JS change forces a cache miss while unchanged files
 continue to be served from cache.
 
-### 76.1 Build behaviour
+### 77.1 Build behaviour
 
 - After all HTML files and assets are written, the build must read each
   JS file referenced by `<script>` tags in `public/` and compute a short
   content hash (first 8 hex characters of the MD5
-  digest). <!-- 02-§76.1 -->
+  digest). <!-- 02-§77.1 -->
 - The build must replace every `src="<file>.js"` in all HTML files
-  under `public/` with `src="<file>.js?v=<hash>"`. <!-- 02-§76.2 -->
+  under `public/` with `src="<file>.js?v=<hash>"`. <!-- 02-§77.2 -->
 - The hash must be deterministic: identical JS content must always
-  produce the same hash. <!-- 02-§76.3 -->
+  produce the same hash. <!-- 02-§77.3 -->
 
-### 76.2 Constraints
+### 77.2 Constraints
 
 - No render function signatures may change — the hash is applied as a
-  post-processing step in `build.js`. <!-- 02-§76.4 -->
+  post-processing step in `build.js`. <!-- 02-§77.4 -->
 - Existing tests that verify JS file presence must continue to
-  pass. <!-- 02-§76.5 -->
+  pass. <!-- 02-§77.5 -->
 
 ---
 
-## 77. Image Cache-Busting
+## 78. Image Cache-Busting
 
 Images are cached for up to one year (02-§67.1). When an image is replaced
 with new content but the same filename, browsers may serve the old version
@@ -3498,21 +3498,21 @@ indefinitely. The build must append a content-based hash to image URLs in
 HTML so that changed images force a cache miss while unchanged images
 continue to be served from cache.
 
-### 77.1 Build behaviour
+### 78.1 Build behaviour
 
 - After all HTML files and assets are written, the build must read each
   image file referenced by `<img>` tags in `public/` and compute a short
   content hash (first 8 hex characters of the MD5
-  digest). <!-- 02-§77.1 -->
+  digest). <!-- 02-§78.1 -->
 - The build must replace every `src="<file>.<ext>"` (where ext is webp,
   png, jpg, jpeg, or ico) in all HTML files under `public/` with
-  `src="<file>.<ext>?v=<hash>"`. <!-- 02-§77.2 -->
+  `src="<file>.<ext>?v=<hash>"`. <!-- 02-§78.2 -->
 - The hash must be deterministic: identical image content must always
-  produce the same hash. <!-- 02-§77.3 -->
+  produce the same hash. <!-- 02-§78.3 -->
 
-### 77.2 Constraints
+### 78.2 Constraints
 
 - No render function signatures may change — the hash is applied as a
-  post-processing step in `build.js`. <!-- 02-§77.4 -->
+  post-processing step in `build.js`. <!-- 02-§78.4 -->
 - Existing tests that verify image file presence must continue to
-  pass. <!-- 02-§77.5 -->
+  pass. <!-- 02-§78.5 -->

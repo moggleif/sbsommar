@@ -1698,6 +1698,50 @@ the scroll-to-top button. It is an inline SVG speech-bubble icon with
 
 ---
 
+## 27. Asset Cache-Busting (CSS, JS, Images)
+
+### 27.1 Problem
+
+CSS, JS, and images are cached by the browser (02-§67.1–67.2). When a
+deploy changes these files, browsers may serve stale versions against fresh
+HTML. CSS already has cache-busting (02-§69); JS and images do not.
+
+### 27.2 Mechanism
+
+The build applies content-based hashes as a post-processing step after all
+files are written to `public/`. For each asset type the build:
+
+1. Reads the file from `public/`.
+2. Computes the first 8 hex characters of the MD5 digest.
+3. Appends `?v=<hash>` to the URL in all HTML files under `public/`.
+
+Unchanged files produce the same hash across builds, so browsers continue
+serving them from cache. Changed files produce a new hash, forcing a cache
+miss.
+
+### 27.3 Asset types
+
+| Asset type | HTML attribute | Pattern | Requirement |
+| ---------- | -------------- | ------- | ----------- |
+| CSS | `href="style.css"` | `href="style.css?v=<hash>"` | 02-§69.1–69.3 |
+| JS | `src="<file>.js"` | `src="<file>.js?v=<hash>"` | 02-§77.1–77.3 |
+| Images | `src="<file>.<ext>"` | `src="<file>.<ext>?v=<hash>"` | 02-§78.1–78.3 |
+
+### 27.4 Constraints
+
+- Applied as a post-processing step — no render function signatures
+  change.
+- Each asset file is read once per build; the hash is reused across all
+  HTML files that reference it.
+
+### 27.5 Files
+
+| File | Role |
+| ---- | ---- |
+| `source/build/build.js` | Post-processing: hash computation and URL rewriting |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
