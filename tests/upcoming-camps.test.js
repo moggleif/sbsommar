@@ -121,17 +121,15 @@ describe('renderUpcomingCampsHtml – item content (02-§28.11–28.13)', () => 
     assert.ok(html.includes('9 aug'), 'should include formatted end date');
   });
 
-  it('UC-07: camp name is linked when link is non-empty', () => {
+  it('UC-07: camp name is plain text even when link is non-empty (02-§28.12)', () => {
     const html = renderUpcomingCampsHtml([futureCamp], 2026);
-    assert.ok(
-      html.includes('href="https://www.facebook.com/groups/syssleback2026"'),
-      'should render link href',
-    );
+    assert.ok(!html.includes('<a href='), 'should not render any link');
+    assert.ok(html.includes('SB Sommar Augusti 2026'), 'should render camp name as plain text');
   });
 
   it('UC-08: camp name is plain text when link is empty', () => {
     const html = renderUpcomingCampsHtml([futureCampJuni], 2026);
-    assert.ok(!html.includes('href=""'), 'should not render empty href');
+    assert.ok(!html.includes('<a href='), 'should not render any link');
     assert.ok(html.includes('SB Sommar Juni 2026'), 'should render camp name as text');
   });
 
@@ -204,6 +202,15 @@ describe('Camp list CSS – compact one-liner layout (02-§3.5)', () => {
     assert.ok(
       !match[1].includes('display: block') && !match[1].includes('display:block'),
       '.camp-name should not have display: block',
+    );
+  });
+
+  it('CL-04: .camp-name uses terracotta color (02-§28.18)', () => {
+    const match = CSS.match(/\.camp-name\s*\{([^}]*)\}/);
+    assert.ok(match, '.camp-name rule should exist');
+    assert.ok(
+      match[1].includes('var(--color-terracotta)'),
+      '.camp-name should use var(--color-terracotta)',
     );
   });
 });

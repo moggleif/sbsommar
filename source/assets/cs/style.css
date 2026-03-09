@@ -1718,21 +1718,7 @@ body.modal-open {
 
 .camp-name {
   font-weight: 700;
-  color: var(--color-navy);
-}
-
-.camp-name a {
   color: var(--color-terracotta);
-  text-decoration: none;
-}
-
-.camp-name a:hover {
-  text-decoration: underline;
-}
-
-.camp-name a:focus-visible {
-  outline: 2px solid var(--color-terracotta);
-  outline-offset: 2px;
 }
 
 .camp-past .camp-name {
