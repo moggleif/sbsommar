@@ -3358,6 +3358,9 @@ implementation) and the same GitHub API primitives.
     depending on the selected category.
 - The API must return `{ success: true, issueUrl: "<URL>" }` on success
   so the client can link to the created issue. <!-- 02-§73.9 -->
+- In non-production environments (`BUILD_ENV` is not `production`), the
+  API must not create a GitHub Issue. It must log the request and return
+  `{ success: true, issueUrl: "" }` (empty string). <!-- 02-§73.28 -->
 
 ### 73.3 Validation requirements
 
@@ -3405,6 +3408,18 @@ implementation) and the same GitHub API primitives.
 - A short help text must appear below the heading: "Gäller hemsidan
   och informationen här, inte själva
   lägret." <!-- 02-§73.23 -->
+
+### 73.8 Non-production environment warning
+
+- When the API returns a successful response without an issue URL
+  (dry-run in QA or local environments), the success view must show a
+  warning below the "Tack för din feedback!" heading. <!-- 02-§73.24 -->
+- The warning text must be: "OBS: Detta är en testsida. Din feedback
+  sparades inte. Besök den riktiga siten för att skicka
+  feedback." <!-- 02-§73.25 -->
+- The warning must use the same styling as form validation errors
+  (`.form-error-msg`: terracotta left border, light background). <!-- 02-§73.26 -->
+- The warning must not include a URL to the production site. <!-- 02-§73.27 -->
 
 ## 74. Sticky Navigation Positioning
 

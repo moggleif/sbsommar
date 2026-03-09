@@ -1651,6 +1651,9 @@ A new script `source/assets/js/client/feedback.js` manages:
 - Metadata collection (page URL, viewport, User-Agent, timestamp).
 - POST to the feedback endpoint with progress steps in the modal.
 - On success: display a link to the created GitHub Issue.
+- On dry-run success (empty `issueUrl`): display a warning in
+  `.form-error-msg` style that the feedback was not saved because
+  this is a test site.
 
 ### 26.3 Navigation integration
 
@@ -1669,6 +1672,9 @@ the scroll-to-top button. It is an inline SVG speech-bubble icon with
 - Creates a GitHub Issue via `githubRequest()` (exported from
   `source/api/github.js`).
 - Route: `POST /feedback` registered in `app.js`.
+- Non-production dry-run: when `BUILD_ENV` is not `production`, the
+  endpoint logs the request and returns `{ success: true, issueUrl: '' }`
+  without creating a GitHub Issue.
 
 ### 26.5 PHP API (`api/src/Feedback.php`)
 
