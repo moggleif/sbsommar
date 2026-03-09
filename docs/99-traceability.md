@@ -1099,9 +1099,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:             999
-Covered (implemented + tested): 494
+Covered (implemented + tested): 490
 Implemented, not tested:        505
-Gap (no implementation):          0
+Gap (no implementation):          4
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1365,6 +1365,9 @@ Matrix cleanup (2026-02-25):
   4 covered (MAIN-01-*, MAIN-02-*, MAIN-03-*): one <main> per page, excludes nav/footer.
   1 implemented (02-§70.4): no visual styling changes — semantic element only.
   <main> added to all 9 render files. Design documented in 07-DESIGN.md §9.6.
+4 requirements retired (02-§64.10–12, 02-§64.24): back-to-top nav link removed.
+  IDX-12, IDX-13, IDX-14, IDX-20 tests to be removed.
+4 requirements added for section anchor ID consistency (02-§79.1–79.4).
 ```
 
 ---
@@ -1622,10 +1625,10 @@ Matrix cleanup (2026-02-25):
 | IDX-17 | `tests/index-design.test.js` | `02-§64.7 — Alternating sections suppress border-top (CSS)` |
 | IDX-18 | `tests/index-design.test.js` | `02-§64.8 — Section headings use terracotta colour (no decorative line)` |
 | `02-§64.9` | implemented | RFSB logo floated inline (~70 px) — `.content-img[alt="RFSB logo"]` in style.css |
-| IDX-12 | `tests/index-design.test.js` | `02-§64.10 — "Till toppen" link in navigation` |
-| IDX-14 | `tests/index-design.test.js` | `02-§64.11 — Back-to-top link inside hamburger menu on mobile` |
-| IDX-13 | `tests/index-design.test.js` | `02-§64.12 — Back-to-top link has href="#"` |
-| IDX-20 | `tests/index-design.test.js` | `02-§64.24 — Desktop nav back-to-top link hidden until scroll` |
+| `02-§64.10` | retired | Back-to-top nav link removed; scroll-to-top button (§64.20–23) remains |
+| `02-§64.11` | retired | See 02-§64.10 |
+| `02-§64.12` | retired | See 02-§64.10 |
+| `02-§64.24` | retired | See 02-§64.10 |
 | `02-§64.13` | implemented | Content images max-width 500 px — `.content-img` in style.css |
 | `02-§64.14` | implemented | Accommodation images max-width 250 px — `.content-img[alt="Stuga"]` etc. in style.css |
 | `02-§64.15` | implemented | Servicehus image matches hero width — `.content-img[alt="Servicehus"]` in style.css |
@@ -1767,3 +1770,8 @@ Matrix cleanup (2026-02-25):
 | `02-§78.3` | covered | CACHE-15: image hash determinism verified |
 | `02-§78.4` | covered | CACHE-13: post-processing step, no render changes |
 | `02-§78.5` | implemented | Manual: npm test passes (1265 tests) |
+| | | **§79 — Section Anchor ID Consistency** |
+| `02-§79.1` | gap | Testimonials section must use `id="roster"` |
+| `02-§79.2` | gap | Pricing section must use `id="kostnader"` |
+| `02-§79.3` | gap | Navigation link for "Röster" must point to `#roster` |
+| `02-§79.4` | gap | Navigation link for "Kostnader" must point to `#kostnader` |
