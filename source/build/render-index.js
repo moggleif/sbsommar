@@ -292,15 +292,9 @@ function renderUpcomingCampsHtml(allCamps, currentYear) {
     const location = escapeHtml(camp.location || '');
     const dateRange = escapeHtml(formatCampDateRange(camp.start_date, camp.end_date));
     const endDate = toDateString(camp.end_date);
-    const link = (camp.link || '').trim();
-
-    const nameHtml = link
-      ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${name}</a>`
-      : name;
-
     return `    <li class="camp-item" data-end="${endDate}">
       <span class="camp-icon" aria-hidden="true"></span>
-      <span class="camp-name">${nameHtml}</span>
+      <span class="camp-name">${name}</span>
       <span class="camp-meta">${location} · ${dateRange}</span>
     </li>`;
   }).join('\n');
