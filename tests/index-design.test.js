@@ -4,7 +4,7 @@
 //
 // Covers: testimonial cards (§64.1–64.4), alternating section backgrounds
 // (§64.5–64.7), decorative headings (§64.8), RFSB logo (§64.9), and
-// back-to-top link (§64.10–64.12).
+// section anchor ID consistency (§79.1–79.4).
 //
 // Browser-specific rendering (CSS ::after, border-radius, box-shadow) cannot
 // be verified in Node.js. Manual checkpoint:
@@ -95,7 +95,7 @@ describe('wrapTestimonialCards (02-§64.1–64.4)', () => {
 describe('renderIndexPage – alternating sections (02-§64.5–64.7)', () => {
   const sections = [
     { id: 'start',        navLabel: 'Om lägret',     html: '<p>Start</p>' },
-    { id: 'testimonials', navLabel: 'Röster',         html: '<p>Röster</p>' },
+    { id: 'roster',       navLabel: 'Röster',         html: '<p>Röster</p>' },
     { id: 'faq',          navLabel: 'Vanliga frågor', html: '<p>FAQ</p>' },
     { id: 'anmalan',      navLabel: 'Anmälan',        html: '<p>Anmälan</p>' },
     { id: 'regler',       navLabel: 'Regler',         html: '<p>Regler</p>' },
@@ -115,8 +115,8 @@ describe('renderIndexPage – alternating sections (02-§64.5–64.7)', () => {
   });
 
   it('IDX-09: second section (index 1) has class section-alt', () => {
-    const match = html.match(/<section id="testimonials"[^>]*>/);
-    assert.ok(match, 'Expected section#testimonials');
+    const match = html.match(/<section id="roster"[^>]*>/);
+    assert.ok(match, 'Expected section#roster');
     assert.ok(match[0].includes('section-alt'), `Second section should have section-alt, got: ${match[0]}`);
   });
 
@@ -133,39 +133,17 @@ describe('renderIndexPage – alternating sections (02-§64.5–64.7)', () => {
   });
 });
 
-// ── Back-to-top link (02-§64.10–64.12) ──────────────────────────────────────
+// ── Navigation does not contain a back-to-top link ──────────────────────────
 
-describe('pageNav – back-to-top link (02-§64.10–64.12)', () => {
+describe('pageNav – no back-to-top link', () => {
   const SECTIONS = [
     { id: 'start', navLabel: 'Om lägret' },
     { id: 'faq',   navLabel: 'FAQ' },
   ];
 
-  it('IDX-12: nav contains a back-to-top link', () => {
+  it('IDX-21: nav does not contain a back-to-top link element', () => {
     const html = pageNav('index.html', SECTIONS);
-    assert.ok(html.includes('nav-link--top'), `Expected nav-link--top, got: ${html}`);
-  });
-
-  it('IDX-13: back-to-top link has href="#"', () => {
-    const html = pageNav('index.html', SECTIONS);
-    const match = html.match(/<a[^>]*nav-link--top[^>]*>/);
-    assert.ok(match, 'Expected nav-link--top element');
-    assert.ok(match[0].includes('href="#"'), `Expected href="#", got: ${match[0]}`);
-  });
-
-  it('IDX-14: back-to-top link is inside the nav-menu div', () => {
-    const html = pageNav('index.html', SECTIONS);
-    const menuStart = html.indexOf('id="nav-menu"');
-    const topLink = html.indexOf('nav-link--top');
-    const menuEnd = html.lastIndexOf('</div>');
-    assert.ok(topLink > menuStart && topLink < menuEnd, 'Back-to-top link must be inside nav-menu');
-  });
-
-  it('IDX-20: back-to-top link has hidden attribute by default (02-§64.24)', () => {
-    const html = pageNav('index.html', SECTIONS);
-    const match = html.match(/<a[^>]*nav-link--top[^>]*>/);
-    assert.ok(match, 'Expected nav-link--top element');
-    assert.ok(match[0].includes('hidden'), 'Back-to-top link must have hidden attribute');
+    assert.ok(!html.includes('nav-link--top'), `Unexpected nav-link--top in: ${html}`);
   });
 });
 
@@ -188,7 +166,42 @@ describe('CSS – index design improvements', () => {
     assert.ok(css.includes('section-alt') && css.includes('padding-bottom'), 'Expected section-alt with vertical padding');
   });
 
-  it('IDX-19: .nav-link--top rule exists', () => {
-    assert.ok(css.includes('.nav-link--top'), 'Expected .nav-link--top CSS rule');
+});
+
+// ── Section anchor ID consistency (02-§79.1–79.4) ──────────────────────────
+
+describe('section anchor IDs match navigation labels (02-§79.1–79.4)', () => {
+  const sections = [
+    { id: 'start',     navLabel: 'Om lägret',     html: '<p>Start</p>' },
+    { id: 'roster',    navLabel: 'Röster',         html: '<p>Röster</p>' },
+    { id: 'kostnader', navLabel: 'Kostnader',      html: '<p>Pris</p>' },
+  ];
+
+  const indexHtml = renderIndexPage({
+    heroSrc: null,
+    heroAlt: null,
+    sections,
+  });
+
+  it('ANC-01: testimonials section uses id="roster" (02-§79.1)', () => {
+    assert.ok(indexHtml.includes('id="roster"'), 'Expected section id="roster"');
+    assert.ok(!indexHtml.includes('id="testimonials"'), 'Must not use id="testimonials"');
+  });
+
+  it('ANC-02: pricing section uses id="kostnader" (02-§79.2)', () => {
+    assert.ok(indexHtml.includes('id="kostnader"'), 'Expected section id="kostnader"');
+    assert.ok(!indexHtml.includes('id="kostnad"'), 'Must not use id="kostnad"');
+  });
+
+  it('ANC-03: nav link for Röster points to #roster (02-§79.3)', () => {
+    const navHtml = pageNav('index.html', sections);
+    assert.ok(navHtml.includes('href="#roster"'), `Expected href="#roster", got: ${navHtml}`);
+    assert.ok(!navHtml.includes('href="#testimonials"'), 'Must not link to #testimonials');
+  });
+
+  it('ANC-04: nav link for Kostnader points to #kostnader (02-§79.4)', () => {
+    const navHtml = pageNav('index.html', sections);
+    assert.ok(navHtml.includes('href="#kostnader"'), `Expected href="#kostnader", got: ${navHtml}`);
+    assert.ok(!navHtml.includes('href="#kostnad"'), 'Must not link to #kostnad');
   });
 });
