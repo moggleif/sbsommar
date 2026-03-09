@@ -118,8 +118,8 @@ describe('02-§77.1 — JS cache-busting post-processing', () => {
 
   it('CACHE-11: build.js replaces JS src with versioned query string', () => {
     assert.ok(
-      /\.js\?v=/.test(buildSrc),
-      'Expected build.js to produce .js?v= replacement pattern',
+      buildSrc.includes('?v=') && /\.js\)"/m.test(buildSrc),
+      'Expected build.js to produce JS ?v= replacement pattern',
     );
   });
 
