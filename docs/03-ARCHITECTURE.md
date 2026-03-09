@@ -904,7 +904,7 @@ No per-camp event files are loaded.
 2. Sorts ascending by `start_date`.
 3. Renders an `<ul class="upcoming-camps">` list. Each `<li>` carries a
    `data-end="{end_date}"` attribute.
-4. Each item shows: camp name (linked if `link` is non-empty), location, and
+4. Each item shows: camp name (plain text), location, and
    date range. An `information` paragraph is included when non-empty.
 
 ### 14.4 Section integration
@@ -935,7 +935,7 @@ New classes in `style.css`:
 - `.camp-check` — the checkbox/checkmark indicator
 - `.camp-past` — green checkmark + `text-decoration: line-through`
 - `.camp-body` — flex row container; `display: flex; align-items: baseline` places name and meta on one line
-- `.camp-name` — camp name (may be a link); inline within `.camp-body`
+- `.camp-name` — camp name (plain text, terracotta); inline within `.camp-body`
 - `.camp-meta` — location and date range; inline within `.camp-body`
 - `.camp-info` — information text
 
