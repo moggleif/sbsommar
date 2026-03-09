@@ -48,8 +48,6 @@ function pageNav(activeHref, navSections = []) {
     sectionRow = `\n    <div class="nav-sections">\n${sectionItems}\n    </div>`;
   }
 
-  const topLink = '\n    <a class="nav-link nav-link--top" href="#" hidden>Till toppen &uarr;</a>';
-
   const fbUrlAttr = _feedbackUrl ? ` data-api-url="${_feedbackUrl}"` : '';
   const feedbackBtn = `    <button type="button" class="feedback-btn" aria-label="Ge feedback"${fbUrlAttr}>
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
@@ -68,7 +66,7 @@ ${feedbackBtn}
     <div class="nav-menu" id="nav-menu">
       <div class="nav-pages">
 ${pageItems}
-      </div>${sectionRow}${topLink}
+      </div>${sectionRow}
     </div>
   </nav>`;
 }

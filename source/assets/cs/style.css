@@ -864,34 +864,6 @@ details.event-row[open] > summary .ev-title {
     opacity: 1;
   }
 
-  .nav-link--top {
-    display: block;
-    margin-top: var(--space-sm);
-    padding-top: var(--space-sm);
-    border-top: 2px solid rgba(255, 255, 255, 0.3);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-}
-
-/* ── Back-to-top link (02-§64.10–64.12) ── */
-
-.nav-link--top {
-  font-size: 11px;
-  margin-left: auto;
-  text-decoration: none;
-}
-
-.nav-link--top:hover {
-  color: var(--color-sage-hover);
-}
-
-.nav-link--top:focus-visible {
-  outline: 2px solid var(--color-terracotta);
-  outline-offset: 2px;
-  opacity: 1;
 }
 
 /* ── Buttons ── */

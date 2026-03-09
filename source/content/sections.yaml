@@ -3,7 +3,7 @@ sections:
     id: start
     nav: Om lägret
   - file: testimonials.md
-    id: testimonials
+    id: roster
     nav: Röster
   - file: faq.md
     id: faq
@@ -19,7 +19,7 @@ sections:
     id: mat
     nav: Mat
   - file: pricing.md
-    id: kostnad
+    id: kostnader
     nav: Kostnader
   - file: local-info.md
     id: service
