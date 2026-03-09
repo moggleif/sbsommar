@@ -185,8 +185,8 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
         }
       }
 
-      // Wrap testimonial cards for the testimonials section
-      if (s.id === 'testimonials') {
+      // Wrap testimonial cards for the röster section
+      if (s.id === 'roster') {
         sectionHtml = wrapTestimonialCards(sectionHtml);
       }
 

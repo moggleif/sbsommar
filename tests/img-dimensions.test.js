@@ -43,7 +43,7 @@ describe('02-§66.1 — Testimonial image dimensions', () => {
     ].join('\n');
 
     const html = renderIndexPage(buildPage({
-      sections: [{ id: 'testimonials', navLabel: 'Omdömen', html: testimonialHtml }],
+      sections: [{ id: 'roster', navLabel: 'Omdömen', html: testimonialHtml }],
     }));
 
     const imgMatch = html.match(/<img[^>]*class="testimonial-img"[^>]*>/);

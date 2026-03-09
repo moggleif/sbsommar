@@ -3011,15 +3011,6 @@ scroll and better leverage existing design tokens.
 - The RFSB logo in the first section must be displayed as a small inline
   floated image (~70 px wide) beside the opening paragraph. <!-- 02-§64.9 -->
 
-### 64.5 Back-to-top navigation
-
-- A "Till toppen" link must be present inside the navigation. <!-- 02-§64.10 -->
-- On mobile, the link must be inside the hamburger menu so it opens and
-  closes together with the menu panel. <!-- 02-§64.11 -->
-- The link must scroll to the top of the page. <!-- 02-§64.12 -->
-- On wide screens (desktop nav), the link must be hidden until the user
-  has scrolled down. <!-- 02-§64.24 -->
-
 ### 64.6 Consistent content image widths
 
 - General content images (`.content-img`) must be constrained to
@@ -3531,3 +3522,21 @@ continue to be served from cache.
   post-processing step in `build.js`. <!-- 02-§78.4 -->
 - Existing tests that verify image file presence must continue to
   pass. <!-- 02-§78.5 -->
+
+---
+
+## 79. Section Anchor ID Consistency
+
+Section anchor IDs on the index page must match their navigation labels.
+The `id` field in `sections.yaml` is the single source of truth for both
+the `<section id="…">` attribute and the `href="#…"` in navigation links.
+
+### 79.1 Anchor IDs
+
+- The testimonials section must use `id="roster"`. <!-- 02-§79.1 -->
+- The pricing section must use `id="kostnader"`. <!-- 02-§79.2 -->
+
+### 79.2 Navigation link targets
+
+- The navigation link for "Röster" must point to `#roster`. <!-- 02-§79.3 -->
+- The navigation link for "Kostnader" must point to `#kostnader`. <!-- 02-§79.4 -->

@@ -24,7 +24,7 @@ const { renderArkivPage } = require('../source/build/render-arkiv');
 
 const SECTIONS = [
   { id: 'start',        navLabel: 'Om lägret' },
-  { id: 'testimonials', navLabel: 'Röster' },
+  { id: 'roster',       navLabel: 'Röster' },
   { id: 'faq',          navLabel: 'FAQ' },
 ];
 
@@ -130,13 +130,13 @@ describe('pageNav – section links (02-§24.7, §24.8, §24.9)', () => {
   it('NAV-09: section links on non-index pages point to index.html#id', () => {
     const html = pageNav('schema.html', SECTIONS);
     assert.ok(html.includes('href="index.html#start"'), `Got: ${html}`);
-    assert.ok(html.includes('href="index.html#testimonials"'), `Got: ${html}`);
+    assert.ok(html.includes('href="index.html#roster"'), `Got: ${html}`);
   });
 
   it('NAV-09b: section links on index page use anchor-only hrefs', () => {
     const html = pageNav('index.html', SECTIONS);
     assert.ok(html.includes('href="#start"'), `Expected anchor-only on index. Got: ${html}`);
-    assert.ok(html.includes('href="#testimonials"'), `Got: ${html}`);
+    assert.ok(html.includes('href="#roster"'), `Got: ${html}`);
   });
 
   it('renders no section links when navSections is empty', () => {

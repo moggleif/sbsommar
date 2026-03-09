@@ -48,7 +48,7 @@ describe('pageNav – dual labels (02-§75.4, §75.5, §75.11)', () => {
 
   it('NL-03: each nav link has both a short and a long label (02-§75.11)', () => {
     const links = [...html.matchAll(/<a [^>]*class="nav-link[^"]*"[^>]*>([\s\S]*?)<\/a>/g)];
-    const pageLinks = links.filter((m) => !m[0].includes('nav-link--section') && !m[0].includes('nav-link--top'));
+    const pageLinks = links.filter((m) => !m[0].includes('nav-link--section'));
     assert.equal(pageLinks.length, 5, 'Expected 5 page links');
     for (const link of pageLinks) {
       const inner = link[1];
