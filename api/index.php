@@ -76,9 +76,6 @@ try {
         $method === 'GET' && $route === '/cleanup-cookies'
             => handleCleanupCookies(),
 
-        $method === 'GET' && $route === '/debug-github'
-            => handleDebugGitHub(),
-
         $method === 'POST' && $route === '/add-event'
             => handleAddEvent($activeCamp),
 
@@ -126,26 +123,6 @@ function handleCleanupCookies(): void
     }
 
     jsonResponse(['cleaned' => count(array_unique($stale))]);
-}
-
-function handleDebugGitHub(): void
-{
-    $steps = [];
-    try {
-        $steps[] = 'GitHub class exists: ' . (class_exists(GitHub::class) ? 'yes' : 'no');
-        $steps[] = 'GITHUB_OWNER: ' . (empty($_ENV['GITHUB_OWNER']) ? 'MISSING' : 'set');
-        $steps[] = 'GITHUB_REPO: ' . (empty($_ENV['GITHUB_REPO']) ? 'MISSING' : 'set');
-        $steps[] = 'GITHUB_BRANCH: ' . (empty($_ENV['GITHUB_BRANCH']) ? 'MISSING' : 'set');
-        $steps[] = 'GITHUB_TOKEN: ' . (empty($_ENV['GITHUB_TOKEN']) ? 'MISSING' : 'set (' . strlen($_ENV['GITHUB_TOKEN']) . ' chars)');
-        $gh = new GitHub();
-        $steps[] = 'Constructor: OK';
-    } catch (\Throwable $e) {
-        $steps[] = 'Error: ' . $e->getMessage();
-        $steps[] = 'Class: ' . get_class($e);
-        $steps[] = 'File: ' . $e->getFile() . ':' . $e->getLine();
-        $steps[] = 'Trace: ' . $e->getTraceAsString();
-    }
-    jsonResponse(['steps' => $steps]);
 }
 
 function handleAddEvent(?array $activeCamp): void
