@@ -1099,10 +1099,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1010
+Total requirements:            1017
 Covered (implemented + tested): 514
 Implemented, not tested:        496
-Gap (no implementation):          0
+Gap (no implementation):          7
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1857,3 +1857,15 @@ Matrix cleanup (2026-02-25):
 | `02-§83.23` | done | No new npm dependencies added |
 | `02-§83.24` | covered | All 1374 existing tests pass after implementation |
 | `02-§83.25` | covered | PWA-23: every page uses sbsommar-icon-192.png as favicon |
+
+### §84 — API Error Messages
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§84.1` | gap | — |
+| `02-§84.2` | gap | — |
+| `02-§84.3` | gap | — |
+| `02-§84.4` | gap | — |
+| `02-§84.5` | gap | — |
+| `02-§84.6` | gap | — |
+| `02-§84.7` | gap | — |

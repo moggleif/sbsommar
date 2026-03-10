@@ -157,6 +157,24 @@ Client-side date filtering: when today falls within the camp period, only days
 from today onward are shown. This uses the same date comparison logic as the
 existing past-date blocking (§13). <!-- 03-§3.2b -->
 
+### 3.3 API error classification
+
+When a GitHub API call fails during event submission (add, batch-add, or edit),
+the PHP API classifies the error before returning it to the client. <!-- 03-§3.3 -->
+
+| HTTP status from GitHub | Category | Swedish user message | Actionable? |
+| ----------------------- | -------- | -------------------- | ----------- |
+| 401 / 403 (no rate-limit) | Auth | Servern kunde inte ansluta till GitHub. Kontakta arrangören. | No — config |
+| 403 (rate-limit) / 429 | Rate limit | För många förfrågningar just nu. Försök igen om några minuter. | Yes — wait |
+| 409 / 422 | Conflict | En skrivkonflikt uppstod. Försök igen. | Yes — retry |
+| 5xx | GitHub error | GitHub har tillfälliga problem. Försök igen om en stund. | Yes — wait |
+| curl timeout / no response | Network | Kunde inte nå GitHub. Kontrollera att tjänsten är tillgänglig. | Maybe |
+| Other | Unknown | Ett oväntat fel uppstod. Försök igen eller kontakta arrangören. | Maybe |
+
+The classification is implemented in a single helper method so all three
+mutation endpoints share the same logic. Error messages never expose tokens,
+file paths, or stack traces. <!-- 03-§3.3a -->
+
 ---
 
 ## 4. Archive Layer
