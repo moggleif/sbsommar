@@ -1382,6 +1382,8 @@ Matrix cleanup (2026-02-25):
   New: 02-§83.26 (maskable icon), 02-§83.27 (scheme filter), 02-§83.28 (events.json
     network-first), 02-§83.29 (offline fallback), 02-§83.30–33 (offline page),
     02-§83.34 (cache version increment).
+6 requirements added for image cache-busting href and manifest references (02-§86.1–86.6):
+  all 6 gap (not yet implemented).
 ```
 
 ---
@@ -1900,3 +1902,9 @@ Matrix cleanup (2026-02-25):
 | `02-§85.10` | covered | DRAFT-04: clearDraft removes sessionStorage after success |
 | `02-§85.11` | done | `sb_responsible` localStorage code unchanged |
 | `02-§85.12` | covered | DRAFT-05: no require() or import in source |
+| `02-§86.1` | gap | Build replaces `href="<file>.<ext>"` with `href="<file>.<ext>?v=<hash>"` in all HTML |
+| `02-§86.2` | gap | Build replaces `"src": "<file>.<ext>"` in `app.webmanifest` with `"src": "<file>.<ext>?v=<hash>"` |
+| `02-§86.3` | gap | Hash values reuse the same image hash cache as existing `src` cache-busting |
+| `02-§86.4` | gap | Preload `href` matches corresponding `<img src>` URL exactly |
+| `02-§86.5` | gap | No render function signatures change — post-processing extension |
+| `02-§86.6` | gap | Existing tests continue to pass |

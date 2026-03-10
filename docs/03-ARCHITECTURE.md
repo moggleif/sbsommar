@@ -1795,7 +1795,9 @@ miss.
 | ---------- | -------------- | ------- | ----------- |
 | CSS | `href="style.css"` | `href="style.css?v=<hash>"` | 02-§69.1–69.3 |
 | JS | `src="<file>.js"` | `src="<file>.js?v=<hash>"` | 02-§77.1–77.3 |
-| Images | `src="<file>.<ext>"` | `src="<file>.<ext>?v=<hash>"` | 02-§78.1–78.3 |
+| Images (`src`) | `src="<file>.<ext>"` | `src="<file>.<ext>?v=<hash>"` | 02-§78.1–78.3 |
+| Images (`href`) | `href="<file>.<ext>"` | `href="<file>.<ext>?v=<hash>"` | 02-§86.1 |
+| Manifest icons | `"src": "<file>.<ext>"` | `"src": "<file>.<ext>?v=<hash>"` | 02-§86.2 |
 
 ### 27.4 Constraints
 
