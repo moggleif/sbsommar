@@ -1100,9 +1100,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1052
-Covered (implemented + tested): 533
+Covered (implemented + tested): 540
 Implemented, not tested:        511
-Gap (no implementation):          7
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1386,7 +1386,7 @@ Matrix cleanup (2026-02-25):
   5 covered (CACHE-16..20): 02-§86.1–86.4, 02-§86.6.
   1 implemented (structural, no render changes): 02-§86.5.
 8 requirements added for manifest metadata (02-§87.1–87.8):
-  7 gap (not yet implemented): 02-§87.1–87.6, 02-§87.8.
+  7 covered (PWA-32..37): 02-§87.1–87.6, 02-§87.8.
   1 done (no new deps): 02-§87.7.
 ```
 
@@ -1917,11 +1917,11 @@ Matrix cleanup (2026-02-25):
 
 | Requirement | Status | Test / Evidence |
 | ----------- | ------ | --------------- |
-| `02-§87.1` | gap | Manifest `id` set to `"/"` |
-| `02-§87.2` | gap | Manifest `description` set |
-| `02-§87.3` | gap | Manifest has `screenshots` array with ≥2 entries |
-| `02-§87.4` | gap | One screenshot has `form_factor: "wide"`, size `1280x720` |
-| `02-§87.5` | gap | One screenshot has `form_factor: "narrow"`, size `750x1334` |
-| `02-§87.6` | gap | Screenshot `src` paths cache-busted by build |
+| `02-§87.1` | covered | PWA-32: manifest id is "/" |
+| `02-§87.2` | covered | PWA-33: manifest description verified |
+| `02-§87.3` | covered | PWA-34: screenshots array has ≥2 entries |
+| `02-§87.4` | covered | PWA-35: wide screenshot 1280x720 |
+| `02-§87.5` | covered | PWA-36: narrow screenshot 750x1334 |
+| `02-§87.6` | covered | PWA-37: screenshot src paths in images/; build cache-busts via existing regex |
 | `02-§87.7` | done | No new npm dependencies |
-| `02-§87.8` | gap | Existing tests pass |
+| `02-§87.8` | covered | All existing tests pass |
