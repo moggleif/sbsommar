@@ -1101,8 +1101,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ```text
 Total requirements:            1017
 Covered (implemented + tested): 514
-Implemented, not tested:        496
-Gap (no implementation):          7
+Implemented, not tested:        503
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1862,10 +1862,10 @@ Matrix cleanup (2026-02-25):
 
 | Requirement | Status | Test / Evidence |
 | ----------- | ------ | --------------- |
-| `02-§84.1` | gap | Manual: submit activity on QA with broken config; verify message is specific |
-| `02-§84.2` | gap | Manual: compare retry-able vs permanent error messages |
-| `02-§84.3` | gap | Code review: `api/src/GitHub.php` classifyGitHubError method |
-| `02-§84.4` | gap | Manual: trigger each error category and verify Swedish message |
-| `02-§84.5` | gap | Code review: all three catch blocks in `api/index.php` use classifier |
-| `02-§84.6` | gap | Code review: no tokens/paths/traces in returned messages |
+| `02-§84.1` | implemented | Manual: submit activity on QA with broken config; verify message is specific |
+| `02-§84.2` | implemented | Manual: compare retry-able vs permanent error messages |
+| `02-§84.3` | implemented | `api/src/GitHub.php::classifyGitHubError()` — static classifier method |
+| `02-§84.4` | implemented | Manual: trigger each error category and verify Swedish message |
+| `02-§84.5` | implemented | All three catch blocks in `api/index.php` call `GitHub::classifyGitHubError($e)` |
+| `02-§84.6` | implemented | Code review: classifier returns hardcoded Swedish strings, no dynamic data |
 | `02-§84.7` | done | No client changes needed; `lagg-till.js` already shows `json.error` |
