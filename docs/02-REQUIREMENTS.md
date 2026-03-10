@@ -3557,11 +3557,13 @@ the `<section id="…">` attribute and the `href="#…"` in navigation links.
 
 ---
 
-## 80. Recurring Activities and Batch Submission
+## 80. Multi-Day Selection and Batch Submission
 
 Participants often run the same activity on multiple days at the same time and
-place. The form must support submitting a single activity for several days at
-once, and the API must accept batch submissions atomically.
+place. The add-activity form uses a day grid that is always multi-select —
+clicking days toggles them on/off. When more than one day is selected, the
+submission uses the batch endpoint. A confirmation modal is shown before every
+submission.
 
 ### 80.1 Day grid component (user requirements)
 
@@ -3573,23 +3575,23 @@ once, and the API must accept batch submissions atomically.
   `start_date..end_date`. <!-- 02-§80.3 -->
 - When the current date falls within the camp period, only days from today
   onward are shown. Before the camp period, all days are shown. <!-- 02-§80.4 -->
-- In single-select mode (default), clicking a day selects it and deselects the
-  previously selected day. Exactly one day must be selected before
-  submit. <!-- 02-§80.5 -->
+- The day grid is always multi-select. Clicking a day toggles it on or off
+  independently. There is no single-select mode. <!-- 02-§80.5 -->
 
-### 80.2 Recurring toggle (user requirements)
+### 80.2 Multi-day info and validation (user requirements)
 
-- A toggle labelled "Återkommande" is shown near the day grid. <!-- 02-§80.6 -->
-- Toggling it on switches the day grid from single-select to multi-select
-  mode. <!-- 02-§80.7 -->
-- When toggled on, all camp days except the first and last day are
-  pre-selected. The first and last day are unselected by default but can be
-  selected manually. <!-- 02-§80.8 -->
-- In multi-select mode, clicking a day toggles it on or off
-  independently. <!-- 02-§80.9 -->
-- At least one day must be selected before submit. <!-- 02-§80.10 -->
-- Toggling back to single-select clears all selections and returns to the
-  default single-select behaviour. <!-- 02-§80.11 -->
+- The day grid is always multi-select. Clicking any day toggles its
+  selection. <!-- 02-§80.6 -->
+- When two or more days are selected, an info text is shown below the day grid
+  stating the count and that each day becomes a separate editable
+  activity. <!-- 02-§80.7 -->
+- When exactly one day is selected after having had multiple selected, a soft
+  hint is shown reminding the user that only one day is selected. <!-- 02-§80.8 -->
+- Clicking a day toggles it on or off independently. <!-- 02-§80.9 -->
+- At least one day must be selected before submit. An error message is shown
+  immediately (live validation) if no day is selected. <!-- 02-§80.10 -->
+- The day grid paginates at 8 days per page. Navigation arrows (← →) allow
+  moving between pages. <!-- 02-§80.11 -->
 
 ### 80.3 Batch API endpoint (API requirements)
 
@@ -3614,17 +3616,17 @@ once, and the API must accept batch submissions atomically.
 - The session cookie is updated with all new event IDs when consent is
   given. <!-- 02-§80.19 -->
 
-### 80.4 Submit flow for batch (user requirements)
+### 80.4 Confirmation and submit flow (user requirements)
 
-- When the form is in multi-select mode and submitted, the client sends a
-  single request to the batch endpoint. <!-- 02-§80.20 -->
+- Before every submission (single or batch), a confirmation modal is shown
+  displaying the activity summary: title, date(s), time, location, responsible,
+  description, and link. <!-- 02-§80.20 -->
 - The progress modal (§53.2) displays the same stages as single submit. The
   final success message states the number of created activities
   (e.g. "5 aktiviteter tillagda!"). <!-- 02-§80.21 -->
 - On error, the modal displays the error message. Since the batch is
   all-or-nothing, no partial state needs to be communicated. <!-- 02-§80.22 -->
-- "Lägg till en till" resets the form including the day grid and
-  toggle. <!-- 02-§80.23 -->
+- "Lägg till en till" resets the form including the day grid. <!-- 02-§80.23 -->
 
 ### 80.5 Edit form (site requirements)
 
@@ -3634,7 +3636,7 @@ once, and the API must accept batch submissions atomically.
 
 ### 80.6 Implementation constraints
 
-- The day grid and toggle are implemented in vanilla JavaScript. <!-- 02-§80.25 -->
+- The day grid is implemented in vanilla JavaScript. <!-- 02-§80.25 -->
 - The day grid uses CSS custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§80.26 -->
 - The batch endpoint must be implemented in both Node.js and PHP with identical
   validation and response format. <!-- 02-§80.27 -->

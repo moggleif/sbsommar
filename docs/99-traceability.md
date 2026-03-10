@@ -1100,13 +1100,14 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1000
-Covered (implemented + tested): 494
-Implemented, not tested:        506
+Covered (implemented + tested): 506
+Implemented, not tested:        494
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
 8 of 11 new requirements are covered (ARK-01..08 tests).
+§80 multi-day selection: 12 covered by tests, 12 manual (browser-only), 3 code-only.
 3 are implemented but require manual/visual verification
   (02-§21.3 layout, 02-§21.5 single-open, 02-§21.7 keyboard).
 02-§2.6, 02-§16.2, 02-§16.4 moved from gap to covered.
@@ -1775,31 +1776,31 @@ Matrix cleanup (2026-02-25):
 | ANC-02 | `tests/index-design.test.js` | `02-§79.2 — Pricing section uses id="kostnader"` |
 | ANC-03 | `tests/index-design.test.js` | `02-§79.3 — Nav link for Röster points to #roster` |
 | ANC-04 | `tests/index-design.test.js` | `02-§79.4 — Nav link for Kostnader points to #kostnader` |
-| | | **§80 — Recurring Activities and Batch Submission** |
-| `02-§80.1` | gap | Day grid replaces native date picker on add-activity form |
-| `02-§80.2` | gap | Each day button shows Swedish weekday abbreviation and day/month |
-| `02-§80.3` | gap | Day grid contains exactly the days within camp start_date..end_date |
-| `02-§80.4` | gap | During camp period, only days from today onward are shown |
-| `02-§80.5` | gap | Single-select mode: clicking a day deselects the previous; exactly one selected |
-| `02-§80.6` | gap | A toggle labelled "Återkommande" is shown near the day grid |
-| `02-§80.7` | gap | Toggle switches day grid from single-select to multi-select |
-| `02-§80.8` | gap | Multi-select pre-selects all days except first and last |
-| `02-§80.9` | gap | Multi-select: clicking a day toggles it independently |
-| `02-§80.10` | gap | At least one day must be selected before submit |
-| `02-§80.11` | gap | Toggling back to single-select clears all selections |
-| `02-§80.12` | gap | POST /add-events accepts dates array instead of date |
-| `02-§80.13` | gap | Batch endpoint validates every date with same rules as single |
-| `02-§80.14` | gap | Batch validates uniqueness (title + date + start) for every date |
-| `02-§80.15` | gap | All-or-nothing: any failed date rejects entire batch |
-| `02-§80.16` | gap | All events committed in single branch and PR |
-| `02-§80.17` | gap | Response includes eventIds array |
-| `02-§80.18` | gap | Time-gating and injection scanning apply to batch |
-| `02-§80.19` | gap | Session cookie updated with all new event IDs |
-| `02-§80.20` | gap | Multi-select submit sends single request to batch endpoint |
-| `02-§80.21` | gap | Success message states number of created activities |
-| `02-§80.22` | gap | Error displays message; no partial state |
-| `02-§80.23` | gap | "Lägg till en till" resets form including day grid and toggle |
-| `02-§80.24` | gap | Edit form not affected; single day selector remains |
-| `02-§80.25` | gap | Day grid and toggle in vanilla JavaScript |
-| `02-§80.26` | gap | Day grid uses CSS custom properties from 07-DESIGN.md |
-| `02-§80.27` | gap | Batch endpoint implemented in both Node.js and PHP |
+| | | **§80 — Multi-Day Selection and Batch Submission** |
+| `02-§80.1` | DG-01 | Day grid replaces native date picker on add-activity form |
+| `02-§80.2` | DG-04, DG-05 | Each day button shows Swedish weekday abbreviation and day/month |
+| `02-§80.3` | DG-06, DG-07 | Day grid contains exactly the days within camp start_date..end_date |
+| `02-§80.4` | manual | During camp period, only days from today onward are shown (browser-only) |
+| `02-§80.5` | DG-08 | Always multi-select: clicking a day toggles it independently |
+| `02-§80.6` | DG-09 | Day grid is always multi-select |
+| `02-§80.7` | manual | Info text shown when 2+ days selected (browser-only) |
+| `02-§80.8` | manual | Soft hint when only one day selected after multi (browser-only) |
+| `02-§80.9` | DG-08 | Clicking a day toggles it independently |
+| `02-§80.10` | DG-11 | At least one day must be selected; error shown via live validation |
+| `02-§80.11` | manual | Pagination at 8 days/page with ← → navigation (browser-only) |
+| `02-§80.12` | BATCH-01, BATCH-02 | POST /add-events accepts dates array instead of date |
+| `02-§80.13` | BATCH-04, BATCH-05 | Batch endpoint validates every date with same rules as single |
+| `02-§80.14` | manual | Batch validates uniqueness (title + date + start) — requires live data |
+| `02-§80.15` | BATCH-06, BATCH-07 | All-or-nothing: any failed field rejects entire batch |
+| `02-§80.16` | manual | All events committed in single branch and PR (integration) |
+| `02-§80.17` | BATCH-08 | Response includes eventIds array |
+| `02-§80.18` | BATCH-09 | Time-gating and injection scanning apply to batch |
+| `02-§80.19` | manual | Session cookie updated with all new event IDs (browser-only) |
+| `02-§80.20` | manual | Confirmation modal shown before every submission (browser-only) |
+| `02-§80.21` | manual | Success message states number of created activities (browser-only) |
+| `02-§80.22` | manual | Error displays message; no partial state (browser-only) |
+| `02-§80.23` | manual | "Lägg till en till" resets form including day grid (browser-only) |
+| `02-§80.24` | DG-12 | Edit form not affected; single day selector remains |
+| `02-§80.25` | done | Day grid implemented in vanilla JavaScript |
+| `02-§80.26` | done | Day grid uses CSS custom properties from 07-DESIGN.md |
+| `02-§80.27` | done | Batch endpoint implemented in both Node.js and PHP |
