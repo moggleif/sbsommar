@@ -119,7 +119,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
   <meta name="robots" content="noindex, nofollow">
   <title>Lägrets schema – ${campName}</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+  <link rel="icon" type="image/png" href="images/sbsommar-icon-192.png">
 ${pwaHeadTags()}
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>

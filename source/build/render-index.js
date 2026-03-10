@@ -215,7 +215,7 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
   <meta name="robots" content="noindex, nofollow">
   <title>SB Sommar</title>
   <link rel="stylesheet" href="style.css">${preloadHtml}
-  <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+  <link rel="icon" type="image/png" href="images/sbsommar-icon-192.png">
 ${pwaHeadTags()}
 </head>
 <body>
