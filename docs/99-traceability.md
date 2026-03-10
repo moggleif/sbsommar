@@ -1099,9 +1099,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1038
-Covered (implemented + tested): 528
-Implemented, not tested:        510
+Total requirements:            1044
+Covered (implemented + tested): 533
+Implemented, not tested:        511
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1382,6 +1382,9 @@ Matrix cleanup (2026-02-25):
   New: 02-§83.26 (maskable icon), 02-§83.27 (scheme filter), 02-§83.28 (events.json
     network-first), 02-§83.29 (offline fallback), 02-§83.30–33 (offline page),
     02-§83.34 (cache version increment).
+6 requirements added for image cache-busting href and manifest references (02-§86.1–86.6):
+  5 covered (CACHE-16..20): 02-§86.1–86.4, 02-§86.6.
+  1 implemented (structural, no render changes): 02-§86.5.
 ```
 
 ---
@@ -1900,3 +1903,9 @@ Matrix cleanup (2026-02-25):
 | `02-§85.10` | covered | DRAFT-04: clearDraft removes sessionStorage after success |
 | `02-§85.11` | done | `sb_responsible` localStorage code unchanged |
 | `02-§85.12` | covered | DRAFT-05: no require() or import in source |
+| `02-§86.1` | covered | CACHE-16: build.js replaces image href with `?v=<hash>` |
+| `02-§86.2` | covered | CACHE-20: app.webmanifest icons have `?v=` hashes |
+| `02-§86.3` | covered | CACHE-18: href cache-busting reuses imgHashCache |
+| `02-§86.4` | covered | CACHE-19: preload href matches img src in index.html |
+| `02-§86.5` | implemented | Post-processing in `build.js`, no render changes |
+| `02-§86.6` | covered | All existing tests pass (pre-commit hook) |
