@@ -3687,3 +3687,67 @@ the form first.
   `lagg-till.js`. <!-- 02-§81.9 -->
 - The validation reuses the existing `setFieldError` / `clearFieldError`
   helpers. <!-- 02-§81.10 -->
+
+---
+
+## 82. Character counter on text input fields
+
+The add-activity and edit-activity forms display a discreet character counter on
+text input fields so the user sees how much space remains before hitting the
+maximum length.
+
+### 82.1 Affected fields and maximum lengths (site requirements)
+
+- The following fields display a character counter and enforce a `maxlength`
+  attribute in HTML: <!-- 02-§82.1 -->
+
+  | Field       | Max length |
+  |-------------|-----------|
+  | title       | 80        |
+  | responsible | 60        |
+  | description | 2000      |
+  | link        | 500       |
+
+- The `maxlength` attribute is set on each `<input>` and `<textarea>` element in
+  both the add-activity form (`render-add.js`) and the edit-activity form
+  (`render-edit.js`). <!-- 02-§82.2 -->
+- The API validation in `validate.js` uses the same limits. The `responsible`
+  field limit is reduced from 200 to 60 to match the new client-side
+  constraint. <!-- 02-§82.3 -->
+
+### 82.2 Counter visibility (user requirements)
+
+- The counter is hidden when the field value is below 70 % of the maximum
+  length. <!-- 02-§82.4 -->
+- The counter becomes visible when the field value reaches or exceeds 70 % of
+  the maximum length. <!-- 02-§82.5 -->
+- The counter text turns terracotta (`var(--color-terracotta)`) when the field
+  value reaches or exceeds 90 % of the maximum length. <!-- 02-§82.6 -->
+
+### 82.3 Counter format and placement (user requirements)
+
+- The counter text shows the current length and the maximum length in the format
+  `N / MAX` (e.g. `58 / 80`). <!-- 02-§82.7 -->
+- The counter is placed directly below the input field, right-aligned within the
+  `.field` container. <!-- 02-§82.8 -->
+- The counter uses `font-size: var(--font-size-small)` and
+  `color: var(--color-charcoal)` at `opacity: 0.6` by default. <!-- 02-§82.9 -->
+
+### 82.4 Counter updates (site requirements)
+
+- The counter updates on every `input` event on the field. <!-- 02-§82.10 -->
+- When the form is reset (e.g. after successful submission), counters are hidden
+  again. <!-- 02-§82.11 -->
+
+### 82.5 Both forms (site requirements)
+
+- The character counter is present on both the add-activity form
+  (`lagg-till.html`) and the edit-activity form
+  (`redigera.html`). <!-- 02-§82.12 -->
+
+### 82.6 Implementation constraints
+
+- The counters are implemented in vanilla JavaScript. <!-- 02-§82.13 -->
+- The counters use CSS custom properties from `docs/07-DESIGN.md
+  §7`. <!-- 02-§82.14 -->
+- No new npm dependencies are added. <!-- 02-§82.15 -->
