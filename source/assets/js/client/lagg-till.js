@@ -631,13 +631,13 @@
     var summary =
       (isBatch ? '<p class="field-info">Varje dag blir en egen aktivitet som kan redigeras separat.</p>' : '') +
       '<table class="confirm-summary">' +
-        '<tr><td>📌</td><td><strong>' + title + '</strong></td></tr>' +
+        '<tr><td>📌</td><td><strong>' + escHtml(title) + '</strong></td></tr>' +
         (isBatch
           ? '<tr><td>📅</td><td><strong>' + selectedDates.length + ' dagar:</strong> ' + dateList + '</td></tr>'
           : '<tr><td>📅</td><td>' + dateList + '</td></tr>') +
         '<tr><td>🕐</td><td>' + start + '–' + end + '</td></tr>' +
-        '<tr><td>📍</td><td>' + location + '</td></tr>' +
-        '<tr><td>👤</td><td>' + responsible + '</td></tr>' +
+        '<tr><td>📍</td><td>' + escHtml(location) + '</td></tr>' +
+        '<tr><td>👤</td><td>' + escHtml(responsible) + '</td></tr>' +
         descRow +
         linkRow +
       '</table>';
