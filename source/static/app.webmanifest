@@ -1,6 +1,8 @@
 {
   "name": "SB Sommar",
   "short_name": "SB Sommar",
+  "id": "/",
+  "description": "Information och aktiviteter för SB Sommar-lägret",
   "lang": "sv",
   "start_url": "/",
   "display": "standalone",
@@ -24,6 +26,20 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "images/screenshot-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
     }
   ]
 }
