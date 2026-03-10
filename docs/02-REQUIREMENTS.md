@@ -3815,3 +3815,5 @@ worker provides basic offline caching of static assets.
 - The service worker is implemented in vanilla JavaScript. <!-- 02-§83.22 -->
 - No new npm dependencies are added. <!-- 02-§83.23 -->
 - Existing pages and functionality must not break. <!-- 02-§83.24 -->
+- Every HTML page must use the PWA icon (`images/sbsommar-icon-192.png`) as
+  the browser favicon (`<link rel="icon">`). <!-- 02-§83.25 -->
