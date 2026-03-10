@@ -3760,7 +3760,8 @@ maximum length.
 
 The site must be installable as a Progressive Web App so participants can add it
 to their home screen and use it in a standalone app-like experience. A service
-worker provides basic offline caching of static assets.
+worker provides offline caching so that core pages and recent event data remain
+accessible without network connectivity.
 
 ### 83.1 Web App Manifest (site requirements)
 
@@ -3774,6 +3775,9 @@ worker provides basic offline caching of static assets.
 - The manifest must declare at least two icon sizes: 192×192 and
   512×512, both PNG. <!-- 02-§83.6 -->
 - The manifest `icons` array must include a `"purpose": "any"` entry. <!-- 02-§83.7 -->
+- The manifest `icons` array must include at least one entry with
+  `"purpose": "maskable"` so the icon renders correctly in adaptive icon
+  contexts (Android home screen, etc.). <!-- 02-§83.26 -->
 
 ### 83.2 HTML head tags (site requirements)
 
@@ -3781,7 +3785,7 @@ worker provides basic offline caching of static assets.
   in `<head>`. <!-- 02-§83.8 -->
 - Every HTML page must include `<meta name="theme-color">` with the same value
   as the manifest `theme_color`. <!-- 02-§83.9 -->
-- Every HTML page must include `<meta name="apple-mobile-web-app-capable"
+- Every HTML page must include `<meta name="mobile-web-app-capable"
   content="yes">`. <!-- 02-§83.10 -->
 - Every HTML page must include `<meta name="apple-mobile-web-app-status-bar-style"
   content="default">`. <!-- 02-§83.11 -->
@@ -3794,14 +3798,27 @@ worker provides basic offline caching of static assets.
   `sw.js` only when the browser supports service workers. <!-- 02-§83.14 -->
 - The service worker must use a versioned cache name so that updates can
   invalidate old caches. <!-- 02-§83.15 -->
-- On `install`, the service worker must pre-cache the main HTML pages
-  (`/`, `/schema.html`, `/idag.html`), the CSS file, and the manifest. <!-- 02-§83.16 -->
+- On `install`, the service worker must pre-cache all user-facing HTML pages
+  (`/`, `/schema.html`, `/idag.html`, `/lagg-till.html`, `/redigera.html`,
+  `/live.html`, `/arkiv.html`, `/kalender.html`), the CSS file, and the
+  manifest. <!-- 02-§83.16 -->
 - On `fetch`, the service worker must serve cached responses for navigation
   and static-asset requests when the network is unavailable
   (network-first with cache fallback for HTML, cache-first for CSS/JS/images). <!-- 02-§83.17 -->
 - On `activate`, the service worker must delete caches whose name does not
   match the current version. <!-- 02-§83.18 -->
-- The service worker must not cache API responses or `events.json`. <!-- 02-§83.19 -->
+- The service worker must not cache API responses (`/api/` paths) or
+  form-submission endpoints (`/add-event`, `/edit-event`). <!-- 02-§83.19 -->
+- The service worker must only handle requests with `http:` or `https:`
+  schemes; all other schemes (e.g. `chrome-extension:`) must be
+  ignored. <!-- 02-§83.27 -->
+- The service worker must cache `events.json` using a
+  network-first strategy with cache fallback so that schedule data is
+  available offline. <!-- 02-§83.28 -->
+- When a navigation request fails and the requested page is not in the
+  cache, the service worker must respond with a dedicated offline
+  fallback page (`/offline.html`) that tells the user they are offline
+  and lists which pages may be available from cache. <!-- 02-§83.29 -->
 
 ### 83.4 Icon assets (site requirements)
 
@@ -3810,13 +3827,25 @@ worker provides basic offline caching of static assets.
 - The build copies them to `public/images/` alongside other image
   assets. <!-- 02-§83.21 -->
 
-### 83.5 Implementation constraints
+### 83.6 Offline fallback page (site requirements)
+
+- The build must produce an `offline.html` page at the site root. <!-- 02-§83.30 -->
+- The offline page must use the same shared layout (header, footer,
+  CSS) as other pages. <!-- 02-§83.31 -->
+- The offline page must display a Swedish-language message informing the
+  user that they are offline. <!-- 02-§83.32 -->
+- The service worker must pre-cache `offline.html` on install. <!-- 02-§83.33 -->
+
+### 83.7 Implementation constraints
 
 - The service worker is implemented in vanilla JavaScript. <!-- 02-§83.22 -->
 - No new npm dependencies are added. <!-- 02-§83.23 -->
 - Existing pages and functionality must not break. <!-- 02-§83.24 -->
 - Every HTML page must use the PWA icon (`images/sbsommar-icon-192.png`) as
   the browser favicon (`<link rel="icon">`). <!-- 02-§83.25 -->
+- The cache version constant must be incremented when caching behaviour
+  changes, so that old caches are invalidated on the next
+  activation. <!-- 02-§83.34 -->
 
 ---
 
