@@ -1862,10 +1862,10 @@ Matrix cleanup (2026-02-25):
 
 | Requirement | Status | Test / Evidence |
 | ----------- | ------ | --------------- |
-| `02-§84.1` | gap | — |
-| `02-§84.2` | gap | — |
-| `02-§84.3` | gap | — |
-| `02-§84.4` | gap | — |
-| `02-§84.5` | gap | — |
-| `02-§84.6` | gap | — |
-| `02-§84.7` | gap | — |
+| `02-§84.1` | gap | Manual: submit activity on QA with broken config; verify message is specific |
+| `02-§84.2` | gap | Manual: compare retry-able vs permanent error messages |
+| `02-§84.3` | gap | Code review: `api/src/GitHub.php` classifyGitHubError method |
+| `02-§84.4` | gap | Manual: trigger each error category and verify Swedish message |
+| `02-§84.5` | gap | Code review: all three catch blocks in `api/index.php` use classifier |
+| `02-§84.6` | gap | Code review: no tokens/paths/traces in returned messages |
+| `02-§84.7` | done | No client changes needed; `lagg-till.js` already shows `json.error` |
