@@ -18,6 +18,70 @@
     } catch { /* localStorage may be unavailable */ }
   }
 
+  // ── Form draft cache — restore from sessionStorage (02-§85.1, 02-§85.8) ──
+
+  var DRAFT_KEY = 'sb_form_draft';
+
+  function saveDraft() {
+    try {
+      var draft = {
+        title:       (form.querySelector('#f-title') || {}).value || '',
+        start:       (form.querySelector('#f-start') || {}).value || '',
+        end:         (form.querySelector('#f-end') || {}).value || '',
+        location:    (form.querySelector('#f-location') || {}).value || '',
+        responsible: (form.querySelector('#f-responsible') || {}).value || '',
+        description: (form.querySelector('#f-description') || {}).value || '',
+        link:        (form.querySelector('#f-link') || {}).value || '',
+        dates:       [],
+      };
+      var selected = form.querySelectorAll('.day-btn.selected');
+      for (var i = 0; i < selected.length; i++) {
+        draft.dates.push(selected[i].dataset.date);
+      }
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    } catch { /* sessionStorage may be unavailable */ }
+  }
+
+  function restoreDraft() {
+    try {
+      var raw = sessionStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      var draft = JSON.parse(raw);
+
+      var fields = ['title', 'start', 'end', 'responsible', 'description', 'link'];
+      for (var i = 0; i < fields.length; i++) {
+        var el = form.querySelector('#f-' + fields[i]);
+        if (el && draft[fields[i]]) el.value = draft[fields[i]];
+      }
+
+      // Restore location select
+      var loc = form.querySelector('#f-location');
+      if (loc && draft.location) {
+        for (var j = 0; j < loc.options.length; j++) {
+          if (loc.options[j].value === draft.location) {
+            loc.value = draft.location;
+            break;
+          }
+        }
+      }
+
+      // Restore day-grid selections (02-§85.9)
+      if (draft.dates && draft.dates.length && dayGrid) {
+        var btns = dayGrid.querySelectorAll('.day-btn');
+        for (var k = 0; k < btns.length; k++) {
+          if (draft.dates.indexOf(btns[k].dataset.date) !== -1) {
+            btns[k].classList.add('selected');
+          }
+        }
+        updateHiddenDate();
+      }
+    } catch { /* sessionStorage may be unavailable or data corrupt */ }
+  }
+
+  function clearDraft() {
+    try { sessionStorage.removeItem(DRAFT_KEY); } catch { /* ignore */ }
+  }
+
   // ── Dynamic cookie paragraph swap (02-§48.5–48.7) ─────────────────────────
 
   var cookieInfoEl = document.getElementById('cookie-info');
@@ -165,6 +229,27 @@
       btn.classList.toggle('selected');
       updateHiddenDate();
       validateDateSelection();
+    });
+  }
+
+  // ── Form draft cache — restore and save listeners (02-§85.5–85.9) ─────────
+
+  restoreDraft();
+
+  // Save on text/time input (02-§85.5)
+  ['#f-title', '#f-start', '#f-end', '#f-responsible', '#f-description', '#f-link'].forEach(function (sel) {
+    var el = form.querySelector(sel);
+    if (el) el.addEventListener('input', saveDraft);
+  });
+
+  // Save on location change (02-§85.6)
+  var locSelect = form.querySelector('#f-location');
+  if (locSelect) locSelect.addEventListener('change', saveDraft);
+
+  // Save on day-grid click (02-§85.7) — runs after toggle in existing handler
+  if (dayGrid) {
+    dayGrid.addEventListener('click', function (e) {
+      if (e.target.closest('.day-btn')) saveDraft();
     });
   }
 
@@ -789,6 +874,8 @@
           }
           // Save responsible name for auto-fill on next visit (02-§48.1, 02-§48.3)
           try { localStorage.setItem('sb_responsible', responsible); } catch { /* ignore */ }
+          // Clear draft after successful submission (02-§85.10)
+          clearDraft();
           if (isBatch) {
             setModalBatchSuccess(title, selectedDates.length, consentGiven);
           } else {

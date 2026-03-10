@@ -1099,9 +1099,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1017
-Covered (implemented + tested): 514
-Implemented, not tested:        503
+Total requirements:            1029
+Covered (implemented + tested): 519
+Implemented, not tested:        510
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1372,6 +1372,10 @@ Matrix cleanup (2026-02-25):
   IDX-12, IDX-13, IDX-14, IDX-20 tests removed; IDX-21 added (absence test).
 4 requirements added for section anchor ID consistency (02-§79.1–79.4):
   all 4 covered (ANC-01..04).
+12 requirements added for form draft cache (02-§85.1–85.12):
+  5 covered (DRAFT-01..05): 02-§85.4, 02-§85.5, 02-§85.8, 02-§85.10, 02-§85.12.
+  5 implemented (browser-only): 02-§85.1, 02-§85.2, 02-§85.3, 02-§85.6, 02-§85.7, 02-§85.9.
+  2 done (no implementation needed): 02-§85.11.
 ```
 
 ---
@@ -1869,3 +1873,15 @@ Matrix cleanup (2026-02-25):
 | `02-§84.5` | implemented | All three catch blocks in `api/index.php` call `GitHub::classifyGitHubError($e)` |
 | `02-§84.6` | implemented | Code review: classifier returns hardcoded Swedish strings, no dynamic data |
 | `02-§84.7` | done | No client changes needed; `lagg-till.js` already shows `json.error` |
+| `02-§85.1` | implemented | Manual: fill form, reload → fields restored (DRAFT-M01) |
+| `02-§85.2` | implemented | Manual: submit successfully, reload → form empty (DRAFT-M02) |
+| `02-§85.3` | implemented | Manual: fill form, close tab, reopen → form empty (DRAFT-M03) |
+| `02-§85.4` | covered | DRAFT-01: source references `sb_form_draft` key |
+| `02-§85.5` | covered | DRAFT-02: input event listener for draft saving |
+| `02-§85.6` | implemented | Manual: change location, reload → location restored |
+| `02-§85.7` | implemented | Manual: select days, reload → days re-selected (DRAFT-M04) |
+| `02-§85.8` | covered | DRAFT-03: restoreDraft reads sessionStorage on load |
+| `02-§85.9` | implemented | Manual: select days, reload → buttons visually selected (DRAFT-M04) |
+| `02-§85.10` | covered | DRAFT-04: clearDraft removes sessionStorage after success |
+| `02-§85.11` | done | `sb_responsible` localStorage code unchanged |
+| `02-§85.12` | covered | DRAFT-05: no require() or import in source |
