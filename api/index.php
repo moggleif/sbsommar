@@ -93,7 +93,7 @@ try {
     };
 } catch (\Throwable $e) {
     error_log('PHP API error: ' . $e->getMessage());
-    jsonResponse(['success' => false, 'error' => 'Internt serverfel.'], 500);
+    jsonResponse(['success' => false, 'error' => GitHub::classifyGitHubError($e)], 500);
 }
 
 // ── Route handlers ───────────────────────────────────────────────────────
