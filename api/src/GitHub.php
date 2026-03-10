@@ -535,3 +535,4 @@ final class GitHub
 
         return 'Ett oväntat fel uppstod. Försök igen eller kontakta arrangören.';
     }
+}
