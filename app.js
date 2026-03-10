@@ -135,7 +135,7 @@ app.post('/feedback', async (req, res) => {
     return res.json({ success: true, issueUrl: '' });
   }
 
-  if (BUILD_ENV !== 'production') {
+  if (BUILD_ENV !== 'production' && BUILD_ENV !== 'qa') {
     console.log('[feedback dry-run]', JSON.stringify(req.body, null, 2));
     return res.json({ success: true, issueUrl: '' });
   }
