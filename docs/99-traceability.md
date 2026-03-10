@@ -1856,3 +1856,4 @@ Matrix cleanup (2026-02-25):
 | `02-§83.22` | done | Service worker in vanilla JavaScript, no frameworks |
 | `02-§83.23` | done | No new npm dependencies added |
 | `02-§83.24` | covered | All 1374 existing tests pass after implementation |
+| `02-§83.25` | covered | PWA-23: every page uses sbsommar-icon-192.png as favicon |
