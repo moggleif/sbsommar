@@ -1100,9 +1100,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1010
-Covered (implemented + tested): 506
-Implemented, not tested:        494
-Gap (no implementation):         10
+Covered (implemented + tested): 514
+Implemented, not tested:        496
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1805,13 +1805,13 @@ Matrix cleanup (2026-02-25):
 | `02-§80.26` | done | Day grid uses CSS custom properties from 07-DESIGN.md |
 | `02-§80.27` | done | Batch endpoint implemented in both Node.js and PHP |
 | | | **§81 — Client-side Link Field Validation** |
-| `02-§81.1` | gap | Blur validation checks http/https protocol |
-| `02-§81.2` | gap | Blur validation checks for at least one dot after protocol |
-| `02-§81.3` | gap | Error shown below field using field-error pattern |
-| `02-§81.4` | gap | Empty link field shows no error |
-| `02-§81.5` | gap | Error cleared on input event |
-| `02-§81.6` | gap | Missing protocol error message in Swedish |
-| `02-§81.7` | gap | Missing dot error message in Swedish |
-| `02-§81.8` | gap | Submit blocked while link field has error |
-| `02-§81.9` | gap | Implemented in vanilla JS in lagg-till.js |
-| `02-§81.10` | gap | Reuses existing setFieldError/clearFieldError helpers |
+| `02-§81.1` | LINK-03, LINK-04 | Blur validation checks http/https protocol |
+| `02-§81.2` | LINK-05 | Blur validation checks for at least one dot after protocol |
+| `02-§81.3` | LINK-01, LINK-02 | Error shown below field using field-error pattern |
+| `02-§81.4` | manual | Empty link field shows no error (browser-only) |
+| `02-§81.5` | LINK-08 | Error cleared on input event |
+| `02-§81.6` | LINK-06 | Missing protocol error message in Swedish |
+| `02-§81.7` | LINK-07 | Missing dot error message in Swedish |
+| `02-§81.8` | manual | Submit blocked while link field has error (browser-only) |
+| `02-§81.9` | LINK-09 | Implemented in vanilla JS in lagg-till.js |
+| `02-§81.10` | LINK-10 | Reuses existing setFieldError/clearAllErrors helpers |
