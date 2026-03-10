@@ -490,6 +490,58 @@ async function main() {
     }
   }
   console.log(`Cache-bust: ${imgHashCache.size} image files  (${imgReplacements} pages)`);
+
+  // ── Post-process: Image href cache-busting (02-§86.1) ──────────────────
+  const htmlFiles4 = findHtmlFiles(OUTPUT_DIR);
+  let hrefReplacements = 0;
+  for (const file of htmlFiles4) {
+    let html = fs.readFileSync(file, 'utf8');
+    const updated = html.replace(
+      /href="([^"]+\.(webp|png|jpg|jpeg|ico))"/g,
+      (_match, imgFile) => {
+        const imgPath = path.join(OUTPUT_DIR, imgFile);
+        if (!fs.existsSync(imgPath)) return _match;
+        if (!imgHashCache.has(imgFile)) {
+          const hash = crypto.createHash('md5')
+            .update(fs.readFileSync(imgPath))
+            .digest('hex')
+            .slice(0, 8);
+          imgHashCache.set(imgFile, hash);
+        }
+        return `href="${imgFile}?v=${imgHashCache.get(imgFile)}"`;
+      },
+    );
+    if (updated !== html) {
+      fs.writeFileSync(file, updated, 'utf8');
+      hrefReplacements++;
+    }
+  }
+  console.log(`Cache-bust: image href  (${hrefReplacements} pages)`);
+
+  // ── Post-process: Manifest icon cache-busting (02-§86.2) ───────────────
+  const manifestPath = path.join(OUTPUT_DIR, 'app.webmanifest');
+  if (fs.existsSync(manifestPath)) {
+    let manifest = fs.readFileSync(manifestPath, 'utf8');
+    const updated = manifest.replace(
+      /"src"\s*:\s*"([^"]+\.(webp|png|jpg|jpeg|ico))"/g,
+      (_match, imgFile) => {
+        const imgPath = path.join(OUTPUT_DIR, imgFile);
+        if (!fs.existsSync(imgPath)) return _match;
+        if (!imgHashCache.has(imgFile)) {
+          const hash = crypto.createHash('md5')
+            .update(fs.readFileSync(imgPath))
+            .digest('hex')
+            .slice(0, 8);
+          imgHashCache.set(imgFile, hash);
+        }
+        return `"src": "${imgFile}?v=${imgHashCache.get(imgFile)}"`;
+      },
+    );
+    if (updated !== manifest) {
+      fs.writeFileSync(manifestPath, updated, 'utf8');
+      console.log('Cache-bust: app.webmanifest icons');
+    }
+  }
 }
 
 main().catch((err) => {
