@@ -126,6 +126,37 @@ flowchart TD
     end
 ```
 
+### 3.1 Batch event submissions (recurring activities)
+
+A batch endpoint `POST /add-events` (Node.js) and `POST /api/add-events` (PHP)
+accepts the same fields as the single-event endpoint but with `dates` (an array)
+instead of `date`. <!-- 03-§3.1 -->
+
+The flow is identical to the single-event flow above, with two differences:
+
+1. **Validation**: every date in the array is validated against camp range,
+   past-date rules, and uniqueness `(title + date + start)` before any write.
+   If any date fails, the entire batch is rejected. <!-- 03-§3.1a -->
+2. **Commit**: all events are appended to the camp YAML file and committed in a
+   single branch and PR — not one PR per event. <!-- 03-§3.1b -->
+
+The session cookie is updated with all new event IDs (when consent is given).
+
+### 3.2 Day grid on add-activity form
+
+The add-activity form replaces the native `<input type="date">` with a grid of
+day buttons rendered at build time from the active camp's `start_date` and
+`end_date`. <!-- 03-§3.2 -->
+
+Each button shows the Swedish weekday abbreviation and date (e.g. "Mån 28/7").
+A "Återkommande" toggle switches the grid between single-select (default) and
+multi-select mode. In single-select, exactly one day is selected. In
+multi-select, multiple days can be toggled on/off. <!-- 03-§3.2a -->
+
+Client-side date filtering: when today falls within the camp period, only days
+from today onward are shown. This uses the same date comparison logic as the
+existing past-date blocking (§13). <!-- 03-§3.2b -->
+
 ---
 
 ## 4. Archive Layer

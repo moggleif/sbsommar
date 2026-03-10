@@ -1775,3 +1775,31 @@ Matrix cleanup (2026-02-25):
 | ANC-02 | `tests/index-design.test.js` | `02-§79.2 — Pricing section uses id="kostnader"` |
 | ANC-03 | `tests/index-design.test.js` | `02-§79.3 — Nav link for Röster points to #roster` |
 | ANC-04 | `tests/index-design.test.js` | `02-§79.4 — Nav link for Kostnader points to #kostnader` |
+| | | **§80 — Recurring Activities and Batch Submission** |
+| `02-§80.1` | gap | Day grid replaces native date picker on add-activity form |
+| `02-§80.2` | gap | Each day button shows Swedish weekday abbreviation and day/month |
+| `02-§80.3` | gap | Day grid contains exactly the days within camp start_date..end_date |
+| `02-§80.4` | gap | During camp period, only days from today onward are shown |
+| `02-§80.5` | gap | Single-select mode: clicking a day deselects the previous; exactly one selected |
+| `02-§80.6` | gap | A toggle labelled "Återkommande" is shown near the day grid |
+| `02-§80.7` | gap | Toggle switches day grid from single-select to multi-select |
+| `02-§80.8` | gap | Multi-select pre-selects all days except first and last |
+| `02-§80.9` | gap | Multi-select: clicking a day toggles it independently |
+| `02-§80.10` | gap | At least one day must be selected before submit |
+| `02-§80.11` | gap | Toggling back to single-select clears all selections |
+| `02-§80.12` | gap | POST /add-events accepts dates array instead of date |
+| `02-§80.13` | gap | Batch endpoint validates every date with same rules as single |
+| `02-§80.14` | gap | Batch validates uniqueness (title + date + start) for every date |
+| `02-§80.15` | gap | All-or-nothing: any failed date rejects entire batch |
+| `02-§80.16` | gap | All events committed in single branch and PR |
+| `02-§80.17` | gap | Response includes eventIds array |
+| `02-§80.18` | gap | Time-gating and injection scanning apply to batch |
+| `02-§80.19` | gap | Session cookie updated with all new event IDs |
+| `02-§80.20` | gap | Multi-select submit sends single request to batch endpoint |
+| `02-§80.21` | gap | Success message states number of created activities |
+| `02-§80.22` | gap | Error displays message; no partial state |
+| `02-§80.23` | gap | "Lägg till en till" resets form including day grid and toggle |
+| `02-§80.24` | gap | Edit form not affected; single day selector remains |
+| `02-§80.25` | gap | Day grid and toggle in vanilla JavaScript |
+| `02-§80.26` | gap | Day grid uses CSS custom properties from 07-DESIGN.md |
+| `02-§80.27` | gap | Batch endpoint implemented in both Node.js and PHP |
