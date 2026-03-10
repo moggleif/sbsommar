@@ -3943,3 +3943,32 @@ redundant downloads.
 - No render function signatures may change — this is a post-processing
   extension. <!-- 02-§86.5 -->
 - Existing tests must continue to pass. <!-- 02-§86.6 -->
+
+---
+
+## 87. Manifest Metadata for Richer Install UI
+
+Chrome requires additional manifest fields to show a richer install prompt.
+Missing fields degrade the install experience or block the install prompt on
+newer browser versions.
+
+### 87.1 Manifest identity (site requirements)
+
+- The manifest must set `id` to `"/"`. <!-- 02-§87.1 -->
+- The manifest must set `description` to `"Information och aktiviteter för SB Sommar-lägret"`. <!-- 02-§87.2 -->
+
+### 87.2 Manifest screenshots (site requirements)
+
+- The manifest must include a `screenshots` array with at least two
+  entries. <!-- 02-§87.3 -->
+- One screenshot must have `form_factor` set to `"wide"` with size
+  `"1280x720"` and type `"image/png"`. <!-- 02-§87.4 -->
+- One screenshot must have `form_factor` set to `"narrow"` with size
+  `"750x1334"` and type `"image/png"`. <!-- 02-§87.5 -->
+- Screenshot `src` paths must point to files in the `images/` directory
+  and must be cache-busted by the existing build pipeline. <!-- 02-§87.6 -->
+
+### 87.3 Constraints
+
+- No new npm dependencies. <!-- 02-§87.7 -->
+- Existing tests must continue to pass. <!-- 02-§87.8 -->
