@@ -145,7 +145,14 @@
       if (multiDayInfo) multiDayInfo.hidden = true;
     } else {
       setFieldError('date', null);
-      if (multiDayInfo) multiDayInfo.hidden = count < 2;
+      if (multiDayInfo) {
+        if (count >= 2) {
+          multiDayInfo.textContent = 'Du har valt ' + count + ' dagar. Det skapas en aktivitet per dag som kan redigeras separat.';
+          multiDayInfo.hidden = false;
+        } else {
+          multiDayInfo.hidden = true;
+        }
+      }
     }
   }
 
