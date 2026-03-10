@@ -142,4 +142,48 @@ function fail(error) {
   return { ok: false, error };
 }
 
-module.exports = { validateEventRequest, validateEditRequest };
+// Batch validation: same rules as single, but with dates[] instead of date.
+// Returns { ok: true, eventIds: [...] } or { ok: false, error: string }.
+function validateBatchEventRequest(body, campDates) {
+  if (!body || typeof body !== 'object') {
+    return fail('Invalid request body');
+  }
+
+  if (!Array.isArray(body.dates)) {
+    return fail('dates måste vara en array');
+  }
+  if (body.dates.length === 0) {
+    return fail('dates får inte vara tom');
+  }
+
+  // Validate non-date fields once using a proxy body with the first date.
+  const proxyBody = { ...body, date: body.dates[0] };
+  delete proxyBody.dates;
+  const fieldResult = validateFields(proxyBody, { requireId: false }, campDates);
+  if (!fieldResult.ok) return fieldResult;
+
+  // Validate each date individually.
+  const eventIds = [];
+  for (const d of body.dates) {
+    const date = typeof d === 'string' ? d.trim() : '';
+    if (!date) return fail('date är obligatoriskt');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return fail(`date ${date} måste vara YYYY-MM-DD`);
+    if (isNaN(new Date(date).getTime())) return fail(`date ${date} är inte ett giltigt datum`);
+    if (isDatePast(date)) return fail('Datum kan inte vara i det förflutna.');
+
+    if (campDates && campDates.start_date && campDates.end_date) {
+      if (date < campDates.start_date || date > campDates.end_date) {
+        return fail(`date ${date} är utanför lägrets datumintervall (${campDates.start_date} – ${campDates.end_date})`);
+      }
+    }
+
+    const title = typeof body.title === 'string' ? body.title.trim() : '';
+    const start = typeof body.start === 'string' ? body.start.trim() : '';
+    const slug = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}-${date}-${start.replace(':', '')}`;
+    eventIds.push(slug);
+  }
+
+  return { ok: true, eventIds };
+}
+
+module.exports = { validateEventRequest, validateEditRequest, validateBatchEventRequest };

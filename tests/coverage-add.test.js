@@ -48,22 +48,23 @@ describe('02-§2.5 — Add-activity page structure', () => {
   });
 });
 
-// ── 02-§6.2  Date field constrained to camp date range ──────────────────────
+// ── 02-§6.2  Day grid constrained to camp date range ────────────────────────
 
-describe('02-§6.2 — Date input constrained to camp dates', () => {
-  it('RADD-05: date input has min attribute from camp start_date', () => {
+describe('02-§6.2 — Day grid constrained to camp dates', () => {
+  it('RADD-05: day grid has data-start from camp start_date', () => {
     const html = render();
-    assert.ok(html.includes('min="2099-07-01"'), 'min date set');
+    assert.ok(html.includes('data-start="2099-07-01"'), 'start date set');
   });
 
-  it('RADD-06: date input has max attribute from camp end_date', () => {
+  it('RADD-06: day grid has data-end from camp end_date', () => {
     const html = render();
-    assert.ok(html.includes('max="2099-07-07"'), 'max date set');
+    assert.ok(html.includes('data-end="2099-07-07"'), 'end date set');
   });
 
-  it('RADD-07: date input has type="date"', () => {
+  it('RADD-07: day grid contains day buttons', () => {
     const html = render();
-    assert.ok(html.includes('type="date"'), 'date type');
+    assert.ok(html.includes('class="day-btn"'), 'day-btn class');
+    assert.ok(html.includes('class="day-grid"'), 'day-grid class');
   });
 });
 

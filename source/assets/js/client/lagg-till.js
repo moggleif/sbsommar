@@ -29,14 +29,146 @@
     } catch { /* localStorage may be unavailable */ }
   }
 
+  // ── Day grid (02-§80.1–80.11) ─────────────────────────────────────────────
+
+  var dayGrid = form.querySelector('.day-grid');
+  var dateInput = form.querySelector('#f-date');
+  var PAGE_SIZE = parseInt((dayGrid && dayGrid.dataset.pageSize) || '8', 10);
+  var visibleBtns = []; // buttons not filtered by past-day rule
+  var currentPage = 0;
+
+  // Filter out past days when today is during camp (02-§80.4).
+  // Build visibleBtns array for pagination.
+  if (dayGrid) {
+    var today = new Date().toISOString().slice(0, 10);
+    var gridStart = dayGrid.dataset.start;
+    var gridEnd = dayGrid.dataset.end;
+    var allDayBtns = dayGrid.querySelectorAll('.day-btn');
+    for (var i = 0; i < allDayBtns.length; i++) {
+      if (today >= gridStart && today <= gridEnd && allDayBtns[i].dataset.date < today) {
+        allDayBtns[i].style.display = 'none';
+      } else {
+        visibleBtns.push(allDayBtns[i]);
+      }
+    }
+  }
+
+  // ── Pagination nav ──────────────────────────────────────────────────────────
+
+  var navEl = null;
+  var prevBtn = null;
+  var nextBtn = null;
+  var navLabel = null;
+
+  function totalPages() {
+    return Math.max(1, Math.ceil(visibleBtns.length / PAGE_SIZE));
+  }
+
+  function showPage(page) {
+    currentPage = page;
+    var start = page * PAGE_SIZE;
+    var end = start + PAGE_SIZE;
+    for (var i = 0; i < visibleBtns.length; i++) {
+      visibleBtns[i].style.display = (i >= start && i < end) ? '' : 'none';
+    }
+    if (navEl) {
+      prevBtn.disabled = page === 0;
+      nextBtn.disabled = page >= totalPages() - 1;
+      navLabel.textContent = (page + 1) + ' / ' + totalPages();
+      navEl.style.display = totalPages() > 1 ? '' : 'none';
+    }
+  }
+
+  if (dayGrid && visibleBtns.length > PAGE_SIZE) {
+    navEl = document.createElement('div');
+    navEl.className = 'day-grid-nav';
+    prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.textContent = '←';
+    prevBtn.setAttribute('aria-label', 'Föregående dagar');
+    nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.textContent = '→';
+    nextBtn.setAttribute('aria-label', 'Nästa dagar');
+    navLabel = document.createElement('span');
+    navLabel.className = 'day-grid-label';
+    navEl.appendChild(prevBtn);
+    navEl.appendChild(navLabel);
+    navEl.appendChild(nextBtn);
+    dayGrid.parentNode.insertBefore(navEl, dayGrid.nextSibling);
+
+    prevBtn.addEventListener('click', function () {
+      if (currentPage > 0) showPage(currentPage - 1);
+    });
+    nextBtn.addEventListener('click', function () {
+      if (currentPage < totalPages() - 1) showPage(currentPage + 1);
+    });
+  }
+
+  // Show first page (hides excess buttons).
+  if (dayGrid) showPage(0);
+
+  // ── Day grid helpers ────────────────────────────────────────────────────────
+
+  function getSelectedDates() {
+    var selected = dayGrid.querySelectorAll('.day-btn.selected');
+    var dates = [];
+    for (var i = 0; i < selected.length; i++) {
+      dates.push(selected[i].dataset.date);
+    }
+    return dates;
+  }
+
+  function updateHiddenDate() {
+    if (!dateInput) return;
+    var dates = getSelectedDates();
+    dateInput.value = dates.length === 1 ? dates[0] : '';
+  }
+
+  var dateInteracted = false;
+
+  // Multi-day info text — shown when 2+ days are selected.
+  var multiDayInfo = null;
+  if (dayGrid) {
+    multiDayInfo = document.createElement('span');
+    multiDayInfo.className = 'field-info';
+    multiDayInfo.textContent = 'Varje dag skapas som en egen aktivitet som kan redigeras separat.';
+    multiDayInfo.hidden = true;
+    dayGrid.parentNode.insertBefore(multiDayInfo, dayGrid.nextSibling);
+  }
+
+  function validateDateSelection() {
+    if (!dateInteracted) return;
+    var count = getSelectedDates().length;
+    if (count === 0) {
+      setFieldError('date', 'Välj minst en dag.');
+      if (multiDayInfo) multiDayInfo.hidden = true;
+    } else {
+      setFieldError('date', null);
+      if (multiDayInfo) multiDayInfo.hidden = count < 2;
+    }
+  }
+
+  // Day button click handler — always multi-select.
+  if (dayGrid) {
+    dayGrid.addEventListener('click', function (e) {
+      var btn = e.target.closest('.day-btn');
+      if (!btn) return;
+      dateInteracted = true;
+      btn.classList.toggle('selected');
+      updateHiddenDate();
+      validateDateSelection();
+    });
+  }
+
   // ── Time-gating (02-§26.3–26.8) ───────────────────────────────────────────
 
   var opensDate = form.dataset.opens;
   var closesDate = form.dataset.closes;
 
   if (opensDate && closesDate) {
-    var today = new Date().toISOString().slice(0, 10);
-    if (today < opensDate) {
+    var todayGate = new Date().toISOString().slice(0, 10);
+    if (todayGate < opensDate) {
       // Before opening
       var parts = opensDate.split('-');
       var months = ['januari','februari','mars','april','maj','juni',
@@ -49,7 +181,7 @@
       fieldset.disabled = true;
       submitBtn.disabled = true;
       form.classList.add('form-gated');
-    } else if (today > closesDate) {
+    } else if (todayGate > closesDate) {
       // After closing
       var msg2 = document.createElement('div');
       msg2.className = 'form-gate-msg';
@@ -176,6 +308,18 @@
     if (modal.hidden) { openModal(); } else { modalHeading.focus(); }
   }
 
+  function resetDayGrid() {
+    if (!dayGrid) return;
+    var allBtns = dayGrid.querySelectorAll('.day-btn');
+    for (var i = 0; i < allBtns.length; i++) {
+      allBtns[i].classList.remove('selected');
+    }
+    if (dateInput) dateInput.value = '';
+    if (multiDayInfo) multiDayInfo.hidden = true;
+    dateInteracted = false;
+    showPage(0);
+  }
+
   function setModalSuccess(title, consentGiven) {
     clearProgressTimers();
     completeAllSteps();
@@ -196,6 +340,33 @@
     document.getElementById('modal-new-btn').addEventListener('click', function () {
       closeModal();
       form.reset();
+      resetDayGrid();
+      clearAllErrors();
+      unlock();
+      window.scrollTo(0, 0);
+    });
+  }
+
+  function setModalBatchSuccess(title, count, consentGiven) {
+    clearProgressTimers();
+    completeAllSteps();
+    modalHeading.textContent = count + ' aktiviteter tillagda!';
+    var noEditNote = consentGiven ? '' :
+      '<p class="result-note">Du valde att inte tillåta cookie, så aktiviteterna kan inte' +
+      ' redigeras från den här webbläsaren.</p>';
+    modalContent.innerHTML =
+      '<p class="intro"><strong>' + escHtml(title) + '</strong>' +
+      ' på ' + count + ' dagar – syns i schemat om ungefär en minut.</p>' +
+      noEditNote +
+      '<div class="success-actions">' +
+        '<a href="schema.html" class="btn-primary">Gå till schemat →</a>' +
+        '<button id="modal-new-btn" class="btn-secondary">Lägg till en till</button>' +
+      '</div>';
+    focusFirstInModal();
+    document.getElementById('modal-new-btn').addEventListener('click', function () {
+      closeModal();
+      form.reset();
+      resetDayGrid();
       clearAllErrors();
       unlock();
       window.scrollTo(0, 0);
@@ -325,17 +496,8 @@
     });
   });
 
-  // Validate date immediately on change (02-§6.9).
-  var dateInput = form.querySelector('#f-date');
-  if (dateInput) {
-    dateInput.addEventListener('change', function () {
-      if (!dateInput.value) return; // blur handles the empty case
-      var today = new Date().toISOString().slice(0, 10);
-      if (dateInput.value < today) {
-        setFieldError('date', 'Datum kan inte vara i det förflutna.');
-      }
-    });
-  }
+  // Date validation is handled by the day grid — past days are hidden.
+  // The hidden dateInput is set programmatically by day grid clicks.
 
   // Validate end time immediately on change (02-§6.10, 02-§54.1–54.9).
   var endInput = form.querySelector('#f-end');
@@ -392,18 +554,9 @@
     });
   }
 
-  // Re-check past-time on start whenever date changes (02-§6.14).
-  // Clear any stale past-time error first (e.g. user switches from today to tomorrow).
-  if (dateInput) {
-    dateInput.addEventListener('change', function () {
-      if (startInput && startInput.value) {
-        setFieldError('start', null);
-        if (isPastTimeToday(startInput.value)) {
-          setFieldError('start', 'Starttiden har redan passerat – menade du imorgon?');
-        }
-      }
-    });
-  }
+  // Past-time re-check on date change is handled by the day grid.
+  // When a day button is clicked, updateHiddenDate() sets dateInput.value,
+  // and isPastTimeToday() reads it when start time changes.
 
   // ── Submit handler ───────────────────────────────────────────────────────────
 
@@ -413,13 +566,13 @@
 
     var els         = form.elements;
     var title       = els.title.value.trim();
-    var date        = els.date.value;
+    var selectedDates = getSelectedDates();
+    var isBatch     = selectedDates.length > 1;
     var start       = els.start.value;
     var end         = els.end.value;
     var location    = els.location.value;
     var responsible = els.responsible.value.trim();
 
-    var today = new Date().toISOString().slice(0, 10);
     var hasError = false;
     var firstInvalid = null;
 
@@ -430,8 +583,7 @@
     }
 
     if (!title)            fail('title', 'Rubrik är obligatoriskt.');
-    if (!date)             fail('date', 'Datum är obligatoriskt.');
-    else if (date < today) fail('date', 'Datum kan inte vara i det förflutna.');
+    if (selectedDates.length === 0) fail('date', 'Välj minst en dag.');
     if (!start)            fail('start', 'Starttid är obligatorisk.');
     if (!end)              fail('end', 'Sluttid är obligatorisk.');
     else if (start) {
@@ -442,8 +594,10 @@
     if (!responsible)      fail('responsible', 'Ansvarig är obligatoriskt.');
 
     if (hasError) {
-      firstInvalid.focus();
-      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (firstInvalid) {
+        firstInvalid.focus();
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
       return;
     }
 
@@ -462,13 +616,15 @@
     consentFn(function (consentGiven) {
       setModalLoading();
 
-      fetch(form.dataset.apiUrl || '/add-event', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      // Build request body — single or batch (02-§80.20).
+      var apiUrl = form.dataset.apiUrl || '/add-event';
+      var bodyObj;
+      if (isBatch) {
+        // Batch: POST /add-events with dates array.
+        apiUrl = apiUrl.replace(/\/add-event$/, '/add-events');
+        bodyObj = {
           title:         title,
-          date:          date,
+          dates:         selectedDates,
           start:         start,
           end:           end,
           location:      location,
@@ -476,7 +632,26 @@
           description:   els.description.value,
           link:          els.link.value.trim(),
           cookieConsent: consentGiven,
-        }),
+        };
+      } else {
+        bodyObj = {
+          title:         title,
+          date:          selectedDates[0],
+          start:         start,
+          end:           end,
+          location:      location,
+          responsible:   responsible,
+          description:   els.description.value,
+          link:          els.link.value.trim(),
+          cookieConsent: consentGiven,
+        };
+      }
+
+      fetch(apiUrl, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bodyObj),
       })
         .then(function (r) { return r.json(); })
         .then(function (json) {
@@ -486,7 +661,11 @@
           }
           // Save responsible name for auto-fill on next visit (02-§48.1, 02-§48.3)
           try { localStorage.setItem('sb_responsible', responsible); } catch { /* ignore */ }
-          setModalSuccess(title, consentGiven);
+          if (isBatch) {
+            setModalBatchSuccess(title, selectedDates.length, consentGiven);
+          } else {
+            setModalSuccess(title, consentGiven);
+          }
         })
         .catch(function () {
           setModalError('Något gick fel. Kontrollera din internetanslutning och försök igen.');

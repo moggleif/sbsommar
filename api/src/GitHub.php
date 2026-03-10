@@ -92,6 +92,80 @@ final class GitHub
     }
 
     /**
+     * Batch: add multiple events (same activity on different dates) in one PR.
+     *
+     * @param array $body Request body with 'dates' array instead of 'date'.
+     * @return string[] Array of created event IDs.
+     */
+    public function addEventsToActiveCamp(array $body): array
+    {
+        $title       = trim((string) ($body['title'] ?? ''));
+        $start       = trim((string) ($body['start'] ?? ''));
+        $end         = trim((string) ($body['end'] ?? ''));
+        $location    = trim((string) ($body['location'] ?? ''));
+        $responsible = trim((string) ($body['responsible'] ?? ''));
+        $description = is_string($body['description'] ?? null) ? trim($body['description']) : null;
+        $link        = is_string($body['link'] ?? null) ? trim($body['link']) : null;
+        $ownerName   = is_string($body['ownerName'] ?? null) ? trim($body['ownerName']) : '';
+
+        $description = $description !== '' ? $description : null;
+        $link        = $link !== '' ? $link : null;
+
+        $now = (new \DateTimeImmutable('now', new \DateTimeZone('UTC')))->format('Y-m-d H:i');
+
+        $dates    = $body['dates'];
+        $eventIds = [];
+        $yamlBlocks = [];
+
+        foreach ($dates as $date) {
+            $date = trim((string) $date);
+            $eventId = self::slugify($title) . "-{$date}-" . str_replace(':', '', $start);
+            $eventIds[] = $eventId;
+
+            $event = [
+                'id'          => $eventId,
+                'title'       => $title,
+                'date'        => $date,
+                'start'       => $start,
+                'end'         => $end,
+                'location'    => $location,
+                'responsible' => $responsible,
+                'description' => $description,
+                'link'        => $link,
+                'owner'       => ['name' => $ownerName, 'email' => ''],
+                'meta'        => ['created_at' => $now, 'updated_at' => $now],
+            ];
+
+            $yamlBlocks[] = self::buildEventYaml($event, 2);
+        }
+
+        // 1. Resolve active camp
+        $camp         = $this->resolveActiveCamp();
+        $campFilePath = 'source/data/' . $camp['file'];
+
+        // 2. Fetch camp file
+        [$campContent, $fileSha] = $this->getFile($campFilePath);
+
+        // 3. Build new content — all events in one commit
+        $newContent = rtrim($campContent) . "\n" . implode("\n", $yamlBlocks) . "\n";
+        $commitMsg  = "Add " . count($dates) . " recurring events to {$camp['name']}: {$title}";
+
+        // 4. Ephemeral branch
+        $mainSha    = $this->getMainSha();
+        $branchName = 'event/batch-' . self::slugify($title) . '-' . time();
+        $this->createBranch($branchName, $mainSha);
+
+        // 5. Commit
+        $this->putFile($campFilePath, $newContent, $fileSha, $commitMsg, $branchName);
+
+        // 6. PR + auto-merge
+        $pr = $this->createPullRequest($commitMsg, $branchName, 'Automatically created by the SB Sommar add-events API (batch).');
+        $this->enableAutoMerge($pr['node_id']);
+
+        return $eventIds;
+    }
+
+    /**
      * Patch an existing event in the active camp's YAML file.
      *
      * @param array<string,mixed> $updates  Validated request body

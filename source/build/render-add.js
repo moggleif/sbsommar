@@ -1,6 +1,6 @@
 'use strict';
 
-const { escapeHtml, toDateString } = require('./render');
+const { escapeHtml, toDateString, campDayButtons } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
 const { addOneDay } = require('../api/time-gate');
 const { goatcounterScript } = require('./analytics');
@@ -22,6 +22,11 @@ function renderAddPage(camp, locations, apiUrl, footerHtml = '', navSections = [
 
   const locationOptions = locList
     .map((l) => `            <option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`)
+    .join('\n');
+
+  const days = campDayButtons(startDate, endDate);
+  const dayBtns = days
+    .map((d) => `          <button type="button" class="day-btn" data-date="${d.isoDate}">${d.label}</button>`)
     .join('\n');
 
   return `<!DOCTYPE html>
@@ -52,12 +57,16 @@ ${pageNav('lagg-till.html', navSections)}
         <span class="field-error" id="err-title" hidden></span>
       </div>
 
-      <div class="field-row">
-        <div class="field">
-          <label for="f-date">Datum <span class="req">*</span></label>
-          <input type="date" id="f-date" name="date" min="${startDate}" max="${endDate}" required aria-describedby="err-date">
-          <span class="field-error" id="err-date" hidden></span>
+      <div class="field">
+        <label>Datum <span class="req">*</span></label>
+        <div class="day-grid" data-start="${startDate}" data-end="${endDate}" data-page-size="8">
+${dayBtns}
         </div>
+        <input type="hidden" id="f-date" name="date" aria-describedby="err-date">
+        <span class="field-error" id="err-date" hidden></span>
+      </div>
+
+      <div class="field-row">
         <div class="field">
           <label for="f-start">Starttid <span class="req">*</span></label>
           <input type="time" id="f-start" name="start" required aria-describedby="err-start">

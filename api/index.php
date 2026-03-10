@@ -79,6 +79,9 @@ try {
         $method === 'POST' && $route === '/add-event'
             => handleAddEvent($activeCamp),
 
+        $method === 'POST' && $route === '/add-events'
+            => handleAddEvents($activeCamp),
+
         $method === 'POST' && $route === '/edit-event'
             => handleEditEvent($activeCamp),
 
@@ -178,6 +181,60 @@ function handleAddEvent(?array $activeCamp): void
     }
 
     jsonResponse(['success' => true, 'eventId' => $eventId]);
+}
+
+function handleAddEvents(?array $activeCamp): void
+{
+    // Time-gating (same as single add)
+    if ($activeCamp !== null) {
+        $today = date('Y-m-d');
+        if (TimeGate::isOutsideEditingPeriod(
+            $today,
+            (string) ($activeCamp['opens_for_editing'] ?? ''),
+            (string) ($activeCamp['end_date'] ?? ''),
+        )) {
+            jsonResponse([
+                'success' => false,
+                'error'   => 'Det går inte att lägga till aktiviteter just nu. Formuläret är inte öppet.',
+            ], 403);
+
+            return;
+        }
+    }
+
+    $body = getJsonBody();
+
+    $v = Validate::validateBatchEventRequest($body, $activeCamp);
+    if (!$v['ok']) {
+        jsonResponse(['success' => false, 'error' => $v['error']], 400);
+
+        return;
+    }
+
+    // Commit all events to GitHub in a single PR
+    try {
+        $gh = new GitHub();
+        $eventIds = $gh->addEventsToActiveCamp($body);
+    } catch (\Throwable $e) {
+        error_log('POST /add-events error: ' . $e->getMessage());
+        jsonResponse(['success' => false, 'error' => 'Aktiviteterna kunde inte sparas. Försök igen om en stund.'], 500);
+
+        return;
+    }
+
+    // Session cookie — add all event IDs (only if consent given)
+    $consentGiven = ($body['cookieConsent'] ?? false) === true;
+    if ($consentGiven) {
+        $existing = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
+        $updated  = $existing;
+        foreach ($eventIds as $eid) {
+            $updated = Session::mergeIds($updated, $eid);
+        }
+        $cookieDomain = !empty($_ENV['COOKIE_DOMAIN']) ? $_ENV['COOKIE_DOMAIN'] : null;
+        header('Set-Cookie: ' . Session::buildSetCookieHeader($updated, $cookieDomain));
+    }
+
+    jsonResponse(['success' => true, 'eventIds' => $eventIds]);
 }
 
 function handleEditEvent(?array $activeCamp): void
