@@ -11,10 +11,14 @@
 //   - Escape / click outside / close button closes the modal.
 //   - Success shows a clickable link to the created issue.
 //   - Failure shows an error with retry option.
-//   - (02-§73.24–73.27) In QA/local: success view shows a warning
+//   - (02-§73.24–73.27) In local dev: success view shows a warning
 //     in .form-error-msg style: "OBS: Detta är en testsida. Din feedback
 //     sparades inte. Besök den riktiga siten för att skicka feedback."
 //     No production URL is shown.
+//   - (02-§73.28) In local dev (BUILD_ENV neither 'production' nor 'qa'):
+//     dry-run — no GitHub Issue created.
+//   - (02-§73.29) In QA (BUILD_ENV='qa'): real GitHub Issue created,
+//     same as production.
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');

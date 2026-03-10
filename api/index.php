@@ -275,7 +275,7 @@ function handleFeedback(): void
     }
 
     $buildEnv = $_ENV['BUILD_ENV'] ?? null;
-    if ($buildEnv !== 'production') {
+    if ($buildEnv !== 'production' && $buildEnv !== 'qa') {
         error_log('[feedback dry-run] ' . json_encode($body, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         jsonResponse(['success' => true, 'issueUrl' => '']);
 
