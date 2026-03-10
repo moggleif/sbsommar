@@ -1878,6 +1878,63 @@ Two PNG icons are required in `source/content/images/`:
 
 ---
 
+## 29. Form Draft Cache (sessionStorage)
+
+When filling in the add-activity form, field values are continuously saved to
+`sessionStorage` so that a page reload restores all input. This protects
+against accidental reloads, browser lock-ups, and navigation mistakes.
+
+### Storage key and format
+
+A single `sessionStorage` key `sb_form_draft` holds a JSON object with the
+current field values:
+
+```json
+{
+  "title": "Morgonyoga",
+  "start": "08:00",
+  "end": "09:00",
+  "location": "Stora stugan",
+  "responsible": "Anna",
+  "description": "Ta med matta",
+  "link": "",
+  "dates": ["2025-08-04", "2025-08-05"]
+}
+```
+
+### Save triggers
+
+| Field | Event |
+| --- | --- |
+| Title, start, end, responsible, description, link | `input` |
+| Location (select) | `change` |
+| Day-grid dates | `click` (on day button) |
+
+### Restore logic
+
+On `DOMContentLoaded`, if `sb_form_draft` exists in `sessionStorage`:
+
+1. Text/time inputs are restored via `.value` assignment.
+2. The location `<select>` is restored if the saved value matches an option.
+3. Day-grid buttons matching saved dates are programmatically clicked (or
+   their `aria-pressed` / class toggled) and the hidden input updated.
+4. Existing `sb_responsible` localStorage logic is unaffected — the draft
+   cache does not replace it.
+
+### Cleanup
+
+The draft is removed (`sessionStorage.removeItem('sb_form_draft')`) after a
+successful submission response. Because `sessionStorage` is scoped to the
+browser tab, closing the tab also clears the data — no expiry logic is needed.
+
+### Changed file
+
+| File | Change |
+| --- | --- |
+| `source/assets/js/client/lagg-till.js` | Add save/restore/clear logic for `sb_form_draft` |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.

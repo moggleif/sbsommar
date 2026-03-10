@@ -1869,3 +1869,15 @@ Matrix cleanup (2026-02-25):
 | `02-§84.5` | implemented | All three catch blocks in `api/index.php` call `GitHub::classifyGitHubError($e)` |
 | `02-§84.6` | implemented | Code review: classifier returns hardcoded Swedish strings, no dynamic data |
 | `02-§84.7` | done | No client changes needed; `lagg-till.js` already shows `json.error` |
+| `02-§85.1` | gap | Reload restores all field values |
+| `02-§85.2` | gap | Draft cleared after successful submit |
+| `02-§85.3` | gap | Draft does not survive tab close (sessionStorage) |
+| `02-§85.4` | gap | All fields stored under single `sb_form_draft` key |
+| `02-§85.5` | gap | Text inputs saved on `input` event |
+| `02-§85.6` | gap | Location saved on `change` event |
+| `02-§85.7` | gap | Day-grid dates saved on click |
+| `02-§85.8` | gap | Fields restored on page load from draft |
+| `02-§85.9` | gap | Day-grid selections visually restored |
+| `02-§85.10` | gap | Draft removed after successful submission |
+| `02-§85.11` | gap | `sb_responsible` localStorage behaviour unchanged |
+| `02-§85.12` | gap | Vanilla JS, no new dependencies |
