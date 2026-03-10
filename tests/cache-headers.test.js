@@ -159,3 +159,62 @@ describe('02-§78.1 — Image cache-busting post-processing', () => {
     assert.equal(h1, h2, 'Same image content must produce identical hashes');
   });
 });
+
+// ── 02-§86.1–86.6 — Image cache-busting for href and manifest ──────────────
+
+describe('02-§86.1 — Image href cache-busting', () => {
+  const buildSrc = fs.readFileSync(BUILD_PATH, 'utf8');
+
+  it('CACHE-16: build.js replaces image href with versioned query string', () => {
+    assert.ok(
+      buildSrc.includes('href="') && /href.*\$\{imgFile\}\?v=/.test(buildSrc),
+      'Expected build.js to produce image href ?v= replacement pattern',
+    );
+  });
+
+  it('CACHE-17: build.js replaces manifest icon src with versioned query string', () => {
+    assert.ok(
+      buildSrc.includes('webmanifest') || buildSrc.includes('manifest'),
+      'Expected build.js to process app.webmanifest',
+    );
+  });
+
+  it('CACHE-18: href cache-busting reuses existing imgHashCache', () => {
+    const hrefSection = buildSrc.indexOf('Image href cache-busting');
+    assert.ok(hrefSection !== -1, 'Expected href cache-busting section in build.js');
+    const afterHref = buildSrc.slice(hrefSection, hrefSection + 600);
+    assert.ok(
+      afterHref.includes('imgHashCache'),
+      'Expected href image replacement to reference imgHashCache for hash reuse',
+    );
+  });
+});
+
+describe('02-§86.4 — Preload href matches img src', () => {
+  it('CACHE-19: preload href has same ?v= hash as corresponding img src in index.html', () => {
+    const indexPath = path.join(__dirname, '..', 'public', 'index.html');
+    if (!fs.existsSync(indexPath)) return;
+    const html = fs.readFileSync(indexPath, 'utf8');
+    const preloadMatch = html.match(/rel="preload"[^>]*href="([^"]+)"/);
+    if (!preloadMatch) return;
+    const preloadHref = preloadMatch[1];
+    const imgFile = preloadHref.replace(/\?v=.*$/, '');
+    const imgSrcMatch = html.match(new RegExp(`src="${imgFile.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\?v=[^"]*)?"`));
+    assert.ok(imgSrcMatch, `Expected <img src> for ${imgFile}`);
+    const imgSrc = imgFile + (imgSrcMatch[1] || '');
+    assert.equal(preloadHref, imgSrc, `Preload href "${preloadHref}" must match img src "${imgSrc}"`);
+  });
+});
+
+describe('02-§86.2 — Manifest icon cache-busting', () => {
+  it('CACHE-20: app.webmanifest icons have ?v= hashes', () => {
+    const manifestPath = path.join(__dirname, '..', 'public', 'app.webmanifest');
+    if (!fs.existsSync(manifestPath)) return;
+    const manifest = fs.readFileSync(manifestPath, 'utf8');
+    const iconSrcs = [...manifest.matchAll(/"src"\s*:\s*"([^"]+)"/g)].map((m) => m[1]);
+    assert.ok(iconSrcs.length > 0, 'Expected at least one icon in manifest');
+    for (const src of iconSrcs) {
+      assert.ok(/\?v=[0-9a-f]+/.test(src), `Expected ${src} to have ?v= hash`);
+    }
+  });
+});
