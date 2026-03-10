@@ -23,13 +23,25 @@ camps:
     archived: false
   - id: qa-testcamp
     name: QA Testläger
-    start_date: '2026-01-01'
+    start_date: '2026-10-01'
     end_date: '2026-12-31'
     opens_for_editing: '2026-01-01'
     location: Testar
     link: ""
     information: ""
     file: qa-testcamp.yaml
+    archived: true
+    qa: true
+  - id: qa-thisweek
+    name: QA Testläger (denna vecka)
+    start_date: '2026-03-10'
+    end_date: '2026-03-17'
+    opens_for_editing: '2026-03-02'
+    location: Sysslebäck
+    link: ""
+    information: |
+      Duplikat av 2026 juli-lägret, men med datum denna vecka för QA-testning.
+    file: qa-thisweek.yaml
     archived: false
     qa: true
   - id: 2025-08-syssleback

@@ -4,6 +4,7 @@
     "valid-id": ["error", { "relaxed": true }],
     "wcag/h71": "off",
     "empty-heading": "off",
-    "no-raw-characters": "off"
+    "no-raw-characters": "off",
+    "long-title": ["error", { "maxlength": 80 }]
   }
 }

@@ -315,6 +315,35 @@ hierarchy. <!-- 07-§6.70 -->
 Using `em` makes the headings proportional to the container's font-size
 (e.g. 13 px in `.event-extra`, 16 px in `.md-preview`). <!-- 07-§6.75 -->
 
+### Day grid (date selection)
+
+A grid of day buttons replaces the native date picker on the add-activity
+form. The grid is always multi-select — there is no toggle. <!-- 07-§6.76 -->
+
+- Container (`.day-grid`): `display: flex`, `flex-wrap: wrap`,
+  `gap: var(--space-xs)`. <!-- 07-§6.77 -->
+- Day button (`.day-btn`): `min-width: 4.5em`, `padding: var(--space-xs)
+  var(--space-sm)`, `border: 2px solid rgba(0,0,0,0.12)`,
+  `border-radius: var(--radius-sm)`, `background: var(--color-white)`,
+  `color: var(--color-charcoal)`, `font-size: var(--font-size-small)`,
+  `text-align: center`, `cursor: pointer`. <!-- 07-§6.78 -->
+- Hover: `border-color: var(--color-terracotta)`,
+  `background: color-mix(in srgb, var(--color-terracotta) 10%, var(--color-white))`. <!-- 07-§6.79 -->
+- Selected (`.day-btn.selected`): `border-color: var(--color-sage)`,
+  `background: color-mix(in srgb, var(--color-sage) 12%, var(--color-cream))`.
+  No `font-weight` change to prevent button size shifts. <!-- 07-§6.80 -->
+- Focus-visible: same outline as other interactive elements
+  (`2px solid var(--color-terracotta)`, `outline-offset: 2px`). <!-- 07-§6.81 -->
+- The weekday abbreviation is displayed on one line, the date on the line
+  below, both center-aligned within the button. <!-- 07-§6.82 -->
+- Pagination nav (`.day-grid-nav`): `display: flex`, centered, with ← / →
+  buttons when the camp has more than 8 days. Page size is set via
+  `data-page-size` attribute on the day grid container. <!-- 07-§6.83 -->
+- Confirmation summary (`.confirm-summary`): table layout inside the submit
+  confirmation modal, with emoji icons in the first column and values in the
+  second. Compact padding (`2px`), description row has extra top
+  padding. <!-- 07-§6.84 -->
+
 ---
 
 ## 7. CSS Strategy

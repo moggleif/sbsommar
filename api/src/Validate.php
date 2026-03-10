@@ -12,7 +12,7 @@ final class Validate
     private const TIME_RE = '/^\d{2}:\d{2}$/';
 
     private const MAX_LENGTHS = [
-        'title'       => 200,
+        'title'       => 80,
         'location'    => 200,
         'responsible' => 200,
         'description' => 2000,
@@ -51,6 +51,70 @@ final class Validate
     public static function validateEditRequest(array $body, ?array $campDates = null): array
     {
         return self::validateFields($body, true, $campDates);
+    }
+
+    /**
+     * Batch validation: same rules as single, but with dates[] instead of date.
+     *
+     * @param array<string,mixed>      $body
+     * @param array{start_date?:string,end_date?:string}|null $campDates
+     * @return array{ok:bool,error?:string,eventIds?:string[]}
+     */
+    public static function validateBatchEventRequest(array $body, ?array $campDates = null): array
+    {
+        if (!isset($body['dates']) || !is_array($body['dates'])) {
+            return self::fail('dates måste vara en array');
+        }
+        if (count($body['dates']) === 0) {
+            return self::fail('dates får inte vara tom');
+        }
+
+        // Validate non-date fields using a proxy body with the first date.
+        $proxyBody = $body;
+        $proxyBody['date'] = $body['dates'][0];
+        unset($proxyBody['dates']);
+        $fieldResult = self::validateFields($proxyBody, false, $campDates);
+        if (!$fieldResult['ok']) {
+            return $fieldResult;
+        }
+
+        // Validate each date individually.
+        $eventIds = [];
+        $title = trim((string) ($body['title'] ?? ''));
+        $start = trim((string) ($body['start'] ?? ''));
+
+        foreach ($body['dates'] as $d) {
+            $date = is_string($d) ? trim($d) : '';
+            if ($date === '') {
+                return self::fail('date är obligatoriskt');
+            }
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+                return self::fail("date {$date} måste vara YYYY-MM-DD");
+            }
+            if (strtotime($date) === false) {
+                return self::fail("date {$date} är inte ett giltigt datum");
+            }
+            if ($date < date('Y-m-d')) {
+                return self::fail('Datum kan inte vara i det förflutna.');
+            }
+            if ($campDates !== null
+                && isset($campDates['start_date'], $campDates['end_date'])
+            ) {
+                if ($date < $campDates['start_date'] || $date > $campDates['end_date']) {
+                    return self::fail(sprintf(
+                        'date %s är utanför lägrets datumintervall (%s – %s)',
+                        $date,
+                        $campDates['start_date'],
+                        $campDates['end_date'],
+                    ));
+                }
+            }
+
+            $slug = GitHub::slugify($title) . "-{$date}-" . str_replace(':', '', $start);
+            $eventIds[] = $slug;
+        }
+
+        return ['ok' => true, 'eventIds' => $eventIds];
     }
 
     // ── internal ──────────────────────────────────────────────────────────
