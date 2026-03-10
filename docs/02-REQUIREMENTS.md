@@ -3911,3 +3911,35 @@ When filling in the add-activity form, all field values are saved to
   the draft cache does not replace that existing behaviour. <!-- 02-§85.11 -->
 - The implementation uses vanilla JavaScript with no new
   dependencies. <!-- 02-§85.12 -->
+
+---
+
+## 86. Image Cache-Busting for href and Manifest References
+
+Section 78 covers `src` attributes in `<img>` tags. Images also appear in
+`href` attributes (`<link rel="preload">`, `<link rel="icon">`,
+`<link rel="apple-touch-icon">`) and in the PWA manifest
+(`app.webmanifest`). These references must receive the same content-based
+hash so that the browser treats them as identical URLs and avoids
+redundant downloads.
+
+### 86.1 Build behaviour
+
+- After the existing image cache-busting step, the build must also replace
+  `href="<file>.<ext>"` (where ext is webp, png, jpg, jpeg, or ico) in all
+  HTML files under `public/` with
+  `href="<file>.<ext>?v=<hash>"`. <!-- 02-§86.1 -->
+- The build must replace `"src": "<file>.<ext>"` (same extensions) in
+  `app.webmanifest` under `public/` with
+  `"src": "<file>.<ext>?v=<hash>"`. <!-- 02-§86.2 -->
+- The hash values must reuse the same image hash cache as the existing
+  `src` cache-busting to ensure consistency. <!-- 02-§86.3 -->
+
+### 86.2 Constraints
+
+- The preload `href` must match the corresponding `<img src>` URL exactly
+  (including query string) so that the browser can match the preloaded
+  resource. <!-- 02-§86.4 -->
+- No render function signatures may change — this is a post-processing
+  extension. <!-- 02-§86.5 -->
+- Existing tests must continue to pass. <!-- 02-§86.6 -->
