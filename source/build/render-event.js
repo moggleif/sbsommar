@@ -40,7 +40,7 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <base href="../../">
-  <title>${title} – ${campName}</title>
+  <title>${title}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
 </head>

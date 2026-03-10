@@ -53,7 +53,7 @@ ${pageNav('lagg-till.html', navSections)}
 
       <div class="field">
         <label for="f-title">Rubrik <span class="req">*</span></label>
-        <input type="text" id="f-title" name="title" autocomplete="off" required aria-describedby="err-title">
+        <input type="text" id="f-title" name="title" autocomplete="off" required maxlength="80" aria-describedby="err-title">
         <span class="field-error" id="err-title" hidden></span>
       </div>
 

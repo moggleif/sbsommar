@@ -164,12 +164,11 @@ describe('renderEventPage (02-§36)', () => {
     assert.ok(!html.includes('class="event-ext-link"'), 'should not render external link');
   });
 
-  it('EVT-18 (02-§36.6): page title includes event title and camp name', () => {
+  it('EVT-18 (02-§36.6): page title includes event title', () => {
     const html = renderEventPage(fullEvent, camp, siteUrl);
     const titleMatch = html.match(/<title>([^<]+)<\/title>/);
     assert.ok(titleMatch, 'should have title element');
     assert.ok(titleMatch[1].includes('Fotboll'), 'title should include event name');
-    assert.ok(titleMatch[1].includes(camp.name), 'title should include camp name');
   });
 
   it('EVT-21 (02-§45.8): page includes iCal download link', () => {

@@ -390,14 +390,14 @@ describe('validateEditRequest – time format', () => {
 // ── String length limits (02-§10.3) ─────────────────────────────────────────
 
 describe('validateEventRequest – string length limits', () => {
-  it('VLD-42: rejects title exceeding 200 characters', () => {
-    const r = validateEventRequest(valid({ title: 'A'.repeat(201) }));
+  it('VLD-42: rejects title exceeding 80 characters', () => {
+    const r = validateEventRequest(valid({ title: 'A'.repeat(81) }));
     assert.strictEqual(r.ok, false);
     assert.ok(r.error.includes('title'));
   });
 
-  it('VLD-43: accepts title at exactly 200 characters', () => {
-    const r = validateEventRequest(valid({ title: 'A'.repeat(200) }));
+  it('VLD-43: accepts title at exactly 80 characters', () => {
+    const r = validateEventRequest(valid({ title: 'A'.repeat(80) }));
     assert.strictEqual(r.ok, true);
   });
 
@@ -432,8 +432,8 @@ describe('validateEventRequest – string length limits', () => {
 });
 
 describe('validateEditRequest – string length limits', () => {
-  it('VLD-49: rejects title exceeding 200 characters', () => {
-    const r = validateEditRequest(validEdit({ title: 'A'.repeat(201) }));
+  it('VLD-49: rejects title exceeding 80 characters', () => {
+    const r = validateEditRequest(validEdit({ title: 'A'.repeat(81) }));
     assert.strictEqual(r.ok, false);
     assert.ok(r.error.includes('title'));
   });

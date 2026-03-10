@@ -12,7 +12,7 @@ final class Validate
     private const TIME_RE = '/^\d{2}:\d{2}$/';
 
     private const MAX_LENGTHS = [
-        'title'       => 200,
+        'title'       => 80,
         'location'    => 200,
         'responsible' => 200,
         'description' => 2000,

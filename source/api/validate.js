@@ -8,7 +8,7 @@ function timeToMinutes(hhmm) {
 }
 
 const MAX_LENGTHS = {
-  title:       200,
+  title:       80,
   location:    200,
   responsible: 200,
   description: 2000,
