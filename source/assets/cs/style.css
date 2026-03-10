@@ -1304,6 +1304,10 @@ textarea {
 
 /* ── Character counter (02-§82, 07-§6.85–6.88) ── */
 
+.char-counter[hidden] {
+  display: none;
+}
+
 .char-counter {
   display: block;
   margin-top: 2px;
