@@ -16,7 +16,6 @@ const { renderDescriptionHtml } = require('./markdown');
  */
 function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []) {
   const title = escapeHtml(event.title);
-  const campName = escapeHtml(camp.name);
   const date = formatDate(toDateString(event.date));
   const timeStr = event.end
     ? `${escapeHtml(String(event.start))}–${escapeHtml(String(event.end))}`
