@@ -3849,3 +3849,36 @@ understand whether the problem is actionable or not.
   paths, or full stack traces. <!-- 02-§84.6 -->
 - The existing client-side code (`lagg-till.js`) already displays
   `json.error` — no client changes are needed. <!-- 02-§84.7 -->
+
+## 85. Form Draft Cache (sessionStorage)
+
+When filling in the add-activity form, all field values are saved to
+`sessionStorage` so that a page reload preserves the user's input.
+
+### 85.1 User requirements
+
+- When the user reloads the add-activity page, all previously entered field
+  values are restored automatically. <!-- 02-§85.1 -->
+- After a successful submission, the cached draft is cleared so the form
+  starts fresh. <!-- 02-§85.2 -->
+- The draft cache does not survive closing the browser tab — it only
+  protects against reloads within the same session. <!-- 02-§85.3 -->
+
+### 85.2 Site requirements
+
+- All form fields are persisted to `sessionStorage` under a single key
+  (`sb_form_draft`). <!-- 02-§85.4 -->
+- Text inputs (title, start time, end time, responsible, description, link)
+  are saved on every `input` event. <!-- 02-§85.5 -->
+- The selected location is saved on `change`. <!-- 02-§85.6 -->
+- Selected day-grid dates are saved on click. <!-- 02-§85.7 -->
+- On page load, if a draft exists in `sessionStorage`, all fields are
+  restored from it before the user interacts with the form. <!-- 02-§85.8 -->
+- Restored day-grid selections re-activate the visual selected state and
+  update the hidden input. <!-- 02-§85.9 -->
+- The draft is removed from `sessionStorage` after a successful
+  submission. <!-- 02-§85.10 -->
+- The `sb_responsible` field continues to use `localStorage` as before —
+  the draft cache does not replace that existing behaviour. <!-- 02-§85.11 -->
+- The implementation uses vanilla JavaScript with no new
+  dependencies. <!-- 02-§85.12 -->
