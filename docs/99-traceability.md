@@ -1100,9 +1100,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1038
-Covered (implemented + tested): 519
+Covered (implemented + tested): 528
 Implemented, not tested:        510
-Gap (no implementation):          9
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1851,31 +1851,31 @@ Matrix cleanup (2026-02-25):
 | `02-§83.7` | covered | PWA-16: at least one icon has purpose "any" |
 | `02-§83.8` | covered | PWA-01-*: all 8 pages include `<link rel="manifest">` |
 | `02-§83.9` | covered | PWA-02-*: all 8 pages include `<meta name="theme-color">` |
-| `02-§83.10` | gap | PWA-03-*: update meta tag from apple-mobile-web-app-capable to mobile-web-app-capable |
+| `02-§83.10` | covered | PWA-03-*: all 8 pages include mobile-web-app-capable (updated from apple- prefix) |
 | `02-§83.11` | covered | PWA-04-*: all 8 pages include apple-mobile-web-app-status-bar-style |
 | `02-§83.12` | covered | PWA-05-*: all 8 pages include apple-touch-icon |
 | `02-§83.13` | covered | PWA-17: `source/static/sw.js` exists; `build.js` copies to public/ |
 | `02-§83.14` | covered | PWA-06-*: all 8 pages include sw-register.js |
-| `02-§83.15` | gap | PWA-18: sw.js CACHE_NAME must be updated to sb-sommar-v2 |
-| `02-§83.16` | gap | PWA-19: sw.js must pre-cache all user-facing pages |
+| `02-§83.15` | covered | PWA-18, PWA-31: sw.js CACHE_NAME is sb-sommar-v2 |
+| `02-§83.16` | covered | PWA-19: sw.js pre-caches all 8 user-facing pages + offline.html |
 | `02-§83.17` | implemented | Manual: verify network-first HTML, cache-first assets in browser DevTools |
 | `02-§83.18` | covered | PWA-20: sw.js activate handler deletes old caches |
-| `02-§83.19` | gap | PWA-21: sw.js must exclude only API paths, not events.json |
+| `02-§83.19` | covered | PWA-21: sw.js excludes /api/, /add-event, /edit-event from caching |
 | `02-§83.20` | manual | User provides sbsommar-icon-192.png and sbsommar-icon-512.png in source/content/images/ |
 | `02-§83.21` | implemented | Build copies content/images/ to public/images/ (existing pipeline) |
 | `02-§83.22` | done | Service worker in vanilla JavaScript, no frameworks |
 | `02-§83.23` | done | No new npm dependencies added |
-| `02-§83.24` | covered | All 1374 existing tests pass after implementation |
+| `02-§83.24` | covered | All 1395 existing tests pass after implementation |
 | `02-§83.25` | covered | PWA-23: every page uses sbsommar-icon-192.png as favicon |
-| `02-§83.26` | gap | Manifest must include at least one icon with purpose "maskable" |
-| `02-§83.27` | gap | Service worker must ignore non-http(s) schemes |
-| `02-§83.28` | gap | Service worker must cache events.json with network-first strategy |
-| `02-§83.29` | gap | Service worker must serve offline.html when navigation fails and page not cached |
-| `02-§83.30` | gap | Build must produce offline.html at site root |
-| `02-§83.31` | gap | Offline page must use shared layout |
-| `02-§83.32` | gap | Offline page must display Swedish offline message |
-| `02-§83.33` | gap | Service worker must pre-cache offline.html |
-| `02-§83.34` | gap | Cache version must be incremented (v1 → v2) |
+| `02-§83.26` | covered | PWA-24: manifest has icon with purpose "maskable" |
+| `02-§83.27` | covered | PWA-25: sw.js checks url.protocol for http/https |
+| `02-§83.28` | covered | PWA-26: sw.js handles events.json with network-first caching |
+| `02-§83.29` | covered | PWA-27: sw.js references offline.html as fallback |
+| `02-§83.30` | covered | PWA-28: render-offline.js exists; build.js wires it |
+| `02-§83.31` | implemented | Manual: verify offline page uses shared nav/footer/CSS |
+| `02-§83.32` | covered | PWA-29: offline page contains Swedish offline text |
+| `02-§83.33` | covered | PWA-30: offline.html in PRE_CACHE_URLS |
+| `02-§83.34` | covered | PWA-31: CACHE_NAME is sb-sommar-v2 |
 
 ### §84 — API Error Messages
 
