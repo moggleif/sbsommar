@@ -621,11 +621,11 @@
     // Truncate long descriptions in the summary.
     var shortDesc = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
     var descRow = shortDesc
-      ? '<tr class="desc-row"><td>📝</td><td>' + shortDesc.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</td></tr>'
+      ? '<tr class="desc-row"><td>📝</td><td>' + escHtml(shortDesc) + '</td></tr>'
       : '';
     var linkVal = els.link.value.trim();
     var linkRow = linkVal
-      ? '<tr><td>🔗</td><td>' + linkVal.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</td></tr>'
+      ? '<tr><td>🔗</td><td>' + escHtml(linkVal) + '</td></tr>'
       : '';
 
     var summary =
@@ -633,9 +633,9 @@
       '<table class="confirm-summary">' +
         '<tr><td>📌</td><td><strong>' + escHtml(title) + '</strong></td></tr>' +
         (isBatch
-          ? '<tr><td>📅</td><td><strong>' + selectedDates.length + ' dagar:</strong> ' + dateList + '</td></tr>'
-          : '<tr><td>📅</td><td>' + dateList + '</td></tr>') +
-        '<tr><td>🕐</td><td>' + start + '–' + end + '</td></tr>' +
+          ? '<tr><td>📅</td><td><strong>' + selectedDates.length + ' dagar:</strong> ' + escHtml(dateList) + '</td></tr>'
+          : '<tr><td>📅</td><td>' + escHtml(dateList) + '</td></tr>') +
+        '<tr><td>🕐</td><td>' + escHtml(start) + '–' + escHtml(end) + '</td></tr>' +
         '<tr><td>📍</td><td>' + escHtml(location) + '</td></tr>' +
         '<tr><td>👤</td><td>' + escHtml(responsible) + '</td></tr>' +
         descRow +
