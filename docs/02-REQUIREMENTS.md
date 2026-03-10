@@ -3640,3 +3640,50 @@ submission.
 - The day grid uses CSS custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§80.26 -->
 - The batch endpoint must be implemented in both Node.js and PHP with identical
   validation and response format. <!-- 02-§80.27 -->
+
+---
+
+## 81. Client-side link field validation
+
+The add-activity form validates the optional link field on blur so that the user
+gets immediate feedback when the format is incorrect, without having to submit
+the form first.
+
+### 81.1 Blur validation (user requirements)
+
+- When the user leaves the link field and the value is non-empty, the client
+  validates that the value starts with `http://` or `https://`
+  (case-insensitive). <!-- 02-§81.1 -->
+- When the value is non-empty and does not start with `http://` or `https://`,
+  the client validates that the value contains at least one dot after the
+  protocol. <!-- 02-§81.2 -->
+- When validation fails, an error message is shown below the field using the
+  same error pattern as other fields (red text, `field-error`
+  class). <!-- 02-§81.3 -->
+- When the link field is empty, no validation error is shown (the field is
+  optional). <!-- 02-§81.4 -->
+
+### 81.2 Clearing errors (user requirements)
+
+- When the user types in the link field after an error has been shown, the error
+  is cleared on `input` event. <!-- 02-§81.5 -->
+
+### 81.3 Error messages (user requirements)
+
+- Missing protocol: the error message is
+  "Länken måste börja med https:// eller http://". <!-- 02-§81.6 -->
+- Missing dot (no valid domain): the error message is
+  "Länken ser inte ut som en giltig webbadress". <!-- 02-§81.7 -->
+
+### 81.4 Submit gating (site requirements)
+
+- The form must not allow submission while the link field has a validation
+  error. The submit button validation checks must include the link field
+  state. <!-- 02-§81.8 -->
+
+### 81.5 Implementation constraints
+
+- The validation is implemented in vanilla JavaScript in
+  `lagg-till.js`. <!-- 02-§81.9 -->
+- The validation reuses the existing `setFieldError` / `clearFieldError`
+  helpers. <!-- 02-§81.10 -->

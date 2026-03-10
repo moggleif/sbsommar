@@ -465,7 +465,7 @@
   }
 
   function clearAllErrors() {
-    var fields = ['title', 'date', 'start', 'end', 'location', 'responsible'];
+    var fields = ['title', 'date', 'start', 'end', 'location', 'responsible', 'link'];
     for (var i = 0; i < fields.length; i++) { setFieldError(fields[i], null); }
   }
 
@@ -565,6 +565,29 @@
   // When a day button is clicked, updateHiddenDate() sets dateInput.value,
   // and isPastTimeToday() reads it when start time changes.
 
+  // ── Link field blur validation (02-§81.1–81.10) ──────────────────────────
+
+  var linkInput = form.querySelector('#f-link');
+  if (linkInput) {
+    linkInput.addEventListener('blur', function () {
+      var val = linkInput.value.trim();
+      if (!val) { setFieldError('link', null); return; }
+      if (!/^https?:\/\//i.test(val)) {
+        setFieldError('link', 'Länken måste börja med https:// eller http://');
+        return;
+      }
+      var afterProtocol = val.replace(/^https?:\/\//i, '');
+      if (afterProtocol.indexOf('.') === -1) {
+        setFieldError('link', 'Länken ser inte ut som en giltig webbadress');
+        return;
+      }
+      setFieldError('link', null);
+    });
+    linkInput.addEventListener('input', function () {
+      setFieldError('link', null);
+    });
+  }
+
   // ── Submit handler ───────────────────────────────────────────────────────────
 
   form.addEventListener('submit', function (e) {
@@ -599,6 +622,16 @@
     }
     if (!location)         fail('location', 'Plats är obligatoriskt.');
     if (!responsible)      fail('responsible', 'Ansvarig är obligatoriskt.');
+
+    // Link field validation (02-§81.8) — optional but must be valid if filled.
+    var linkSubmitVal = els.link.value.trim();
+    if (linkSubmitVal) {
+      if (!/^https?:\/\//i.test(linkSubmitVal)) {
+        fail('link', 'Länken måste börja med https:// eller http://');
+      } else if (linkSubmitVal.replace(/^https?:\/\//i, '').indexOf('.') === -1) {
+        fail('link', 'Länken ser inte ut som en giltig webbadress');
+      }
+    }
 
     if (hasError) {
       if (firstInvalid) {

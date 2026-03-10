@@ -509,6 +509,20 @@ Errors are cleared on the next submit attempt — not on individual
 keystroke or blur. This keeps the JS simple and avoids distracting
 the user while they are still filling in the form.
 
+### Blur validation for the link field
+
+The optional link field validates on blur — unlike required fields which
+validate on submit. When the user leaves the field and the value is
+non-empty, `lagg-till.js` checks:
+
+1. The value starts with `http://` or `https://` (case-insensitive).
+2. The value contains at least one dot after the protocol (basic domain check).
+
+If either check fails, `setFieldError` shows the error below the field.
+The error is cleared on the `input` event so the user gets immediate
+feedback as they correct the value. The submit flow also checks the link
+field error state — submission is blocked while the error is visible.
+
 ### Accessibility
 
 - `aria-invalid="true"` communicates the error state to screen readers.

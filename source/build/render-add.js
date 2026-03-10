@@ -107,7 +107,8 @@ ${locationOptions}
 
       <div class="field">
         <label for="f-link">Länk <span class="opt">(valfritt)</span></label>
-        <input type="url" id="f-link" name="link" placeholder="https://...">
+        <input type="url" id="f-link" name="link" placeholder="https://..." aria-describedby="err-link">
+        <span class="field-error" id="err-link" hidden></span>
       </div>
 
     </fieldset>
