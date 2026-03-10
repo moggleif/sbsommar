@@ -1302,6 +1302,22 @@ textarea {
   padding: 4px var(--space-xs);
 }
 
+/* ── Character counter (02-§82, 07-§6.85–6.88) ── */
+
+.char-counter {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  opacity: 0.6;
+  text-align: right;
+}
+
+.char-counter.warn {
+  color: var(--color-terracotta);
+  opacity: 1;
+}
+
 /* ── Success state ── */
 
 .success-box {

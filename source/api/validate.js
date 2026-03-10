@@ -10,7 +10,7 @@ function timeToMinutes(hhmm) {
 const MAX_LENGTHS = {
   title:       80,
   location:    200,
-  responsible: 200,
+  responsible: 60,
   description: 2000,
   link:        500,
 };
