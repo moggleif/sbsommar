@@ -1816,18 +1816,18 @@ Matrix cleanup (2026-02-25):
 | `02-§81.9` | LINK-09 | Implemented in vanilla JS in lagg-till.js |
 | `02-§81.10` | LINK-10 | Reuses existing setFieldError/clearAllErrors helpers |
 | | | **§82 — Character Counter on Text Input Fields** |
-| `02-§82.1` | gap | Fields: title 80, responsible 60, description 2000, link 500 |
-| `02-§82.2` | gap | maxlength attribute on inputs in render-add.js and render-edit.js |
-| `02-§82.3` | gap | API validate.js responsible limit reduced to 60 |
-| `02-§82.4` | gap | Counter hidden below 70% of max |
-| `02-§82.5` | gap | Counter visible at ≥70% of max |
-| `02-§82.6` | gap | Counter turns terracotta at ≥90% of max |
-| `02-§82.7` | gap | Counter format: N / MAX |
-| `02-§82.8` | gap | Counter right-aligned below field |
-| `02-§82.9` | gap | Counter uses font-size-small, charcoal, opacity 0.6 |
-| `02-§82.10` | gap | Counter updates on input event |
-| `02-§82.11` | gap | Counters hidden on form reset |
-| `02-§82.12` | gap | Counter on both add and edit forms |
-| `02-§82.13` | gap | Vanilla JavaScript implementation |
-| `02-§82.14` | gap | Uses CSS custom properties from 07-DESIGN.md |
-| `02-§82.15` | gap | No new npm dependencies |
+| `02-§82.1` | CC-01..CC-08 | Fields: title 80, responsible 60, description 2000, link 500 |
+| `02-§82.2` | CC-01..CC-08 | maxlength attribute on inputs in render-add.js and render-edit.js |
+| `02-§82.3` | CC-09, CC-10 | API validate.js responsible limit reduced to 60 |
+| `02-§82.4` | manual | Counter hidden below 70% of max (browser-only) |
+| `02-§82.5` | manual | Counter visible at ≥70% of max (browser-only) |
+| `02-§82.6` | CC-12 | Counter turns terracotta at ≥90% of max; `.char-counter.warn` in CSS |
+| `02-§82.7` | manual | Counter format: N / MAX (browser-only) |
+| `02-§82.8` | manual | Counter right-aligned below field (browser-only) |
+| `02-§82.9` | CC-11 | Counter uses font-size-small, charcoal, opacity 0.6; `.char-counter` in CSS |
+| `02-§82.10` | manual | Counter updates on input event (browser-only) |
+| `02-§82.11` | manual | Counters hidden on form reset (browser-only) |
+| `02-§82.12` | CC-05..CC-08 | Counter on both add and edit forms |
+| `02-§82.13` | done | Vanilla JavaScript in lagg-till.js and redigera.js |
+| `02-§82.14` | done | Uses CSS custom properties from 07-DESIGN.md |
+| `02-§82.15` | done | No new npm dependencies |
