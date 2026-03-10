@@ -141,6 +141,9 @@ function handleDebugGitHub(): void
         $steps[] = 'Constructor: OK';
     } catch (\Throwable $e) {
         $steps[] = 'Error: ' . $e->getMessage();
+        $steps[] = 'Class: ' . get_class($e);
+        $steps[] = 'File: ' . $e->getFile() . ':' . $e->getLine();
+        $steps[] = 'Trace: ' . $e->getTraceAsString();
     }
     jsonResponse(['steps' => $steps]);
 }
