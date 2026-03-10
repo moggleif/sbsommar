@@ -9,6 +9,7 @@ const PRE_CACHE_URLS = [
   '/',
   '/schema.html',
   '/idag.html',
+  '/style.css',
   '/app.webmanifest',
 ];
 

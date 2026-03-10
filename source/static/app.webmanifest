@@ -1,6 +1,7 @@
 {
   "name": "SB Sommar",
   "short_name": "SB Sommar",
+  "lang": "sv",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#C76D48",
