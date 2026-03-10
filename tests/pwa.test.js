@@ -290,3 +290,17 @@ describe('02-§83.22 — sw-register.js exists', () => {
     assert.ok(fs.existsSync(filePath), 'sw-register.js must exist');
   });
 });
+
+// ── 02-§83.25 — Every page uses PWA icon as favicon ─────────────────────────
+
+describe('02-§83.25 — Every page uses PWA icon as favicon', () => {
+  for (const [name, fn] of ALL_PAGES) {
+    it(`PWA-23-${name}: ${name} page uses sbsommar-icon-192.png as favicon`, () => {
+      const html = fn();
+      assert.ok(
+        html.includes('rel="icon"') && html.includes('sbsommar-icon-192.png'),
+        `${name} must use sbsommar-icon-192.png as favicon`,
+      );
+    });
+  }
+});
