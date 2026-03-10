@@ -12,7 +12,7 @@
 function pwaHeadTags() {
   return `  <link rel="manifest" href="app.webmanifest">
   <meta name="theme-color" content="#C76D48">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="apple-touch-icon" href="images/sbsommar-icon-192.png">`;
 }

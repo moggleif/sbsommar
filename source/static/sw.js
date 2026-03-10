@@ -1,21 +1,26 @@
 // Service worker for SB Sommar PWA.
-// Provides basic offline caching with a network-first strategy for HTML
-// and cache-first for static assets (CSS, JS, images).
+// Provides offline caching: network-first for HTML and events.json,
+// cache-first for static assets (CSS, JS, images).
 
-const CACHE_NAME = 'sb-sommar-v1';
+const CACHE_NAME = 'sb-sommar-v2';
 
-// Core pages and assets to pre-cache on install.
+// Pages and assets to pre-cache on install.
 const PRE_CACHE_URLS = [
   '/',
   '/schema.html',
   '/idag.html',
+  '/lagg-till.html',
+  '/redigera.html',
+  '/live.html',
+  '/arkiv.html',
+  '/kalender.html',
+  '/offline.html',
   '/style.css',
   '/app.webmanifest',
 ];
 
 // Paths that must never be cached (always fetched from network).
 const NO_CACHE_PATTERNS = [
-  'events.json',
   '/add-event',
   '/edit-event',
   '/api/',
@@ -53,12 +58,21 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Never cache API calls or event data.
+  // Ignore non-HTTP(S) schemes (e.g. chrome-extension://).
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+
+  // Never cache API calls or form submissions.
   if (NO_CACHE_PATTERNS.some((p) => url.pathname.includes(p))) return;
 
-  // Navigation requests (HTML): network-first, cache fallback.
-  if (request.mode === 'navigate' || request.destination === 'document') {
+  // events.json: network-first so offline still shows schedule data.
+  if (url.pathname.endsWith('events.json')) {
     event.respondWith(networkFirstThenCache(request));
+    return;
+  }
+
+  // Navigation requests (HTML): network-first, offline fallback page.
+  if (request.mode === 'navigate' || request.destination === 'document') {
+    event.respondWith(networkFirstWithOfflineFallback(request));
     return;
   }
 
@@ -71,16 +85,32 @@ self.addEventListener('fetch', (event) => {
 async function networkFirstThenCache(request) {
   try {
     const response = await fetch(request);
-    // Cache a copy of the successful response.
     if (response.ok) {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, response.clone());
     }
     return response;
   } catch {
-    // Network unavailable — serve from cache if available.
     const cached = await caches.match(request);
     return cached || new Response('Offline', { status: 503, statusText: 'Offline' });
+  }
+}
+
+async function networkFirstWithOfflineFallback(request) {
+  try {
+    const response = await fetch(request);
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    // Try the specific page from cache first.
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    // Fall back to the offline page.
+    const offline = await caches.match('/offline.html');
+    return offline || new Response('Offline', { status: 503, statusText: 'Offline' });
   }
 }
 
@@ -90,7 +120,6 @@ async function cacheFirstThenNetwork(request) {
 
   try {
     const response = await fetch(request);
-    // Cache the response for next time.
     if (response.ok) {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, response.clone());
