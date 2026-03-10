@@ -16,6 +16,7 @@ const { renderRssFeed } = require('./render-rss');
 const { renderEventPage } = require('./render-event');
 const { renderEventIcal, renderIcalFeed } = require('./render-ical');
 const { renderKalenderPage } = require('./render-kalender');
+const { renderOfflinePage } = require('./render-offline');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 const { addOneDay } = require('../api/time-gate');
 const { setFeedbackUrl } = require('./layout');
@@ -273,6 +274,11 @@ async function main() {
   const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'kalender.html'), kalenderHtml, 'utf8');
   console.log('Built: public/kalender.html');
+
+  // ── Render offline fallback page ────────────────────────────────────────
+  const offlineHtml = renderOfflinePage(footerWithVersion, navSections, GOATCOUNTER_CODE);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'offline.html'), offlineHtml, 'utf8');
+  console.log('Built: public/offline.html');
 
   // ── Render index.html from content/sections.yaml ─────────────────────────
   // sectionsConfig already loaded above for navSections.

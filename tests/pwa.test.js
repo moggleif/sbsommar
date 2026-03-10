@@ -81,15 +81,15 @@ describe('02-§83.9 — Every page includes theme-color meta', () => {
   }
 });
 
-// ── 02-§83.10 — Every page includes apple-mobile-web-app-capable ────────────
+// ── 02-§83.10 — Every page includes mobile-web-app-capable ──────────────────
 
-describe('02-§83.10 — Every page includes apple-mobile-web-app-capable', () => {
+describe('02-§83.10 — Every page includes mobile-web-app-capable', () => {
   for (const [name, fn] of ALL_PAGES) {
-    it(`PWA-03-${name}: ${name} page includes apple-mobile-web-app-capable`, () => {
+    it(`PWA-03-${name}: ${name} page includes mobile-web-app-capable`, () => {
       const html = fn();
       assert.ok(
-        html.includes('name="apple-mobile-web-app-capable"'),
-        `${name} must have apple-mobile-web-app-capable`,
+        html.includes('name="mobile-web-app-capable"'),
+        `${name} must have mobile-web-app-capable`,
       );
     });
   }
@@ -251,13 +251,24 @@ describe('02-§83.15 — Service worker uses versioned cache name', () => {
 
 // ── 02-§83.16 — Install pre-caches core pages ──────────────────────────────
 
-describe('02-§83.16 — Install pre-caches core pages', () => {
-  it('PWA-19: sw.js pre-caches /, schema.html, and idag.html', () => {
+describe('02-§83.16 — Install pre-caches all user-facing pages', () => {
+  const EXPECTED_PAGES = [
+    '/',
+    'schema.html',
+    'idag.html',
+    'lagg-till.html',
+    'redigera.html',
+    'live.html',
+    'arkiv.html',
+    'kalender.html',
+  ];
+
+  it('PWA-19: sw.js pre-caches all user-facing pages', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
-    assert.ok(src.includes("'/'") || src.includes('"/'), 'sw.js must pre-cache /');
-    assert.ok(src.includes('schema.html'), 'sw.js must pre-cache schema.html');
-    assert.ok(src.includes('idag.html'), 'sw.js must pre-cache idag.html');
+    for (const page of EXPECTED_PAGES) {
+      assert.ok(src.includes(page), `sw.js must pre-cache ${page}`);
+    }
   });
 });
 
@@ -272,13 +283,15 @@ describe('02-§83.18 — Activate deletes old caches', () => {
   });
 });
 
-// ── 02-§83.19 — Service worker does not cache events.json ───────────────────
+// ── 02-§83.19 — Service worker does not cache API paths ─────────────────────
 
-describe('02-§83.19 — Service worker does not cache events.json', () => {
-  it('PWA-21: sw.js excludes events.json from caching', () => {
+describe('02-§83.19 — Service worker excludes API paths from caching', () => {
+  it('PWA-21: sw.js excludes /api/, /add-event, /edit-event', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
-    assert.ok(src.includes('events.json'), 'sw.js must reference events.json (to exclude it)');
+    assert.ok(src.includes('/api/'), 'sw.js must exclude /api/ paths');
+    assert.ok(src.includes('/add-event'), 'sw.js must exclude /add-event');
+    assert.ok(src.includes('/edit-event'), 'sw.js must exclude /edit-event');
   });
 });
 
@@ -303,4 +316,114 @@ describe('02-§83.25 — Every page uses PWA icon as favicon', () => {
       );
     });
   }
+});
+
+// ── 02-§83.26 — Manifest icons include purpose "maskable" ──────────────────
+
+describe('02-§83.26 — Manifest icons include purpose "maskable"', () => {
+  it('PWA-24: at least one icon has purpose "maskable"', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'static', 'app.webmanifest');
+    const manifest = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const hasMaskable = manifest.icons.some((i) =>
+      i.purpose && i.purpose.includes('maskable'),
+    );
+    assert.ok(hasMaskable, 'at least one icon must have purpose "maskable"');
+  });
+});
+
+// ── 02-§83.27 — Service worker ignores non-http(s) schemes ─────────────────
+
+describe('02-§83.27 — Service worker ignores non-http(s) schemes', () => {
+  it('PWA-25: sw.js checks URL protocol before caching', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
+    const src = fs.readFileSync(filePath, 'utf8');
+    assert.ok(
+      src.includes("url.protocol !== 'http:'") || src.includes('url.protocol'),
+      'sw.js must check url.protocol to filter non-http schemes',
+    );
+  });
+});
+
+// ── 02-§83.28 — Service worker caches events.json with network-first ────────
+
+describe('02-§83.28 — Service worker caches events.json', () => {
+  it('PWA-26: sw.js references events.json for network-first caching', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
+    const src = fs.readFileSync(filePath, 'utf8');
+    assert.ok(
+      src.includes('events.json'),
+      'sw.js must handle events.json (network-first caching)',
+    );
+  });
+});
+
+// ── 02-§83.29 — Service worker serves offline.html fallback ─────────────────
+
+describe('02-§83.29 — Service worker serves offline fallback', () => {
+  it('PWA-27: sw.js references offline.html', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
+    const src = fs.readFileSync(filePath, 'utf8');
+    assert.ok(
+      src.includes('offline.html'),
+      'sw.js must reference offline.html as fallback',
+    );
+  });
+});
+
+// ── 02-§83.30 — offline.html renderer exists ────────────────────────────────
+
+describe('02-§83.30 — offline.html renderer exists', () => {
+  it('PWA-28: source/build/render-offline.js exists', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'build', 'render-offline.js');
+    assert.ok(fs.existsSync(filePath), 'render-offline.js must exist');
+  });
+});
+
+// ── 02-§83.32 — Offline page has Swedish offline message ────────────────────
+
+describe('02-§83.32 — Offline page has Swedish offline message', () => {
+  it('PWA-29: offline page contains Swedish offline text', () => {
+    // Require the renderer only if it exists (test will fail at PWA-28 first).
+    const rendererPath = path.join(__dirname, '..', 'source', 'build', 'render-offline.js');
+    if (!fs.existsSync(rendererPath)) {
+      assert.fail('render-offline.js does not exist yet');
+    }
+    const { renderOfflinePage } = require(rendererPath);
+    const html = renderOfflinePage();
+    assert.ok(
+      html.includes('offline') || html.includes('Offline') || html.includes('nätverks'),
+      'offline page must contain Swedish offline message',
+    );
+  });
+});
+
+// ── 02-§83.33 — Service worker pre-caches offline.html ─────────────────────
+
+describe('02-§83.33 — Service worker pre-caches offline.html', () => {
+  it('PWA-30: sw.js includes offline.html in PRE_CACHE_URLS', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
+    const src = fs.readFileSync(filePath, 'utf8');
+    // Check that offline.html appears in the pre-cache list (before the ];).
+    const preCacheSection = src.substring(
+      src.indexOf('PRE_CACHE_URLS'),
+      src.indexOf('];', src.indexOf('PRE_CACHE_URLS')),
+    );
+    assert.ok(
+      preCacheSection.includes('offline.html'),
+      'PRE_CACHE_URLS must include offline.html',
+    );
+  });
+});
+
+// ── 02-§83.34 — Cache version incremented ───────────────────────────────────
+
+describe('02-§83.34 — Cache version incremented to v2', () => {
+  it('PWA-31: sw.js uses sb-sommar-v2 cache name', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
+    const src = fs.readFileSync(filePath, 'utf8');
+    assert.ok(
+      src.includes('sb-sommar-v2'),
+      'CACHE_NAME must be sb-sommar-v2',
+    );
+  });
 });
