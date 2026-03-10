@@ -470,4 +470,11 @@ describe('02-§87 — Manifest metadata for richer install UI', () => {
       assert.ok(s.src.startsWith('images/'), `screenshot src "${s.src}" must start with "images/"`);
     }
   });
+
+  it('PWA-38: screenshot image files exist in source/content/images/ (02-§87.6)', () => {
+    for (const s of manifest.screenshots) {
+      const imgPath = path.join(__dirname, '..', 'source', 'content', s.src);
+      assert.ok(fs.existsSync(imgPath), `screenshot file "${s.src}" must exist`);
+    }
+  });
 });
