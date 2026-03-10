@@ -1794,6 +1794,72 @@ miss.
 
 ---
 
+## 28. Progressive Web App (PWA)
+
+The site is installable as a Progressive Web App. This gives participants a
+native-app-like experience when they add sbsommar.se to their home screen.
+
+### Manifest
+
+`source/static/app.webmanifest` defines the app name, icons, theme color, and
+display mode. It is copied to `public/app.webmanifest` during the build.
+
+### Service worker
+
+`source/static/sw.js` lives at the site root (`public/sw.js`) so its scope
+covers all pages. It uses a versioned cache name (`sb-sommar-v1`).
+
+**Cache strategy:**
+
+| Request type | Strategy | Rationale |
+| --- | --- | --- |
+| HTML (navigation) | Network-first, cache fallback | Users should see fresh content when online |
+| CSS, JS, images | Cache-first, network fallback | Static assets change infrequently; cache-busting hashes force updates |
+| `events.json`, API calls | Network-only (not cached) | Event data must always be fresh |
+
+**Lifecycle:**
+
+- `install`: Pre-caches core pages (`/`, `/schema.html`, `/idag.html`),
+  CSS, and the manifest.
+- `activate`: Deletes old caches whose name does not match the current version.
+- `fetch`: Intercepts requests and applies the strategy table above.
+
+### Registration
+
+`source/assets/js/client/sw-register.js` registers the service worker on every
+page. It checks for `navigator.serviceWorker` support before registering.
+
+### HTML head tags
+
+Every render function adds to `<head>`:
+
+- `<link rel="manifest" href="app.webmanifest">`
+- `<meta name="theme-color" content="...">` (terracotta from design palette)
+- `<meta name="apple-mobile-web-app-capable" content="yes">`
+- `<meta name="apple-mobile-web-app-status-bar-style" content="default">`
+- `<link rel="apple-touch-icon" href="images/icon-192.png">`
+
+### Icons
+
+Two PNG icons are required in `source/content/images/`:
+
+| File | Size | Purpose |
+| --- | --- | --- |
+| `icon-192.png` | 192×192 | Android home screen, Apple touch icon |
+| `icon-512.png` | 512×512 | Android splash screen |
+
+### Files
+
+| File | Role |
+| --- | --- |
+| `source/static/app.webmanifest` | PWA manifest |
+| `source/static/sw.js` | Service worker |
+| `source/assets/js/client/sw-register.js` | Service worker registration |
+| `source/content/images/icon-192.png` | App icon 192×192 |
+| `source/content/images/icon-512.png` | App icon 512×512 |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.

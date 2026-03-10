@@ -1831,3 +1831,28 @@ Matrix cleanup (2026-02-25):
 | `02-§82.13` | done | Vanilla JavaScript in lagg-till.js and redigera.js |
 | `02-§82.14` | done | Uses CSS custom properties from 07-DESIGN.md |
 | `02-§82.15` | done | No new npm dependencies |
+| | | **§83 — Progressive Web App (PWA) Support** |
+| `02-§83.1` | gap | Build produces `app.webmanifest` at site root |
+| `02-§83.2` | gap | Manifest sets name and short_name to "SB Sommar" |
+| `02-§83.3` | gap | Manifest sets display to "standalone" |
+| `02-§83.4` | gap | Manifest sets start_url to "/" |
+| `02-§83.5` | gap | Manifest sets theme_color and background_color from design palette |
+| `02-§83.6` | gap | Manifest declares 192×192 and 512×512 PNG icons |
+| `02-§83.7` | gap | Manifest icons include purpose "any" |
+| `02-§83.8` | gap | Every page includes `<link rel="manifest">` |
+| `02-§83.9` | gap | Every page includes `<meta name="theme-color">` |
+| `02-§83.10` | gap | Every page includes apple-mobile-web-app-capable |
+| `02-§83.11` | gap | Every page includes apple-mobile-web-app-status-bar-style |
+| `02-§83.12` | gap | Every page includes apple-touch-icon |
+| `02-§83.13` | gap | Build produces `sw.js` at site root |
+| `02-§83.14` | gap | Registration script included on every page |
+| `02-§83.15` | gap | Service worker uses versioned cache name |
+| `02-§83.16` | gap | Install pre-caches core pages, CSS, and manifest |
+| `02-§83.17` | gap | Fetch: network-first HTML, cache-first static assets |
+| `02-§83.18` | gap | Activate deletes old caches |
+| `02-§83.19` | gap | Service worker does not cache API responses or events.json |
+| `02-§83.20` | gap | Icon files icon-192.png and icon-512.png exist |
+| `02-§83.21` | gap | Build copies icons to public/images/ |
+| `02-§83.22` | gap | Service worker in vanilla JavaScript |
+| `02-§83.23` | gap | No new npm dependencies |
+| `02-§83.24` | gap | Existing pages and functionality must not break |
