@@ -81,7 +81,7 @@ ${pageNav('redigera.html', navSections)}
 
         <div class="field">
           <label for="f-title">Rubrik <span class="req">*</span></label>
-          <input type="text" id="f-title" name="title" autocomplete="off" required aria-describedby="err-title">
+          <input type="text" id="f-title" name="title" autocomplete="off" required maxlength="80" aria-describedby="err-title">
           <span class="field-error" id="err-title" hidden></span>
         </div>
 
@@ -114,7 +114,7 @@ ${locationOptions}
           </div>
           <div class="field">
             <label for="f-responsible">Ansvarig <span class="req">*</span></label>
-            <input type="text" id="f-responsible" name="responsible" autocomplete="off" required aria-describedby="err-responsible">
+            <input type="text" id="f-responsible" name="responsible" autocomplete="off" required maxlength="60" aria-describedby="err-responsible">
             <span class="field-error" id="err-responsible" hidden></span>
           </div>
         </div>
@@ -122,7 +122,7 @@ ${locationOptions}
         <div class="field">
           <label for="f-description">Beskrivning <span class="opt">(valfritt)</span></label>
           <div class="md-toolbar" role="toolbar" aria-label="Markdown-formatering"></div>
-          <textarea id="f-description" name="description" rows="4"></textarea>
+          <textarea id="f-description" name="description" rows="4" maxlength="2000"></textarea>
           <section class="md-preview" aria-live="polite" aria-label="Förhandsgranskning av beskrivning" hidden>
             <div class="md-preview-header"><span class="md-preview-label">Förhandsgranskning</span><span class="md-help">Ser det inte ut som du tänkt dig? Kolla <a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener noreferrer">Markdown-guiden ↗</a></span></div>
             <div class="md-preview-content"></div>
@@ -131,7 +131,7 @@ ${locationOptions}
 
         <div class="field">
           <label for="f-link">Länk <span class="opt">(valfritt)</span></label>
-          <input type="url" id="f-link" name="link" placeholder="https://...">
+          <input type="url" id="f-link" name="link" maxlength="500" placeholder="https://...">
         </div>
 
       </fieldset>

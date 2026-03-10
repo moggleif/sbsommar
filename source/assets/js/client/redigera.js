@@ -392,6 +392,43 @@
     for (var i = 0; i < fields.length; i++) { setFieldError(fields[i], null); }
   }
 
+  // ── Character counters (02-§82) ──────────────────────────────────────────────
+
+  var COUNTER_FIELDS = ['title', 'responsible', 'description', 'link'];
+
+  function initCounter(name) {
+    var input = form.querySelector('#f-' + name);
+    if (!input) return;
+    var max = parseInt(input.getAttribute('maxlength'), 10);
+    if (!max) return;
+
+    var counter = document.createElement('span');
+    counter.className = 'char-counter';
+    counter.hidden = true;
+    input.parentNode.insertBefore(counter, input.nextSibling);
+
+    function update() {
+      var len = input.value.length;
+      var ratio = len / max;
+      if (ratio < 0.7) {
+        counter.hidden = true;
+        return;
+      }
+      counter.hidden = false;
+      counter.textContent = len + ' / ' + max;
+      if (ratio >= 0.9) {
+        counter.classList.add('warn');
+      } else {
+        counter.classList.remove('warn');
+      }
+    }
+
+    input.addEventListener('input', update);
+    update(); // in case of pre-populated values
+  }
+
+  if (form) COUNTER_FIELDS.forEach(initCounter);
+
   // ── Form submission ──────────────────────────────────────────────────────────
 
   if (form) {

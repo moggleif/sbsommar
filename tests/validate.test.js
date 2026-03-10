@@ -407,8 +407,8 @@ describe('validateEventRequest – string length limits', () => {
     assert.ok(r.error.includes('location'));
   });
 
-  it('VLD-45: rejects responsible exceeding 200 characters', () => {
-    const r = validateEventRequest(valid({ responsible: 'C'.repeat(201) }));
+  it('VLD-45: rejects responsible exceeding 60 characters', () => {
+    const r = validateEventRequest(valid({ responsible: 'C'.repeat(61) }));
     assert.strictEqual(r.ok, false);
     assert.ok(r.error.includes('responsible'));
   });
