@@ -175,8 +175,18 @@ Participants must be able to submit a new activity through the form at `/lagg-ti
 The form must help the user fill it in correctly. This is not about security —
 it is about reducing confusion and frustration.
 
-- **Date field:** constrained to the active camp's date range. The user cannot
-  select a date outside the camp week. <!-- 02-§6.2 -->
+- **Date selection:** a grid of day buttons — one per camp day. Each button shows
+  the weekday abbreviation and date (e.g. "Mån 28/7"). The user selects a day by
+  clicking; the previously selected day is deselected. Exactly one day must be
+  selected before submit. The grid contains only days within the active camp's
+  `start_date..end_date`. When the current date falls within the camp period,
+  only days from today onward are shown. <!-- 02-§6.2 -->
+- **Recurring toggle:** a toggle labelled "Återkommande" switches the day grid
+  from single-select to multi-select mode. In multi-select mode, clicking a day
+  toggles it on or off independently. When toggled on, all camp days except the
+  first and last day are pre-selected. The first and last day are unselected by
+  default but can be selected manually. At least one day must be selected before
+  submit. <!-- 02-§6.15 -->
 - **Location field:** a dropdown populated from `source/data/local.yaml`.
   One option ("Annat") allows a free-text location not in the list. <!-- 02-§6.3 -->
 - **Time fields:** display a `HH:MM` format hint. The field should guide the user
@@ -3544,3 +3554,87 @@ the `<section id="…">` attribute and the `href="#…"` in navigation links.
 
 - The navigation link for "Röster" must point to `#roster`. <!-- 02-§79.3 -->
 - The navigation link for "Kostnader" must point to `#kostnader`. <!-- 02-§79.4 -->
+
+---
+
+## 80. Recurring Activities and Batch Submission
+
+Participants often run the same activity on multiple days at the same time and
+place. The form must support submitting a single activity for several days at
+once, and the API must accept batch submissions atomically.
+
+### 80.1 Day grid component (user requirements)
+
+- The date picker on the add-activity form is a grid of day buttons replacing
+  the native `<input type="date">`. <!-- 02-§80.1 -->
+- Each button displays the Swedish weekday abbreviation and the date in
+  day/month format (e.g. "Mån 28/7"). <!-- 02-§80.2 -->
+- The grid contains exactly the days within the active camp's
+  `start_date..end_date`. <!-- 02-§80.3 -->
+- When the current date falls within the camp period, only days from today
+  onward are shown. Before the camp period, all days are shown. <!-- 02-§80.4 -->
+- In single-select mode (default), clicking a day selects it and deselects the
+  previously selected day. Exactly one day must be selected before
+  submit. <!-- 02-§80.5 -->
+
+### 80.2 Recurring toggle (user requirements)
+
+- A toggle labelled "Återkommande" is shown near the day grid. <!-- 02-§80.6 -->
+- Toggling it on switches the day grid from single-select to multi-select
+  mode. <!-- 02-§80.7 -->
+- When toggled on, all camp days except the first and last day are
+  pre-selected. The first and last day are unselected by default but can be
+  selected manually. <!-- 02-§80.8 -->
+- In multi-select mode, clicking a day toggles it on or off
+  independently. <!-- 02-§80.9 -->
+- At least one day must be selected before submit. <!-- 02-§80.10 -->
+- Toggling back to single-select clears all selections and returns to the
+  default single-select behaviour. <!-- 02-§80.11 -->
+
+### 80.3 Batch API endpoint (API requirements)
+
+- A new endpoint `POST /add-events` (and PHP equivalent `POST /api/add-events`)
+  accepts the same fields as `POST /add-event` but with `dates` (an array of
+  `YYYY-MM-DD` strings) instead of `date`. <!-- 02-§80.12 -->
+- The endpoint validates every date in the array using the same rules as the
+  single-event endpoint (within camp range, not in the past, valid
+  format). <!-- 02-§80.13 -->
+- The endpoint validates the uniqueness constraint `(title + date + start)` for
+  every date in the batch against existing events in the camp
+  file. <!-- 02-§80.14 -->
+- All validation runs before any write. If any single date fails validation,
+  the entire batch is rejected and no events are created
+  (all-or-nothing). <!-- 02-§80.15 -->
+- On success, all events are committed in a single branch and PR — not one PR
+  per event. <!-- 02-§80.16 -->
+- The response includes `{ "success": true, "eventIds": [...] }` listing all
+  created event IDs. <!-- 02-§80.17 -->
+- Time-gating (§26) and injection scanning (§49) apply to the batch endpoint
+  identically. <!-- 02-§80.18 -->
+- The session cookie is updated with all new event IDs when consent is
+  given. <!-- 02-§80.19 -->
+
+### 80.4 Submit flow for batch (user requirements)
+
+- When the form is in multi-select mode and submitted, the client sends a
+  single request to the batch endpoint. <!-- 02-§80.20 -->
+- The progress modal (§53.2) displays the same stages as single submit. The
+  final success message states the number of created activities
+  (e.g. "5 aktiviteter tillagda!"). <!-- 02-§80.21 -->
+- On error, the modal displays the error message. Since the batch is
+  all-or-nothing, no partial state needs to be communicated. <!-- 02-§80.22 -->
+- "Lägg till en till" resets the form including the day grid and
+  toggle. <!-- 02-§80.23 -->
+
+### 80.5 Edit form (site requirements)
+
+- The edit form is not affected by this feature. Editing always operates on a
+  single event. The date field on the edit form remains a single day
+  selector. <!-- 02-§80.24 -->
+
+### 80.6 Implementation constraints
+
+- The day grid and toggle are implemented in vanilla JavaScript. <!-- 02-§80.25 -->
+- The day grid uses CSS custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§80.26 -->
+- The batch endpoint must be implemented in both Node.js and PHP with identical
+  validation and response format. <!-- 02-§80.27 -->
