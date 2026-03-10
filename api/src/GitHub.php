@@ -483,4 +483,55 @@ final class GitHub
 
         return $data;
     }
-}
+
+    /**
+     * Classify a GitHub API error into a user-facing Swedish message.
+     *
+     * Parses the exception message produced by githubRequest() to determine
+     * the error category. Never exposes tokens, paths, or stack traces.
+     */
+    public static function classifyGitHubError(\Throwable $e): string
+    {
+        $msg = $e->getMessage();
+
+        // Network / curl failure (no HTTP status)
+        if (str_starts_with($msg, 'GitHub API request failed:')) {
+            if (str_contains($msg, 'timed out') || str_contains($msg, 'Timeout')) {
+                return 'Kunde inte nå GitHub — anslutningen tog för lång tid. Försök igen om en stund.';
+            }
+
+            return 'Kunde inte nå GitHub. Kontrollera att tjänsten är tillgänglig och försök igen.';
+        }
+
+        // Extract HTTP status code from "GitHub API {code}: ..."
+        if (preg_match('/^GitHub API (\d{3}):/', $msg, $m)) {
+            $status = (int) $m[1];
+
+            // Rate limiting (403 with rate limit message, or 429)
+            if ($status === 429 || ($status === 403 && str_contains($msg, 'rate limit'))) {
+                return 'För många förfrågningar just nu. Försök igen om några minuter.';
+            }
+
+            // Authentication / authorisation
+            if ($status === 401 || $status === 403) {
+                return 'Servern kunde inte ansluta till GitHub. Kontakta arrangören.';
+            }
+
+            // Conflict or validation
+            if ($status === 409 || $status === 422) {
+                return 'En skrivkonflikt uppstod. Försök igen.';
+            }
+
+            // GitHub server errors
+            if ($status >= 500) {
+                return 'GitHub har tillfälliga problem. Försök igen om en stund.';
+            }
+        }
+
+        // Missing environment variables (constructor throws)
+        if (str_contains($msg, 'Missing required env')) {
+            return 'Servern är inte korrekt konfigurerad. Kontakta arrangören.';
+        }
+
+        return 'Ett oväntat fel uppstod. Försök igen eller kontakta arrangören.';
+    }
