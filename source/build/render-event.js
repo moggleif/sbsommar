@@ -3,6 +3,7 @@
 const { escapeHtml, formatDate, toDateString } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
 const { renderDescriptionHtml } = require('./markdown');
+const { pwaHeadTags } = require('./pwa');
 
 /**
  * Renders a static HTML detail page for a single event.
@@ -42,6 +43,7 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   <title>${title}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body>
 ${pageNav('schema.html', navSections)}
@@ -56,6 +58,7 @@ ${descriptionHtml}${linkHtml}  </div>
 </main>
   <script src="nav.js" defer></script>
   <script src="feedback.js" defer></script>
+  <script src="sw-register.js" defer></script>
 ${pageFooter(footerHtml)}
 </body>
 </html>

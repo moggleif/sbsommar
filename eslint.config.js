@@ -28,4 +28,12 @@ module.exports = [
       globals: { ...globals.browser },
     },
   },
+
+  // 🟠 Service worker = ServiceWorker globals
+  {
+    files: ['source/static/sw.js'],
+    languageOptions: {
+      globals: { ...globals.serviceworker },
+    },
+  },
 ];

@@ -4,6 +4,7 @@ const { pageNav, pageFooter } = require('./layout');
 const { escapeHtml, toDateString, formatDate } = require('./utils');
 const { renderDescriptionHtml } = require('./markdown');
 const { goatcounterScript } = require('./analytics');
+const { pwaHeadTags } = require('./pwa');
 
 const MONTHS_SV = [
   'januari', 'februari', 'mars', 'april', 'maj', 'juni',
@@ -144,6 +145,7 @@ function renderArkivPage(allCamps, footerHtml = '', navSections = [], campEvents
   <title>Arkiv – SB Sommar</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body>
 ${pageNav('arkiv.html', navSections)}
@@ -159,7 +161,8 @@ ${items}
 </main>
   <script src="arkiv.js"></script>
   <script src="nav.js" defer></script>
-  <script src="feedback.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="feedback.js" defer></script>
+  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>`;

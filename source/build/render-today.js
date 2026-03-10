@@ -3,6 +3,7 @@
 const { escapeHtml, toDateString } = require('./render');
 const { renderDescriptionHtml } = require('./markdown');
 const { goatcounterScript } = require('./analytics');
+const { pwaHeadTags } = require('./pwa');
 
 /**
  * Renders the "Dagens schema" page.
@@ -42,6 +43,7 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', goat
   <title>Dagens schema – ${campName}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body class="display-mode">
 
@@ -65,7 +67,8 @@ function renderTodayPage(camp, events, qrSvg, siteUrl = '', buildTime = '', goat
   </div>
 </main>
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = ''; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true; window.__BUILD_TIME__ = '${safeBuildTime}'; window.__VERSION__ = '${safeBuildTime}';</script>
-  <script src="events-today.js"></script>${goatcounterScript(goatcounterCode)}
+  <script src="events-today.js"></script>
+  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
 </body>
 </html>
 `;
