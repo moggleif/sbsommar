@@ -1672,9 +1672,10 @@ the scroll-to-top button. It is an inline SVG speech-bubble icon with
 - Creates a GitHub Issue via `githubRequest()` (exported from
   `source/api/github.js`).
 - Route: `POST /feedback` registered in `app.js`.
-- Non-production dry-run: when `BUILD_ENV` is not `production`, the
+- Dry-run: when `BUILD_ENV` is neither `production` nor `qa`, the
   endpoint logs the request and returns `{ success: true, issueUrl: '' }`
-  without creating a GitHub Issue.
+  without creating a GitHub Issue. This means only local development
+  is dry-run; QA creates real GitHub Issues.
 
 ### 26.5 PHP API (`api/src/Feedback.php`)
 

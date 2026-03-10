@@ -3354,8 +3354,8 @@ implementation) and the same GitHub API primitives.
   and return `{ success: true, issueUrl: "" }` (empty
   string). <!-- 02-§73.28 -->
 - In the QA environment (`BUILD_ENV` is `qa`), the API must create a
-  GitHub Issue just as in production, so that testers can verify the
-  full feedback flow. <!-- 02-§73.29 -->
+  GitHub Issue just as in production, so that testers can give
+  feedback. <!-- 02-§73.29 -->
 
 ### 73.3 Validation requirements
 
