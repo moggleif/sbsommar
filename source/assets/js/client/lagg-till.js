@@ -608,6 +608,52 @@
       return;
     }
 
+    // ── Confirmation modal ──────────────────────────────────────────────────
+    openModal();
+    modalHeading.textContent = 'Bekräfta';
+    var dateList = selectedDates.map(function (d) {
+      var dt = new Date(d + 'T12:00:00');
+      var weekdays = ['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'];
+      return weekdays[dt.getDay()] + ' ' + dt.getDate() + '/' + (dt.getMonth() + 1);
+    }).join(', ');
+
+    var desc = els.description.value.trim();
+    // Truncate long descriptions in the summary.
+    var shortDesc = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
+    var descRow = shortDesc
+      ? '<tr><td>📝</td><td>' + shortDesc.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</td></tr>'
+      : '';
+
+    var summary =
+      '<table class="confirm-summary">' +
+        '<tr><td>📌</td><td><strong>' + title + '</strong></td></tr>' +
+        (isBatch
+          ? '<tr><td>📅</td><td><strong>' + selectedDates.length + ' dagar:</strong> ' + dateList + '</td></tr>'
+          : '<tr><td>📅</td><td>' + dateList + '</td></tr>') +
+        '<tr><td>🕐</td><td>' + start + '–' + end + '</td></tr>' +
+        '<tr><td>📍</td><td>' + location + '</td></tr>' +
+        '<tr><td>👤</td><td>' + responsible + '</td></tr>' +
+        descRow +
+      '</table>' +
+      (isBatch ? '<p class="field-info">Varje dag blir en egen aktivitet som kan redigeras separat.</p>' : '');
+
+    modalContent.innerHTML = summary +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn-primary" id="confirm-submit">Skicka</button>' +
+        '<button type="button" class="btn-secondary" id="cancel-submit">Avbryt</button>' +
+      '</div>';
+    focusFirstInModal();
+
+    document.getElementById('cancel-submit').addEventListener('click', function () {
+      closeModal();
+    });
+    document.getElementById('confirm-submit').addEventListener('click', function () {
+      doSubmit(title, selectedDates, start, end, location, responsible, els);
+    });
+  });
+
+  function doSubmit(title, selectedDates, start, end, location, responsible, els) {
+    var isBatch = selectedDates.length > 1;
     lock();
 
     // Ask for cookie consent before sending (shown once per browser).
@@ -678,5 +724,6 @@
           setModalError('Något gick fel. Kontrollera din internetanslutning och försök igen.');
         });
     }, modalApi);
-  });
+  }
+
 })();

@@ -1717,6 +1717,30 @@ p:has(> .content-img[alt="Anita Kullander"]) {
   text-align: center;
 }
 
+.confirm-summary {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  margin: var(--space-sm) 0;
+}
+
+.confirm-summary td {
+  padding: var(--space-xs) var(--space-xs);
+  vertical-align: top;
+}
+
+.confirm-summary td:first-child {
+  width: 1.5em;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
 .modal-spinner {
   width: 40px;
   height: 40px;
