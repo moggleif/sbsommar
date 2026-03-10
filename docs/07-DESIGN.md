@@ -315,6 +315,20 @@ hierarchy. <!-- 07-§6.70 -->
 Using `em` makes the headings proportional to the container's font-size
 (e.g. 13 px in `.event-extra`, 16 px in `.md-preview`). <!-- 07-§6.75 -->
 
+### Character counter (form fields)
+
+A small counter below text input fields showing how many characters have been
+typed relative to the maximum. <!-- 07-§6.85 -->
+
+- Counter element (`.char-counter`): `font-size: var(--font-size-small)`,
+  `color: var(--color-charcoal)`, `opacity: 0.6`, `text-align: right`,
+  `margin-top: 2px`. <!-- 07-§6.86 -->
+- Warning state (`.char-counter.warn`): `color: var(--color-terracotta)`,
+  `opacity: 1`. Applied when field value reaches or exceeds 90 % of the maximum
+  length. <!-- 07-§6.87 -->
+- The counter is hidden (`hidden` attribute) when the field value is below 70 %
+  of the maximum length. <!-- 07-§6.88 -->
+
 ### Day grid (date selection)
 
 A grid of day buttons replaces the native date picker on the add-activity

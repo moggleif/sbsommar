@@ -1815,3 +1815,19 @@ Matrix cleanup (2026-02-25):
 | `02-§81.8` | manual | Submit blocked while link field has error (browser-only) |
 | `02-§81.9` | LINK-09 | Implemented in vanilla JS in lagg-till.js |
 | `02-§81.10` | LINK-10 | Reuses existing setFieldError/clearAllErrors helpers |
+| | | **§82 — Character Counter on Text Input Fields** |
+| `02-§82.1` | gap | Fields: title 80, responsible 60, description 2000, link 500 |
+| `02-§82.2` | gap | maxlength attribute on inputs in render-add.js and render-edit.js |
+| `02-§82.3` | gap | API validate.js responsible limit reduced to 60 |
+| `02-§82.4` | gap | Counter hidden below 70% of max |
+| `02-§82.5` | gap | Counter visible at ≥70% of max |
+| `02-§82.6` | gap | Counter turns terracotta at ≥90% of max |
+| `02-§82.7` | gap | Counter format: N / MAX |
+| `02-§82.8` | gap | Counter right-aligned below field |
+| `02-§82.9` | gap | Counter uses font-size-small, charcoal, opacity 0.6 |
+| `02-§82.10` | gap | Counter updates on input event |
+| `02-§82.11` | gap | Counters hidden on form reset |
+| `02-§82.12` | gap | Counter on both add and edit forms |
+| `02-§82.13` | gap | Vanilla JavaScript implementation |
+| `02-§82.14` | gap | Uses CSS custom properties from 07-DESIGN.md |
+| `02-§82.15` | gap | No new npm dependencies |
