@@ -75,7 +75,7 @@ final class GitHub
         [$campContent, $fileSha] = $this->getFile($campFilePath);
 
         // 3. Build new content
-        $newContent = rtrim($campContent) . "\n" . self::buildEventYaml($event, 2) . "\n";
+        $newContent = rtrim($campContent) . "\n" . self::buildEventYaml($event) . "\n";
         $commitMsg  = "Add event to {$camp['name']}: {$title} ({$date})";
 
         // 4. Ephemeral branch
@@ -136,7 +136,7 @@ final class GitHub
                 'meta'        => ['created_at' => $now, 'updated_at' => $now],
             ];
 
-            $yamlBlocks[] = self::buildEventYaml($event, 2);
+            $yamlBlocks[] = self::buildEventYaml($event);
         }
 
         // 1. Resolve active camp

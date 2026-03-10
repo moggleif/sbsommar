@@ -33,8 +33,8 @@ function yamlScalar(val) {
 
 // Serialise a single event as a YAML block ready to append.
 // `indent` is the number of leading spaces for the list marker (`- id:`).
-// Field lines are indented by `indent + 2`.  Default 0 keeps backward
-// compatibility; callers that append to an `events:` list should pass 2.
+// Field lines are indented by `indent + 2`.  Default 0 matches the camp
+// YAML format where list items sit at column 0 under the `events:` key.
 function buildEventYaml(event, indent = 0) {
   const p  = ' '.repeat(indent);      // prefix for "- id:" line
   const fp = ' '.repeat(indent + 2);  // prefix for field lines
@@ -246,7 +246,7 @@ async function addEventToActiveCamp(body) {
   const { content: campContent, sha: fileSha } = await getFile(campFilePath);
 
   // Step 3: build new file content
-  const newContent = campContent.trimEnd() + '\n' + buildEventYaml(event, 2) + '\n';
+  const newContent = campContent.trimEnd() + '\n' + buildEventYaml(event) + '\n';
   const commitMsg  = `Add event to ${camp.name}: ${title} (${date})`;
 
   // Step 4: create ephemeral branch from current main HEAD
