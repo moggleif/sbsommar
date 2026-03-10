@@ -624,11 +624,11 @@
     if (!responsible)      fail('responsible', 'Ansvarig är obligatoriskt.');
 
     // Link field validation (02-§81.8) — optional but must be valid if filled.
-    var linkVal = els.link.value.trim();
-    if (linkVal) {
-      if (!/^https?:\/\//i.test(linkVal)) {
+    var linkSubmitVal = els.link.value.trim();
+    if (linkSubmitVal) {
+      if (!/^https?:\/\//i.test(linkSubmitVal)) {
         fail('link', 'Länken måste börja med https:// eller http://');
-      } else if (linkVal.replace(/^https?:\/\//i, '').indexOf('.') === -1) {
+      } else if (linkSubmitVal.replace(/^https?:\/\//i, '').indexOf('.') === -1) {
         fail('link', 'Länken ser inte ut som en giltig webbadress');
       }
     }

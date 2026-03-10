@@ -68,7 +68,7 @@ describe('02-§81 — Client-side link field validation', () => {
       'source must check for http/https protocol',
     );
     assert.ok(
-      /https?\:\/\//i.test(SRC),
+      /https?:\/\//i.test(SRC),
       'source must contain protocol pattern check',
     );
   });
