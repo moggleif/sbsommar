@@ -1725,8 +1725,12 @@ p:has(> .content-img[alt="Anita Kullander"]) {
 }
 
 .confirm-summary td {
-  padding: var(--space-xs) var(--space-xs);
+  padding: 2px var(--space-xs);
   vertical-align: top;
+}
+
+.confirm-summary tr.desc-row td {
+  padding-top: var(--space-sm);
 }
 
 .confirm-summary td:first-child {

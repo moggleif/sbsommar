@@ -621,10 +621,15 @@
     // Truncate long descriptions in the summary.
     var shortDesc = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
     var descRow = shortDesc
-      ? '<tr><td>📝</td><td>' + shortDesc.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</td></tr>'
+      ? '<tr class="desc-row"><td>📝</td><td>' + shortDesc.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</td></tr>'
+      : '';
+    var linkVal = els.link.value.trim();
+    var linkRow = linkVal
+      ? '<tr><td>🔗</td><td>' + linkVal.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</td></tr>'
       : '';
 
     var summary =
+      (isBatch ? '<p class="field-info">Varje dag blir en egen aktivitet som kan redigeras separat.</p>' : '') +
       '<table class="confirm-summary">' +
         '<tr><td>📌</td><td><strong>' + title + '</strong></td></tr>' +
         (isBatch
@@ -634,8 +639,8 @@
         '<tr><td>📍</td><td>' + location + '</td></tr>' +
         '<tr><td>👤</td><td>' + responsible + '</td></tr>' +
         descRow +
-      '</table>' +
-      (isBatch ? '<p class="field-info">Varje dag blir en egen aktivitet som kan redigeras separat.</p>' : '');
+        linkRow +
+      '</table>';
 
     modalContent.innerHTML = summary +
       '<div class="modal-actions">' +
