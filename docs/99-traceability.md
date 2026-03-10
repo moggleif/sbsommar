@@ -1099,9 +1099,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1010
+Total requirements:            1017
 Covered (implemented + tested): 514
-Implemented, not tested:        496
+Implemented, not tested:        503
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1857,3 +1857,15 @@ Matrix cleanup (2026-02-25):
 | `02-§83.23` | done | No new npm dependencies added |
 | `02-§83.24` | covered | All 1374 existing tests pass after implementation |
 | `02-§83.25` | covered | PWA-23: every page uses sbsommar-icon-192.png as favicon |
+
+### §84 — API Error Messages
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§84.1` | implemented | Manual: submit activity on QA with broken config; verify message is specific |
+| `02-§84.2` | implemented | Manual: compare retry-able vs permanent error messages |
+| `02-§84.3` | implemented | `api/src/GitHub.php::classifyGitHubError()` — static classifier method |
+| `02-§84.4` | implemented | Manual: trigger each error category and verify Swedish message |
+| `02-§84.5` | implemented | All three catch blocks in `api/index.php` call `GitHub::classifyGitHubError($e)` |
+| `02-§84.6` | implemented | Code review: classifier returns hardcoded Swedish strings, no dynamic data |
+| `02-§84.7` | done | No client changes needed; `lagg-till.js` already shows `json.error` |

@@ -165,7 +165,7 @@ function handleAddEvent(?array $activeCamp): void
         $gh->addEventToActiveCamp($body);
     } catch (\Throwable $e) {
         error_log('POST /add-event error: ' . $e->getMessage());
-        jsonResponse(['success' => false, 'error' => 'Aktiviteten kunde inte sparas. Försök igen om en stund.'], 500);
+        jsonResponse(['success' => false, 'error' => GitHub::classifyGitHubError($e)], 500);
 
         return;
     }
@@ -217,7 +217,7 @@ function handleAddEvents(?array $activeCamp): void
         $eventIds = $gh->addEventsToActiveCamp($body);
     } catch (\Throwable $e) {
         error_log('POST /add-events error: ' . $e->getMessage());
-        jsonResponse(['success' => false, 'error' => 'Aktiviteterna kunde inte sparas. Försök igen om en stund.'], 500);
+        jsonResponse(['success' => false, 'error' => GitHub::classifyGitHubError($e)], 500);
 
         return;
     }
@@ -295,7 +295,7 @@ function handleEditEvent(?array $activeCamp): void
         $gh->updateEventInActiveCamp($eventId, $body);
     } catch (\Throwable $e) {
         error_log('POST /edit-event error: ' . $e->getMessage());
-        jsonResponse(['success' => false, 'error' => 'Ändringen kunde inte sparas. Försök igen om en stund.'], 500);
+        jsonResponse(['success' => false, 'error' => GitHub::classifyGitHubError($e)], 500);
 
         return;
     }

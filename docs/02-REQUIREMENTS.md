@@ -3817,3 +3817,35 @@ worker provides basic offline caching of static assets.
 - Existing pages and functionality must not break. <!-- 02-§83.24 -->
 - Every HTML page must use the PWA icon (`images/sbsommar-icon-192.png`) as
   the browser favicon (`<link rel="icon">`). <!-- 02-§83.25 -->
+
+---
+
+## 84. API Error Messages
+
+When an API call fails, the user must receive an error message that helps them
+understand whether the problem is actionable or not.
+
+### 84.1 User requirements
+
+- When submitting an activity fails, the user sees a message that indicates
+  the nature of the failure — not just "kunde inte sparas". <!-- 02-§84.1 -->
+- The user can distinguish between a temporary problem (try again later) and
+  a permanent problem (contact the organiser). <!-- 02-§84.2 -->
+
+### 84.2 Site requirements
+
+- The PHP API classifies GitHub API errors into categories before returning
+  them to the client: <!-- 02-§84.3 -->
+  - **Authentication** (401/403) — token missing or expired.
+  - **Conflict** (409/422) — concurrent write or validation failure.
+  - **Rate limit** (403 with rate-limit header, 429) — too many requests.
+  - **Network / timeout** — GitHub unreachable.
+  - **Other server errors** (5xx) — transient GitHub failure.
+- Each category maps to a Swedish user-facing message that tells the user
+  whether to retry or contact the organiser. <!-- 02-§84.4 -->
+- The classification applies to all three mutation endpoints: `/add-event`,
+  `/add-events`, and `/edit-event`. <!-- 02-§84.5 -->
+- Error messages must never expose internal details such as tokens, file
+  paths, or full stack traces. <!-- 02-§84.6 -->
+- The existing client-side code (`lagg-till.js`) already displays
+  `json.error` — no client changes are needed. <!-- 02-§84.7 -->
