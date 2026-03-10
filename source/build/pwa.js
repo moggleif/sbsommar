@@ -4,8 +4,8 @@
  * Returns the PWA-related HTML tags for <head>.
  * Called by every render function to ensure consistent PWA support.
  *
- * Includes: manifest link, theme-color, Apple-specific meta tags,
- * and apple-touch-icon.
+ * Includes: manifest link, theme-color, mobile-web-app-capable,
+ * Apple status-bar-style, and apple-touch-icon.
  *
  * Theme color uses Terracotta (#C76D48) from 07-DESIGN.md §2.1.
  */
