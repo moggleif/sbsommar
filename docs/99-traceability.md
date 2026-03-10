@@ -1832,27 +1832,27 @@ Matrix cleanup (2026-02-25):
 | `02-§82.14` | done | Uses CSS custom properties from 07-DESIGN.md |
 | `02-§82.15` | done | No new npm dependencies |
 | | | **§83 — Progressive Web App (PWA) Support** |
-| `02-§83.1` | gap | Build produces `app.webmanifest` at site root |
-| `02-§83.2` | gap | Manifest sets name and short_name to "SB Sommar" |
-| `02-§83.3` | gap | Manifest sets display to "standalone" |
-| `02-§83.4` | gap | Manifest sets start_url to "/" |
-| `02-§83.5` | gap | Manifest sets theme_color and background_color from design palette |
-| `02-§83.6` | gap | Manifest declares 192×192 and 512×512 PNG icons |
-| `02-§83.7` | gap | Manifest icons include purpose "any" |
-| `02-§83.8` | gap | Every page includes `<link rel="manifest">` |
-| `02-§83.9` | gap | Every page includes `<meta name="theme-color">` |
-| `02-§83.10` | gap | Every page includes apple-mobile-web-app-capable |
-| `02-§83.11` | gap | Every page includes apple-mobile-web-app-status-bar-style |
-| `02-§83.12` | gap | Every page includes apple-touch-icon |
-| `02-§83.13` | gap | Build produces `sw.js` at site root |
-| `02-§83.14` | gap | Registration script included on every page |
-| `02-§83.15` | gap | Service worker uses versioned cache name |
-| `02-§83.16` | gap | Install pre-caches core pages, CSS, and manifest |
-| `02-§83.17` | gap | Fetch: network-first HTML, cache-first static assets |
-| `02-§83.18` | gap | Activate deletes old caches |
-| `02-§83.19` | gap | Service worker does not cache API responses or events.json |
-| `02-§83.20` | gap | Icon files icon-192.png and icon-512.png exist |
-| `02-§83.21` | gap | Build copies icons to public/images/ |
-| `02-§83.22` | gap | Service worker in vanilla JavaScript |
-| `02-§83.23` | gap | No new npm dependencies |
-| `02-§83.24` | gap | Existing pages and functionality must not break |
+| `02-§83.1` | covered | PWA-07: `source/static/app.webmanifest` exists; `build.js` copies to public/ |
+| `02-§83.2` | covered | PWA-08, PWA-09: manifest name and short_name verified |
+| `02-§83.3` | covered | PWA-10: manifest display "standalone" verified |
+| `02-§83.4` | covered | PWA-11: manifest start_url "/" verified |
+| `02-§83.5` | covered | PWA-12, PWA-13: theme_color #C76D48, background_color #F5EEDF |
+| `02-§83.6` | covered | PWA-14, PWA-15: 192×192 and 512×512 PNG icons in manifest |
+| `02-§83.7` | covered | PWA-16: at least one icon has purpose "any" |
+| `02-§83.8` | covered | PWA-01-*: all 8 pages include `<link rel="manifest">` |
+| `02-§83.9` | covered | PWA-02-*: all 8 pages include `<meta name="theme-color">` |
+| `02-§83.10` | covered | PWA-03-*: all 8 pages include apple-mobile-web-app-capable |
+| `02-§83.11` | covered | PWA-04-*: all 8 pages include apple-mobile-web-app-status-bar-style |
+| `02-§83.12` | covered | PWA-05-*: all 8 pages include apple-touch-icon |
+| `02-§83.13` | covered | PWA-17: `source/static/sw.js` exists; `build.js` copies to public/ |
+| `02-§83.14` | covered | PWA-06-*: all 8 pages include sw-register.js |
+| `02-§83.15` | covered | PWA-18: sw.js contains versioned CACHE_NAME sb-sommar-v1 |
+| `02-§83.16` | covered | PWA-19: sw.js pre-caches /, schema.html, idag.html |
+| `02-§83.17` | implemented | Manual: verify network-first HTML, cache-first assets in browser DevTools |
+| `02-§83.18` | covered | PWA-20: sw.js activate handler deletes old caches |
+| `02-§83.19` | covered | PWA-21: sw.js references events.json to exclude it |
+| `02-§83.20` | manual | User provides icon-192.png and icon-512.png in source/content/images/ |
+| `02-§83.21` | implemented | Build copies content/images/ to public/images/ (existing pipeline) |
+| `02-§83.22` | done | Service worker in vanilla JavaScript, no frameworks |
+| `02-§83.23` | done | No new npm dependencies added |
+| `02-§83.24` | covered | All 1374 existing tests pass after implementation |
