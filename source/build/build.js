@@ -401,6 +401,18 @@ async function main() {
     console.log('Copied: source/static/.htaccess → public/.htaccess');
   }
 
+  // ── Copy PWA files: manifest and service worker (02-§83.1, 02-§83.13) ──
+  const manifestSrc = path.join(STATIC_DIR, 'app.webmanifest');
+  if (fs.existsSync(manifestSrc)) {
+    fs.copyFileSync(manifestSrc, path.join(OUTPUT_DIR, 'app.webmanifest'));
+    console.log('Copied: source/static/app.webmanifest → public/app.webmanifest');
+  }
+  const swSrc = path.join(STATIC_DIR, 'sw.js');
+  if (fs.existsSync(swSrc)) {
+    fs.copyFileSync(swSrc, path.join(OUTPUT_DIR, 'sw.js'));
+    console.log('Copied: source/static/sw.js → public/sw.js');
+  }
+
   // ── Post-process: CSS cache-busting (02-§69.1–69.3) ───────────────────
   const cssOut = path.join(OUTPUT_DIR, 'style.css');
   if (fs.existsSync(cssOut)) {

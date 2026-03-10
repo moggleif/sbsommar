@@ -4,6 +4,7 @@ const { escapeHtml, toDateString } = require('./render');
 const { pageNav, pageFooter } = require('./layout');
 const { renderDescriptionHtml } = require('./markdown');
 const { goatcounterScript } = require('./analytics');
+const { pwaHeadTags } = require('./pwa');
 
 /**
  * Renders the "Idag" page – today's schedule in the standard site layout.
@@ -36,6 +37,7 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieD
   <title>Dagens aktiviteter – ${campName}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('idag.html', navSections)}
@@ -49,7 +51,8 @@ ${pageNav('idag.html', navSections)}
   <script src="events-today.js"></script>
   <script src="session.js"></script>
   <script src="nav.js" defer></script>
-  <script src="feedback.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="feedback.js" defer></script>
+  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

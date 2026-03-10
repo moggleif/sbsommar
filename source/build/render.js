@@ -4,6 +4,7 @@ const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml, formatDate } = require('./utils');
 const { renderDescriptionHtml } = require('./markdown');
 const { goatcounterScript } = require('./analytics');
+const { pwaHeadTags } = require('./pwa');
 
 /**
  * Groups events by date and sorts each day's events by start time.
@@ -119,6 +120,7 @@ function renderSchedulePage(camp, events, footerHtml = '', navSections = [], sit
   <title>Lägrets schema – ${campName}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('schema.html', navSections)}
@@ -136,6 +138,7 @@ ${daySections}
   <script src="session.js"></script>
   <script src="nav.js" defer></script>
   <script src="feedback.js" defer></script>
+  <script src="sw-register.js" defer></script>
   <script>
   (function(){var t=new Date();t.setHours(0,0,0,0);document.querySelectorAll('details.day').forEach(function(d){var p=d.id.split('-');var dd=new Date(+p[0],+p[1]-1,+p[2]);if(dd<t)d.removeAttribute('open');});})();
   </script>${goatcounterScript(goatcounterCode)}

@@ -4,6 +4,7 @@ const { escapeHtml, toDateString } = require('./render');
 const { pageNav, pageFooter } = require('./layout');
 const { addOneDay } = require('../api/time-gate');
 const { goatcounterScript } = require('./analytics');
+const { pwaHeadTags } = require('./pwa');
 
 const DEFAULT_LOCATIONS = ['Servicehus', 'Annat'];
 
@@ -41,6 +42,7 @@ function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = 
   <title>Redigera aktivitet – ${campName}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body>
 ${pageNav('redigera.html', navSections)}
@@ -157,7 +159,8 @@ ${locationOptions}
   <script defer src="markdown-preview.js"></script>
   <script src="redigera.js"></script>
   <script src="nav.js" defer></script>
-  <script src="feedback.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="feedback.js" defer></script>
+  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

@@ -3,6 +3,7 @@
 const { escapeHtml } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
 const { goatcounterScript } = require('./analytics');
+const { pwaHeadTags } = require('./pwa');
 
 /**
  * Renders the calendar tips page at /kalender.html.
@@ -27,6 +28,7 @@ function renderKalenderPage(camp, siteUrl, footerHtml = '', navSections = [], go
   <title>Kalendersynk – ${campName}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body>
 ${pageNav('kalender.html', navSections)}
@@ -100,7 +102,8 @@ ${pageNav('kalender.html', navSections)}
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
 </main>
   <script src="nav.js" defer></script>
-  <script src="feedback.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="feedback.js" defer></script>
+  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

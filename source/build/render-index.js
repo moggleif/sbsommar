@@ -5,6 +5,7 @@ const { Marked } = require('marked');
 const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml } = require('./utils');
 const { goatcounterScript } = require('./analytics');
+const { pwaHeadTags } = require('./pwa');
 const { getImageDimensions } = require('./image-dimensions');
 
 /**
@@ -215,6 +216,7 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
   <title>SB Sommar</title>
   <link rel="stylesheet" href="style.css">${preloadHtml}
   <link rel="icon" type="image/webp" href="images/rfsb-logo.webp">
+${pwaHeadTags()}
 </head>
 <body>
 ${pageNav('index.html', navSections)}
@@ -247,7 +249,8 @@ ${contentSections}
     var today = p.find(function (x) { return x.type === 'year'; }).value + '-' + p.find(function (x) { return x.type === 'month'; }).value + '-' + p.find(function (x) { return x.type === 'day'; }).value;
     if (today >= opens && today <= closes) el.removeAttribute('hidden');
   })();
-  </script>` : ''}${goatcounterScript(goatcounterCode)}
+  </script>` : ''}
+  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

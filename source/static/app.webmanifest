@@ -1,0 +1,23 @@
+{
+  "name": "SB Sommar",
+  "short_name": "SB Sommar",
+  "lang": "sv",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#C76D48",
+  "background_color": "#F5EEDF",
+  "icons": [
+    {
+      "src": "images/sbsommar-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/sbsommar-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

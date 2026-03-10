@@ -38,7 +38,9 @@ hidden — discoverable only by direct link.
 - Every HTML page must include a `<meta name="robots" content="noindex, nofollow">`
   tag in the `<head>` section. <!-- 02-§1a.2 -->
 - No sitemap, Open Graph tags, or other discoverability metadata may be added
-  to any page. <!-- 02-§1a.3 -->
+  to any page. PWA metadata (`<link rel="manifest">`, `<meta name="theme-color">`,
+  Apple touch-icon tags) is not considered discoverability metadata — it controls
+  app installation behavior, not search engine visibility. <!-- 02-§1a.3 -->
 
 ---
 
@@ -3751,3 +3753,65 @@ maximum length.
 - The counters use CSS custom properties from `docs/07-DESIGN.md
   §7`. <!-- 02-§82.14 -->
 - No new npm dependencies are added. <!-- 02-§82.15 -->
+
+---
+
+## 83. Progressive Web App (PWA) Support
+
+The site must be installable as a Progressive Web App so participants can add it
+to their home screen and use it in a standalone app-like experience. A service
+worker provides basic offline caching of static assets.
+
+### 83.1 Web App Manifest (site requirements)
+
+- The build must produce an `app.webmanifest` file at the site root. <!-- 02-§83.1 -->
+- The manifest must set `name` to `"SB Sommar"` and `short_name` to
+  `"SB Sommar"`. <!-- 02-§83.2 -->
+- The manifest must set `display` to `"standalone"`. <!-- 02-§83.3 -->
+- The manifest must set `start_url` to `"/"`. <!-- 02-§83.4 -->
+- The manifest must set `theme_color` and `background_color` to values from
+  the design palette (`07-DESIGN.md §2`). <!-- 02-§83.5 -->
+- The manifest must declare at least two icon sizes: 192×192 and
+  512×512, both PNG. <!-- 02-§83.6 -->
+- The manifest `icons` array must include a `"purpose": "any"` entry. <!-- 02-§83.7 -->
+
+### 83.2 HTML head tags (site requirements)
+
+- Every HTML page must include `<link rel="manifest" href="app.webmanifest">`
+  in `<head>`. <!-- 02-§83.8 -->
+- Every HTML page must include `<meta name="theme-color">` with the same value
+  as the manifest `theme_color`. <!-- 02-§83.9 -->
+- Every HTML page must include `<meta name="apple-mobile-web-app-capable"
+  content="yes">`. <!-- 02-§83.10 -->
+- Every HTML page must include `<meta name="apple-mobile-web-app-status-bar-style"
+  content="default">`. <!-- 02-§83.11 -->
+- Every HTML page must include `<link rel="apple-touch-icon" href="images/sbsommar-icon-192.png">`. <!-- 02-§83.12 -->
+
+### 83.3 Service worker (site requirements)
+
+- The build must produce a `sw.js` file at the site root. <!-- 02-§83.13 -->
+- A registration script must be included on every page and must register
+  `sw.js` only when the browser supports service workers. <!-- 02-§83.14 -->
+- The service worker must use a versioned cache name so that updates can
+  invalidate old caches. <!-- 02-§83.15 -->
+- On `install`, the service worker must pre-cache the main HTML pages
+  (`/`, `/schema.html`, `/idag.html`), the CSS file, and the manifest. <!-- 02-§83.16 -->
+- On `fetch`, the service worker must serve cached responses for navigation
+  and static-asset requests when the network is unavailable
+  (network-first with cache fallback for HTML, cache-first for CSS/JS/images). <!-- 02-§83.17 -->
+- On `activate`, the service worker must delete caches whose name does not
+  match the current version. <!-- 02-§83.18 -->
+- The service worker must not cache API responses or `events.json`. <!-- 02-§83.19 -->
+
+### 83.4 Icon assets (site requirements)
+
+- PNG icon files `sbsommar-icon-192.png` (192×192) and `sbsommar-icon-512.png` (512×512) must
+  exist in the images directory. <!-- 02-§83.20 -->
+- The build copies them to `public/images/` alongside other image
+  assets. <!-- 02-§83.21 -->
+
+### 83.5 Implementation constraints
+
+- The service worker is implemented in vanilla JavaScript. <!-- 02-§83.22 -->
+- No new npm dependencies are added. <!-- 02-§83.23 -->
+- Existing pages and functionality must not break. <!-- 02-§83.24 -->
