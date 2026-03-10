@@ -1099,8 +1099,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1044
-Covered (implemented + tested): 533
+Total requirements:            1052
+Covered (implemented + tested): 540
 Implemented, not tested:        511
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
@@ -1385,6 +1385,9 @@ Matrix cleanup (2026-02-25):
 6 requirements added for image cache-busting href and manifest references (02-§86.1–86.6):
   5 covered (CACHE-16..20): 02-§86.1–86.4, 02-§86.6.
   1 implemented (structural, no render changes): 02-§86.5.
+8 requirements added for manifest metadata (02-§87.1–87.8):
+  7 covered (PWA-32..37): 02-§87.1–87.6, 02-§87.8.
+  1 done (no new deps): 02-§87.7.
 ```
 
 ---
@@ -1909,3 +1912,16 @@ Matrix cleanup (2026-02-25):
 | `02-§86.4` | covered | CACHE-19: preload href matches img src in index.html |
 | `02-§86.5` | implemented | Post-processing in `build.js`, no render changes |
 | `02-§86.6` | covered | All existing tests pass (pre-commit hook) |
+
+### §87 — Manifest Metadata for Richer Install UI
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§87.1` | covered | PWA-32: manifest id is "/" |
+| `02-§87.2` | covered | PWA-33: manifest description verified |
+| `02-§87.3` | covered | PWA-34: screenshots array has ≥2 entries |
+| `02-§87.4` | covered | PWA-35: wide screenshot 1280x720 |
+| `02-§87.5` | covered | PWA-36: narrow screenshot 750x1334 |
+| `02-§87.6` | covered | PWA-37: screenshot src paths in images/; build cache-busts via existing regex |
+| `02-§87.7` | done | No new npm dependencies |
+| `02-§87.8` | covered | All existing tests pass |

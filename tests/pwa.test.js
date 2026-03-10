@@ -1,6 +1,6 @@
 'use strict';
 
-const { describe, it } = require('node:test');
+const { describe, it, before } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
@@ -425,5 +425,56 @@ describe('02-§83.34 — Cache version incremented to v2', () => {
       src.includes('sb-sommar-v2'),
       'CACHE_NAME must be sb-sommar-v2',
     );
+  });
+});
+
+// ── 02-§87 — Manifest metadata for richer install UI ────────────────────────
+
+describe('02-§87 — Manifest metadata for richer install UI', () => {
+  const manifestPath = path.join(__dirname, '..', 'source', 'static', 'app.webmanifest');
+  let manifest;
+
+  before(() => {
+    manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  });
+
+  it('PWA-32: manifest sets id to "/" (02-§87.1)', () => {
+    assert.equal(manifest.id, '/');
+  });
+
+  it('PWA-33: manifest sets description (02-§87.2)', () => {
+    assert.equal(manifest.description, 'Information och aktiviteter för SB Sommar-lägret');
+  });
+
+  it('PWA-34: manifest has screenshots array with at least 2 entries (02-§87.3)', () => {
+    assert.ok(Array.isArray(manifest.screenshots), 'screenshots must be an array');
+    assert.ok(manifest.screenshots.length >= 2, 'screenshots must have at least 2 entries');
+  });
+
+  it('PWA-35: one screenshot has form_factor "wide" and size 1280x720 (02-§87.4)', () => {
+    const wide = manifest.screenshots.find((s) => s.form_factor === 'wide');
+    assert.ok(wide, 'must have a screenshot with form_factor "wide"');
+    assert.equal(wide.sizes, '1280x720');
+    assert.equal(wide.type, 'image/png');
+  });
+
+  it('PWA-36: one screenshot has form_factor "narrow" and size 750x1334 (02-§87.5)', () => {
+    const narrow = manifest.screenshots.find((s) => s.form_factor === 'narrow');
+    assert.ok(narrow, 'must have a screenshot with form_factor "narrow"');
+    assert.equal(narrow.sizes, '750x1334');
+    assert.equal(narrow.type, 'image/png');
+  });
+
+  it('PWA-37: screenshot src paths point to images/ directory (02-§87.6)', () => {
+    for (const s of manifest.screenshots) {
+      assert.ok(s.src.startsWith('images/'), `screenshot src "${s.src}" must start with "images/"`);
+    }
+  });
+
+  it('PWA-38: screenshot image files exist in source/content/images/ (02-§87.6)', () => {
+    for (const s of manifest.screenshots) {
+      const imgPath = path.join(__dirname, '..', 'source', 'content', s.src);
+      assert.ok(fs.existsSync(imgPath), `screenshot file "${s.src}" must exist`);
+    }
   });
 });
