@@ -116,8 +116,8 @@ describe('02-§83.12 — Every page includes apple-touch-icon', () => {
     it(`PWA-05-${name}: ${name} page includes apple-touch-icon`, () => {
       const html = fn();
       assert.ok(
-        html.includes('rel="apple-touch-icon"') && html.includes('icon-192.png'),
-        `${name} must have apple-touch-icon linking to icon-192.png`,
+        html.includes('rel="apple-touch-icon"') && html.includes('sbsommar-icon-192.png'),
+        `${name} must have apple-touch-icon linking to sbsommar-icon-192.png`,
       );
     });
   }

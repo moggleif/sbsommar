@@ -3785,7 +3785,7 @@ worker provides basic offline caching of static assets.
   content="yes">`. <!-- 02-§83.10 -->
 - Every HTML page must include `<meta name="apple-mobile-web-app-status-bar-style"
   content="default">`. <!-- 02-§83.11 -->
-- Every HTML page must include `<link rel="apple-touch-icon" href="images/icon-192.png">`. <!-- 02-§83.12 -->
+- Every HTML page must include `<link rel="apple-touch-icon" href="images/sbsommar-icon-192.png">`. <!-- 02-§83.12 -->
 
 ### 83.3 Service worker (site requirements)
 
@@ -3805,7 +3805,7 @@ worker provides basic offline caching of static assets.
 
 ### 83.4 Icon assets (site requirements)
 
-- PNG icon files `icon-192.png` (192×192) and `icon-512.png` (512×512) must
+- PNG icon files `sbsommar-icon-192.png` (192×192) and `sbsommar-icon-512.png` (512×512) must
   exist in the images directory. <!-- 02-§83.20 -->
 - The build copies them to `public/images/` alongside other image
   assets. <!-- 02-§83.21 -->

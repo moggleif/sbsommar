@@ -1851,7 +1851,7 @@ Matrix cleanup (2026-02-25):
 | `02-§83.17` | implemented | Manual: verify network-first HTML, cache-first assets in browser DevTools |
 | `02-§83.18` | covered | PWA-20: sw.js activate handler deletes old caches |
 | `02-§83.19` | covered | PWA-21: sw.js references events.json to exclude it |
-| `02-§83.20` | manual | User provides icon-192.png and icon-512.png in source/content/images/ |
+| `02-§83.20` | manual | User provides sbsommar-icon-192.png and sbsommar-icon-512.png in source/content/images/ |
 | `02-§83.21` | implemented | Build copies content/images/ to public/images/ (existing pipeline) |
 | `02-§83.22` | done | Service worker in vanilla JavaScript, no frameworks |
 | `02-§83.23` | done | No new npm dependencies added |

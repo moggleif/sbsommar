@@ -1837,7 +1837,7 @@ Every render function adds to `<head>`:
 - `<meta name="theme-color" content="...">` (terracotta from design palette)
 - `<meta name="apple-mobile-web-app-capable" content="yes">`
 - `<meta name="apple-mobile-web-app-status-bar-style" content="default">`
-- `<link rel="apple-touch-icon" href="images/icon-192.png">`
+- `<link rel="apple-touch-icon" href="images/sbsommar-icon-192.png">`
 
 ### Icons
 
@@ -1845,8 +1845,8 @@ Two PNG icons are required in `source/content/images/`:
 
 | File | Size | Purpose |
 | --- | --- | --- |
-| `icon-192.png` | 192×192 | Android home screen, Apple touch icon |
-| `icon-512.png` | 512×512 | Android splash screen |
+| `sbsommar-icon-192.png` | 192×192 | Android home screen, Apple touch icon |
+| `sbsommar-icon-512.png` | 512×512 | Android splash screen |
 
 ### Files
 
@@ -1855,8 +1855,8 @@ Two PNG icons are required in `source/content/images/`:
 | `source/static/app.webmanifest` | PWA manifest |
 | `source/static/sw.js` | Service worker |
 | `source/assets/js/client/sw-register.js` | Service worker registration |
-| `source/content/images/icon-192.png` | App icon 192×192 |
-| `source/content/images/icon-512.png` | App icon 512×512 |
+| `source/content/images/sbsommar-icon-192.png` | App icon 192×192 |
+| `source/content/images/sbsommar-icon-512.png` | App icon 512×512 |
 
 ---
 

@@ -149,7 +149,16 @@ describe('02-§68.11 — All image files are referenced', () => {
     while ((m = reJ.exec(renderIndex)) !== null) jsRefs.push(m[1]);
     while ((m = reJ.exec(render)) !== null) jsRefs.push(m[1]);
 
-    const allRefs = new Set([...mdRefs, ...yamlRefs, ...jsRefs]);
+    // PWA manifest references PNG icons.
+    const manifestPath = path.join(__dirname, '..', 'source', 'static', 'app.webmanifest');
+    const manifestRefs = [];
+    if (fs.existsSync(manifestPath)) {
+      const reM = /images\/([^\s"']+\.(png|webp))/g;
+      const manifestSrc = fs.readFileSync(manifestPath, 'utf8');
+      while ((m = reM.exec(manifestSrc)) !== null) manifestRefs.push(m[1]);
+    }
+
+    const allRefs = new Set([...mdRefs, ...yamlRefs, ...jsRefs, ...manifestRefs]);
     const unreferenced = images.filter(f => !allRefs.has(f));
     assert.deepStrictEqual(unreferenced, [], `Unreferenced images: ${unreferenced.join(', ')}`);
   });
