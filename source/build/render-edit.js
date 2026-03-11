@@ -67,6 +67,7 @@ ${pageNav('redigera.html', navSections)}
     <h1>Mina aktiviteter</h1>
     <p class="intro" id="my-events-empty">Här dyker dina redigerbara aktiviteter upp.</p>
     <ul id="my-events-list"></ul>
+    <p class="cookie-debug-note" id="my-events-note" hidden>Aktiviteter vars datum har passerat rensas automatiskt från cookien och visas inte i listan ovan.</p>
   </div>
 
   <div id="edit-error" hidden>
@@ -75,7 +76,10 @@ ${pageNav('redigera.html', navSections)}
   </div>
 
   <section id="edit-section" hidden>
-    <h1>Redigera aktivitet</h1>
+    <div class="edit-header">
+      <h1>Redigera aktivitet</h1>
+      <button type="button" id="btn-delete" class="btn-delete-pill">Radera aktivitet</button>
+    </div>
 
     <form id="edit-form" class="event-form" novalidate
           data-api-url="${escapeHtml(apiUrl || '/edit-event')}"
@@ -153,8 +157,6 @@ ${locationOptions}
 
     </form>
 
-    <hr class="delete-separator">
-    <button type="button" id="btn-delete" class="btn-destructive-text">Radera aktivitet</button>
   </section>
 
   <div id="delete-confirm" class="submit-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-confirm-heading" hidden>

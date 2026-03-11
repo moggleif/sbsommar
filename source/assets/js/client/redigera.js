@@ -11,6 +11,7 @@
   var myEventsEl   = document.getElementById('edit-my-events');
   var myEventsList = document.getElementById('my-events-list');
   var myEventsEmpty = document.getElementById('my-events-empty');
+  var myEventsNote  = document.getElementById('my-events-note');
   var form         = document.getElementById('edit-form');
   var fieldset     = form ? form.querySelector('fieldset') : null;
   var submitBtn    = form ? form.querySelector('button[type="submit"]') : null;
@@ -298,6 +299,7 @@
       }
       myEventsList.hidden = false;
     }
+    if (myEventsNote) myEventsNote.hidden = false;
     return editable;
   }
 
@@ -731,7 +733,7 @@
 
     if (ids.length > 0) {
       html += '<p class="cookie-debug-note">Aktiviteter vars datum har passerat rensas automatiskt ' +
-        'från cookien och visas inte i listan ovan.</p>';
+        'från cookien och visas inte i listan nedan.</p>';
       html += '<table class="cookie-debug-table"><thead><tr>' +
         '<th>Aktivitets-ID</th><th>Status</th></tr></thead><tbody>';
 
