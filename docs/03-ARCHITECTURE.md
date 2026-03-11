@@ -453,7 +453,8 @@ form with current event data.
 `POST /edit-event` handles edit submissions:
 
 1. Read and parse the `sb_session` cookie from the request.
-2. Confirm the target event ID is in the cookie array.
+2. Confirm the target event ID is in the cookie array **or** that the
+   request body contains a valid `adminToken`.
 3. Validate the submitted fields (same rules as `POST /add-event`).
 4. Confirm the event's date has not passed.
 5. Read the camp YAML from GitHub, locate the event by ID, replace mutable
@@ -464,12 +465,12 @@ form with current event data.
 ```mermaid
 flowchart TD
     A[Participant clicks Redigera link] --> B[/redigera.html?id=event-id/]
-    B --> C[JS: check session cookie — owns this ID?]
+    B --> C{JS: owns this ID via cookie OR has admin token?}
     C -->|No| D[Show error — not authorised]
     C -->|Yes| E[Fetch /events.json · pre-populate form]
     E --> F[User edits and submits]
     F --> G["POST /edit-event (server)"]
-    G --> H[Validate cookie ownership + fields + date not passed]
+    G --> H{Cookie ownership OR valid adminToken? + fields + date not passed}
     H -->|Fail| I[HTTP 400/403]
     H -->|Pass| J[GitHub API: read camp YAML]
     J --> K[Replace event fields · update meta.updated_at]
@@ -2040,10 +2041,10 @@ browser tab, closing the tab also clears the data — no expiry logic is needed.
 ### Purpose
 
 A lightweight admin mechanism allows designated administrators to bypass
-the per-event cookie ownership model. This section covers only the token
-infrastructure — storage, activation, verification, and status display.
-The behaviour changes that use the token (e.g. editing any event) are
-defined in a future requirement.
+the per-event cookie ownership model. The token infrastructure covers
+storage, activation, verification, and status display. The edit/delete
+endpoints and client-side code accept a valid admin token as an
+alternative to session-cookie ownership (OR condition).
 
 ### Token storage (server)
 

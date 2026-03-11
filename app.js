@@ -113,9 +113,11 @@ app.post('/edit-event', (req, res) => {
 
   const eventId = String(req.body.id).trim();
 
-  // Verify ownership: event ID must be in the session cookie.
+  // Verify ownership: event ID must be in the session cookie OR
+  // the request must carry a valid admin token (02-§7.3, §18.31).
   const ownedIds = parseSessionIds(req.headers.cookie || '');
-  if (!ownedIds.includes(eventId)) {
+  const isAdmin = verifyAdminToken(req.body.adminToken, adminTokens);
+  if (!ownedIds.includes(eventId) && !isAdmin) {
     return res.status(403).json({ success: false, error: 'Ej behörig att redigera denna aktivitet.' });
   }
 
@@ -145,9 +147,11 @@ app.post('/delete-event', (req, res) => {
     return res.status(400).json({ success: false, error: 'Aktivitets-ID saknas.' });
   }
 
-  // Verify ownership: event ID must be in the session cookie.
+  // Verify ownership: event ID must be in the session cookie OR
+  // the request must carry a valid admin token (02-§7.3, §89.13).
   const ownedIds = parseSessionIds(req.headers.cookie || '');
-  if (!ownedIds.includes(eventId)) {
+  const isAdmin = verifyAdminToken(req.body.adminToken, adminTokens);
+  if (!ownedIds.includes(eventId) && !isAdmin) {
     return res.status(403).json({ success: false, error: 'Ej behörig att radera denna aktivitet.' });
   }
 
