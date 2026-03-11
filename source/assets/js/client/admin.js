@@ -65,14 +65,15 @@
 
   // ── Activation form (only on /admin.html) ──────────────────────────────────
 
-  var form = document.getElementById('admin-form');
-  if (form) {
+  var wrapper = document.getElementById('admin-form');
+  var form = document.getElementById('admin-activate');
+  if (wrapper && form) {
     var input = document.getElementById('admin-token');
     var message = document.getElementById('admin-message');
+    var removeBtn = document.getElementById('admin-remove');
 
     // Pre-fill status if already activated
     var existing = getAdminData();
-    var removeBtn = document.getElementById('admin-remove');
 
     if (existing && !isExpired(existing)) {
       var expiry = extractExpiry(existing.token);
