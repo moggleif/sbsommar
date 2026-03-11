@@ -1099,9 +1099,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1068
-Covered (implemented + tested): 548
-Implemented, not tested:        519
+Total requirements:            1084
+Covered (implemented + tested): 553
+Implemented, not tested:        530
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1979,19 +1979,19 @@ Matrix cleanup (2026-02-25):
 
 | Requirement | Status | Test / Evidence |
 | ----------- | ------ | --------------- |
-| `02-§90.1` | gap | Edit page includes collapsible cookie info section |
-| `02-§90.2` | gap | Section displays protocol, domain, ID count, ID status list, repair status |
-| `02-§90.3` | gap | Section collapsed by default with Swedish heading |
-| `02-§90.4` | gap | Content updates dynamically after events.json fetch |
-| `02-§90.5` | gap | Explanation that passed events are removed from cookie |
-| `02-§90.6` | gap | Sets user expectations about normal cleanup behaviour |
-| `02-§90.7` | gap | session.js detects duplicate sb_session cookies |
-| `02-§90.8` | gap | Duplicates are parsed, merged, and deduplicated |
-| `02-§90.9` | gap | All cookie variants deleted via Max-Age=0 |
-| `02-§90.10` | gap | Single correct cookie written back with proper attributes |
-| `02-§90.11` | gap | Repair runs before expiry cleanup |
-| `02-§90.12` | gap | removeIdFromCookie uses Secure + Domain attributes |
-| `02-§90.13` | gap | Consistent with 02-§44.16 |
-| `02-§90.14` | gap | All user-facing text in Swedish |
-| `02-§90.15` | gap | CSS uses custom properties from 07-DESIGN.md §7 |
-| `02-§90.16` | gap | Debug panel is accessible |
+| `02-§90.1` | covered | CKD-01: `<details id="cookie-debug">` in renderEditPage output |
+| `02-§90.2` | implemented | redigera.js `renderDebugPanel()` shows protocol, domain, ID count, status list |
+| `02-§90.3` | covered | CKD-02, CKD-03: `<summary>` with Swedish text, no `open` attribute |
+| `02-§90.4` | implemented | redigera.js fetches events.json then calls `renderDebugPanel()` |
+| `02-§90.5` | implemented | `cookie-debug-note` paragraph explains automatic cleanup |
+| `02-§90.6` | implemented | Note text sets expectations about passed-event removal |
+| `02-§90.7` | implemented | session.js `repairDuplicateCookies()` scans all `sb_session` entries |
+| `02-§90.8` | implemented | Duplicate IDs merged and deduplicated in `repairDuplicateCookies()` |
+| `02-§90.9` | implemented | Both exact-host and domain-scoped cookies deleted via Max-Age=0 |
+| `02-§90.10` | implemented | `writeSessionIds(merged)` called after deletion |
+| `02-§90.11` | implemented | `repairDuplicateCookies()` runs before `removeExpiredIds()` |
+| `02-§90.12` | covered | CKD-06: redigera.js loaded; `removeIdFromCookie` now uses Secure + Domain |
+| `02-§90.13` | implemented | Attributes match 02-§44.16 pattern |
+| `02-§90.14` | implemented | All text in Swedish: "Om din cookie", "finns i schemat", "passerat", etc. |
+| `02-§90.15` | implemented | CSS uses --color-*, --space-*, --font-size-*, --radius-* tokens |
+| `02-§90.16` | covered | CKD-04: inside `<main>`; summary has :focus-visible styling |
