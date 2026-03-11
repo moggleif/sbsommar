@@ -947,31 +947,38 @@ details.event-row[open] > summary .ev-title {
   outline-offset: 2px;
 }
 
-.delete-separator {
-  margin: var(--space-xl) 0 var(--space-md);
-  border: none;
-  border-top: 1px solid var(--color-cream);
+.edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
-.btn-destructive-text {
-  background: none;
+.edit-header h1 {
+  margin-bottom: 0;
+}
+
+.btn-delete-pill {
+  display: inline-block;
+  background: var(--color-terracotta);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: none;
+  padding: 6px 16px;
   border: none;
-  color: var(--color-error);
-  font-size: var(--font-size-small);
-  font-weight: 400;
+  border-radius: 999px;
   cursor: pointer;
-  padding: var(--space-xs) 0;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 200ms ease;
+  transition: background 200ms ease;
 }
 
-.btn-destructive-text:hover {
-  color: #7f1d1d;
+.btn-delete-pill:hover {
+  background: #b35e3a;
 }
 
-.btn-destructive-text:focus-visible {
-  outline: 2px solid var(--color-error);
+.btn-delete-pill:focus-visible {
+  outline: 2px solid var(--color-terracotta);
   outline-offset: 2px;
 }
 
@@ -2641,6 +2648,7 @@ body.modal-open {
 .cookie-debug {
   max-width: var(--container-narrow);
   margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
   border: 1px solid var(--color-sage);
   border-radius: var(--radius-md);
   font-size: var(--font-size-small);
