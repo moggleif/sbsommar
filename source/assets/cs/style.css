@@ -40,6 +40,9 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: var(--font-sans);
   max-width: var(--container);
   margin: 0 auto;
@@ -49,6 +52,10 @@ body {
   font-size: 16px;
   line-height: 1.65;
   overflow-wrap: break-word;
+}
+
+main {
+  flex: 1;
 }
 
 h1 {
@@ -2225,7 +2232,7 @@ body.modal-open {
   align-items: baseline;
   gap: 4px var(--space-md);
   max-width: var(--container-narrow);
-  margin-top: 0;
+  margin-top: auto;
   padding: var(--space-md) 0;
   font-size: var(--font-size-nav);
   color: var(--color-charcoal);
