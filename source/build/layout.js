@@ -89,7 +89,7 @@ ${pageItems}
 function pageFooter(footerHtml) {
   const trimmed = (footerHtml || '').trim();
   if (!trimmed) return '';
-  return `  <footer class="site-footer">\n${trimmed}\n  </footer>`;
+  return `  <footer class="site-footer">\n${trimmed}\n    <span id="admin-status" class="admin-status"></span>\n  </footer>`;
 }
 
 module.exports = { pageNav, pageFooter, setFeedbackUrl };

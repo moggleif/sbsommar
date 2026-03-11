@@ -11,6 +11,7 @@ const { isEventPast }                                            = require('./so
 const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
 const { isOutsideEditingPeriod }                                 = require('./source/api/time-gate');
 const { validateFeedbackRequest, createFeedbackIssue, isRateLimited } = require('./source/api/feedback');
+const { parseAdminTokens, verifyAdminToken }                     = require('./source/api/admin');
 const { resolveActiveCamp }                                      = require('./source/scripts/resolve-active-camp');
 
 const app = express();
@@ -21,6 +22,7 @@ const campsPath = path.join(__dirname, 'source', 'data', 'camps.yaml');
 const campsData = yaml.load(fs.readFileSync(campsPath, 'utf8'));
 const BUILD_ENV = process.env.BUILD_ENV || undefined;
 const activeCamp = resolveActiveCamp(campsData.camps || [], undefined, BUILD_ENV);
+const adminTokens = parseAdminTokens(process.env.ADMIN_TOKENS);
 
 // ── Middleware ───────────────────────────────────────────────────────────────
 
@@ -47,6 +49,16 @@ app.use((req, res, next) => {
 // Health check (on /api/health so that / serves index.html via express.static)
 app.get('/api/health', (req, res) => {
   res.json({ status: 'API running' });
+});
+
+// ── Admin token verification (02-§91.4) ─────────────────────────────────────
+
+app.post('/verify-admin', (req, res) => {
+  const { token } = req.body || {};
+  if (verifyAdminToken(token, adminTokens)) {
+    return res.json({ valid: true });
+  }
+  return res.status(403).json({ valid: false });
 });
 
 app.post('/add-event', (req, res) => {

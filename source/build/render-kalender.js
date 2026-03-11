@@ -104,7 +104,8 @@ ${pageNav('kalender.html', navSections)}
   <script src="nav.js" defer></script>
   <script src="feedback.js" defer></script>
   <script src="sw-register.js" defer></script>
-  <script src="pwa-install.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="pwa-install.js" defer></script>
+  <script src="admin.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

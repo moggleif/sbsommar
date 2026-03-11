@@ -18,7 +18,7 @@
 //   - 02-§91.21: Valid token → filled/locked icon
 //   - 02-§91.22: Expired token → open/unlocked icon, links to /admin.html
 
-const { describe, it, beforeEach, afterEach } = require('node:test');
+const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
 // ── verify-admin module ─────────────────────────────────────────────────────
