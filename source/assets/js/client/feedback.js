@@ -54,6 +54,7 @@
     document.body.classList.add('modal-open');
     modal.addEventListener('keydown', trapFocus);
     showForm();
+    if (!navigator.onLine) showOfflineWarning();
   }
 
   function closeModal() {
@@ -283,4 +284,49 @@
     focusFirst();
     document.getElementById('fb-retry').addEventListener('click', showForm);
   }
+
+  // ── Offline guard for feedback modal ────────────────────────────────────
+
+  var OFFLINE_ID = 'fb-offline-warning';
+  var OFFLINE_MSG = 'Du är offline \u2014 feedback kan inte skickas just nu.';
+
+  function showOfflineWarning() {
+    if (document.getElementById(OFFLINE_ID)) return;
+    var warn = document.createElement('p');
+    warn.id = OFFLINE_ID;
+    warn.className = 'form-error-msg';
+    warn.setAttribute('role', 'alert');
+    warn.textContent = OFFLINE_MSG;
+    contentEl.insertBefore(warn, contentEl.firstChild);
+    var submitBtn = contentEl.querySelector('.feedback-submit');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.dataset.offlineDisabled = 'true';
+    }
+  }
+
+  function hideOfflineWarning() {
+    var warn = document.getElementById(OFFLINE_ID);
+    if (warn) warn.remove();
+    var submitBtn = contentEl.querySelector('.feedback-submit');
+    if (submitBtn && submitBtn.dataset.offlineDisabled === 'true') {
+      delete submitBtn.dataset.offlineDisabled;
+      // Re-evaluate normal validation state.
+      var titleIn = document.getElementById('fb-title');
+      var descIn = document.getElementById('fb-description');
+      if (titleIn && descIn) {
+        submitBtn.disabled = !(titleIn.value.trim() && descIn.value.trim());
+      }
+    }
+  }
+
+  function checkOfflineState() {
+    if (modal.hidden) return;
+    if (!navigator.onLine) showOfflineWarning();
+    else hideOfflineWarning();
+  }
+
+  window.addEventListener('offline', checkOfflineState);
+  window.addEventListener('online', checkOfflineState);
+
 })();

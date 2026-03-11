@@ -1890,7 +1890,7 @@ display mode. It is copied to `public/app.webmanifest` during the build.
 ### Service worker
 
 `source/static/sw.js` lives at the site root (`public/sw.js`) so its scope
-covers all pages. It uses a versioned cache name (currently `sb-sommar-v3`).
+covers all pages. It uses a versioned cache name (currently `sb-sommar-v4`).
 
 **Scheme guard:** The fetch handler returns early for any request whose
 URL scheme is not `http:` or `https:`. This prevents errors from
@@ -1905,18 +1905,36 @@ browser-extension schemes such as `chrome-extension:`.
 | `events.json` | Network-first, cache fallback | Event data should be fresh when online but available offline |
 | API calls (`/api/`, `/add-event`, `/edit-event`) | Network-only (not cached) | Mutations must always reach the server |
 
+Cache-matching uses `{ ignoreSearch: true }` so that cache-busted URLs
+(e.g. `style.css?v=abc123`) match the pre-cached file.
+
 **Offline fallback:** When a navigation request fails and the requested
 page is not in the cache, the service worker responds with
 `/offline.html` — a pre-cached page that tells the user they are offline.
 
+**Build-time pre-cache manifest (§92):**
+
+The build scans all files in `public/` after post-processing and injects
+a complete pre-cache URL list into `sw.js` by replacing the
+`/* __PRE_CACHE_URLS__ */` placeholder. This ensures every asset — HTML
+pages, CSS, JS, images, `events.json` — is available offline from the
+first launch. Files excluded from pre-cache: `.htaccess`, `robots.txt`,
+`sw.js`, `version.json`, `.ics`, `.rss`, and per-event detail pages.
+
 **Lifecycle:**
 
-- `install`: Pre-caches all user-facing HTML pages (`/`, `/schema.html`,
-  `/idag.html`, `/lagg-till.html`, `/redigera.html`, `/live.html`,
-  `/arkiv.html`, `/kalender.html`), the offline fallback page, CSS, and
-  the manifest.
+- `install`: Pre-caches all assets from the build-injected list.
 - `activate`: Deletes old caches whose name does not match the current version.
 - `fetch`: Intercepts requests and applies the strategy table above.
+
+**Offline guard (§92):**
+
+Form pages (`lagg-till.html`, `redigera.html`) and the feedback modal
+include offline detection. When the user is offline, a Swedish-language
+banner appears and submit buttons are disabled. When connectivity
+returns, the banner disappears and buttons are re-enabled.
+`offline-guard.js` handles the form pages; `feedback.js` handles the
+feedback modal internally.
 
 ### Registration
 
@@ -1953,6 +1971,7 @@ Two PNG icons are required in `source/content/images/`:
 | `source/content/images/sbsommar-icon-192.png` | App icon 192×192 |
 | `source/content/images/sbsommar-icon-512.png` | App icon 512×512 |
 | `source/assets/js/client/pwa-install.js` | PWA install button logic |
+| `source/assets/js/client/offline-guard.js` | Offline detection for form pages |
 
 ### 28.7 Install guide
 

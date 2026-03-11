@@ -3809,20 +3809,20 @@ accessible without network connectivity.
   `sw.js` only when the browser supports service workers. <!-- 02-§83.14 -->
 - The service worker must use a versioned cache name so that updates can
   invalidate old caches. <!-- 02-§83.15 -->
-- On `install`, the service worker must pre-cache read-only HTML pages
-  (`/`, `/index.html`, `/schema.html`, `/idag.html`,
-  `/live.html`, `/arkiv.html`, `/kalender.html`), the CSS file, and the
-  manifest. Pages that require network to function (`/lagg-till.html`,
-  `/redigera.html`) must not be pre-cached. <!-- 02-§83.16 -->
+- On `install`, the service worker pre-caches all site assets (HTML
+  pages, CSS, JS, images, `events.json`) so the full site is available
+  offline from the first launch. The pre-cache list is generated at
+  build time (see §92). <!-- 02-§83.16 -->
 - On `fetch`, the service worker must serve cached responses for navigation
   and static-asset requests when the network is unavailable
   (network-first with cache fallback for HTML, cache-first for CSS/JS/images). <!-- 02-§83.17 -->
 - On `activate`, the service worker must delete caches whose name does not
   match the current version. <!-- 02-§83.18 -->
-- The service worker must not cache API responses (`/api/` paths),
+- The service worker does not cache API responses (`/api/` paths) or
   form-submission endpoints (`/add-event`, `/edit-event`,
-  `/delete-event`), or pages that require network to function
-  (`/lagg-till.html`, `/redigera.html`). <!-- 02-§83.19 -->
+  `/delete-event`, `/verify-admin`). Form pages (`lagg-till.html`,
+  `redigera.html`) are pre-cached and served offline; an offline guard
+  (§92) disables submission when there is no network. <!-- 02-§83.19 -->
 - The service worker must only handle requests with `http:` or `https:`
   schemes; all other schemes (e.g. `chrome-extension:`) must be
   ignored. <!-- 02-§83.27 -->
@@ -3860,8 +3860,8 @@ accessible without network connectivity.
 - Existing pages and functionality must not break. <!-- 02-§83.24 -->
 - Every HTML page must use the PWA icon (`images/sbsommar-icon-192.png`) as
   the browser favicon (`<link rel="icon">`). <!-- 02-§83.25 -->
-- The cache version constant must be incremented when caching behaviour
-  changes, so that old caches are invalidated on the next
+- The cache version constant is updated when caching behaviour changes,
+  so that old caches are invalidated on the next
   activation. <!-- 02-§83.34 -->
 
 ---
@@ -4274,3 +4274,82 @@ behaviour that uses this token is defined in §7, §18, and §89.
 - The admin token must never be sent in cookies — it is stored only in
   `localStorage` and sent explicitly in API request bodies or
   headers. <!-- 02-§91.28 -->
+
+---
+
+## 92. PWA Full Pre-Cache and Offline Guard
+
+The PWA pre-caches every asset the build produces so the entire site works
+offline from the first launch after installation. Form pages and the feedback
+modal detect offline status and clearly communicate that submission requires
+an internet connection.
+
+### 92.1 Build-time pre-cache manifest (site requirements)
+
+- The build scans all files in `public/` after all post-processing
+  (cache-busting) is complete and generates a pre-cache URL
+  list. <!-- 02-§92.1 -->
+- The generated list excludes files that are not meaningful to cache:
+  `.htaccess`, `robots.txt`, `sw.js`, `version.json`,
+  `.ics` files, `.rss` files, and per-event detail pages
+  (`schema/*/index.html`). <!-- 02-§92.2 -->
+- The build injects the generated list into `sw.js` by replacing a
+  placeholder token (`/* __PRE_CACHE_URLS__ */`). <!-- 02-§92.3 -->
+- The injected URLs are root-relative paths (e.g. `/images/hero.jpg`,
+  `/style.css`). <!-- 02-§92.4 -->
+- After injection, `sw.js` contains no remaining placeholder
+  tokens. <!-- 02-§92.5 -->
+
+### 92.2 Service worker (site requirements)
+
+- The `PRE_CACHE_URLS` array in `sw.js` is populated by the build-time
+  injection. There is no hand-maintained list. <!-- 02-§92.6 -->
+- The service worker cache name is `sb-sommar-v4`. <!-- 02-§92.7 -->
+- The service worker pre-caches all site pages, including
+  `lagg-till.html` and `redigera.html`. <!-- 02-§92.8 -->
+- The `NO_CACHE_PATTERNS` list contains only API and submission
+  endpoints: `/add-event`, `/edit-event`, `/delete-event`,
+  `/verify-admin`, `/api/`. It does not contain any `.html`
+  pages. <!-- 02-§92.9 -->
+- The `cacheFirstThenNetwork` strategy uses `{ ignoreSearch: true }`
+  when matching cache entries so that cache-busted URLs
+  (e.g. `style.css?v=abc`) match pre-cached files. <!-- 02-§92.10 -->
+- The `networkFirstWithOfflineFallback` strategy uses
+  `{ ignoreSearch: true }` when matching cache entries. <!-- 02-§92.11 -->
+
+### 92.3 Offline guard — form pages (user requirements)
+
+- A client-side script `offline-guard.js` detects offline status using
+  `navigator.onLine` and the `online`/`offline` events. <!-- 02-§92.12 -->
+- When the user is offline on `lagg-till.html` or `redigera.html`, an
+  alert banner appears at the top of the form area with the message:
+  *"Du är offline. Formuläret kräver internetanslutning för att
+  skicka."* <!-- 02-§92.13 -->
+- When the user is offline, all submit buttons on the form page are
+  disabled (`disabled` attribute set). <!-- 02-§92.14 -->
+- When the user comes back online, the banner disappears and the submit
+  buttons are re-enabled. <!-- 02-§92.15 -->
+- The banner uses the existing `.form-error-msg` styling from the design
+  system. <!-- 02-§92.16 -->
+- The script is included on `lagg-till.html` and
+  `redigera.html`. <!-- 02-§92.17 -->
+
+### 92.4 Offline guard — feedback modal (user requirements)
+
+- When the feedback modal is open and the user is offline, a warning
+  message appears inside the modal:
+  *"Du är offline — feedback kan inte skickas just nu."* <!-- 02-§92.18 -->
+- The feedback submit button is disabled when offline. <!-- 02-§92.19 -->
+- When the user comes back online, the warning disappears and the submit
+  button follows its normal enabled/disabled logic (based on field
+  validation). <!-- 02-§92.20 -->
+
+### 92.5 Constraints
+
+- All user-facing text is in Swedish. <!-- 02-§92.21 -->
+- CSS uses custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§92.22 -->
+- No npm dependencies are added. <!-- 02-§92.23 -->
+- The service worker is vanilla JavaScript with no external
+  libraries. <!-- 02-§92.24 -->
+- The offline fallback page (`offline.html`) continues to function as a
+  last resort when a page is not in the cache. <!-- 02-§92.25 -->

@@ -1,21 +1,14 @@
 // Service worker for SB Sommar PWA.
 // Provides offline caching: network-first for HTML and events.json,
 // cache-first for static assets (CSS, JS, images).
+// The PRE_CACHE_URLS list is injected at build time — see build.js.
 
-const CACHE_NAME = 'sb-sommar-v3';
+const CACHE_NAME = 'sb-sommar-v4';
 
 // Pages and assets to pre-cache on install.
+// The build replaces the placeholder below with the full list of URLs.
 const PRE_CACHE_URLS = [
-  '/',
-  '/index.html',
-  '/schema.html',
-  '/idag.html',
-  '/live.html',
-  '/arkiv.html',
-  '/kalender.html',
-  '/offline.html',
-  '/style.css',
-  '/app.webmanifest',
+  /* __PRE_CACHE_URLS__ */
 ];
 
 // Paths that must never be cached (always fetched from network).
@@ -25,11 +18,9 @@ const NO_CACHE_PATTERNS = [
   '/delete-event',
   '/verify-admin',
   '/api/',
-  '/lagg-till.html',
-  '/redigera.html',
 ];
 
-// ── Install: pre-cache core pages ───────────────────────────────────────────
+// ── Install: pre-cache all site assets ────────────────────────────────────────
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -64,7 +55,7 @@ self.addEventListener('fetch', (event) => {
   // Ignore non-HTTP(S) schemes (e.g. chrome-extension://).
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
-  // Never cache API calls, form submissions, or network-dependent pages.
+  // Never cache API calls or form-submission endpoints.
   if (NO_CACHE_PATTERNS.some((p) => url.pathname.includes(p))) return;
 
   // events.json: network-first so offline still shows schedule data.
@@ -94,7 +85,7 @@ async function networkFirstThenCache(request) {
     }
     return response;
   } catch {
-    const cached = await caches.match(request);
+    const cached = await caches.match(request, { ignoreSearch: true });
     return cached || new Response('Offline', { status: 503, statusText: 'Offline' });
   }
 }
@@ -109,7 +100,7 @@ async function networkFirstWithOfflineFallback(request) {
     return response;
   } catch {
     // Try the specific page from cache first.
-    const cached = await caches.match(request);
+    const cached = await caches.match(request, { ignoreSearch: true });
     if (cached) return cached;
     // Fall back to the offline page.
     const offline = await caches.match('/offline.html');
@@ -118,7 +109,7 @@ async function networkFirstWithOfflineFallback(request) {
 }
 
 async function cacheFirstThenNetwork(request) {
-  const cached = await caches.match(request);
+  const cached = await caches.match(request, { ignoreSearch: true });
   if (cached) return cached;
 
   try {

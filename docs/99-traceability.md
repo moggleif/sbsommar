@@ -1100,9 +1100,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1113
-Covered (implemented + tested): 569
-Implemented, not tested:        544
+Total requirements:            1138
+Covered (implemented + tested): 582
+Implemented, not tested:        556
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -2035,3 +2035,33 @@ Matrix cleanup (2026-02-25):
 | `02-§91.26` | implemented | CSS uses --color-*, --space-*, --font-size-*, --radius-* tokens |
 | `02-§91.27` | implemented | Form has label, input, aria-live on message; icon has title attr |
 | `02-§91.28` | implemented | Token stored in localStorage only, sent in POST body to /verify-admin |
+
+### §92 — PWA Full Pre-Cache and Offline Guard
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§92.1` | implemented | `build.js` scans `public/` with `collectFiles()`, generates URL list |
+| `02-§92.2` | implemented | `EXCLUDE_PATTERNS` in `build.js`: `.gitkeep`, `.htaccess`, `robots.txt`, `sw.js`, `version.json`, `app.webmanifest`, `.ics`, `.rss`, `schema/*/index.html` |
+| `02-§92.3` | covered | OFF-01: `sw.js` contains `/* __PRE_CACHE_URLS__ */` placeholder; `build.js` replaces it |
+| `02-§92.4` | implemented | `collectFiles()` produces `/`-prefixed paths |
+| `02-§92.5` | implemented | `build.js` replaces placeholder with URL list; no placeholder remains |
+| `02-§92.6` | covered | OFF-17: source `sw.js` has no hardcoded URLs; OFF-01: placeholder present |
+| `02-§92.7` | covered | OFF-02: `CACHE_NAME` is `sb-sommar-v4` |
+| `02-§92.8` | covered | OFF-08: NO_CACHE_PATTERNS has no `.html` pages; build includes all HTML |
+| `02-§92.9` | covered | OFF-03..08: NO_CACHE has API endpoints only, no `.html` |
+| `02-§92.10` | covered | OFF-09: `sw.js` contains `ignoreSearch` |
+| `02-§92.11` | covered | OFF-09: `ignoreSearch` in `networkFirstWithOfflineFallback` |
+| `02-§92.12` | covered | OFF-10..11: `offline-guard.js` exists and uses `navigator.onLine` |
+| `02-§92.13` | covered | OFF-12: message "Du är offline…" in `offline-guard.js` |
+| `02-§92.14` | implemented | manual: `offline-guard.js` sets `disabled` on submit buttons |
+| `02-§92.15` | implemented | manual: `window.addEventListener('online')` re-enables buttons |
+| `02-§92.16` | implemented | `offline-guard.js` uses `className = 'form-error-msg'` |
+| `02-§92.17` | covered | OFF-13..14: form pages include `offline-guard.js` |
+| `02-§92.18` | covered | OFF-15..16: `feedback.js` uses `navigator.onLine`, has offline message |
+| `02-§92.19` | implemented | manual: `feedback.js` `showOfflineWarning()` disables submit |
+| `02-§92.20` | implemented | manual: `feedback.js` `hideOfflineWarning()` re-evaluates validation |
+| `02-§92.21` | covered | OFF-12, OFF-16: messages in Swedish |
+| `02-§92.22` | implemented | `offline-guard.js` uses `.form-error-msg` (design system class) |
+| `02-§92.23` | implemented | No new entries in `package.json` |
+| `02-§92.24` | implemented | `sw.js` is vanilla JS, no imports |
+| `02-§92.25` | implemented | `offline.html` included in pre-cache list, fallback logic unchanged |

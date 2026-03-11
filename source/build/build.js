@@ -567,6 +567,47 @@ async function main() {
       console.log('Cache-bust: app.webmanifest icons');
     }
   }
+
+  // ── Post-process: Inject pre-cache URL list into sw.js (02-§92.1–92.5) ──
+  const swOutPath = path.join(OUTPUT_DIR, 'sw.js');
+  if (fs.existsSync(swOutPath)) {
+    const EXCLUDE_PATTERNS = [
+      /^\.gitkeep$/,
+      /^\.htaccess$/,
+      /^robots\.txt$/,
+      /^sw\.js$/,
+      /^version\.json$/,
+      /^app\.webmanifest$/,
+      /\.ics$/,
+      /\.rss$/,
+      /^schema\/.*\/index\.html$/,
+    ];
+
+    function collectFiles(dir, prefix) {
+      const urls = [];
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const rel = prefix ? prefix + '/' + entry.name : entry.name;
+        if (entry.isDirectory()) {
+          urls.push(...collectFiles(path.join(dir, entry.name), rel));
+        } else {
+          if (!EXCLUDE_PATTERNS.some((re) => re.test(rel))) {
+            urls.push('/' + rel.replace(/\\/g, '/'));
+          }
+        }
+      }
+      return urls;
+    }
+
+    const preCacheUrls = collectFiles(OUTPUT_DIR, '').sort();
+    // Add '/' as an alias for /index.html.
+    if (!preCacheUrls.includes('/')) preCacheUrls.unshift('/');
+
+    const urlList = preCacheUrls.map((u) => `  '${u}'`).join(',\n');
+    let swContent = fs.readFileSync(swOutPath, 'utf8');
+    swContent = swContent.replace('/* __PRE_CACHE_URLS__ */', urlList);
+    fs.writeFileSync(swOutPath, swContent, 'utf8');
+    console.log(`Pre-cache: injected ${preCacheUrls.length} URLs into sw.js`);
+  }
 }
 
 main().catch((err) => {
