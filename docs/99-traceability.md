@@ -1099,10 +1099,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1052
+Total requirements:            1068
 Covered (implemented + tested): 540
 Implemented, not tested:        511
-Gap (no implementation):          0
+Gap (no implementation):         16
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1925,3 +1925,24 @@ Matrix cleanup (2026-02-25):
 | `02-§87.6` | covered | PWA-37: screenshot src paths in images/; build cache-busts via existing regex |
 | `02-§87.7` | done | No new npm dependencies |
 | `02-§87.8` | covered | All existing tests pass |
+
+### §88 — PWA Install Guide
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§88.1` | gap | |
+| `02-§88.2` | gap | |
+| `02-§88.3` | gap | |
+| `02-§88.4` | gap | |
+| `02-§88.5` | gap | |
+| `02-§88.6` | gap | |
+| `02-§88.7` | gap | |
+| `02-§88.8` | gap | |
+| `02-§88.9` | gap | |
+| `02-§88.10` | gap | |
+| `02-§88.11` | gap | |
+| `02-§88.12` | gap | |
+| `02-§88.13` | gap | |
+| `02-§88.14` | gap | |
+| `02-§88.15` | gap | |
+| `02-§88.16` | gap | |
