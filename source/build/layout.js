@@ -63,7 +63,8 @@ function pageNav(activeHref, navSections = []) {
       </svg>
     </button>`;
 
-  return `  <nav class="page-nav" aria-label="Sidnavigation">
+  return `  <div class="site-content">
+  <nav class="page-nav" aria-label="Sidnavigation">
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
@@ -89,7 +90,7 @@ ${pageItems}
 function pageFooter(footerHtml) {
   const trimmed = (footerHtml || '').trim();
   if (!trimmed) return '';
-  return `  <footer class="site-footer">\n${trimmed}\n  </footer>`;
+  return `  </div>\n  <footer class="site-footer">\n${trimmed}\n  </footer>`;
 }
 
 module.exports = { pageNav, pageFooter, setFeedbackUrl };

@@ -14,6 +14,7 @@
   <link rel="apple-touch-icon" href="images/sbsommar-icon-192.png">
 </head>
 <body>
+  <div class="site-content">
   <nav class="page-nav" aria-label="Sidnavigation">
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
       <span class="nav-toggle-bar"></span>
