@@ -196,6 +196,36 @@ final class GitHub
         $this->enableAutoMerge($pr['node_id']);
     }
 
+    /**
+     * Remove an event from the active camp's YAML file via ephemeral
+     * branch → PR → auto-merge.
+     */
+    public function removeEventFromActiveCamp(string $eventId): void
+    {
+        // 1. Resolve active camp
+        $camp         = $this->resolveActiveCamp();
+        $campFilePath = 'source/data/' . $camp['file'];
+
+        // 2. Fetch camp file
+        [$campContent, $fileSha] = $this->getFile($campFilePath);
+
+        // 3. Remove event
+        $newContent = self::removeEventFromYaml($campContent, $eventId);
+        if ($newContent === null) {
+            throw new \RuntimeException("Event not found: {$eventId}");
+        }
+
+        $commitMsg = "Delete event in {$camp['name']}: {$eventId}";
+
+        // 4. Ephemeral branch → commit → PR → auto-merge
+        $mainSha    = $this->getMainSha();
+        $branchName = "event-delete/{$eventId}-" . time();
+        $this->createBranch($branchName, $mainSha);
+        $this->putFile($campFilePath, $newContent, $fileSha, $commitMsg, $branchName);
+        $pr = $this->createPullRequest($commitMsg, $branchName, 'Automatically created by the SB Sommar delete-event API.');
+        $this->enableAutoMerge($pr['node_id']);
+    }
+
     // ── Camp resolution ──────────────────────────────────────────────────
 
     /** @return array<string,mixed> */
@@ -278,6 +308,32 @@ final class GitHub
         $lines[] = "{$dp}updated_at: {$event['meta']['updated_at']}";
 
         return implode("\n", $lines);
+    }
+
+    /**
+     * Remove an event from a YAML string, returning the new YAML or null if not found.
+     */
+    public static function removeEventFromYaml(string $yamlContent, string $eventId): ?string
+    {
+        $data = Yaml::parse($yamlContent);
+        if (!is_array($data) || !is_array($data['events'] ?? null)) {
+            return null;
+        }
+
+        $idx = null;
+        foreach ($data['events'] as $i => $event) {
+            if (($event['id'] ?? null) === $eventId) {
+                $idx = $i;
+                break;
+            }
+        }
+        if ($idx === null) {
+            return null;
+        }
+
+        array_splice($data['events'], $idx, 1);
+
+        return Yaml::dump($data, 4, 2, Yaml::DUMP_NULL_AS_TILDE);
     }
 
     /**

@@ -85,6 +85,9 @@ try {
         $method === 'POST' && $route === '/edit-event'
             => handleEditEvent($activeCamp),
 
+        $method === 'POST' && $route === '/delete-event'
+            => handleDeleteEvent($activeCamp),
+
         $method === 'POST' && $route === '/feedback'
             => handleFeedback(),
 
@@ -298,6 +301,70 @@ function handleEditEvent(?array $activeCamp): void
         $gh->updateEventInActiveCamp($eventId, $body);
     } catch (\Throwable $e) {
         error_log('POST /edit-event error: ' . $e->getMessage());
+        jsonResponse(['success' => false, 'error' => GitHub::classifyGitHubError($e)], 500);
+
+        return;
+    }
+
+    jsonResponse(['success' => true]);
+}
+
+function handleDeleteEvent(?array $activeCamp): void
+{
+    // Time-gating
+    if ($activeCamp !== null) {
+        $today = date('Y-m-d');
+        if (TimeGate::isOutsideEditingPeriod(
+            $today,
+            (string) ($activeCamp['opens_for_editing'] ?? ''),
+            (string) ($activeCamp['end_date'] ?? ''),
+        )) {
+            jsonResponse([
+                'success' => false,
+                'error'   => 'Det går inte att radera aktiviteter just nu. Formuläret är inte öppet.',
+            ], 403);
+
+            return;
+        }
+    }
+
+    $body = getJsonBody();
+
+    $eventId = trim((string) ($body['id'] ?? ''));
+    if ($eventId === '') {
+        jsonResponse(['success' => false, 'error' => 'Aktivitets-ID saknas.'], 400);
+
+        return;
+    }
+
+    // Verify ownership via session cookie
+    $ownedIds = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
+    if (!in_array($eventId, $ownedIds, true)) {
+        jsonResponse([
+            'success' => false,
+            'error'   => 'Ej behörig att radera denna aktivitet.',
+        ], 403);
+
+        return;
+    }
+
+    // Reject past events
+    $eventDate = trim((string) ($body['date'] ?? ''));
+    if ($eventDate !== '' && $eventDate < date('Y-m-d')) {
+        jsonResponse([
+            'success' => false,
+            'error'   => 'Aktiviteten har redan ägt rum och kan inte raderas.',
+        ], 400);
+
+        return;
+    }
+
+    // Commit to GitHub synchronously so the user sees errors
+    try {
+        $gh = new GitHub();
+        $gh->removeEventFromActiveCamp($eventId);
+    } catch (\Throwable $e) {
+        error_log('POST /delete-event error: ' . $e->getMessage());
         jsonResponse(['success' => false, 'error' => GitHub::classifyGitHubError($e)], 500);
 
         return;
