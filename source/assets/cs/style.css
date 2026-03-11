@@ -2229,14 +2229,19 @@ body.modal-open {
 /* ── Site footer ── */
 
 .site-footer {
+  background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
+  color: var(--color-charcoal);
+  font-size: var(--font-size-nav);
+}
+
+.site-footer__inner {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px var(--space-md);
+  max-width: var(--container);
+  margin: 0 auto;
   padding: var(--space-md) var(--space-sm);
-  font-size: var(--font-size-nav);
-  color: var(--color-charcoal);
-  background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
 }
 
 .site-footer p {
@@ -2263,7 +2268,7 @@ body.modal-open {
 }
 
 @media (max-width: 690px) {
-  .site-footer {
+  .site-footer__inner {
     flex-direction: column;
   }
 
