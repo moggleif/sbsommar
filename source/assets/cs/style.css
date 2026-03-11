@@ -2590,3 +2590,88 @@ body.modal-open {
   }
 }
 
+/* ── Cookie debug panel (02-§90) ───────────────────────────────────────────── */
+
+.cookie-debug {
+  margin-top: var(--space-lg);
+  border: 1px solid var(--color-sage);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-small);
+  background: var(--color-cream-light);
+}
+
+.cookie-debug summary {
+  cursor: pointer;
+  padding: var(--space-xs) var(--space-sm);
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.cookie-debug summary:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: -2px;
+}
+
+#cookie-debug-content {
+  padding: 0 var(--space-sm) var(--space-sm);
+}
+
+.cookie-debug-warn {
+  background: var(--color-error);
+  color: var(--color-white);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.cookie-debug-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-xs) var(--space-sm);
+  margin: 0 0 var(--space-sm);
+}
+
+.cookie-debug-list dt {
+  font-weight: 600;
+}
+
+.cookie-debug-list dd {
+  margin: 0;
+}
+
+.cookie-debug-note {
+  color: var(--color-charcoal);
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.cookie-debug-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cookie-debug-table th,
+.cookie-debug-table td {
+  text-align: left;
+  padding: var(--space-xs);
+  border-bottom: 1px solid var(--color-sage);
+}
+
+.cookie-debug-table th {
+  font-weight: 600;
+}
+
+.cookie-debug-table code {
+  font-size: var(--font-size-small);
+  word-break: break-all;
+}
+
+.cookie-status-ok { color: var(--color-sage-hover); }
+.cookie-status-expired { color: var(--color-terracotta); }
+.cookie-status-unknown { color: var(--color-charcoal); font-style: italic; }
+
+.cookie-debug-loading {
+  color: var(--color-charcoal);
+  font-style: italic;
+}
+

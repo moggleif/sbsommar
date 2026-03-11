@@ -4087,3 +4087,83 @@ Deletion removes the event entirely from the camp's YAML file.
 - All user-facing text must be in Swedish. <!-- 02-§89.22 -->
 - The delete endpoint must use `credentials: 'include'` so that the
   `sb_session` cookie is sent cross-origin. <!-- 02-§89.23 -->
+
+---
+
+## 90. Cookie Debug Panel and Session Cookie Repair
+
+### 90.1 Context
+
+The `sb_session` cookie tracks which events the current user has created,
+enabling the edit and delete flows. A bug in `removeIdFromCookie`
+(redigera.js) writes the cookie back without the `Secure` flag and without
+the `Domain` attribute, which can create duplicate cookies with the same
+name. Additionally, there is no way for users to inspect what is stored
+in the cookie or understand why editing may not work, making cookie
+problems difficult to diagnose.
+
+### 90.2 Cookie debug panel (user requirements)
+
+- The edit page (`redigera.html`) must include a collapsible information
+  section (e.g. `<details>`) that shows the contents of the user's
+  session cookie. <!-- 02-§90.1 -->
+- The section must display: <!-- 02-§90.2 -->
+  - Whether the page is loaded over HTTP or HTTPS, with a warning if
+    HTTP (since the `Secure` flag prevents the cookie from being saved
+    over plain HTTP).
+  - The cookie domain (from the `data-cookie-domain` attribute on
+    `<body>`), or "ej satt" if absent.
+  - The number of event IDs currently stored in the cookie.
+  - A list of each event ID with its status:
+    - "finns i schemat" — the ID exists in `events.json` and the event
+      date has not passed.
+    - "passerat" — the ID exists in `events.json` but the event date
+      has passed (will be cleaned automatically).
+    - "hittades inte i schemat" — the ID does not appear in
+      `events.json` (may be pending deploy or orphaned).
+  - Whether automatic cookie repair was performed during this page
+    load (see §90.4).
+- The section must be collapsed by default and use a descriptive Swedish
+  heading (e.g. "Om din cookie"). <!-- 02-§90.3 -->
+- The section must update its content dynamically after `events.json`
+  has been fetched. <!-- 02-§90.4 -->
+
+### 90.3 Informational text about event cleanup (user requirements)
+
+- The edit page must display a brief explanation that events whose date
+  has passed are automatically removed from the cookie and will not
+  appear in the user's list of editable events. <!-- 02-§90.5 -->
+- The purpose is to set expectations so the user understands this is
+  normal behaviour, not an error. <!-- 02-§90.6 -->
+
+### 90.4 Cookie repair — duplicate detection and merge (site requirements)
+
+- On every page load, `session.js` must detect if more than one
+  `sb_session` cookie exists (e.g. one with `Domain` and one
+  without). <!-- 02-§90.7 -->
+- If duplicates are found, all ID arrays must be parsed, merged, and
+  deduplicated. <!-- 02-§90.8 -->
+- All existing `sb_session` cookies must be deleted (both the
+  exact-host variant and the domain-scoped variant) by setting
+  `Max-Age=0`. <!-- 02-§90.9 -->
+- A single correct cookie must then be written back with the proper
+  attributes (`Path=/`, `Max-Age`, `Secure`, `SameSite=Strict`, and
+  `Domain` when configured). <!-- 02-§90.10 -->
+- The repair must happen before the existing expiry cleanup, so that
+  all valid IDs are preserved. <!-- 02-§90.11 -->
+
+### 90.5 Bug fix — `removeIdFromCookie` attributes (site requirements)
+
+- The `removeIdFromCookie` function in `redigera.js` must write the
+  cookie with the same attributes as `session.js`: `Path=/`,
+  `Max-Age=604800`, `Secure`, `SameSite=Strict`, and `Domain` when
+  `data-cookie-domain` is set on `<body>`. <!-- 02-§90.12 -->
+- This fixes a violation of 02-§44.16 (cookie attributes must match
+  across all write paths). <!-- 02-§90.13 -->
+
+### 90.6 Constraints
+
+- All user-facing text must be in Swedish. <!-- 02-§90.14 -->
+- CSS must use custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§90.15 -->
+- The debug panel must be accessible (keyboard-navigable, screen-reader
+  friendly). <!-- 02-§90.16 -->

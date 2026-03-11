@@ -305,6 +305,11 @@
     if (ownedIds.length === 0) {
       // No cookie — show explanation (02-§48.8)
       if (noSessionEl) noSessionEl.hidden = false;
+      // Still render debug panel (shows "no cookie" state).
+      fetch('/events.json')
+        .then(function (r) { return r.json(); })
+        .then(function (events) { renderDebugPanel(events); })
+        .catch(function () { renderDebugPanel(null); });
       return;
     }
 
@@ -314,9 +319,11 @@
       .then(function (r) { return r.json(); })
       .then(function (events) {
         renderMyEvents(events, ownedIds, today);
+        renderDebugPanel(events);
       })
       .catch(function () {
         if (myEventsEmpty) myEventsEmpty.textContent = 'Kunde inte hämta schemadata.';
+        renderDebugPanel(null);
       });
     return;
   }
@@ -324,6 +331,10 @@
   // Specific event selected — existing edit behaviour (02-§48.17)
   if (ownedIds.indexOf(eventId) === -1) {
     showError('Du har inte rättighet att redigera denna aktivitet.');
+    fetch('/events.json')
+      .then(function (r) { return r.json(); })
+      .then(function (events) { renderDebugPanel(events); })
+      .catch(function () { renderDebugPanel(null); });
     return;
   }
 
@@ -338,11 +349,13 @@
 
       if (!event) {
         showError('Aktiviteten hittades inte i det aktuella schemat.');
+        renderDebugPanel(events);
         return;
       }
 
       if (event.date < today) {
         showError('Aktiviteten har redan ägt rum och kan inte redigeras.');
+        renderDebugPanel(events);
         return;
       }
 
@@ -355,9 +368,11 @@
       populate(event);
       loadingEl.hidden = true;
       sectionEl.hidden = false;
+      renderDebugPanel(events);
     })
     .catch(function () {
       showError('Kunde inte hämta schemadata. Kontrollera din internetanslutning.');
+      renderDebugPanel(null);
     });
 
   // ── Per-field inline errors (02-§6.5) ──────────────────────────────────────
@@ -628,10 +643,15 @@
     });
   }
 
+  // Read the cookie domain from <body> to match session.js write-back (02-§90.12).
+  var cookieDomain = (document.body.dataset.cookieDomain || '').trim();
+  var domainPart = cookieDomain ? '; Domain=' + cookieDomain : '';
+
   function removeIdFromCookie(idToRemove) {
     var ids = readSessionIds().filter(function (id) { return id !== idToRemove; });
     var encoded = encodeURIComponent(JSON.stringify(ids));
-    document.cookie = COOKIE_NAME + '=' + encoded + '; path=/; max-age=604800; SameSite=Strict';
+    document.cookie = COOKIE_NAME + '=' + encoded +
+      '; Path=/; Max-Age=604800; Secure; SameSite=Strict' + domainPart;
   }
 
   function performDelete() {
@@ -671,5 +691,67 @@
   }
   if (deleteNo) {
     deleteNo.addEventListener('click', closeDeleteConfirm);
+  }
+
+  // ── Cookie debug panel (02-§90.1–90.6) ────────────────────────────────────
+
+  var debugContent = document.getElementById('cookie-debug-content');
+
+  function renderDebugPanel(eventsArray) {
+    if (!debugContent) return;
+
+    var isSecure = location.protocol === 'https:';
+    var domain = cookieDomain || 'ej satt';
+    var ids = readSessionIds();
+    var eventMap = {};
+    if (Array.isArray(eventsArray)) {
+      for (var i = 0; i < eventsArray.length; i++) {
+        if (eventsArray[i] && eventsArray[i].id) {
+          eventMap[eventsArray[i].id] = eventsArray[i];
+        }
+      }
+    }
+
+    var html = '';
+
+    // Protocol warning
+    if (!isSecure) {
+      html += '<p class="cookie-debug-warn"><strong>Varning:</strong> Sidan laddas via HTTP. ' +
+        'Cookien har <code>Secure</code>-flaggan och kan inte sparas utan HTTPS.</p>';
+    }
+
+    html += '<dl class="cookie-debug-list">';
+    html += '<dt>Protokoll</dt><dd>' + (isSecure ? 'HTTPS' : 'HTTP') + '</dd>';
+    html += '<dt>Cookie-domän</dt><dd>' + escHtml(domain) + '</dd>';
+    html += '<dt>Antal lagrade aktiviteter</dt><dd>' + ids.length + '</dd>';
+    html += '</dl>';
+
+    if (ids.length > 0) {
+      html += '<p class="cookie-debug-note">Aktiviteter vars datum har passerat rensas automatiskt ' +
+        'från cookien och visas inte i listan ovan.</p>';
+      html += '<table class="cookie-debug-table"><thead><tr>' +
+        '<th>Aktivitets-ID</th><th>Status</th></tr></thead><tbody>';
+
+      var debugToday = new Date().toISOString().slice(0, 10);
+      for (var j = 0; j < ids.length; j++) {
+        var id = ids[j];
+        var ev = eventMap[id];
+        var status;
+        if (!ev) {
+          status = '<span class="cookie-status-unknown">hittades inte i schemat (kan vara under publicering)</span>';
+        } else if (ev.date < debugToday) {
+          status = '<span class="cookie-status-expired">passerat</span>';
+        } else {
+          status = '<span class="cookie-status-ok">finns i schemat</span>';
+        }
+        html += '<tr><td><code>' + escHtml(id) + '</code></td><td>' + status + '</td></tr>';
+      }
+      html += '</tbody></table>';
+    } else {
+      html += '<p>Ingen cookie hittades. Du behöver <a href="lagg-till.html">lägga till ' +
+        'en aktivitet</a> och godkänna cookien för att kunna redigera.</p>';
+    }
+
+    debugContent.innerHTML = html;
   }
 })();

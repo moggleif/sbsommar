@@ -179,6 +179,13 @@ ${locationOptions}
       <div id="modal-content" class="modal-content"></div>
     </div>
   </div>
+
+  <details id="cookie-debug" class="cookie-debug">
+    <summary>Om din cookie</summary>
+    <div id="cookie-debug-content">
+      <p class="cookie-debug-loading">Laddar cookie-information…</p>
+    </div>
+  </details>
 </main>
   <script src="markdown-toolbar.js"></script>
   <script defer src="marked.umd.js"></script>
