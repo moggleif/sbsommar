@@ -1946,3 +1946,31 @@ Matrix cleanup (2026-02-25):
 | `02-§88.14` | done | No new npm dependencies |
 | `02-§88.15` | covered | All 1429 existing tests pass |
 | `02-§88.16` | covered | INST-04, INST-05: Swedish text verified |
+
+### §89 — Delete Activity
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§89.1` | covered | DEL-08: renders id="btn-delete" in edit page HTML |
+| `02-§89.2` | covered | DEL-09: label "Radera aktivitet"; DEL-10: class btn-destructive |
+| `02-§89.3` | covered | DEL-11: renders id="delete-confirm" dialog; DEL-14: role="alertdialog" |
+| `02-§89.4` | covered | DEL-11: dialog contains id="delete-confirm-title" populated by JS |
+| `02-§89.5` | covered | DEL-12: "Ja, radera" button; DEL-13: "Avbryt" button |
+| `02-§89.6` | manual | Browser-only: verify success message "Aktiviteten är raderad!" after delete |
+| `02-§89.7` | implemented | Edit page time-gating hides entire form including delete button |
+| `02-§89.8` | manual | Browser-only: verify progress modal opens after confirmation |
+| `02-§89.9` | implemented | redigera.js DELETE_PROGRESS_STEPS array has 3 steps |
+| `02-§89.10` | manual | Browser-only: verify success modal shows "Gå till schemat" link |
+| `02-§89.11` | manual | Browser-only: verify error modal shows "Försök igen" button |
+| `02-§89.12` | implemented | app.js POST /delete-event route exists |
+| `02-§89.13` | implemented | app.js reads parseSessionIds from cookie header |
+| `02-§89.14` | implemented | app.js returns 403 when event ID not in cookie |
+| `02-§89.15` | implemented | app.js returns 400 when isEventPast is true |
+| `02-§89.16` | implemented | app.js returns 400 when isOutsideEditingPeriod is true |
+| `02-§89.17` | covered | DEL-01–DEL-07: removeEventFromYaml tested; github.js removeEventFromActiveCamp implemented |
+| `02-§89.18` | implemented | redigera.js removeIdFromCookie updates sb_session after delete |
+| `02-§89.19` | implemented | Reuses submit-modal, openModal, trapFocus patterns from edit flow |
+| `02-§89.20` | implemented | style.css btn-destructive uses --color-error custom property |
+| `02-§89.21` | done | No new npm dependencies added |
+| `02-§89.22` | implemented | All text in Swedish: "Radera aktivitet", "Ja, radera", "Avbryt", etc. |
+| `02-§89.23` | implemented | redigera.js fetch uses credentials: 'include' |

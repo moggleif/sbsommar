@@ -176,6 +176,10 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
 - **Secondary**: Border `#C76D48`, text `#C76D48`, transparent background. <!-- 07-§6.16 -->
 - Hover: darken background by ~10%, smooth transition `200ms ease`. <!-- 07-§6.17 -->
 - Font: same as body, `700` weight, `14–16px`. <!-- 07-§6.18 -->
+- **Destructive**: Border `var(--color-error, #b91c1c)`, text
+  `var(--color-error, #b91c1c)`, transparent background. Same sizing
+  and font rules as secondary. Hover: background
+  `var(--color-error, #b91c1c)`, text white. <!-- 07-§6.85 -->
 
 ### Cards (info blocks, testimonials)
 

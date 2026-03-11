@@ -7,6 +7,7 @@
   --color-charcoal:   #3B3A38;
   --color-white:      #FFFFFF;
   --color-cream-light:#FAF7EF;
+  --color-error:      #b91c1c;
   --font-sans:   system-ui, -apple-system, sans-serif;
   --font-serif:  Georgia, serif;
   --font-size-base:  16px;
@@ -911,6 +912,43 @@ details.event-row[open] > summary .ev-title {
 .btn-secondary:hover {
   background: var(--color-terracotta);
   color: var(--color-white);
+}
+
+.btn-destructive {
+  display: inline-block;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  text-align: center;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-error);
+  border: 1.5px solid var(--color-error);
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.btn-destructive:hover {
+  background: var(--color-error);
+  color: var(--color-white);
+}
+
+.btn-destructive:focus-visible {
+  outline: 2px solid var(--color-error);
+  outline-offset: 2px;
+}
+
+.delete-separator {
+  margin: var(--spacing-lg) 0;
+  border: none;
+  border-top: 1px solid var(--color-cream);
+}
+
+.delete-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
 }
 
 /* ── Add-event form ── */

@@ -14,6 +14,11 @@
   var form         = document.getElementById('edit-form');
   var fieldset     = form ? form.querySelector('fieldset') : null;
   var submitBtn    = form ? form.querySelector('button[type="submit"]') : null;
+  var deleteBtn    = document.getElementById('btn-delete');
+  var deleteDialog = document.getElementById('delete-confirm');
+  var deleteTitle  = document.getElementById('delete-confirm-title');
+  var deleteYes    = document.getElementById('delete-confirm-yes');
+  var deleteNo     = document.getElementById('delete-confirm-no');
   var modal        = document.getElementById('submit-modal');
   var modalHeading = document.getElementById('modal-heading');
   var modalContent = document.getElementById('modal-content');
@@ -503,5 +508,168 @@
           setModalError('Något gick fel. Kontrollera din internetanslutning och försök igen.');
         });
     });
+  }
+
+  // ── Delete flow (02-§89) ──────────────────────────────────────────────────
+
+  var DELETE_PROGRESS_STEPS = [
+    { text: 'Skickar till servern\u2026', delay: 0 },
+    { text: 'Kontrollerar aktiviteten\u2026', delay: 500 },
+    { text: 'Raderar aktiviteten\u2026', delay: 2000 },
+  ];
+
+  function buildDeleteProgressHtml() {
+    var html = '<ul class="submit-progress" role="status" aria-live="polite">';
+    for (var i = 0; i < DELETE_PROGRESS_STEPS.length; i++) {
+      html += '<li class="progress-step" id="del-progress-step-' + i + '">' +
+        '<span class="step-icon" aria-hidden="true">\u25CB</span> ' +
+        '<span class="step-text">' + DELETE_PROGRESS_STEPS[i].text + '</span></li>';
+    }
+    html += '</ul>';
+    return html;
+  }
+
+  function activateDelStep(index) {
+    var el = document.getElementById('del-progress-step-' + index);
+    if (!el) return;
+    el.classList.add('step-active');
+    el.querySelector('.step-icon').textContent = '\u25C9';
+  }
+
+  function completeDelStep(index) {
+    var el = document.getElementById('del-progress-step-' + index);
+    if (!el) return;
+    el.classList.remove('step-active');
+    el.classList.add('step-done');
+    el.querySelector('.step-icon').textContent = '\u2713';
+  }
+
+  function completeAllDelSteps() {
+    for (var i = 0; i < DELETE_PROGRESS_STEPS.length; i++) {
+      completeDelStep(i);
+    }
+  }
+
+  function openDeleteConfirm() {
+    if (!form) return;
+    var title = form.elements.title.value || '';
+    if (deleteTitle) deleteTitle.textContent = title;
+    preFocusEl = document.activeElement;
+    deleteDialog.hidden = false;
+    document.body.classList.add('modal-open');
+    deleteDialog.addEventListener('keydown', trapDeleteFocus);
+    if (deleteNo) deleteNo.focus();
+  }
+
+  function closeDeleteConfirm() {
+    deleteDialog.hidden = true;
+    document.body.classList.remove('modal-open');
+    deleteDialog.removeEventListener('keydown', trapDeleteFocus);
+    if (preFocusEl) preFocusEl.focus();
+  }
+
+  function trapDeleteFocus(e) {
+    if (e.key === 'Escape') { closeDeleteConfirm(); return; }
+    if (e.key !== 'Tab') return;
+    var focusable = Array.from(
+      deleteDialog.querySelectorAll('button:not([disabled])'),
+    );
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
+  }
+
+  function setDeleteModalLoading() {
+    closeDeleteConfirm();
+    modalHeading.textContent = 'Raderar\u2026';
+    modalContent.innerHTML = buildDeleteProgressHtml();
+    activateDelStep(0);
+
+    for (var i = 1; i < DELETE_PROGRESS_STEPS.length; i++) {
+      (function (prev, curr, delay) {
+        progressTimers.push(setTimeout(function () {
+          completeDelStep(prev);
+          activateDelStep(curr);
+        }, delay));
+      })(i - 1, i, DELETE_PROGRESS_STEPS[i].delay);
+    }
+
+    openModal();
+  }
+
+  function setDeleteModalSuccess(title) {
+    clearProgressTimers();
+    completeAllDelSteps();
+    modalHeading.textContent = 'Aktiviteten är raderad!';
+    modalContent.innerHTML =
+      '<p class="intro"><strong>' + escHtml(title) + '</strong>' +
+      ' har tagits bort från schemat.</p>' +
+      '<div class="success-actions">' +
+        '<a href="schema.html" class="btn-primary">Gå till schemat →</a>' +
+      '</div>';
+    focusFirstInModal();
+  }
+
+  function setDeleteModalError(message) {
+    clearProgressTimers();
+    modalHeading.textContent = 'Något gick fel';
+    modalContent.innerHTML =
+      '<p class="form-error-msg">' + escHtml(message) + '</p>' +
+      '<button id="modal-retry-delete-btn" class="btn-primary">Försök igen</button>';
+    focusFirstInModal();
+    document.getElementById('modal-retry-delete-btn').addEventListener('click', function () {
+      closeModal();
+      if (deleteBtn) deleteBtn.focus();
+    });
+  }
+
+  function removeIdFromCookie(idToRemove) {
+    var ids = readSessionIds().filter(function (id) { return id !== idToRemove; });
+    var encoded = encodeURIComponent(JSON.stringify(ids));
+    document.cookie = COOKIE_NAME + '=' + encoded + '; path=/; max-age=604800; SameSite=Strict';
+  }
+
+  function performDelete() {
+    if (!form) return;
+    var els = form.elements;
+    var id = els.id.value;
+    var title = els.title.value || '';
+    var date = els.date.value || '';
+
+    setDeleteModalLoading();
+
+    fetch(form.dataset.deleteUrl || '/delete-event', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id, date: date }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (json) {
+        if (!json.success) {
+          setDeleteModalError(json.error || 'Något gick fel.');
+          return;
+        }
+        removeIdFromCookie(id);
+        setDeleteModalSuccess(title);
+      })
+      .catch(function () {
+        setDeleteModalError('Något gick fel. Kontrollera din internetanslutning och försök igen.');
+      });
+  }
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener('click', openDeleteConfirm);
+  }
+  if (deleteYes) {
+    deleteYes.addEventListener('click', performDelete);
+  }
+  if (deleteNo) {
+    deleteNo.addEventListener('click', closeDeleteConfirm);
   }
 })();

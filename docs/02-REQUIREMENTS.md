@@ -4022,3 +4022,68 @@ discover this without being intrusive.
 - No new npm dependencies. <!-- 02-§88.14 -->
 - Existing pages and functionality must not break. <!-- 02-§88.15 -->
 - All user-facing text must be in Swedish. <!-- 02-§88.16 -->
+
+---
+
+## 89. Delete Activity
+
+Participants who submitted an activity can delete it from the edit page.
+Deletion removes the event entirely from the camp's YAML file.
+
+### 89.1 Delete button on edit page (user requirements)
+
+- When an event is loaded for editing on `/redigera.html`, a delete button
+  is visible below the form. <!-- 02-§89.1 -->
+- The button label is "Radera aktivitet" and is styled as a destructive
+  action (visually distinct from the save button). <!-- 02-§89.2 -->
+- Clicking the delete button shows a confirmation dialog asking the user
+  to confirm deletion before proceeding. <!-- 02-§89.3 -->
+- The confirmation dialog includes the event title so the user knows
+  which event will be deleted. <!-- 02-§89.4 -->
+- The confirmation dialog has two buttons: "Ja, radera" (confirm) and
+  "Avbryt" (cancel). <!-- 02-§89.5 -->
+- After successful deletion, a clear Swedish confirmation is shown. <!-- 02-§89.6 -->
+- The delete button is not shown when the editing period is closed or
+  when the event date has passed. <!-- 02-§89.7 -->
+
+### 89.2 Delete submit flow (site requirements)
+
+- After the user confirms deletion, a progress modal is shown with
+  status steps, matching the style of the edit submit flow (§20). <!-- 02-§89.8 -->
+- The progress modal shows steps: sending request, checking activity,
+  deleting activity. <!-- 02-§89.9 -->
+- On success, the modal shows a confirmation message and a link back
+  to the schedule page. <!-- 02-§89.10 -->
+- On failure, the modal shows an error message with a retry
+  option. <!-- 02-§89.11 -->
+
+### 89.3 Server-side delete endpoint (site requirements)
+
+- A `POST /delete-event` endpoint accepts delete requests. <!-- 02-§89.12 -->
+- The server reads the `sb_session` cookie from the request, parses the
+  event ID array, and verifies the target event ID is present. <!-- 02-§89.13 -->
+- If the event ID is not in the cookie, the server responds with
+  HTTP 403. <!-- 02-§89.14 -->
+- If the event's date has already passed, the server responds with
+  HTTP 400. <!-- 02-§89.15 -->
+- If the editing period is closed, the server responds with
+  HTTP 400. <!-- 02-§89.16 -->
+- If validation passes, the server reads the YAML file from GitHub,
+  removes the target event entirely, and commits the change via an
+  ephemeral branch and PR with auto-merge — the same pipeline used
+  for additions and edits. <!-- 02-§89.17 -->
+
+### 89.4 Client-side session cleanup (site requirements)
+
+- After a successful delete, the event ID is removed from the
+  `sb_session` cookie on the client side. <!-- 02-§89.18 -->
+
+### 89.5 Constraints
+
+- The delete flow must reuse existing modal, progress, and accessibility
+  patterns from the edit submit flow. <!-- 02-§89.19 -->
+- CSS must use custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§89.20 -->
+- No new npm dependencies. <!-- 02-§89.21 -->
+- All user-facing text must be in Swedish. <!-- 02-§89.22 -->
+- The delete endpoint must use `credentials: 'include'` so that the
+  `sb_session` cookie is sent cross-origin. <!-- 02-§89.23 -->

@@ -51,4 +51,21 @@ function patchEventInYaml(yamlContent, eventId, updates) {
   return yaml.dump(data, { lineWidth: -1, noRefs: true });
 }
 
-module.exports = { isEventPast, patchEventInYaml };
+// ── removeEventFromYaml ──────────────────────────────────────────────────────
+
+// Find the event with eventId inside a full camp YAML string and remove it
+// entirely from the events array.  Returns the new YAML string, or null if no
+// event with that ID is found.
+function removeEventFromYaml(yamlContent, eventId) {
+  let data;
+  try { data = yaml.load(yamlContent); } catch { return null; }
+  if (!data || !Array.isArray(data.events)) return null;
+
+  const idx = data.events.findIndex((e) => e.id === eventId);
+  if (idx === -1) return null;
+
+  data.events.splice(idx, 1);
+  return yaml.dump(data, { lineWidth: -1, noRefs: true });
+}
+
+module.exports = { isEventPast, patchEventInYaml, removeEventFromYaml };

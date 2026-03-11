@@ -559,6 +559,58 @@ field error state — submission is blocked while the error is visible.
 
 ---
 
+## 7b. Participant Event Deletion
+
+Participants who own an event can delete it from the edit page. Deletion
+removes the event entirely from the camp's YAML file using the same
+ephemeral-branch → PR → auto-merge pipeline as additions and edits.
+
+### Server-side flow
+
+```text
+POST /delete-event  { id }
+  ├─ parse sb_session cookie → owned IDs
+  ├─ reject if id not in cookie → 403
+  ├─ reject if editing period closed → 400
+  ├─ reject if event date < today → 400
+  └─ removeEventFromActiveCamp(id)
+       ├─ resolve active camp from camps.yaml
+       ├─ fetch camp YAML + SHA from GitHub
+       ├─ remove event entry from YAML
+       ├─ create ephemeral branch event-delete/<id>
+       ├─ commit removal
+       ├─ open PR → auto-merge (squash)
+       └─ return success
+```
+
+### Client-side flow
+
+1. User clicks "Radera aktivitet" button on the edit page.
+2. Confirmation dialog appears with event title and two buttons.
+3. On confirm, progress modal opens (same pattern as edit submit flow §9).
+4. `POST /delete-event` with `credentials: 'include'`.
+5. On success: event ID removed from `sb_session` cookie; confirmation shown.
+6. On failure: error shown with retry option.
+
+### Delete endpoint URL derivation
+
+The build step derives the delete URL from the `API_URL` environment
+variable by replacing a trailing `/add-event` path segment with
+`/delete-event`; if `API_URL` does not end with `/add-event`, the delete
+URL falls back to `/delete-event`.
+
+### Delete-event files changed
+
+| File | Change |
+| --- | --- |
+| `app.js` | Add `POST /delete-event` route |
+| `source/api/edit-event.js` | Add `removeEventFromYaml()` function |
+| `source/api/github.js` | Add `removeEventFromActiveCamp()` function |
+| `source/build/render-edit.js` | Add delete button and confirmation dialog HTML |
+| `source/assets/js/client/redigera.js` | Add delete button handler, confirmation, progress modal |
+
+---
+
 ## 8. Add-Activity Submit Flow — Field Locking and Progress Modal
 
 ### Submit flow stages
