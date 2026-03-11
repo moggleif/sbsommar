@@ -22,6 +22,11 @@
   var modal        = document.getElementById('submit-modal');
   var modalHeading = document.getElementById('modal-heading');
   var modalContent = document.getElementById('modal-content');
+  var debugContent = document.getElementById('cookie-debug-content');
+
+  // Read the cookie domain from <body> to match session.js write-back (02-§90.12).
+  var cookieDomain = (document.body.dataset.cookieDomain || '').trim();
+  var domainPart = cookieDomain ? '; Domain=' + cookieDomain : '';
 
   // ── Utility ──────────────────────────────────────────────────────────────────
 
@@ -647,10 +652,6 @@
     });
   }
 
-  // Read the cookie domain from <body> to match session.js write-back (02-§90.12).
-  var cookieDomain = (document.body.dataset.cookieDomain || '').trim();
-  var domainPart = cookieDomain ? '; Domain=' + cookieDomain : '';
-
   function removeIdFromCookie(idToRemove) {
     var ids = readSessionIds().filter(function (id) { return id !== idToRemove; });
     var encoded = encodeURIComponent(JSON.stringify(ids));
@@ -698,8 +699,6 @@
   }
 
   // ── Cookie debug panel (02-§90.1–90.6) ────────────────────────────────────
-
-  var debugContent = document.getElementById('cookie-debug-content');
 
   function renderDebugPanel(eventsArray) {
     if (!debugContent) return;
