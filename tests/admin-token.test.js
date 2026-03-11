@@ -7,11 +7,11 @@
 //     disabled when ADMIN_TOKENS is unset (ADM-01..07)
 //   - render-admin.js: page structure, layout, form elements (ADM-08..12)
 //   - layout.js: footer includes admin-icon container (ADM-13..14)
-//   - admin-status module: expiry logic (ADM-15..17)
+//   - token-embedded expiry: extractTokenExpiry, isTokenExpired (ADM-25..35)
 //
 // Browser-only (manual checkpoints documented in traceability):
 //   - 02-§91.11: Calls POST /verify-admin on submit
-//   - 02-§91.12: Valid → store token + timestamp in localStorage, show success
+//   - 02-§91.12: Valid → store token in localStorage, show success
 //   - 02-§91.13: Invalid → show error, store nothing
 //   - 02-§91.19: Footer shows admin icon when token in localStorage
 //   - 02-§91.20: No token → nothing displayed
@@ -145,11 +145,9 @@ describe('pageFooter admin-icon container (02-§91.19)', () => {
   });
 });
 
-// ── Admin expiry logic ──────────────────────────────────────────────────────
-
-const { isAdminExpired, isTokenExpired, extractTokenExpiry, ADMIN_TTL_MS } = require('../source/api/admin');
-
 // ── Token-embedded expiry ───────────────────────────────────────────────────
+
+const { isTokenExpired, extractTokenExpiry } = require('../source/api/admin');
 
 describe('extractTokenExpiry', () => {
   it('ADM-25: extracts epoch from valid token format', () => {
@@ -207,30 +205,3 @@ describe('verifyAdminToken with embedded expiry', () => {
   });
 });
 
-describe('isAdminExpired (02-§91.16, §91.17, §91.18)', () => {
-  it('ADM-19: returns false when activated just now', () => {
-    assert.strictEqual(isAdminExpired(Date.now()), false);
-  });
-
-  it('ADM-20: returns false when activated 59 days ago', () => {
-    const fiftyNineDaysAgo = Date.now() - (59 * 24 * 60 * 60 * 1000);
-    assert.strictEqual(isAdminExpired(fiftyNineDaysAgo), false);
-  });
-
-  it('ADM-21: returns true when activated 61 days ago', () => {
-    const sixtyOneDaysAgo = Date.now() - (61 * 24 * 60 * 60 * 1000);
-    assert.strictEqual(isAdminExpired(sixtyOneDaysAgo), true);
-  });
-
-  it('ADM-22: returns true when activated is undefined', () => {
-    assert.strictEqual(isAdminExpired(undefined), true);
-  });
-
-  it('ADM-23: returns true when activated is 0', () => {
-    assert.strictEqual(isAdminExpired(0), true);
-  });
-
-  it('ADM-24: TTL constant is 60 days in ms', () => {
-    assert.strictEqual(ADMIN_TTL_MS, 60 * 24 * 60 * 60 * 1000);
-  });
-});

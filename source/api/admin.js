@@ -2,8 +2,6 @@
 
 const crypto = require('crypto');
 
-const ADMIN_TTL_MS = 60 * 24 * 60 * 60 * 1000; // 60 days
-
 // ── parseAdminTokens ────────────────────────────────────────────────────────
 
 // Parse the ADMIN_TOKENS environment variable (comma-separated string)
@@ -54,13 +52,4 @@ function verifyAdminToken(candidate, validTokens) {
   return false;
 }
 
-// ── isAdminExpired ──────────────────────────────────────────────────────────
-
-// Check if an admin activation timestamp has expired (> 30 days).
-// Used client-side and in tests; the server does not track expiry.
-function isAdminExpired(activatedMs) {
-  if (!activatedMs || typeof activatedMs !== 'number') return true;
-  return (Date.now() - activatedMs) > ADMIN_TTL_MS;
-}
-
-module.exports = { parseAdminTokens, verifyAdminToken, isAdminExpired, isTokenExpired, extractTokenExpiry, ADMIN_TTL_MS };
+module.exports = { parseAdminTokens, verifyAdminToken, isTokenExpired, extractTokenExpiry };

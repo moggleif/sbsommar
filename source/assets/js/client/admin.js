@@ -2,7 +2,6 @@
   'use strict';
 
   var STORAGE_KEY = 'sb_admin';
-  var TTL_MS = 60 * 24 * 60 * 60 * 1000; // 60 days
 
   // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -16,9 +15,21 @@
     }
   }
 
+  // Extract epoch (seconds) from the last underscore-segment of a token.
+  // Token format: namn_uuid_epoch
+  function extractExpiry(token) {
+    if (!token || typeof token !== 'string') return 0;
+    var i = token.lastIndexOf('_');
+    if (i === -1) return 0;
+    var n = Number(token.slice(i + 1));
+    return isFinite(n) && n > 0 ? n : 0;
+  }
+
   function isExpired(data) {
-    if (!data || typeof data.activated !== 'number') return true;
-    return (Date.now() - data.activated) > TTL_MS;
+    if (!data || !data.token) return true;
+    var expiry = extractExpiry(data.token);
+    if (expiry === 0) return true;
+    return Math.floor(Date.now() / 1000) > expiry;
   }
 
   // ── Footer status icon ─────────────────────────────────────────────────────
@@ -37,7 +48,7 @@
 
     if (isExpired(data)) {
       // Expired → open lock, link to /admin.html (02-§91.22)
-      container.innerHTML = '<a href="admin.html" class="admin-icon admin-icon--expired" title="Admin utgången">' +
+      container.innerHTML = '<a href="admin.html" class="admin-icon admin-icon--expired" title="Admin utgången — efterfråga ny token">' +
         '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
         '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>' +
         '<path d="M7 11V7a5 5 0 0 1 9.9-1"/>' +
@@ -65,6 +76,10 @@
       message.textContent = 'Admin-token är redan aktiv.';
       message.hidden = false;
       message.classList.add('admin-message--success');
+    } else if (existing && isExpired(existing)) {
+      message.textContent = 'Din admin-token har gått ut. Efterfråga en ny token och aktivera den här.';
+      message.hidden = false;
+      message.classList.add('admin-message--error');
     }
 
     form.addEventListener('submit', function (e) {
@@ -93,7 +108,6 @@
           if (data.valid) {
             localStorage.setItem(STORAGE_KEY, JSON.stringify({
               token: token,
-              activated: Date.now(),
             }));
             message.textContent = 'Admin-token aktiverad!';
             message.classList.add('admin-message--success');
