@@ -23,6 +23,7 @@ const PRE_CACHE_URLS = [
 const NO_CACHE_PATTERNS = [
   '/add-event',
   '/edit-event',
+  '/verify-admin',
   '/api/',
 ];
 
