@@ -3801,17 +3801,20 @@ accessible without network connectivity.
   `sw.js` only when the browser supports service workers. <!-- 02-§83.14 -->
 - The service worker must use a versioned cache name so that updates can
   invalidate old caches. <!-- 02-§83.15 -->
-- On `install`, the service worker must pre-cache all user-facing HTML pages
-  (`/`, `/schema.html`, `/idag.html`, `/lagg-till.html`, `/redigera.html`,
+- On `install`, the service worker must pre-cache read-only HTML pages
+  (`/`, `/index.html`, `/schema.html`, `/idag.html`,
   `/live.html`, `/arkiv.html`, `/kalender.html`), the CSS file, and the
-  manifest. <!-- 02-§83.16 -->
+  manifest. Pages that require network to function (`/lagg-till.html`,
+  `/redigera.html`) must not be pre-cached. <!-- 02-§83.16 -->
 - On `fetch`, the service worker must serve cached responses for navigation
   and static-asset requests when the network is unavailable
   (network-first with cache fallback for HTML, cache-first for CSS/JS/images). <!-- 02-§83.17 -->
 - On `activate`, the service worker must delete caches whose name does not
   match the current version. <!-- 02-§83.18 -->
-- The service worker must not cache API responses (`/api/` paths) or
-  form-submission endpoints (`/add-event`, `/edit-event`). <!-- 02-§83.19 -->
+- The service worker must not cache API responses (`/api/` paths),
+  form-submission endpoints (`/add-event`, `/edit-event`,
+  `/delete-event`), or pages that require network to function
+  (`/lagg-till.html`, `/redigera.html`). <!-- 02-§83.19 -->
 - The service worker must only handle requests with `http:` or `https:`
   schemes; all other schemes (e.g. `chrome-extension:`) must be
   ignored. <!-- 02-§83.27 -->
@@ -3837,6 +3840,9 @@ accessible without network connectivity.
   CSS) as other pages. <!-- 02-§83.31 -->
 - The offline page must display a Swedish-language message informing the
   user that they are offline. <!-- 02-§83.32 -->
+- The offline page must only link to pages that are pre-cached and
+  functional offline. It must not link to pages that require network
+  (e.g. `lagg-till.html`). <!-- 02-§83.35 -->
 - The service worker must pre-cache `offline.html` on install. <!-- 02-§83.33 -->
 
 ### 83.7 Implementation constraints

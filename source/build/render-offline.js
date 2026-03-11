@@ -37,7 +37,6 @@ ${pageNav('', navSections)}
     <li><a href="index.html">Hem</a></li>
     <li><a href="schema.html">Schema</a></li>
     <li><a href="idag.html">Dagens aktiviteter</a></li>
-    <li><a href="lagg-till.html">Lägg till aktivitet</a></li>
     <li><a href="arkiv.html">Arkiv</a></li>
   </ul>
   <p>Prova igen när du har internetåtkomst.</p>
