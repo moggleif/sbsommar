@@ -1100,9 +1100,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1113
-Covered (implemented + tested): 566
+Covered (implemented + tested): 569
 Implemented, not tested:        544
-Gap (no implementation):          3
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1867,11 +1867,11 @@ Matrix cleanup (2026-02-25):
 | `02-§83.12` | covered | PWA-05-*: all 8 pages include apple-touch-icon |
 | `02-§83.13` | covered | PWA-17: `source/static/sw.js` exists; `build.js` copies to public/ |
 | `02-§83.14` | covered | PWA-06-*: all 8 pages include sw-register.js |
-| `02-§83.15` | covered | PWA-18, PWA-31: sw.js CACHE_NAME is sb-sommar-v2 |
-| `02-§83.16` | gap | Updated: pre-cache excludes lagg-till.html, redigera.html; adds /index.html |
+| `02-§83.15` | covered | PWA-18, PWA-31: sw.js CACHE_NAME is sb-sommar-v3 |
+| `02-§83.16` | covered | PWA-19, PWA-19b: pre-cache excludes lagg-till.html, redigera.html; includes /index.html |
 | `02-§83.17` | implemented | Manual: verify network-first HTML, cache-first assets in browser DevTools |
 | `02-§83.18` | covered | PWA-20: sw.js activate handler deletes old caches |
-| `02-§83.19` | gap | Updated: also excludes /lagg-till.html, /redigera.html, /delete-event |
+| `02-§83.19` | covered | PWA-21: NO_CACHE_PATTERNS includes /lagg-till.html, /redigera.html, /delete-event |
 | `02-§83.20` | manual | User provides sbsommar-icon-192.png and sbsommar-icon-512.png in source/content/images/ |
 | `02-§83.21` | implemented | Build copies content/images/ to public/images/ (existing pipeline) |
 | `02-§83.22` | done | Service worker in vanilla JavaScript, no frameworks |
@@ -1886,8 +1886,8 @@ Matrix cleanup (2026-02-25):
 | `02-§83.31` | implemented | Manual: verify offline page uses shared nav/footer/CSS |
 | `02-§83.32` | covered | PWA-29: offline page contains Swedish offline text |
 | `02-§83.33` | covered | PWA-30: offline.html in PRE_CACHE_URLS |
-| `02-§83.34` | covered | PWA-31: CACHE_NAME is sb-sommar-v2 |
-| `02-§83.35` | gap | New: offline page must only link to pages functional offline |
+| `02-§83.34` | covered | PWA-31: CACHE_NAME is sb-sommar-v3 |
+| `02-§83.35` | covered | PWA-32, PWA-33: offline page <main> does not link to lagg-till.html or redigera.html |
 
 ### §84 — API Error Messages
 
