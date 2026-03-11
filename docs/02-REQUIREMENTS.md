@@ -3972,3 +3972,53 @@ newer browser versions.
 
 - No new npm dependencies. <!-- 02-§87.7 -->
 - Existing tests must continue to pass. <!-- 02-§87.8 -->
+
+## 88. PWA Install Guide
+
+Many users — especially on iPhone — do not notice that the site can be
+installed as an app. A discreet install button in the top bar helps them
+discover this without being intrusive.
+
+### 88.1 Install button in navigation (user requirements)
+
+- The header bar must include an install button alongside the existing
+  controls (hamburger menu, scroll-to-top, feedback). <!-- 02-§88.1 -->
+- The button must use a recognisable install/download icon, styled
+  consistently with the other header buttons. <!-- 02-§88.2 -->
+- The button label/tooltip must be in Swedish
+  (e.g. "Installera appen"). <!-- 02-§88.3 -->
+- The button must appear on all pages (it lives in the shared
+  header). <!-- 02-§88.4 -->
+
+### 88.2 Platform-specific behaviour (site requirements)
+
+- On browsers that support the `beforeinstallprompt` event
+  (Chrome/Edge on Android and desktop), the button must capture the
+  event and trigger the native install prompt when clicked. <!-- 02-§88.5 -->
+- After a successful installation (detected via the `appinstalled`
+  event), the button must be hidden. <!-- 02-§88.6 -->
+- On iOS Safari (detected by user-agent and lack of
+  `beforeinstallprompt`), the button must show a tooltip or small
+  overlay with the instruction: "Tryck på Dela-ikonen och välj
+  'Lägg till på hemskärmen'". <!-- 02-§88.7 -->
+- The iOS tooltip must close when the user taps outside it or presses
+  Escape. <!-- 02-§88.8 -->
+- When the site is already running in standalone mode
+  (`display-mode: standalone`), the button must not be rendered at
+  all. <!-- 02-§88.9 -->
+- On browsers where neither `beforeinstallprompt` nor iOS Safari is
+  detected, the button must not be rendered. <!-- 02-§88.10 -->
+
+### 88.3 Persistence (site requirements)
+
+- The button is always visible as long as the platform conditions are
+  met — no dismiss logic and no localStorage gating. <!-- 02-§88.11 -->
+
+### 88.4 Constraints
+
+- The install button logic must be implemented in a dedicated vanilla
+  JavaScript file (`pwa-install.js`). <!-- 02-§88.12 -->
+- CSS must use custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§88.13 -->
+- No new npm dependencies. <!-- 02-§88.14 -->
+- Existing pages and functionality must not break. <!-- 02-§88.15 -->
+- All user-facing text must be in Swedish. <!-- 02-§88.16 -->
