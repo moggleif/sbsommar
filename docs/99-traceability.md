@@ -1946,3 +1946,31 @@ Matrix cleanup (2026-02-25):
 | `02-§88.14` | done | No new npm dependencies |
 | `02-§88.15` | covered | All 1429 existing tests pass |
 | `02-§88.16` | covered | INST-04, INST-05: Swedish text verified |
+
+### §89 — Delete Activity
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§89.1` | gap | Delete button visible on edit page when event loaded |
+| `02-§89.2` | gap | Button label "Radera aktivitet", destructive styling |
+| `02-§89.3` | gap | Confirmation dialog shown before deletion |
+| `02-§89.4` | gap | Confirmation dialog includes event title |
+| `02-§89.5` | gap | Dialog has "Ja, radera" and "Avbryt" buttons |
+| `02-§89.6` | gap | Swedish confirmation shown after successful deletion |
+| `02-§89.7` | gap | Button hidden when editing period closed or event passed |
+| `02-§89.8` | gap | Progress modal shown after confirmation |
+| `02-§89.9` | gap | Progress modal shows sending/checking/deleting steps |
+| `02-§89.10` | gap | Success modal with link to schedule |
+| `02-§89.11` | gap | Error modal with retry option |
+| `02-§89.12` | gap | POST /delete-event endpoint exists |
+| `02-§89.13` | gap | Server reads sb_session cookie for ownership |
+| `02-§89.14` | gap | Server returns 403 if event not in cookie |
+| `02-§89.15` | gap | Server returns 400 if event date passed |
+| `02-§89.16` | gap | Server returns 400 if editing period closed |
+| `02-§89.17` | gap | Server removes event from YAML via ephemeral branch/PR |
+| `02-§89.18` | gap | Event ID removed from sb_session cookie after delete |
+| `02-§89.19` | gap | Reuses existing modal/progress/a11y patterns |
+| `02-§89.20` | gap | CSS uses custom properties from 07-DESIGN.md §7 |
+| `02-§89.21` | gap | No new npm dependencies |
+| `02-§89.22` | gap | All user-facing text in Swedish |
+| `02-§89.23` | gap | Delete request uses credentials: 'include' |
