@@ -1099,10 +1099,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1084
+Total requirements:            1112
 Covered (implemented + tested): 553
 Implemented, not tested:        530
-Gap (no implementation):          0
+Gap (no implementation):         28
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1995,3 +1995,36 @@ Matrix cleanup (2026-02-25):
 | `02-§90.14` | implemented | All text in Swedish: "Om din cookie", "finns i schemat", "passerat", etc. |
 | `02-§90.15` | implemented | CSS uses --color-*, --space-*, --font-size-*, --radius-* tokens |
 | `02-§90.16` | covered | CKD-04: inside `<main>`; summary has :focus-visible styling |
+
+### §91 — Admin Token — Activation and Status Indicator
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§91.1` | gap | `ADMIN_TOKENS` env var, comma-separated |
+| `02-§91.2` | gap | Tokens are opaque strings (UUIDs) |
+| `02-§91.3` | gap | No admin functionality when `ADMIN_TOKENS` unset |
+| `02-§91.4` | gap | `POST /verify-admin` endpoint exists |
+| `02-§91.5` | gap | Request body `{ "token": "<string>" }` |
+| `02-§91.6` | gap | Valid token → `200 { "valid": true }` |
+| `02-§91.7` | gap | Invalid token → `403 { "valid": false }` |
+| `02-§91.8` | gap | Constant-time string comparison |
+| `02-§91.9` | gap | `/admin.html` page exists |
+| `02-§91.10` | gap | Text input + submit button |
+| `02-§91.11` | gap | Calls `POST /verify-admin` on submit |
+| `02-§91.12` | gap | Valid: store token + timestamp in localStorage, show success |
+| `02-§91.13` | gap | Invalid: show error, store nothing |
+| `02-§91.14` | gap | Uses shared layout (header, nav, footer) |
+| `02-§91.15` | gap | Not listed in navigation |
+| `02-§91.16` | gap | Token expired after 30 days (2 592 000 000 ms) |
+| `02-§91.17` | gap | Expiry checked client-side |
+| `02-§91.18` | gap | Expired token treated as no token |
+| `02-§91.19` | gap | Footer shows admin icon when token in localStorage |
+| `02-§91.20` | gap | No token → nothing displayed |
+| `02-§91.21` | gap | Valid token → filled/locked icon |
+| `02-§91.22` | gap | Expired token → open/unlocked icon, links to `/admin.html` |
+| `02-§91.23` | gap | Icon is small and unobtrusive |
+| `02-§91.24` | gap | Icon has Swedish `title` attribute |
+| `02-§91.25` | gap | All text in Swedish |
+| `02-§91.26` | gap | CSS uses custom properties from 07-DESIGN.md §7 |
+| `02-§91.27` | gap | Accessible (keyboard-navigable, screen-reader friendly) |
+| `02-§91.28` | gap | Token never sent in cookies, only localStorage + request bodies |

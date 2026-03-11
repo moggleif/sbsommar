@@ -150,6 +150,7 @@ flowchart TD
 | `GITHUB_REPO`    | —       | GitHub repository name                                   |
 | `GITHUB_BRANCH`  | —       | Branch to commit events to (typically `main`)            |
 | `GITHUB_TOKEN`   | —       | Personal access token with repo write access             |
+| `ADMIN_TOKENS`   | —       | Comma-separated admin tokens (UUIDs). Omit to disable.   |
 
 `API_URL`, `ALLOWED_ORIGIN`, `COOKIE_DOMAIN`, `GITHUB_*`, and SSH credentials are stored as GitHub Actions secrets and server environment variables. They are not needed for local development. Without `API_URL` set, the built form will have no submit endpoint — this is expected in local builds. Without `GITHUB_*` set, event submission via the API will fail; all other functionality works normally.
 
@@ -177,6 +178,24 @@ camp:
   end_date: '2026-07-05'
 events: []
 ```
+
+### Admin Tokens (optional)
+
+If one or two people need the ability to edit or delete any event
+through the site UI (not just their own):
+
+1. Generate a token for each admin:
+   `node -e "console.log(crypto.randomUUID())"`
+2. Add the tokens to the environment variable `ADMIN_TOKENS` as a
+   comma-separated list (in `.env` locally, in GitHub Environment
+   secrets for QA/Production, and in the PHP `api/.env` on the server).
+3. Share each token privately with the corresponding admin (e.g. via
+   SMS or in person).
+4. The admin visits `/admin.html`, enters the token, and gains admin
+   status for 30 days.
+
+Tokens can be revoked at any time by removing them from `ADMIN_TOKENS`
+and redeploying. No code change is needed.
 
 ### During Camp
 

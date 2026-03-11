@@ -2035,6 +2035,82 @@ browser tab, closing the tab also clears the data — no expiry logic is needed.
 
 ---
 
+## 30. Admin Token Infrastructure
+
+### Purpose
+
+A lightweight admin mechanism allows designated administrators to bypass
+the per-event cookie ownership model. This section covers only the token
+infrastructure — storage, activation, verification, and status display.
+The behaviour changes that use the token (e.g. editing any event) are
+defined in a future requirement.
+
+### Token storage (server)
+
+Admin tokens are stored in the environment variable `ADMIN_TOKENS` as a
+comma-separated list of opaque strings (e.g. UUIDs). Both the Node.js
+server (`app.js`) and the PHP API (`api/`) read this variable at startup.
+When the variable is unset or empty, all admin functionality is disabled.
+
+### Verification endpoint
+
+`POST /verify-admin` accepts `{ "token": "<string>" }` and responds:
+
+- `200 { "valid": true }` — token found in `ADMIN_TOKENS`
+- `403 { "valid": false }` — token not found
+
+The comparison uses constant-time string comparison to prevent timing
+attacks.
+
+### Token storage (client)
+
+The admin token is stored in `localStorage` under the key `sb_admin`:
+
+```json
+{ "token": "<string>", "activated": 1710000000000 }
+```
+
+The token is never placed in a cookie. It is sent explicitly in API
+request bodies when admin privileges are needed.
+
+### Expiry
+
+A token is considered expired if more than 30 days (2 592 000 000 ms)
+have passed since the `activated` timestamp. Expiry is checked
+client-side. An expired token behaves as if no token exists.
+
+### Activation page
+
+`/admin.html` — a minimal page with a text input and submit button.
+On submit, it calls `POST /verify-admin`. If valid, the token and
+timestamp are stored in `localStorage`. The page shares the site layout
+(header, navigation, footer) but is **not listed in the navigation**.
+
+### Footer status indicator
+
+A small icon in the shared site footer shows admin status:
+
+| State | Display |
+| --- | --- |
+| No token in `localStorage` | Nothing shown |
+| Valid token (< 30 days) | Filled/locked icon with title "Admin aktiv" |
+| Expired token (> 30 days) | Open/unlocked icon with title "Admin utgången", links to `/admin.html` |
+
+The icon is rendered client-side by a script included in the footer
+layout, reading from `localStorage`.
+
+### Files (planned)
+
+| File | Role |
+| --- | --- |
+| `source/build/render-admin.js` | Build-time render of `/admin.html` |
+| `source/assets/js/client/admin.js` | Client-side: activation form + footer icon |
+| `source/build/layout.js` | Updated `pageFooter()` to include admin icon container |
+| `app.js` | New `POST /verify-admin` endpoint (Node.js) |
+| `api/index.php` | New `POST /verify-admin` endpoint (PHP) |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
