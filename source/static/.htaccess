@@ -15,6 +15,11 @@
     Header set Cache-Control "max-age=604800, public"
   </FilesMatch>
 
+  # Service worker — always revalidate (must come after the JS rule)
+  <FilesMatch "^sw\.js$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
   # HTML — always revalidate
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"

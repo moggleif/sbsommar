@@ -417,6 +417,24 @@ async function main() {
   if (fs.existsSync(swSrc)) {
     fs.copyFileSync(swSrc, path.join(OUTPUT_DIR, 'sw.js'));
     console.log('Copied: source/static/sw.js → public/sw.js');
+
+    // Cache-bust sw.js registration so browsers fetch the latest version.
+    const swHash = crypto.createHash('md5')
+      .update(fs.readFileSync(path.join(OUTPUT_DIR, 'sw.js')))
+      .digest('hex')
+      .slice(0, 8);
+    const swRegPath = path.join(OUTPUT_DIR, 'sw-register.js');
+    if (fs.existsSync(swRegPath)) {
+      const swReg = fs.readFileSync(swRegPath, 'utf8');
+      const updated = swReg.replace(
+        "register('/sw.js')",
+        `register('/sw.js?v=${swHash}')`,
+      );
+      if (updated !== swReg) {
+        fs.writeFileSync(swRegPath, updated, 'utf8');
+        console.log(`Cache-bust: sw.js?v=${swHash}`);
+      }
+    }
   }
 
   // ── Post-process: CSS cache-busting (02-§69.1–69.3) ───────────────────
