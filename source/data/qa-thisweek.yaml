@@ -471,3 +471,48 @@ events:
   meta:
     created_at: 2026-03-11 06:31
     updated_at: 2026-03-11 06:31
+- id: lagger-till-2026-03-13-1212
+  title: Lägger till
+  date: '2026-03-13'
+  start: '12:12'
+  end: '15:15'
+  location: Fritidsgården
+  responsible: Morgan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-03-11 09:20
+    updated_at: 2026-03-11 09:20
+- id: lagger-till-2026-03-14-1212
+  title: Lägger till
+  date: '2026-03-14'
+  start: '12:12'
+  end: '15:15'
+  location: Fritidsgården
+  responsible: Morgan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-03-11 09:20
+    updated_at: 2026-03-11 09:20
+- id: lagger-till-2026-03-15-1212
+  title: Lägger till
+  date: '2026-03-15'
+  start: '12:12'
+  end: '15:15'
+  location: Fritidsgården
+  responsible: Morgan
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-03-11 09:20
+    updated_at: 2026-03-11 09:20
