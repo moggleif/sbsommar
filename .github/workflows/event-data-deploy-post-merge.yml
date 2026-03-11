@@ -27,7 +27,7 @@ jobs:
     environment: qa
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -45,7 +45,7 @@ jobs:
             echo "Detected changed file: $CHANGED"
           fi
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         if: steps.gate.outputs.skip != 'true'
         with:
           node-version: '20'
@@ -101,11 +101,11 @@ jobs:
     environment: production
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
