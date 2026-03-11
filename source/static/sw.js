@@ -64,7 +64,7 @@ self.addEventListener('fetch', (event) => {
   // Ignore non-HTTP(S) schemes (e.g. chrome-extension://).
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
-  // Never cache API calls or form submissions.
+  // Never cache API calls, form submissions, or network-dependent pages.
   if (NO_CACHE_PATTERNS.some((p) => url.pathname.includes(p))) return;
 
   // events.json: network-first so offline still shows schedule data.
