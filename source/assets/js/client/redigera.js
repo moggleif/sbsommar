@@ -243,19 +243,23 @@
 
     if (opensDate && closesDate) {
       var todayGate = new Date().toISOString().slice(0, 10);
-      if (todayGate < opensDate) {
-        var parts = opensDate.split('-');
-        var months = ['januari','februari','mars','april','maj','juni',
-                      'juli','augusti','september','oktober','november','december'];
-        var formatted = parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+      if (todayGate < opensDate || todayGate > closesDate) {
+        if (todayGate < opensDate) {
+          var parts = opensDate.split('-');
+          var months = ['januari','februari','mars','april','maj','juni',
+                        'juli','augusti','september','oktober','november','december'];
+          var formatted = parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+          errorMsg.textContent = 'Formuläret öppnar den ' + formatted + '.';
+        } else {
+          errorMsg.textContent = 'Lägret är avslutat.';
+        }
         loadingEl.hidden = true;
-        errorMsg.textContent = 'Formuläret öppnar den ' + formatted + '.';
         errorEl.hidden = false;
-        return;
-      } else if (todayGate > closesDate) {
-        loadingEl.hidden = true;
-        errorMsg.textContent = 'Lägret är avslutat.';
-        errorEl.hidden = false;
+        // Still render cookie debug panel before returning.
+        fetch('/events.json')
+          .then(function (r) { return r.json(); })
+          .then(function (events) { renderDebugPanel(events); })
+          .catch(function () { renderDebugPanel(null); });
         return;
       }
     }
