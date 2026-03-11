@@ -64,16 +64,56 @@
     return map;
   }
 
+  // ── Admin token helper ──────────────────────────────────────────────────────
+
+  // Check if a valid (non-expired) admin token exists in localStorage (02-§7.3).
+  function hasValidAdminToken() {
+    try {
+      var raw = localStorage.getItem('sb_admin');
+      if (!raw) return false;
+      var data = JSON.parse(raw);
+      if (!data || !data.token || typeof data.token !== 'string') return false;
+      var i = data.token.lastIndexOf('_');
+      if (i === -1) return false;
+      var epoch = Number(data.token.slice(i + 1));
+      if (!isFinite(epoch) || epoch <= 0) return false;
+      return Math.floor(Date.now() / 1000) <= epoch;
+    } catch {
+      return false;
+    }
+  }
+
   // ── Edit link injection ─────────────────────────────────────────────────────
 
-  function injectEditLinks(ownedIds) {
-    if (!ownedIds.length) return;
+  function injectEditLinks(ownedIds, isAdmin) {
     var today = new Date().toISOString().slice(0, 10);
+
+    if (isAdmin) {
+      // Admin: inject edit link on ALL future event rows (02-§18.16).
+      var allRows = document.querySelectorAll('[data-event-id]');
+      allRows.forEach(function (row) {
+        var date = row.getAttribute('data-event-date');
+        if (date && date < today) return;
+
+        var id = row.getAttribute('data-event-id');
+        var link = document.createElement('a');
+        link.href = 'redigera.html?id=' + encodeURIComponent(id);
+        link.textContent = 'Redigera';
+        link.className = 'edit-link';
+
+        var target = (row.tagName === 'DETAILS')
+          ? row.querySelector('summary')
+          : row;
+        (target || row).appendChild(link);
+      });
+      return;
+    }
+
+    if (!ownedIds.length) return;
 
     ownedIds.forEach(function (id) {
       var rows = document.querySelectorAll('[data-event-id="' + CSS.escape(id) + '"]');
       rows.forEach(function (row) {
-        // Only inject if the event date hasn't passed.
         var date = row.getAttribute('data-event-date');
         if (date && date < today) return;
 
@@ -82,8 +122,6 @@
         link.textContent = 'Redigera';
         link.className = 'edit-link';
 
-        // For <details> rows the link must go inside <summary> so it is
-        // visible when collapsed, not hidden in the expandable body.
         var target = (row.tagName === 'DETAILS')
           ? row.querySelector('summary')
           : row;
@@ -143,7 +181,10 @@
   // Repair duplicates first (before expiry cleanup).
   var repair = repairDuplicateCookies();
   var ids = repair.repaired ? repair.ids : readSessionIds();
-  if (!ids.length) return;
+  var isAdmin = hasValidAdminToken();
+
+  // If no cookie IDs and not admin, nothing to do.
+  if (!ids.length && !isAdmin) return;
 
   // Fetch events.json to validate dates and clean up expired IDs.
   fetch('/events.json')
@@ -155,10 +196,10 @@
       // Persist the cleaned list back.
       writeSessionIds(active);
 
-      injectEditLinks(active);
+      injectEditLinks(active, isAdmin);
     })
     .catch(function () {
       // If events.json is unavailable, still inject links for what we have.
-      injectEditLinks(ids);
+      injectEditLinks(ids, isAdmin);
     });
 })();

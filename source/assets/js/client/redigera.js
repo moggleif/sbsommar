@@ -208,6 +208,26 @@
     return [];
   }
 
+  // ── Admin token helper (02-§7.3) ─────────────────────────────────────────────
+
+  function getAdminToken() {
+    try {
+      var raw = localStorage.getItem('sb_admin');
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || !data.token || typeof data.token !== 'string') return null;
+      var i = data.token.lastIndexOf('_');
+      if (i === -1) return null;
+      var epoch = Number(data.token.slice(i + 1));
+      if (!isFinite(epoch) || epoch <= 0) return null;
+      return Math.floor(Date.now() / 1000) <= epoch ? data.token : null;
+    } catch {
+      return null;
+    }
+  }
+
+  var adminToken = getAdminToken();
+
   // ── Error display ────────────────────────────────────────────────────────────
 
   function showError(msg) {
@@ -340,7 +360,8 @@
   }
 
   // Specific event selected — existing edit behaviour (02-§48.17)
-  if (ownedIds.indexOf(eventId) === -1) {
+  // Authorised if event ID is in session cookie OR user has admin token (02-§7.3).
+  if (ownedIds.indexOf(eventId) === -1 && !adminToken) {
     showError('Du har inte rättighet att redigera denna aktivitet.');
     fetch('/events.json')
       .then(function (r) { return r.json(); })
@@ -506,11 +527,7 @@
       lock();
       setModalLoading();
 
-      fetch(form.dataset.apiUrl || '/edit-event', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      var editBody = {
           id:          els.id.value,
           title:       title,
           date:        date,
@@ -520,7 +537,14 @@
           responsible: responsible,
           description: els.description.value,
           link:        els.link.value.trim(),
-        }),
+        };
+      if (adminToken) editBody.adminToken = adminToken;
+
+      fetch(form.dataset.apiUrl || '/edit-event', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editBody),
       })
         .then(function (r) { return r.json(); })
         .then(function (json) {
@@ -679,11 +703,14 @@
 
     setDeleteModalLoading();
 
+    var deleteBody = { id: id, date: date };
+    if (adminToken) deleteBody.adminToken = adminToken;
+
     fetch(form.dataset.deleteUrl || '/delete-event', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: id, date: date }),
+      body: JSON.stringify(deleteBody),
     })
       .then(function (r) { return r.json(); })
       .then(function (json) {
