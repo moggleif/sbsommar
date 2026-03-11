@@ -429,8 +429,17 @@ edit events they do not own.
    cleaned cookie back (or deletes it if the array becomes empty).
    The write-back must include the same `Domain` attribute the server used,
    read from a `data-cookie-domain` attribute injected on `<body>` at build time.
-5. Schedule pages read the cookie and attach "Redigera" links to matching
+5. Before the expiry cleanup, `session.js` detects duplicate `sb_session`
+   cookies (e.g. one with `Domain` and one without, caused by a historical
+   bug in `removeIdFromCookie`). If duplicates are found, all ID arrays are
+   merged and deduplicated, both cookie variants are deleted, and a single
+   correct cookie is written back. This repair is transparent to the user.
+6. Schedule pages read the cookie and attach "Redigera" links to matching
    event rows.
+7. The edit page (`redigera.html`) includes a collapsible "Om din cookie"
+   section that displays the cookie contents: protocol, cookie domain,
+   stored event IDs with their status (active / expired / not found in
+   schema), and whether automatic repair was performed.
 
 ### /events.json
 

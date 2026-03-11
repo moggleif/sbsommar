@@ -1974,3 +1974,24 @@ Matrix cleanup (2026-02-25):
 | `02-§89.21` | done | No new npm dependencies added |
 | `02-§89.22` | implemented | All text in Swedish: "Radera aktivitet", "Ja, radera", "Avbryt", etc. |
 | `02-§89.23` | implemented | redigera.js fetch uses credentials: 'include' |
+
+### §90 — Cookie Debug Panel and Session Cookie Repair
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§90.1` | gap | Edit page includes collapsible cookie info section |
+| `02-§90.2` | gap | Section displays protocol, domain, ID count, ID status list, repair status |
+| `02-§90.3` | gap | Section collapsed by default with Swedish heading |
+| `02-§90.4` | gap | Content updates dynamically after events.json fetch |
+| `02-§90.5` | gap | Explanation that passed events are removed from cookie |
+| `02-§90.6` | gap | Sets user expectations about normal cleanup behaviour |
+| `02-§90.7` | gap | session.js detects duplicate sb_session cookies |
+| `02-§90.8` | gap | Duplicates are parsed, merged, and deduplicated |
+| `02-§90.9` | gap | All cookie variants deleted via Max-Age=0 |
+| `02-§90.10` | gap | Single correct cookie written back with proper attributes |
+| `02-§90.11` | gap | Repair runs before expiry cleanup |
+| `02-§90.12` | gap | removeIdFromCookie uses Secure + Domain attributes |
+| `02-§90.13` | gap | Consistent with 02-§44.16 |
+| `02-§90.14` | gap | All user-facing text in Swedish |
+| `02-§90.15` | gap | CSS uses custom properties from 07-DESIGN.md §7 |
+| `02-§90.16` | gap | Debug panel is accessible |
