@@ -62,6 +62,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  max-width: var(--container-narrow);
 }
 
 .rss-link {
@@ -307,6 +308,12 @@ blockquote {
   margin-bottom: var(--space-lg);
 }
 
+/* ── Today page ── */
+
+#today-events {
+  max-width: var(--container-narrow);
+}
+
 /* ── Today card (live / display view) ── */
 
 .today-card {
@@ -457,6 +464,7 @@ details.day {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   overflow: hidden;
+  max-width: var(--container-narrow);
 }
 
 details.day > summary {
@@ -1941,6 +1949,12 @@ body.modal-open {
   white-space: pre-line;
 }
 
+/* ── Archive page ── */
+
+.page-content {
+  max-width: var(--container-narrow);
+}
+
 /* ── Archive timeline ── */
 
 .timeline {
@@ -2612,9 +2626,20 @@ body.modal-open {
   }
 }
 
+/* ── Edit page sections ── */
+
+#edit-loading,
+#edit-no-session,
+#edit-my-events,
+#edit-error,
+#edit-section {
+  max-width: var(--container-narrow);
+}
+
 /* ── Cookie debug panel (02-§90) ───────────────────────────────────────────── */
 
 .cookie-debug {
+  max-width: var(--container-narrow);
   margin-top: var(--space-lg);
   border: 1px solid var(--color-sage);
   border-radius: var(--radius-md);
