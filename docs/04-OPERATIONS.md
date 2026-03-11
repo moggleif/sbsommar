@@ -184,13 +184,13 @@ events: []
 If one or two people need the ability to edit or delete any event
 through the site UI (not just their own):
 
-1. Generate a token for each admin:
-   `node -e "console.log(crypto.randomUUID())"`
-2. Add the tokens to the environment variable `ADMIN_TOKENS` as a
-   comma-separated list (in `.env` locally, in GitHub Environment
-   secrets for QA/Production, and in the PHP `api/.env` on the server).
-3. Share each token privately with the corresponding admin (e.g. via
-   SMS or in person).
+1. Run `npm run admin:create` and follow the prompts. The script
+   generates a token in the format `namn_uuid` and prints instructions.
+   The token is shown only once — save it immediately.
+2. Add the token to `ADMIN_TOKENS` in all three locations (see script
+   output): `.env`, `api/.env` on the server, and GitHub Environment
+   secrets for QA/Production.
+3. Share the token privately with the admin (e.g. via SMS or in person).
 4. The admin visits `/admin.html`, enters the token, and gains admin
    status for 30 days.
 
