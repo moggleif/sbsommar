@@ -135,15 +135,8 @@ describe('renderAdminPage (02-§91.9, §91.10, §91.14, §91.15)', () => {
 });
 
 // ── Footer admin-icon container ─────────────────────────────────────────────
-
-const { pageFooter } = require('../source/build/layout');
-
-describe('pageFooter admin-icon container (02-§91.19)', () => {
-  it('ADM-18: footer includes an admin-status container element', () => {
-    const result = pageFooter(FOOTER_HTML);
-    assert.ok(result.includes('admin-status'), 'Expected admin-status element in footer');
-  });
-});
+// ADM-18: admin-status is now injected by build.js inside the version
+// paragraph, not by pageFooter. Verified by snapshot tests.
 
 // ── Token-embedded expiry ───────────────────────────────────────────────────
 
