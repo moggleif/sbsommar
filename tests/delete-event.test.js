@@ -198,4 +198,11 @@ describe('deleteApiUrl', () => {
       'https://api.example.com/delete-event',
     );
   });
+
+  it('DEL-18: replaces /edit-event with /delete-event', () => {
+    assert.strictEqual(
+      deleteApiUrl('https://api.example.com/edit-event'),
+      'https://api.example.com/delete-event',
+    );
+  });
 });

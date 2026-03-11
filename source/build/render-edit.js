@@ -16,10 +16,11 @@ function editApiUrl(addUrl) {
   return addUrl.replace(/\/add-event$/, '/edit-event');
 }
 
-// Derive the delete-event API URL from the add-event API URL.
-function deleteApiUrl(addUrl) {
-  if (!addUrl) return '/delete-event';
-  return addUrl.replace(/\/add-event$/, '/delete-event');
+// Derive the delete-event API URL from any event API URL.
+// Handles both /add-event and /edit-event as input.
+function deleteApiUrl(url) {
+  if (!url) return '/delete-event';
+  return url.replace(/\/(add|edit)-event$/, '/delete-event');
 }
 
 function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = [], goatcounterCode = '') {
