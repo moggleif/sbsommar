@@ -35,18 +35,17 @@
 html {
   overflow-x: hidden;
   overflow-x: clip;
+  overflow-y: scroll;
   scroll-padding-top: 80px;
-  scrollbar-gutter: stable;
+  background: var(--color-cream);
 }
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin: 0;
   font-family: var(--font-sans);
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: var(--space-xs) var(--space-sm) 0;
   color: var(--color-charcoal);
   background: var(--color-cream);
   font-size: 16px;
@@ -54,8 +53,12 @@ body {
   overflow-wrap: break-word;
 }
 
-main {
+.site-content {
   flex: 1;
+  max-width: var(--container);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-xs) var(--space-sm) 0;
 }
 
 h1 {
@@ -2226,24 +2229,14 @@ body.modal-open {
 /* ── Site footer ── */
 
 .site-footer {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px var(--space-md);
-  max-width: var(--container-narrow);
-  margin-top: auto;
-  padding: var(--space-md) 0;
+  padding: var(--space-md) var(--space-sm);
   font-size: var(--font-size-nav);
   color: var(--color-charcoal);
-}
-
-.site-footer::before {
-  content: '';
-  position: absolute;
-  inset: 0 -9999px;
   background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
-  z-index: -1;
 }
 
 .site-footer p {
@@ -2515,12 +2508,11 @@ body.modal-open {
      pseudo-elements (inset: 0 -9999px) are not needed. Hide them and
      set the background directly on the elements instead. */
   .page-nav::before,
-  .content section.section-alt::before,
-  .site-footer::before {
+  .content section.section-alt::before {
     display: none;
   }
 
-  body {
+  .site-content {
     padding-top: 0;
   }
 
@@ -2535,13 +2527,6 @@ body.modal-open {
     background: var(--color-cream-light);
     margin-left: calc(-1 * var(--space-sm));
     margin-right: calc(-1 * var(--space-sm));
-    padding-left: var(--space-sm);
-    padding-right: var(--space-sm);
-  }
-
-  .site-footer {
-    background: color-mix(in srgb, var(--color-sage) 15%, var(--color-cream));
-    margin: 0 calc(-1 * var(--space-sm));
     padding-left: var(--space-sm);
     padding-right: var(--space-sm);
   }
