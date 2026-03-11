@@ -1100,9 +1100,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1068
-Covered (implemented + tested): 540
-Implemented, not tested:        511
-Gap (no implementation):         16
+Covered (implemented + tested): 548
+Implemented, not tested:        519
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1930,19 +1930,19 @@ Matrix cleanup (2026-02-25):
 
 | Requirement | Status | Test / Evidence |
 | ----------- | ------ | --------------- |
-| `02-§88.1` | gap | |
-| `02-§88.2` | gap | |
-| `02-§88.3` | gap | |
-| `02-§88.4` | gap | |
-| `02-§88.5` | gap | |
-| `02-§88.6` | gap | |
-| `02-§88.7` | gap | |
-| `02-§88.8` | gap | |
-| `02-§88.9` | gap | |
-| `02-§88.10` | gap | |
-| `02-§88.11` | gap | |
-| `02-§88.12` | gap | |
-| `02-§88.13` | gap | |
-| `02-§88.14` | gap | |
-| `02-§88.15` | gap | |
-| `02-§88.16` | gap | |
+| `02-§88.1` | covered | INST-03: nav includes pwa-install-btn on all nav pages |
+| `02-§88.2` | covered | INST-06: button has SVG icon |
+| `02-§88.3` | covered | INST-04: aria-label "Installera appen"; JS sets title |
+| `02-§88.4` | covered | INST-02: all 8 pages include pwa-install.js |
+| `02-§88.5` | covered | INST-07: JS handles beforeinstallprompt |
+| `02-§88.6` | covered | INST-08: JS handles appinstalled |
+| `02-§88.7` | manual | Browser-only: verify iOS tooltip shows instruction text |
+| `02-§88.8` | manual | Browser-only: outside click and Escape close tooltip |
+| `02-§88.9` | covered | INST-09: JS checks display-mode: standalone |
+| `02-§88.10` | implemented | JS hides btn unless beforeinstallprompt fires or iOS detected |
+| `02-§88.11` | implemented | No localStorage/dismiss logic in code |
+| `02-§88.12` | covered | INST-01: pwa-install.js exists |
+| `02-§88.13` | implemented | CSS uses custom properties from 07-DESIGN.md §7 |
+| `02-§88.14` | done | No new npm dependencies |
+| `02-§88.15` | covered | All 1429 existing tests pass |
+| `02-§88.16` | covered | INST-04, INST-05: Swedish text verified |
