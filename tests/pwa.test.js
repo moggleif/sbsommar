@@ -251,23 +251,43 @@ describe('02-§83.15 — Service worker uses versioned cache name', () => {
 
 // ── 02-§83.16 — Install pre-caches core pages ──────────────────────────────
 
-describe('02-§83.16 — Install pre-caches all user-facing pages', () => {
+describe('02-§83.16 — Install pre-caches read-only pages', () => {
   const EXPECTED_PAGES = [
-    '/',
-    'schema.html',
-    'idag.html',
-    'lagg-till.html',
-    'redigera.html',
-    'live.html',
-    'arkiv.html',
-    'kalender.html',
+    "'/'",
+    "'/index.html'",
+    "'/schema.html'",
+    "'/idag.html'",
+    "'/live.html'",
+    "'/arkiv.html'",
+    "'/kalender.html'",
   ];
 
-  it('PWA-19: sw.js pre-caches all user-facing pages', () => {
+  const EXCLUDED_PAGES = [
+    "'/lagg-till.html'",
+    "'/redigera.html'",
+  ];
+
+  it('PWA-19: sw.js pre-caches read-only pages and /index.html', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
+    const preCacheSection = src.substring(
+      src.indexOf('PRE_CACHE_URLS'),
+      src.indexOf('];', src.indexOf('PRE_CACHE_URLS')),
+    );
     for (const page of EXPECTED_PAGES) {
-      assert.ok(src.includes(page), `sw.js must pre-cache ${page}`);
+      assert.ok(preCacheSection.includes(page), `PRE_CACHE_URLS must include ${page}`);
+    }
+  });
+
+  it('PWA-19b: sw.js does NOT pre-cache network-dependent pages', () => {
+    const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
+    const src = fs.readFileSync(filePath, 'utf8');
+    const preCacheSection = src.substring(
+      src.indexOf('PRE_CACHE_URLS'),
+      src.indexOf('];', src.indexOf('PRE_CACHE_URLS')),
+    );
+    for (const page of EXCLUDED_PAGES) {
+      assert.ok(!preCacheSection.includes(page), `PRE_CACHE_URLS must NOT include ${page}`);
     }
   });
 });
@@ -286,12 +306,19 @@ describe('02-§83.18 — Activate deletes old caches', () => {
 // ── 02-§83.19 — Service worker does not cache API paths ─────────────────────
 
 describe('02-§83.19 — Service worker excludes API paths from caching', () => {
-  it('PWA-21: sw.js excludes /api/, /add-event, /edit-event', () => {
+  it('PWA-21: sw.js excludes API, form endpoints, and network-dependent pages', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
-    assert.ok(src.includes('/api/'), 'sw.js must exclude /api/ paths');
-    assert.ok(src.includes('/add-event'), 'sw.js must exclude /add-event');
-    assert.ok(src.includes('/edit-event'), 'sw.js must exclude /edit-event');
+    const noCacheSection = src.substring(
+      src.indexOf('NO_CACHE_PATTERNS'),
+      src.indexOf('];', src.indexOf('NO_CACHE_PATTERNS')),
+    );
+    assert.ok(noCacheSection.includes('/api/'), 'NO_CACHE_PATTERNS must include /api/');
+    assert.ok(noCacheSection.includes('/add-event'), 'NO_CACHE_PATTERNS must include /add-event');
+    assert.ok(noCacheSection.includes('/edit-event'), 'NO_CACHE_PATTERNS must include /edit-event');
+    assert.ok(noCacheSection.includes('/delete-event'), 'NO_CACHE_PATTERNS must include /delete-event');
+    assert.ok(noCacheSection.includes('/lagg-till.html'), 'NO_CACHE_PATTERNS must include /lagg-till.html');
+    assert.ok(noCacheSection.includes('/redigera.html'), 'NO_CACHE_PATTERNS must include /redigera.html');
   });
 });
 
@@ -397,6 +424,44 @@ describe('02-§83.32 — Offline page has Swedish offline message', () => {
   });
 });
 
+// ── 02-§83.35 — Offline page only links to pages functional offline ─────────
+
+describe('02-§83.35 — Offline page only links to offline-functional pages', () => {
+  it('PWA-32: offline page main content does not link to lagg-till.html', () => {
+    const rendererPath = path.join(__dirname, '..', 'source', 'build', 'render-offline.js');
+    if (!fs.existsSync(rendererPath)) {
+      assert.fail('render-offline.js does not exist yet');
+    }
+    const { renderOfflinePage } = require(rendererPath);
+    const html = renderOfflinePage();
+    const mainContent = html.substring(
+      html.indexOf('<main'),
+      html.indexOf('</main>'),
+    );
+    assert.ok(
+      !mainContent.includes('lagg-till.html'),
+      'offline page <main> must NOT link to lagg-till.html (requires network)',
+    );
+  });
+
+  it('PWA-33: offline page main content does not link to redigera.html', () => {
+    const rendererPath = path.join(__dirname, '..', 'source', 'build', 'render-offline.js');
+    if (!fs.existsSync(rendererPath)) {
+      assert.fail('render-offline.js does not exist yet');
+    }
+    const { renderOfflinePage } = require(rendererPath);
+    const html = renderOfflinePage();
+    const mainContent = html.substring(
+      html.indexOf('<main'),
+      html.indexOf('</main>'),
+    );
+    assert.ok(
+      !mainContent.includes('redigera.html'),
+      'offline page <main> must NOT link to redigera.html (requires network)',
+    );
+  });
+});
+
 // ── 02-§83.33 — Service worker pre-caches offline.html ─────────────────────
 
 describe('02-§83.33 — Service worker pre-caches offline.html', () => {
@@ -417,13 +482,13 @@ describe('02-§83.33 — Service worker pre-caches offline.html', () => {
 
 // ── 02-§83.34 — Cache version incremented ───────────────────────────────────
 
-describe('02-§83.34 — Cache version incremented to v2', () => {
-  it('PWA-31: sw.js uses sb-sommar-v2 cache name', () => {
+describe('02-§83.34 — Cache version incremented to v3', () => {
+  it('PWA-31: sw.js uses sb-sommar-v3 cache name', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
     assert.ok(
-      src.includes('sb-sommar-v2'),
-      'CACHE_NAME must be sb-sommar-v2',
+      src.includes('sb-sommar-v3'),
+      'CACHE_NAME must be sb-sommar-v3',
     );
   });
 });

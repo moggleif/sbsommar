@@ -2,15 +2,14 @@
 // Provides offline caching: network-first for HTML and events.json,
 // cache-first for static assets (CSS, JS, images).
 
-const CACHE_NAME = 'sb-sommar-v2';
+const CACHE_NAME = 'sb-sommar-v3';
 
 // Pages and assets to pre-cache on install.
 const PRE_CACHE_URLS = [
   '/',
+  '/index.html',
   '/schema.html',
   '/idag.html',
-  '/lagg-till.html',
-  '/redigera.html',
   '/live.html',
   '/arkiv.html',
   '/kalender.html',
@@ -23,8 +22,11 @@ const PRE_CACHE_URLS = [
 const NO_CACHE_PATTERNS = [
   '/add-event',
   '/edit-event',
+  '/delete-event',
   '/verify-admin',
   '/api/',
+  '/lagg-till.html',
+  '/redigera.html',
 ];
 
 // ── Install: pre-cache core pages ───────────────────────────────────────────
