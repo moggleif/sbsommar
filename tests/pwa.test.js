@@ -251,44 +251,18 @@ describe('02-§83.15 — Service worker uses versioned cache name', () => {
 
 // ── 02-§83.16 — Install pre-caches core pages ──────────────────────────────
 
-describe('02-§83.16 — Install pre-caches read-only pages', () => {
-  const EXPECTED_PAGES = [
-    "'/'",
-    "'/index.html'",
-    "'/schema.html'",
-    "'/idag.html'",
-    "'/live.html'",
-    "'/arkiv.html'",
-    "'/kalender.html'",
-  ];
-
-  const EXCLUDED_PAGES = [
-    "'/lagg-till.html'",
-    "'/redigera.html'",
-  ];
-
-  it('PWA-19: sw.js pre-caches read-only pages and /index.html', () => {
+describe('02-§83.16 — Install pre-caches all site assets via build injection', () => {
+  it('PWA-19: sw.js source has PRE_CACHE_URLS with build placeholder', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
-    const preCacheSection = src.substring(
-      src.indexOf('PRE_CACHE_URLS'),
-      src.indexOf('];', src.indexOf('PRE_CACHE_URLS')),
+    assert.ok(
+      src.includes('PRE_CACHE_URLS'),
+      'sw.js must define PRE_CACHE_URLS',
     );
-    for (const page of EXPECTED_PAGES) {
-      assert.ok(preCacheSection.includes(page), `PRE_CACHE_URLS must include ${page}`);
-    }
-  });
-
-  it('PWA-19b: sw.js does NOT pre-cache network-dependent pages', () => {
-    const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
-    const src = fs.readFileSync(filePath, 'utf8');
-    const preCacheSection = src.substring(
-      src.indexOf('PRE_CACHE_URLS'),
-      src.indexOf('];', src.indexOf('PRE_CACHE_URLS')),
+    assert.ok(
+      src.includes('/* __PRE_CACHE_URLS__ */'),
+      'PRE_CACHE_URLS must contain the build-injection placeholder',
     );
-    for (const page of EXCLUDED_PAGES) {
-      assert.ok(!preCacheSection.includes(page), `PRE_CACHE_URLS must NOT include ${page}`);
-    }
   });
 });
 
@@ -306,7 +280,7 @@ describe('02-§83.18 — Activate deletes old caches', () => {
 // ── 02-§83.19 — Service worker does not cache API paths ─────────────────────
 
 describe('02-§83.19 — Service worker excludes API paths from caching', () => {
-  it('PWA-21: sw.js excludes API, form endpoints, and network-dependent pages', () => {
+  it('PWA-21: sw.js excludes API and form-submission endpoints', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
     const noCacheSection = src.substring(
@@ -317,8 +291,8 @@ describe('02-§83.19 — Service worker excludes API paths from caching', () => 
     assert.ok(noCacheSection.includes('/add-event'), 'NO_CACHE_PATTERNS must include /add-event');
     assert.ok(noCacheSection.includes('/edit-event'), 'NO_CACHE_PATTERNS must include /edit-event');
     assert.ok(noCacheSection.includes('/delete-event'), 'NO_CACHE_PATTERNS must include /delete-event');
-    assert.ok(noCacheSection.includes('/lagg-till.html'), 'NO_CACHE_PATTERNS must include /lagg-till.html');
-    assert.ok(noCacheSection.includes('/redigera.html'), 'NO_CACHE_PATTERNS must include /redigera.html');
+    assert.ok(noCacheSection.includes('/verify-admin'), 'NO_CACHE_PATTERNS must include /verify-admin');
+    assert.ok(!noCacheSection.includes('.html'), 'NO_CACHE_PATTERNS must not include any .html pages');
   });
 });
 
@@ -482,13 +456,13 @@ describe('02-§83.33 — Service worker pre-caches offline.html', () => {
 
 // ── 02-§83.34 — Cache version incremented ───────────────────────────────────
 
-describe('02-§83.34 — Cache version incremented to v3', () => {
-  it('PWA-31: sw.js uses sb-sommar-v3 cache name', () => {
+describe('02-§83.34 — Cache version incremented to v4', () => {
+  it('PWA-31: sw.js uses sb-sommar-v4 cache name', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
     assert.ok(
-      src.includes('sb-sommar-v3'),
-      'CACHE_NAME must be sb-sommar-v3',
+      src.includes('sb-sommar-v4'),
+      'CACHE_NAME must be sb-sommar-v4',
     );
   });
 });
