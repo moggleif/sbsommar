@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 const yaml = require('js-yaml');
 
 const { removeEventFromYaml } = require('../source/api/edit-event');
-const { renderEditPage, editApiUrl } = require('../source/build/render-edit');
+const { renderEditPage } = require('../source/build/render-edit');
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 

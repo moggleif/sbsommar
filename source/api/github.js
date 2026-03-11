@@ -2,7 +2,7 @@
 
 const https = require('https');
 const yaml  = require('js-yaml');
-const { patchEventInYaml } = require('./edit-event');
+const { patchEventInYaml, removeEventFromYaml } = require('./edit-event');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 
 const CAMPS_PATH = 'source/data/camps.yaml';
@@ -291,4 +291,28 @@ async function updateEventInActiveCamp(eventId, updates) {
   await enableAutoMerge(pr.node_id);
 }
 
-module.exports = { addEventToActiveCamp, updateEventInActiveCamp, slugify, yamlScalar, buildEventYaml, githubRequest, env };
+// Removes an event by ID from the active camp's YAML file.
+// Uses the same ephemeral-branch + PR + auto-merge pipeline.
+async function removeEventFromActiveCamp(eventId) {
+  const { content: campsYaml } = await getFile(CAMPS_PATH);
+  const campsData = yaml.load(campsYaml);
+  const buildEnv = process.env.BUILD_ENV || undefined;
+  const camp = resolveActiveCamp(campsData.camps || [], undefined, buildEnv);
+  const campFilePath = `source/data/${camp.file}`;
+
+  const { content: campContent, sha: fileSha } = await getFile(campFilePath);
+
+  const newContent = removeEventFromYaml(campContent, eventId);
+  if (newContent === null) throw new Error(`Event not found: ${eventId}`);
+
+  const commitMsg  = `Delete event in ${camp.name}: ${eventId}`;
+
+  const mainSha    = await getMainSha();
+  const branchName = `event-delete/${eventId}-${Date.now()}`;
+  await createBranch(branchName, mainSha);
+  await putFile(campFilePath, newContent, fileSha, commitMsg, branchName);
+  const pr = await createPullRequest(commitMsg, branchName, 'Automatically created by the SB Sommar delete-event API.');
+  await enableAutoMerge(pr.node_id);
+}
+
+module.exports = { addEventToActiveCamp, updateEventInActiveCamp, removeEventFromActiveCamp, slugify, yamlScalar, buildEventYaml, githubRequest, env };

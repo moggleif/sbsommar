@@ -16,6 +16,12 @@ function editApiUrl(addUrl) {
   return addUrl.replace(/\/add-event$/, '/edit-event');
 }
 
+// Derive the delete-event API URL from the add-event API URL.
+function deleteApiUrl(addUrl) {
+  if (!addUrl) return '/delete-event';
+  return addUrl.replace(/\/add-event$/, '/delete-event');
+}
+
 function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = [], goatcounterCode = '') {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
@@ -72,6 +78,7 @@ ${pageNav('redigera.html', navSections)}
 
     <form id="edit-form" class="event-form" novalidate
           data-api-url="${escapeHtml(apiUrl || '/edit-event')}"
+          data-delete-url="${escapeHtml(deleteApiUrl(apiUrl) || '/delete-event')}"
           data-camp-start="${startDate}"
           data-camp-end="${endDate}"
           data-opens="${opensDate}"
@@ -144,7 +151,25 @@ ${locationOptions}
       </div>
 
     </form>
+
+    <hr class="delete-separator">
+    <button type="button" id="btn-delete" class="btn-destructive">Radera aktivitet</button>
   </section>
+
+  <div id="delete-confirm" class="submit-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-confirm-heading" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <h2 id="delete-confirm-heading" class="modal-heading" tabindex="-1">Radera aktivitet</h2>
+      <div class="modal-content">
+        <p>Är du säker på att du vill radera <strong id="delete-confirm-title"></strong>?</p>
+        <p>Aktiviteten tas bort helt från schemat. Det går inte att ångra.</p>
+        <div class="delete-actions">
+          <button type="button" id="delete-confirm-yes" class="btn-destructive">Ja, radera</button>
+          <button type="button" id="delete-confirm-no" class="btn-secondary">Avbryt</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="submit-modal" class="submit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" hidden>
     <div class="modal-backdrop"></div>
@@ -168,4 +193,4 @@ ${pageFooter(footerHtml)}
 `;
 }
 
-module.exports = { renderEditPage, editApiUrl };
+module.exports = { renderEditPage, editApiUrl, deleteApiUrl };

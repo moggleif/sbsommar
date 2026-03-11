@@ -5,7 +5,7 @@ const fs      = require('fs');
 const path    = require('path');
 const yaml    = require('js-yaml');
 
-const { addEventToActiveCamp, updateEventInActiveCamp, slugify } = require('./source/api/github');
+const { addEventToActiveCamp, updateEventInActiveCamp, removeEventFromActiveCamp, slugify } = require('./source/api/github');
 const { validateEventRequest, validateEditRequest }              = require('./source/api/validate');
 const { isEventPast }                                            = require('./source/api/edit-event');
 const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
@@ -116,6 +116,38 @@ app.post('/edit-event', (req, res) => {
 
   updateEventInActiveCamp(eventId, req.body).catch((err) => {
     console.error('POST /edit-event background error:', err.message);
+  });
+});
+
+app.post('/delete-event', (req, res) => {
+  // Time-gating: reject if outside the editing period.
+  if (activeCamp) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (isOutsideEditingPeriod(today, activeCamp.opens_for_editing, activeCamp.end_date)) {
+      return res.status(400).json({ success: false, error: 'Det går inte att radera aktiviteter just nu. Formuläret är inte öppet.' });
+    }
+  }
+
+  const eventId = String(req.body.id || '').trim();
+  if (!eventId) {
+    return res.status(400).json({ success: false, error: 'Aktivitets-ID saknas.' });
+  }
+
+  // Verify ownership: event ID must be in the session cookie.
+  const ownedIds = parseSessionIds(req.headers.cookie || '');
+  if (!ownedIds.includes(eventId)) {
+    return res.status(403).json({ success: false, error: 'Ej behörig att radera denna aktivitet.' });
+  }
+
+  // Reject past events.
+  if (isEventPast(String(req.body.date || '').trim())) {
+    return res.status(400).json({ success: false, error: 'Aktiviteten har redan ägt rum och kan inte raderas.' });
+  }
+
+  res.json({ success: true });
+
+  removeEventFromActiveCamp(eventId).catch((err) => {
+    console.error('POST /delete-event background error:', err.message);
   });
 });
 
