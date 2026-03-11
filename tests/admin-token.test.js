@@ -212,14 +212,14 @@ describe('isAdminExpired (02-§91.16, §91.17, §91.18)', () => {
     assert.strictEqual(isAdminExpired(Date.now()), false);
   });
 
-  it('ADM-20: returns false when activated 29 days ago', () => {
-    const twentyNineDaysAgo = Date.now() - (29 * 24 * 60 * 60 * 1000);
-    assert.strictEqual(isAdminExpired(twentyNineDaysAgo), false);
+  it('ADM-20: returns false when activated 59 days ago', () => {
+    const fiftyNineDaysAgo = Date.now() - (59 * 24 * 60 * 60 * 1000);
+    assert.strictEqual(isAdminExpired(fiftyNineDaysAgo), false);
   });
 
-  it('ADM-21: returns true when activated 31 days ago', () => {
-    const thirtyOneDaysAgo = Date.now() - (31 * 24 * 60 * 60 * 1000);
-    assert.strictEqual(isAdminExpired(thirtyOneDaysAgo), true);
+  it('ADM-21: returns true when activated 61 days ago', () => {
+    const sixtyOneDaysAgo = Date.now() - (61 * 24 * 60 * 60 * 1000);
+    assert.strictEqual(isAdminExpired(sixtyOneDaysAgo), true);
   });
 
   it('ADM-22: returns true when activated is undefined', () => {
@@ -230,7 +230,7 @@ describe('isAdminExpired (02-§91.16, §91.17, §91.18)', () => {
     assert.strictEqual(isAdminExpired(0), true);
   });
 
-  it('ADM-24: TTL constant is 30 days in ms', () => {
-    assert.strictEqual(ADMIN_TTL_MS, 30 * 24 * 60 * 60 * 1000);
+  it('ADM-24: TTL constant is 60 days in ms', () => {
+    assert.strictEqual(ADMIN_TTL_MS, 60 * 24 * 60 * 60 * 1000);
   });
 });

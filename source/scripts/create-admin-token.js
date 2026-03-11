@@ -31,7 +31,7 @@ async function main() {
   }
 
   const uuid = crypto.randomUUID();
-  const expirySeconds = Math.floor(Date.now() / 1000) + (30 * 24 * 60 * 60);
+  const expirySeconds = Math.floor(Date.now() / 1000) + (60 * 24 * 60 * 60);
   const token = `${name}_${uuid}_${expirySeconds}`;
   const expiryDate = new Date(expirySeconds * 1000).toISOString().slice(0, 10);
 
@@ -41,7 +41,7 @@ async function main() {
   console.log(`  Token: ${token}`);
   console.log('');
   console.log('  SPARA DENNA TOKEN NU — den visas inte igen.');
-  console.log(`  Giltig till: ${expiryDate} (30 dagar)`);
+  console.log(`  Giltig till: ${expiryDate} (60 dagar)`);
   console.log('');
   console.log('═══════════════════════════════════════════════════');
   console.log('');
