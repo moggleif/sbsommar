@@ -92,9 +92,57 @@
     });
   }
 
+  // ── Duplicate cookie repair (02-§90.7–90.11) ──────────────────────────────
+
+  // Detect and merge duplicate sb_session cookies. This can happen when
+  // one cookie was set with Domain= and another without (historical bug
+  // in removeIdFromCookie). The browser sends both, separated by "; ".
+  function repairDuplicateCookies() {
+    var pairs = document.cookie.split(';');
+    var found = [];
+    for (var i = 0; i < pairs.length; i++) {
+      var pair = pairs[i].trim();
+      if (pair.indexOf(COOKIE_NAME + '=') === 0) {
+        var raw = pair.slice(COOKIE_NAME.length + 1);
+        try {
+          var parsed = JSON.parse(decodeURIComponent(raw));
+          if (Array.isArray(parsed)) {
+            found.push(parsed.filter(function (id) { return typeof id === 'string' && id.length > 0; }));
+          }
+        } catch { /* skip malformed */ }
+      }
+    }
+    if (found.length <= 1) return { repaired: false, ids: found[0] || [] };
+
+    // Merge all ID arrays, deduplicate.
+    var seen = {};
+    var merged = [];
+    for (var j = 0; j < found.length; j++) {
+      for (var k = 0; k < found[j].length; k++) {
+        var id = found[j][k];
+        if (!seen[id]) {
+          seen[id] = true;
+          merged.push(id);
+        }
+      }
+    }
+
+    // Delete both cookie variants (with and without Domain).
+    document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; Secure; SameSite=Strict';
+    if (domainPart) {
+      document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; Secure; SameSite=Strict' + domainPart;
+    }
+
+    // Write back a single correct cookie.
+    writeSessionIds(merged);
+    return { repaired: true, ids: merged };
+  }
+
   // ── Main ────────────────────────────────────────────────────────────────────
 
-  var ids = readSessionIds();
+  // Repair duplicates first (before expiry cleanup).
+  var repair = repairDuplicateCookies();
+  var ids = repair.repaired ? repair.ids : readSessionIds();
   if (!ids.length) return;
 
   // Fetch events.json to validate dates and clean up expired IDs.
