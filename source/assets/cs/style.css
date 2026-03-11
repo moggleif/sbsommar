@@ -940,9 +940,31 @@ details.event-row[open] > summary .ev-title {
 }
 
 .delete-separator {
-  margin: var(--spacing-lg) 0;
+  margin: var(--space-xl) 0 var(--space-md);
   border: none;
   border-top: 1px solid var(--color-cream);
+}
+
+.btn-destructive-text {
+  background: none;
+  border: none;
+  color: var(--color-error);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  cursor: pointer;
+  padding: var(--space-xs) 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 200ms ease;
+}
+
+.btn-destructive-text:hover {
+  color: #7f1d1d;
+}
+
+.btn-destructive-text:focus-visible {
+  outline: 2px solid var(--color-error);
+  outline-offset: 2px;
 }
 
 .delete-actions {

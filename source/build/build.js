@@ -215,7 +215,7 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
 
-  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerWithVersion, navSections, GOATCOUNTER_CODE);
+  const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerWithVersion, navSections, cookieDomain, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');
   console.log(`Built: public/redigera.html`);
 

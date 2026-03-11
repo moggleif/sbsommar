@@ -23,7 +23,7 @@ function deleteApiUrl(url) {
   return url.replace(/\/(add|edit)-event$/, '/delete-event');
 }
 
-function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = [], goatcounterCode = '') {
+function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = [], cookieDomain = '', goatcounterCode = '') {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
@@ -51,7 +51,7 @@ function renderEditPage(camp, locations, apiUrl, footerHtml = '', navSections = 
   <link rel="icon" type="image/png" href="images/sbsommar-icon-192.png">
 ${pwaHeadTags()}
 </head>
-<body>
+<body${cookieDomain ? ` data-cookie-domain="${escapeHtml(cookieDomain)}"` : ''}>
 ${pageNav('redigera.html', navSections)}
 <main>
   <div id="edit-loading" role="status">
@@ -154,7 +154,7 @@ ${locationOptions}
     </form>
 
     <hr class="delete-separator">
-    <button type="button" id="btn-delete" class="btn-destructive">Radera aktivitet</button>
+    <button type="button" id="btn-delete" class="btn-destructive-text">Radera aktivitet</button>
   </section>
 
   <div id="delete-confirm" class="submit-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-confirm-heading" hidden>

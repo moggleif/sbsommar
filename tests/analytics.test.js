@@ -60,7 +60,7 @@ function addWithout() {
   return renderAddPage(CAMP, LOCATIONS, '/add-event');
 }
 function editWith(code) {
-  return renderEditPage(CAMP, LOCATIONS, '/edit-event', '', [], code);
+  return renderEditPage(CAMP, LOCATIONS, '/edit-event', '', [], '', code);
 }
 function editWithout() {
   return renderEditPage(CAMP, LOCATIONS, '/edit-event');
