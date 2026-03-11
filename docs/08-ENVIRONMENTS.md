@@ -93,6 +93,8 @@ the secrets.
 | `SERVER_SSH_PORT` | QA SSH port                      |
 | `DEPLOY_DIR`      | QA deploy directory              |
 
+| `ADMIN_TOKENS`    | Comma-separated list of admin tokens (UUIDs). Optional — omit to disable admin features. |
+
 Example values: `SITE_URL=https://qa.sbsommar.se`,
 `API_URL=https://qa.sbsommar.se/api/add-event`.
 
@@ -103,7 +105,7 @@ needed by the PHP API at runtime.
 
 ### GitHub Environment: `production`
 
-Same secret names as `qa`, but with production values:
+Same secret names as `qa` (including `ADMIN_TOKENS`), but with production values:
 
 | Secret            | Purpose                                               |
 | ----------------- | ----------------------------------------------------- |

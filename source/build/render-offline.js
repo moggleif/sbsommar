@@ -47,6 +47,7 @@ ${goatcounterScript(goatcounterCode)}
 <script src="nav.js" defer></script>
 <script src="sw-register.js" defer></script>
   <script src="pwa-install.js" defer></script>
+  <script src="admin.js" defer></script>
 </body>
 </html>`;
 }

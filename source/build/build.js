@@ -16,6 +16,7 @@ const { renderRssFeed } = require('./render-rss');
 const { renderEventPage } = require('./render-event');
 const { renderEventIcal, renderIcalFeed } = require('./render-ical');
 const { renderKalenderPage } = require('./render-kalender');
+const { renderAdminPage } = require('./render-admin');
 const { renderOfflinePage } = require('./render-offline');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 const { addOneDay } = require('../api/time-gate');
@@ -274,6 +275,11 @@ async function main() {
   const kalenderHtml = renderKalenderPage(camp, SITE_URL, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'kalender.html'), kalenderHtml, 'utf8');
   console.log('Built: public/kalender.html');
+
+  // ── Render admin activation page ─────────────────────────────────────────
+  const adminHtml = renderAdminPage(camp, footerWithVersion, navSections, GOATCOUNTER_CODE);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'admin.html'), adminHtml, 'utf8');
+  console.log('Built: public/admin.html');
 
   // ── Render offline fallback page ────────────────────────────────────────
   const offlineHtml = renderOfflinePage(footerWithVersion, navSections, GOATCOUNTER_CODE);

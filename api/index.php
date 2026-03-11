@@ -88,6 +88,9 @@ try {
         $method === 'POST' && $route === '/feedback'
             => handleFeedback(),
 
+        $method === 'POST' && $route === '/verify-admin'
+            => handleVerifyAdmin(),
+
         default
             => jsonResponse(['error' => 'Not found'], 404),
     };
@@ -348,6 +351,29 @@ function handleFeedback(): void
             'success' => false,
             'error'   => 'Kunde inte skapa feedback. Försök igen om en stund.',
         ], 500);
+    }
+}
+
+function handleVerifyAdmin(): void
+{
+    $body = getJsonBody();
+    $token = trim((string) ($body['token'] ?? ''));
+
+    $raw = $_ENV['ADMIN_TOKENS'] ?? '';
+    $validTokens = array_filter(array_map('trim', explode(',', $raw)));
+
+    $found = false;
+    foreach ($validTokens as $valid) {
+        if (strlen($token) === strlen($valid) && hash_equals($valid, $token)) {
+            $found = true;
+            break;
+        }
+    }
+
+    if ($found) {
+        jsonResponse(['valid' => true]);
+    } else {
+        jsonResponse(['valid' => false], 403);
     }
 }
 
