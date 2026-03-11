@@ -1962,12 +1962,12 @@ Matrix cleanup (2026-02-25):
 | `02-§89.9` | implemented | redigera.js DELETE_PROGRESS_STEPS array has 3 steps |
 | `02-§89.10` | manual | Browser-only: verify success modal shows "Gå till schemat" link |
 | `02-§89.11` | manual | Browser-only: verify error modal shows "Försök igen" button |
-| `02-§89.12` | implemented | app.js POST /delete-event route exists |
-| `02-§89.13` | implemented | app.js reads parseSessionIds from cookie header |
-| `02-§89.14` | implemented | app.js returns 403 when event ID not in cookie |
-| `02-§89.15` | implemented | app.js returns 400 when isEventPast is true |
-| `02-§89.16` | implemented | app.js returns 400 when isOutsideEditingPeriod is true |
-| `02-§89.17` | covered | DEL-01–DEL-07: removeEventFromYaml tested; github.js removeEventFromActiveCamp implemented |
+| `02-§89.12` | implemented | app.js POST /delete-event route; api/index.php POST /delete-event route |
+| `02-§89.13` | implemented | app.js reads parseSessionIds from cookie header; api/index.php Session::parseSessionIds |
+| `02-§89.14` | implemented | app.js returns 403 when event ID not in cookie; api/index.php same |
+| `02-§89.15` | implemented | app.js returns 400 when isEventPast is true; api/index.php same |
+| `02-§89.16` | implemented | app.js returns 400 when isOutsideEditingPeriod is true; api/index.php same |
+| `02-§89.17` | covered | DEL-01–DEL-07: removeEventFromYaml tested; github.js + GitHub.php removeEventFromActiveCamp implemented |
 | `02-§89.18` | implemented | redigera.js removeIdFromCookie updates sb_session after delete |
 | `02-§89.19` | implemented | Reuses submit-modal, openModal, trapFocus patterns from edit flow |
 | `02-§89.20` | implemented | style.css btn-destructive uses --color-error custom property |
