@@ -2731,3 +2731,7 @@ body.modal-open {
 .admin-icon--active { color: var(--color-sage-hover); }
 .admin-icon--expired { color: var(--color-terracotta); }
 
+.admin-remove {
+  margin-top: var(--space-md);
+}
+
