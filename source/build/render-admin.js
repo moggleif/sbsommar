@@ -30,6 +30,7 @@ ${nav}
       <button type="submit" class="btn btn--primary">Aktivera</button>
       <p id="admin-message" class="admin-message" aria-live="polite" hidden></p>
     </form>
+    <button type="button" id="admin-remove" class="btn btn--secondary admin-remove" hidden>Ta bort min token</button>
   </main>
 ${footer}
   <script src="admin.js"></script>

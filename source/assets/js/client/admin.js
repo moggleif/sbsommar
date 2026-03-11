@@ -54,12 +54,12 @@
         '<path d="M7 11V7a5 5 0 0 1 9.9-1"/>' +
         '</svg></a>';
     } else {
-      // Valid → filled lock (02-§91.21)
-      container.innerHTML = '<span class="admin-icon admin-icon--active" title="Admin aktiv">' +
+      // Valid → filled lock, link to admin page (02-§91.21)
+      container.innerHTML = '<a href="admin.html" class="admin-icon admin-icon--active" title="Admin aktiv">' +
         '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
         '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>' +
         '<path d="M7 11V7a5 5 0 0 1 10 0v4"/>' +
-        '</svg></span>';
+        '</svg></a>';
     }
   }
 
@@ -72,14 +72,34 @@
 
     // Pre-fill status if already activated
     var existing = getAdminData();
+    var removeBtn = document.getElementById('admin-remove');
+
     if (existing && !isExpired(existing)) {
-      message.textContent = 'Admin-token är redan aktiv.';
+      var expiry = extractExpiry(existing.token);
+      var expiryDate = expiry ? new Date(expiry * 1000).toLocaleDateString('sv-SE') : '';
+      message.textContent = 'Admin-token är aktiv' + (expiryDate ? ' till ' + expiryDate : '') + '. Du kan byta genom att ange en ny token nedan.';
       message.hidden = false;
       message.classList.add('admin-message--success');
     } else if (existing && isExpired(existing)) {
       message.textContent = 'Din admin-token har gått ut. Efterfråga en ny token och aktivera den här.';
       message.hidden = false;
       message.classList.add('admin-message--error');
+    }
+
+    // Show remove button when a token exists (active or expired)
+    if (existing && removeBtn) {
+      removeBtn.hidden = false;
+    }
+
+    if (removeBtn) {
+      removeBtn.addEventListener('click', function () {
+        localStorage.removeItem(STORAGE_KEY);
+        message.textContent = 'Token borttagen.';
+        message.className = 'admin-message admin-message--success';
+        message.hidden = false;
+        removeBtn.hidden = true;
+        renderFooterIcon();
+      });
     }
 
     form.addEventListener('submit', function (e) {
@@ -112,6 +132,7 @@
             message.textContent = 'Admin-token aktiverad!';
             message.classList.add('admin-message--success');
             message.hidden = false;
+            if (removeBtn) removeBtn.hidden = false;
             renderFooterIcon();
           } else {
             message.textContent = 'Ogiltig token. Försök igen.';
