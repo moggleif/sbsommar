@@ -55,6 +55,14 @@ function pageNav(activeHref, navSections = []) {
       </svg>
     </button>`;
 
+  const installBtn = `    <button type="button" class="pwa-install-btn" aria-label="Installera appen" hidden>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+    </button>`;
+
   return `  <nav class="page-nav" aria-label="Sidnavigation">
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Öppna meny">
       <span class="nav-toggle-bar"></span>
@@ -62,6 +70,7 @@ function pageNav(activeHref, navSections = []) {
       <span class="nav-toggle-bar"></span>
     </button>
     <button type="button" class="scroll-top" aria-label="Till toppen" hidden>&#x2B06;</button>
+${installBtn}
 ${feedbackBtn}
     <div class="nav-menu" id="nav-menu">
       <div class="nav-pages">

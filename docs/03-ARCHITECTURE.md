@@ -1890,6 +1890,30 @@ Two PNG icons are required in `source/content/images/`:
 | `source/build/render-offline.js` | Offline fallback page renderer |
 | `source/content/images/sbsommar-icon-192.png` | App icon 192×192 |
 | `source/content/images/sbsommar-icon-512.png` | App icon 512×512 |
+| `source/assets/js/client/pwa-install.js` | PWA install button logic |
+
+### 28.7 Install guide
+
+A discreet install button in the site header helps users discover that the
+site can be installed as an app. The button appears alongside the existing
+header controls (hamburger menu, scroll-to-top, feedback).
+
+**Platform detection and behaviour:**
+
+| Platform | Detection | Button action |
+| --- | --- | --- |
+| Chrome / Edge (Android, desktop) | `beforeinstallprompt` event fires | Captures event; click calls `prompt()` on the deferred event |
+| iOS Safari | UA contains iPhone/iPad + no `beforeinstallprompt` | Click shows tooltip with manual instruction |
+| Standalone mode | `matchMedia('(display-mode: standalone)')` | Button not rendered |
+| Other browsers | Neither condition met | Button not rendered |
+
+After successful installation (`appinstalled` event), the button is hidden.
+
+The iOS tooltip provides a Swedish instruction ("Tryck på Dela-ikonen och
+välj 'Lägg till på hemskärmen'") and closes on outside click or Escape.
+
+All logic lives in `source/assets/js/client/pwa-install.js`, loaded with
+`defer` on every page via the shared layout.
 
 ---
 

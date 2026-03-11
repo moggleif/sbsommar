@@ -139,6 +139,7 @@ ${daySections}
   <script src="nav.js" defer></script>
   <script src="feedback.js" defer></script>
   <script src="sw-register.js" defer></script>
+  <script src="pwa-install.js" defer></script>
   <script>
   (function(){var t=new Date();t.setHours(0,0,0,0);document.querySelectorAll('details.day').forEach(function(d){var p=d.id.split('-');var dd=new Date(+p[0],+p[1]-1,+p[2]);if(dd<t)d.removeAttribute('open');});})();
   </script>${goatcounterScript(goatcounterCode)}

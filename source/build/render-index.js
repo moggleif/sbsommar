@@ -250,7 +250,8 @@ ${contentSections}
     if (today >= opens && today <= closes) el.removeAttribute('hidden');
   })();
   </script>` : ''}
-  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="sw-register.js" defer></script>
+  <script src="pwa-install.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

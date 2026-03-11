@@ -68,7 +68,8 @@ ${pwaHeadTags()}
 </main>
   <script>window.__EVENTS__ = ${eventsJson}; window.__HEADING_PREFIX__ = ''; window.__EMPTY_CLASS__ = 'sidebar-text'; window.__SHOW_FOOTER__ = true; window.__BUILD_TIME__ = '${safeBuildTime}'; window.__VERSION__ = '${safeBuildTime}';</script>
   <script src="events-today.js"></script>
-  <script src="sw-register.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="sw-register.js" defer></script>
+  <script src="pwa-install.js" defer></script>${goatcounterScript(goatcounterCode)}
 </body>
 </html>
 `;

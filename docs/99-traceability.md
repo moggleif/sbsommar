@@ -1099,9 +1099,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1052
-Covered (implemented + tested): 540
-Implemented, not tested:        511
+Total requirements:            1068
+Covered (implemented + tested): 548
+Implemented, not tested:        519
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1925,3 +1925,24 @@ Matrix cleanup (2026-02-25):
 | `02-§87.6` | covered | PWA-37: screenshot src paths in images/; build cache-busts via existing regex |
 | `02-§87.7` | done | No new npm dependencies |
 | `02-§87.8` | covered | All existing tests pass |
+
+### §88 — PWA Install Guide
+
+| Requirement | Status | Test / Evidence |
+| ----------- | ------ | --------------- |
+| `02-§88.1` | covered | INST-03: nav includes pwa-install-btn on all nav pages |
+| `02-§88.2` | covered | INST-06: button has SVG icon |
+| `02-§88.3` | covered | INST-04: aria-label "Installera appen"; JS sets title |
+| `02-§88.4` | covered | INST-02: all 8 pages include pwa-install.js |
+| `02-§88.5` | covered | INST-07: JS handles beforeinstallprompt |
+| `02-§88.6` | covered | INST-08: JS handles appinstalled |
+| `02-§88.7` | manual | Browser-only: verify iOS tooltip shows instruction text |
+| `02-§88.8` | manual | Browser-only: outside click and Escape close tooltip |
+| `02-§88.9` | covered | INST-09: JS checks display-mode: standalone |
+| `02-§88.10` | implemented | JS hides btn unless beforeinstallprompt fires or iOS detected |
+| `02-§88.11` | implemented | No localStorage/dismiss logic in code |
+| `02-§88.12` | covered | INST-01: pwa-install.js exists |
+| `02-§88.13` | implemented | CSS uses custom properties from 07-DESIGN.md §7 |
+| `02-§88.14` | done | No new npm dependencies |
+| `02-§88.15` | covered | All 1429 existing tests pass |
+| `02-§88.16` | covered | INST-04, INST-05: Swedish text verified |
