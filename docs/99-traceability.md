@@ -2035,3 +2035,33 @@ Matrix cleanup (2026-02-25):
 | `02-§91.26` | implemented | CSS uses --color-*, --space-*, --font-size-*, --radius-* tokens |
 | `02-§91.27` | implemented | Form has label, input, aria-live on message; icon has title attr |
 | `02-§91.28` | implemented | Token stored in localStorage only, sent in POST body to /verify-admin |
+
+### §92 — PWA Full Pre-Cache and Offline Guard
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§92.1` | gap | Build scans `public/` and generates pre-cache URL list |
+| `02-§92.2` | gap | Exclusions: `.htaccess`, `robots.txt`, `sw.js`, `version.json`, `.ics`, `.rss`, `schema/*/index.html` |
+| `02-§92.3` | gap | Build injects list into `sw.js` via `/* __PRE_CACHE_URLS__ */` placeholder |
+| `02-§92.4` | gap | Injected URLs are root-relative paths |
+| `02-§92.5` | gap | No placeholder tokens remain after injection |
+| `02-§92.6` | gap | PRE_CACHE_URLS populated by build injection, no hand-maintained list |
+| `02-§92.7` | gap | Cache name is `sb-sommar-v4` |
+| `02-§92.8` | gap | All site pages pre-cached including `lagg-till.html` and `redigera.html` |
+| `02-§92.9` | gap | NO_CACHE_PATTERNS contains only API endpoints, no .html pages |
+| `02-§92.10` | gap | `cacheFirstThenNetwork` uses `{ ignoreSearch: true }` |
+| `02-§92.11` | gap | `networkFirstWithOfflineFallback` uses `{ ignoreSearch: true }` |
+| `02-§92.12` | gap | `offline-guard.js` detects offline via `navigator.onLine` + events |
+| `02-§92.13` | gap | Offline banner on form pages: "Du är offline…" |
+| `02-§92.14` | gap | Submit buttons disabled when offline |
+| `02-§92.15` | gap | Banner removed and buttons re-enabled when back online |
+| `02-§92.16` | gap | Banner uses `.form-error-msg` styling |
+| `02-§92.17` | gap | Script included on `lagg-till.html` and `redigera.html` |
+| `02-§92.18` | gap | Feedback modal shows offline warning |
+| `02-§92.19` | gap | Feedback submit button disabled when offline |
+| `02-§92.20` | gap | Feedback warning removed and button re-enabled when back online |
+| `02-§92.21` | gap | All user-facing text in Swedish |
+| `02-§92.22` | gap | CSS uses custom properties from design system |
+| `02-§92.23` | gap | No npm dependencies added |
+| `02-§92.24` | gap | Service worker is vanilla JS |
+| `02-§92.25` | gap | `offline.html` continues to function as last resort |
