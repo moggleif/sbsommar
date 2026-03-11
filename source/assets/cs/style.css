@@ -2458,3 +2458,97 @@ body.modal-open {
   }
 }
 
+/* ── PWA install button (02-§88) ── */
+
+.pwa-install-btn {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .pwa-install-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: var(--space-xs);
+    right: calc(var(--space-sm) + 42px + var(--space-xs));
+    width: 42px;
+    height: 42px;
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0;
+    cursor: pointer;
+    z-index: 201;
+    line-height: 0;
+  }
+
+  .pwa-install-btn[hidden] {
+    display: none;
+  }
+
+  .pwa-install-btn:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
+  }
+}
+
+@media (min-width: 768px) {
+  .pwa-install-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--color-terracotta);
+    transition: color 0.2s;
+    position: absolute;
+    top: -1px;
+    left: min(calc(100% - 55px), calc(var(--container-narrow) - 55px));
+  }
+
+  .pwa-install-btn[hidden] {
+    display: none;
+  }
+
+  .pwa-install-btn:hover {
+    color: var(--color-navy);
+  }
+
+  .pwa-install-btn:focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 2px;
+  }
+}
+
+/* ── PWA install tooltip (iOS) ── */
+
+.pwa-install-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-charcoal);
+  color: var(--color-white);
+  font-size: var(--font-size-small);
+  font-family: var(--font-sans);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  z-index: 202;
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 767px) {
+  .pwa-install-tooltip {
+    position: fixed;
+    top: calc(var(--space-xs) + 42px + var(--space-xs));
+    right: var(--space-sm);
+    white-space: normal;
+    max-width: 260px;
+  }
+}
+

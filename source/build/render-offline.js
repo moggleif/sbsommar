@@ -46,6 +46,7 @@ ${pageFooter(footerHtml)}
 ${goatcounterScript(goatcounterCode)}
 <script src="nav.js" defer></script>
 <script src="sw-register.js" defer></script>
+  <script src="pwa-install.js" defer></script>
 </body>
 </html>`;
 }
