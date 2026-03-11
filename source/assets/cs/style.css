@@ -984,8 +984,9 @@ details.event-row[open] > summary .ev-title {
 
 .delete-actions {
   display: flex;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-md);
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-md);
 }
 
 /* ── Add-event form ── */
@@ -1763,7 +1764,7 @@ p:has(> .content-img[alt="Anita Kullander"]) {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 300;
 }
 
 .submit-modal[hidden] {
