@@ -359,6 +359,17 @@ function handleVerifyAdmin(): void
     $body = getJsonBody();
     $token = trim((string) ($body['token'] ?? ''));
 
+    // Check embedded expiry (token format: namn_uuid_epoch)
+    $lastUnderscore = strrpos($token, '_');
+    if ($lastUnderscore !== false) {
+        $epoch = (int) substr($token, $lastUnderscore + 1);
+        if ($epoch > 0 && time() > $epoch) {
+            jsonResponse(['valid' => false, 'error' => 'Token har gått ut.'], 403);
+
+            return;
+        }
+    }
+
     $raw = $_ENV['ADMIN_TOKENS'] ?? '';
     $validTokens = array_filter(array_map('trim', explode(',', $raw)));
 

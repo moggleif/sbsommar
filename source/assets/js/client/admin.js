@@ -2,7 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'sb_admin';
-  var TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+  var TTL_MS = 60 * 24 * 60 * 60 * 1000; // 60 days
 
   // ── Helpers ────────────────────────────────────────────────────────────────
 

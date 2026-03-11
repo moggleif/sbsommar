@@ -51,16 +51,22 @@ describe('parseAdminTokens (02-§91.1, §91.2)', () => {
 });
 
 describe('verifyAdminToken (02-§91.3, §91.6, §91.7, §91.8)', () => {
+  // Use future epoch so tokens are not rejected by expiry check
+  const futureEpoch = Math.floor(Date.now() / 1000) + 86400;
+
   it('ADM-06: returns true when token matches one in the list', () => {
-    assert.strictEqual(verifyAdminToken('my-token', ['other', 'my-token']), true);
+    const tok = `my_token_${futureEpoch}`;
+    assert.strictEqual(verifyAdminToken(tok, ['other', tok]), true);
   });
 
   it('ADM-07: returns false when token does not match', () => {
-    assert.strictEqual(verifyAdminToken('wrong', ['aaa', 'bbb']), false);
+    const tok = `wrong_${futureEpoch}`;
+    assert.strictEqual(verifyAdminToken(tok, ['aaa', 'bbb']), false);
   });
 
   it('ADM-08: returns false when token list is empty (§91.3)', () => {
-    assert.strictEqual(verifyAdminToken('anything', []), false);
+    const tok = `anything_${futureEpoch}`;
+    assert.strictEqual(verifyAdminToken(tok, []), false);
   });
 
   it('ADM-09: returns false when token is empty string', () => {
@@ -141,21 +147,79 @@ describe('pageFooter admin-icon container (02-§91.19)', () => {
 
 // ── Admin expiry logic ──────────────────────────────────────────────────────
 
-const { isAdminExpired, ADMIN_TTL_MS } = require('../source/api/admin');
+const { isAdminExpired, isTokenExpired, extractTokenExpiry, ADMIN_TTL_MS } = require('../source/api/admin');
+
+// ── Token-embedded expiry ───────────────────────────────────────────────────
+
+describe('extractTokenExpiry', () => {
+  it('ADM-25: extracts epoch from valid token format', () => {
+    assert.strictEqual(extractTokenExpiry('erik_abc123_1752710400'), 1752710400);
+  });
+
+  it('ADM-26: returns 0 for token without epoch suffix', () => {
+    assert.strictEqual(extractTokenExpiry('erik_abc123'), 0);
+  });
+
+  it('ADM-27: returns 0 for empty string', () => {
+    assert.strictEqual(extractTokenExpiry(''), 0);
+  });
+
+  it('ADM-28: returns 0 for undefined', () => {
+    assert.strictEqual(extractTokenExpiry(undefined), 0);
+  });
+
+  it('ADM-29: returns 0 when last segment is not a number', () => {
+    assert.strictEqual(extractTokenExpiry('erik_abc123_notanumber'), 0);
+  });
+});
+
+describe('isTokenExpired', () => {
+  it('ADM-30: returns false for token with future epoch', () => {
+    const future = Math.floor(Date.now() / 1000) + 86400;
+    assert.strictEqual(isTokenExpired(`test_uuid_${future}`), false);
+  });
+
+  it('ADM-31: returns true for token with past epoch', () => {
+    const past = Math.floor(Date.now() / 1000) - 86400;
+    assert.strictEqual(isTokenExpired(`test_uuid_${past}`), true);
+  });
+
+  it('ADM-32: returns true for token without epoch', () => {
+    assert.strictEqual(isTokenExpired('test_uuid'), true);
+  });
+
+  it('ADM-33: returns true for undefined', () => {
+    assert.strictEqual(isTokenExpired(undefined), true);
+  });
+});
+
+describe('verifyAdminToken with embedded expiry', () => {
+  it('ADM-34: rejects expired token even if it matches list', () => {
+    const past = Math.floor(Date.now() / 1000) - 86400;
+    const token = `test_uuid_${past}`;
+    assert.strictEqual(verifyAdminToken(token, [token]), false);
+  });
+
+  it('ADM-35: accepts valid non-expired token', () => {
+    const future = Math.floor(Date.now() / 1000) + 86400;
+    const token = `test_uuid_${future}`;
+    assert.strictEqual(verifyAdminToken(token, [token]), true);
+  });
+});
 
 describe('isAdminExpired (02-§91.16, §91.17, §91.18)', () => {
   it('ADM-19: returns false when activated just now', () => {
     assert.strictEqual(isAdminExpired(Date.now()), false);
   });
 
-  it('ADM-20: returns false when activated 29 days ago', () => {
-    const twentyNineDaysAgo = Date.now() - (29 * 24 * 60 * 60 * 1000);
-    assert.strictEqual(isAdminExpired(twentyNineDaysAgo), false);
+  it('ADM-20: returns false when activated 59 days ago', () => {
+    const fiftyNineDaysAgo = Date.now() - (59 * 24 * 60 * 60 * 1000);
+    assert.strictEqual(isAdminExpired(fiftyNineDaysAgo), false);
   });
 
-  it('ADM-21: returns true when activated 31 days ago', () => {
-    const thirtyOneDaysAgo = Date.now() - (31 * 24 * 60 * 60 * 1000);
-    assert.strictEqual(isAdminExpired(thirtyOneDaysAgo), true);
+  it('ADM-21: returns true when activated 61 days ago', () => {
+    const sixtyOneDaysAgo = Date.now() - (61 * 24 * 60 * 60 * 1000);
+    assert.strictEqual(isAdminExpired(sixtyOneDaysAgo), true);
   });
 
   it('ADM-22: returns true when activated is undefined', () => {
@@ -166,7 +230,7 @@ describe('isAdminExpired (02-§91.16, §91.17, §91.18)', () => {
     assert.strictEqual(isAdminExpired(0), true);
   });
 
-  it('ADM-24: TTL constant is 30 days in ms', () => {
-    assert.strictEqual(ADMIN_TTL_MS, 30 * 24 * 60 * 60 * 1000);
+  it('ADM-24: TTL constant is 60 days in ms', () => {
+    assert.strictEqual(ADMIN_TTL_MS, 60 * 24 * 60 * 60 * 1000);
   });
 });
