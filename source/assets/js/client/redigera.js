@@ -305,6 +305,11 @@
     if (ownedIds.length === 0) {
       // No cookie — show explanation (02-§48.8)
       if (noSessionEl) noSessionEl.hidden = false;
+      // Still render debug panel (shows "no cookie" state).
+      fetch('/events.json')
+        .then(function (r) { return r.json(); })
+        .then(function (events) { renderDebugPanel(events); })
+        .catch(function () { renderDebugPanel(null); });
       return;
     }
 
@@ -314,9 +319,11 @@
       .then(function (r) { return r.json(); })
       .then(function (events) {
         renderMyEvents(events, ownedIds, today);
+        renderDebugPanel(events);
       })
       .catch(function () {
         if (myEventsEmpty) myEventsEmpty.textContent = 'Kunde inte hämta schemadata.';
+        renderDebugPanel(null);
       });
     return;
   }
@@ -324,6 +331,10 @@
   // Specific event selected — existing edit behaviour (02-§48.17)
   if (ownedIds.indexOf(eventId) === -1) {
     showError('Du har inte rättighet att redigera denna aktivitet.');
+    fetch('/events.json')
+      .then(function (r) { return r.json(); })
+      .then(function (events) { renderDebugPanel(events); })
+      .catch(function () { renderDebugPanel(null); });
     return;
   }
 
@@ -338,11 +349,13 @@
 
       if (!event) {
         showError('Aktiviteten hittades inte i det aktuella schemat.');
+        renderDebugPanel(events);
         return;
       }
 
       if (event.date < today) {
         showError('Aktiviteten har redan ägt rum och kan inte redigeras.');
+        renderDebugPanel(events);
         return;
       }
 
@@ -355,9 +368,11 @@
       populate(event);
       loadingEl.hidden = true;
       sectionEl.hidden = false;
+      renderDebugPanel(events);
     })
     .catch(function () {
       showError('Kunde inte hämta schemadata. Kontrollera din internetanslutning.');
+      renderDebugPanel(null);
     });
 
   // ── Per-field inline errors (02-§6.5) ──────────────────────────────────────
@@ -723,7 +738,7 @@
         var ev = eventMap[id];
         var status;
         if (!ev) {
-          status = '<span class="cookie-status-unknown">hittades inte i schemat</span>';
+          status = '<span class="cookie-status-unknown">hittades inte i schemat (kan vara under publicering)</span>';
         } else if (ev.date < debugToday) {
           status = '<span class="cookie-status-expired">passerat</span>';
         } else {
@@ -739,14 +754,4 @@
 
     debugContent.innerHTML = html;
   }
-
-  // Populate the debug panel: fetch events.json for status matching.
-  fetch('/events.json')
-    .then(function (r) { return r.json(); })
-    .then(function (eventsArray) {
-      renderDebugPanel(eventsArray);
-    })
-    .catch(function () {
-      renderDebugPanel(null);
-    });
 })();
