@@ -24,7 +24,9 @@ Speed and mobile usability matter most here.
 
 **Administrators**
 Staff who manage the camp data — creating and archiving camps, correcting events,
-managing location lists. Editing is done directly in YAML files. No admin UI is needed.
+managing location lists. Bulk data editing is done directly in YAML files.
+A lightweight admin token mechanism allows designated administrators to edit
+and delete any event through the site's existing UI (see §91).
 
 ---
 
@@ -60,6 +62,7 @@ The following pages must exist:
 | `02-§2.11` | Edit activity | `/redigera.html` | Participants who submitted the event |
 | `02-§2.12` | iCal feed | `/schema.ics` | Anyone subscribing to the schedule |
 | `02-§2.13` | Calendar tips | `/kalender.html` | Participants wanting to sync the schedule |
+| `02-§2.14` | Admin activation | `/admin.html` | Administrators |
 
 The homepage, schedule pages, add-activity form, and archive share the same header and navigation. <!-- 02-§2.8 -->
 None require login. <!-- 02-§2.9 -->
@@ -4167,3 +4170,93 @@ problems difficult to diagnose.
 - CSS must use custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§90.15 -->
 - The debug panel must be accessible (keyboard-navigable, screen-reader
   friendly). <!-- 02-§90.16 -->
+
+---
+
+## 91. Admin Token — Activation and Status Indicator
+
+### 91.1 Context
+
+The site uses a cookie-based ownership model where each participant can
+only edit events they created. During camp, one or two designated
+administrators need the ability to edit or delete any event — for example
+to correct mistakes, remove duplicates, or update events on behalf of
+participants who lost their cookie.
+
+This requirement covers only the token infrastructure: storage,
+activation, verification, and a visual status indicator. The actual
+"edit all events" behaviour that uses this token is deferred to a
+future requirement.
+
+### 91.2 Admin tokens (site requirements)
+
+- The server must accept a comma-separated list of valid admin tokens
+  via the environment variable `ADMIN_TOKENS`. <!-- 02-§91.1 -->
+- Each token is an opaque string (e.g. a UUID). <!-- 02-§91.2 -->
+- When `ADMIN_TOKENS` is unset or empty, all admin functionality is
+  disabled — the site behaves exactly as before. <!-- 02-§91.3 -->
+
+### 91.3 Token verification endpoint (API requirements)
+
+- The API must expose `POST /verify-admin`. <!-- 02-§91.4 -->
+- The request body must contain `{ "token": "<string>" }`. <!-- 02-§91.5 -->
+- If the token matches any entry in `ADMIN_TOKENS`, the response is
+  `200 { "valid": true }`. <!-- 02-§91.6 -->
+- If the token does not match, the response is
+  `403 { "valid": false }`. <!-- 02-§91.7 -->
+- The endpoint must be rate-limit-aware: no special rate limiting is
+  required in this phase, but the token comparison must use
+  constant-time string comparison to prevent timing attacks. <!-- 02-§91.8 -->
+
+### 91.4 Admin activation page (user requirements)
+
+- A page at `/admin.html` must allow an administrator to enter their
+  token. <!-- 02-§91.9 -->
+- The page must contain a single text input and a submit button. <!-- 02-§91.10 -->
+- On submit, the page must call `POST /verify-admin` with the entered
+  token. <!-- 02-§91.11 -->
+- If the server responds with `valid: true`: <!-- 02-§91.12 -->
+  - Store the token and the current timestamp in `localStorage` under
+    the key `sb_admin`. The stored value is a JSON object:
+    `{ "token": "<string>", "activated": <unix-ms> }`.
+  - Show a success message (in Swedish).
+- If the server responds with `valid: false`: <!-- 02-§91.13 -->
+  - Do not store anything.
+  - Show an error message (in Swedish).
+- The page must use the same layout (header, navigation, footer) as
+  other site pages. <!-- 02-§91.14 -->
+- The page must not be listed in the site navigation. <!-- 02-§91.15 -->
+
+### 91.5 Token expiry (site requirements)
+
+- A stored admin token is considered expired if more than 30 days
+  (2 592 000 000 ms) have passed since the `activated`
+  timestamp. <!-- 02-§91.16 -->
+- Expiry is checked client-side before any admin-related behaviour. <!-- 02-§91.17 -->
+- An expired token is treated as if no token exists — the user must
+  re-activate. <!-- 02-§91.18 -->
+
+### 91.6 Footer status indicator (user requirements)
+
+- Every page that includes the shared site footer must display an admin
+  status icon when a token exists in `localStorage`. <!-- 02-§91.19 -->
+- **No token in `localStorage`**: nothing is displayed. <!-- 02-§91.20 -->
+- **Valid token (not expired)**: a filled/locked icon is displayed,
+  indicating active admin status. <!-- 02-§91.21 -->
+- **Expired token (> 30 days)**: an open/unlocked icon is displayed,
+  indicating the token needs renewal. Clicking the icon navigates to
+  `/admin.html`. <!-- 02-§91.22 -->
+- The icon must be small and unobtrusive — it is not intended for
+  regular visitors. <!-- 02-§91.23 -->
+- The icon must have a `title` attribute explaining its meaning in
+  Swedish (e.g. "Admin aktiv" / "Admin utgången"). <!-- 02-§91.24 -->
+
+### 91.7 Constraints
+
+- All user-facing text must be in Swedish. <!-- 02-§91.25 -->
+- CSS must use custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§91.26 -->
+- The activation page must be accessible (keyboard-navigable,
+  screen-reader friendly). <!-- 02-§91.27 -->
+- The admin token must never be sent in cookies — it is stored only in
+  `localStorage` and sent explicitly in API request bodies or
+  headers. <!-- 02-§91.28 -->
