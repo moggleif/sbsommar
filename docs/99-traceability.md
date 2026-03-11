@@ -1996,8 +1996,8 @@ Matrix cleanup (2026-02-25):
 | `02-§90.9` | implemented | Both exact-host and domain-scoped cookies deleted via Max-Age=0 |
 | `02-§90.10` | implemented | `writeSessionIds(merged)` called after deletion |
 | `02-§90.11` | implemented | `repairDuplicateCookies()` runs before `removeExpiredIds()` |
-| `02-§90.12` | covered | CKD-06: redigera.js loaded; `removeIdFromCookie` now uses Secure + Domain |
-| `02-§90.13` | implemented | Attributes match 02-§44.16 pattern |
+| `02-§90.12` | implemented | `removeIdFromCookie` deletes both cookie variants (exact-host + domain-scoped) before writing back, matching `repairDuplicateCookies` pattern |
+| `02-§90.13` | implemented | Attributes match 02-§44.16 pattern; both variants cleared via Max-Age=0 |
 | `02-§90.14` | implemented | All text in Swedish: "Om din cookie", "finns i schemat", "passerat", etc. |
 | `02-§90.15` | implemented | CSS uses --color-*, --space-*, --font-size-*, --radius-* tokens |
 | `02-§90.16` | covered | CKD-04: inside `<main>`; summary has :focus-visible styling |

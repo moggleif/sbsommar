@@ -656,9 +656,18 @@
 
   function removeIdFromCookie(idToRemove) {
     var ids = readSessionIds().filter(function (id) { return id !== idToRemove; });
-    var encoded = encodeURIComponent(JSON.stringify(ids));
-    document.cookie = COOKIE_NAME + '=' + encoded +
-      '; Path=/; Max-Age=604800; Secure; SameSite=Strict' + domainPart;
+    // Delete both cookie variants (with and without Domain) to avoid
+    // orphaned duplicates — same pattern as repairDuplicateCookies (02-§90.9).
+    document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; Secure; SameSite=Strict';
+    if (domainPart) {
+      document.cookie = COOKIE_NAME + '=; Path=/; Max-Age=0; Secure; SameSite=Strict' + domainPart;
+    }
+    // Write back the cleaned list.
+    if (ids.length) {
+      var encoded = encodeURIComponent(JSON.stringify(ids));
+      document.cookie = COOKIE_NAME + '=' + encoded +
+        '; Path=/; Max-Age=604800; Secure; SameSite=Strict' + domainPart;
+    }
   }
 
   function performDelete() {
