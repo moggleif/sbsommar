@@ -52,6 +52,11 @@ Language:
 
 - The site is in Swedish. All user-facing text — labels, headings, descriptions, error messages, confirmations — must be in Swedish. <!-- CL-§1.10 -->
 - When writing requirements in `docs/02-REQUIREMENTS.md`, describe the desired state — not "changes" or "improvements". <!-- CL-§1.11 -->
+  - Write each requirement as a standalone fact about how the system works. A reader who has never seen the codebase should understand the requirement without needing to know what existed before.
+  - **Bad**: "The cache version must be incremented to v4." / "lagg-till.html must be removed from NO_CACHE_PATTERNS."
+  - **Good**: "The service worker cache name is `sb-sommar-v4`." / "The service worker pre-caches all site pages including `lagg-till.html` and `redigera.html`."
+  - Avoid words like: "changed", "updated", "replaced", "removed", "incremented", "added", "new". These describe transitions, not desired state.
+  - The Context subsection at the top of each requirement section is the only place where background and motivation belong. Requirements themselves are pure desired-state declarations.
 
 ---
 
