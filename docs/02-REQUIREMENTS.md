@@ -238,11 +238,11 @@ it is about reducing confusion and frustration.
 Participants can edit their own active events (events whose date has not yet passed)
 through a session-cookie-based ownership mechanism. See §18 for the full specification. <!-- 02-§7.1 -->
 
-Administrators can edit or remove any activity by modifying the camp's YAML file
-directly. See [04-OPERATIONS.md](04-OPERATIONS.md) for the workflow. <!-- 02-§7.2 -->
+Administrators with a valid admin token (§91) can edit or remove any activity
+through the same edit and delete flows available to participants. <!-- 02-§7.2 -->
 
-Only the submitting participant (identified by their session cookie) may edit a
-given participant-submitted event. <!-- 02-§7.3 -->
+A user may edit or delete an event if the event ID is present in their session
+cookie (ownership) **or** the user holds a valid admin token. <!-- 02-§7.3 -->
 
 ---
 
@@ -560,8 +560,9 @@ that requires no login.
 
 ### 18.4 Edit links on schedule pages
 
-- Schedule pages add an "Redigera" link next to each event
-  whose ID is present in the session cookie and whose date has not passed. <!-- 02-§18.16 -->
+- Schedule pages add an "Redigera" link next to each event whose ID is present
+  in the session cookie **or** whose user holds a valid admin token (§91), and
+  whose date has not passed. <!-- 02-§18.16 -->
 - The link is injected by client-side JavaScript after page load; it is never
   part of the static HTML. <!-- 02-§18.17 -->
 - Each event row in the generated HTML carries a `data-event-id` attribute
@@ -571,8 +572,9 @@ that requires no login.
 ### 18.7 Edit links on the Idag today view
 
 - The "Idag" today view (`/idag.html`) also shows a "Redigera" link next to
-  each event the visitor owns and that has not passed — using the same rule and
-  link text as the weekly schedule. <!-- 02-§18.42 -->
+  each event the visitor owns or for which the visitor holds a valid admin
+  token (§91), and that has not passed — using the same rule and link text
+  as the weekly schedule. <!-- 02-§18.42 -->
 - The events JSON embedded in `idag.html` at build time includes the event's
   `id` field so client-side JavaScript can associate rendered rows with their
   stable IDs. <!-- 02-§18.43 -->
@@ -586,8 +588,9 @@ that requires no login.
 - When loaded, it reads the `id` query parameter, checks the session cookie,
   and fetches `/events.json` to pre-populate the form with the event's current
   values. <!-- 02-§18.21 -->
-- If the event ID is not in the session cookie, or the event has already passed,
-  the page shows a clear error and no form is rendered. <!-- 02-§18.22 -->
+- If the event ID is not in the session cookie and the user does not hold a
+  valid admin token (§91), or the event has already passed, the page shows a
+  clear error and no form is rendered. <!-- 02-§18.22 -->
 - The edit form exposes the same fields as the add-activity form (title, date,
   start time, end time, location, responsible person, description, link). <!-- 02-§18.23 -->
 - The event's stable `id` must not change after creation, even when mutable
@@ -610,8 +613,10 @@ that requires no login.
 
 - A `POST /edit-event` endpoint accepts edit requests. <!-- 02-§18.30 -->
 - The server reads the `sb_session` cookie from the request, parses the event
-  ID array, and verifies the target event ID is present. <!-- 02-§18.31 -->
-- If the event ID is not in the cookie, the server responds with HTTP 403. <!-- 02-§18.32 -->
+  ID array, and verifies the target event ID is present — or that the request
+  body contains a valid `adminToken` (§91). <!-- 02-§18.31 -->
+- If the event ID is not in the cookie and no valid admin token is provided,
+  the server responds with HTTP 403. <!-- 02-§18.32 -->
 - If the event's date has already passed, the server responds with HTTP 400. <!-- 02-§18.33 -->
 - If validation passes, the server reads the YAML file from GitHub, replaces the
   target event's mutable fields in place, and commits the change via an ephemeral
@@ -645,6 +650,9 @@ that requires no login.
 - The edit form submission must use `credentials: 'include'` so that the
   `sb_session` cookie is sent to the cross-origin API. Without this the server
   cannot verify ownership and will reject the request with HTTP 403. <!-- 02-§18.45 -->
+- When the user holds a valid admin token (§91), the edit and delete request
+  bodies must include `adminToken` so the server can verify admin
+  status. <!-- 02-§18.50 -->
 
 ---
 
@@ -4070,9 +4078,10 @@ Deletion removes the event entirely from the camp's YAML file.
 
 - A `POST /delete-event` endpoint accepts delete requests. <!-- 02-§89.12 -->
 - The server reads the `sb_session` cookie from the request, parses the
-  event ID array, and verifies the target event ID is present. <!-- 02-§89.13 -->
-- If the event ID is not in the cookie, the server responds with
-  HTTP 403. <!-- 02-§89.14 -->
+  event ID array, and verifies the target event ID is present — or that the
+  request body contains a valid `adminToken` (§91). <!-- 02-§89.13 -->
+- If the event ID is not in the cookie and no valid admin token is provided,
+  the server responds with HTTP 403. <!-- 02-§89.14 -->
 - If the event's date has already passed, the server responds with
   HTTP 400. <!-- 02-§89.15 -->
 - If the editing period is closed, the server responds with
@@ -4189,10 +4198,9 @@ administrators need the ability to edit or delete any event — for example
 to correct mistakes, remove duplicates, or update events on behalf of
 participants who lost their cookie.
 
-This requirement covers only the token infrastructure: storage,
-activation, verification, and a visual status indicator. The actual
-"edit all events" behaviour that uses this token is deferred to a
-future requirement.
+This requirement covers the token infrastructure: storage, activation,
+verification, and a visual status indicator. The edit/delete authorisation
+behaviour that uses this token is defined in §7, §18, and §89.
 
 ### 91.2 Admin tokens (site requirements)
 
