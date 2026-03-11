@@ -1252,6 +1252,7 @@ textarea {
 /* ── Time-gating message ── */
 
 .form-gate-msg {
+  max-width: 750px;
   margin-bottom: var(--space-md);
   padding: var(--space-sm);
   background: color-mix(in srgb, var(--color-sage) 20%, var(--color-cream));
