@@ -153,9 +153,10 @@ async function main() {
 
   // ── Compute version string for footer (02-§62.3, 02-§62.15) ──────────────
   const versionString = resolveVersionString(process.env, path.join(__dirname, '../..'));
+  const adminStatus = '<span id="admin-status" class="admin-status"></span>';
   const footerWithVersion = versionString
-    ? footerHtml + `\n<p class="site-footer__version">v${escapeHtml(versionString)}</p>`
-    : footerHtml;
+    ? footerHtml + `\n<p class="site-footer__version">v${escapeHtml(versionString)} ${adminStatus}</p>`
+    : footerHtml + `\n<p class="site-footer__version">${adminStatus}</p>`;
 
   // ── Load nav sections from content/sections.yaml ──────────────────────────
   // Resolved early so navSections can be passed to every render function.

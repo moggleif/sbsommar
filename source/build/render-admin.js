@@ -23,14 +23,17 @@ ${pwa}
 <body>
 ${nav}
   <main>
-    <h1>Admin</h1>
-    <form id="admin-form" class="admin-form">
-      <label for="admin-token">Ange din admin-token</label>
-      <input type="text" id="admin-token" name="token" required autocomplete="off" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
-      <button type="submit" class="btn btn--primary">Aktivera</button>
+    <h1>Bakom kulisserna</h1>
+    <p class="admin-intro">Här aktiverar du din admin-token. Med en aktiv token kan du redigera och ta bort alla aktiviteter i schemat — inte bara dina egna.</p>
+    <div id="admin-form" class="admin-form">
       <p id="admin-message" class="admin-message" aria-live="polite" hidden></p>
-    </form>
-    <button type="button" id="admin-remove" class="btn btn--secondary admin-remove" hidden>Ta bort min token</button>
+      <form id="admin-activate">
+        <label for="admin-token">Ange din admin-token</label>
+        <input type="text" id="admin-token" name="token" required autocomplete="off" placeholder="namn_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_0000000000">
+        <button type="submit" class="btn btn--primary">Aktivera</button>
+      </form>
+      <button type="button" id="admin-remove" class="btn btn--secondary admin-remove" hidden>Ta bort min token</button>
+    </div>
   </main>
 ${footer}
   <script src="admin.js"></script>

@@ -2677,9 +2677,20 @@ body.modal-open {
 
 /* ── Admin token ─────────────────────────────────────────────────────────── */
 
+.admin-intro {
+  max-width: var(--container-narrow);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-sm);
+}
+
 .admin-form {
   max-width: var(--container-narrow);
-  margin: var(--space-md) auto;
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
 .admin-form label {
@@ -2697,7 +2708,6 @@ body.modal-open {
   font-size: var(--font-size-base);
   border: 1px solid var(--color-charcoal);
   border-radius: var(--radius-sm);
-  margin-bottom: var(--space-sm);
 }
 
 .admin-form input[type="text"]:focus-visible {
@@ -2708,30 +2718,33 @@ body.modal-open {
 .admin-message {
   font-family: var(--font-sans);
   font-size: var(--font-size-small);
-  margin-top: var(--space-xs);
+  margin: 0;
 }
 
 .admin-message--success { color: var(--color-sage-hover); }
 .admin-message--error { color: var(--color-error); }
 
+.admin-remove {
+  align-self: flex-start;
+}
+
 .admin-status {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-left: var(--space-xs);
-  vertical-align: middle;
   line-height: 1;
 }
 
+a.admin-icon,
 .admin-icon {
   display: inline-flex;
   align-items: center;
-  color: var(--color-charcoal);
   text-decoration: none;
 }
 
+a.admin-icon--active,
 .admin-icon--active { color: var(--color-sage-hover); }
-.admin-icon--expired { color: var(--color-terracotta); }
 
-.admin-remove {
-  margin-top: var(--space-md);
-}
+a.admin-icon--expired,
+.admin-icon--expired { color: var(--color-terracotta); }
 
