@@ -93,7 +93,7 @@ the secrets.
 | `SERVER_SSH_PORT` | QA SSH port                      |
 | `DEPLOY_DIR`      | QA deploy directory              |
 
-| `ADMIN_TOKENS`    | Comma-separated list of admin tokens (UUIDs). Optional — omit to disable admin features. |
+| `ADMIN_TOKENS`    | Comma-separated list of admin tokens (format: `namn_uuid_epoch`). Optional — omit to disable admin features. Create tokens with `npm run admin:create`. |
 
 Example values: `SITE_URL=https://qa.sbsommar.se`,
 `API_URL=https://qa.sbsommar.se/api/add-event`.

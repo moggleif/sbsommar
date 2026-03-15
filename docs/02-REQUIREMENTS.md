@@ -4206,7 +4206,15 @@ behaviour that uses this token is defined in §7, §18, and §89.
 
 - The server must accept a comma-separated list of valid admin tokens
   via the environment variable `ADMIN_TOKENS`. <!-- 02-§91.1 -->
-- Each token is an opaque string (e.g. a UUID). <!-- 02-§91.2 -->
+- Each token follows the format `namn_uuid_epoch`, where `namn` is a
+  lowercase identifier for the admin, `uuid` is a v4 UUID, and `epoch`
+  is a Unix timestamp (seconds) representing the token's expiry
+  date. <!-- 02-§91.2 -->
+- A token whose embedded epoch is in the past is rejected server-side
+  regardless of whether it appears in `ADMIN_TOKENS`. <!-- 02-§91.29 -->
+- The creation script `npm run admin:create` generates a token with
+  60 days validity and prints instructions for where to store
+  it. <!-- 02-§91.30 -->
 - When `ADMIN_TOKENS` is unset or empty, all admin functionality is
   disabled — the site behaves exactly as before. <!-- 02-§91.3 -->
 
