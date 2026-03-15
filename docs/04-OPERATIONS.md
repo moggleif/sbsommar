@@ -185,7 +185,8 @@ If one or two people need the ability to edit or delete any event
 through the site UI (not just their own):
 
 1. Run `npm run admin:create` and follow the prompts. The script
-   generates a token in the format `namn_uuid` and prints instructions.
+   generates a token in the format `namn_uuid_epoch` (where `epoch` is
+   a Unix timestamp 60 days in the future) and prints instructions.
    The token is shown only once — save it immediately.
 2. Add the token to `ADMIN_TOKENS` in all three locations (see script
    output): `.env`, `api/.env` on the server, and GitHub Environment
