@@ -126,8 +126,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | COV-12..13 | `source/build/build.js` – falls back to most recent camp by `start_date` | covered |
 | `02-§3.4` | Schedule and add-activity links are prominent when a camp is active or upcoming | 03-ARCHITECTURE.md §3 | — | `source/build/layout.js` – nav always shows all links (not conditionally prominent based on camp state) | implemented |
 | `02-§3.5` | Upcoming-camps list renders each camp as a compact one-liner with no separators | 03-ARCHITECTURE.md §14.6 | CL-01, CL-02, CL-03 (CSS presence); manual: visual check | `source/assets/cs/style.css` – `.camp-item`, `.camp-body` flex layout | covered |
-| `02-§3.6` | Registration section links to the external registration service at `event-friend-ai.lovable.app` | 02-REQUIREMENTS.md §3 | REG-01 | `source/content/registration.md` | gap |
-| `02-§3.7` | Pricing and rules sections document cancellation refund tiers and organiser's right to refuse | 02-REQUIREMENTS.md §3 | REG-02..05 | `source/content/pricing.md`, `source/content/rules.md` | gap |
+| `02-§3.6` | Registration section links to the external registration service at `event-friend-ai.lovable.app` | 02-REQUIREMENTS.md §3 | REG-01 | `source/content/registration.md` | covered |
+| `02-§3.7` | Pricing and rules sections document cancellation refund tiers and organiser's right to refuse | 02-REQUIREMENTS.md §3 | REG-02..05 | `source/content/pricing.md`, `source/content/rules.md` | covered |
 | `02-§4.1` | Weekly schedule shows all activities for the full camp week, grouped by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `renderSchedulePage()`, `groupAndSortEvents()` | covered |
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
 | `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
@@ -1103,9 +1103,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1142
-Covered (implemented + tested): 583
+Covered (implemented + tested): 585
 Implemented, not tested:        557
-Gap (no implementation):          2
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
