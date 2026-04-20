@@ -18,6 +18,8 @@ camps:
     start_date: YYYY-MM-DD
     end_date: YYYY-MM-DD
     opens_for_editing: YYYY-MM-DD  # first date participants can add/edit activities
+    registration_opens: YYYY-MM-DD  # first date the homepage registration banner is shown
+    registration_closes: YYYY-MM-DD # last date the banner is shown (inclusive)
     location: string     # place name displayed on the archive page
     file: string         # filename in source/data/ (e.g. 2026-06-syssleback.yaml)
     archived: boolean    # true once the camp has ended
@@ -26,11 +28,18 @@ camps:
     link: string | null          # optional URL (e.g. Facebook group) shown on archive page
 ```
 
-All fields except `information`, `link`, and `qa` are required for each entry. <!-- 05-§1.1 -->
+All fields except `information`, `link`, `qa`, `registration_opens`, and
+`registration_closes` are required for each entry. <!-- 05-§1.1 -->
 
 The `opens_for_editing` field defines the first date on which the add-activity and
 edit-activity forms are available. The submission period closes at the end of
 `end_date + 1 day`. Typical default: `start_date − 7 days`. <!-- 05-§1.6 -->
+
+The `registration_opens` and `registration_closes` fields define the inclusive
+date range during which the homepage displays a banner linking to the
+registration section for that camp. Both fields are required for non-archived
+camps and optional for archived camps (where they are ignored). The range must
+satisfy `registration_opens <= registration_closes < start_date`. <!-- 05-§1.7 -->
 
 Rules:
 

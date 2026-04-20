@@ -2096,3 +2096,37 @@ Matrix cleanup (2026-02-25):
 | `02-§93.13` | implemented | `package.json` unchanged by this feature |
 | `02-§93.14` | implemented | `api/composer.json` unchanged by this feature |
 | `02-§93.15` | implemented | Documented in 03-ARCHITECTURE.md §31.7; matches existing §73.14 trust model |
+
+### §94 — Registration Banner and CTA Button
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§94.1` | gap | Hero banner per non-archived camp announcing open registration + last date — pending implementation in `source/build/render-index.js` and `source/assets/cs/style.css` |
+| `02-§94.2` | gap | Banner `<a>` element has `href="#anmalan"` — pending render-index.js change |
+| `02-§94.3` | gap | `build.js` must sort `registrationCamps` ascending by `start_date` — pending |
+| `02-§94.4` | gap | CTA button injected into `anmalan` section with external registration URL — pending render-index.js change |
+| `02-§94.5` | gap | Desktop float-right styling for CTA — pending CSS |
+| `02-§94.6` | gap | Mobile full-width/centred styling for CTA — pending CSS + manual browser check |
+| `02-§94.7` | gap | Remove `**[Anmäl er här](...)**` line from `source/content/registration.md` — pending |
+| `02-§94.8` | gap | New `registration_opens` / `registration_closes` fields in `camps.yaml` — pending data edit |
+| `02-§94.9` | gap | Validator rejects invalid / missing / out-of-order values on non-archived camps — pending `source/scripts/validate-camps.js` change + VLD-REG-01..NN tests |
+| `02-§94.10` | gap | Validator treats fields as optional on archived camps — pending `validate-camps.js` change + VLD-REG test |
+| `02-§94.11` | gap | Build-time HTML emits banners with `hidden` + `data-opens` / `data-closes` — pending + REGB-01..NN tests |
+| `02-§94.12` | gap | Inline client script toggles `hidden` based on Europe/Stockholm `today` — pending render-index.js + manual browser check |
+| `02-§94.13` | gap | No flicker; no visible space when container is empty — pending CSS + manual browser check |
+| `02-§94.14` | gap | Only non-archived camps receive banners — pending `build.js` filter + REGB test |
+| `02-§94.15` | gap | CTA injected by renderer (not authored in markdown), mirroring `wrapTestimonialCards` — pending REGC-01..NN tests |
+| `02-§94.16` | gap | CTA has `target="_blank"` + `rel="noopener noreferrer"` — pending REGC test |
+| `02-§94.17` | gap | CTA uses existing `.btn-primary` class — pending REGC test |
+| `02-§94.18` | gap | Banner `data-goatcounter-click="click-register-banner-<camp-id>"` — pending REGB test |
+| `02-§94.19` | gap | CTA `data-goatcounter-click="click-register-section"` — pending REGC test |
+| `02-§94.20` | gap | All banner and CTA text in Swedish — pending REGB / REGC text assertions |
+| `02-§94.21` | gap | CSS uses only tokens from `07-DESIGN.md §7` — pending CSS + manual token audit |
+| `02-§94.22` | gap | No new JavaScript files; inline script in generated `index.html` — pending REGB / manual inspection of HTML output |
+| `02-§94.23` | gap | No new npm/Composer dependencies — pending manual review of `package.json` / `api/composer.json` |
+
+### §1 — Camp registry fields (camps.yaml)
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `05-§1.7` | gap | `registration_opens` + `registration_closes` required on non-archived camps; inclusive range < `start_date` — pending `validate-camps.js` change + VLD-REG tests |

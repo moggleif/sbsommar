@@ -2223,6 +2223,125 @@ status `429` and no `valid` key.
 
 ---
 
+## 32. Registration Banner and CTA Button
+
+### 32.1 Overview
+
+Two coordinated UI elements make registration status and the entry point
+visible on the homepage:
+
+1. **Hero banners** — one per non-archived camp, rendered directly below
+   the hero image, each announcing that registration is open for that
+   specific camp and linking to the `#anmalan` section.
+2. **CTA button in the `anmalan` section** — a prominent `.btn-primary`
+   "Anmäl er här" call-to-action injected by the renderer, replacing the
+   inline bold markdown link in `source/content/registration.md`.
+
+Both elements share the "render always, hide via client-side JS when the
+relevant date window is inactive" pattern already used for hero action
+buttons (§15, §71) and hero countdown (§15.3). Nothing is ever
+server-rendered based on the current date, so the static HTML remains
+cache-friendly.
+
+### 32.2 Data source
+
+`source/data/camps.yaml` carries two new date fields per camp —
+`registration_opens` and `registration_closes`, inclusive — described in
+`05-DATA_CONTRACT.md §1.7`. `source/scripts/validate-camps.js` rejects
+non-archived camps with missing, malformed, or out-of-order values, and
+treats the fields as optional for archived camps.
+
+### 32.3 Build-time rendering
+
+`source/build/render-index.js`:
+
+- `renderIndexPage(...)` accepts a new parameter `registrationCamps`: an
+  array of `{ id, name, registrationOpens, registrationCloses,
+  lastRegistrationLabel }` objects. The array is already sorted ascending
+  by `start_date` by the caller.
+- Directly after the hero `<img>` (before the existing `hero-actions`
+  block), a `<div class="hero-registration-banners">` wraps one
+  `<a class="hero-registration-banner" hidden data-opens="..."
+  data-closes="..." href="#anmalan" data-goatcounter-click="click-register-banner-<id>">`
+  per camp. Each banner contains a title span and a meta span with the
+  last-registration date.
+- The `anmalan` section is post-processed (same pattern as
+  `wrapTestimonialCards`): the renderer wraps the section body in a flex
+  container and prepends a `.registration-cta` element holding a
+  `.btn-primary` with `href` to the external registration URL,
+  `target="_blank"`, `rel="noopener noreferrer"`, and
+  `data-goatcounter-click="click-register-section"`. The markdown source
+  no longer contains the inline bold link.
+- The external registration URL lives as a module-level constant in
+  `render-index.js` so a future move to a YAML-driven URL is a small
+  refactor, not a schema change.
+
+`source/build/build.js` computes `registrationCamps` by filtering
+`camps.yaml` to entries where `archived !== true`, reading the two new
+fields, and sorting ascending by `start_date`. Entries missing the fields
+(already validated away in non-archived camps) are dropped defensively.
+
+### 32.4 Client-side visibility
+
+The inline `<script>` at the end of `index.html` that currently toggles
+`.hero-actions` based on `data-opens`/`data-closes` is generalised to
+also toggle every `.hero-registration-banner[data-opens]`. The script
+uses the same Europe/Stockholm-anchored "today" string comparison as
+§71.5 — no timezone library, no `Date` arithmetic.
+
+Outside the registration window, each banner keeps its `hidden`
+attribute and the container `.hero-registration-banners` collapses to
+zero visible height because the banners stack vertically with no
+surrounding padding of their own.
+
+### 32.5 Styling
+
+`source/assets/cs/style.css` gains:
+
+- `.hero-registration-banners` — vertical flex column, `gap:
+  var(--space-sm)`, centred within the hero container, hidden from
+  layout when all children are `[hidden]` (achieved by letting each
+  banner own its own vertical spacing).
+- `.hero-registration-banner` — full-width card with cream background
+  (`--color-cream-light`), terracotta left-border accent, `padding:
+  var(--space-sm) var(--space-md)`, `border-radius: var(--radius-md)`.
+- `.hero-registration-banner-title` — bold, terracotta text, slightly
+  larger than body.
+- `.hero-registration-banner-meta` — smaller, charcoal text on a new
+  line.
+- `.registration-cta` — wrapper: desktop floats the CTA right of the
+  text flow (`float: right; margin: 0 0 var(--space-sm) var(--space-md)`),
+  mobile (< 720 px) sets `float: none`, full width, centred.
+- `.registration-cta-btn` — a modifier on `.btn-primary` that only
+  widens the button on mobile.
+
+All values come from existing tokens in `07-DESIGN.md §7`.
+
+### 32.6 Accessibility
+
+- Banners are `<a>` elements so they are reachable via the tab sequence
+  and clickable as a single target.
+- Title and meta spans are inside the anchor; screen readers read the
+  concatenated text.
+- The CTA button inherits `.btn-primary`'s `:focus-visible` rule from
+  `07-§9.2`.
+- Color contrast of cream background + terracotta title meets WCAG AA,
+  verified against the existing testimonial-card pattern that uses the
+  same palette.
+
+### 32.7 Files changed
+
+| File                                  | Change                                                                   |
+| ------------------------------------- | ------------------------------------------------------------------------ |
+| `source/data/camps.yaml`              | Add `registration_opens` + `registration_closes` to non-archived camps   |
+| `source/scripts/validate-camps.js`    | Validate new fields (presence, ISO format, ordering, before `start_date`) |
+| `source/build/build.js`               | Compute `registrationCamps` array, pass to `renderIndexPage`             |
+| `source/build/render-index.js`        | Render banner block; inject `.registration-cta` into `anmalan` section   |
+| `source/content/registration.md`      | Remove the inline `**[Anmäl er här](...)**` line                         |
+| `source/assets/cs/style.css`          | New classes for banner and CTA wrapper                                   |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.
