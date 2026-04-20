@@ -1102,10 +1102,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1142
+Total requirements:            1157
 Covered (implemented + tested): 585
 Implemented, not tested:        557
-Gap (no implementation):          0
+Gap (no implementation):         15
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1755,7 +1755,7 @@ Matrix cleanup (2026-02-25):
 | `02-§73.11` | covered | FB-10..13: length limit tests for title, description, name |
 | `02-§73.12` | covered | FB-14..16: injection scan tests |
 | `02-§73.13` | covered | FB-17..19: honeypot flag tests |
-| `02-§73.14` | implemented | `source/api/feedback.js` isRateLimited; `api/src/Feedback.php` isRateLimited |
+| `02-§73.14` | implemented | `/feedback` rate-limit delegated to shared helper (§93); see `02-§93.4`, `02-§93.8`, `02-§93.10` |
 | `02-§73.15` | implemented | Manual: verify role=dialog, aria-modal, focus trap |
 | `02-§73.16` | covered | FB-02: aria-label="Ge feedback" present |
 | `02-§73.17` | implemented | Manual: verify Escape, click outside, close button |
@@ -2076,3 +2076,23 @@ Matrix cleanup (2026-02-25):
 | `02-§92.23` | implemented | No new entries in `package.json` |
 | `02-§92.24` | implemented | `sw.js` is vanilla JS, no imports |
 | `02-§92.25` | implemented | `offline.html` included in pre-cache list, fallback logic unchanged |
+
+### §93 — Rate Limiting for Authorization Endpoints
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§93.1` | gap | `/verify-admin` rejects >5 req/IP/h with 429 — to be implemented in `app.js`, `api/index.php` |
+| `02-§93.2` | gap | `/edit-event` rejects >30 req/IP/h with 429 — to be implemented in `app.js`, `api/index.php` |
+| `02-§93.3` | gap | `/delete-event` rejects >30 req/IP/h with 429 — to be implemented in `app.js`, `api/index.php` |
+| `02-§93.4` | gap | `/feedback` keeps >5 req/IP/h behavior via shared helper |
+| `02-§93.5` | gap | Rate-limit check runs before validation/auth/time-gating on all four endpoints |
+| `02-§93.6` | gap | IP resolution: `X-Forwarded-For` → remote address, same as existing `/feedback` handler |
+| `02-§93.7` | gap | `source/api/rate-limit.js` exposes `isRateLimited(key, config)` over in-process Map |
+| `02-§93.8` | gap | `source/api/feedback.js` delegates to shared helper; own rate-limit code removed |
+| `02-§93.9` | gap | `api/src/RateLimit.php` exposes `SBSommar\RateLimit::isLimited($ip, $ns, $limit, $window)` |
+| `02-§93.10` | gap | `api/src/Feedback.php` delegates to `RateLimit::isLimited`; own rate-limit code removed |
+| `02-§93.11` | gap | Counter state is process-local in Node, file-local in PHP — documented limitation |
+| `02-§93.12` | gap | Swedish error "För många förfrågningar. Försök igen senare." on 429 |
+| `02-§93.13` | gap | No new npm dependencies in `package.json` |
+| `02-§93.14` | gap | No new Composer dependencies in `api/composer.json` |
+| `02-§93.15` | gap | `X-Forwarded-For` trust boundary deferred to reverse-proxy config (same as §73.14) |
