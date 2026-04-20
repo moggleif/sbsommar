@@ -2342,6 +2342,75 @@ All values come from existing tokens in `07-DESIGN.md §7`.
 
 ---
 
+## 33. Regex Performance and Escape Hygiene
+
+### 33.1 Goal
+
+Close CodeQL alerts #17 (`js/polynomial-redos`) and #30–#32
+(`js/incomplete-sanitization`) and remove two regex patterns that invite
+future bugs: a polynomial-time trim in the slug builder and an
+incomplete ad-hoc escape in a test file. The fixes are behaviour-
+preserving; nothing user-facing or data-facing changes.
+
+### 33.2 `slugify()` — linear-time trim
+
+`slugify()` in `source/api/github.js` runs on user-supplied activity
+titles. Before this change the trim step used two separate passes:
+
+```js
+.replace(/^-+/, '')
+.replace(/-+$/, '')
+```
+
+`/^-+/` is linear (anchored at start), but `/-+$/` without a start
+anchor can be O(n²) when the input contains a long run of `-`
+characters: the engine retries the `-+$` match at every position. After
+the earlier collapse `[^a-z0-9]+/g → '-'`, runs of `-` already cannot
+exceed length 1, so `+` in the trim regexes is redundant. The fix is a
+single combined pass:
+
+```js
+.replace(/^-|-$/g, '')
+```
+
+Linear, matches at most two characters (one leading, one trailing), and
+produces identical output for every input.
+
+### 33.3 `tests/helpers/regex-escape.js` — shared `escapeRegExp`
+
+`tests/scoped-headings.test.js` built a `RegExp` from a CSS selector
+string by escaping only `.` and `\s`, which is fine for the current
+literals (`.md-preview`, `.event-desc`, `.event-description`) but
+malformed as soon as any callsite passes a selector with `*`, `+`, `?`,
+`^`, `$`, `{`, `}`, `(`, `)`, `|`, `[`, `]`, or `\`. CodeQL's
+`js/incomplete-sanitization` correctly flags this pattern.
+
+A single helper at `tests/helpers/regex-escape.js` exports the canonical
+escape:
+
+```js
+function escapeRegExp(str) {
+  return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+```
+
+`tests/scoped-headings.test.js` imports this helper at each site where a
+`container` or `heading` value is interpolated into a `RegExp`. No
+other test file currently builds a pattern from a variable string, so
+no broader refactor is needed.
+
+### 33.4 Files changed
+
+| File                                  | Change                                                                   |
+| ------------------------------------- | ------------------------------------------------------------------------ |
+| `source/api/github.js`                | Collapse two-step trim in `slugify()` into `/^-\|-$/g`                    |
+| `tests/helpers/regex-escape.js`       | New helper exporting `escapeRegExp(str)`                                 |
+| `tests/scoped-headings.test.js`       | Replace hand-rolled selector escape with `escapeRegExp()`                |
+| `tests/slugify-redos.test.js`         | New test — verifies ReDoS-safe runtime and output equivalence            |
+| `tests/regex-escape.test.js`          | New test — verifies helper covers every metacharacter                    |
+
+---
+
 ## 10. Decided Against
 
 Decisions evaluated and deliberately rejected. Kept here so they are not re-proposed.

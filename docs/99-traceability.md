@@ -2125,6 +2125,18 @@ Matrix cleanup (2026-02-25):
 | `02-§94.22` | covered | REGB-11 / REGB-12: inline banner visibility script is emitted only when banners are present; no new JS files |
 | `02-§94.23` | implemented | `package.json` and `api/composer.json` unchanged by this feature |
 
+### §95 — Security Hygiene: Regex Performance and Escaping
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§95.1` | gap | Linear-time trim in `slugify()` — pending Phase 4 |
+| `02-§95.2` | gap | Output-equivalence proof for `slugify()` — pending Phase 4 |
+| `02-§95.3` | gap | `tests/helpers/regex-escape.js` `escapeRegExp()` — pending Phase 4 |
+| `02-§95.4` | gap | `tests/scoped-headings.test.js` uses shared helper — pending Phase 4 |
+| `02-§95.5` | gap | No new dependencies — pending Phase 4 |
+| `02-§95.6` | gap | Output preserved — pending Phase 4 |
+| `02-§95.7` | gap | CodeQL alerts #17, #30, #31, #32 reach `fixed` — pending CodeQL re-scan |
+
 ### §1 — Camp registry fields (camps.yaml)
 
 | ID | Status | Notes |
