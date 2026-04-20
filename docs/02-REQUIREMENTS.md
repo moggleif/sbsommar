@@ -4525,3 +4525,57 @@ inside the section itself that replaces the inline markdown link.
 - No new JavaScript files are added; the visibility script is inline in
   the generated `index.html`, consistent with §71.11. <!-- 02-§94.22 -->
 - No new npm or Composer dependencies. <!-- 02-§94.23 -->
+
+---
+
+## 95. Security Hygiene: Regex Performance and Escaping
+
+### 95.1 Context
+
+CodeQL flagged four regex-related issues in the codebase:
+
+- Alert #17 (`js/polynomial-redos`) in `source/api/github.js` at the
+  `slugify()` helper — the two-step `.replace(/^-+/, '').replace(/-+$/, '')`
+  pass depends on user-provided input and can backtrack polynomially on
+  `-`-heavy strings.
+- Alerts #30, #31, #32 (`js/incomplete-sanitization`) in
+  `tests/scoped-headings.test.js` — the ad-hoc escape
+  `.replace(/\./g, '\\.').replace(/\s+/g, '\\s+')` does not cover `\`,
+  `*`, `+`, `?`, `^`, `$`, `{`, `}`, `(`, `)`, `|`, `[`, `]`, so a
+  selector containing any of those characters would produce a malformed
+  pattern.
+
+Neither alert represents an active vulnerability — slug inputs come from
+authored camp data and the flagged test selectors are hardcoded — but
+both should be eliminated so the CodeQL queue stays actionable and future
+changes do not silently inherit the unsafe pattern.
+
+### 95.2 Slugify performance (site requirements)
+
+- `slugify()` in `source/api/github.js` strips leading and trailing `-`
+  characters in a single linear-time pass so its worst-case time on any
+  input is O(n). <!-- 02-§95.1 -->
+- `slugify(s)` produces output identical to the previous implementation
+  for every input: lowercase, `å`/`ä` → `a`, `ö` → `o`, non-alphanumerics
+  collapsed to `-`, leading and trailing `-` removed, truncated to 48
+  characters. <!-- 02-§95.2 -->
+
+### 95.3 Regex escape helper (test infrastructure requirements)
+
+- `tests/helpers/regex-escape.js` exports `escapeRegExp(str)` which
+  returns `str` with every regex metacharacter in the set
+  `. * + ? ^ $ { } ( ) | [ ] \` prefixed by `\`, so the resulting
+  pattern matches only the literal input string. <!-- 02-§95.3 -->
+- `tests/scoped-headings.test.js` uses `escapeRegExp()` at every site
+  where a `container` or `heading` value is interpolated into a
+  `RegExp`; the file contains no hand-rolled `\.`/`\s+` substitution for
+  regex construction. <!-- 02-§95.4 -->
+
+### 95.4 Constraints
+
+- No new npm or Composer dependencies. <!-- 02-§95.5 -->
+- No user-visible behaviour change: slugs generated for new activities
+  remain identical to the previous output, so existing event IDs and
+  URLs continue to resolve. <!-- 02-§95.6 -->
+- CodeQL alerts #17, #30, #31, and #32 reach state `fixed` on the next
+  scan after merge. <!-- 02-§95.7 -->
