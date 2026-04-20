@@ -37,23 +37,6 @@ const INJECTION_PATTERNS = [
   { re: /data:text\/html/i, label: 'data:text/html URI' },
 ];
 
-// ── Rate-limiting (in-memory) ────────────────────────────────────────────────
-
-const rateMap = new Map();   // ip → { count, resetAt }
-const RATE_LIMIT = 5;
-const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-
-function isRateLimited(ip) {
-  const now = Date.now();
-  const entry = rateMap.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    return false;
-  }
-  entry.count += 1;
-  return entry.count > RATE_LIMIT;
-}
-
 // ── Validation ───────────────────────────────────────────────────────────────
 
 function validateFeedbackRequest(body) {
@@ -143,4 +126,4 @@ async function createFeedbackIssue(body) {
   return data.html_url;
 }
 
-module.exports = { validateFeedbackRequest, createFeedbackIssue, isRateLimited };
+module.exports = { validateFeedbackRequest, createFeedbackIssue };
