@@ -126,8 +126,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | COV-12..13 | `source/build/build.js` – falls back to most recent camp by `start_date` | covered |
 | `02-§3.4` | Schedule and add-activity links are prominent when a camp is active or upcoming | 03-ARCHITECTURE.md §3 | — | `source/build/layout.js` – nav always shows all links (not conditionally prominent based on camp state) | implemented |
 | `02-§3.5` | Upcoming-camps list renders each camp as a compact one-liner with no separators | 03-ARCHITECTURE.md §14.6 | CL-01, CL-02, CL-03 (CSS presence); manual: visual check | `source/assets/cs/style.css` – `.camp-item`, `.camp-body` flex layout | covered |
-| `02-§3.6` | Registration section links to the external registration service at `event-friend-ai.lovable.app` | 02-REQUIREMENTS.md §3 | — | `source/content/registration.md` | gap |
-| `02-§3.7` | Pricing and rules sections document cancellation refund tiers and organiser's right to refuse | 02-REQUIREMENTS.md §3 | — | `source/content/pricing.md`, `source/content/rules.md` | gap |
+| `02-§3.6` | Registration section links to the external registration service at `event-friend-ai.lovable.app` | 02-REQUIREMENTS.md §3 | REG-01 | `source/content/registration.md` | gap |
+| `02-§3.7` | Pricing and rules sections document cancellation refund tiers and organiser's right to refuse | 02-REQUIREMENTS.md §3 | REG-02..05 | `source/content/pricing.md`, `source/content/rules.md` | gap |
 | `02-§4.1` | Weekly schedule shows all activities for the full camp week, grouped by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `renderSchedulePage()`, `groupAndSortEvents()` | covered |
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
 | `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
@@ -1506,6 +1506,8 @@ Matrix cleanup (2026-02-25):
 | DAC-01..07 | `tests/resolve-active-camp.test.js` | `resolveActiveCamp` |
 | LOC-01..10 | `tests/render-locations.test.js` | `renderLocationAccordions` |
 | COV-01..16 | `tests/coverage-index.test.js` | Homepage render tests (02-§2.1, 02-§3.1, CL-§3.1, CL-§3.3, 02-§2.9, 02-§14.1) |
+| REG-01 | `tests/registration-content.test.js` | Registration section links to external service (02-§3.6) |
+| REG-02..05 | `tests/registration-content.test.js` | Participation terms documented (02-§3.7) |
 | LAY-01..15 | `tests/coverage-layout.test.js` | Layout component tests (CL-§2.4, CL-§2.5, CL-§3.4, 02-§2.8, 02-§24.10) |
 | DIS-01..25 | `tests/coverage-today.test.js` | Display mode view tests (02-§2.4a, 02-§2.10, 02-§4.6, 02-§4.7, 02-§4.13, 02-§17.3) |
 | IDAG-01..18 | `tests/coverage-idag.test.js` | Today standard view tests (02-§2.4, 02-§4.5, 02-§4.13, 02-§14.1) |
