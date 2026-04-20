@@ -15,6 +15,8 @@ function makeCamp(overrides = {}) {
     start_date: '2026-08-01',
     end_date: '2026-08-07',
     opens_for_editing: '2026-07-25',
+    registration_opens: '2026-05-01',
+    registration_closes: '2026-07-15',
     location: 'Testville',
     file: '2026-08-test.yaml',
     archived: false,
@@ -368,5 +370,92 @@ describe('validateCamps – edge cases', () => {
     assert.equal(result.ok, false);
     // Error should reference camp-b, not camp-a
     assert.ok(result.errors.some(e => e.includes('camp-b')));
+  });
+});
+
+// ── Registration window (02-§94.8, §94.9, §94.10; 05-§1.7) ──────────────────
+
+function makeRegCamp(overrides = {}) {
+  return makeCamp({
+    registration_opens: '2026-05-01',
+    registration_closes: '2026-07-15',
+    ...overrides,
+  });
+}
+
+describe('validateCamps – registration window fields (02-§94.8–94.10, 05-§1.7)', () => {
+  it('VCMP-37: non-archived camp accepts valid registration window', () => {
+    const result = run([makeRegCamp()]);
+    assert.equal(result.ok, true, `errors: ${result.errors.join('; ')}`);
+  });
+
+  it('VCMP-38: non-archived camp missing registration_opens fails', () => {
+    const camp = makeRegCamp();
+    delete camp.registration_opens;
+    const result = run([camp]);
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e => e.includes('registration_opens')),
+      `Expected error about registration_opens, got: ${result.errors.join('; ')}`);
+  });
+
+  it('VCMP-39: non-archived camp missing registration_closes fails', () => {
+    const camp = makeRegCamp();
+    delete camp.registration_closes;
+    const result = run([camp]);
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e => e.includes('registration_closes')),
+      `Expected error about registration_closes, got: ${result.errors.join('; ')}`);
+  });
+
+  it('VCMP-40: rejects invalid registration_opens date format', () => {
+    const result = run([makeRegCamp({ registration_opens: '2026/05/01' })]);
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e => e.includes('registration_opens')));
+  });
+
+  it('VCMP-41: rejects invalid registration_closes date format', () => {
+    const result = run([makeRegCamp({ registration_closes: 'July' })]);
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e => e.includes('registration_closes')));
+  });
+
+  it('VCMP-42: rejects registration_opens after registration_closes', () => {
+    const result = run([makeRegCamp({
+      registration_opens: '2026-06-20',
+      registration_closes: '2026-05-01',
+    })]);
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e =>
+      e.includes('registration_opens') || e.includes('registration_closes')
+    ));
+  });
+
+  it('VCMP-43: rejects registration_closes on or after start_date', () => {
+    const result = run([makeRegCamp({
+      start_date: '2026-08-01',
+      end_date: '2026-08-07',
+      registration_opens: '2026-05-01',
+      registration_closes: '2026-08-01',
+    })]);
+    assert.equal(result.ok, false);
+    assert.ok(result.errors.some(e =>
+      e.includes('registration_closes') && e.includes('start_date')
+    ), `Expected error tying registration_closes to start_date, got: ${result.errors.join('; ')}`);
+  });
+
+  it('VCMP-44: accepts registration_opens equal to registration_closes', () => {
+    const result = run([makeRegCamp({
+      registration_opens: '2026-07-15',
+      registration_closes: '2026-07-15',
+    })]);
+    assert.equal(result.ok, true, `errors: ${result.errors.join('; ')}`);
+  });
+
+  it('VCMP-45: archived camp without registration fields is accepted', () => {
+    const camp = makeCamp({ archived: true });
+    delete camp.registration_opens;
+    delete camp.registration_closes;
+    const result = run([camp]);
+    assert.equal(result.ok, true, `errors: ${result.errors.join('; ')}`);
   });
 });

@@ -4435,3 +4435,92 @@ reusable implementation per runtime.
   `X-Forwarded-For` spoof protection; trust boundaries are deferred to
   reverse-proxy configuration, consistent with the existing feedback
   handler. <!-- 02-§93.15 -->
+
+---
+
+## 94. Registration Banner and CTA Button
+
+### 94.1 Context
+
+The homepage must signal, at a glance, that registration is open for each
+upcoming camp. The "Hur anmäler jag oss?" section contains an inline bold
+markdown link that first-time visitors easily miss, and nothing else on the
+page communicates whether registration is currently open or when it closes.
+Two changes address this: a banner below the hero that announces the open
+registration window and links to the section, and a prominent CTA button
+inside the section itself that replaces the inline markdown link.
+
+### 94.2 User requirements
+
+- A prospective family visiting the homepage during an open registration
+  period for a camp sees a banner directly below the hero image announcing
+  that registration for that camp is open, together with the last
+  registration date. <!-- 02-§94.1 -->
+- Clicking the banner navigates to the `#anmalan` section on the same
+  page. <!-- 02-§94.2 -->
+- One banner is rendered per non-archived camp that has a registration
+  window, ordered by the camp's `start_date` ascending (closest camp
+  first). <!-- 02-§94.3 -->
+- The "Hur anmäler jag oss?" section contains a visually prominent
+  "Anmäl er här" button that opens the external registration service at
+  `event-friend-ai.lovable.app` in a new tab. <!-- 02-§94.4 -->
+- On desktop (≥ 720 px), the "Anmäl er här" button sits to the right of
+  the section column, and surrounding text flows around it. <!-- 02-§94.5 -->
+- On mobile (< 720 px), the "Anmäl er här" button spans the full column
+  width and is centred. <!-- 02-§94.6 -->
+- The registration section contains no inline bold markdown link labelled
+  "Anmäl er här"; the CTA button is the single call-to-action. <!-- 02-§94.7 -->
+
+### 94.3 Data requirements
+
+- Each non-archived camp in `camps.yaml` declares the fields
+  `registration_opens` and `registration_closes`, both as ISO dates
+  (`YYYY-MM-DD`, inclusive). <!-- 02-§94.8 -->
+- The data validator rejects a non-archived camp that is missing either
+  field, has a non-ISO date, has `registration_opens > registration_closes`,
+  or has `registration_closes >= start_date`. <!-- 02-§94.9 -->
+- Archived camps may omit the registration fields; the validator does not
+  require them. <!-- 02-§94.10 -->
+
+### 94.4 Banner visibility rules
+
+- Each banner is rendered in the static HTML at build time with the
+  `hidden` attribute and the data attributes `data-opens` and
+  `data-closes` carrying the camp's registration window. <!-- 02-§94.11 -->
+- A client-side script removes `hidden` only when the current
+  Europe/Stockholm date satisfies
+  `data-opens <= today <= data-closes`. <!-- 02-§94.12 -->
+- Outside the registration window the banner remains hidden; it does not
+  briefly flash visible, and its container reserves no visible space when
+  empty. <!-- 02-§94.13 -->
+- Banners are only rendered for non-archived camps. <!-- 02-§94.14 -->
+
+### 94.5 CTA button placement and behaviour
+
+- The CTA button is injected by the homepage renderer into the `anmalan`
+  section, not authored in the markdown source, following the same
+  injection pattern as `wrapTestimonialCards` in
+  `source/build/render-index.js`. <!-- 02-§94.15 -->
+- The button opens in a new browser tab with `target="_blank"` and
+  `rel="noopener noreferrer"`, consistent with other external links on
+  the site. <!-- 02-§94.16 -->
+- The button reuses the existing `.btn-primary` class from
+  `source/assets/cs/style.css`; no new colour, typography, or spacing
+  tokens are introduced. <!-- 02-§94.17 -->
+
+### 94.6 Analytics
+
+- Each banner carries
+  `data-goatcounter-click="click-register-banner-<camp-id>"`, where
+  `<camp-id>` is the camp's `id` from `camps.yaml`. <!-- 02-§94.18 -->
+- The CTA button carries
+  `data-goatcounter-click="click-register-section"`. <!-- 02-§94.19 -->
+
+### 94.7 Constraints
+
+- All user-facing text is in Swedish. <!-- 02-§94.20 -->
+- CSS uses existing design tokens from `07-DESIGN.md §7`; no hardcoded
+  colours, spacing, or typography. <!-- 02-§94.21 -->
+- No new JavaScript files are added; the visibility script is inline in
+  the generated `index.html`, consistent with §71.11. <!-- 02-§94.22 -->
+- No new npm or Composer dependencies. <!-- 02-§94.23 -->

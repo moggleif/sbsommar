@@ -167,6 +167,49 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
   `data-opens` / `data-closes` attributes and toggles the `hidden`
   attribute. <!-- 07-§6.84 -->
 
+### Registration Banners
+
+- A vertical stack of banners appears directly below the hero image when
+  one or more non-archived camps have an active registration window. <!-- 07-§6.89 -->
+- One banner per camp, ordered by `start_date` ascending (closest camp
+  on top). <!-- 07-§6.90 -->
+- Each banner is a full-width `<a>` card with a terracotta left border
+  accent (`border-left: 4px solid var(--color-terracotta)`), background
+  `var(--color-cream-light)`, `border-radius: var(--radius-md)`,
+  `padding: var(--space-sm) var(--space-md)`. <!-- 07-§6.91 -->
+- Banner title: `700` weight, `color: var(--color-terracotta)`,
+  `font-size: var(--font-size-base)`. <!-- 07-§6.92 -->
+- Banner meta line: `font-size: var(--font-size-small)`,
+  `color: var(--color-charcoal)`, displayed on its own line beneath the
+  title. <!-- 07-§6.93 -->
+- Container (`.hero-registration-banners`): `display: flex;
+  flex-direction: column; gap: var(--space-sm)`, centred within the hero
+  container width. <!-- 07-§6.94 -->
+- Hover: background shifts to
+  `color-mix(in srgb, var(--color-terracotta) 6%, var(--color-cream-light))`,
+  `200ms ease`, no scale transform. <!-- 07-§6.95 -->
+- Focus-visible: standard outline
+  (`2px solid var(--color-terracotta); outline-offset: 2px`). <!-- 07-§6.96 -->
+- Visibility is controlled by the same inline client-side JS as Hero
+  Action Buttons: banners stay `hidden` outside the window defined by
+  `data-opens` / `data-closes`. <!-- 07-§6.97 -->
+
+### Registration CTA (in the anmälan section)
+
+- The "Hur anmäler jag oss?" section carries a single prominent "Anmäl
+  er här" call-to-action button injected by the build-time renderer, not
+  authored in markdown. <!-- 07-§6.98 -->
+- The button reuses `.btn-primary` styling (terracotta background, white
+  text). <!-- 07-§6.99 -->
+- Wrapper `.registration-cta` — desktop (≥ 720 px): `float: right;
+  margin: 0 0 var(--space-sm) var(--space-md)` so the following
+  paragraph text flows around the button. <!-- 07-§6.100 -->
+- Mobile (< 720 px): `float: none`, `display: block`, `width: 100%`,
+  `text-align: center`; the button sits on its own row centred in the
+  column. <!-- 07-§6.101 -->
+- The CTA opens the external registration service in a new tab
+  (`target="_blank"`, `rel="noopener noreferrer"`). <!-- 07-§6.102 -->
+
 ### Buttons
 
 - Min height: `40px`. <!-- 07-§6.12 -->

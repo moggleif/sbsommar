@@ -4,8 +4,6 @@ Självklart är hela familjen välkommen. Alla räknas som deltagare. Barn i all
 
 Före anmälan, läs [regler och villkor](#regler).
 
-**[Anmäl er här](https://event-friend-ai.lovable.app)**
-
 Anmälan sker på en separat sida som drivs av arrangören EDQ AB. Där fyller ni i anmälan steg för steg och väljer betalning i slutet. Vid frågor om anmälan, kontakta <info@edq.se>.
 
 ## Viktiga datum

@@ -246,6 +246,82 @@ h3 {
   outline-offset: 2px;
 }
 
+/* ── Hero registration banners (02-§94, 07-§6.89–6.97) ── */
+
+.hero-registration-banners {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-registration-banner {
+  display: block;
+  background: var(--color-cream-light);
+  border-left: 4px solid var(--color-terracotta);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  color: var(--color-charcoal);
+  transition: background 200ms ease;
+}
+
+.hero-registration-banner[hidden] {
+  display: none;
+}
+
+.hero-registration-banner:hover {
+  background: color-mix(in srgb, var(--color-terracotta) 6%, var(--color-cream-light));
+}
+
+.hero-registration-banner:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
+.hero-registration-banner-title {
+  display: block;
+  font-weight: 700;
+  color: var(--color-terracotta);
+  font-size: var(--font-size-base);
+}
+
+.hero-registration-banner-meta {
+  display: block;
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  margin-top: 2px;
+}
+
+/* ── Registration CTA in anmälan section (02-§94, 07-§6.98–6.102) ── */
+
+.registration-cta {
+  float: right;
+  margin: 0 0 var(--space-sm) var(--space-md);
+}
+
+.registration-cta-btn {
+  text-decoration: none;
+}
+
+@media (max-width: 719px) {
+  .registration-cta {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 var(--space-sm) 0;
+  }
+
+  .registration-cta-btn {
+    display: inline-block;
+    min-width: 60%;
+  }
+}
+
 /* ── Camps row (camps list + countdown) ── */
 
 .camps-row {
