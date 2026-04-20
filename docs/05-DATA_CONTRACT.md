@@ -28,8 +28,9 @@ camps:
     link: string | null          # optional URL (e.g. Facebook group) shown on archive page
 ```
 
-All fields except `information`, `link`, `qa`, `registration_opens`, and
-`registration_closes` are required for each entry. <!-- 05-§1.1 -->
+All fields except `information`, `link`, and `qa` are required for each
+entry. `registration_opens` and `registration_closes` are conditionally
+required — see §1.7. <!-- 05-§1.1 -->
 
 The `opens_for_editing` field defines the first date on which the add-activity and
 edit-activity forms are available. The submission period closes at the end of
