@@ -10,7 +10,7 @@ const { renderAddPage } = require('./render-add');
 const { renderEditPage, editApiUrl } = require('./render-edit');
 const { renderTodayPage, renderRedirectPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
-const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions } = require('./render-index');
+const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions, formatLongSvDate } = require('./render-index');
 const { renderArkivPage } = require('./render-arkiv');
 const { renderRssFeed } = require('./render-rss');
 const { renderEventPage } = require('./render-event');
@@ -360,8 +360,22 @@ async function main() {
     ? addOneDay(toDateString(activeCamp.end_date))
     : null;
 
+  // ── Registration banners (02-§94.1–94.14) ────────────────────────────────
+  // One banner per non-archived camp that has both registration window fields.
+  // build-time ordering is ascending by start_date (closest camp on top).
+  const registrationCamps = camps
+    .filter((c) => c.archived !== true && c.registration_opens && c.registration_closes)
+    .sort((a, b) => toDateString(a.start_date).localeCompare(toDateString(b.start_date)))
+    .map((c) => ({
+      id: c.id,
+      name: c.name,
+      registrationOpens: toDateString(c.registration_opens),
+      registrationCloses: toDateString(c.registration_closes),
+      lastRegistrationLabel: formatLongSvDate(c.registration_closes),
+    }));
+
   const heroDims = heroSrc ? getImageDimensions(path.join(CONTENT_DIR, heroSrc)) : null;
-  const indexHtml = renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget, opensForEditing, editingCloses }, footerWithVersion, navSections, GOATCOUNTER_CODE);
+  const indexHtml = renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget, opensForEditing, editingCloses, registrationCamps }, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`Built: public/index.html  (${sections.length} sections)`);
 

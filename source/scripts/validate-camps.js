@@ -46,8 +46,8 @@ function validateCamps(camps, files) {
       }
     }
 
-    // ── Date format (02-§37.2) ────────────────────────────────────────────
-    for (const dateField of ['start_date', 'end_date', 'opens_for_editing']) {
+    // ── Date format (02-§37.2, 02-§94.9) ──────────────────────────────────
+    for (const dateField of ['start_date', 'end_date', 'opens_for_editing', 'registration_opens', 'registration_closes']) {
       const val = camp[dateField];
       if (val !== undefined && val !== null && val !== '') {
         const str = String(val);
@@ -62,6 +62,28 @@ function validateCamps(camps, files) {
     const endStr = String(camp.end_date || '');
     if (DATE_RE.test(startStr) && DATE_RE.test(endStr) && endStr < startStr) {
       errors.push(`${ref}: end_date (${endStr}) must be on or after start_date (${startStr})`);
+    }
+
+    // ── Registration window (02-§94.8, §94.9, §94.10; 05-§1.7) ────────────
+    const isArchived = camp.archived === true;
+    const regOpens = String(camp.registration_opens || '');
+    const regCloses = String(camp.registration_closes || '');
+
+    if (!isArchived) {
+      if (!regOpens) {
+        errors.push(`${ref}: registration_opens is required for non-archived camps`);
+      }
+      if (!regCloses) {
+        errors.push(`${ref}: registration_closes is required for non-archived camps`);
+      }
+    }
+
+    if (DATE_RE.test(regOpens) && DATE_RE.test(regCloses) && regOpens > regCloses) {
+      errors.push(`${ref}: registration_opens (${regOpens}) must be on or before registration_closes (${regCloses})`);
+    }
+
+    if (DATE_RE.test(regCloses) && DATE_RE.test(startStr) && regCloses >= startStr) {
+      errors.push(`${ref}: registration_closes (${regCloses}) must be before start_date (${startStr})`);
     }
 
     // ── archived is boolean (02-§37.4) ────────────────────────────────────

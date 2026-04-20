@@ -142,8 +142,9 @@ function convertMarkdown(input, headingOffset = 0, collapsible = false, contentD
  * @param {string|null} opts.opensForEditing - YYYY-MM-DD first editing date
  * @param {string|null} opts.editingCloses  - YYYY-MM-DD last editing date (end_date + 1)
  * @param {Array<{id: string, navLabel: string, html: string}>} opts.sections
+ * @param {Array<{id: string, name: string, registrationOpens: string, registrationCloses: string}>} [opts.registrationCamps]
  */
-function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget, opensForEditing, editingCloses }, footerHtml = '', navSections = [], goatcounterCode = '') {
+function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, facebookUrl, countdownTarget, opensForEditing, editingCloses, registrationCamps }, footerHtml = '', navSections = [], goatcounterCode = '') {
   const countdownHtml = countdownTarget
     ? `<div class="hero-countdown" data-target="${countdownTarget}">\n        <span class="hero-countdown-number">00</span>\n        <span class="hero-countdown-label">Dagar kvar</span>\n      </div>`
     : '';
@@ -162,8 +163,10 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
     ? `\n    <div class="hero-actions" hidden data-opens="${opensForEditing}" data-closes="${editingCloses}">\n      <a href="idag.html" class="hero-actions-btn">Idag</a>\n      <a href="schema.html" class="hero-actions-btn">Schema</a>\n      <a href="lagg-till.html" class="hero-actions-btn">Lägg till</a>\n    </div>`
     : '';
 
+  const registrationBannersHtml = renderRegistrationBannersHtml(registrationCamps);
+
   const heroHtml = heroSrc
-    ? `\n  <div class="hero">\n    <div class="hero-header">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>${socialLinks}\n    </div>\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img"${heroDimAttrs} fetchpriority="high">${actionButtonsHtml}\n  </div>`
+    ? `\n  <div class="hero">\n    <div class="hero-header">\n      <h1 class="hero-title">Sommarläger i Sysslebäck</h1>${socialLinks}\n    </div>\n    <img src="${heroSrc}" alt="${heroAlt || ''}" class="hero-img"${heroDimAttrs} fetchpriority="high">${actionButtonsHtml}${registrationBannersHtml}\n  </div>`
     : '';
 
   const contentSections = sections
@@ -189,6 +192,11 @@ function renderIndexPage({ heroSrc, heroAlt, heroDims, sections, discordUrl, fac
       // Wrap testimonial cards for the röster section
       if (s.id === 'roster') {
         sectionHtml = wrapTestimonialCards(sectionHtml);
+      }
+
+      // Inject the registration CTA button into the anmälan section (02-§94.15)
+      if (s.id === 'anmalan') {
+        sectionHtml = injectRegistrationCta(sectionHtml);
       }
 
       const inner = sectionHtml
@@ -249,6 +257,19 @@ ${contentSections}
     var today = p.find(function (x) { return x.type === 'year'; }).value + '-' + p.find(function (x) { return x.type === 'month'; }).value + '-' + p.find(function (x) { return x.type === 'day'; }).value;
     if (today >= opens && today <= closes) el.removeAttribute('hidden');
   })();
+  </script>` : ''}${(registrationCamps && registrationCamps.length > 0) ? `
+  <script>
+  (function () {
+    var banners = document.querySelectorAll('.hero-registration-banner[data-opens]');
+    if (!banners.length) return;
+    var p = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+    var today = p.find(function (x) { return x.type === 'year'; }).value + '-' + p.find(function (x) { return x.type === 'month'; }).value + '-' + p.find(function (x) { return x.type === 'day'; }).value;
+    banners.forEach(function (el) {
+      var opens = el.getAttribute('data-opens');
+      var closes = el.getAttribute('data-closes');
+      if (today >= opens && today <= closes) el.removeAttribute('hidden');
+    });
+  })();
   </script>` : ''}
   <script src="sw-register.js" defer></script>
   <script src="pwa-install.js" defer></script>
@@ -264,9 +285,19 @@ const MONTHS_SV_SHORT = [
   'jul', 'aug', 'sep', 'okt', 'nov', 'dec',
 ];
 
+const MONTHS_SV_LONG = [
+  'januari', 'februari', 'mars', 'april', 'maj', 'juni',
+  'juli', 'augusti', 'september', 'oktober', 'november', 'december',
+];
+
 function formatShortDate(dateStr) {
   const d = new Date(toDateString(dateStr) + 'T12:00:00');
   return `${d.getDate()} ${MONTHS_SV_SHORT[d.getMonth()]}`;
+}
+
+function formatLongSvDate(dateStr) {
+  const d = new Date(toDateString(dateStr) + 'T12:00:00');
+  return `${d.getDate()} ${MONTHS_SV_LONG[d.getMonth()]}`;
 }
 
 function formatCampDateRange(startStr, endStr) {
@@ -402,4 +433,51 @@ function wrapTestimonialCards(html) {
   }).join('\n');
 }
 
-module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions, wrapTestimonialCards };
+// ── Registration banner and CTA (02-§94) ────────────────────────────────────
+
+const REGISTRATION_URL = 'https://event-friend-ai.lovable.app';
+
+/**
+ * Renders the hero registration banners — one per camp with an active
+ * registration window. Returns an empty string when `registrationCamps` is
+ * absent or empty so no container is emitted.
+ *
+ * @param {Array<{id: string, name: string, registrationOpens: string, registrationCloses: string}>} registrationCamps
+ */
+function renderRegistrationBannersHtml(registrationCamps) {
+  if (!registrationCamps || registrationCamps.length === 0) return '';
+
+  const items = registrationCamps.map((c) => {
+    const lastLabel = escapeHtml(c.lastRegistrationLabel || formatLongSvDate(c.registrationCloses));
+    const id = escapeHtml(c.id);
+    const name = escapeHtml(c.name);
+    return `      <a href="#anmalan" class="hero-registration-banner" hidden data-opens="${c.registrationOpens}" data-closes="${c.registrationCloses}" data-goatcounter-click="click-register-banner-${id}">
+        <span class="hero-registration-banner-title">Anmälan till ${name} är öppen</span>
+        <span class="hero-registration-banner-meta">Sista anmälningsdag ${lastLabel}</span>
+      </a>`;
+  }).join('\n');
+
+  return `\n    <div class="hero-registration-banners">\n${items}\n    </div>`;
+}
+
+/**
+ * Injects the "Anmäl er här" CTA button into the `anmalan` section HTML.
+ * The CTA is inserted immediately after the first heading so that on desktop
+ * the `float: right` layout lets the following paragraph text flow around it.
+ * On mobile the CTA styling (07-§6.101) sets `float: none` and full width.
+ *
+ * @param {string} sectionHtml - rendered HTML of the anmälan section body
+ * @returns {string} the section HTML with the CTA injected
+ */
+function injectRegistrationCta(sectionHtml) {
+  const cta = `<div class="registration-cta">\n  <a href="${REGISTRATION_URL}" class="btn-primary registration-cta-btn" target="_blank" rel="noopener noreferrer" data-goatcounter-click="click-register-section">Anmäl er här</a>\n</div>`;
+
+  const headingMatch = sectionHtml.match(/<\/h[1-6]>\s*/);
+  if (!headingMatch) {
+    return cta + '\n' + sectionHtml;
+  }
+  const insertPoint = headingMatch.index + headingMatch[0].length;
+  return sectionHtml.slice(0, insertPoint) + cta + '\n' + sectionHtml.slice(insertPoint);
+}
+
+module.exports = { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions, wrapTestimonialCards, renderRegistrationBannersHtml, injectRegistrationCta, formatLongSvDate, REGISTRATION_URL };

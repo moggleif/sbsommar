@@ -4,6 +4,8 @@ camps:
     start_date: '2026-07-26'
     end_date: '2026-08-02'
     opens_for_editing: '2026-07-18'
+    registration_opens: '2026-04-15'
+    registration_closes: '2026-07-12'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/syssleback2026"
     information: |
@@ -15,6 +17,8 @@ camps:
     start_date: '2026-06-21'
     end_date: '2026-06-28'
     opens_for_editing: '2026-06-17'
+    registration_opens: '2026-04-15'
+    registration_closes: '2026-06-14'
     location: Sysslebäck
     link: "https://www.facebook.com/groups/syssleback2026"
     information: |
@@ -37,6 +41,8 @@ camps:
     start_date: '2026-03-10'
     end_date: '2026-03-17'
     opens_for_editing: '2026-03-02'
+    registration_opens: '2026-02-15'
+    registration_closes: '2026-03-01'
     location: Sysslebäck
     link: ""
     information: |
