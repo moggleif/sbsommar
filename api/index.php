@@ -9,6 +9,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use SBSommar\ActiveCamp;
 use SBSommar\Feedback;
 use SBSommar\GitHub;
+use SBSommar\RateLimit;
 use SBSommar\Session;
 use SBSommar\TimeGate;
 use SBSommar\Validate;
@@ -38,6 +39,20 @@ if ($origin !== '' && in_array($origin, $allowedOrigins, true)) {
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(204);
     exit;
+}
+
+// ── Rate-limit configuration (02-§93.1–93.4) ─────────────────────────────
+
+const HOUR_SECONDS              = 3600;
+const RATE_LIMIT_MSG            = 'För många förfrågningar. Försök igen senare.';
+const RATE_LIMIT_VERIFY_ADMIN   = 5;
+const RATE_LIMIT_EDIT_EVENT     = 30;
+const RATE_LIMIT_DELETE_EVENT   = 30;
+const RATE_LIMIT_FEEDBACK       = 5;
+
+function clientIp(): string
+{
+    return (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '');
 }
 
 // ── Routing ──────────────────────────────────────────────────────────────
@@ -245,6 +260,12 @@ function handleAddEvents(?array $activeCamp): void
 
 function handleEditEvent(?array $activeCamp): void
 {
+    if (RateLimit::isLimited(clientIp(), 'edit-event', RATE_LIMIT_EDIT_EVENT, HOUR_SECONDS)) {
+        jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
+
+        return;
+    }
+
     // Time-gating
     if ($activeCamp !== null) {
         $today = date('Y-m-d');
@@ -311,6 +332,12 @@ function handleEditEvent(?array $activeCamp): void
 
 function handleDeleteEvent(?array $activeCamp): void
 {
+    if (RateLimit::isLimited(clientIp(), 'delete-event', RATE_LIMIT_DELETE_EVENT, HOUR_SECONDS)) {
+        jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
+
+        return;
+    }
+
     // Time-gating
     if ($activeCamp !== null) {
         $today = date('Y-m-d');
@@ -375,12 +402,8 @@ function handleDeleteEvent(?array $activeCamp): void
 
 function handleFeedback(): void
 {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
-    if (Feedback::isRateLimited($ip)) {
-        jsonResponse([
-            'success' => false,
-            'error'   => 'För många förfrågningar. Försök igen senare.',
-        ], 429);
+    if (RateLimit::isLimited(clientIp(), 'feedback', RATE_LIMIT_FEEDBACK, HOUR_SECONDS)) {
+        jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
 
         return;
     }
@@ -423,6 +446,12 @@ function handleFeedback(): void
 
 function handleVerifyAdmin(): void
 {
+    if (RateLimit::isLimited(clientIp(), 'verify-admin', RATE_LIMIT_VERIFY_ADMIN, HOUR_SECONDS)) {
+        jsonResponse(['error' => RATE_LIMIT_MSG], 429);
+
+        return;
+    }
+
     $body = getJsonBody();
     $token = trim((string) ($body['token'] ?? ''));
 

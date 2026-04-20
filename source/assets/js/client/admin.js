@@ -136,7 +136,7 @@
             if (removeBtn) removeBtn.hidden = false;
             renderFooterIcon();
           } else {
-            message.textContent = 'Ogiltig token. Försök igen.';
+            message.textContent = data.error || 'Ogiltig token. Försök igen.';
             message.classList.add('admin-message--error');
             message.hidden = false;
           }

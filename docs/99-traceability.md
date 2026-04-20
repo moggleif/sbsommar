@@ -1102,9 +1102,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1142
-Covered (implemented + tested): 585
-Implemented, not tested:        557
+Total requirements:            1157
+Covered (implemented + tested): 590
+Implemented, not tested:        567
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1755,7 +1755,7 @@ Matrix cleanup (2026-02-25):
 | `02-§73.11` | covered | FB-10..13: length limit tests for title, description, name |
 | `02-§73.12` | covered | FB-14..16: injection scan tests |
 | `02-§73.13` | covered | FB-17..19: honeypot flag tests |
-| `02-§73.14` | implemented | `source/api/feedback.js` isRateLimited; `api/src/Feedback.php` isRateLimited |
+| `02-§73.14` | implemented | `/feedback` rate-limit delegated to shared helper (§93); see `02-§93.4`, `02-§93.8`, `02-§93.10` |
 | `02-§73.15` | implemented | Manual: verify role=dialog, aria-modal, focus trap |
 | `02-§73.16` | covered | FB-02: aria-label="Ge feedback" present |
 | `02-§73.17` | implemented | Manual: verify Escape, click outside, close button |
@@ -2076,3 +2076,23 @@ Matrix cleanup (2026-02-25):
 | `02-§92.23` | implemented | No new entries in `package.json` |
 | `02-§92.24` | implemented | `sw.js` is vanilla JS, no imports |
 | `02-§92.25` | implemented | `offline.html` included in pre-cache list, fallback logic unchanged |
+
+### §93 — Rate Limiting for Authorization Endpoints
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§93.1` | covered | RL-01..05: `app.js` /verify-admin calls `isRateLimited('verify-admin:{ip}', {limit:5, windowMs:3_600_000})`; `api/index.php` handleVerifyAdmin same via `RateLimit::isLimited` |
+| `02-§93.2` | covered | RL-01..05: `app.js` /edit-event guards with {limit:30}; `api/index.php` handleEditEvent same |
+| `02-§93.3` | covered | RL-01..05: `app.js` /delete-event guards with {limit:30}; `api/index.php` handleDeleteEvent same |
+| `02-§93.4` | covered | RL-01..05: `app.js` /feedback routed through shared helper with {limit:5}; `api/index.php` handleFeedback same |
+| `02-§93.5` | implemented | Manual: rate-limit check placed before all other logic in each handler; confirm by reading handler bodies |
+| `02-§93.6` | implemented | `app.js` `clientIp()` and `api/index.php` `clientIp()` both read XFF first, fall back to remote addr |
+| `02-§93.7` | covered | RL-01..05 exercise `source/api/rate-limit.js` `isRateLimited()` across fresh key, under-limit, over-limit, per-key independence, window expiry |
+| `02-§93.8` | implemented | `source/api/feedback.js` exports only `validateFeedbackRequest` + `createFeedbackIssue`; no rate-limit state remains |
+| `02-§93.9` | implemented | `api/src/RateLimit.php` provides `SBSommar\RateLimit::isLimited($ip, $ns, $limit, $window)` with JSON-file state in sys_get_temp_dir() |
+| `02-§93.10` | implemented | `api/src/Feedback.php` no longer contains `isRateLimited` or rate-limit state; `api/index.php` calls `RateLimit::isLimited(clientIp(), 'feedback', 5, 3600)` directly |
+| `02-§93.11` | implemented | Documented in 03-ARCHITECTURE.md §31.3–31.4, §31.7 |
+| `02-§93.12` | implemented | `app.js` `RATE_LIMIT_MSG` and `api/index.php` `RATE_LIMIT_MSG` both hold "För många förfrågningar. Försök igen senare." |
+| `02-§93.13` | implemented | `package.json` unchanged by this feature |
+| `02-§93.14` | implemented | `api/composer.json` unchanged by this feature |
+| `02-§93.15` | implemented | Documented in 03-ARCHITECTURE.md §31.7; matches existing §73.14 trust model |

@@ -4230,9 +4230,9 @@ behaviour that uses this token is defined in §7, §18, and §89.
   `200 { "valid": true }`. <!-- 02-§91.6 -->
 - If the token does not match, the response is
   `403 { "valid": false }`. <!-- 02-§91.7 -->
-- The endpoint must be rate-limit-aware: no special rate limiting is
-  required in this phase, but the token comparison must use
-  constant-time string comparison to prevent timing attacks. <!-- 02-§91.8 -->
+- The endpoint enforces the rate limits defined in §93 and performs
+  token comparison using constant-time string comparison to prevent
+  timing attacks. <!-- 02-§91.8 -->
 
 ### 91.4 Admin activation page (user requirements)
 
@@ -4365,3 +4365,73 @@ an internet connection.
   libraries. <!-- 02-§92.24 -->
 - The offline fallback page (`offline.html`) continues to function as a
   last resort when a page is not in the cache. <!-- 02-§92.25 -->
+
+---
+
+## 93. Rate Limiting for Authorization Endpoints
+
+### 93.1 Context
+
+The API exposes four `POST` endpoints that either perform authorization
+(`/verify-admin`) or accept ownership-gated writes (`/edit-event`,
+`/delete-event`), plus the user-feedback channel (`/feedback`). CodeQL
+flagged three of these as missing rate limiting (alerts #40, #41, #42,
+rule `js/missing-rate-limiting`), which allows an attacker to brute-force
+admin tokens or hammer the GitHub write path. The feedback endpoint
+already enforces a per-IP rate limit through an in-memory / file-based
+counter; this requirement extends the same protection to the remaining
+authorization endpoints and consolidates the mechanism into a single
+reusable implementation per runtime.
+
+### 93.2 Per-endpoint rate limits (API requirements)
+
+- `/verify-admin` rejects more than **5 requests per IP per hour**
+  with HTTP `429` and the Swedish error message "För många
+  förfrågningar. Försök igen senare." <!-- 02-§93.1 -->
+- `/edit-event` rejects more than **30 requests per IP per hour**
+  with HTTP `429` and the same Swedish error message. <!-- 02-§93.2 -->
+- `/delete-event` rejects more than **30 requests per IP per hour**
+  with HTTP `429` and the same Swedish error message. <!-- 02-§93.3 -->
+- `/feedback` continues to reject more than **5 requests per IP per
+  hour** with HTTP `429` (no behavior change; see §73.14). <!-- 02-§93.4 -->
+- The rate-limit check runs before authorization, validation, and
+  time-gating so a throttled client never touches the GitHub API or the
+  admin-token comparison path. <!-- 02-§93.5 -->
+- The client IP is derived from the `X-Forwarded-For` header if
+  present, falling back to the connection's remote address — the same
+  resolution order used by the existing feedback handler. <!-- 02-§93.6 -->
+
+### 93.3 Shared rate-limit implementation (site requirements)
+
+- Node (`app.js`) imports a single helper, `source/api/rate-limit.js`,
+  that exposes `isRateLimited(key, config)`. The helper holds state in
+  an in-process `Map` keyed by `"{namespace}:{ip}"` so different
+  endpoints do not share quotas. <!-- 02-§93.7 -->
+- The Node feedback handler uses the shared helper. The previous
+  `isRateLimited` export in `source/api/feedback.js` is removed;
+  `/feedback` calls the shared helper with the same `{ limit: 5,
+  windowMs: 3_600_000 }` configuration to preserve §73.14
+  behavior. <!-- 02-§93.8 -->
+- PHP (`api/index.php`) calls `SBSommar\RateLimit::isLimited($ip,
+  $namespace, $limit, $windowSeconds)` from
+  `api/src/RateLimit.php`. Counter state lives in a single JSON file
+  under `sys_get_temp_dir()` with namespaced keys so endpoints do not
+  share quotas. <!-- 02-§93.9 -->
+- The PHP feedback handler uses the shared class. `Feedback::isRateLimited`
+  no longer exists as a separate implementation; it delegates to
+  `RateLimit::isLimited` with the feedback namespace and
+  `{ limit: 5, window: 3600 }`. <!-- 02-§93.10 -->
+- Rate-limit state is process-local in Node and file-local in PHP —
+  neither runtime coordinates across processes. This is acceptable
+  because both deployments are single-process (one Node server,
+  single-shared-host PHP). <!-- 02-§93.11 -->
+
+### 93.4 Constraints
+
+- All user-facing error text is in Swedish. <!-- 02-§93.12 -->
+- No new npm dependencies are added. <!-- 02-§93.13 -->
+- No new Composer dependencies are added. <!-- 02-§93.14 -->
+- The rate-limit helper imposes no hard requirement on
+  `X-Forwarded-For` spoof protection; trust boundaries are deferred to
+  reverse-proxy configuration, consistent with the existing feedback
+  handler. <!-- 02-§93.15 -->

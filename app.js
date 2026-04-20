@@ -10,9 +10,10 @@ const { validateEventRequest, validateEditRequest }              = require('./so
 const { isEventPast }                                            = require('./source/api/edit-event');
 const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
 const { isOutsideEditingPeriod }                                 = require('./source/api/time-gate');
-const { validateFeedbackRequest, createFeedbackIssue, isRateLimited } = require('./source/api/feedback');
+const { validateFeedbackRequest, createFeedbackIssue }           = require('./source/api/feedback');
 const { parseAdminTokens, verifyAdminToken }                     = require('./source/api/admin');
 const { resolveActiveCamp }                                      = require('./source/scripts/resolve-active-camp');
+const { isRateLimited }                                          = require('./source/api/rate-limit');
 
 const app = express();
 
@@ -27,6 +28,18 @@ const adminTokens = parseAdminTokens(process.env.ADMIN_TOKENS);
 // ── Middleware ───────────────────────────────────────────────────────────────
 
 app.use(express.json());
+
+// Rate-limit configurations per endpoint (02-§93.1–93.4).
+const HOUR_MS = 60 * 60 * 1000;
+const RATE_LIMIT_VERIFY_ADMIN = { limit: 5,  windowMs: HOUR_MS };
+const RATE_LIMIT_EDIT_EVENT   = { limit: 30, windowMs: HOUR_MS };
+const RATE_LIMIT_DELETE_EVENT = { limit: 30, windowMs: HOUR_MS };
+const RATE_LIMIT_FEEDBACK     = { limit: 5,  windowMs: HOUR_MS };
+const RATE_LIMIT_MSG          = 'För många förfrågningar. Försök igen senare.';
+
+function clientIp(req) {
+  return req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+}
 
 const ALLOWED_ORIGINS = new Set(
   [process.env.ALLOWED_ORIGIN, process.env.QA_ORIGIN].filter(Boolean)
@@ -54,6 +67,9 @@ app.get('/api/health', (req, res) => {
 // ── Admin token verification (02-§91.4) ─────────────────────────────────────
 
 app.post('/verify-admin', (req, res) => {
+  if (isRateLimited(`verify-admin:${clientIp(req)}`, RATE_LIMIT_VERIFY_ADMIN)) {
+    return res.status(429).json({ error: RATE_LIMIT_MSG });
+  }
   const { token } = req.body || {};
   if (verifyAdminToken(token, adminTokens)) {
     return res.json({ valid: true });
@@ -98,6 +114,10 @@ app.post('/add-event', (req, res) => {
 });
 
 app.post('/edit-event', (req, res) => {
+  if (isRateLimited(`edit-event:${clientIp(req)}`, RATE_LIMIT_EDIT_EVENT)) {
+    return res.status(429).json({ success: false, error: RATE_LIMIT_MSG });
+  }
+
   // Time-gating: reject if outside the editing period.
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
@@ -134,6 +154,10 @@ app.post('/edit-event', (req, res) => {
 });
 
 app.post('/delete-event', (req, res) => {
+  if (isRateLimited(`delete-event:${clientIp(req)}`, RATE_LIMIT_DELETE_EVENT)) {
+    return res.status(429).json({ success: false, error: RATE_LIMIT_MSG });
+  }
+
   // Time-gating: reject if outside the editing period.
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
@@ -168,9 +192,8 @@ app.post('/delete-event', (req, res) => {
 });
 
 app.post('/feedback', async (req, res) => {
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
-  if (isRateLimited(ip)) {
-    return res.status(429).json({ success: false, error: 'För många förfrågningar. Försök igen senare.' });
+  if (isRateLimited(`feedback:${clientIp(req)}`, RATE_LIMIT_FEEDBACK)) {
+    return res.status(429).json({ success: false, error: RATE_LIMIT_MSG });
   }
 
   const v = validateFeedbackRequest(req.body);

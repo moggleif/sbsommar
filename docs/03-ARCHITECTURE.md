@@ -1793,7 +1793,9 @@ the scroll-to-top button. It is an inline SVG speech-bubble icon with
   patterns from `source/api/validate.js`).
 - Honeypot check: if `website` field is non-empty, return success without
   creating an issue.
-- Rate-limit: in-memory Map, max 5 per IP per hour.
+- Rate-limit: delegates to `isRateLimited()` in `source/api/rate-limit.js`
+  with the `feedback` namespace, `{ limit: 5, windowMs: 3_600_000 }`.
+  See §31 for the shared helper.
 - Creates a GitHub Issue via `githubRequest()` (exported from
   `source/api/github.js`).
 - Route: `POST /feedback` registered in `app.js`.
@@ -1805,7 +1807,8 @@ the scroll-to-top button. It is an inline SVG speech-bubble icon with
 ### 26.5 PHP API (`api/src/Feedback.php`)
 
 - Same validation and logic as Node.js.
-- Rate-limit: simplest possible (in-memory per request or file-based).
+- Rate-limit: delegates to `SBSommar\RateLimit::isLimited($ip, 'feedback',
+  5, 3600)`. See §31 for the shared helper.
 - Uses `GitHub::createIssue()` (new public method on the existing class).
 - Route: `POST /api/feedback` registered in `api/index.php`.
 
@@ -2128,6 +2131,95 @@ layout, reading from `localStorage`.
 | `source/build/layout.js` | Updated `pageFooter()` to include admin icon container |
 | `app.js` | New `POST /verify-admin` endpoint (Node.js) |
 | `api/index.php` | New `POST /verify-admin` endpoint (PHP) |
+
+---
+
+## 31. Authorization Endpoint Rate Limiting
+
+### 31.1 Goal
+
+Protect authorization and write endpoints (`/verify-admin`,
+`/edit-event`, `/delete-event`, `/feedback`) from brute-force probing
+and abusive bursts, and give CodeQL's `js/missing-rate-limiting`
+analysis a visible, explicit counter to stop flagging these handlers.
+
+The mechanism is intentionally minimal: a per-IP counter per endpoint
+with an hourly window, returned as HTTP `429` with a Swedish error
+message. Coordination across processes is out of scope — single-process
+Node and single-host PHP both store counter state locally.
+
+### 31.2 Per-endpoint limits
+
+| Endpoint          | Limit (per IP per hour) | Rationale                                           |
+| ----------------- | ----------------------- | --------------------------------------------------- |
+| `/verify-admin`   | 5                       | Brute-force target; admins only verify once per session |
+| `/edit-event`     | 30                      | Normal owner edits; 2–3 attempts per edit, batching tolerated |
+| `/delete-event`   | 30                      | Same profile as edit                                |
+| `/feedback`       | 5                       | Existing §73.14 limit, unchanged                    |
+
+The rate-limit check runs **before** validation, authorization, and
+time-gating, so a throttled client never reaches the admin-token
+comparison path or the GitHub API.
+
+### 31.3 Node (`source/api/rate-limit.js`)
+
+- Exports `isRateLimited(key, { limit, windowMs })`.
+- State: module-level `Map<string, { count, resetAt }>`.
+- `key` is caller-composed: `"{namespace}:{ip}"` so different endpoints
+  do not share quotas.
+- Expired entries are replaced lazily on access; no sweeper timer.
+- Client IP resolution is handled by the caller (same pattern as the
+  existing feedback handler: `X-Forwarded-For` → `socket.remoteAddress`).
+
+### 31.4 PHP (`api/src/RateLimit.php`)
+
+- Exposes `SBSommar\RateLimit::isLimited(string $ip, string $namespace,
+  int $limit, int $windowSeconds): bool`.
+- State: a single JSON file under `sys_get_temp_dir()`
+  (`sbsommar_rate_limit.json`), with namespaced keys so endpoints share
+  storage but not quotas.
+- The same expired-entry sweep runs each call; no scheduled cleanup.
+- Client IP resolution is handled by `api/index.php`: `HTTP_X_FORWARDED_FOR`
+  → `REMOTE_ADDR`.
+
+### 31.5 Failure semantics
+
+On limit exceeded, both runtimes return:
+
+```json
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+
+{ "success": false, "error": "För många förfrågningar. Försök igen senare." }
+```
+
+`/verify-admin` returns the same payload but omits `success` since its
+success response uses `{ "valid": true }` — it returns
+`{ "error": "För många förfrågningar. Försök igen senare." }` with
+status `429` and no `valid` key.
+
+### 31.6 Files
+
+| File                          | Role                                                       |
+| ----------------------------- | ---------------------------------------------------------- |
+| `source/api/rate-limit.js`    | Shared Node helper                                         |
+| `source/api/feedback.js`      | Uses shared helper; no longer owns its own Map             |
+| `app.js`                      | Calls helper before handler bodies on the four endpoints   |
+| `api/src/RateLimit.php`       | Shared PHP helper                                          |
+| `api/src/Feedback.php`        | Uses shared helper; its old `isRateLimited` is removed     |
+| `api/index.php`               | Calls helper at the top of each guarded handler            |
+
+### 31.7 Known limitations
+
+- In-process counters reset on restart. Acceptable because both
+  deployments are single-process and an attacker would need to time
+  restarts very precisely.
+- `X-Forwarded-For` is trusted as-is. A misconfigured proxy could
+  allow spoofed limits; this is the same trust boundary as the existing
+  feedback handler and as session-cookie parsing.
+- File locking is not used in PHP. Two concurrent PHP requests may
+  race on the JSON write; worst case is one request's increment lost.
+  For a 5/h or 30/h limit this is negligible.
 
 ---
 

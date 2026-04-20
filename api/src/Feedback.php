@@ -41,44 +41,6 @@ final class Feedback
         '/data:text\/html/i' => 'data:text/html URI',
     ];
 
-    // ── Rate-limiting (file-based) ──────────────────────────────────────
-
-    private const RATE_LIMIT = 5;
-    private const RATE_WINDOW = 3600; // 1 hour in seconds
-
-    public static function isRateLimited(string $ip): bool
-    {
-        $file = sys_get_temp_dir() . '/sbsommar_feedback_rate.json';
-        $data = [];
-
-        if (file_exists($file)) {
-            $raw = file_get_contents($file);
-            $data = json_decode($raw ?: '{}', true) ?: [];
-        }
-
-        $now = time();
-
-        // Clean expired entries
-        foreach ($data as $key => $entry) {
-            if ($now > ($entry['resetAt'] ?? 0)) {
-                unset($data[$key]);
-            }
-        }
-
-        $entry = $data[$ip] ?? null;
-        if ($entry === null || $now > ($entry['resetAt'] ?? 0)) {
-            $data[$ip] = ['count' => 1, 'resetAt' => $now + self::RATE_WINDOW];
-            file_put_contents($file, json_encode($data));
-
-            return false;
-        }
-
-        $data[$ip]['count'] = ($data[$ip]['count'] ?? 0) + 1;
-        file_put_contents($file, json_encode($data));
-
-        return $data[$ip]['count'] > self::RATE_LIMIT;
-    }
-
     // ── Validation ──────────────────────────────────────────────────────
 
     /**
