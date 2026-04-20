@@ -94,6 +94,10 @@ The homepage must feel complete and trustworthy even when no camp is currently a
 When a camp is active or upcoming, the schedule and add-activity links are prominent. <!-- 02-§3.4 -->
 The upcoming-camps list renders each camp as a compact one-liner (icon, name, location, and dates on a single line) with no visual separators between items. <!-- 02-§3.5 -->
 
+The registration section must link to the external registration service at `event-friend-ai.lovable.app`, where families complete the full sign-up form. <!-- 02-§3.6 -->
+
+The pricing and rules sections must document the cancellation refund tiers and the organiser's right to refuse participation, matching the terms that bind participants at the point of registration. <!-- 02-§3.7 -->
+
 **Tone:** Warm, calm, and clear. Written in Swedish. Not corporate. Not promotional.
 The goal is that a parent visiting for the first time leaves thinking:
 *"I understand what this is. I know how it works. I feel comfortable taking the next step."*

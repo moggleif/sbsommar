@@ -2,17 +2,23 @@
 
 ## Avgift för lägret
 
-Deltagaravgiften för 2025 är **400 kr per deltagare** för hela lägret. Definitionen av *deltagare* är alltså deltagande vuxna och barn, där de allra yngsta (ca 0-2 år) är undantagna. Man är deltagare oavsett man bor på lägerområdet eller inte.
+Deltagaravgiften för 2026 är **420 kr per deltagare** för hela lägret. Definitionen av *deltagare* är alltså deltagande vuxna och barn, där de allra yngsta (ca 0-2 år) är undantagna. Man är deltagare oavsett man bor på lägerområdet eller inte.
 
 ![Servicehus](images/servicehus.webp)
 
 ### Medlem RFSB
 
-Utöver deltagaravgiften så är det obligatoriskt med medlemskap i RFSB för deltagande på lägret. Kostnaden för medlemskap är **200 kr per vuxen** **(25+ år)** respektive **100 kr (18-25 år)** medan barn och ungdomar är medlemmar utan kostnad. Ni som redan är betalande medlemmar betalar naturligtvis inte för detta igen.
+Utöver deltagaravgiften så är det obligatoriskt med medlemskap i RFSB för deltagande på lägret. Kostnaden för medlemskap är **200 kr per vuxen** **(25+ år)** respektive **100 kr (18-25 år)** medan barn och ungdomar är medlemmar utan kostnad. Ni som redan är betalande medlemmar betalar naturligtvis inte för detta igen. Medlemskap tecknas på <https://rfsb.se>.
 
 ### Betalning
 
-Faktura skickas ut för lägeravgift och eventuellt nya medlemsavgifter. Kontrollera er epost inklusive skräppost (fakturan kommer från <mail@eaccounting.vismaonline.com>), och hör av er till <ekonomi@rfsb.se> om något skulle vara fel.
+Betalning av deltagaravgiften sker i samband med anmälan och kan göras på tre sätt:
+
+* **Kort**
+* **Swish**
+* **Faktura** – tillkommer 95 kr i fakturaavgift, betalas inom 10 dagar. Fakturaavgiften återbetalas inte vid avbokning.
+
+Vid frågor om betalning, kontakta <info@edq.se>. Avbokningsvillkor finns under [regler och villkor](#regler).
 
 ## Boende
 
@@ -22,7 +28,7 @@ Det finns lite olika boende-alternativ. Nedan listas de som är relaterade till 
 
 Lägerområdets tält- och husvagnsplatser har inte varit fulltecknade tidigare år.
 
-Lägerområdets centrala stug- och vandrarhemsplatser är få — de som anmäler sig på utsatt tid (se anmälan) och kommer vara med samtliga lägerdagar kan delta i fördelning av dessa. Besked om tilldelning av stuga/vandrarhemsplats på campingen skickas ut någon månad före lägret. Det går bra att avanmäla sig om man inte tilldelas boende. I sådana fall ordnar vi återbetalning av deltagaravgiften.
+Lägerområdets centrala stug- och vandrarhemsplatser är få — de som anmäler sig på utsatt tid (se anmälan) och kommer vara med samtliga lägerdagar kan delta i fördelning av dessa. Besked om tilldelning av stuga/vandrarhemsplats på campingen skickas ut någon månad före lägret. Det går bra att avanmäla sig om man inte tilldelas boende. I sådana fall ordnar vi återbetalning av hela deltagaravgiften, se även [avbokningsvillkoren](#regler).
 
 **Betalning sker direkt till campingen vid ankomst för de som har boende enligt nedan.**
 Extra dagar före/efter veckan kan bokas direkt med campingen efter att stuga/vandrarhem tilldelats. Detsamma gäller campingplats. Uppge alltid att du ska på sommarläger för att få lägerpris alla dygnen.

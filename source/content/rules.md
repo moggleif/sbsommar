@@ -16,5 +16,12 @@
 
 * **Plats & betalning:** De som får plats betalar enligt de instruktioner som skickas ut. Anmälan garanterar inte plats förrän avgiften är erlagd.
 * **Föranmälan:** All närvaro måste föranmälas.
-* **Avstängning:** Vid allvarliga överträdelser kan familjer bli ombedda att lämna utan återbetalning.
+* **Rätten att neka:** Arrangören (EDQ AB) förbehåller sig rätten att neka deltagande för personer som arrangören bedömer som olämpliga att delta i lägret. Om en anmälan nekas återbetalas deltagaravgiften i sin helhet.
+* **Avbokning:** Återbetalning av deltagaravgiften sker enligt följande:
+  * Mer än 14 dagar före lägret: 100% återbetalning.
+  * 7–13 dagar före lägret: 50% återbetalning.
+  * Mindre än 7 dagar före lägret: ingen återbetalning.
+  * Vid medicinska eller andra särskilda skäl, kontakta <info@edq.se> och ange skäl för återbetalning.
+  * Eventuell fakturaavgift återbetalas inte.
+* **Avstängning under lägret:** Vid allvarliga överträdelser under pågående läger kan familjer bli ombedda att lämna utan återbetalning.
 * **Mat & boende:** Ingår inte i lägeravgiften – ordnas av varje familj själva.
