@@ -2105,8 +2105,8 @@ Matrix cleanup (2026-02-25):
 | `02-§94.2` | covered | REGB-04: each banner's `<a>` carries `href="#anmalan"` |
 | `02-§94.3` | implemented | `source/build/build.js` sorts `registrationCamps` ascending by `start_date` before passing to `renderIndexPage`; verified in rendered HTML |
 | `02-§94.4` | covered | REGC-03, REGC-06: CTA `href` is `event-friend-ai.lovable.app`; label is "Anmäl er här" |
-| `02-§94.5` | implemented | `source/assets/cs/style.css` `.registration-cta { float: right; margin: 0 0 var(--space-sm) var(--space-md) }` — manual browser verification |
-| `02-§94.6` | implemented | `style.css` `@media (max-width: 719px) .registration-cta { float: none; width: 100%; text-align: center }` — manual browser verification |
+| `02-§94.5` | implemented | `source/assets/cs/style.css` `.registration-cta { display: block; margin: 0 0 var(--space-md) 0 }` + `.registration-cta-btn { display: inline-block }`; button sits on its own line under the section heading — manual browser verification |
+| `02-§94.6` | implemented | No media query; identical layout on desktop and mobile — manual browser verification |
 | `02-§94.7` | covered | REG-06: `source/content/registration.md` contains no bold `[Anmäl er här]` link |
 | `02-§94.8` | implemented | `source/data/camps.yaml` carries `registration_opens` / `registration_closes` for 2026-06, 2026-07, and qa-thisweek; validator enforces presence |
 | `02-§94.9` | covered | VCMP-38..43: `source/scripts/validate-camps.js` rejects missing / invalid / out-of-order values on non-archived camps |

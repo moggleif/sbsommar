@@ -4464,10 +4464,11 @@ inside the section itself that replaces the inline markdown link.
 - The "Hur anmäler jag oss?" section contains a visually prominent
   "Anmäl er här" button that opens the external registration service at
   `event-friend-ai.lovable.app` in a new tab. <!-- 02-§94.4 -->
-- On desktop (≥ 720 px), the "Anmäl er här" button sits to the right of
-  the section column, and surrounding text flows around it. <!-- 02-§94.5 -->
-- On mobile (< 720 px), the "Anmäl er här" button spans the full column
-  width and is centred. <!-- 02-§94.6 -->
+- The "Anmäl er här" button sits on its own line directly under the
+  "Hur anmäler jag oss?" heading, as an inline-block element sized to
+  its own content. <!-- 02-§94.5 -->
+- The button layout is identical on desktop and mobile — no float, no
+  breakpoint-dependent width change. <!-- 02-§94.6 -->
 - The registration section contains no inline bold markdown link labelled
   "Anmäl er här"; the CTA button is the single call-to-action. <!-- 02-§94.7 -->
 
