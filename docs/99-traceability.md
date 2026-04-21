@@ -1102,9 +1102,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1181
-Covered (implemented + tested): 605
-Implemented, not tested:        576
+Total requirements:            1188
+Covered (implemented + tested): 609
+Implemented, not tested:        579
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -2124,6 +2124,18 @@ Matrix cleanup (2026-02-25):
 | `02-§94.21` | implemented | `style.css` new rules use only `--color-*`, `--space-*`, `--radius-*`, `--font-size-*` tokens from `07-DESIGN.md §7` |
 | `02-§94.22` | covered | REGB-11 / REGB-12: inline banner visibility script is emitted only when banners are present; no new JS files |
 | `02-§94.23` | implemented | `package.json` and `api/composer.json` unchanged by this feature |
+
+### §95 — Security Hygiene: Regex Performance and Escaping
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§95.1` | covered | SLUG-RD-01, SLUG-RD-02: `slugify()` trim collapsed to `/^-\|-$/g`; pathological `-`-heavy input returns under 50 ms |
+| `02-§95.2` | covered | SLUG-RD-03..14: `slugify(s)` matches reference implementation and honours 48-char cap, no leading/trailing dash |
+| `02-§95.3` | covered | RE-01..18: `tests/helpers/regex-escape.js` escapes `. * + ? ^ $ { } ( ) \| [ ] \` and coerces non-string input |
+| `02-§95.4` | implemented | `tests/scoped-headings.test.js` imports `escapeRegExp` and uses it at lines 50, 134, 156; no hand-rolled `\.`/`\s+` escape remains — all 22 SH-* tests still pass |
+| `02-§95.5` | implemented | `package.json` and `api/composer.json` unchanged by this feature |
+| `02-§95.6` | covered | SLUG-RD-03..12 prove output equivalence; SLUG-RD-14 guarantees no leading/trailing dash regression |
+| `02-§95.7` | implemented | Code changes in place; CodeQL re-scan after merge must show #17, #30, #31, #32 in state `fixed` (external verification) |
 
 ### §1 — Camp registry fields (camps.yaml)
 

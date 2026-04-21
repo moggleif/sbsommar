@@ -23,6 +23,7 @@ const path = require('node:path');
 
 const { renderAddPage } = require('../source/build/render-add');
 const { renderEditPage } = require('../source/build/render-edit');
+const { escapeRegExp } = require('./helpers/regex-escape.js');
 
 const css = fs.readFileSync(
   path.join(__dirname, '..', 'source', 'assets', 'cs', 'style.css'),
@@ -44,7 +45,9 @@ const editHtml = renderEditPage(dummyCamp, ['Servicehus'], '/api');
 function extractEmSize(cssText, selector) {
   // Match grouped selectors like ".md-preview h1,\n.event-desc h1,\n... {"
   // Find any rule block whose selector list includes our target selector.
-  const escaped = selector.replace(/\./g, '\\.').replace(/\s+/g, '\\s+');
+  // Collapse any run of literal spaces in the selector to `\s+` so the
+  // pattern tolerates arbitrary whitespace between selector parts in CSS.
+  const escaped = escapeRegExp(selector).replace(/ +/g, '\\s+');
   const re = new RegExp(
     '(?:^|[},])\\s*(?:[^{}]*,\\s*)*' + escaped +
     '\\s*(?:,[^{]*)?\\{([^}]*)',
@@ -128,10 +131,10 @@ describe('02-§59.3 — h4 is body size, bold (SH-19..21)', () => {
       assert.equal(size, 1, `${container} h4 must be 1em`);
 
       // Verify bold via extracting the rule block
-      const escaped = container.replace(/\./g, '\\.').replace(/\s+/g, '\\s+');
+      const escaped = escapeRegExp(container);
       const re = new RegExp(
         '(?:^|[},])\\s*(?:[^{}]*,\\s*)*' + escaped +
-        ' h4\\s*(?:,[^{]*)?\\{([^}]*)', 'm',
+        '\\s+h4\\s*(?:,[^{]*)?\\{([^}]*)', 'm',
       );
       const m = css.match(re);
       assert.ok(m, `${container} h4 rule block must exist`);
@@ -150,7 +153,7 @@ describe('02-§59.4 — No hardcoded px in scoped headings (SH-22)', () => {
     for (const container of containers) {
       for (const heading of headings) {
         const re = new RegExp(
-          container.replace(/\./g, '\\.') + ' ' + heading +
+          escapeRegExp(container) + '\\s+' + escapeRegExp(heading) +
           '\\s*\\{[^}]*font-size:\\s*\\d+px',
         );
         assert.ok(
