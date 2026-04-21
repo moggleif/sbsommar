@@ -142,3 +142,47 @@ describe('renderAddPage – submit UX structure', () => {
     );
   });
 });
+
+// ── Static multi-day hint under Datum label (02-§80.28–80.30) ────────────────
+
+describe('renderAddPage – static multi-day date hint (02-§80.28–80.30)', () => {
+  it('DG-HINT-01 (02-§80.28): renders the literal hint text', () => {
+    assert.ok(
+      render().includes('Återkommande aktivitet — välj flera dagar.'),
+      'Expected literal hint text below the Datum label',
+    );
+  });
+
+  it('DG-HINT-02 (02-§80.28): hint is placed between the Datum label and the day-grid container', () => {
+    const html = render();
+    const labelIdx = html.indexOf('Datum <span class="req">*</span></label>');
+    const hintIdx = html.indexOf('Återkommande aktivitet — välj flera dagar.');
+    const gridIdx = html.indexOf('class="day-grid"');
+    assert.ok(labelIdx !== -1, 'Datum label not found');
+    assert.ok(hintIdx !== -1, 'Hint text not found');
+    assert.ok(gridIdx !== -1, 'day-grid container not found');
+    assert.ok(
+      labelIdx < hintIdx && hintIdx < gridIdx,
+      'Hint must appear after the Datum label and before the .day-grid',
+    );
+  });
+
+  it('DG-HINT-03 (02-§80.29): hint uses the .field-info class', () => {
+    const html = render();
+    const re = /<span class="field-info">Återkommande aktivitet — välj flera dagar\.<\/span>/;
+    assert.ok(re.test(html), 'Hint must be a <span class="field-info"> with the literal text');
+  });
+});
+
+// ── Edit page does not render the multi-day hint (02-§80.30) ─────────────────
+
+describe('renderEditPage – does not render the multi-day hint (02-§80.30)', () => {
+  it('DG-HINT-04 (02-§80.30): edit page HTML does not contain the hint text', () => {
+    const { renderEditPage } = require('../source/build/render-edit');
+    const html = renderEditPage(CAMP, LOCATIONS, API_URL);
+    assert.ok(
+      !html.includes('Återkommande aktivitet'),
+      'Edit page must not include the multi-day hint — single-date selector only',
+    );
+  });
+});
