@@ -18,11 +18,11 @@ Formuläret leder er genom sju steg:
 1. **Kontaktuppgifter** – namn, e-post och telefon för den som anmäler, samt samtycke till integritetspolicyn.
 2. **Deltagare** – en eller flera personer med namn, födelsedatum (år/månad/dag), och valfria uppgifter om allergier, specialkost, sjukvårdsutbildning och medföljande husdjur.
 3. **Boende** – prioritetsordning mellan camping, stuga/vandrarhem på området, stuga utanför området (cirka 10 km), eller eget boende.
-4. **Medlemskap i RFSB** – medlemskap är ett krav för att delta. Ni kan slutföra anmälan innan medlemskap är tecknat, men det måste vara på plats före lägret. Tecknas på <https://rfsb.se>.
+4. **Medlemskap i RFSB** – medlemskap är ett krav för att delta. Ni kan slutföra anmälan innan medlemskap är tecknat, men det måste vara på plats före lägret. Tecknas på <https://rfsb.se/bli-medlem/>.
 5. **Övriga upplysningar** – valfritt fält för särskilda behov, frågor eller önskemål.
 6. **Sammanfattning** – kontroll av uppgifter och pris.
 7. **Betalning** – kort, Swish eller faktura.
 
 ## Medlemskap i RFSB
 
-Deltagande på lägret kräver medlemskap i Riksförbundet för Särskild Begåvning. Medlemskap tecknas på <https://rfsb.se> och kan ordnas även efter anmälan — men senast före lägerstart. Alla anmälningar stäms av mot RFSB:s medlemslista innan lägret börjar.
+Deltagande på lägret kräver medlemskap i Riksförbundet för Särskild Begåvning. Medlemskap tecknas på <https://rfsb.se/bli-medlem/> och kan ordnas även efter anmälan — men senast före lägerstart. Alla anmälningar stäms av mot RFSB:s medlemslista innan lägret börjar.

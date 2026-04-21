@@ -299,27 +299,13 @@ h3 {
 /* ── Registration CTA in anmälan section (02-§94, 07-§6.98–6.102) ── */
 
 .registration-cta {
-  float: right;
-  margin: 0 0 var(--space-sm) var(--space-md);
+  display: block;
+  margin: 0 0 var(--space-md) 0;
 }
 
 .registration-cta-btn {
+  display: inline-block;
   text-decoration: none;
-}
-
-@media (max-width: 719px) {
-  .registration-cta {
-    float: none;
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin: 0 0 var(--space-sm) 0;
-  }
-
-  .registration-cta-btn {
-    display: inline-block;
-    min-width: 60%;
-  }
 }
 
 /* ── Camps row (camps list + countdown) ── */

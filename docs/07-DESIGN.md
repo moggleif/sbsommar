@@ -201,12 +201,13 @@ Base unit: `8px`. Spacing values are multiples of this. <!-- 07-§4.4 -->
   authored in markdown. <!-- 07-§6.98 -->
 - The button reuses `.btn-primary` styling (terracotta background, white
   text). <!-- 07-§6.99 -->
-- Wrapper `.registration-cta` — desktop (≥ 720 px): `float: right;
-  margin: 0 0 var(--space-sm) var(--space-md)` so the following
-  paragraph text flows around the button. <!-- 07-§6.100 -->
-- Mobile (< 720 px): `float: none`, `display: block`, `width: 100%`,
-  `text-align: center`; the button sits on its own row centred in the
-  column. <!-- 07-§6.101 -->
+- Wrapper `.registration-cta` — `display: block; margin: 0 0
+  var(--space-md) 0`: the button sits on its own line directly under
+  the "Hur anmäler jag oss?" heading. <!-- 07-§6.100 -->
+- `.registration-cta-btn` — `display: inline-block; text-decoration:
+  none`: the button is sized to its own content. Same layout on
+  desktop and mobile — no float, no breakpoint-dependent width
+  change. <!-- 07-§6.101 -->
 - The CTA opens the external registration service in a new tab
   (`target="_blank"`, `rel="noopener noreferrer"`). <!-- 07-§6.102 -->
 
