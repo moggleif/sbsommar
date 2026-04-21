@@ -13,8 +13,11 @@ const assert = require('node:assert/strict');
 
 const { slugify } = require('../source/api/github.js');
 
-// Baseline reference implementation that mirrors the documented output
-// contract of slugify(). Used to prove output equivalence.
+// Baseline reference: a deliberate snapshot of the PREVIOUS slugify()
+// implementation (two-step trim). Used as an oracle so SLUG-RD-03..12
+// can prove that the new /^-|-$/g single-pass trim is output-equivalent.
+// Do not "refactor" this to call slugify() — the point is to compare
+// against the old behaviour.
 function referenceSlug(str) {
   return String(str)
     .toLowerCase()
