@@ -37,16 +37,16 @@ camps:
     archived: true
     qa: true
   - id: qa-thisweek
-    name: QA Testläger (denna vecka)
+    name: QA Testläger (vår 2026)
     start_date: '2026-03-10'
-    end_date: '2026-03-17'
+    end_date: '2026-06-07'
     opens_for_editing: '2026-03-02'
     registration_opens: '2026-02-15'
     registration_closes: '2026-03-01'
     location: Sysslebäck
     link: ""
     information: |
-      Duplikat av 2026 juli-lägret, men med datum denna vecka för QA-testning.
+      QA-läger aktivt fram till två veckor före nästa riktiga läger (2026-06-21).
     file: qa-thisweek.yaml
     archived: false
     qa: true

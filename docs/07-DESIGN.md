@@ -405,6 +405,11 @@ form. The grid is always multi-select — there is no toggle. <!-- 07-§6.76 -->
   confirmation modal, with emoji icons in the first column and values in the
   second. Compact padding (`2px`), description row has extra top
   padding. <!-- 07-§6.84 -->
+- A static `.field-info` hint with the text
+  `Återkommande aktivitet — välj flera dagar.` is rendered between the
+  `Datum *` label and the `.day-grid` container on the add-activity
+  page. It is always visible and shares the styling defined in
+  `07-§6.44a–6.44g`. <!-- 07-§6.103 -->
 
 ---
 

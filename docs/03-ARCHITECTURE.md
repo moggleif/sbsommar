@@ -84,8 +84,17 @@ the `BUILD_ENV` environment variable:
 - **Local** (`BUILD_ENV` unset): No filtering — all camps are included
   and normal derivation rules apply.
 
-The QA camp (`qa-testcamp`) uses a full-year date range so that events
-submitted on any day pass date validation. See `02-REQUIREMENTS.md §42`.
+Two QA-only camps coexist in `camps.yaml` to provide a continuous QA
+testing window without overlapping the real-camp season:
+
+- A spring QA camp (`qa-thisweek`) runs through the off-season and
+  closes two weeks before the next real camp's `start_date`, leaving
+  the real-camp window QA-free.
+- An autumn QA camp (`qa-testcamp`) covers October 1 through December
+  31 of the current year, reopening QA testing once the real-camp
+  season ends.
+
+See `02-REQUIREMENTS.md §42` for the full data model and seasonal rules.
 
 ---
 

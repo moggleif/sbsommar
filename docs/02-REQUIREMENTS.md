@@ -1810,6 +1810,29 @@ QA environments.
 - This is a manual one-line change in `camps.yaml` — no automation
   is required. <!-- 02-§42.29 -->
 
+### 42.9 Seasonal QA camp model (data requirements)
+
+#### 42.9.1 Context
+
+QA-only camps act as the active camp in QA environments so the full event
+flow can be tested without touching production data. To avoid QA noise
+overlapping with the real-camp window, the active QA camp must close
+before the upcoming real camp's pre-camp preparation period and reopen
+after the real-camp season ends.
+
+#### 42.9.2 Requirements
+
+- Two QA-only camps exist in `camps.yaml` at any time: one "spring" camp
+  active in the period leading up to the next real camp, and one "autumn"
+  camp active after the real-camp season. <!-- 02-§42.31 -->
+- The spring QA camp's `end_date` is two weeks before the
+  `start_date` of the next non-QA, non-archived camp. <!-- 02-§42.32 -->
+- No QA-only camp's date range covers the period from the spring QA camp's
+  `end_date` (exclusive) until the autumn QA camp's `start_date` (exclusive),
+  so no QA camp is active in QA during the real-camp season. <!-- 02-§42.33 -->
+- The autumn QA camp's `start_date` is `YYYY-10-01` and its `end_date`
+  is `YYYY-12-31`, where `YYYY` is the current calendar year. <!-- 02-§42.34 -->
+
 ---
 
 ## 43. Replace FTP with SSH for QA Deploys
@@ -3662,6 +3685,18 @@ submission.
 - The day grid uses CSS custom properties from `docs/07-DESIGN.md §7`. <!-- 02-§80.26 -->
 - The batch endpoint must be implemented in both Node.js and PHP with identical
   validation and response format. <!-- 02-§80.27 -->
+
+### 80.7 Static multi-day hint (user requirements)
+
+- A static hint with the text
+  `Återkommande aktivitet — välj flera dagar.` is rendered immediately
+  below the `Datum *` label on the add-activity page, above the day
+  grid, and is always visible regardless of selection state. <!-- 02-§80.28 -->
+- The hint is rendered with the existing `.field-info` class so it
+  matches the visual style of other inline field info messages on the
+  same page. <!-- 02-§80.29 -->
+- The hint is shown only on the add-activity page; the edit page (which
+  does not support multi-day selection) does not render it. <!-- 02-§80.30 -->
 
 ---
 

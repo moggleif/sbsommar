@@ -812,6 +812,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§42.27` | `validate-camps.js` accepts `qa` as valid optional boolean | — | VCMP-33..36 | `source/scripts/validate-camps.js` | covered |
 | `02-§42.28` | Yearly: QA camp date range updated to new year | — | manual: annual maintenance | `source/data/camps.yaml` | implemented |
 | `02-§42.29` | Yearly update is manual one-line change, no automation | — | — | — | implemented |
+| `02-§42.31` | Two QA-only camps coexist: spring + autumn | 02-REQUIREMENTS.md §42.9, 03-ARCHITECTURE.md §2 | QSEAS-01, QSEAS-03 | `source/data/camps.yaml` | covered |
+| `02-§42.32` | Spring QA camp `end_date` is two weeks before next real camp `start_date` | 02-REQUIREMENTS.md §42.9, 03-ARCHITECTURE.md §2 | QSEAS-04 | `source/data/camps.yaml` | covered |
+| `02-§42.33` | No QA camp covers the real-camp season window | 02-REQUIREMENTS.md §42.9 | QSEAS-05 | `source/data/camps.yaml` | covered |
+| `02-§42.34` | Autumn QA camp runs Oct 1 – Dec 31 of current year | 02-REQUIREMENTS.md §42.9 | QSEAS-02 | `source/data/camps.yaml` | covered |
 | `02-§43.1` | QA event data deploy uses SCP over SSH instead of FTP | 08-ENVIRONMENTS.md | manual: trigger event PR, verify QA pages update via SCP | `.github/workflows/event-data-deploy.yml` – `deploy-qa` job | implemented |
 | `02-§43.2` | QA event data upload uses existing SSH secrets | 08-ENVIRONMENTS.md | manual: inspect workflow secrets references | `.github/workflows/event-data-deploy.yml` | implemented |
 | `02-§43.3` | QA target dir derived from `DEPLOY_DIR` + `/public_html/` | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | implemented |
@@ -1102,8 +1106,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1188
-Covered (implemented + tested): 605
+Total requirements:            1195
+Covered (implemented + tested): 612
 Implemented, not tested:        583
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
@@ -1597,6 +1601,8 @@ Matrix cleanup (2026-02-25):
 | PROG-01..02 | `tests/submit-progress.test.js` | `02-§53.6 — Progress stage messages` |
 | PROG-03..04 | `tests/submit-progress.test.js` | `02-§53.11 — Progress in both forms` |
 | BUILD-QA-01 | `tests/build-qa-filter.test.js` | `build.js QA camp filtering (02-§42.13, 02-§42.30)` |
+| QSEAS-01..05 | `tests/qa-camp-seasonal.test.js` | `camps.yaml – seasonal QA camp model (02-§42.31–42.34)` |
+| DG-HINT-01..04 | `tests/render-add.test.js` | `renderAddPage – static multi-day date hint (02-§80.28–80.30); renderEditPage – does not render the multi-day hint (02-§80.30)` |
 | VLD-56..61 | `tests/validate.test.js` | `validateEventRequest – midnight crossing (02-§54.1–54.5)` |
 | VLD-62..63 | `tests/validate.test.js` | `validateEditRequest – midnight crossing (02-§54.10)` |
 | LNT-24..25 | `tests/lint-yaml.test.js` | `validateYaml – midnight crossing (05-§4.3)` |
@@ -1842,6 +1848,9 @@ Matrix cleanup (2026-02-25):
 | `02-§80.25` | done | Day grid implemented in vanilla JavaScript |
 | `02-§80.26` | done | Day grid uses CSS custom properties from 07-DESIGN.md |
 | `02-§80.27` | done | Batch endpoint implemented in both Node.js and PHP |
+| `02-§80.28` | DG-HINT-01, DG-HINT-02 | Static hint text under Datum label on add-activity page |
+| `02-§80.29` | DG-HINT-03 | Hint uses `.field-info` class for visual consistency |
+| `02-§80.30` | DG-HINT-04 | Hint shown only on add-activity page, not on edit page |
 | | | **§81 — Client-side Link Field Validation** |
 | `02-§81.1` | LINK-03, LINK-04 | Blur validation checks http/https protocol |
 | `02-§81.2` | LINK-05 | Blur validation checks for at least one dot after protocol |
