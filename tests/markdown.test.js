@@ -82,6 +82,26 @@ describe('renderDescriptionHtml (02-§56.1, 02-§56.2, 02-§56.6, 02-§56.7)', (
     assert.ok(!html.includes('<script'), `script tag with whitespace must be removed, got: ${html}`);
   });
 
+  it('MKD-D28 (02-§56.6): unsafe URI scheme matched case-insensitively and tolerant of leading whitespace', () => {
+    const html = renderDescriptionHtml('[click](  JaVaScRiPt:alert(1))');
+    assert.ok(!/javascript:/i.test(html), `JavaScript: scheme must be neutralized, got: ${html}`);
+    assert.ok(html.includes('click'), `link text must survive, got: ${html}`);
+  });
+
+  it('MKD-D29 (02-§56.6): raw HTML in markdown is dropped at parse time, not escaped', () => {
+    const html = renderDescriptionHtml('Hello <b>bold</b> world');
+    assert.ok(!html.includes('<b>'), `raw <b> must not survive, got: ${html}`);
+    assert.ok(!html.includes('&lt;b&gt;'), `raw <b> must be dropped, not escaped, got: ${html}`);
+    assert.ok(html.includes('Hello') && html.includes('world'), `surrounding text must survive, got: ${html}`);
+  });
+
+  it('MKD-D30 (02-§56.6): javascript: URI in image src is neutralized', () => {
+    const html = renderDescriptionHtml('![x](javascript:alert(1))');
+    assert.ok(!/javascript:/i.test(html), `image src must not contain javascript:, got: ${html}`);
+    assert.ok(html.includes('<img'), `image element must still render, got: ${html}`);
+    assert.ok(/src=""/.test(html), `image src must be neutralized to empty, got: ${html}`);
+  });
+
   it('MKD-D13 (02-§56.7): null input returns empty string', () => {
     const html = renderDescriptionHtml(null);
     assert.strictEqual(html, '');
