@@ -1103,8 +1103,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1188
-Covered (implemented + tested): 609
-Implemented, not tested:        579
+Covered (implemented + tested): 610
+Implemented, not tested:        578
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -2135,7 +2135,7 @@ Matrix cleanup (2026-02-25):
 | `02-§95.4` | implemented | `tests/scoped-headings.test.js` imports `escapeRegExp` and uses it at lines 50, 134, 156; no hand-rolled `\.`/`\s+` escape remains — all 22 SH-* tests still pass |
 | `02-§95.5` | implemented | `package.json` and `api/composer.json` unchanged by this feature |
 | `02-§95.6` | covered | SLUG-RD-03..12 prove output equivalence; SLUG-RD-14 guarantees no leading/trailing dash regression |
-| `02-§95.7` | implemented | Code changes in place; CodeQL re-scan after merge must show #17, #30, #31, #32 in state `fixed` (external verification) |
+| `02-§95.7` | covered | CodeQL post-merge scan on main confirmed alerts #17, #30, #31, #32 transitioned to state `fixed` |
 
 ### §1 — Camp registry fields (camps.yaml)
 
