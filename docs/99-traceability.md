@@ -1102,9 +1102,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1181
-Covered (implemented + tested): 605
-Implemented, not tested:        576
+Total requirements:            1188
+Covered (implemented + tested): 609
+Implemented, not tested:        579
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -2129,13 +2129,13 @@ Matrix cleanup (2026-02-25):
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§95.1` | gap | Linear-time trim in `slugify()` — pending Phase 4 |
-| `02-§95.2` | gap | Output-equivalence proof for `slugify()` — pending Phase 4 |
-| `02-§95.3` | gap | `tests/helpers/regex-escape.js` `escapeRegExp()` — pending Phase 4 |
-| `02-§95.4` | gap | `tests/scoped-headings.test.js` uses shared helper — pending Phase 4 |
-| `02-§95.5` | gap | No new dependencies — pending Phase 4 |
-| `02-§95.6` | gap | Output preserved — pending Phase 4 |
-| `02-§95.7` | gap | CodeQL alerts #17, #30, #31, #32 reach `fixed` — pending CodeQL re-scan |
+| `02-§95.1` | covered | SLUG-RD-01, SLUG-RD-02: `slugify()` trim collapsed to `/^-\|-$/g`; pathological `-`-heavy input returns under 50 ms |
+| `02-§95.2` | covered | SLUG-RD-03..14: `slugify(s)` matches reference implementation and honours 48-char cap, no leading/trailing dash |
+| `02-§95.3` | covered | RE-01..18: `tests/helpers/regex-escape.js` escapes `. * + ? ^ $ { } ( ) \| [ ] \` and coerces non-string input |
+| `02-§95.4` | implemented | `tests/scoped-headings.test.js` imports `escapeRegExp` and uses it at lines 49, 135, 157; no hand-rolled `\.`/`\s+` escape remains — all 22 SH-* tests still pass |
+| `02-§95.5` | implemented | `package.json` and `api/composer.json` unchanged by this feature |
+| `02-§95.6` | covered | SLUG-RD-03..12 prove output equivalence; SLUG-RD-14 guarantees no leading/trailing dash regression |
+| `02-§95.7` | implemented | Code changes in place; CodeQL re-scan after merge must show #17, #30, #31, #32 in state `fixed` (external verification) |
 
 ### §1 — Camp registry fields (camps.yaml)
 
