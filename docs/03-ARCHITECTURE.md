@@ -1430,13 +1430,29 @@ is left unwrapped.
 `description` field in event data:
 
 - **`renderDescriptionHtml(text)`** — converts Markdown to HTML via
-  `marked.parse()` and sanitizes the output by removing `<script>`,
-  `<iframe>`, `<object>`, `<embed>` tags, `on*` event-handler attributes,
-  and `javascript:` URIs. Used by `render-event.js`, `render.js`, and
-  `render-today.js`.
+  `marked.parse()`, configured with sanitizing renderer overrides from
+  `source/assets/js/client/markdown-renderers.js`. The `html` renderer
+  returns the empty string, so any raw HTML (block or inline) the
+  Markdown parser tokenizes — `<script>`, `<iframe>`, `<object>`,
+  `<embed>`, `on*` event handlers, anything else — is dropped before
+  it can reach the output. The `link` and `image` renderers neutralize
+  any URI whose scheme (after stripping leading whitespace and control
+  characters and lowercasing) matches `javascript:`, `vbscript:`,
+  `data:`, or `file:`, replacing it with an empty `href`/`src`. Used by
+  `render-event.js`, `render.js`, `render-today.js`, `render-idag.js`,
+  and `render-arkiv.js`.
 - **`stripMarkdown(text)`** — removes Markdown syntax and returns plain text.
   Used by `render-rss.js` and `render-ical.js` where formatted HTML is not
   appropriate.
+
+The same `markdown-renderers.js` module is shipped to the browser and
+consumed by `source/assets/js/client/markdown-preview.js` so that the
+live preview on `/lagg-till.html` and `/redigera.html` produces the
+same sanitized output as the build, byte for byte. The dual CJS+IIFE
+wrapper exposes `module.exports` in Node and `window.MarkdownRenderers`
+in the browser from the same source file. Keeping the renderer logic
+in one file removes the parity drift that previously required
+duplicated regex sanitizers in build and preview code paths.
 
 ### 20.4 Files
 
@@ -1444,6 +1460,8 @@ is left unwrapped.
 | ---- | ---- |
 | `source/build/render-index.js` | `convertMarkdown()`, `inlineHtml()`, `createMarked()` |
 | `source/build/markdown.js` | `renderDescriptionHtml()`, `stripMarkdown()` |
+| `source/assets/js/client/markdown-renderers.js` | Sanitizing `renderers` and `isUnsafeUri()` — shared between build and browser preview |
+| `source/assets/js/client/markdown-preview.js` | Live preview wired to the shared renderers |
 | `source/assets/css/style.css` | Table styles for markdown-rendered tables |
 
 ---

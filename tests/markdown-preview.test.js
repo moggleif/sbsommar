@@ -65,35 +65,86 @@ describe('02-§58.7 — marked script uses defer (MDP-03..04)', () => {
 
 // ── 02-§58.8 — Sanitization parity with build ──────────────────────────────
 
-describe('02-§58.8 — Client-side sanitization matches build (MDP-05..09)', () => {
-  const previewPath = path.join(
-    __dirname, '..', 'source', 'assets', 'js', 'client', 'markdown-preview.js',
+describe('02-§58.8 — Client-side sanitization matches build (MDP-05..09, MDP-23..26)', () => {
+  const { Marked } = require('marked');
+  const renderersPath = path.join(
+    __dirname, '..', 'source', 'assets', 'js', 'client', 'markdown-renderers.js',
   );
-  // The sanitizeHtml function is exported for testing under Node.js
-  const { sanitizeHtml } = require(previewPath);
+  const { renderers, isUnsafeUri } = require(renderersPath);
 
-  it('MDP-05: strips <script> tags', () => {
-    assert.equal(sanitizeHtml('<script>alert(1)</script>'), 'alert(1)');
+  // Helper: parse markdown through the same shared renderers the browser uses.
+  function preview(markdown) {
+    return new Marked({ renderer: renderers }).parse(markdown);
+  }
+
+  it('MDP-05: drops raw <script> tags from markdown input', () => {
+    const result = preview('<script>alert(1)</script>');
+    assert.ok(!result.includes('<script'), `must drop <script>, got: ${result}`);
+    assert.ok(!result.includes('alert(1)'), `must drop entire raw HTML token, got: ${result}`);
   });
 
-  it('MDP-06: strips <iframe> tags', () => {
-    assert.equal(sanitizeHtml('<iframe src="x"></iframe>'), '');
+  it('MDP-06: drops raw <iframe> tags from markdown input', () => {
+    const result = preview('<iframe src="x"></iframe>');
+    assert.ok(!result.includes('<iframe'), `must drop <iframe>, got: ${result}`);
   });
 
-  it('MDP-07: strips on* event handlers', () => {
-    const result = sanitizeHtml('<div onclick="alert(1)">hi</div>');
-    assert.ok(!result.includes('onclick'), 'on* handler must be removed');
-    assert.ok(result.includes('hi'), 'content must survive');
+  it('MDP-07: drops raw HTML containing on* event handlers', () => {
+    const result = preview('<div onclick="alert(1)">hi</div>');
+    assert.ok(!result.includes('onclick'), `on* handler must not survive, got: ${result}`);
+    assert.ok(!result.includes('<div'), `raw <div> must be dropped, got: ${result}`);
   });
 
-  it('MDP-08: strips javascript: URIs', () => {
-    const result = sanitizeHtml('<a href="javascript:alert(1)">click</a>');
-    assert.ok(!result.includes('javascript:'), 'javascript: URI must be removed');
+  it('MDP-08: neutralizes javascript: URIs in markdown links', () => {
+    const result = preview('[click](javascript:alert(1))');
+    assert.ok(!/javascript:/i.test(result), `javascript: URI must be removed, got: ${result}`);
+    assert.ok(result.includes('click'), `link text must survive, got: ${result}`);
   });
 
-  it('MDP-09: handles nested attack patterns', () => {
-    const result = sanitizeHtml('<scr<script>ipt>alert(1)</scr</script>ipt>');
-    assert.ok(!result.includes('<script'), 'nested script tags must be removed');
+  it('MDP-09: nested raw-HTML attack patterns are dropped', () => {
+    const result = preview('<scr<script>ipt>alert(1)</scr</script>ipt>');
+    assert.ok(!result.includes('<script'), `nested script tags must not survive, got: ${result}`);
+  });
+
+  it('MDP-23: unsafe URI scheme matched case-insensitively and tolerant of whitespace', () => {
+    const result = preview('[click](  JaVaScRiPt:alert(1))');
+    assert.ok(!/javascript:/i.test(result), `JavaScript: scheme must be neutralized, got: ${result}`);
+  });
+
+  it('MDP-24: raw inline HTML is dropped, not HTML-escaped', () => {
+    const result = preview('Hello <b>bold</b> world');
+    assert.ok(!result.includes('<b>'), `raw <b> must not survive, got: ${result}`);
+    assert.ok(!result.includes('&lt;b&gt;'), `raw <b> must be dropped, not escaped, got: ${result}`);
+  });
+
+  it('MDP-25: javascript: URI in image src is neutralized', () => {
+    const result = preview('![x](javascript:alert(1))');
+    assert.ok(!/javascript:/i.test(result), `image src must not contain javascript:, got: ${result}`);
+    assert.ok(/src=""/.test(result), `image src must be neutralized to empty, got: ${result}`);
+  });
+
+  it('MDP-26: shared renderer module exposes the same shape under Node require and browser IIFE', () => {
+    // The shared module uses a UMD wrapper. Node loads the CJS branch via
+    // require(); the browser branch attaches to a global. Evaluate the file
+    // as a plain script in a synthetic global to exercise the IIFE branch
+    // and confirm the two paths expose an identical-shape object.
+    const fs = require('node:fs');
+    const vm = require('node:vm');
+    const src = fs.readFileSync(renderersPath, 'utf8');
+    const sandbox = { self: {}, module: undefined };
+    vm.createContext(sandbox);
+    vm.runInContext(src, sandbox);
+    const browserExport = sandbox.self.MarkdownRenderers;
+    assert.ok(browserExport, 'IIFE branch must attach MarkdownRenderers to the global');
+    assert.deepEqual(
+      Object.keys(renderers).sort(),
+      Object.keys(browserExport.renderers).sort(),
+      'renderer keys must match between Node and browser exports',
+    );
+    assert.equal(typeof browserExport.isUnsafeUri, 'function');
+    assert.equal(browserExport.isUnsafeUri('javascript:x'), true);
+    assert.equal(browserExport.isUnsafeUri('https://example.com'), false);
+    assert.equal(isUnsafeUri('  VBSCRIPT:foo'), true);
+    assert.equal(isUnsafeUri('mailto:x@y'), false);
   });
 });
 

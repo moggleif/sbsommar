@@ -2590,9 +2590,13 @@ appropriate output for each context.
 - In iCal output (schema.ics and per-event .ics files), the description
   must be stripped of Markdown syntax and included as plain text in the
   `DESCRIPTION` property. <!-- 02-§56.5 -->
-- All Markdown-to-HTML output must be sanitized: `<script>`, `<iframe>`,
-  `<object>`, `<embed>` tags, `on*` event-handler attributes, and
-  `javascript:` URIs must be removed. <!-- 02-§56.6 -->
+- Raw HTML in description Markdown is dropped at parse time by marked
+  renderer overrides, so `<script>`, `<iframe>`, `<object>`, `<embed>`,
+  any other raw tags, and any `on*` event-handler attributes never appear
+  in the rendered output. URIs in links and images that use the
+  `javascript:`, `vbscript:`, `data:`, or `file:` scheme — matched
+  case-insensitively and tolerant of leading whitespace and control
+  characters — are neutralized to an empty `href`/`src`. <!-- 02-§56.6 -->
 - Descriptions that contain no Markdown syntax (plain text) must continue
   to render correctly — `marked` wraps them in `<p>` tags, which is
   acceptable. <!-- 02-§56.7 -->
@@ -2678,10 +2682,11 @@ shows the user how their Markdown will render.
   public JS directory during the build step. <!-- 02-§58.6 -->
 - The `marked.min.js` script must be loaded with the `defer` attribute so
   it does not block page rendering. <!-- 02-§58.7 -->
-- The preview must sanitize all rendered HTML using the same rules as
-  build-time rendering (02-§56.6): `<script>`, `<iframe>`, `<object>`,
-  `<embed>` tags, `on*` event-handler attributes, and `javascript:` URIs
-  must be removed. <!-- 02-§58.8 -->
+- The preview applies the same sanitization rules as build-time rendering
+  (02-§56.6): raw HTML is dropped at parse time and unsafe-scheme URIs in
+  links and images are neutralized. The preview consumes the same shared
+  marked-renderer module as the build to guarantee byte-for-byte parity
+  between preview output and the eventually-published page. <!-- 02-§58.8 -->
 - The preview logic must live in a dedicated JS file
   (`markdown-preview.js`) that is loaded by both forms. <!-- 02-§58.9 -->
 - The preview area must use `aria-live="polite"` so that screen readers

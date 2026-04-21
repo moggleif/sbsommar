@@ -1006,7 +1006,7 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§56.3` | Today view uses pre-rendered description HTML from build JSON | 03-ARCHITECTURE.md §20.3 | DIS-26, DIS-27, IDAG-19 | `source/build/render-today.js`, `render-idag.js` → `descriptionHtml` in JSON; `events-today.js` → uses `e.descriptionHtml` | covered |
 | `02-§56.4` | RSS feed strips Markdown, uses plain text description | 03-ARCHITECTURE.md §17.3, §20.3 | RSS-16 | `source/build/render-rss.js` → `stripMarkdown()` | covered |
 | `02-§56.5` | iCal strips Markdown, uses plain text description | 03-ARCHITECTURE.md §20.3 | ICAL-32, ICAL-33 | `source/build/render-ical.js` → `stripMarkdown()` | covered |
-| `02-§56.6` | Markdown → HTML output is sanitized (no script/iframe/object/embed/on*/javascript:) | 03-ARCHITECTURE.md §20.3 | MKD-D07..12, EVT-24 | `source/build/markdown.js` → `sanitizeHtml()` | covered |
+| `02-§56.6` | Description Markdown sanitization: raw HTML dropped at parse time, unsafe-scheme URIs (`javascript:`/`vbscript:`/`data:`/`file:`) neutralized in links and images | 03-ARCHITECTURE.md §20.3 | MKD-D07..12, MKD-D25..26, MKD-D28..30, EVT-24 | `source/assets/js/client/markdown-renderers.js` → `renderers`; consumed by `source/build/markdown.js` → `renderDescriptionHtml()` | covered |
 | `02-§56.7` | Plain text descriptions render correctly (wrapped in `<p>`) | 03-ARCHITECTURE.md §20.3 | MKD-D01, MKD-D06, MKD-D13..14 | `source/build/markdown.js` → `renderDescriptionHtml()` | covered |
 | `02-§56.8` | `.event-description p` no longer applies `font-style: italic` | — | MKD-CSS-01 | `source/assets/cs/style.css` | covered |
 | `02-§56.9` | Description CSS uses existing design tokens only | 07-DESIGN.md §7 | manual: inspect CSS for hardcoded values | `source/assets/cs/style.css` — no new custom properties added | implemented |
@@ -1602,7 +1602,7 @@ Matrix cleanup (2026-02-25):
 | LNT-24..25 | `tests/lint-yaml.test.js` | `validateYaml – midnight crossing (05-§4.3)` |
 | LVD-07..09 | `tests/live-form-validation.test.js` | `midnight crossing source checks (02-§54.1, 02-§54.6)` |
 | MDP-01..06 | `tests/coverage-css.test.js` | `02-§55.1–55.5 — Modal design polish` |
-| MKD-D01..15 | `tests/markdown.test.js` | `renderDescriptionHtml (02-§56.1, 02-§56.6, 02-§56.7)` |
+| MKD-D01..15, MKD-D25..30 | `tests/markdown.test.js` | `renderDescriptionHtml (02-§56.1, 02-§56.6, 02-§56.7)` (incl. nested-attack, whitespace, tel-hyphens, case-insensitive scheme, raw-HTML drop, image-src neutralization) |
 | MKD-D16..24 | `tests/markdown.test.js` | `stripMarkdown (02-§56.4, 02-§56.5)` |
 | EVT-23..25 | `tests/render-event.test.js` | `renderEventPage – markdown description (02-§56.1, 02-§56.6, 02-§56.7)` |
 | RSS-16 | `tests/render-rss.test.js` | `renderRssFeed – markdown stripped (02-§56.4)` |
@@ -1627,7 +1627,7 @@ Matrix cleanup (2026-02-25):
 | MDP-01..02 | `tests/markdown-preview.test.js` | `02-§58.5 — marked.umd.js loaded in both forms` |
 | MDP-22 | `tests/markdown-preview.test.js` | `02-§58.6 — Build copies marked.umd.js` |
 | MDP-03..04 | `tests/markdown-preview.test.js` | `02-§58.7 — marked script uses defer` |
-| MDP-05..09 | `tests/markdown-preview.test.js` | `02-§58.8 — Sanitization parity with build` |
+| MDP-05..09, MDP-23..26 | `tests/markdown-preview.test.js` | `02-§58.8 — Sanitization parity with build` (covers shared-renderer parity, case-insensitive scheme matching, raw-HTML drop, image-src neutralization) |
 | MDP-10..12 | `tests/markdown-preview.test.js` | `02-§58.9 — markdown-preview.js file and inclusion` |
 | MDP-13..14 | `tests/markdown-preview.test.js` | `02-§58.10 — aria-live="polite"` |
 | MDP-15..16 | `tests/markdown-preview.test.js` | `02-§58.11 — Accessible aria-label` |

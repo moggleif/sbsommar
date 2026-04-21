@@ -1,41 +1,7 @@
 'use strict';
 
 const { Marked } = require('marked');
-
-/**
- * Pattern matching dangerous HTML tags (with optional whitespace before >).
- * Matches opening, closing, and self-closing forms of script, iframe, object, embed.
- */
-const DANGEROUS_TAG_RE = /<\/?\s*(script|iframe|object|embed)\b[^>]*>/gi;
-
-/**
- * Pattern matching on* event handler attributes.
- */
-const EVENT_HANDLER_RE = /\s+on\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi;
-
-/**
- * Pattern matching javascript: URIs in href/src attributes.
- */
-const JS_URI_RE = /(href|src)\s*=\s*(["'])javascript:[^"']*\2/gi;
-
-/**
- * Sanitizes HTML output by removing dangerous tags and attributes.
- * Strips: <script>, <iframe>, <object>, <embed>, on* event handlers,
- * and javascript: URIs. Runs in a loop to handle nested/reconstructed
- * patterns (e.g. `<scr<script>ipt>`).
- */
-function sanitizeHtml(html) {
-  let result = html;
-  let prev;
-  do {
-    prev = result;
-    result = result
-      .replace(DANGEROUS_TAG_RE, '')
-      .replace(EVENT_HANDLER_RE, '')
-      .replace(JS_URI_RE, '$1=""');
-  } while (result !== prev);
-  return result;
-}
+const { renderers } = require('../assets/js/client/markdown-renderers');
 
 /**
  * Replaces regular hyphens with non-breaking hyphens (&#8209;) inside the
@@ -51,16 +17,20 @@ function fixTelHyphens(html) {
 
 /**
  * Converts a Markdown description string to sanitized HTML.
- * Returns empty string for null/empty input.
+ *
+ * Sanitization is performed by the marked renderer overrides defined in
+ * `source/assets/js/client/markdown-renderers.js` (shared with the live
+ * preview): raw HTML tokens are dropped at parse time and unsafe-scheme
+ * URIs in links and images are neutralized. See 02-§56.6.
  *
  * @param {string|null} text - Markdown text
  * @returns {string} Sanitized HTML
  */
 function renderDescriptionHtml(text) {
   if (!text || !text.trim()) return '';
-  const md = new Marked();
+  const md = new Marked({ renderer: renderers });
   const html = md.parse(text).trim();
-  return fixTelHyphens(sanitizeHtml(html));
+  return fixTelHyphens(html);
 }
 
 /**

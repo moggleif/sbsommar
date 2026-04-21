@@ -191,6 +191,7 @@ ${locationOptions}
 </main>
   <script src="markdown-toolbar.js"></script>
   <script defer src="marked.umd.js"></script>
+  <script defer src="markdown-renderers.js"></script>
   <script defer src="markdown-preview.js"></script>
   <script src="offline-guard.js"></script>
   <script src="redigera.js"></script>
