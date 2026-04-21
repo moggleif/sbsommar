@@ -1,9 +1,10 @@
 'use strict';
 
-const express = require('express');
-const fs      = require('fs');
-const path    = require('path');
-const yaml    = require('js-yaml');
+const express   = require('express');
+const rateLimit = require('express-rate-limit');
+const fs        = require('fs');
+const path      = require('path');
+const yaml      = require('js-yaml');
 
 const { addEventToActiveCamp, updateEventInActiveCamp, removeEventFromActiveCamp, slugify } = require('./source/api/github');
 const { validateEventRequest, validateEditRequest }              = require('./source/api/validate');
@@ -13,9 +14,11 @@ const { isOutsideEditingPeriod }                                 = require('./so
 const { validateFeedbackRequest, createFeedbackIssue }           = require('./source/api/feedback');
 const { parseAdminTokens, verifyAdminToken }                     = require('./source/api/admin');
 const { resolveActiveCamp }                                      = require('./source/scripts/resolve-active-camp');
-const { isRateLimited }                                          = require('./source/api/rate-limit');
 
 const app = express();
+
+// 02-§93.15: only honour X-Forwarded-For from a loopback-connected proxy.
+app.set('trust proxy', 'loopback');
 
 // ── Load active camp metadata for time-gating ───────────────────────────────
 
@@ -29,17 +32,29 @@ const adminTokens = parseAdminTokens(process.env.ADMIN_TOKENS);
 
 app.use(express.json());
 
-// Rate-limit configurations per endpoint (02-§93.1–93.4).
+// 02-§93.1–§93.8: per-endpoint rate limiters.
 const HOUR_MS = 60 * 60 * 1000;
-const RATE_LIMIT_VERIFY_ADMIN = { limit: 5,  windowMs: HOUR_MS };
-const RATE_LIMIT_EDIT_EVENT   = { limit: 30, windowMs: HOUR_MS };
-const RATE_LIMIT_DELETE_EVENT = { limit: 30, windowMs: HOUR_MS };
-const RATE_LIMIT_FEEDBACK     = { limit: 5,  windowMs: HOUR_MS };
-const RATE_LIMIT_MSG          = 'För många förfrågningar. Försök igen senare.';
+const RATE_LIMIT_MSG = 'För många förfrågningar. Försök igen senare.';
 
-function clientIp(req) {
-  return req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+function makeLimiter({ limit, windowMs, includeSuccess = true }) {
+  return rateLimit({
+    windowMs,
+    limit,
+    standardHeaders: 'draft-7',
+    legacyHeaders: false,
+    handler: (req, res) => {
+      const body = includeSuccess
+        ? { success: false, error: RATE_LIMIT_MSG }
+        : { error: RATE_LIMIT_MSG };
+      res.status(429).json(body);
+    },
+  });
 }
+
+const verifyAdminLimiter = makeLimiter({ limit: 5,  windowMs: HOUR_MS, includeSuccess: false });
+const editEventLimiter   = makeLimiter({ limit: 30, windowMs: HOUR_MS });
+const deleteEventLimiter = makeLimiter({ limit: 30, windowMs: HOUR_MS });
+const feedbackLimiter    = makeLimiter({ limit: 5,  windowMs: HOUR_MS });
 
 const ALLOWED_ORIGINS = new Set(
   [process.env.ALLOWED_ORIGIN, process.env.QA_ORIGIN].filter(Boolean)
@@ -66,10 +81,7 @@ app.get('/api/health', (req, res) => {
 
 // ── Admin token verification (02-§91.4) ─────────────────────────────────────
 
-app.post('/verify-admin', (req, res) => {
-  if (isRateLimited(`verify-admin:${clientIp(req)}`, RATE_LIMIT_VERIFY_ADMIN)) {
-    return res.status(429).json({ error: RATE_LIMIT_MSG });
-  }
+app.post('/verify-admin', verifyAdminLimiter, (req, res) => {
   const { token } = req.body || {};
   if (verifyAdminToken(token, adminTokens)) {
     return res.json({ valid: true });
@@ -113,11 +125,7 @@ app.post('/add-event', (req, res) => {
   });
 });
 
-app.post('/edit-event', (req, res) => {
-  if (isRateLimited(`edit-event:${clientIp(req)}`, RATE_LIMIT_EDIT_EVENT)) {
-    return res.status(429).json({ success: false, error: RATE_LIMIT_MSG });
-  }
-
+app.post('/edit-event', editEventLimiter, (req, res) => {
   // Time-gating: reject if outside the editing period.
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
@@ -153,11 +161,7 @@ app.post('/edit-event', (req, res) => {
   });
 });
 
-app.post('/delete-event', (req, res) => {
-  if (isRateLimited(`delete-event:${clientIp(req)}`, RATE_LIMIT_DELETE_EVENT)) {
-    return res.status(429).json({ success: false, error: RATE_LIMIT_MSG });
-  }
-
+app.post('/delete-event', deleteEventLimiter, (req, res) => {
   // Time-gating: reject if outside the editing period.
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
@@ -191,11 +195,7 @@ app.post('/delete-event', (req, res) => {
   });
 });
 
-app.post('/feedback', async (req, res) => {
-  if (isRateLimited(`feedback:${clientIp(req)}`, RATE_LIMIT_FEEDBACK)) {
-    return res.status(429).json({ success: false, error: RATE_LIMIT_MSG });
-  }
-
+app.post('/feedback', feedbackLimiter, async (req, res) => {
   const v = validateFeedbackRequest(req.body);
   if (!v.ok) {
     return res.status(400).json({ success: false, error: v.error });
