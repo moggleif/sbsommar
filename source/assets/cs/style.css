@@ -1623,6 +1623,7 @@ details.accordion > summary:focus-visible {
 
 .content section.section-alt {
   position: relative;
+
   /* Create a stacking context so the ::before's z-index: -1 stays within
      this section instead of sinking behind the body background. */
   isolation: isolate;
