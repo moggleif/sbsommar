@@ -303,8 +303,12 @@ h3 {
   margin: 0 0 var(--space-md) 0;
 }
 
-.registration-cta-btn {
+/* Prefix with .content so we outrank the generic content-link rule
+   (specificity 0,1,1) — without this the button text renders as
+   terracotta-on-terracotta and is invisible. */
+.content .registration-cta-btn {
   display: inline-block;
+  color: var(--color-white);
   text-decoration: none;
 }
 
@@ -1638,12 +1642,14 @@ details.accordion > summary:focus-visible {
 /* ── Content (prose pages) ── */
 
 .content p,
-.content ul {
+.content ul,
+.content ol {
   max-width: 750px;
   margin: 0 0 var(--space-sm);
 }
 
-.content ul {
+.content ul,
+.content ol {
   padding-left: var(--space-lg);
 }
 
