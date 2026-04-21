@@ -1793,9 +1793,9 @@ the scroll-to-top button. It is an inline SVG speech-bubble icon with
   patterns from `source/api/validate.js`).
 - Honeypot check: if `website` field is non-empty, return success without
   creating an issue.
-- Rate-limit: delegates to `isRateLimited()` in `source/api/rate-limit.js`
-  with the `feedback` namespace, `{ limit: 5, windowMs: 3_600_000 }`.
-  See §31 for the shared helper.
+- Rate-limit: enforced at the route layer by the `feedback` instance of
+  `express-rate-limit` defined in `app.js` with `{ limit: 5, windowMs:
+  3_600_000 }`. See §31 for the full mechanism.
 - Creates a GitHub Issue via `githubRequest()` (exported from
   `source/api/github.js`).
 - Route: `POST /feedback` registered in `app.js`.
@@ -2161,15 +2161,26 @@ The rate-limit check runs **before** validation, authorization, and
 time-gating, so a throttled client never reaches the admin-token
 comparison path or the GitHub API.
 
-### 31.3 Node (`source/api/rate-limit.js`)
+### 31.3 Node (`app.js` + `express-rate-limit`)
 
-- Exports `isRateLimited(key, { limit, windowMs })`.
-- State: module-level `Map<string, { count, resetAt }>`.
-- `key` is caller-composed: `"{namespace}:{ip}"` so different endpoints
-  do not share quotas.
-- Expired entries are replaced lazily on access; no sweeper timer.
-- Client IP resolution is handled by the caller (same pattern as the
-  existing feedback handler: `X-Forwarded-For` → `socket.remoteAddress`).
+- Uses the [`express-rate-limit`](https://www.npmjs.com/package/express-rate-limit)
+  middleware, installed as a runtime dependency.
+- Each guarded route has its own `rateLimit({ windowMs, limit, ... })`
+  instance defined at the top of `app.js`; the instance is applied as
+  per-route middleware. Separate instances keep per-endpoint counters
+  independent.
+- State: the middleware's default in-memory store. Expired entries are
+  cleaned up automatically; no unbounded growth.
+- Client IP resolution: `express-rate-limit` derives the key from
+  `req.ip`, which honours the Express `trust proxy` setting. `app.js`
+  sets `app.set('trust proxy', 'loopback')` so only loopback-connected
+  reverse proxies are permitted to set `X-Forwarded-For`. Deployments
+  behind a non-loopback proxy are expected to configure an appropriate
+  trust boundary in their reverse-proxy layer.
+- On limit exceeded, the middleware emits HTTP `429` with the standard
+  `Retry-After` and `RateLimit-*` headers; `app.js` overrides the
+  response body via the `handler` option to produce the Swedish error
+  payload defined in §31.5.
 
 ### 31.4 PHP (`api/src/RateLimit.php`)
 
@@ -2200,23 +2211,25 @@ status `429` and no `valid` key.
 
 ### 31.6 Files
 
-| File                          | Role                                                       |
-| ----------------------------- | ---------------------------------------------------------- |
-| `source/api/rate-limit.js`    | Shared Node helper                                         |
-| `source/api/feedback.js`      | Uses shared helper; no longer owns its own Map             |
-| `app.js`                      | Calls helper before handler bodies on the four endpoints   |
-| `api/src/RateLimit.php`       | Shared PHP helper                                          |
-| `api/src/Feedback.php`        | Uses shared helper; its old `isRateLimited` is removed     |
-| `api/index.php`               | Calls helper at the top of each guarded handler            |
+| File                          | Role                                                                |
+| ----------------------------- | ------------------------------------------------------------------- |
+| `app.js`                      | Defines per-endpoint `rateLimit()` middleware and applies it to routes |
+| `package.json`                | Declares `express-rate-limit` as a runtime dependency               |
+| `api/src/RateLimit.php`       | Shared PHP helper                                                   |
+| `api/src/Feedback.php`        | Uses shared PHP helper                                              |
+| `api/index.php`               | Calls helper at the top of each guarded handler                     |
 
 ### 31.7 Known limitations
 
 - In-process counters reset on restart. Acceptable because both
   deployments are single-process and an attacker would need to time
   restarts very precisely.
-- `X-Forwarded-For` is trusted as-is. A misconfigured proxy could
-  allow spoofed limits; this is the same trust boundary as the existing
-  feedback handler and as session-cookie parsing.
+- Node's `trust proxy` is set to `'loopback'`. Deployments that place
+  a non-loopback reverse proxy in front of `app.js` must widen the
+  trust setting or accept that `X-Forwarded-For` will not be honoured
+  for rate-limit keying. The PHP handler continues to trust
+  `HTTP_X_FORWARDED_FOR` as-is, matching the hosting-environment
+  assumption for shared PHP hosts.
 - File locking is not used in PHP. Two concurrent PHP requests may
   race on the JSON write; worst case is one request's increment lost.
   For a 5/h or 30/h limit this is negligible.

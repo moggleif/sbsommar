@@ -2081,21 +2081,21 @@ Matrix cleanup (2026-02-25):
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§93.1` | covered | RL-01..05: `app.js` /verify-admin calls `isRateLimited('verify-admin:{ip}', {limit:5, windowMs:3_600_000})`; `api/index.php` handleVerifyAdmin same via `RateLimit::isLimited` |
-| `02-§93.2` | covered | RL-01..05: `app.js` /edit-event guards with {limit:30}; `api/index.php` handleEditEvent same |
-| `02-§93.3` | covered | RL-01..05: `app.js` /delete-event guards with {limit:30}; `api/index.php` handleDeleteEvent same |
-| `02-§93.4` | covered | RL-01..05: `app.js` /feedback routed through shared helper with {limit:5}; `api/index.php` handleFeedback same |
-| `02-§93.5` | implemented | Manual: rate-limit check placed before all other logic in each handler; confirm by reading handler bodies |
-| `02-§93.6` | implemented | `app.js` `clientIp()` and `api/index.php` `clientIp()` both read XFF first, fall back to remote addr |
-| `02-§93.7` | covered | RL-01..05 exercise `source/api/rate-limit.js` `isRateLimited()` across fresh key, under-limit, over-limit, per-key independence, window expiry |
-| `02-§93.8` | implemented | `source/api/feedback.js` exports only `validateFeedbackRequest` + `createFeedbackIssue`; no rate-limit state remains |
-| `02-§93.9` | implemented | `api/src/RateLimit.php` provides `SBSommar\RateLimit::isLimited($ip, $ns, $limit, $window)` with JSON-file state in sys_get_temp_dir() |
-| `02-§93.10` | implemented | `api/src/Feedback.php` no longer contains `isRateLimited` or rate-limit state; `api/index.php` calls `RateLimit::isLimited(clientIp(), 'feedback', 5, 3600)` directly |
-| `02-§93.11` | implemented | Documented in 03-ARCHITECTURE.md §31.3–31.4, §31.7 |
-| `02-§93.12` | implemented | `app.js` `RATE_LIMIT_MSG` and `api/index.php` `RATE_LIMIT_MSG` both hold "För många förfrågningar. Försök igen senare." |
-| `02-§93.13` | implemented | `package.json` unchanged by this feature |
+| `02-§93.1` | gap | Pending: `app.js` /verify-admin protected by `express-rate-limit` instance `{limit:5, windowMs:3_600_000}`; PHP side unchanged via `RateLimit::isLimited` |
+| `02-§93.2` | gap | Pending: `app.js` /edit-event protected by `express-rate-limit` `{limit:30}`; PHP unchanged |
+| `02-§93.3` | gap | Pending: `app.js` /delete-event protected by `express-rate-limit` `{limit:30}`; PHP unchanged |
+| `02-§93.4` | gap | Pending: `app.js` /feedback protected by `express-rate-limit` `{limit:5}`; PHP unchanged |
+| `02-§93.5` | gap | Pending: each `express-rate-limit` middleware is applied as the first argument on its route so the limiter runs before validation, auth, and time-gating |
+| `02-§93.6` | gap | Pending: Node side keys on `req.ip` via Express `trust proxy 'loopback'`; PHP side reads XFF with REMOTE_ADDR fallback |
+| `02-§93.7` | gap | Pending: `app.js` defines per-endpoint `rateLimit({...})` instances; `source/api/rate-limit.js` and its tests removed in favour of the standard middleware |
+| `02-§93.8` | gap | Pending: `/feedback` route uses its own `rateLimit()` instance with `{limit:5, windowMs:3_600_000}` preserving §73.14 behaviour |
+| `02-§93.9` | implemented | `api/src/RateLimit.php` provides `SBSommar\RateLimit::isLimited($ip, $ns, $limit, $window)` with JSON-file state in sys_get_temp_dir() — unchanged |
+| `02-§93.10` | implemented | `api/src/Feedback.php` delegates to `RateLimit::isLimited` with the feedback namespace; unchanged |
+| `02-§93.11` | gap | Pending: documented in 03-ARCHITECTURE.md §31.3–31.4, §31.7 with middleware's in-memory store semantics |
+| `02-§93.12` | gap | Pending: `app.js` emits "För många förfrågningar. Försök igen senare." via the middleware's `handler` override; PHP `RATE_LIMIT_MSG` unchanged |
+| `02-§93.13` | gap | Pending: `package.json` declares `express-rate-limit` as the sole added runtime dependency, justified in 02-§93.13 |
 | `02-§93.14` | implemented | `api/composer.json` unchanged by this feature |
-| `02-§93.15` | implemented | Documented in 03-ARCHITECTURE.md §31.7; matches existing §73.14 trust model |
+| `02-§93.15` | gap | Pending: `app.js` sets `trust proxy 'loopback'`; documented in 03-ARCHITECTURE.md §31.7 |
 
 ### §94 — Registration Banner and CTA Button
 
