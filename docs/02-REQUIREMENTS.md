@@ -4397,20 +4397,19 @@ reusable implementation per runtime.
 - The rate-limit check runs before authorization, validation, and
   time-gating so a throttled client never touches the GitHub API or the
   admin-token comparison path. <!-- 02-§93.5 -->
-- The client IP is derived from the `X-Forwarded-For` header if
-  present, falling back to the connection's remote address — the same
-  resolution order used by the existing feedback handler. <!-- 02-§93.6 -->
+- The client IP used as the rate-limit key is derived from `req.ip` in
+  Node — that is, Express's trust-proxy-aware resolver (see §93.15) —
+  and from `HTTP_X_FORWARDED_FOR` with `REMOTE_ADDR` fallback in
+  PHP. <!-- 02-§93.6 -->
 
-### 93.3 Shared rate-limit implementation (site requirements)
+### 93.3 Rate-limit implementation (site requirements)
 
-- Node (`app.js`) imports a single helper, `source/api/rate-limit.js`,
-  that exposes `isRateLimited(key, config)`. The helper holds state in
-  an in-process `Map` keyed by `"{namespace}:{ip}"` so different
-  endpoints do not share quotas. <!-- 02-§93.7 -->
-- The Node feedback handler uses the shared helper. The previous
-  `isRateLimited` export in `source/api/feedback.js` is removed;
-  `/feedback` calls the shared helper with the same `{ limit: 5,
-  windowMs: 3_600_000 }` configuration to preserve §73.14
+- Node (`app.js`) uses the `express-rate-limit` middleware. Each guarded
+  route has its own `rateLimit({ windowMs, limit, ... })` instance
+  configured with the per-endpoint limits in §93.2. Instances are named
+  so different endpoints do not share quotas. <!-- 02-§93.7 -->
+- The Node feedback handler has its own `rateLimit()` instance with
+  `{ windowMs: 3_600_000, limit: 5 }`, preserving the §73.14
   behavior. <!-- 02-§93.8 -->
 - PHP (`api/index.php`) calls `SBSommar\RateLimit::isLimited($ip,
   $namespace, $limit, $windowSeconds)` from
@@ -4421,20 +4420,27 @@ reusable implementation per runtime.
   no longer exists as a separate implementation; it delegates to
   `RateLimit::isLimited` with the feedback namespace and
   `{ limit: 5, window: 3600 }`. <!-- 02-§93.10 -->
-- Rate-limit state is process-local in Node and file-local in PHP —
-  neither runtime coordinates across processes. This is acceptable
-  because both deployments are single-process (one Node server,
-  single-shared-host PHP). <!-- 02-§93.11 -->
+- Rate-limit state is held in the Node process (by `express-rate-limit`'s
+  default in-memory store, which evicts expired entries automatically)
+  and in a local JSON file in PHP. Neither runtime coordinates across
+  processes. This is acceptable because each deployment uses a single
+  Node process or a single shared PHP host. <!-- 02-§93.11 -->
 
 ### 93.4 Constraints
 
 - All user-facing error text is in Swedish. <!-- 02-§93.12 -->
-- No new npm dependencies are added. <!-- 02-§93.13 -->
+- The only new npm runtime dependency permitted for rate limiting is
+  `express-rate-limit`, used by `app.js` per §93.7. It is required so
+  that CodeQL's `js/missing-rate-limiting` analysis can recognize the
+  counter, and so that the Node side gains standard `Retry-After` /
+  `RateLimit-*` response headers and automatic store cleanup — properties
+  the prior custom helper did not provide. <!-- 02-§93.13 -->
 - No new Composer dependencies are added. <!-- 02-§93.14 -->
-- The rate-limit helper imposes no hard requirement on
-  `X-Forwarded-For` spoof protection; trust boundaries are deferred to
-  reverse-proxy configuration, consistent with the existing feedback
-  handler. <!-- 02-§93.15 -->
+- On the Node side, `app.js` sets Express `trust proxy` to `'loopback'`
+  so the middleware only honours `X-Forwarded-For` from trusted
+  loopback-connected reverse proxies. On non-loopback deployments the
+  trust boundary is the hosting environment's proxy configuration,
+  consistent with the existing PHP feedback handler. <!-- 02-§93.15 -->
 
 ---
 
