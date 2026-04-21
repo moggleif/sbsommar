@@ -812,6 +812,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 | `02-§42.27` | `validate-camps.js` accepts `qa` as valid optional boolean | — | VCMP-33..36 | `source/scripts/validate-camps.js` | covered |
 | `02-§42.28` | Yearly: QA camp date range updated to new year | — | manual: annual maintenance | `source/data/camps.yaml` | implemented |
 | `02-§42.29` | Yearly update is manual one-line change, no automation | — | — | — | implemented |
+| `02-§42.31` | Two QA-only camps coexist: spring + autumn | 02-REQUIREMENTS.md §42.9, 03-ARCHITECTURE.md §2 | manual: inspect `camps.yaml` for two `qa: true` entries | `source/data/camps.yaml` | gap |
+| `02-§42.32` | Spring QA camp `end_date` is two weeks before next real camp `start_date` | 02-REQUIREMENTS.md §42.9, 03-ARCHITECTURE.md §2 | manual: inspect `camps.yaml` and verify date arithmetic | `source/data/camps.yaml` | gap |
+| `02-§42.33` | No QA camp covers the real-camp season window | 02-REQUIREMENTS.md §42.9 | manual: inspect `camps.yaml` date ranges | `source/data/camps.yaml` | gap |
+| `02-§42.34` | Autumn QA camp runs Oct 1 – Dec 31 of current year | 02-REQUIREMENTS.md §42.9 | manual: inspect `camps.yaml` autumn camp dates | `source/data/camps.yaml` | gap |
 | `02-§43.1` | QA event data deploy uses SCP over SSH instead of FTP | 08-ENVIRONMENTS.md | manual: trigger event PR, verify QA pages update via SCP | `.github/workflows/event-data-deploy.yml` – `deploy-qa` job | implemented |
 | `02-§43.2` | QA event data upload uses existing SSH secrets | 08-ENVIRONMENTS.md | manual: inspect workflow secrets references | `.github/workflows/event-data-deploy.yml` | implemented |
 | `02-§43.3` | QA target dir derived from `DEPLOY_DIR` + `/public_html/` | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | implemented |
@@ -1842,6 +1846,9 @@ Matrix cleanup (2026-02-25):
 | `02-§80.25` | done | Day grid implemented in vanilla JavaScript |
 | `02-§80.26` | done | Day grid uses CSS custom properties from 07-DESIGN.md |
 | `02-§80.27` | done | Batch endpoint implemented in both Node.js and PHP |
+| `02-§80.28` | gap | Static hint text under Datum label on add-activity page |
+| `02-§80.29` | gap | Hint uses `.field-info` class for visual consistency |
+| `02-§80.30` | gap | Hint shown only on add-activity page, not on edit page |
 | | | **§81 — Client-side Link Field Validation** |
 | `02-§81.1` | LINK-03, LINK-04 | Blur validation checks http/https protocol |
 | `02-§81.2` | LINK-05 | Blur validation checks for at least one dot after protocol |
