@@ -1623,6 +1623,7 @@ details.accordion > summary:focus-visible {
 
 .content section.section-alt {
   position: relative;
+  isolation: isolate;
   padding-top: var(--space-md);
   padding-bottom: var(--space-md);
 }
