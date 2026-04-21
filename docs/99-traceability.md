@@ -2064,7 +2064,7 @@ Matrix cleanup (2026-02-25):
 | `02-§92.4` | implemented | `collectFiles()` produces `/`-prefixed paths |
 | `02-§92.5` | implemented | `build.js` replaces placeholder with URL list; no placeholder remains |
 | `02-§92.6` | covered | OFF-17: source `sw.js` has no hardcoded URLs; OFF-01: placeholder present |
-| `02-§92.7` | covered | OFF-02: `CACHE_NAME` is `sb-sommar-v4` |
+| `02-§92.7` | covered | OFF-02: `CACHE_NAME` is `sb-sommar-v5` |
 | `02-§92.8` | covered | OFF-08: NO_CACHE_PATTERNS has no `.html` pages; build includes all HTML |
 | `02-§92.9` | covered | OFF-03..08: NO_CACHE has API endpoints only, no `.html` |
 | `02-§92.10` | covered | OFF-09: `sw.js` contains `ignoreSearch` |

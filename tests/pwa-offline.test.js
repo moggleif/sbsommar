@@ -34,15 +34,15 @@ describe('02-§92.3 — sw.js uses build-injected pre-cache list', () => {
   });
 });
 
-// ── §92.7 — Cache name is sb-sommar-v4 ──────────────────────────────────────
+// ── §92.7 — Cache name is sb-sommar-v5 ──────────────────────────────────────
 
-describe('02-§92.7 — Cache name is sb-sommar-v4', () => {
-  it('OFF-02: sw.js uses sb-sommar-v4 cache name', () => {
+describe('02-§92.7 — Cache name is sb-sommar-v5', () => {
+  it('OFF-02: sw.js uses sb-sommar-v5 cache name', () => {
     const swPath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(swPath, 'utf8');
     assert.ok(
-      src.includes('sb-sommar-v4'),
-      'CACHE_NAME must be sb-sommar-v4',
+      src.includes('sb-sommar-v5'),
+      'CACHE_NAME must be sb-sommar-v5',
     );
   });
 });

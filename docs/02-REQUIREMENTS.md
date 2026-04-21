@@ -4316,7 +4316,7 @@ an internet connection.
 
 - The `PRE_CACHE_URLS` array in `sw.js` is populated by the build-time
   injection. There is no hand-maintained list. <!-- 02-§92.6 -->
-- The service worker cache name is `sb-sommar-v4`. <!-- 02-§92.7 -->
+- The service worker cache name is `sb-sommar-v5`. <!-- 02-§92.7 -->
 - The service worker pre-caches all site pages, including
   `lagg-till.html` and `redigera.html`. <!-- 02-§92.8 -->
 - The `NO_CACHE_PATTERNS` list contains only API and submission

@@ -3,7 +3,7 @@
 // cache-first for static assets (CSS, JS, images).
 // The PRE_CACHE_URLS list is injected at build time — see build.js.
 
-const CACHE_NAME = 'sb-sommar-v4';
+const CACHE_NAME = 'sb-sommar-v5';
 
 // Pages and assets to pre-cache on install.
 // The build replaces the placeholder below with the full list of URLs.
