@@ -12,8 +12,8 @@ namespace SBSommar;
  * fresh process per request on shared hosting, so we cannot hold
  * counters in memory the way the Node side does.
  *
- * Node has an equivalent in source/api/rate-limit.js — see
- * docs/03-ARCHITECTURE.md §31.
+ * The Node API (`app.js`) uses the third-party `express-rate-limit`
+ * middleware instead; see docs/03-ARCHITECTURE.md §31.3.
  */
 final class RateLimit
 {

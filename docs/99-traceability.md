@@ -1103,8 +1103,8 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1188
-Covered (implemented + tested): 610
-Implemented, not tested:        578
+Covered (implemented + tested): 605
+Implemented, not tested:        583
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1401,6 +1401,13 @@ Matrix cleanup (2026-02-25):
 2 requirements added for admin token format (02-§91.29–91.30):
   1 covered (02-§91.29: server-side expiry rejection, ADM-09..10).
   1 implemented (02-§91.30: creation script).
+§93 Node rate-limit helper replaced by `express-rate-limit` middleware:
+  `source/api/rate-limit.js` and `tests/rate-limit.test.js` deleted;
+  `app.js` now uses per-route `rateLimit({...})` instances with
+  `trust proxy 'loopback'` and standard `Retry-After` / `RateLimit-*`
+  headers. Closes CodeQL `js/missing-rate-limiting` alerts 43/44/45.
+  5 rows moved from covered to implemented (manual verification replaces
+  removed RL-01..05 unit tests of the now-deleted helper).
 ```
 
 ---
@@ -2081,21 +2088,21 @@ Matrix cleanup (2026-02-25):
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§93.1` | covered | RL-01..05: `app.js` /verify-admin calls `isRateLimited('verify-admin:{ip}', {limit:5, windowMs:3_600_000})`; `api/index.php` handleVerifyAdmin same via `RateLimit::isLimited` |
-| `02-§93.2` | covered | RL-01..05: `app.js` /edit-event guards with {limit:30}; `api/index.php` handleEditEvent same |
-| `02-§93.3` | covered | RL-01..05: `app.js` /delete-event guards with {limit:30}; `api/index.php` handleDeleteEvent same |
-| `02-§93.4` | covered | RL-01..05: `app.js` /feedback routed through shared helper with {limit:5}; `api/index.php` handleFeedback same |
-| `02-§93.5` | implemented | Manual: rate-limit check placed before all other logic in each handler; confirm by reading handler bodies |
-| `02-§93.6` | implemented | `app.js` `clientIp()` and `api/index.php` `clientIp()` both read XFF first, fall back to remote addr |
-| `02-§93.7` | covered | RL-01..05 exercise `source/api/rate-limit.js` `isRateLimited()` across fresh key, under-limit, over-limit, per-key independence, window expiry |
-| `02-§93.8` | implemented | `source/api/feedback.js` exports only `validateFeedbackRequest` + `createFeedbackIssue`; no rate-limit state remains |
-| `02-§93.9` | implemented | `api/src/RateLimit.php` provides `SBSommar\RateLimit::isLimited($ip, $ns, $limit, $window)` with JSON-file state in sys_get_temp_dir() |
-| `02-§93.10` | implemented | `api/src/Feedback.php` no longer contains `isRateLimited` or rate-limit state; `api/index.php` calls `RateLimit::isLimited(clientIp(), 'feedback', 5, 3600)` directly |
-| `02-§93.11` | implemented | Documented in 03-ARCHITECTURE.md §31.3–31.4, §31.7 |
-| `02-§93.12` | implemented | `app.js` `RATE_LIMIT_MSG` and `api/index.php` `RATE_LIMIT_MSG` both hold "För många förfrågningar. Försök igen senare." |
-| `02-§93.13` | implemented | `package.json` unchanged by this feature |
+| `02-§93.1` | implemented | `app.js` `verifyAdminLimiter` = `rateLimit({limit:5, windowMs:3_600_000, ...})` applied as middleware on `POST /verify-admin`; emits 429 + Swedish `{error}` body. Manual: 6-request burst confirms 5×403 then 429 with `Retry-After: 3600` |
+| `02-§93.2` | implemented | `app.js` `editEventLimiter` = `rateLimit({limit:30, ...})` on `POST /edit-event`; PHP side unchanged via `api/index.php handleEditEvent` |
+| `02-§93.3` | implemented | `app.js` `deleteEventLimiter` = `rateLimit({limit:30, ...})` on `POST /delete-event`; PHP side unchanged |
+| `02-§93.4` | implemented | `app.js` `feedbackLimiter` = `rateLimit({limit:5, ...})` on `POST /feedback`; PHP side unchanged |
+| `02-§93.5` | implemented | Each `rateLimit()` instance is the first middleware argument on its route, so the limiter runs before validation, auth, and time-gating; confirm by reading `app.js` route definitions |
+| `02-§93.6` | implemented | Node: `express-rate-limit` keys on `req.ip`, resolved through Express `app.set('trust proxy', 'loopback')` in `app.js`. PHP: `api/index.php` `clientIp()` reads `HTTP_X_FORWARDED_FOR` then `REMOTE_ADDR` |
+| `02-§93.7` | implemented | `app.js` defines `makeLimiter()` and four named instances (`verifyAdminLimiter`, `editEventLimiter`, `deleteEventLimiter`, `feedbackLimiter`); `source/api/rate-limit.js` and its tests removed in favour of the standard middleware |
+| `02-§93.8` | implemented | `feedbackLimiter` on the `/feedback` route uses `{limit:5, windowMs:3_600_000}`, preserving §73.14 |
+| `02-§93.9` | implemented | `api/src/RateLimit.php` provides `SBSommar\RateLimit::isLimited($ip, $ns, $limit, $window)` with JSON-file state in sys_get_temp_dir() — unchanged |
+| `02-§93.10` | implemented | `api/src/Feedback.php` delegates to `RateLimit::isLimited` with the feedback namespace; unchanged |
+| `02-§93.11` | implemented | Documented in 03-ARCHITECTURE.md §31.3 (middleware's default in-memory store auto-cleans), §31.4 (PHP JSON file), §31.7 |
+| `02-§93.12` | implemented | `app.js` `RATE_LIMIT_MSG` = "För många förfrågningar. Försök igen senare." emitted via the middleware's `handler` override; PHP `RATE_LIMIT_MSG` in `api/index.php` unchanged |
+| `02-§93.13` | implemented | `package.json` declares `express-rate-limit` as the sole added runtime dependency, justified by CodeQL detectability and standard `Retry-After` / `RateLimit-*` headers |
 | `02-§93.14` | implemented | `api/composer.json` unchanged by this feature |
-| `02-§93.15` | implemented | Documented in 03-ARCHITECTURE.md §31.7; matches existing §73.14 trust model |
+| `02-§93.15` | implemented | `app.js` sets `app.set('trust proxy', 'loopback')`; documented in 03-ARCHITECTURE.md §31.7 |
 
 ### §94 — Registration Banner and CTA Button
 
