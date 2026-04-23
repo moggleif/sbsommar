@@ -24,7 +24,15 @@ const yaml = require('js-yaml');
 const DOCS_DIR = path.resolve(__dirname, '..', 'docs');
 const CONFIG_PATH = path.join(DOCS_DIR, '_config.yml');
 const ROBOTS_PATH = path.join(DOCS_DIR, 'robots.txt');
-const HEAD_CUSTOM_PATH = path.join(DOCS_DIR, '_includes', 'head-custom.html');
+// GitHub Pages themes use different filenames for the head-custom include:
+// Primer/Minima look for `head-custom.html` (dash); Cayman looks for
+// `head_custom.html` (underscore). The project ships both so the noindex
+// meta tag injects regardless of which theme GitHub Pages selects as
+// default. See 02-§97.20.
+const HEAD_CUSTOM_PATHS = [
+  path.join(DOCS_DIR, '_includes', 'head-custom.html'),
+  path.join(DOCS_DIR, '_includes', 'head_custom.html'),
+];
 const INDEX_PATH = path.join(DOCS_DIR, 'index.md');
 
 describe('docs/_config.yml — GitHub Pages documentation site (02-§97.5, §97.6)', () => {
@@ -86,7 +94,8 @@ describe('docs/_config.yml — GitHub Pages documentation site (02-§97.5, §97.
 
 describe('docs/ — search-engine and crawler policy (02-§97.18–97.21)', () => {
   const robotsExists = fs.existsSync(ROBOTS_PATH);
-  const headCustomExists = fs.existsSync(HEAD_CUSTOM_PATH);
+  const presentHeadIncludes = HEAD_CUSTOM_PATHS.filter((p) => fs.existsSync(p));
+  const headCustomExists = presentHeadIncludes.length > 0;
 
   it('DOCS-CFG-05: docs/robots.txt is present and disallows every user agent', (t) => {
     if (!robotsExists) {
@@ -98,17 +107,30 @@ describe('docs/ — search-engine and crawler policy (02-§97.18–97.21)', () =
     assert.match(raw, /Disallow:\s*\//, 'robots.txt must disallow every path');
   });
 
-  it('DOCS-CFG-06: docs/_includes/head-custom.html emits noindex/nofollow meta', (t) => {
+  it('DOCS-CFG-06: every head-custom include emits noindex/nofollow meta', (t) => {
     if (!headCustomExists) {
-      t.skip('docs/_includes/head-custom.html not yet created — see 02-§97.20');
+      t.skip(
+        'No head-custom include present yet — see 02-§97.20 '
+          + '(expects head-custom.html and/or head_custom.html under docs/_includes/)',
+      );
       return;
     }
-    const raw = fs.readFileSync(HEAD_CUSTOM_PATH, 'utf8');
-    assert.match(
-      raw,
-      /<meta\s+name=["']robots["']\s+content=["'][^"']*noindex[^"']*nofollow[^"']*["']/i,
-      'head-custom.html must include a robots meta with noindex and nofollow',
+    // At least one head-custom include must exist; every present include
+    // must emit the robots meta so that whichever convention the active
+    // GitHub Pages theme follows, the noindex tag still lands in <head>.
+    assert.ok(
+      presentHeadIncludes.length >= 1,
+      'At least one head-custom include must exist',
     );
+    const robotsMeta = /<meta\s+name=["']robots["']\s+content=["'][^"']*noindex[^"']*nofollow[^"']*["']/i;
+    for (const p of presentHeadIncludes) {
+      const raw = fs.readFileSync(p, 'utf8');
+      assert.match(
+        raw,
+        robotsMeta,
+        `${path.relative(DOCS_DIR, p)} must include a robots meta with noindex and nofollow`,
+      );
+    }
   });
 
   it('DOCS-CFG-07: no sitemap or open-graph artefacts under docs/', () => {

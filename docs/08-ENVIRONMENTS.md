@@ -219,10 +219,12 @@ site:
   the rendered HTML pages on the published site.
 - `docs/robots.txt` (`User-agent: *` / `Disallow: /`) blocks every
   crawler at the documentation site root.
-- `docs/_includes/head-custom.html` injects
-  `<meta name="robots" content="noindex, nofollow">` into every
-  rendered page. Primer-family GitHub Pages themes include this
-  partial in `<head>` automatically.
+- `docs/_includes/head-custom.html` and `docs/_includes/head_custom.html`
+  inject `<meta name="robots" content="noindex, nofollow">` into every
+  rendered page. Two filenames are shipped because GitHub Pages themes
+  use different conventions: Primer/Minima look for the dashed name,
+  Cayman looks for the underscored name. Whichever default GitHub
+  Pages selects, the meta tag still lands in `<head>`.
 - `docs/index.md` is the landing page — it carries a project-technical
   reverse-discoverability banner pointing back to the source
   repository, README, and issue tracker on github.com.

@@ -4841,8 +4841,10 @@ existing deployment workflow.
   `Disallow: /`). <!-- 02-§97.19 -->
 - Every rendered HTML page on the documentation site includes a
   `<meta name="robots" content="noindex, nofollow">` tag in the
-  `<head>` section. The tag is injected once via Jekyll's
-  `head-custom.html` include (under `docs/_includes/`) so that every
-  page picks it up without per-file front matter. <!-- 02-§97.20 -->
+  `<head>` section. The tag is injected via Jekyll's head-custom
+  include under `docs/_includes/`. Both filename conventions are
+  shipped (`head-custom.html` for Primer/Minima themes,
+  `head_custom.html` for Cayman) so that the meta tag lands in
+  `<head>` regardless of which default theme GitHub Pages selects. <!-- 02-§97.20 -->
 - No sitemap, Open Graph tags, or other discoverability metadata are
   added to the documentation site. <!-- 02-§97.21 -->

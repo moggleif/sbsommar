@@ -2219,7 +2219,7 @@ Matrix cleanup (2026-02-25):
 | `02-§97.17` | covered | DOCS-IDX-05: `docs/index.md` main copy is project-technical; no camp marketing phrases (`family camp`, `gifted children`, `Sysslebäck`) |
 | `02-§97.18` | implemented | Policy declaration; satisfied collectively by §97.19, §97.20, §97.21 |
 | `02-§97.19` | covered | DOCS-CFG-05: `docs/robots.txt` (Disallow: /) present; verified to address every user agent |
-| `02-§97.20` | covered | DOCS-CFG-06: `docs/_includes/head-custom.html` emits `<meta name="robots" content="noindex, nofollow">`; Primer-family Pages themes include this partial in `<head>` automatically — manual browser verification confirms the tag appears in rendered HTML |
+| `02-§97.20` | covered | DOCS-CFG-06: both `docs/_includes/head-custom.html` (Primer/Minima) and `docs/_includes/head_custom.html` (Cayman) emit `<meta name="robots" content="noindex, nofollow">`; whichever theme GitHub Pages picks, the tag lands in `<head>` — manual browser verification confirms |
 | `02-§97.21` | covered | DOCS-CFG-07: no `sitemap.xml`, `sitemap.txt`, or forbidden Jekyll plugins (`jekyll-sitemap`, `jekyll-seo-tag`, `jekyll-feed`) under `docs/` |
 
 ### §1 — Camp registry fields (camps.yaml)

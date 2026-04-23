@@ -33,9 +33,9 @@ environments, releasing, and the full requirements traceability matrix.
 ## About this site
 
 This documentation site is intentionally hidden from search engines:
-it is served with a `Disallow: /` `robots.txt` and every page emits a
-`<meta name="robots" content="noindex, nofollow">` tag. Reach it
-through a direct link only.
+it is served with a `Disallow: /` `robots.txt` and every rendered
+page emits a `<meta name="robots" content="noindex, nofollow">` tag.
+Reach it through a direct link only.
 
 To suggest a change, edit the relevant Markdown file in the repository
 and open a pull request — see
