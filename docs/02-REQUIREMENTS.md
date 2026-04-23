@@ -94,7 +94,7 @@ The homepage must feel complete and trustworthy even when no camp is currently a
 When a camp is active or upcoming, the schedule and add-activity links are prominent. <!-- 02-§3.4 -->
 The upcoming-camps list renders each camp as a compact one-liner (icon, name, location, and dates on a single line) with no visual separators between items. <!-- 02-§3.5 -->
 
-The registration section must link to the external registration service at `event-friend-ai.lovable.app`, where families complete the full sign-up form. <!-- 02-§3.6 -->
+The registration section must link to the external booking site, where families complete the full sign-up form. The specific URL lives in the build code, not in this requirement. <!-- 02-§3.6 -->
 
 The pricing and rules sections must document the cancellation refund tiers and the organiser's right to refuse participation, matching the terms that bind participants at the point of registration. <!-- 02-§3.7 -->
 
@@ -4542,8 +4542,9 @@ inside the section itself that replaces the inline markdown link.
   window, ordered by the camp's `start_date` ascending (closest camp
   first). <!-- 02-§94.3 -->
 - The "Hur anmäler jag oss?" section contains a visually prominent
-  "Anmäl er här" button that opens the external registration service at
-  `event-friend-ai.lovable.app` in a new tab. <!-- 02-§94.4 -->
+  "Anmäl er här" button that opens the external booking site in a new
+  tab. The specific URL lives in the build code, not in this
+  requirement. <!-- 02-§94.4 -->
 - The "Anmäl er här" button sits on its own line directly under the
   "Hur anmäler jag oss?" heading, as an inline-block element sized to
   its own content. <!-- 02-§94.5 -->
