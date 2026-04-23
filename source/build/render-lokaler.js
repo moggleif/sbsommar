@@ -332,7 +332,7 @@ ${pageNav('lokaler.html', navSections)}
 
   <div class="lokaler-grid-wrapper">
     <div class="lokaler-grid">
-      <div class="lokaler-grid-corner">Lokaler</div>
+      <div class="lokaler-grid-corner" aria-label="Lokaler mot dag">Lokaler \ Dag</div>
 ${dayHeaders}
 ${rows}
     </div>
