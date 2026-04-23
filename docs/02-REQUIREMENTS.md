@@ -1068,8 +1068,13 @@ through the website.
   valid admin token (§91), the add-activity and edit-activity forms display
   the same locked message as for ordinary users, plus an additional button
   labelled "Öppna ändå (admin)". <!-- 02-§26.14 -->
+- The bypass button is rendered on its own row directly below the locked
+  message — outside the message box, not inline with any other link or
+  text — and has the same placement on `/lagg-till.html` and `/redigera.html`. <!-- 02-§26.20 -->
 - Activating the bypass button removes the disabled state on the form
-  fieldset and submit button so the admin can complete the submission. <!-- 02-§26.15 -->
+  fieldset and submit button so the admin can complete the submission.
+  Activating the button also hides both the locked message and the button
+  itself so the form alone remains visible. <!-- 02-§26.15 -->
 - The bypass button is only shown when the form is locked because the period
   has not yet opened. It is never shown after `end_date + 1 day`. <!-- 02-§26.16 -->
 - `POST /add-event`, `POST /edit-event`, and `POST /delete-event` accept
@@ -3719,7 +3724,7 @@ submission.
 ### 80.7 Static multi-day hint (user requirements)
 
 - A static hint with the text
-  `Återkommande aktivitet — välj flera dagar.` is rendered immediately
+  `För återkommande aktivitet — välj flera dagar.` is rendered immediately
   below the `Datum *` label on the add-activity page, above the day
   grid, and is always visible regardless of selection state. <!-- 02-§80.28 -->
 - The hint is rendered with the existing `.field-info` class so it

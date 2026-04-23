@@ -61,7 +61,7 @@ ${pageNav('lagg-till.html', navSections)}
 
       <div class="field">
         <label>Datum <span class="req">*</span></label>
-        <span class="field-info">Återkommande aktivitet — välj flera dagar.</span>
+        <span class="field-info">För återkommande aktivitet — välj flera dagar.</span>
         <div class="day-grid" data-start="${startDate}" data-end="${endDate}" data-page-size="8">
 ${dayBtns}
         </div>

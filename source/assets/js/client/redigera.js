@@ -273,17 +273,21 @@
       var todayGate = new Date().toISOString().slice(0, 10);
       if (todayGate < opensDate || todayGate > closesDate) {
         var isBeforeOpens = todayGate < opensDate;
+        var gateMsg = document.createElement('div');
+        gateMsg.className = 'form-gate-msg';
         if (isBeforeOpens) {
           var parts = opensDate.split('-');
           var months = ['januari','februari','mars','april','maj','juni',
                         'juli','augusti','september','oktober','november','december'];
           var formatted = parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
-          errorMsg.textContent = 'Formuläret öppnar den ' + formatted + '.';
+          gateMsg.textContent = 'Formuläret öppnar den ' + formatted + '.';
         } else {
-          errorMsg.textContent = 'Lägret är avslutat.';
+          gateMsg.textContent = 'Lägret är avslutat.';
         }
         loadingEl.hidden = true;
-        errorEl.hidden = false;
+        // Dedicated gate banner — do not reuse errorEl since it also carries
+        // the "Tillbaka till schemat" link used by other error flows.
+        sectionEl.parentNode.insertBefore(gateMsg, sectionEl);
         gateBlocked = true;
 
         // Admin bypass button — only before opens (02-§26.16)
@@ -293,11 +297,13 @@
           bypassBtn.className = 'form-gate-bypass';
           bypassBtn.textContent = 'Öppna ändå (admin)';
           bypassBtn.addEventListener('click', function () {
-            errorEl.hidden = true;
+            gateMsg.hidden = true;
+            bypassBtn.hidden = true;
             loadingEl.hidden = false;
             runInit();
           });
-          errorEl.appendChild(bypassBtn);
+          // Insert on its own row directly below the banner (02-§26.20).
+          gateMsg.parentNode.insertBefore(bypassBtn, gateMsg.nextSibling);
         }
 
         // Still render cookie debug panel even while gated.

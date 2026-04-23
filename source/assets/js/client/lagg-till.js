@@ -306,8 +306,10 @@
           submitBtn.disabled = false;
           form.classList.remove('form-gated');
           msg.hidden = true;
+          bypassBtn.hidden = true;
         });
-        msg.appendChild(bypassBtn);
+        // Insert after the banner on its own row, not inside it (02-§26.20).
+        msg.parentNode.insertBefore(bypassBtn, msg.nextSibling);
       }
     } else if (todayGate > closesDate) {
       // After closing — no admin bypass (02-§26.16, §26.18)
