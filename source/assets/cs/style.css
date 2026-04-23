@@ -3014,6 +3014,7 @@ a.admin-icon--expired,
      visible time gap between neighbouring bookings. */
   min-width: 8px;
   padding: 4px 6px;
+
   /* Non-clashing bookings are green — the "go ahead, this slot is taken but
      nothing conflicts" colour. Clashes override below with red. */
   background: color-mix(in srgb, var(--color-sage) 25%, var(--color-white));
@@ -3033,27 +3034,6 @@ a.admin-icon--expired,
    Needs to POP at a glance even at narrow block widths, so we combine a
    clearly pink background, a full red outline (box-shadow), and the red
    left accent. On hover the outline stays while the expand-shadow adds on. */
-.event-block--clash {
-  background: color-mix(in srgb, var(--color-error) 35%, var(--color-white));
-  border-left-color: var(--color-error);
-  box-shadow: 0 0 0 1.5px var(--color-error);
-}
-
-.event-block--clash:hover,
-.event-block--clash:focus-visible {
-  background: color-mix(in srgb, var(--color-error) 55%, var(--color-white));
-  box-shadow:
-    0 0 0 1.5px var(--color-error),
-    0 2px 8px color-mix(in srgb, var(--color-error) 35%, transparent);
-}
-
-/* Taller day-bands so stacked lanes remain legible. Lane count above 5 is
-   extremely unlikely at SB Sommar, so we cap visual stacking there. */
-.day-band--lanes-2 { --lane-count: 2; min-height: 5em; }
-.day-band--lanes-3 { --lane-count: 3; min-height: 6.5em; }
-.day-band--lanes-4 { --lane-count: 4; min-height: 8em; }
-.day-band--lanes-5 { --lane-count: 5; min-height: 9.5em; }
-
 .event-block:hover,
 .event-block:focus-visible {
   /* Expand the block just wide enough for the full text so titles like
@@ -3072,6 +3052,33 @@ a.admin-icon--expired,
   outline: 2px solid var(--color-sage-hover);
   outline-offset: 2px;
 }
+
+/* Clash rules come AFTER the general :hover/:focus so they win at equal
+   specificity (otherwise hovering a red clash block flipped it green). */
+.event-block--clash {
+  background: color-mix(in srgb, var(--color-error) 35%, var(--color-white));
+  border-left-color: var(--color-error);
+  box-shadow: 0 0 0 1.5px var(--color-error);
+}
+
+.event-block--clash:hover,
+.event-block--clash:focus-visible {
+  background: color-mix(in srgb, var(--color-error) 55%, var(--color-white));
+  box-shadow:
+    0 0 0 1.5px var(--color-error),
+    0 2px 8px color-mix(in srgb, var(--color-error) 35%, transparent);
+}
+
+.event-block--clash:focus-visible {
+  outline-color: var(--color-error);
+}
+
+/* Taller day-bands so stacked lanes remain legible. Lane count above 5 is
+   extremely unlikely at SB Sommar, so we cap visual stacking there. */
+.day-band--lanes-2 { --lane-count: 2; min-height: 5em; }
+.day-band--lanes-3 { --lane-count: 3; min-height: 6.5em; }
+.day-band--lanes-4 { --lane-count: 4; min-height: 8em; }
+.day-band--lanes-5 { --lane-count: 5; min-height: 9.5em; }
 
 .event-block__title {
   font-weight: 700;
