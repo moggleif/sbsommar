@@ -2255,7 +2255,7 @@ the add- and edit-activity forms that links to this page.
 | --- | --- | --- |
 | `02-§98.1` | gap | `source/build/render-lokaler.js` not yet created; `public/lokaler.html` not yet emitted by the build |
 | `02-§98.2` | gap | Will iterate locales in `source/data/local.yaml` order |
-| `02-§98.3` | gap | Grid spans camp's `start_date`..`end_date` inclusive |
+| `02-§98.3` | gap | Grid spans max(today, `start_date`)..`end_date`; full span fallback for past camps; test LOK-75 |
 | `02-§98.4` | gap | Event time-blocks positioned by date and start/end times |
 | `02-§98.5` | gap | Event-block text: title, start, end, responsible |
 | `02-§98.6` | gap | Empty-locale rows display "Inga bokningar" |

@@ -4909,8 +4909,13 @@ overview, is covered in a later section. Issue #332.
 - The page displays every locale defined in `source/data/local.yaml`,
   in the same order as they appear in that file. <!-- 02-§98.2 -->
 - Each locale is represented as one row in a visual time-grid that
-  spans the active camp's dates (from `start_date` to `end_date`,
-  inclusive). <!-- 02-§98.3 -->
+  spans from the current date (inclusive) through the active camp's
+  `end_date`. When the camp has not yet started (today before
+  `start_date`), the grid spans `start_date` through `end_date`. When
+  the active camp is fully in the past, the grid falls back to the
+  full camp span so the page still renders. Past dates within an
+  in-progress camp are hidden — there is no point showing yesterday
+  when planning a new activity. <!-- 02-§98.3 -->
 - Events from the active camp are rendered as time-blocks positioned
   horizontally within each locale row according to their date and
   start/end times. <!-- 02-§98.4 -->

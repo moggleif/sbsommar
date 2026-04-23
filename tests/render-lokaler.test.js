@@ -344,6 +344,40 @@ describe('02-§98.8, §98.9, §98.12, §98.13 — navigation, legend, rendering'
   });
 });
 
+describe('02-§98.3 — today-forward filter', () => {
+  const CAMP_ACTIVE = {
+    name: 'SB sommar 2099',
+    location: 'Sysslebäck',
+    start_date: '2099-07-01',
+    end_date: '2099-07-05',
+  };
+
+  it('LOK-75: hides past days when today is in the middle of the camp', () => {
+    const events = [
+      event({ id: 'past', date: '2099-07-01', title: 'Gammal aktivitet' }),
+      event({ id: 'today', date: '2099-07-03', title: 'Dagens aktivitet' }),
+      event({ id: 'future', date: '2099-07-05', title: 'Framtida aktivitet' }),
+    ];
+    const out = renderLokalerPage(CAMP_ACTIVE, LOCATIONS, events, '', [], '', '2099-07-03');
+    assert.ok(!out.includes('Gammal aktivitet'), 'past event is hidden');
+    assert.ok(out.includes('Dagens aktivitet'), 'today event is shown');
+    assert.ok(out.includes('Framtida aktivitet'), 'future event is shown');
+  });
+
+  it('LOK-76: shows all days when today is before the camp starts', () => {
+    const events = [event({ date: '2099-07-02', title: 'Framtid' })];
+    const out = renderLokalerPage(CAMP_ACTIVE, LOCATIONS, events, '', [], '', '2099-06-15');
+    assert.ok(out.includes('Framtid'), 'event shown when whole camp is still upcoming');
+  });
+
+  it('LOK-77: falls back to the full span when today is after the camp ends', () => {
+    // Without fallback the grid would render with zero days (visibly broken).
+    const events = [event({ date: '2099-07-02', title: 'Gammal' })];
+    const out = renderLokalerPage(CAMP_ACTIVE, LOCATIONS, events, '', [], '', '2099-07-10');
+    assert.ok(out.includes('Gammal'), 'event still rendered when whole camp is in the past');
+  });
+});
+
 describe('02-§98.1 — integration with 2025-06 archive camp', () => {
   it('LOK-70: renders without throwing against the real 2025-06 archive', () => {
     const { camp, events } = load2025Camp();

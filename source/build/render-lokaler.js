@@ -202,14 +202,27 @@ function renderDayHeader(isoDate) {
  * @param {string} [goatcounterCode]
  * @returns {string}
  */
-function renderLokalerPage(camp, locations, events, footerHtml = '', navSections = [], goatcounterCode = '') {
+function renderLokalerPage(camp, locations, events, footerHtml = '', navSections = [], goatcounterCode = '', today = null) {
   const campName = escapeHtml(camp.name);
   const startDate = toDateString(camp.start_date);
   const endDate = toDateString(camp.end_date);
-  const campDates = enumerateDates(startDate, endDate);
+  const todayIso = today || new Date().toISOString().slice(0, 10);
 
-  const { startHour, endHour } = computeHourRange(events);
-  const groups = groupEventsByLocation(events, locations);
+  // Show today..end_date. If the camp is fully in the past the filter would
+  // give an empty grid — fall back to the full camp span so the page still
+  // renders meaningfully (defensive; resolveActiveCamp would typically have
+  // picked the next upcoming camp before we get here).
+  const allDates = enumerateDates(startDate, endDate);
+  const futureDates = allDates.filter((d) => d >= todayIso);
+  const campDates = futureDates.length > 0 ? futureDates : allDates;
+
+  // Filter events to the same window so the hour band and per-locale
+  // groupings reflect only what's shown.
+  const visibleDateSet = new Set(campDates);
+  const visibleEvents = events.filter((e) => visibleDateSet.has(e.date));
+
+  const { startHour, endHour } = computeHourRange(visibleEvents);
+  const groups = groupEventsByLocation(visibleEvents, locations);
 
   const positionRules = { dayStartHour: startHour, dayEndHour: endHour, rules: [] };
 
