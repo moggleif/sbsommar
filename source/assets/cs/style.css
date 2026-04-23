@@ -2936,7 +2936,9 @@ a.admin-icon--expired,
   background: var(--color-cream);
   padding: var(--space-xs) var(--space-sm);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
   position: sticky;
   left: 0;
   z-index: 1;
@@ -2962,28 +2964,35 @@ a.admin-icon--expired,
 .day-band {
   position: relative;
   min-height: 3.5em;
-  background: var(--color-white);
-}
+  background-color: var(--color-white);
 
-.day-band--all-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-xs);
-  grid-column: 2 / -1;
+  /* Tunna vertikala linjer — en per timme inuti dagsbandet, så man ser var
+     08:00, 09:00, ... verkligen ligger även när event-block är små. */
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(100% / var(--lokaler-hour-span, 14) - 1px),
+    color-mix(in srgb, var(--color-charcoal) 6%, transparent) calc(100% / var(--lokaler-hour-span, 14) - 1px),
+    color-mix(in srgb, var(--color-charcoal) 6%, transparent) calc(100% / var(--lokaler-hour-span, 14))
+  );
 }
 
 .lokal-empty {
+  font-weight: 400;
   color: color-mix(in srgb, var(--color-charcoal) 55%, transparent);
   font-style: italic;
-  font-size: var(--font-size-small);
+  font-size: calc(var(--font-size-small) - 1px);
 }
 
 .event-block {
   position: absolute;
   top: 4px;
   bottom: 4px;
-  min-width: 3.5em;
+
+  /* Small min-width so the block stays clickable even for 15-minute events,
+     but low enough that typical 1-hour events don't swell and distort the
+     visible time gap between neighbouring bookings. */
+  min-width: 8px;
   padding: 4px 6px;
   background: color-mix(in srgb, var(--color-terracotta) 15%, var(--color-white));
   border-left: 3px solid var(--color-terracotta);

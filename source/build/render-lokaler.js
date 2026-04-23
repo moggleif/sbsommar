@@ -162,9 +162,6 @@ function renderEventBlock(event, locationName, isoDate, positionRules, blockInde
 }
 
 function renderDayBand(eventsOnDay, locationName, isoDate, positionRules) {
-  if (eventsOnDay.length === 0) {
-    return '<div class="day-band day-band--empty"></div>';
-  }
   const blocks = eventsOnDay
     .map((ev, i) => renderEventBlock(ev, locationName, isoDate, positionRules, `${locationName}-${isoDate}-${i}`))
     .filter(Boolean)
@@ -173,12 +170,9 @@ function renderDayBand(eventsOnDay, locationName, isoDate, positionRules) {
 }
 
 function renderLokalRow(locationName, locationEvents, campDates, positionRules) {
-  const label = `<div class="lokal-label">${escapeHtml(locationName)}</div>`;
-
-  if (locationEvents.length === 0) {
-    const empty = `<div class="day-band day-band--all-empty"><span class="lokal-empty">Inga bokningar</span></div>`;
-    return `<div class="lokal-row lokal-row--empty">${label}${empty}</div>`;
-  }
+  const hasEvents = locationEvents.length > 0;
+  const emptyTag = hasEvents ? '' : '<span class="lokal-empty">Inga bokningar</span>';
+  const label = `<div class="lokal-label">${escapeHtml(locationName)}${emptyTag}</div>`;
 
   const byDate = new Map(campDates.map((d) => [d, []]));
   for (const ev of locationEvents) {
@@ -189,7 +183,8 @@ function renderLokalRow(locationName, locationEvents, campDates, positionRules) 
     .map((d) => renderDayBand(byDate.get(d) || [], locationName, d, positionRules))
     .join('');
 
-  return `<div class="lokal-row">${label}${bands}</div>`;
+  const rowClass = hasEvents ? 'lokal-row' : 'lokal-row lokal-row--empty';
+  return `<div class="${rowClass}">${label}${bands}</div>`;
 }
 
 function renderDayHeader(isoDate) {
