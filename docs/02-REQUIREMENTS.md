@@ -4881,3 +4881,75 @@ existing deployment workflow.
   `<head>` regardless of which default theme GitHub Pages selects. <!-- 02-§97.20 -->
 - No sitemap, Open Graph tags, or other discoverability metadata are
   added to the documentation site. <!-- 02-§97.21 -->
+
+## 98. Locale Overview Page
+
+### 98.1 Context
+
+When participants add activities to the schedule via `/lagg-till.html`,
+there is no direct way to see which locales are already booked at which
+times. The form links to `/schema.html` with a reminder to "check the
+schedule before adding", but on mobile this is awkward and an entire
+week of bookings is hard to hold in memory. As a result, bookings that
+unintentionally clash with existing activities can be submitted.
+
+A dedicated Locale Overview page shows the active camp's events laid
+out as a visual time-grid — one row per locale, blocks placed at their
+scheduled times — so a person picking a time and place can see at a
+glance which locales are already taken and which are free.
+
+This section describes the overview page only. A soft conflict warning
+rendered inside the add- and edit-activity forms, linking to this
+overview, is covered in a later section. Issue #332.
+
+### 98.2 Page existence and content
+
+- A page at `/lokaler.html` exists on the built site and is regenerated
+  on every build. <!-- 02-§98.1 -->
+- The page displays every locale defined in `source/data/local.yaml`,
+  in the same order as they appear in that file. <!-- 02-§98.2 -->
+- Each locale is represented as one row in a visual time-grid that
+  spans the active camp's dates (from `start_date` to `end_date`,
+  inclusive). <!-- 02-§98.3 -->
+- Events from the active camp are rendered as time-blocks positioned
+  horizontally within each locale row according to their date and
+  start/end times. <!-- 02-§98.4 -->
+- Each event-block displays the activity's title, start time, end
+  time, and responsible person. <!-- 02-§98.5 -->
+- Locales that have no events during the active camp are shown with
+  the text "Inga bokningar" on that row. <!-- 02-§98.6 -->
+- Events whose `location` value does not match any `name` in
+  `local.yaml` are rendered in the "Annat" row. <!-- 02-§98.7 -->
+
+### 98.3 Navigation
+
+- The page is reached from `/schema.html` via a text link labelled
+  "Se lokalöversikt →". <!-- 02-§98.8 -->
+- The page does not appear as an entry in the top navigation. <!-- 02-§98.9 -->
+
+### 98.4 Accessibility and user-facing text
+
+- The page heading is "Lokalöversikt" and all user-facing text is in
+  Swedish, consistent with §14. <!-- 02-§98.10 -->
+- Each event-block is focusable with the keyboard and carries an
+  `aria-label` that communicates locale, date, time range, title, and
+  responsible person, so a screen-reader user does not depend on
+  visual grid positioning to understand the booking. <!-- 02-§98.11 -->
+- The page includes a short legend below the grid explaining that
+  blocks represent booked times and rows marked "Inga bokningar"
+  represent free locales. <!-- 02-§98.12 -->
+
+### 98.5 Rendering
+
+- The grid markup is generated server-side at build time by a new
+  renderer `source/build/render-lokaler.js`. The page requires no
+  client-side JavaScript to render or position the grid. <!-- 02-§98.13 -->
+- The grid's visual styling — colors, spacing, and typography — uses
+  the custom properties defined in `docs/07-DESIGN.md §7`; no colors,
+  spacing, or font sizes are hardcoded. <!-- 02-§98.14 -->
+
+### 98.6 Mobile behaviour
+
+- On viewport widths below 600px the grid wrapper scrolls horizontally
+  so that the full camp week remains viewable without breaking the
+  surrounding page layout. The rest of the page flows normally. <!-- 02-§98.15 -->
