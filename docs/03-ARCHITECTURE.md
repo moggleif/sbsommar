@@ -371,6 +371,19 @@ At build time:
 4. Sort events chronologically.
 5. Render HTML pages.
 
+### 5.1 Locale overview page
+
+`source/build/render-lokaler.js` produces `public/lokaler.html` — a
+read-only visual timeline of which locales are already booked for the
+active camp. The grid is rendered server-side; the page ships no
+client-side grid code. Each locale defined in `source/data/local.yaml`
+becomes one row; events from the active camp's YAML are positioned as
+time-blocks inside that row according to their date and start/end
+times. Events whose `location` field does not match any locale name
+fall into the "Annat" row. The page is not a site-navigation entry; it
+is reached through a link from `/schema.html`. See 02-REQUIREMENTS.md
+§98 for the full requirements.
+
 ---
 
 ## 6. Project Structure

@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site policy, 02-§97.15–97.21).
+Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered, 02-§98.1–98.20 all covered/implemented).
 
 ---
 
@@ -1113,9 +1113,9 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 ## Summary
 
 ```text
-Total requirements:            1238
-Covered (implemented + tested): 630
-Implemented, not tested:        608
+Total requirements:            1261
+Covered (implemented + tested): 649
+Implemented, not tested:        612
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1451,6 +1451,13 @@ Matrix cleanup (2026-02-25):
   a project-technical reverse-discoverability banner pointing back to
   the source repo, README, and issue tracker on github.com.
   8 new tests across the same suite (DOCS-CFG-05..07, DOCS-IDX-01..05).
+
+20 requirements delivered for the locale overview page (02-§98.1–98.20,
+Session 1 of issue #332): 16 covered by unit tests (LOK-01..83),
+4 implemented (§98.8 contextual links, §98.14 design-token discipline,
+§98.15 mobile breakpoint, §98.20 corner cell) — all four need
+manual/browser verification only. See 02-REQUIREMENTS.md §98 and
+07-DESIGN.md §6 "Locale overview grid" for the design spec.
 ```
 
 ---
@@ -2237,6 +2244,39 @@ Matrix cleanup (2026-02-25):
 | `02-§97.19` | covered | DOCS-CFG-05: `docs/robots.txt` (Disallow: /) present; verified to address every user agent |
 | `02-§97.20` | covered | DOCS-CFG-06: both `docs/_includes/head-custom.html` (Primer/Minima) and `docs/_includes/head_custom.html` (Cayman) emit `<meta name="robots" content="noindex, nofollow">`; whichever theme GitHub Pages picks, the tag lands in `<head>` — manual browser verification confirms |
 | `02-§97.21` | covered | DOCS-CFG-07: no `sitemap.xml`, `sitemap.txt`, or forbidden Jekyll plugins (`jekyll-sitemap`, `jekyll-seo-tag`, `jekyll-feed`) under `docs/` |
+
+### §98 — Locale Overview Page
+
+Session 1 of issue #332. Delivers `/lokaler.html` as a week-wide visual
+timeline of which locales are already booked during the active camp.
+Session 2 (a separate later change) will add a soft conflict warning in
+the add- and edit-activity forms that links to this page.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§98.1` | covered | `source/build/render-lokaler.js` — `renderLokalerPage`; `source/build/build.js` writes `public/lokaler.html`; tests LOK-30, LOK-70 |
+| `02-§98.2` | covered | `groupEventsByLocation()` preserves `local.yaml` order; tests LOK-01, LOK-40 |
+| `02-§98.3` | covered | Today-forward filter + full-span fallback in `renderLokalerPage`; tests LOK-75, LOK-76, LOK-77 |
+| `02-§98.4` | covered | `positionBlock()` computes `left`/`width` from start/end; tests LOK-10..LOK-16, LOK-41 |
+| `02-§98.5` | covered | `renderEventBlock()` emits title, time range, responsible spans; tests LOK-50, LOK-51 |
+| `02-§98.6` | covered | Empty locales get the italic `.lokal-empty` sub-label "Inga bokningar"; test LOK-42 |
+| `02-§98.7` | covered | `groupEventsByLocation()` folds unknown locations under "Annat"; tests LOK-04, LOK-05, LOK-08, LOK-43 |
+| `02-§98.8` | implemented | "Se lokalöversikt →" link in `source/build/render.js` schedule intro and `source/build/render-add.js` add intro. Manual: open /schema.html and /lagg-till.html, click link |
+| `02-§98.9` | covered | `source/build/layout.js` untouched — no nav entry added; test LOK-61 |
+| `02-§98.10` | covered | `<h1>Lokalöversikt</h1>`; `<html lang="sv">`; test LOK-31 |
+| `02-§98.11` | covered | `ariaLabelFor()` builds locale/date/time/title/responsible string; test LOK-52 |
+| `02-§98.12` | covered | `.lokaler-legend` placed before `.lokaler-grid-wrapper` in `renderLokalerPage`; test LOK-62 |
+| `02-§98.13` | covered | Entire grid server-rendered at build; no `lokaler.js` referenced; test LOK-63 |
+| `02-§98.14` | implemented | All `style.css` §6.104–6.115 rules use `var(--color-*)`, `var(--space-*)`, `color-mix()` derivations; manual: grep `source/assets/cs/style.css` for hex values inside `.lokaler-*` / `.event-block*` / `.day-band*` rules |
+| `02-§98.15` | implemented | `.lokaler-grid-wrapper { overflow-x: auto }`; `@media (max-width: 600px)` shrinks `--lokaler-*-col`. Manual: open /lokaler.html at ≤600px viewport, confirm horizontal scroll and surrounding layout intact |
+| `02-§98.16` | covered | `assignLanes()` greedy first-fit; `.day-band--lanes-N` modifiers; per-event `--lane` custom property; test LOK-80 |
+| `02-§98.17` | covered | `markClashes()` + `.event-block--clash` class; bg `color-mix(var(--color-error) 35%, white)` + `box-shadow` red outline; test LOK-80 |
+| `02-§98.18` | covered | Clash predicate `a.start < b.end && a.end > b.start` in `markClashes()`; test LOK-81 |
+| `02-§98.19` | covered | Per-event `--group` (count of temporally-overlapping events including self) drives height; non-clashers keep full band height even on crowded days; test LOK-83 |
+| `02-§98.20` | implemented | `.lokaler-grid-corner` cell renders the text `Lokaler \ Dag` inside `renderLokalerPage`; visible on every page render. Manual: open /lokaler.html, confirm corner text |
+| `02-§98.21` | covered | `effectiveEnd()` uses strict `<` so `start === end` gives `widthPct = 0`; `renderEventBlock()` returns empty string for zero-width; test LOK-84 |
+| `02-§98.22` | covered | `expandCrossMidnight()` splits an event into `_part: 'start'` (its own date, until 24:00) and `_part: 'end'` (next date, from 00:00); data-lb suffixed `--start`/`--end`; aria-label adds "fortsätter nästa dag" / "från föregående dag"; test LOK-85 |
+| `02-§98.23` | covered | Native `<table>`/`<tr>`/`<th scope="row">`/`<th scope="col">`/`<td>` in `renderLokalerPage`; CSS `display: grid` on `<table>` and `display: contents` on `<tr>` make them participate in CSS Grid; test LOK-86. CSS source-order invariant for clash-hover guarded by LOK-87 |
 
 ### §1 — Camp registry fields (camps.yaml)
 

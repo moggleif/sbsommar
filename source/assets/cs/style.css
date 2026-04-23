@@ -2905,3 +2905,235 @@ a.admin-icon--active,
 a.admin-icon--expired,
 .admin-icon--expired { color: var(--color-terracotta); }
 
+/* ── Locale overview grid (02-§98, 07-§6.104–6.115) ─────────────────────── */
+
+.lokaler-grid-wrapper {
+  overflow-x: auto;
+  margin: var(--space-md) 0;
+  padding-bottom: var(--space-xs);
+
+  /* The frame sits on the WRAPPER, not the grid. The wrapper does not scroll
+     — only its inner grid does — so the frame stays put even when the user
+     scrolls days horizontally. Without this, the grid's own border-left
+     would disappear off-screen as the grid slides left. */
+  border: 1px solid color-mix(in srgb, var(--color-charcoal) 22%, transparent);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.lokaler-grid {
+  --lokaler-label-col: 9em;
+  --lokaler-day-col: 14em;
+
+  display: grid;
+  grid-template-columns: var(--lokaler-label-col) repeat(var(--lokaler-day-count, 7), var(--lokaler-day-col));
+  gap: 1px;
+
+  /* The gap colour shows between cells as 1px divider lines. It has to be
+     visibly darker than the cell background (which is itself a cream/
+     charcoal mix) or the lines disappear into the cells. */
+  background: color-mix(in srgb, var(--color-charcoal) 25%, transparent);
+  min-width: min-content;
+}
+
+.lokaler-grid > * {
+  background: var(--color-white);
+}
+
+.lokal-label {
+  font-weight: 700;
+  color: var(--color-charcoal);
+  background: var(--color-cream-light);
+  padding: var(--space-xs) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.lokaler-grid-corner {
+  /* The top-left corner cell is neither a row nor a column header —
+     styled to match the schedule cells so the visible "chrome" is only
+     the label column and day-header row. Sticky+z-index keeps it parked
+     above both the sticky label column and the scrolling grid content. */
+  background: color-mix(in srgb, var(--color-cream) 90%, var(--color-charcoal) 10%);
+  padding: var(--space-xs) var(--space-sm);
+  font-weight: 700;
+  color: var(--color-charcoal);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.day-band-label {
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  text-align: center;
+  padding: var(--space-xs);
+  background: var(--color-cream-light);
+  font-weight: 700;
+}
+
+.lokaler-grid thead,
+.lokaler-grid tbody,
+.lokal-row,
+.lokaler-grid-header-row {
+  /* Native <table> plus CSS Grid: the default table-header-group /
+     table-row-group / table-row display values would break the grid's
+     column tracks. display: contents removes each wrapper from the box
+     tree so the <th>/<td> children become direct grid items. */
+  display: contents;
+}
+
+.day-band {
+  position: relative;
+  min-height: 3.5em;
+
+  /* Derived neutral: a warm tan, darker than both page bg (cream) and
+     labels (cream-light). Mixing cream with a touch of charcoal reproduces
+     the tinted look the grid's transparent charcoal background used to
+     give the cells — distinct from every other surface on the page. */
+  background-color: color-mix(in srgb, var(--color-cream) 90%, var(--color-charcoal) 10%);
+
+  /* Tunna vertikala linjer — en per timme inuti dagsbandet, så man ser var
+     08:00, 09:00, ... verkligen ligger även när event-block är små. */
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(100% / var(--lokaler-hour-span, 14) - 1px),
+    color-mix(in srgb, var(--color-charcoal) 8%, transparent) calc(100% / var(--lokaler-hour-span, 14) - 1px),
+    color-mix(in srgb, var(--color-charcoal) 8%, transparent) calc(100% / var(--lokaler-hour-span, 14))
+  );
+}
+
+.lokal-empty {
+  font-weight: 400;
+  color: color-mix(in srgb, var(--color-charcoal) 55%, transparent);
+  font-style: italic;
+  font-size: calc(var(--font-size-small) - 1px);
+}
+
+.event-block {
+  position: absolute;
+
+  /* Vertical placement: each event sits in a lane at a fraction of the
+     day-band height. --lane (row index) and --group (how many events it
+     actually overlaps with, counting itself) are set per event in the
+     inline <style> block. Using per-event --group instead of a day-wide
+     lane count means non-clashing events keep full height even on days
+     where another pair elsewhere is clashing. */
+  top: calc((var(--lane, 0) / var(--group, 1)) * 100% + 2px);
+  height: calc(100% / var(--group, 1) - 4px);
+
+  /* Small min-width so the block stays clickable even for 15-minute events,
+     but low enough that typical 1-hour events don't swell and distort the
+     visible time gap between neighbouring bookings. */
+  min-width: 8px;
+  padding: 4px 6px;
+
+  /* Non-clashing bookings are green — the "go ahead, this slot is taken but
+     nothing conflicts" colour. Clashes override below with red. */
+  background: color-mix(in srgb, var(--color-sage) 25%, var(--color-white));
+  border-left: 3px solid var(--color-sage);
+  border-radius: var(--radius-sm);
+  color: var(--color-charcoal);
+  font-size: var(--font-size-small);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+/* Clash: event overlaps at least one other event in the same locale+day.
+   Needs to POP at a glance even at narrow block widths, so we combine a
+   clearly pink background, a full red outline (box-shadow), and the red
+   left accent. On hover the outline stays while the expand-shadow adds on. */
+.event-block:hover,
+.event-block:focus-visible {
+  /* Expand the block just wide enough for the full text so titles like
+     "Lunch" and "Middag" are readable on hover/focus, without needing a
+     native tooltip. z-index lifts it over neighbouring blocks. The original
+     width from the data-lb rule is preserved as the minimum, so the block
+     does not shrink. */
+  width: auto;
+  min-width: max-content;
+  z-index: 2;
+  background: color-mix(in srgb, var(--color-sage) 45%, var(--color-white));
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-charcoal) 22%, transparent);
+}
+
+.event-block:focus-visible {
+  outline: 2px solid var(--color-sage-hover);
+  outline-offset: 2px;
+}
+
+/* Clash rules come AFTER the general :hover/:focus so they win at equal
+   specificity (otherwise hovering a red clash block flipped it green). */
+.event-block--clash {
+  background: color-mix(in srgb, var(--color-error) 35%, var(--color-white));
+  border-left-color: var(--color-error);
+  box-shadow: 0 0 0 1.5px var(--color-error);
+}
+
+.event-block--clash:hover,
+.event-block--clash:focus-visible {
+  background: color-mix(in srgb, var(--color-error) 55%, var(--color-white));
+  box-shadow:
+    0 0 0 1.5px var(--color-error),
+    0 2px 8px color-mix(in srgb, var(--color-error) 35%, transparent);
+}
+
+.event-block--clash:focus-visible {
+  outline-color: var(--color-error);
+}
+
+/* Taller day-bands so stacked lanes remain legible. The lane-count affects
+   only the day-band's min-height (how much vertical space the band reserves
+   for stacked events); per-event height uses --group, not lane-count, so a
+   non-clashing event in a crowded day still fills the full band vertically. */
+.day-band--lanes-2 { min-height: 5em; }
+.day-band--lanes-3 { min-height: 6.5em; }
+.day-band--lanes-4 { min-height: 8em; }
+.day-band--lanes-5 { min-height: 9.5em; }
+
+.event-block__title {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-block__time,
+.event-block__resp {
+  font-size: calc(var(--font-size-small) - 1px);
+  color: color-mix(in srgb, var(--color-charcoal) 80%, transparent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lokaler-legend {
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+
+  /* Match the .intro reading-width cap (750px) so the two paragraphs above
+     the grid line up at the same width, even though the grid wrapper below
+     is wider. */
+  max-width: 750px;
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 600px) {
+  .lokaler-grid {
+    --lokaler-label-col: 6em;
+    --lokaler-day-col: 10em;
+  }
+}
+

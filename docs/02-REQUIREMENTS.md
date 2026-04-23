@@ -4881,3 +4881,123 @@ existing deployment workflow.
   `<head>` regardless of which default theme GitHub Pages selects. <!-- 02-§97.20 -->
 - No sitemap, Open Graph tags, or other discoverability metadata are
   added to the documentation site. <!-- 02-§97.21 -->
+
+## 98. Locale Overview Page
+
+### 98.1 Context
+
+When participants add activities to the schedule via `/lagg-till.html`,
+there is no direct way to see which locales are already booked at which
+times. The form links to `/schema.html` with a reminder to "check the
+schedule before adding", but on mobile this is awkward and an entire
+week of bookings is hard to hold in memory. As a result, bookings that
+unintentionally clash with existing activities can be submitted.
+
+A dedicated Locale Overview page shows the active camp's events laid
+out as a visual time-grid — one row per locale, blocks placed at their
+scheduled times — so a person picking a time and place can see at a
+glance which locales are already taken and which are free.
+
+This section describes the overview page only. A soft conflict warning
+rendered inside the add- and edit-activity forms, linking to this
+overview, is covered in a later section. Issue #332.
+
+### 98.2 Page existence and content
+
+- A page at `/lokaler.html` exists on the built site and is regenerated
+  on every build. <!-- 02-§98.1 -->
+- The page displays every locale defined in `source/data/local.yaml`,
+  in the same order as they appear in that file. <!-- 02-§98.2 -->
+- Each locale is represented as one row in a visual time-grid that
+  spans from the current date (inclusive) through the active camp's
+  `end_date`. When the camp has not yet started (today before
+  `start_date`), the grid spans `start_date` through `end_date`. When
+  the active camp is fully in the past, the grid falls back to the
+  full camp span so the page still renders. Past dates within an
+  in-progress camp are hidden — there is no point showing yesterday
+  when planning a new activity. <!-- 02-§98.3 -->
+- Events from the active camp are rendered as time-blocks positioned
+  horizontally within each locale row according to their date and
+  start/end times. <!-- 02-§98.4 -->
+- Each event-block displays the activity's title, start time, end
+  time, and responsible person. <!-- 02-§98.5 -->
+- Locales that have no events during the active camp are shown with
+  the text "Inga bokningar" on that row. <!-- 02-§98.6 -->
+- Events whose `location` value does not match any `name` in
+  `local.yaml` are rendered in the "Annat" row. <!-- 02-§98.7 -->
+
+### 98.3 Navigation
+
+- The page is reached from `/schema.html` and `/lagg-till.html` via a
+  text link labelled "Se lokalöversikt →". On `/lagg-till.html` the
+  link sits inside the intro paragraph that reminds the participant to
+  check the schedule for clashes before submitting. <!-- 02-§98.8 -->
+- The page does not appear as an entry in the top navigation. <!-- 02-§98.9 -->
+
+### 98.4 Accessibility and user-facing text
+
+- The page heading is "Lokalöversikt" and all user-facing text is in
+  Swedish, consistent with §14. <!-- 02-§98.10 -->
+- Each event-block is focusable with the keyboard and carries an
+  `aria-label` that communicates locale, date, time range, title, and
+  responsible person, so a screen-reader user does not depend on
+  visual grid positioning to understand the booking. <!-- 02-§98.11 -->
+- The page includes a short legend above the grid explaining that
+  blocks represent booked times and rows marked "Inga bokningar"
+  mean the locale is free for the entire camp. The legend is placed
+  above rather than below so it stays within the reader's first
+  viewport — the grid itself is often taller than the screen. <!-- 02-§98.12 -->
+
+### 98.5 Rendering
+
+- The grid markup is generated server-side at build time by a new
+  renderer `source/build/render-lokaler.js`. The page requires no
+  client-side JavaScript to render or position the grid. <!-- 02-§98.13 -->
+- The grid's visual styling — colors, spacing, and typography — uses
+  the custom properties defined in `docs/07-DESIGN.md §7`; no colors,
+  spacing, or font sizes are hardcoded. <!-- 02-§98.14 -->
+
+### 98.6 Mobile behaviour
+
+- On viewport widths below 600px the grid wrapper scrolls horizontally
+  so that the full camp week remains viewable without breaking the
+  surrounding page layout. The rest of the page flows normally. <!-- 02-§98.15 -->
+
+### 98.7 Clash visualisation
+
+- When two or more events in the same locale on the same day overlap
+  in time, they are stacked in separate vertical lanes within the day
+  band. Each event remains independently visible; one event never
+  covers another. <!-- 02-§98.16 -->
+- Every event that overlaps at least one other event in the same
+  locale is visually marked as a clash: a distinct accent colour on
+  the block (differentiated from the default booking colour) so that
+  clashes stand out at a glance without requiring the reader to
+  interact with the block. <!-- 02-§98.17 -->
+- Back-to-back events (one's end time equals another's start time)
+  are not treated as clashes. <!-- 02-§98.18 -->
+- Non-overlapping events in a day that contains other clashing events
+  retain the full height of their row. Only events that actually
+  overlap one another share vertical space with each other. <!-- 02-§98.19 -->
+- The top-left corner cell of the grid labels both axes with the text
+  "Lokaler \ Dag" (the backslash reads as a diagonal separator between
+  the row axis and the column axis). <!-- 02-§98.20 -->
+- Events whose `start` time equals their `end` time (zero duration,
+  typically legacy "sista för idag 23:59–23:59" markers) are not
+  rendered as blocks on the grid — they have no duration to visualise
+  and cannot conflict with anything. They remain visible through the
+  regular schedule views. <!-- 02-§98.21 -->
+- Cross-midnight events (events where the `end` time falls strictly
+  before the `start` time, allowed up to 17 hours per §9) are split
+  into two visual blocks — one on their own date from `start` to
+  24:00, and one on the following date from 00:00 to `end`. Both
+  blocks link to the same per-event detail page and carry aria-labels
+  describing the continuation so a screen-reader user understands
+  they are the same booking. <!-- 02-§98.22 -->
+- The grid markup uses native table elements so assistive tech can
+  announce the two-axis structure: `<table>` as the grid container,
+  `<tr>` for each row, `<th scope="row">` for locale labels, `<th
+  scope="col">` for day headers and the top-left corner cell, and
+  `<td>` for each day band. CSS Grid still drives the visual
+  layout via `display: grid` on the `<table>` and `display:
+  contents` on the `<tr>`s. <!-- 02-§98.23 -->

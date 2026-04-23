@@ -7,7 +7,7 @@ camps:
     registration_opens: '2026-04-15'
     registration_closes: '2026-07-12'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/syssleback2026"
+    link: https://www.facebook.com/groups/syssleback2026
     information: |
       Claude code har nu fixat systemet. Ingen wordpress längre. Ren kod endast för våra behov. Kanske kan vi snart skriva önskemål och det införs nästan automatiskt.
     file: 2026-07-syssleback.yaml
@@ -20,7 +20,7 @@ camps:
     registration_opens: '2026-04-15'
     registration_closes: '2026-06-14'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/syssleback2026"
+    link: https://www.facebook.com/groups/syssleback2026
     information: |
       Claude code har nu fixat systemet. Ingen wordpress längre. Ren kod endast för våra behov. Kanske kan vi snart skriva önskemål och det införs nästan automatiskt.
     file: 2026-06-syssleback.yaml
@@ -31,20 +31,20 @@ camps:
     end_date: '2026-12-31'
     opens_for_editing: '2026-01-01'
     location: Testar
-    link: ""
-    information: ""
+    link: ''
+    information: ''
     file: qa-testcamp.yaml
     archived: true
     qa: true
   - id: qa-thisweek
     name: QA Testläger (vår 2026)
-    start_date: '2026-03-10'
+    start_date: '2026-04-24'
     end_date: '2026-06-07'
-    opens_for_editing: '2026-03-02'
-    registration_opens: '2026-02-15'
-    registration_closes: '2026-03-01'
+    opens_for_editing: '2026-04-20'
+    registration_opens: '2026-02-23'
+    registration_closes: '2026-04-19'
     location: Sysslebäck
-    link: ""
+    link: ''
     information: |
       QA-läger aktivt fram till två veckor före nästa riktiga läger (2026-06-21).
     file: qa-thisweek.yaml
@@ -56,7 +56,7 @@ camps:
     end_date: '2025-08-15'
     opens_for_editing: '2025-07-27'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/syssleback2025"
+    link: https://www.facebook.com/groups/syssleback2025
     information: |
       I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
       Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
@@ -70,7 +70,7 @@ camps:
     end_date: '2025-06-29'
     opens_for_editing: '2025-06-15'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/syssleback2025"
+    link: https://www.facebook.com/groups/syssleback2025
     information: |
       I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
       Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
@@ -84,7 +84,7 @@ camps:
     end_date: '2024-06-30'
     opens_for_editing: '2024-06-16'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/syssleback2024"
+    link: https://www.facebook.com/groups/syssleback2024
     information: |
       I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
       Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
@@ -98,7 +98,7 @@ camps:
     end_date: '2023-07-02'
     opens_for_editing: '2023-06-18'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/syssleback2023"
+    link: https://www.facebook.com/groups/syssleback2023
     information: |
       I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
       Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
@@ -112,7 +112,7 @@ camps:
     end_date: '2022-07-03'
     opens_for_editing: '2022-06-19'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/639094320468722"
+    link: https://www.facebook.com/groups/639094320468722
     information: |
       I början var det manuellt arbete för en person att uppdatera schemat med det som skapades.
       Senaste åren så sköts det automatiskt. Det är varje individ som lägger in i schemat.
@@ -126,7 +126,7 @@ camps:
     end_date: '2021-07-04'
     opens_for_editing: '2021-06-20'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/1117007488486447"
+    link: https://www.facebook.com/groups/1117007488486447
     information: |
       Hör gärna av dig via PM (se Facebooktråden) om du vet att du vill anordna en aktivitet en eller flera av dagarna!
       Lägret blir vad vi gör det till.
@@ -141,7 +141,7 @@ camps:
     end_date: '2019-07-01'
     opens_for_editing: '2019-06-17'
     location: Sysslebäck
-    link: "https://www.facebook.com/groups/rfsb2019sommar/permalink/462623754311856/"
+    link: https://www.facebook.com/groups/rfsb2019sommar/permalink/462623754311856/
     information: |
       Aktivitetsschemat sätts och uppdateras löpande under lägret.
       Hör gärna av dig till Gabriel eller Johan redan nu (eller skriv i Facebooktråden) om du vet att du vill anordna en aktivitet en eller flera av dagarna!
@@ -155,7 +155,7 @@ camps:
     end_date: '2018-06-20'
     opens_for_editing: '2018-06-10'
     location: Sysslebäck
-    link: "https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/"
+    link: https://www.facebook.com/events/2076104085945151/permalink/2174970302725195/
     information: |
       Klickbara länkar leder till Facebook-tråd om aktiviteten.
       Obs att det kan finnas fler trådar om aktiviteten (sök i FB-gruppen för lägret om du vill vara säker på att inte missa någon info).

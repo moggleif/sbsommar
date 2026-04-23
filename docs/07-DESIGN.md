@@ -411,6 +411,91 @@ form. The grid is always multi-select — there is no toggle. <!-- 07-§6.76 -->
   page. It is always visible and shares the styling defined in
   `07-§6.44a–6.44g`. <!-- 07-§6.103 -->
 
+### Locale overview grid
+
+The `/lokaler.html` page shows every locale (from `source/data/local.yaml`)
+as a row, with the active camp's dates forming the horizontal axis and
+existing bookings rendered as time-blocks inside each row. It is a
+read-only visualisation aimed at spotting free time slots at a glance.
+
+- Wrapper (`.lokaler-grid-wrapper`): `overflow-x: auto`,
+  `width: fit-content`, `max-width: 100%`. The grid's visible frame
+  lives on the wrapper (`1px solid color-mix(in srgb, var(--color-charcoal) 22%, transparent)`),
+  so the frame stays put when the inner grid scrolls horizontally. <!-- 07-§6.104 -->
+- Grid container (`.lokaler-grid`): CSS Grid with `grid-template-columns:
+  var(--lokaler-label-col) repeat(var(--lokaler-day-count), var(--lokaler-day-col))`.
+  A 1px `gap` with a charcoal-25%-over-transparent background shows as
+  row and column divider lines. No radius — inner cells are rectangular,
+  and any radius would leave empty triangles at the outer corners. <!-- 07-§6.105 -->
+- Corner cell (`.lokaler-grid-corner`): top-left cell labelled
+  "Lokaler \\ Dag" — the backslash reads as a diagonal separator between
+  the row axis (locales) and the column axis (days). Shares the warm
+  tan background with the data cells so the label chrome is visually
+  just the row/column rubrics. `position: sticky; left: 0; z-index: 2`
+  so it stays parked above the sticky label column. <!-- 07-§6.106 -->
+- Locale label (`.lokal-label`): `flex-direction: column; justify-content: center`,
+  `font-weight: 700`, `color: var(--color-charcoal)`,
+  `background: var(--color-cream-light)`, `padding: var(--space-xs) var(--space-sm)`,
+  `position: sticky; left: 0; z-index: 1`. Empty locales render
+  "Inga bokningar" as a small italic sub-label inside the same cell
+  (`.lokal-empty`). <!-- 07-§6.107 -->
+- Day header (`.day-band-label`): weekday abbreviation and date
+  (e.g. "mån 22/6"), `font-size: var(--font-size-small)`,
+  `background: var(--color-cream-light)`, `font-weight: 700`,
+  center-aligned. <!-- 07-§6.108 -->
+- Day band (`.day-band`): warm tan background
+  (`color-mix(in srgb, var(--color-cream) 90%, var(--color-charcoal) 10%)`)
+  with a `repeating-linear-gradient` drawing one 1px vertical line per
+  hour — so 12:00, 15:00, 18:00 … are visible even when a booking
+  block is only a few pixels wide. `position: relative; min-height: 3.5em`
+  so event blocks can be absolutely positioned inside. Bands with
+  stacked lanes scale min-height via `.day-band--lanes-N` modifiers
+  (5em for 2, 6.5em for 3, 8em for 4, 9.5em for 5). <!-- 07-§6.109 -->
+- Event block (`.event-block`, rendered as `<a>`): absolute-positioned
+  within its day band using inline-generated `[data-lb="…"]` rules for
+  `left`/`width` (percent of the hour band) and custom properties
+  `--lane` and `--group`. Vertical placement is `top: calc((var(--lane)
+  / var(--group)) * 100% + 2px)`, `height: calc(100% / var(--group) - 4px)`
+  — so non-overlapping events keep full band height even on days where
+  other events stack. Default colour family signals "OK booking":
+  `background: color-mix(in srgb, var(--color-sage) 25%, var(--color-white))`,
+  `border-left: 3px solid var(--color-sage)`,
+  `border-radius: var(--radius-sm)`,
+  `min-width: 8px` (enough to stay clickable, small enough that
+  1-hour events don't swell and distort the visible time gap between
+  neighbouring bookings). <!-- 07-§6.110 -->
+- Event block hover / focus-visible: expands to full content width
+  (`width: auto; min-width: max-content`) so the full title is readable
+  without a native tooltip, `z-index: 2` to lift above neighbours,
+  `background: color-mix(in srgb, var(--color-sage) 45%, var(--color-white))`,
+  plus a soft charcoal drop shadow. Focus ring: `2px solid var(--color-sage-hover)`,
+  `outline-offset: 2px`. <!-- 07-§6.111 -->
+- Clash marker (`.event-block--clash`): applied to any event that
+  overlaps at least one other event in the same locale+day. Overrides
+  the green palette with `--color-error`:
+  `background: color-mix(in srgb, var(--color-error) 35%, var(--color-white))`,
+  `border-left-color: var(--color-error)`,
+  and `box-shadow: 0 0 0 1.5px var(--color-error)` as a red outline
+  around the whole block. Hover/focus strengthens to a 55% error mix
+  and adds a red drop shadow. The clash rules live *after* the general
+  `.event-block:hover` rules in the stylesheet so they win at equal
+  specificity. <!-- 07-§6.112 -->
+- Empty-row sub-label (`.lokal-empty`): small italic
+  "Inga bokningar" text inside `.lokal-label` when the locale has no
+  events in the visible range. `font-style: italic; font-size:
+  calc(var(--font-size-small) - 1px)`,
+  `color: color-mix(in srgb, var(--color-charcoal) 55%, transparent)`. <!-- 07-§6.113 -->
+- Legend (`.lokaler-legend`): placed **above** the grid (the grid is
+  often taller than the viewport so a below-grid note would be easy to
+  miss). `font-size: var(--font-size-small)`,
+  `color: var(--color-charcoal)`,
+  `max-width: 750px` so it wraps at the same reading width as
+  `.intro` rather than stretching to the wider grid. <!-- 07-§6.114 -->
+- On viewport widths below 600px, `.lokaler-grid-wrapper` retains its
+  `overflow-x: auto`, and the locale label column shrinks via
+  `--lokaler-label-col: 6em` and `--lokaler-day-col: 10em` to keep the
+  day columns readable on phone screens. <!-- 07-§6.115 -->
+
 ---
 
 ## 7. CSS Strategy
