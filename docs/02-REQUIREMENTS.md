@@ -1553,9 +1553,12 @@ alerts.
 ### 39.2 Workflow permissions (deploy)
 
 - `deploy-reusable.yml` must declare an explicit `permissions` block with
-  minimal scope. The workflow reads repository contents and deploys via
-  external FTP/SSH (no GitHub Pages token needed), so `contents: read` is
-  sufficient. <!-- 02-§39.2 -->
+  minimal scope. The workflow reads repository contents and deploys the
+  main site (`sbsommar.se`) to external shared hosting via FTP/SSH, so
+  `contents: read` is sufficient and no write-scoped token such as
+  `pages: write` is needed. The GitHub Pages documentation site (§97) is
+  served directly by GitHub from the `docs/` folder and uses its own
+  built-in deployment, unaffected by this workflow's permissions. <!-- 02-§39.2 -->
 
 ### 39.3 ReDoS-safe slugify
 
@@ -4718,3 +4721,76 @@ from a stale cache.
   feedback modal continue to show the offline guard when
   `navigator.onLine` is false, and `offline.html` remains the last-resort
   fallback for navigation requests that are not in the cache. <!-- 02-§96.15 -->
+
+---
+
+## 97. Project Documentation Site
+
+### 97.1 Context
+
+The project documentation in `docs/` is structured Markdown covering
+contribution guidelines, requirements, architecture, data contract,
+operations, design, environments, releasing, and the traceability
+matrix. Reading it on GitHub's file viewer works, but cross-file links
+render as raw `.md` file downloads in some contexts and searching
+requires opening files one at a time.
+
+Publishing the same content as a small, read-only documentation site
+lets contributors and stakeholders browse the docs in a regular
+browser, follow internal links without friction, and link directly to
+specific sections when reporting issues or discussing changes. The
+documentation site is entirely separate from the main `sbsommar.se`
+site — it does not affect the camp website, the PHP API, or any
+existing deployment workflow.
+
+### 97.2 Publication (site requirements)
+
+- The `docs/` folder is published as a static website at a
+  public URL hosted by GitHub Pages. <!-- 02-§97.1 -->
+- The documentation site is served from the `main` branch, mapped to
+  the `/docs` folder, using GitHub Pages' "Deploy from a branch"
+  source. <!-- 02-§97.2 -->
+- A push to `main` that changes any file under `docs/` causes GitHub
+  Pages to rebuild and republish the documentation site automatically,
+  without running the project's own CI workflows and without manual
+  intervention. <!-- 02-§97.3 -->
+- The documentation site is publicly readable. It exposes only files
+  already present in the public `docs/` folder of the repository; it
+  does not surface files from outside `docs/`, repository secrets, or
+  environment values. <!-- 02-§97.4 -->
+
+### 97.3 Rendering (site requirements)
+
+- Markdown files in `docs/` are rendered as HTML by GitHub Pages'
+  built-in Jekyll toolchain, with no custom build step or project-owned
+  workflow. <!-- 02-§97.5 -->
+- Relative links between documentation pages written as
+  `[text](other-file.md)` or `[text](other-file.md#section)` resolve
+  correctly on the published site, so that navigation between docs
+  files works without editing each link manually. <!-- 02-§97.6 -->
+- HTML comments used as inline requirement markers in the source
+  Markdown (for example `<!-- 02-§1.1 -->`) are preserved as HTML
+  comments in the rendered output and are not visible to readers. <!-- 02-§97.7 -->
+
+### 97.4 Landing page
+
+- The root URL of the documentation site renders `docs/index.md` as the
+  landing page. The landing page lists every other Markdown file under
+  `docs/` (for example `01-CONTRIBUTORS.md`, `02-REQUIREMENTS.md`, and
+  the rest of the numbered docs) with a one-line description and a link
+  to the rendered HTML page. <!-- 02-§97.12 -->
+
+### 97.5 Constraints
+
+- The documentation site contributes no entries to `package.json` or
+  `api/composer.json`. <!-- 02-§97.8 -->
+- No GitHub Actions workflow under `.github/workflows/` publishes the
+  documentation site; GitHub Pages' built-in deployment is the only
+  mechanism that builds it. <!-- 02-§97.9 -->
+- The deploy workflows for the main site and event data
+  (`deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`,
+  `event-data-deploy.yml`, `event-data-deploy-post-merge.yml`) do not
+  interact with the documentation site or GitHub Pages; they target
+  shared hosting only. <!-- 02-§97.10 -->
+- The documentation site uses the default `*.github.io` URL assigned by
+  GitHub Pages; no `docs/CNAME` file is present. <!-- 02-§97.11 -->

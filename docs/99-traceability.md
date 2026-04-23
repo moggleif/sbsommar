@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix, 02-§18.47–18.48).
+Audit date: 2026-02-24. Last updated: 2026-04-23 (project documentation site, 02-§97.1–97.11).
 
 ---
 
@@ -1106,10 +1106,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1210
+Total requirements:            1222
 Covered (implemented + tested): 620
-Implemented, not tested:        590
-Gap (no implementation):          0
+Implemented, not tested:        599
+Gap (no implementation):          3
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1412,6 +1412,16 @@ Matrix cleanup (2026-02-25):
   headers. Closes CodeQL `js/missing-rate-limiting` alerts 43/44/45.
   5 rows moved from covered to implemented (manual verification replaces
   removed RL-01..05 unit tests of the now-deleted helper).
+12 requirements added for the project documentation site (02-§97.1–97.12):
+  3 still gap (02-§97.1–97.3) — depend on Settings → Pages being enabled
+    by a maintainer; nothing in code can change this state.
+  9 implemented — `docs/_config.yml` enables `jekyll-relative-links`;
+    `docs/index.md` is the landing page; `01-CONTRIBUTORS.md` points
+    readers at the docs site; no new workflows, dependencies, or
+    domain config are introduced.
+  4 new tests in `tests/docs-site-config.test.js` (DOCS-CFG-01..04)
+    verify that `docs/_config.yml` parses, declares the plugin, and
+    enables `relative_links`.
 ```
 
 ---
@@ -2172,6 +2182,23 @@ Matrix cleanup (2026-02-25):
 | `02-§96.13` | covered | SWH-08: `sw.js` has no `import`, `require`, or `importScripts` |
 | `02-§96.14` | implemented | `package.json` unchanged by this feature |
 | `02-§96.15` | implemented | `offline-guard.js`, `feedback.js`, and `offline.html` unchanged; offline routing in `sw.js` preserved — manual browser verification |
+
+### §97 — Project Documentation Site
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§97.1` | gap | Pages must be enabled in Settings → Pages; URL appears there once the first build finishes (manual step, see 08-ENVIRONMENTS.md § Documentation site) |
+| `02-§97.2` | gap | Source `main` + `/docs` is set manually in Settings → Pages; documented in 08-ENVIRONMENTS.md |
+| `02-§97.3` | gap | Verified manually by pushing a `docs/` change after enablement and confirming the Pages build runs |
+| `02-§97.4` | implemented | `docs/` contains only project documentation; no secrets, env values, or non-docs files — manual content review during this PR |
+| `02-§97.5` | implemented | `docs/_config.yml` relies on GitHub Pages' built-in Jekyll; no project workflow added (verified by absence in `.github/workflows/`) |
+| `02-§97.6` | implemented | DOCS-CFG-03 / DOCS-CFG-04: `docs/_config.yml` activates `jekyll-relative-links` and `relative_links.enabled: true`; runtime `.md → .html` resolution verified manually in the browser |
+| `02-§97.7` | implemented | Manual browser verification: inline `<!-- 02-§N.M -->` markers remain as HTML comments in rendered output and are not visible |
+| `02-§97.8` | implemented | `package.json` and `api/composer.json` unchanged by this feature (verified in PR diff) |
+| `02-§97.9` | implemented | `.github/workflows/` unchanged; no Pages-specific workflow added (verified in PR diff) |
+| `02-§97.10` | implemented | `deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`, `event-data-deploy.yml`, and `event-data-deploy-post-merge.yml` are untouched in this PR |
+| `02-§97.11` | implemented | No `docs/CNAME` file; default `*.github.io` URL in use |
+| `02-§97.12` | implemented | `docs/index.md` lists every other docs file with a one-line description and an `.md` link; `jekyll-relative-links` resolves the links to rendered pages — manual browser verification |
 
 ### §1 — Camp registry fields (camps.yaml)
 
