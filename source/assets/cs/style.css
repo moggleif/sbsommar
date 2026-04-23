@@ -3001,8 +3001,13 @@ a.admin-icon--expired,
 
 .event-block {
   position: absolute;
-  top: 4px;
-  bottom: 4px;
+
+  /* Vertical placement: each event occupies one of N lanes within the band.
+     --lane-count is set on the enclosing .day-band (1 by default; 2–5 via
+     .day-band--lanes-N modifiers); --lane is set per event in the inline
+     <style> block. The 2px offset keeps adjacent lanes visually separated. */
+  top: calc((var(--lane, 0) / var(--lane-count, 1)) * 100% + 2px);
+  height: calc(100% / var(--lane-count, 1) - 4px);
 
   /* Small min-width so the block stays clickable even for 15-minute events,
      but low enough that typical 1-hour events don't swell and distort the
@@ -3021,6 +3026,27 @@ a.admin-icon--expired,
   overflow: hidden;
   line-height: 1.2;
 }
+
+/* Clash: event overlaps at least one other event in the same locale+day.
+   Signalled with the error colour on the left accent and a red-tinted bg
+   so the block stands out at a glance. */
+.event-block--clash {
+  background: color-mix(in srgb, var(--color-error) 12%, var(--color-white));
+  border-left-color: var(--color-error);
+}
+
+.event-block--clash:hover,
+.event-block--clash:focus-visible {
+  background: color-mix(in srgb, var(--color-error) 22%, var(--color-white));
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-error) 30%, transparent);
+}
+
+/* Taller day-bands so stacked lanes remain legible. Lane count above 5 is
+   extremely unlikely at SB Sommar, so we cap visual stacking there. */
+.day-band--lanes-2 { --lane-count: 2; min-height: 5em; }
+.day-band--lanes-3 { --lane-count: 3; min-height: 6.5em; }
+.day-band--lanes-4 { --lane-count: 4; min-height: 8em; }
+.day-band--lanes-5 { --lane-count: 5; min-height: 9.5em; }
 
 .event-block:hover,
 .event-block:focus-visible {

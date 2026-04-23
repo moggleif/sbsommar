@@ -1113,10 +1113,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (locale overview page requireme
 ## Summary
 
 ```text
-Total requirements:            1253
+Total requirements:            1256
 Covered (implemented + tested): 630
 Implemented, not tested:        608
-Gap (no implementation):         15
+Gap (no implementation):         18
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -2268,6 +2268,9 @@ the add- and edit-activity forms that links to this page.
 | `02-§98.13` | gap | Grid is static HTML emitted by the build; no client-side grid JS |
 | `02-§98.14` | gap | Styling via `var(--color-*)`, `var(--space-*)` tokens (07-§6.104–6.115) |
 | `02-§98.15` | gap | `@media (max-width: 600px)` keeps `overflow-x: auto` on `.lokaler-grid-wrapper` |
+| `02-§98.16` | gap | `assignLanes()` in render-lokaler.js; `.day-band--lanes-2..5` stack events vertically; test LOK-80 |
+| `02-§98.17` | gap | `markClashes()` + `.event-block--clash` styling (red-tinted bg, error-coloured accent); test LOK-80 |
+| `02-§98.18` | gap | Clash predicate is `a.start < b.end && a.end > b.start` — back-to-back does not clash; test LOK-81 |
 
 ### §1 — Camp registry fields (camps.yaml)
 

@@ -4962,3 +4962,17 @@ overview, is covered in a later section. Issue #332.
 - On viewport widths below 600px the grid wrapper scrolls horizontally
   so that the full camp week remains viewable without breaking the
   surrounding page layout. The rest of the page flows normally. <!-- 02-§98.15 -->
+
+### 98.7 Clash visualisation
+
+- When two or more events in the same locale on the same day overlap
+  in time, they are stacked in separate vertical lanes within the day
+  band. Each event remains independently visible; one event never
+  covers another. <!-- 02-§98.16 -->
+- Every event that overlaps at least one other event in the same
+  locale is visually marked as a clash: a distinct accent colour on
+  the block (differentiated from the default booking colour) so that
+  clashes stand out at a glance without requiring the reader to
+  interact with the block. <!-- 02-§98.17 -->
+- Back-to-back events (one's end time equals another's start time)
+  are not treated as clashes. <!-- 02-§98.18 -->

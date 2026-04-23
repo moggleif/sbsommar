@@ -344,6 +344,37 @@ describe('02-§98.8, §98.9, §98.12, §98.13 — navigation, legend, rendering'
   });
 });
 
+describe('02-§98.4 — clash detection and lane stacking', () => {
+  it('LOK-80: overlapping events get separate lanes and a clash class', () => {
+    const events = [
+      event({ id: 'a', date: '2099-07-01', start: '12:00', end: '14:00', location: 'Servicehus', title: 'Workshop' }),
+      event({ id: 'b', date: '2099-07-01', start: '13:00', end: '15:00', location: 'Servicehus', title: 'Yoga' }),
+    ];
+    const out = renderLokalerPage(CAMP, LOCATIONS, events);
+    assert.ok(/event-block--clash/.test(out), 'at least one block is marked as clash');
+    assert.ok(/day-band--lanes-2/.test(out), 'day band uses two lanes for the overlap');
+  });
+
+  it('LOK-81: back-to-back events (no overlap) do not clash', () => {
+    const events = [
+      event({ id: 'a', date: '2099-07-01', start: '12:00', end: '13:00', location: 'Servicehus' }),
+      event({ id: 'b', date: '2099-07-01', start: '13:00', end: '14:00', location: 'Servicehus', title: 'Fika' }),
+    ];
+    const out = renderLokalerPage(CAMP, LOCATIONS, events);
+    assert.ok(!/event-block--clash/.test(out), 'adjacent events are not clashes');
+    assert.ok(!/day-band--lanes-/.test(out), 'single lane is enough');
+  });
+
+  it('LOK-82: events in different locales on the same time do not clash', () => {
+    const events = [
+      event({ id: 'a', date: '2099-07-01', start: '12:00', end: '13:00', location: 'Servicehus' }),
+      event({ id: 'b', date: '2099-07-01', start: '12:00', end: '13:00', location: 'GA Idrott', title: 'Badminton' }),
+    ];
+    const out = renderLokalerPage(CAMP, LOCATIONS, events);
+    assert.ok(!/event-block--clash/.test(out), 'different locales do not clash');
+  });
+});
+
 describe('02-§98.3 — today-forward filter', () => {
   const CAMP_ACTIVE = {
     name: 'SB sommar 2099',

@@ -97,6 +97,54 @@ function computeHourRange(events) {
   return { startHour: Math.floor(minStart), endHour: Math.ceil(maxEnd) };
 }
 
+// Returns the effective end time for overlap/lane comparisons. Cross-midnight
+// events (end <= start) are treated as ending at 24:00 for this purpose.
+function effectiveEnd(ev) {
+  return ev.end <= ev.start ? '24:00' : ev.end;
+}
+
+/**
+ * Assigns each event to a "lane" so overlapping events stack vertically in
+ * the same day band rather than drawing on top of each other. Greedy first-fit:
+ * iterate events by start time; place into the first lane whose last event has
+ * finished. Returns a shallow clone of events (each with a `_lane` integer)
+ * and the total number of lanes needed.
+ */
+function assignLanes(events) {
+  const sorted = [...events]
+    .map((e) => ({ ...e }))
+    .sort((a, b) => (a.start < b.start ? -1 : a.start > b.start ? 1 : 0));
+  const laneEnds = [];
+  for (const ev of sorted) {
+    let laneIdx = laneEnds.findIndex((end) => end <= ev.start);
+    if (laneIdx === -1) {
+      laneIdx = laneEnds.length;
+      laneEnds.push(effectiveEnd(ev));
+    } else {
+      laneEnds[laneIdx] = effectiveEnd(ev);
+    }
+    ev._lane = laneIdx;
+  }
+  return { events: sorted, laneCount: laneEnds.length };
+}
+
+/**
+ * Marks each event that overlaps at least one other event (in the same
+ * group) with `_clash = true`. Back-to-back events (end == other.start) do
+ * not count as overlapping.
+ */
+function markClashes(events) {
+  for (const a of events) {
+    for (const b of events) {
+      if (a === b) continue;
+      if (a.start < effectiveEnd(b) && effectiveEnd(a) > b.start) {
+        a._clash = true;
+        break;
+      }
+    }
+  }
+}
+
 /**
  * Computes the horizontal position (left%, width%) for an event block within
  * a day band spanning [dayStartHour, dayEndHour]. Events extending past the
@@ -148,8 +196,11 @@ function renderEventBlock(event, locationName, isoDate, positionRules, blockInde
   if (widthPct <= 0) return '';
 
   const dataLb = `${event.id || `evt-${blockIndex}`}`;
+  // left/width position the block horizontally within the day band;
+  // --lane selects which vertical sub-row (lane) it occupies, cooperating
+  // with --lane-count set on the enclosing .day-band.
   positionRules.rules.push(
-    `${blockCssSelector(dataLb)}{left:${leftPct.toFixed(4)}%;width:${widthPct.toFixed(4)}%;}`,
+    `${blockCssSelector(dataLb)}{left:${leftPct.toFixed(4)}%;width:${widthPct.toFixed(4)}%;--lane:${event._lane || 0};}`,
   );
 
   const href = event.id ? `schema/${encodeURIComponent(event.id)}/` : 'schema.html';
@@ -158,15 +209,19 @@ function renderEventBlock(event, locationName, isoDate, positionRules, blockInde
   const time = `${escapeHtml(event.start)}–${escapeHtml(event.end)}`;
   const resp = event.responsible ? escapeHtml(event.responsible) : '';
   const dataLbAttr = escapeHtml(dataLb);
-  return `<a class="event-block" data-lb="${dataLbAttr}" href="${href}" aria-label="${aria}"><span class="event-block__title">${title}</span><span class="event-block__time">${time}</span>${resp ? `<span class="event-block__resp">${resp}</span>` : ''}</a>`;
+  const clashClass = event._clash ? ' event-block--clash' : '';
+  return `<a class="event-block${clashClass}" data-lb="${dataLbAttr}" href="${href}" aria-label="${aria}"><span class="event-block__title">${title}</span><span class="event-block__time">${time}</span>${resp ? `<span class="event-block__resp">${resp}</span>` : ''}</a>`;
 }
 
 function renderDayBand(eventsOnDay, locationName, isoDate, positionRules) {
-  const blocks = eventsOnDay
+  const { events: laned, laneCount } = assignLanes(eventsOnDay);
+  markClashes(laned);
+  const blocks = laned
     .map((ev, i) => renderEventBlock(ev, locationName, isoDate, positionRules, `${locationName}-${isoDate}-${i}`))
     .filter(Boolean)
     .join('');
-  return `<div class="day-band">${blocks}</div>`;
+  const lanesClass = laneCount > 1 ? ` day-band--lanes-${Math.min(laneCount, 5)}` : '';
+  return `<div class="day-band${lanesClass}">${blocks}</div>`;
 }
 
 function renderLokalRow(locationName, locationEvents, campDates, positionRules) {
