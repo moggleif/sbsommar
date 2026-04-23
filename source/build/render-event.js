@@ -15,8 +15,18 @@ const { pwaHeadTags } = require('./pwa');
  * @param {Array}  [navSections=[]] - Navigation sections
  * @returns {string} Full HTML page
  */
+// The HTML <title> tag has a project-wide 80-char limit (see .htmlvalidate.json
+// "long-title"). Event titles are capped at 80 chars at input, but the archive
+// contains legacy data with longer titles — render-time truncation means we
+// never emit an over-long <title> regardless of how a title ended up in YAML.
+function truncateForTitleTag(text, maxLen = 80) {
+  if (text.length <= maxLen) return text;
+  return text.slice(0, maxLen - 1).trimEnd() + '…';
+}
+
 function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []) {
   const title = escapeHtml(event.title);
+  const titleForTag = escapeHtml(truncateForTitleTag(event.title));
   const date = formatDate(toDateString(event.date));
   const timeStr = event.end
     ? `${escapeHtml(String(event.start))}–${escapeHtml(String(event.end))}`
@@ -40,7 +50,7 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <base href="../../">
-  <title>${title}</title>
+  <title>${titleForTag}</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="images/sbsommar-icon-192.png">
 ${pwaHeadTags()}
