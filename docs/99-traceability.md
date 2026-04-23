@@ -1106,9 +1106,9 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (project documentation site, 02
 ## Summary
 
 ```text
-Total requirements:            1221
+Total requirements:            1222
 Covered (implemented + tested): 620
-Implemented, not tested:        598
+Implemented, not tested:        599
 Gap (no implementation):          3
 Orphan tests (no requirement):    0
 
@@ -1412,12 +1412,13 @@ Matrix cleanup (2026-02-25):
   headers. Closes CodeQL `js/missing-rate-limiting` alerts 43/44/45.
   5 rows moved from covered to implemented (manual verification replaces
   removed RL-01..05 unit tests of the now-deleted helper).
-11 requirements added for the project documentation site (02-§97.1–97.11):
+12 requirements added for the project documentation site (02-§97.1–97.12):
   3 still gap (02-§97.1–97.3) — depend on Settings → Pages being enabled
     by a maintainer; nothing in code can change this state.
-  8 implemented — `docs/_config.yml` enables `jekyll-relative-links`;
-    `01-CONTRIBUTORS.md` points readers at the docs site; no new
-    workflows, dependencies, or domain config are introduced.
+  9 implemented — `docs/_config.yml` enables `jekyll-relative-links`;
+    `docs/index.md` is the landing page; `01-CONTRIBUTORS.md` points
+    readers at the docs site; no new workflows, dependencies, or
+    domain config are introduced.
   4 new tests in `tests/docs-site-config.test.js` (DOCS-CFG-01..04)
     verify that `docs/_config.yml` parses, declares the plugin, and
     enables `relative_links`.
@@ -2197,6 +2198,7 @@ Matrix cleanup (2026-02-25):
 | `02-§97.9` | implemented | `.github/workflows/` unchanged; no Pages-specific workflow added (verified in PR diff) |
 | `02-§97.10` | implemented | `deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`, `event-data-deploy.yml`, and `event-data-deploy-post-merge.yml` are untouched in this PR |
 | `02-§97.11` | implemented | No `docs/CNAME` file; default `*.github.io` URL in use |
+| `02-§97.12` | implemented | `docs/index.md` lists every other docs file with a one-line description and an `.md` link; `jekyll-relative-links` resolves the links to rendered pages — manual browser verification |
 
 ### §1 — Camp registry fields (camps.yaml)
 

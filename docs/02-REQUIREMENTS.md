@@ -4786,3 +4786,11 @@ existing deployment workflow.
   shared hosting only. <!-- 02-§97.10 -->
 - The documentation site uses the default `*.github.io` URL assigned by
   GitHub Pages; no `docs/CNAME` file is present. <!-- 02-§97.11 -->
+
+### 97.5 Landing page
+
+- The root URL of the documentation site renders `docs/index.md` as the
+  landing page. The landing page lists every other Markdown file under
+  `docs/` (for example `01-CONTRIBUTORS.md`, `02-REQUIREMENTS.md`, and
+  the rest of the numbered docs) with a one-line description and a link
+  to the rendered HTML page. <!-- 02-§97.12 -->
