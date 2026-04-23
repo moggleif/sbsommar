@@ -2911,6 +2911,14 @@ a.admin-icon--expired,
   overflow-x: auto;
   margin: var(--space-md) 0;
   padding-bottom: var(--space-xs);
+
+  /* The frame sits on the WRAPPER, not the grid. The wrapper does not scroll
+     — only its inner grid does — so the frame stays put even when the user
+     scrolls days horizontally. Without this, the grid's own border-left
+     would disappear off-screen as the grid slides left. */
+  border: 1px solid color-mix(in srgb, var(--color-charcoal) 22%, transparent);
+  width: fit-content;
+  max-width: 100%;
 }
 
 .lokaler-grid {
@@ -2920,9 +2928,9 @@ a.admin-icon--expired,
   display: grid;
   grid-template-columns: var(--lokaler-label-col) repeat(var(--lokaler-day-count, 7), var(--lokaler-day-col));
   gap: 1px;
+
+  /* The gap colour shows between cells as subtle 1px divider lines. */
   background: color-mix(in srgb, var(--color-charcoal) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-charcoal) 12%, transparent);
-  border-radius: var(--radius-sm);
   min-width: min-content;
 }
 
@@ -2945,7 +2953,7 @@ a.admin-icon--expired,
 }
 
 .lokal-label--header {
-  background: var(--color-cream);
+  background: var(--color-cream-light);
 }
 
 .day-band-label {
@@ -2953,7 +2961,7 @@ a.admin-icon--expired,
   color: var(--color-charcoal);
   text-align: center;
   padding: var(--space-xs);
-  background: var(--color-cream);
+  background: var(--color-cream-light);
   font-weight: 700;
 }
 
@@ -2964,7 +2972,12 @@ a.admin-icon--expired,
 .day-band {
   position: relative;
   min-height: 3.5em;
-  background-color: var(--color-cream);
+
+  /* Derived neutral: a warm tan, darker than both page bg (cream) and
+     labels (cream-light). Mixing cream with a touch of charcoal reproduces
+     the tinted look the grid's transparent charcoal background used to
+     give the cells — distinct from every other surface on the page. */
+  background-color: color-mix(in srgb, var(--color-cream) 90%, var(--color-charcoal) 10%);
 
   /* Tunna vertikala linjer — en per timme inuti dagsbandet, så man ser var
      08:00, 09:00, ... verkligen ligger även när event-block är små. */
