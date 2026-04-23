@@ -4923,8 +4923,10 @@ overview, is covered in a later section. Issue #332.
 
 ### 98.3 Navigation
 
-- The page is reached from `/schema.html` via a text link labelled
-  "Se lokalöversikt →". <!-- 02-§98.8 -->
+- The page is reached from `/schema.html` and `/lagg-till.html` via a
+  text link labelled "Se lokalöversikt →". On `/lagg-till.html` the
+  link sits inside the intro paragraph that reminds the participant to
+  check the schedule for clashes before submitting. <!-- 02-§98.8 -->
 - The page does not appear as an entry in the top navigation. <!-- 02-§98.9 -->
 
 ### 98.4 Accessibility and user-facing text

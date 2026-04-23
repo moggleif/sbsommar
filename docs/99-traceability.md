@@ -2260,7 +2260,7 @@ the add- and edit-activity forms that links to this page.
 | `02-§98.5` | gap | Event-block text: title, start, end, responsible |
 | `02-§98.6` | gap | Empty-locale rows display "Inga bokningar" |
 | `02-§98.7` | gap | Unknown `location` values fold into the "Annat" row |
-| `02-§98.8` | gap | "Se lokalöversikt →" link added to `source/build/render.js` `renderSchedulePage()` in the intro area |
+| `02-§98.8` | gap | "Se lokalöversikt →" link added to `source/build/render.js` `renderSchedulePage()` intro and `source/build/render-add.js` `renderAddPage()` intro |
 | `02-§98.9` | gap | No new `pageNav` entry; `source/build/layout.js` untouched |
 | `02-§98.10` | gap | Heading "Lokalöversikt"; all copy in Swedish per §14 |
 | `02-§98.11` | gap | Event-blocks as `<button>` or `<a>` with descriptive `aria-label` |

@@ -2962,9 +2962,6 @@ a.admin-icon--expired,
 .day-band {
   position: relative;
   min-height: 3.5em;
-}
-
-.day-band--empty {
   background: var(--color-white);
 }
 
