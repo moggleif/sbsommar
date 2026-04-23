@@ -189,6 +189,7 @@ parts of the project documentation; it is fully separate from the
 | Deploy trigger     | Push to `main` that touches any file under `docs/` (automatic)        |
 | Workflows involved | None — GitHub Pages runs its own internal build                       |
 | URL                | Default `*.github.io` URL assigned by GitHub Pages (no custom domain) |
+| Visibility         | Hidden — `Disallow: /` `robots.txt` + `noindex, nofollow` meta on every page |
 
 ### How to enable
 
@@ -208,15 +209,36 @@ so the CI status of a docs-only change does not gate publication.
 
 ### Configuration
 
-The only project-owned configuration file for the documentation site
-is `docs/_config.yml`. It activates the
-[`jekyll-relative-links`](https://github.com/benbalter/jekyll-relative-links)
-plugin (whitelisted on GitHub Pages) so that relative links between
-Markdown files such as `[text](other-file.md)` resolve correctly to
-the rendered HTML pages on the published site.
+The project owns four files under `docs/` that shape the published
+site:
+
+- `docs/_config.yml` activates the
+  [`jekyll-relative-links`](https://github.com/benbalter/jekyll-relative-links)
+  plugin (whitelisted on GitHub Pages) so that relative links between
+  Markdown files such as `[text](other-file.md)` resolve correctly to
+  the rendered HTML pages on the published site.
+- `docs/robots.txt` (`User-agent: *` / `Disallow: /`) blocks every
+  crawler at the documentation site root.
+- `docs/_includes/head-custom.html` injects
+  `<meta name="robots" content="noindex, nofollow">` into every
+  rendered page. Primer-family GitHub Pages themes include this
+  partial in `<head>` automatically.
+- `docs/index.md` is the landing page — it carries a project-technical
+  reverse-discoverability banner pointing back to the source
+  repository, README, and issue tracker on github.com.
 
 No other Jekyll configuration is owned by the project; the default
 GitHub Pages theme and defaults are used as-is.
+
+### Visibility policy
+
+The documentation site mirrors §1a's "intentionally hidden,
+discoverable only by direct link" policy for `sbsommar.se`. The
+landing page never links to the camp site (`sbsommar.se`), and its
+main copy describes the page as the developer-facing documentation
+for a static-site project rather than describing the camp itself.
+See `02-REQUIREMENTS.md` §97.7 (reverse-discoverability banner) and
+§97.8 (search-engine and crawler policy).
 
 ### Relationship to other environments
 
