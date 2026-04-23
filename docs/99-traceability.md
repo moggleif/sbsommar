@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-04-23 (project documentation site, 02-§97.1–97.11).
+Audit date: 2026-02-24. Last updated: 2026-04-23 (README discoverability of docs site, 02-§97.13–97.14).
 
 ---
 
@@ -1106,10 +1106,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (project documentation site, 02
 ## Summary
 
 ```text
-Total requirements:            1222
+Total requirements:            1224
 Covered (implemented + tested): 620
 Implemented, not tested:        599
-Gap (no implementation):          3
+Gap (no implementation):          5
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -2199,6 +2199,8 @@ Matrix cleanup (2026-02-25):
 | `02-§97.10` | implemented | `deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`, `event-data-deploy.yml`, and `event-data-deploy-post-merge.yml` are untouched in this PR |
 | `02-§97.11` | implemented | No `docs/CNAME` file; default `*.github.io` URL in use |
 | `02-§97.12` | implemented | `docs/index.md` lists every other docs file with a one-line description and an `.md` link; `jekyll-relative-links` resolves the links to rendered pages — manual browser verification |
+| `02-§97.13` | gap | `README.md` needs a link to `https://moggleif.github.io/sbsommar/` above the developer setup section |
+| `02-§97.14` | gap | `README.md` doc table currently stops at 07-DESIGN.md; missing 08, 09, 99 |
 
 ### §1 — Camp registry fields (camps.yaml)
 
