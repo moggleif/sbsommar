@@ -1113,8 +1113,8 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 ## Summary
 
 ```text
-Total requirements:            1258
-Covered (implemented + tested): 646
+Total requirements:            1261
+Covered (implemented + tested): 649
 Implemented, not tested:        612
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
