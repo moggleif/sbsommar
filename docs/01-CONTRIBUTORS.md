@@ -3,6 +3,13 @@
 There are two types of contributors: **content editors** and **developers**.
 Most contributions are content edits and require no programming knowledge.
 
+> **Reading the docs in your browser:** the files in `docs/` are also
+> published as a small documentation website by GitHub Pages. The URL
+> appears in the repository under **Settings → Pages** once Pages is
+> enabled — see [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md#documentation-site)
+> for setup details. Editing any file under `docs/` and pushing to
+> `main` republishes the site automatically.
+
 ---
 
 ## Content Editors

@@ -1,0 +1,19 @@
+# Jekyll configuration for the SB Sommar project documentation site.
+# Published by GitHub Pages from the `main` branch, `/docs` folder.
+# See docs/08-ENVIRONMENTS.md (§ Documentation site) for the full setup.
+
+title: SB Sommar – Project Documentation
+
+# Enable jekyll-relative-links so that intra-docs links written as
+# [text](other-file.md) resolve to the rendered HTML pages.
+# This plugin is whitelisted on GitHub Pages (no Gemfile needed).
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled: true
+  collections: true
+
+# Include the standard Markdown extensions GitHub Pages already understands.
+include:
+  - "*.md"
