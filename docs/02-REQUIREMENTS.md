@@ -4774,15 +4774,15 @@ existing deployment workflow.
 
 ### 97.4 Constraints
 
-- No new runtime or client-side dependencies are added to the project's
-  `package.json` or `api/composer.json`. <!-- 02-§97.8 -->
-- No new GitHub Actions workflow is added to publish the documentation
-  site; GitHub Pages' built-in deployment is the only mechanism used. <!-- 02-§97.9 -->
-- The existing deploy workflows (`deploy-qa.yml`, `deploy-prod.yml`,
-  `deploy-reusable.yml`, `event-data-deploy.yml`,
-  `event-data-deploy-post-merge.yml`) and their permissions are
-  unchanged; they continue to deploy the main site and event data to
-  shared hosting, not to GitHub Pages. <!-- 02-§97.10 -->
-- The documentation site has no custom domain configured in this
-  revision; it uses the default `*.github.io` URL assigned by GitHub
-  Pages. <!-- 02-§97.11 -->
+- The documentation site contributes no entries to `package.json` or
+  `api/composer.json`. <!-- 02-§97.8 -->
+- No GitHub Actions workflow under `.github/workflows/` publishes the
+  documentation site; GitHub Pages' built-in deployment is the only
+  mechanism that builds it. <!-- 02-§97.9 -->
+- The deploy workflows for the main site and event data
+  (`deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`,
+  `event-data-deploy.yml`, `event-data-deploy-post-merge.yml`) do not
+  interact with the documentation site or GitHub Pages; they target
+  shared hosting only. <!-- 02-§97.10 -->
+- The documentation site uses the default `*.github.io` URL assigned by
+  GitHub Pages; no `docs/CNAME` file is present. <!-- 02-§97.11 -->
