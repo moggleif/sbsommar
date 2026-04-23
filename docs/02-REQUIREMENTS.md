@@ -4669,11 +4669,15 @@ from a stale cache.
   equal to the current `CACHE_NAME` and then calls
   `self.clients.claim()` so that the new worker immediately controls
   every open tab without requiring a reload. <!-- 02-§96.4 -->
-- The `cacheFirstThenNetwork` strategy matches cache entries **without**
-  `ignoreSearch`, so a request for `style.css?v=<newHash>` does not
-  satisfy from a cache entry keyed at `style.css?v=<oldHash>` or
-  `style.css`. When no match exists, the request falls through to the
-  network and the fresh response is stored in the cache. <!-- 02-§96.5 -->
+- The `cacheFirstThenNetwork` strategy's **primary** cache lookup
+  matches without `ignoreSearch`, so a request for
+  `style.css?v=<newHash>` does not satisfy from a cache entry keyed at
+  `style.css?v=<oldHash>` or `style.css`. When no exact match exists,
+  the request falls through to the network and the fresh response is
+  stored in the cache. A secondary `ignoreSearch` match is only
+  performed as an **offline fallback** when the network fetch itself
+  fails, so that pre-cached `/style.css` still serves when the user is
+  offline on a new hash. <!-- 02-§96.5 -->
 - The `networkFirstThenCache` and `networkFirstWithOfflineFallback`
   strategies continue to use `{ ignoreSearch: true }` when falling back
   to the cache, so that a cache-busted HTML or `events.json` URL still

@@ -74,14 +74,21 @@ describe('02-§96.4 — activate handler deletes old caches and claims clients',
   });
 });
 
-// ── §96.5 — cacheFirst matches cache entries WITHOUT ignoreSearch ───────────
+// ── §96.5 — cacheFirst primary lookup is exact; fallback may ignoreSearch ──
 
-describe('02-§96.5 — cacheFirstThenNetwork omits ignoreSearch', () => {
-  it('SWH-05: cacheFirstThenNetwork body does not reference ignoreSearch', () => {
+describe('02-§96.5 — cacheFirstThenNetwork primary lookup is exact', () => {
+  it('SWH-05: primary caches.match before fetch does not pass ignoreSearch', () => {
     const body = extractFunctionBody(SW_SRC, 'function cacheFirstThenNetwork');
+    const fetchIdx = body.indexOf('fetch(request)');
+    assert.ok(fetchIdx !== -1, 'body must contain fetch(request)');
+    const primary = body.substring(0, fetchIdx);
     assert.ok(
-      !body.includes('ignoreSearch'),
-      'cacheFirstThenNetwork must not use ignoreSearch on the primary match',
+      primary.includes('caches.match(request)') || primary.includes('caches.match(request,'),
+      'primary section must call caches.match(request, ...)',
+    );
+    assert.ok(
+      !/caches\.match\([^)]*ignoreSearch/.test(primary),
+      'primary caches.match must not use ignoreSearch',
     );
   });
 });

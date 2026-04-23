@@ -3,7 +3,7 @@
 // cache-first for static assets (CSS, JS, images).
 // The PRE_CACHE_URLS list is injected at build time — see build.js.
 
-const CACHE_NAME = 'sb-sommar-v5';
+const CACHE_NAME = 'sb-sommar-v6';
 
 // Pages and assets to pre-cache on install.
 // The build replaces the placeholder below with the full list of URLs.
@@ -23,22 +23,32 @@ const NO_CACHE_PATTERNS = [
 // ── Install: pre-cache all site assets ────────────────────────────────────────
 
 self.addEventListener('install', (event) => {
+  // Activate the new worker immediately, bypassing the waiting state.
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRE_CACHE_URLS)),
+    caches.open(CACHE_NAME).then((cache) =>
+      // `cache: 'reload'` bypasses the browser's HTTP cache for each fetch,
+      // so a stale asset cached with a long max-age can't poison the SW cache.
+      cache.addAll(
+        PRE_CACHE_URLS.map((u) => new Request(u, { cache: 'reload' })),
+      ),
+    ),
   );
 });
 
-// ── Activate: remove old caches ─────────────────────────────────────────────
+// ── Activate: remove old caches and take over existing clients ──────────────
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(
         keys
           .filter((key) => key !== CACHE_NAME)
           .map((key) => caches.delete(key)),
-      ),
-    ),
+      );
+      await self.clients.claim();
+    })(),
   );
 });
 
@@ -109,7 +119,9 @@ async function networkFirstWithOfflineFallback(request) {
 }
 
 async function cacheFirstThenNetwork(request) {
-  const cached = await caches.match(request, { ignoreSearch: true });
+  // Exact match only — a cache-busted URL (style.css?v=newHash) must
+  // not satisfy from an older entry keyed at a different query string.
+  const cached = await caches.match(request);
   if (cached) return cached;
 
   try {
@@ -120,6 +132,9 @@ async function cacheFirstThenNetwork(request) {
     }
     return response;
   } catch {
-    return new Response('Offline', { status: 503, statusText: 'Offline' });
+    // Offline fallback: try a query-stringless cache entry (e.g. pre-cached
+    // `/style.css` when the request was `/style.css?v=<hash>`).
+    const fallback = await caches.match(request, { ignoreSearch: true });
+    return fallback || new Response('Offline', { status: 503, statusText: 'Offline' });
   }
 }
