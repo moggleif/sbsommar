@@ -594,6 +594,12 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 | `02-§26.11` | `POST /edit-event` rejects with HTTP 403 outside period | 03-ARCHITECTURE.md §13.4 | GATE-05..10 (logic); — (manual: POST outside period) | `app.js` – `isOutsideEditingPeriod()` check before validation | implemented |
 | `02-§26.12` | API error response includes Swedish message | 03-ARCHITECTURE.md §13.4 | — (manual: inspect 403 response body) | `app.js` – Swedish error strings in both endpoints | implemented |
 | `02-§26.13` | Build embeds `opens_for_editing` and `end_date` as `data-` attributes on form | 03-ARCHITECTURE.md §13.2 | GATE-01..04, REDT-22..24 | `source/build/render-add.js`, `source/build/render-edit.js` – `data-opens` and `data-closes` on `<form>` | covered |
+| `02-§26.14` | Before period + valid admin token: add and edit forms show "Öppna ändå (admin)" button alongside locked message | 03-ARCHITECTURE.md §13.6 | — | — | gap |
+| `02-§26.15` | Bypass button removes disabled state on fieldset and submit button | 03-ARCHITECTURE.md §13.6 | — | — | gap |
+| `02-§26.16` | Bypass button is only shown before the period opens, never after | 03-ARCHITECTURE.md §13.6 | — | — | gap |
+| `02-§26.17` | `/add-event`, `/edit-event`, `/delete-event` accept valid admin tokens before `opens_for_editing` | 03-ARCHITECTURE.md §13.6 | — | — | gap |
+| `02-§26.18` | Same endpoints reject requests after `end_date + 1 day` regardless of admin token | 03-ARCHITECTURE.md §13.6 | — | — | gap |
+| `02-§26.19` | Add-activity form includes admin token as `adminToken` in request body when bypass is active | 03-ARCHITECTURE.md §13.6 | — | — | gap |
 | `05-§1.6` | `opens_for_editing` field documented in data contract | 05-DATA_CONTRACT.md §1 | — | `docs/05-DATA_CONTRACT.md` – field added to schema and described | implemented |
 | `02-§30.1` | Hero two-column layout: image ~2/3, sidebar ~1/3 | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | HERO-01, HERO-02 | `source/build/render-index.js` – `.hero` grid, `.hero-main`, `.hero-sidebar`; `style.css` – `grid-template-columns: 2fr 1fr` | covered |
 | `02-§30.2` | Mobile: hero stacks vertically | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | — (manual: resize to <690px) | `style.css` – `@media (max-width: 690px) { .hero { grid-template-columns: 1fr } }` | implemented |
