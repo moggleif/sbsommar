@@ -302,6 +302,18 @@ Before writing any code: <!-- CL-§11.2 -->
 - Write code to make all tests pass. <!-- CL-§11.7 -->
 - Commit: `feat: implement [feature]`
 
+**Wait for user review of the implementation result:**
+
+After the implementation commit, stop and let the user see the result **running locally** before moving on. <!-- CL-§11.32 -->
+
+- The branch must be checked out locally and the dev server running (`npm start` or project equivalent) so the user can actually interact with the change, not just read a summary.
+- For UI changes: give the exact URLs to open (`/lagg-till.html`, `/redigera.html?id=…`, etc.) and any steps to reach the state that was changed (e.g. "admin token must be active", "open while `opens_for_editing` is in the future").
+- For backend/API changes: give the exact `curl` command or test invocation the user can run to see the behaviour.
+- For doc-only changes: point to the file paths and line ranges, and the rendered preview if one exists.
+- Do not start Phase 5 until the user has looked at the running result and signalled that the direction is right. If they want changes, revise and re-run Phase 4.
+
+The reasoning: if Phase 4 went in the wrong direction, every minute spent on traceability, extra review passes, and PR creation is wasted. A short pause here, with the thing running locally, is cheap; rework after Phase 8 is not.
+
 ## Phase 5 — Review and Traceability Update
 
 - Verify that requirements, documentation, tests, and implementation are consistent and complete. <!-- CL-§11.8 -->
@@ -323,6 +335,18 @@ For each pass, check from every one of these perspectives in turn:
 - **Beginner user**: Would a non-technical person understand the form, the feedback, and the flow? Is anything intimidating or unclear?
 - **First-time visitor**: Does the feature feel coherent with the rest of the site? Does anything feel out of place or inconsistent in tone, style, or layout?
 - **AI self-review**: Step back and ask — did I miss anything? Did I take shortcuts? Did I follow all constraints? Is there anything I would do differently?
+
+**Browser / manual verification for UI or frontend changes:**
+
+When the change touches HTML, CSS, or client-side JavaScript — anything a user would see or interact with — the User pass is not complete until the feature has actually been used in a browser. <!-- CL-§11.30 -->
+
+- Start the dev server (`npm start` or the project equivalent).
+- Walk through the golden path and the relevant edge cases for the feature.
+- Verify that other features on the same page still behave as before.
+- If something cannot be reached without special state (expired token, locked form, specific date), arrange that state (e.g. temporarily adjust `camps.yaml`) and restore it before committing.
+- If a browser check is genuinely impossible in the current environment (no dev server available, no browser access), say so explicitly in the review notes rather than silently skipping it.
+
+Unit tests, lint, and CodeQL verify code correctness, not feature correctness.
 
 After each pass: fix any issues found, then commit: `fix: post-review improvements for [feature] (pass N)`
 
@@ -360,9 +384,17 @@ After the PR is created, verify that CI passes and complete the merge. <!-- CL-�
 - Run `gh pr checks <number>` and wait for **all** checks to pass — including CodeQL (Analyze actions, Analyze javascript-typescript) and any other checks that may be added later. Do not merge while any check is pending or failing. <!-- CL-§11.20 -->
 - If any check fails, investigate the failure, fix the issue on the branch, push, and re-check. <!-- CL-§11.21 -->
 
+**Wait for user review and approval:**
+
+After CI is green, stop and wait for the user to review the PR and explicitly approve the merge. Do not merge on the strength of green CI alone. <!-- CL-§11.31 -->
+
+- Summarise what is ready for review (PR URL, CI status, any manual-verification notes).
+- Do not interpret silence, earlier agreement on scope, or a thumbs-up on the plan as approval to merge — merge to `main` is a shared-system action that always needs an explicit go-ahead.
+- If the user requests changes, return to the appropriate phase (tests, implementation, review) before merging.
+
 **Merge:**
 
-- Merge the PR with `gh pr merge <number> --merge`. <!-- CL-§11.22 -->
+- Once the user has explicitly approved, merge the PR with `gh pr merge <number> --merge`. <!-- CL-§11.22 -->
 
 **Cleanup:**
 
