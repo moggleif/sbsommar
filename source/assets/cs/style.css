@@ -3103,6 +3103,11 @@ a.admin-icon--expired,
 .lokaler-legend {
   font-size: var(--font-size-small);
   color: var(--color-charcoal);
+
+  /* Match the .intro reading-width cap (750px) so the two paragraphs above
+     the grid line up at the same width, even though the grid wrapper below
+     is wider. */
+  max-width: 750px;
   margin-top: var(--space-sm);
 }
 
