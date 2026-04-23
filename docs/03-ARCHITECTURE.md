@@ -1024,10 +1024,13 @@ Client side (`lagg-till.js`, `redigera.js`):
    checks for a valid admin token (same extraction as used in `redigera.js`
    for edit/delete — see §12 Admin Token).
 2. If an admin token is present, a secondary button labelled
-   "Öppna ändå (admin)" is rendered next to the locked-form message.
+   "Öppna ändå (admin)" is inserted directly after the locked-message
+   container as its next sibling, so it renders on its own row immediately
+   below the banner rather than inside it. The same DOM position is used on
+   both pages for a consistent layout.
 3. Pressing the button removes the disabled attribute on the fieldset and
-   submit button, allowing submission to proceed. The form then behaves as
-   if the period were open.
+   submit button and hides both the locked message and the bypass button.
+   The form then behaves as if the period were open.
 4. When the locked state applies because `today > closes`, the admin button
    is never rendered.
 5. `lagg-till.js` reads the admin token the same way `redigera.js` does and

@@ -600,6 +600,7 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 | `02-§26.17` | `/add-event`, `/edit-event`, `/delete-event` accept valid admin tokens before `opens_for_editing` | 03-ARCHITECTURE.md §13.6 | ABYP-01..06, ABYP-11..13 | `app.js` – skips pre-period reject when `verifyAdminToken()` passes; `api/index.php` – same check in all three handlers | covered |
 | `02-§26.18` | Same endpoints reject requests after `end_date + 1 day` regardless of admin token | 03-ARCHITECTURE.md §13.6 | ABYP-07..10 | `app.js`, `api/index.php` – `isAfterEditingPeriod()` rejects before admin check | covered |
 | `02-§26.19` | Add-activity form includes admin token as `adminToken` in request body when bypass is active | 03-ARCHITECTURE.md §13.6 | — (manual: open add form with admin token before period, click bypass, submit, inspect POST body) | `source/assets/js/client/lagg-till.js` – `bodyObj.adminToken = adminToken` when `adminBypassActive` | implemented |
+| `02-§26.20` | Bypass button renders on its own row directly below the locked message, outside the banner, same placement on both pages | 03-ARCHITECTURE.md §13.6 | — (manual: open lagg-till.html and redigera.html before opens with admin token, confirm the button sits below the banner on its own row on both pages) | `source/assets/js/client/lagg-till.js`, `source/assets/js/client/redigera.js` – button inserted as next sibling of the locked message container; `source/assets/cs/style.css` – `.form-gate-bypass { display: block; width: fit-content; }` | gap |
 | `05-§1.6` | `opens_for_editing` field documented in data contract | 05-DATA_CONTRACT.md §1 | — | `docs/05-DATA_CONTRACT.md` – field added to schema and described | implemented |
 | `02-§30.1` | Hero two-column layout: image ~2/3, sidebar ~1/3 | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | HERO-01, HERO-02 | `source/build/render-index.js` – `.hero` grid, `.hero-main`, `.hero-sidebar`; `style.css` – `grid-template-columns: 2fr 1fr` | covered |
 | `02-§30.2` | Mobile: hero stacks vertically | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | — (manual: resize to <690px) | `style.css` – `@media (max-width: 690px) { .hero { grid-template-columns: 1fr } }` | implemented |
@@ -1112,10 +1113,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 ## Summary
 
 ```text
-Total requirements:            1237
+Total requirements:            1238
 Covered (implemented + tested): 630
 Implemented, not tested:        607
-Gap (no implementation):          0
+Gap (no implementation):          1
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
