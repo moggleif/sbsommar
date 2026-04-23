@@ -2929,8 +2929,10 @@ a.admin-icon--expired,
   grid-template-columns: var(--lokaler-label-col) repeat(var(--lokaler-day-count, 7), var(--lokaler-day-col));
   gap: 1px;
 
-  /* The gap colour shows between cells as subtle 1px divider lines. */
-  background: color-mix(in srgb, var(--color-charcoal) 10%, transparent);
+  /* The gap colour shows between cells as 1px divider lines. It has to be
+     visibly darker than the cell background (which is itself a cream/
+     charcoal mix) or the lines disappear into the cells. */
+  background: color-mix(in srgb, var(--color-charcoal) 25%, transparent);
   min-width: min-content;
 }
 
