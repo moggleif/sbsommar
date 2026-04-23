@@ -435,7 +435,7 @@ function wrapTestimonialCards(html) {
 
 // ── Registration banner and CTA (02-§94) ────────────────────────────────────
 
-const REGISTRATION_URL = 'https://event-friend-ai.lovable.app';
+const REGISTRATION_URL = 'https://boka.sbsommar.se';
 
 /**
  * Renders the hero registration banners — one per camp with an active
