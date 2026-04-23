@@ -3009,7 +3009,16 @@ a.admin-icon--expired,
 
 .event-block:hover,
 .event-block:focus-visible {
-  background: color-mix(in srgb, var(--color-terracotta) 25%, var(--color-white));
+  /* Expand the block just wide enough for the full text so titles like
+     "Lunch" and "Middag" are readable on hover/focus, without needing a
+     native tooltip. z-index lifts it over neighbouring blocks. The original
+     width from the data-lb rule is preserved as the minimum, so the block
+     does not shrink. */
+  width: auto;
+  min-width: max-content;
+  z-index: 2;
+  background: color-mix(in srgb, var(--color-terracotta) 28%, var(--color-white));
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-charcoal) 22%, transparent);
 }
 
 .event-block:focus-visible {
