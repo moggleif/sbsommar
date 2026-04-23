@@ -4976,3 +4976,9 @@ overview, is covered in a later section. Issue #332.
   interact with the block. <!-- 02-§98.17 -->
 - Back-to-back events (one's end time equals another's start time)
   are not treated as clashes. <!-- 02-§98.18 -->
+- Non-overlapping events in a day that contains other clashing events
+  retain the full height of their row. Only events that actually
+  overlap one another share vertical space with each other. <!-- 02-§98.19 -->
+- The top-left corner cell of the grid labels both axes with the text
+  "Lokaler \ Dag" (the backslash reads as a diagonal separator between
+  the row axis and the column axis). <!-- 02-§98.20 -->

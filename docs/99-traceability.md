@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-04-23 (locale overview page requirements added as gaps, 02-§98.1–98.15).
+Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered, 02-§98.1–98.20 all covered/implemented).
 
 ---
 
@@ -1113,10 +1113,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (locale overview page requireme
 ## Summary
 
 ```text
-Total requirements:            1256
-Covered (implemented + tested): 630
-Implemented, not tested:        608
-Gap (no implementation):         18
+Total requirements:            1258
+Covered (implemented + tested): 646
+Implemented, not tested:        612
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1452,11 +1452,12 @@ Matrix cleanup (2026-02-25):
   the source repo, README, and issue tracker on github.com.
   8 new tests across the same suite (DOCS-CFG-05..07, DOCS-IDX-01..05).
 
-15 requirements added for the locale overview page (02-§98.1–98.15):
-  All at status `gap` until Session 1 of issue #332 lands
-  (`source/build/render-lokaler.js`, `public/lokaler.html`,
-  and the schedule-page link "Se lokalöversikt →").
-  See 02-REQUIREMENTS.md §98 and 07-DESIGN.md §6 "Locale overview grid".
+20 requirements delivered for the locale overview page (02-§98.1–98.20,
+Session 1 of issue #332): 16 covered by unit tests (LOK-01..83),
+4 implemented (§98.8 contextual links, §98.14 design-token discipline,
+§98.15 mobile breakpoint, §98.20 corner cell) — all four need
+manual/browser verification only. See 02-REQUIREMENTS.md §98 and
+07-DESIGN.md §6 "Locale overview grid" for the design spec.
 ```
 
 ---
@@ -2253,24 +2254,26 @@ the add- and edit-activity forms that links to this page.
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§98.1` | gap | `source/build/render-lokaler.js` not yet created; `public/lokaler.html` not yet emitted by the build |
-| `02-§98.2` | gap | Will iterate locales in `source/data/local.yaml` order |
-| `02-§98.3` | gap | Grid spans max(today, `start_date`)..`end_date`; full span fallback for past camps; test LOK-75 |
-| `02-§98.4` | gap | Event time-blocks positioned by date and start/end times |
-| `02-§98.5` | gap | Event-block text: title, start, end, responsible |
-| `02-§98.6` | gap | Empty-locale rows display "Inga bokningar" |
-| `02-§98.7` | gap | Unknown `location` values fold into the "Annat" row |
-| `02-§98.8` | gap | "Se lokalöversikt →" link added to `source/build/render.js` `renderSchedulePage()` intro and `source/build/render-add.js` `renderAddPage()` intro |
-| `02-§98.9` | gap | No new `pageNav` entry; `source/build/layout.js` untouched |
-| `02-§98.10` | gap | Heading "Lokalöversikt"; all copy in Swedish per §14 |
-| `02-§98.11` | gap | Event-blocks as `<button>` or `<a>` with descriptive `aria-label` |
-| `02-§98.12` | gap | `.lokaler-legend` block placed above the grid (grid often exceeds the viewport height) |
-| `02-§98.13` | gap | Grid is static HTML emitted by the build; no client-side grid JS |
-| `02-§98.14` | gap | Styling via `var(--color-*)`, `var(--space-*)` tokens (07-§6.104–6.115) |
-| `02-§98.15` | gap | `@media (max-width: 600px)` keeps `overflow-x: auto` on `.lokaler-grid-wrapper` |
-| `02-§98.16` | gap | `assignLanes()` in render-lokaler.js; `.day-band--lanes-2..5` stack events vertically; test LOK-80 |
-| `02-§98.17` | gap | `markClashes()` + `.event-block--clash` styling (red-tinted bg, error-coloured accent); test LOK-80 |
-| `02-§98.18` | gap | Clash predicate is `a.start < b.end && a.end > b.start` — back-to-back does not clash; test LOK-81 |
+| `02-§98.1` | covered | `source/build/render-lokaler.js` — `renderLokalerPage`; `source/build/build.js` writes `public/lokaler.html`; tests LOK-30, LOK-70 |
+| `02-§98.2` | covered | `groupEventsByLocation()` preserves `local.yaml` order; tests LOK-01, LOK-40 |
+| `02-§98.3` | covered | Today-forward filter + full-span fallback in `renderLokalerPage`; tests LOK-75, LOK-76, LOK-77 |
+| `02-§98.4` | covered | `positionBlock()` computes `left`/`width` from start/end; tests LOK-10..LOK-16, LOK-41 |
+| `02-§98.5` | covered | `renderEventBlock()` emits title, time range, responsible spans; tests LOK-50, LOK-51 |
+| `02-§98.6` | covered | Empty locales get the italic `.lokal-empty` sub-label "Inga bokningar"; test LOK-42 |
+| `02-§98.7` | covered | `groupEventsByLocation()` folds unknown locations under "Annat"; tests LOK-04, LOK-05, LOK-08, LOK-43 |
+| `02-§98.8` | implemented | "Se lokalöversikt →" link in `source/build/render.js` schedule intro and `source/build/render-add.js` add intro. Manual: open /schema.html and /lagg-till.html, click link |
+| `02-§98.9` | covered | `source/build/layout.js` untouched — no nav entry added; test LOK-61 |
+| `02-§98.10` | covered | `<h1>Lokalöversikt</h1>`; `<html lang="sv">`; test LOK-31 |
+| `02-§98.11` | covered | `ariaLabelFor()` builds locale/date/time/title/responsible string; test LOK-52 |
+| `02-§98.12` | covered | `.lokaler-legend` placed before `.lokaler-grid-wrapper` in `renderLokalerPage`; test LOK-62 |
+| `02-§98.13` | covered | Entire grid server-rendered at build; no `lokaler.js` referenced; test LOK-63 |
+| `02-§98.14` | implemented | All `style.css` §6.104–6.115 rules use `var(--color-*)`, `var(--space-*)`, `color-mix()` derivations; manual: grep `source/assets/cs/style.css` for hex values inside `.lokaler-*` / `.event-block*` / `.day-band*` rules |
+| `02-§98.15` | implemented | `.lokaler-grid-wrapper { overflow-x: auto }`; `@media (max-width: 600px)` shrinks `--lokaler-*-col`. Manual: open /lokaler.html at ≤600px viewport, confirm horizontal scroll and surrounding layout intact |
+| `02-§98.16` | covered | `assignLanes()` greedy first-fit; `.day-band--lanes-N` modifiers; per-event `--lane` custom property; test LOK-80 |
+| `02-§98.17` | covered | `markClashes()` + `.event-block--clash` class; bg `color-mix(var(--color-error) 35%, white)` + `box-shadow` red outline; test LOK-80 |
+| `02-§98.18` | covered | Clash predicate `a.start < b.end && a.end > b.start` in `markClashes()`; test LOK-81 |
+| `02-§98.19` | covered | Per-event `--group` (count of temporally-overlapping events including self) drives height; non-clashers keep full band height even on crowded days; test LOK-83 |
+| `02-§98.20` | implemented | `.lokaler-grid-corner` cell renders the text `Lokaler \ Dag` inside `renderLokalerPage`; visible on every page render. Manual: open /lokaler.html, confirm corner text |
 
 ### §1 — Camp registry fields (camps.yaml)
 
