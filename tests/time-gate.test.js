@@ -20,7 +20,11 @@ const assert = require('node:assert/strict');
 
 const { renderAddPage } = require('../source/build/render-add');
 const { renderEditPage } = require('../source/build/render-edit');
-const { isOutsideEditingPeriod } = require('../source/api/time-gate');
+const {
+  isOutsideEditingPeriod,
+  isBeforeEditingPeriod,
+  isAfterEditingPeriod,
+} = require('../source/api/time-gate');
 
 // ── Test data ────────────────────────────────────────────────────────────────
 
@@ -109,5 +113,39 @@ describe('isOutsideEditingPeriod (02-§26.10, 02-§26.11)', () => {
 
   it('GATE-10: returns true on end_date + 2 days (first disallowed day)', () => {
     assert.strictEqual(isOutsideEditingPeriod('2026-06-29', opens, endDate), true);
+  });
+});
+
+// ── isBeforeEditingPeriod / isAfterEditingPeriod (02-§26.17, 02-§26.18) ────
+
+describe('isBeforeEditingPeriod (02-§26.17)', () => {
+  const opens = '2026-06-14';
+
+  it('GATE-11: returns true when today is strictly before opens_for_editing', () => {
+    assert.strictEqual(isBeforeEditingPeriod('2026-06-13', opens), true);
+  });
+
+  it('GATE-12: returns false on the opens_for_editing date itself', () => {
+    assert.strictEqual(isBeforeEditingPeriod('2026-06-14', opens), false);
+  });
+
+  it('GATE-13: returns false well after opens_for_editing', () => {
+    assert.strictEqual(isBeforeEditingPeriod('2027-01-01', opens), false);
+  });
+});
+
+describe('isAfterEditingPeriod (02-§26.18)', () => {
+  const endDate = '2026-06-27';
+
+  it('GATE-14: returns false on end_date + 1 day (last allowed day)', () => {
+    assert.strictEqual(isAfterEditingPeriod('2026-06-28', endDate), false);
+  });
+
+  it('GATE-15: returns true on end_date + 2 days (first disallowed day)', () => {
+    assert.strictEqual(isAfterEditingPeriod('2026-06-29', endDate), true);
+  });
+
+  it('GATE-16: returns false before the camp (today earlier than end_date)', () => {
+    assert.strictEqual(isAfterEditingPeriod('2026-06-01', endDate), false);
   });
 });

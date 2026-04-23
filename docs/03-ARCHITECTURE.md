@@ -1011,6 +1011,45 @@ message.
 | `source/assets/js/client/redigera.js` | Client-side date check and form disabling |
 | `app.js` | Server-side date check on both endpoints |
 
+### 13.6 Admin bypass before the camp opens
+
+Administrators can open the add-activity and edit-activity forms before
+`opens_for_editing`. The bypass is one-sided: it only opens the pre-period
+lock. After `end_date + 1 day` the forms stay locked for everyone so finished
+camps cannot be altered retroactively through the website.
+
+Client side (`lagg-till.js`, `redigera.js`):
+
+1. When the locked state applies because `today < opens`, the script also
+   checks for a valid admin token (same extraction as used in `redigera.js`
+   for edit/delete — see §12 Admin Token).
+2. If an admin token is present, a secondary button labelled
+   "Öppna ändå (admin)" is rendered next to the locked-form message.
+3. Pressing the button removes the disabled attribute on the fieldset and
+   submit button, allowing submission to proceed. The form then behaves as
+   if the period were open.
+4. When the locked state applies because `today > closes`, the admin button
+   is never rendered.
+5. `lagg-till.js` reads the admin token the same way `redigera.js` does and
+   includes it in the `/add-event` request body as `adminToken` when the
+   admin bypass is active.
+
+Server side (`app.js`):
+
+1. Each of `POST /add-event`, `POST /edit-event`, and `POST /delete-event`
+   verifies the admin token (using `verifyAdminToken` from `source/api/admin.js`)
+   and treats the request as admin if valid.
+2. The pre-period check (`today < opens_for_editing`) is skipped for admin
+   requests.
+3. The post-period check (`today > end_date + 1 day`) is **not** skipped —
+   it applies to admins too.
+
+`time-gate.js` exposes two helpers alongside the existing
+`isOutsideEditingPeriod`: `isBeforeEditingPeriod(today, opens)` and
+`isAfterEditingPeriod(today, endDate)`. Endpoints use them to distinguish the
+two lock reasons. The combined helper is retained for callers that do not
+need the distinction.
+
 ---
 
 ## 14. Upcoming Camps Section on Homepage

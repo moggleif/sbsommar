@@ -594,6 +594,12 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 | `02-§26.11` | `POST /edit-event` rejects with HTTP 403 outside period | 03-ARCHITECTURE.md §13.4 | GATE-05..10 (logic); — (manual: POST outside period) | `app.js` – `isOutsideEditingPeriod()` check before validation | implemented |
 | `02-§26.12` | API error response includes Swedish message | 03-ARCHITECTURE.md §13.4 | — (manual: inspect 403 response body) | `app.js` – Swedish error strings in both endpoints | implemented |
 | `02-§26.13` | Build embeds `opens_for_editing` and `end_date` as `data-` attributes on form | 03-ARCHITECTURE.md §13.2 | GATE-01..04, REDT-22..24 | `source/build/render-add.js`, `source/build/render-edit.js` – `data-opens` and `data-closes` on `<form>` | covered |
+| `02-§26.14` | Before period + valid admin token: add and edit forms show "Öppna ändå (admin)" button alongside locked message | 03-ARCHITECTURE.md §13.6 | — (manual: open form before `opens_for_editing` with admin token, confirm bypass button appears) | `source/assets/js/client/lagg-till.js`, `source/assets/js/client/redigera.js` – bypass button inserted next to locked message | implemented |
+| `02-§26.15` | Bypass button removes disabled state on fieldset and submit button | 03-ARCHITECTURE.md §13.6 | — (manual: click bypass button, confirm form becomes interactive) | `source/assets/js/client/lagg-till.js`, `source/assets/js/client/redigera.js` – click handler clears disabled and `form-gated` class | implemented |
+| `02-§26.16` | Bypass button is only shown before the period opens, never after | 03-ARCHITECTURE.md §13.6 | — (manual: open form after `end_date + 1` with admin token, confirm no bypass button) | `source/assets/js/client/lagg-till.js`, `source/assets/js/client/redigera.js` – bypass branch gated on `isBeforeOpens` / pre-opens block | implemented |
+| `02-§26.17` | `/add-event`, `/edit-event`, `/delete-event` accept valid admin tokens before `opens_for_editing` | 03-ARCHITECTURE.md §13.6 | ABYP-01..06, ABYP-11..13 | `app.js` – skips pre-period reject when `verifyAdminToken()` passes; `api/index.php` – same check in all three handlers | covered |
+| `02-§26.18` | Same endpoints reject requests after `end_date + 1 day` regardless of admin token | 03-ARCHITECTURE.md §13.6 | ABYP-07..10 | `app.js`, `api/index.php` – `isAfterEditingPeriod()` rejects before admin check | covered |
+| `02-§26.19` | Add-activity form includes admin token as `adminToken` in request body when bypass is active | 03-ARCHITECTURE.md §13.6 | — (manual: open add form with admin token before period, click bypass, submit, inspect POST body) | `source/assets/js/client/lagg-till.js` – `bodyObj.adminToken = adminToken` when `adminBypassActive` | implemented |
 | `05-§1.6` | `opens_for_editing` field documented in data contract | 05-DATA_CONTRACT.md §1 | — | `docs/05-DATA_CONTRACT.md` – field added to schema and described | implemented |
 | `02-§30.1` | Hero two-column layout: image ~2/3, sidebar ~1/3 | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | HERO-01, HERO-02 | `source/build/render-index.js` – `.hero` grid, `.hero-main`, `.hero-sidebar`; `style.css` – `grid-template-columns: 2fr 1fr` | covered |
 | `02-§30.2` | Mobile: hero stacks vertically | 03-ARCHITECTURE.md §15, 07-DESIGN.md §6 | — (manual: resize to <690px) | `style.css` – `@media (max-width: 690px) { .hero { grid-template-columns: 1fr } }` | implemented |
@@ -1106,9 +1112,9 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 ## Summary
 
 ```text
-Total requirements:            1231
-Covered (implemented + tested): 628
-Implemented, not tested:        603
+Total requirements:            1237
+Covered (implemented + tested): 630
+Implemented, not tested:        607
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -1159,6 +1165,12 @@ End time is now required everywhere (add form, edit form, data contract).
 14 requirements added for form time-gating (02-§26.1–26.13, 05-§1.6):
   2 covered (GATE-01..10): 02-§26.2 (period logic), 02-§26.13 (data attributes).
   12 implemented (browser-only or manual): 02-§26.1, 02-§26.3–26.12, 05-§1.6.
+6 requirements added for admin pre-camp bypass (02-§26.14–26.19):
+  2 covered (GATE-11..16, ABYP-01..13): 02-§26.17 (pre-period admin accept),
+    02-§26.18 (post-period locked for everyone).
+  4 implemented (browser-only): 02-§26.14 (bypass button rendered),
+    02-§26.15 (disabled state cleared on click), 02-§26.16 (bypass button
+    not shown after period), 02-§26.19 (admin token in /add-event body).
 6 requirements added for past-date blocking (02-§27.1–27.6):
   3 covered (PDT-03..06): 02-§27.4, 02-§27.5, 02-§27.6
   2 implemented (browser-only client validation): 02-§27.2, 02-§27.3

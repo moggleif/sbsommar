@@ -253,7 +253,28 @@
     });
   }
 
-  // ── Time-gating (02-§26.3–26.8) ───────────────────────────────────────────
+  // ── Admin token helper (02-§26.17, §26.19) ────────────────────────────────
+
+  function getAdminToken() {
+    try {
+      var raw = localStorage.getItem('sb_admin');
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || !data.token || typeof data.token !== 'string') return null;
+      var i = data.token.lastIndexOf('_');
+      if (i === -1) return null;
+      var epoch = Number(data.token.slice(i + 1));
+      if (!isFinite(epoch) || epoch <= 0) return null;
+      return Math.floor(Date.now() / 1000) <= epoch ? data.token : null;
+    } catch {
+      return null;
+    }
+  }
+
+  var adminToken = getAdminToken();
+  var adminBypassActive = false;
+
+  // ── Time-gating (02-§26.3–26.8, §26.14–§26.19) ────────────────────────────
 
   var opensDate = form.dataset.opens;
   var closesDate = form.dataset.closes;
@@ -273,8 +294,23 @@
       fieldset.disabled = true;
       submitBtn.disabled = true;
       form.classList.add('form-gated');
+
+      if (adminToken) {
+        var bypassBtn = document.createElement('button');
+        bypassBtn.type = 'button';
+        bypassBtn.className = 'form-gate-bypass';
+        bypassBtn.textContent = 'Öppna ändå (admin)';
+        bypassBtn.addEventListener('click', function () {
+          adminBypassActive = true;
+          fieldset.disabled = false;
+          submitBtn.disabled = false;
+          form.classList.remove('form-gated');
+          msg.hidden = true;
+        });
+        msg.appendChild(bypassBtn);
+      }
     } else if (todayGate > closesDate) {
-      // After closing
+      // After closing — no admin bypass (02-§26.16, §26.18)
       var msg2 = document.createElement('div');
       msg2.className = 'form-gate-msg';
       msg2.textContent = 'Lägret är avslutat.';
@@ -858,6 +894,12 @@
           link:          els.link.value.trim(),
           cookieConsent: consentGiven,
         };
+      }
+
+      // Admin bypass (02-§26.19): forward token when admin opened the form
+      // before opens_for_editing.
+      if (adminBypassActive && adminToken) {
+        bodyObj.adminToken = adminToken;
       }
 
       fetch(apiUrl, {

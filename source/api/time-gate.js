@@ -27,8 +27,29 @@ function addOneDay(dateStr) {
  * @returns {boolean}
  */
 function isOutsideEditingPeriod(today, opensForEditing, endDate) {
-  const closes = addOneDay(endDate);
-  return today < opensForEditing || today > closes;
+  return isBeforeEditingPeriod(today, opensForEditing) || isAfterEditingPeriod(today, endDate);
 }
 
-module.exports = { isOutsideEditingPeriod, addOneDay };
+/**
+ * Returns true when `today` is strictly before `opens_for_editing`.
+ * Used to distinguish the pre-period lock (admin can bypass, 02-§26.17)
+ * from the post-period lock (everyone is locked out, 02-§26.18).
+ */
+function isBeforeEditingPeriod(today, opensForEditing) {
+  return today < opensForEditing;
+}
+
+/**
+ * Returns true when `today` is strictly after `end_date + 1 day`, i.e. the
+ * camp period has fully ended. Admins do not bypass this (02-§26.18).
+ */
+function isAfterEditingPeriod(today, endDate) {
+  return today > addOneDay(endDate);
+}
+
+module.exports = {
+  isOutsideEditingPeriod,
+  isBeforeEditingPeriod,
+  isAfterEditingPeriod,
+  addOneDay,
+};
