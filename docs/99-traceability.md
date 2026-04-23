@@ -2162,22 +2162,6 @@ Matrix cleanup (2026-02-25):
 | `02-§95.6` | covered | SLUG-RD-03..12 prove output equivalence; SLUG-RD-14 guarantees no leading/trailing dash regression |
 | `02-§95.7` | covered | CodeQL post-merge scan on main confirmed alerts #17, #30, #31, #32 transitioned to state `fixed` |
 
-### §97 — Project Documentation Site
-
-| ID | Status | Notes |
-| --- | --- | --- |
-| `02-§97.1` | gap | Pages must be enabled in Settings → Pages; URL appears there once the first build finishes (manual step, see 08-ENVIRONMENTS.md § Documentation site) |
-| `02-§97.2` | gap | Source `main` + `/docs` is set manually in Settings → Pages; documented in 08-ENVIRONMENTS.md |
-| `02-§97.3` | gap | Verified manually by pushing a `docs/` change after enablement and confirming the Pages build runs |
-| `02-§97.4` | implemented | `docs/` contains only project documentation; no secrets, env values, or non-docs files — manual content review during this PR |
-| `02-§97.5` | implemented | `docs/_config.yml` relies on GitHub Pages' built-in Jekyll; no project workflow added (verified by absence in `.github/workflows/`) |
-| `02-§97.6` | implemented | DOCS-CFG-03 / DOCS-CFG-04: `docs/_config.yml` activates `jekyll-relative-links` and `relative_links.enabled: true`; runtime `.md → .html` resolution verified manually in the browser |
-| `02-§97.7` | implemented | Manual browser verification: inline `<!-- 02-§N.M -->` markers remain as HTML comments in rendered output and are not visible |
-| `02-§97.8` | implemented | `package.json` and `api/composer.json` unchanged by this feature (verified in PR diff) |
-| `02-§97.9` | implemented | `.github/workflows/` unchanged; no Pages-specific workflow added (verified in PR diff) |
-| `02-§97.10` | implemented | `deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`, `event-data-deploy.yml`, and `event-data-deploy-post-merge.yml` are untouched in this PR |
-| `02-§97.11` | implemented | No `docs/CNAME` file; default `*.github.io` URL in use |
-
 ### §96 — Self-Healing Service Worker Upgrade
 
 | ID | Status | Notes |
@@ -2197,6 +2181,22 @@ Matrix cleanup (2026-02-25):
 | `02-§96.13` | covered | SWH-08: `sw.js` has no `import`, `require`, or `importScripts` |
 | `02-§96.14` | implemented | `package.json` unchanged by this feature |
 | `02-§96.15` | implemented | `offline-guard.js`, `feedback.js`, and `offline.html` unchanged; offline routing in `sw.js` preserved — manual browser verification |
+
+### §97 — Project Documentation Site
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§97.1` | gap | Pages must be enabled in Settings → Pages; URL appears there once the first build finishes (manual step, see 08-ENVIRONMENTS.md § Documentation site) |
+| `02-§97.2` | gap | Source `main` + `/docs` is set manually in Settings → Pages; documented in 08-ENVIRONMENTS.md |
+| `02-§97.3` | gap | Verified manually by pushing a `docs/` change after enablement and confirming the Pages build runs |
+| `02-§97.4` | implemented | `docs/` contains only project documentation; no secrets, env values, or non-docs files — manual content review during this PR |
+| `02-§97.5` | implemented | `docs/_config.yml` relies on GitHub Pages' built-in Jekyll; no project workflow added (verified by absence in `.github/workflows/`) |
+| `02-§97.6` | implemented | DOCS-CFG-03 / DOCS-CFG-04: `docs/_config.yml` activates `jekyll-relative-links` and `relative_links.enabled: true`; runtime `.md → .html` resolution verified manually in the browser |
+| `02-§97.7` | implemented | Manual browser verification: inline `<!-- 02-§N.M -->` markers remain as HTML comments in rendered output and are not visible |
+| `02-§97.8` | implemented | `package.json` and `api/composer.json` unchanged by this feature (verified in PR diff) |
+| `02-§97.9` | implemented | `.github/workflows/` unchanged; no Pages-specific workflow added (verified in PR diff) |
+| `02-§97.10` | implemented | `deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`, `event-data-deploy.yml`, and `event-data-deploy-post-merge.yml` are untouched in this PR |
+| `02-§97.11` | implemented | No `docs/CNAME` file; default `*.github.io` URL in use |
 
 ### §1 — Camp registry fields (camps.yaml)
 
