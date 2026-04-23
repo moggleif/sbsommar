@@ -2933,7 +2933,7 @@ a.admin-icon--expired,
 .lokal-label {
   font-weight: 700;
   color: var(--color-charcoal);
-  background: var(--color-cream);
+  background: var(--color-cream-light);
   padding: var(--space-xs) var(--space-sm);
   display: flex;
   flex-direction: column;
@@ -2945,7 +2945,7 @@ a.admin-icon--expired,
 }
 
 .lokal-label--header {
-  background: var(--color-cream-light);
+  background: var(--color-cream);
 }
 
 .day-band-label {
@@ -2953,7 +2953,7 @@ a.admin-icon--expired,
   color: var(--color-charcoal);
   text-align: center;
   padding: var(--space-xs);
-  background: var(--color-cream-light);
+  background: var(--color-cream);
   font-weight: 700;
 }
 
@@ -2964,7 +2964,7 @@ a.admin-icon--expired,
 .day-band {
   position: relative;
   min-height: 3.5em;
-  background-color: var(--color-white);
+  background-color: var(--color-cream);
 
   /* Tunna vertikala linjer — en per timme inuti dagsbandet, så man ser var
      08:00, 09:00, ... verkligen ligger även när event-block är små. */
@@ -2972,8 +2972,8 @@ a.admin-icon--expired,
     to right,
     transparent 0,
     transparent calc(100% / var(--lokaler-hour-span, 14) - 1px),
-    color-mix(in srgb, var(--color-charcoal) 6%, transparent) calc(100% / var(--lokaler-hour-span, 14) - 1px),
-    color-mix(in srgb, var(--color-charcoal) 6%, transparent) calc(100% / var(--lokaler-hour-span, 14))
+    color-mix(in srgb, var(--color-charcoal) 8%, transparent) calc(100% / var(--lokaler-hour-span, 14) - 1px),
+    color-mix(in srgb, var(--color-charcoal) 8%, transparent) calc(100% / var(--lokaler-hour-span, 14))
   );
 }
 
