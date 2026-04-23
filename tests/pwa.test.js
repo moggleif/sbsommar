@@ -453,13 +453,13 @@ describe('02-§83.33 — Service worker pre-caches offline.html', () => {
 
 // ── 02-§83.34 — Cache version incremented ───────────────────────────────────
 
-describe('02-§83.34 — Cache version incremented to v5', () => {
-  it('PWA-31: sw.js uses sb-sommar-v5 cache name', () => {
+describe('02-§83.34 — Cache version incremented', () => {
+  it('PWA-31: sw.js uses current cache name (sb-sommar-v6 per §96.1)', () => {
     const filePath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(filePath, 'utf8');
     assert.ok(
-      src.includes('sb-sommar-v5'),
-      'CACHE_NAME must be sb-sommar-v5',
+      src.includes("'sb-sommar-v6'"),
+      'CACHE_NAME must be sb-sommar-v6',
     );
   });
 });

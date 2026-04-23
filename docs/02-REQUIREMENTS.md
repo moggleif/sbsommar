@@ -4356,18 +4356,17 @@ an internet connection.
 
 - The `PRE_CACHE_URLS` array in `sw.js` is populated by the build-time
   injection. There is no hand-maintained list. <!-- 02-§92.6 -->
-- The service worker cache name is `sb-sommar-v5`. <!-- 02-§92.7 -->
+- The service worker cache name is defined in §96.1. <!-- 02-§92.7 -->
 - The service worker pre-caches all site pages, including
   `lagg-till.html` and `redigera.html`. <!-- 02-§92.8 -->
 - The `NO_CACHE_PATTERNS` list contains only API and submission
   endpoints: `/add-event`, `/edit-event`, `/delete-event`,
   `/verify-admin`, `/api/`. It does not contain any `.html`
   pages. <!-- 02-§92.9 -->
-- The `cacheFirstThenNetwork` strategy uses `{ ignoreSearch: true }`
-  when matching cache entries so that cache-busted URLs
-  (e.g. `style.css?v=abc`) match pre-cached files. <!-- 02-§92.10 -->
-- The `networkFirstWithOfflineFallback` strategy uses
-  `{ ignoreSearch: true }` when matching cache entries. <!-- 02-§92.11 -->
+- The `cacheFirstThenNetwork` strategy for static assets matches cache
+  entries as defined in §96.5. <!-- 02-§92.10 -->
+- The network-first strategies match cache entries with
+  `{ ignoreSearch: true }` as defined in §96.6. <!-- 02-§92.11 -->
 
 ### 92.3 Offline guard — form pages (user requirements)
 
@@ -4625,3 +4624,97 @@ changes do not silently inherit the unsafe pattern.
   URLs continue to resolve. <!-- 02-§95.6 -->
 - CodeQL alerts #17, #30, #31, and #32 reach state `fixed` on the next
   scan after merge. <!-- 02-§95.7 -->
+
+---
+
+## 96. Self-Healing Service Worker Upgrade
+
+### 96.1 Context
+
+Clients that had visited the site before a deploy could end up serving
+a stale `/style.css` from the service worker's Cache Storage even after
+a new service worker activated. Two factors combined to cause this:
+
+1. The pre-cache step used `cache.addAll(PRE_CACHE_URLS)` with default
+   `fetch` semantics, which respects the browser's HTTP cache. When the
+   HTTP cache held a `style.css` copy from before the deploy (served
+   with `Cache-Control: max-age=604800`), that stale copy was pulled
+   directly into the new `sb-sommar-v<N>` cache.
+2. The service worker never called `self.skipWaiting()` or
+   `self.clients.claim()`, so a freshly installed worker stayed in the
+   waiting state until every existing client was closed. Users who kept
+   the site open (especially as an installed PWA) never saw the new
+   worker activate.
+
+The result was that CSS changes landed on the server but did not reach
+existing clients — the banners added in §94 rendered as unstyled
+inline links on devices that had visited the site within the last week.
+
+This section defines the service-worker upgrade behaviour that removes
+the need for any user action (no "clear cache and data") to recover
+from a stale cache.
+
+### 96.2 Service worker (site requirements)
+
+- The service worker cache name is `sb-sommar-v6`. <!-- 02-§96.1 -->
+- The `install` event handler calls `self.skipWaiting()` so that a new
+  worker moves straight from `installed` to `activating` without
+  waiting for all existing clients to close. <!-- 02-§96.2 -->
+- The `install` handler pre-caches every URL in `PRE_CACHE_URLS` using
+  `new Request(url, { cache: 'reload' })`, which bypasses the browser's
+  HTTP cache and fetches each asset directly from the network, so a
+  stale HTTP-cache entry cannot be copied into the service-worker
+  cache. <!-- 02-§96.3 -->
+- The `activate` event handler deletes every cache whose name is not
+  equal to the current `CACHE_NAME` and then calls
+  `self.clients.claim()` so that the new worker immediately controls
+  every open tab without requiring a reload. <!-- 02-§96.4 -->
+- The `cacheFirstThenNetwork` strategy's **primary** cache lookup
+  matches without `ignoreSearch`, so a request for
+  `style.css?v=<newHash>` does not satisfy from a cache entry keyed at
+  `style.css?v=<oldHash>` or `style.css`. When no exact match exists,
+  the request falls through to the network and the fresh response is
+  stored in the cache. A secondary `ignoreSearch` match is only
+  performed as an **offline fallback** when the network fetch itself
+  fails, so that pre-cached `/style.css` still serves when the user is
+  offline on a new hash. <!-- 02-§96.5 -->
+- The `networkFirstThenCache` and `networkFirstWithOfflineFallback`
+  strategies continue to use `{ ignoreSearch: true }` when falling back
+  to the cache, so that a cache-busted HTML or `events.json` URL still
+  matches the previously stored entry during an offline fallback. <!-- 02-§96.6 -->
+
+### 96.3 Pre-cache URL list (site requirements)
+
+- The build-generated `PRE_CACHE_URLS` list continues to contain
+  root-relative paths without the cache-busting query string
+  (e.g. `/style.css`, not `/style.css?v=abc`). <!-- 02-§96.7 -->
+- The cache-first handler, with `ignoreSearch` removed, stores fetched
+  `style.css?v=<hash>` responses as separate entries. The pre-cached
+  `/style.css` entry continues to serve as an offline fallback when the
+  hashed URL is not yet cached. <!-- 02-§96.8 -->
+
+### 96.4 Self-healing behaviour (user requirements)
+
+- A user whose browser has an active service worker from before this
+  release receives the new service worker on the next visit to
+  `sbsommar.se` (or `qa.sbsommar.se`): the browser fetches `sw.js`
+  bypassing its HTTP cache, installs the new worker, applies
+  `skipWaiting`, and claims the open tab. <!-- 02-§96.9 -->
+- The new worker deletes the old `sb-sommar-v5` cache and rebuilds
+  `sb-sommar-v6` from fresh network responses. <!-- 02-§96.10 -->
+- After at most one reload following the first post-deploy visit, every
+  client sees the same assets that the server serves, including the
+  current `style.css` with the §94 registration-banner rules. <!-- 02-§96.11 -->
+- No user action (clearing site data, uninstalling the PWA,
+  unregistering the service worker) is required to recover from the
+  stale-cache state. <!-- 02-§96.12 -->
+
+### 96.5 Constraints
+
+- The service worker remains vanilla JavaScript with no external
+  libraries. <!-- 02-§96.13 -->
+- No new npm dependencies are added. <!-- 02-§96.14 -->
+- The offline behaviour defined in §92 is preserved: form pages and the
+  feedback modal continue to show the offline guard when
+  `navigator.onLine` is false, and `offline.html` remains the last-resort
+  fallback for navigation requests that are not in the cache. <!-- 02-§96.15 -->

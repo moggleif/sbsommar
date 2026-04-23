@@ -34,15 +34,15 @@ describe('02-§92.3 — sw.js uses build-injected pre-cache list', () => {
   });
 });
 
-// ── §92.7 — Cache name is sb-sommar-v5 ──────────────────────────────────────
+// ── §96.1 — Cache name is sb-sommar-v6 ──────────────────────────────────────
 
-describe('02-§92.7 — Cache name is sb-sommar-v5', () => {
-  it('OFF-02: sw.js uses sb-sommar-v5 cache name', () => {
+describe('02-§96.1 — Cache name is sb-sommar-v6', () => {
+  it('OFF-02: sw.js uses sb-sommar-v6 cache name', () => {
     const swPath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
     const src = fs.readFileSync(swPath, 'utf8');
     assert.ok(
-      src.includes('sb-sommar-v5'),
-      'CACHE_NAME must be sb-sommar-v5',
+      src.includes("'sb-sommar-v6'"),
+      'CACHE_NAME must be sb-sommar-v6',
     );
   });
 });
@@ -90,16 +90,16 @@ describe('02-§92.9 — NO_CACHE_PATTERNS contains only API endpoints', () => {
   });
 });
 
-// ── §92.10, §92.11 — ignoreSearch in cache strategies ───────────────────────
+// ── §96.5, §96.6 — ignoreSearch scoped to network-first strategies ────────
 
-describe('02-§92.10/§92.11 — Cache strategies use ignoreSearch', () => {
+describe('02-§96.5/§96.6 — Cache-match scope for ignoreSearch', () => {
   const swPath = path.join(__dirname, '..', 'source', 'static', 'sw.js');
 
-  it('OFF-09: sw.js contains ignoreSearch: true', () => {
+  it('OFF-09: sw.js still uses ignoreSearch in at least one cache match', () => {
     const src = fs.readFileSync(swPath, 'utf8');
     assert.ok(
       src.includes('ignoreSearch'),
-      'sw.js must use ignoreSearch for cache matching',
+      'sw.js must use ignoreSearch for network-first fallback',
     );
   });
 });

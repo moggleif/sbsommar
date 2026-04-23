@@ -1920,7 +1920,7 @@ display mode. It is copied to `public/app.webmanifest` during the build.
 ### Service worker
 
 `source/static/sw.js` lives at the site root (`public/sw.js`) so its scope
-covers all pages. It uses a versioned cache name (currently `sb-sommar-v5`).
+covers all pages. It uses a versioned cache name (currently `sb-sommar-v6`).
 
 **Scheme guard:** The fetch handler returns early for any request whose
 URL scheme is not `http:` or `https:`. This prevents errors from
@@ -1930,13 +1930,17 @@ browser-extension schemes such as `chrome-extension:`.
 
 | Request type | Strategy | Rationale |
 | --- | --- | --- |
-| HTML (navigation) | Network-first, cache fallback | Users should see fresh content when online |
-| CSS, JS, images | Cache-first, network fallback | Static assets change infrequently; cache-busting hashes force updates |
-| `events.json` | Network-first, cache fallback | Event data should be fresh when online but available offline |
+| HTML (navigation) | Network-first, cache fallback (ignoreSearch) | Users should see fresh content when online |
+| CSS, JS, images | Cache-first (exact match), network fallback | Static assets are served by cache-busted URL; exact match ensures a new hash triggers a fresh network fetch |
+| `events.json` | Network-first, cache fallback (ignoreSearch) | Event data should be fresh when online but available offline |
 | API calls (`/api/`, `/add-event`, `/edit-event`) | Network-only (not cached) | Mutations must always reach the server |
 
-Cache-matching uses `{ ignoreSearch: true }` so that cache-busted URLs
-(e.g. `style.css?v=abc123`) match the pre-cached file.
+Cache-matching for the network-first strategies (HTML and `events.json`)
+uses `{ ignoreSearch: true }` so that cache-busted or query-stringed
+URLs still match the pre-cached file when falling back offline. The
+cache-first strategy for static assets does **not** use `ignoreSearch`
+— a request for `style.css?v=<newHash>` must not satisfy from a cache
+entry keyed at `style.css?v=<oldHash>` (§96.5).
 
 **Offline fallback:** When a navigation request fails and the requested
 page is not in the cache, the service worker responds with
@@ -1951,11 +1955,27 @@ pages, CSS, JS, images, `events.json` — is available offline from the
 first launch. Files excluded from pre-cache: `.htaccess`, `robots.txt`,
 `sw.js`, `version.json`, `.ics`, `.rss`, and per-event detail pages.
 
-**Lifecycle:**
+**Lifecycle (§96 — self-healing upgrade):**
 
-- `install`: Pre-caches all assets from the build-injected list.
-- `activate`: Deletes old caches whose name does not match the current version.
+- `install`: Calls `self.skipWaiting()` and pre-caches all assets from
+  the build-injected list. Each URL is wrapped in
+  `new Request(url, { cache: 'reload' })` so the fetch bypasses the
+  browser's HTTP cache. This prevents a stale HTTP-cache entry (kept
+  fresh for up to a week by `Cache-Control: max-age=604800`) from being
+  copied into the new service-worker cache on install.
+- `activate`: Deletes every cache whose name does not match the current
+  `CACHE_NAME`, then calls `self.clients.claim()` so the new worker
+  immediately controls every open tab without waiting for the user to
+  close and reopen them.
 - `fetch`: Intercepts requests and applies the strategy table above.
+
+Combined, `skipWaiting` + `clients.claim` + `cache: 'reload'` on
+pre-cache mean that any client whose prior service worker had cached a
+stale `/style.css` self-heals on the first post-deploy visit: the
+browser fetches the new `sw.js` (bypassing its HTTP cache because
+`updateViaCache: 'imports'` is Chrome's default for registered service
+workers), installs it, activates it immediately, wipes the old cache,
+and rebuilds the new cache from network-only responses.
 
 **Offline guard (§92):**
 

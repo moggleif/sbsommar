@@ -1106,9 +1106,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1195
-Covered (implemented + tested): 612
-Implemented, not tested:        583
+Total requirements:            1210
+Covered (implemented + tested): 620
+Implemented, not tested:        590
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
@@ -2152,6 +2152,26 @@ Matrix cleanup (2026-02-25):
 | `02-§95.5` | implemented | `package.json` and `api/composer.json` unchanged by this feature |
 | `02-§95.6` | covered | SLUG-RD-03..12 prove output equivalence; SLUG-RD-14 guarantees no leading/trailing dash regression |
 | `02-§95.7` | covered | CodeQL post-merge scan on main confirmed alerts #17, #30, #31, #32 transitioned to state `fixed` |
+
+### §96 — Self-Healing Service Worker Upgrade
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§96.1` | covered | OFF-02, PWA-31: `sw.js` declares `const CACHE_NAME = 'sb-sommar-v6'` |
+| `02-§96.2` | covered | SWH-01: `install` event handler contains `self.skipWaiting()` |
+| `02-§96.3` | covered | SWH-02: `install` handler wraps each URL as `new Request(u, { cache: 'reload' })` before `cache.addAll` |
+| `02-§96.4` | covered | SWH-03, SWH-04: `activate` handler deletes caches `!== CACHE_NAME` and calls `self.clients.claim()` |
+| `02-§96.5` | covered | SWH-05: primary `caches.match(request)` in `cacheFirstThenNetwork` has no `ignoreSearch`; secondary `ignoreSearch` match exists only on the fetch-failure branch |
+| `02-§96.6` | covered | SWH-06, SWH-07, OFF-09: `networkFirstThenCache` and `networkFirstWithOfflineFallback` retain `{ ignoreSearch: true }` on their catch-branch cache lookups |
+| `02-§96.7` | implemented | `source/build/build.js` pre-cache-manifest injection uses root-relative paths (no query strings); verified post-build by `public/sw.js` contents |
+| `02-§96.8` | implemented | `cacheFirstThenNetwork` catch branch calls `caches.match(request, { ignoreSearch: true })` so `/style.css` pre-cache entry still serves offline — manual browser verification |
+| `02-§96.9` | implemented | Manual browser verification: load SW v5, deploy v6, confirm next navigation upgrades without user action |
+| `02-§96.10` | implemented | Manual browser verification: confirm `sb-sommar-v5` is deleted on activate and `sb-sommar-v6` populated from fresh network responses |
+| `02-§96.11` | implemented | Manual browser verification: confirm §94 registration-banner styling applies on second reload after deploy |
+| `02-§96.12` | implemented | Manual browser verification: no clear-site-data or unregister action required from the end user |
+| `02-§96.13` | covered | SWH-08: `sw.js` has no `import`, `require`, or `importScripts` |
+| `02-§96.14` | implemented | `package.json` unchanged by this feature |
+| `02-§96.15` | implemented | `offline-guard.js`, `feedback.js`, and `offline.html` unchanged; offline routing in `sw.js` preserved — manual browser verification |
 
 ### §1 — Camp registry fields (camps.yaml)
 
