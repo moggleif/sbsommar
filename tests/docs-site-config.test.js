@@ -21,7 +21,11 @@ const yaml = require('js-yaml');
 // implementation lands in Phase 4), the suite skips — a missing file is
 // a gap captured by 02-§97.5 / 02-§97.6 in 99-traceability.md.
 
-const CONFIG_PATH = path.resolve(__dirname, '..', 'docs', '_config.yml');
+const DOCS_DIR = path.resolve(__dirname, '..', 'docs');
+const CONFIG_PATH = path.join(DOCS_DIR, '_config.yml');
+const ROBOTS_PATH = path.join(DOCS_DIR, 'robots.txt');
+const HEAD_CUSTOM_PATH = path.join(DOCS_DIR, '_includes', 'head-custom.html');
+const INDEX_PATH = path.join(DOCS_DIR, 'index.md');
 
 describe('docs/_config.yml — GitHub Pages documentation site (02-§97.5, §97.6)', () => {
   const exists = fs.existsSync(CONFIG_PATH);
@@ -69,6 +73,142 @@ describe('docs/_config.yml — GitHub Pages documentation site (02-§97.5, §97.
       cfg.relative_links && cfg.relative_links.enabled,
       true,
       'relative_links.enabled must be true',
+    );
+  });
+});
+
+// ── Requirement: 02-§97.18, 97.19, 97.20, 97.21 ──────────────────────────────
+// The published documentation site mirrors §1a's hidden policy for the camp
+// site. Two artefacts must exist under docs/ to enforce that on the rendered
+// Pages output: a robots.txt that disallows everything, and a Jekyll
+// `head-custom.html` include that emits a noindex/nofollow meta tag in
+// every rendered page.
+
+describe('docs/ — search-engine and crawler policy (02-§97.18–97.21)', () => {
+  const robotsExists = fs.existsSync(ROBOTS_PATH);
+  const headCustomExists = fs.existsSync(HEAD_CUSTOM_PATH);
+
+  it('DOCS-CFG-05: docs/robots.txt is present and disallows every user agent', (t) => {
+    if (!robotsExists) {
+      t.skip('docs/robots.txt not yet created — see 02-§97.19');
+      return;
+    }
+    const raw = fs.readFileSync(ROBOTS_PATH, 'utf8');
+    assert.match(raw, /User-agent:\s*\*/, 'robots.txt must address every user agent');
+    assert.match(raw, /Disallow:\s*\//, 'robots.txt must disallow every path');
+  });
+
+  it('DOCS-CFG-06: docs/_includes/head-custom.html emits noindex/nofollow meta', (t) => {
+    if (!headCustomExists) {
+      t.skip('docs/_includes/head-custom.html not yet created — see 02-§97.20');
+      return;
+    }
+    const raw = fs.readFileSync(HEAD_CUSTOM_PATH, 'utf8');
+    assert.match(
+      raw,
+      /<meta\s+name=["']robots["']\s+content=["'][^"']*noindex[^"']*nofollow[^"']*["']/i,
+      'head-custom.html must include a robots meta with noindex and nofollow',
+    );
+  });
+
+  it('DOCS-CFG-07: no sitemap or open-graph artefacts under docs/', () => {
+    const artefacts = ['sitemap.xml', 'sitemap.txt'];
+    for (const a of artefacts) {
+      assert.ok(
+        !fs.existsSync(path.join(DOCS_DIR, a)),
+        `docs/${a} must not exist (02-§97.21)`,
+      );
+    }
+    if (fs.existsSync(CONFIG_PATH)) {
+      const cfg = yaml.load(fs.readFileSync(CONFIG_PATH, 'utf8')) || {};
+      const plugins = Array.isArray(cfg.plugins) ? cfg.plugins : [];
+      const forbidden = ['jekyll-sitemap', 'jekyll-seo-tag', 'jekyll-feed'];
+      for (const p of forbidden) {
+        assert.ok(
+          !plugins.includes(p),
+          `_config.yml must not enable ${p} (02-§97.21)`,
+        );
+      }
+    }
+  });
+});
+
+// ── Requirement: 02-§97.15, 97.16, 97.17 ─────────────────────────────────────
+// docs/index.md (the landing page) must carry a banner with absolute
+// github.com links back to the source repo, README, and issues; must not
+// link to https://sbsommar.se; and its main copy must be projekt-teknisk
+// rather than camp-marketing copy.
+
+describe('docs/index.md — landing-page contract (02-§97.15–97.17)', () => {
+  const indexExists = fs.existsSync(INDEX_PATH);
+  const raw = indexExists ? fs.readFileSync(INDEX_PATH, 'utf8') : '';
+  // The reverse-discoverability banner introduced by 02-§97.15 always
+  // includes the issue tracker URL — use it as a sentinel so the suite
+  // skips cleanly while the banner is still missing (Phase 3 commit) and
+  // activates once Phase 4 lands.
+  const bannerActive = raw.includes('https://github.com/moggleif/sbsommar/issues');
+  const skipMsg = 'reverse-discoverability banner not yet in docs/index.md — see 02-§97.15';
+
+  it('DOCS-IDX-01: links back to the source repository on github.com', (t) => {
+    if (!indexExists || !bannerActive) {
+      t.skip(skipMsg);
+      return;
+    }
+    assert.ok(
+      raw.includes('https://github.com/moggleif/sbsommar'),
+      'docs/index.md must link to https://github.com/moggleif/sbsommar',
+    );
+  });
+
+  it('DOCS-IDX-02: links to the rendered README on github.com', (t) => {
+    if (!indexExists || !bannerActive) {
+      t.skip(skipMsg);
+      return;
+    }
+    assert.ok(
+      raw.includes('https://github.com/moggleif/sbsommar#readme')
+        || raw.includes('https://github.com/moggleif/sbsommar/blob/main/README.md'),
+      'docs/index.md must link to the README on github.com',
+    );
+  });
+
+  it('DOCS-IDX-03: links to the issue tracker', (t) => {
+    if (!indexExists || !bannerActive) {
+      t.skip(skipMsg);
+      return;
+    }
+    assert.ok(
+      raw.includes('https://github.com/moggleif/sbsommar/issues'),
+      'docs/index.md must link to the issue tracker',
+    );
+  });
+
+  it('DOCS-IDX-04: does not link to https://sbsommar.se', (t) => {
+    if (!indexExists || !bannerActive) {
+      t.skip(skipMsg);
+      return;
+    }
+    assert.ok(
+      !raw.includes('https://sbsommar.se'),
+      'docs/index.md must not link to https://sbsommar.se (02-§97.16)',
+    );
+  });
+
+  it('DOCS-IDX-05: main copy is projekt-teknisk (no camp marketing)', (t) => {
+    if (!indexExists || !bannerActive) {
+      t.skip(skipMsg);
+      return;
+    }
+    const forbiddenPhrases = [
+      'family camp',
+      'gifted children',
+      'Sysslebäck',
+    ];
+    const found = forbiddenPhrases.filter((p) => raw.includes(p));
+    assert.deepEqual(
+      found,
+      [],
+      `docs/index.md must not contain camp-marketing phrases (02-§97.17): ${found.join(', ')}`,
     );
   });
 });
