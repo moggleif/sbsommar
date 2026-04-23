@@ -15,6 +15,9 @@ const README_PATH = path.join(REPO_ROOT, 'README.md');
 const DOCS_DIR = path.join(REPO_ROOT, 'docs');
 
 const DOCS_SITE_URL = 'https://moggleif.github.io/sbsommar/';
+// Match the URL inside a Markdown autolink (`<...>`) so CodeQL recognises
+// the surrounding context — see 02-§39.4.
+const DOCS_SITE_AUTOLINK = `<${DOCS_SITE_URL}>`;
 
 const EXPECTED_DOC_FILES = [
   '01-CONTRIBUTORS.md',
@@ -31,7 +34,7 @@ const EXPECTED_DOC_FILES = [
 
 describe('README.md — documentation-site discoverability (02-§97.13, §97.14)', () => {
   const readme = fs.readFileSync(README_PATH, 'utf8');
-  const hasSiteLink = readme.includes(DOCS_SITE_URL);
+  const hasSiteLink = readme.includes(DOCS_SITE_AUTOLINK);
 
   it('README-DOCS-01: README.md links to the published docs site URL', (t) => {
     if (!hasSiteLink) {
@@ -39,8 +42,8 @@ describe('README.md — documentation-site discoverability (02-§97.13, §97.14)
       return;
     }
     assert.ok(
-      readme.includes(DOCS_SITE_URL),
-      `README.md must contain the docs site URL ${DOCS_SITE_URL}`,
+      readme.includes(DOCS_SITE_AUTOLINK),
+      `README.md must contain the docs site URL as a Markdown autolink ${DOCS_SITE_AUTOLINK}`,
     );
   });
 
@@ -49,7 +52,7 @@ describe('README.md — documentation-site discoverability (02-§97.13, §97.14)
       t.skip('README.md does not yet link to the docs site — see 02-§97.13');
       return;
     }
-    const urlIdx = readme.indexOf(DOCS_SITE_URL);
+    const urlIdx = readme.indexOf(DOCS_SITE_AUTOLINK);
     const setupIdx = readme.indexOf('## For Developers');
     assert.ok(setupIdx !== -1, '"## For Developers" heading must be present');
     assert.ok(
