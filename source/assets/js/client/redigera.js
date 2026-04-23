@@ -261,7 +261,9 @@
     els.description.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
-  // ── Time-gating (02-§26.9) ──────────────────────────────────────────────────
+  // ── Time-gating (02-§26.9, §26.14–§26.19) ──────────────────────────────────
+
+  var gateBlocked = false;
 
   if (form) {
     var opensDate = form.dataset.opens;
@@ -270,7 +272,8 @@
     if (opensDate && closesDate) {
       var todayGate = new Date().toISOString().slice(0, 10);
       if (todayGate < opensDate || todayGate > closesDate) {
-        if (todayGate < opensDate) {
+        var isBeforeOpens = todayGate < opensDate;
+        if (isBeforeOpens) {
           var parts = opensDate.split('-');
           var months = ['januari','februari','mars','april','maj','juni',
                         'juli','augusti','september','oktober','november','december'];
@@ -281,12 +284,28 @@
         }
         loadingEl.hidden = true;
         errorEl.hidden = false;
-        // Still render cookie debug panel before returning.
+        gateBlocked = true;
+
+        // Admin bypass button — only before opens (02-§26.16)
+        if (isBeforeOpens && adminToken) {
+          var bypassBtn = document.createElement('button');
+          bypassBtn.type = 'button';
+          bypassBtn.className = 'form-gate-bypass';
+          bypassBtn.textContent = 'Öppna ändå (admin)';
+          bypassBtn.addEventListener('click', function () {
+            errorEl.hidden = true;
+            loadingEl.hidden = false;
+            gateBlocked = false;
+            runInit();
+          });
+          errorEl.appendChild(bypassBtn);
+        }
+
+        // Still render cookie debug panel even while gated.
         fetch('/events.json')
           .then(function (r) { return r.json(); })
           .then(function (events) { renderDebugPanel(events); })
           .catch(function () { renderDebugPanel(null); });
-        return;
       }
     }
   }
@@ -325,18 +344,45 @@
 
   // ── Init ─────────────────────────────────────────────────────────────────────
 
-  var eventId = getParam('id');
-  var today = new Date().toISOString().slice(0, 10);
-  var ownedIds = readSessionIds();
+  function runInit() {
+    var eventId = getParam('id');
+    var today = new Date().toISOString().slice(0, 10);
+    var ownedIds = readSessionIds();
 
-  if (!eventId) {
-    // No specific event selected — show browse mode
-    loadingEl.hidden = true;
+    if (!eventId) {
+      // No specific event selected — show browse mode
+      loadingEl.hidden = true;
 
-    if (ownedIds.length === 0) {
-      // No cookie — show explanation (02-§48.8)
-      if (noSessionEl) noSessionEl.hidden = false;
-      // Still render debug panel (shows "no cookie" state).
+      if (ownedIds.length === 0) {
+        // No cookie — show explanation (02-§48.8)
+        if (noSessionEl) noSessionEl.hidden = false;
+        // Still render debug panel (shows "no cookie" state).
+        fetch('/events.json')
+          .then(function (r) { return r.json(); })
+          .then(function (events) { renderDebugPanel(events); })
+          .catch(function () { renderDebugPanel(null); });
+        return;
+      }
+
+      // Has cookie — fetch events and show list (02-§48.13)
+      if (myEventsEl) myEventsEl.hidden = false;
+      fetch('/events.json')
+        .then(function (r) { return r.json(); })
+        .then(function (events) {
+          renderMyEvents(events, ownedIds, today);
+          renderDebugPanel(events);
+        })
+        .catch(function () {
+          if (myEventsEmpty) myEventsEmpty.textContent = 'Kunde inte hämta schemadata.';
+          renderDebugPanel(null);
+        });
+      return;
+    }
+
+    // Specific event selected — existing edit behaviour (02-§48.17)
+    // Authorised if event ID is in session cookie OR user has admin token (02-§7.3).
+    if (ownedIds.indexOf(eventId) === -1 && !adminToken) {
+      showError('Du har inte rättighet att redigera denna aktivitet.');
       fetch('/events.json')
         .then(function (r) { return r.json(); })
         .then(function (events) { renderDebugPanel(events); })
@@ -344,68 +390,45 @@
       return;
     }
 
-    // Has cookie — fetch events and show list (02-§48.13)
-    if (myEventsEl) myEventsEl.hidden = false;
+    // Fetch events.json to verify the event exists and hasn't passed.
     fetch('/events.json')
       .then(function (r) { return r.json(); })
       .then(function (events) {
-        renderMyEvents(events, ownedIds, today);
+        var event = null;
+        for (var i = 0; i < events.length; i++) {
+          if (events[i].id === eventId) { event = events[i]; break; }
+        }
+
+        if (!event) {
+          showError('Aktiviteten hittades inte i det aktuella schemat.');
+          renderDebugPanel(events);
+          return;
+        }
+
+        if (event.date < today) {
+          showError('Aktiviteten har redan ägt rum och kan inte redigeras.');
+          renderDebugPanel(events);
+          return;
+        }
+
+        // Show event list above form if user has other events (02-§48.18)
+        if (myEventsEl) {
+          var editable = renderMyEvents(events, ownedIds, today);
+          if (editable.length > 0) myEventsEl.hidden = false;
+        }
+
+        populate(event);
+        loadingEl.hidden = true;
+        sectionEl.hidden = false;
         renderDebugPanel(events);
       })
       .catch(function () {
-        if (myEventsEmpty) myEventsEmpty.textContent = 'Kunde inte hämta schemadata.';
+        showError('Kunde inte hämta schemadata. Kontrollera din internetanslutning.');
         renderDebugPanel(null);
       });
-    return;
   }
 
-  // Specific event selected — existing edit behaviour (02-§48.17)
-  // Authorised if event ID is in session cookie OR user has admin token (02-§7.3).
-  if (ownedIds.indexOf(eventId) === -1 && !adminToken) {
-    showError('Du har inte rättighet att redigera denna aktivitet.');
-    fetch('/events.json')
-      .then(function (r) { return r.json(); })
-      .then(function (events) { renderDebugPanel(events); })
-      .catch(function () { renderDebugPanel(null); });
-    return;
-  }
-
-  // Fetch events.json to verify the event exists and hasn't passed.
-  fetch('/events.json')
-    .then(function (r) { return r.json(); })
-    .then(function (events) {
-      var event = null;
-      for (var i = 0; i < events.length; i++) {
-        if (events[i].id === eventId) { event = events[i]; break; }
-      }
-
-      if (!event) {
-        showError('Aktiviteten hittades inte i det aktuella schemat.');
-        renderDebugPanel(events);
-        return;
-      }
-
-      if (event.date < today) {
-        showError('Aktiviteten har redan ägt rum och kan inte redigeras.');
-        renderDebugPanel(events);
-        return;
-      }
-
-      // Show event list above form if user has other events (02-§48.18)
-      if (myEventsEl) {
-        var editable = renderMyEvents(events, ownedIds, today);
-        if (editable.length > 0) myEventsEl.hidden = false;
-      }
-
-      populate(event);
-      loadingEl.hidden = true;
-      sectionEl.hidden = false;
-      renderDebugPanel(events);
-    })
-    .catch(function () {
-      showError('Kunde inte hämta schemadata. Kontrollera din internetanslutning.');
-      renderDebugPanel(null);
-    });
+  if (!gateBlocked) runInit();
 
   // ── Per-field inline errors (02-§6.5) ──────────────────────────────────────
 

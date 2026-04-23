@@ -7,6 +7,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/vendor/autoload.php';
 
 use SBSommar\ActiveCamp;
+use SBSommar\Admin;
 use SBSommar\Feedback;
 use SBSommar\GitHub;
 use SBSommar\RateLimit;
@@ -79,6 +80,10 @@ try {
     // This can happen when deployed without the source/ directory.
 }
 
+// ── Parse configured admin tokens once ───────────────────────────────────
+
+$adminTokens = Admin::parseAdminTokens($_ENV['ADMIN_TOKENS'] ?? null);
+
 // ── Handlers ─────────────────────────────────────────────────────────────
 
 header('Content-Type: application/json; charset=utf-8');
@@ -92,22 +97,22 @@ try {
             => handleCleanupCookies(),
 
         $method === 'POST' && $route === '/add-event'
-            => handleAddEvent($activeCamp),
+            => handleAddEvent($activeCamp, $adminTokens),
 
         $method === 'POST' && $route === '/add-events'
-            => handleAddEvents($activeCamp),
+            => handleAddEvents($activeCamp, $adminTokens),
 
         $method === 'POST' && $route === '/edit-event'
-            => handleEditEvent($activeCamp),
+            => handleEditEvent($activeCamp, $adminTokens),
 
         $method === 'POST' && $route === '/delete-event'
-            => handleDeleteEvent($activeCamp),
+            => handleDeleteEvent($activeCamp, $adminTokens),
 
         $method === 'POST' && $route === '/feedback'
             => handleFeedback(),
 
         $method === 'POST' && $route === '/verify-admin'
-            => handleVerifyAdmin(),
+            => handleVerifyAdmin($adminTokens),
 
         default
             => jsonResponse(['error' => 'Not found'], 404),
@@ -146,16 +151,20 @@ function handleCleanupCookies(): void
     jsonResponse(['cleaned' => count(array_unique($stale))]);
 }
 
-function handleAddEvent(?array $activeCamp): void
+/** @param list<string> $adminTokens */
+function handleAddEvent(?array $activeCamp, array $adminTokens): void
 {
-    // Time-gating
+    $body = getJsonBody();
+
+    // Time-gating with admin bypass (02-§26.17, 02-§26.18)
     if ($activeCamp !== null) {
-        $today = date('Y-m-d');
-        if (TimeGate::isOutsideEditingPeriod(
-            $today,
-            (string) ($activeCamp['opens_for_editing'] ?? ''),
-            (string) ($activeCamp['end_date'] ?? ''),
-        )) {
+        $today   = date('Y-m-d');
+        $opens   = (string) ($activeCamp['opens_for_editing'] ?? '');
+        $endDate = (string) ($activeCamp['end_date'] ?? '');
+        if (TimeGate::isAfterEditingPeriod($today, $endDate)
+            || (TimeGate::isBeforeEditingPeriod($today, $opens)
+                && !Admin::verifyAdminToken($body['adminToken'] ?? null, $adminTokens))
+        ) {
             jsonResponse([
                 'success' => false,
                 'error'   => 'Det går inte att lägga till aktiviteter just nu. Formuläret är inte öppet.',
@@ -164,8 +173,6 @@ function handleAddEvent(?array $activeCamp): void
             return;
         }
     }
-
-    $body = getJsonBody();
 
     $v = Validate::validateEventRequest($body, $activeCamp);
     if (!$v['ok']) {
@@ -204,16 +211,20 @@ function handleAddEvent(?array $activeCamp): void
     jsonResponse(['success' => true, 'eventId' => $eventId]);
 }
 
-function handleAddEvents(?array $activeCamp): void
+/** @param list<string> $adminTokens */
+function handleAddEvents(?array $activeCamp, array $adminTokens): void
 {
-    // Time-gating (same as single add)
+    $body = getJsonBody();
+
+    // Time-gating with admin bypass (02-§26.17, 02-§26.18)
     if ($activeCamp !== null) {
-        $today = date('Y-m-d');
-        if (TimeGate::isOutsideEditingPeriod(
-            $today,
-            (string) ($activeCamp['opens_for_editing'] ?? ''),
-            (string) ($activeCamp['end_date'] ?? ''),
-        )) {
+        $today   = date('Y-m-d');
+        $opens   = (string) ($activeCamp['opens_for_editing'] ?? '');
+        $endDate = (string) ($activeCamp['end_date'] ?? '');
+        if (TimeGate::isAfterEditingPeriod($today, $endDate)
+            || (TimeGate::isBeforeEditingPeriod($today, $opens)
+                && !Admin::verifyAdminToken($body['adminToken'] ?? null, $adminTokens))
+        ) {
             jsonResponse([
                 'success' => false,
                 'error'   => 'Det går inte att lägga till aktiviteter just nu. Formuläret är inte öppet.',
@@ -222,8 +233,6 @@ function handleAddEvents(?array $activeCamp): void
             return;
         }
     }
-
-    $body = getJsonBody();
 
     $v = Validate::validateBatchEventRequest($body, $activeCamp);
     if (!$v['ok']) {
@@ -258,7 +267,8 @@ function handleAddEvents(?array $activeCamp): void
     jsonResponse(['success' => true, 'eventIds' => $eventIds]);
 }
 
-function handleEditEvent(?array $activeCamp): void
+/** @param list<string> $adminTokens */
+function handleEditEvent(?array $activeCamp, array $adminTokens): void
 {
     if (RateLimit::isLimited(clientIp(), 'edit-event', RATE_LIMIT_EDIT_EVENT, HOUR_SECONDS)) {
         jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
@@ -266,14 +276,17 @@ function handleEditEvent(?array $activeCamp): void
         return;
     }
 
-    // Time-gating
+    $body    = getJsonBody();
+    $isAdmin = Admin::verifyAdminToken($body['adminToken'] ?? null, $adminTokens);
+
+    // Time-gating with admin bypass (02-§26.17, 02-§26.18)
     if ($activeCamp !== null) {
-        $today = date('Y-m-d');
-        if (TimeGate::isOutsideEditingPeriod(
-            $today,
-            (string) ($activeCamp['opens_for_editing'] ?? ''),
-            (string) ($activeCamp['end_date'] ?? ''),
-        )) {
+        $today   = date('Y-m-d');
+        $opens   = (string) ($activeCamp['opens_for_editing'] ?? '');
+        $endDate = (string) ($activeCamp['end_date'] ?? '');
+        if (TimeGate::isAfterEditingPeriod($today, $endDate)
+            || (TimeGate::isBeforeEditingPeriod($today, $opens) && !$isAdmin)
+        ) {
             jsonResponse([
                 'success' => false,
                 'error'   => 'Det går inte att redigera aktiviteter just nu. Formuläret är inte öppet.',
@@ -282,8 +295,6 @@ function handleEditEvent(?array $activeCamp): void
             return;
         }
     }
-
-    $body = getJsonBody();
 
     $v = Validate::validateEditRequest($body, $activeCamp);
     if (!$v['ok']) {
@@ -294,9 +305,10 @@ function handleEditEvent(?array $activeCamp): void
 
     $eventId = trim((string) ($body['id'] ?? ''));
 
-    // Verify ownership via session cookie
+    // Verify ownership: event ID in session cookie OR valid admin token
+    // (02-§7.3, §18.31).
     $ownedIds = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
-    if (!in_array($eventId, $ownedIds, true)) {
+    if (!in_array($eventId, $ownedIds, true) && !$isAdmin) {
         jsonResponse([
             'success' => false,
             'error'   => 'Ej behörig att redigera denna aktivitet.',
@@ -330,7 +342,8 @@ function handleEditEvent(?array $activeCamp): void
     jsonResponse(['success' => true]);
 }
 
-function handleDeleteEvent(?array $activeCamp): void
+/** @param list<string> $adminTokens */
+function handleDeleteEvent(?array $activeCamp, array $adminTokens): void
 {
     if (RateLimit::isLimited(clientIp(), 'delete-event', RATE_LIMIT_DELETE_EVENT, HOUR_SECONDS)) {
         jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
@@ -338,14 +351,17 @@ function handleDeleteEvent(?array $activeCamp): void
         return;
     }
 
-    // Time-gating
+    $body    = getJsonBody();
+    $isAdmin = Admin::verifyAdminToken($body['adminToken'] ?? null, $adminTokens);
+
+    // Time-gating with admin bypass (02-§26.17, 02-§26.18)
     if ($activeCamp !== null) {
-        $today = date('Y-m-d');
-        if (TimeGate::isOutsideEditingPeriod(
-            $today,
-            (string) ($activeCamp['opens_for_editing'] ?? ''),
-            (string) ($activeCamp['end_date'] ?? ''),
-        )) {
+        $today   = date('Y-m-d');
+        $opens   = (string) ($activeCamp['opens_for_editing'] ?? '');
+        $endDate = (string) ($activeCamp['end_date'] ?? '');
+        if (TimeGate::isAfterEditingPeriod($today, $endDate)
+            || (TimeGate::isBeforeEditingPeriod($today, $opens) && !$isAdmin)
+        ) {
             jsonResponse([
                 'success' => false,
                 'error'   => 'Det går inte att radera aktiviteter just nu. Formuläret är inte öppet.',
@@ -355,8 +371,6 @@ function handleDeleteEvent(?array $activeCamp): void
         }
     }
 
-    $body = getJsonBody();
-
     $eventId = trim((string) ($body['id'] ?? ''));
     if ($eventId === '') {
         jsonResponse(['success' => false, 'error' => 'Aktivitets-ID saknas.'], 400);
@@ -364,9 +378,10 @@ function handleDeleteEvent(?array $activeCamp): void
         return;
     }
 
-    // Verify ownership via session cookie
+    // Verify ownership: event ID in session cookie OR valid admin token
+    // (02-§7.3, §89.13).
     $ownedIds = Session::parseSessionIds($_SERVER['HTTP_COOKIE'] ?? '');
-    if (!in_array($eventId, $ownedIds, true)) {
+    if (!in_array($eventId, $ownedIds, true) && !$isAdmin) {
         jsonResponse([
             'success' => false,
             'error'   => 'Ej behörig att radera denna aktivitet.',
@@ -444,7 +459,8 @@ function handleFeedback(): void
     }
 }
 
-function handleVerifyAdmin(): void
+/** @param list<string> $adminTokens */
+function handleVerifyAdmin(array $adminTokens): void
 {
     if (RateLimit::isLimited(clientIp(), 'verify-admin', RATE_LIMIT_VERIFY_ADMIN, HOUR_SECONDS)) {
         jsonResponse(['error' => RATE_LIMIT_MSG], 429);
@@ -452,32 +468,10 @@ function handleVerifyAdmin(): void
         return;
     }
 
-    $body = getJsonBody();
+    $body  = getJsonBody();
     $token = trim((string) ($body['token'] ?? ''));
 
-    // Check embedded expiry (token format: namn_uuid_epoch)
-    $lastUnderscore = strrpos($token, '_');
-    if ($lastUnderscore !== false) {
-        $epoch = (int) substr($token, $lastUnderscore + 1);
-        if ($epoch > 0 && time() > $epoch) {
-            jsonResponse(['valid' => false, 'error' => 'Token har gått ut.'], 403);
-
-            return;
-        }
-    }
-
-    $raw = $_ENV['ADMIN_TOKENS'] ?? '';
-    $validTokens = array_filter(array_map('trim', explode(',', $raw)));
-
-    $found = false;
-    foreach ($validTokens as $valid) {
-        if (strlen($token) === strlen($valid) && hash_equals($valid, $token)) {
-            $found = true;
-            break;
-        }
-    }
-
-    if ($found) {
+    if (Admin::verifyAdminToken($token, $adminTokens)) {
         jsonResponse(['valid' => true]);
     } else {
         jsonResponse(['valid' => false], 403);

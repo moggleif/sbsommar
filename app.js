@@ -10,7 +10,7 @@ const { addEventToActiveCamp, updateEventInActiveCamp, removeEventFromActiveCamp
 const { validateEventRequest, validateEditRequest }              = require('./source/api/validate');
 const { isEventPast }                                            = require('./source/api/edit-event');
 const { parseSessionIds, buildSetCookieHeader, mergeIds }        = require('./source/api/session');
-const { isOutsideEditingPeriod }                                 = require('./source/api/time-gate');
+const { isBeforeEditingPeriod, isAfterEditingPeriod }            = require('./source/api/time-gate');
 const { validateFeedbackRequest, createFeedbackIssue }           = require('./source/api/feedback');
 const { parseAdminTokens, verifyAdminToken }                     = require('./source/api/admin');
 const { resolveActiveCamp }                                      = require('./source/scripts/resolve-active-camp');
@@ -90,10 +90,14 @@ app.post('/verify-admin', verifyAdminLimiter, (req, res) => {
 });
 
 app.post('/add-event', (req, res) => {
-  // Time-gating: reject if outside the editing period.
+  // Time-gating with admin bypass (02-§26.17, 02-§26.18).
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
-    if (isOutsideEditingPeriod(today, activeCamp.opens_for_editing, activeCamp.end_date)) {
+    if (isAfterEditingPeriod(today, activeCamp.end_date)) {
+      return res.status(403).json({ success: false, error: 'Det går inte att lägga till aktiviteter just nu. Formuläret är inte öppet.' });
+    }
+    if (isBeforeEditingPeriod(today, activeCamp.opens_for_editing)
+        && !verifyAdminToken(req.body.adminToken, adminTokens)) {
       return res.status(403).json({ success: false, error: 'Det går inte att lägga till aktiviteter just nu. Formuläret är inte öppet.' });
     }
   }
@@ -126,10 +130,14 @@ app.post('/add-event', (req, res) => {
 });
 
 app.post('/edit-event', editEventLimiter, (req, res) => {
-  // Time-gating: reject if outside the editing period.
+  // Time-gating with admin bypass (02-§26.17, 02-§26.18).
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
-    if (isOutsideEditingPeriod(today, activeCamp.opens_for_editing, activeCamp.end_date)) {
+    if (isAfterEditingPeriod(today, activeCamp.end_date)) {
+      return res.status(403).json({ success: false, error: 'Det går inte att redigera aktiviteter just nu. Formuläret är inte öppet.' });
+    }
+    if (isBeforeEditingPeriod(today, activeCamp.opens_for_editing)
+        && !verifyAdminToken(req.body.adminToken, adminTokens)) {
       return res.status(403).json({ success: false, error: 'Det går inte att redigera aktiviteter just nu. Formuläret är inte öppet.' });
     }
   }
@@ -162,10 +170,14 @@ app.post('/edit-event', editEventLimiter, (req, res) => {
 });
 
 app.post('/delete-event', deleteEventLimiter, (req, res) => {
-  // Time-gating: reject if outside the editing period.
+  // Time-gating with admin bypass (02-§26.17, 02-§26.18).
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
-    if (isOutsideEditingPeriod(today, activeCamp.opens_for_editing, activeCamp.end_date)) {
+    if (isAfterEditingPeriod(today, activeCamp.end_date)) {
+      return res.status(400).json({ success: false, error: 'Det går inte att radera aktiviteter just nu. Formuläret är inte öppet.' });
+    }
+    if (isBeforeEditingPeriod(today, activeCamp.opens_for_editing)
+        && !verifyAdminToken(req.body.adminToken, adminTokens)) {
       return res.status(400).json({ success: false, error: 'Det går inte att radera aktiviteter just nu. Formuläret är inte öppet.' });
     }
   }

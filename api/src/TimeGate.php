@@ -24,8 +24,25 @@ final class TimeGate
         string $opensForEditing,
         string $endDate,
     ): bool {
-        $closes = self::addOneDay($endDate);
+        return self::isBeforeEditingPeriod($today, $opensForEditing)
+            || self::isAfterEditingPeriod($today, $endDate);
+    }
 
-        return $today < $opensForEditing || $today > $closes;
+    /**
+     * Today is strictly before `opens_for_editing`. Admins may bypass this
+     * state via a valid admin token (02-§26.17).
+     */
+    public static function isBeforeEditingPeriod(string $today, string $opensForEditing): bool
+    {
+        return $today < $opensForEditing;
+    }
+
+    /**
+     * Today is strictly after `end_date + 1 day`. No admin bypass applies
+     * (02-§26.18).
+     */
+    public static function isAfterEditingPeriod(string $today, string $endDate): bool
+    {
+        return $today > self::addOneDay($endDate);
     }
 }
