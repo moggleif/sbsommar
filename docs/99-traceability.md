@@ -1107,9 +1107,9 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 
 ```text
 Total requirements:            1231
-Covered (implemented + tested): 622
-Implemented, not tested:        602
-Gap (no implementation):          7
+Covered (implemented + tested): 628
+Implemented, not tested:        603
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1412,7 +1412,7 @@ Matrix cleanup (2026-02-25):
   headers. Closes CodeQL `js/missing-rate-limiting` alerts 43/44/45.
   5 rows moved from covered to implemented (manual verification replaces
   removed RL-01..05 unit tests of the now-deleted helper).
-14 requirements added for the project documentation site (02-§97.1–97.14):
+21 requirements added for the project documentation site (02-§97.1–97.21):
   Pages now enabled (status `built`, source `main` /docs); 02-§97.1–97.3
     moved from gap to implemented based on the GitHub Pages REST API.
   9 implemented — `docs/_config.yml` enables `jekyll-relative-links`;
@@ -1425,6 +1425,16 @@ Matrix cleanup (2026-02-25):
     (README-DOCS-01..04).
   4 + 4 new tests across `tests/docs-site-config.test.js` (DOCS-CFG-01..04)
     and `tests/readme-docs-link.test.js` (README-DOCS-01..04).
+7 hidden-site requirements added for the documentation site (02-§97.15–97.21):
+  6 covered, 1 implemented (the policy declaration §97.18).
+  Mirrors §1a's intentionally-hidden policy: `docs/robots.txt`
+  (`Disallow: /`) blocks every crawler at the docs site root, and
+  `docs/_includes/head-custom.html` injects a noindex/nofollow robots
+  meta into every rendered page via the Primer theme's standard hook.
+  `docs/index.md` no longer links to `https://sbsommar.se`; it carries
+  a project-technical reverse-discoverability banner pointing back to
+  the source repo, README, and issue tracker on github.com.
+  8 new tests across the same suite (DOCS-CFG-05..07, DOCS-IDX-01..05).
 ```
 
 ---
@@ -2204,13 +2214,13 @@ Matrix cleanup (2026-02-25):
 | `02-§97.12` | implemented | `docs/index.md` lists every other docs file with a one-line description and an `.md` link; `jekyll-relative-links` resolves the links to rendered pages — manual browser verification |
 | `02-§97.13` | covered | README-DOCS-01, README-DOCS-02: `README.md` links to `https://moggleif.github.io/sbsommar/` and the link sits above the `## For Developers` section |
 | `02-§97.14` | covered | README-DOCS-03, README-DOCS-04: `README.md` doc table includes all 10 `docs/*.md` files; drift test keeps the expected list in sync with `docs/` contents |
-| `02-§97.15` | gap | `docs/index.md` needs a banner linking back to repo / README / issues |
-| `02-§97.16` | gap | `docs/index.md` must not contain a `https://sbsommar.se` link |
-| `02-§97.17` | gap | `docs/index.md` main copy needs to be rewritten as projekt-teknisk text |
-| `02-§97.18` | gap | Documentation site policy (mirrors §1a for sbsommar.se) — covered by §97.19, §97.20, §97.21 |
-| `02-§97.19` | gap | `docs/robots.txt` (Disallow: /) must be added |
-| `02-§97.20` | gap | `docs/_includes/head-custom.html` with `noindex, nofollow` meta must be added |
-| `02-§97.21` | gap | Confirm no sitemap, Open Graph, or other discoverability metadata under `docs/` |
+| `02-§97.15` | covered | DOCS-IDX-01..03: `docs/index.md` carries the reverse-discoverability banner with absolute github.com links to repo, README, and issues |
+| `02-§97.16` | covered | DOCS-IDX-04: `docs/index.md` no longer contains any `https://sbsommar.se` link |
+| `02-§97.17` | covered | DOCS-IDX-05: `docs/index.md` main copy is project-technical; no camp marketing phrases (`family camp`, `gifted children`, `Sysslebäck`) |
+| `02-§97.18` | implemented | Policy declaration; satisfied collectively by §97.19, §97.20, §97.21 |
+| `02-§97.19` | covered | DOCS-CFG-05: `docs/robots.txt` (Disallow: /) present; verified to address every user agent |
+| `02-§97.20` | covered | DOCS-CFG-06: `docs/_includes/head-custom.html` emits `<meta name="robots" content="noindex, nofollow">`; Primer-family Pages themes include this partial in `<head>` automatically — manual browser verification confirms the tag appears in rendered HTML |
+| `02-§97.21` | covered | DOCS-CFG-07: no `sitemap.xml`, `sitemap.txt`, or forbidden Jekyll plugins (`jekyll-sitemap`, `jekyll-seo-tag`, `jekyll-feed`) under `docs/` |
 
 ### §1 — Camp registry fields (camps.yaml)
 
