@@ -4,6 +4,11 @@ SB Sommar is a family camp in Sysslebäck for particularly gifted children, youn
 
 This is the camp's official website — the single place where families find everything they need to understand, trust, and decide to attend.
 
+> **📖 Project documentation:** <https://moggleif.github.io/sbsommar/>
+> — rendered from [`docs/`](docs/) and republished automatically on
+> every push to `main`. Browse the documentation in your browser
+> instead of clicking through `.md` files here.
+
 ---
 
 ## The Camp
@@ -92,12 +97,19 @@ Start by reading [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md). It covers s
 
 ### Documentation
 
-| # | Doc | What it covers |
-| - | --- | -------------- |
-| 1 | [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md) | Setup, git workflow, linting, testing, contribution rules |
-| 2 | [docs/02-REQUIREMENTS.md](docs/02-REQUIREMENTS.md) | What the site must do and for whom — user, site, and API requirements |
-| 3 | [docs/03-ARCHITECTURE.md](docs/03-ARCHITECTURE.md) | System structure, data layers, rendering logic, API server |
-| 4 | [docs/04-OPERATIONS.md](docs/04-OPERATIONS.md) | Commands, camp lifecycle, deployment, disaster recovery |
-| 5 | [docs/05-DATA_CONTRACT.md](docs/05-DATA_CONTRACT.md) | YAML schema, required fields, ID format, stability policy |
-| 6 | [docs/06-EVENT_DATA_MODEL.md](docs/06-EVENT_DATA_MODEL.md) | Event field definitions, ownership, and metadata |
-| 7 | [docs/07-DESIGN.md](docs/07-DESIGN.md) | Colors, typography, spacing tokens, component rules |
+Read the full documentation in your browser at
+<https://moggleif.github.io/sbsommar/>, or click any file below to
+read it directly on GitHub.
+
+| #  | Doc | What it covers |
+| -- | --- | -------------- |
+| 1  | [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md) | Setup, git workflow, linting, testing, contribution rules |
+| 2  | [docs/02-REQUIREMENTS.md](docs/02-REQUIREMENTS.md) | What the site must do and for whom — user, site, and API requirements |
+| 3  | [docs/03-ARCHITECTURE.md](docs/03-ARCHITECTURE.md) | System structure, data layers, rendering logic, API server |
+| 4  | [docs/04-OPERATIONS.md](docs/04-OPERATIONS.md) | Commands, camp lifecycle, deployment, disaster recovery |
+| 5  | [docs/05-DATA_CONTRACT.md](docs/05-DATA_CONTRACT.md) | YAML schema, required fields, ID format, stability policy |
+| 6  | [docs/06-EVENT_DATA_MODEL.md](docs/06-EVENT_DATA_MODEL.md) | Event field definitions, ownership, and metadata |
+| 7  | [docs/07-DESIGN.md](docs/07-DESIGN.md) | Colors, typography, spacing tokens, component rules |
+| 8  | [docs/08-ENVIRONMENTS.md](docs/08-ENVIRONMENTS.md) | Local / QA / Production environments, secrets schema, documentation site setup |
+| 9  | [docs/09-RELEASING.md](docs/09-RELEASING.md) | Step-by-step guide for deploying to production, rollback, release tagging |
+| 99 | [docs/99-traceability.md](docs/99-traceability.md) | Requirements traceability matrix — every requirement, its tests, and its implementation |

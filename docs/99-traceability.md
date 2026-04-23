@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-04-23 (project documentation site, 02-§97.1–97.11).
+Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site policy, 02-§97.15–97.21).
 
 ---
 
@@ -1106,10 +1106,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (project documentation site, 02
 ## Summary
 
 ```text
-Total requirements:            1222
-Covered (implemented + tested): 620
-Implemented, not tested:        599
-Gap (no implementation):          3
+Total requirements:            1231
+Covered (implemented + tested): 628
+Implemented, not tested:        603
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1412,16 +1412,29 @@ Matrix cleanup (2026-02-25):
   headers. Closes CodeQL `js/missing-rate-limiting` alerts 43/44/45.
   5 rows moved from covered to implemented (manual verification replaces
   removed RL-01..05 unit tests of the now-deleted helper).
-12 requirements added for the project documentation site (02-§97.1–97.12):
-  3 still gap (02-§97.1–97.3) — depend on Settings → Pages being enabled
-    by a maintainer; nothing in code can change this state.
+21 requirements added for the project documentation site (02-§97.1–97.21):
+  Pages now enabled (status `built`, source `main` /docs); 02-§97.1–97.3
+    moved from gap to implemented based on the GitHub Pages REST API.
   9 implemented — `docs/_config.yml` enables `jekyll-relative-links`;
     `docs/index.md` is the landing page; `01-CONTRIBUTORS.md` points
     readers at the docs site; no new workflows, dependencies, or
     domain config are introduced.
-  4 new tests in `tests/docs-site-config.test.js` (DOCS-CFG-01..04)
-    verify that `docs/_config.yml` parses, declares the plugin, and
-    enables `relative_links`.
+  2 covered (02-§97.13, 02-§97.14) — `README.md` links to the
+    published site above the developer setup section and lists every
+    docs/*.md file; `tests/readme-docs-link.test.js` verifies both
+    (README-DOCS-01..04).
+  4 + 4 new tests across `tests/docs-site-config.test.js` (DOCS-CFG-01..04)
+    and `tests/readme-docs-link.test.js` (README-DOCS-01..04).
+7 hidden-site requirements added for the documentation site (02-§97.15–97.21):
+  6 covered, 1 implemented (the policy declaration §97.18).
+  Mirrors §1a's intentionally-hidden policy: `docs/robots.txt`
+  (`Disallow: /`) blocks every crawler at the docs site root, and
+  `docs/_includes/head-custom.html` injects a noindex/nofollow robots
+  meta into every rendered page via the Primer theme's standard hook.
+  `docs/index.md` no longer links to `https://sbsommar.se`; it carries
+  a project-technical reverse-discoverability banner pointing back to
+  the source repo, README, and issue tracker on github.com.
+  8 new tests across the same suite (DOCS-CFG-05..07, DOCS-IDX-01..05).
 ```
 
 ---
@@ -2187,9 +2200,9 @@ Matrix cleanup (2026-02-25):
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§97.1` | gap | Pages must be enabled in Settings → Pages; URL appears there once the first build finishes (manual step, see 08-ENVIRONMENTS.md § Documentation site) |
-| `02-§97.2` | gap | Source `main` + `/docs` is set manually in Settings → Pages; documented in 08-ENVIRONMENTS.md |
-| `02-§97.3` | gap | Verified manually by pushing a `docs/` change after enablement and confirming the Pages build runs |
+| `02-§97.1` | implemented | Pages enabled; `gh api repos/moggleif/sbsommar/pages` returns status `built` with `html_url=https://moggleif.github.io/sbsommar/` |
+| `02-§97.2` | implemented | Same API response shows `source.branch=main`, `source.path=/docs` |
+| `02-§97.3` | implemented | Pages' built-in automatic deploy runs on every push to `main` that touches `docs/`; verified after the initial enablement |
 | `02-§97.4` | implemented | `docs/` contains only project documentation; no secrets, env values, or non-docs files — manual content review during this PR |
 | `02-§97.5` | implemented | `docs/_config.yml` relies on GitHub Pages' built-in Jekyll; no project workflow added (verified by absence in `.github/workflows/`) |
 | `02-§97.6` | implemented | DOCS-CFG-03 / DOCS-CFG-04: `docs/_config.yml` activates `jekyll-relative-links` and `relative_links.enabled: true`; runtime `.md → .html` resolution verified manually in the browser |
@@ -2199,6 +2212,15 @@ Matrix cleanup (2026-02-25):
 | `02-§97.10` | implemented | `deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`, `event-data-deploy.yml`, and `event-data-deploy-post-merge.yml` are untouched in this PR |
 | `02-§97.11` | implemented | No `docs/CNAME` file; default `*.github.io` URL in use |
 | `02-§97.12` | implemented | `docs/index.md` lists every other docs file with a one-line description and an `.md` link; `jekyll-relative-links` resolves the links to rendered pages — manual browser verification |
+| `02-§97.13` | covered | README-DOCS-01, README-DOCS-02: `README.md` links to `https://moggleif.github.io/sbsommar/` and the link sits above the `## For Developers` section |
+| `02-§97.14` | covered | README-DOCS-03, README-DOCS-04: `README.md` doc table includes all 10 `docs/*.md` files; drift test keeps the expected list in sync with `docs/` contents |
+| `02-§97.15` | covered | DOCS-IDX-01..03: `docs/index.md` carries the reverse-discoverability banner with absolute github.com links to repo, README, and issues |
+| `02-§97.16` | covered | DOCS-IDX-04: `docs/index.md` no longer contains any `https://sbsommar.se` link |
+| `02-§97.17` | covered | DOCS-IDX-05: `docs/index.md` main copy is project-technical; no camp marketing phrases (`family camp`, `gifted children`, `Sysslebäck`) |
+| `02-§97.18` | implemented | Policy declaration; satisfied collectively by §97.19, §97.20, §97.21 |
+| `02-§97.19` | covered | DOCS-CFG-05: `docs/robots.txt` (Disallow: /) present; verified to address every user agent |
+| `02-§97.20` | covered | DOCS-CFG-06: both `docs/_includes/head-custom.html` (Primer/Minima) and `docs/_includes/head_custom.html` (Cayman) emit `<meta name="robots" content="noindex, nofollow">`; whichever theme GitHub Pages picks, the tag lands in `<head>` — manual browser verification confirms |
+| `02-§97.21` | covered | DOCS-CFG-07: no `sitemap.xml`, `sitemap.txt`, or forbidden Jekyll plugins (`jekyll-sitemap`, `jekyll-seo-tag`, `jekyll-feed`) under `docs/` |
 
 ### §1 — Camp registry fields (camps.yaml)
 
