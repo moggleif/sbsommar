@@ -4794,3 +4794,17 @@ existing deployment workflow.
   shared hosting only. <!-- 02-§97.10 -->
 - The documentation site uses the default `*.github.io` URL assigned by
   GitHub Pages; no `docs/CNAME` file is present. <!-- 02-§97.11 -->
+
+### 97.6 Repository-root discoverability
+
+- `README.md` (the file GitHub renders on the repository home page)
+  links to the documentation site's public URL near the top of the
+  file, before the developer setup section, so that a first-time
+  visitor sees the link without scrolling past the marketing copy. <!-- 02-§97.13 -->
+- The documentation index in `README.md` lists every file currently
+  published under `docs/` (`01-CONTRIBUTORS.md`, `02-REQUIREMENTS.md`,
+  `03-ARCHITECTURE.md`, `04-OPERATIONS.md`, `05-DATA_CONTRACT.md`,
+  `06-EVENT_DATA_MODEL.md`, `07-DESIGN.md`, `08-ENVIRONMENTS.md`,
+  `09-RELEASING.md`, and `99-traceability.md`), each with a one-line
+  description and a link that works both on GitHub's file viewer and
+  on the rendered documentation site. <!-- 02-§97.14 -->
