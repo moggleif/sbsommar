@@ -1345,6 +1345,11 @@ textarea {
   transition: background 200ms ease, color 200ms ease;
 }
 
+.form-gate-msg[hidden],
+.form-gate-bypass[hidden] {
+  display: none;
+}
+
 .form-gate-bypass:hover {
   background: var(--color-terracotta);
   color: var(--color-white);
