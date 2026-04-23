@@ -130,14 +130,15 @@ app.post('/add-event', (req, res) => {
 });
 
 app.post('/edit-event', editEventLimiter, (req, res) => {
+  const isAdmin = verifyAdminToken(req.body.adminToken, adminTokens);
+
   // Time-gating with admin bypass (02-§26.17, 02-§26.18).
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
     if (isAfterEditingPeriod(today, activeCamp.end_date)) {
       return res.status(403).json({ success: false, error: 'Det går inte att redigera aktiviteter just nu. Formuläret är inte öppet.' });
     }
-    if (isBeforeEditingPeriod(today, activeCamp.opens_for_editing)
-        && !verifyAdminToken(req.body.adminToken, adminTokens)) {
+    if (isBeforeEditingPeriod(today, activeCamp.opens_for_editing) && !isAdmin) {
       return res.status(403).json({ success: false, error: 'Det går inte att redigera aktiviteter just nu. Formuläret är inte öppet.' });
     }
   }
@@ -152,7 +153,6 @@ app.post('/edit-event', editEventLimiter, (req, res) => {
   // Verify ownership: event ID must be in the session cookie OR
   // the request must carry a valid admin token (02-§7.3, §18.31).
   const ownedIds = parseSessionIds(req.headers.cookie || '');
-  const isAdmin = verifyAdminToken(req.body.adminToken, adminTokens);
   if (!ownedIds.includes(eventId) && !isAdmin) {
     return res.status(403).json({ success: false, error: 'Ej behörig att redigera denna aktivitet.' });
   }
@@ -170,14 +170,15 @@ app.post('/edit-event', editEventLimiter, (req, res) => {
 });
 
 app.post('/delete-event', deleteEventLimiter, (req, res) => {
+  const isAdmin = verifyAdminToken(req.body.adminToken, adminTokens);
+
   // Time-gating with admin bypass (02-§26.17, 02-§26.18).
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
     if (isAfterEditingPeriod(today, activeCamp.end_date)) {
       return res.status(400).json({ success: false, error: 'Det går inte att radera aktiviteter just nu. Formuläret är inte öppet.' });
     }
-    if (isBeforeEditingPeriod(today, activeCamp.opens_for_editing)
-        && !verifyAdminToken(req.body.adminToken, adminTokens)) {
+    if (isBeforeEditingPeriod(today, activeCamp.opens_for_editing) && !isAdmin) {
       return res.status(400).json({ success: false, error: 'Det går inte att radera aktiviteter just nu. Formuläret är inte öppet.' });
     }
   }
@@ -190,7 +191,6 @@ app.post('/delete-event', deleteEventLimiter, (req, res) => {
   // Verify ownership: event ID must be in the session cookie OR
   // the request must carry a valid admin token (02-§7.3, §89.13).
   const ownedIds = parseSessionIds(req.headers.cookie || '');
-  const isAdmin = verifyAdminToken(req.body.adminToken, adminTokens);
   if (!ownedIds.includes(eventId) && !isAdmin) {
     return res.status(403).json({ success: false, error: 'Ej behörig att radera denna aktivitet.' });
   }
