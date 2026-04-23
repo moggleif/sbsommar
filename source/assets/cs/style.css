@@ -2954,8 +2954,20 @@ a.admin-icon--expired,
   z-index: 1;
 }
 
-.lokal-label--header {
-  background: var(--color-cream-light);
+.lokaler-grid-corner {
+  /* The top-left corner cell is neither a row nor a column header —
+     styled to match the schedule cells so the visible "chrome" is only
+     the label column and day-header row. Sticky+z-index keeps it parked
+     above both the sticky label column and the scrolling grid content. */
+  background: color-mix(in srgb, var(--color-cream) 90%, var(--color-charcoal) 10%);
+  padding: var(--space-xs) var(--space-sm);
+  font-weight: 700;
+  color: var(--color-charcoal);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  left: 0;
+  z-index: 2;
 }
 
 .day-band-label {

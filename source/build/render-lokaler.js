@@ -332,7 +332,7 @@ ${pageNav('lokaler.html', navSections)}
 
   <div class="lokaler-grid-wrapper">
     <div class="lokaler-grid">
-      <div class="lokal-label lokal-label--header"></div>
+      <div class="lokaler-grid-corner">Lokaler</div>
 ${dayHeaders}
 ${rows}
     </div>
