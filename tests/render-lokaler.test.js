@@ -365,6 +365,22 @@ describe('02-§98.4 — clash detection and lane stacking', () => {
     assert.ok(!/day-band--lanes-/.test(out), 'single lane is enough');
   });
 
+  it('LOK-83: non-overlapping event keeps --group:1 even when another pair clashes that day', () => {
+    const events = [
+      // Morning event, no overlap — should render at full height
+      event({ id: 'morning', date: '2099-07-01', start: '09:00', end: '10:00', location: 'Servicehus', title: 'Frukost' }),
+      // Afternoon clash pair
+      event({ id: 'a', date: '2099-07-01', start: '14:00', end: '15:30', location: 'Servicehus', title: 'Workshop' }),
+      event({ id: 'b', date: '2099-07-01', start: '15:00', end: '16:00', location: 'Servicehus', title: 'Yoga' }),
+    ];
+    const out = renderLokalerPage(CAMP, LOCATIONS, events);
+    // Morning event should have --group:1 (stands alone in its timespan)
+    assert.ok(/\[data-lb="morning"\][^}]*--group:1/.test(out), 'morning event has group 1');
+    // Both clash events should have --group:2 (they overlap each other)
+    assert.ok(/\[data-lb="a"\][^}]*--group:2/.test(out), 'clash A has group 2');
+    assert.ok(/\[data-lb="b"\][^}]*--group:2/.test(out), 'clash B has group 2');
+  });
+
   it('LOK-82: events in different locales on the same time do not clash', () => {
     const events = [
       event({ id: 'a', date: '2099-07-01', start: '12:00', end: '13:00', location: 'Servicehus' }),

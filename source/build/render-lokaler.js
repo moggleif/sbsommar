@@ -196,11 +196,15 @@ function renderEventBlock(event, locationName, isoDate, positionRules, blockInde
   if (widthPct <= 0) return '';
 
   const dataLb = `${event.id || `evt-${blockIndex}`}`;
-  // left/width position the block horizontally within the day band;
-  // --lane selects which vertical sub-row (lane) it occupies, cooperating
-  // with --lane-count set on the enclosing .day-band.
+  // left/width position the block horizontally; --lane selects its vertical
+  // sub-row, and --group is the local lane count (how many events actually
+  // overlap this one in time, counting itself). Using a per-event --group
+  // instead of a day-wide lane count means non-clashing events in an
+  // otherwise-crowded day still take their full day-band height.
+  const lane = event._lane || 0;
+  const group = event._groupSize || 1;
   positionRules.rules.push(
-    `${blockCssSelector(dataLb)}{left:${leftPct.toFixed(4)}%;width:${widthPct.toFixed(4)}%;--lane:${event._lane || 0};}`,
+    `${blockCssSelector(dataLb)}{left:${leftPct.toFixed(4)}%;width:${widthPct.toFixed(4)}%;--lane:${lane};--group:${group};}`,
   );
 
   const href = event.id ? `schema/${encodeURIComponent(event.id)}/` : 'schema.html';
@@ -216,6 +220,18 @@ function renderEventBlock(event, locationName, isoDate, positionRules, blockInde
 function renderDayBand(eventsOnDay, locationName, isoDate, positionRules) {
   const { events: laned, laneCount } = assignLanes(eventsOnDay);
   markClashes(laned);
+
+  // Per-event "group size": how many events (including itself) are active
+  // during any moment of this event's time range. Used for per-event height
+  // so non-overlapping events take full band height even on crowded days.
+  for (const ev of laned) {
+    let count = 0;
+    for (const other of laned) {
+      if (other.start < effectiveEnd(ev) && effectiveEnd(other) > ev.start) count++;
+    }
+    ev._groupSize = count;
+  }
+
   const blocks = laned
     .map((ev, i) => renderEventBlock(ev, locationName, isoDate, positionRules, `${locationName}-${isoDate}-${i}`))
     .filter(Boolean)
