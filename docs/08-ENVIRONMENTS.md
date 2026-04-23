@@ -5,6 +5,11 @@ All environments deploy from the `main` branch.
 
 For CI/CD workflow details, see [04-OPERATIONS.md](04-OPERATIONS.md).
 
+The project also publishes a separate **documentation site** from the
+`docs/` folder via GitHub Pages. The documentation site is not one of
+the three application environments and does not host the camp site or
+the PHP API. See [§ Documentation site](#documentation-site) below.
+
 ---
 
 ## Overview
@@ -165,3 +170,62 @@ See `.env.example` for the full list of variables and their descriptions.
 The `.env` file is ignored by git and is never committed.
 Without `API_URL` set, the built form will have no submit endpoint — this is
 expected for local builds that only need to test the static site.
+
+---
+
+## Documentation site
+
+The Markdown files in `docs/` are published as a small read-only
+documentation website by GitHub Pages. This site exists to make it
+easier for contributors and stakeholders to read and link to specific
+parts of the project documentation; it is fully separate from the
+`sbsommar.se` camp site and the PHP API.
+
+| Aspect             | Value                                                                 |
+| ------------------ | --------------------------------------------------------------------- |
+| Host               | GitHub Pages                                                          |
+| Source             | `main` branch, `/docs` folder                                         |
+| Build              | GitHub Pages' built-in Jekyll toolchain                                |
+| Deploy trigger     | Push to `main` that touches any file under `docs/` (automatic)        |
+| Workflows involved | None — GitHub Pages runs its own internal build                       |
+| URL                | Default `*.github.io` URL assigned by GitHub Pages (no custom domain) |
+
+### How to enable
+
+This is a one-time GitHub repository setting, performed through the
+web UI by a maintainer:
+
+1. Go to the repository on GitHub.
+2. Open **Settings → Pages → Build and deployment**.
+3. Set **Source** to `Deploy from a branch`.
+4. Set **Branch** to `main` and the folder to `/docs`.
+5. Save. GitHub Pages runs its first build automatically; the public
+   URL appears on the same settings page when the build finishes.
+
+Once enabled, every push to `main` that changes a file under `docs/`
+triggers a new Pages build. No project workflow runs for the docs site,
+so the CI status of a docs-only change does not gate publication.
+
+### Configuration
+
+The only project-owned configuration file for the documentation site
+is `docs/_config.yml`. It activates the
+[`jekyll-relative-links`](https://github.com/benbalter/jekyll-relative-links)
+plugin (whitelisted on GitHub Pages) so that relative links between
+Markdown files such as `[text](other-file.md)` resolve correctly to
+the rendered HTML pages on the published site.
+
+No other Jekyll configuration is owned by the project; the default
+GitHub Pages theme and defaults are used as-is.
+
+### Relationship to other environments
+
+The documentation site shares no secrets, URLs, or deploy infrastructure
+with the QA or Production environments. Editing `docs/` never triggers
+`deploy-qa.yml`, `deploy-prod.yml`, or the event-data deploy workflows.
+Conversely, editing files outside `docs/` never triggers a Pages
+rebuild.
+
+If a link on the documentation site breaks, the fix belongs in the
+Markdown file it points to (or the `docs/_config.yml` configuration),
+not in any of the deploy workflows.

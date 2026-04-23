@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix, 02-§18.47–18.48).
+Audit date: 2026-02-24. Last updated: 2026-04-23 (project documentation site, 02-§97.1–97.11).
 
 ---
 
@@ -1106,10 +1106,10 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 ## Summary
 
 ```text
-Total requirements:            1210
+Total requirements:            1221
 Covered (implemented + tested): 620
 Implemented, not tested:        590
-Gap (no implementation):          0
+Gap (no implementation):         11
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1412,6 +1412,10 @@ Matrix cleanup (2026-02-25):
   headers. Closes CodeQL `js/missing-rate-limiting` alerts 43/44/45.
   5 rows moved from covered to implemented (manual verification replaces
   removed RL-01..05 unit tests of the now-deleted helper).
+11 requirements added for the project documentation site (02-§97.1–97.11):
+  all 11 currently gap — GitHub Pages enablement is a repo setting made
+  via Settings → Pages; verification is manual (browser click-through).
+  Phase 5 updates the statuses once the site is published.
 ```
 
 ---
@@ -2152,6 +2156,22 @@ Matrix cleanup (2026-02-25):
 | `02-§95.5` | implemented | `package.json` and `api/composer.json` unchanged by this feature |
 | `02-§95.6` | covered | SLUG-RD-03..12 prove output equivalence; SLUG-RD-14 guarantees no leading/trailing dash regression |
 | `02-§95.7` | covered | CodeQL post-merge scan on main confirmed alerts #17, #30, #31, #32 transitioned to state `fixed` |
+
+### §97 — Project Documentation Site
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§97.1` | gap | Published site URL will be confirmed after Pages is enabled in Settings → Pages |
+| `02-§97.2` | gap | Source: `main`, `/docs` — set manually in Settings → Pages (recorded in 08-ENVIRONMENTS.md) |
+| `02-§97.3` | gap | Verified manually by pushing a `docs/` change and confirming the Pages build runs |
+| `02-§97.4` | gap | Only files in `docs/` are exposed; manual review confirms no secrets live under `docs/` |
+| `02-§97.5` | gap | GitHub Pages' built-in Jekyll renders Markdown; no project workflow involved |
+| `02-§97.6` | gap | `jekyll-relative-links` plugin enabled via `docs/_config.yml`; manual click-through verification |
+| `02-§97.7` | gap | Manual browser verification: inline `<!-- 02-§N.M -->` markers do not appear in rendered output |
+| `02-§97.8` | gap | `package.json` and `api/composer.json` unchanged |
+| `02-§97.9` | gap | `.github/workflows/` unchanged; no Pages-specific workflow added |
+| `02-§97.10` | gap | `deploy-qa.yml`, `deploy-prod.yml`, `deploy-reusable.yml`, and event-data workflows unchanged |
+| `02-§97.11` | gap | No `docs/CNAME` file; default `*.github.io` URL in use |
 
 ### §96 — Self-Healing Service Worker Upgrade
 
