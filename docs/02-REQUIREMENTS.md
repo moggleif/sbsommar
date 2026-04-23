@@ -4356,18 +4356,17 @@ an internet connection.
 
 - The `PRE_CACHE_URLS` array in `sw.js` is populated by the build-time
   injection. There is no hand-maintained list. <!-- 02-§92.6 -->
-- The service worker cache name is `sb-sommar-v5`. <!-- 02-§92.7 -->
+- The service worker cache name is defined in §96.1. <!-- 02-§92.7 -->
 - The service worker pre-caches all site pages, including
   `lagg-till.html` and `redigera.html`. <!-- 02-§92.8 -->
 - The `NO_CACHE_PATTERNS` list contains only API and submission
   endpoints: `/add-event`, `/edit-event`, `/delete-event`,
   `/verify-admin`, `/api/`. It does not contain any `.html`
   pages. <!-- 02-§92.9 -->
-- The `cacheFirstThenNetwork` strategy uses `{ ignoreSearch: true }`
-  when matching cache entries so that cache-busted URLs
-  (e.g. `style.css?v=abc`) match pre-cached files. <!-- 02-§92.10 -->
-- The `networkFirstWithOfflineFallback` strategy uses
-  `{ ignoreSearch: true }` when matching cache entries. <!-- 02-§92.11 -->
+- The `cacheFirstThenNetwork` strategy for static assets matches cache
+  entries as defined in §96.5. <!-- 02-§92.10 -->
+- The network-first strategies match cache entries with
+  `{ ignoreSearch: true }` as defined in §96.6. <!-- 02-§92.11 -->
 
 ### 92.3 Offline guard — form pages (user requirements)
 
