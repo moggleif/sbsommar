@@ -294,10 +294,12 @@
           bypassBtn.textContent = 'Öppna ändå (admin)';
           bypassBtn.addEventListener('click', function () {
             errorEl.hidden = true;
+            bypassBtn.hidden = true;
             loadingEl.hidden = false;
             runInit();
           });
-          errorEl.appendChild(bypassBtn);
+          // Insert after the banner on its own row, not inside it (02-§26.20).
+          errorEl.parentNode.insertBefore(bypassBtn, errorEl.nextSibling);
         }
 
         // Still render cookie debug panel even while gated.

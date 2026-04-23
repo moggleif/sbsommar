@@ -1329,8 +1329,10 @@ textarea {
 }
 
 .form-gate-bypass {
-  display: inline-block;
+  display: block;
+  width: fit-content;
   margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
   padding: 6px 14px;
   border-radius: var(--radius-sm);
   background: transparent;
