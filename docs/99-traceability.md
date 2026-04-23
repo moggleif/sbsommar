@@ -2274,6 +2274,9 @@ the add- and edit-activity forms that links to this page.
 | `02-§98.18` | covered | Clash predicate `a.start < b.end && a.end > b.start` in `markClashes()`; test LOK-81 |
 | `02-§98.19` | covered | Per-event `--group` (count of temporally-overlapping events including self) drives height; non-clashers keep full band height even on crowded days; test LOK-83 |
 | `02-§98.20` | implemented | `.lokaler-grid-corner` cell renders the text `Lokaler \ Dag` inside `renderLokalerPage`; visible on every page render. Manual: open /lokaler.html, confirm corner text |
+| `02-§98.21` | covered | `effectiveEnd()` uses strict `<` so `start === end` gives `widthPct = 0`; `renderEventBlock()` returns empty string for zero-width; test LOK-84 |
+| `02-§98.22` | covered | `expandCrossMidnight()` splits an event into `_part: 'start'` (its own date, until 24:00) and `_part: 'end'` (next date, from 00:00); data-lb suffixed `--start`/`--end`; aria-label adds "fortsätter nästa dag" / "från föregående dag"; test LOK-85 |
+| `02-§98.23` | covered | Native `<table>`/`<tr>`/`<th scope="row">`/`<th scope="col">`/`<td>` in `renderLokalerPage`; CSS `display: grid` on `<table>` and `display: contents` on `<tr>` make them participate in CSS Grid; test LOK-86. CSS source-order invariant for clash-hover guarded by LOK-87 |
 
 ### §1 — Camp registry fields (camps.yaml)
 

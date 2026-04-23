@@ -98,9 +98,44 @@ function computeHourRange(events) {
 }
 
 // Returns the effective end time for overlap/lane comparisons. Cross-midnight
-// events (end <= start) are treated as ending at 24:00 for this purpose.
+// events (end STRICTLY before start) are treated as ending at 24:00. Events
+// where start === end have zero duration and keep their end as-is so
+// positionBlock produces width 0 and the block is skipped.
 function effectiveEnd(ev) {
-  return ev.end <= ev.start ? '24:00' : ev.end;
+  return ev.end < ev.start ? '24:00' : ev.end;
+}
+
+function addOneDayIso(isoDate) {
+  const d = new Date(`${isoDate}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
+
+/**
+ * Cross-midnight events (end < start) span two calendar days. Splits such
+ * an event into two render slots: one on its own date (start..24:00) and
+ * one on the following date (00:00..end). Each slot carries `_part` ("start"
+ * or "end") and `_origTime` (the original start–end range for aria-label).
+ * Non-cross-midnight events pass through unchanged.
+ */
+function expandCrossMidnight(events) {
+  const out = [];
+  for (const ev of events) {
+    if (ev.end < ev.start) {
+      const origTime = `${ev.start}–${ev.end}`;
+      out.push({ ...ev, end: '24:00', _part: 'start', _origTime: origTime });
+      out.push({
+        ...ev,
+        date: addOneDayIso(ev.date),
+        start: '00:00',
+        _part: 'end',
+        _origTime: origTime,
+      });
+    } else {
+      out.push(ev);
+    }
+  }
+  return out;
 }
 
 /**
@@ -159,7 +194,9 @@ function markClashes(events) {
 function positionBlock(event, dayStartHour, dayEndHour) {
   const startH = parseHHMM(event.start);
   let endH = parseHHMM(event.end);
-  if (endH <= startH) endH = 24;
+  // Strict `<`: cross-midnight clips to 24:00. Zero-duration (end === start)
+  // keeps the original end so widthPct comes out 0 and the caller skips.
+  if (endH < startH) endH = 24;
 
   const clippedStart = Math.max(startH, dayStartHour);
   const clippedEnd = Math.min(endH, dayEndHour);
@@ -175,7 +212,14 @@ function positionBlock(event, dayStartHour, dayEndHour) {
 function ariaLabelFor(event, locationName, isoDate) {
   const day = formatDayHeader(isoDate);
   const who = event.responsible ? `, ansvarig ${event.responsible}` : '';
-  return `${locationName}, ${day}, ${event.start}–${event.end} ${event.title}${who}`;
+  // Cross-midnight events use _origTime (the full original span) in the
+  // aria-label, with a trailing hint about the midnight split, so the
+  // listener understands both halves represent the same booking.
+  const timeLabel = event._origTime || `${event.start}–${event.end}`;
+  let continuation = '';
+  if (event._part === 'start') continuation = ' (fortsätter nästa dag)';
+  else if (event._part === 'end') continuation = ' (från föregående dag)';
+  return `${locationName}, ${day}, ${timeLabel} ${event.title}${who}${continuation}`;
 }
 
 // CSS is emitted in a single <style> block to keep the HTML free of inline
@@ -195,7 +239,10 @@ function renderEventBlock(event, locationName, isoDate, positionRules, blockInde
   );
   if (widthPct <= 0) return '';
 
-  const dataLb = `${event.id || `evt-${blockIndex}`}`;
+  // Cross-midnight events produce two slots with the same event.id; suffix
+  // the split part so data-lb stays unique (CSS selectors need uniqueness).
+  const partSuffix = event._part ? `--${event._part}` : '';
+  const dataLb = `${event.id || `evt-${blockIndex}`}${partSuffix}`;
   // left/width position the block horizontally; --lane selects its vertical
   // sub-row, and --group is the local lane count (how many events actually
   // overlap this one in time, counting itself). Using a per-event --group
@@ -237,13 +284,13 @@ function renderDayBand(eventsOnDay, locationName, isoDate, positionRules) {
     .filter(Boolean)
     .join('');
   const lanesClass = laneCount > 1 ? ` day-band--lanes-${Math.min(laneCount, 5)}` : '';
-  return `<div class="day-band${lanesClass}">${blocks}</div>`;
+  return `<td class="day-band${lanesClass}">${blocks}</td>`;
 }
 
 function renderLokalRow(locationName, locationEvents, campDates, positionRules) {
   const hasEvents = locationEvents.length > 0;
   const emptyTag = hasEvents ? '' : '<span class="lokal-empty">Inga bokningar</span>';
-  const label = `<div class="lokal-label">${escapeHtml(locationName)}${emptyTag}</div>`;
+  const label = `<th class="lokal-label" scope="row">${escapeHtml(locationName)}${emptyTag}</th>`;
 
   const byDate = new Map(campDates.map((d) => [d, []]));
   for (const ev of locationEvents) {
@@ -255,11 +302,11 @@ function renderLokalRow(locationName, locationEvents, campDates, positionRules) 
     .join('');
 
   const rowClass = hasEvents ? 'lokal-row' : 'lokal-row lokal-row--empty';
-  return `<div class="${rowClass}">${label}${bands}</div>`;
+  return `<tr class="${rowClass}">${label}${bands}</tr>`;
 }
 
 function renderDayHeader(isoDate) {
-  return `<div class="day-band-label">${escapeHtml(formatDayHeader(isoDate))}</div>`;
+  return `<th class="day-band-label" scope="col">${escapeHtml(formatDayHeader(isoDate))}</th>`;
 }
 
 /**
@@ -288,9 +335,11 @@ function renderLokalerPage(camp, locations, events, footerHtml = '', navSections
   const campDates = futureDates.length > 0 ? futureDates : allDates;
 
   // Filter events to the same window so the hour band and per-locale
-  // groupings reflect only what's shown.
+  // groupings reflect only what's shown. Cross-midnight events are split
+  // here so each half lands in the correct day's column.
   const visibleDateSet = new Set(campDates);
-  const visibleEvents = events.filter((e) => visibleDateSet.has(e.date));
+  const expanded = expandCrossMidnight(events);
+  const visibleEvents = expanded.filter((e) => visibleDateSet.has(e.date));
 
   const { startHour, endHour } = computeHourRange(visibleEvents);
   const groups = groupEventsByLocation(visibleEvents, locations);
@@ -331,19 +380,24 @@ ${pageNav('lokaler.html', navSections)}
   <p class="lokaler-legend">Varje färgat block är en bokad aktivitet. Rader märkta "Inga bokningar" betyder att lokalen är ledig hela lägret. Behöver du flytta något du lagt till? <a href="redigera.html">Redigera aktivitet</a>.</p>
 
   <div class="lokaler-grid-wrapper">
-    <div class="lokaler-grid">
-      <div class="lokaler-grid-corner">Lokaler \\ Dag</div>
+    <table class="lokaler-grid" aria-label="Lokaler mot dagar — bokningsöversikt">
+      <thead>
+        <tr class="lokaler-grid-header-row">
+          <th class="lokaler-grid-corner" scope="col">Lokaler \\ Dag</th>
 ${dayHeaders}
+        </tr>
+      </thead>
+      <tbody>
 ${rows}
-    </div>
+      </tbody>
+    </table>
   </div>
 </main>
   <script src="wp-cleanup.js"></script>
   <script src="nav.js" defer></script>
   <script src="feedback.js" defer></script>
   <script src="sw-register.js" defer></script>
-  <script src="pwa-install.js" defer></script>
-  <script src="admin.js" defer></script>${goatcounterScript(goatcounterCode)}
+  <script src="pwa-install.js" defer></script>${goatcounterScript(goatcounterCode)}
 ${pageFooter(footerHtml)}
 </body>
 </html>

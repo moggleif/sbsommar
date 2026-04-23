@@ -425,6 +425,67 @@ describe('02-§98.3 — today-forward filter', () => {
   });
 });
 
+describe('02-§98.21 — zero-duration events are skipped', () => {
+  it('LOK-84: event with start === end does not render a block', () => {
+    const events = [
+      event({ id: 'zero', date: '2099-07-01', start: '23:59', end: '23:59', title: 'Sista för idag' }),
+      event({ id: 'real', date: '2099-07-01', start: '10:00', end: '11:00', title: 'Frukost' }),
+    ];
+    const out = renderLokalerPage(CAMP, LOCATIONS, events);
+    assert.ok(out.includes('Frukost'), 'real event still rendered');
+    assert.ok(!out.includes('Sista för idag'), 'zero-duration event hidden from the grid');
+  });
+});
+
+describe('02-§98.22 — cross-midnight events split across two days', () => {
+  const MULTI_DAY_CAMP = {
+    name: 'SB sommar 2099',
+    location: 'Sysslebäck',
+    start_date: '2099-07-01',
+    end_date: '2099-07-03',
+  };
+
+  it('LOK-85: event 22:00–01:00 on day 1 renders on both day 1 and day 2', () => {
+    const events = [
+      event({ id: 'nightfilm', date: '2099-07-01', start: '22:00', end: '01:00', title: 'Nattbio', location: 'Servicehus' }),
+    ];
+    const out = renderLokalerPage(MULTI_DAY_CAMP, LOCATIONS, events);
+    assert.ok(/data-lb="nightfilm--start"/.test(out), 'start-half block on day 1');
+    assert.ok(/data-lb="nightfilm--end"/.test(out), 'end-half block on day 2');
+    assert.ok(out.includes('fortsätter nästa dag'), 'aria-label hints at continuation');
+    assert.ok(out.includes('från föregående dag'), 'aria-label hints at origin day');
+  });
+});
+
+describe('02-§98.23 — native table semantics', () => {
+  it('LOK-86: grid uses <table>/<tr>/<th>/<td> so assistive tech announces axes', () => {
+    const events = [event({ id: 'a', title: 'Test' })];
+    const out = renderLokalerPage(CAMP, LOCATIONS, events);
+    assert.ok(/<table class="lokaler-grid"/.test(out), 'outer container is a <table>');
+    assert.ok(/<tr class="lokal-row/.test(out), 'body rows are <tr>');
+    assert.ok(/<th class="lokal-label" scope="row"/.test(out), 'locale labels are <th scope="row">');
+    assert.ok(/<th class="day-band-label" scope="col"/.test(out), 'day headers are <th scope="col">');
+    assert.ok(/<td class="day-band/.test(out), 'day bands are <td>');
+  });
+});
+
+describe('clash CSS source order — regression test for :hover override', () => {
+  it('LOK-87: .event-block--clash:hover rule appears after .event-block:hover in style.css', () => {
+    const css = fs.readFileSync(
+      path.join(__dirname, '..', 'source', 'assets', 'cs', 'style.css'),
+      'utf8',
+    );
+    const generalHover = css.indexOf('.event-block:hover');
+    const clashHover = css.indexOf('.event-block--clash:hover');
+    assert.ok(generalHover > 0, 'general .event-block:hover rule exists');
+    assert.ok(clashHover > 0, '.event-block--clash:hover rule exists');
+    assert.ok(
+      clashHover > generalHover,
+      'clash hover rule must come after general hover so it wins at equal specificity',
+    );
+  });
+});
+
 describe('02-§98.1 — integration with 2025-06 archive camp', () => {
   it('LOK-70: renders without throwing against the real 2025-06 archive', () => {
     const { camp, events } = load2025Camp();
@@ -437,13 +498,16 @@ describe('02-§98.1 — integration with 2025-06 archive camp', () => {
     }
   });
 
-  it('LOK-71: every event title from the archive appears at least once', () => {
+  it('LOK-71: every non-zero-duration event title from the archive appears at least once', () => {
     const { camp, events } = load2025Camp();
     const locations = loadLocalYaml();
     const out = renderLokalerPage(camp, locations, events);
-    // Sample across the data — all unique titles appear
-    const uniqueTitles = [...new Set(events.map((e) => e.title))];
-    for (const title of uniqueTitles) {
+    // Zero-duration events (start === end) are intentionally skipped per
+    // 02-§98.21 — exclude them from the "should appear" assertion.
+    const renderableTitles = [...new Set(
+      events.filter((e) => e.start !== e.end).map((e) => e.title),
+    )];
+    for (const title of renderableTitles) {
       assert.ok(out.includes(title), `title "${title}" present in output`);
     }
   });

@@ -2979,7 +2979,14 @@ a.admin-icon--expired,
   font-weight: 700;
 }
 
-.lokal-row {
+.lokaler-grid thead,
+.lokaler-grid tbody,
+.lokal-row,
+.lokaler-grid-header-row {
+  /* Native <table> plus CSS Grid: the default table-header-group /
+     table-row-group / table-row display values would break the grid's
+     column tracks. display: contents removes each wrapper from the box
+     tree so the <th>/<td> children become direct grid items. */
   display: contents;
 }
 

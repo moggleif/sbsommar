@@ -4982,3 +4982,22 @@ overview, is covered in a later section. Issue #332.
 - The top-left corner cell of the grid labels both axes with the text
   "Lokaler \ Dag" (the backslash reads as a diagonal separator between
   the row axis and the column axis). <!-- 02-§98.20 -->
+- Events whose `start` time equals their `end` time (zero duration,
+  typically legacy "sista för idag 23:59–23:59" markers) are not
+  rendered as blocks on the grid — they have no duration to visualise
+  and cannot conflict with anything. They remain visible through the
+  regular schedule views. <!-- 02-§98.21 -->
+- Cross-midnight events (events where the `end` time falls strictly
+  before the `start` time, allowed up to 17 hours per §9) are split
+  into two visual blocks — one on their own date from `start` to
+  24:00, and one on the following date from 00:00 to `end`. Both
+  blocks link to the same per-event detail page and carry aria-labels
+  describing the continuation so a screen-reader user understands
+  they are the same booking. <!-- 02-§98.22 -->
+- The grid markup uses native table elements so assistive tech can
+  announce the two-axis structure: `<table>` as the grid container,
+  `<tr>` for each row, `<th scope="row">` for locale labels, `<th
+  scope="col">` for day headers and the top-left corner cell, and
+  `<td>` for each day band. CSS Grid still drives the visual
+  layout via `display: grid` on the `<table>` and `display:
+  contents` on the `<tr>`s. <!-- 02-§98.23 -->
