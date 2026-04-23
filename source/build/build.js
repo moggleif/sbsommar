@@ -10,6 +10,7 @@ const { renderAddPage } = require('./render-add');
 const { renderEditPage, editApiUrl } = require('./render-edit');
 const { renderTodayPage, renderRedirectPage } = require('./render-today');
 const { renderIdagPage } = require('./render-idag');
+const { renderLokalerPage } = require('./render-lokaler');
 const { renderIndexPage, convertMarkdown, extractHeroImage, extractH1, renderUpcomingCampsHtml, renderLocationAccordions, formatLongSvDate } = require('./render-index');
 const { renderArkivPage } = require('./render-arkiv');
 const { renderRssFeed } = require('./render-rss');
@@ -214,6 +215,10 @@ async function main() {
   const addHtml = renderAddPage(camp, locations, process.env.API_URL, footerWithVersion, navSections, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'lagg-till.html'), addHtml, 'utf8');
   console.log(`Built: public/lagg-till.html  (${locations.length} locations)`);
+
+  const lokalerHtml = renderLokalerPage(camp, allLocations, events, footerWithVersion, navSections, GOATCOUNTER_CODE);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'lokaler.html'), lokalerHtml, 'utf8');
+  console.log(`Built: public/lokaler.html  (${events.length} events, ${allLocations.length} locations)`);
 
   const editHtml = renderEditPage(camp, locations, editApiUrl(process.env.API_URL), footerWithVersion, navSections, cookieDomain, GOATCOUNTER_CODE);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'redigera.html'), editHtml, 'utf8');

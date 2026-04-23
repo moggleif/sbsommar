@@ -24,7 +24,7 @@ try {
   const mod = require('../source/build/render-lokaler');
   ({ renderLokalerPage, groupEventsByLocation, positionBlock, computeHourRange } = mod);
   moduleLoaded = true;
-} catch (_e) {
+} catch {
   // module not yet present — all suites below will be skipped
 }
 const skip = !moduleLoaded;
