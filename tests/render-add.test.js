@@ -148,7 +148,7 @@ describe('renderAddPage – submit UX structure', () => {
 describe('renderAddPage – static multi-day date hint (02-§80.28–80.30)', () => {
   it('DG-HINT-01 (02-§80.28): renders the literal hint text', () => {
     assert.ok(
-      render().includes('Återkommande aktivitet — välj flera dagar.'),
+      render().includes('För återkommande aktivitet — välj flera dagar.'),
       'Expected literal hint text below the Datum label',
     );
   });
@@ -156,7 +156,7 @@ describe('renderAddPage – static multi-day date hint (02-§80.28–80.30)', ()
   it('DG-HINT-02 (02-§80.28): hint is placed between the Datum label and the day-grid container', () => {
     const html = render();
     const labelIdx = html.indexOf('Datum <span class="req">*</span></label>');
-    const hintIdx = html.indexOf('Återkommande aktivitet — välj flera dagar.');
+    const hintIdx = html.indexOf('För återkommande aktivitet — välj flera dagar.');
     const gridIdx = html.indexOf('class="day-grid"');
     assert.ok(labelIdx !== -1, 'Datum label not found');
     assert.ok(hintIdx !== -1, 'Hint text not found');
@@ -169,7 +169,7 @@ describe('renderAddPage – static multi-day date hint (02-§80.28–80.30)', ()
 
   it('DG-HINT-03 (02-§80.29): hint uses the .field-info class', () => {
     const html = render();
-    const re = /<span class="field-info">Återkommande aktivitet — välj flera dagar\.<\/span>/;
+    const re = /<span class="field-info">För återkommande aktivitet — välj flera dagar\.<\/span>/;
     assert.ok(re.test(html), 'Hint must be a <span class="field-info"> with the literal text');
   });
 });
@@ -181,7 +181,7 @@ describe('renderEditPage – does not render the multi-day hint (02-§80.30)', (
     const { renderEditPage } = require('../source/build/render-edit');
     const html = renderEditPage(CAMP, LOCATIONS, API_URL);
     assert.ok(
-      !html.includes('Återkommande aktivitet'),
+      !html.includes('återkommande aktivitet'),
       'Edit page must not include the multi-day hint — single-date selector only',
     );
   });

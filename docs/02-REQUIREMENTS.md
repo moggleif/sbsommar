@@ -3724,7 +3724,7 @@ submission.
 ### 80.7 Static multi-day hint (user requirements)
 
 - A static hint with the text
-  `Återkommande aktivitet — välj flera dagar.` is rendered immediately
+  `För återkommande aktivitet — välj flera dagar.` is rendered immediately
   below the `Datum *` label on the add-activity page, above the day
   grid, and is always visible regardless of selection state. <!-- 02-§80.28 -->
 - The hint is rendered with the existing `.field-info` class so it
