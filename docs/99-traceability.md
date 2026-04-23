@@ -1107,9 +1107,9 @@ Audit date: 2026-02-24. Last updated: 2026-02-28 (cookie domain client-write fix
 
 ```text
 Total requirements:            1210
-Covered (implemented + tested): 612
-Implemented, not tested:        583
-Gap (no implementation):         15
+Covered (implemented + tested): 620
+Implemented, not tested:        590
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -2157,21 +2157,21 @@ Matrix cleanup (2026-02-25):
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§96.1` | gap | `sw.js` declares `const CACHE_NAME = 'sb-sommar-v6'` |
-| `02-§96.2` | gap | `install` event handler calls `self.skipWaiting()` |
-| `02-§96.3` | gap | `install` handler wraps each URL as `new Request(u, { cache: 'reload' })` before `cache.addAll` |
-| `02-§96.4` | gap | `activate` handler deletes non-current caches and calls `self.clients.claim()` |
-| `02-§96.5` | gap | `cacheFirstThenNetwork` matches cache entries without `ignoreSearch` |
-| `02-§96.6` | gap | `networkFirstThenCache` and `networkFirstWithOfflineFallback` continue to use `{ ignoreSearch: true }` when falling back to cache |
-| `02-§96.7` | gap | `PRE_CACHE_URLS` entries remain root-relative without query strings (build output) |
-| `02-§96.8` | gap | Cache-first handler falls back to ignoreSearch match against the pre-cached `/style.css` entry when the hashed URL is not yet cached |
-| `02-§96.9` | gap | Manual browser verification: install SW v5 locally, deploy v6, confirm next navigation upgrades without user action |
-| `02-§96.10` | gap | Manual browser verification: confirm `sb-sommar-v5` is deleted on activate and `sb-sommar-v6` is populated with fresh bytes |
-| `02-§96.11` | gap | Manual browser verification: confirm banners render with correct styling on second reload after deploy |
-| `02-§96.12` | gap | Manual browser verification: no clear-site-data or unregister action needed |
-| `02-§96.13` | gap | `sw.js` has no imports; vanilla JavaScript only |
-| `02-§96.14` | gap | `package.json` unchanged by this feature |
-| `02-§96.15` | gap | `offline-guard.js`, `feedback.js`, and `offline.html` remain in place; offline fallback routing in `sw.js` is unchanged |
+| `02-§96.1` | covered | OFF-02, PWA-31: `sw.js` declares `const CACHE_NAME = 'sb-sommar-v6'` |
+| `02-§96.2` | covered | SWH-01: `install` event handler contains `self.skipWaiting()` |
+| `02-§96.3` | covered | SWH-02: `install` handler wraps each URL as `new Request(u, { cache: 'reload' })` before `cache.addAll` |
+| `02-§96.4` | covered | SWH-03, SWH-04: `activate` handler deletes caches `!== CACHE_NAME` and calls `self.clients.claim()` |
+| `02-§96.5` | covered | SWH-05: primary `caches.match(request)` in `cacheFirstThenNetwork` has no `ignoreSearch`; secondary `ignoreSearch` match exists only on the fetch-failure branch |
+| `02-§96.6` | covered | SWH-06, SWH-07, OFF-09: `networkFirstThenCache` and `networkFirstWithOfflineFallback` retain `{ ignoreSearch: true }` on their catch-branch cache lookups |
+| `02-§96.7` | implemented | `source/build/build.js` pre-cache-manifest injection uses root-relative paths (no query strings); verified post-build by `public/sw.js` contents |
+| `02-§96.8` | implemented | `cacheFirstThenNetwork` catch branch calls `caches.match(request, { ignoreSearch: true })` so `/style.css` pre-cache entry still serves offline — manual browser verification |
+| `02-§96.9` | implemented | Manual browser verification: load SW v5, deploy v6, confirm next navigation upgrades without user action |
+| `02-§96.10` | implemented | Manual browser verification: confirm `sb-sommar-v5` is deleted on activate and `sb-sommar-v6` populated from fresh network responses |
+| `02-§96.11` | implemented | Manual browser verification: confirm §94 registration-banner styling applies on second reload after deploy |
+| `02-§96.12` | implemented | Manual browser verification: no clear-site-data or unregister action required from the end user |
+| `02-§96.13` | covered | SWH-08: `sw.js` has no `import`, `require`, or `importScripts` |
+| `02-§96.14` | implemented | `package.json` unchanged by this feature |
+| `02-§96.15` | implemented | `offline-guard.js`, `feedback.js`, and `offline.html` unchanged; offline routing in `sw.js` preserved — manual browser verification |
 
 ### §1 — Camp registry fields (camps.yaml)
 
