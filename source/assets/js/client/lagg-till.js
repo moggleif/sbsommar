@@ -289,9 +289,7 @@
       var formatted = parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
       var msg = document.createElement('div');
       msg.className = 'form-gate-msg';
-      var text = document.createElement('p');
-      text.textContent = 'Formuläret öppnar den ' + formatted + '.';
-      msg.appendChild(text);
+      msg.textContent = 'Formuläret öppnar den ' + formatted + '.';
       form.parentNode.insertBefore(msg, form);
       fieldset.disabled = true;
       submitBtn.disabled = true;
@@ -315,9 +313,7 @@
       // After closing — no admin bypass (02-§26.16, §26.18)
       var msg2 = document.createElement('div');
       msg2.className = 'form-gate-msg';
-      var text2 = document.createElement('p');
-      text2.textContent = 'Lägret är avslutat.';
-      msg2.appendChild(text2);
+      msg2.textContent = 'Lägret är avslutat.';
       form.parentNode.insertBefore(msg2, form);
       fieldset.disabled = true;
       submitBtn.disabled = true;

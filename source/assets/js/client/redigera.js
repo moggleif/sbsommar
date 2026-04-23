@@ -295,7 +295,6 @@
           bypassBtn.addEventListener('click', function () {
             errorEl.hidden = true;
             loadingEl.hidden = false;
-            gateBlocked = false;
             runInit();
           });
           errorEl.appendChild(bypassBtn);
