@@ -1054,6 +1054,33 @@ or edit activities.
   on the form element so client-side JavaScript can evaluate the period at page
   load without an API call. <!-- 02-§26.13 -->
 
+### 26.7 Admin bypass before the camp opens
+
+Context: administrators need to prepare the schedule via the website before
+`opens_for_editing`. Issues #335 and #336 asked for a way to add and edit
+activities during that preparation window without editing YAML by hand. The
+bypass is deliberately one-sided: admins can open the form before the camp
+opens, but the same forms remain locked for everyone — including admins —
+after the camp has ended, so finished camps cannot be altered retroactively
+through the website.
+
+- When the current date is before `opens_for_editing` and the client holds a
+  valid admin token (§91), the add-activity and edit-activity forms display
+  the same locked message as for ordinary users, plus an additional button
+  labelled "Öppna ändå (admin)". <!-- 02-§26.14 -->
+- Activating the bypass button removes the disabled state on the form
+  fieldset and submit button so the admin can complete the submission. <!-- 02-§26.15 -->
+- The bypass button is only shown when the form is locked because the period
+  has not yet opened. It is never shown after `end_date + 1 day`. <!-- 02-§26.16 -->
+- `POST /add-event`, `POST /edit-event`, and `POST /delete-event` accept
+  requests that carry a valid admin token even when the current date is
+  before `opens_for_editing`. <!-- 02-§26.17 -->
+- The same endpoints reject requests when the current date is after
+  `end_date + 1 day`, regardless of whether an admin token is present. <!-- 02-§26.18 -->
+- The add-activity form includes the admin token in the request body (as
+  `adminToken`) when an admin submits through the bypass path, using the same
+  mechanism as the edit and delete flows (§18.31, §89.13). <!-- 02-§26.19 -->
+
 ---
 
 ## 27. Past-Date Blocking
