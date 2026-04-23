@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 const HOUR_SECONDS              = 3600;
 const RATE_LIMIT_MSG            = 'För många förfrågningar. Försök igen senare.';
 const RATE_LIMIT_VERIFY_ADMIN   = 5;
+const RATE_LIMIT_ADD_EVENT      = 30;
 const RATE_LIMIT_EDIT_EVENT     = 30;
 const RATE_LIMIT_DELETE_EVENT   = 30;
 const RATE_LIMIT_FEEDBACK       = 5;
@@ -154,6 +155,12 @@ function handleCleanupCookies(): void
 /** @param list<string> $adminTokens */
 function handleAddEvent(?array $activeCamp, array $adminTokens): void
 {
+    if (RateLimit::isLimited(clientIp(), 'add-event', RATE_LIMIT_ADD_EVENT, HOUR_SECONDS)) {
+        jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
+
+        return;
+    }
+
     $body = getJsonBody();
 
     // Time-gating with admin bypass (02-§26.17, 02-§26.18)
@@ -214,6 +221,12 @@ function handleAddEvent(?array $activeCamp, array $adminTokens): void
 /** @param list<string> $adminTokens */
 function handleAddEvents(?array $activeCamp, array $adminTokens): void
 {
+    if (RateLimit::isLimited(clientIp(), 'add-events', RATE_LIMIT_ADD_EVENT, HOUR_SECONDS)) {
+        jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
+
+        return;
+    }
+
     $body = getJsonBody();
 
     // Time-gating with admin bypass (02-§26.17, 02-§26.18)

@@ -52,6 +52,7 @@ function makeLimiter({ limit, windowMs, includeSuccess = true }) {
 }
 
 const verifyAdminLimiter = makeLimiter({ limit: 5,  windowMs: HOUR_MS, includeSuccess: false });
+const addEventLimiter    = makeLimiter({ limit: 30, windowMs: HOUR_MS });
 const editEventLimiter   = makeLimiter({ limit: 30, windowMs: HOUR_MS });
 const deleteEventLimiter = makeLimiter({ limit: 30, windowMs: HOUR_MS });
 const feedbackLimiter    = makeLimiter({ limit: 5,  windowMs: HOUR_MS });
@@ -89,7 +90,7 @@ app.post('/verify-admin', verifyAdminLimiter, (req, res) => {
   return res.status(403).json({ valid: false });
 });
 
-app.post('/add-event', (req, res) => {
+app.post('/add-event', addEventLimiter, (req, res) => {
   // Time-gating with admin bypass (02-§26.17, 02-§26.18).
   if (activeCamp) {
     const today = new Date().toISOString().slice(0, 10);
