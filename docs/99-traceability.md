@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site policy, 02-§97.15–97.21).
+Audit date: 2026-02-24. Last updated: 2026-04-23 (locale overview page requirements added as gaps, 02-§98.1–98.15).
 
 ---
 
@@ -1113,10 +1113,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 ## Summary
 
 ```text
-Total requirements:            1238
+Total requirements:            1253
 Covered (implemented + tested): 630
 Implemented, not tested:        608
-Gap (no implementation):          0
+Gap (no implementation):         15
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -1451,6 +1451,12 @@ Matrix cleanup (2026-02-25):
   a project-technical reverse-discoverability banner pointing back to
   the source repo, README, and issue tracker on github.com.
   8 new tests across the same suite (DOCS-CFG-05..07, DOCS-IDX-01..05).
+
+15 requirements added for the locale overview page (02-§98.1–98.15):
+  All at status `gap` until Session 1 of issue #332 lands
+  (`source/build/render-lokaler.js`, `public/lokaler.html`,
+  and the schedule-page link "Se lokalöversikt →").
+  See 02-REQUIREMENTS.md §98 and 07-DESIGN.md §6 "Locale overview grid".
 ```
 
 ---
@@ -2237,6 +2243,31 @@ Matrix cleanup (2026-02-25):
 | `02-§97.19` | covered | DOCS-CFG-05: `docs/robots.txt` (Disallow: /) present; verified to address every user agent |
 | `02-§97.20` | covered | DOCS-CFG-06: both `docs/_includes/head-custom.html` (Primer/Minima) and `docs/_includes/head_custom.html` (Cayman) emit `<meta name="robots" content="noindex, nofollow">`; whichever theme GitHub Pages picks, the tag lands in `<head>` — manual browser verification confirms |
 | `02-§97.21` | covered | DOCS-CFG-07: no `sitemap.xml`, `sitemap.txt`, or forbidden Jekyll plugins (`jekyll-sitemap`, `jekyll-seo-tag`, `jekyll-feed`) under `docs/` |
+
+### §98 — Locale Overview Page
+
+Session 1 of issue #332. Delivers `/lokaler.html` as a week-wide visual
+timeline of which locales are already booked during the active camp.
+Session 2 (a separate later change) will add a soft conflict warning in
+the add- and edit-activity forms that links to this page.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§98.1` | gap | `source/build/render-lokaler.js` not yet created; `public/lokaler.html` not yet emitted by the build |
+| `02-§98.2` | gap | Will iterate locales in `source/data/local.yaml` order |
+| `02-§98.3` | gap | Grid spans camp's `start_date`..`end_date` inclusive |
+| `02-§98.4` | gap | Event time-blocks positioned by date and start/end times |
+| `02-§98.5` | gap | Event-block text: title, start, end, responsible |
+| `02-§98.6` | gap | Empty-locale rows display "Inga bokningar" |
+| `02-§98.7` | gap | Unknown `location` values fold into the "Annat" row |
+| `02-§98.8` | gap | "Se lokalöversikt →" link added to `source/build/render.js` `renderSchedulePage()` in the intro area |
+| `02-§98.9` | gap | No new `pageNav` entry; `source/build/layout.js` untouched |
+| `02-§98.10` | gap | Heading "Lokalöversikt"; all copy in Swedish per §14 |
+| `02-§98.11` | gap | Event-blocks as `<button>` or `<a>` with descriptive `aria-label` |
+| `02-§98.12` | gap | `.lokaler-legend` block beneath the grid |
+| `02-§98.13` | gap | Grid is static HTML emitted by the build; no client-side grid JS |
+| `02-§98.14` | gap | Styling via `var(--color-*)`, `var(--space-*)` tokens (07-§6.104–6.115) |
+| `02-§98.15` | gap | `@media (max-width: 600px)` keeps `overflow-x: auto` on `.lokaler-grid-wrapper` |
 
 ### §1 — Camp registry fields (camps.yaml)
 

@@ -411,6 +411,61 @@ form. The grid is always multi-select — there is no toggle. <!-- 07-§6.76 -->
   page. It is always visible and shares the styling defined in
   `07-§6.44a–6.44g`. <!-- 07-§6.103 -->
 
+### Locale overview grid
+
+The `/lokaler.html` page shows every locale (from `source/data/local.yaml`)
+as a row, with the active camp's dates forming the horizontal axis and
+existing bookings rendered as time-blocks inside each row. It is a
+read-only visualisation aimed at spotting free time slots at a glance.
+
+- Wrapper (`.lokaler-grid-wrapper`): `overflow-x: auto` so the grid
+  scrolls horizontally on narrow viewports without disturbing the
+  surrounding page layout. <!-- 07-§6.104 -->
+- Grid container (`.lokaler-grid`): uses CSS Grid. The first column is
+  the locale label; the remaining columns are one per camp day. The
+  label column is `position: sticky; left: 0` so it remains visible
+  while the rest of the grid scrolls. <!-- 07-§6.105 -->
+- Row (`.lokal-row`): minimum height sufficient to display two lines
+  of text (title and time range) inside an event-block without the
+  block overlapping neighbouring rows. <!-- 07-§6.106 -->
+- Locale label (`.lokal-label`): `font-weight: 700`, `color: var(--color-charcoal)`,
+  `background: var(--color-cream)`, `padding: var(--space-xs) var(--space-sm)`,
+  aligned to the vertical centre of its row. <!-- 07-§6.107 -->
+- Day header (`.day-band-label`): weekday abbreviation and date,
+  `font-size: var(--font-size-small)`, `color: var(--color-charcoal)`,
+  center-aligned within the day column. <!-- 07-§6.108 -->
+- Day band (`.day-band`): uses a nested CSS Grid keyed to the camp's
+  hour range (earliest event hour to latest event hour + 1, rounded
+  to whole hours). `position: relative` so event blocks can be
+  absolutely positioned inside. <!-- 07-§6.109 -->
+- Event block (`.event-block`): absolute-positioned within its day
+  band using `left`/`width` percentages derived from its start/end
+  times relative to the day's hour range. `background:
+  color-mix(in srgb, var(--color-terracotta) 15%, var(--color-white))`,
+  `border-left: 3px solid var(--color-terracotta)`,
+  `border-radius: var(--radius-sm)`,
+  `padding: var(--space-xs)`,
+  `color: var(--color-charcoal)`,
+  `font-size: var(--font-size-small)`,
+  `min-width: 3em` so brief events remain clickable. <!-- 07-§6.110 -->
+- Event block hover/focus: `background:
+  color-mix(in srgb, var(--color-terracotta) 25%, var(--color-white))`. <!-- 07-§6.111 -->
+- Empty-row indicator (`.lokal-empty`): the row's day bands contain a
+  single centred text "Inga bokningar" in
+  `color: color-mix(in srgb, var(--color-charcoal) 60%, transparent)`,
+  `font-style: italic`,
+  `font-size: var(--font-size-small)`. <!-- 07-§6.112 -->
+- Legend (`.lokaler-legend`): sits directly below the grid;
+  `font-size: var(--font-size-small)`,
+  `color: var(--color-charcoal)`,
+  `margin-top: var(--space-sm)`. <!-- 07-§6.113 -->
+- Focus-visible on event blocks: same outline as other interactive
+  elements (`2px solid var(--color-terracotta)`, `outline-offset:
+  2px`). <!-- 07-§6.114 -->
+- On viewport widths below 600px, `.lokaler-grid-wrapper` retains
+  `overflow-x: auto`, and the locale label column may shrink to a
+  fixed `min-width: 6em` to keep the day columns readable. <!-- 07-§6.115 -->
+
 ---
 
 ## 7. CSS Strategy
