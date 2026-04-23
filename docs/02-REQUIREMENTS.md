@@ -4808,3 +4808,41 @@ existing deployment workflow.
   `09-RELEASING.md`, and `99-traceability.md`), each with a one-line
   description and a link that works both on GitHub's file viewer and
   on the rendered documentation site. <!-- 02-§97.14 -->
+
+### 97.7 Reverse-discoverability banner
+
+- The landing page `docs/index.md` carries a banner near the top
+  (above the documentation index) that links back to the source
+  repository on GitHub, the rendered `README.md` on GitHub, and the
+  GitHub issue tracker. The links target absolute
+  `https://github.com/moggleif/sbsommar` URLs so they resolve
+  identically whether the page is viewed on the published Pages site
+  or on GitHub's file viewer. <!-- 02-§97.15 -->
+- The landing page does not link to `https://sbsommar.se` (the
+  participant-facing camp site). The §97.8 search-engine policy
+  prohibits actively pointing search engines at the camp site from a
+  publicly hosted Pages page. <!-- 02-§97.16 -->
+- The landing page's main copy is project-technical: it identifies
+  the page as the developer-facing documentation for a static-site
+  project and points readers at `README.md` for additional context.
+  It does not describe the camp's purpose, audience, schedule, or
+  any other content that the §97.8 search-engine policy keeps off
+  search-engine result pages. <!-- 02-§97.17 -->
+
+### 97.8 Search-engine and crawler policy
+
+- The published documentation site is intentionally hidden — it is
+  discoverable only by direct link and must not appear in search
+  engine results. This policy mirrors §1a for the camp site
+  (`sbsommar.se`) but applies to the documentation site
+  (`https://moggleif.github.io/sbsommar/`). <!-- 02-§97.18 -->
+- A `docs/robots.txt` file at the documentation site root disallows
+  every user agent from every path (`User-agent: *` /
+  `Disallow: /`). <!-- 02-§97.19 -->
+- Every rendered HTML page on the documentation site includes a
+  `<meta name="robots" content="noindex, nofollow">` tag in the
+  `<head>` section. The tag is injected once via Jekyll's
+  `head-custom.html` include (under `docs/_includes/`) so that every
+  page picks it up without per-file front matter. <!-- 02-§97.20 -->
+- No sitemap, Open Graph tags, or other discoverability metadata are
+  added to the documentation site. <!-- 02-§97.21 -->
