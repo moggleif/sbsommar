@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { renderIndexPage } = require('../source/build/render-index');
+const { renderIndexPage, REGISTRATION_URL } = require('../source/build/render-index');
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -183,12 +183,12 @@ describe('renderIndexPage – registration CTA in anmalan section (02-§94.4–9
     );
   });
 
-  it('REGC-03: CTA href points to event-friend-ai.lovable.app', () => {
+  it('REGC-03: CTA href points to REGISTRATION_URL', () => {
     const html = renderIndexPage(pageWithAnmalan());
     const anmalanMatch = html.match(/<section id="anmalan"[\s\S]*?<\/section>/);
     assert.ok(
-      /href="https:\/\/event-friend-ai\.lovable\.app"/.test(anmalanMatch[0]),
-      'Expected external registration URL in CTA href',
+      anmalanMatch[0].includes(`href="${REGISTRATION_URL}"`),
+      `Expected CTA href to equal REGISTRATION_URL (${REGISTRATION_URL})`,
     );
   });
 

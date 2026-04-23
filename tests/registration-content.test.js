@@ -5,16 +5,16 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { renderIndexPage } = require('../source/build/render-index');
+const { renderIndexPage, REGISTRATION_URL } = require('../source/build/render-index');
 
 const contentDir = path.join(__dirname, '..', 'source', 'content');
 const pricingMd = fs.readFileSync(path.join(contentDir, 'pricing.md'), 'utf8');
 const rulesMd = fs.readFileSync(path.join(contentDir, 'rules.md'), 'utf8');
 
-// ── 02-§3.6  Registration section links to the external registration service ─
+// ── 02-§3.6  Registration section links to the external booking site ────────
 
-describe('02-§3.6 — Registration section links to external service', () => {
-  it('REG-01: rendered anmalan section links to event-friend-ai.lovable.app', () => {
+describe('02-§3.6 — Registration section links to external booking site', () => {
+  it('REG-01: rendered anmalan section links to REGISTRATION_URL', () => {
     const html = renderIndexPage({
       heroSrc: 'images/k.webp',
       heroAlt: '',
@@ -27,8 +27,8 @@ describe('02-§3.6 — Registration section links to external service', () => {
     const anmalanMatch = html.match(/<section id="anmalan"[\s\S]*?<\/section>/);
     assert.ok(anmalanMatch, 'Expected anmalan section in rendered output');
     assert.ok(
-      anmalanMatch[0].includes('event-friend-ai.lovable.app'),
-      'Rendered anmalan section must link to the external registration service',
+      anmalanMatch[0].includes(REGISTRATION_URL),
+      `Rendered anmalan section must link to REGISTRATION_URL (${REGISTRATION_URL})`,
     );
   });
 });
