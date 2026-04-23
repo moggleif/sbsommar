@@ -2264,7 +2264,7 @@ the add- and edit-activity forms that links to this page.
 | `02-§98.9` | gap | No new `pageNav` entry; `source/build/layout.js` untouched |
 | `02-§98.10` | gap | Heading "Lokalöversikt"; all copy in Swedish per §14 |
 | `02-§98.11` | gap | Event-blocks as `<button>` or `<a>` with descriptive `aria-label` |
-| `02-§98.12` | gap | `.lokaler-legend` block beneath the grid |
+| `02-§98.12` | gap | `.lokaler-legend` block placed above the grid (grid often exceeds the viewport height) |
 | `02-§98.13` | gap | Grid is static HTML emitted by the build; no client-side grid JS |
 | `02-§98.14` | gap | Styling via `var(--color-*)`, `var(--space-*)` tokens (07-§6.104–6.115) |
 | `02-§98.15` | gap | `@media (max-width: 600px)` keeps `overflow-x: auto` on `.lokaler-grid-wrapper` |

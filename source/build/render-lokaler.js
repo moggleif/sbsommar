@@ -244,6 +244,8 @@ ${pageNav('lokaler.html', navSections)}
   <h1>Lokalöversikt</h1>
   <p class="intro">Se vilka tider varje lokal redan är upptagen — välj en ledig tid när du <a href="lagg-till.html">lägger till en aktivitet</a>. Klicka på ett tidsblock för mer information.</p>
 
+  <p class="lokaler-legend">Varje färgat block är en bokad aktivitet. Rader märkta "Inga bokningar" betyder att lokalen är ledig hela lägret. Behöver du flytta något du lagt till? <a href="redigera.html">Redigera aktivitet</a>.</p>
+
   <div class="lokaler-grid-wrapper">
     <div class="lokaler-grid">
       <div class="lokal-label lokal-label--header"></div>
@@ -251,8 +253,6 @@ ${dayHeaders}
 ${rows}
     </div>
   </div>
-
-  <p class="lokaler-legend">Varje färgat block är en bokad aktivitet. Rader märkta "Inga bokningar" betyder att lokalen är ledig hela veckan. Behöver du flytta något du lagt till? <a href="redigera.html">Redigera aktivitet</a>.</p>
 </main>
   <script src="wp-cleanup.js"></script>
   <script src="nav.js" defer></script>

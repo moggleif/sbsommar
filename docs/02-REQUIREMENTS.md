@@ -4937,9 +4937,11 @@ overview, is covered in a later section. Issue #332.
   `aria-label` that communicates locale, date, time range, title, and
   responsible person, so a screen-reader user does not depend on
   visual grid positioning to understand the booking. <!-- 02-§98.11 -->
-- The page includes a short legend below the grid explaining that
+- The page includes a short legend above the grid explaining that
   blocks represent booked times and rows marked "Inga bokningar"
-  represent free locales. <!-- 02-§98.12 -->
+  mean the locale is free for the entire camp. The legend is placed
+  above rather than below so it stays within the reader's first
+  viewport — the grid itself is often taller than the screen. <!-- 02-§98.12 -->
 
 ### 98.5 Rendering
 
