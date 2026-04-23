@@ -103,7 +103,7 @@ Aim to move all `implemented` rows toward `covered` over time.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-04-23 (Pages live + README discoverability, 02-§97.1–97.3, 97.13–97.14).
+Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site policy, 02-§97.15–97.21).
 
 ---
 
@@ -1106,10 +1106,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (Pages live + README discoverab
 ## Summary
 
 ```text
-Total requirements:            1224
+Total requirements:            1231
 Covered (implemented + tested): 622
 Implemented, not tested:        602
-Gap (no implementation):          0
+Gap (no implementation):          7
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -2204,6 +2204,13 @@ Matrix cleanup (2026-02-25):
 | `02-§97.12` | implemented | `docs/index.md` lists every other docs file with a one-line description and an `.md` link; `jekyll-relative-links` resolves the links to rendered pages — manual browser verification |
 | `02-§97.13` | covered | README-DOCS-01, README-DOCS-02: `README.md` links to `https://moggleif.github.io/sbsommar/` and the link sits above the `## For Developers` section |
 | `02-§97.14` | covered | README-DOCS-03, README-DOCS-04: `README.md` doc table includes all 10 `docs/*.md` files; drift test keeps the expected list in sync with `docs/` contents |
+| `02-§97.15` | gap | `docs/index.md` needs a banner linking back to repo / README / issues |
+| `02-§97.16` | gap | `docs/index.md` must not contain a `https://sbsommar.se` link |
+| `02-§97.17` | gap | `docs/index.md` main copy needs to be rewritten as projekt-teknisk text |
+| `02-§97.18` | gap | Documentation site policy (mirrors §1a for sbsommar.se) — covered by §97.19, §97.20, §97.21 |
+| `02-§97.19` | gap | `docs/robots.txt` (Disallow: /) must be added |
+| `02-§97.20` | gap | `docs/_includes/head-custom.html` with `noindex, nofollow` meta must be added |
+| `02-§97.21` | gap | Confirm no sitemap, Open Graph, or other discoverability metadata under `docs/` |
 
 ### §1 — Camp registry fields (camps.yaml)
 
