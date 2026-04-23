@@ -126,7 +126,7 @@ Audit date: 2026-02-24. Last updated: 2026-04-23 (hidden documentation site poli
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | COV-12..13 | `source/build/build.js` – falls back to most recent camp by `start_date` | covered |
 | `02-§3.4` | Schedule and add-activity links are prominent when a camp is active or upcoming | 03-ARCHITECTURE.md §3 | — | `source/build/layout.js` – nav always shows all links (not conditionally prominent based on camp state) | implemented |
 | `02-§3.5` | Upcoming-camps list renders each camp as a compact one-liner with no separators | 03-ARCHITECTURE.md §14.6 | CL-01, CL-02, CL-03 (CSS presence); manual: visual check | `source/assets/cs/style.css` – `.camp-item`, `.camp-body` flex layout | covered |
-| `02-§3.6` | Registration section links to the external registration service at `event-friend-ai.lovable.app` | 02-REQUIREMENTS.md §3 | REG-01 | `source/content/registration.md` | covered |
+| `02-§3.6` | Registration section links to the external booking site (URL defined in build code) | 02-REQUIREMENTS.md §3 | REG-01 | `source/build/render-index.js` – `REGISTRATION_URL` | covered |
 | `02-§3.7` | Pricing and rules sections document cancellation refund tiers and organiser's right to refuse | 02-REQUIREMENTS.md §3 | REG-02..05 | `source/content/pricing.md`, `source/content/rules.md` | covered |
 | `02-§4.1` | Weekly schedule shows all activities for the full camp week, grouped by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `renderSchedulePage()`, `groupAndSortEvents()` | covered |
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
@@ -2159,7 +2159,7 @@ Matrix cleanup (2026-02-25):
 | `02-§94.1` | covered | REGB-08, REGB-10: `renderRegistrationBannersHtml` emits a banner per non-archived camp with title + meta; rendered inside hero area |
 | `02-§94.2` | covered | REGB-04: each banner's `<a>` carries `href="#anmalan"` |
 | `02-§94.3` | implemented | `source/build/build.js` sorts `registrationCamps` ascending by `start_date` before passing to `renderIndexPage`; verified in rendered HTML |
-| `02-§94.4` | covered | REGC-03, REGC-06: CTA `href` is `event-friend-ai.lovable.app`; label is "Anmäl er här" |
+| `02-§94.4` | covered | REGC-03, REGC-06: CTA `href` is the `REGISTRATION_URL` defined in `source/build/render-index.js`; label is "Anmäl er här" |
 | `02-§94.5` | implemented | `source/assets/cs/style.css` `.registration-cta { display: block; margin: 0 0 var(--space-md) 0 }` + `.registration-cta-btn { display: inline-block }`; button sits on its own line under the section heading — manual browser verification |
 | `02-§94.6` | implemented | No media query; identical layout on desktop and mobile — manual browser verification |
 | `02-§94.7` | covered | REG-06: `source/content/registration.md` contains no bold `[Anmäl er här]` link |
