@@ -3014,8 +3014,10 @@ a.admin-icon--expired,
      visible time gap between neighbouring bookings. */
   min-width: 8px;
   padding: 4px 6px;
-  background: color-mix(in srgb, var(--color-terracotta) 15%, var(--color-white));
-  border-left: 3px solid var(--color-terracotta);
+  /* Non-clashing bookings are green — the "go ahead, this slot is taken but
+     nothing conflicts" colour. Clashes override below with red. */
+  background: color-mix(in srgb, var(--color-sage) 25%, var(--color-white));
+  border-left: 3px solid var(--color-sage);
   border-radius: var(--radius-sm);
   color: var(--color-charcoal);
   font-size: var(--font-size-small);
@@ -3028,17 +3030,21 @@ a.admin-icon--expired,
 }
 
 /* Clash: event overlaps at least one other event in the same locale+day.
-   Signalled with the error colour on the left accent and a red-tinted bg
-   so the block stands out at a glance. */
+   Needs to POP at a glance even at narrow block widths, so we combine a
+   clearly pink background, a full red outline (box-shadow), and the red
+   left accent. On hover the outline stays while the expand-shadow adds on. */
 .event-block--clash {
-  background: color-mix(in srgb, var(--color-error) 12%, var(--color-white));
+  background: color-mix(in srgb, var(--color-error) 35%, var(--color-white));
   border-left-color: var(--color-error);
+  box-shadow: 0 0 0 1.5px var(--color-error);
 }
 
 .event-block--clash:hover,
 .event-block--clash:focus-visible {
-  background: color-mix(in srgb, var(--color-error) 22%, var(--color-white));
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-error) 30%, transparent);
+  background: color-mix(in srgb, var(--color-error) 55%, var(--color-white));
+  box-shadow:
+    0 0 0 1.5px var(--color-error),
+    0 2px 8px color-mix(in srgb, var(--color-error) 35%, transparent);
 }
 
 /* Taller day-bands so stacked lanes remain legible. Lane count above 5 is
@@ -3058,12 +3064,12 @@ a.admin-icon--expired,
   width: auto;
   min-width: max-content;
   z-index: 2;
-  background: color-mix(in srgb, var(--color-terracotta) 28%, var(--color-white));
+  background: color-mix(in srgb, var(--color-sage) 45%, var(--color-white));
   box-shadow: 0 2px 8px color-mix(in srgb, var(--color-charcoal) 22%, transparent);
 }
 
 .event-block:focus-visible {
-  outline: 2px solid var(--color-terracotta);
+  outline: 2px solid var(--color-sage-hover);
   outline-offset: 2px;
 }
 
