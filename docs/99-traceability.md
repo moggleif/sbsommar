@@ -1114,9 +1114,9 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 
 ```text
 Total requirements:            1279
-Covered (implemented + tested): 649
-Implemented, not tested:        612
-Gap (no implementation):         18
+Covered (implemented + tested): 658
+Implemented, not tested:        621
+Gap (no implementation):          0
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -2290,24 +2290,24 @@ refactor of `render-lokaler.js` onto the shared module).
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§99.1` | gap | Shared module `source/assets/js/client/conflict-check.js` (UMD); pending Phase 3/4 |
-| `02-§99.2` | gap | Single source of truth — render-lokaler.js and render-event.js consume the module; no duplicate predicate |
-| `02-§99.3` | gap | Clash definition: same date + same location + strict time overlap; back-to-back not a clash; cross-midnight end → 24:00 |
-| `02-§99.4` | gap | `/lagg-till.html` fetches `/events.json` once per page load and caches in memory |
-| `02-§99.5` | gap | Add-form runs conflict check on every change when date(s), start, end, and location are all set |
-| `02-§99.6` | gap | Banner rendered before submit button; per-date grouping when multiple dates selected |
-| `02-§99.7` | gap | Banner includes "Se lokalöversikt →" link to `/lokaler.html` |
-| `02-§99.8` | gap | Banner never blocks submit — implementation verifies submit handler is unaffected by banner state |
-| `02-§99.9` | gap | `role="status"` + `aria-live="polite"` on the client-rendered banner |
-| `02-§99.10` | gap | `/redigera.html` runs conflict check after populate and on every change |
-| `02-§99.11` | gap | Current event excluded via `excludeId` option to `findConflicts` |
-| `02-§99.12` | gap | Banner shows immediately on load when the populated event is already in conflict |
-| `02-§99.13` | gap | All banner text in Swedish |
-| `02-§99.14` | gap | CSS reuses `var(--color-error)` and `color-mix(... 35%, var(--color-white))` from `.event-block--clash` |
-| `02-§99.15` | gap | `render-event.js` renders the banner at build time for conflicting per-event pages; self always excluded |
-| `02-§99.16` | gap | Same CSS classes and DOM structure on both server- and client-rendered banner |
-| `02-§99.17` | gap | On per-event page banner sits inside `.event-detail` after place/responsible row and before description |
-| `02-§99.18` | gap | On edit form banner sits at top (before first fieldset), visible next to the heading without scrolling |
+| `02-§99.1` | covered | `source/assets/js/client/conflict-check.js` exports `effectiveEnd`, `overlaps`, `markClashes`, `findConflicts`, `findConflictsMulti`; tests CNF-01..32 |
+| `02-§99.2` | covered | `render-lokaler.js` and `render-event.js` both `require('../assets/js/client/conflict-check.js')`; no inline overlap predicate remains. Test CNF-02-RefactoredLokaler |
+| `02-§99.3` | covered | Same-date + same-location + strict overlap; back-to-back is not a clash; cross-midnight end → 24:00. Tests CNF-01..14, CNF-20..23, CNF-40..41 |
+| `02-§99.4` | implemented | `lagg-till.js` `whenEvents()` — lazy singleton promise wrapping `fetch('/events.json')`. Manual: DevTools Network → load /lagg-till.html, confirm one request |
+| `02-§99.5` | implemented | `lagg-till.js` `maybeCheckConflicts()` wired to `change` events on `#f-start`/`#f-end`/`#f-location` and click on `.day-btn`; 150 ms debounce. Manual: fill all four fields, confirm banner appears |
+| `02-§99.6` | covered | `renderConflicts()` in `lagg-till.js` emits banner before submit via `submitBtn.parentNode.insertBefore`; per-date sections via `findConflictsMulti` with CNF-30..32 |
+| `02-§99.7` | covered | Banner footer hard-coded `<a href="lokaler.html">Se lokalöversikt →</a>`; CNF-64 asserts per-event variant; same string literal in `lagg-till.js` and `redigera.js` |
+| `02-§99.8` | implemented | Submit handler is unchanged; conflict state only drives banner visibility. Manual: submit lagg-till with banner visible, confirm form posts |
+| `02-§99.9` | implemented | `ensureConflictBanner()` sets `role="status"` + `aria-live="polite"`. Manual: verify with a screen reader |
+| `02-§99.10` | implemented | `redigera.js` `scheduleConflictCheck()` called in the `.then()` handler after `populate()`; change listeners on `#f-date`/`#f-start`/`#f-end`/`#f-location`. CNF-52, CNF-54 check wiring |
+| `02-§99.11` | covered | `findConflicts(..., { excludeId: els.id.value })` in `redigera.js`; tested via CNF-24 |
+| `02-§99.12` | implemented | First `scheduleConflictCheck()` fires immediately after `populate(event)`. Manual: open a known-clashing event and confirm banner renders on load |
+| `02-§99.13` | implemented | All strings (`Den här tiden…`, `Se lokalöversikt →`, weekday names via `WEEKDAYS_LONG_SV`) are Swedish literals in `lagg-till.js`, `redigera.js`, `render-event.js` |
+| `02-§99.14` | implemented | `.conflict-warning` in `source/assets/cs/style.css` uses `color-mix(in srgb, var(--color-error) 35%, var(--color-white))`, identical to `.event-block--clash`. Manual: DevTools Computed background on /lokaler.html event-block and banner — same values |
+| `02-§99.15` | covered | `render-event.js` `renderConflictBanner(event, allEvents)` called per page with `excludeId: event.id`; `build.js` passes `events` array. Tests CNF-60, CNF-60b, CNF-61, CNF-62 |
+| `02-§99.16` | covered | Both renderers emit `<div class="conflict-warning">…__lead/__list/__footer</div>`; a single CSS rule in `style.css` styles both. Tests CNF-50, CNF-53, CNF-60..64 |
+| `02-§99.17` | covered | `render-event.js` template interpolates `${conflictHtml}${descriptionHtml}${linkHtml}` inside `.event-detail`. Test CNF-63 |
+| `02-§99.18` | implemented | `redigera.js` `ensureConflictBanner()` inserts before the first `<fieldset>` in `#edit-form`. Manual: open /redigera.html?id=<clashing>, confirm banner appears between the "Redigera aktivitet" heading and the Rubrik field |
 
 ### §1 — Camp registry fields (camps.yaml)
 
