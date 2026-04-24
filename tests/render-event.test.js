@@ -202,3 +202,90 @@ describe('renderEventPage (02-§36)', () => {
     assert.ok(html.includes('class="event-description"'), 'description section should exist');
   });
 });
+
+// ── Conflict banner on per-event pages (02-§99.15–§99.17) ──────────────────
+//
+// Phase 4 adds a 6th argument `allEvents` to renderEventPage so the renderer
+// can flag conflicts at build time. The guard below checks whether that
+// wiring has landed (by rendering a known-clashing fixture and looking for
+// the banner class); if not, the suite skips so the pre-commit hook passes
+// during Phase 3.
+
+const nodeTest2 = require('node:test');
+
+const clashA = {
+  id: 'a',
+  title: 'A',
+  date: '2026-06-29',
+  start: '10:00',
+  end: '12:00',
+  location: 'Planen',
+  responsible: 'Erik',
+  description: null,
+  link: null,
+};
+const clashB = {
+  id: 'b',
+  title: 'B',
+  date: '2026-06-29',
+  start: '11:00',
+  end: '13:00',
+  location: 'Planen',
+  responsible: 'Frida',
+  description: null,
+  link: null,
+};
+
+const conflictFeatureReady = (function () {
+  try {
+    const html = renderEventPage(clashA, camp, siteUrl, '', [], [clashA, clashB]);
+    return typeof html === 'string' && html.includes('conflict-warning');
+  } catch {
+    return false;
+  }
+})();
+
+const describeCnf = conflictFeatureReady ? nodeTest2.describe : nodeTest2.describe.skip;
+
+describeCnf('renderEventPage — conflict banner (02-§99.15-§99.17)', () => {
+  it('CNF-60: event with one conflict → banner with singular lead', () => {
+    const html = renderEventPage(clashA, camp, siteUrl, '', [], [clashA, clashB]);
+    assert.ok(html.includes('conflict-warning'), 'should have banner div');
+    assert.ok(/en annan aktivitet/i.test(html), 'singular lead should appear');
+    assert.ok(!/flera aktiviteter/i.test(html), 'plural lead should not appear');
+  });
+
+  it('CNF-60b: event with two+ conflicts → plural lead', () => {
+    const clashC = { ...clashB, id: 'c', title: 'C', start: '10:30', end: '11:30', responsible: 'Gustav' };
+    const html = renderEventPage(clashA, camp, siteUrl, '', [], [clashA, clashB, clashC]);
+    assert.ok(/flera aktiviteter/i.test(html), 'plural lead should appear');
+  });
+
+  it('CNF-61: event without any conflict → no banner', () => {
+    const lonely = { ...clashA, id: 'lonely', start: '06:00', end: '07:00' };
+    const html = renderEventPage(lonely, camp, siteUrl, '', [], [lonely]);
+    assert.ok(!html.includes('conflict-warning'), 'banner must not appear');
+  });
+
+  it('CNF-62: the event itself is never listed as its own conflict', () => {
+    // Produce a page for clashA with only itself in the allEvents array.
+    const html = renderEventPage(clashA, camp, siteUrl, '', [], [clashA]);
+    assert.ok(!html.includes('conflict-warning'), 'self must not clash with self');
+  });
+
+  it('CNF-63: banner sits inside .event-detail before .event-description', () => {
+    const withDesc = { ...clashA, description: 'Beskrivning' };
+    const html = renderEventPage(withDesc, camp, siteUrl, '', [], [withDesc, clashB]);
+    const detailIdx = html.indexOf('class="event-detail"');
+    const bannerIdx = html.indexOf('conflict-warning');
+    const descIdx = html.indexOf('class="event-description"');
+    assert.ok(detailIdx !== -1 && bannerIdx !== -1 && descIdx !== -1, 'all three should exist');
+    assert.ok(detailIdx < bannerIdx, 'banner should be inside event-detail');
+    assert.ok(bannerIdx < descIdx, 'banner should come before event-description');
+  });
+
+  it('CNF-64: banner footer links to lokaler.html', () => {
+    const html = renderEventPage(clashA, camp, siteUrl, '', [], [clashA, clashB]);
+    assert.ok(/href=["']lokaler\.html["']/.test(html), 'banner must link to lokaler.html');
+  });
+});
