@@ -534,11 +534,15 @@ same thing. <!-- 07-§6.116 -->
   the user types, without stealing focus. On the static per-event
   page the banner does not need `aria-live` (the HTML is fixed at
   build time). <!-- 07-§6.122 -->
-- Banner placement: in the add- and edit-forms, rendered immediately
-  before the submit button, so the user sees it on the way to the
-  click. On per-event pages, rendered inside `.event-detail` after
-  the place/responsible row and before the description, so readers
-  see the clash alongside the rest of the booking's metadata. <!-- 07-§6.123 -->
+- Banner placement:
+  - On the **add form**, immediately before the submit button so the
+    user sees the clash on the way to clicking "Skicka".
+  - On the **edit form**, at the top of the form (before the first
+    fieldset) so a clash on a populated event is visible right
+    beside the "Redigera aktivitet" heading without scrolling.
+  - On **per-event pages**, inside `.event-detail` after the
+    place/responsible row and before the description, so readers see
+    the clash alongside the rest of the booking's metadata. <!-- 07-§6.123 -->
 
 ---
 

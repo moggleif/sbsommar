@@ -841,10 +841,12 @@
     conflictBanner.setAttribute('role', 'status');
     conflictBanner.setAttribute('aria-live', 'polite');
     conflictBanner.hidden = true;
-    // Insert before the form-actions block (submit + cancel).
-    var actions = form.querySelector('.form-actions');
-    if (actions && actions.parentNode) {
-      actions.parentNode.insertBefore(conflictBanner, actions);
+    // Insert at the top of the form, before the first fieldset, so a clash
+    // is visible between the "Redigera aktivitet" heading and the form
+    // fields without the user needing to scroll to the submit button.
+    var firstFieldset = form.querySelector('fieldset');
+    if (firstFieldset && firstFieldset.parentNode) {
+      firstFieldset.parentNode.insertBefore(conflictBanner, firstFieldset);
     } else if (submitBtn && submitBtn.parentNode) {
       submitBtn.parentNode.insertBefore(conflictBanner, submitBtn);
     }

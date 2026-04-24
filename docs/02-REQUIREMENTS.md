@@ -5046,11 +5046,12 @@ schedule. Issue #332 (Session 2).
 - When the form has at least one selected date, a start time, an end
   time, and a location, a conflict check runs on every change to any
   of those fields. <!-- 02-§99.5 -->
-- When at least one conflict exists, a banner is rendered immediately
-  before the submit button listing each conflicting event's time
-  range, title, and responsible person. When multiple dates are
-  selected, the banner groups conflicts under one subheading per
-  date; dates without conflicts do not appear in the banner. <!-- 02-§99.6 -->
+- When at least one conflict exists on the add form, a banner is
+  rendered immediately before the submit button listing each
+  conflicting event's time range, title, and responsible person.
+  When multiple dates are selected, the banner groups conflicts
+  under one subheading per date; dates without conflicts do not
+  appear in the banner. <!-- 02-§99.6 -->
 - The banner includes a link "Se lokalöversikt →" pointing to
   `/lokaler.html`. <!-- 02-§99.7 -->
 - The banner never prevents submit. Submitting a form while the
@@ -5069,6 +5070,10 @@ schedule. Issue #332 (Session 2).
 - When the form first populates with an event whose current slot
   already conflicts with another event, the banner is shown
   immediately without requiring user interaction. <!-- 02-§99.12 -->
+- On the edit form the banner is rendered at the top of the form —
+  before the first fieldset — so a clash on a populated event is
+  visible right next to the "Redigera aktivitet" heading without
+  requiring the user to scroll to the submit button. <!-- 02-§99.18 -->
 
 ### 99.5 Language and styling
 

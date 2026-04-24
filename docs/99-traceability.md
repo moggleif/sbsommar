@@ -1113,10 +1113,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 ## Summary
 
 ```text
-Total requirements:            1278
+Total requirements:            1279
 Covered (implemented + tested): 649
 Implemented, not tested:        612
-Gap (no implementation):         17
+Gap (no implementation):         18
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -2307,6 +2307,7 @@ refactor of `render-lokaler.js` onto the shared module).
 | `02-§99.15` | gap | `render-event.js` renders the banner at build time for conflicting per-event pages; self always excluded |
 | `02-§99.16` | gap | Same CSS classes and DOM structure on both server- and client-rendered banner |
 | `02-§99.17` | gap | On per-event page banner sits inside `.event-detail` after place/responsible row and before description |
+| `02-§99.18` | gap | On edit form banner sits at top (before first fieldset), visible next to the heading without scrolling |
 
 ### §1 — Camp registry fields (camps.yaml)
 
