@@ -12,6 +12,7 @@ const { escapeHtml, toDateString } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
 const { goatcounterScript } = require('./analytics');
 const { pwaHeadTags } = require('./pwa');
+const { effectiveEnd, markClashes } = require('../assets/js/client/conflict-check.js');
 
 const FALLBACK_LOCATION = 'Annat';
 const WEEKDAYS_SV = ['sön', 'mån', 'tis', 'ons', 'tor', 'fre', 'lör'];
@@ -97,13 +98,9 @@ function computeHourRange(events) {
   return { startHour: Math.floor(minStart), endHour: Math.ceil(maxEnd) };
 }
 
-// Returns the effective end time for overlap/lane comparisons. Cross-midnight
-// events (end STRICTLY before start) are treated as ending at 24:00. Events
-// where start === end have zero duration and keep their end as-is so
-// positionBlock produces width 0 and the block is skipped.
-function effectiveEnd(ev) {
-  return ev.end < ev.start ? '24:00' : ev.end;
-}
+// `effectiveEnd` comes from the shared conflict-check module (02-§99.1).
+// Events where start === end have zero duration and keep their end as-is
+// so positionBlock produces width 0 and the block is skipped.
 
 function addOneDayIso(isoDate) {
   const d = new Date(`${isoDate}T00:00:00Z`);
@@ -163,22 +160,8 @@ function assignLanes(events) {
   return { events: sorted, laneCount: laneEnds.length };
 }
 
-/**
- * Marks each event that overlaps at least one other event (in the same
- * group) with `_clash = true`. Back-to-back events (end == other.start) do
- * not count as overlapping.
- */
-function markClashes(events) {
-  for (const a of events) {
-    for (const b of events) {
-      if (a === b) continue;
-      if (a.start < effectiveEnd(b) && effectiveEnd(a) > b.start) {
-        a._clash = true;
-        break;
-      }
-    }
-  }
-}
+// `markClashes` comes from the shared conflict-check module (02-§99.2).
+// Back-to-back events (end == other.start) do not count as overlapping.
 
 /**
  * Computes the horizontal position (left%, width%) for an event block within

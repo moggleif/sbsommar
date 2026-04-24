@@ -269,7 +269,7 @@ async function main() {
   for (const e of events) {
     const eventDir = path.join(schemaDir, String(e.id));
     fs.mkdirSync(eventDir, { recursive: true });
-    const eventHtml = renderEventPage(e, camp, SITE_URL, footerWithVersion, navSections);
+    const eventHtml = renderEventPage(e, camp, SITE_URL, footerWithVersion, navSections, events);
     fs.writeFileSync(path.join(eventDir, 'index.html'), eventHtml, 'utf8');
     const eventIcs = renderEventIcal(e, camp, SITE_URL);
     fs.writeFileSync(path.join(eventDir, 'event.ics'), eventIcs, 'utf8');

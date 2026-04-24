@@ -3094,6 +3094,75 @@ a.admin-icon--expired,
   outline-color: var(--color-error);
 }
 
+/* ── Conflict warning banner (02-§99, 07-§6.116–6.123) ──────────────────────
+   Rendered on the add-form, edit-form, and per-event detail pages when the
+   event's date/time/place overlaps another booking. Reuses the exact same
+   red palette as .event-block--clash above so the signals read as the same
+   thing. Soft-but-visible: the banner flags the clash, it never blocks
+   submit. */
+.conflict-warning {
+  margin: var(--space-md) 0;
+  padding: var(--space-md);
+  background: color-mix(in srgb, var(--color-error) 35%, var(--color-white));
+  border-left: 3px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1.5px var(--color-error);
+  color: var(--color-text);
+}
+
+.conflict-warning[hidden] { display: none; }
+
+.conflict-warning__lead {
+  margin: 0 0 var(--space-xs);
+  font-weight: 600;
+}
+
+.conflict-warning__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-xs);
+}
+
+.conflict-warning__list li {
+  padding: calc(var(--space-xs) / 2) 0;
+}
+
+.conflict-warning__time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  margin-right: 0.4em;
+}
+
+.conflict-warning__resp {
+  color: color-mix(in srgb, var(--color-charcoal) 70%, transparent);
+  margin-left: 0.2em;
+}
+
+.conflict-warning__date-group + .conflict-warning__date-group {
+  margin-top: var(--space-sm);
+}
+
+.conflict-warning__date {
+  margin: 0 0 calc(var(--space-xs) / 2);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+}
+
+.conflict-warning__footer {
+  margin: 0;
+}
+
+.conflict-warning__footer a {
+  color: var(--color-error);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.conflict-warning__footer a:hover,
+.conflict-warning__footer a:focus-visible {
+  text-decoration: underline;
+}
+
 /* Taller day-bands so stacked lanes remain legible. The lane-count affects
    only the day-band's min-height (how much vertical space the band reserves
    for stacked events); per-event height uses --group, not lane-count, so a

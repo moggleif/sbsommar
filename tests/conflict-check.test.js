@@ -54,8 +54,8 @@ describe('conflict-check — effectiveEnd (02-§99.3)', () => {
     assert.equal(mod.effectiveEnd({ start: '22:00', end: '01:00' }), '24:00');
   });
 
-  it('CNF-03: degenerate end === start is treated as 24:00 (matches render-lokaler)', () => {
-    assert.equal(mod.effectiveEnd({ start: '12:00', end: '12:00' }), '24:00');
+  it('CNF-03: degenerate end === start keeps the raw end (matches render-lokaler: zero-duration events are not cross-midnight)', () => {
+    assert.equal(mod.effectiveEnd({ start: '12:00', end: '12:00' }), '12:00');
   });
 });
 
@@ -90,9 +90,13 @@ describe('conflict-check — overlaps (02-§99.3)', () => {
     );
   });
 
-  it('CNF-14: cross-midnight vs early next morning overlap → true', () => {
+  it('CNF-14: cross-midnight event clashes with a late-evening event on the same date', () => {
+    // (22:00–01:00) has effectiveEnd 24:00, so it strictly overlaps a
+    // 23:00–23:30 booking on the same date. (Cross-midnight continuations
+    // into the next day are modelled by callers splitting the event
+    // before they hit this predicate — see render-lokaler expandCrossMidnight.)
     assert.equal(
-      mod.overlaps({ start: '22:00', end: '01:00' }, { start: '00:30', end: '02:00' }),
+      mod.overlaps({ start: '22:00', end: '01:00' }, { start: '23:00', end: '23:30' }),
       true,
     );
   });
