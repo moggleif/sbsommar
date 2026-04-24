@@ -5001,3 +5001,98 @@ overview, is covered in a later section. Issue #332.
   `<td>` for each day band. CSS Grid still drives the visual
   layout via `display: grid` on the `<table>` and `display:
   contents` on the `<tr>`s. <!-- 02-§98.23 -->
+
+## 99. Conflict Warning in Add/Edit Forms and Activity Pages
+
+### 99.1 Context
+
+The Locale Overview page (§98) shows which locales are already booked,
+but a participant filling in the add- or edit-activity form is not
+automatically told when the values they have just entered collide with
+an existing booking. The server accepts conflicting bookings on
+purpose — clashes can be deliberate — so the warning must never
+prevent submission. Its job is to surface the clash early, while the
+participant is still choosing, and offer a quick path to the Locale
+Overview where free slots are visible.
+
+The same warning is also useful on the per-event detail page at
+`/schema/<slug>/`: when someone opens an activity that is already in
+conflict with another activity, they should see it immediately
+alongside the booking details, not have to piece it together from the
+schedule. Issue #332 (Session 2).
+
+### 99.2 Shared detection module
+
+- A module at `source/assets/js/client/conflict-check.js` exposes
+  `effectiveEnd`, `overlaps`, `markClashes`, `findConflicts`, and
+  `findConflictsMulti`. The module contains no DOM access and no
+  network code. <!-- 02-§99.1 -->
+- The module is consumed by `lagg-till.js`, `redigera.js`,
+  `source/build/render-lokaler.js`, `source/build/render-event.js`,
+  and the Node test suite. No other copy of the overlap predicate
+  exists in the codebase. <!-- 02-§99.2 -->
+- Two events conflict when they share the same `date`, share the same
+  `location` string (exact match), and their time intervals overlap
+  strictly. Back-to-back events (one's `end` equals another's
+  `start`) do not conflict. Cross-midnight events (those where
+  `end <= start`) are compared with an effective end of `24:00`.
+  <!-- 02-§99.3 -->
+
+### 99.3 Add-activity form
+
+- `/lagg-till.html` fetches `/events.json` once per page load and
+  caches the response in memory for subsequent conflict checks.
+  <!-- 02-§99.4 -->
+- When the form has at least one selected date, a start time, an end
+  time, and a location, a conflict check runs on every change to any
+  of those fields. <!-- 02-§99.5 -->
+- When at least one conflict exists, a banner is rendered immediately
+  before the submit button listing each conflicting event's time
+  range, title, and responsible person. When multiple dates are
+  selected, the banner groups conflicts under one subheading per
+  date; dates without conflicts do not appear in the banner. <!-- 02-§99.6 -->
+- The banner includes a link "Se lokalöversikt →" pointing to
+  `/lokaler.html`. <!-- 02-§99.7 -->
+- The banner never prevents submit. Submitting a form while the
+  banner is visible proceeds normally. <!-- 02-§99.8 -->
+- The banner uses `role="status"` and `aria-live="polite"` so
+  assistive tech announces new conflicts without stealing focus.
+  <!-- 02-§99.9 -->
+
+### 99.4 Edit-activity form
+
+- `/redigera.html` runs the same conflict check after the form is
+  populated from `/events.json` and on every subsequent change to
+  date, start, end, or location. <!-- 02-§99.10 -->
+- The event currently being edited (matched by `id`) is always
+  excluded from its own conflict set. <!-- 02-§99.11 -->
+- When the form first populates with an event whose current slot
+  already conflicts with another event, the banner is shown
+  immediately without requiring user interaction. <!-- 02-§99.12 -->
+
+### 99.5 Language and styling
+
+- All user-facing text in the banner is in Swedish, consistent with
+  §14. <!-- 02-§99.13 -->
+- Banner styling uses the CSS custom properties defined in
+  `docs/07-DESIGN.md §7`. The banner reuses the same
+  `var(--color-error)` accent and
+  `color-mix(in srgb, var(--color-error) 35%, var(--color-white))`
+  background as the clash marker on the Locale Overview
+  (`.event-block--clash`), so the two clash signals are visually
+  related. <!-- 02-§99.14 -->
+
+### 99.6 Per-event activity pages
+
+- Per-event detail pages at `/schema/<slug>/index.html`, rendered by
+  `source/build/render-event.js`, include the same conflict-warning
+  banner at build time when the event overlaps at least one other
+  event in the active camp. The event itself is always excluded from
+  its own conflict set. <!-- 02-§99.15 -->
+- The banner markup on per-event pages uses the same CSS classes and
+  DOM structure as the client-rendered banner in the forms, so a
+  single CSS rule styles both. <!-- 02-§99.16 -->
+- On the per-event page the banner is rendered inside the
+  `.event-detail` container, after the location/responsible row and
+  any external-link row, and before the `.event-description` block.
+  <!-- 02-§99.17 -->
