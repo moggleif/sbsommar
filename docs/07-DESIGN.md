@@ -496,6 +496,50 @@ read-only visualisation aimed at spotting free time slots at a glance.
   `--lokaler-label-col: 6em` and `--lokaler-day-col: 10em` to keep the
   day columns readable on phone screens. <!-- 07-§6.115 -->
 
+### Conflict warning banner
+
+The add-activity form, the edit-activity form, and per-event detail
+pages at `/schema/<slug>/` all render the same conflict-warning
+banner when the activity's date/time/place overlaps another booking.
+The banner deliberately reuses the clash palette from the Locale
+Overview (`.event-block--clash`) so the two signals feel like the
+same thing. <!-- 07-§6.116 -->
+
+- Banner (`.conflict-warning`):
+  `background: color-mix(in srgb, var(--color-error) 35%, var(--color-white))`,
+  `border-left: 3px solid var(--color-error)`,
+  `box-shadow: 0 0 0 1.5px var(--color-error)`,
+  `border-radius: var(--radius-sm)`,
+  `padding: var(--space-md)`. The body text uses
+  `color: var(--color-text)` (not red) — only the accent is red, so
+  the banner reads as "heads up" rather than as a blocking error.
+  The banner does not prevent submit. <!-- 07-§6.117 -->
+- Banner lead (`.conflict-warning__lead`): plain paragraph,
+  `margin: 0 0 var(--space-xs) 0`, `font-weight: 600`. The sentence
+  uses singular ("en annan aktivitet") or plural ("flera aktiviteter")
+  depending on how many conflicts are in that date group. <!-- 07-§6.118 -->
+- Banner list (`.conflict-warning__list`): unbulleted list with
+  time, title, and responsible person per row. Time is monospace or
+  tabular-nums so the columns line up when several conflicts are
+  listed. <!-- 07-§6.119 -->
+- Banner date subheading (`.conflict-warning__date`, multi-date
+  add-form only): small `<h3>` per conflicting date, e.g.
+  `Måndag 4/5`. Dates without conflicts do not appear. <!-- 07-§6.120 -->
+- Banner footer link (`.conflict-warning__footer a`): points to
+  `/lokaler.html` with the text `Se lokalöversikt →`. `color:
+  var(--color-error)`; underline on hover/focus. Same focus-ring
+  treatment as other content links. <!-- 07-§6.121 -->
+- Banner accessibility in the forms: `role="status"` and
+  `aria-live="polite"` so assistive tech announces new conflicts as
+  the user types, without stealing focus. On the static per-event
+  page the banner does not need `aria-live` (the HTML is fixed at
+  build time). <!-- 07-§6.122 -->
+- Banner placement: in the add- and edit-forms, rendered immediately
+  before the submit button, so the user sees it on the way to the
+  click. On per-event pages, rendered inside `.event-detail` after
+  the place/responsible row and before the description, so readers
+  see the clash alongside the rest of the booking's metadata. <!-- 07-§6.123 -->
+
 ---
 
 ## 7. CSS Strategy

@@ -384,6 +384,51 @@ fall into the "Annat" row. The page is not a site-navigation entry; it
 is reached through a link from `/schema.html`. See 02-REQUIREMENTS.md
 §98 for the full requirements.
 
+### 5.2 Shared conflict-detection module
+
+`source/assets/js/client/conflict-check.js` is a single small module
+containing the overlap predicate — `effectiveEnd`, `overlaps`,
+`markClashes`, `findConflicts`, and `findConflictsMulti`. It has no
+DOM access and no network code; it is pure data logic.
+
+The module is written as a UMD wrapper so the **same file** is
+consumed by three runtimes:
+
+1. **Browser.** `lagg-till.js` and `redigera.js` load it via
+   `<script src="conflict-check.js">` and read `window.SBConflictCheck`.
+2. **Build.** `source/build/render-lokaler.js` and
+   `source/build/render-event.js` `require('../assets/js/client/conflict-check.js')`
+   as a normal CommonJS module. This direction —
+   `source/build/*` → `source/assets/js/client/*` — is the opposite
+   of the usual dependency direction, but it is a deliberate choice:
+   the module is pure logic that belongs with the larger consumer
+   (the client), and importing it from the build layer avoids
+   duplicating the overlap predicate. Duplication would violate
+   CLAUDE.md §4.3 ("no duplicated event definitions") and carries a
+   real drift risk — any future change to the back-to-back or
+   cross-midnight rule would otherwise need two edits.
+3. **Tests.** Node's built-in test runner `require()`s it directly.
+
+Server-side consumers (`render-lokaler.js`, `render-event.js`) use
+the module at build time; the browser consumers use it at runtime.
+Both see the same function behaviour, so a conflict flagged at build
+on a per-event page matches exactly what the form's live check would
+flag if the same values were typed in. See 02-REQUIREMENTS.md §99 for
+the full requirements.
+
+### 5.3 Per-event pages and conflict banner
+
+`source/build/render-event.js` produces one `schema/<slug>/index.html`
+page per event in the active camp. The renderer receives the event
+itself, the list of all active-camp events, and produces the detail
+page. When the event overlaps another event in the same locale at the
+same date (`findConflicts(event, allEvents, { excludeId: event.id })`
+returns a non-empty array), the renderer emits the same
+`.conflict-warning` banner that the add/edit forms render on the
+client. One CSS rule styles both. The banner is written into
+`.event-detail` after the location/responsible row and before the
+description. See 02-REQUIREMENTS.md §99.15–§99.17.
+
 ---
 
 ## 6. Project Structure

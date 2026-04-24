@@ -1113,10 +1113,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 ## Summary
 
 ```text
-Total requirements:            1261
+Total requirements:            1278
 Covered (implemented + tested): 649
 Implemented, not tested:        612
-Gap (no implementation):          0
+Gap (no implementation):         17
 Orphan tests (no requirement):    0
 
 Note: Archive timeline implemented (02-§2.6, 02-§16.2, 02-§16.4, 02-§21.1–21.11).
@@ -2277,6 +2277,36 @@ the add- and edit-activity forms that links to this page.
 | `02-§98.21` | covered | `effectiveEnd()` uses strict `<` so `start === end` gives `widthPct = 0`; `renderEventBlock()` returns empty string for zero-width; test LOK-84 |
 | `02-§98.22` | covered | `expandCrossMidnight()` splits an event into `_part: 'start'` (its own date, until 24:00) and `_part: 'end'` (next date, from 00:00); data-lb suffixed `--start`/`--end`; aria-label adds "fortsätter nästa dag" / "från föregående dag"; test LOK-85 |
 | `02-§98.23` | covered | Native `<table>`/`<tr>`/`<th scope="row">`/`<th scope="col">`/`<td>` in `renderLokalerPage`; CSS `display: grid` on `<table>` and `display: contents` on `<tr>` make them participate in CSS Grid; test LOK-86. CSS source-order invariant for clash-hover guarded by LOK-87 |
+
+### §99 — Conflict warning in forms and activity pages
+
+Session 2 of issue #332. Adds a red-dampened conflict banner to
+`/lagg-till.html`, `/redigera.html`, and each per-event detail page
+(`/schema/<slug>/`) when the activity's date/time/place overlaps
+another booking. The overlap predicate lives in a single shared
+UMD module `source/assets/js/client/conflict-check.js`, consumed by
+both the client-side forms and the build-time renderers (including a
+refactor of `render-lokaler.js` onto the shared module).
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§99.1` | gap | Shared module `source/assets/js/client/conflict-check.js` (UMD); pending Phase 3/4 |
+| `02-§99.2` | gap | Single source of truth — render-lokaler.js and render-event.js consume the module; no duplicate predicate |
+| `02-§99.3` | gap | Clash definition: same date + same location + strict time overlap; back-to-back not a clash; cross-midnight end → 24:00 |
+| `02-§99.4` | gap | `/lagg-till.html` fetches `/events.json` once per page load and caches in memory |
+| `02-§99.5` | gap | Add-form runs conflict check on every change when date(s), start, end, and location are all set |
+| `02-§99.6` | gap | Banner rendered before submit button; per-date grouping when multiple dates selected |
+| `02-§99.7` | gap | Banner includes "Se lokalöversikt →" link to `/lokaler.html` |
+| `02-§99.8` | gap | Banner never blocks submit — implementation verifies submit handler is unaffected by banner state |
+| `02-§99.9` | gap | `role="status"` + `aria-live="polite"` on the client-rendered banner |
+| `02-§99.10` | gap | `/redigera.html` runs conflict check after populate and on every change |
+| `02-§99.11` | gap | Current event excluded via `excludeId` option to `findConflicts` |
+| `02-§99.12` | gap | Banner shows immediately on load when the populated event is already in conflict |
+| `02-§99.13` | gap | All banner text in Swedish |
+| `02-§99.14` | gap | CSS reuses `var(--color-error)` and `color-mix(... 35%, var(--color-white))` from `.event-block--clash` |
+| `02-§99.15` | gap | `render-event.js` renders the banner at build time for conflicting per-event pages; self always excluded |
+| `02-§99.16` | gap | Same CSS classes and DOM structure on both server- and client-rendered banner |
+| `02-§99.17` | gap | On per-event page banner sits inside `.event-detail` after place/responsible row and before description |
 
 ### §1 — Camp registry fields (camps.yaml)
 
