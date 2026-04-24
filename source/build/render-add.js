@@ -135,6 +135,7 @@ ${locationOptions}
   <script defer src="markdown-renderers.js"></script>
   <script defer src="markdown-preview.js"></script>
   <script src="offline-guard.js"></script>
+  <script src="conflict-check.js"></script>
   <script src="lagg-till.js"></script>
   <script src="nav.js" defer></script>
   <script src="feedback.js" defer></script>

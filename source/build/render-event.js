@@ -4,6 +4,7 @@ const { escapeHtml, formatDate, toDateString } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
 const { renderDescriptionHtml } = require('./markdown');
 const { pwaHeadTags } = require('./pwa');
+const { findConflicts } = require('../assets/js/client/conflict-check.js');
 
 /**
  * Renders a static HTML detail page for a single event.
@@ -13,6 +14,9 @@ const { pwaHeadTags } = require('./pwa');
  * @param {string} siteUrl - Base URL (unused in HTML but kept for consistency)
  * @param {string} [footerHtml=''] - Pre-rendered footer HTML
  * @param {Array}  [navSections=[]] - Navigation sections
+ * @param {Array}  [allEvents=[]] - All events in the active camp, used to
+ *                                  flag date/location overlaps at build time
+ *                                  (02-§99.15).
  * @returns {string} Full HTML page
  */
 // The HTML <title> tag has a project-wide 80-char limit (see .htmlvalidate.json
@@ -24,7 +28,22 @@ function truncateForTitleTag(text, maxLen = 80) {
   return text.slice(0, maxLen - 1).trimEnd() + '…';
 }
 
-function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []) {
+// Build the conflict-warning banner HTML for a per-event page. Returns ''
+// when there are no conflicts. The markup mirrors the client-rendered
+// banner in lagg-till.js / redigera.js so one CSS rule styles both.
+function renderConflictBanner(event, allEvents) {
+  const conflicts = findConflicts(event, allEvents, { excludeId: event.id });
+  if (conflicts.length === 0) return '';
+  const lead = conflicts.length === 1
+    ? 'Den här tiden och platsen krockar med en annan aktivitet:'
+    : 'Den här tiden och platsen krockar med flera aktiviteter:';
+  const items = conflicts.map(function (c) {
+    return `      <li><span class="conflict-warning__time">${escapeHtml(String(c.start))}–${escapeHtml(String(c.end))}</span> <span class="conflict-warning__title">${escapeHtml(String(c.title || ''))}</span> <span class="conflict-warning__resp">(${escapeHtml(String(c.responsible || ''))})</span></li>`;
+  }).join('\n');
+  return `    <div class="conflict-warning" role="status">\n      <p class="conflict-warning__lead">${lead}</p>\n      <ul class="conflict-warning__list">\n${items}\n      </ul>\n      <p class="conflict-warning__footer"><a href="lokaler.html">Se lokalöversikt →</a></p>\n    </div>\n`;
+}
+
+function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = [], allEvents = []) {
   const title = escapeHtml(event.title);
   const titleForTag = escapeHtml(truncateForTitleTag(event.title));
   const date = formatDate(toDateString(event.date));
@@ -42,6 +61,8 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   if (event.link) {
     linkHtml = `    <p class="event-link-row"><a class="event-ext-link" href="${escapeHtml(String(event.link))}" target="_blank" rel="noopener noreferrer">Extern länk (för diskussion etc) →</a></p>\n`;
   }
+
+  const conflictHtml = renderConflictBanner(event, allEvents);
 
   return `<!DOCTYPE html>
 <html lang="sv">
@@ -64,7 +85,7 @@ ${pageNav('schema.html', navSections)}
     <p>📅 ${date} 🕐 ${timeStr}</p>
     <p>📍 <strong>Plats:</strong> ${escapeHtml(event.location)} · 👤 <strong>Ansvarig:</strong> ${escapeHtml(event.responsible)}</p>
     <p>📆 <a href="schema/${escapeHtml(String(event.id))}/event.ics" download>Lägg till i kalender (.ics)</a></p>
-${descriptionHtml}${linkHtml}  </div>
+${conflictHtml}${descriptionHtml}${linkHtml}  </div>
 </main>
   <script src="nav.js" defer></script>
   <script src="feedback.js" defer></script>

@@ -426,6 +426,8 @@
         loadingEl.hidden = true;
         sectionEl.hidden = false;
         renderDebugPanel(events);
+        eventsCache = events;
+        scheduleConflictCheck();
       })
       .catch(function () {
         showError('Kunde inte hämta schemadata. Kontrollera din internetanslutning.');
@@ -822,5 +824,97 @@
     }
 
     debugContent.innerHTML = html;
+  }
+
+  // ── Conflict warning (02-§99.10–99.12) ───────────────────────────────────
+
+  var CONFLICT = (typeof window !== 'undefined' && window.SBConflictCheck) || null;
+  var eventsCache = null;
+  var conflictBanner = null;
+  var conflictDebounceTimer = null;
+
+  function ensureConflictBanner() {
+    if (conflictBanner) return conflictBanner;
+    if (!form) return null;
+    conflictBanner = document.createElement('div');
+    conflictBanner.className = 'conflict-warning';
+    conflictBanner.setAttribute('role', 'status');
+    conflictBanner.setAttribute('aria-live', 'polite');
+    conflictBanner.hidden = true;
+    // Insert at the top of the form, before the first fieldset, so a clash
+    // is visible between the "Redigera aktivitet" heading and the form
+    // fields without the user needing to scroll to the submit button.
+    var firstFieldset = form.querySelector('fieldset');
+    if (firstFieldset && firstFieldset.parentNode) {
+      firstFieldset.parentNode.insertBefore(conflictBanner, firstFieldset);
+    } else if (submitBtn && submitBtn.parentNode) {
+      submitBtn.parentNode.insertBefore(conflictBanner, submitBtn);
+    }
+    return conflictBanner;
+  }
+
+  function escapeConflictText(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function renderConflictList(conflicts) {
+    var items = '';
+    for (var i = 0; i < conflicts.length; i++) {
+      var c = conflicts[i];
+      items += '<li>'
+        + '<span class="conflict-warning__time">' + escapeConflictText(c.start) + '–' + escapeConflictText(c.end) + '</span> '
+        + '<span class="conflict-warning__title">' + escapeConflictText(c.title) + '</span> '
+        + '<span class="conflict-warning__resp">(' + escapeConflictText(c.responsible) + ')</span>'
+        + '</li>';
+    }
+    return items;
+  }
+
+  function renderConflicts(conflicts) {
+    var banner = ensureConflictBanner();
+    if (!banner) return;
+    if (!conflicts || conflicts.length === 0) {
+      banner.hidden = true;
+      banner.innerHTML = '';
+      return;
+    }
+    var lead = conflicts.length === 1
+      ? 'Den här tiden och platsen krockar med en annan aktivitet:'
+      : 'Den här tiden och platsen krockar med flera aktiviteter:';
+    banner.innerHTML = '<p class="conflict-warning__lead">' + lead + '</p>'
+      + '<ul class="conflict-warning__list">' + renderConflictList(conflicts) + '</ul>'
+      + '<p class="conflict-warning__footer"><a href="lokaler.html">Se lokalöversikt →</a></p>';
+    banner.hidden = false;
+  }
+
+  function maybeCheckConflicts() {
+    if (!CONFLICT || !form || !eventsCache) return;
+    var els = form.elements;
+    var date = (els.date && els.date.value) || '';
+    var start = (els.start && els.start.value) || '';
+    var end = (els.end && els.end.value) || '';
+    var location = (els.location && els.location.value) || '';
+    var excludeId = (els.id && els.id.value) || undefined;
+    if (!date || !start || !end || !location) { renderConflicts(null); return; }
+    if (end <= start) { renderConflicts(null); return; }
+    var conflicts = CONFLICT.findConflicts(
+      { date: date, start: start, end: end, location: location },
+      eventsCache,
+      { excludeId: excludeId },
+    );
+    renderConflicts(conflicts);
+  }
+
+  function scheduleConflictCheck() {
+    if (conflictDebounceTimer) clearTimeout(conflictDebounceTimer);
+    conflictDebounceTimer = setTimeout(maybeCheckConflicts, 150);
+  }
+
+  if (form) {
+    ['#f-date', '#f-start', '#f-end', '#f-location'].forEach(function (sel) {
+      var el = form.querySelector(sel);
+      if (el) el.addEventListener('change', scheduleConflictCheck);
+    });
   }
 })();

@@ -253,6 +253,150 @@
     });
   }
 
+  // ── Conflict warning (02-§99.4–99.9) ─────────────────────────────────────
+
+  var CONFLICT = (typeof window !== 'undefined' && window.SBConflictCheck) || null;
+  var eventsCache = null;
+  var eventsPromise = null;
+  var conflictBanner = null;
+  var conflictDebounceTimer = null;
+  var WEEKDAYS_LONG_SV = ['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'];
+
+  function whenEvents() {
+    if (eventsCache) return Promise.resolve(eventsCache);
+    if (eventsPromise) return eventsPromise;
+    eventsPromise = fetch('/events.json')
+      .then(function (r) { return r.json(); })
+      .then(function (list) {
+        eventsCache = Array.isArray(list) ? list : [];
+        return eventsCache;
+      })
+      .catch(function () {
+        eventsCache = [];
+        return eventsCache;
+      });
+    return eventsPromise;
+  }
+
+  function ensureConflictBanner() {
+    if (conflictBanner) return conflictBanner;
+    conflictBanner = document.createElement('div');
+    conflictBanner.className = 'conflict-warning';
+    conflictBanner.setAttribute('role', 'status');
+    conflictBanner.setAttribute('aria-live', 'polite');
+    conflictBanner.hidden = true;
+    if (submitBtn && submitBtn.parentNode) {
+      submitBtn.parentNode.insertBefore(conflictBanner, submitBtn);
+    }
+    return conflictBanner;
+  }
+
+  function escapeConflictText(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function formatSwedishDate(iso) {
+    // iso = "2026-05-04"
+    var parts = iso.split('-');
+    if (parts.length !== 3) return iso;
+    var d = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2]));
+    var weekday = WEEKDAYS_LONG_SV[d.getUTCDay()];
+    return weekday.charAt(0).toUpperCase() + weekday.slice(1)
+      + ' ' + (+parts[2]) + '/' + (+parts[1]);
+  }
+
+  function renderConflictList(conflicts) {
+    var items = '';
+    for (var i = 0; i < conflicts.length; i++) {
+      var c = conflicts[i];
+      items += '<li>'
+        + '<span class="conflict-warning__time">' + escapeConflictText(c.start) + '–' + escapeConflictText(c.end) + '</span> '
+        + '<span class="conflict-warning__title">' + escapeConflictText(c.title) + '</span> '
+        + '<span class="conflict-warning__resp">(' + escapeConflictText(c.responsible) + ')</span>'
+        + '</li>';
+    }
+    return items;
+  }
+
+  function renderConflicts(mapByDate) {
+    var banner = ensureConflictBanner();
+    if (!mapByDate || mapByDate.size === 0) {
+      banner.hidden = true;
+      banner.innerHTML = '';
+      return;
+    }
+    var footer = '<p class="conflict-warning__footer"><a href="lokaler.html">Se lokalöversikt →</a></p>';
+    var dates = [];
+    mapByDate.forEach(function (_, k) { dates.push(k); });
+    dates.sort();
+
+    var html;
+    if (dates.length === 1) {
+      var single = mapByDate.get(dates[0]);
+      var lead = single.length === 1
+        ? 'Den här tiden och platsen krockar med en annan aktivitet:'
+        : 'Den här tiden och platsen krockar med flera aktiviteter:';
+      html = '<p class="conflict-warning__lead">' + lead + '</p>'
+        + '<ul class="conflict-warning__list">' + renderConflictList(single) + '</ul>'
+        + footer;
+    } else {
+      html = '<p class="conflict-warning__lead">Den här tiden och platsen krockar på flera dagar:</p>';
+      for (var i = 0; i < dates.length; i++) {
+        var d = dates[i];
+        var list = mapByDate.get(d);
+        html += '<section class="conflict-warning__date-group">'
+          + '<h3 class="conflict-warning__date">' + escapeConflictText(formatSwedishDate(d)) + '</h3>'
+          + '<ul class="conflict-warning__list">' + renderConflictList(list) + '</ul>'
+          + '</section>';
+      }
+      html += footer;
+    }
+
+    banner.innerHTML = html;
+    banner.hidden = false;
+  }
+
+  function maybeCheckConflicts() {
+    if (!CONFLICT) return; // shared module not loaded — silently skip
+    var dates = dayGrid ? getSelectedDates() : [];
+    if (!dates.length) { renderConflicts(null); return; }
+    var start = (form.querySelector('#f-start') || {}).value || '';
+    var end = (form.querySelector('#f-end') || {}).value || '';
+    var location = (form.querySelector('#f-location') || {}).value || '';
+    if (!start || !end || !location) { renderConflicts(null); return; }
+    if (end <= start) { renderConflicts(null); return; }
+    whenEvents().then(function (events) {
+      var map = CONFLICT.findConflictsMulti(
+        { dates: dates, start: start, end: end, location: location },
+        events,
+      );
+      renderConflicts(map);
+    });
+  }
+
+  function scheduleConflictCheck() {
+    if (conflictDebounceTimer) clearTimeout(conflictDebounceTimer);
+    conflictDebounceTimer = setTimeout(maybeCheckConflicts, 150);
+  }
+
+  // Prime the cache early so the first keystroke has data ready.
+  whenEvents();
+
+  // Wire listeners onto the same fields that trigger conflict relevance.
+  ['#f-start', '#f-end', '#f-location'].forEach(function (sel) {
+    var el = form.querySelector(sel);
+    if (el) el.addEventListener('change', scheduleConflictCheck);
+  });
+  if (dayGrid) {
+    dayGrid.addEventListener('click', function (e) {
+      if (e.target.closest('.day-btn')) scheduleConflictCheck();
+    });
+  }
+
+  // Restore may have populated fields before any listener fires; run once.
+  scheduleConflictCheck();
+
   // ── Admin token helper (02-§26.17, §26.19) ────────────────────────────────
 
   function getAdminToken() {
@@ -448,6 +592,11 @@
     if (multiDayInfo) multiDayInfo.hidden = true;
     dateInteracted = false;
     showPage(0);
+    // Hide any lingering conflict warning from the previous submission.
+    if (conflictBanner) {
+      conflictBanner.hidden = true;
+      conflictBanner.innerHTML = '';
+    }
   }
 
   function setModalSuccess(title, consentGiven) {
