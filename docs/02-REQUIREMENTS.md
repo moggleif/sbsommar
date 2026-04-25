@@ -38,79 +38,79 @@ A map of every `## N.` section. Use the line range to gauge depth before opening
 - §23. Event Data CI Pipeline — superseded by §50 (lines 1004–1016) — mostly superseded; §23.14 (CI checkout depth) still applies.
 - §24. Unified Navigation (lines 1017–1079) — top-nav structure shared by every page.
 - §25. Image Loading Performance (lines 1080–1111) — lazy-loading, dimensions, formats.
-- §26. Form Time-Gating (lines 1112–1196) — `opens_for_editing` window that locks forms outside the camp.
-- §27. Past-Date Blocking (lines 1197–1238) — refuse activities with dates already in the past.
-- §28. Upcoming Camps on Homepage (lines 1239–1297) — upcoming-camp listing for prospective families.
-- §29. Camp Naming Convention (lines 1298–1313) — `YYYY-MM-location.yaml` naming.
-- §30. Hero Section Redesign (lines 1314–1389) — homepage hero layout, copy, CTAs.
-- §31. Inline Camp Listing and Link Styling (lines 1390–1437) — homepage camp list link styling.
-- §32. HTML Validation in CI (lines 1438–1469) — html-validate runs on every build.
-- §33. CSS Linting in CI (lines 1470–1502) — stylelint runs on every build.
-- §34. Derived Active Camp (lines 1503–1550) — `camps.yaml`-driven active-camp selection.
-- §35. Location Accordions on Index Page (lines 1551–1584) — collapsible per-location lists on the homepage.
-- §37. camps.yaml Validator (lines 1585–1633) — schema check for the camp registry.
-- §38. Replace Hand-Rolled Markdown Converter with marked (lines 1634–1678) — Markdown rendering pipeline switch.
-- §39. CodeQL Alert Remediation (lines 1679–1725) — security-scan findings closed during the migration.
-- §40. Zero-Downtime Static Site Deploy (lines 1726–1783) — atomic symlink-swap deploy.
-- §41. Environment Management (lines 1784–1856) — local / QA / production separation.
-- §42. QA Camp Isolation (lines 1857–1978) — preventing QA camps from leaking into the public site.
-- §43. Replace FTP with SSH for QA Deploys (lines 1979–2033) — QA deploy migration from FTP to SCP.
-- §44. PHP API for Shared Hosting (lines 2034–2169) — PHP-based API replacing Node for shared hosting.
-- §45. iCal Calendar Export (lines 2170–2266) — `.ics` feed of all events.
-- §46. iCal Presentation and Compliance (lines 2267–2322) — RFC 5545 conformance details.
-- §47. Heading and Link Color Update (lines 2323–2338) — design-token color refresh.
-- §48. Add-Activity and Edit-Activity Cookie Enhancements (lines 2339–2407) — author-name and edit-token cookie behaviour.
-- §49. API-Layer Security Validation (lines 2408–2444) — injection / link / length checks at the API.
-- §50. Docker-Based Event Data CI Pipeline (lines 2445–2496) — post-merge build/deploy workflow (Docker parts archived).
-- §51. Event Data Deploy — Eliminate Serial Detect Job (lines 2497–2543) — parallel deploy jobs with inline detection.
-- §52. Replace Docker Container with setup-node + npm Cache (lines 2544–2585) — deploy-time dependency strategy.
-- §53. Synchronous API Error Visibility and Deploy Safety (lines 2586–2643) — surface GitHub commit failures to the user.
-- §54. Midnight-Crossing Events (lines 2644–2694) — events that span past midnight.
-- §55. Submit modal design polish (lines 2695–2715) — submit-modal styling polish.
-- §56. Render Description as Markdown (lines 2716–2759) — Markdown rendering of activity description.
-- §57. Markdown Toolbar for Description Field (lines 2760–2803) — formatting buttons above the textarea.
-- §58. Markdown Preview for Description Field (lines 2804–2858) — live preview pane.
-- §59. Scoped Heading Sizes in Event Descriptions (lines 2859–2893) — scoped CSS for headings inside descriptions.
-- §60. Release and Deployment Documentation (lines 2894–2933) — release process docs.
-- §61. Mobile Navigation Improvements (lines 2934–2986) — mobile-only nav-menu behaviour.
-- §62. Footer Versioning (lines 2987–3068) — visible version in the footer.
-- §63. Site Analytics (lines 3069–3157) — privacy-respecting visit analytics.
-- §64. Index Page Design Improvements (lines 3158–3226) — homepage layout polish.
-- §65. Client-Side Date and Regex Robustness (lines 3227–3251) — defensive date/regex handling.
-- §66. Image Dimension Attributes (lines 3252–3294) — explicit `width`/`height` on every image.
-- §67. Static Asset Cache Headers (lines 3295–3323) — `Cache-Control` headers per asset type.
-- §68. Descriptive Image Filenames (lines 3324–3360) — meaningful filenames for accessibility and SEO.
-- §69. CSS Cache-Busting (lines 3361–3386) — content-hashed CSS file names.
-- §70. Main Landmark Element (lines 3387–3410) — `<main>` wraps page content for screen readers.
-- §71. Hero Action Buttons (lines 3411–3454) — homepage hero CTA buttons.
-- §72. Close Past-Day Accordions on Schedule Page (lines 3455–3488) — auto-collapse past days on the schedule.
-- §73. Feedback Button (GitHub Issues) (lines 3489–3597) — bug-report button that opens a GitHub Issue draft.
-- §74. Sticky Navigation Positioning (lines 3598–3615) — sticky top-nav behaviour while scrolling.
-- §75. Consistent Navigation and Page Title Labels (lines 3616–3652) — title / nav-label consistency.
-- §77. JavaScript Cache-Busting (lines 3653–3681) — content-hashed JS file names.
-- §78. Image Cache-Busting (lines 3682–3710) — content-hashed image references.
-- §79. Section Anchor ID Consistency (lines 3711–3728) — stable anchor IDs across pages.
-- §80. Multi-Day Selection and Batch Submission (lines 3729–3826) — picking multiple days in the add form.
-- §81. Client-side link field validation (lines 3827–3873) — link-field URL validation in the form.
-- §82. Character counter on text input fields (lines 3874–3937) — live character count next to inputs.
-- §83. Progressive Web App (PWA) Support (lines 3938–4036) — manifest, service worker, install support.
-- §84. API Error Messages (lines 4037–4066) — Swedish-language API error responses.
-- §85. Form Draft Cache (sessionStorage) (lines 4067–4101) — auto-save form drafts to sessionStorage.
-- §86. Image Cache-Busting for href and Manifest References (lines 4102–4133) — image hashing across links and manifest.
-- §87. Manifest Metadata for Richer Install UI (lines 4134–4160) — install-prompt metadata in `manifest.json`.
-- §88. PWA Install Guide (lines 4161–4212) — in-app install instructions for users.
-- §89. Delete Activity (lines 4213–4278) — delete-activity flow.
-- §90. Cookie Debug Panel and Session Cookie Repair (lines 4279–4358) — debug panel for cookie state and repair tooling.
-- §91. Admin Token — Activation and Status Indicator (lines 4359–4455) — admin-token activation UX and status indicator.
-- §92. PWA Full Pre-Cache and Offline Guard (lines 4456–4533) — full site pre-cache and offline fallback.
-- §93. Rate Limiting for Authorization Endpoints (lines 4534–4609) — token-issue throttling.
-- §94. Registration Banner and CTA Button (lines 4610–4700) — homepage registration banner.
-- §95. Security Hygiene: Regex Performance and Escaping (lines 4701–4754) — regex hardening.
-- §96. Self-Healing Service Worker Upgrade (lines 4755–4848) — auto-upgrade flow for stuck service workers.
-- §97. Project Documentation Site (lines 4849–4973) — `/docs/` build and deployment.
-- §98. Locale Overview Page (lines 4974–5093) — overview page listing all locales/camps.
-- §99. Conflict Warning in Add/Edit Forms and Activity Pages (lines 5094–5195) — overlap warning surface.
-- Archived (superseded) (lines 5196–5248) — prose for requirements replaced by later sections; IDs preserved.
+- §26. Form Time-Gating (lines 1112–1195) — `opens_for_editing` window that locks forms outside the camp.
+- §27. Past-Date Blocking (lines 1196–1237) — refuse activities with dates already in the past.
+- §28. Upcoming Camps on Homepage (lines 1238–1296) — upcoming-camp listing for prospective families.
+- §29. Camp Naming Convention (lines 1297–1312) — `YYYY-MM-location.yaml` naming.
+- §30. Hero Section Redesign (lines 1313–1388) — homepage hero layout, copy, CTAs.
+- §31. Inline Camp Listing and Link Styling (lines 1389–1436) — homepage camp list link styling.
+- §32. HTML Validation in CI (lines 1437–1468) — html-validate runs on every build.
+- §33. CSS Linting in CI (lines 1469–1501) — stylelint runs on every build.
+- §34. Derived Active Camp (lines 1502–1545) — `camps.yaml`-driven active-camp selection.
+- §35. Location Accordions on Index Page (lines 1546–1579) — collapsible per-location lists on the homepage.
+- §37. camps.yaml Validator (lines 1580–1628) — schema check for the camp registry.
+- §38. Replace Hand-Rolled Markdown Converter with marked (lines 1629–1673) — Markdown rendering pipeline switch.
+- §39. CodeQL Alert Remediation (lines 1674–1720) — security-scan findings closed during the migration.
+- §40. Zero-Downtime Static Site Deploy (lines 1721–1778) — atomic symlink-swap deploy.
+- §41. Environment Management (lines 1779–1851) — local / QA / production separation.
+- §42. QA Camp Isolation (lines 1852–1975) — preventing QA camps from leaking into the public site.
+- §43. Replace FTP with SSH for QA Deploys (lines 1976–2030) — QA deploy migration from FTP to SCP.
+- §44. PHP API for Shared Hosting (lines 2031–2166) — PHP-based API replacing Node for shared hosting.
+- §45. iCal Calendar Export (lines 2167–2263) — `.ics` feed of all events.
+- §46. iCal Presentation and Compliance (lines 2264–2319) — RFC 5545 conformance details.
+- §47. Heading and Link Color Update (lines 2320–2335) — design-token color refresh.
+- §48. Add-Activity and Edit-Activity Cookie Enhancements (lines 2336–2404) — author-name and edit-token cookie behaviour.
+- §49. API-Layer Security Validation (lines 2405–2441) — injection / link / length checks at the API.
+- §50. Docker-Based Event Data CI Pipeline (lines 2442–2493) — post-merge build/deploy workflow (Docker parts archived).
+- §51. Event Data Deploy — Eliminate Serial Detect Job (lines 2494–2540) — parallel deploy jobs with inline detection.
+- §52. Replace Docker Container with setup-node + npm Cache (lines 2541–2582) — deploy-time dependency strategy.
+- §53. Synchronous API Error Visibility and Deploy Safety (lines 2583–2640) — surface GitHub commit failures to the user.
+- §54. Midnight-Crossing Events (lines 2641–2691) — events that span past midnight.
+- §55. Submit modal design polish (lines 2692–2712) — submit-modal styling polish.
+- §56. Render Description as Markdown (lines 2713–2756) — Markdown rendering of activity description.
+- §57. Markdown Toolbar for Description Field (lines 2757–2800) — formatting buttons above the textarea.
+- §58. Markdown Preview for Description Field (lines 2801–2855) — live preview pane.
+- §59. Scoped Heading Sizes in Event Descriptions (lines 2856–2890) — scoped CSS for headings inside descriptions.
+- §60. Release and Deployment Documentation (lines 2891–2930) — release process docs.
+- §61. Mobile Navigation Improvements (lines 2931–2983) — mobile-only nav-menu behaviour.
+- §62. Footer Versioning (lines 2984–3065) — visible version in the footer.
+- §63. Site Analytics (lines 3066–3154) — privacy-respecting visit analytics.
+- §64. Index Page Design Improvements (lines 3155–3223) — homepage layout polish.
+- §65. Client-Side Date and Regex Robustness (lines 3224–3248) — defensive date/regex handling.
+- §66. Image Dimension Attributes (lines 3249–3291) — explicit `width`/`height` on every image.
+- §67. Static Asset Cache Headers (lines 3292–3320) — `Cache-Control` headers per asset type.
+- §68. Descriptive Image Filenames (lines 3321–3357) — meaningful filenames for accessibility and SEO.
+- §69. CSS Cache-Busting (lines 3358–3383) — content-hashed CSS file names.
+- §70. Main Landmark Element (lines 3384–3407) — `<main>` wraps page content for screen readers.
+- §71. Hero Action Buttons (lines 3408–3451) — homepage hero CTA buttons.
+- §72. Close Past-Day Accordions on Schedule Page (lines 3452–3485) — auto-collapse past days on the schedule.
+- §73. Feedback Button (GitHub Issues) (lines 3486–3594) — bug-report button that opens a GitHub Issue draft.
+- §74. Sticky Navigation Positioning (lines 3595–3612) — sticky top-nav behaviour while scrolling.
+- §75. Consistent Navigation and Page Title Labels (lines 3613–3649) — title / nav-label consistency.
+- §77. JavaScript Cache-Busting (lines 3650–3675) — content-hashed JS file names.
+- §78. Image Cache-Busting (lines 3676–3701) — content-hashed image references.
+- §79. Section Anchor ID Consistency (lines 3702–3719) — stable anchor IDs across pages.
+- §80. Multi-Day Selection and Batch Submission (lines 3720–3817) — picking multiple days in the add form.
+- §81. Client-side link field validation (lines 3818–3864) — link-field URL validation in the form.
+- §82. Character counter on text input fields (lines 3865–3928) — live character count next to inputs.
+- §83. Progressive Web App (PWA) Support (lines 3929–4027) — manifest, service worker, install support.
+- §84. API Error Messages (lines 4028–4057) — Swedish-language API error responses.
+- §85. Form Draft Cache (sessionStorage) (lines 4058–4092) — auto-save form drafts to sessionStorage.
+- §86. Image Cache-Busting for href and Manifest References (lines 4093–4124) — image hashing across links and manifest.
+- §87. Manifest Metadata for Richer Install UI (lines 4125–4151) — install-prompt metadata in `manifest.json`.
+- §88. PWA Install Guide (lines 4152–4203) — in-app install instructions for users.
+- §89. Delete Activity (lines 4204–4269) — delete-activity flow.
+- §90. Cookie Debug Panel and Session Cookie Repair (lines 4270–4349) — debug panel for cookie state and repair tooling.
+- §91. Admin Token — Activation and Status Indicator (lines 4350–4446) — admin-token activation UX and status indicator.
+- §92. PWA Full Pre-Cache and Offline Guard (lines 4447–4524) — full site pre-cache and offline fallback.
+- §93. Rate Limiting for Authorization Endpoints (lines 4525–4600) — token-issue throttling.
+- §94. Registration Banner and CTA Button (lines 4601–4691) — homepage registration banner.
+- §95. Security Hygiene: Regex Performance and Escaping (lines 4692–4745) — regex hardening.
+- §96. Self-Healing Service Worker Upgrade (lines 4746–4839) — auto-upgrade flow for stuck service workers.
+- §97. Project Documentation Site (lines 4840–4964) — `/docs/` build and deployment.
+- §98. Locale Overview Page (lines 4965–5084) — overview page listing all locales/camps.
+- §99. Conflict Warning in Add/Edit Forms and Activity Pages (lines 5085–5186) — overlap warning surface.
+- Archived (superseded) (lines 5187–5239) — prose for requirements replaced by later sections; IDs preserved.
 
 ---
 
@@ -1117,12 +1117,11 @@ or edit activities.
 
 ### 26.1 Data model
 
-- Each camp in `camps.yaml` must have an `opens_for_editing` field containing a
-  `YYYY-MM-DD` date. This is the first date on which the forms become
-  available. <!-- 02-§26.1 -->
-- The submission period for a camp runs from `opens_for_editing` through
-  `end_date + 1 day` (inclusive on both ends, compared as dates without
-  timezone). <!-- 02-§26.2 -->
+The `opens_for_editing` field on each `camps.yaml` entry defines when the
+forms open. The submission period runs from `opens_for_editing` through
+`end_date + 1 day` (inclusive on both ends, compared as dates without
+timezone). See `05-DATA_CONTRACT.md §1` for the canonical field
+definition and the typical default (`start_date − 7 days`). <!-- 02-§26.1 --> <!-- 02-§26.2 -->
 
 ### 26.2 UI behaviour — before the period opens
 
@@ -1509,16 +1508,12 @@ intervention.
 
 ### 34.1 Derivation rules
 
-The system determines the active camp using the following priority: <!-- 02-§34.1 -->
-
-1. **On dates** — if today falls within a camp's `start_date..end_date`
-   (inclusive), that camp is active. <!-- 02-§34.2 -->
-2. **Next upcoming** — if no camp is on dates, the camp with the nearest
-   future `start_date` is active. <!-- 02-§34.3 -->
-3. **Most recent** — if no upcoming camps exist, the camp with the latest
-   `end_date` is active, even if it is archived. <!-- 02-§34.4 -->
-
-If two camps overlap in dates, the one with the earlier `start_date` wins. <!-- 02-§34.5 -->
+Exactly one camp is active at any time, selected by a date-based priority
+applied at both build time and at API request time — today on dates →
+nearest future `start_date` → latest `end_date`, with the earlier
+`start_date` winning any overlap. See `03-ARCHITECTURE.md §2 "Metadata
+Layer"` for the canonical rules and the shared resolver
+(`source/scripts/resolve-active-camp.js`). <!-- 02-§34.1 --> <!-- 02-§34.2 --> <!-- 02-§34.3 --> <!-- 02-§34.4 --> <!-- 02-§34.5 -->
 
 ### 34.2 Data model changes
 
@@ -1857,10 +1852,12 @@ event data reaches both environments immediately.
 ## 42. QA Camp Isolation
 
 QA and Production share the same `camps.yaml` registry and the same git branch.
-A dedicated QA camp allows testing the full event flow (form submission, schedule
-rendering, today view) without polluting production data. The QA camp must be
-invisible to production builds and APIs, and must always be the active camp in
-QA environments.
+A dedicated QA camp allows testing the full event flow without polluting
+production data: it is invisible to production builds and APIs, and is always
+the active camp in QA environments. See `03-ARCHITECTURE.md §2 "QA camp
+isolation"` for the canonical filter mechanism (driven by `BUILD_ENV`) and the
+seasonal QA-camp model. The subsections below capture the operational
+requirements that flow from that design.
 
 ### 42.1 Data model (data requirements)
 
@@ -1955,11 +1952,11 @@ QA environments.
 
 #### 42.9.1 Context
 
-QA-only camps act as the active camp in QA environments so the full event
-flow can be tested without touching production data. To avoid QA noise
-overlapping with the real-camp window, the active QA camp must close
-before the upcoming real camp's pre-camp preparation period and reopen
-after the real-camp season ends.
+The active QA camp must close before the upcoming real camp's pre-camp
+preparation period and reopen after the real-camp season ends, so QA
+testing never overlaps the real-camp window. See
+`03-ARCHITECTURE.md §2 "QA camp isolation"` for the spring/autumn camp
+descriptions and the off-season window.
 
 #### 42.9.2 Requirements
 
@@ -3655,20 +3652,17 @@ descriptive where there is room.
 HTML files are served with `Cache-Control: no-cache` and always revalidate,
 but JS is cached for up to one week (02-§67.2). When a deploy changes
 client-side JavaScript, browsers may serve stale scripts against fresh HTML,
-causing broken behaviour. The build must append a content-based hash to
-JS URLs so that any JS change forces a cache miss while unchanged files
-continue to be served from cache.
+causing broken behaviour. The build must append a content-based hash to JS
+URLs so that any JS change forces a cache miss while unchanged files continue
+to be served from cache.
 
 ### 77.1 Build behaviour
 
-- After all HTML files and assets are written, the build must read each
-  JS file referenced by `<script>` tags in `public/` and compute a short
-  content hash (first 8 hex characters of the MD5
-  digest). <!-- 02-§77.1 -->
-- The build must replace every `src="<file>.js"` in all HTML files
-  under `public/` with `src="<file>.js?v=<hash>"`. <!-- 02-§77.2 -->
-- The hash must be deterministic: identical JS content must always
-  produce the same hash. <!-- 02-§77.3 -->
+The build appends a deterministic 8-character MD5-based content hash to every
+`<script src="…">` reference in `public/` HTML so JS URLs become
+`src="<file>.js?v=<hash>"`, with identical JS content always producing the
+same hash. See `03-ARCHITECTURE.md §27 "Asset Cache-Busting"` for the
+canonical mechanism (shared with CSS and image cache-busting). <!-- 02-§77.1 --> <!-- 02-§77.2 --> <!-- 02-§77.3 -->
 
 ### 77.2 Constraints
 
@@ -3689,15 +3683,12 @@ continue to be served from cache.
 
 ### 78.1 Build behaviour
 
-- After all HTML files and assets are written, the build must read each
-  image file referenced by `<img>` tags in `public/` and compute a short
-  content hash (first 8 hex characters of the MD5
-  digest). <!-- 02-§78.1 -->
-- The build must replace every `src="<file>.<ext>"` (where ext is webp,
-  png, jpg, jpeg, or ico) in all HTML files under `public/` with
-  `src="<file>.<ext>?v=<hash>"`. <!-- 02-§78.2 -->
-- The hash must be deterministic: identical image content must always
-  produce the same hash. <!-- 02-§78.3 -->
+The build appends a deterministic 8-character MD5-based content hash to every
+`<img src="…">` reference in `public/` HTML so image URLs become
+`src="<file>.<ext>?v=<hash>"` (where `ext` is `webp`, `png`, `jpg`, `jpeg`,
+or `ico`), with identical image content always producing the same hash. See
+`03-ARCHITECTURE.md §27 "Asset Cache-Busting"` for the canonical mechanism
+(shared with CSS and JS cache-busting). <!-- 02-§78.1 --> <!-- 02-§78.2 --> <!-- 02-§78.3 -->
 
 ### 78.2 Constraints
 

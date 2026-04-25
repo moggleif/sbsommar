@@ -71,11 +71,11 @@ npm run test:update-snapshots    # Regenerate schedule page snapshots
 
 Event data lives in `source/data/`. One YAML file per camp.
 
-Which camp is active is derived automatically from dates at build time:
-
-1. If today falls within a camp's `start_date..end_date`, that camp is active.
-2. Otherwise, the next upcoming camp (nearest future `start_date`) is active.
-3. If no upcoming camps exist, the most recent camp (latest `end_date`) is active.
+Which camp is active is derived automatically from dates at build time and at
+API request time — there is no manual `active` field. See
+[03-ARCHITECTURE.md §2 "Metadata Layer"](03-ARCHITECTURE.md#2-metadata-layer)
+for the canonical priority rules (today on dates → next upcoming → most
+recent) and the shared resolver.
 
 Events are sorted chronologically at build time, so their order in the YAML file does not matter. New events submitted through the form are committed to GitHub and merged via auto-merge PR — the file on disk updates when the next deploy runs.
 
