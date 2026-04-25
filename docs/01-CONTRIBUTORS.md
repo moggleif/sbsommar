@@ -218,5 +218,7 @@ When reporting a bug, include:
 
 - Which page or view is affected.
 - What you expected to see.
+- What actually happened.
+- Steps to reproduce, if you know them.
 
 If the issue is urgent (e.g. the schedule is broken during camp), contact the maintainers directly — do not wait for a GitHub issue response.

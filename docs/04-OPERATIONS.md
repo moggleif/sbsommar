@@ -179,25 +179,6 @@ camp:
 events: []
 ```
 
-### Admin Tokens (optional)
-
-If one or two people need the ability to edit or delete any event
-through the site UI (not just their own):
-
-1. Run `npm run admin:create` and follow the prompts. The script
-   generates a token in the format `namn_uuid_epoch` (where `epoch` is
-   a Unix timestamp 60 days in the future) and prints instructions.
-   The token is shown only once — save it immediately.
-2. Add the token to `ADMIN_TOKENS` in all three locations (see script
-   output): `.env`, `api/.env` on the server, and GitHub Environment
-   secrets for QA/Production.
-3. Share the token privately with the admin (e.g. via SMS or in person).
-4. The admin visits `/admin.html`, enters the token, and gains admin
-   status for 30 days.
-
-Tokens can be revoked at any time by removing them from `ADMIN_TOKENS`
-and redeploying. No code change is needed.
-
 ### During Camp
 
 Participants add events through the web form at `/lagg-till.html`.
@@ -212,6 +193,32 @@ to fix or remove entries.
 1. Set `archived: true` for the camp in `source/data/camps.yaml`.
 2. Commit. The YAML file already has its permanent name — it becomes the archive as-is.
 3. Deploy. The system automatically derives the next active camp from dates.
+
+---
+
+## Admin Tokens (optional)
+
+Admin tokens grant one or two people the ability to edit or delete any
+event through the site UI — not just their own. The feature is optional;
+omit `ADMIN_TOKENS` to disable it entirely.
+
+### Issuing a token
+
+1. Run `npm run admin:create` and follow the prompts. The script
+   generates a token in the format `namn_uuid_epoch` (where `epoch` is
+   a Unix timestamp 60 days in the future) and prints instructions.
+   The token is shown only once — save it immediately.
+2. Add the token to `ADMIN_TOKENS` in all three locations (see script
+   output): `.env`, `api/.env` on the server, and GitHub Environment
+   secrets for QA/Production.
+3. Share the token privately with the admin (e.g. via SMS or in person).
+4. The admin visits `/admin.html`, enters the token, and gains admin
+   status for 30 days.
+
+### Revoking a token
+
+Remove the token from `ADMIN_TOKENS` and redeploy. No code change is
+needed.
 
 ---
 
