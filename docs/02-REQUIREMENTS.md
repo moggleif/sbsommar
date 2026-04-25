@@ -7,6 +7,113 @@ Read this before reading any other technical document.
 
 ---
 
+## Contents
+
+A map of every `## N.` section. Use the line range to gauge depth before opening a section. Section numbers are not always sequential (historic gaps and out-of-order additions are preserved because the IDs are cited from code).
+
+- §1. Who Uses This Site (lines 117–139) — three audiences (prospective families, attending families, leaders) and what each needs.
+- §1a. Search Engine and Crawler Policy (lines 140–155) — robots, sitemap, and AI-crawler rules.
+- §2. Site Pages (lines 156–182) — the URLs the site exposes (homepage, schedule, today, etc.).
+- §3. Homepage — Pre-Camp Requirements (lines 183–213) — what the homepage must answer for prospective families.
+- §4. Schedule Views (lines 214–250) — weekly schedule, today, and display-mode views.
+- §5. Activity Detail View (lines 251–270) — inline expansion of an activity inside the schedule.
+- §6. Adding an Activity (lines 271–346) — add-activity form, fields, validation, submit flow.
+- §7. Editing and Removing Activities (lines 347–359) — edit-mode access and removal rules.
+- §8. Locations (lines 360–371) — location list and how it is populated.
+- §9. Form Validation (lines 372–388) — client-side validation rules shared across add/edit.
+- §10. API Input Validation (lines 389–412) — server-side validation enforced by the API.
+- §11. Activity Order and Overlaps (lines 413–420) — sort order and overlap handling on the schedule.
+- §12. Reliability (lines 421–433) — uptime, deploy safety, silent-loss prevention.
+- §13. Accessibility (lines 434–446) — keyboard, screen-reader, contrast.
+- §14. Language (lines 447–455) — Swedish-only user-facing text.
+- §15. RSS Feed (lines 456–518) — subscription feed of all events.
+- §36. Per-Event Detail Pages (lines 519–581) — static detail page generated per activity.
+- §16. Archive (lines 582–592) — how past camps are archived after a season.
+- §17. Simplicity (lines 593–607) — top-level constraints (static-first, no SPA).
+- §18. Participant Event Editing (lines 608–769) — token-based participant edit flow.
+- §20. Edit-Activity Submit Flow (lines 770–819) — server-side handling of edit submissions.
+- §19. Add-Activity Submit Flow (lines 820–882) — server-side handling of add submissions.
+- §22. Shared Site Footer (lines 883–903) — footer content and link blocks.
+- §21. Archive Timeline (lines 904–1003) — chronological listing of past camps.
+- §23. Event Data CI Pipeline — superseded by §50 (lines 1004–1016) — mostly superseded; §23.14 (CI checkout depth) still applies.
+- §24. Unified Navigation (lines 1017–1079) — top-nav structure shared by every page.
+- §25. Image Loading Performance (lines 1080–1111) — lazy-loading, dimensions, formats.
+- §26. Form Time-Gating (lines 1112–1196) — `opens_for_editing` window that locks forms outside the camp.
+- §27. Past-Date Blocking (lines 1197–1238) — refuse activities with dates already in the past.
+- §28. Upcoming Camps on Homepage (lines 1239–1297) — upcoming-camp listing for prospective families.
+- §29. Camp Naming Convention (lines 1298–1313) — `YYYY-MM-location.yaml` naming.
+- §30. Hero Section Redesign (lines 1314–1389) — homepage hero layout, copy, CTAs.
+- §31. Inline Camp Listing and Link Styling (lines 1390–1437) — homepage camp list link styling.
+- §32. HTML Validation in CI (lines 1438–1469) — html-validate runs on every build.
+- §33. CSS Linting in CI (lines 1470–1502) — stylelint runs on every build.
+- §34. Derived Active Camp (lines 1503–1550) — `camps.yaml`-driven active-camp selection.
+- §35. Location Accordions on Index Page (lines 1551–1584) — collapsible per-location lists on the homepage.
+- §37. camps.yaml Validator (lines 1585–1633) — schema check for the camp registry.
+- §38. Replace Hand-Rolled Markdown Converter with marked (lines 1634–1678) — Markdown rendering pipeline switch.
+- §39. CodeQL Alert Remediation (lines 1679–1725) — security-scan findings closed during the migration.
+- §40. Zero-Downtime Static Site Deploy (lines 1726–1783) — atomic symlink-swap deploy.
+- §41. Environment Management (lines 1784–1856) — local / QA / production separation.
+- §42. QA Camp Isolation (lines 1857–1978) — preventing QA camps from leaking into the public site.
+- §43. Replace FTP with SSH for QA Deploys (lines 1979–2033) — QA deploy migration from FTP to SCP.
+- §44. PHP API for Shared Hosting (lines 2034–2169) — PHP-based API replacing Node for shared hosting.
+- §45. iCal Calendar Export (lines 2170–2266) — `.ics` feed of all events.
+- §46. iCal Presentation and Compliance (lines 2267–2322) — RFC 5545 conformance details.
+- §47. Heading and Link Color Update (lines 2323–2338) — design-token color refresh.
+- §48. Add-Activity and Edit-Activity Cookie Enhancements (lines 2339–2407) — author-name and edit-token cookie behaviour.
+- §49. API-Layer Security Validation (lines 2408–2444) — injection / link / length checks at the API.
+- §50. Docker-Based Event Data CI Pipeline (lines 2445–2496) — post-merge build/deploy workflow (Docker parts archived).
+- §51. Event Data Deploy — Eliminate Serial Detect Job (lines 2497–2543) — parallel deploy jobs with inline detection.
+- §52. Replace Docker Container with setup-node + npm Cache (lines 2544–2585) — deploy-time dependency strategy.
+- §53. Synchronous API Error Visibility and Deploy Safety (lines 2586–2643) — surface GitHub commit failures to the user.
+- §54. Midnight-Crossing Events (lines 2644–2694) — events that span past midnight.
+- §55. Submit modal design polish (lines 2695–2715) — submit-modal styling polish.
+- §56. Render Description as Markdown (lines 2716–2759) — Markdown rendering of activity description.
+- §57. Markdown Toolbar for Description Field (lines 2760–2803) — formatting buttons above the textarea.
+- §58. Markdown Preview for Description Field (lines 2804–2858) — live preview pane.
+- §59. Scoped Heading Sizes in Event Descriptions (lines 2859–2893) — scoped CSS for headings inside descriptions.
+- §60. Release and Deployment Documentation (lines 2894–2933) — release process docs.
+- §61. Mobile Navigation Improvements (lines 2934–2986) — mobile-only nav-menu behaviour.
+- §62. Footer Versioning (lines 2987–3068) — visible version in the footer.
+- §63. Site Analytics (lines 3069–3157) — privacy-respecting visit analytics.
+- §64. Index Page Design Improvements (lines 3158–3226) — homepage layout polish.
+- §65. Client-Side Date and Regex Robustness (lines 3227–3251) — defensive date/regex handling.
+- §66. Image Dimension Attributes (lines 3252–3294) — explicit `width`/`height` on every image.
+- §67. Static Asset Cache Headers (lines 3295–3323) — `Cache-Control` headers per asset type.
+- §68. Descriptive Image Filenames (lines 3324–3360) — meaningful filenames for accessibility and SEO.
+- §69. CSS Cache-Busting (lines 3361–3386) — content-hashed CSS file names.
+- §70. Main Landmark Element (lines 3387–3410) — `<main>` wraps page content for screen readers.
+- §71. Hero Action Buttons (lines 3411–3454) — homepage hero CTA buttons.
+- §72. Close Past-Day Accordions on Schedule Page (lines 3455–3488) — auto-collapse past days on the schedule.
+- §73. Feedback Button (GitHub Issues) (lines 3489–3597) — bug-report button that opens a GitHub Issue draft.
+- §74. Sticky Navigation Positioning (lines 3598–3615) — sticky top-nav behaviour while scrolling.
+- §75. Consistent Navigation and Page Title Labels (lines 3616–3652) — title / nav-label consistency.
+- §77. JavaScript Cache-Busting (lines 3653–3681) — content-hashed JS file names.
+- §78. Image Cache-Busting (lines 3682–3710) — content-hashed image references.
+- §79. Section Anchor ID Consistency (lines 3711–3728) — stable anchor IDs across pages.
+- §80. Multi-Day Selection and Batch Submission (lines 3729–3826) — picking multiple days in the add form.
+- §81. Client-side link field validation (lines 3827–3873) — link-field URL validation in the form.
+- §82. Character counter on text input fields (lines 3874–3937) — live character count next to inputs.
+- §83. Progressive Web App (PWA) Support (lines 3938–4036) — manifest, service worker, install support.
+- §84. API Error Messages (lines 4037–4066) — Swedish-language API error responses.
+- §85. Form Draft Cache (sessionStorage) (lines 4067–4101) — auto-save form drafts to sessionStorage.
+- §86. Image Cache-Busting for href and Manifest References (lines 4102–4133) — image hashing across links and manifest.
+- §87. Manifest Metadata for Richer Install UI (lines 4134–4160) — install-prompt metadata in `manifest.json`.
+- §88. PWA Install Guide (lines 4161–4212) — in-app install instructions for users.
+- §89. Delete Activity (lines 4213–4278) — delete-activity flow.
+- §90. Cookie Debug Panel and Session Cookie Repair (lines 4279–4358) — debug panel for cookie state and repair tooling.
+- §91. Admin Token — Activation and Status Indicator (lines 4359–4455) — admin-token activation UX and status indicator.
+- §92. PWA Full Pre-Cache and Offline Guard (lines 4456–4533) — full site pre-cache and offline fallback.
+- §93. Rate Limiting for Authorization Endpoints (lines 4534–4609) — token-issue throttling.
+- §94. Registration Banner and CTA Button (lines 4610–4700) — homepage registration banner.
+- §95. Security Hygiene: Regex Performance and Escaping (lines 4701–4754) — regex hardening.
+- §96. Self-Healing Service Worker Upgrade (lines 4755–4848) — auto-upgrade flow for stuck service workers.
+- §97. Project Documentation Site (lines 4849–4973) — `/docs/` build and deployment.
+- §98. Locale Overview Page (lines 4974–5093) — overview page listing all locales/camps.
+- §99. Conflict Warning in Add/Edit Forms and Activity Pages (lines 5094–5195) — overlap warning surface.
+- Archived (superseded) (lines 5196–5248) — prose for requirements replaced by later sections; IDs preserved.
+
+---
+
 ## 1. Who Uses This Site
 
 Three distinct audiences:
@@ -896,9 +1003,8 @@ time. <!-- 02-§21.22 -->
 
 ## 23. Event Data CI Pipeline — superseded by §50
 
-> **Note:** §23.1–23.10 are superseded by §49 (API-layer validation) and §50
-> (Docker-based pipeline). §23.11–23.13 are superseded by §50.4 (post-merge
-> SCP deploy). §23.14 still applies to `ci.yml`.
+> §23.1–§23.13 are superseded — see [Archived (superseded)](#archived-superseded).
+> §23.14 still applies to `ci.yml`.
 
 ### 23.0 Git history for branch comparison
 
@@ -1905,8 +2011,7 @@ secrets to manage. Production remains on FTP until QA is validated.
 
 ### 43.3 Production — superseded by §50.5
 
-> **Note:** Production event data deploy now uses SCP (§50.5).
-> `02-§43.9` and `02-§43.10` are superseded by `02-§50.19`–`02-§50.22`.
+> §43.9–§43.10 are superseded — see [Archived (superseded)](#archived-superseded).
 
 ### 43.4 Documentation (site requirements)
 
@@ -2342,24 +2447,10 @@ identical check. The CI scan will be removed in a future pipeline optimisation.
 Event data validation (injection patterns, link protocol, length limits) runs in the
 API layer at submission time. Data that reaches git is already validated. The CI
 pipeline for event-data PRs provides a branch-protection gate, and a post-merge
-workflow builds and deploys via a pre-built Docker image.
+workflow builds and deploys event-data files.
 
-### 50.1 Docker build image (site requirements)
-
-- A Docker image containing Node.js 20 and the project's production dependencies
-  (`js-yaml`, `marked`, `qrcode`) must be available for CI workflows. <!-- 02-§50.1 -->
-- The image must be based on `node:20` (full image, not slim). <!-- 02-§50.2 -->
-- The Dockerfile must live in `.github/docker/Dockerfile`. <!-- 02-§50.3 -->
-- The image must be published to GitHub Container Registry
-  (`ghcr.io/<owner>/<repo>`). <!-- 02-§50.4 -->
-
-### 50.2 Docker image build workflow (site requirements)
-
-- A workflow (`.github/workflows/docker-build.yml`) must build and push the Docker
-  image when `package.json` or `.github/docker/Dockerfile` changes on push to
-  `main`. <!-- 02-§50.5 -->
-- The workflow must tag images with both `latest` and the git SHA. <!-- 02-§50.6 -->
-- The workflow must have `packages: write` and `contents: read` permissions. <!-- 02-§50.7 -->
+> §50.1–§50.7 (Docker image and build workflow) are superseded by §52 — see
+> [Archived (superseded)](#archived-superseded).
 
 ### 50.3 Event data PR check (site requirements)
 
@@ -2374,10 +2465,8 @@ workflow builds and deploys via a pre-built Docker image.
   on push to `main` with path filter `source/data/**.yaml`. <!-- 02-§50.11 -->
 - The workflow must use the pre-built Docker image from GHCR instead of
   `setup-node` + `npm ci`. <!-- 02-§50.12 -->
-- The workflow must detect which per-camp YAML file changed by comparing
-  `HEAD~1..HEAD`. <!-- 02-§50.13 -->
-- The workflow must determine whether the changed file belongs to a QA camp
-  and set an `is_qa` output. <!-- 02-§50.14 -->
+- §50.13 and §50.14 (pre-merge detect job) are superseded by §51 — see
+  [Archived (superseded)](#archived-superseded).
 - The workflow must build the site using `node source/build/build.js`. <!-- 02-§50.15 -->
 - The workflow must stage only event-data-derived files for upload: `schema.html`,
   `idag.html`, `live.html`, `dagens-schema.html`, `events.json`, `schema.rss`,
@@ -5101,3 +5190,59 @@ schedule. Issue #332 (Session 2).
   `.event-detail` container, after the location/responsible row and
   any external-link row, and before the `.event-description` block.
   <!-- 02-§99.17 -->
+
+---
+
+## Archived (superseded)
+
+This section preserves prose from requirements that have been replaced by later
+requirements. Their `02-§N.M` IDs remain in this document because they are still
+cited from code, tests, and `99-traceability.md`. Live sections elsewhere in this
+file keep a one-line pointer back to the archive so the live flow stays compact.
+
+### Archived: §23 — Event Data CI Pipeline (superseded by §49, §50, §52)
+
+> §23.1–§23.10 are superseded by §49 (API-layer validation) and §50 (the
+> Docker-based pipeline, itself later replaced by §52). §23.11–§23.13 are
+> superseded by §50.4 (post-merge SCP deploy). §23.14 still applies to `ci.yml`
+> and remains live in §23.
+
+### Archived: §43.9–§43.10 — Production FTP deploy (superseded by §50.19–§50.22)
+
+> Production event data deploy now uses SCP (§50.19) and the production FTP
+> secrets have been removed (§50.22). `02-§43.9` and `02-§43.10` are superseded
+> by `02-§50.19`–`02-§50.22`.
+
+### Archived: §50.13–§50.14 — Pre-merge detect job (superseded by §51)
+
+> The post-merge event-data deploy workflow no longer relies on a serial
+> `detect` job. Each deploy job performs its own inline detection (§51.2,
+> §51.5) and the production job determines QA-camp status inline (§51.7).
+
+- The workflow must detect which per-camp YAML file changed by comparing
+  `HEAD~1..HEAD`. <!-- 02-§50.13 -->
+- The workflow must determine whether the changed file belongs to a QA camp
+  and set an `is_qa` output. <!-- 02-§50.14 -->
+
+### Archived: §50.1–§50.7 — Docker image and build workflow (superseded by §52)
+
+> The post-merge event-data deploy workflow no longer uses a Docker image.
+> Dependencies are installed via `actions/setup-node` with the built-in npm
+> cache (§52.1).
+
+#### Docker build image (archived §50.1–§50.4)
+
+- A Docker image containing Node.js 20 and the project's production dependencies
+  (`js-yaml`, `marked`, `qrcode`) must be available for CI workflows. <!-- 02-§50.1 -->
+- The image must be based on `node:20` (full image, not slim). <!-- 02-§50.2 -->
+- The Dockerfile must live in `.github/docker/Dockerfile`. <!-- 02-§50.3 -->
+- The image must be published to GitHub Container Registry
+  (`ghcr.io/<owner>/<repo>`). <!-- 02-§50.4 -->
+
+#### Docker image build workflow (archived §50.5–§50.7)
+
+- A workflow (`.github/workflows/docker-build.yml`) must build and push the Docker
+  image when `package.json` or `.github/docker/Dockerfile` changes on push to
+  `main`. <!-- 02-§50.5 -->
+- The workflow must tag images with both `latest` and the git SHA. <!-- 02-§50.6 -->
+- The workflow must have `packages: write` and `contents: read` permissions. <!-- 02-§50.7 -->

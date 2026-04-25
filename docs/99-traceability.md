@@ -101,6 +101,15 @@ Notes in parentheses explain partial or incorrect implementations.
 `implemented` is not the same as `covered`. Code that is not tested may break silently.
 Aim to move all `implemented` rows toward `covered` over time.
 
+### Archived (superseded) requirements
+
+Rows below marked **superseded by 02-§X** describe requirements whose prose has
+been moved to the *Archived (superseded)* section at the bottom of
+`docs/02-REQUIREMENTS.md`. The IDs are kept verbatim because they are still
+cited from code and from this matrix; the moved prose is preserved there for
+historical context. Refer to that section for the current list of archived ID
+ranges.
+
 ---
 
 Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered, 02-§98.1–98.20 all covered/implemented).
