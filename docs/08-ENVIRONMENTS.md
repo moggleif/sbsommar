@@ -66,7 +66,7 @@ All environments receive event data within minutes of submission — no manual s
 | `deploy-prod.yml`         | `workflow_dispatch` (manual)                            | `production`         |
 | `event-data-deploy.yml`   | PR from `event/` or `event-edit/` changing data YAMLs  | — (no-op gate)       |
 | `event-data-deploy-post-merge.yml` | Push to `main` (data YAMLs only)              | `qa` + `production`  |
-| `docker-build.yml`        | Push to `main` (package.json or Dockerfile)            | — (GHCR, no longer used by event-data deploy) |
+| `docker-build.yml`        | Push to `main` (`package.json`, `package-lock.json`, or Dockerfile) | — (pushes Docker image to GHCR) |
 
 `deploy-qa.yml` and `deploy-prod.yml` both call the shared reusable workflow
 `deploy-reusable.yml`, which builds the static site, deploys it via SCP,
@@ -86,19 +86,18 @@ the secrets.
 
 ### GitHub Environment: `qa` (PHP on Loopia)
 
-| Secret            | Purpose                          |
-| ----------------- | -------------------------------- |
-| `SITE_URL`        | QA base URL                      |
-| `API_URL`         | QA PHP API endpoint              |
-| `COOKIE_DOMAIN`   | Session cookie domain (e.g. `sbsommar.se`) — injected at build time |
-| `GOATCOUNTER_SITE_CODE` | GoatCounter site code for QA analytics (e.g. `qa-sbsommar`) |
-| `SERVER_HOST`     | QA SSH/SCP host                  |
-| `SERVER_USER`     | QA SSH username                  |
-| `SERVER_SSH_KEY`  | QA SSH private key               |
-| `SERVER_SSH_PORT` | QA SSH port                      |
-| `DEPLOY_DIR`      | QA deploy directory              |
-
-| `ADMIN_TOKENS`    | Comma-separated list of admin tokens (format: `namn_uuid_epoch`). Optional — omit to disable admin features. Create tokens with `npm run admin:create`. |
+| Secret                  | Purpose                                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SITE_URL`              | QA base URL                                                                                                                                             |
+| `API_URL`               | QA PHP API endpoint                                                                                                                                     |
+| `COOKIE_DOMAIN`         | Session cookie domain (e.g. `sbsommar.se`) — injected at build time                                                                                     |
+| `GOATCOUNTER_SITE_CODE` | GoatCounter site code for QA analytics (e.g. `qa-sbsommar`)                                                                                             |
+| `SERVER_HOST`           | QA SSH/SCP host                                                                                                                                         |
+| `SERVER_USER`           | QA SSH username                                                                                                                                         |
+| `SERVER_SSH_KEY`        | QA SSH private key                                                                                                                                      |
+| `SERVER_SSH_PORT`       | QA SSH port                                                                                                                                             |
+| `DEPLOY_DIR`            | QA deploy directory                                                                                                                                     |
+| `ADMIN_TOKENS`          | Comma-separated list of admin tokens (format: `namn_uuid_epoch`). Optional — omit to disable admin features. Create tokens with `npm run admin:create`. |
 
 Example values: `SITE_URL=https://qa.sbsommar.se`,
 `API_URL=https://qa.sbsommar.se/api/add-event`.

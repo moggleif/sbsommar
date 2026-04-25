@@ -199,7 +199,7 @@ Before bumping the version, review what has changed and draft release
 notes. This makes the automatically generated GitHub Release more
 useful and ensures nothing is forgotten.
 
-**1. Check what has changed since the last `.0` release:**
+#### 1. Check what has changed since the last `.0` release
 
 ```bash
 git fetch --tags
@@ -217,7 +217,7 @@ git log v1.0.0..HEAD --oneline
 Replace `v1.0.0` with the actual base tag of the current version
 series — this is the `.0` tag, not the latest patch.
 
-**2. Draft release notes:**
+#### 2. Draft release notes
 
 Write a short summary of the release. Group changes by category:
 
@@ -229,7 +229,7 @@ Write a short summary of the release. Group changes by category:
 Keep it concise — a few bullet points per category. The audience is
 someone who uses the site, not a developer.
 
-**3. Bump and merge:**
+#### 3. Bump and merge
 
 1. Edit the `VERSION` file — change `1.0` to `1.1` (or `2.0`).
 2. Commit: `chore: bump version to 1.1`
@@ -239,7 +239,7 @@ someone who uses the site, not a developer.
    **automatically creates a GitHub Release** with auto-generated notes
    listing all PRs since the previous release.
 
-**4. Edit the GitHub Release:**
+#### 4. Edit the GitHub Release
 
 After the deploy creates the release, open it on GitHub and replace or
 supplement the auto-generated notes with your drafted summary from
