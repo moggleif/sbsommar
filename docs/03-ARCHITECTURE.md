@@ -1374,7 +1374,7 @@ convention).
 
 ---
 
-## 18. Per-Event Detail Pages
+## 18. Static Per-Event Pages
 
 At build time, `source/build/render-event.js` produces one static HTML page
 per event in the active camp. Each page lives in its own sub-folder:

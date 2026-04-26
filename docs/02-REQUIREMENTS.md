@@ -16,101 +16,101 @@ A map of every `## N.` section. Use the line range to gauge depth before opening
 - §2. Site Pages (lines 156–182) — the URLs the site exposes (homepage, schedule, today, etc.).
 - §3. Homepage — Pre-Camp Requirements (lines 183–213) — what the homepage must answer for prospective families.
 - §4. Schedule Views (lines 214–250) — weekly schedule, today, and display-mode views.
-- §5. Activity Detail View (lines 251–270) — inline expansion of an activity inside the schedule.
-- §6. Adding an Activity (lines 271–346) — add-activity form, fields, validation, submit flow.
-- §7. Editing and Removing Activities (lines 347–359) — edit-mode access and removal rules.
-- §8. Locations (lines 360–371) — location list and how it is populated.
-- §9. Form Validation (lines 372–388) — client-side validation rules shared across add/edit.
-- §10. API Input Validation (lines 389–412) — server-side validation enforced by the API.
-- §11. Activity Order and Overlaps (lines 413–420) — sort order and overlap handling on the schedule.
-- §12. Reliability (lines 421–433) — uptime, deploy safety, silent-loss prevention.
-- §13. Accessibility (lines 434–446) — keyboard, screen-reader, contrast.
-- §14. Language (lines 447–455) — Swedish-only user-facing text.
-- §15. RSS Feed (lines 456–518) — subscription feed of all events.
-- §36. Per-Event Detail Pages (lines 519–581) — static detail page generated per activity.
-- §16. Archive (lines 582–592) — how past camps are archived after a season.
-- §17. Simplicity (lines 593–607) — top-level constraints (static-first, no SPA).
-- §18. Participant Event Editing (lines 608–769) — token-based participant edit flow.
-- §20. Edit-Activity Submit Flow (lines 770–819) — server-side handling of edit submissions.
-- §19. Add-Activity Submit Flow (lines 820–882) — server-side handling of add submissions.
-- §22. Shared Site Footer (lines 883–903) — footer content and link blocks.
-- §21. Archive Timeline (lines 904–1003) — chronological listing of past camps.
-- §23. Event Data CI Pipeline — superseded by §50 (lines 1004–1016) — mostly superseded; §23.14 (CI checkout depth) still applies.
-- §24. Unified Navigation (lines 1017–1079) — top-nav structure shared by every page.
-- §25. Image Loading Performance (lines 1080–1111) — lazy-loading, dimensions, formats.
-- §26. Form Time-Gating (lines 1112–1195) — `opens_for_editing` window that locks forms outside the camp.
-- §27. Past-Date Blocking (lines 1196–1237) — refuse activities with dates already in the past.
-- §28. Upcoming Camps on Homepage (lines 1238–1296) — upcoming-camp listing for prospective families.
-- §29. Camp Naming Convention (lines 1297–1312) — `YYYY-MM-location.yaml` naming.
-- §30. Hero Section Redesign (lines 1313–1388) — homepage hero layout, copy, CTAs.
-- §31. Inline Camp Listing and Link Styling (lines 1389–1436) — homepage camp list link styling.
-- §32. HTML Validation in CI (lines 1437–1468) — html-validate runs on every build.
-- §33. CSS Linting in CI (lines 1469–1501) — stylelint runs on every build.
-- §34. Derived Active Camp (lines 1502–1545) — `camps.yaml`-driven active-camp selection.
-- §35. Location Accordions on Index Page (lines 1546–1579) — collapsible per-location lists on the homepage.
-- §37. camps.yaml Validator (lines 1580–1628) — schema check for the camp registry.
-- §38. Replace Hand-Rolled Markdown Converter with marked (lines 1629–1673) — Markdown rendering pipeline switch.
-- §39. CodeQL Alert Remediation (lines 1674–1720) — security-scan findings closed during the migration.
-- §40. Zero-Downtime Static Site Deploy (lines 1721–1778) — atomic symlink-swap deploy.
-- §41. Environment Management (lines 1779–1851) — local / QA / production separation.
-- §42. QA Camp Isolation (lines 1852–1975) — preventing QA camps from leaking into the public site.
-- §43. Replace FTP with SSH for QA Deploys (lines 1976–2030) — QA deploy migration from FTP to SCP.
-- §44. PHP API for Shared Hosting (lines 2031–2166) — PHP-based API replacing Node for shared hosting.
-- §45. iCal Calendar Export (lines 2167–2263) — `.ics` feed of all events.
-- §46. iCal Presentation and Compliance (lines 2264–2319) — RFC 5545 conformance details.
-- §47. Heading and Link Color Update (lines 2320–2335) — design-token color refresh.
-- §48. Add-Activity and Edit-Activity Cookie Enhancements (lines 2336–2404) — author-name and edit-token cookie behaviour.
-- §49. API-Layer Security Validation (lines 2405–2441) — injection / link / length checks at the API.
-- §50. Docker-Based Event Data CI Pipeline (lines 2442–2493) — post-merge build/deploy workflow (Docker parts archived).
-- §51. Event Data Deploy — Eliminate Serial Detect Job (lines 2494–2540) — parallel deploy jobs with inline detection.
-- §52. Replace Docker Container with setup-node + npm Cache (lines 2541–2582) — deploy-time dependency strategy.
-- §53. Synchronous API Error Visibility and Deploy Safety (lines 2583–2640) — surface GitHub commit failures to the user.
-- §54. Midnight-Crossing Events (lines 2641–2691) — events that span past midnight.
-- §55. Submit modal design polish (lines 2692–2712) — submit-modal styling polish.
-- §56. Render Description as Markdown (lines 2713–2756) — Markdown rendering of activity description.
-- §57. Markdown Toolbar for Description Field (lines 2757–2800) — formatting buttons above the textarea.
-- §58. Markdown Preview for Description Field (lines 2801–2855) — live preview pane.
-- §59. Scoped Heading Sizes in Event Descriptions (lines 2856–2890) — scoped CSS for headings inside descriptions.
-- §60. Release and Deployment Documentation (lines 2891–2930) — release process docs.
-- §61. Mobile Navigation Improvements (lines 2931–2983) — mobile-only nav-menu behaviour.
-- §62. Footer Versioning (lines 2984–3065) — visible version in the footer.
-- §63. Site Analytics (lines 3066–3154) — privacy-respecting visit analytics.
-- §64. Index Page Design Improvements (lines 3155–3223) — homepage layout polish.
-- §65. Client-Side Date and Regex Robustness (lines 3224–3248) — defensive date/regex handling.
-- §66. Image Dimension Attributes (lines 3249–3291) — explicit `width`/`height` on every image.
-- §67. Static Asset Cache Headers (lines 3292–3320) — `Cache-Control` headers per asset type.
-- §68. Descriptive Image Filenames (lines 3321–3357) — meaningful filenames for accessibility and SEO.
-- §69. CSS Cache-Busting (lines 3358–3383) — content-hashed CSS file names.
-- §70. Main Landmark Element (lines 3384–3407) — `<main>` wraps page content for screen readers.
-- §71. Hero Action Buttons (lines 3408–3451) — homepage hero CTA buttons.
-- §72. Close Past-Day Accordions on Schedule Page (lines 3452–3485) — auto-collapse past days on the schedule.
-- §73. Feedback Button (GitHub Issues) (lines 3486–3594) — bug-report button that opens a GitHub Issue draft.
-- §74. Sticky Navigation Positioning (lines 3595–3612) — sticky top-nav behaviour while scrolling.
-- §75. Consistent Navigation and Page Title Labels (lines 3613–3649) — title / nav-label consistency.
-- §77. JavaScript Cache-Busting (lines 3650–3675) — content-hashed JS file names.
-- §78. Image Cache-Busting (lines 3676–3701) — content-hashed image references.
-- §79. Section Anchor ID Consistency (lines 3702–3719) — stable anchor IDs across pages.
-- §80. Multi-Day Selection and Batch Submission (lines 3720–3817) — picking multiple days in the add form.
-- §81. Client-side link field validation (lines 3818–3864) — link-field URL validation in the form.
-- §82. Character counter on text input fields (lines 3865–3928) — live character count next to inputs.
-- §83. Progressive Web App (PWA) Support (lines 3929–4027) — manifest, service worker, install support.
-- §84. API Error Messages (lines 4028–4057) — Swedish-language API error responses.
-- §85. Form Draft Cache (sessionStorage) (lines 4058–4092) — auto-save form drafts to sessionStorage.
-- §86. Image Cache-Busting for href and Manifest References (lines 4093–4124) — image hashing across links and manifest.
-- §87. Manifest Metadata for Richer Install UI (lines 4125–4151) — install-prompt metadata in `manifest.json`.
-- §88. PWA Install Guide (lines 4152–4203) — in-app install instructions for users.
-- §89. Delete Activity (lines 4204–4269) — delete-activity flow.
-- §90. Cookie Debug Panel and Session Cookie Repair (lines 4270–4349) — debug panel for cookie state and repair tooling.
-- §91. Admin Token — Activation and Status Indicator (lines 4350–4446) — admin-token activation UX and status indicator.
-- §92. PWA Full Pre-Cache and Offline Guard (lines 4447–4524) — full site pre-cache and offline fallback.
-- §93. Rate Limiting for Authorization Endpoints (lines 4525–4600) — token-issue throttling.
-- §94. Registration Banner and CTA Button (lines 4601–4691) — homepage registration banner.
-- §95. Security Hygiene: Regex Performance and Escaping (lines 4692–4745) — regex hardening.
-- §96. Self-Healing Service Worker Upgrade (lines 4746–4839) — auto-upgrade flow for stuck service workers.
-- §97. Project Documentation Site (lines 4840–4964) — `/docs/` build and deployment.
-- §98. Locale Overview Page (lines 4965–5084) — overview page listing all locales/camps.
-- §99. Conflict Warning in Add/Edit Forms and Activity Pages (lines 5085–5186) — overlap warning surface.
-- Archived (superseded) (lines 5187–5239) — prose for requirements replaced by later sections; IDs preserved.
+- §5. Inline Activity Detail (Schedule) (lines 251–270) — inline expansion of an activity inside the schedule.
+- §6. Adding an Activity (lines 271–354) — add-activity form, fields, validation, submit flow.
+- §7. Editing and Removing Activities (lines 355–367) — edit-mode access and removal rules.
+- §8. Locations (lines 368–379) — location list and how it is populated.
+- §9. Form Validation (lines 380–396) — client-side validation rules shared across add/edit.
+- §10. API Input Validation (lines 397–420) — server-side validation enforced by the API.
+- §11. Activity Order and Overlaps (lines 421–428) — sort order and overlap handling on the schedule.
+- §12. Reliability (lines 429–441) — uptime, deploy safety, silent-loss prevention.
+- §13. Accessibility (lines 442–454) — keyboard, screen-reader, contrast.
+- §14. Language (lines 455–463) — Swedish-only user-facing text.
+- §15. RSS Feed (lines 464–526) — subscription feed of all events.
+- §36. Static Per-Event Pages (lines 527–589) — static detail page generated per activity.
+- §16. Archive (lines 590–600) — how past camps are archived after a season.
+- §17. Simplicity (lines 601–615) — top-level constraints (static-first, no SPA).
+- §18. Participant Event Editing (lines 616–777) — token-based participant edit flow.
+- §20. Edit-Activity Submit Flow (lines 778–827) — server-side handling of edit submissions.
+- §19. Add-Activity Submit Flow (lines 828–890) — server-side handling of add submissions.
+- §22. Shared Site Footer (lines 891–911) — footer content and link blocks.
+- §21. Archive Timeline (lines 912–1011) — chronological listing of past camps.
+- §23. Event Data CI Pipeline — superseded by §50 (lines 1012–1024) — mostly superseded; §23.14 (CI checkout depth) still applies.
+- §24. Unified Navigation (lines 1025–1087) — top-nav structure shared by every page.
+- §25. Image Loading Performance (lines 1088–1119) — lazy-loading, dimensions, formats.
+- §26. Form Time-Gating (lines 1120–1203) — `opens_for_editing` window that locks forms outside the camp.
+- §27. Past-Date Blocking (lines 1204–1245) — refuse activities with dates already in the past.
+- §28. Upcoming Camps on Homepage (lines 1246–1304) — upcoming-camp listing for prospective families.
+- §29. Camp Naming Convention (lines 1305–1320) — `YYYY-MM-location.yaml` naming.
+- §30. Hero Section Redesign (lines 1321–1396) — homepage hero layout, copy, CTAs.
+- §31. Inline Camp Listing and Link Styling (lines 1397–1444) — homepage camp list link styling.
+- §32. HTML Validation in CI (lines 1445–1476) — html-validate runs on every build.
+- §33. CSS Linting in CI (lines 1477–1509) — stylelint runs on every build.
+- §34. Derived Active Camp (lines 1510–1553) — `camps.yaml`-driven active-camp selection.
+- §35. Location Accordions on Index Page (lines 1554–1587) — collapsible per-location lists on the homepage.
+- §37. camps.yaml Validator (lines 1588–1636) — schema check for the camp registry.
+- §38. Replace Hand-Rolled Markdown Converter with marked (lines 1637–1681) — Markdown rendering pipeline switch.
+- §39. CodeQL Alert Remediation (lines 1682–1728) — security-scan findings closed during the migration.
+- §40. Zero-Downtime Static Site Deploy (lines 1729–1786) — atomic symlink-swap deploy.
+- §41. Environment Management (lines 1787–1859) — local / QA / production separation.
+- §42. QA Camp Isolation (lines 1860–1983) — preventing QA camps from leaking into the public site.
+- §43. Replace FTP with SSH for QA Deploys (lines 1984–2038) — QA deploy migration from FTP to SCP.
+- §44. PHP API for Shared Hosting (lines 2039–2174) — PHP-based API replacing Node for shared hosting.
+- §45. iCal Calendar Export (lines 2175–2271) — `.ics` feed of all events.
+- §46. iCal Presentation and Compliance (lines 2272–2327) — RFC 5545 conformance details.
+- §47. Heading and Link Color Update (lines 2328–2343) — design-token color refresh.
+- §48. Add-Activity and Edit-Activity Cookie Enhancements (lines 2344–2412) — author-name and edit-token cookie behaviour.
+- §49. API-Layer Security Validation (lines 2413–2449) — injection / link / length checks at the API.
+- §50. Docker-Based Event Data CI Pipeline (lines 2450–2501) — post-merge build/deploy workflow (Docker parts archived).
+- §51. Event Data Deploy — Eliminate Serial Detect Job (lines 2502–2548) — parallel deploy jobs with inline detection.
+- §52. Replace Docker Container with setup-node + npm Cache (lines 2549–2590) — deploy-time dependency strategy.
+- §53. Synchronous API Error Visibility and Deploy Safety (lines 2591–2648) — surface GitHub commit failures to the user.
+- §54. Midnight-Crossing Events (lines 2649–2699) — events that span past midnight.
+- §55. Submit modal design polish (lines 2700–2720) — submit-modal styling polish.
+- §56. Render Description as Markdown (lines 2721–2764) — Markdown rendering of activity description.
+- §57. Markdown Toolbar for Description Field (lines 2765–2808) — formatting buttons above the textarea.
+- §58. Markdown Preview for Description Field (lines 2809–2863) — live preview pane.
+- §59. Scoped Heading Sizes in Event Descriptions (lines 2864–2898) — scoped CSS for headings inside descriptions.
+- §60. Release and Deployment Documentation (lines 2899–2938) — release process docs.
+- §61. Mobile Navigation Improvements (lines 2939–2991) — mobile-only nav-menu behaviour.
+- §62. Footer Versioning (lines 2992–3073) — visible version in the footer.
+- §63. Site Analytics (lines 3074–3162) — privacy-respecting visit analytics.
+- §64. Index Page Design Improvements (lines 3163–3231) — homepage layout polish.
+- §65. Client-Side Date and Regex Robustness (lines 3232–3256) — defensive date/regex handling.
+- §66. Image Dimension Attributes (lines 3257–3299) — explicit `width`/`height` on every image.
+- §67. Static Asset Cache Headers (lines 3300–3328) — `Cache-Control` headers per asset type.
+- §68. Descriptive Image Filenames (lines 3329–3365) — meaningful filenames for accessibility and SEO.
+- §69. CSS Cache-Busting (lines 3366–3391) — content-hashed CSS file names.
+- §70. Main Landmark Element (lines 3392–3415) — `<main>` wraps page content for screen readers.
+- §71. Hero Action Buttons (lines 3416–3459) — homepage hero CTA buttons.
+- §72. Close Past-Day Accordions on Schedule Page (lines 3460–3493) — auto-collapse past days on the schedule.
+- §73. Feedback Button (GitHub Issues) (lines 3494–3602) — bug-report button that opens a GitHub Issue draft.
+- §74. Sticky Navigation Positioning (lines 3603–3620) — sticky top-nav behaviour while scrolling.
+- §75. Consistent Navigation and Page Title Labels (lines 3621–3657) — title / nav-label consistency.
+- §77. JavaScript Cache-Busting (lines 3658–3683) — content-hashed JS file names.
+- §78. Image Cache-Busting (lines 3684–3709) — content-hashed image references.
+- §79. Section Anchor ID Consistency (lines 3710–3727) — stable anchor IDs across pages.
+- §80. Multi-Day Selection and Batch Submission (lines 3728–3825) — picking multiple days in the add form.
+- §81. Client-side link field validation (lines 3826–3872) — link-field URL validation in the form.
+- §82. Character counter on text input fields (lines 3873–3936) — live character count next to inputs.
+- §83. Progressive Web App (PWA) Support (lines 3937–4035) — manifest, service worker, install support.
+- §84. API Error Messages (lines 4036–4065) — Swedish-language API error responses.
+- §85. Form Draft Cache (sessionStorage) (lines 4066–4100) — auto-save form drafts to sessionStorage.
+- §86. Image Cache-Busting for href and Manifest References (lines 4101–4132) — image hashing across links and manifest.
+- §87. Manifest Metadata for Richer Install UI (lines 4133–4159) — install-prompt metadata in `manifest.json`.
+- §88. PWA Install Guide (lines 4160–4211) — in-app install instructions for users.
+- §89. Delete Activity (lines 4212–4277) — delete-activity flow.
+- §90. Cookie Debug Panel and Session Cookie Repair (lines 4278–4357) — debug panel for cookie state and repair tooling.
+- §91. Admin Token — Activation and Status Indicator (lines 4358–4454) — admin-token activation UX and status indicator.
+- §92. PWA Full Pre-Cache and Offline Guard (lines 4455–4532) — full site pre-cache and offline fallback.
+- §93. Rate Limiting for Authorization Endpoints (lines 4533–4608) — token-issue throttling.
+- §94. Registration Banner and CTA Button (lines 4609–4699) — homepage registration banner.
+- §95. Security Hygiene: Regex Performance and Escaping (lines 4700–4753) — regex hardening.
+- §96. Self-Healing Service Worker Upgrade (lines 4754–4847) — auto-upgrade flow for stuck service workers.
+- §97. Project Documentation Site (lines 4848–4972) — `/docs/` build and deployment.
+- §98. Locale Overview Page (lines 4973–5092) — overview page listing all locales/camps.
+- §99. Conflict Warning in Add/Edit Forms and Activity Pages (lines 5093–5194) — overlap warning surface.
+- Archived (superseded) (lines 5195–5247) — prose for requirements replaced by later sections; IDs preserved.
 
 ---
 
@@ -248,7 +248,7 @@ The goal is that a parent visiting for the first time leaves thinking:
 
 ---
 
-## 5. Activity Detail View
+## 5. Inline Activity Detail (Schedule)
 
 When a participant clicks an activity, a detail view must show: <!-- 02-§5.1 -->
 
@@ -291,6 +291,8 @@ Participants must be able to submit a new activity through the form at `/lagg-ti
 The form must help the user fill it in correctly. This is not about security —
 it is about reducing confusion and frustration.
 
+#### Field controls
+
 - **Date selection:** a grid of day buttons — one per camp day. Each button shows
   the weekday abbreviation and date (e.g. "Mån 28/7"). The user selects a day by
   clicking; the previously selected day is deselected. Exactly one day must be
@@ -307,6 +309,9 @@ it is about reducing confusion and frustration.
   One option ("Annat") allows a free-text location not in the list. <!-- 02-§6.3 -->
 - **Time fields:** display a `HH:MM` format hint. The field should guide the user
   toward a valid value. <!-- 02-§6.4 -->
+
+#### Submit feedback
+
 - **Errors:** shown inline, per field, immediately on submit. Not as a single
   generic message at the top of the form. Each error message must name the specific
   problem (e.g. "Sluttid måste vara efter starttid"). <!-- 02-§6.5 -->
@@ -316,6 +321,9 @@ it is about reducing confusion and frustration.
   The user should not be left wondering whether it worked. <!-- 02-§6.7 -->
 - **Network failure:** if the submission cannot reach the server, the user is
   told clearly that it failed and can try again. Submissions must not be silently lost. <!-- 02-§6.8 -->
+
+#### Live validation
+
 - **Live date validation:** when the user selects a date value (on `change`), the
   date field must immediately show an inline error if the value is in the past,
   without requiring a submit attempt. <!-- 02-§6.9 -->
@@ -516,7 +524,7 @@ environment variable alongside `API_URL`. <!-- 02-§15.14 -->
 
 ---
 
-## 36. Per-Event Detail Pages
+## 36. Static Per-Event Pages
 
 Each event in the active camp must have its own static HTML page, generated
 at build time. <!-- 02-§36.1 -->
