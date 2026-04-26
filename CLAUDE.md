@@ -17,7 +17,16 @@ These are the authoritative sources. CLAUDE.md summarises principles; the docs d
 | File | What it governs |
 | ---- | --------------- |
 | `docs/01-CONTRIBUTORS.md` | Contribution guidelines, git workflow, setup, linting |
-| `docs/02-REQUIREMENTS.md` | What the site must do and for whom — user, site, and API requirements |
+| `docs/02-REQUIREMENTS.md` | Requirements index — audience overview (§1, §1a) and a map to the topic files below |
+| `docs/02a-pages-navigation.md` | Site structure: page inventory, navigation, footer, hero CTAs, accordions, anchor IDs |
+| `docs/02b-schedule-and-detail.md` | Schedule views, inline activity detail, per-event pages, RSS, iCal, Markdown rendering |
+| `docs/02c-add-edit-forms.md` | Add and edit forms, validation, submit flows, time-gating, cookies, drafts, delete, conflict warning |
+| `docs/02d-event-data.md` | Event data, locations, archive policy, naming, derived active camp, QA isolation, camps.yaml validator |
+| `docs/02e-build-deploy.md` | CI pipelines, environments, zero-downtime deploy, release docs, footer version, docs site build |
+| `docs/02f-caching-performance.md` | Cache headers, content-hash cache-busting, image dimensions and lazy-loading |
+| `docs/02g-platform-security.md` | Reliability, accessibility, language, security hardening, analytics, PWA, admin token, rate limiting |
+| `docs/02h-design-and-content.md` | Hero redesign, link colors, modal styling, registration banner, locale overview, index design |
+| `docs/02z-archive.md` | Archived requirements (superseded by later sections; IDs preserved) |
 | `docs/03-ARCHITECTURE.md` | System structure, data layers, rendering logic, fallback rules |
 | `docs/04-OPERATIONS.md` | Camp lifecycle: before/during/after, deployment, disaster recovery |
 | `docs/05-DATA_CONTRACT.md` | YAML schema, required fields, validation rules, ID format |

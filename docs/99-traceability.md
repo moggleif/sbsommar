@@ -62,7 +62,7 @@ One sentence describing a single, testable thing the system must do.
 This is **not** where the requirement is stated — it is where the *solution approach* is documented.
 It points to the doc that tells a developer *how* to implement the requirement.
 
-Example: the requirement "event date must fall within camp dates" comes from `02-REQUIREMENTS.md §9`,
+Example: the requirement "event date must fall within camp dates" comes from `02c-add-edit-forms.md §9`,
 but the implementation rules (date format, range check) are specified in `06-EVENT_DATA_MODEL.md §4`,
 so that is the Doc Ref.
 
@@ -135,23 +135,23 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§3.3` | Homepage remains complete and usable even when no camp is active | 03-ARCHITECTURE.md §5 (Fallback rule) | COV-12..13 | `source/build/build.js` – falls back to most recent camp by `start_date` | covered |
 | `02-§3.4` | Schedule and add-activity links are prominent when a camp is active or upcoming | 03-ARCHITECTURE.md §3 | — | `source/build/layout.js` – nav always shows all links (not conditionally prominent based on camp state) | implemented |
 | `02-§3.5` | Upcoming-camps list renders each camp as a compact one-liner with no separators | 03-ARCHITECTURE.md §14.6 | CL-01, CL-02, CL-03 (CSS presence); manual: visual check | `source/assets/cs/style.css` – `.camp-item`, `.camp-body` flex layout | covered |
-| `02-§3.6` | Registration section links to the external booking site (URL defined in build code) | 02-REQUIREMENTS.md §3 | REG-01 | `source/build/render-index.js` – `REGISTRATION_URL` | covered |
-| `02-§3.7` | Pricing and rules sections document cancellation refund tiers and organiser's right to refuse | 02-REQUIREMENTS.md §3 | REG-02..05 | `source/content/pricing.md`, `source/content/rules.md` | covered |
+| `02-§3.6` | Registration section links to the external booking site (URL defined in build code) | 02a-pages-navigation.md §3 | REG-01 | `source/build/render-index.js` – `REGISTRATION_URL` | covered |
+| `02-§3.7` | Pricing and rules sections document cancellation refund tiers and organiser's right to refuse | 02a-pages-navigation.md §3 | REG-02..05 | `source/content/pricing.md`, `source/content/rules.md` | covered |
 | `02-§4.1` | Weekly schedule shows all activities for the full camp week, grouped by day | 03-ARCHITECTURE.md §5 | SNP-02, SNP-03 | `source/build/render.js` – `renderSchedulePage()`, `groupAndSortEvents()` | covered |
 | `02-§4.2` | Within each day, activities are listed in chronological order by start time | 03-ARCHITECTURE.md §5 | RND-28..32 | `source/build/render.js` – `groupAndSortEvents()` | covered |
 | `02-§4.3` | Each activity shows title, start time, end time, location, and responsible person | 05-DATA_CONTRACT.md §2, §3 | RND-39..45 | `source/build/render.js` – `renderEventRow()` | covered |
 | `02-§4.5` | Today view (`/idag.html`) shows only today's activities in the standard site layout | 03-ARCHITECTURE.md §5 | IDAG-09..11 | `source/build/render-idag.js`, `source/assets/js/client/events-today.js` | covered |
 | `02-§4.6` | Display view has dark background, large text, and minimal chrome; legible at a distance | 07-DESIGN.md §6 | DIS-07, CSS-37 | `source/build/render-today.js` – `class="display-mode"`; `source/assets/cs/style.css` → `/live.html` | covered |
 | `02-§4.7` | Display view requires no interaction to stay useful | 03-ARCHITECTURE.md §3 | DIS-08..09 | `source/build/render-today.js` – no day controls rendered | covered |
-| `02-§4.14` | Display view shows no site-level footer | 02-REQUIREMENTS.md §4 | DIS-19 | `source/build/render-today.js` – `pageFooter` call and import removed; no `<footer>` in template | covered |
-| `02-§4.15` | Display view shows a live clock of the current time in the sidebar, updated every second | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.40 | DIS-22, DIS-23 | `source/build/render-today.js` – `<div class="status-bar">` with `id="live-clock"`; `source/assets/js/client/events-today.js` – `updateClock()` via `setInterval` | covered |
-| `02-§4.16` | Display view shows when events were last updated; timestamp embedded at build time | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.40 | DIS-20, DIS-21 | `source/build/build.js` – `buildTime = new Date().toISOString()`; `source/build/render-today.js` – `window.__BUILD_TIME__`, `window.__VERSION__`; `events-today.js` – `buildInfoEl.textContent` | covered |
-| `02-§4.17` | Display view polls `version.json` every 5 minutes and reloads if a newer build is detected | 02-REQUIREMENTS.md §4 | — (manual: deploy a new build while page is open; confirm reload within 5 min) | `source/assets/js/client/events-today.js` – `pollVersion()` via `setInterval`; `source/build/build.js` – writes `public/version.json` | implemented |
-| `02-§4.18` | Display view reloads automatically shortly after midnight to show the new day's events | 02-REQUIREMENTS.md §4 | — (manual: advance system clock past 00:00 and confirm page reloads) | `source/assets/js/client/events-today.js` – `scheduleMidnightReload()` via `setTimeout` | implemented |
-| `02-§4.19` | Display view heading shows only the current day and date, without a page-title prefix | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.46 | DIS-13, DIS-24 | `source/build/render-today.js` – `window.__HEADING_PREFIX__ = ''`; `source/assets/js/client/events-today.js` – ternary skips prefix when empty | covered |
-| `02-§4.20` | Display view heading is positioned inside the sidebar, not above the event list | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.44 | DIS-24, DIS-25 | `source/build/render-today.js` – `<h1 id="today-heading" class="sidebar-heading">` inside `<aside class="dagens-sidebar">` | covered |
-| `02-§4.21` | Display view is optimised for portrait screens; event rows are compact | 02-REQUIREMENTS.md §4; 07-DESIGN.md §6.45, §6.48 | — (manual: open `/live.html` in a portrait viewport ~1080×1920 and confirm event rows are compact and the sidebar is narrow) | `source/assets/cs/style.css` – `.dagens-events { flex: 3 }`, `.dagens-sidebar { flex: 1 }`, `body.display-mode .event-row { font-size: 13px; padding: 6px }` | implemented |
-| `02-§76.1` | Old `/dagens-schema.html` URL redirects to `/live.html` | 02-REQUIREMENTS.md §4 | RDR-01..04 | `source/build/render-today.js` – `renderRedirectPage()`; `source/build/build.js` → `public/dagens-schema.html` | covered |
+| `02-§4.14` | Display view shows no site-level footer | 02b-schedule-and-detail.md §4 | DIS-19 | `source/build/render-today.js` – `pageFooter` call and import removed; no `<footer>` in template | covered |
+| `02-§4.15` | Display view shows a live clock of the current time in the sidebar, updated every second | 02b-schedule-and-detail.md §4; 07-DESIGN.md §6.40 | DIS-22, DIS-23 | `source/build/render-today.js` – `<div class="status-bar">` with `id="live-clock"`; `source/assets/js/client/events-today.js` – `updateClock()` via `setInterval` | covered |
+| `02-§4.16` | Display view shows when events were last updated; timestamp embedded at build time | 02b-schedule-and-detail.md §4; 07-DESIGN.md §6.40 | DIS-20, DIS-21 | `source/build/build.js` – `buildTime = new Date().toISOString()`; `source/build/render-today.js` – `window.__BUILD_TIME__`, `window.__VERSION__`; `events-today.js` – `buildInfoEl.textContent` | covered |
+| `02-§4.17` | Display view polls `version.json` every 5 minutes and reloads if a newer build is detected | 02b-schedule-and-detail.md §4 | — (manual: deploy a new build while page is open; confirm reload within 5 min) | `source/assets/js/client/events-today.js` – `pollVersion()` via `setInterval`; `source/build/build.js` – writes `public/version.json` | implemented |
+| `02-§4.18` | Display view reloads automatically shortly after midnight to show the new day's events | 02b-schedule-and-detail.md §4 | — (manual: advance system clock past 00:00 and confirm page reloads) | `source/assets/js/client/events-today.js` – `scheduleMidnightReload()` via `setTimeout` | implemented |
+| `02-§4.19` | Display view heading shows only the current day and date, without a page-title prefix | 02b-schedule-and-detail.md §4; 07-DESIGN.md §6.46 | DIS-13, DIS-24 | `source/build/render-today.js` – `window.__HEADING_PREFIX__ = ''`; `source/assets/js/client/events-today.js` – ternary skips prefix when empty | covered |
+| `02-§4.20` | Display view heading is positioned inside the sidebar, not above the event list | 02b-schedule-and-detail.md §4; 07-DESIGN.md §6.44 | DIS-24, DIS-25 | `source/build/render-today.js` – `<h1 id="today-heading" class="sidebar-heading">` inside `<aside class="dagens-sidebar">` | covered |
+| `02-§4.21` | Display view is optimised for portrait screens; event rows are compact | 02b-schedule-and-detail.md §4; 07-DESIGN.md §6.45, §6.48 | — (manual: open `/live.html` in a portrait viewport ~1080×1920 and confirm event rows are compact and the sidebar is narrow) | `source/assets/cs/style.css` – `.dagens-events { flex: 3 }`, `.dagens-sidebar { flex: 1 }`, `body.display-mode .event-row { font-size: 13px; padding: 6px }` | implemented |
+| `02-§76.1` | Old `/dagens-schema.html` URL redirects to `/live.html` | 02b-schedule-and-detail.md §4 | RDR-01..04 | `source/build/render-today.js` – `renderRedirectPage()`; `source/build/build.js` → `public/dagens-schema.html` | covered |
 | `02-§77.1` | Build computes MD5 hash of each JS file referenced by `<script>` tags | 03-ARCHITECTURE.md §27 | CACHE-10 | `source/build/build.js` – JS cache-busting post-processing | covered |
 | `02-§77.2` | Build replaces `src="<file>.js"` with `src="<file>.js?v=<hash>"` in all HTML | 03-ARCHITECTURE.md §27 | CACHE-11 | `source/build/build.js` – JS cache-busting post-processing | covered |
 | `02-§77.3` | JS hash is deterministic: identical content → identical hash | 03-ARCHITECTURE.md §27 | CACHE-12 | `source/build/build.js` – `crypto.createHash('md5')` | covered |
@@ -212,7 +212,7 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§17.1` | The site works well on mobile devices | 07-DESIGN.md §4, §5 | — | `source/assets/cs/style.css` – responsive layout, container widths, breakpoints | implemented |
 | `02-§17.2` | The site requires no explanation; the schedule and add-activity form are self-evident | 07-DESIGN.md §1 | — | UX/design principle; assessed through usability review, not automatable | implemented |
 | `05-§1.1` | Each `camps.yaml` entry includes all required fields: `id`, `name`, `start_date`, `end_date`, `file`, `active`, `archived` | 06-EVENT_DATA_MODEL.md §3, 03-ARCHITECTURE.md §2 | — | `source/build/build.js` reads and uses these fields; no build-time schema validator | implemented |
-| `05-§1.2` | Active camp is derived from dates (no manual flag) | 03-ARCHITECTURE.md §2; 02-REQUIREMENTS.md §34 | DAC-01..07 | `source/scripts/resolve-active-camp.js` | covered |
+| `05-§1.2` | Active camp is derived from dates (no manual flag) | 03-ARCHITECTURE.md §2; 02d-event-data.md §34 | DAC-01..07 | `source/scripts/resolve-active-camp.js` | covered |
 | `05-§1.3` | *(Superseded — `active` field removed; conflict impossible)* | — | — | — | *(superseded by 02-§34.6)* |
 | `05-§3.1` | Each submitted event must include `id`, `title`, `date`, `start`, `end`, `location`, and `responsible` | 06-EVENT_DATA_MODEL.md §4, 05-DATA_CONTRACT.md §3 | VLD-04..11, VLD-27..28 | `source/api/validate.js` – `validateEventRequest()` and `validateEditRequest()` (note: `id` is server-generated, not submitted as input) | covered |
 | `05-§4.1` | Event `date` must fall within the camp's `start_date` and `end_date` (inclusive) | 06-EVENT_DATA_MODEL.md §4 | VLD-50..55, LNT-12, LNT-13 | `source/api/validate.js` – `campDates` range check; `lint-yaml.js` – camp range check; `app.js` – passes `activeCamp` | covered |
@@ -227,8 +227,8 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `CL-§1.3` | No client-side rendering framework is used (see `CL-§2.9`) | 03-ARCHITECTURE.md §7 | STR-FW-01..06 | `source/assets/js/client/` – plain vanilla JS only | covered |
 | `CL-§4.1` | Event data has a single source of truth (see `CL-§2.3`) | 03-ARCHITECTURE.md §1 | — | `source/data/*.yaml` files; `source/build/build.js` reads exclusively from there | implemented |
 | `CL-§3.2` | Main page sections are authored in Markdown (see `CL-§2.2`) | 03-ARCHITECTURE.md §6 | RNI-01..38 | `source/build/render-index.js` – `convertMarkdown()` | covered |
-| `CL-§5.1` | HTML validation runs in CI; build fails if HTML is invalid (see `02-§32.1`–`02-§32.8`) | 03-ARCHITECTURE.md §11.5; 02-REQUIREMENTS.md §32 | manual: `npm run build && npm run lint:html` | `.htmlvalidate.json`, `ci.yml` Validate HTML step, `package.json` lint:html script | implemented |
-| `CL-§5.2` | CSS linting runs in CI; build fails if CSS is invalid (see `02-§33.1`–`02-§33.8`) | 03-ARCHITECTURE.md §11.5; 02-REQUIREMENTS.md §33 | manual: `npm run lint:css` | `.stylelintrc.json`, `ci.yml` Lint CSS step, `package.json` lint:css script | implemented |
+| `CL-§5.1` | HTML validation runs in CI; build fails if HTML is invalid (see `02-§32.1`–`02-§32.8`) | 03-ARCHITECTURE.md §11.5; 02e-build-deploy.md §32 | manual: `npm run build && npm run lint:html` | `.htmlvalidate.json`, `ci.yml` Validate HTML step, `package.json` lint:html script | implemented |
+| `CL-§5.2` | CSS linting runs in CI; build fails if CSS is invalid (see `02-§33.1`–`02-§33.8`) | 03-ARCHITECTURE.md §11.5; 02e-build-deploy.md §33 | manual: `npm run lint:css` | `.stylelintrc.json`, `ci.yml` Lint CSS step, `package.json` lint:css script | implemented |
 | `CL-§5.3` | JavaScript linting runs in CI; build fails if lint fails | 04-OPERATIONS.md (CI/CD Workflows) | — | `.github/workflows/ci.yml` – `npm run lint` (ESLint) | implemented |
 | `CL-§5.5` | Event data is validated at build time for required fields, valid dates, and no duplicate identifiers | 04-OPERATIONS.md (Disaster Recovery); 05-DATA_CONTRACT.md §3–§6 | LNT-01..23 | `source/scripts/lint-yaml.js` – validates required fields, dates, time format, camp range, duplicate IDs, unique (title+date+start), active+archived; runs in CI via `event-data-deploy.yml` | covered |
 | `CL-§9.1` | Built output lives in `/public` | 04-OPERATIONS.md (System Overview) | — | `source/build/build.js` – `OUTPUT_DIR = …/public` | implemented |
@@ -411,7 +411,7 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§18.9` | If the user accepts consent, the form submission proceeds and the server sets the session cookie | 03-ARCHITECTURE.md §7 | — | `lagg-till.js` passes `cookieConsent: true`; `app.js` sets cookie | implemented |
 | `02-§18.10` | If the user declines consent, the event is still submitted but no session cookie is set | 03-ARCHITECTURE.md §7 | — | `lagg-till.js` passes `cookieConsent: false`; `app.js` skips `Set-Cookie` | implemented |
 | `02-§18.11` | Only an accepted consent decision is stored in `localStorage` as `sb_cookie_consent`; declining is not persisted so the user can change their mind | 03-ARCHITECTURE.md §7 | — | `cookie-consent.js` – `saveConsent()` stores only `'accepted'`; decline handler omits `saveConsent()` | implemented |
-| `02-§18.12` | The consent prompt is written in Swedish | 02-REQUIREMENTS.md §14 | — | `cookie-consent.js` – banner innerHTML is Swedish text | implemented |
+| `02-§18.12` | The consent prompt is written in Swedish | 02g-platform-security.md §14 | — | `cookie-consent.js` – banner innerHTML is Swedish text | implemented |
 | `02-§18.13` | On every page load, JS removes event IDs from the cookie whose date has already passed | 03-ARCHITECTURE.md §7 | — | `session.js` – `removeExpiredIds()` called on load | implemented |
 | `02-§18.14` | After cleaning, if no IDs remain the cookie is deleted; otherwise the cleaned cookie is written back | 03-ARCHITECTURE.md §7 | — | `session.js` – `writeSessionIds([])` sets `Max-Age=0` | implemented |
 | `02-§18.15` | "Passed" means the event date is strictly before today's local date | 03-ARCHITECTURE.md §7 | EDIT-01..03 | `source/api/edit-event.js` – `isEventPast()`; `session.js` – `date >= today` | covered |
@@ -430,7 +430,7 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§18.24` | The event's stable `id` must not change after creation even when mutable fields are edited | 06-EVENT_DATA_MODEL.md §4 | EDIT-13 | `source/api/edit-event.js` – `patchEventInYaml()` preserves `event.id` | covered |
 | `02-§18.25` | The edit form is subject to the same validation rules as the add-activity form (§9) | 03-ARCHITECTURE.md §7 | VLD-27..32 | `source/api/validate.js` – `validateEditRequest()`; `redigera.js` client-side validate | covered |
 | `02-§18.26` | After a successful edit, a clear Swedish confirmation is shown; schedule updates within minutes | 03-ARCHITECTURE.md §7 | — | `render-edit.js` – `#result` section; `github.js` – `updateEventInActiveCamp()` PR pipeline | implemented |
-| `02-§18.27` | The edit form is written entirely in Swedish | 02-REQUIREMENTS.md §14 | REDT-12..16 | `source/build/render-edit.js` – all labels and messages in Swedish | covered |
+| `02-§18.27` | The edit form is written entirely in Swedish | 02g-platform-security.md §14 | REDT-12..16 | `source/build/render-edit.js` – all labels and messages in Swedish | covered |
 | `02-§18.28` | A static `/events.json` file is generated at build time containing all events for the active camp | 03-ARCHITECTURE.md §7 | — | `source/build/build.js` – writes `public/events.json` | implemented |
 | `02-§18.29` | `/events.json` contains only public fields (id, title, date, start, end, location, responsible, description, link); owner and meta are excluded | 03-ARCHITECTURE.md §7 | STR-JSON-01..02 | `build.js` – `PUBLIC_EVENT_FIELDS` array | covered |
 | `02-§18.30` | A `POST /edit-event` endpoint accepts edit requests | 03-ARCHITECTURE.md §7 | — | `app.js` – `app.post('/edit-event', …)` | implemented |
@@ -556,12 +556,12 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§25.5` | First-section images must NOT have `loading="lazy"` (LCP fix) | 03-ARCHITECTURE.md §4b | IMG-07 | `source/build/render-index.js` – `renderIndexPage()` strips `loading="lazy"` when `i === 0` | covered |
 | `02-§25.6` | `nav.js` script tag must include `defer` on all pages | 03-ARCHITECTURE.md §4b | STR-NAV-01..06 | All 6 render files + snapshot | covered |
 
-| `02-§27.1` | "Past" means event date is strictly before today's local date | 02-REQUIREMENTS.md §27.1 | — | Definition only; enforced by 02-§27.2–27.6 | — |
-| `02-§27.2` | Add-activity form blocks submission when date is in the past | 02-REQUIREMENTS.md §27.2 | PDT-01 (manual: open form, pick yesterday, submit → error shown) | `source/assets/js/client/lagg-till.js` – `date < today` check before submit | implemented |
-| `02-§27.3` | Edit-activity form blocks submission when date is in the past | 02-REQUIREMENTS.md §27.3 | PDT-02 (manual: edit event, change date to past, submit → error shown) | `source/assets/js/client/redigera.js` – `date < submitToday` check before submit | implemented |
-| `02-§27.4` | `POST /add-event` rejects past dates with HTTP 400 | 02-REQUIREMENTS.md §27.4 | PDT-03, PDT-04 | `source/api/validate.js` – `isDatePast()` in `validateEventRequest` | covered |
-| `02-§27.5` | `POST /edit-event` rejects submitted past dates with HTTP 400 | 02-REQUIREMENTS.md §27.5 | PDT-05, PDT-06 | `source/api/validate.js` – `isDatePast()` in `validateEditRequest` | covered |
-| `02-§27.6` | Past-date check is in the shared validation module | 02-REQUIREMENTS.md §27.6 | PDT-03..06 | `source/api/validate.js` – single `isDatePast()` function | covered |
+| `02-§27.1` | "Past" means event date is strictly before today's local date | 02c-add-edit-forms.md §27.1 | — | Definition only; enforced by 02-§27.2–27.6 | — |
+| `02-§27.2` | Add-activity form blocks submission when date is in the past | 02c-add-edit-forms.md §27.2 | PDT-01 (manual: open form, pick yesterday, submit → error shown) | `source/assets/js/client/lagg-till.js` – `date < today` check before submit | implemented |
+| `02-§27.3` | Edit-activity form blocks submission when date is in the past | 02c-add-edit-forms.md §27.3 | PDT-02 (manual: edit event, change date to past, submit → error shown) | `source/assets/js/client/redigera.js` – `date < submitToday` check before submit | implemented |
+| `02-§27.4` | `POST /add-event` rejects past dates with HTTP 400 | 02c-add-edit-forms.md §27.4 | PDT-03, PDT-04 | `source/api/validate.js` – `isDatePast()` in `validateEventRequest` | covered |
+| `02-§27.5` | `POST /edit-event` rejects submitted past dates with HTTP 400 | 02c-add-edit-forms.md §27.5 | PDT-05, PDT-06 | `source/api/validate.js` – `isDatePast()` in `validateEditRequest` | covered |
+| `02-§27.6` | Past-date check is in the shared validation module | 02c-add-edit-forms.md §27.6 | PDT-03..06 | `source/api/validate.js` – single `isDatePast()` function | covered |
 
 | `02-§28.1` | List includes camps where `archived === false` OR `start_date` year matches current year | 03-ARCHITECTURE.md §14.3 | UC-01, UC-02, UC-03 | `source/build/render-index.js` – `renderUpcomingCampsHtml()` filter logic | covered |
 | `02-§28.2` | "Current year" evaluated at page-load time in browser | 03-ARCHITECTURE.md §14.3 | — (manual: build uses `new Date().getFullYear()` at build time; year boundary is a rare edge case; build runs frequently) | `source/build/build.js` – passes `new Date().getFullYear()` to `renderUpcomingCampsHtml()` | implemented |
@@ -828,10 +828,10 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§42.27` | `validate-camps.js` accepts `qa` as valid optional boolean | — | VCMP-33..36 | `source/scripts/validate-camps.js` | covered |
 | `02-§42.28` | Yearly: QA camp date range updated to new year | — | manual: annual maintenance | `source/data/camps.yaml` | implemented |
 | `02-§42.29` | Yearly update is manual one-line change, no automation | — | — | — | implemented |
-| `02-§42.31` | Two QA-only camps coexist: spring + autumn | 02-REQUIREMENTS.md §42.9, 03-ARCHITECTURE.md §2 | QSEAS-01, QSEAS-03 | `source/data/camps.yaml` | covered |
-| `02-§42.32` | Spring QA camp `end_date` is two weeks before next real camp `start_date` | 02-REQUIREMENTS.md §42.9, 03-ARCHITECTURE.md §2 | QSEAS-04 | `source/data/camps.yaml` | covered |
-| `02-§42.33` | No QA camp covers the real-camp season window | 02-REQUIREMENTS.md §42.9 | QSEAS-05 | `source/data/camps.yaml` | covered |
-| `02-§42.34` | Autumn QA camp runs Oct 1 – Dec 31 of current year | 02-REQUIREMENTS.md §42.9 | QSEAS-02 | `source/data/camps.yaml` | covered |
+| `02-§42.31` | Two QA-only camps coexist: spring + autumn | 02d-event-data.md §42.9, 03-ARCHITECTURE.md §2 | QSEAS-01, QSEAS-03 | `source/data/camps.yaml` | covered |
+| `02-§42.32` | Spring QA camp `end_date` is two weeks before next real camp `start_date` | 02d-event-data.md §42.9, 03-ARCHITECTURE.md §2 | QSEAS-04 | `source/data/camps.yaml` | covered |
+| `02-§42.33` | No QA camp covers the real-camp season window | 02d-event-data.md §42.9 | QSEAS-05 | `source/data/camps.yaml` | covered |
+| `02-§42.34` | Autumn QA camp runs Oct 1 – Dec 31 of current year | 02d-event-data.md §42.9 | QSEAS-02 | `source/data/camps.yaml` | covered |
 | `02-§43.1` | QA event data deploy uses SCP over SSH instead of FTP | 08-ENVIRONMENTS.md | manual: trigger event PR, verify QA pages update via SCP | `.github/workflows/event-data-deploy.yml` – `deploy-qa` job | implemented |
 | `02-§43.2` | QA event data upload uses existing SSH secrets | 08-ENVIRONMENTS.md | manual: inspect workflow secrets references | `.github/workflows/event-data-deploy.yml` | implemented |
 | `02-§43.3` | QA target dir derived from `DEPLOY_DIR` + `/public_html/` | 08-ENVIRONMENTS.md | manual: inspect workflow | `.github/workflows/event-data-deploy.yml` | implemented |
@@ -927,24 +927,24 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§47.1` | All headings (h1–h6) use terracotta color | 07-DESIGN.md §3 | HDC-01..03 | `source/assets/cs/style.css` – h1, h2, h3 rules | covered |
 | `02-§47.2` | Content links have permanent underline | 07-DESIGN.md §6 | HDC-04 | `source/assets/cs/style.css` – `.content a` rule | covered |
 | `02-§47.3` | Nav/back-links retain existing styles | 07-DESIGN.md §6 | manual: visual check | no change to `.nav-link` or `.back-link` rules | implemented |
-| `02-§48.1` | Save "Ansvarig" to localStorage on successful submit | 02-REQUIREMENTS.md §48.1 | CEH-06, CEH-07 | `source/assets/js/client/lagg-till.js` | covered |
-| `02-§48.2` | Pre-fill "Ansvarig" from localStorage on page load | 02-REQUIREMENTS.md §48.1 | CEH-06 | `source/assets/js/client/lagg-till.js` | covered |
-| `02-§48.3` | Update stored responsible on every successful submit | 02-REQUIREMENTS.md §48.1 | CEH-07 | `source/assets/js/client/lagg-till.js` | covered |
-| `02-§48.4` | Cookie paragraph exists in add form intro text | 02-REQUIREMENTS.md §48.2 | CEH-P01 | `source/build/render-add.js` | covered |
-| `02-§48.5` | Replace cookie paragraph with edit link if consent given | 02-REQUIREMENTS.md §48.2 | CEH-08, CEH-09 | `source/assets/js/client/lagg-till.js` | covered |
-| `02-§48.6` | Keep cookie paragraph unchanged if no consent | 02-REQUIREMENTS.md §48.2 | manual: clear localStorage, reload page | `source/build/render-add.js` | implemented |
-| `02-§48.7` | Replacement is done client-side on page load | 02-REQUIREMENTS.md §48.2 | CEH-08 | `source/assets/js/client/lagg-till.js` | covered |
-| `02-§48.8` | Edit page without cookie or id shows explanation text | 02-REQUIREMENTS.md §48.3 | CEH-01, CEH-10 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
-| `02-§48.9` | Explanation text is in Swedish | 02-REQUIREMENTS.md §48.3 | CEH-02 | `source/build/render-edit.js` | covered |
-| `02-§48.10` | Loading spinner hidden when no id param | 02-REQUIREMENTS.md §48.3 | manual: visit /redigera.html without params | `source/assets/js/client/redigera.js` | implemented |
-| `02-§48.11` | Cookie with no matching events shows empty-state message | 02-REQUIREMENTS.md §48.4 | manual: set cookie with expired IDs | `source/assets/js/client/redigera.js` | implemented |
-| `02-§48.12` | Loading spinner hidden for empty-state | 02-REQUIREMENTS.md §48.4 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
-| `02-§48.13` | Cookie with matching events shows event list | 02-REQUIREMENTS.md §48.5 | CEH-03, CEH-11 | `source/assets/js/client/redigera.js` | covered |
-| `02-§48.14` | List items show title as link to redigera.html?id= | 02-REQUIREMENTS.md §48.5 | CEH-04 | `source/assets/js/client/redigera.js` | covered |
-| `02-§48.15` | Past events filtered out of list | 02-REQUIREMENTS.md §48.5 | manual: mix past and future event IDs | `source/assets/js/client/redigera.js` | implemented |
-| `02-§48.16` | Edit form hidden until specific event selected | 02-REQUIREMENTS.md §48.5 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
-| `02-§48.17` | Existing edit behaviour preserved with id param | 02-REQUIREMENTS.md §48.6 | existing REDT tests | `source/assets/js/client/redigera.js` | covered |
-| `02-§48.18` | Event list shown above edit form when editing | 02-REQUIREMENTS.md §48.6 | CEH-05 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
+| `02-§48.1` | Save "Ansvarig" to localStorage on successful submit | 02c-add-edit-forms.md §48.1 | CEH-06, CEH-07 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.2` | Pre-fill "Ansvarig" from localStorage on page load | 02c-add-edit-forms.md §48.1 | CEH-06 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.3` | Update stored responsible on every successful submit | 02c-add-edit-forms.md §48.1 | CEH-07 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.4` | Cookie paragraph exists in add form intro text | 02c-add-edit-forms.md §48.2 | CEH-P01 | `source/build/render-add.js` | covered |
+| `02-§48.5` | Replace cookie paragraph with edit link if consent given | 02c-add-edit-forms.md §48.2 | CEH-08, CEH-09 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.6` | Keep cookie paragraph unchanged if no consent | 02c-add-edit-forms.md §48.2 | manual: clear localStorage, reload page | `source/build/render-add.js` | implemented |
+| `02-§48.7` | Replacement is done client-side on page load | 02c-add-edit-forms.md §48.2 | CEH-08 | `source/assets/js/client/lagg-till.js` | covered |
+| `02-§48.8` | Edit page without cookie or id shows explanation text | 02c-add-edit-forms.md §48.3 | CEH-01, CEH-10 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
+| `02-§48.9` | Explanation text is in Swedish | 02c-add-edit-forms.md §48.3 | CEH-02 | `source/build/render-edit.js` | covered |
+| `02-§48.10` | Loading spinner hidden when no id param | 02c-add-edit-forms.md §48.3 | manual: visit /redigera.html without params | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.11` | Cookie with no matching events shows empty-state message | 02c-add-edit-forms.md §48.4 | manual: set cookie with expired IDs | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.12` | Loading spinner hidden for empty-state | 02c-add-edit-forms.md §48.4 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.13` | Cookie with matching events shows event list | 02c-add-edit-forms.md §48.5 | CEH-03, CEH-11 | `source/assets/js/client/redigera.js` | covered |
+| `02-§48.14` | List items show title as link to redigera.html?id= | 02c-add-edit-forms.md §48.5 | CEH-04 | `source/assets/js/client/redigera.js` | covered |
+| `02-§48.15` | Past events filtered out of list | 02c-add-edit-forms.md §48.5 | manual: mix past and future event IDs | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.16` | Edit form hidden until specific event selected | 02c-add-edit-forms.md §48.5 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
+| `02-§48.17` | Existing edit behaviour preserved with id param | 02c-add-edit-forms.md §48.6 | existing REDT tests | `source/assets/js/client/redigera.js` | covered |
+| `02-§48.18` | Event list shown above edit form when editing | 02c-add-edit-forms.md §48.6 | CEH-05 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
 | `02-§49.1` | API validates free-text fields for injection patterns before accepting the request | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `scanForInjection()` in `validateFields()` | covered |
 | `02-§49.2` | Injection patterns rejected: `<script`, `javascript:`, `on*=`, `<iframe`, `<object`, `<embed`, `data:text/html` | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `INJECTION_PATTERNS` array | covered |
 | `02-§49.3` | Error message identifies offending field and pattern category | 03-ARCHITECTURE.md §11.8 | ASEC-01..07 | `source/api/validate.js` – error string includes field name and pattern label | covered |
@@ -1465,7 +1465,7 @@ Matrix cleanup (2026-02-25):
 Session 1 of issue #332): 16 covered by unit tests (LOK-01..83),
 4 implemented (§98.8 contextual links, §98.14 design-token discipline,
 §98.15 mobile breakpoint, §98.20 corner cell) — all four need
-manual/browser verification only. See 02-REQUIREMENTS.md §98 and
+manual/browser verification only. See 02h-design-and-content.md §98 and
 07-DESIGN.md §6 "Locale overview grid" for the design spec.
 ```
 
