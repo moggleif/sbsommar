@@ -28,7 +28,7 @@ time-sensitive (camp is running).
 testing the full event flow without polluting production data. Production builds
 and APIs filter out QA camps entirely. See `03-ARCHITECTURE.md §2 "QA camp
 isolation"` for the filter mechanism and the seasonal QA-camp model, and
-`02-REQUIREMENTS.md §42` for the detailed requirements.
+`02-requirements/event-data.md §42` for the detailed requirements.
 
 ---
 
@@ -240,7 +240,7 @@ discoverable only by direct link" policy for `sbsommar.se`. The
 landing page never links to the camp site (`sbsommar.se`), and its
 main copy describes the page as the developer-facing documentation
 for a static-site project rather than describing the camp itself.
-See `02-REQUIREMENTS.md` §97.7 (reverse-discoverability banner) and
+See `02-requirements/build-deploy.md` §97.7 (reverse-discoverability banner) and
 §97.8 (search-engine and crawler policy).
 
 ### Relationship to other environments

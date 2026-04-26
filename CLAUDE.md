@@ -17,7 +17,16 @@ These are the authoritative sources. CLAUDE.md summarises principles; the docs d
 | File | What it governs |
 | ---- | --------------- |
 | `docs/01-CONTRIBUTORS.md` | Contribution guidelines, git workflow, setup, linting |
-| `docs/02-REQUIREMENTS.md` | What the site must do and for whom — user, site, and API requirements |
+| `docs/02-requirements/index.md` | Requirements index — audience overview (§1, §1a) and a map to the topic files below |
+| `docs/02-requirements/pages-navigation.md` | Site structure: page inventory, navigation, footer, hero CTAs, accordions, anchor IDs |
+| `docs/02-requirements/schedule-and-detail.md` | Schedule views, inline activity detail, per-event pages, RSS, iCal, Markdown rendering |
+| `docs/02-requirements/add-edit-forms.md` | Add and edit forms, validation, submit flows, time-gating, cookies, drafts, delete, conflict warning |
+| `docs/02-requirements/event-data.md` | Event data, locations, archive policy, naming, derived active camp, QA isolation, camps.yaml validator |
+| `docs/02-requirements/build-deploy.md` | CI pipelines, environments, zero-downtime deploy, release docs, footer version, docs site build |
+| `docs/02-requirements/caching-performance.md` | Cache headers, content-hash cache-busting, image dimensions and lazy-loading |
+| `docs/02-requirements/platform-security.md` | Reliability, accessibility, language, security hardening, analytics, PWA, admin token, rate limiting |
+| `docs/02-requirements/design-and-content.md` | Hero redesign, link colors, modal styling, registration banner, locale overview, index design |
+| `docs/02-requirements/archive.md` | Archived requirements (superseded by later sections; IDs preserved) |
 | `docs/03-ARCHITECTURE.md` | System structure, data layers, rendering logic, fallback rules |
 | `docs/04-OPERATIONS.md` | Camp lifecycle: before/during/after, deployment, disaster recovery |
 | `docs/05-DATA_CONTRACT.md` | YAML schema, required fields, validation rules, ID format |
@@ -51,7 +60,7 @@ Clarity over cleverness. <!-- CL-§1.9 -->
 Language:
 
 - The site is in Swedish. All user-facing text — labels, headings, descriptions, error messages, confirmations — must be in Swedish. <!-- CL-§1.10 -->
-- When writing requirements in `docs/02-REQUIREMENTS.md`, describe the desired state — not "changes" or "improvements". <!-- CL-§1.11 -->
+- When writing requirements in `docs/02-requirements/`, describe the desired state — not "changes" or "improvements". <!-- CL-§1.11 -->
   - Write each requirement as a standalone fact about how the system works. A reader who has never seen the codebase should understand the requirement without needing to know what existed before.
   - **Bad**: "The cache version must be incremented to v4." / "lagg-till.html must be removed from NO_CACHE_PATTERNS."
   - **Good**: "The service worker cache name is `sb-sommar-v4`." / "The service worker pre-caches all site pages including `lagg-till.html` and `redigera.html`."
@@ -224,7 +233,7 @@ Do not skip phases. Each phase ends with a commit. <!-- CL-§11.1 -->
 
 ## Parallel-work rebase rule
 
-When multiple branches are in flight, shared documentation files (`99-traceability.md`, `02-REQUIREMENTS.md`, architecture and design docs) change frequently on `main` and are prone to renumbering conflicts. <!-- CL-§11.24 -->
+When multiple branches are in flight, shared documentation files (`99-traceability.md`, `02-requirements/`, architecture and design docs) change frequently on `main` and are prone to renumbering conflicts. <!-- CL-§11.24 -->
 
 Before editing any shared documentation file, rebase on the latest `main`: <!-- CL-§11.25 -->
 
@@ -280,7 +289,7 @@ Do not rubber-stamp prompts. If something seems off, say so. If something is too
 Before writing any code: <!-- CL-§11.2 -->
 
 - Convert the agreed prompt into structured requirements: user requirements, event/data requirements, and site requirements.
-- Add them to `docs/02-REQUIREMENTS.md` with correct `02-§` IDs and inline comment markers.
+- Add them to the appropriate topic file under `docs/02-requirements/` with correct `02-§` IDs and inline comment markers. The `index.md` redirect map shows which topic owns which `02-§N` range.
 - Commit: `docs: add requirements for [feature]`
 
 ## Phase 2 — Documentation and Traceability

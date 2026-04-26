@@ -19,9 +19,24 @@ const DOCS_SITE_URL = 'https://moggleif.github.io/sbsommar/';
 // the surrounding context — see 02-§39.4.
 const DOCS_SITE_AUTOLINK = `<${DOCS_SITE_URL}>`;
 
+// Paths are relative to the repository's `docs/` directory. Topic files
+// that have been split into a subfolder (e.g. `02-requirements/`) are
+// listed by their subfolder path. The `index.md` files inside subfolders
+// (e.g. `02-requirements/index.md`) are intentionally excluded — the
+// README links to the subfolder URL (`docs/02-requirements/`) which
+// renders the same content via Jekyll. The top-level `docs/index.md`
+// (the docs site landing page) is also excluded.
 const EXPECTED_DOC_FILES = [
   '01-CONTRIBUTORS.md',
-  '02-REQUIREMENTS.md',
+  '02-requirements/pages-navigation.md',
+  '02-requirements/schedule-and-detail.md',
+  '02-requirements/add-edit-forms.md',
+  '02-requirements/event-data.md',
+  '02-requirements/build-deploy.md',
+  '02-requirements/caching-performance.md',
+  '02-requirements/platform-security.md',
+  '02-requirements/design-and-content.md',
+  '02-requirements/archive.md',
   '03-ARCHITECTURE.md',
   '04-OPERATIONS.md',
   '05-DATA_CONTRACT.md',
@@ -31,6 +46,26 @@ const EXPECTED_DOC_FILES = [
   '09-RELEASING.md',
   '99-traceability.md',
 ];
+
+// README links to the subfolder index via the folder URL `docs/02-requirements/`
+// rather than the file path `docs/02-requirements/index.md`. The test asserts
+// that link separately so it stays in sync with the README format.
+const EXPECTED_FOLDER_INDEX_LINKS = ['02-requirements/'];
+
+function listMarkdownFilesRecursive(dir, base = '') {
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name.startsWith('_')) continue; // skip Jekyll meta dirs
+    const rel = base ? `${base}/${entry.name}` : entry.name;
+    const abs = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      out.push(...listMarkdownFilesRecursive(abs, rel));
+    } else if (entry.name.endsWith('.md')) {
+      out.push(rel);
+    }
+  }
+  return out;
+}
 
 describe('README.md — documentation-site discoverability (02-§97.13, §97.14)', () => {
   const readme = fs.readFileSync(README_PATH, 'utf8');
@@ -70,18 +105,32 @@ describe('README.md — documentation-site discoverability (02-§97.13, §97.14)
       (file) => !readme.includes(`docs/${file}`),
     );
     assert.deepEqual(missing, [], `README.md missing links: ${missing.join(', ')}`);
+    const missingFolders = EXPECTED_FOLDER_INDEX_LINKS.filter(
+      (folder) => !readme.includes(`docs/${folder}`),
+    );
+    assert.deepEqual(
+      missingFolders,
+      [],
+      `README.md missing folder index links: ${missingFolders.join(', ')}`,
+    );
   });
 
   it('README-DOCS-04: EXPECTED_DOC_FILES matches actual docs/ contents (no drift)', () => {
-    const actual = fs
-      .readdirSync(DOCS_DIR)
-      .filter((f) => f.endsWith('.md') && f !== 'index.md')
+    const actual = listMarkdownFilesRecursive(DOCS_DIR)
+      .filter((f) => {
+        // The docs site landing (`docs/index.md`) and per-folder index files
+        // (e.g. `02-requirements/index.md`) are excluded — they are reached
+        // through the folder URL which is asserted separately.
+        if (f === 'index.md') return false;
+        if (f.endsWith('/index.md')) return false;
+        return true;
+      })
       .sort();
     const expected = [...EXPECTED_DOC_FILES].sort();
     assert.deepEqual(
       actual,
       expected,
-      'EXPECTED_DOC_FILES must match docs/*.md (excluding index.md) — update both together',
+      'EXPECTED_DOC_FILES must match docs/**/*.md (excluding index files) — update both together',
     );
   });
 });
