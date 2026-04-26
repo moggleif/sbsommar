@@ -2,7 +2,7 @@
 
 Sections superseded by later requirements. IDs are preserved because they are still cited from code; prose lives here for historical reference.
 
-Part of [02-REQUIREMENTS.md](./02-REQUIREMENTS.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
+Part of [the requirements index](./index.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
 
 ---
 

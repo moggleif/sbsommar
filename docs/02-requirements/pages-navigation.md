@@ -2,7 +2,7 @@
 
 Site structure: page inventory, the homepage pre-camp section, navigation, footer, hero CTAs, accordions, anchor IDs.
 
-Part of [02-REQUIREMENTS.md](./02-REQUIREMENTS.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
+Part of [the requirements index](./index.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
 
 ---
 

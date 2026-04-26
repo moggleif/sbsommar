@@ -14,17 +14,17 @@ Sections §1 and §1a (audiences, crawler policy) are kept here because they fra
 
 | File | Topic | Sections |
 | ---- | ----- | -------- |
-| [`02a-pages-navigation.md`](./02a-pages-navigation.md) | Pages and Navigation | §2, §3, §11, §17, §22, §24, §35, §61, §70, §71, §72, §74, §75, §79 |
-| [`02b-schedule-and-detail.md`](./02b-schedule-and-detail.md) | Schedule and Activity Detail | §4, §5, §15, §36, §45, §46, §56, §59 |
-| [`02c-add-edit-forms.md`](./02c-add-edit-forms.md) | Add and Edit Forms | §6, §7, §8, §9, §10, §19, §20, §26, §27, §48, §53, §54, §57, §58, §80, §81, §82, §85, §89, §90, §99 |
-| [`02d-event-data.md`](./02d-event-data.md) | Event Data | §16, §18, §21, §28, §29, §34, §37, §42 |
-| [`02e-build-deploy.md`](./02e-build-deploy.md) | Build and Deploy | §23, §32, §33, §40, §41, §43, §44, §50, §51, §52, §60, §62, §97 |
-| [`02f-caching-performance.md`](./02f-caching-performance.md) | Caching and Performance | §25, §38, §65, §66, §67, §68, §69, §77, §78, §86 |
-| [`02g-platform-security.md`](./02g-platform-security.md) | Platform and Security | §12, §13, §14, §39, §49, §63, §73, §83, §84, §87, §88, §91, §92, §93, §95, §96 |
-| [`02h-design-and-content.md`](./02h-design-and-content.md) | Design and Content | §30, §31, §47, §55, §64, §94, §98 |
-| [`02z-archive.md`](./02z-archive.md) | Archived Requirements | (superseded sections) |
+| [`pages-navigation.md`](./pages-navigation.md) | Pages and Navigation | §2, §3, §11, §17, §22, §24, §35, §61, §70, §71, §72, §74, §75, §79 |
+| [`schedule-and-detail.md`](./schedule-and-detail.md) | Schedule and Activity Detail | §4, §5, §15, §36, §45, §46, §56, §59 |
+| [`add-edit-forms.md`](./add-edit-forms.md) | Add and Edit Forms | §6, §7, §8, §9, §10, §19, §20, §26, §27, §48, §53, §54, §57, §58, §80, §81, §82, §85, §89, §90, §99 |
+| [`event-data.md`](./event-data.md) | Event Data | §16, §18, §21, §28, §29, §34, §37, §42 |
+| [`build-deploy.md`](./build-deploy.md) | Build and Deploy | §23, §32, §33, §40, §41, §43, §44, §50, §51, §52, §60, §62, §97 |
+| [`caching-performance.md`](./caching-performance.md) | Caching and Performance | §25, §38, §65, §66, §67, §68, §69, §77, §78, §86 |
+| [`platform-security.md`](./platform-security.md) | Platform and Security | §12, §13, §14, §39, §49, §63, §73, §83, §84, §87, §88, §91, §92, §93, §95, §96 |
+| [`design-and-content.md`](./design-and-content.md) | Design and Content | §30, §31, §47, §55, §64, §94, §98 |
+| [`archive.md`](./archive.md) | Archived Requirements | (superseded sections) |
 
-Looking for `02-§N`? Search this directory: `grep -l '## N\.' docs/02*.md` finds the file that owns the section.
+Looking for `02-§N`? Search this directory: `grep -l '## N\.' docs/02-requirements/*.md` finds the file that owns the section.
 
 ---
 

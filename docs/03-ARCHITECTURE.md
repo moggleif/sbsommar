@@ -94,7 +94,7 @@ testing window without overlapping the real-camp season:
   31 of the current year, reopening QA testing once the real-camp
   season ends.
 
-See `02d-event-data.md §42` for the full data model and seasonal rules.
+See `02-requirements/event-data.md §42` for the full data model and seasonal rules.
 
 ---
 
@@ -381,7 +381,7 @@ becomes one row; events from the active camp's YAML are positioned as
 time-blocks inside that row according to their date and start/end
 times. Events whose `location` field does not match any locale name
 fall into the "Annat" row. The page is not a site-navigation entry; it
-is reached through a link from `/schema.html`. See 02h-design-and-content.md
+is reached through a link from `/schema.html`. See 02-requirements/design-and-content.md
 §98 for the full requirements.
 
 ### 5.2 Shared conflict-detection module
@@ -413,7 +413,7 @@ Server-side consumers (`render-lokaler.js`, `render-event.js`) use
 the module at build time; the browser consumers use it at runtime.
 Both see the same function behaviour, so a conflict flagged at build
 on a per-event page matches exactly what the form's live check would
-flag if the same values were typed in. See 02c-add-edit-forms.md §99
+flag if the same values were typed in. See 02-requirements/add-edit-forms.md §99
 for the full requirements.
 
 ### 5.3 Per-event pages and conflict banner
@@ -427,7 +427,7 @@ returns a non-empty array), the renderer emits the same
 `.conflict-warning` banner that the add/edit forms render on the
 client. One CSS rule styles both. The banner is written into
 `.event-detail` after the location/responsible row and before the
-description. See 02c-add-edit-forms.md §99.15–§99.17.
+description. See 02-requirements/add-edit-forms.md §99.15–§99.17.
 
 ---
 
@@ -843,7 +843,7 @@ skipped when no event data file changed. For the production job they run uncondi
 because the gate step itself uses `node -e` with `js-yaml` to check QA camp status.
 
 > **Note:** §11.1 previously described a Docker build image (`ghcr.io/<owner>/<repo>`).
-> That approach was replaced by setup-node + npm cache (see 02e-build-deploy.md §52).
+> That approach was replaced by setup-node + npm cache (see 02-requirements/build-deploy.md §52).
 
 ### 11.2 PR check (event-data-deploy.yml)
 

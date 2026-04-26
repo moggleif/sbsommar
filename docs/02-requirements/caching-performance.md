@@ -2,7 +2,7 @@
 
 Cache strategy: cache headers, content-hash cache-busting for CSS/JS/images, image dimension and filename rules, image lazy-loading.
 
-Part of [02-REQUIREMENTS.md](./02-REQUIREMENTS.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
+Part of [the requirements index](./index.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
 
 ---
 

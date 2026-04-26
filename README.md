@@ -104,16 +104,16 @@ read it directly on GitHub.
 | #  | Doc | What it covers |
 | -- | --- | -------------- |
 | 1  | [docs/01-CONTRIBUTORS.md](docs/01-CONTRIBUTORS.md) | Setup, git workflow, linting, testing, contribution rules |
-| 2  | [docs/02-REQUIREMENTS.md](docs/02-REQUIREMENTS.md) | Requirements index — audience overview and a map to the topic files below |
-| 2a | [docs/02a-pages-navigation.md](docs/02a-pages-navigation.md) | Site structure, page inventory, navigation, footer, hero CTAs |
-| 2b | [docs/02b-schedule-and-detail.md](docs/02b-schedule-and-detail.md) | Schedule views, inline activity detail, per-event pages, RSS, iCal, Markdown rendering |
-| 2c | [docs/02c-add-edit-forms.md](docs/02c-add-edit-forms.md) | Add and edit forms, validation, submit flows, time-gating, drafts, delete |
-| 2d | [docs/02d-event-data.md](docs/02d-event-data.md) | Event data, locations, archive policy, naming, derived active camp, QA isolation |
-| 2e | [docs/02e-build-deploy.md](docs/02e-build-deploy.md) | CI pipelines, environments, zero-downtime deploy, release docs, footer version, docs site build |
-| 2f | [docs/02f-caching-performance.md](docs/02f-caching-performance.md) | Cache headers, content-hash cache-busting, image dimensions and lazy-loading |
-| 2g | [docs/02g-platform-security.md](docs/02g-platform-security.md) | Reliability, accessibility, language, security hardening, analytics, PWA, admin token, rate limiting |
-| 2h | [docs/02h-design-and-content.md](docs/02h-design-and-content.md) | Hero redesign, link colors, modal styling, registration banner, locale overview, index design |
-| 2z | [docs/02z-archive.md](docs/02z-archive.md) | Archived requirements (superseded by later sections; IDs preserved) |
+| 2  | [docs/02-requirements/](docs/02-requirements/index.md) | Requirements index — audience overview and a map to the topic files below |
+| 2a | [docs/02-requirements/pages-navigation.md](docs/02-requirements/pages-navigation.md) | Site structure, page inventory, navigation, footer, hero CTAs |
+| 2b | [docs/02-requirements/schedule-and-detail.md](docs/02-requirements/schedule-and-detail.md) | Schedule views, inline activity detail, per-event pages, RSS, iCal, Markdown rendering |
+| 2c | [docs/02-requirements/add-edit-forms.md](docs/02-requirements/add-edit-forms.md) | Add and edit forms, validation, submit flows, time-gating, drafts, delete |
+| 2d | [docs/02-requirements/event-data.md](docs/02-requirements/event-data.md) | Event data, locations, archive policy, naming, derived active camp, QA isolation |
+| 2e | [docs/02-requirements/build-deploy.md](docs/02-requirements/build-deploy.md) | CI pipelines, environments, zero-downtime deploy, release docs, footer version, docs site build |
+| 2f | [docs/02-requirements/caching-performance.md](docs/02-requirements/caching-performance.md) | Cache headers, content-hash cache-busting, image dimensions and lazy-loading |
+| 2g | [docs/02-requirements/platform-security.md](docs/02-requirements/platform-security.md) | Reliability, accessibility, language, security hardening, analytics, PWA, admin token, rate limiting |
+| 2h | [docs/02-requirements/design-and-content.md](docs/02-requirements/design-and-content.md) | Hero redesign, link colors, modal styling, registration banner, locale overview, index design |
+| 2z | [docs/02-requirements/archive.md](docs/02-requirements/archive.md) | Archived requirements (superseded by later sections; IDs preserved) |
 | 3  | [docs/03-ARCHITECTURE.md](docs/03-ARCHITECTURE.md) | System structure, data layers, rendering logic, API server |
 | 4  | [docs/04-OPERATIONS.md](docs/04-OPERATIONS.md) | Commands, camp lifecycle, deployment, disaster recovery |
 | 5  | [docs/05-DATA_CONTRACT.md](docs/05-DATA_CONTRACT.md) | YAML schema, required fields, ID format, stability policy |

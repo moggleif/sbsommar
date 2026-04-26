@@ -2,7 +2,7 @@
 
 Add-activity and edit-activity forms: fields, validation, submit flows, time-gating, cookies, drafts, multi-day, delete, conflict warning, error visibility.
 
-Part of [02-REQUIREMENTS.md](./02-REQUIREMENTS.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
+Part of [the requirements index](./index.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
 
 ---
 

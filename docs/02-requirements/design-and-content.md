@@ -2,7 +2,7 @@
 
 Visual and editorial polish: hero redesign, link colors, modal styling, registration banner, locale overview page, index design.
 
-Part of [02-REQUIREMENTS.md](./02-REQUIREMENTS.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
+Part of [the requirements index](./index.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
 
 ---
 

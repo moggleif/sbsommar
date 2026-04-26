@@ -2,13 +2,13 @@
 
 CI pipelines, lint gates, environments (local/QA/production), zero-downtime deploy, release docs, footer version, the docs site build.
 
-Part of [02-REQUIREMENTS.md](./02-REQUIREMENTS.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
+Part of [the requirements index](./index.md). Section IDs (`02-§N.M`) are stable and cited from code; they do not encode the file path.
 
 ---
 
 ## 23. Event Data CI Pipeline — superseded by §50
 
-> §23.1–§23.13 are superseded — see [Archived (superseded)](./02z-archive.md).
+> §23.1–§23.13 are superseded — see [Archived (superseded)](./archive.md).
 > §23.14 still applies to `ci.yml`.
 
 ### 23.0 Git history for branch comparison
@@ -260,7 +260,7 @@ secrets to manage. Production remains on FTP until QA is validated.
 
 ### 43.3 Production — superseded by §50.5
 
-> §43.9–§43.10 are superseded — see [Archived (superseded)](./02z-archive.md).
+> §43.9–§43.10 are superseded — see [Archived (superseded)](./archive.md).
 
 ### 43.4 Documentation (site requirements)
 
@@ -428,7 +428,7 @@ pipeline for event-data PRs provides a branch-protection gate, and a post-merge
 workflow builds and deploys event-data files.
 
 > §50.1–§50.7 (Docker image and build workflow) are superseded by §52 — see
-> [Archived (superseded)](./02z-archive.md).
+> [Archived (superseded)](./archive.md).
 
 ### 50.3 Event data PR check (site requirements)
 
@@ -444,7 +444,7 @@ workflow builds and deploys event-data files.
 - The workflow must use the pre-built Docker image from GHCR instead of
   `setup-node` + `npm ci`. <!-- 02-§50.12 -->
 - §50.13 and §50.14 (pre-merge detect job) are superseded by §51 — see
-  [Archived (superseded)](./02z-archive.md).
+  [Archived (superseded)](./archive.md).
 - The workflow must build the site using `node source/build/build.js`. <!-- 02-§50.15 -->
 - The workflow must stage only event-data-derived files for upload: `schema.html`,
   `idag.html`, `live.html`, `dagens-schema.html`, `events.json`, `schema.rss`,
@@ -745,9 +745,9 @@ existing deployment workflow.
 
 - The root URL of the documentation site renders `docs/index.md` as the
   landing page. The landing page lists every other Markdown file under
-  `docs/` (for example `01-CONTRIBUTORS.md`, `02-REQUIREMENTS.md`, the
-  topic files in the `02` family, and the rest of the numbered docs)
-  with a one-line description and a link to the rendered HTML page.
+  `docs/` (for example `01-CONTRIBUTORS.md`, the `02-requirements/`
+  index and its topic files, and the rest of the numbered docs) with a
+  one-line description and a link to the rendered HTML page.
   <!-- 02-§97.12 -->
 
 ### 97.5 Constraints
@@ -772,12 +772,11 @@ existing deployment workflow.
   file, before the developer setup section, so that a first-time
   visitor sees the link without scrolling past the marketing copy. <!-- 02-§97.13 -->
 - The documentation index in `README.md` lists every file currently
-  published under `docs/` (`01-CONTRIBUTORS.md`, the `02-REQUIREMENTS.md`
-  index plus its topic files `02a-pages-navigation.md`,
-  `02b-schedule-and-detail.md`, `02c-add-edit-forms.md`,
-  `02d-event-data.md`, `02e-build-deploy.md`,
-  `02f-caching-performance.md`, `02g-platform-security.md`,
-  `02h-design-and-content.md`, `02z-archive.md`, then
+  published under `docs/` (`01-CONTRIBUTORS.md`, the `02-requirements/`
+  index plus its topic files `pages-navigation.md`,
+  `schedule-and-detail.md`, `add-edit-forms.md`, `event-data.md`,
+  `build-deploy.md`, `caching-performance.md`, `platform-security.md`,
+  `design-and-content.md`, `archive.md`, then
   `03-ARCHITECTURE.md`, `04-OPERATIONS.md`, `05-DATA_CONTRACT.md`,
   `06-EVENT_DATA_MODEL.md`, `07-DESIGN.md`, `08-ENVIRONMENTS.md`,
   `09-RELEASING.md`, and `99-traceability.md`), each with a one-line
