@@ -114,7 +114,14 @@ read it directly on GitHub.
 | 2g | [docs/02-requirements/platform-security.md](docs/02-requirements/platform-security.md) | Reliability, accessibility, language, security hardening, analytics, PWA, admin token, rate limiting |
 | 2h | [docs/02-requirements/design-and-content.md](docs/02-requirements/design-and-content.md) | Hero redesign, link colors, modal styling, registration banner, locale overview, index design |
 | 2z | [docs/02-requirements/archive.md](docs/02-requirements/archive.md) | Archived requirements (superseded by later sections; IDs preserved) |
-| 3  | [docs/03-ARCHITECTURE.md](docs/03-ARCHITECTURE.md) | System structure, data layers, rendering logic, API server |
+| 3  | [docs/03-architecture/](docs/03-architecture/index.md) | Architecture index — overview and a map to the topic files below |
+| 3a | [docs/03-architecture/data-layer.md](docs/03-architecture/data-layer.md) | Camp YAML, metadata registry, active-camp resolution, archive, footer, robots |
+| 3b | [docs/03-architecture/rendering.md](docs/03-architecture/rendering.md) | Page rendering logic, project structure, RSS feed, per-event pages |
+| 3c | [docs/03-architecture/forms-and-api.md](docs/03-architecture/forms-and-api.md) | Session cookies, inline validation, deletion, submit flows, time-gating, draft cache |
+| 3d | [docs/03-architecture/ci-and-deploy.md](docs/03-architecture/ci-and-deploy.md) | Event data CI pipeline, validators, Markdown converter, PHP API, asset cache-busting |
+| 3e | [docs/03-architecture/pages-and-content.md](docs/03-architecture/pages-and-content.md) | Navigation, upcoming camps, hero, accordions, iCal, analytics, image dims, cache headers, feedback, registration banner |
+| 3f | [docs/03-architecture/platform-and-security.md](docs/03-architecture/platform-and-security.md) | PWA, admin token, rate limiting, regex hygiene |
+| 3g | [docs/03-architecture/appendix.md](docs/03-architecture/appendix.md) | Decisions deliberately rejected; design philosophy |
 | 4  | [docs/04-OPERATIONS.md](docs/04-OPERATIONS.md) | Commands, camp lifecycle, deployment, disaster recovery |
 | 5  | [docs/05-DATA_CONTRACT.md](docs/05-DATA_CONTRACT.md) | YAML schema, required fields, ID format, stability policy |
 | 6  | [docs/06-EVENT_DATA_MODEL.md](docs/06-EVENT_DATA_MODEL.md) | Event field definitions, ownership, and metadata |

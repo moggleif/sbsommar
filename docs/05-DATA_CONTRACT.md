@@ -45,7 +45,7 @@ satisfy `registration_opens <= registration_closes < start_date`. <!-- 05-§1.7 
 Rules:
 
 - The active camp is derived at build/request time from dates — there is no
-  manual `active` field. See `03-ARCHITECTURE.md §2 "Metadata Layer"` for the
+  manual `active` field. See `03-architecture/data-layer.md §2 "Metadata Layer"` for the
   derivation rules. <!-- 05-§1.2 -->
 - The `file` field references a YAML file in `source/data/`. <!-- 05-§1.4 -->
 - The camp `id` is permanent and must never change after the camp is first created. <!-- 05-§1.5 -->

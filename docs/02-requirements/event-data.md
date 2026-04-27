@@ -376,7 +376,7 @@ intervention.
 Exactly one camp is active at any time, selected by a date-based priority
 applied at both build time and at API request time — today on dates →
 nearest future `start_date` → latest `end_date`, with the earlier
-`start_date` winning any overlap. See `03-ARCHITECTURE.md §2 "Metadata
+`start_date` winning any overlap. See `03-architecture/data-layer.md §2 "Metadata
 Layer"` for the canonical rules and the shared resolver
 (`source/scripts/resolve-active-camp.js`). <!-- 02-§34.1 --> <!-- 02-§34.2 --> <!-- 02-§34.3 --> <!-- 02-§34.4 --> <!-- 02-§34.5 -->
 
@@ -466,7 +466,7 @@ sync.
 QA and Production share the same `camps.yaml` registry and the same git branch.
 A dedicated QA camp allows testing the full event flow without polluting
 production data: it is invisible to production builds and APIs, and is always
-the active camp in QA environments. See `03-ARCHITECTURE.md §2 "QA camp
+the active camp in QA environments. See `03-architecture/data-layer.md §2 "QA camp
 isolation"` for the canonical filter mechanism (driven by `BUILD_ENV`) and the
 seasonal QA-camp model. The subsections below capture the operational
 requirements that flow from that design.
@@ -567,7 +567,7 @@ requirements that flow from that design.
 The active QA camp must close before the upcoming real camp's pre-camp
 preparation period and reopen after the real-camp season ends, so QA
 testing never overlaps the real-camp window. See
-`03-ARCHITECTURE.md §2 "QA camp isolation"` for the spring/autumn camp
+`03-architecture/data-layer.md §2 "QA camp isolation"` for the spring/autumn camp
 descriptions and the off-season window.
 
 #### 42.9.2 Requirements

@@ -413,7 +413,7 @@ that supports Node.js.
   configuration, and how to set it up on a new host. <!-- 02-§44.37 -->
 - `docs/08-ENVIRONMENTS.md` must document the `qa` GitHub Environment
   (PHP on Loopia) and its secrets. <!-- 02-§44.38 -->
-- `docs/03-ARCHITECTURE.md` must note the dual API architecture (Node.js
+- `docs/03-architecture/` must note the dual API architecture (Node.js
   for local dev and Node.js hosts, PHP for shared hosting). <!-- 02-§44.39 -->
 
 ---
@@ -777,7 +777,7 @@ existing deployment workflow.
   `schedule-and-detail.md`, `add-edit-forms.md`, `event-data.md`,
   `build-deploy.md`, `caching-performance.md`, `platform-security.md`,
   `design-and-content.md`, `archive.md`, then
-  `03-ARCHITECTURE.md`, `04-OPERATIONS.md`, `05-DATA_CONTRACT.md`,
+  `03-architecture/`, `04-OPERATIONS.md`, `05-DATA_CONTRACT.md`,
   `06-EVENT_DATA_MODEL.md`, `07-DESIGN.md`, `08-ENVIRONMENTS.md`,
   `09-RELEASING.md`, and `99-traceability.md`), each with a one-line
   description and a link that works both on GitHub's file viewer and
