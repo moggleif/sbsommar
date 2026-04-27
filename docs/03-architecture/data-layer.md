@@ -99,7 +99,7 @@ During camp week, participants submit activities through the `/lagg-till.html` f
 
 The API server (`app.js`) handles each submission as follows:
 
-1. Validates the incoming event data, including security scanning for injection patterns and link protocol validation (see [`ci-and-deploy.md`](./ci-and-deploy.md) §11.8).
+1. Validates the incoming event data, including security scanning for injection patterns and link protocol validation (see [`ci-and-deploy.md`](./ci-and-deploy.md) §11.6).
 2. Responds immediately with a success confirmation — the form does not wait for the rest of the process.
 3. Reads `source/data/camps.yaml` from GitHub via the Contents API.
 4. Derives the active camp from dates and reads its YAML file from GitHub.

@@ -944,12 +944,12 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§48.16` | Edit form hidden until specific event selected | 02-requirements/add-edit-forms.md §48.5 | manual: visit /redigera.html with cookie | `source/assets/js/client/redigera.js` | implemented |
 | `02-§48.17` | Existing edit behaviour preserved with id param | 02-requirements/add-edit-forms.md §48.6 | existing REDT tests | `source/assets/js/client/redigera.js` | covered |
 | `02-§48.18` | Event list shown above edit form when editing | 02-requirements/add-edit-forms.md §48.6 | CEH-05 | `source/build/render-edit.js`, `source/assets/js/client/redigera.js` | covered |
-| `02-§49.1` | API validates free-text fields for injection patterns before accepting the request | 03-architecture/ci-and-deploy.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `scanForInjection()` in `validateFields()` | covered |
-| `02-§49.2` | Injection patterns rejected: `<script`, `javascript:`, `on*=`, `<iframe`, `<object`, `<embed`, `data:text/html` | 03-architecture/ci-and-deploy.md §11.8 | ASEC-01..07 | `source/api/validate.js` – `INJECTION_PATTERNS` array | covered |
-| `02-§49.3` | Error message identifies offending field and pattern category | 03-architecture/ci-and-deploy.md §11.8 | ASEC-01..07 | `source/api/validate.js` – error string includes field name and pattern label | covered |
-| `02-§49.4` | Non-empty link must start with `http://` or `https://` | 03-architecture/ci-and-deploy.md §11.8 | ASEC-08..10 | `source/api/validate.js` – protocol regex check on `link` field | covered |
-| `02-§49.5` | Injection and link checks identical in Node.js and PHP implementations | 03-architecture/ci-and-deploy.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
-| `02-§49.6` | Both implementations produce equivalent error messages | 03-architecture/ci-and-deploy.md §11.8 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
+| `02-§49.1` | API validates free-text fields for injection patterns before accepting the request | 03-architecture/ci-and-deploy.md §11.6 | ASEC-01..07 | `source/api/validate.js` – `scanForInjection()` in `validateFields()` | covered |
+| `02-§49.2` | Injection patterns rejected: `<script`, `javascript:`, `on*=`, `<iframe`, `<object`, `<embed`, `data:text/html` | 03-architecture/ci-and-deploy.md §11.6 | ASEC-01..07 | `source/api/validate.js` – `INJECTION_PATTERNS` array | covered |
+| `02-§49.3` | Error message identifies offending field and pattern category | 03-architecture/ci-and-deploy.md §11.6 | ASEC-01..07 | `source/api/validate.js` – error string includes field name and pattern label | covered |
+| `02-§49.4` | Non-empty link must start with `http://` or `https://` | 03-architecture/ci-and-deploy.md §11.6 | ASEC-08..10 | `source/api/validate.js` – protocol regex check on `link` field | covered |
+| `02-§49.5` | Injection and link checks identical in Node.js and PHP implementations | 03-architecture/ci-and-deploy.md §11.6 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
+| `02-§49.6` | Both implementations produce equivalent error messages | 03-architecture/ci-and-deploy.md §11.6 | ASEC-01..16 | `source/api/validate.js` + `api/src/Validate.php` | covered |
 | `02-§50.1` | Docker image contains Node.js 20 and production dependencies — **superseded by 02-§52.1 (setup-node + npm cache)** | 03-architecture/ci-and-deploy.md §11.1 | manual: inspect `.github/docker/Dockerfile` | `.github/docker/Dockerfile` | implemented |
 | `02-§50.2` | Image based on `node:20` (full, not slim) — **superseded by 02-§52.1** | 03-architecture/ci-and-deploy.md §11.1 | manual: inspect Dockerfile FROM line | `.github/docker/Dockerfile` | implemented |
 | `02-§50.3` | Dockerfile lives in `.github/docker/Dockerfile` — **superseded by 02-§52.1** | 03-architecture/ci-and-deploy.md §11.1 | manual: file exists at path | `.github/docker/Dockerfile` | implemented |
@@ -1329,7 +1329,7 @@ Matrix cleanup (2026-02-25):
   5 implemented (browser-only, manual verification): 02-§48.6, 02-§48.10–48.12, 02-§48.15–48.16.
 6 requirements added for API-layer security validation (02-§49.1–49.6):
   6 covered (ASEC-01..16): injection pattern scanning, link protocol, Node.js + PHP parity.
-  Architecture documented in 03-architecture/ci-and-deploy.md §11.8.
+  Architecture documented in 03-architecture/ci-and-deploy.md §11.6.
 23 requirements added for Docker-based event data CI pipeline (02-§50.1–50.24):
   22 implemented (workflow files, Dockerfile, CI config; manual verification only).
   1 gap (02-§50.22: manual FTP secret cleanup after validation).
