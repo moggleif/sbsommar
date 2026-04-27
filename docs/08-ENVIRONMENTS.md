@@ -26,7 +26,7 @@ time-sensitive (camp is running).
 
 **QA camp isolation:** A dedicated QA camp (`qa: true` in `camps.yaml`) allows
 testing the full event flow without polluting production data. Production builds
-and APIs filter out QA camps entirely. See `03-ARCHITECTURE.md §2 "QA camp
+and APIs filter out QA camps entirely. See `03-architecture/data-layer.md §2 "QA camp
 isolation"` for the filter mechanism and the seasonal QA-camp model, and
 `02-requirements/event-data.md §42` for the detailed requirements.
 

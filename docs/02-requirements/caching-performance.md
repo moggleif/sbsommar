@@ -271,7 +271,7 @@ to be served from cache.
 The build appends a deterministic 8-character MD5-based content hash to every
 `<script src="…">` reference in `public/` HTML so JS URLs become
 `src="<file>.js?v=<hash>"`, with identical JS content always producing the
-same hash. See `03-ARCHITECTURE.md §27 "Asset Cache-Busting"` for the
+same hash. See `03-architecture/ci-and-deploy.md §27 "Asset Cache-Busting"` for the
 canonical mechanism (shared with CSS and image cache-busting). <!-- 02-§77.1 --> <!-- 02-§77.2 --> <!-- 02-§77.3 -->
 
 ### 77.2 Constraints
@@ -299,7 +299,7 @@ The build appends a deterministic 8-character MD5-based content hash to every
 `<img src="…">` reference in `public/` HTML so image URLs become
 `src="<file>.<ext>?v=<hash>"` (where `ext` is `webp`, `png`, `jpg`, `jpeg`,
 or `ico`), with identical image content always producing the same hash. See
-`03-ARCHITECTURE.md §27 "Asset Cache-Busting"` for the canonical mechanism
+`03-architecture/ci-and-deploy.md §27 "Asset Cache-Busting"` for the canonical mechanism
 (shared with CSS and JS cache-busting). <!-- 02-§78.1 --> <!-- 02-§78.2 --> <!-- 02-§78.3 -->
 
 ### 78.2 Constraints

@@ -157,7 +157,7 @@ Snapshot tests catch unintended layout regressions — they save the expected HT
 Before making structural changes, read:
 
 - [02-requirements/](02-requirements/index.md)
-- [03-ARCHITECTURE.md](03-ARCHITECTURE.md)
+- [03-architecture/](03-architecture/)
 - [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md)
 - [06-EVENT_DATA_MODEL.md](06-EVENT_DATA_MODEL.md)
 - [CLAUDE.md](../CLAUDE.md)

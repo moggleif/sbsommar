@@ -27,7 +27,14 @@ These are the authoritative sources. CLAUDE.md summarises principles; the docs d
 | `docs/02-requirements/platform-security.md` | Reliability, accessibility, language, security hardening, analytics, PWA, admin token, rate limiting |
 | `docs/02-requirements/design-and-content.md` | Hero redesign, link colors, modal styling, registration banner, locale overview, index design |
 | `docs/02-requirements/archive.md` | Archived requirements (superseded by later sections; IDs preserved) |
-| `docs/03-ARCHITECTURE.md` | System structure, data layers, rendering logic, fallback rules |
+| `docs/03-architecture/index.md` | Architecture index — system overview and a map to the topic files below |
+| `docs/03-architecture/data-layer.md` | Camp YAML, metadata registry, active-camp resolution, archive, footer, robots |
+| `docs/03-architecture/rendering.md` | Page rendering logic, project structure, RSS feed, per-event pages |
+| `docs/03-architecture/forms-and-api.md` | Session cookies, inline validation, deletion, submit flows, time-gating, draft cache |
+| `docs/03-architecture/ci-and-deploy.md` | Event data CI pipeline, validators, Markdown converter, PHP API, asset cache-busting |
+| `docs/03-architecture/pages-and-content.md` | Navigation, upcoming camps, hero, accordions, iCal, analytics, image dims, cache headers, feedback, registration banner |
+| `docs/03-architecture/platform-and-security.md` | PWA, admin token, rate limiting, regex hygiene |
+| `docs/03-architecture/appendix.md` | Decisions deliberately rejected; design philosophy |
 | `docs/04-OPERATIONS.md` | Camp lifecycle: before/during/after, deployment, disaster recovery |
 | `docs/05-DATA_CONTRACT.md` | YAML schema, required fields, validation rules, ID format |
 | `docs/06-EVENT_DATA_MODEL.md` | Why the event data is shaped the way it is — ownership, metadata, stability reasoning |
@@ -294,7 +301,7 @@ Before writing any code: <!-- CL-§11.2 -->
 
 ## Phase 2 — Documentation and Traceability
 
-- Document how each requirement is or will be implemented in the relevant architecture and design docs (`docs/03-ARCHITECTURE.md`, `docs/07-DESIGN.md`, etc.). <!-- CL-§11.3 -->
+- Document how each requirement is or will be implemented in the relevant architecture and design docs (`docs/03-architecture/`, `docs/07-DESIGN.md`, etc.). <!-- CL-§11.3 -->
 - Add new sections to docs where needed; existing docs may already cover some requirements.
 - Add all new requirements to `docs/99-traceability.md` with status `gap`. <!-- CL-§11.4 -->
 - Commit: `docs: document design and traceability for [feature]`

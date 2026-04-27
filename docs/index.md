@@ -30,7 +30,14 @@ environments, releasing, and the full requirements traceability matrix.
 | [02-requirements/platform-security.md](02-requirements/platform-security.md) | Reliability, accessibility, language, security hardening, analytics, PWA, admin token, rate limiting |
 | [02-requirements/design-and-content.md](02-requirements/design-and-content.md) | Hero redesign, link colors, modal styling, registration banner, locale overview, index design |
 | [02-requirements/archive.md](02-requirements/archive.md) | Archived requirements (superseded; IDs preserved) |
-| [03-ARCHITECTURE.md](03-ARCHITECTURE.md) | System structure, data layers, rendering logic, fallback rules |
+| [03-architecture/](03-architecture/index.md) | Architecture index — overview and a map to the topic files below |
+| [03-architecture/data-layer.md](03-architecture/data-layer.md) | Camp YAML, metadata registry, active-camp resolution, archive, footer, robots |
+| [03-architecture/rendering.md](03-architecture/rendering.md) | Page rendering logic, project structure, RSS feed, per-event pages |
+| [03-architecture/forms-and-api.md](03-architecture/forms-and-api.md) | Session cookies, inline validation, deletion, submit flows, time-gating, draft cache |
+| [03-architecture/ci-and-deploy.md](03-architecture/ci-and-deploy.md) | Event data CI pipeline, validators, Markdown converter, PHP API, asset cache-busting |
+| [03-architecture/pages-and-content.md](03-architecture/pages-and-content.md) | Navigation, upcoming camps, hero, accordions, iCal, analytics, image dims, cache headers, feedback, registration banner |
+| [03-architecture/platform-and-security.md](03-architecture/platform-and-security.md) | PWA, admin token, rate limiting, regex hygiene |
+| [03-architecture/appendix.md](03-architecture/appendix.md) | Decisions deliberately rejected; design philosophy |
 | [04-OPERATIONS.md](04-OPERATIONS.md) | Operational lifecycle, deployment, disaster recovery |
 | [05-DATA_CONTRACT.md](05-DATA_CONTRACT.md) | YAML schema, required fields, validation rules, ID format |
 | [06-EVENT_DATA_MODEL.md](06-EVENT_DATA_MODEL.md) | Why event data is shaped the way it is — ownership, metadata, stability |

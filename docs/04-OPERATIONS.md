@@ -2,7 +2,7 @@
 
 How to develop, run, and deploy the site.
 
-For a full description of the system's architecture and data flow, see [03-ARCHITECTURE.md](03-ARCHITECTURE.md).
+For a full description of the system's architecture and data flow, see [03-architecture/](03-architecture/).
 For environment management (Local, QA, Production), secrets schema, and GitHub Environments setup, see [08-ENVIRONMENTS.md](08-ENVIRONMENTS.md).
 
 ---
@@ -73,7 +73,7 @@ Event data lives in `source/data/`. One YAML file per camp.
 
 Which camp is active is derived automatically from dates at build time and at
 API request time — there is no manual `active` field. See
-[03-ARCHITECTURE.md §2 "Metadata Layer"](03-ARCHITECTURE.md#2-metadata-layer)
+[03-architecture/data-layer.md §2 "Metadata Layer"](03-architecture/data-layer.md#2-metadata-layer)
 for the canonical priority rules (today on dates → next upcoming → most
 recent) and the shared resolver.
 
