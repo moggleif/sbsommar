@@ -100,8 +100,9 @@ through a session-cookie-based ownership mechanism. See §18 for the full specif
 Administrators with a valid admin token (§91) can edit or remove any activity
 through the same edit and delete flows available to participants. <!-- 02-§7.2 -->
 
-A user may edit or delete an event if the event ID is present in their session
-cookie (ownership) **or** the user holds a valid admin token. <!-- 02-§7.3 -->
+A user may edit or delete an event if their session cookie contains a valid
+signed ownership entry for that event **or** the user holds a valid admin
+token. <!-- 02-§7.3 -->
 
 ---
 
@@ -754,8 +755,8 @@ submission.
   created event IDs. <!-- 02-§80.17 -->
 - Time-gating (§26) and injection scanning (§49) apply to the batch endpoint
   identically. <!-- 02-§80.18 -->
-- The session cookie is updated with all new event IDs when consent is
-  given. <!-- 02-§80.19 -->
+- The session cookie is updated with ownership entries for all submitted events
+  when consent is given. <!-- 02-§80.19 -->
 
 ### 80.4 Confirmation and submit flow (user requirements)
 
@@ -985,11 +986,11 @@ Deletion removes the event entirely from the camp's YAML file.
 ### 89.3 Server-side delete endpoint (site requirements)
 
 - A `POST /delete-event` endpoint accepts delete requests. <!-- 02-§89.12 -->
-- The server reads the `sb_session` cookie from the request, parses the
-  event ID array, and verifies the target event ID is present — or that the
-  request body contains a valid `adminToken` (§91). <!-- 02-§89.13 -->
-- If the event ID is not in the cookie and no valid admin token is provided,
-  the server responds with HTTP 403. <!-- 02-§89.14 -->
+- The server reads the `sb_session` cookie from the request and verifies a valid
+  ownership entry for the target event ID — or that the request body contains a
+  valid `adminToken` (§91). <!-- 02-§89.13 -->
+- If the cookie does not contain valid ownership for the event and no valid admin
+  token is provided, the server responds with HTTP 403. <!-- 02-§89.14 -->
 - If the event's date has already passed, the server responds with
   HTTP 400. <!-- 02-§89.15 -->
 - If the editing period is closed, the server responds with
@@ -1199,3 +1200,54 @@ schedule. Issue #332 (Session 2).
   `.event-detail` container, after the location/responsible row and
   any external-link row, and before the `.event-description` block.
   <!-- 02-§99.17 -->
+
+---
+
+## 101. Signed Session Ownership
+
+### 101.1 Context
+
+The `sb_session` cookie lets participants find, edit, and delete activities
+they submitted from the same browser. Event IDs are public because the schedule
+and `events.json` expose them, so a plain event-ID list is suitable for UI hints
+but not for server-side authorization.
+
+### 101.2 Ownership cookie format
+
+- The session cookie must contain ownership entries that are tamper-resistant
+  for server-side authorization. <!-- 02-§101.1 -->
+- Each ownership entry must bind an event ID and expiry time to an unguessable
+  server-generated proof, such as a signed capability or equivalent verifier.
+  <!-- 02-§101.2 -->
+- The cookie must remain readable by client-side JavaScript so static schedule
+  pages can show edit links for events owned in the current browser.
+  <!-- 02-§101.3 -->
+- The cookie must keep the existing security attributes: `Path=/`,
+  `Max-Age=604800`, `Secure`, `SameSite=Strict`, and `Domain` when configured.
+  <!-- 02-§101.4 -->
+
+### 101.3 Server-side authorization
+
+- `POST /edit-event` must authorize participant edits only when the request
+  includes a valid ownership entry for the target event ID. <!-- 02-§101.5 -->
+- `POST /delete-event` must authorize participant deletes only when the request
+  includes a valid ownership entry for the target event ID. <!-- 02-§101.6 -->
+- A manually constructed cookie containing only a public event ID must not grant
+  edit or delete permission. <!-- 02-§101.7 -->
+- Invalid, malformed, expired, or unverifiable ownership entries must be ignored
+  for authorization. <!-- 02-§101.8 -->
+- Administrators with a valid admin token must retain the existing ability to
+  edit or delete any activity. <!-- 02-§101.9 -->
+
+### 101.4 Cookie lifecycle and compatibility
+
+- When an activity is submitted and cookie consent is accepted, the response
+  must store a valid ownership entry for each submitted event. <!-- 02-§101.10 -->
+- Existing valid ownership entries must be preserved and deduplicated when
+  another event is stored in the cookie. <!-- 02-§101.11 -->
+- Legacy cookies that contain only event ID strings may be read for client-side
+  display or cleanup, but they must not authorize edit or delete requests.
+  <!-- 02-§101.12 -->
+- The edit page's cookie debug panel must describe unverifiable legacy entries
+  clearly enough that users understand why those events may not be editable.
+  <!-- 02-§101.13 -->

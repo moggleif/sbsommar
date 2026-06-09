@@ -100,6 +100,7 @@ the secrets.
 | `SERVER_SSH_PORT`       | QA SSH port                                                                                                                                             |
 | `DEPLOY_DIR`            | QA deploy directory                                                                                                                                     |
 | `ADMIN_TOKENS`          | Comma-separated list of admin tokens (format: `namn_uuid_epoch`). Optional — omit to disable admin features. Create tokens with `npm run admin:create`. |
+| `SESSION_SECRET`        | Secret signing key for participant event-ownership cookies. Must differ between QA and Production.                                                       |
 
 Example values: `SITE_URL=https://qa.sbsommar.se`,
 `API_URL=https://qa.sbsommar.se/api/add-event`.
@@ -107,8 +108,9 @@ Example values: `SITE_URL=https://qa.sbsommar.se`,
 The PHP API is deployed alongside the static site via SCP. Its `.env` file
 on the server is managed manually and lives at `$DEPLOY_DIR/.env` — outside
 the web root, never under `public_html/api` (§100). It contains the
-`GITHUB_*`, `ALLOWED_ORIGIN`, `QA_ORIGIN`, `COOKIE_DOMAIN`, `BUILD_ENV`, and
-`ADMIN_TOKENS` variables needed by the PHP API at runtime.
+`GITHUB_*`, `ALLOWED_ORIGIN`, `QA_ORIGIN`, `COOKIE_DOMAIN`, `BUILD_ENV`,
+`ADMIN_TOKENS`, and `SESSION_SECRET` variables needed by the PHP API at
+runtime.
 
 ### GitHub Environment: `production`
 
@@ -125,6 +127,7 @@ Same secret names as `qa` (including `ADMIN_TOKENS`), but with production values
 | `SERVER_SSH_KEY`  | Production SSH private key                            |
 | `SERVER_SSH_PORT` | Production SSH port                                   |
 | `DEPLOY_DIR`      | Production deploy directory                           |
+| `SESSION_SECRET`  | Secret signing key for participant event-ownership cookies |
 
 ---
 
