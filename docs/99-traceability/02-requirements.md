@@ -1406,6 +1406,14 @@ its requirement rows together with the test-legend rows that evidence them.
 | `02-§97.19` | covered | DOCS-CFG-05: `docs/robots.txt` (Disallow: /) present; verified to address every user agent |
 | `02-§97.20` | covered | DOCS-CFG-06: both `docs/_includes/head-custom.html` (Primer/Minima) and `docs/_includes/head_custom.html` (Cayman) emit `<meta name="robots" content="noindex, nofollow">`; whichever theme GitHub Pages picks, the tag lands in `<head>` — manual browser verification confirms |
 | `02-§97.21` | covered | DOCS-CFG-07: no `sitemap.xml`, `sitemap.txt`, or forbidden Jekyll plugins (`jekyll-sitemap`, `jekyll-seo-tag`, `jekyll-feed`) under `docs/` |
+| `02-§97.22` | gap | Arch §34.2–34.3: `docs/_config.yml` `defaults` apply `layout: default` to every page; shadow layout over Primer. Issue #355, pending Phase 4 |
+| `02-§97.23` | gap | Arch §34.1: header site-title links to landing page (already provided by Primer; preserved by the shadow layout). Issue #355 |
+| `02-§97.24` | gap | Arch §34.1: max-width `markdown-body` container (Primer's CSS, retained). Issue #355 |
+| `02-§97.25` | gap | Arch §34.3: YAML front-matter `title` on every `.md` under `docs/`. Issue #355, pending Phase 4 |
+| `02-§97.26` | gap | Arch §34.3: site title rendered as non-heading chrome so the document's `#` heading is the only `<h1>`. Issue #355, pending Phase 4 |
+| `02-§97.27` | gap | Arch §34.4: one-level breadcrumb on subfolder pages, naming the family. Issue #355, pending Phase 4 |
+| `02-§97.28` | gap | Arch §34.5: within-family navigation block from `docs/_includes/family-nav.html`. Issue #355, pending Phase 4 |
+| `02-§97.29` | gap | Arch §34.5: `docs/_data/docs-nav.yml` is the single source for family listings; siblings update without per-file edits. Issue #355, pending Phase 4 |
 
 ### §98 — Locale Overview Page
 
