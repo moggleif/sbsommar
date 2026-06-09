@@ -19,8 +19,11 @@ const path = require('node:path');
 const root = (...p) => path.resolve(__dirname, '..', ...p);
 const read = (rel) => fs.readFileSync(root(rel), 'utf8');
 
-// A directive that denies access regardless of whether the file exists.
+// Directives that deny access regardless of whether the file exists.
+// DENY is the Apache 2.4 form; DENY_22 is the 2.2 fallback. Both are present
+// so the rule holds whatever authorization module the host loads.
 const DENY = /Require\s+all\s+denied/i;
+const DENY_22 = /Deny\s+from\s+all/i;
 
 describe('02-§100.4 — api/.htaccess denies dotfiles', () => {
   const src = read('api/.htaccess');
@@ -29,12 +32,14 @@ describe('02-§100.4 — api/.htaccess denies dotfiles', () => {
     assert.match(src, DENY, 'api/.htaccess must contain "Require all denied"');
   });
 
-  it('HTACC-02: the dotfile pattern (^\\.) is denied', () => {
+  it('HTACC-02: the dotfile pattern (^\\.) is denied on both Apache 2.4 and 2.2', () => {
     // The deny must apply to every dotfile, not just .env, so .git, .htpasswd
-    // etc. are also unreachable.
+    // etc. are also unreachable — and on both the 2.4 (Require) and 2.2
+    // (Order/Deny) authorization stacks.
     const block = src.match(/<FilesMatch\s+"\^\\\."\s*>([\s\S]*?)<\/FilesMatch>/i);
     assert.ok(block, 'api/.htaccess must have a <FilesMatch "^\\."> block');
-    assert.match(block[1], DENY, 'the dotfile FilesMatch block must deny access');
+    assert.match(block[1], DENY, 'the dotfile block must deny on Apache 2.4 (Require all denied)');
+    assert.match(block[1], DENY_22, 'the dotfile block must deny on Apache 2.2 (Deny from all)');
   });
 
   it('HTACC-03: the deny precedes the index.php rewrite', () => {
@@ -49,11 +54,12 @@ describe('02-§100.4 — api/.htaccess denies dotfiles', () => {
 });
 
 describe('02-§100.5 — site-root .htaccess denies .env', () => {
-  it('HTACC-04: source/static/.htaccess denies a file named .env', () => {
+  it('HTACC-04: source/static/.htaccess denies a file named .env on 2.4 and 2.2', () => {
     const src = read('source/static/.htaccess');
     const block = src.match(/<Files\s+"\.env"\s*>([\s\S]*?)<\/Files>/i);
     assert.ok(block, 'source/static/.htaccess must have a <Files ".env"> block');
-    assert.match(block[1], DENY, 'the .env Files block must deny access');
+    assert.match(block[1], DENY, 'the .env block must deny on Apache 2.4 (Require all denied)');
+    assert.match(block[1], DENY_22, 'the .env block must deny on Apache 2.2 (Deny from all)');
   });
 });
 
