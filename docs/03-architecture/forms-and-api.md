@@ -19,7 +19,7 @@ date passes. No server-side session store is used.
 | Property | Value |
 | --- | --- |
 | Name | `sb_session` |
-| Content | JSON array of event ID strings |
+| Content | JSON array of ownership entries (`{ id, sig }`) |
 | Max-Age | 7 days (604 800 s) |
 | Secure | Yes (HTTPS only) |
 | SameSite | Strict |
@@ -30,33 +30,38 @@ The schedule pages are static HTML, pre-rendered at build time. There is no
 server-side rendering at request time. Client-side JavaScript is therefore the
 only layer that can read the cookie and selectively show edit links for events
 the current visitor owns. Making the cookie `httpOnly` would prevent this.
-Security is maintained through server-side validation: the `/edit-event` endpoint
-always verifies that the target event ID appears in the cookie sent with the
-request. An attacker who cannot forge a session cookie they do not have cannot
-edit events they do not own.
+Security is maintained through server-side validation: edit and delete endpoints
+verify that the cookie contains a signed ownership entry for the target event.
+The signature uses a server-side `SESSION_SECRET`, so a caller can read the
+event ID for UI purposes without being able to mint ownership for public IDs.
+
+Legacy cookies that contain plain event ID strings may be read by the client for
+display or cleanup, but the server treats them as unauthorised for edit/delete.
 
 ### Cookie lifecycle
 
 1. User submits the add-activity form and accepts cookie consent.
 2. Server validates the event, responds with `Set-Cookie: sb_session=…`.
-3. The cookie contains the new event's ID merged with any IDs already in
-   the existing cookie.
+3. The cookie contains the event's signed ownership entry merged with any
+   existing valid ownership entries.
 4. On every page load, `source/assets/js/client/session.js` reads the
-   cookie, removes IDs for events whose dates have passed, and writes the
-   cleaned cookie back (or deletes it if the array becomes empty).
+   cookie, removes entries for events whose dates have passed, and writes the
+   cleaned cookie back (or deletes it if the array becomes empty). The client
+   preserves each entry's signature; it never creates new signatures.
    The write-back must include the same `Domain` attribute the server used,
    read from a `data-cookie-domain` attribute injected on `<body>` at build time.
 5. Before the expiry cleanup, `session.js` detects duplicate `sb_session`
    cookies (e.g. one with `Domain` and one without, caused by a historical
-   bug in `removeIdFromCookie`). If duplicates are found, all ID arrays are
-   merged and deduplicated, both cookie variants are deleted, and a single
+   bug in `removeIdFromCookie`). If duplicates are found, all ownership entries
+   are merged and deduplicated, both cookie variants are deleted, and a single
    correct cookie is written back. This repair is transparent to the user.
 6. Schedule pages read the cookie and attach "Redigera" links to matching
    event rows.
 7. The edit page (`redigera.html`) includes a collapsible "Om din cookie"
    section that displays the cookie contents: protocol, cookie domain,
-   stored event IDs with their status (active / expired / not found in
-   schema), and whether automatic repair was performed.
+   stored event ownership entries with their status (active / expired / not
+   found in schema / legacy-unverifiable), and whether automatic repair was
+   performed.
 
 ### /events.json
 
@@ -70,7 +75,7 @@ form with current event data.
 `POST /edit-event` handles edit submissions:
 
 1. Read and parse the `sb_session` cookie from the request.
-2. Confirm the target event ID is in the cookie array **or** that the
+2. Confirm the target event ID has a valid signed ownership entry **or** that the
    request body contains a valid `adminToken`.
 3. Validate the submitted fields (same rules as `POST /add-event`).
 4. Confirm the event's date has not passed.
@@ -87,7 +92,7 @@ flowchart TD
     C -->|Yes| E[Fetch /events.json · pre-populate form]
     E --> F[User edits and submits]
     F --> G["POST /edit-event (server)"]
-    G --> H{Cookie ownership OR valid adminToken? + fields + date not passed}
+    G --> H{Signed cookie ownership OR valid adminToken? + fields + date not passed}
     H -->|Fail| I[HTTP 400/403]
     H -->|Pass| J[GitHub API: read camp YAML]
     J --> K[Replace event fields · update meta.updated_at]
@@ -196,8 +201,8 @@ ephemeral-branch → PR → auto-merge pipeline as additions and edits.
 
 ```text
 POST /delete-event  { id }
-  ├─ parse sb_session cookie → owned IDs
-  ├─ reject if id not in cookie → 403
+  ├─ verify sb_session signed ownership for id
+  ├─ reject if no valid ownership/admin token → 403
   ├─ reject if editing period closed → 400
   ├─ reject if event date < today → 400
   └─ removeEventFromActiveCamp(id)

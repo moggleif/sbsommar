@@ -91,16 +91,17 @@ Initial state:
 - Fields may be empty strings.
 - Email is not yet used.
 - Email is not publicly displayed.
-- Ownership logic is not implemented.
+- Participant edit/delete ownership is carried by the signed `sb_session`
+  cookie, not by the public event YAML.
 
 This structure allows future:
 
-- Self-editing functionality
 - Token-based editing links
 - Week-based session validation
-- Ownership verification
+- Optional server-side ownership records
 
-Ownership design will be defined separately.
+The YAML `owner` object remains internal metadata and is not used as public
+authorization state.
 
 ---
 
