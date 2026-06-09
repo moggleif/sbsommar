@@ -230,7 +230,6 @@ Part of [the traceability index](./index.md).
 | `02-§22.4` | No render function or template contains literal footer markup — `footer.md` is the single source of truth | 03-architecture/data-layer.md §4b | — (code review: no hardcoded footer text in any render function) | Convention enforced by single-source architecture | implemented |
 | `02-§22.5` | If `footer.md` is missing at build time, all pages render with an empty footer and the build does not crash | 03-architecture/data-layer.md §4b | FTR-01, FTR-05, FTR-07, FTR-09, FTR-11, FTR-13, FTR-15, FTR-17 | `source/build/build.js` – `fs.existsSync()` fallback to `''`; `pageFooter('')` returns `''` | covered |
 | `02-§22.6` | Updating `footer.md` and running the build changes the footer on all pages without modifying any other file | 03-architecture/data-layer.md §4b | — (follows from §22.3; no separate test needed) | Verified structurally: `footerHtml` flows from `footer.md` through `convertMarkdown()` into every page | implemented |
-
 | `02-§23.1` | CI must parse and structurally validate the changed event YAML file on event-branch PRs before merge — **superseded by 02-§49.1 (API-layer validation)** | 03-architecture/ci-and-deploy.md §11.6 | LNT-01 | `source/scripts/lint-yaml.js` (retained as library); validation now in API layer | covered |
 | `02-§23.2` | Lint validates all required fields — **superseded by API-layer validation** | 03-architecture/ci-and-deploy.md §11.6 | LNT-02..09 | `source/scripts/lint-yaml.js` | covered |
 | `02-§23.3` | Lint validates date format and range — **superseded by API-layer validation** | 03-architecture/ci-and-deploy.md §11.6 | LNT-10..13 | `source/scripts/lint-yaml.js` | covered |
@@ -261,21 +260,18 @@ Part of [the traceability index](./index.md).
 | `02-§24.14` | Expanded menu closable by clicking outside | 03-architecture/pages-and-content.md §12.4 | — (browser JS behaviour; cannot unit-test in Node) | `source/assets/js/client/nav.js` – document `click` listener closes when outside nav | implemented |
 | `02-§24.15` | Desktop: hamburger hidden, all links visible | 07-design/components.md §6 | — (manual: view on ≥768 px viewport, confirm hamburger absent) | `source/assets/css/style.css` – `.nav-toggle { display: none }` at `@media (min-width: 768px)` | implemented |
 | `02-§24.17` | Expanded menu closes on navigation link click | 03-architecture/pages-and-content.md §12.4 | — (browser JS behaviour; manual: open hamburger menu, click a link, confirm menu closes) | `source/assets/js/client/nav.js` – click listener on menu `<a>` elements closes menu | implemented |
-
 | `02-§25.1` | Content images have `loading="lazy"` (except first section) | 03-architecture/data-layer.md §4b | IMG-01 | `source/build/render-index.js` – `marked` custom image renderer adds `loading="lazy"`; `renderIndexPage()` strips it from first section | covered |
 | `02-§25.2` | Hero image must NOT have `loading="lazy"` | 03-architecture/data-layer.md §4b | IMG-02 | `source/build/render-index.js` – hero uses separate template without `loading="lazy"` | covered |
 | `02-§25.3` | Homepage head includes `<link rel="preload">` for hero image | 03-architecture/data-layer.md §4b | IMG-03, IMG-04, IMG-05 | `source/build/render-index.js` – `preloadHtml` variable | covered |
 | `02-§25.4` | Hero image has `fetchpriority="high"` | 03-architecture/data-layer.md §4b | IMG-06 | `source/build/render-index.js` – hero `<img>` template | covered |
 | `02-§25.5` | First-section images must NOT have `loading="lazy"` (LCP fix) | 03-architecture/data-layer.md §4b | IMG-07 | `source/build/render-index.js` – `renderIndexPage()` strips `loading="lazy"` when `i === 0` | covered |
 | `02-§25.6` | `nav.js` script tag must include `defer` on all pages | 03-architecture/data-layer.md §4b | STR-NAV-01..06 | All 6 render files + snapshot | covered |
-
 | `02-§27.1` | "Past" means event date is strictly before today's local date | 02-requirements/add-edit-forms.md §27.1 | — | Definition only; enforced by 02-§27.2–27.6 | — |
 | `02-§27.2` | Add-activity form blocks submission when date is in the past | 02-requirements/add-edit-forms.md §27.2 | PDT-01 (manual: open form, pick yesterday, submit → error shown) | `source/assets/js/client/lagg-till.js` – `date < today` check before submit | implemented |
 | `02-§27.3` | Edit-activity form blocks submission when date is in the past | 02-requirements/add-edit-forms.md §27.3 | PDT-02 (manual: edit event, change date to past, submit → error shown) | `source/assets/js/client/redigera.js` – `date < submitToday` check before submit | implemented |
 | `02-§27.4` | `POST /add-event` rejects past dates with HTTP 400 | 02-requirements/add-edit-forms.md §27.4 | PDT-03, PDT-04 | `source/api/validate.js` – `isDatePast()` in `validateEventRequest` | covered |
 | `02-§27.5` | `POST /edit-event` rejects submitted past dates with HTTP 400 | 02-requirements/add-edit-forms.md §27.5 | PDT-05, PDT-06 | `source/api/validate.js` – `isDatePast()` in `validateEditRequest` | covered |
 | `02-§27.6` | Past-date check is in the shared validation module | 02-requirements/add-edit-forms.md §27.6 | PDT-03..06 | `source/api/validate.js` – single `isDatePast()` function | covered |
-
 | `02-§28.1` | List includes camps where `archived === false` OR `start_date` year matches current year | 03-architecture/pages-and-content.md §14.3 | UC-01, UC-02, UC-03 | `source/build/render-index.js` – `renderUpcomingCampsHtml()` filter logic | covered |
 | `02-§28.2` | "Current year" evaluated at page-load time in browser | 03-architecture/pages-and-content.md §14.3 | — (manual: build uses `new Date().getFullYear()` at build time; year boundary is a rare edge case; build runs frequently) | `source/build/build.js` – passes `new Date().getFullYear()` to `renderUpcomingCampsHtml()` | implemented |
 | `02-§28.3` | Camps sorted by `start_date` ascending | 03-architecture/pages-and-content.md §14.3 | UC-04 | `source/build/render-index.js` – `.sort()` in `renderUpcomingCampsHtml()` | covered |
@@ -294,15 +290,12 @@ Part of [the traceability index](./index.md).
 | `02-§28.15` | No daily rebuilds needed for status updates | 03-architecture/pages-and-content.md §14.5 | — (architectural constraint; client-side JS evaluates dates at page load) | `source/build/render-index.js` – inline `<script>` runs on every page load | implemented |
 | `02-§28.16` | Uses only CSS custom properties from 07-design/ | 03-architecture/pages-and-content.md §14.6 | — (manual: inspect `style.css` `.upcoming-camps` section — all values use `--color-*`, `--space-*`, `--font-*`, `--radius-*` tokens) | `source/assets/cs/style.css` – upcoming-camps section | implemented |
 | `02-§28.17` | Client-side script is minimal — no framework | 03-architecture/pages-and-content.md §14.5 | — (manual: inline IIFE, 6 lines, no imports) | `source/build/render-index.js` – inline `<script>` | implemented |
-
 | `02-§29.1` | Camp `name` format is `{type} {year} {month}` (e.g. "SB sommar 2026 augusti") | 05-DATA_CONTRACT.md §1 | — (data convention; verified by inspection of `camps.yaml`) | `source/data/camps.yaml` – all camp names follow the format | implemented |
 | `02-§29.2` | Month names in camp names are lowercase (Swedish convention) | 05-DATA_CONTRACT.md §1 | — (data convention) | `source/data/camps.yaml` – all months lowercase | implemented |
 | `02-§29.3` | Camp type name uses sentence case (e.g. "SB sommar", not "SB Sommar") | 05-DATA_CONTRACT.md §1 | — (data convention) | `source/data/camps.yaml` – "SB sommar", "SB vinter" | implemented |
-
 | `02-§1a.1` | The build generates a `robots.txt` that disallows all user agents from all paths | 03-architecture/data-layer.md §4c | — (manual: run `npm run build` and verify `public/robots.txt` contains `User-agent: *` and `Disallow: /`) | `source/build/build.js` – writes `public/robots.txt` | implemented |
 | `02-§1a.2` | Every HTML page includes `<meta name="robots" content="noindex, nofollow">` in `<head>` | 03-architecture/data-layer.md §4c | ROB-01..07 | All 7 render files – `<meta name="robots">` in `<head>` | covered |
 | `02-§1a.3` | No sitemap, Open Graph tags, or other discoverability metadata on any page | 03-architecture/data-layer.md §4c | ROB-08..14 | No discoverability tags in any render file | covered |
-
 | `02-§26.1` | Each camp in `camps.yaml` has an `opens_for_editing` field (YYYY-MM-DD) | 05-DATA_CONTRACT.md §1 | — | `source/data/camps.yaml` – all 9 camps have `opens_for_editing` | implemented |
 | `02-§26.2` | Submission period runs from `opens_for_editing` through `end_date + 1 day` | 03-architecture/forms-and-api.md §13.1 | GATE-05..10 | `source/api/time-gate.js` – `isOutsideEditingPeriod()` | covered |
 | `02-§26.3` | Before period: add-activity form greyed out (reduced opacity) | 03-architecture/forms-and-api.md §13.3 | — (manual: open form before `opens_for_editing`, confirm fields greyed out) | `source/assets/js/client/lagg-till.js` – sets `fieldset.disabled` and `form-gated` class | implemented |
