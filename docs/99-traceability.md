@@ -871,8 +871,8 @@ Audit date: 2026-02-24. Last updated: 2026-04-24 (locale overview page delivered
 | `02-§44.23` | Secrets never appear in error responses | 03-architecture/ci-and-deploy.md §21 | manual: deploy and test | `api/index.php` | implemented |
 | `02-§44.24` | PHP API lives in api/ at project root | 03-architecture/ci-and-deploy.md §21 | manual: inspect structure | `api/` | implemented |
 | `02-§44.25` | Dependencies managed via Composer | 03-architecture/ci-and-deploy.md §21 | manual: inspect | `api/composer.json` | implemented |
-| `02-§44.26` | Directory structure: index.php, src/, composer.json, .env | 03-architecture/ci-and-deploy.md §21 | manual: inspect structure | `api/` | implemented |
-| `02-§44.27` | .htaccess routes all requests to index.php | 03-architecture/ci-and-deploy.md §21 | manual: deploy and verify | `api/.htaccess` | implemented |
+| `02-§44.26` | Directory structure: index.php, src/, composer.json, .env.example; runtime .env outside web root (§100) | 03-architecture/ci-and-deploy.md §21 | manual: inspect structure | `api/` | implemented |
+| `02-§44.27` | .htaccess denies dotfiles (§100), then routes requests to index.php | 03-architecture/ci-and-deploy.md §21 | HTACC-03 (structure); manual: deploy and verify routing | `api/.htaccess` | implemented |
 | `02-§44.28` | .htaccess works on Apache 2.4 with mod_rewrite | 03-architecture/ci-and-deploy.md §21 | manual: deploy and verify | `api/.htaccess` | covered |
 | `02-§44.29` | Deploy workflow uploads api/ with vendor/ | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | covered |
 | `02-§44.30` | composer install --no-dev runs in CI or vendor/ included in archive | 04-OPERATIONS.md | manual: inspect workflow | deploy workflow | covered |
@@ -1364,6 +1364,8 @@ Matrix cleanup (2026-02-25):
   4 implemented (browser-only visual/timing, manual verification): 02-§53.7–53.10.
   API: synchronous GitHub operations, real error messages to user.
   Client: progress step list with green checkboxes during submission.
+  02-§53.12–53.14 (ENV-01..03) later superseded by §100; the backup-and-restore
+  mechanism and its tests (tests/deploy-env-backup.test.js) were removed.
   Deploy: persistent .env backup outside public_html.
 11 requirements added for midnight-crossing events (02-§54.1–54.11):
   10 covered (VLD-56..63, LNT-24..25, LVD-07..09): server, client, lint validation.
