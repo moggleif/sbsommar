@@ -239,6 +239,8 @@ Rotating this secret invalidates every existing token at once.
 
 ### Issuing a token
 
+Via the CLI:
+
 1. Run `npm run admin:create` and follow the prompts (name + role). The
    script signs a token in the format `namn_roll_epoch_sig` against
    `ADMIN_TOKEN_SECRET` — 60 days validity for `admin`, 90 days for
@@ -248,6 +250,15 @@ Rotating this secret invalidates every existing token at once.
    No environment edit and no redeploy are needed.
 3. The holder visits `/token.html`, enters the token, and gains the role's
    privileges until the token's embedded expiry.
+
+Or from the web (superadmin only):
+
+1. Open `/token.html` with an active superadmin token — a "Skapa
+   token-länk" section appears.
+2. Fill in name, role (`admin` or `early` — superadmin can never be minted
+   here), and validity, then press "Skapa länk".
+3. Share the activation link (`/token.html#token=…`) privately. The
+   recipient opens it and the token activates automatically.
 
 ### Revoking access
 

@@ -1590,3 +1590,28 @@ Doc ref: `03-architecture/platform-and-security.md §30`.
 | `02-§105.9` | implemented | EARLY-22 (structural: `redigera.js` ownership shortcut uses `hasAdminRole`); manual: open `redigera.html?id=<annans>` with an early token and confirm "inte rättighet" message |
 | `02-§105.10` | implemented | Swedish labels and error texts; manual/visual check (CLI prompts and bypass labels in Swedish) |
 | `02-§105.11` | covered | EARLY-21..23: clients read the role from segment 2 only for UI; every privileged action re-verified server-side (EARLY-18..19) |
+
+### §106 — Token Minting from the Web (superadmin)
+
+Doc ref: `03-architecture/platform-and-security.md §30`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§106.1` | covered | MINT-11, MINT-12: `POST /mint-token` wired in `app.js` and `api/index.php` |
+| `02-§106.2` | covered | MINT-09, MINT-10 (gate predicate) + MINT-11/12 (structural); HTTP-verified: admin/early/garbage → 403 |
+| `02-§106.3` | covered | MINT-06 + PHPUnit `testRejectsNonWhitelistedRoles`: superadmin/unknown roles rejected 400 |
+| `02-§106.4` | covered | MINT-01, MINT-07 + PHPUnit `testSanitisesNameLikeTheCli`: shared `sanitizeTokenName()`; empty → 400 |
+| `02-§106.5` | covered | MINT-02..05 + PHPUnit: default = cap (60/90); outside 1..cap or non-integer → 400 |
+| `02-§106.6` | covered | MINT-02, MINT-08 + PHPUnit parity vector: token = `signToken(sanitised, role, now+days·86400)`; handlers return it without storing |
+| `02-§106.7` | covered | MINT-11, MINT-12: `mintTokenLimiter` (5/h) in `app.js`; `RateLimit::isLimited(.., 'mint-token', 5, 3600)` in PHP |
+| `02-§106.8` | covered | MINT-10: empty secret → no requester verifies → gate false (403) |
+| `02-§106.9` | implemented | MINT-15 (structural: role gate in `admin.js`); manual: open /token.html with superadmin vs admin token and confirm section visibility |
+| `02-§106.10` | implemented | MINT-14 (markup: name/role/days with data-days); manual: switch role and confirm day default/max follows (60↔90) |
+| `02-§106.11` | implemented | MINT-15 (structural: `#token=` link build); manual: mint and confirm the link format |
+| `02-§106.12` | implemented | MINT-14 (markup: copy button, share hidden by default); manual: share button appears only when navigator.share exists |
+| `02-§106.13` | implemented | Swedish error strings in `admin.js`/server handlers; manual/visual check |
+| `02-§106.14` | implemented | MINT-15 (structural: hash parse + /verify-admin reuse via activateToken); manual: open an activation link and confirm activation |
+| `02-§106.15` | implemented | MINT-15 (structural: history.replaceState); manual: confirm the fragment leaves the address bar on success and failure |
+| `02-§106.16` | covered | MINT-15: `admin.js` matches `#token=` and contains no `?token=`; link built with `#token=` |
+| `02-§106.17` | implemented | Architectural: signing only in `app.js`/`api/index.php` via the shared helpers; no secret reference in any client file |
+| `02-§106.18` | implemented | Swedish text; reuses `.admin-form` components; new CSS uses only `--space-*`/`--color-*`/`--font-*`/`--radius-*` tokens; manual/visual |
