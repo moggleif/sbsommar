@@ -1572,3 +1572,21 @@ Doc ref: `03-architecture/platform-and-security.md §34`.
 | `02-§104.17` | covered | SEC-384-01: `source/static/.htaccess` sets a CSP with `default-src 'self'`, `object-src 'none'`, `frame-ancestors 'none'`, `base-uri 'self'`, GoatCounter origins, `'unsafe-inline'` scripts/styles |
 | `02-§104.18` | covered | SEC-384-03: `injectHtaccessCsp()` injects the `API_URL` origin into `connect-src` (cross-origin added, same-origin/unset resolves clean, no placeholder left); `source/build/utils.js`, wired in `source/build/build.js` |
 | `02-§104.19` | covered | SEC-384-02: `.htaccess` sets `nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, HSTS |
+
+### §105 — Early Access Role (tidig åtkomst)
+
+Doc ref: `03-architecture/platform-and-security.md §30`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§105.1` | gap | Pre-camp time gate admits valid `admin`/`superadmin`/`early` tokens |
+| `02-§105.2` | gap | Ownership bypass excludes `early` — cookie ownership only |
+| `02-§105.3` | gap | Post-camp lock applies to every role |
+| `02-§105.4` | gap | `/verify-admin` accepts any recognised role incl. `early` |
+| `02-§105.5` | gap | Two role checks: `verifyAdminToken` vs pre-camp-bypass check, both runtimes |
+| `02-§105.6` | gap | `npm run admin:create` mints `early` with 90 days validity |
+| `02-§105.7` | gap | All-event edit links only for `admin`/`superadmin` roles |
+| `02-§105.8` | gap | Bypass button for all roles; label "(admin)" / "(tidig åtkomst)" |
+| `02-§105.9` | gap | Edit-page ownership shortcut only for admin-equivalent roles |
+| `02-§105.10` | gap | All user-facing text in Swedish |
+| `02-§105.11` | gap | Client reads role from segment 2; server is the authority |
