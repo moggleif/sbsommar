@@ -15,13 +15,14 @@
     }
   }
 
-  // Extract epoch (seconds) from the last underscore-segment of a token.
-  // Token format: namn_uuid_epoch
+  // Extract epoch (seconds) from a token. Format: namn_roll_epoch_sig — the
+  // epoch is the third underscore-segment (the base64url sig may contain
+  // underscores, so we read by position rather than from the end).
   function extractExpiry(token) {
     if (!token || typeof token !== 'string') return 0;
-    var i = token.lastIndexOf('_');
-    if (i === -1) return 0;
-    var n = Number(token.slice(i + 1));
+    var parts = token.split('_');
+    if (parts.length < 4) return 0;
+    var n = Number(parts[2]);
     return isFinite(n) && n > 0 ? n : 0;
   }
 
