@@ -138,11 +138,17 @@ Test IDs referenced in the `Test(s)` column are defined in the
 ## Summary
 
 ```text
-Total requirements:            1331
-Covered (implemented + tested): 699
-Implemented, not tested:        632
+Total requirements:            1349
+Covered (implemented + tested): 708
+Implemented, not tested:        641
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
+
+Note: §106 (Token Minting from the Web) adds 18 requirements
+  (02-§106.1–106.18): 9 covered (MINT-01..15, tests/mint-token.test.js,
+  plus PHPUnit MintTokenTest cross-runtime parity) and 9 implemented
+  (browser/manual checkpoints for mint-UI visibility, role-driven day
+  field, copy/share buttons, and fragment redemption).
 
 Note: §105 (Early Access Role, tidig åtkomst) adds 11 requirements
   (02-§105.1–105.11): 7 covered (EARLY-01..23, tests/early-access.test.js,

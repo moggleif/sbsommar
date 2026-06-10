@@ -200,3 +200,5 @@ Part of [the traceability index](./index.md).
 | ABYP-01..13 | `tests/admin-time-gate-bypass.test.js` | Admin bypass of the pre-camp schedule lock (02-§26.14–26.19) |
 | EARLY-01..23 | `tests/early-access.test.js` | Early access role: pre-camp bypass, ownership exclusion, CLI, role wiring (02-§105) |
 | (PHPUnit) | `api/tests/AdminTokenTest.php` | PHP mirror of the token model incl. `verifyPreCampBypassToken` (02-§91, 02-§105) |
+| MINT-01..15 | `tests/mint-token.test.js` | Web token minting: sanitiser, mintRequest, superadmin gate, route/UI wiring (02-§106) |
+| (PHPUnit) | `api/tests/MintTokenTest.php` | PHP mirror of `mintRequest` with the same fixed inputs (02-§106) |
