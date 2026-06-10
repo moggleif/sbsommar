@@ -21,9 +21,26 @@ describe('convertMarkdown – inline Markdown', () => {
     assert.ok(html.includes('<strong>Hello</strong>'), `Got: ${html}`);
   });
 
-  it('converts a link ([text](url)) to <a>', () => {
+  it('converts an external link to <a> that opens in a new tab', () => {
     const html = convertMarkdown('[Click here](https://example.com)');
-    assert.ok(html.includes('<a href="https://example.com">Click here</a>'), `Got: ${html}`);
+    assert.ok(
+      html.includes('<a href="https://example.com" target="_blank" rel="noopener noreferrer">Click here</a>'),
+      `Got: ${html}`,
+    );
+  });
+
+  it('opens http (non-https) external links in a new tab too', () => {
+    const html = convertMarkdown('[Plain](http://example.com)');
+    assert.ok(
+      html.includes('<a href="http://example.com" target="_blank" rel="noopener noreferrer">Plain</a>'),
+      `Got: ${html}`,
+    );
+  });
+
+  it('keeps in-page anchor links in the same tab (no target/rel)', () => {
+    const html = convertMarkdown('[Till maten](#mat)');
+    assert.ok(html.includes('<a href="#mat">Till maten</a>'), `Got: ${html}`);
+    assert.ok(!html.includes('target="_blank"'), `anchor link should not open a new tab. Got: ${html}`);
   });
 
   it('converts an image (![alt](src)) to <img> with loading="lazy"', () => {
@@ -39,7 +56,10 @@ describe('convertMarkdown – inline Markdown', () => {
   it('handles multiple inline elements in one paragraph', () => {
     const html = convertMarkdown('See **this** [link](https://x.com).');
     assert.ok(html.includes('<strong>this</strong>'), `Got: ${html}`);
-    assert.ok(html.includes('<a href="https://x.com">link</a>'), `Got: ${html}`);
+    assert.ok(
+      html.includes('<a href="https://x.com" target="_blank" rel="noopener noreferrer">link</a>'),
+      `Got: ${html}`,
+    );
   });
 });
 

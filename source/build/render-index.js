@@ -9,6 +9,27 @@ const { pwaHeadTags } = require('./pwa');
 const { getImageDimensions } = require('./image-dimensions');
 
 /**
+ * marked link renderer override. External http(s) links open in a new tab
+ * with rel="noopener noreferrer", matching how the hero, registration CTA,
+ * event and calendar links behave. Internal and in-page anchor links (e.g.
+ * #mat, #service) return false so marked's default renderer handles them and
+ * they stay in the same tab. Used as a method, so `this` is the renderer
+ * instance and `this.parser` is available.
+ */
+function renderLink({ href, title, tokens }) {
+  if (!/^https?:\/\//i.test(href)) return false;
+  let cleanHref;
+  try {
+    cleanHref = encodeURI(href).replace(/%25/g, '%');
+  } catch {
+    return false;
+  }
+  const text = this.parser.parseInline(tokens);
+  const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
+  return `<a href="${cleanHref}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`;
+}
+
+/**
  * Converts inline Markdown (images, links, bold) to HTML using marked.
  * Content files are author-controlled so no HTML escaping is applied.
  */
@@ -16,6 +37,7 @@ function inlineHtml(text, contentDir) {
   const md = new Marked();
   md.use({
     renderer: {
+      link: renderLink,
       image({ href, text: alt }) {
         const dimAttrs = resolveDimAttrs(href, contentDir);
         return `<img src="${href}" alt="${alt || ''}" class="content-img"${dimAttrs} loading="lazy">`;
@@ -66,6 +88,7 @@ function createMarked(headingOffset, contentDir) {
   const md = new Marked();
   md.use({
     renderer: {
+      link: renderLink,
       heading({ tokens, depth }) {
         const level = Math.min(depth + headingOffset, 6);
         const text = this.parser.parseInline(tokens);
