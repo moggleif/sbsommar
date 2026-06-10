@@ -1564,5 +1564,5 @@ Doc ref: `03-architecture/platform-and-security.md §34`.
 | `02-§104.12` | covered | SEC-387-01: `TRUSTED_PROXIES` documented in `.env.example`; unset ⇒ XFF never trusted |
 | `02-§104.13` | covered | SEC-370-02: mutation handlers return HTTP 503 when `$activeCamp` is null; `api/index.php` |
 | `02-§104.14` | covered | SEC-370-01, SEC-370-03: bundled `api/data/camps.yaml` resolved first with repo fallback; deploy workflow copies `camps.yaml`; `api/index.php`, `deploy-reusable.yml`, `api/.gitignore` |
-| `02-§104.15` | covered | SEC-369-01: workflow runs `lint-yaml.js` + `check-yaml-security.js` on changed per-camp files; `event-data-deploy.yml` |
-| `02-§104.16` | covered | SEC-369-02, SEC-369-03: `fetch-depth: 0`, no job-level `if`; validates `event-delete/` and manual data PRs |
+| `02-§104.15` | covered | SEC-369-01, SEC-369-04: `check-yaml-security.js` hard-blocks every changed per-camp file; `lint-yaml.js` hard-blocks non-archived camps and is advisory for archived (derived from `camps.yaml`); `event-data-deploy.yml`. Locally simulated: archived edit exit 0, injected `javascript:` link exit 1 |
+| `02-§104.16` | covered | SEC-369-02, SEC-369-03: `fetch-depth: 0`, no job-level `if`; validates `event-delete/` and manual data PRs; here-string loop (not a pipe) so a finding reliably fails the job |

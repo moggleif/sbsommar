@@ -57,17 +57,39 @@ jobs:
       - name: Validate schema and security of changed event files
         if: steps.changed.outputs.has_files == 'true'
         run: |
-          set -euo pipefail
-          echo "${{ steps.changed.outputs.files }}" | while IFS= read -r f; do
+          set -uo pipefail
+          # Iterate via a here-string (not a pipe) so the loop runs in this
+          # shell and a validation failure reliably fails the job — the whole
+          # point of the gate (#369). Track failures explicitly and exit
+          # non-zero if any file fails a blocking validator.
+          #
+          # Scope (legacy data, #369): the security scanner is a HARD block for
+          # every changed per-camp file. The schema validator hard-blocks files
+          # belonging to non-archived camps, but is advisory for archived camps
+          # — their data predates the current required-field schema and is
+          # immutable history, so blocking edits to it would make the gate
+          # unusable. New submissions are schema-validated at the API layer
+          # before the PR is opened, so active-camp data is still enforced here.
+          active="$(node -e "const y=require('js-yaml'),fs=require('fs');const d=y.load(fs.readFileSync('source/data/camps.yaml','utf8'));(d.camps||[]).filter(c=>!c.archived).forEach(c=>console.log('source/data/'+c.file))")"
+          status=0
+          while IFS= read -r f; do
             [ -z "$f" ] && continue
             if [ ! -f "$f" ]; then
               echo "Skipping deleted file: $f"
               continue
             fi
             echo "Validating $f"
-            node source/scripts/lint-yaml.js "$f"
-            node source/scripts/check-yaml-security.js "$f"
-          done
+            node source/scripts/check-yaml-security.js "$f" || status=1
+            if printf '%s\n' "$active" | grep -qxF "$f"; then
+              node source/scripts/lint-yaml.js "$f" || status=1
+            else
+              echo "::notice::$f belongs to an archived camp; schema check is advisory (security scan still enforced)"
+              node source/scripts/lint-yaml.js "$f" || echo "::warning::schema issues in archived file $f (not blocking)"
+            fi
+          done <<EOF
+          ${{ steps.changed.outputs.files }}
+          EOF
+          exit $status
 
       - name: No event-data files changed
         if: steps.changed.outputs.has_files != 'true'

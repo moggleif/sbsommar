@@ -418,10 +418,13 @@ sits above the table and is left multi-line. PHP mirrors this in
 ### 34.2 Link protocol validation in the render layer (02-§104.4–104.5)
 
 `source/build/utils.js` exports `safeLinkHref(url)` — returns the URL only when
-it matches `^https?://`i, else `''`. `render.js` and `render-arkiv.js` route
-`e.link`/`ev.link` through it and skip the anchor when it returns empty. The
-client `events-today.js` has an equivalent inline `safeHttp()` and gates both
-`hasExtra` and the anchor on its result. This is independent of the API (§49.4)
+it matches `^https?://`i, else `''`. `render.js`, `render-arkiv.js`, and
+`render-event.js` (the per-event detail page) route `e.link`/`ev.link`/
+`event.link` through it and skip the anchor when it returns empty; `render.js`
+and `render-arkiv.js` also gate `hasExtra` on the sanitised link so a bad-only
+link does not produce an empty expander. The client `events-today.js` has an
+equivalent inline `safeHttp()` and gates both `hasExtra` and the anchor on its
+result. This is independent of the API (§49.4)
 and CI (`check-yaml-security.js`) link checks — defence-in-depth for legacy or
 hand-edited YAML that never passed the API.
 
@@ -467,11 +470,16 @@ generated `data/` directory.
 
 `event-data-deploy.yml` checks out with `fetch-depth: 0`, installs deps,
 diffs the changed `source/data/*.yaml` files against the PR base (excluding
-`camps.yaml`/`local.yaml`), and runs `lint-yaml.js` + `check-yaml-security.js`
-on each. The job-level `if` that previously restricted it to `event/` and
-`event-edit/` branches is removed, so `event-delete/` branches and manual data
-PRs are all validated. Build and deploy remain post-merge
-(`event-data-deploy-post-merge.yml`).
+`camps.yaml`/`local.yaml`), and validates each in a here-string loop (not a
+pipe-to-`while`, so a failure reliably fails the job). `check-yaml-security.js`
+is a hard block for every file. `lint-yaml.js` is a hard block for non-archived
+camps and advisory (`::warning::`) for archived ones — the loop derives the
+non-archived camp file list from `camps.yaml` via a `js-yaml` one-liner, so
+legacy archived data (which predates the required-field schema) stays editable
+while the security control still applies to it. The job-level `if` that
+previously restricted the check to `event/` and `event-edit/` branches is
+removed, so `event-delete/` branches and manual data PRs are all validated.
+Build and deploy remain post-merge (`event-data-deploy-post-merge.yml`).
 
 ### 34.8 Files changed
 

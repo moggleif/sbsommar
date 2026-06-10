@@ -50,7 +50,7 @@ function renderEventRow(e) {
   const metaParts = [e.location, e.responsible].filter(Boolean).map(escapeHtml);
   const metaEl = metaParts.length ? `<span class="ev-meta"> · ${metaParts.join(' · ')}</span>` : '';
   const icalEl = icalDownloadLink(e);
-  const hasExtra = e.description || e.link;
+  const hasExtra = e.description || safeLinkHref(e.link);
 
   const idAttr = e.id ? ` data-event-id="${escapeHtml(String(e.id))}"` : '';
   const dateAttr = e.date ? ` data-event-date="${escapeHtml(String(e.date))}"` : '';

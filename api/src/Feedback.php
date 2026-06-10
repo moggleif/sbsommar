@@ -121,7 +121,9 @@ final class Feedback
      */
     public static function sanitizeMetaField(mixed $value, int $maxLen): string
     {
-        $s = (string) ($value ?? '');
+        // Only scalars become text; arrays/objects from the JSON body are dropped
+        // (avoids an "Array to string conversion" warning and is safe).
+        $s = is_scalar($value) ? (string) $value : '';
         $s = (string) preg_replace('/[\x00-\x1f\x7f]+/', ' ', $s);
         $s = str_replace('|', '\\|', $s);
         $s = trim($s);

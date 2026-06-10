@@ -61,7 +61,7 @@ function renderArchiveEventRow(ev) {
     : escapeHtml(String(ev.start));
   const metaParts = [ev.location, ev.responsible].filter(Boolean).map(escapeHtml);
   const metaEl = metaParts.length ? `<span class="ev-meta"> · ${metaParts.join(' · ')}</span>` : '';
-  const hasExtra = ev.description || ev.link;
+  const hasExtra = ev.description || safeLinkHref(ev.link);
 
   if (hasExtra) {
     return `        <details class="event-row">

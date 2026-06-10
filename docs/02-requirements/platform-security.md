@@ -1143,9 +1143,10 @@ hand-edited or legacy camp YAML never passes the API.
 - When an event's `link` field is rendered as an anchor, the `href` is emitted
   only when the link begins with `http://` or `https://` (case-insensitive);
   any other value renders no external link. <!-- 02-§104.4 -->
-- This render-time check is applied in the build renderers
-  (`source/build/render.js`, `source/build/render-arkiv.js`) and the client
-  today/display script (`source/assets/js/client/events-today.js`),
+- This render-time check is applied everywhere the event `link` is rendered as
+  an anchor: the build renderers (`source/build/render.js`,
+  `source/build/render-arkiv.js`, `source/build/render-event.js`) and the
+  client today/display script (`source/assets/js/client/events-today.js`),
   independent of the API and CI link validation. <!-- 02-§104.5 -->
 
 ### 104.4 Constant-time admin-token comparison
@@ -1208,9 +1209,14 @@ The event-data PR check is the branch-protection backstop for malformed or
 unsafe YAML and must run real validation.
 
 - The event-data pull-request workflow (`event-data-deploy.yml`) runs the
-  schema validator (`lint-yaml.js`) and the security scanner
-  (`check-yaml-security.js`) against every changed per-camp event file,
-  excluding `camps.yaml` and `local.yaml`. <!-- 02-§104.15 -->
+  security scanner (`check-yaml-security.js`) as a hard block against every
+  changed per-camp event file (excluding `camps.yaml` and `local.yaml`); a
+  finding fails the check. The schema validator (`lint-yaml.js`) also runs on
+  every changed file: it is a hard block for files belonging to non-archived
+  camps and advisory (reported, non-blocking) for archived camps, whose data
+  predates the current required-field schema. New submissions are schema-validated
+  at the API layer before the PR is opened, so active-camp data remains
+  enforced. <!-- 02-§104.15 -->
 - The workflow validates every pull request that touches `source/data/*.yaml`
   — including `event-delete/` branches and manually opened PRs — and checks
   out with enough git history for the diff against the base to resolve
