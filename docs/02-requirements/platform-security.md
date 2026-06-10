@@ -1080,12 +1080,20 @@ keep working.
 - The edit and delete flows build the new document with the YAML serializer
   (§10.4), which guarantees a structurally valid result; they therefore rely on
   serialisation rather than a separate re-parse. <!-- 02-§102.6 -->
+- The appended event block is indented to match the indentation of the existing
+  `events:` list items in the target camp file (defaulting to two spaces when the
+  list has no items yet), so the combined document is valid YAML regardless of
+  the file's existing indentation style (§10.6). This is what lets the
+  whole-document validation in §102.5 succeed for every well-formed
+  submission. <!-- 02-§102.8 -->
 
 ### 102.5 Parity between Node.js and PHP implementations
 
 - The control-character constraints (§102.1, §102.3), the carriage-return
-  normalisation (§102.4), and the whole-document validation (§102.5) are
-  implemented identically in the Node.js API (`source/api/validate.js`,
-  `source/api/github.js`) and the PHP API (`api/src/Validate.php`,
-  `api/src/GitHub.php`), and produce equivalent error messages for the same
-  invalid input. <!-- 02-§102.7 -->
+  normalisation (§102.4), the whole-document validation (§102.5), and the
+  indentation matching (§102.8) are implemented identically in the Node.js API
+  (`source/api/validate.js`, `source/api/github.js`) and the PHP API
+  (`api/src/Validate.php`, `api/src/GitHub.php`), and produce equivalent error
+  messages for the same invalid input. The PHP API additionally applies the
+  whole-document validation and indentation matching to its batch (recurring)
+  add flow, which has no Node.js counterpart. <!-- 02-§102.7 -->
