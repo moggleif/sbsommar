@@ -234,7 +234,39 @@ for the chosen role — 60 days validity for `admin`, 90 days for `early`,
 180 days for `superadmin` — and prints it to hand over: no environment edit
 and no redeploy per person, because the secret (not a list) is what the
 runtimes read. `superadmin` is minted only by this script (it grants the
-right to mint others), never from the web UI. Because tokens are stateless, an
+right to mint others), never from the web UI.
+
+### Self-service minting (`/mint-token`)
+
+`POST /mint-token` (02-§106) lets a superadmin mint `admin` and `early`
+tokens from the web. The route is a privilege boundary and is deliberately
+narrow:
+
+- **Gate**: the request body's `token` must verify with role `superadmin`
+  (`verifyToken(...).role === 'superadmin'`); anything else is 403. With an
+  unset secret nothing verifies, so the endpoint fails closed.
+- **Whitelist**: only `admin` and `early` can be minted (`superadmin` is
+  CLI-only, Linje A), with `days` capped at the role's standard validity
+  (60/90).
+- **Stateless**: the response is the signed token and nothing else — no
+  storage, no log of issued tokens, same model as §91.
+- **Rate-limited**: 5 requests/hour per IP, like `/verify-admin`.
+
+The shared mint logic lives in `mintRequest()` (`source/api/admin.js` and
+`api/src/Admin.php`) — name sanitisation (identical to the CLI: lowercase,
+hyphens, `a–ö`/digits only, never underscore), role whitelist, day cap, and
+signing — so the Node and PHP routes stay thin and behave identically. The
+CLI reuses the same sanitiser.
+
+The mint UI is a section on `/token.html` (rendered hidden by
+`render-admin.js`, revealed by `admin.js` when the stored token's role is
+`superadmin`). It builds an activation link
+`<site-origin>/token.html#token=<token>` with copy and `navigator.share`
+buttons. On load the same page redeems incoming links: it reads
+`location.hash`, posts the value to `/verify-admin`, stores it like a
+manual activation, and clears the fragment with `history.replaceState`.
+The token travels in the fragment — never a query parameter — so it stays
+out of server logs and `Referer` headers. Because tokens are stateless, an
 individual token cannot be revoked without rotating `ADMIN_TOKEN_SECRET`
 (which invalidates all tokens at once); short embedded expiries bound the
 exposure of a leaked token.

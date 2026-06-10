@@ -1590,3 +1590,28 @@ Doc ref: `03-architecture/platform-and-security.md §30`.
 | `02-§105.9` | implemented | EARLY-22 (structural: `redigera.js` ownership shortcut uses `hasAdminRole`); manual: open `redigera.html?id=<annans>` with an early token and confirm "inte rättighet" message |
 | `02-§105.10` | implemented | Swedish labels and error texts; manual/visual check (CLI prompts and bypass labels in Swedish) |
 | `02-§105.11` | covered | EARLY-21..23: clients read the role from segment 2 only for UI; every privileged action re-verified server-side (EARLY-18..19) |
+
+### §106 — Token Minting from the Web (superadmin)
+
+Doc ref: `03-architecture/platform-and-security.md §30`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§106.1` | gap | `POST /mint-token` in `app.js` and `api/index.php` |
+| `02-§106.2` | gap | Requires valid superadmin token, else 403 |
+| `02-§106.3` | gap | Mintable roles exactly admin/early; superadmin rejected 400 |
+| `02-§106.4` | gap | Name sanitised like the CLI; empty → 400; never underscore |
+| `02-§106.5` | gap | `days` 1..role cap (60/90); default = cap; outside → 400 |
+| `02-§106.6` | gap | 200 `{success, token}`; nothing stored |
+| `02-§106.7` | gap | Rate limit 5/h per IP |
+| `02-§106.8` | gap | Unset secret → no requester validates → 403 (fail-closed) |
+| `02-§106.9` | gap | Mint section on /token.html visible only for superadmin role |
+| `02-§106.10` | gap | Form: name, role, days; role change updates day default/max |
+| `02-§106.11` | gap | POST with stored token; link `<origin>/token.html#token=…` |
+| `02-§106.12` | gap | Copy button; share button only when navigator.share exists |
+| `02-§106.13` | gap | Errors in Swedish in mint message area |
+| `02-§106.14` | gap | Hash redemption → /verify-admin → store like manual activation |
+| `02-§106.15` | gap | history.replaceState clears the fragment either way |
+| `02-§106.16` | gap | Token in #fragment, never ?query |
+| `02-§106.17` | gap | Secret never client-side; minting server-side only |
+| `02-§106.18` | gap | Swedish text; existing form components and CSS tokens |
