@@ -1244,18 +1244,18 @@ its requirement rows together with the test-legend rows that evidence them.
 
 | Requirement | Status | Test / Evidence |
 | ----------- | ------ | --------------- |
-| `02-§91.1` | gap | Single `ADMIN_TOKEN_SECRET` model (no list); `verifyToken` tests in `admin-token.test.js` |
-| `02-§91.2` | gap | Format `namn_roll_epoch_sig`; `signToken`/`verifyToken` round-trip + tamper tests |
-| `02-§91.3` | gap | `verifyToken` returns null / verify-admin disabled when secret empty |
-| `02-§91.29` | gap | Tamper, expiry, and unknown-role rejection (Node + PHP parity tests) |
-| `02-§91.30` | gap | `npm run admin:create` signs offline for `admin`/`superadmin` (60/180 days) |
-| `02-§91.31` | gap | `admin`/`superadmin` admin-equivalent; `early` a recognised role |
-| `02-§91.32` | gap | Runtimes warn at startup when `ADMIN_TOKEN_SECRET` < 32 bytes |
+| `02-§91.1` | covered | TOK-01..12: single `ADMIN_TOKEN_SECRET` model, `verifyToken` in `admin-token.test.js` |
+| `02-§91.2` | covered | TOK-01 fixed vector (Node + PHP `AdminTokenTest.php`); TOK-03/12 round-trips; `source/api/admin.js`, `api/src/Admin.php` |
+| `02-§91.3` | covered | TOK-10: `verifyToken` returns null when the secret is empty |
+| `02-§91.29` | covered | TOK-05..09: tampered field, unknown role, expired rejected (PHP parity in `AdminTokenTest.php`) |
+| `02-§91.30` | implemented | `npm run admin:create` signs offline for `admin`/`superadmin` (60/180 days); manual: minted token round-trips |
+| `02-§91.31` | covered | TOK-13, TOK-14: `admin`/`superadmin` admin-equivalent; `early` recognised but not admin |
+| `02-§91.32` | covered | TOK-22: `app.js` / `api/index.php` warn when `ADMIN_TOKEN_SECRET` < 32 bytes (parallels SESSION_SECRET, §387) |
 | `02-§91.4` | implemented | `app.js` POST /verify-admin; `api/index.php` handleVerifyAdmin() |
 | `02-§91.5` | implemented | Request body parsed in both Node.js and PHP handlers |
-| `02-§91.6` | gap | `verifyToken` accepts valid signature + recognised role + future epoch |
-| `02-§91.7` | gap | `verifyToken` rejects tampered/expired token |
-| `02-§91.8` | gap | Constant-time digest comparison (`tokenDigest` + `timingSafeEqual` / `hash_equals`) |
+| `02-§91.6` | covered | TOK-03, TOK-04, TOK-13: valid signature + recognised role + future epoch accepted |
+| `02-§91.7` | covered | TOK-05..09: tampered/expired token rejected |
+| `02-§91.8` | covered | SEC-386-03: constant-time `tokenDigest` + `timingSafeEqual` / `hash_equals(self::tokenDigest)` |
 | `02-§91.9` | covered | ADM-11: `renderAdminPage` produces valid HTML document |
 | `02-§91.10` | covered | ADM-12, ADM-13: text input + submit button in rendered output |
 | `02-§91.11` | implemented | manual: `admin.js` calls `POST /verify-admin` on form submit |
