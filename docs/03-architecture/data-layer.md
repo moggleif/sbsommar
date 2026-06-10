@@ -87,8 +87,9 @@ Two QA-only camps coexist in `camps.yaml` to provide a continuous QA
 testing window without overlapping the real-camp season:
 
 - A spring QA camp (`qa-thisweek`) runs through the off-season and
-  closes two weeks before the next real camp's `start_date`, leaving
-  the real-camp window QA-free.
+  closes when the next real camp opens for editing (its
+  `opens_for_editing`), so QA stays testable right up to the point the
+  real camp takes over, leaving the real-camp window QA-free.
 - An autumn QA camp (`qa-testcamp`) covers October 1 through December
   31 of the current year, reopening QA testing once the real-camp
   season ends.

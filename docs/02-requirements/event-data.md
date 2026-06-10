@@ -573,19 +573,22 @@ requirements that flow from that design.
 
 #### 42.9.1 Context
 
-The active QA camp must close before the upcoming real camp's pre-camp
-preparation period and reopen after the real-camp season ends, so QA
-testing never overlaps the real-camp window. See
-`03-architecture/data-layer.md §2 "QA camp isolation"` for the spring/autumn camp
-descriptions and the off-season window.
+The active QA camp stays open until the upcoming real camp opens for
+editing, then hands over to that real camp; a separate autumn QA camp
+reopens after the real-camp season ends. This keeps an open camp available
+for QA testing at all times except the real camp's own active window. See
+`03-architecture/data-layer.md §2 "QA camp isolation"` for the spring/autumn
+camp descriptions and the off-season window.
 
 #### 42.9.2 Requirements
 
 - Two QA-only camps exist in `camps.yaml` at any time: one "spring" camp
   active in the period leading up to the next real camp, and one "autumn"
   camp active after the real-camp season. <!-- 02-§42.31 -->
-- The spring QA camp's `end_date` is two weeks before the
-  `start_date` of the next non-QA, non-archived camp. <!-- 02-§42.32 -->
+- The spring QA camp's `end_date` is the date on which the next non-QA,
+  non-archived camp opens for editing (its `opens_for_editing`), so the QA
+  camp stays open for testing right up until the real camp's pre-camp
+  preparation period begins. <!-- 02-§42.32 -->
 - No QA-only camp's date range covers the period from the spring QA camp's
   `end_date` (exclusive) until the autumn QA camp's `start_date` (exclusive),
   so no QA camp is active in QA during the real-camp season. <!-- 02-§42.33 -->
