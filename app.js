@@ -34,6 +34,13 @@ const activeCamp = resolveActiveCamp(campsData.camps || [], undefined, BUILD_ENV
 const adminTokens = parseAdminTokens(process.env.ADMIN_TOKENS);
 const sessionSecret = process.env.SESSION_SECRET || '';
 
+// Warn (don't crash) when SESSION_SECRET is set but too weak to resist
+// ownership-cookie forgery (#387). An unset secret disables cookie ownership
+// entirely and fails closed, which is safe.
+if (sessionSecret && sessionSecret.length < 32) {
+  console.warn('WARNING: SESSION_SECRET is shorter than 32 characters — use a long random value to protect activity-ownership signatures.');
+}
+
 // ── Middleware ───────────────────────────────────────────────────────────────
 
 app.use(express.json());

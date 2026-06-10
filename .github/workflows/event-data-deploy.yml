@@ -1,8 +1,13 @@
 name: Event Data Deploy
 
-# Branch-protection gate for event-data PRs.
-# Validation runs in the API layer at submission time.
-# Build and deploy run post-merge (event-data-deploy-post-merge.yml).
+# Validation gate for event-data PRs (#369).
+#
+# API submissions validate at request time, but this PR check is the
+# branch-protection backstop: it re-runs the YAML schema validator
+# (lint-yaml.js) and the security scanner (check-yaml-security.js) against
+# every changed per-camp event file, so malformed or unsafe YAML cannot reach
+# main even via a hand-opened PR or a path the API missed. Build and deploy
+# run post-merge (event-data-deploy-post-merge.yml).
 
 permissions:
   contents: read
@@ -18,10 +23,52 @@ jobs:
   check:
     name: Event data check
     runs-on: ubuntu-latest
-    if: |
-      startsWith(github.head_ref, 'event/') ||
-      startsWith(github.head_ref, 'event-edit/')
 
     steps:
-      - name: Validated at API layer
-        run: echo "Validated at API layer"
+      - uses: actions/checkout@v6
+        with:
+          # Full history so the diff against the PR base resolves (CL-§9.5).
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Determine changed per-camp event files
+        id: changed
+        run: |
+          set -euo pipefail
+          base="${{ github.event.pull_request.base.sha }}"
+          # Per-camp event files only. camps.yaml / local.yaml are config, not
+          # event data, and are validated by full CI (CL-§9.4).
+          files=$(git diff --name-only "$base" HEAD -- 'source/data/*.yaml' \
+            | grep -vE '(^|/)(camps|local)\.yaml$' || true)
+          {
+            echo "files<<EOF"
+            echo "$files"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          if [ -n "$files" ]; then echo "has_files=true" >> "$GITHUB_OUTPUT"; else echo "has_files=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Validate schema and security of changed event files
+        if: steps.changed.outputs.has_files == 'true'
+        run: |
+          set -euo pipefail
+          echo "${{ steps.changed.outputs.files }}" | while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            if [ ! -f "$f" ]; then
+              echo "Skipping deleted file: $f"
+              continue
+            fi
+            echo "Validating $f"
+            node source/scripts/lint-yaml.js "$f"
+            node source/scripts/check-yaml-security.js "$f"
+          done
+
+      - name: No event-data files changed
+        if: steps.changed.outputs.has_files != 'true'
+        run: echo "No per-camp event files changed; nothing to validate."

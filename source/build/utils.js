@@ -61,4 +61,15 @@ function campDayButtons(startDate, endDate) {
   return days;
 }
 
-module.exports = { toDateString, escapeHtml, formatDate, campDayButtons };
+// Return the URL unchanged only when it is a safe http(s) link; otherwise ''.
+// Defence-in-depth (02-§49.4, issue #385): the render layer must not emit a
+// `javascript:`/`data:`/other-scheme URI into an href even if a value reached
+// events.json without passing API/CI validation (e.g. legacy or hand-edited
+// camp YAML). escapeHtml neutralises quotes but not the URL scheme.
+function safeLinkHref(url) {
+  if (url == null) return '';
+  const s = String(url).trim();
+  return /^https?:\/\//i.test(s) ? s : '';
+}
+
+module.exports = { toDateString, escapeHtml, formatDate, campDayButtons, safeLinkHref };

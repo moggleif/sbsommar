@@ -55,9 +55,32 @@ const RATE_LIMIT_EDIT_EVENT     = 30;
 const RATE_LIMIT_DELETE_EVENT   = 30;
 const RATE_LIMIT_FEEDBACK       = 5;
 
+/**
+ * Resolve the client IP used as the rate-limit key (#371, 02-§93.6).
+ *
+ * `X-Forwarded-For` is attacker-controlled and is only honoured when the
+ * direct peer (`REMOTE_ADDR`) is a configured trusted proxy — otherwise a
+ * client could rotate the header to mint a fresh rate-limit bucket per
+ * request and bypass throttling. `TRUSTED_PROXIES` is a comma-separated list
+ * of proxy IPs; when unset, the raw `REMOTE_ADDR` is always used.
+ */
 function clientIp(): string
 {
-    return (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '');
+    $remote = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
+
+    $trusted = array_filter(array_map('trim', explode(',', (string) ($_ENV['TRUSTED_PROXIES'] ?? ''))));
+    if ($remote !== '' && in_array($remote, $trusted, true)) {
+        $forwarded = (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? '');
+        if ($forwarded !== '') {
+            // The left-most entry is the original client appended by the proxy.
+            $first = trim(explode(',', $forwarded)[0]);
+            if (filter_var($first, FILTER_VALIDATE_IP) !== false) {
+                return $first;
+            }
+        }
+    }
+
+    return $remote;
 }
 
 // ── Routing ──────────────────────────────────────────────────────────────
@@ -71,23 +94,45 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 // ── Resolve active camp for time-gating ──────────────────────────────────
 
+// $activeCamp stays null only when the metadata cannot be loaded, parsed, or
+// resolved. Mutation handlers treat null as "metadata unavailable" and fail
+// closed (#370) — they must never silently skip time-gating. The camps file is
+// looked up in the deploy-bundled location first (api/data/, shipped alongside
+// the API) and then the repo layout (source/data/, for local dev and tests).
 $activeCamp = null;
 try {
-    $campsPath = dirname(__DIR__) . '/source/data/camps.yaml';
-    if (file_exists($campsPath)) {
+    $campsCandidates = [
+        __DIR__ . '/data/camps.yaml',
+        dirname(__DIR__) . '/source/data/camps.yaml',
+    ];
+    $campsPath = null;
+    foreach ($campsCandidates as $candidate) {
+        if (file_exists($candidate)) {
+            $campsPath = $candidate;
+            break;
+        }
+    }
+    if ($campsPath !== null) {
         $campsData  = Yaml::parseFile($campsPath);
         $buildEnv   = $_ENV['BUILD_ENV'] ?? null;
         $activeCamp = ActiveCamp::resolve($campsData['camps'] ?? [], null, $buildEnv);
     }
 } catch (\Throwable $e) {
-    // Non-fatal: if camp resolution fails, time-gating is skipped.
-    // This can happen when deployed without the source/ directory.
+    // Leave $activeCamp null → mutation endpoints fail closed below.
+    error_log('Camp metadata resolution failed: ' . $e->getMessage());
 }
 
 // ── Parse configured admin tokens once ───────────────────────────────────
 
 $adminTokens = Admin::parseAdminTokens($_ENV['ADMIN_TOKENS'] ?? null);
 $sessionSecret = (string) ($_ENV['SESSION_SECRET'] ?? '');
+
+// Warn (don't fail) when SESSION_SECRET is set but too weak to resist
+// ownership-cookie forgery (#387). An unset secret disables cookie ownership
+// entirely and fails closed, which is safe.
+if ($sessionSecret !== '' && strlen($sessionSecret) < 32) {
+    error_log('WARNING: SESSION_SECRET is shorter than 32 characters — use a long random value to protect activity-ownership signatures.');
+}
 
 // ── Handlers ─────────────────────────────────────────────────────────────
 
@@ -161,6 +206,13 @@ function handleAddEvent(?array $activeCamp, array $adminTokens, string $sessionS
 {
     if (RateLimit::isLimited(clientIp(), 'add-event', RATE_LIMIT_ADD_EVENT, HOUR_SECONDS)) {
         jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
+
+        return;
+    }
+
+    // Fail closed when camp metadata is unavailable: never skip time-gating (#370).
+    if ($activeCamp === null) {
+        jsonResponse(['success' => false, 'error' => 'Formuläret är inte tillgängligt just nu. Kontakta arrangören.'], 503);
 
         return;
     }
@@ -246,6 +298,13 @@ function handleAddEvents(?array $activeCamp, array $adminTokens, string $session
         return;
     }
 
+    // Fail closed when camp metadata is unavailable: never skip time-gating (#370).
+    if ($activeCamp === null) {
+        jsonResponse(['success' => false, 'error' => 'Formuläret är inte tillgängligt just nu. Kontakta arrangören.'], 503);
+
+        return;
+    }
+
     $body = getJsonBody();
 
     // Time-gating with admin bypass (02-§26.17, 02-§26.18)
@@ -323,6 +382,13 @@ function handleEditEvent(?array $activeCamp, array $adminTokens, string $session
         return;
     }
 
+    // Fail closed when camp metadata is unavailable: never skip time-gating (#370).
+    if ($activeCamp === null) {
+        jsonResponse(['success' => false, 'error' => 'Formuläret är inte tillgängligt just nu. Kontakta arrangören.'], 503);
+
+        return;
+    }
+
     $body    = getJsonBody();
     $isAdmin = Admin::verifyAdminToken($body['adminToken'] ?? null, $adminTokens);
 
@@ -394,6 +460,13 @@ function handleDeleteEvent(?array $activeCamp, array $adminTokens, string $sessi
 {
     if (RateLimit::isLimited(clientIp(), 'delete-event', RATE_LIMIT_DELETE_EVENT, HOUR_SECONDS)) {
         jsonResponse(['success' => false, 'error' => RATE_LIMIT_MSG], 429);
+
+        return;
+    }
+
+    // Fail closed when camp metadata is unavailable: never skip time-gating (#370).
+    if ($activeCamp === null) {
+        jsonResponse(['success' => false, 'error' => 'Formuläret är inte tillgängligt just nu. Kontakta arrangören.'], 503);
 
         return;
     }

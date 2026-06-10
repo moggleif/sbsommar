@@ -54,8 +54,34 @@ final class Admin
     }
 
     /**
+     * Per-process random key used only to equalise lengths before comparison.
+     */
+    private static function compareKey(): string
+    {
+        static $key = null;
+        if ($key === null) {
+            $key = random_bytes(32);
+        }
+
+        return $key;
+    }
+
+    /**
+     * Hash a token to a fixed-width digest so comparison leaks neither the
+     * match nor the token length via timing (02-§91.8, #386).
+     */
+    private static function tokenDigest(string $value): string
+    {
+        return hash_hmac('sha256', $value, self::compareKey(), true);
+    }
+
+    /**
      * Constant-time check of a candidate against the list of valid tokens.
      * Returns false for empty/expired candidates and empty token lists.
+     *
+     * Hashing both sides to a fixed-width digest lets hash_equals run on every
+     * candidate/valid pair without a length pre-check, so the comparison leaks
+     * neither which token matched nor the candidate's length.
      *
      * @param list<string> $validTokens
      */
@@ -67,12 +93,17 @@ final class Admin
         if (self::isTokenExpired($candidate)) {
             return false;
         }
+
+        $candidateDigest = self::tokenDigest($candidate);
+        $match = false;
+        // Compare against every token (no early return) so neither which token
+        // matched nor the candidate's length is observable through timing.
         foreach ($validTokens as $valid) {
-            if (strlen($candidate) === strlen($valid) && hash_equals($valid, $candidate)) {
-                return true;
+            if (hash_equals(self::tokenDigest($valid), $candidateDigest)) {
+                $match = true;
             }
         }
 
-        return false;
+        return $match;
     }
 }

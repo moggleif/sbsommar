@@ -31,6 +31,19 @@ final class Feedback
 
     private const TEXT_FIELDS = ['title', 'description', 'name'];
 
+    /**
+     * Length caps for client-supplied metadata fields (issue #383). These
+     * fields are not run through the injection scan and end up in a
+     * GitHub-issue Markdown table.
+     */
+    private const META_MAX_LENGTHS = [
+        'url'       => 500,
+        'viewport'  => 20,
+        'userAgent' => 400,
+        'timestamp' => 40,
+        'name'      => 200,
+    ];
+
     private const INJECTION_PATTERNS = [
         '/<script/i'         => '<script>',
         '/javascript:/i'     => 'javascript: URI',
@@ -100,6 +113,23 @@ final class Feedback
     // ── GitHub Issue creation ────────────────────────────────────────────
 
     /**
+     * Make a value safe to drop into a single Markdown table cell (issue #383):
+     * collapse control characters (incl. CR/LF/TAB) to a single space so a
+     * value cannot break the table row, escape the `|` column delimiter, and
+     * cap the length so a client cannot inject table structure or an unbounded
+     * payload into the issue.
+     */
+    public static function sanitizeMetaField(mixed $value, int $maxLen): string
+    {
+        $s = (string) ($value ?? '');
+        $s = (string) preg_replace('/[\x00-\x1f\x7f]+/', ' ', $s);
+        $s = str_replace('|', '\\|', $s);
+        $s = trim($s);
+
+        return mb_substr($s, 0, $maxLen);
+    }
+
+    /**
      * @param array<string,mixed> $body  Validated request body
      * @return string  HTML URL of the created issue
      */
@@ -108,11 +138,11 @@ final class Feedback
         $category    = trim((string) ($body['category'] ?? ''));
         $title       = trim((string) ($body['title'] ?? ''));
         $description = trim((string) ($body['description'] ?? ''));
-        $name        = trim((string) ($body['name'] ?? ''));
-        $pageUrl     = trim((string) ($body['url'] ?? ''));
-        $viewport    = (string) ($body['viewport'] ?? '');
-        $userAgent   = (string) ($body['userAgent'] ?? '');
-        $timestamp   = (string) ($body['timestamp'] ?? '');
+        $name        = self::sanitizeMetaField(trim((string) ($body['name'] ?? '')), self::META_MAX_LENGTHS['name']);
+        $pageUrl     = self::sanitizeMetaField(trim((string) ($body['url'] ?? '')), self::META_MAX_LENGTHS['url']);
+        $viewport    = self::sanitizeMetaField($body['viewport'] ?? '', self::META_MAX_LENGTHS['viewport']);
+        $userAgent   = self::sanitizeMetaField($body['userAgent'] ?? '', self::META_MAX_LENGTHS['userAgent']);
+        $timestamp   = self::sanitizeMetaField($body['timestamp'] ?? '', self::META_MAX_LENGTHS['timestamp']);
 
         $display = self::CATEGORY_DISPLAY[$category] ?? $category;
 

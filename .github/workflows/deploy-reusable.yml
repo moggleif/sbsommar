@@ -102,6 +102,12 @@ jobs:
             # Cleanup
             rm -rf "$DEPLOY_DIR/public_html_old"
 
+      # Ship camp metadata alongside the API so the PHP time-gating can always
+      # resolve the active camp from disk and never fail open (#370). The API
+      # reads api/data/camps.yaml first, then the repo source path.
+      - name: Bundle camp metadata into API package
+        run: mkdir -p api/data && cp source/data/camps.yaml api/data/camps.yaml
+
       - name: Package PHP API for upload
         run: tar -czf api.tar.gz --exclude='.env' --exclude='.env.example' --exclude='vendor' -C api .
 

@@ -9,6 +9,12 @@ user-submitted data reaches rendered HTML.
 This is a point-in-time review. It is broad, not exhaustive; it did not include
 live penetration testing of the running QA host.
 
+> **Status (2026-06-10):** All five new findings (N1–N5) and the three
+> already-tracked findings (#369–#371) are fixed on
+> `claude/security-hardening-assessment-rqnanu`, with Node + PHP unit tests
+> and structural checks. Live HTTP-header verification on QA (N2) remains a
+> manual checkpoint after deploy.
+
 ---
 
 ## Method and scope

@@ -766,9 +766,15 @@ reusable implementation per runtime.
   time-gating so a throttled client never touches the GitHub API or the
   admin-token comparison path. <!-- 02-§93.5 -->
 - The client IP used as the rate-limit key is derived from `req.ip` in
-  Node — that is, Express's trust-proxy-aware resolver (see §93.15) —
-  and from `HTTP_X_FORWARDED_FOR` with `REMOTE_ADDR` fallback in
-  PHP. <!-- 02-§93.6 -->
+  Node — that is, Express's trust-proxy-aware resolver (see §93.15). In
+  PHP it is `REMOTE_ADDR`, except that the left-most `HTTP_X_FORWARDED_FOR`
+  entry is used when `REMOTE_ADDR` is listed in the `TRUSTED_PROXIES`
+  environment variable and that entry is a syntactically valid IP. Because
+  `X-Forwarded-For` is attacker-controlled, it is never trusted from an
+  untrusted peer — otherwise a direct client could rotate the header to
+  mint a fresh rate-limit bucket per request and bypass throttling. When
+  `TRUSTED_PROXIES` is unset, the raw `REMOTE_ADDR` is always
+  used. <!-- 02-§93.6 -->
 
 ### 93.3 Rate-limit implementation (site requirements)
 

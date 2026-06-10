@@ -1,7 +1,7 @@
 'use strict';
 
 const { pageNav, pageFooter } = require('./layout');
-const { escapeHtml, toDateString, formatDate } = require('./utils');
+const { escapeHtml, toDateString, formatDate, safeLinkHref } = require('./utils');
 const { renderDescriptionHtml } = require('./markdown');
 const { goatcounterScript } = require('./analytics');
 const { pwaHeadTags } = require('./pwa');
@@ -44,9 +44,10 @@ function eventExtraHtml(ev) {
   if (ev.description) {
     parts.push(`<div class="event-desc">${renderDescriptionHtml(ev.description)}</div>`);
   }
-  if (ev.link) {
+  const safeLink = safeLinkHref(ev.link);
+  if (safeLink) {
     parts.push(
-      `<a class="event-ext-link" href="${escapeHtml(String(ev.link))}" target="_blank" rel="noopener">Extern länk →</a>`,
+      `<a class="event-ext-link" href="${escapeHtml(safeLink)}" target="_blank" rel="noopener">Extern länk →</a>`,
     );
   }
   return `<div class="event-extra">${parts.join('')}</div>`;
