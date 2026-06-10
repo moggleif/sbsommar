@@ -766,9 +766,19 @@ reusable implementation per runtime.
   time-gating so a throttled client never touches the GitHub API or the
   admin-token comparison path. <!-- 02-§93.5 -->
 - The client IP used as the rate-limit key is derived from `req.ip` in
-  Node — that is, Express's trust-proxy-aware resolver (see §93.15) —
-  and from `HTTP_X_FORWARDED_FOR` with `REMOTE_ADDR` fallback in
-  PHP. <!-- 02-§93.6 -->
+  Node — that is, Express's trust-proxy-aware resolver (see §93.15). In
+  PHP it is `REMOTE_ADDR`, except that the **right-most**
+  `HTTP_X_FORWARDED_FOR` entry — the address the trusted proxy appended — is
+  used when `REMOTE_ADDR` is listed in the `TRUSTED_PROXIES` environment
+  variable and that entry is a syntactically valid IP. The right-most entry is
+  chosen because a client can prepend spoofed entries but cannot control the
+  value the trusted proxy adds last; the left-most entry is attacker-controlled
+  whenever the proxy appends (the common behaviour) rather than replaces.
+  Because `X-Forwarded-For` is attacker-controlled, it is never trusted from an
+  untrusted peer — otherwise a direct client could rotate the header to mint a
+  fresh rate-limit bucket per request and bypass throttling. When
+  `TRUSTED_PROXIES` is unset, the raw `REMOTE_ADDR` is always
+  used. <!-- 02-§93.6 -->
 
 ### 93.3 Rate-limit implementation (site requirements)
 
@@ -1097,3 +1107,157 @@ keep working.
   messages for the same invalid input. The PHP API additionally applies the
   whole-document validation and indentation matching to its batch (recurring)
   add flow, which has no Node.js counterpart. <!-- 02-§102.7 -->
+
+---
+
+## 104. Security Hardening (2026-06)
+
+### 104.1 Context
+
+A point-in-time security review of the API, render pipeline, web-server
+configuration, and deploy/secret handling (recorded in
+`SECURITY-ASSESSMENT-2026-06.md`) identified a set of hardening gaps. This
+section is the desired-state declaration for each. It complements the
+adjacent security sections (§39, §49, §73, §91, §93, §95, §100, §102) and the
+already-tracked workflow/proxy/time-gating items.
+
+### 104.2 Feedback metadata sanitisation
+
+The feedback endpoint embeds client-supplied metadata in a GitHub-issue
+Markdown table. These metadata fields are not part of the injection-pattern
+scan (§73.12) and must not be able to break the table or carry an unbounded
+payload.
+
+- The feedback API caps the length of the client-supplied metadata fields
+  before embedding them in the issue: page URL ≤ 500, viewport ≤ 20,
+  User-Agent ≤ 400, timestamp ≤ 40, and name ≤ 200 characters. <!-- 02-§104.1 -->
+- Each metadata value placed in the issue's Markdown table has its control
+  characters (including carriage return, line feed, and tab) collapsed to a
+  single space and its `|` characters escaped, so a submission cannot add
+  table rows or columns or smuggle structure into the issue. <!-- 02-§104.2 -->
+- The metadata sanitisation is implemented identically in
+  `source/api/feedback.js` and `api/src/Feedback.php`. <!-- 02-§104.3 -->
+
+### 104.3 Link protocol validation in the render layer
+
+The event `link` field is rendered as a clickable anchor. The render layer
+must not depend solely on API-time (§49.4) and CI validation, because
+hand-edited or legacy camp YAML never passes the API.
+
+- When an event's `link` field is rendered as an anchor, the `href` is emitted
+  only when the link begins with `http://` or `https://` (case-insensitive);
+  any other value renders no external link. <!-- 02-§104.4 -->
+- This render-time check is applied everywhere the event `link` is rendered as
+  an anchor: the build renderers (`source/build/render.js`,
+  `source/build/render-arkiv.js`, `source/build/render-event.js`) and the
+  client today/display script (`source/assets/js/client/events-today.js`),
+  independent of the API and CI link validation. <!-- 02-§104.5 -->
+
+### 104.4 Constant-time admin-token comparison
+
+§91.8 requires constant-time admin-token comparison. The comparison must not
+leak the candidate's length.
+
+- Admin-token verification compares a candidate against each configured token
+  by hashing both sides to a fixed-width keyed digest and comparing the
+  digests in constant time, with no length pre-check and no early return, so
+  neither a match nor the candidate's length is observable through
+  timing. <!-- 02-§104.6 -->
+- This comparison is implemented identically in `source/api/admin.js` and
+  `api/src/Admin.php`. <!-- 02-§104.7 -->
+
+### 104.5 Session secret configuration
+
+Activity-ownership authorisation rests on an HMAC signature keyed by
+`SESSION_SECRET`. A weak secret allows ownership forgery.
+
+- The session-signing secret is supplied via the `SESSION_SECRET` environment
+  variable and is documented in `.env.example` with its purpose and a minimum
+  strength of 32 random bytes. <!-- 02-§104.8 -->
+- When `SESSION_SECRET` is set but shorter than 32 characters, both runtimes
+  (`app.js`, `api/index.php`) log a warning at startup. An unset secret
+  disables cookie-based ownership and fails closed. <!-- 02-§104.9 -->
+
+### 104.6 Trusted-proxy rate-limit key and atomic counter
+
+The PHP rate-limiter keys on the client IP. `X-Forwarded-For` is
+attacker-controlled and the counter file must update atomically.
+
+- The PHP rate-limiter uses `REMOTE_ADDR` as the client key, honouring the
+  right-most (proxy-appended) `X-Forwarded-For` entry only when `REMOTE_ADDR`
+  is listed in the `TRUSTED_PROXIES` environment variable and that entry is a
+  syntactically valid IP. The right-most entry is used because the left-most is
+  client-spoofable when the proxy appends (see §93.6). <!-- 02-§104.10 -->
+- The PHP rate-limit counter file is read and written under an exclusive lock
+  (`flock`) for the whole read-modify-write, so concurrent requests cannot
+  lose updates and a client cannot exceed a limit by racing. <!-- 02-§104.11 -->
+- `TRUSTED_PROXIES` is documented in `.env.example`; when it is unset,
+  `X-Forwarded-For` is never trusted. <!-- 02-§104.12 -->
+
+### 104.7 Fail-closed time-gating when camp metadata is unavailable
+
+The PHP time-gating depends on local camp metadata. When that metadata is
+unavailable it must not silently skip the gate.
+
+- When the PHP API cannot load, parse, or resolve the active camp metadata,
+  the mutation endpoints (`/add-event`, `/add-events`, `/edit-event`,
+  `/delete-event`) reject the request with HTTP 503 rather than skipping
+  time-gating. <!-- 02-§104.13 -->
+- The PHP API resolves the camps metadata from `api/data/camps.yaml` (bundled
+  with the API deploy) first, falling back to the repository
+  `source/data/camps.yaml`; the deploy workflow copies `camps.yaml` into the
+  API package so the file is always present on the server. <!-- 02-§104.14 -->
+
+### 104.8 Event-data pull-request validation gate
+
+The event-data PR check is the branch-protection backstop for malformed or
+unsafe YAML and must run real validation.
+
+- The event-data pull-request workflow (`event-data-deploy.yml`) runs the
+  security scanner (`check-yaml-security.js`) as a hard block against every
+  changed per-camp event file (excluding `camps.yaml` and `local.yaml`); a
+  finding fails the check. The schema validator (`lint-yaml.js`) also runs on
+  every changed file: it is a hard block for files belonging to non-archived
+  camps and advisory (reported, non-blocking) for archived camps, whose data
+  predates the current required-field schema. New submissions are schema-validated
+  at the API layer before the PR is opened, so active-camp data remains
+  enforced. <!-- 02-§104.15 -->
+- The workflow validates every pull request that touches `source/data/*.yaml`
+  — including `event-delete/` branches and manually opened PRs — and checks
+  out with enough git history for the diff against the base to resolve
+  (CL-§9.5). <!-- 02-§104.16 -->
+- The validation job performs its diff and validation in a single step so no
+  untrusted value crosses a step-output boundary, and no untrusted value is
+  interpolated as `${{ … }}` into a `run:` script: the PR base SHA arrives via
+  an environment variable and the changed filenames are a local shell variable
+  read as data (quoted here-string, each name quoted). A crafted filename such
+  as `source/data/x$(…).yaml` is therefore inert and cannot inject shell
+  commands on the runner. <!-- 02-§104.20 -->
+
+### 104.9 HTTP security headers
+
+The site renders user-submitted content as HTML and relies on output encoding
+and a Markdown sanitiser; HTTP security headers add an independent defence
+layer. The static site and the API may be on different origins (in production
+the API is a separate `api.` host), so the policy must allow cross-origin API
+calls without weakening the rest.
+
+- The site `.htaccess` sets a `Content-Security-Policy` that restricts
+  `default-src` to `'self'`, forbids plugins (`object-src 'none'`), framing
+  (`frame-ancestors 'none'`), and base-tag hijacking (`base-uri 'self'`),
+  permits the GoatCounter script/connect/image origins, and allows inline
+  scripts and styles (`'unsafe-inline'`) as required by the build's per-page
+  inline data scripts on static hosting. <!-- 02-§104.17 -->
+- The CSP `connect-src` lists `'self'` and the API origin so the form,
+  feedback, edit/delete, and verify-admin `fetch()` calls are not blocked when
+  the API is a separate origin. The build injects the API origin (derived from
+  `API_URL`) into `connect-src` at build time; `'self'` covers a same-origin or
+  local API, and the built `.htaccess` contains no remaining placeholder
+  token. <!-- 02-§104.18 -->
+- The site `.htaccess` also sets `X-Content-Type-Options: nosniff`,
+  `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`,
+  a `Permissions-Policy` disabling geolocation/microphone/camera/interest-cohort,
+  and `Strict-Transport-Security` with `max-age` of one year. `includeSubDomains`
+  and `preload` are intentionally omitted until every `*.sbsommar.se` subdomain
+  is confirmed HTTPS-only, because the directive is hard to reverse within the
+  `max-age` window. <!-- 02-§104.19 -->

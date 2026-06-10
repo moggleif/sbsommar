@@ -34,6 +34,16 @@ function isTokenExpired(token) {
 
 // ── verifyAdminToken ────────────────────────────────────────────────────────
 
+// Per-process random key used only to equalise lengths before comparison.
+// Hashing both sides to a fixed-width digest lets us run timingSafeEqual on
+// every candidate/valid pair without a length pre-check, so the comparison
+// leaks neither the match nor the token length via timing (02-§91.8, #386).
+const COMPARE_KEY = crypto.randomBytes(32);
+
+function tokenDigest(value) {
+  return crypto.createHmac('sha256', COMPARE_KEY).update(String(value)).digest();
+}
+
 // Check if a candidate token matches any entry in the valid tokens list.
 // Uses constant-time comparison to prevent timing attacks (02-§91.8).
 // Rejects tokens whose embedded expiry epoch has passed.
@@ -43,13 +53,16 @@ function verifyAdminToken(candidate, validTokens) {
   // Check embedded expiry before comparing
   if (isTokenExpired(candidate)) return false;
 
+  const candidateDigest = tokenDigest(candidate);
+  let match = false;
+  // Compare against every token (no early return) so neither which token
+  // matched nor the candidate's length is observable through timing.
   for (const valid of validTokens) {
-    if (candidate.length === valid.length &&
-        crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(valid))) {
-      return true;
+    if (crypto.timingSafeEqual(tokenDigest(valid), candidateDigest)) {
+      match = true;
     }
   }
-  return false;
+  return match;
 }
 
 module.exports = { parseAdminTokens, verifyAdminToken, isTokenExpired, extractTokenExpiry };

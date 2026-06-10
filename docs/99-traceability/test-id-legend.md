@@ -187,3 +187,12 @@ Part of [the traceability index](./index.md).
 | PHARN-01..09 | `tests/php-harness.test.js` | PHP harness wiring: Composer, PHPUnit, CI, Node-only hook (02-§103) |
 | (PHPUnit) | `api/tests/ValidateTest.php` | PHP mirror of `validate.test.js`, run via `composer test` (02-§103.4) |
 | (PHPUnit) | `api/tests/GitHubTest.php` | PHP mirror of `github.test.js`, run via `composer test` (02-§103.4) |
+| SEC-369-01..05 | `tests/security-hardening.test.js` | Event-data PR workflow: real validation, archived scope, script-injection-safe (02-§104.15, 02-§104.16, 02-§104.20) |
+| SEC-370-01..03 | `tests/security-hardening.test.js` | PHP time-gating fails closed; bundled camps.yaml (02-§104.13, 02-§104.14) |
+| SEC-371-01..03 | `tests/security-hardening.test.js` | PHP rate-limit trusted-proxy IP (right-most XFF) + `flock` counter (02-§104.10, 02-§104.11) |
+| SEC-383-01..05 | `tests/security-hardening.test.js` | Feedback metadata sanitisation (02-§104.1–104.3) |
+| SEC-384-01..03 | `tests/security-hardening.test.js` | HTTP security headers + CSP API-origin injection (02-§104.17–104.19) |
+| SEC-385-01..05 | `tests/security-hardening.test.js` | Link protocol validation in the render layer (02-§104.4, 02-§104.5) |
+| SEC-386-01..03 | `tests/security-hardening.test.js` | Constant-time admin-token comparison (02-§104.6, 02-§104.7) |
+| SEC-387-01..02 | `tests/security-hardening.test.js` | SESSION_SECRET / TRUSTED_PROXIES documented; weak-secret warning (02-§104.8, 02-§104.9) |
+| (PHPUnit) | `api/tests/SecurityHardeningTest.php` | PHP coverage of feedback sanitiser, constant-time token, rate-limit counter (02-§104) |

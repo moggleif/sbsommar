@@ -1,2 +1,5 @@
 /.phpunit.cache/
 /composer.lock
+
+# Camp metadata copied in by the deploy workflow (#370); not committed.
+/data/

@@ -1,6 +1,6 @@
 'use strict';
 
-const { escapeHtml, formatDate, toDateString } = require('./utils');
+const { escapeHtml, formatDate, toDateString, safeLinkHref } = require('./utils');
 const { pageNav, pageFooter } = require('./layout');
 const { renderDescriptionHtml } = require('./markdown');
 const { pwaHeadTags } = require('./pwa');
@@ -58,8 +58,9 @@ function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = []
   }
 
   let linkHtml = '';
-  if (event.link) {
-    linkHtml = `    <p class="event-link-row"><a class="event-ext-link" href="${escapeHtml(String(event.link))}" target="_blank" rel="noopener noreferrer">Extern länk (för diskussion etc) →</a></p>\n`;
+  const safeLink = safeLinkHref(event.link);
+  if (safeLink) {
+    linkHtml = `    <p class="event-link-row"><a class="event-ext-link" href="${escapeHtml(safeLink)}" target="_blank" rel="noopener noreferrer">Extern länk (för diskussion etc) →</a></p>\n`;
   }
 
   const conflictHtml = renderConflictBanner(event, allEvents);

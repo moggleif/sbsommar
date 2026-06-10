@@ -45,11 +45,21 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  // Only emit http(s) links into an href (defence-in-depth, issue #385):
+  // a javascript:/data: URI in e.link must never become a clickable href,
+  // even if it reached events.json without API/CI validation.
+  function safeHttp(u) {
+    if (u == null) return '';
+    var s = String(u).trim();
+    return /^https?:\/\//i.test(s) ? s : '';
+  }
+
   var rows = todayEvents.map(function (e) {
     var timeStr = e.end ? esc(e.start) + '–' + esc(e.end) : esc(e.start);
     var metaParts = [e.location, e.responsible].filter(Boolean).map(esc);
     var metaEl = metaParts.length ? '<span class="ev-meta"> · ' + metaParts.join(' · ') + '</span>' : '';
-    var hasExtra = e.description || e.descriptionHtml || e.link;
+    var safeLink = safeHttp(e.link);
+    var hasExtra = e.description || e.descriptionHtml || safeLink;
     var idAttr = e.id ? ' data-event-id="' + esc(e.id) + '"' : '';
     var dateAttr = e.date ? ' data-event-date="' + esc(e.date) + '"' : '';
 
@@ -60,8 +70,8 @@
       } else if (e.description) {
         extraParts.push('<div class="event-desc"><p>' + esc(e.description) + '</p></div>');
       }
-      if (e.link) {
-        extraParts.push('<a class="event-ext-link" href="' + esc(e.link) + '" target="_blank" rel="noopener">Extern länk →</a>');
+      if (safeLink) {
+        extraParts.push('<a class="event-ext-link" href="' + esc(safeLink) + '" target="_blank" rel="noopener">Extern länk →</a>');
       }
       return '<details class="event-row"' + idAttr + dateAttr + '><summary>' +
         '<span class="ev-time">' + timeStr + '</span>' +

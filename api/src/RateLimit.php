@@ -27,34 +27,53 @@ final class RateLimit
     public static function isLimited(string $ip, string $namespace, int $limit, int $windowSeconds): bool
     {
         $file = sys_get_temp_dir() . '/' . self::STATE_FILE;
-        $data = [];
 
-        if (file_exists($file)) {
-            $raw = file_get_contents($file);
-            $data = json_decode($raw ?: '{}', true) ?: [];
+        // Open for read+write (create if absent) and hold an exclusive lock for
+        // the whole read-modify-write so concurrent requests cannot clobber
+        // each other's counters (#371). On a filesystem error we fail open
+        // rather than block legitimate traffic.
+        $fp = @fopen($file, 'c+');
+        if ($fp === false) {
+            return false;
         }
-
-        $now = time();
-
-        // Sweep expired entries.
-        foreach ($data as $k => $entry) {
-            if ($now > ($entry['resetAt'] ?? 0)) {
-                unset($data[$k]);
-            }
-        }
-
-        $key = "{$namespace}:{$ip}";
-        $entry = $data[$key] ?? null;
-        if ($entry === null || $now > ($entry['resetAt'] ?? 0)) {
-            $data[$key] = ['count' => 1, 'resetAt' => $now + $windowSeconds];
-            file_put_contents($file, json_encode($data));
+        if (!flock($fp, LOCK_EX)) {
+            fclose($fp);
 
             return false;
         }
 
-        $data[$key]['count'] = ($data[$key]['count'] ?? 0) + 1;
-        file_put_contents($file, json_encode($data));
+        try {
+            $raw  = stream_get_contents($fp);
+            $data = json_decode($raw ?: '{}', true) ?: [];
 
-        return $data[$key]['count'] > $limit;
+            $now = time();
+
+            // Sweep expired entries.
+            foreach ($data as $k => $entry) {
+                if ($now > ($entry['resetAt'] ?? 0)) {
+                    unset($data[$k]);
+                }
+            }
+
+            $key   = "{$namespace}:{$ip}";
+            $entry = $data[$key] ?? null;
+            if ($entry === null || $now > ($entry['resetAt'] ?? 0)) {
+                $data[$key] = ['count' => 1, 'resetAt' => $now + $windowSeconds];
+                $limited    = false;
+            } else {
+                $data[$key]['count'] = ($data[$key]['count'] ?? 0) + 1;
+                $limited             = $data[$key]['count'] > $limit;
+            }
+
+            ftruncate($fp, 0);
+            rewind($fp);
+            fwrite($fp, json_encode($data));
+            fflush($fp);
+
+            return $limited;
+        } finally {
+            flock($fp, LOCK_UN);
+            fclose($fp);
+        }
     }
 }

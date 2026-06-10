@@ -1543,3 +1543,30 @@ refactor of `render-lokaler.js` onto the shared module).
 | `02-§103.7` | implemented | A failing PHPUnit test exits non-zero, failing the `Run PHP tests` step; manual (CI behaviour) |
 | `02-§103.8` | implemented | `composer test` runs the suite locally after `composer install` in `api/` (verified: 37 tests, 57 assertions pass) |
 | `02-§103.9` | covered | PHARN-09: pre-commit hook (`.githooks/pre-commit`) invokes no `php`/`composer` |
+
+### §104 — Security Hardening (2026-06)
+
+Doc ref: `03-architecture/platform-and-security.md §34`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§104.1` | covered | SEC-383-03 + PHPUnit `testSanitizeCapsLength`: per-field caps in `META_MAX_LENGTHS`; `source/api/feedback.js` + `api/src/Feedback.php` |
+| `02-§104.2` | covered | SEC-383-01, SEC-383-02, SEC-383-04, SEC-383-06 + PHPUnit `testSanitize*`/`testFeedbackTableRowsKeepTwoColumns`: control chars collapsed, backslash escaped before `\|` (CodeQL js/incomplete-sanitization, code-scanning #53); `sanitizeMetaField()` |
+| `02-§104.3` | covered | SEC-383-05 + PHPUnit `SecurityHardeningTest`: Node/PHP parity of the sanitiser |
+| `02-§104.4` | covered | SEC-385-01, SEC-385-02: `safeLinkHref()` emits href only for `http(s)`; `source/build/utils.js` |
+| `02-§104.5` | covered | SEC-385-03: build renderers + `events-today.js` route the link through the guard; `render.js`, `render-arkiv.js`, `events-today.js` |
+| `02-§104.6` | covered | SEC-386-01, SEC-386-02 + PHPUnit `testAdminToken*`: digest-based constant-time compare, no length pre-check; `source/api/admin.js` + `api/src/Admin.php` |
+| `02-§104.7` | covered | SEC-386-03: Node/PHP parity; source asserts no `length === length` short-circuit |
+| `02-§104.8` | covered | SEC-387-01: `.env.example` documents `SESSION_SECRET` with 32-byte minimum |
+| `02-§104.9` | covered | SEC-387-02: `app.js` + `api/index.php` warn on a secret shorter than 32 chars; unset disables ownership (fails closed) |
+| `02-§104.10` | covered | SEC-371-01, SEC-371-03: `clientIp()` trusts `X-Forwarded-For` only from `TRUSTED_PROXIES`, validates the IP, and uses the right-most (proxy-appended) entry — not the spoofable left-most; `api/index.php` (cross-ref 02-§93.6) |
+| `02-§104.11` | covered | SEC-371-02 + PHPUnit `testRateLimitCountsAndTrips`/`testRateLimitSeparatesNamespaces`: `flock(LOCK_EX)` + `ftruncate` read-modify-write; `api/src/RateLimit.php` |
+| `02-§104.12` | covered | SEC-387-01: `TRUSTED_PROXIES` documented in `.env.example`; unset ⇒ XFF never trusted |
+| `02-§104.13` | covered | SEC-370-02: mutation handlers return HTTP 503 when `$activeCamp` is null; `api/index.php` |
+| `02-§104.14` | covered | SEC-370-01, SEC-370-03: bundled `api/data/camps.yaml` resolved first with repo fallback; deploy workflow copies `camps.yaml`; `api/index.php`, `deploy-reusable.yml`, `api/.gitignore` |
+| `02-§104.15` | covered | SEC-369-01, SEC-369-04: `check-yaml-security.js` hard-blocks every changed per-camp file; `lint-yaml.js` hard-blocks non-archived camps and is advisory for archived (derived from `camps.yaml`); `event-data-deploy.yml`. Locally simulated: archived edit exit 0, injected `javascript:` link exit 1 |
+| `02-§104.16` | covered | SEC-369-02, SEC-369-03: `fetch-depth: 0`, no job-level `if`; validates `event-delete/` and manual data PRs; quoted here-string loop (not a pipe) so a finding reliably fails the job |
+| `02-§104.20` | covered | SEC-369-05: single-step diff+validate (no step-output crossing); base SHA via `env: BASE_SHA`, filenames a local var read via quoted here-string; no `${{ }}` in any `run:`, no untrusted write to `GITHUB_OUTPUT`. Locally proved a `x$(…).yaml` filename executes under an interpolated/unquoted-heredoc pattern and is inert under this one |
+| `02-§104.17` | covered | SEC-384-01: `source/static/.htaccess` sets a CSP with `default-src 'self'`, `object-src 'none'`, `frame-ancestors 'none'`, `base-uri 'self'`, GoatCounter origins, `'unsafe-inline'` scripts/styles |
+| `02-§104.18` | covered | SEC-384-03: `injectHtaccessCsp()` injects the `API_URL` origin into `connect-src` (cross-origin added, same-origin/unset resolves clean, no placeholder left); `source/build/utils.js`, wired in `source/build/build.js` |
+| `02-§104.19` | covered | SEC-384-02: `.htaccess` sets `nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, HSTS |

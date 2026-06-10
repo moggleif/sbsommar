@@ -1,8 +1,13 @@
 name: Event Data Deploy
 
-# Branch-protection gate for event-data PRs.
-# Validation runs in the API layer at submission time.
-# Build and deploy run post-merge (event-data-deploy-post-merge.yml).
+# Validation gate for event-data PRs (#369).
+#
+# API submissions validate at request time, but this PR check is the
+# branch-protection backstop: it re-runs the YAML schema validator
+# (lint-yaml.js) and the security scanner (check-yaml-security.js) against
+# every changed per-camp event file, so malformed or unsafe YAML cannot reach
+# main even via a hand-opened PR or a path the API missed. Build and deploy
+# run post-merge (event-data-deploy-post-merge.yml).
 
 permissions:
   contents: read
@@ -18,10 +23,63 @@ jobs:
   check:
     name: Event data check
     runs-on: ubuntu-latest
-    if: |
-      startsWith(github.head_ref, 'event/') ||
-      startsWith(github.head_ref, 'event-edit/')
 
     steps:
-      - name: Validated at API layer
-        run: echo "Validated at API layer"
+      - uses: actions/checkout@v6
+        with:
+          # Full history so the diff against the PR base resolves (CL-§9.5).
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Diff + validation in a single step so no untrusted value (changed
+      # filenames, base SHA) ever crosses a step-output boundary or is
+      # interpolated as ${{ }} into a run script. The base SHA arrives via env
+      # (and is a trusted commit ref); the file list is a local shell variable
+      # read through a quoted here-string with each filename quoted as "$f", so
+      # a crafted name like `source/data/x$(…).yaml` stays inert data.
+      - name: Validate changed event data
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -uo pipefail
+          # Per-camp event files only. camps.yaml / local.yaml are config, not
+          # event data, and are validated by full CI (CL-§9.4).
+          files=$(git diff --name-only "$BASE_SHA" HEAD -- 'source/data/*.yaml' \
+            | grep -vE '(^|/)(camps|local)\.yaml$' || true)
+          if [ -z "$files" ]; then
+            echo "No per-camp event files changed; nothing to validate."
+            exit 0
+          fi
+
+          # Scope (legacy data, #369): the security scanner is a HARD block for
+          # every changed per-camp file. The schema validator hard-blocks files
+          # belonging to non-archived camps, but is advisory for archived camps
+          # — their data predates the current required-field schema and is
+          # immutable history, so blocking edits to it would make the gate
+          # unusable. New submissions are schema-validated at the API layer
+          # before the PR is opened, so active-camp data is still enforced here.
+          active="$(node -e "const y=require('js-yaml'),fs=require('fs');const d=y.load(fs.readFileSync('source/data/camps.yaml','utf8'));(d.camps||[]).filter(c=>!c.archived).forEach(c=>console.log('source/data/'+c.file))")"
+          status=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            if [ ! -f "$f" ]; then
+              echo "Skipping deleted file: $f"
+              continue
+            fi
+            echo "Validating $f"
+            node source/scripts/check-yaml-security.js "$f" || status=1
+            if printf '%s\n' "$active" | grep -qxF "$f"; then
+              node source/scripts/lint-yaml.js "$f" || status=1
+            else
+              echo "::notice::$f belongs to an archived camp; schema check is advisory (security scan still enforced)"
+              node source/scripts/lint-yaml.js "$f" || echo "::warning::schema issues in archived file $f (not blocking)"
+            fi
+          done <<< "$files"
+          exit $status
