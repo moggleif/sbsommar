@@ -1027,7 +1027,7 @@ dotfiles (so a stray copy inside the web root is still refused).
   location inside the web root. <!-- 02-§100.2 -->
 - The PHP API reads its configuration (`GITHUB_OWNER`, `GITHUB_REPO`,
   `GITHUB_BRANCH`, `GITHUB_TOKEN`, `ALLOWED_ORIGIN`, `QA_ORIGIN`,
-  `COOKIE_DOMAIN`, `BUILD_ENV`, `ADMIN_TOKENS`) from
+  `COOKIE_DOMAIN`, `BUILD_ENV`, `ADMIN_TOKEN_SECRET`) from
   `$DEPLOY_DIR/.env`. <!-- 02-§100.3 -->
 
 ### 100.3 Web server denial (site requirements)

@@ -164,20 +164,45 @@ alternative to session-cookie ownership (OR condition).
 
 ### Token storage (server)
 
-Admin tokens are stored in the environment variable `ADMIN_TOKENS` as a
-comma-separated list of opaque strings (e.g. UUIDs). Both the Node.js
-server (`app.js`) and the PHP API (`api/`) read this variable at startup.
-When the variable is unset or empty, all admin functionality is disabled.
+The server validates tokens against a single signing secret in the
+environment variable `ADMIN_TOKEN_SECRET`; there is no stored list of
+issued tokens. A token has the form `namn_roll_epoch_sig`, where `sig` is
+the base64url HMAC-SHA256 of `namn_roll_epoch` keyed by the secret. The
+Node server (`app.js` / `source/api/admin.js`) and the PHP API
+(`api/index.php` / `api/src/Admin.php`) each read the secret at startup and
+recompute the signature to validate a token: `signToken()` produces a token
+and `verifyToken()` returns its `{ name, role, epoch }` or `null`. Both
+runtimes encode the signature as unpadded base64url so a token signed by one
+validates in the other. The token is parsed on the first three underscores
+(`namn`, `roll`, `epoch` are underscore-free; the remainder is `sig`, which
+may itself contain base64url underscores). Roles `admin` and `superadmin`
+are administrator-equivalent; `early` is a recognised role with narrower
+privileges. When the secret is unset or empty, no token validates and admin
+functionality is disabled. The runtimes log a warning when the secret is
+shorter than 32 bytes (same posture as `SESSION_SECRET`).
 
 ### Verification endpoint
 
 `POST /verify-admin` accepts `{ "token": "<string>" }` and responds:
 
-- `200 { "valid": true }` — token found in `ADMIN_TOKENS`
-- `403 { "valid": false }` — token not found
+- `200 { "valid": true }` — valid signature, recognised role, unexpired epoch
+- `403 { "valid": false }` — otherwise
 
-The comparison uses constant-time string comparison to prevent timing
-attacks.
+The supplied and recomputed signatures are compared in constant time over
+fixed-width digests (`tokenDigest()`, an HMAC keyed by a per-process random
+key, retained from #386), so neither validity nor token length leaks via
+timing.
+
+### Provisioning and revocation
+
+`npm run admin:create` signs a token offline against `ADMIN_TOKEN_SECRET`
+for the chosen role and prints it to hand over — no environment edit and no
+redeploy per person, because the secret (not a list) is what the runtimes
+read. `superadmin` is minted only by this script (it grants the right to
+mint others), never from the web UI. Because tokens are stateless, an
+individual token cannot be revoked without rotating `ADMIN_TOKEN_SECRET`
+(which invalidates all tokens at once); short embedded expiries bound the
+exposure of a leaked token.
 
 ### Token storage (client)
 

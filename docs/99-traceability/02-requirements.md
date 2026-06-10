@@ -1244,16 +1244,18 @@ its requirement rows together with the test-legend rows that evidence them.
 
 | Requirement | Status | Test / Evidence |
 | ----------- | ------ | --------------- |
-| `02-§91.1` | covered | ADM-01..05: `parseAdminTokens` tests in `admin-token.test.js` |
-| `02-§91.2` | covered | Format `namn_uuid_epoch`; `create-admin-token.js` generates; ADM-09..10 validate expiry |
-| `02-§91.3` | covered | ADM-08: `verifyAdminToken` returns false for empty list |
-| `02-§91.29` | covered | ADM-09, ADM-10: `isTokenExpired` / `verifyAdminToken` reject expired tokens server-side |
-| `02-§91.30` | implemented | `npm run admin:create` runs `source/scripts/create-admin-token.js` |
+| `02-§91.1` | gap | Single `ADMIN_TOKEN_SECRET` model (no list); `verifyToken` tests in `admin-token.test.js` |
+| `02-§91.2` | gap | Format `namn_roll_epoch_sig`; `signToken`/`verifyToken` round-trip + tamper tests |
+| `02-§91.3` | gap | `verifyToken` returns null / verify-admin disabled when secret empty |
+| `02-§91.29` | gap | Tamper, expiry, and unknown-role rejection (Node + PHP parity tests) |
+| `02-§91.30` | gap | `npm run admin:create` signs offline for `admin`/`superadmin` (60/180 days) |
+| `02-§91.31` | gap | `admin`/`superadmin` admin-equivalent; `early` a recognised role |
+| `02-§91.32` | gap | Runtimes warn at startup when `ADMIN_TOKEN_SECRET` < 32 bytes |
 | `02-§91.4` | implemented | `app.js` POST /verify-admin; `api/index.php` handleVerifyAdmin() |
 | `02-§91.5` | implemented | Request body parsed in both Node.js and PHP handlers |
-| `02-§91.6` | covered | ADM-06: `verifyAdminToken` returns true for matching token |
-| `02-§91.7` | covered | ADM-07: `verifyAdminToken` returns false for non-matching token |
-| `02-§91.8` | implemented | `crypto.timingSafeEqual` (Node.js), `hash_equals` (PHP) |
+| `02-§91.6` | gap | `verifyToken` accepts valid signature + recognised role + future epoch |
+| `02-§91.7` | gap | `verifyToken` rejects tampered/expired token |
+| `02-§91.8` | gap | Constant-time digest comparison (`tokenDigest` + `timingSafeEqual` / `hash_equals`) |
 | `02-§91.9` | covered | ADM-11: `renderAdminPage` produces valid HTML document |
 | `02-§91.10` | covered | ADM-12, ADM-13: text input + submit button in rendered output |
 | `02-§91.11` | implemented | manual: `admin.js` calls `POST /verify-admin` on form submit |
@@ -1489,7 +1491,7 @@ refactor of `render-lokaler.js` onto the shared module).
 | --- | --- | --- |
 | `02-§100.1` | covered | ENVLOC-02: workflow writes no `.env` into `$API_STAGING`/`$PUBLIC_DIR/api`; `.github/workflows/deploy-reusable.yml`. Manual: `ls $DEPLOY_DIR/public_html/api/.env` absent after deploy |
 | `02-§100.2` | covered | HTACC-05, HTACC-06: `api/index.php` loads via `Dotenv::createImmutable(dirname(__DIR__, 2))` and never `createImmutable(__DIR__)` |
-| `02-§100.3` | implemented | PHP runtime reads `GITHUB_*`, origins, `COOKIE_DOMAIN`, `BUILD_ENV`, `ADMIN_TOKENS` from `$DEPLOY_DIR/.env`; no PHP test harness — manual server verification (submit an event end-to-end) |
+| `02-§100.3` | implemented | PHP runtime reads `GITHUB_*`, origins, `COOKIE_DOMAIN`, `BUILD_ENV`, `ADMIN_TOKEN_SECRET` from `$DEPLOY_DIR/.env`; no PHP test harness — manual server verification (submit an event end-to-end) |
 | `02-§100.4` | covered | HTACC-01, HTACC-02, HTACC-03: `api/.htaccess` denies dotfiles (2.4 + 2.2) before the rewrite. Manual: `curl -sI .../api/.env` → 403 |
 | `02-§100.5` | covered | HTACC-04: `source/static/.htaccess` denies `.env` (2.4 + 2.2); build copies it to `public/.htaccess` |
 | `02-§100.6` | implemented | Manual checkpoint — `curl -sI https://sbsommar.se/api/.env` and QA return 403/404 (live Apache/LiteSpeed only) |
