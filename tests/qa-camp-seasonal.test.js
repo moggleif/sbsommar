@@ -2,8 +2,8 @@
 
 // Verifies the seasonal QA camp model in source/data/camps.yaml (02-§42.31–42.34).
 //
-// The site keeps two QA-only camps (qa: true): a "spring" camp that closes two
-// weeks before the next real camp begins, and an "autumn" camp covering Oct 1
+// The site keeps two QA-only camps (qa: true): a "spring" camp that closes when
+// the next real camp opens for editing, and an "autumn" camp covering Oct 1
 // – Dec 31 of the current year. Together they leave the real-camp window
 // QA-free while ensuring continuous QA coverage outside that window.
 
@@ -18,11 +18,6 @@ const camps = yaml.load(fs.readFileSync(CAMPS_PATH, 'utf8')).camps;
 
 const qaCamps = camps.filter((c) => c.qa === true);
 const realCamps = camps.filter((c) => !c.qa && c.archived !== true);
-
-function daysBetween(a, b) {
-  const ms = (new Date(b) - new Date(a));
-  return Math.round(ms / (1000 * 60 * 60 * 24));
-}
 
 describe('camps.yaml – seasonal QA camp model (02-§42.31–42.34)', () => {
   it('QSEAS-01 (02-§42.31): exactly two QA-only camps exist', () => {
@@ -48,7 +43,7 @@ describe('camps.yaml – seasonal QA camp model (02-§42.31–42.34)', () => {
     assert.ok(spring, 'No spring QA camp found');
   });
 
-  it('QSEAS-04 (02-§42.32): spring QA camp end_date is exactly 14 days before the next real camp', () => {
+  it('QSEAS-04 (02-§42.32): spring QA camp end_date equals the next real camp opens_for_editing', () => {
     const spring = qaCamps.find((c) => !/-10-01$/.test(c.start_date));
     assert.ok(spring, 'No spring QA camp found');
 
@@ -58,10 +53,9 @@ describe('camps.yaml – seasonal QA camp model (02-§42.31–42.34)', () => {
 
     assert.ok(upcomingReal, 'No upcoming real camp after spring QA camp end_date');
 
-    const gap = daysBetween(spring.end_date, upcomingReal.start_date);
     assert.equal(
-      gap, 14,
-      `Spring QA camp must end exactly 14 days before next real camp (${upcomingReal.id} on ${upcomingReal.start_date}); got ${gap} days from ${spring.end_date}`,
+      spring.end_date, upcomingReal.opens_for_editing,
+      `Spring QA camp end_date (${spring.end_date}) must equal the next real camp's opens_for_editing (${upcomingReal.id}: ${upcomingReal.opens_for_editing})`,
     );
   });
 
