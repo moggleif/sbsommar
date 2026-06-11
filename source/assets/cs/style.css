@@ -2881,6 +2881,12 @@ body.modal-open {
   outline-offset: 2px;
 }
 
+/* Submit buttons sit inside the form, so the `.admin-form` gap does not
+   reach them — give them air above the field they follow (02-§91.34). */
+.admin-form form button[type="submit"] {
+  margin-top: var(--space-sm);
+}
+
 .mint-result {
   display: flex;
   flex-direction: column;
