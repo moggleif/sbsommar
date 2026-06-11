@@ -2887,6 +2887,14 @@ body.modal-open {
   gap: var(--space-xs);
 }
 
+/* The generated link is read-only output, not a field to fill in (02-§106.20,
+   07-§6.124): a muted background and default cursor set it apart from the
+   editable inputs above it. */
+#mint-link {
+  background: var(--color-cream);
+  cursor: default;
+}
+
 .mint-actions {
   display: flex;
   gap: var(--space-sm);

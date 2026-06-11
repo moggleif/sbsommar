@@ -87,6 +87,26 @@
     }
   }
 
+  // Validate the mint form's fields (02-§106.19). Pure — returns Swedish
+  // messages keyed by field, or null when valid. The recipient name is
+  // required; the day count must be an integer within 1..max for the role.
+  // Mirrors the add-activity form's per-field model (02-§6.5).
+  function validateMintFields(fields) {
+    var f = fields || {};
+    var errors = { name: null, days: null };
+    var name = (f.name == null ? '' : String(f.name)).trim();
+    if (!name) errors.name = 'Namn är obligatoriskt.';
+    var max = Number(f.max);
+    var rawDays = f.days;
+    var days = Number(rawDays);
+    if (rawDays === '' || rawDays == null || !isFinite(days)) {
+      errors.days = 'Giltighetstid är obligatorisk.';
+    } else if (days % 1 !== 0 || days < 1 || (isFinite(max) && days > max)) {
+      errors.days = 'Giltighetstiden måste vara 1–' + (isFinite(max) ? max : '') + ' dagar.';
+    }
+    return errors;
+  }
+
   // Derive the API base URL from the page's API configuration.
   function apiBase() {
     var feedbackBtn = document.querySelector('.feedback-btn[data-api-url]');
@@ -104,6 +124,7 @@
         tokenRole: tokenRole,
         extractExpiry: extractExpiry,
         isExpired: isExpired,
+        validateMintFields: validateMintFields,
       };
     }
     return;
@@ -251,6 +272,7 @@
 
     var mintForm = document.getElementById('mint-form');
     var mintMessage = document.getElementById('mint-message');
+    var mintName = document.getElementById('mint-name');
     var mintRoleSel = document.getElementById('mint-role');
     var mintDays = document.getElementById('mint-days');
     var mintResult = document.getElementById('mint-result');
@@ -264,6 +286,29 @@
       mintMessage.hidden = false;
     };
 
+    // Per-field inline errors for the mint form, mirroring lagg-till.js's
+    // model (02-§106.19, §6.5): field name → its input + #mint-err-<field>
+    // span. The error clears as soon as the user edits the field.
+    var MINT_FIELDS = { name: mintName, days: mintDays };
+    var setMintFieldError = function (field, msg) {
+      var el = MINT_FIELDS[field];
+      var span = document.getElementById('mint-err-' + field);
+      if (!el || !span) return;
+      if (msg) {
+        el.setAttribute('aria-invalid', 'true');
+        span.textContent = msg;
+        span.hidden = false;
+      } else {
+        el.removeAttribute('aria-invalid');
+        span.textContent = '';
+        span.hidden = true;
+      }
+    };
+    Object.keys(MINT_FIELDS).forEach(function (field) {
+      if (!MINT_FIELDS[field]) return;
+      MINT_FIELDS[field].addEventListener('input', function () { setMintFieldError(field, null); });
+    });
+
     // Role change updates the day field's default and maximum (02-§106.10).
     mintRoleSel.addEventListener('change', function () {
       var opt = mintRoleSel.options[mintRoleSel.selectedIndex];
@@ -276,6 +321,20 @@
       e.preventDefault();
       mintMessage.hidden = true;
       mintResult.hidden = true;
+
+      // Client-side validation with Swedish inline errors (02-§106.19) —
+      // `novalidate` on the form suppresses the browser's native bubbles.
+      var errors = validateMintFields({
+        name: mintName.value,
+        days: mintDays.value,
+        max: Number(mintDays.max),
+      });
+      setMintFieldError('name', errors.name);
+      setMintFieldError('days', errors.days);
+      if (errors.name || errors.days) {
+        (errors.name ? mintName : mintDays).focus();
+        return;
+      }
 
       // Read the stored token fresh on every mint, in case it was replaced
       // since the section was revealed. The server is the real gate.
