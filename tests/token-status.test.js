@@ -15,6 +15,10 @@
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+
+const read = (rel) => fs.readFileSync(path.join(__dirname, '..', rel), 'utf8');
 
 const { roleDescription, tokenRole } = require('../source/assets/js/client/admin.js');
 
@@ -47,5 +51,21 @@ describe('token status rights text (02-§91.33)', () => {
     // still works, it simply omits the sentence.
     assert.strictEqual(roleDescription('whatever'), '');
     assert.strictEqual(roleDescription(null), '');
+  });
+});
+
+// These two are DOM behaviours (input value, button disabled state), so they
+// are checked structurally here and verified manually in the browser.
+describe('activation field + button state (02-§91.36, §91.37)', () => {
+  const src = read('source/assets/js/client/admin.js');
+
+  it('TOK-25: admin.js clears the token input on successful activation (02-§91.36)', () => {
+    assert.match(src, /input\.value = ''/);
+  });
+
+  it('TOK-26: admin.js disables Aktivera while the input is empty (02-§91.37)', () => {
+    assert.match(src, /submitBtn/);
+    assert.match(src, /\.disabled = !.*\.value\.trim\(\)/);
+    assert.match(src, /input\.addEventListener\('input'/);
   });
 });
