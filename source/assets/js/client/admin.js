@@ -70,10 +70,43 @@
     return token.split('_')[1] || null;
   }
 
+  // Swedish description of what each role allows, shown in the active-token
+  // status (02-§91.33). An unrecognised or missing role yields '' — the status
+  // still renders, it simply omits the rights sentence. The server, not this
+  // text, enforces every privilege.
+  function roleDescription(role) {
+    switch (role) {
+      case 'superadmin':
+        return 'Du kan ändra alla aktiviteter, öppna formuläret innan lägret öppnar och skapa nya token-länkar.';
+      case 'admin':
+        return 'Du kan ändra alla aktiviteter och öppna formuläret innan det öppnar för alla.';
+      case 'early':
+        return 'Du kan lägga till och ändra dina egna aktiviteter innan formuläret öppnar för alla.';
+      default:
+        return '';
+    }
+  }
+
   // Derive the API base URL from the page's API configuration.
   function apiBase() {
     var feedbackBtn = document.querySelector('.feedback-btn[data-api-url]');
     return feedbackBtn ? feedbackBtn.dataset.apiUrl.replace(/\/feedback$/, '') : '';
+  }
+
+  // ── Node export (tests) ─────────────────────────────────────────────────────
+  // In Node there is no DOM: export the pure helpers and stop before any DOM
+  // wiring runs. In the browser `document` exists, so this branch is skipped and
+  // the page wiring below executes as normal. Mirrors markdown-toolbar.js.
+  if (typeof document === 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      module.exports = {
+        roleDescription: roleDescription,
+        tokenRole: tokenRole,
+        extractExpiry: extractExpiry,
+        isExpired: isExpired,
+      };
+    }
+    return;
   }
 
   // ── Activation form (only on /token.html) ──────────────────────────────────
@@ -88,13 +121,27 @@
     // Pre-fill status if already activated
     var existing = getAdminData();
 
+    // Swedish label per role, paired with the rights sentence and appended to
+    // any "token is active" message so the holder sees which token they have
+    // and what it allows (02-§91.33). Role and recipient come from the token
+    // string (namn_roll_epoch_sig).
+    var ROLE_LABELS = { superadmin: 'Superadmin', admin: 'Admin', early: 'Tidig åtkomst' };
+    var rightsSuffix = function (token) {
+      var label = ROLE_LABELS[tokenRole(token)] || '';
+      var rights = roleDescription(tokenRole(token));
+      return (label ? ' Roll: ' + label + '.' : '') + (rights ? ' ' + rights : '');
+    };
+
     if (existing && !isExpired(existing)) {
       var expiry = extractExpiry(existing.token);
       var expiryDate = expiry ? new Date(expiry * 1000).toLocaleDateString('sv-SE') : '';
       var activatedAt = existing.activated ? new Date(existing.activated).toLocaleString('sv-SE') : '';
-      message.textContent = 'Din token är aktiv' + (expiryDate ? ' till ' + expiryDate : '')
+      var recipient = (existing.token.split('_')[0]) || '';
+      message.textContent = 'Din token' + (recipient ? ' (' + recipient + ')' : '') + ' är aktiv'
+        + (expiryDate ? ' till ' + expiryDate : '')
         + (activatedAt ? ' (aktiverad ' + activatedAt + ')' : '')
-        + '. Du kan byta genom att ange en ny token nedan.';
+        + '.' + rightsSuffix(existing.token)
+        + ' Du kan byta genom att ange en ny token nedan.';
       message.hidden = false;
       message.classList.add('admin-message--success');
     } else if (existing && isExpired(existing)) {
@@ -140,7 +187,7 @@
               token: token,
               activated: Date.now(),
             }));
-            message.textContent = 'Token aktiverad ' + new Date().toLocaleString('sv-SE') + '.';
+            message.textContent = 'Token aktiverad ' + new Date().toLocaleString('sv-SE') + '.' + rightsSuffix(token);
             message.classList.add('admin-message--success');
             message.hidden = false;
             if (removeBtn) removeBtn.hidden = false;

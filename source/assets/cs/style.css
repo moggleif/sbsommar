@@ -2850,6 +2850,11 @@ body.modal-open {
   gap: var(--space-sm);
 }
 
+/* `.admin-form` sets display, which defeats the `hidden` attribute; restore
+   display:none so the superadmin-only mint section stays hidden until
+   `admin.js` reveals it (02-§106.9). */
+.admin-form[hidden] { display: none; }
+
 .admin-form label {
   display: block;
   margin-bottom: var(--space-xs);
