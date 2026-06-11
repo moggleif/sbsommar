@@ -204,4 +204,19 @@ describe('mint UI and redemption wiring (02-§106.9–106.16)', () => {
     assert.match(validateMintFields({ name: 'a', days: 1.5, max: 60 }).days, /1–60/);
     assert.strictEqual(validateMintFields({ name: 'a', days: 90, max: 90 }).days, null);
   });
+
+  it('MINT-19: token removal goes through a confirmation dialog (02-§91.35)', () => {
+    const { renderAdminPage } = require('../source/build/render-admin');
+    const html = renderAdminPage({ name: 'SB Sommar 2026' }, '<p>f</p>');
+    // The confirmation alertdialog and its two buttons exist, hidden by default.
+    assert.match(html, /id="token-remove-confirm"[^>]*role="alertdialog"[^>]*hidden/);
+    assert.match(html, /id="token-remove-yes"/);
+    assert.match(html, /id="token-remove-no"/);
+
+    // admin.js opens the dialog from the remove button and clears the token
+    // only on confirmation — never directly on the remove button's click.
+    const src = read('source/assets/js/client/admin.js');
+    assert.match(src, /removeBtn\.addEventListener\('click', openRemoveConfirm\)/);
+    assert.match(src, /removeYes\.addEventListener\('click', performRemove\)/);
+  });
 });
