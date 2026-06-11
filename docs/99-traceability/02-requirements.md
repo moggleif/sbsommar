@@ -1252,8 +1252,8 @@ its requirement rows together with the test-legend rows that evidence them.
 | `02-§91.31` | covered | TOK-13, TOK-14: `admin`/`superadmin` admin-equivalent; `early` recognised but not admin |
 | `02-§91.32` | covered | TOK-22: `app.js` / `api/index.php` warn when `ADMIN_TOKEN_SECRET` < 32 bytes (parallels SESSION_SECRET, §387) |
 | `02-§91.33` | covered | TOK-23, TOK-24: `tokenRole()` + `roleDescription()` map superadmin/admin/early to Swedish rights text; `setStatusWithRole()` renders the bold `Roll: <label>` title; manual: open /token.html with each role and confirm the title and rights (recipient name not shown) |
-| `02-§91.34` | gap | MINT-17 (planned, structural): render-admin.js buttons use `.btn-primary`/`.btn-secondary`, no `.btn--*`; manual: token page buttons match the rest of the site |
-| `02-§91.35` | gap | MINT-19 (planned, structural): render-admin.js has the `#token-remove-confirm` alertdialog and `admin.js` opens it from the remove button (no direct `removeItem` on click); manual: click "Ta bort min token" → dialog; Avbryt/Escape keeps token, "Ja, ta bort" removes it |
+| `02-§91.34` | covered | MINT-17 (structural): render-admin.js buttons use `.btn-primary`/`.btn-secondary`, no `.btn--*`; `.admin-form form button[type="submit"]` has margin-top; manual: token page buttons match the rest of the site |
+| `02-§91.35` | covered | MINT-19 (structural): render-admin.js has the `#token-remove-confirm` alertdialog and `admin.js` opens it from the remove button (no direct `removeItem` on click); manual: click "Ta bort min token" → dialog; Avbryt/Escape keeps token, "Ja, ta bort" removes it |
 | `02-§91.4` | implemented | `app.js` POST /verify-admin; `api/index.php` handleVerifyAdmin() |
 | `02-§91.5` | implemented | Request body parsed in both Node.js and PHP handlers |
 | `02-§91.6` | covered | TOK-03, TOK-04, TOK-13: valid signature + recognised role + future epoch accepted |
@@ -1618,5 +1618,5 @@ Doc ref: `03-architecture/platform-and-security.md §30`.
 | `02-§106.16` | covered | MINT-15: `admin.js` matches `#token=` and contains no `?token=`; link built with `#token=` |
 | `02-§106.17` | implemented | Architectural: signing only in `app.js`/`api/index.php` via the shared helpers; no secret reference in any client file |
 | `02-§106.18` | implemented | Swedish text; reuses `.admin-form` components; new CSS uses only `--space-*`/`--color-*`/`--font-*`/`--radius-*` tokens; manual/visual |
-| `02-§106.19` | gap | MINT-18 (planned): mint form has `novalidate` + `mint-err-*` field-error spans; `validateMintForm()` rejects empty name and out-of-range days with Swedish messages; manual: submit empty → Swedish inline errors, no English bubble |
-| `02-§106.20` | gap | MINT-17 (planned, structural): `#mint-link` read-only styling present; manual: link field looks like output, not an input |
+| `02-§106.19` | covered | MINT-18: `validateMintFields()` rejects empty name and out-of-range/non-integer days with Swedish messages; mint form has `novalidate` + `mint-err-*` field-error spans wired by `setMintFieldError()`; manual: submit empty → Swedish inline errors, no English bubble |
+| `02-§106.20` | covered | MINT-17 (structural): `#mint-link` read-only styling (`background` + `cursor: default`) present; manual: link field looks like output, not an input |
