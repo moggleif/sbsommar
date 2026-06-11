@@ -325,7 +325,6 @@
     var mintResult = document.getElementById('mint-result');
     var mintLink = document.getElementById('mint-link');
     var mintCopy = document.getElementById('mint-copy');
-    var mintShare = document.getElementById('mint-share');
 
     var showMintMessage = function (text, ok) {
       mintMessage.textContent = text;
@@ -407,8 +406,7 @@
           // Activation link with the token in the fragment (02-§106.11, §106.16).
           mintLink.value = location.origin + '/token.html#token=' + encodeURIComponent(data.token);
           mintResult.hidden = false;
-          if (navigator.share) mintShare.hidden = false;
-          showMintMessage('Länk skapad. Dela den privat med mottagaren.', true);
+          showMintMessage('Länk skapad. Kopiera och dela den privat med mottagaren.', true);
         })
         .catch(function () {
           showMintMessage('Kunde inte skapa token. Kontrollera din anslutning.', false);
@@ -427,11 +425,6 @@
       } else {
         fallbackCopy();
       }
-    });
-
-    mintShare.addEventListener('click', function () {
-      navigator.share({ title: 'SB Sommar – aktivera din token', url: mintLink.value })
-        .catch(function () { /* user cancelled the share sheet */ });
     });
   }
 

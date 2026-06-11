@@ -2845,6 +2845,10 @@ body.modal-open {
 .admin-form {
   max-width: var(--container-narrow);
   margin-top: var(--space-md);
+
+  /* `.site-content` has no bottom padding, so without this the last control
+     (e.g. "Kopiera länken") sits flush against the footer. */
+  margin-bottom: var(--space-lg);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);

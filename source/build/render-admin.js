@@ -57,7 +57,6 @@ ${nav}
         <input type="text" id="mint-link" readonly>
         <div class="mint-actions">
           <button type="button" id="mint-copy" class="btn-secondary">Kopiera länken</button>
-          <button type="button" id="mint-share" class="btn-secondary" hidden>Dela …</button>
         </div>
       </div>
     </div>
