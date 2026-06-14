@@ -1637,3 +1637,14 @@ Doc ref: `03-architecture/pages-and-content.md §16.5`, `03-architecture/renderi
 | `02-§107.6` | covered | LOCAVAIL-11: filtered list reaches `renderLokalerPage()` |
 | `02-§107.7` | covered | LOCAVAIL-12: filtered list reaches `renderLocationAccordions()` |
 | `02-§107.8` | covered | LOCAVAIL-09, LOCAVAIL-10: `render-add.js`/`render-edit.js` always append "Annat" |
+
+### §108 — Config-File QA Deploy Trigger
+
+Doc ref: `03-architecture/ci-and-deploy.md §11.5`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§108.1` | gap | `deploy-qa.yml` triggers full QA deploy except on per-camp-event-only pushes |
+| `02-§108.2` | gap | Ignore patterns target `source/data/20[0-9][0-9]-*.yaml` + `source/data/qa-*.yaml` |
+| `02-§108.3` | gap | `camps.yaml` / `local.yaml` changes trigger full QA deploy |
+| `02-§108.4` | gap | Production deploy stays manual (`workflow_dispatch`) |
