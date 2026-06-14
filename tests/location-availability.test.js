@@ -28,7 +28,7 @@ try {
   ({ filterAvailableLocations } = require('../source/build/locations'));
   moduleLoaded = typeof filterAvailableLocations === 'function';
 } catch {
-  moduleLoaded = false;
+  // module not yet present — all suites below will be skipped
 }
 const describe = moduleLoaded ? nodeTest.describe : nodeTest.describe.skip;
 
