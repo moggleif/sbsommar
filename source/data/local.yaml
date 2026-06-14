@@ -26,6 +26,7 @@ locations:
     image_path: "images/fotbollsplan.webp"
   - id: fritidsgarden
     name: Fritidsgården
+    active: false
     information: >
       Kom ihåg, det tar cirka 15-20 minuter att gå till fritidsgården från
       campingen. Städa direkt efter eventuellt användande. Entrén är i den
@@ -124,6 +125,7 @@ locations:
     image_path: "images/servicehus.webp"
   - id: skolan
     name: Skolan
+    active: false
     information: >
       Kvistbergsskolan. Kom ihåg, det tar cirka 15-20 minuter att gå till
       skolan från campingen. Alla lokaler i skolan städas direkt efter
