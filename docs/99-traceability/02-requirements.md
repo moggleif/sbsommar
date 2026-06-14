@@ -1644,7 +1644,7 @@ Doc ref: `03-architecture/ci-and-deploy.md §11.5`.
 
 | ID | Status | Notes |
 | --- | --- | --- |
-| `02-§108.1` | gap | `deploy-qa.yml` triggers full QA deploy except on per-camp-event-only pushes |
-| `02-§108.2` | gap | Ignore patterns target `source/data/20[0-9][0-9]-*.yaml` + `source/data/qa-*.yaml` |
-| `02-§108.3` | gap | `camps.yaml` / `local.yaml` changes trigger full QA deploy |
-| `02-§108.4` | gap | Production deploy stays manual (`workflow_dispatch`) |
+| `02-§108.1` | covered | DQT-05: `deploy-qa.yml` push trigger on `main` + `workflow_dispatch` |
+| `02-§108.2` | covered | DQT-01, DQT-02, DQT-04: `paths-ignore` targets `20[0-9][0-9]-*.yaml` + `qa-*.yaml`, no catch-all |
+| `02-§108.3` | covered | DQT-03: neither `camps.yaml` nor `local.yaml` is ignored |
+| `02-§108.4` | covered | DQT-06: `deploy-prod.yml` is `workflow_dispatch` only, no push trigger |
