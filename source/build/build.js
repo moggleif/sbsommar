@@ -25,6 +25,7 @@ const { setFeedbackUrl } = require('./layout');
 const { resolveVersionString } = require('./version');
 const { escapeHtml, injectHtaccessCsp } = require('./utils');
 const { getImageDimensions } = require('./image-dimensions');
+const { filterAvailableLocations } = require('./locations');
 
 // ── Load .env if present (local dev) ─────────────────────────────────────────
 const envPath = path.join(__dirname, '../..', '.env');
@@ -97,7 +98,9 @@ if (!fs.existsSync(localFilePath)) {
   process.exit(1);
 }
 const localData = yaml.load(fs.readFileSync(localFilePath, 'utf8'));
-const allLocations = localData.locations || [];
+// Drop locations marked unavailable (active: false) so they disappear from the
+// forms, the Lokaler grid, and the homepage accordions at once (02-§107).
+const allLocations = filterAvailableLocations(localData.locations);
 const locations = allLocations.map((l) => l.name);
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

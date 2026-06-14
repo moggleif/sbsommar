@@ -1622,3 +1622,18 @@ Doc ref: `03-architecture/platform-and-security.md §30`.
 | `02-§106.18` | implemented | Swedish text; reuses `.admin-form` components; new CSS uses only `--space-*`/`--color-*`/`--font-*`/`--radius-*` tokens; manual/visual |
 | `02-§106.19` | covered | MINT-18: `validateMintFields()` rejects empty name and out-of-range/non-integer days with Swedish messages; mint form has `novalidate` + `mint-err-*` field-error spans wired by `setMintFieldError()`; manual: submit empty → Swedish inline errors, no English bubble |
 | `02-§106.20` | covered | MINT-17 (structural): `#mint-link` read-only styling (`background` + `cursor: default`) present; manual: link field looks like output, not an input |
+
+### §107 — Location Availability
+
+Doc ref: `03-architecture/pages-and-content.md §16.5`, `03-architecture/rendering.md §5.1`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§107.1` | covered | LOCAVAIL-02, LOCAVAIL-03: `filterAvailableLocations()` in `source/build/locations.js` reads the optional `active` field |
+| `02-§107.2` | covered | LOCAVAIL-01, LOCAVAIL-02: omitted or `true` → kept |
+| `02-§107.3` | covered | LOCAVAIL-03, LOCAVAIL-04: `active: false` → removed |
+| `02-§107.4` | covered | LOCAVAIL-06, LOCAVAIL-07 (build.js wiring), LOCAVAIL-08: `source/build/build.js` filters before `renderAddPage()` |
+| `02-§107.5` | covered | LOCAVAIL-10: filtered list reaches `renderEditPage()` |
+| `02-§107.6` | covered | LOCAVAIL-11: filtered list reaches `renderLokalerPage()` |
+| `02-§107.7` | covered | LOCAVAIL-12: filtered list reaches `renderLocationAccordions()` |
+| `02-§107.8` | covered | LOCAVAIL-09, LOCAVAIL-10: `render-add.js`/`render-edit.js` always append "Annat" |

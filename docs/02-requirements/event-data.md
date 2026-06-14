@@ -594,3 +594,37 @@ camp descriptions and the off-season window.
   so no QA camp is active in QA during the real-camp season. <!-- 02-§42.33 -->
 - The autumn QA camp's `start_date` is `YYYY-10-01` and its `end_date`
   is `YYYY-12-31`, where `YYYY` is the current calendar year. <!-- 02-§42.34 -->
+
+---
+
+---
+
+## 107. Location Availability
+
+### 107.1 Context
+
+The camp uses a fixed set of physical locations (`source/data/local.yaml`) —
+tents, halls, the school, the youth centre, and so on. Not every location is
+available every year; some seasons the camp has no access to the school or the
+youth centre. Administrators need a simple way to mark such a location as
+unavailable so it disappears from the places participants can choose and browse,
+without deleting it from the data (it returns next year by flipping one setting).
+
+### 107.2 Requirements
+
+- Each location entry in `source/data/local.yaml` may include an optional
+  boolean field `active`. <!-- 02-§107.1 -->
+- When `active` is `true` or omitted, the location is available. <!-- 02-§107.2 -->
+- When `active` is `false`, the location is unavailable for the current
+  camp. <!-- 02-§107.3 -->
+- Unavailable locations are not offered as options in the location dropdown of
+  the add-activity form. <!-- 02-§107.4 -->
+- Unavailable locations are not offered as options in the location dropdown of
+  the edit-activity form. <!-- 02-§107.5 -->
+- Unavailable locations are not listed on the Lokaler page (the per-location
+  schedule grid). <!-- 02-§107.6 -->
+- Unavailable locations are not shown in the location accordions in the
+  "Lokaler" section of the homepage. <!-- 02-§107.7 -->
+- The "Annat" fallback option remains available in the add-activity and
+  edit-activity forms regardless of location availability, so an activity can
+  always be placed somewhere. <!-- 02-§107.8 -->
