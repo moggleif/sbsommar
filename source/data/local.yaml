@@ -1,3 +1,10 @@
+# Lokaler som visas på sidan, i schemat och i formulären.
+#
+# Vill du dölja en lokal ett år då den inte är tillgänglig (t.ex. skolan eller
+# fritids), lägg till raden  active: false  under den lokalen. Den försvinner då
+# från lokalöversikten, schemat och valet av lokal i formulären. Ta bort raden
+# (eller skriv active: true) för att visa lokalen igen. Lokaler utan rad räknas
+# som tillgängliga.
 locations:
   - id: andreas-taltet
     name: AndreasTältet
