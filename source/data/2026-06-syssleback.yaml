@@ -377,7 +377,7 @@ events:
     id: bradspel-2026-06-25-1900
     title: Brädspel
     date: '2026-06-25'
-    start: '19:00'
+    start: '20:00'
     end: '23:00'
     location: Kaffetält
     responsible: Birgitta
@@ -388,7 +388,7 @@ events:
       email: ''
     meta:
       created_at: '2026-06-17 06:32'
-      updated_at: '2026-06-17 06:32'
+      updated_at: '2026-06-19 14:44'
   -
     id: bradspel-2026-06-26-1900
     title: Brädspel
