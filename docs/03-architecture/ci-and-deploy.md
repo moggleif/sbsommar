@@ -161,14 +161,18 @@ held a newline.
 
 The shared loader `loadCampEvents()` (data-layer.md §1.1) is the build-time gate
 for fragment integrity: it requires each fragment's `event.id` to equal its
-filename stem and requires event ids to be unique across the camp file and all of
-its fragments, failing the build (and therefore the post-merge deploy) on a
-violation. A hand-committed fragment that breaks either rule is caught here even
-though data-only commits skip the full CI build. Submitted content destined for a
-fragment passes the same API-layer field validation and security scan
-(`validate.js` / `Validate.php`, above) as content destined for the camp file, and
-the `lint-yaml.js` / `check-yaml-security.js` CLIs accept a fragment path for
-manual checks (02-§109.18, 02-§109.21).
+filename stem, failing the build (and therefore the post-merge deploy) on a
+mismatch (02-§109.19). When an id appears in both the camp file and a fragment it
+de-duplicates by keeping the fragment and logging a warning (02-§109.15), so the
+rendered set always has unique ids. Strict cross-source id uniqueness
+(02-§109.20) is enforced at the source: the add API rejects a duplicate create
+with HTTP 422 (§3.4). Submitted content destined for a fragment passes the same
+API-layer field validation and security scan (`validate.js` / `Validate.php`,
+above) as content destined for the camp file. The PR-check workflow
+(`event-data-deploy.yml`) runs `check-yaml-security.js` (hard block) and
+`lint-yaml.js` on every changed file — both auto-detect a fragment (top-level
+`event:`) versus a camp file, and the schema check hard-blocks fragments
+belonging to a non-archived camp (02-§109.18, 02-§109.21).
 
 Carriage returns in `description` are normalised to line feeds in
 `buildEventYaml()` before the literal block is emitted, so the stored value uses
