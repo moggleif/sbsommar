@@ -1648,3 +1648,37 @@ Doc ref: `03-architecture/ci-and-deploy.md §11.5`.
 | `02-§108.2` | covered | DQT-01, DQT-02, DQT-04: `paths-ignore` targets `20[0-9][0-9]-*.yaml` + `qa-*.yaml`, no catch-all |
 | `02-§108.3` | covered | DQT-03: neither `camps.yaml` nor `local.yaml` is ignored |
 | `02-§108.4` | covered | DQT-06: `deploy-prod.yml` is `workflow_dispatch` only, no push trigger |
+
+### §109 — Concurrent Event Submission via Fragment Files
+
+Doc ref: `03-architecture/data-layer.md §1.1`, `§3`, `§3.1`, `§3.4`, `§4a`;
+`03-architecture/ci-and-deploy.md §11.3`, `§11.4`, `§11.6`;
+`05-DATA_CONTRACT.md §2.1`, `§5`, `§6`; `06-EVENT_DATA_MODEL.md §1.1`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§109.1` | gap | Fragment dir `source/data/<stem>/` alongside camp file; `source/build/load-events.js` `loadCampEvents()` |
+| `02-§109.2` | gap | Fragment file is a single top-level `event:` mapping; `buildFragmentYaml()` in `github.js` / `GitHub.php` |
+| `02-§109.3` | gap | Fragment filename stem equals `event.id` |
+| `02-§109.4` | gap | Missing fragment dir → camp behaves as file-only; `loadCampEvents()` returns file events unchanged |
+| `02-§109.5` | gap | `addEventToActiveCamp()` writes new fragment file, no append; `github.js` / `GitHub.php` |
+| `02-§109.6` | gap | `addEventsToActiveCamp()` writes one fragment per date on one branch/PR |
+| `02-§109.7` | gap | Invariant: two adds → two distinct new files (no shared file touched); test asserts distinct `putFile` paths |
+| `02-§109.8` | gap | Existing-id fragment create → 422 → "En skrivkonflikt uppstod" (§3.3) |
+| `02-§109.9` | gap | Edit/delete look up fragment by id first, then camp-file fallback |
+| `02-§109.10` | gap | `updateEventInActiveCamp()` rewrites fragment file in place; preserves id/created_at, bumps updated_at |
+| `02-§109.11` | gap | `removeEventFromActiveCamp()` deletes fragment file (Contents API DELETE) |
+| `02-§109.12` | gap | No fragment for id → patch/remove camp YAML in place (existing path) |
+| `02-§109.13` | gap | `build.js` (active) + `render-arkiv.js` (archive) load via `loadCampEvents()` |
+| `02-§109.14` | gap | Merged set runs through existing deterministic sort (date, start) |
+| `02-§109.15` | gap | `loadCampEvents()` de-dups by id, fragment wins, logs warning |
+| `02-§109.16` | gap | All views built from merged set (schedule/today/live/event pages/events.json/RSS/iCal/archive) |
+| `02-§109.17` | gap | Fragment parse backstop: one `event:` mapping with expected id, before any branch (extends `assertEventYamlValid`) |
+| `02-§109.18` | gap | Fragment event obeys field/date/end-after-start rules; API `validateFields`, `lint-yaml.js` fragment mode |
+| `02-§109.19` | gap | `loadCampEvents()` asserts `event.id` === filename stem (build fails on mismatch) |
+| `02-§109.20` | gap | `loadCampEvents()` asserts id uniqueness across camp file + fragments |
+| `02-§109.21` | gap | `check-yaml-security.js` / `lint-yaml.js` accept a fragment path; API scans submitted content |
+| `02-§109.22` | gap | `event-data-deploy-post-merge.yml` maps changed fragment/file path → camp file (`<stem>.yaml` / `<file>.yaml`) |
+| `02-§109.23` | gap | Production QA gating uses camp attribution; QA-camp fragment → skip prod deploy |
+| `02-§109.24` | gap | Fragment-only commit is data-only in `ci.yml` `has_code` rule (already matched; regression test) |
+| `02-§109.25` | gap | `source/data/**.yaml` triggers match nested fragment paths (both event-data workflows) |
