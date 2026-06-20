@@ -143,6 +143,28 @@ flowchart TD
     end
 ```
 
+### Merge queue
+
+All pull requests to `main` — including the automated `event/`, `event-edit/`,
+and `event-delete/` PRs opened by the form API — merge through a **merge queue**
+required by the `main` branch ruleset. When a PR's required checks pass and
+auto-merge is enabled, GitHub adds it to the queue instead of merging it directly.
+
+The queue merges one entry at a time. Each queued PR is re-tested on a temporary
+`gh-readonly-queue/main/*` branch built on the current `main` tip, so a PR forked
+from an older `main` is rebuilt against the latest commit and merged in order.
+Concurrent form submissions therefore all reach `main` automatically: no PR is
+left stranded `behind` the branch it was forked from, and no manual
+"Update branch" step is needed.
+
+The required `Lint, Test & Build` check reaches a queue branch because `ci.yml`
+triggers on `push` to `**`, which matches `gh-readonly-queue/main/*`. No workflow
+declares a `merge_group:` trigger, so narrowing that `push` filter stops the check
+from reporting on the queue branch: queued PRs then wait out the 60-minute
+status-check timeout, are treated as failed, and drop from the queue without
+merging. Add an explicit `merge_group:` trigger to the check-providing workflows
+before narrowing the `push` trigger.
+
 ### Environment Variables
 
 | Variable         | Default | Description                                              |

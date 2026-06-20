@@ -169,12 +169,12 @@ describe('docs/index.md — landing-page contract (02-§97.15–97.17)', () => {
   // (`[text](url)` or `<url>`) so CodeQL sees a complete URL context and
   // does not flag the assertions as incomplete URL substring sanitisation.
   // See 02-§39.4 for the same remediation pattern.
-  const REPO_URL_LINK = '](https://github.com/moggleif/sbsommar)';
+  const REPO_URL_LINK = '](https://github.com/SBsommar/sbsommar)';
   const README_URL_LINKS = [
-    '](https://github.com/moggleif/sbsommar#readme)',
-    '](https://github.com/moggleif/sbsommar/blob/main/README.md)',
+    '](https://github.com/SBsommar/sbsommar#readme)',
+    '](https://github.com/SBsommar/sbsommar/blob/main/README.md)',
   ];
-  const ISSUES_URL_LINK = '](https://github.com/moggleif/sbsommar/issues)';
+  const ISSUES_URL_LINK = '](https://github.com/SBsommar/sbsommar/issues)';
   const CAMP_SITE_PATTERNS = [
     '](https://sbsommar.se',
     '<https://sbsommar.se',
@@ -195,7 +195,7 @@ describe('docs/index.md — landing-page contract (02-§97.15–97.17)', () => {
     }
     assert.ok(
       raw.includes(REPO_URL_LINK),
-      'docs/index.md must link to the source repo via [text](https://github.com/moggleif/sbsommar)',
+      'docs/index.md must link to the source repo via [text](https://github.com/SBsommar/sbsommar)',
     );
   });
 
@@ -218,7 +218,7 @@ describe('docs/index.md — landing-page contract (02-§97.15–97.17)', () => {
     }
     assert.ok(
       raw.includes(ISSUES_URL_LINK),
-      'docs/index.md must link to the issue tracker via [text](https://github.com/moggleif/sbsommar/issues)',
+      'docs/index.md must link to the issue tracker via [text](https://github.com/SBsommar/sbsommar/issues)',
     );
   });
 
