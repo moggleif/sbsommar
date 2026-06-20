@@ -143,6 +143,20 @@ flowchart TD
     end
 ```
 
+### Merge queue
+
+All pull requests to `main` — including the automated `event/`, `event-edit/`,
+and `event-delete/` PRs opened by the form API — merge through a **merge queue**
+required by the `main` branch ruleset. When a PR's required checks pass and
+auto-merge is enabled, GitHub adds it to the queue instead of merging it directly.
+
+The queue merges one entry at a time. Each queued PR is re-tested on a temporary
+`gh-readonly-queue/main/*` branch built on the current `main` tip, so a PR forked
+from an older `main` is rebuilt against the latest commit and merged in order.
+Concurrent form submissions therefore all reach `main` automatically: no PR is
+left stranded `behind` the branch it was forked from, and no manual
+"Update branch" step is needed.
+
 ### Environment Variables
 
 | Variable         | Default | Description                                              |
