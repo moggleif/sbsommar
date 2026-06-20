@@ -14,7 +14,7 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const README_PATH = path.join(REPO_ROOT, 'README.md');
 const DOCS_DIR = path.join(REPO_ROOT, 'docs');
 
-const DOCS_SITE_URL = 'https://moggleif.github.io/sbsommar/';
+const DOCS_SITE_URL = 'https://sbsommar.github.io/sbsommar/';
 // Match the URL inside a Markdown autolink (`<...>`) so CodeQL recognises
 // the surrounding context — see 02-§39.4.
 const DOCS_SITE_AUTOLINK = `<${DOCS_SITE_URL}>`;
