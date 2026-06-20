@@ -684,7 +684,7 @@ events:
     end: '15:00'
     location: AndreasTältet
     responsible: jag
-    description: test
+    description: testar
     link: null
     owner:
       name: ''
