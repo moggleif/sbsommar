@@ -245,8 +245,7 @@ URL falls back to `/delete-event`.
 | File | Change |
 | --- | --- |
 | `app.js` | Add `POST /delete-event` route |
-| `source/api/edit-event.js` | Add `removeEventFromYaml()` function |
-| `source/api/github.js` | Add `removeEventFromActiveCamp()` function |
+| `source/api/github.js` | `removeEventFromActiveCamp()` deletes the event's fragment file (02-§109.11) |
 | `source/build/render-edit.js` | Add delete button and confirmation dialog HTML |
 | `source/assets/js/client/redigera.js` | Add delete button handler, confirmation, progress modal |
 

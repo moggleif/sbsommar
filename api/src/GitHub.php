@@ -366,8 +366,9 @@ final class GitHub
     }
 
     /**
-     * Apply $updates to a single event array, mirroring patchEventInYaml's
-     * mutable-field rules. Used for fragment edits (02-§109.10).
+     * Apply $updates to a single event array using the project's mutable-field
+     * rules. This is the only edit path — every event lives in its own fragment
+     * file (02-§109.9, §109.10).
      *
      * @param array<string,mixed> $event
      * @param array<string,mixed> $updates
