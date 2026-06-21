@@ -271,6 +271,12 @@ The classification is implemented in a single helper method so all three
 mutation endpoints share the same logic. Error messages never expose tokens,
 file paths, or stack traces. <!-- 03-§3.3a -->
 
+A duplicate submission is handled before this table applies: the add flow's
+pre-check (02-§111.2) answers HTTP 409 with "Den här aktiviteten finns redan i
+schemat." directly, without going through `classifyGitHubError`. The 409 / 422
+row above therefore covers only genuine GitHub conflict responses — the
+create-time backstop, not the duplicate pre-check. <!-- 03-§3.3b -->
+
 ### 3.4 Fragment writes, edits, and deletes
 
 Every add and batch-add writes new fragment files rather than appending to the
@@ -281,10 +287,14 @@ camp YAML file (§1.1). The mutation endpoints behave as follows: <!-- 03-§3.4 
   (02-§109.5).
 - **Batch add** — one new fragment file per date, all on a single branch and PR
   (02-§109.6).
-- If a fragment with the target id already exists (a genuine duplicate of the
-  same activity at the same date and start time), the create call returns
-  HTTP 422 and the API surfaces the "En skrivkonflikt uppstod" message (§3.3)
-  rather than overwriting the existing event (02-§109.8). <!-- 03-§3.4a -->
+- Before any branch is created, the add and batch-add flows check whether the
+  target fragment already exists on `main`. If it does (a genuine duplicate of
+  the same activity at the same date and start time), the submission is rejected
+  with **HTTP 409** and the Swedish message "Den här aktiviteten finns redan i
+  schemat." (batch: "…för ett eller flera av de valda datumen."), rather than
+  creating a branch or overwriting the existing event (02-§111.2, refining
+  02-§109.8). The older create-time HTTP 422 conflict (§3.3) remains only as a
+  deep backstop. <!-- 03-§3.4a -->
 
 Edit and delete operate only on the event's fragment file (02-§109.9):
 <!-- 03-§3.4b -->
