@@ -1,11 +1,11 @@
 'use strict';
 
 // Closes event-submission pull requests that a merge to main has made redundant
-// (02-§110.6–110.9). Runs in event-data-deploy-post-merge.yml after each
+// (02-§111.6–111.9). Runs in event-data-deploy-post-merge.yml after each
 // event-data merge.
 //
 // A duplicate submission (same title + date + start → same fragment path) can slip
-// past the add-API duplicate pre-check (02-§110.2) when it is opened before the
+// past the add-API duplicate pre-check (02-§111.2) when it is opened before the
 // first identical submission merges: at branch-cut time neither fragment is on main
 // yet, so both pull requests are created. Once the first merges, the second would
 // add a file that already exists on main with identical content, so its net diff
@@ -14,7 +14,7 @@
 //
 // A pull request that instead modifies an existing fragment (same id, different
 // body → a non-empty diff) is left open and logged for manual attention, so the
-// residual edge stays visible rather than being closed silently (02-§110.9).
+// residual edge stays visible rather than being closed silently (02-§111.9).
 
 const { execFileSync } = require('node:child_process');
 
@@ -76,7 +76,7 @@ function main() {
           '--comment', 'Stänger automatiskt: aktiviteten finns redan på sajten (identiskt inskick). Inget går förlorat.',
         ]);
       } else if (verdict === 'log-manual') {
-        console.log(`::warning::Event PR #${pr.number} (${pr.headRefName}) shares an id with an existing activity but has a different body — needs manual review (02-§110.9)`);
+        console.log(`::warning::Event PR #${pr.number} (${pr.headRefName}) shares an id with an existing activity but has a different body — needs manual review (02-§111.9)`);
       }
     } catch (err) {
       console.log(`::warning::Could not process event PR #${pr.number} (${pr.headRefName}): ${err.message}`);

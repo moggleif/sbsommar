@@ -79,7 +79,7 @@ final class GitHub
 
         // Reject a duplicate before any branch/PR is created, so an already-merged
         // identical activity fails cleanly (409) instead of a dangling branch and a
-        // generic write-conflict error (02-§110.1, §110.2).
+        // generic write-conflict error (02-§111.1, §111.2).
         if ($this->getFileMaybe($fragPath) !== null) {
             throw new DuplicateEventException("Event already exists: {$event['id']}");
         }
@@ -156,7 +156,7 @@ final class GitHub
 
         // Reject the whole batch before any branch/PR if any date's fragment already
         // exists on main — atomic, so a partial overlap never creates some files
-        // (02-§110.4, §110.5).
+        // (02-§111.4, §111.5).
         foreach ($fragments as [$fragPath, , $eventId]) {
             if ($this->getFileMaybe($fragPath) !== null) {
                 throw new DuplicateEventException("Event already exists: {$eventId}");

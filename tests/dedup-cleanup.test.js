@@ -1,6 +1,6 @@
 'use strict';
 
-// Unit tests for the redundant-duplicate-PR cleanup decision (02-§110.6–110.9).
+// Unit tests for the redundant-duplicate-PR cleanup decision (02-§111.6–111.9).
 // classifyEventPr is pure, so its full decision table is tested here; the GitHub
 // API wiring in the script's main() is a manual/integration checkpoint.
 
@@ -11,7 +11,7 @@ const { classifyEventPr } = require('../source/scripts/close-redundant-event-prs
 
 const DATA = 'source/data/2026-06-syssleback/x-2026-06-22-0800.yaml';
 
-describe('classifyEventPr — redundant duplicate cleanup (02-§110.6–110.9)', () => {
+describe('classifyEventPr — redundant duplicate cleanup (02-§111.6–111.9)', () => {
   it('DEDUPCLEAN-01: event/ branch with no changed files → close (empty net diff)', () => {
     assert.equal(classifyEventPr({ branch: 'event/2026-06-22-x-1', files: [] }), 'close');
   });

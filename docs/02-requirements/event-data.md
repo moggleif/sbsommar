@@ -837,7 +837,7 @@ open → fragments while the camp is live → compaction at archive.
 
 ## 111. Duplicate Submission Hardening
 
-### 110.1 Context
+### 111.1 Context
 
 Activities are submitted in bursts (§109.1). An event's id is derived from its
 title, date, and start time, so submitting the same activity twice produces the
@@ -862,7 +862,7 @@ submissions that resolve to the same id are treated as the same activity. The
 desired state is that neither window produces a stuck pull request or a confusing
 error.
 
-### 110.2 Duplicate pre-check before submission (site requirements)
+### 111.2 Duplicate pre-check before submission (site requirements)
 
 - Before any branch or pull request is created, the add flow checks whether the
   target fragment file (`source/data/<stem>/<event-id>.yaml`) already exists on
@@ -883,7 +883,7 @@ error.
   chosen dates already have this activity. No fragment from a rejected batch is
   created. <!-- 02-§111.5 -->
 
-### 110.3 Concurrent-duplicate cleanup (site requirements)
+### 111.3 Concurrent-duplicate cleanup (site requirements)
 
 - When two identical submissions are created before either merges, both
   pre-checks pass because neither fragment is yet on `main`. After the first

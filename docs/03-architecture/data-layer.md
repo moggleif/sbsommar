@@ -272,7 +272,7 @@ mutation endpoints share the same logic. Error messages never expose tokens,
 file paths, or stack traces. <!-- 03-§3.3a -->
 
 A duplicate submission is handled before this table applies: the add flow's
-pre-check (02-§110.2) answers HTTP 409 with "Den här aktiviteten finns redan i
+pre-check (02-§111.2) answers HTTP 409 with "Den här aktiviteten finns redan i
 schemat." directly, without going through `classifyGitHubError`. The 409 / 422
 row above therefore covers only genuine GitHub conflict responses — the
 create-time backstop, not the duplicate pre-check. <!-- 03-§3.3b -->
@@ -292,7 +292,7 @@ camp YAML file (§1.1). The mutation endpoints behave as follows: <!-- 03-§3.4 
   the same activity at the same date and start time), the submission is rejected
   with **HTTP 409** and the Swedish message "Den här aktiviteten finns redan i
   schemat." (batch: "…för ett eller flera av de valda datumen."), rather than
-  creating a branch or overwriting the existing event (02-§110.2, refining
+  creating a branch or overwriting the existing event (02-§111.2, refining
   02-§109.8). The older create-time HTTP 422 conflict (§3.3) remains only as a
   deep backstop. <!-- 03-§3.4a -->
 

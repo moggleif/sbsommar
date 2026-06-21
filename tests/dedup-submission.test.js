@@ -1,6 +1,6 @@
 'use strict';
 
-// Structural checks for the duplicate-submission pre-check (02-§110.1–110.5).
+// Structural checks for the duplicate-submission pre-check (02-§111.1–111.5).
 //
 // The pre-check lives inside the network-touching add flow (github.js / GitHub.php)
 // and its entrypoints (app.js / index.php), which cannot run in Node tests. As with
@@ -10,7 +10,7 @@
 //   DEDUP-M01: submit an activity that already exists → API answers 409 with
 //     "Den här aktiviteten finns redan i schemat." and no PR is created.
 //   DEDUP-M02: submit the same activity twice concurrently → one lands; the
-//     redundant PR is auto-closed by close-redundant-event-prs (02-§110.6–110.9).
+//     redundant PR is auto-closed by close-redundant-event-prs (02-§111.6–111.9).
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
@@ -33,7 +33,7 @@ function slice(src, startNeedle, endNeedle) {
   return src.slice(start, end > start ? end : src.length);
 }
 
-describe('02-§110 — github.js duplicate pre-check (DEDUP-01..03)', () => {
+describe('02-§111 — github.js duplicate pre-check (DEDUP-01..03)', () => {
   const body = slice(GH_JS, 'async function addEventToActiveCamp', 'async function updateEventInActiveCamp');
 
   it('DEDUP-01: addEventToActiveCamp checks getFileMaybe before creating a branch', () => {
@@ -60,7 +60,7 @@ describe('02-§110 — github.js duplicate pre-check (DEDUP-01..03)', () => {
   });
 });
 
-describe('02-§110.3 — app.js surfaces the duplicate synchronously (DEDUP-04)', () => {
+describe('02-§111.3 — app.js surfaces the duplicate synchronously (DEDUP-04)', () => {
   const handler = slice(APP_JS, "app.post('/add-event'", "app.post('/edit-event'");
 
   it('DEDUP-04: the handler awaits isDuplicateEvent and answers 409 before the success response', () => {
@@ -74,7 +74,7 @@ describe('02-§110.3 — app.js surfaces the duplicate synchronously (DEDUP-04)'
   });
 });
 
-describe('02-§110 — GitHub.php duplicate pre-check (DEDUP-05..07)', () => {
+describe('02-§111 — GitHub.php duplicate pre-check (DEDUP-05..07)', () => {
   const addBody = slice(GH_PHP, 'function addEventToActiveCamp', 'function addEventsToActiveCamp');
   const batchBody = slice(GH_PHP, 'function addEventsToActiveCamp', 'function updateEventInActiveCamp');
 
@@ -101,7 +101,7 @@ describe('02-§110 — GitHub.php duplicate pre-check (DEDUP-05..07)', () => {
   });
 });
 
-describe('02-§110.2/110.5 — index.php maps duplicates to 409 (DEDUP-08..09)', () => {
+describe('02-§111.2/111.5 — index.php maps duplicates to 409 (DEDUP-08..09)', () => {
   const single = slice(INDEX_PHP, 'function handleAddEvent(', 'function handleAddEvents(');
   const batch = slice(INDEX_PHP, 'function handleAddEvents(', 'function handleEditEvent(');
 

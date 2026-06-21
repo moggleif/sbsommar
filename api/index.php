@@ -284,7 +284,7 @@ function handleAddEvent(?array $activeCamp, string $adminTokenSecret, string $se
         $gh = new GitHub();
         $gh->addEventToActiveCamp($body);
     } catch (DuplicateEventException $e) {
-        // Same activity already in the schedule — reject cleanly (02-§110.2).
+        // Same activity already in the schedule — reject cleanly (02-§111.2).
         jsonResponse(['success' => false, 'error' => 'Den här aktiviteten finns redan i schemat.'], 409);
 
         return;
@@ -372,7 +372,7 @@ function handleAddEvents(?array $activeCamp, string $adminTokenSecret, string $s
         $eventIds = $gh->addEventsToActiveCamp($body);
     } catch (DuplicateEventException $e) {
         // One or more of the chosen dates already have this activity — reject the
-        // whole batch cleanly (02-§110.5).
+        // whole batch cleanly (02-§111.5).
         jsonResponse(['success' => false, 'error' => 'Aktiviteten finns redan i schemat för ett eller flera av de valda datumen.'], 409);
 
         return;

@@ -161,7 +161,7 @@ app.post('/add-event', addEventLimiter, async (req, res) => {
   }
 
   // Duplicate pre-check — runs synchronously so the user sees the rejection even
-  // though the GitHub write below is fire-and-forget (02-§110.2, §110.3). PHP is
+  // though the GitHub write below is fire-and-forget (02-§111.2, §111.3). PHP is
   // synchronous and gets this for free; here it must come before res.json.
   try {
     if (await isDuplicateEvent(req.body)) {

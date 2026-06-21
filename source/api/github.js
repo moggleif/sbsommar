@@ -328,13 +328,13 @@ async function resolveActiveCampFromGitHub() {
 }
 
 // Swedish message shown when a submission duplicates an activity already in the
-// schedule (02-§110.2).
+// schedule (02-§111.2).
 const DUPLICATE_EVENT_MESSAGE = 'Den här aktiviteten finns redan i schemat.';
 
 // Build the error thrown when a fragment with the target id already exists. The
 // `status`/`userMessage` mark it as a duplicate so a synchronous caller can answer
 // 409; the Node entrypoint instead calls isDuplicateEvent() before its
-// fire-and-forget write, while PHP maps DuplicateEventException → 409 (02-§110.2).
+// fire-and-forget write, while PHP maps DuplicateEventException → 409 (02-§111.2).
 function duplicateEventError(eventId) {
   const err = new Error(`Event already exists: ${eventId}`);
   err.status = 409;
@@ -344,8 +344,8 @@ function duplicateEventError(eventId) {
 }
 
 // Resolve the event id the add flow would write for this body and report whether
-// its fragment already exists on main (02-§110.1). Used by the Node entrypoint to
-// reject a duplicate synchronously, before the fire-and-forget write (02-§110.3).
+// its fragment already exists on main (02-§111.1). Used by the Node entrypoint to
+// reject a duplicate synchronously, before the fire-and-forget write (02-§111.3).
 async function isDuplicateEvent(body) {
   const title = String(body.title).trim();
   const date  = String(body.date).trim();
@@ -389,7 +389,7 @@ async function addEventToActiveCamp(body) {
 
   // Reject a duplicate before any branch/PR is created, so an already-merged
   // identical activity fails cleanly (409) instead of a dangling branch and a
-  // generic write-conflict error (02-§110.1, §110.2).
+  // generic write-conflict error (02-§111.1, §111.2).
   if (await getFileMaybe(fragPath)) throw duplicateEventError(event.id);
 
   // Ephemeral branch → create the new fragment file (no sha) → PR → auto-merge.
