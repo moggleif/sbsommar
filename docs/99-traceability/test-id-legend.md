@@ -213,3 +213,4 @@ Part of [the traceability index](./index.md).
 | FRAG-80..82 | `tests/check-yaml-security.test.js` | `scanYaml` scans a fragment's single `event:` mapping (02-§109.21) |
 | EDW-29..32 | `tests/event-deploy-workflow.test.js` | Fragment-aware production QA gating + workflow triggers (02-§109.22, 109.23, 109.25) |
 | (PHPUnit) | `api/tests/GitHubTest.php` | PHP mirror of the fragment helpers: `buildFragmentYaml`, `fragmentPath`, `assertFragmentYamlValid` (02-§109) |
+| SPLIT-01..10 | `tests/split-camp-events.test.js` | `splitCampEvents` / `resolveCampFile` / `emptyEventsList` split-at-open (02-§110) |

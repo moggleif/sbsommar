@@ -1682,4 +1682,19 @@ Doc ref: `03-architecture/data-layer.md §1.1`, `§3`, `§3.1`, `§3.4`, `§4a`;
 | `02-§109.23` | covered | EDW-29, EDW-30, FRAG-52: prod gate maps fragment → camp file, then the camps.yaml `qa` lookup |
 | `02-§109.24` | covered | FRAG-70..73: fragment-only diff is data-only under `ci.yml`'s `^source/data/` + camps/local rule |
 | `02-§109.25` | covered | EDW-31, EDW-32: both event-data workflows trigger on `source/data/**.yaml` (matches nested fragments) |
-| `02-§109.26` | covered | FRAGONLY-05, -12: monolith patch/remove helpers removed (Node+PHP); mutation bodies never reference `campFilePath`. Split-at-open and compaction tracked separately |
+| `02-§109.26` | covered | FRAGONLY-05, -12: monolith patch/remove helpers removed (Node+PHP); mutation bodies never reference `campFilePath`. Split-at-open implemented (§110); compaction tracked separately |
+
+### §110 — Split a Camp's Seeded Events into Fragments at Opening
+
+Doc ref: `02-requirements/event-data.md §110`; `03-architecture/data-layer.md §1.2`, `§3.4`; `04-OPERATIONS.md` (Camp Lifecycle → When a Camp Opens).
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§110.1` | covered | SPLIT-01, SPLIT-08, SPLIT-09: `resolveCampFile()` + `splitCampEvents()` in `source/scripts/split-camp-events.js` write one fragment per camp-file event |
+| `02-§110.2` | covered | SPLIT-01, SPLIT-02, SPLIT-07: fragments written to `source/data/<stem>/<event-id>.yaml` via `buildFragmentYaml()`; stem == `event.id` |
+| `02-§110.3` | covered | SPLIT-01, SPLIT-10: `emptyEventsList()` keeps the `camp:` header verbatim and leaves `events: []` |
+| `02-§110.4` | covered | SPLIT-03: `loadCampEvents()` round-trips the same ids with no doubling; fragments + emptied list written together |
+| `02-§110.5` | covered | SPLIT-04, SPLIT-07: each fragment passes `assertFragmentYamlValid`, `validateFragment` (`lint-yaml.js`), `scanYaml` (`check-yaml-security.js`) before any write |
+| `02-§110.6` | covered | SPLIT-05: idempotent no-op when the camp file's `events:` list is already empty |
+| `02-§110.7` | covered | SPLIT-06: pre-existing fragment for a seeded id aborts with an error and writes nothing |
+| `02-§110.8` | covered | `04-OPERATIONS.md` (Camp Lifecycle → When a Camp Opens) documents the manual step run at/just before `opens_for_editing`; manual checkpoint |
