@@ -11,6 +11,8 @@ name: Event Data Deploy (Post-Merge)
 #   2. deploy-prod    – detect inline + QA check + build + SCP to Production
 #   3. close-redundant-event-prs – close duplicate event PRs made redundant by
 #                                  this merge (02-§111.6–111.9)
+#   4. recover-stranded-event-prs – re-enqueue event PRs stranded in the merge
+#                                   queue by this merge's base move (02-§112.7)
 
 permissions:
   contents: read
