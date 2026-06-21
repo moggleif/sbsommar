@@ -832,3 +832,72 @@ open → fragments while the camp is live → compaction at archive.
   when a camp opens for editing (at or shortly before its `opens_for_editing`
   date), placed in the camp lifecycle as: split at open → fragments while the camp
   is live → compaction at archive. <!-- 02-§110.8 -->
+
+---
+
+## 111. Duplicate Submission Hardening
+
+### 110.1 Context
+
+Activities are submitted in bursts (§109.1). An event's id is derived from its
+title, date, and start time, so submitting the same activity twice produces the
+same id and therefore the same fragment file path
+(`source/data/<stem>/<event-id>.yaml`). Two such submissions try to create the
+same new file, which collides in one of two windows:
+
+- **Already merged.** The first submission has already merged, so the fragment
+  exists on `main`. The second submission cuts a branch and tries to create a
+  file that already exists. Today this surfaces as a generic write-conflict
+  error ("En skrivkonflikt uppstod", §109.8) raised *after* a branch has been
+  created — or, in the Node runtime where the GitHub write is fire-and-forget, as
+  a silent background failure after the form has already reported success.
+- **Concurrent.** Both submissions are in flight before either merges, so neither
+  sees the other's fragment on `main`. Both pull requests are created; the first
+  merges, and the second becomes redundant — the file it would add already exists
+  on `main`. It lingers as an open pull request that a maintainer must close by
+  hand (issue #480; observed as #473/#474, "Färga t-shirt pass 5-6").
+
+The id formula (title + date + start) is intentional and unchanged: two
+submissions that resolve to the same id are treated as the same activity. The
+desired state is that neither window produces a stuck pull request or a confusing
+error.
+
+### 110.2 Duplicate pre-check before submission (site requirements)
+
+- Before any branch or pull request is created, the add flow checks whether the
+  target fragment file (`source/data/<stem>/<event-id>.yaml`) already exists on
+  `main`. <!-- 02-§111.1 -->
+- If the target fragment already exists on `main`, the submission is rejected with
+  HTTP 409 and a Swedish message stating that the activity already exists in the
+  schedule — not a generic write-conflict message. No branch or pull request is
+  created. This refines §109.8. <!-- 02-§111.2 -->
+- The duplicate pre-check runs synchronously, before the success response is sent,
+  so the user always sees the rejection. This holds both in the PHP runtime, where
+  the whole submission is synchronous, and in the Node runtime, where the GitHub
+  write is otherwise fire-and-forget and the check must therefore complete before
+  the response. <!-- 02-§111.3 -->
+- The duplicate pre-check applies to both a single submission (`POST /add-event`)
+  and a batch submission (`POST /add-events`). <!-- 02-§111.4 -->
+- A batch submission is rejected as a whole when any of its target fragment files
+  already exists on `main`; the Swedish message states that one or more of the
+  chosen dates already have this activity. No fragment from a rejected batch is
+  created. <!-- 02-§111.5 -->
+
+### 110.3 Concurrent-duplicate cleanup (site requirements)
+
+- When two identical submissions are created before either merges, both
+  pre-checks pass because neither fragment is yet on `main`. After the first
+  merges, the second submission's pull request adds a file that already exists on
+  `main` with identical content, so its net diff against `main` is
+  empty. <!-- 02-§111.6 -->
+- An event pull request — a branch named `event/*` that changes only files under
+  `source/data/` — whose net diff against `main` is empty is closed automatically
+  and its branch deleted, without maintainer action. The activity is already on
+  the site from the first pull request, so nothing is lost. <!-- 02-§111.7 -->
+- The cleanup runs after each merge of event data to `main`, re-evaluating the
+  open event pull requests so that one made redundant by the merge is closed
+  promptly. <!-- 02-§111.8 -->
+- A concurrent submission that resolves to the same id but carries a different body
+  (so its net diff against `main` is not empty) is outside this automatic cleanup;
+  it is logged for manual attention rather than closed silently, so the residual
+  edge stays visible. <!-- 02-§111.9 -->
