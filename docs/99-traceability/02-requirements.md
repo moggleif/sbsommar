@@ -1735,3 +1735,21 @@ Doc ref: `02-requirements/event-data.md §112`;
 | `02-§112.9` | implemented | `main()` filters to open event PRs and returns early with "nothing to recover" when none exist; live behaviour is STRAND-M01 |
 | `02-§112.10` | covered | STRAND-10: `classifyStrandedPr` is pure and returns `skip` for any non-stranded PR, so repeated sweeps are no-ops |
 | `02-§112.11` | covered | STRAND-11/-12/-13: `recoverPr()` wraps the re-enable in `withRetry` (exponential backoff); disable is a single attempt; live toggle is STRAND-M01 |
+
+### §113 — Proactive Merge-Queue Enqueue
+
+Doc ref: `02-requirements/event-data.md §113`;
+`03-architecture/forms-and-api.md §30` (Proactive Merge-Queue Enqueue);
+`03-architecture/ci-and-deploy.md §11.8` (cross-reference).
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§113.1` | implemented | `enqueueBestEffort(pr.node_id)` runs after `enableAutoMerge` in add/edit/delete (Node) and add/batch/edit/delete (PHP); the mutation shape is ENQ-01/-02/-04 (Node) + PHP parity; the live "PR lands in the queue" is manual checkpoint ENQ-M01 |
+| `02-§113.2` | implemented | Each call site keeps `enableAutoMerge(pr.node_id)` immediately before the enqueue call, so a non-mergeable PR still queues via auto-merge once checks pass; code-review checkpoint, live behaviour is ENQ-M01 |
+| `02-§113.3` | covered | ENQ-03 (Node) + `testBuildEnqueueMutationSpecifiesNoMergeMethod` (PHP): the mutation contains no `mergeMethod`; ENQ-05 confirms it selects `mergeQueueEntry`, not `enablePullRequestAutoMerge` |
+| `02-§113.4` | covered | ENQ-06/-07/-10: `enqueueBestEffort` calls the impl once on success and never throws when it rejects (sync throw or rejected Promise) |
+| `02-§113.5` | covered | ENQ-09: a "checks still running" failure is swallowed and reported as not enqueued; the queue actually declining an unmergeable PR is live checkpoint ENQ-M01 |
+| `02-§113.6` | covered | ENQ-08: exactly one warning is logged on failure and nothing else; no GitHub issue is created (the best-effort wrapper only calls `log`) |
+| `02-§113.7` | covered | ENQ-07: the enqueue step is contained so the submission outcome is unchanged whether enqueue succeeds or fails |
+| `02-§113.8` | covered | Recovery (`recover-stranded-event-prs.js`, §112) is untouched; STRAND-01..13 still pass. A proactively enqueued PR has a `mergeQueueEntry`, so `classifyStrandedPr` returns `skip` (STRAND-04) and recovery still catches any PR that later falls out of the queue |
+| `02-§113.9` | covered | The event-data validation gate (`check-yaml-security.js`, `lint-yaml.js`) and API-layer validation are unchanged; YSEC/validation tests still pass. Enqueue only changes when a PR enters the queue, not whether its required checks run |
