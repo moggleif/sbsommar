@@ -1664,7 +1664,7 @@ Doc ref: `03-architecture/data-layer.md §1.1`, `§3`, `§3.1`, `§3.4`, `§4a`;
 | `02-§109.5` | implemented | `addEventToActiveCamp()` writes a fragment via `fragmentPath`+`buildFragmentYaml` (FRAG-35 path); network write is the e2e/manual checkpoint |
 | `02-§109.6` | implemented | `GitHub::addEventsToActiveCamp()` writes one fragment per date on one branch/PR; network write manual |
 | `02-§109.7` | covered | FRAG-37, FRAG-38: distinct ids → distinct files (no shared file); same id → same path |
-| `02-§109.8` | implemented | New-file create on an existing id → GitHub 422 → `classifyGitHubError` "En skrivkonflikt uppstod" (§3.3, FRAG-38); live 422 manual |
+| `02-§109.8` | implemented | Primary path is now the §110.2 pre-check (409 + clear Swedish message, DEDUP-02/-08); the new-file-create-on-existing-id → GitHub 422 → `classifyGitHubError` "En skrivkonflikt uppstod" (§3.3, FRAG-38) is a deep backstop; live 422 manual |
 | `02-§109.9` | covered | FRAGONLY-01..04, -10, -11: Node+PHP edit/delete bodies act on `fragmentPath` only and never reference `campFilePath` |
 | `02-§109.10` | covered | EDIT-05..15, EEC-01..04: `patchEventObject` preserves id/created_at and bumps updated_at; edit rewrites the fragment via `buildFragmentYaml` |
 | `02-§109.11` | covered | FRAGONLY-04, -11: fragment delete via `deleteFile()`, no `putFile` in the delete path |
@@ -1676,7 +1676,7 @@ Doc ref: `03-architecture/data-layer.md §1.1`, `§3`, `§3.1`, `§3.4`, `§4a`;
 | `02-§109.17` | covered | FRAG-40..43 (+ PHP): `assertFragmentYamlValid()` parses one `event:` with the expected id before any branch |
 | `02-§109.18` | covered | FRAG-60..66: `validateFragment()` in `lint-yaml.js` checks fields, date, end-after-start |
 | `02-§109.19` | covered | FRAG-04: `loadCampEvents()` throws when `event.id` ≠ filename stem; `lint-yaml.js` CLI repeats the check |
-| `02-§109.20` | implemented | Add API rejects a duplicate id with 422 (02-§109.8); `loadCampEvents()` dedup (FRAG-05) keeps the rendered set unique |
+| `02-§109.20` | implemented | Add API rejects a duplicate id before any branch via the §110.2 pre-check (409, DEDUP-01/-05), with the 422 create-conflict (02-§109.8) as backstop; `loadCampEvents()` dedup (FRAG-05) keeps the rendered set unique |
 | `02-§109.21` | covered | FRAG-80..82 (`check-yaml-security.js` scans a fragment), FRAG-60..66 (`lint-yaml.js` fragment mode) |
 | `02-§109.22` | covered | FRAG-50..58: `campFileForPath()` in `source/scripts/changed-camp-file.js`; EDW-29 wires it into the deploy gate |
 | `02-§109.23` | covered | EDW-29, EDW-30, FRAG-52: prod gate maps fragment → camp file, then the camps.yaml `qa` lookup |
