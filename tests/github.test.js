@@ -3,7 +3,7 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { slugify, yamlScalar, buildEventYaml, detectEventIndent, assertEventYamlValid, buildFragmentYaml, fragmentPath, assertFragmentYamlValid } = require('../source/api/github');
+const { slugify, yamlScalar, buildEventYaml, detectEventIndent, assertEventYamlValid, buildFragmentYaml, fragmentPath, assertFragmentYamlValid, buildEnqueueMutation, enqueueBestEffort } = require('../source/api/github');
 
 // ── slugify ───────────────────────────────────────────────────────────────────
 
@@ -533,5 +533,80 @@ describe('fragment helpers (FRAG-30..45)', () => {
   it('FRAG-43: throws when the event id does not match the expected id', () => {
     const content = buildFragmentYaml(baseEvent({ id: 'other-2026-06-22-0800' }));
     assert.throws(() => assertFragmentYamlValid(content, 'frukost-2026-06-22-0800'), /frukost-2026-06-22-0800/);
+  });
+});
+
+// ── buildEnqueueMutation / enqueueBestEffort (02-§113) ─────────────────────────
+// Proactive merge-queue enqueue: a pure mutation builder plus a best-effort wrapper
+// that must never fail the submission. The network call itself is a manual
+// checkpoint (ENQ-M01); only the pure/isolatable logic is unit-tested here.
+
+describe('buildEnqueueMutation (ENQ-01..05)', () => {
+  it('ENQ-01 (02-§113.1): builds a mutation that calls enqueuePullRequest', () => {
+    const { query } = buildEnqueueMutation('PR_node_1');
+    assert.match(query, /enqueuePullRequest/);
+  });
+
+  it('ENQ-02 (02-§113.1): passes the node id as the pullRequestId input', () => {
+    const { query } = buildEnqueueMutation('PR_node_1');
+    assert.match(query, /pullRequestId:\s*\$id/);
+  });
+
+  it('ENQ-03 (02-§113.3): does not specify a merge method (the queue config decides)', () => {
+    const { query } = buildEnqueueMutation('PR_node_1');
+    assert.doesNotMatch(query, /mergeMethod/i);
+  });
+
+  it('ENQ-04 (02-§113.1): binds the given node id to the $id variable', () => {
+    const { variables } = buildEnqueueMutation('PR_node_42');
+    assert.strictEqual(variables.id, 'PR_node_42');
+  });
+
+  it('ENQ-05 (02-§113.1): selects mergeQueueEntry — the merge-queue mutation, not auto-merge', () => {
+    const { query } = buildEnqueueMutation('PR_node_1');
+    assert.match(query, /mergeQueueEntry/);
+    assert.doesNotMatch(query, /enablePullRequestAutoMerge/);
+  });
+});
+
+describe('enqueueBestEffort (ENQ-06..10)', () => {
+  it('ENQ-06 (02-§113.1): calls the enqueue impl once with the node id on the happy path', async () => {
+    const calls = [];
+    const ok = await enqueueBestEffort('PR_node_1', { enqueue: (id) => { calls.push(id); }, log: () => {} });
+    assert.deepStrictEqual(calls, ['PR_node_1']);
+    assert.strictEqual(ok, true);
+  });
+
+  it('ENQ-07 (02-§113.4, §113.7): never throws when enqueue rejects — submission stays intact', async () => {
+    await assert.doesNotReject(() => enqueueBestEffort('PR_node_1', {
+      enqueue: () => { throw new Error('Pull request is not in a mergeable state'); },
+      log: () => {},
+    }));
+  });
+
+  it('ENQ-08 (02-§113.6): logs a warning (and creates nothing else) when enqueue fails', async () => {
+    const logged = [];
+    await enqueueBestEffort('PR_node_1', {
+      enqueue: () => { throw new Error('checks pending'); },
+      log: (msg) => logged.push(msg),
+    });
+    assert.strictEqual(logged.length, 1, 'expected exactly one warning log');
+    assert.match(logged[0], /enqueue/i);
+  });
+
+  it('ENQ-09 (02-§113.5): a "checks still running" failure is swallowed and reported as not enqueued', async () => {
+    const result = await enqueueBestEffort('PR_node_1', {
+      enqueue: () => { throw new Error('required status checks have not yet passed'); },
+      log: () => {},
+    });
+    assert.strictEqual(result, false);
+  });
+
+  it('ENQ-10 (02-§113.4): swallows a rejected Promise (async enqueue impl) too', async () => {
+    const result = await enqueueBestEffort('PR_node_1', {
+      enqueue: () => Promise.reject(new Error('transient 502')),
+      log: () => {},
+    });
+    assert.strictEqual(result, false);
   });
 });

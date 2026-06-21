@@ -263,4 +263,39 @@ final class GitHubTest extends TestCase
         $this->expectException(\RuntimeException::class);
         GitHub::assertFragmentYamlValid($content, 'frukost-2026-06-22-0800');
     }
+
+    // ── buildEnqueueMutation (02-§113) ───────────────────────────────────────
+    // Mirrors the Node ENQ-01..05 tests: proactive merge-queue enqueue mutation.
+    // The network call and best-effort containment are manual checkpoints (ENQ-M01).
+
+    public function testBuildEnqueueMutationCallsEnqueuePullRequest(): void
+    {
+        ['query' => $query] = GitHub::buildEnqueueMutation('PR_node_1');
+        $this->assertStringContainsString('enqueuePullRequest', $query);
+    }
+
+    public function testBuildEnqueueMutationPassesNodeIdAsPullRequestId(): void
+    {
+        ['query' => $query] = GitHub::buildEnqueueMutation('PR_node_1');
+        $this->assertMatchesRegularExpression('/pullRequestId:\s*\$id/', $query);
+    }
+
+    public function testBuildEnqueueMutationSpecifiesNoMergeMethod(): void
+    {
+        ['query' => $query] = GitHub::buildEnqueueMutation('PR_node_1');
+        $this->assertDoesNotMatchRegularExpression('/mergeMethod/i', $query);
+    }
+
+    public function testBuildEnqueueMutationBindsNodeIdToIdVariable(): void
+    {
+        ['variables' => $variables] = GitHub::buildEnqueueMutation('PR_node_42');
+        $this->assertSame('PR_node_42', $variables['id']);
+    }
+
+    public function testBuildEnqueueMutationSelectsMergeQueueEntryNotAutoMerge(): void
+    {
+        ['query' => $query] = GitHub::buildEnqueueMutation('PR_node_1');
+        $this->assertStringContainsString('mergeQueueEntry', $query);
+        $this->assertStringNotContainsString('enablePullRequestAutoMerge', $query);
+    }
 }
