@@ -138,11 +138,23 @@ Test IDs referenced in the `Test(s)` column are defined in the
 ## Summary
 
 ```text
-Total requirements:            1397
-Covered (implemented + tested): 749
-Implemented, not tested:        648
+Total requirements:            1408
+Covered (implemented + tested): 754
+Implemented, not tested:        654
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
+
+Note: §112 (Stranded Auto-Merge Recovery) adds 11 requirements
+  (02-§112.1–112.11): 5 covered (STRAND-01..13,
+  tests/stranded-recovery.test.js) and 6 implemented (the GraphQL
+  disable→enable toggle, the per-PR isolation and early-exit in main(), and
+  the two workflow entry points, STRAND-M01 manual). Event PRs merge through a
+  required merge queue; when main advances between auto-merge enablement and
+  queue entry, a sibling event PR can strand (auto-merge on, mergeStateStatus
+  CLEAN, no mergeQueueEntry) and never merge. recover-stranded-event-prs.js
+  detects that signature and toggles auto-merge off then on to register a fresh
+  queue entry, running after each event merge and on a 15-minute safety-net
+  schedule (#495).
 
 Note: §111 (Duplicate Submission Hardening) adds 9 requirements
   (02-§111.1–111.9): 7 covered (DEDUP-01..09, DEDUPCLEAN-01..09,
