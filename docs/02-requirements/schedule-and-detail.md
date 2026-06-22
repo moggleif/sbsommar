@@ -332,6 +332,15 @@ and does not disrupt the existing row layout. <!-- 02-§46.7 -->
 The link uses the `download` attribute so the browser saves the file
 rather than navigating. <!-- 02-§46.8 -->
 
+### 46.6 Per-event iCal link in today view
+
+Every event row on the today view (`/idag.html`) includes a download link
+to its `.ics` file, identical in appearance and behaviour to the per-event
+iCal link on the weekly schedule. <!-- 02-§46.16 -->
+
+The display view (`/live.html`) shows no per-event iCal link, since it is a
+passive, non-interactive screen viewed at a distance. <!-- 02-§46.17 -->
+
 ### 46.3 Calendar tips page discoverability
 
 The weekly schedule page includes a visible link to `kalender.html` near
