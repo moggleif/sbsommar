@@ -1738,6 +1738,10 @@ Doc ref: `02-requirements/event-data.md §112`;
 | `02-§112.9` | implemented | `main()` filters to open event PRs and returns early with "nothing to recover" when none exist; live behaviour is STRAND-M01 |
 | `02-§112.10` | covered | STRAND-10: `classifyStrandedPr` is pure and returns `skip` for any non-stranded PR, so repeated sweeps are no-ops |
 | `02-§112.11` | covered | STRAND-11/-12/-13: `recoverPr()` wraps the re-enable in `withRetry` (exponential backoff); disable is a single attempt; live toggle is STRAND-M01 |
+| `02-§112.12` | implemented | Both recovery jobs pass `secrets.EVENT_AUTOMERGE_TOKEN` as `GITHUB_TOKEN` (not the default token, which fails auto-merge mutations); live behaviour is manual checkpoint STRAND-M01 |
+| `02-§112.13` | covered | STRAND-16/-17 (`processPr` returns `'failed'` on fetch/recover error), STRAND-18/-19 (`runSweep` counts failures and keeps going); `main()` throws when the count is non-zero |
+| `02-§112.14` | implemented | `EVENT_AUTOMERGE_TOKEN` documented as a repository-level secret in 08-ENVIRONMENTS; recovery jobs declare no `environment:` so only repo-level secrets resolve |
+| `02-§112.15` | implemented | Re-enable runs under the PAT identity so the merge triggers `event-data-deploy-post-merge.yml`; manual checkpoint STRAND-M01 |
 
 ### §113 — Proactive Merge-Queue Enqueue
 

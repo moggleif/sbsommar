@@ -958,6 +958,10 @@ stuck in the queue handoff.
   retries the whole recovery. <!-- 02-§112.11 -->
 - Each event pull request is evaluated in isolation, so a failure to read or recover
   one pull request does not abort the recovery of the others. <!-- 02-§112.6 -->
+- When one or more stranded pull requests could not be recovered during a pass, the
+  recovery job exits with a non-zero status after it has attempted every pull request.
+  A failed recovery surfaces as a failed job, not a silent warning on an otherwise
+  green run. <!-- 02-§112.13 -->
 
 ### 112.3 When recovery runs (site requirements)
 
@@ -975,6 +979,22 @@ stuck in the queue handoff.
   none are stranded. <!-- 02-§112.9 -->
 - Recovery is idempotent. A pull request that is not stranded is left unchanged on
   every pass, so running recovery repeatedly is safe. <!-- 02-§112.10 -->
+
+### 112.4 Recovery job authentication (site requirements)
+
+- The recovery job authenticates to the GitHub API with a token that is permitted to
+  enable and disable auto-merge on pull requests. The default GitHub Actions workflow
+  token (`secrets.GITHUB_TOKEN`) cannot perform the auto-merge GraphQL mutations even
+  when granted `pull-requests: write`, so recovery uses a separate token. <!-- 02-§112.12 -->
+- The token is supplied through the repository-level Actions secret
+  `EVENT_AUTOMERGE_TOKEN`, which holds a credential with pull-request and contents
+  write access to the repository. The secret is repository-level (not environment
+  scoped), because the recovery jobs run without a GitHub Environment and therefore
+  resolve only repository- and organisation-level secrets. <!-- 02-§112.14 -->
+- The recovered pull request merges under the `EVENT_AUTOMERGE_TOKEN` identity rather
+  than the Actions bot, so the merge to `main` triggers the event-data post-merge
+  deploy. A merge performed under the default Actions token would not trigger that
+  push-driven workflow. <!-- 02-§112.15 -->
 
 ## 113. Proactive Merge-Queue Enqueue
 
