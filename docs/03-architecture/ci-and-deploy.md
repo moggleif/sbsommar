@@ -277,15 +277,31 @@ redundant-PR cleanup.
 The classifier never recovers a pull request that is not stranded, so repeated runs
 are idempotent (02-§112.10).
 
-**When it runs (02-§112.7–112.9).** The sweep runs in two places:
+**When it runs (02-§112.7–112.9, 112.16).** The sweep runs from three triggers, all
+invoking the same `recover-stranded-event-prs.js`:
 
 - A job in `event-data-deploy-post-merge.yml` (push to `main`, `source/data/**.yaml`),
   alongside `close-redundant-event-prs` — the event merge that triggers this workflow
   is exactly the base move that can strand a sibling, so recovery happens immediately
   (02-§112.7).
-- A scheduled workflow, `merge-queue-recovery.yml`, on a 15-minute cron, as a safety
-  net for strandings that no event-data merge follows (02-§112.8). The sweep lists the
+- `merge-queue-recovery.yml` on a `check_suite` `completed` trigger — a pull request
+  becomes stranded the instant its required checks finish and it turns mergeable, so
+  the sweep runs at that moment instead of waiting (02-§112.16). This is the primary
+  fast path: GitHub does not reliably deliver scheduled runs at the configured 15-minute
+  interval, so the schedule alone leaves a stranded pull request waiting until the next
+  (sporadic) cron delivery.
+- The same `merge-queue-recovery.yml` on a 15-minute `schedule` cron (plus
+  `workflow_dispatch`), as a slow backstop for strandings that neither an event-data
+  merge nor a check-suite completion happens to cover (02-§112.8). The sweep lists the
   open event pull requests first and exits cheaply when none are stranded (02-§112.9).
+
+**Single-flight (02-§112.17).** `merge-queue-recovery.yml` (workflow-level) and the
+post-merge `recover-stranded-event-prs` job both declare the same
+`concurrency: stranded-recovery` group with `cancel-in-progress: false`. Check-suite
+completions arrive in bursts, so the group coalesces them — at most one run executes
+while one waits, and superseded pending runs are dropped. `cancel-in-progress: false`
+is deliberate: a run that has disabled auto-merge but not yet re-enabled it must finish,
+or the pull request would be left with auto-merge off — worse than stranded (02-§112.11).
 
 **Authentication (02-§112.12, 112.14, 112.15).** The default Actions workflow token
 (`secrets.GITHUB_TOKEN`) cannot run the `enablePullRequestAutoMerge` /
