@@ -2,18 +2,18 @@ event:
   id: bradspel-2026-06-25-1900
   title: Brädspel
   date: '2026-06-25'
-  start: '20:00'
+  start: '21:30'
   end: '23:00'
   location: Kaffetält
   responsible: Birgitta
   description: |
     Vi ses och spelar brädspel tillsammans. Kunskapsspel. Ofta TP eller När då då.
-    Aktiviteten kommer att ställas in den kväll som det blir grillkväll.
-
+    
+    
   link: null
   owner:
     name: ''
     email: ''
   meta:
     created_at: 2026-06-17 06:32
-    updated_at: 2026-06-19 14:44
+    updated_at: 2026-06-22 10:44
