@@ -1,6 +1,6 @@
 event:
   id: oklart-2026-06-24-1400
-  title: Oklart
+  title: Diamond painting
   date: '2026-06-25'
   start: '15:00'
   end: '17:00'
@@ -13,4 +13,4 @@ event:
     email: ''
   meta:
     created_at: 2026-06-24 10:22
-    updated_at: 2026-06-24 16:53
+    updated_at: 2026-06-24 18:16
