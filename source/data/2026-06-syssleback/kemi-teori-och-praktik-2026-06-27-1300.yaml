@@ -1,0 +1,16 @@
+event:
+  id: kemi-teori-och-praktik-2026-06-27-1300
+  title: Kemi - teori och praktik
+  date: '2026-06-27'
+  start: '13:00'
+  end: '15:00'
+  location: AndreasTältet
+  responsible: Martina Sjöström
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-06-24 17:53
+    updated_at: 2026-06-24 17:53
