@@ -97,6 +97,36 @@ mode — no visible jump. The background pseudo-element covers the full area.
 `html` has `scroll-padding-top` set to the approximate nav height so that
 anchor targets are not obscured by the sticky bar.
 
+### 12.7 Quick-add activity button (02-§114)
+
+`pageNav()` renders a quick-add button as an `<a class="quick-add-btn"
+href="lagg-till.html" aria-label="Lägg till aktivitet">` element containing an
+inline SVG plus icon. The button is a direct child of `<nav class="page-nav">`,
+rendered alongside the feedback, install, and scroll-to-top buttons.
+
+`pageNav(activeHref, …)` omits the button entirely when `activeHref ===
+'lagg-till.html'`, so it never appears on the add-activity page itself.
+
+The button is mobile-only. Its `display` is `none` by default and `flex` inside
+the `@media (max-width: 767px)` block — the same pattern as `.scroll-top` and
+`.pwa-install-btn`. On desktop the "Lägg till" page link is always visible in
+the nav bar, so no desktop button is needed.
+
+It shares the 42 × 42 px terracotta pill styling of the other floating action
+buttons and is positioned with `position: fixed; top: var(--space-xs)` in the
+slot between the centred scroll-to-top button and the right-aligned feedback
+button (`right: calc(var(--space-sm) + 42px + var(--space-xs))`). The
+`.pwa-install-btn` moves one slot further left
+(`right: calc(var(--space-sm) + 2 * (42px + var(--space-xs)))`) so the two
+never overlap. The button needs no client-side script — it is a plain link.
+
+The install button keeps that fixed slot on `lagg-till.html` even though the
+quick-add button is absent there, so an empty slot can sit between it and the
+feedback button. This is intentional: the install button is hidden unless the
+browser fires `beforeinstallprompt`, so the gap is only ever visible in the
+rare case the app is installable while the user is on the add page — not worth
+page-specific positioning rules.
+
 ---
 
 ## 14. Upcoming Camps Section on Homepage

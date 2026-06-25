@@ -1769,3 +1769,21 @@ Doc ref: `02-requirements/event-data.md §113`;
 | `02-§113.7` | covered | ENQ-07: the enqueue step is contained so the submission outcome is unchanged whether enqueue succeeds or fails |
 | `02-§113.8` | covered | Recovery (`recover-stranded-event-prs.js`, §112) is untouched; STRAND-01..13 still pass. A proactively enqueued PR has a `mergeQueueEntry`, so `classifyStrandedPr` returns `skip` (STRAND-04) and recovery still catches any PR that later falls out of the queue |
 | `02-§113.9` | covered | The event-data validation gate (`check-yaml-security.js`, `lint-yaml.js`) and API-layer validation are unchanged; YSEC/validation tests still pass. Enqueue only changes when a PR enters the queue, not whether its required checks run |
+
+### §114 — Quick-Add Activity Button in Sticky Navigation
+
+Doc ref: `02-requirements/pages-navigation.md §114`;
+`03-architecture/pages-and-content.md §12.7` (Quick-add activity button);
+`07-design/components.md §6.125–6.127` (Quick-add activity button design).
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§114.1` | covered | QADD-05/-08 confirm the button (a `lagg-till.html` link) renders on every non-add page; `layout.js` `pageNav()`. Mobile-only visibility is manual checkpoint (open schema.html at ≤767 px) |
+| `02-§114.2` | covered | QADD-07: the button is rendered before (outside) `.nav-menu`, so it is reachable without opening the hamburger; `layout.js` `pageNav()` |
+| `02-§114.3` | covered | QADD-01/-02/-03: `<a class="quick-add-btn" href="lagg-till.html" aria-label="Lägg till aktivitet">`; `source/build/layout.js` |
+| `02-§114.4` | covered | QADD-06/-09: omitted when `activeHref === 'lagg-till.html'`; `source/build/layout.js` |
+| `02-§114.5` | covered | QADD-10/-11: `.quick-add-btn { display: none }` by default, `display: flex` inside `@media (max-width: 767px)`; `source/assets/cs/style.css`. Desktop absence is manual checkpoint |
+| `02-§114.6` | covered | QADD-12: `right: calc(var(--space-sm) + 42px + var(--space-xs))` between scroll-top and feedback; `source/assets/cs/style.css`. Visual placement is manual checkpoint |
+| `02-§114.7` | covered | QADD-11: 42 × 42 px, `var(--color-terracotta)`, white icon, `var(--radius-md)`; `source/assets/cs/style.css` |
+| `02-§114.8` | covered | QADD-04: inline SVG plus icon inside the anchor; `source/build/layout.js` |
+| `02-§114.9` | covered | QADD-13: `.pwa-install-btn` mobile rule uses `right: calc(var(--space-sm) + 2 * (42px + var(--space-xs)))`; `source/assets/cs/style.css` |
