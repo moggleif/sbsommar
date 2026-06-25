@@ -460,3 +460,42 @@ the `<section id="…">` attribute and the `href="#…"` in navigation links.
 
 - The navigation link for "Röster" must point to `#roster`. <!-- 02-§79.3 -->
 - The navigation link for "Kostnader" must point to `#kostnader`. <!-- 02-§79.4 -->
+
+---
+
+---
+
+## 114. Quick-Add Activity Button in Sticky Navigation
+
+### Context
+
+On long pages such as the schedule, reaching "Lägg till aktivitet" requires
+opening the hamburger menu and scrolling within it. A one-tap quick-add button
+in the always-visible sticky navigation lets a participant start adding an
+activity from anywhere on the site without opening the menu.
+
+### 114.1 User requirements
+
+- A visitor on a mobile viewport sees a "+" button in the sticky top
+  navigation that takes them directly to the add-activity page. <!-- 02-§114.1 -->
+- The button is reachable without opening the hamburger menu, on every page
+  except the add-activity page itself. <!-- 02-§114.2 -->
+
+### 114.2 Site requirements
+
+- The shared navigation renders a quick-add button as an `<a>` element linking
+  to `lagg-till.html`, with `aria-label="Lägg till aktivitet"`. <!-- 02-§114.3 -->
+- The quick-add button appears on every page except `lagg-till.html`, where it
+  is omitted. <!-- 02-§114.4 -->
+- The quick-add button is visible only on mobile viewports (≤ 767 px). On
+  desktop it is not displayed, because the "Lägg till" page link is always
+  visible in the navigation bar. <!-- 02-§114.5 -->
+- The quick-add button is a child of `<nav class="page-nav">`, positioned in
+  the row of floating action buttons between the centred scroll-to-top button
+  and the feedback button. <!-- 02-§114.6 -->
+- The quick-add button matches the other floating action buttons in size
+  (42 × 42 px), terracotta background, white icon, and
+  `var(--radius-md)` border-radius. <!-- 02-§114.7 -->
+- The quick-add button displays a plus (+) icon. <!-- 02-§114.8 -->
+- The PWA-install button is positioned to the left of the quick-add button so
+  the two buttons never overlap. <!-- 02-§114.9 -->
