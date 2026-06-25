@@ -1769,3 +1769,21 @@ Doc ref: `02-requirements/event-data.md §113`;
 | `02-§113.7` | covered | ENQ-07: the enqueue step is contained so the submission outcome is unchanged whether enqueue succeeds or fails |
 | `02-§113.8` | covered | Recovery (`recover-stranded-event-prs.js`, §112) is untouched; STRAND-01..13 still pass. A proactively enqueued PR has a `mergeQueueEntry`, so `classifyStrandedPr` returns `skip` (STRAND-04) and recovery still catches any PR that later falls out of the queue |
 | `02-§113.9` | covered | The event-data validation gate (`check-yaml-security.js`, `lint-yaml.js`) and API-layer validation are unchanged; YSEC/validation tests still pass. Enqueue only changes when a PR enters the queue, not whether its required checks run |
+
+### §114 — Quick-Add Activity Button in Sticky Navigation
+
+Doc ref: `02-requirements/pages-navigation.md §114`;
+`03-architecture/pages-and-content.md §12.7` (Quick-add activity button);
+`07-design/components.md §6.125–6.127` (Quick-add activity button design).
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§114.1` | gap | Mobile sticky nav shows a `+` link to the add-activity page |
+| `02-§114.2` | gap | Reachable without opening the hamburger menu; omitted only on `lagg-till.html` |
+| `02-§114.3` | gap | `pageNav()` renders `<a class="quick-add-btn" href="lagg-till.html" aria-label="Lägg till aktivitet">` |
+| `02-§114.4` | gap | Button omitted when `activeHref === 'lagg-till.html'` |
+| `02-§114.5` | gap | Mobile-only: `display: none` by default, `flex` inside `@media (max-width: 767px)` |
+| `02-§114.6` | gap | Child of `.page-nav`, positioned between scroll-to-top and feedback buttons |
+| `02-§114.7` | gap | 42 × 42 px, terracotta background, white icon, `var(--radius-md)` border-radius |
+| `02-§114.8` | gap | Inline SVG plus (+) icon |
+| `02-§114.9` | gap | `.pwa-install-btn` shifts one slot left so the buttons never overlap |

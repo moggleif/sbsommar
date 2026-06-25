@@ -44,6 +44,18 @@ Part of [the design index](./index.md). Section IDs (`07-§N.M`) are stable and 
 - `html` has `scroll-padding-top` set to account for the sticky navigation
   height, so anchor-link targets are not hidden behind the bar. <!-- 07-§6.25-impl -->
 
+### Quick-add activity button (mobile)
+
+- A `+` quick-add button (`.quick-add-btn`) sits in the row of floating
+  action buttons in the sticky navigation, linking to the add-activity
+  page. <!-- 07-§6.125 -->
+- Mobile only (`≤ 767px`): `42 × 42px`, `background: var(--color-terracotta)`,
+  white plus icon, `border-radius: var(--radius-md)` — matching the
+  scroll-to-top and PWA-install buttons. Hidden on desktop. <!-- 07-§6.126 -->
+- Positioned between the centred scroll-to-top button and the right-aligned
+  feedback button; the PWA-install button shifts one slot left so the
+  buttons never overlap. <!-- 07-§6.127 -->
+
 ### Hero Section
 
 - Two-column layout on desktop: image area (~2/3) and sidebar panel (~1/3).
