@@ -1826,3 +1826,41 @@ Doc ref: `02-requirements/schedule-and-detail.md §4` (Weekly schedule and Today
 | `02-§116.3` | covered | RND-50: `data-event-end` is omitted when the activity has no end; `schema-status.js` then treats the activity as in progress until midnight of its day, after which it is `.is-past` |
 | `02-§116.4` | covered | RDC-22: `schema-status.js` runs once on page load; the page does not auto-refresh. Manual checkpoint: open `schema.html`, then reload at a later time and confirm rows have re-evaluated against the new current time |
 | `02-§116.5` | covered | IDAG-20/-21: the today view (`idag.html`) gets the same treatment. `events-today.js`, after rendering `#today-list`, classifies each row once (guarded to `!window.__BUILD_TIME__` so the live display view's own per-minute logic is unaffected), adding `.is-past` / `.is-now` by comparing the current time of day to each activity's start/end. Same `body:not(.display-mode)` styling. Browser-verified appearance is a manual checkpoint |
+
+### §117 — Schedule Colour Scheme
+
+Doc ref: `02-requirements/design-and-content.md §117`;
+`03-architecture/rendering.md §5.5`;
+`07-design/css-strategy.md §7` (token), `07-design/components.md §6.135–6.138`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§117.1` | gap | `--color-sage-dark: #4F6B1F` defined at `:root` in `style.css`; SCOL-01 asserts the token exists. Contrast ≈5.2:1 on `--color-cream` is a manual/computed checkpoint |
+| `02-§117.2` | gap | SCOL-02: `.ev-time { color: var(--color-sage-dark) }`; no terracotta. Visual check is a manual checkpoint |
+| `02-§117.3` | gap | SCOL-03: `details.event-row[open] > summary .ev-title` uses `var(--color-sage-dark)` |
+| `02-§117.4` | gap | SCOL-04: `body:not(.display-mode) .event-row.is-now` uses a sage tint + `var(--color-sage-dark)` bar and title; no terracotta |
+| `02-§117.5` | gap | SCOL-05: `.back-link a` and `.event-ext-link` use `var(--color-sage-dark)` |
+| `02-§117.6` | gap | SCOL-06: `body.display-mode .event-row.is-now` and the display opened-title rule use `var(--color-sage)` |
+| `02-§117.7` | gap | SCOL-07: in the schedule rules, terracotta appears only under `.is-cancelled`; nav/footer/button rules unchanged. Browser-verified appearance is a manual checkpoint |
+
+### §118 — Cancelled Activities
+
+Doc ref: `02-requirements/schedule-and-detail.md §118`;
+`05-DATA_CONTRACT.md §3` (cancelled field), `06-EVENT_DATA_MODEL.md §4a`;
+`03-architecture/rendering.md §5.6`, `03-architecture/forms-and-api.md §31`;
+`07-design/components.md §6.139–6.141`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§118.1` | gap | LINTY-CANCEL-01: `lint-yaml.js` accepts an event with `cancelled: true/false`/absent and rejects a non-boolean; PHP `VALCANCEL-01` (Validate.php) parity |
+| `02-§118.2` | gap | GHCANCEL-01/-02 (PHP): `patchEventObject()` carries `cancelled` through an edit; `eventBodyLines()` serialises `cancelled:`; LINTY-CANCEL type check |
+| `02-§118.3` | gap | GHCANCEL-03: `patchEventObject()` keeps `id` unchanged; cancelling rewrites no id-deriving field |
+| `02-§118.4` | gap | RED-CANCEL-01/-02: `render-edit.js` emits `#btn-cancel`; redigera.js label toggle is a manual/browser checkpoint |
+| `02-§118.5` | gap | Browser checkpoint: edit body includes `cancelled`; form reflects current state on load (redigera.js `populate()`) |
+| `02-§118.6` | gap | RND-CANCEL-01, IDAG-CANCEL-01, REV-CANCEL-01: cancelled row still rendered in schedule/today/event page |
+| `02-§118.7` | gap | RND-CANCEL-02: `renderEventRow()` prefixes title with `INSTÄLLD` label; events-today + render-event parity |
+| `02-§118.8` | gap | CSS-CANCEL-01: `.event-row.is-cancelled` text terracotta + `line-through` while not past |
+| `02-§118.9` | gap | CSS-CANCEL-02: `.is-past` overrides cancelled colour (grey/dimmed) while label + strike-through remain |
+| `02-§118.10` | gap | RND-CANCEL-02: "INSTÄLLD" is real text in the row, announced by screen readers |
+| `02-§118.11` | gap | RSS-CANCEL-01: `render-rss.js` prefixes a cancelled item `<title>` with `[INSTÄLLD]` and a space |
+| `02-§118.12` | gap | ICAL-CANCEL-01: `render-ical.js` emits `STATUS:CANCELLED` in `schema.ics` and per-event `event.ics` |

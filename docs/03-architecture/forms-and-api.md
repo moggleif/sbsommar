@@ -601,3 +601,43 @@ plain "run this mutation or throw" primitive.
 | --- | --- |
 | `source/api/github.js` | Add `buildEnqueueMutation()` (pure) and `enqueuePullRequest()` (network); call it best-effort after `enableAutoMerge` in add/edit/delete |
 | `api/src/GitHub.php` | Mirror: `buildEnqueueMutation()`, `enqueuePullRequest()`, best-effort call in add/edit/delete/batch |
+
+---
+
+## 31. Cancelling an Activity (02-§118)
+
+Cancelling reuses the existing edit path — it is just an edit that flips one
+boolean — so no new endpoint, branch flow, or merge handling is added.
+
+### 31.1 Edit-form toggle
+
+`render-edit.js` adds a button (`#btn-cancel`) inside the form's
+`.form-actions`. `redigera.js` tracks the current cancelled state in a variable
+seeded from the loaded event (`event.cancelled`), labels the button
+"Ställ in aktiviteten" when active and "Återställ aktiviteten" when cancelled,
+and toggles the variable on click. The edit submit body gains a
+`cancelled: <boolean>` field, sent alongside the existing fields, so "Spara
+ändringar" persists the current state. The button only changes the pending
+state; nothing is written until the form is saved.
+
+### 31.2 Persistence and validation
+
+- **Validation** — `Validate.php` (PHP) and `lint-yaml.js` (build/CI) accept
+  `cancelled` only as a boolean or null; any other type is rejected. The field
+  is optional, so events without it stay valid.
+- **Write-back** — `GitHub.php` `patchEventObject()` carries `cancelled`
+  through an edit (`array_key_exists('cancelled', $updates)` → cast to bool,
+  else keep the event's current value), and `eventBodyLines()` serialises a
+  `cancelled: true|false` line into the fragment YAML. The event `id` is never
+  recomputed, so cancelling never moves the fragment file or breaks ownership.
+
+### 31.3 Files changed
+
+| File | Change |
+| --- | --- |
+| `source/build/render-edit.js` | Render the `#btn-cancel` button in `.form-actions` |
+| `source/assets/js/client/redigera.js` | Track cancelled state, toggle label, send `cancelled` in the edit body |
+| `api/src/Validate.php` | Accept optional `cancelled` boolean |
+| `api/src/GitHub.php` | `patchEventObject()` + `eventBodyLines()` round-trip `cancelled` |
+| `source/scripts/lint-yaml.js` | `cancelled` boolean type-check in `validateEventObject()` |
+| `source/build/build.js` | Add `cancelled` to `PUBLIC_EVENT_FIELDS` (events.json) |
