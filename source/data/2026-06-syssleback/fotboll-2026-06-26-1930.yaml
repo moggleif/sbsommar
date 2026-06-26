@@ -1,0 +1,16 @@
+event:
+  id: fotboll-2026-06-26-1930
+  title: Fotboll
+  date: '2026-06-26'
+  start: '19:30'
+  end: '20:30'
+  location: Fotbollsplan
+  responsible: Valentino
+  description: null
+  link: null
+  owner:
+    name: ''
+    email: ''
+  meta:
+    created_at: 2026-06-26 16:21
+    updated_at: 2026-06-26 16:21
