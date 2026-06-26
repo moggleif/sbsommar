@@ -1812,3 +1812,16 @@ Doc ref: `02-requirements/pages-navigation.md §115`;
 | `02-§115.9` | covered | ESHORT-08/-14: rendered in the floating-action-button group, outside `.nav-menu`; positioned `right: calc(var(--space-sm) + 2 * (42px + var(--space-xs)))` beside the quick-add button; `layout.js` / `style.css` |
 | `02-§115.10` | covered | ESHORT-12: 42 × 42 px, `var(--color-terracotta)`, white icon, `var(--radius-md)`; `source/assets/cs/style.css` |
 | `02-§115.11` | covered | ESHORT-05: inline SVG pencil icon inside the anchor; `source/build/layout.js` |
+
+### §116 — Weekly-Schedule Time Status (ended / in progress)
+
+Doc ref: `02-requirements/schedule-and-detail.md §4` (Weekly schedule);
+`03-architecture/rendering.md §5.4` (Weekly-schedule time status);
+`07-design/components.md §6.134–6.135` (Event / schedule items).
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§116.1` | covered | RND-48/-49, RDC-22: `renderEventRow()` emits `data-event-start`/`data-event-end`; `schema-status.js` adds `.is-past` (light-grey) / `.is-now` (terracotta) per row; `style.css` `body:not(.display-mode) .event-row.is-past/.is-now`. Browser-verified appearance is a manual checkpoint |
+| `02-§116.2` | covered | RND-48/-49: status compares the full date + start/end (`schema-status.js` `parseDateTime()` builds a `Date` from `data-event-date` + time), so past-day rows resolve to `.is-past` and only current-day rows can be `.is-now`. Logic validated against controlled cases (past day, today in-progress, future, midnight crossing) |
+| `02-§116.3` | covered | RND-50: `data-event-end` is omitted when the activity has no end; `schema-status.js` then treats the activity as in progress until midnight of its day, after which it is `.is-past` |
+| `02-§116.4` | covered | RDC-22: `schema-status.js` runs on load and re-runs on a self-correcting timer aligned to the minute boundary (same pattern as `events-today.js`). The once-per-minute re-evaluation is a manual checkpoint: open `schema.html` and watch a row flip as its start/end minute turns over |

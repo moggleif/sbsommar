@@ -81,6 +81,29 @@ client. One CSS rule styles both. The banner is written into
 `.event-detail` after the location/responsible row and before the
 description. See 02-requirements/add-edit-forms.md §99.15–§99.17.
 
+### 5.4 Weekly-schedule time status (02-§116)
+
+`renderEventRow()` in `source/build/render.js` emits each activity's
+times on the row as `data-event-start` (always present) and
+`data-event-end` (omitted when the activity has no end time), alongside
+the existing `data-event-date`. These attributes let the schedule mark
+each row's status client-side without re-parsing the displayed time text.
+
+`source/assets/js/client/schema-status.js` runs only on `schema.html`
+(loaded via `<script src="schema-status.js" defer>`). It reads each
+`.event-row`'s date/start/end attributes, builds local `Date` objects,
+and adds one class per row: `.is-past` once the activity's end has
+passed, or `.is-now` while it is in progress. Resolution rules mirror the
+live display view: an end at or before the start crosses midnight (`+1`
+day), and an activity with no end is treated as in progress until
+midnight of its day, then ended. Because the comparison uses the full
+date — not only the time of day — activities on past days resolve to
+`.is-past` and only current-day activities can be `.is-now`. The function
+runs on load and re-runs on a self-correcting timer aligned to each
+minute boundary, the same pattern `events-today.js` uses, so rows flip as
+the minute turns over without a reload. All visual styling lives in
+`style.css` (see 07-design/components.md §6 "Event / schedule items").
+
 ---
 
 ## 6. Project Structure
