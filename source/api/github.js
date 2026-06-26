@@ -53,6 +53,11 @@ function eventBodyLines(event, fp, dp) {
   }
 
   lines.push(`${fp}link: ${event.link ? yamlScalar(event.link) : 'null'}`);
+  // Only write the cancelled line when the activity is cancelled (02-§118).
+  // An active activity omits it, so un-cancelling removes the line again.
+  if (event.cancelled) {
+    lines.push(`${fp}cancelled: true`);
+  }
   lines.push(`${fp}owner:`);
   lines.push(`${dp}name: '${((event.owner && event.owner.name) || '').replace(/'/g, "''")}'`);
   lines.push(`${dp}email: ''`);

@@ -27,6 +27,7 @@ function patchEventObject(event, updates, now) {
     responsible: 'responsible' in updates ? (updates.responsible || event.responsible) : event.responsible,
     description: 'description' in updates ? (updates.description || null)              : (event.description ?? null),
     link:        'link'        in updates ? (updates.link        || null)              : (event.link ?? null),
+    cancelled:   'cancelled'   in updates ? Boolean(updates.cancelled)                 : Boolean(event.cancelled),
     owner:       event.owner || { name: '', email: '' },
     meta: {
       created_at: event.meta ? event.meta.created_at : null,

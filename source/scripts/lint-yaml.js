@@ -96,6 +96,10 @@ function validateEventObject(event, ref, opts = {}) {
   if (event.link !== undefined && event.link !== null && typeof event.link !== 'string') {
     errors.push(`${ref}: link must be a string or null`);
   }
+  // cancelled is an optional boolean (05-§3.5, 02-§118.1)
+  if (event.cancelled !== undefined && event.cancelled !== null && typeof event.cancelled !== 'boolean') {
+    errors.push(`${ref}: cancelled must be a boolean or null`);
+  }
 
   return errors;
 }

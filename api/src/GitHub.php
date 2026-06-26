@@ -323,6 +323,12 @@ final class GitHub
         }
 
         $lines[] = "{$fp}link: " . (($event['link'] ?? null) !== null ? self::yamlScalar($event['link']) : 'null');
+        // Only write the cancelled line when the activity is cancelled (02-§118).
+        // An active activity omits it, so un-cancelling removes the line and
+        // existing fragments are untouched until they are edited.
+        if (!empty($event['cancelled'])) {
+            $lines[] = "{$fp}cancelled: true";
+        }
         $lines[] = "{$fp}owner:";
         $lines[] = "{$dp}name: '" . str_replace("'", "''", $event['owner']['name'] ?? '') . "'";
         $lines[] = "{$dp}email: ''";
@@ -412,6 +418,7 @@ final class GitHub
             'responsible' => array_key_exists('responsible', $updates) ? ($updates['responsible'] ?: $event['responsible']) : $event['responsible'],
             'description' => array_key_exists('description', $updates) ? ($updates['description'] ?: null) : ($event['description'] ?? null),
             'link'        => array_key_exists('link', $updates) ? ($updates['link'] ?: null) : ($event['link'] ?? null),
+            'cancelled'   => array_key_exists('cancelled', $updates) ? (bool) $updates['cancelled'] : (bool) ($event['cancelled'] ?? false),
             'owner'       => $event['owner'] ?? ['name' => '', 'email' => ''],
             'meta'        => [
                 'created_at' => $event['meta']['created_at'] ?? null,

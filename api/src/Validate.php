@@ -244,6 +244,14 @@ final class Validate
             return self::fail('ownerName måste vara en sträng');
         }
 
+        // cancelled is an optional boolean (02-§118.1, 05-§3.5).
+        if (array_key_exists('cancelled', $body)
+            && $body['cancelled'] !== null
+            && !is_bool($body['cancelled'])
+        ) {
+            return self::fail('cancelled måste vara true eller false');
+        }
+
         // Injection pattern scanning (02-§49.1, 02-§49.2, 02-§49.3)
         foreach (self::TEXT_FIELDS as $field) {
             $val = is_string($body[$field] ?? null) ? $body[$field] : '';

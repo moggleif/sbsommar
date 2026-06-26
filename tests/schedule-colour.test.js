@@ -13,9 +13,11 @@ const path = require('path');
 
 const CSS = fs.readFileSync(path.join(__dirname, '..', 'source', 'assets', 'cs', 'style.css'), 'utf8');
 
-// Returns the body of the first CSS rule whose selector matches `selectorRe`.
+// Returns the body of the CSS rule whose selector begins a line and matches
+// `selectorRe`. Anchoring at line start avoids matching a longer selector that
+// merely ends with the same fragment (e.g. `body.display-mode .ev-time`).
 function ruleBody(selectorRe) {
-  const re = new RegExp(selectorRe.source + '\\s*\\{([^}]*)\\}');
+  const re = new RegExp('^' + selectorRe.source + '\\s*\\{([^}]*)\\}', 'm');
   const m = CSS.match(re);
   return m ? m[1] : null;
 }
@@ -73,6 +75,9 @@ describe('02-§117 — Schedule colour scheme', () => {
     const offenders = [];
     for (let i = 0; i < lines.length; i++) {
       if (!/--color-terracotta|199, 109, 72/.test(lines[i])) continue;
+      // Focus outlines are shared site chrome and keep the terracotta accent
+      // everywhere (02-§117.7); they are not part of the schedule text colour.
+      if (/outline/.test(lines[i])) continue;
       // Walk back to the nearest selector line.
       let j = i;
       while (j >= 0 && !lines[j].includes('{')) j--;

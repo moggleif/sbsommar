@@ -156,6 +156,39 @@ describe('02-§118.2 — cancelled exposed in events.json', () => {
   });
 });
 
+// ── Cancelled styling (style.css) ────────────────────────────────────────────
+
+describe('02-§118.8/.9 — cancelled CSS', () => {
+  const CSS = read('source/assets/cs/style.css');
+
+  it('CSS-CANCEL-01: cancelled rows are struck through and terracotta while not past', () => {
+    assert.match(CSS, /\.event-row\.is-cancelled[^{]*\{[^}]*line-through/, 'line-through on is-cancelled');
+    assert.match(
+      CSS,
+      /\.event-row\.is-cancelled:not\(\.is-past\)[^{]*\{[^}]*var\(--color-terracotta\)/,
+      'terracotta only while :not(.is-past)',
+    );
+  });
+
+  it('CSS-CANCEL-02: terracotta is guarded by :not(.is-past) so past rows go grey', () => {
+    // Every terracotta colour rule on a cancelled schedule row
+    // (`.event-row.is-cancelled`) must carry the :not(.is-past) guard, so a
+    // passed cancelled row falls back to the ordinary grey treatment. The
+    // per-event `h1.is-cancelled` and the edit-form button are not schedule
+    // rows and are intentionally outside this check.
+    let checked = 0;
+    for (const rule of CSS.split('}')) {
+      const [selector, body] = rule.split('{');
+      if (!body) continue;
+      if (!/var\(--color-terracotta\)/.test(body)) continue;
+      if (!/\.event-row\.is-cancelled/.test(selector)) continue;
+      checked += 1;
+      assert.match(selector, /:not\(\.is-past\)/, `cancelled row terracotta guarded by :not(.is-past): ${selector.trim()}`);
+    }
+    assert.ok(checked > 0, 'at least one .event-row.is-cancelled terracotta rule exists');
+  });
+});
+
 // ── Validation (lint-yaml.js) ────────────────────────────────────────────────
 
 describe('02-§118.1 — cancelled boolean validation', () => {

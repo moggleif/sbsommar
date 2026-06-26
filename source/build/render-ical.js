@@ -114,8 +114,13 @@ function renderVevent(event, siteUrl) {
     `DESCRIPTION:${escapeIcal(buildDescription(event))}`,
     `URL:${siteUrl}/schema/${event.id}/`,
     `UID:${event.id}@${hostname}`,
-    'END:VEVENT',
   );
+  // A cancelled activity (02-§118) carries the standard RFC 5545 STATUS so
+  // calendar apps show it as cancelled.
+  if (event.cancelled === true) {
+    lines.push('STATUS:CANCELLED');
+  }
+  lines.push('END:VEVENT');
   return lines.join('\r\n');
 }
 
