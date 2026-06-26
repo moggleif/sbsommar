@@ -54,10 +54,15 @@ function renderEventRow(e) {
 
   const idAttr = e.id ? ` data-event-id="${escapeHtml(String(e.id))}"` : '';
   const dateAttr = e.date ? ` data-event-date="${escapeHtml(String(e.date))}"` : '';
+  // Start/end times exposed so schema-status.js can mark each row as ended
+  // (.is-past) or in progress (.is-now) against the current time.
+  const startAttr = e.start ? ` data-event-start="${escapeHtml(String(e.start))}"` : '';
+  const endAttr = e.end ? ` data-event-end="${escapeHtml(String(e.end))}"` : '';
+  const timeAttrs = `${dateAttr}${startAttr}${endAttr}`;
 
   if (hasExtra) {
     return [
-      `    <details class="event-row"${idAttr}${dateAttr}>`,
+      `    <details class="event-row"${idAttr}${timeAttrs}>`,
       '      <summary>',
       `        <span class="ev-time">${timeStr}</span>`,
       `        <span class="ev-title">${escapeHtml(e.title)}</span>`,
@@ -71,7 +76,7 @@ function renderEventRow(e) {
       .join('\n');
   } else {
     return [
-      `    <div class="event-row plain"${idAttr}${dateAttr}>`,
+      `    <div class="event-row plain"${idAttr}${timeAttrs}>`,
       `      <span class="ev-time">${timeStr}</span>`,
       `      <span class="ev-title">${escapeHtml(e.title)}</span>`,
       metaEl ? `      ${metaEl}` : '',
@@ -142,6 +147,7 @@ ${daySections}
   <script src="sw-register.js" defer></script>
   <script src="pwa-install.js" defer></script>
   <script src="admin.js" defer></script>
+  <script src="schema-status.js" defer></script>
   <script>
   (function(){var t=new Date();t.setHours(0,0,0,0);document.querySelectorAll('details.day').forEach(function(d){var p=d.id.split('-');var dd=new Date(+p[0],+p[1]-1,+p[2]);if(dd<t)d.removeAttribute('open');});})();
   </script>${goatcounterScript(goatcounterCode)}
