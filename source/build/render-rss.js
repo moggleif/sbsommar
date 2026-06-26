@@ -79,9 +79,11 @@ function renderRssFeed(camp, events, siteUrl) {
     const eventUrl = `${safeSiteUrl}/schema/${escapeXml(String(e.id))}/`;
     const desc = escapeXml(buildDescription(e));
     const pubDate = toRfc822(toDateString(e.date), String(e.start));
+    // A cancelled activity (02-§118) is prefixed so feed readers see it is off.
+    const titleText = e.cancelled === true ? `[INSTÄLLD] ${e.title}` : e.title;
 
     return `    <item>
-      <title>${escapeXml(e.title)}</title>
+      <title>${escapeXml(titleText)}</title>
       <link>${eventUrl}</link>
       <guid isPermaLink="true">${eventUrl}</guid>
       <description>${desc}</description>

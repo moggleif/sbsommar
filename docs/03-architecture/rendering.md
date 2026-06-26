@@ -114,6 +114,45 @@ already classifies its rows on a live per-minute timer — and the same
 `body:not(.display-mode)` styling applies. Like the weekly schedule it is
 evaluated once on load; a reload re-evaluates.
 
+### 5.5 Schedule colour scheme (02-§117)
+
+The schedule's attention accents are green so terracotta can mean "cancelled"
+(§5.6). The change is CSS-only and lives in `style.css`: the per-row time
+(`.ev-time`), the expanded-activity title accent, the `.is-now` highlight, and
+the per-event back/external links use `--color-sage-dark` (a readable green
+token, contrast ≈5.2:1 on cream) or, where a fill is wanted, a `--color-sage`
+tint. The display view (`live.html`, dark background) uses `--color-sage`
+instead. No markup changes are needed — the affected elements already carry
+the classes these rules target. Site chrome (nav, footer, buttons, focus
+outlines) is untouched.
+
+### 5.6 Cancelled activities (02-§118)
+
+The optional `cancelled` boolean on an event drives a struck-through "INSTÄLLD"
+treatment in every view, built once from the merged event set so it is
+consistent everywhere. `cancelled` is read straight off the loaded YAML event
+object (no whitelist in `load-events.js`), exposed in `events.json`
+(`PUBLIC_EVENT_FIELDS` in `build.js`), and embedded in the today view's event
+JSON.
+
+- **Weekly schedule** — `renderEventRow()` in `render.js` adds the
+  `is-cancelled` class to the row and prefixes the title with a
+  `<span class="ev-cancelled-label">INSTÄLLD</span>` when `event.cancelled` is
+  true.
+- **Today / display view** — `events-today.js` `buildRowHtml()` does the same
+  at render time, reading `e.cancelled` from the embedded event JSON.
+- **Per-event page** — `renderEventPage()` in `render-event.js` adds the label
+  to the `<h1>` and an `is-cancelled` marker.
+- **RSS** — `render-rss.js` prefixes a cancelled item's `<title>` with
+  `[INSTÄLLD]` followed by a space.
+- **iCal** — `render-ical.js` `renderVevent()` emits `STATUS:CANCELLED` for a
+  cancelled event in both `schema.ics` and the per-event `event.ics`.
+
+The cancelled colour (terracotta + line-through) is overridden by the `.is-past`
+rule, so once a cancelled activity is in the past it takes the normal grey
+dimmed treatment; the label and strike-through remain (07-design/components.md
+§6.139–6.141).
+
 ---
 
 ## 6. Project Structure

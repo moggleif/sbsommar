@@ -33,6 +33,7 @@ When CSS is written, start with these at `:root`:
   /* Colors */
   --color-terracotta: #C76D48;
   --color-sage: #ADBF77;
+  --color-sage-dark: #4F6B1F; /* readable green for text/accents on cream (≈5.2:1, AA) */
   --color-cream: #F5EEDF;
   --color-navy: #192A3D;
   --color-charcoal: #3B3A38;

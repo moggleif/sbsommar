@@ -43,6 +43,12 @@ function icalDownloadLink(e) {
   return `<a href="schema/${escapeHtml(String(e.id))}/event.ics" class="ev-ical" download title="Ladda ner iCal" data-goatcounter-click="download-ical">iCal</a>`;
 }
 
+// A cancelled activity (02-§118) stays in the schedule but is marked with the
+// is-cancelled class (struck-through terracotta styling in style.css) and an
+// "INSTÄLLD" prefix on its title. The prefix is real text, so it is announced
+// by screen readers — the cancelled state never relies on colour alone.
+const CANCELLED_LABEL = '<span class="ev-cancelled-label">INSTÄLLD</span> ';
+
 function renderEventRow(e) {
   const timeStr = e.end
     ? `${escapeHtml(String(e.start))}–${escapeHtml(String(e.end))}`
@@ -51,6 +57,10 @@ function renderEventRow(e) {
   const metaEl = metaParts.length ? `<span class="ev-meta"> · ${metaParts.join(' · ')}</span>` : '';
   const icalEl = icalDownloadLink(e);
   const hasExtra = e.description || safeLinkHref(e.link);
+
+  const cancelled = e.cancelled === true;
+  const cancelledClass = cancelled ? ' is-cancelled' : '';
+  const titleHtml = `${cancelled ? CANCELLED_LABEL : ''}${escapeHtml(e.title)}`;
 
   const idAttr = e.id ? ` data-event-id="${escapeHtml(String(e.id))}"` : '';
   const dateAttr = e.date ? ` data-event-date="${escapeHtml(String(e.date))}"` : '';
@@ -62,10 +72,10 @@ function renderEventRow(e) {
 
   if (hasExtra) {
     return [
-      `    <details class="event-row"${idAttr}${timeAttrs}>`,
+      `    <details class="event-row${cancelledClass}"${idAttr}${timeAttrs}>`,
       '      <summary>',
       `        <span class="ev-time">${timeStr}</span>`,
-      `        <span class="ev-title">${escapeHtml(e.title)}</span>`,
+      `        <span class="ev-title">${titleHtml}</span>`,
       metaEl ? `        ${metaEl}` : '',
       icalEl ? `        ${icalEl}` : '',
       '      </summary>',
@@ -76,9 +86,9 @@ function renderEventRow(e) {
       .join('\n');
   } else {
     return [
-      `    <div class="event-row plain"${idAttr}${timeAttrs}>`,
+      `    <div class="event-row plain${cancelledClass}"${idAttr}${timeAttrs}>`,
       `      <span class="ev-time">${timeStr}</span>`,
-      `      <span class="ev-title">${escapeHtml(e.title)}</span>`,
+      `      <span class="ev-title">${titleHtml}</span>`,
       metaEl ? `      ${metaEl}` : '',
       icalEl ? `      ${icalEl}` : '',
       '    </div>',

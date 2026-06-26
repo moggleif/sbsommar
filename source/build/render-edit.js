@@ -155,6 +155,14 @@ ${locationOptions}
         <a href="schema.html" class="btn-secondary">Avbryt</a>
       </div>
 
+      <!-- Cancel/restore toggle (02-§118): marks the activity inställd. The
+           label flips to "Återställ aktiviteten" once it is cancelled. The
+           pending state is saved with "Spara ändringar". -->
+      <div class="cancel-activity-row">
+        <button type="button" id="btn-cancel" class="btn-cancel-activity">Ställ in aktiviteten</button>
+        <p class="cancel-activity-note" id="cancel-activity-note" hidden></p>
+      </div>
+
     </form>
 
   </section>

@@ -2,6 +2,7 @@
   --color-terracotta: #C76D48;
   --color-sage:       #ADBF77;
   --color-sage-hover: #9aad6a;
+  --color-sage-dark:  #4F6B1F; /* readable green for schedule text/accents on cream (≈5.2:1, AA) */
   --color-cream:      #F5EEDF;
   --color-navy:       #192A3D;
   --color-charcoal:   #3B3A38;
@@ -436,8 +437,8 @@ body.display-mode details.event-row > summary .ev-title {
 }
 
 body.display-mode details.event-row[open] > summary .ev-title {
-  color: var(--color-terracotta);
-  text-decoration-color: var(--color-terracotta);
+  color: var(--color-sage);
+  text-decoration-color: var(--color-sage);
 }
 
 body.display-mode .ev-meta {
@@ -458,8 +459,8 @@ body.display-mode .event-row.is-past {
 }
 
 body.display-mode .event-row.is-now {
-  background: rgba(199, 109, 72, 0.16); /* var(--color-terracotta) tint */
-  box-shadow: inset 3px 0 0 var(--color-terracotta);
+  background: rgba(173, 191, 119, 0.22); /* var(--color-sage) tint */
+  box-shadow: inset 3px 0 0 var(--color-sage);
 }
 
 /* Next-day divider (live.html): a sage label flanked by rules, separating
@@ -671,7 +672,7 @@ details.event-row > summary:focus-visible {
 .ev-time {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  color: var(--color-terracotta);
+  color: var(--color-sage-dark);
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -694,8 +695,8 @@ details.event-row > summary .ev-title::before {
 }
 
 details.event-row[open] > summary .ev-title {
-  color: var(--color-terracotta);
-  text-decoration-color: var(--color-terracotta);
+  color: var(--color-sage-dark);
+  text-decoration-color: var(--color-sage-dark);
 }
 
 .ev-meta {
@@ -731,17 +732,50 @@ body:not(.display-mode) .event-row.is-past .ev-title {
 }
 
 body:not(.display-mode) .event-row.is-now {
-  background: rgba(199, 109, 72, 0.22); /* var(--color-terracotta) tint */
-  box-shadow: inset 4px 0 0 var(--color-terracotta);
+  background: rgba(173, 191, 119, 0.30); /* var(--color-sage) tint */
+  box-shadow: inset 4px 0 0 var(--color-sage-dark);
 }
 
 /* Make the in-progress activity's title pop in the accent colour too. */
 body:not(.display-mode) .event-row.is-now .ev-title {
+  color: var(--color-sage-dark);
+  font-weight: 700;
+}
+
+/* ── Cancelled activities (02-§118) ──────────────────────────────────────────
+   A cancelled activity stays in the schedule, struck through and prefixed with
+   "INSTÄLLD". While it is upcoming or in progress its row text is terracotta —
+   the reserved red signal. Once it has passed (.is-past) the ordinary grey,
+   dimmed treatment takes over; only the strike-through and the label remain. */
+.event-row.is-cancelled .ev-time,
+.event-row.is-cancelled .ev-title,
+.event-row.is-cancelled .ev-meta {
+  text-decoration: line-through;
+}
+
+/* Scoped with the same body prefix as the .is-now rule above and placed after
+   it, so a cancelled activity that is also in progress still reads terracotta,
+   not the sage in-progress accent. The :not(.is-past) guard lets the grey
+   past-treatment win once the activity is over. */
+body:not(.display-mode) .event-row.is-cancelled:not(.is-past) .ev-time,
+body:not(.display-mode) .event-row.is-cancelled:not(.is-past) .ev-title,
+body:not(.display-mode) .event-row.is-cancelled:not(.is-past) .ev-meta {
   color: var(--color-terracotta);
+  opacity: 1;
+}
+
+.ev-cancelled-label {
   font-weight: 700;
 }
 
 /* ── Per-event detail page ── */
+
+/* A cancelled activity's detail page shows the heading struck through and in
+   terracotta, with the "INSTÄLLD" prefix supplied in the markup (02-§118). */
+h1.is-cancelled {
+  color: var(--color-terracotta);
+  text-decoration: line-through;
+}
 
 .back-link {
   margin: 0 0 var(--space-sm);
@@ -749,7 +783,7 @@ body:not(.display-mode) .event-row.is-now .ev-title {
 
 .back-link a {
   font-size: var(--font-size-small);
-  color: var(--color-terracotta);
+  color: var(--color-sage-dark);
   text-decoration: none;
   font-weight: 600;
 }
@@ -821,7 +855,7 @@ body:not(.display-mode) .event-row.is-now .ev-title {
 }
 
 .event-ext-link {
-  color: var(--color-terracotta);
+  color: var(--color-sage-dark);
   font-weight: 600;
   font-size: var(--font-size-small);
   text-decoration: none;
@@ -1134,6 +1168,47 @@ body:not(.display-mode) .event-row.is-now .ev-title {
 .btn-delete-pill:focus-visible {
   outline: 2px solid var(--color-terracotta);
   outline-offset: 2px;
+}
+
+/* Cancel/restore-activity toggle on the edit form (02-§118). A quiet outline
+   button by default ("Ställ in aktiviteten"); once the activity is marked
+   cancelled it turns solid terracotta ("Återställ aktiviteten"). */
+.cancel-activity-row {
+  margin-top: var(--space-sm);
+}
+
+.btn-cancel-activity {
+  display: inline-block;
+  background: transparent;
+  color: var(--color-terracotta);
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  padding: 8px 18px;
+  border: 1.5px solid var(--color-terracotta);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.btn-cancel-activity:hover {
+  background: color-mix(in srgb, var(--color-terracotta) 10%, var(--color-white));
+}
+
+.btn-cancel-activity.is-cancelled {
+  background: var(--color-terracotta);
+  color: #fff;
+}
+
+.btn-cancel-activity:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
+}
+
+.cancel-activity-note {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--font-size-small);
+  color: var(--color-charcoal);
+  opacity: 0.8;
 }
 
 .delete-actions {

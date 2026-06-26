@@ -246,7 +246,7 @@ async function main() {
 
   // ── Build events.json — public event data for the edit form ──────────────
   // Contains only fields the edit form needs; owner and meta are excluded.
-  const PUBLIC_EVENT_FIELDS = ['id', 'title', 'date', 'start', 'end', 'location', 'responsible', 'description', 'link'];
+  const PUBLIC_EVENT_FIELDS = ['id', 'title', 'date', 'start', 'end', 'location', 'responsible', 'description', 'link', 'cancelled'];
   const eventsJson = JSON.stringify(
     events.map((e) => {
       const pub = {};

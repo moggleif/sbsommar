@@ -77,6 +77,9 @@
   }
 
   // Builds the HTML for one event row (collapsible when it has extra detail).
+  // A cancelled activity (02-§118) keeps its place in the list but gets the
+  // is-cancelled class and an "INSTÄLLD" prefix on its title, matching
+  // renderEventRow() in render.js.
   function buildRowHtml(e) {
     var timeStr = e.end ? esc(e.start) + '–' + esc(e.end) : esc(e.start);
     var metaParts = [e.location, e.responsible].filter(Boolean).map(esc);
@@ -86,6 +89,8 @@
     var hasExtra = e.description || e.descriptionHtml || safeLink;
     var idAttr = e.id ? ' data-event-id="' + esc(e.id) + '"' : '';
     var dateAttr = e.date ? ' data-event-date="' + esc(e.date) + '"' : '';
+    var cancelledClass = e.cancelled === true ? ' is-cancelled' : '';
+    var titleHtml = (e.cancelled === true ? '<span class="ev-cancelled-label">INSTÄLLD</span> ' : '') + esc(e.title);
 
     if (hasExtra) {
       var extraParts = [];
@@ -97,16 +102,16 @@
       if (safeLink) {
         extraParts.push('<a class="event-ext-link" href="' + esc(safeLink) + '" target="_blank" rel="noopener">Extern länk →</a>');
       }
-      return '<details class="event-row"' + idAttr + dateAttr + '><summary>' +
+      return '<details class="event-row' + cancelledClass + '"' + idAttr + dateAttr + '><summary>' +
         '<span class="ev-time">' + timeStr + '</span>' +
-        '<span class="ev-title">' + esc(e.title) + '</span>' +
+        '<span class="ev-title">' + titleHtml + '</span>' +
         metaEl + icalEl + '</summary>' +
         '<div class="event-extra">' + extraParts.join('') + '</div>' +
         '</details>';
     }
-    return '<div class="event-row plain"' + idAttr + dateAttr + '>' +
+    return '<div class="event-row plain' + cancelledClass + '"' + idAttr + dateAttr + '>' +
       '<span class="ev-time">' + timeStr + '</span>' +
-      '<span class="ev-title">' + esc(e.title) + '</span>' +
+      '<span class="ev-title">' + titleHtml + '</span>' +
       metaEl + icalEl + '</div>';
   }
 

@@ -46,6 +46,11 @@ function renderConflictBanner(event, allEvents) {
 function renderEventPage(event, camp, siteUrl, footerHtml = '', navSections = [], allEvents = []) {
   const title = escapeHtml(event.title);
   const titleForTag = escapeHtml(truncateForTitleTag(event.title));
+  // A cancelled activity (02-§118) keeps its page but the heading is struck
+  // through (CSS h1.is-cancelled) and prefixed with the "INSTÄLLD" label.
+  const cancelled = event.cancelled === true;
+  const h1Class = cancelled ? ' class="is-cancelled"' : '';
+  const h1Inner = `${cancelled ? '<span class="ev-cancelled-label">INSTÄLLD</span> ' : ''}${title}`;
   const date = formatDate(toDateString(event.date));
   const timeStr = event.end
     ? `${escapeHtml(String(event.start))}–${escapeHtml(String(event.end))}`
@@ -81,7 +86,7 @@ ${pwaHeadTags()}
 ${pageNav('schema.html', navSections)}
 <main>
   <p class="back-link"><a href="schema.html">← Tillbaka till schemat</a></p>
-  <h1>${title}</h1>
+  <h1${h1Class}>${h1Inner}</h1>
   <div class="event-detail">
     <p>📅 ${date} 🕐 ${timeStr}</p>
     <p>📍 <strong>Plats:</strong> ${escapeHtml(event.location)} · 👤 <strong>Ansvarig:</strong> ${escapeHtml(event.responsible)}</p>

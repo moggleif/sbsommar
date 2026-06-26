@@ -16,6 +16,8 @@
   var fieldset     = form ? form.querySelector('fieldset') : null;
   var submitBtn    = form ? form.querySelector('button[type="submit"]') : null;
   var deleteBtn    = document.getElementById('btn-delete');
+  var cancelBtn    = document.getElementById('btn-cancel');
+  var cancelNote   = document.getElementById('cancel-activity-note');
   var deleteDialog = document.getElementById('delete-confirm');
   var deleteTitle  = document.getElementById('delete-confirm-title');
   var deleteYes    = document.getElementById('delete-confirm-yes');
@@ -314,6 +316,35 @@
 
     // Trigger preview update after populating description (02-§58.1)
     els.description.dispatchEvent(new Event('input', { bubbles: true }));
+
+    // Reflect the activity's current cancelled state in the toggle (02-§118.5)
+    cancelledState = event.cancelled === true;
+    updateCancelButton();
+  }
+
+  // ── Cancel / restore activity toggle (02-§118) ──────────────────────────────
+
+  // Pending cancelled state for the activity being edited. Seeded from the
+  // loaded event and flipped by the toggle; saved with "Spara ändringar".
+  var cancelledState = false;
+
+  function updateCancelButton() {
+    if (!cancelBtn) return;
+    cancelBtn.textContent = cancelledState ? 'Återställ aktiviteten' : 'Ställ in aktiviteten';
+    cancelBtn.classList.toggle('is-cancelled', cancelledState);
+    if (cancelNote) {
+      cancelNote.textContent = cancelledState
+        ? 'Aktiviteten är markerad som inställd. Spara ändringarna för att uppdatera schemat.'
+        : '';
+      cancelNote.hidden = !cancelledState;
+    }
+  }
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', function () {
+      cancelledState = !cancelledState;
+      updateCancelButton();
+    });
   }
 
   // ── Time-gating (02-§26.9, §26.14–§26.19) ──────────────────────────────────
@@ -627,6 +658,7 @@
           responsible: responsible,
           description: els.description.value,
           link:        els.link.value.trim(),
+          cancelled:   cancelledState,
         };
       if (adminToken) editBody.adminToken = adminToken;
 

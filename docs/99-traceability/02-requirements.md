@@ -1826,3 +1826,41 @@ Doc ref: `02-requirements/schedule-and-detail.md §4` (Weekly schedule and Today
 | `02-§116.3` | covered | RND-50: `data-event-end` is omitted when the activity has no end; `schema-status.js` then treats the activity as in progress until midnight of its day, after which it is `.is-past` |
 | `02-§116.4` | covered | RDC-22: `schema-status.js` runs once on page load; the page does not auto-refresh. Manual checkpoint: open `schema.html`, then reload at a later time and confirm rows have re-evaluated against the new current time |
 | `02-§116.5` | covered | IDAG-20/-21: the today view (`idag.html`) gets the same treatment. `events-today.js`, after rendering `#today-list`, classifies each row once (guarded to `!window.__BUILD_TIME__` so the live display view's own per-minute logic is unaffected), adding `.is-past` / `.is-now` by comparing the current time of day to each activity's start/end. Same `body:not(.display-mode)` styling. Browser-verified appearance is a manual checkpoint |
+
+### §117 — Schedule Colour Scheme
+
+Doc ref: `02-requirements/design-and-content.md §117`;
+`03-architecture/rendering.md §5.5`;
+`07-design/css-strategy.md §7` (token), `07-design/components.md §6.135–6.138`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§117.1` | covered | SCOL-01: `--color-sage-dark: #4F6B1F` defined at `:root` in `style.css`. Contrast ≈5.2:1 on `--color-cream` is a computed/manual checkpoint |
+| `02-§117.2` | covered | SCOL-02: `.ev-time { color: var(--color-sage-dark) }`; no terracotta. Visual check is a manual checkpoint |
+| `02-§117.3` | covered | SCOL-03: `details.event-row[open] > summary .ev-title` uses `var(--color-sage-dark)` |
+| `02-§117.4` | covered | SCOL-04, CSS-39/-40: `body:not(.display-mode) .event-row.is-now` uses a sage tint + `var(--color-sage-dark)` bar and title; no terracotta |
+| `02-§117.5` | covered | SCOL-05: `.back-link a` and `.event-ext-link` use `var(--color-sage-dark)` |
+| `02-§117.6` | covered | SCOL-06: `body.display-mode .event-row.is-now` and the display opened-title rule use `var(--color-sage)` |
+| `02-§117.7` | covered | SCOL-07: in the schedule rules, terracotta appears only under `.is-cancelled` (focus outlines, shared chrome, excepted). Browser-verified appearance is a manual checkpoint |
+
+### §118 — Cancelled Activities
+
+Doc ref: `02-requirements/schedule-and-detail.md §118`;
+`05-DATA_CONTRACT.md §3` (cancelled field), `06-EVENT_DATA_MODEL.md §4a`;
+`03-architecture/rendering.md §5.6`, `03-architecture/forms-and-api.md §31`;
+`07-design/components.md §6.139–6.141`.
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§118.1` | covered | LINTY-CANCEL-01/-02: `lint-yaml.js` accepts `cancelled: true/false`/absent and rejects a non-boolean; PHP `testCancelled*` (Validate.php) parity. Node mirror `source/api/validate.js` matches |
+| `02-§118.2` | covered | PHP `testPatchEventObjectSetsCancelledFromUpdates`/`testBuildFragmentYamlEmitsCancelledTrue`: `patchEventObject()` carries `cancelled` through an edit; `eventBodyLines()` serialises `cancelled: true`. Node mirror `edit-event.js`/`github.js` matches; LINTY-CANCEL type check |
+| `02-§118.3` | covered | PHP `testPatchEventObjectKeepsIdStableWhenCancelling`: `patchEventObject()` keeps `id` unchanged; cancelling rewrites no id-deriving field |
+| `02-§118.4` | covered | RED-CANCEL-01: `render-edit.js` emits `#btn-cancel` with "Ställ in aktiviteten"; the "Återställ aktiviteten" label toggle is a manual/browser checkpoint |
+| `02-§118.5` | implemented | Manual/browser checkpoint: edit body includes `cancelled` (redigera.js `editBody`); form reflects current state on load (redigera.js `populate()` → `cancelledState`) |
+| `02-§118.6` | covered | RND-CANCEL-01, IDAG-CANCEL-01, REV-CANCEL-01: cancelled row still rendered in schedule/today/event page |
+| `02-§118.7` | covered | RND-CANCEL-02/-03, IDAG-CANCEL-02, REV-CANCEL-01: `renderEventRow()`/`events-today.js`/`renderEventPage()` prefix the title with the `INSTÄLLD` label |
+| `02-§118.8` | covered | CSS-CANCEL-01: `.event-row.is-cancelled` text `line-through`; terracotta only `:not(.is-past)` |
+| `02-§118.9` | covered | CSS-CANCEL-02: cancelled-row terracotta guarded by `:not(.is-past)` so a passed row takes the grey dimmed `.is-past` treatment; label + strike-through remain. Browser-verified appearance is a manual checkpoint |
+| `02-§118.10` | covered | RND-CANCEL-02: "INSTÄLLD" is real text in the row (`<span class="ev-cancelled-label">`), announced by screen readers |
+| `02-§118.11` | covered | RSS-CANCEL-01/-02: `render-rss.js` prefixes a cancelled item `<title>` with `[INSTÄLLD]` and a space; active titles unchanged |
+| `02-§118.12` | covered | ICAL-CANCEL-01/-02/-03: `render-ical.js` emits `STATUS:CANCELLED` in `schema.ics` and per-event `event.ics`; active events omit it |

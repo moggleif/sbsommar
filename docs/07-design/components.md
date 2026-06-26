@@ -222,7 +222,19 @@ mint form's per-field validation uses the inline field-error component
 - Clear time display: bold start time, lighter end time. <!-- 07-§6.31 -->
 - Location as small text below. <!-- 07-§6.32 -->
 - On the weekly schedule (`schema.html`) and the today view (`idag.html`), a row whose activity has ended (`.is-past`) has a light grey background — `rgba(0, 0, 0, 0.05)` — and its time and title are dimmed to `0.5` opacity, so the eye skips past what is over. <!-- 07-§6.134 -->
-- On the same two views, the row whose activity is in progress (`.is-now`) is strongly highlighted so it stands out at a glance: a terracotta wash — `rgba(199, 109, 72, 0.22)` (a tint of `var(--color-terracotta)`) — a `4px` terracotta left accent bar (`box-shadow: inset 4px 0 0 var(--color-terracotta)`), and its title rendered in `var(--color-terracotta)` at `700` weight. These rules are scoped to `body:not(.display-mode)` so they never affect the display view, which hides ended rows entirely. <!-- 07-§6.135 -->
+- On the same two views, the row whose activity is in progress (`.is-now`) is strongly highlighted so it stands out at a glance: a sage wash — `rgba(173, 191, 119, 0.30)` (a tint of `var(--color-sage)`) — a `4px` sage-green left accent bar (`box-shadow: inset 4px 0 0 var(--color-sage-dark)`), and its title rendered in `var(--color-sage-dark)` at `700` weight. These rules are scoped to `body:not(.display-mode)` so they never affect the display view, which hides ended rows entirely. <!-- 07-§6.135 -->
+
+### Schedule colour scheme (02-§117)
+
+- The accent colour of the schedule is green, not terracotta. The activity time on every row (`.ev-time`) is `var(--color-sage-dark)` and `700` weight; an expanded activity's title accent (`details.event-row[open] > summary .ev-title`) is `var(--color-sage-dark)`. On the per-event detail page the back link (`.back-link a`) and an activity's external link (`.event-ext-link`) are `var(--color-sage-dark)`. <!-- 07-§6.136 -->
+- On the display view (`live.html`, dark background), the in-progress wash and accent bar use `var(--color-sage)`, and an expanded activity's title is `var(--color-sage)` — legible on dark, and no terracotta. <!-- 07-§6.137 -->
+- Within the schedule, today, display, and per-event views, terracotta (`var(--color-terracotta)`) is used only to mark a cancelled activity (below). Page chrome shared with the rest of the site — navigation, footer, buttons, focus outlines — keeps its existing colours. <!-- 07-§6.138 -->
+
+### Cancelled activity (02-§118)
+
+- A cancelled activity (`.event-row.is-cancelled`) stays in the schedule. Its heading is prefixed with the word "INSTÄLLD" (rendered as a `.ev-cancelled-label`, bold), and all of its row text — time, title, meta — is struck through (`text-decoration: line-through`). <!-- 07-§6.139 -->
+- While the activity is upcoming or in progress, its row text is `var(--color-terracotta)`, the reserved red signal. The "INSTÄLLD" label is part of the visible text, so the cancelled state never depends on colour or strike-through alone. <!-- 07-§6.140 -->
+- Once a cancelled activity has passed (`.is-past`), it takes the same muted grey, `0.5`-opacity treatment as any other past row: the terracotta colour is dropped (the `.is-past` rule wins) while the "INSTÄLLD" label and strike-through remain. <!-- 07-§6.141 -->
 
 ### Display sidebar — portrait layout
 
