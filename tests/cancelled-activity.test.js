@@ -18,6 +18,7 @@ const { renderEventPage } = require('../source/build/render-event');
 const { renderRssFeed } = require('../source/build/render-rss');
 const { renderEventIcal, renderIcalFeed } = require('../source/build/render-ical');
 const { renderIdagPage } = require('../source/build/render-idag');
+const { renderEditPage } = require('../source/build/render-edit');
 const { validateEventObject } = require('../source/scripts/lint-yaml');
 
 const read = (rel) => fs.readFileSync(path.join(__dirname, '..', rel), 'utf8');
@@ -153,6 +154,19 @@ describe('02-§118.2 — cancelled exposed in events.json', () => {
     const m = src.match(/PUBLIC_EVENT_FIELDS\s*=\s*\[([^\]]+)\]/);
     assert.ok(m, 'PUBLIC_EVENT_FIELDS array found');
     assert.match(m[1], /'cancelled'/, 'cancelled listed in PUBLIC_EVENT_FIELDS');
+  });
+});
+
+// ── Edit form toggle (render-edit.js) ────────────────────────────────────────
+
+describe('02-§118.4 — edit form cancel button', () => {
+  it('RED-CANCEL-01: the edit form renders the cancel-activity button', () => {
+    const camps = { name: 'Test', start_date: '2026-06-28', end_date: '2026-07-05', opens_for_editing: '2026-06-21' };
+    const html = renderEditPage(camps, ['Salen'], '/edit-event');
+    assert.match(html, /id="btn-cancel"/, 'btn-cancel present');
+    assert.match(html, /Ställ in aktiviteten/, 'default Swedish label');
+    // The "Återställ aktiviteten" label is applied by redigera.js in the browser
+    // (manual checkpoint); only the default label is in the static markup.
   });
 });
 
