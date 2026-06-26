@@ -715,11 +715,12 @@ details.event-row[open] > summary .ev-title {
 
 .event-desc { margin: 0 0 4px; }
 
-/* Time status on the weekly schedule (schema.html), applied client-side by
-   schema-status.js. Ended activities are dimmed with a light grey background;
-   the activity in progress is highlighted with a terracotta accent. Scoped away
-   from the dark display view (live.html), which has its own is-past/is-now
-   treatment defined earlier in this file. */
+/* Time status on the weekly schedule (schema.html) and the today view
+   (idag.html), applied client-side by schema-status.js / events-today.js.
+   Ended activities are dimmed with a light grey background; the activity in
+   progress is highlighted with a strong terracotta accent so it stands out at a
+   glance. Scoped away from the dark display view (live.html), which has its own
+   is-past/is-now treatment defined earlier in this file. */
 body:not(.display-mode) .event-row.is-past {
   background: rgba(0, 0, 0, 0.05);
 }
@@ -730,8 +731,14 @@ body:not(.display-mode) .event-row.is-past .ev-title {
 }
 
 body:not(.display-mode) .event-row.is-now {
-  background: rgba(199, 109, 72, 0.1); /* var(--color-terracotta) tint */
-  box-shadow: inset 3px 0 0 var(--color-terracotta);
+  background: rgba(199, 109, 72, 0.22); /* var(--color-terracotta) tint */
+  box-shadow: inset 4px 0 0 var(--color-terracotta);
+}
+
+/* Make the in-progress activity's title pop in the accent colour too. */
+body:not(.display-mode) .event-row.is-now .ev-title {
+  color: var(--color-terracotta);
+  font-weight: 700;
 }
 
 /* ── Per-event detail page ── */

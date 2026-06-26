@@ -339,6 +339,14 @@ describe('07-§6.134, 6.135 — Schedule row time status', () => {
   it('CSS-39: in-progress schedule rows get a terracotta highlight (07-§6.135)', () => {
     const m = CSS.match(/body:not\(\.display-mode\)\s+\.event-row\.is-now\s*\{([^}]+)\}/);
     assert.ok(m, '.is-now rule scoped to non-display mode exists');
-    assert.ok(/box-shadow:\s*inset 3px 0 0 var\(--color-terracotta\)/.test(m[1]), 'terracotta accent bar');
+    assert.ok(/box-shadow:\s*inset 4px 0 0 var\(--color-terracotta\)/.test(m[1]), 'terracotta accent bar');
+    assert.ok(/background:\s*rgba\(199,\s*109,\s*72,\s*0\.22\)/.test(m[1]), 'stronger terracotta wash');
+  });
+
+  it('CSS-40: in-progress row title is rendered in the accent colour (07-§6.135)', () => {
+    const m = CSS.match(/body:not\(\.display-mode\)\s+\.event-row\.is-now\s+\.ev-title\s*\{([^}]+)\}/);
+    assert.ok(m, '.is-now .ev-title rule exists');
+    assert.ok(/color:\s*var\(--color-terracotta\)/.test(m[1]), 'terracotta title');
+    assert.ok(/font-weight:\s*700/.test(m[1]), 'bold title');
   });
 });
