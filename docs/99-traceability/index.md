@@ -116,7 +116,7 @@ ID ranges.
 
 ---
 
-Audit date: 2026-02-24. Last updated: 2026-06-21 (duplicate submission hardening delivered, #480: 02-§111.1–111.9: 7 covered, 2 implemented; split-on-open delivered, #470: 02-§110.1–110.8 covered; fragment-only edit/delete delivered, #467: 02-§109.1–109.26: 22 covered, 4 implemented; config-file QA deploy trigger 02-§108.1–108.4 covered; location availability 02-§107.1–107.8 covered; countdown hidden during ongoing camp delivered, #521: 02-§30.26 covered; stranded-recovery auth + fail-loud 02-§112.12–112.15: 1 covered, 3 implemented; stranded-recovery check-suite trigger + single-flight 02-§112.16–112.17 covered; stranded-recovery rollup-based detection 02-§112.18 covered).
+Audit date: 2026-02-24. Last updated: 2026-06-21 (duplicate submission hardening delivered, #480: 02-§111.1–111.9: 7 covered, 2 implemented; split-on-open delivered, #470: 02-§110.1–110.8 covered; fragment-only edit/delete delivered, #467: 02-§109.1–109.26: 22 covered, 4 implemented; config-file QA deploy trigger 02-§108.1–108.4 covered; location availability 02-§107.1–107.8 covered; countdown hidden during ongoing camp delivered, #521: 02-§30.26 covered; stranded-recovery auth + fail-loud 02-§112.12–112.15: 1 covered, 3 implemented; stranded-recovery check-suite trigger + single-flight 02-§112.16–112.17 covered; stranded-recovery rollup-based detection 02-§112.18 covered; weekly-schedule time status delivered: 02-§116.1–116.4 and 07-§6.134–6.135 covered).
 
 ---
 
@@ -126,10 +126,10 @@ The matrix is split by ID family. Each file carries the rows for one family.
 
 | Family | Source | Rows | File |
 | --- | --- | --- | --- |
-| `02` | `docs/02-requirements/` | 1325 | [02-requirements](./02-requirements.md) |
+| `02` | `docs/02-requirements/` | 1329 | [02-requirements](./02-requirements.md) |
 | `03` | `docs/03-architecture/` | 0 | [03-architecture](./03-architecture.md) |
 | `05` | `docs/05-DATA_CONTRACT.md` | 19 | [05-data-contract](./05-data-contract.md) |
-| `07` | `docs/07-design/` | 91 | [07-design](./07-design.md) |
+| `07` | `docs/07-design/` | 93 | [07-design](./07-design.md) |
 | `CL` | `CLAUDE.md` | 66 | [claude](./claude.md) |
 
 Test IDs referenced in the `Test(s)` column are defined in the
@@ -138,11 +138,23 @@ Test IDs referenced in the `Test(s)` column are defined in the
 ## Summary
 
 ```text
-Total requirements:            1425
-Covered (implemented + tested): 766
+Total requirements:            1431
+Covered (implemented + tested): 772
 Implemented, not tested:        659
 Gap (no implementation):          0
 Orphan tests (no requirement):    0
+
+Note: §116 (Weekly-Schedule Time Status) adds 4 requirements
+  (02-§116.1–116.4) plus 2 design rules (07-§6.134–6.135), all covered.
+  On schema.html each activity row is marked against the current time:
+  schema-status.js adds .is-past (light-grey background, dimmed text) once an
+  activity has ended and .is-now (terracotta highlight + left accent bar) while
+  it is in progress, evaluated once on page load (the static weekly schedule
+  does not auto-refresh; a manual reload re-evaluates the rows).
+  renderEventRow() exposes data-event-start/data-event-end for the comparison;
+  the styling is scoped to body:not(.display-mode) so the dark display view
+  (which hides ended rows) is unaffected. Tests: RND-48..50, RDC-22, CSS-38..39.
+  Browser-verified appearance and the reload refresh are manual checkpoints.
 
 Note: §113 (Proactive Merge-Queue Enqueue) adds 9 requirements
   (02-§113.1–113.9): 7 covered (ENQ-01..10 in tests/github.test.js plus the

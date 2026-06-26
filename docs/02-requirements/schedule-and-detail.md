@@ -18,6 +18,10 @@ Part of [the requirements index](./index.md). Section IDs (`02-§N.M`) are stabl
 - Activities are grouped by day. <!-- 02-§4.10 -->
 - Within each day, activities are listed in chronological order. <!-- 02-§4.2 -->
 - Each activity shows: title, start time, end time, location, responsible person. <!-- 02-§4.3 -->
+- Each activity row reflects its status relative to the current time: an activity whose end time has passed is shown with a muted light-grey background; the activity currently in progress is highlighted with a terracotta accent. Upcoming activities use the default row appearance. <!-- 02-§116.1 -->
+- Status is evaluated against each activity's full date and start/end time, so only activities on the current day can be highlighted as in progress, and every activity on a past day is shown as ended. <!-- 02-§116.2 -->
+- An activity with no end time is treated as in progress from its start time until midnight of its day, after which it is shown as ended. <!-- 02-§116.3 -->
+- Status is evaluated when the page loads; reloading the page re-evaluates it against the current time. The weekly schedule does not refresh on its own while open. <!-- 02-§116.4 -->
 
 ### Today view (`/idag.html`)
 
