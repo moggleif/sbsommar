@@ -1170,20 +1170,26 @@ h1.is-cancelled {
   outline-offset: 2px;
 }
 
-/* Cancel/restore-activity toggle on the edit form (02-§118). A quiet outline
-   button by default ("Ställ in aktiviteten"); once the activity is marked
-   cancelled it turns solid terracotta ("Återställ aktiviteten"). */
-.cancel-activity-row {
-  margin-top: var(--space-sm);
+/* The cancel/restore toggle and the delete button sit beside each other at the
+   top-right of the edit form. */
+.edit-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
 }
 
+/* Cancel/restore-activity toggle on the edit form (02-§118). A quiet outline
+   pill by default ("Ställ in aktiviteten"), sized to match the delete pill it
+   sits next to; once the activity is marked cancelled it turns solid terracotta
+   ("Återställ aktiviteten"). */
 .btn-cancel-activity {
   display: inline-block;
   background: transparent;
   color: var(--color-terracotta);
   font-weight: 700;
-  font-size: var(--font-size-small);
-  padding: 8px 18px;
+  font-size: 12px;
+  padding: 6px 16px;
   border: 1.5px solid var(--color-terracotta);
   border-radius: 999px;
   cursor: pointer;
@@ -1205,7 +1211,7 @@ h1.is-cancelled {
 }
 
 .cancel-activity-note {
-  margin: var(--space-xs) 0 0;
+  margin: var(--space-xs) 0 var(--space-sm);
   font-size: var(--font-size-small);
   color: var(--color-charcoal);
   opacity: 0.8;
