@@ -258,7 +258,7 @@
         if (sessionStorage.getItem(RELOAD_GUARD_KEY) === targetVersion) return false;
         sessionStorage.setItem(RELOAD_GUARD_KEY, targetVersion);
         return true;
-      } catch (e) {
+      } catch {
         // sessionStorage unavailable (e.g. locked-down kiosk) — fall back to
         // the original behaviour rather than failing.
         return true;
