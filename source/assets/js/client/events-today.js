@@ -243,6 +243,27 @@
     // confirmed. It clears automatically on the next success. This separates a
     // stalled screen from one that is merely showing an unchanged schedule.
     var loadedVersion = window.__VERSION__;
+    // Reload-loop guard. The page reloads when version.json reports a newer
+    // build than the one embedded here. If a stale cache keeps serving an old
+    // page whose embedded version never catches up, an unguarded reload would
+    // fire on every poll and thrash the screen. So reload at most once per
+    // target version: remember in sessionStorage which version we last reloaded
+    // for, and if the page comes back still reporting the old version, stop
+    // reloading and leave the (stale) page up rather than flickering. A genuine
+    // new deploy always has a target we have not seen yet, so it still triggers
+    // exactly one reload.
+    var RELOAD_GUARD_KEY = 'sb-reload-target';
+    function shouldReloadFor(targetVersion) {
+      try {
+        if (sessionStorage.getItem(RELOAD_GUARD_KEY) === targetVersion) return false;
+        sessionStorage.setItem(RELOAD_GUARD_KEY, targetVersion);
+        return true;
+      } catch {
+        // sessionStorage unavailable (e.g. locked-down kiosk) — fall back to
+        // the original behaviour rather than failing.
+        return true;
+      }
+    }
     var warnEl = document.getElementById('connection-warning');
     var lastOkCheck = Date.now();
     var STALE_MS = 3 * 60 * 1000;
@@ -265,7 +286,8 @@
         .then(function (data) {
           lastOkCheck = Date.now();
           refreshConnectionWarning();
-          if (loadedVersion && data.version && data.version !== loadedVersion) {
+          if (loadedVersion && data.version && data.version !== loadedVersion &&
+              shouldReloadFor(data.version)) {
             location.reload();
           }
         })
