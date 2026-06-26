@@ -7,8 +7,9 @@
                  light-grey background)
      - .is-now   the activity is in progress (highlighted)
    Upcoming activities get no class and keep the default appearance. The status
-   is re-evaluated every minute, aligned to the minute boundary, so the page
-   stays current without a reload. All visual styling lives in style.css. */
+   is evaluated once when the page loads; the weekly schedule does not refresh
+   on its own, so reloading the page is what re-evaluates every row against the
+   current time. All visual styling lives in style.css. */
 (function () {
   var rows = document.querySelectorAll('.event-row[data-event-date][data-event-start]');
   if (!rows.length) return;
@@ -50,12 +51,7 @@
     }
   }
 
-  // Self-correcting tick aligned to the minute boundary (same pattern as the
-  // live display view) so rows flip exactly as each minute turns over.
-  function tick() {
-    classify();
-    var d = new Date();
-    setTimeout(tick, (60 - d.getSeconds()) * 1000 - d.getMilliseconds());
-  }
-  tick();
+  // Evaluated once, on page load. The weekly schedule is a static page and
+  // intentionally does not auto-refresh; a manual reload re-runs this.
+  classify();
 })();

@@ -149,11 +149,12 @@ Note: §116 (Weekly-Schedule Time Status) adds 4 requirements
   On schema.html each activity row is marked against the current time:
   schema-status.js adds .is-past (light-grey background, dimmed text) once an
   activity has ended and .is-now (terracotta highlight + left accent bar) while
-  it is in progress, re-evaluated each minute. renderEventRow() exposes
-  data-event-start/data-event-end for the comparison; the styling is scoped to
-  body:not(.display-mode) so the dark display view (which hides ended rows) is
-  unaffected. Tests: RND-48..50, RDC-22, CSS-38..39. Browser-verified appearance
-  and the once-per-minute flip are manual checkpoints.
+  it is in progress, evaluated once on page load (the static weekly schedule
+  does not auto-refresh; a manual reload re-evaluates the rows).
+  renderEventRow() exposes data-event-start/data-event-end for the comparison;
+  the styling is scoped to body:not(.display-mode) so the dark display view
+  (which hides ended rows) is unaffected. Tests: RND-48..50, RDC-22, CSS-38..39.
+  Browser-verified appearance and the reload refresh are manual checkpoints.
 
 Note: §113 (Proactive Merge-Queue Enqueue) adds 9 requirements
   (02-§113.1–113.9): 7 covered (ENQ-01..10 in tests/github.test.js plus the

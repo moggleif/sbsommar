@@ -99,9 +99,9 @@ day), and an activity with no end is treated as in progress until
 midnight of its day, then ended. Because the comparison uses the full
 date — not only the time of day — activities on past days resolve to
 `.is-past` and only current-day activities can be `.is-now`. The function
-runs on load and re-runs on a self-correcting timer aligned to each
-minute boundary, the same pattern `events-today.js` uses, so rows flip as
-the minute turns over without a reload. All visual styling lives in
+runs once on page load. Unlike the live display view, the weekly schedule
+is a static page and does not auto-refresh; a manual reload re-evaluates
+every row against the current time. All visual styling lives in
 `style.css` (see 07-design/components.md §6 "Event / schedule items").
 
 ---
