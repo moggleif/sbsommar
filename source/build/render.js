@@ -91,6 +91,8 @@ function renderEventRow(e) {
 
   const cancelled = e.cancelled === true;
   const cancelledClass = cancelled ? ' is-cancelled' : '';
+  // A later-booked same-room time clash is flagged in red (02-§120).
+  const clashClass = e._clash ? ' is-clash' : '';
   const titleHtml = `${cancelled ? CANCELLED_LABEL : ''}${escapeHtml(e.title)}`;
 
   const idAttr = e.id ? ` data-event-id="${escapeHtml(String(e.id))}"` : '';
@@ -103,7 +105,7 @@ function renderEventRow(e) {
 
   if (hasExtra) {
     return [
-      `    <details class="event-row${cancelledClass}${movedClass}"${idAttr}${timeAttrs}>`,
+      `    <details class="event-row${cancelledClass}${movedClass}${clashClass}"${idAttr}${timeAttrs}>`,
       '      <summary>',
       `        <span class="ev-time">${timeCellHtml}</span>`,
       `        <span class="ev-title">${titleHtml}</span>`,
@@ -117,7 +119,7 @@ function renderEventRow(e) {
       .join('\n');
   } else {
     return [
-      `    <div class="event-row plain${cancelledClass}${movedClass}"${idAttr}${timeAttrs}>`,
+      `    <div class="event-row plain${cancelledClass}${movedClass}${clashClass}"${idAttr}${timeAttrs}>`,
       `      <span class="ev-time">${timeCellHtml}</span>`,
       `      <span class="ev-title">${titleHtml}</span>`,
       metaEl ? `      ${metaEl}` : '',
