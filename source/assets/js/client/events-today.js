@@ -164,6 +164,8 @@
     var idAttr = e.id ? ' data-event-id="' + esc(e.id) + '"' : '';
     var dateAttr = e.date ? ' data-event-date="' + esc(e.date) + '"' : '';
     var cancelledClass = e.cancelled === true ? ' is-cancelled' : '';
+    // A later-booked same-room time clash is flagged in red (02-§120).
+    var clashClass = e.clash === true ? ' is-clash' : '';
     var titleHtml = (e.cancelled === true ? '<span class="ev-cancelled-label">INSTÄLLD</span> ' : '') + esc(e.title);
 
     if (hasExtra) {
@@ -176,14 +178,14 @@
       if (safeLink) {
         extraParts.push('<a class="event-ext-link" href="' + esc(safeLink) + '" target="_blank" rel="noopener">Extern länk →</a>');
       }
-      return '<details class="event-row' + cancelledClass + movedClass + '"' + idAttr + dateAttr + '><summary>' +
+      return '<details class="event-row' + cancelledClass + movedClass + clashClass + '"' + idAttr + dateAttr + '><summary>' +
         '<span class="ev-time">' + timeCell + '</span>' +
         '<span class="ev-title">' + titleHtml + '</span>' +
         metaEl + icalEl + '</summary>' +
         '<div class="event-extra">' + extraParts.join('') + '</div>' +
         '</details>';
     }
-    return '<div class="event-row plain' + cancelledClass + movedClass + '"' + idAttr + dateAttr + '>' +
+    return '<div class="event-row plain' + cancelledClass + movedClass + clashClass + '"' + idAttr + dateAttr + '>' +
       '<span class="ev-time">' + timeCell + '</span>' +
       '<span class="ev-title">' + titleHtml + '</span>' +
       metaEl + icalEl + '</div>';

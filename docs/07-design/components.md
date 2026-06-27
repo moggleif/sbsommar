@@ -244,6 +244,11 @@ mint form's per-field validation uses the inline field-error component
 - Once the ghost marker's old slot is in the past it takes the same muted grey, `0.5`-opacity `.is-past` treatment as any other passed row (the amber tint and accent bar are dropped), so a past ghost reads as grey, not amber. <!-- 07-§6.146 -->
 - A relocated activity shows its new location as usual, preceded by its previous location struck through in small, slightly muted text (`.ev-loc-old`, sharing the `.ev-time-old` treatment). A location change adds only this inline annotation — no ghost marker and no amber highlight. <!-- 07-§6.145 -->
 
+### Location clash (02-§120)
+
+- When two activities are booked into the same room at overlapping times, the later-booked one (`.event-row.is-clash`) is flagged in the reserved conflict red (`var(--color-error)`): a red wash, a red left accent bar, and the title in red — the same red already used for the conflict-warning banner. The earlier booking is left unmarked. <!-- 07-§6.147 -->
+- The clash red is placed after the in-progress rule so it wins over the sage "now" accent, and it yields to the grey, `0.5`-opacity `.is-past` treatment once the activity has passed. The catch-all "Annat" location is never flagged. <!-- 07-§6.148 -->
+
 ### Display sidebar — portrait layout
 
 `/live.html` is optimised for portrait-orientation screens (e.g. 1080 × 1920 px). The heading moves into the sidebar so events use the full available height from the top of the page. <!-- 07-§6.44 -->

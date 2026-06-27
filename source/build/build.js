@@ -21,6 +21,7 @@ const { renderAdminPage } = require('./render-admin');
 const { renderOfflinePage } = require('./render-offline');
 const { resolveActiveCamp } = require('../scripts/resolve-active-camp');
 const { loadCampEvents } = require('./load-events');
+const { markLocationClashes } = require('./clashes');
 const { addOneDay } = require('../api/time-gate');
 const { setFeedbackUrl } = require('./layout');
 const { resolveVersionString } = require('./version');
@@ -91,6 +92,10 @@ const camp = campData.camp;
 camp.opens_for_editing = activeCamp.opens_for_editing;
 // Events come from the camp file merged with any fragment files (02-§109.13).
 const events = loadCampEvents(DATA_DIR, activeCamp.file);
+// Flag the later-booked event of each same-room time clash so every view can
+// mark it (02-§120). Tagged once here so the schedule, today, and display views
+// all agree.
+markLocationClashes(events);
 
 // ── Load locations from local.yaml ───────────────────────────────────────────
 

@@ -198,6 +198,25 @@ ghosts in with real rows by start time and keeps the real-event count for its
 footer; the live view's per-minute classifier skips ghosts so they always stay
 visible at the old slot.
 
+### 5.8 Location-clash marking (02-§120)
+
+`source/build/clashes.js` `markLocationClashes(events)` runs once in `build.js`
+right after the active camp's events are loaded, so every view sees the same
+flags. For each non-cancelled activity in a real room (the "Annat"/"[annat]"
+catch-all is excluded by `isRealLocation()`), it looks for an **earlier-created**
+activity on the same date in the same room whose time overlaps — reusing the
+shared `overlaps()` predicate from `conflict-check.js` (the same logic behind the
+per-event conflict banner and the locale overview). The later booking gets
+`_clash = true`; the earliest booking is left unmarked. Cancelled activities have
+freed the room, so they neither clash nor are marked.
+
+`renderEventRow()` (`render.js`) adds an `is-clash` class to a flagged row, and
+`build.js` exposes the boolean as `clash` in the today/display event JSON so
+`buildRowHtml()` (`events-today.js`) marks the same rows. CSS styles
+`.event-row.is-clash` in the reserved conflict red (`--color-error`), placed
+after the in-progress rule so red wins over the sage "now" accent and yields to
+the grey `.is-past` treatment once the activity has passed.
+
 ---
 
 ## 6. Project Structure

@@ -28,6 +28,7 @@ function renderIdagPage(camp, events, footerHtml = '', navSections = [], cookieD
       cancelled: e.cancelled === true,
       moved: e.moved && e.moved.from_date ? e.moved : null,
       relocated: e.relocated && e.relocated.from_location ? e.relocated : null,
+      clash: e._clash === true,
     })),
   );
 

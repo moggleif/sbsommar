@@ -779,6 +779,28 @@ body.display-mode .event-row.is-cancelled.is-now {
   font-weight: 700;
 }
 
+/* ── Location clashes (02-§120) ───────────────────────────────────────────────
+   When two activities are booked into the same room at overlapping times, the
+   one booked later is flagged in the reserved conflict red (--color-error): a
+   red wash, a red left accent bar, and the title in red. Placed after the
+   in-progress rule so the red wins over the sage "now" accent. Like the other
+   row states, the red gives way to the grey .is-past treatment once the
+   activity has passed. */
+body:not(.display-mode) .event-row.is-clash:not(.is-past) {
+  background: color-mix(in srgb, var(--color-error) 12%, transparent);
+  box-shadow: inset 4px 0 0 var(--color-error);
+}
+
+body:not(.display-mode) .event-row.is-clash:not(.is-past) .ev-title {
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+body.display-mode .event-row.is-clash:not(.is-past) {
+  background: color-mix(in srgb, var(--color-error) 22%, transparent);
+  box-shadow: inset 3px 0 0 var(--color-error);
+}
+
 /* ── Moved activities (02-§119) ───────────────────────────────────────────────
    A rescheduled activity keeps its place at the new time: the new time sits on
    top (where the time normally is) and the previous time is struck through in
