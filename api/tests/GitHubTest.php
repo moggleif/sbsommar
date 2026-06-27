@@ -395,4 +395,41 @@ final class GitHubTest extends TestCase
         $yaml = GitHub::buildFragmentYaml(self::baseEvent());
         $this->assertStringNotContainsString('moved:', $yaml);
     }
+
+    // ── relocated marker (02-§119.14) ───────────────────────────────────────
+
+    public function testPatchEventObjectRecordsRelocatedOnLocationChange(): void
+    {
+        $patched = GitHub::patchEventObject(self::baseEvent(), ['location' => 'Nya salen'], '2026-06-22 08:00');
+        $this->assertSame(['from_location' => 'Matsalen'], $patched['relocated']);
+    }
+
+    public function testPatchEventObjectPreservesRelocatedOnNonLocationEdit(): void
+    {
+        $base = self::baseEvent(['relocated' => ['from_location' => 'Ursprung']]);
+        $patched = GitHub::patchEventObject($base, ['title' => 'Nytt'], '2026-06-22 08:00');
+        $this->assertSame(['from_location' => 'Ursprung'], $patched['relocated']);
+    }
+
+    public function testPatchEventObjectClearsRelocatedWhenRestored(): void
+    {
+        $base = self::baseEvent(['location' => 'Nya salen', 'relocated' => ['from_location' => 'Matsalen']]);
+        $patched = GitHub::patchEventObject($base, ['location' => 'Matsalen'], '2026-06-22 08:00');
+        $this->assertArrayNotHasKey('relocated', $patched);
+    }
+
+    public function testBuildFragmentYamlEmitsRelocatedBlock(): void
+    {
+        $yaml = GitHub::buildFragmentYaml(self::baseEvent([
+            'location'  => 'Nya salen',
+            'relocated' => ['from_location' => 'Matsalen'],
+        ]));
+        $doc = \Symfony\Component\Yaml\Yaml::parse($yaml);
+        $this->assertSame('Matsalen', $doc['event']['relocated']['from_location']);
+    }
+
+    public function testBuildFragmentYamlOmitsRelocatedWhenAbsent(): void
+    {
+        $this->assertStringNotContainsString('relocated:', GitHub::buildFragmentYaml(self::baseEvent()));
+    }
 }
