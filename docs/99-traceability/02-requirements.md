@@ -1892,3 +1892,18 @@ changes); `05-DATA_CONTRACT.md §2`, §2.1, §3 (`moved` + `relocated` fields);
 | `02-§119.16` | covered | MOVED-39/-40/-41/-42: `locationHtml()` shows the struck old location (`.ev-loc-old`) before the new one in `renderEventRow()`/`renderEventPage()` and emits no ghost. The today/display view via `events-today.js` is a manual/browser checkpoint |
 | `02-§119.17` | covered | MOVED-44: the ghost row carries `data-event-date`/`-start`/`-end`; `schema-status.js` and `events-today.js` add `.is-past` (greying it) when that slot is past and the `is-ghost` guard blocks `.is-now`. CSS `.event-row.is-ghost.is-past` drops the amber for grey. The live/browser greying is a manual checkpoint |
 | `02-§119.18` | covered | CSS `.event-row.is-ghost .ev-time, .ev-title { text-decoration: line-through }` strikes the ghost's first line while `.ev-moved-to` stays un-struck. Visual appearance is a manual/browser checkpoint |
+
+### §120 — Location-Clash Marking
+
+Doc ref: `02-requirements/schedule-and-detail.md §120`;
+`03-architecture/rendering.md §5.8`; `07-design/components.md §6.147–6.148`.
+Reuses the shared overlap predicate (`conflict-check.js`, §99).
+
+| ID | Status | Notes |
+| --- | --- | --- |
+| `02-§120.1` | covered | CLASH-01/-07: `markLocationClashes()` uses the shared `overlaps()` predicate (same-date, same-room, overlapping); back-to-back is not a clash |
+| `02-§120.2` | covered | CLASH-03/-09: `isRealLocation()` excludes "Annat"/"[annat]" so they never clash; build-integration check confirmed only real rooms are flagged on the live schedule |
+| `02-§120.3` | covered | CLASH-06: a cancelled activity is skipped both as the marked and the conflicting event |
+| `02-§120.4` | covered | CLASH-01/-02/-08: the later-created booking is flagged regardless of array order; with three overlaps the two later ones are marked |
+| `02-§120.5` | covered | CLASH-10/-11: `renderEventRow()` adds `is-clash`; `events-today.js` mirrors it via the `clash` JSON flag. CSS `.event-row.is-clash` uses `--color-error` (red wash + bar + title). The today/display view and visual appearance are manual/browser checkpoints |
+| `02-§120.6` | covered | CSS scopes the clash red with `:not(.is-past)` so a passed clash takes the grey `.is-past` treatment. Visual appearance is a manual/browser checkpoint |

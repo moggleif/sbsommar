@@ -619,3 +619,38 @@ pointer at the slot it used to occupy. This is feedback from a camp organiser
   preceded by its previous location in smaller struck-through text. A location
   change produces no previous-slot marker: only the inline struck-through old
   location is added. <!-- 02-§119.16 -->
+
+---
+
+## 120. Location-Clash Marking
+
+**Context.** Two activities can be booked into the same room at overlapping
+times. The schedule highlights the booking that came later so organisers can
+spot and resolve the double-booking. The same overlap logic already powers the
+per-event conflict banner and the locale overview (§99).
+
+### 120.1 What counts as a clash
+
+- A location clash ("lokalkrock") is two activities on the same date, in the same
+  room, whose times overlap. Back-to-back activities (one ends exactly when the
+  next starts) do not clash, matching the conflict rule in §99.3. <!-- 02-§120.1 -->
+- The catch-all location "Annat" (shown as "[annat]") is never a real room, so an
+  activity there is never part of a clash and never causes one. <!-- 02-§120.2 -->
+- A cancelled ("inställd") activity has freed its room: it is never marked and
+  never causes another activity to be marked. <!-- 02-§120.3 -->
+
+### 120.2 Which activity is marked
+
+- Of two clashing activities, the one created later (by its creation time) is
+  marked; the earlier booking keeps the room and is left unmarked. When three or
+  more activities overlap in the same room, every booking created after the
+  earliest is marked. <!-- 02-§120.4 -->
+
+### 120.3 How it is shown
+
+- A marked activity is shown in the reserved conflict red (`--color-error`) — a
+  red wash, a red left accent bar, and the title in red — in the weekly schedule
+  and the today view. <!-- 02-§120.5 -->
+- Once a marked activity has passed in time, it takes the same muted grey,
+  dimmed treatment as any other passed activity; the red gives way to grey.
+  <!-- 02-§120.6 -->
