@@ -1,7 +1,7 @@
 'use strict';
 
 const { escapeHtml, formatDate, toDateString, safeLinkHref } = require('./utils');
-const { isMoved, movedTimeHtml } = require('./moved');
+const { isMoved, movedTimeHtml, locationHtml } = require('./moved');
 const { pageNav, pageFooter } = require('./layout');
 const { renderDescriptionHtml } = require('./markdown');
 const { pwaHeadTags } = require('./pwa');
@@ -94,7 +94,7 @@ ${pageNav('schema.html', navSections)}
   <h1${h1Class}>${h1Inner}</h1>
   <div class="event-detail">
     <p>📅 ${date} 🕐 ${timeDisplay}</p>
-    <p>📍 <strong>Plats:</strong> ${escapeHtml(event.location)} · 👤 <strong>Ansvarig:</strong> ${escapeHtml(event.responsible)}</p>
+    <p>📍 <strong>Plats:</strong> ${locationHtml(event)} · 👤 <strong>Ansvarig:</strong> ${escapeHtml(event.responsible)}</p>
     <p>📆 <a href="schema/${escapeHtml(String(event.id))}/event.ics" download>Lägg till i kalender (.ics)</a></p>
 ${conflictHtml}${descriptionHtml}${linkHtml}  </div>
 </main>

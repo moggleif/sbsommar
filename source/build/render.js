@@ -2,7 +2,7 @@
 
 const { pageNav, pageFooter } = require('./layout');
 const { toDateString, escapeHtml, formatDate, safeLinkHref } = require('./utils');
-const { isMoved, movedTimeHtml, buildGhosts } = require('./moved');
+const { isMoved, movedTimeHtml, buildGhosts, locationHtml } = require('./moved');
 const { renderDescriptionHtml } = require('./markdown');
 const { goatcounterScript } = require('./analytics');
 const { pwaHeadTags } = require('./pwa');
@@ -79,7 +79,9 @@ function renderEventRow(e) {
   const moved = isMoved(e);
   const timeCellHtml = moved ? movedTimeHtml(e, timeStr) : timeStr;
   const movedClass = moved ? ' is-moved' : '';
-  const metaParts = [e.location, e.responsible].filter(Boolean).map(escapeHtml);
+  // A relocated activity shows its new location as usual, preceded by the
+  // previous location struck through in small text (02-§119.16).
+  const metaParts = [locationHtml(e), e.responsible ? escapeHtml(e.responsible) : ''].filter(Boolean);
   const metaEl = metaParts.length ? `<span class="ev-meta"> · ${metaParts.join(' · ')}</span>` : '';
   const icalEl = icalDownloadLink(e);
   const hasExtra = e.description || safeLinkHref(e.link);

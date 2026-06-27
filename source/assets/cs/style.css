@@ -783,8 +783,11 @@ body.display-mode .event-row.is-cancelled.is-now {
    A rescheduled activity keeps its place at the new time: its previous time is
    struck through in small muted text and its new time is highlighted in amber.
    A minimal ghost marker (.is-ghost) is left at the slot it used to occupy,
-   showing only the title and a "Flyttad till …" pointer to where it went. */
-.ev-time-old {
+   showing only the title and a "Flyttad till …" pointer to where it went.
+   A relocated activity shows its new location as usual with the previous
+   location struck through in small text (.ev-loc-old) — no ghost. */
+.ev-time-old,
+.ev-loc-old {
   text-decoration: line-through;
   font-size: var(--font-size-small);
   opacity: 0.7;
