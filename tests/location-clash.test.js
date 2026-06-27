@@ -79,6 +79,17 @@ describe('markLocationClashes (02-§120)', () => {
     assert.equal(evs[2]._clash, true);
   });
 
+  it('CLASH-12: a Date-object created_at orders correctly against a string one', () => {
+    // Mirrors real data: a seed event whose created_at YAML-parsed into a Date
+    // object, overlapping a later event whose created_at stayed a string. They
+    // must be compared by time, not as raw text ("Fri Feb 27 …" vs "2026-06-…").
+    const seed = ev('Middag', 'Servicehus', '17:00', '18:00', new Date('2026-02-27T09:12:59Z'));
+    const late = ev('Töm', 'Servicehus', '17:00', '18:00', '2026-06-27 00:40');
+    markLocationClashes([seed, late]);
+    assert.equal(seed._clash, undefined); // created first (Feb) — not flagged
+    assert.equal(late._clash, true);      // created later (Jun) — flagged
+  });
+
   it('CLASH-09: isRealLocation rejects annat variants and empty, accepts real rooms', () => {
     assert.equal(isRealLocation('Annat'), false);
     assert.equal(isRealLocation('[annat]'), false);

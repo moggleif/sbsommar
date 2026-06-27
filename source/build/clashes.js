@@ -19,10 +19,16 @@ function isRealLocation(loc) {
   return norm !== 'annat';
 }
 
-// Comparable creation key. Events without a created_at sort first (treated as
-// the original booking), so a missing timestamp never marks the legacy event.
-function createdKey(e) {
-  return e && e.meta && e.meta.created_at ? String(e.meta.created_at) : '';
+// Comparable creation time in epoch milliseconds. YAML parses an ISO timestamp
+// (`2026-02-27T09:12:59Z`) into a Date object but leaves a space-separated one
+// (`2026-06-27 00:40`) as a string, so the two must not be compared as raw text
+// — `new Date(...)` normalises both. A missing or unparseable created_at sorts
+// earliest, so it counts as the original booking and is never the one flagged.
+function createdMs(e) {
+  const v = e && e.meta ? e.meta.created_at : null;
+  if (!v) return -Infinity;
+  const t = new Date(v).getTime();
+  return Number.isNaN(t) ? -Infinity : t;
 }
 
 // Sets `_clash = true` on every event that overlaps an EARLIER-created event in
@@ -31,13 +37,13 @@ function createdKey(e) {
 function markLocationClashes(events) {
   for (const e of events) {
     if (e.cancelled || !isRealLocation(e.location)) continue;
-    const ek = createdKey(e);
+    const ems = createdMs(e);
     for (const f of events) {
       if (f === e || f.cancelled) continue;
       if (f.date !== e.date || f.location !== e.location) continue;
       if (!overlaps(e, f)) continue;
       // `e` came after `f` (created later) and they share the room — mark `e`.
-      if (createdKey(f) < ek) {
+      if (createdMs(f) < ems) {
         e._clash = true;
         break;
       }
