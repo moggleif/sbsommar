@@ -43,6 +43,22 @@ function movedTimeHtml(e, newTimeStr) {
     + `<span class="ev-time-new">${newTimeStr}</span>`;
 }
 
+// True when the event carries a usable previous-location marker (02-§119.14).
+function isRelocated(e) {
+  return !!(e && e.relocated && e.relocated.from_location);
+}
+
+// Location cell HTML for an activity (02-§119.16): the new location as usual,
+// preceded by the previous location struck through in small text when the
+// activity has been relocated. Returns '' when the activity has no location.
+function locationHtml(e) {
+  if (!e.location) return isRelocated(e) ? `<span class="ev-loc-old">${escapeHtml(e.relocated.from_location)}</span>` : '';
+  const current = escapeHtml(e.location);
+  return isRelocated(e)
+    ? `<span class="ev-loc-old">${escapeHtml(e.relocated.from_location)}</span> ${current}`
+    : current;
+}
+
 // Build a previous-slot ghost marker for each moved activity (02-§119.8): a
 // minimal pseudo-event positioned at the old date/start. Marked `_ghost` so the
 // row renderer emits the stripped-down marker (title + "Flyttad till" only).
@@ -57,4 +73,4 @@ function buildGhosts(events) {
   }));
 }
 
-module.exports = { isMoved, movedToText, movedFromText, movedTimeHtml, buildGhosts };
+module.exports = { isMoved, movedToText, movedFromText, movedTimeHtml, buildGhosts, isRelocated, locationHtml };

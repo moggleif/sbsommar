@@ -9,10 +9,10 @@ const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 const yaml = require('js-yaml');
 
-const { patchEventObject, resolveMoved, normaliseMoved } = require('../source/api/edit-event');
+const { patchEventObject, resolveMoved, normaliseMoved, resolveRelocated } = require('../source/api/edit-event');
 const { buildFragmentYaml } = require('../source/api/github');
 const { validateYaml } = require('../source/scripts/lint-yaml');
-const { isMoved, movedToText, movedFromText, buildGhosts } = require('../source/build/moved');
+const { isMoved, movedToText, movedFromText, buildGhosts, isRelocated, locationHtml } = require('../source/build/moved');
 const { renderSchedulePage, renderEventRow } = require('../source/build/render');
 const { renderEventPage } = require('../source/build/render-event');
 
@@ -217,5 +217,103 @@ describe('renderEventPage – moved time, no ghost (02-§119.6, §119.10)', () =
     assert.ok(html.includes('ev-time-old'));
     assert.ok(html.includes('ev-time-new'));
     assert.ok(!html.includes('ev-moved-to'));
+  });
+});
+
+describe('patchEventObject – relocated capture (02-§119.15)', () => {
+  it('MOVED-28: records the previous location when location changes', () => {
+    const p = patchEventObject(baseEvent(), { location: 'Nya salen' }, NOW);
+    assert.deepEqual(p.relocated, { from_location: 'Matsalen' });
+  });
+
+  it('MOVED-29: a non-location edit leaves an existing relocated marker untouched', () => {
+    const ev = baseEvent({ relocated: { from_location: 'Ursprung' } });
+    const p = patchEventObject(ev, { title: 'Nytt' }, NOW);
+    assert.deepEqual(p.relocated, { from_location: 'Ursprung' });
+  });
+
+  it('MOVED-30: a non-relocated edit adds no marker', () => {
+    const p = patchEventObject(baseEvent(), { title: 'Nytt' }, NOW);
+    assert.equal(p.relocated, undefined);
+  });
+
+  it('MOVED-31: restoring the original location clears the marker', () => {
+    const ev = baseEvent({ location: 'Nya salen', relocated: { from_location: 'Matsalen' } });
+    const p = patchEventObject(ev, { location: 'Matsalen' }, NOW);
+    assert.equal(p.relocated, undefined);
+  });
+
+  it('MOVED-32: resolveRelocated returns null when the location is unchanged', () => {
+    assert.equal(resolveRelocated(baseEvent(), 'Matsalen'), null);
+  });
+
+  it('MOVED-33: a location change is independent of a time move', () => {
+    const p = patchEventObject(baseEvent(), { start: '10:00', location: 'Nya salen' }, NOW);
+    assert.deepEqual(p.moved, { from_date: '2026-06-22', from_start: '08:00', from_end: '09:00' });
+    assert.deepEqual(p.relocated, { from_location: 'Matsalen' });
+  });
+});
+
+describe('buildFragmentYaml – relocated serialisation (02-§119.14)', () => {
+  it('MOVED-34: round-trips the relocated block', () => {
+    const y = buildFragmentYaml(baseEvent({ location: 'Nya salen', relocated: { from_location: 'Matsalen' } }));
+    assert.deepEqual(yaml.load(y).event.relocated, { from_location: 'Matsalen' });
+  });
+
+  it('MOVED-35: omits the relocated block when absent', () => {
+    assert.ok(!buildFragmentYaml(baseEvent()).includes('relocated:'));
+  });
+});
+
+describe('lint-yaml – relocated validation (05-§3.7)', () => {
+  const wrap = (eventLines) => `camp:\n  id: c\n  name: C\n  location: L\n  start_date: '2026-06-22'\n  end_date: '2026-06-28'\nevents:\n${eventLines}\n`;
+  const valid = [
+    "- id: a-2026-06-24-1000",
+    "  title: A",
+    "  date: '2026-06-24'",
+    "  start: '10:00'",
+    "  end: '11:00'",
+    "  location: Nya salen",
+    "  responsible: R",
+  ];
+
+  it('MOVED-36: accepts a well-formed relocated block', () => {
+    const lines = valid.concat(['  relocated:', '    from_location: Gamla salen']).join('\n');
+    assert.equal(validateYaml(wrap(lines)).ok, true);
+  });
+
+  it('MOVED-37: rejects an empty relocated.from_location', () => {
+    const lines = valid.concat(['  relocated:', "    from_location: ''"]).join('\n');
+    const res = validateYaml(wrap(lines));
+    assert.equal(res.ok, false);
+    assert.ok(res.errors.some((e) => /relocated\.from_location/.test(e)));
+  });
+});
+
+describe('moved.js – location markup (02-§119.16)', () => {
+  it('MOVED-38: isRelocated is false without a marker', () => {
+    assert.equal(isRelocated(baseEvent()), false);
+  });
+
+  it('MOVED-39: locationHtml shows the struck old location before the new one', () => {
+    const html = locationHtml(baseEvent({ location: 'Nya salen', relocated: { from_location: 'Matsalen' } }));
+    assert.equal(html, '<span class="ev-loc-old">Matsalen</span> Nya salen');
+  });
+
+  it('MOVED-40: locationHtml is the plain location when not relocated', () => {
+    assert.equal(locationHtml(baseEvent({ location: 'Matsalen' })), 'Matsalen');
+  });
+
+  it('MOVED-41: a relocated schedule row shows the struck old location, no ghost', () => {
+    const ev = baseEvent({ location: 'Nya salen', relocated: { from_location: 'Matsalen' } });
+    const html = renderSchedulePage({ name: 'Test' }, [ev]);
+    assert.ok(html.includes('<span class="ev-loc-old">Matsalen</span> Nya salen'));
+    assert.ok(!html.includes('is-ghost'));
+  });
+
+  it('MOVED-42: the event page shows the struck old location', () => {
+    const ev = baseEvent({ location: 'Nya salen', relocated: { from_location: 'Matsalen' } });
+    const html = renderEventPage(ev, { name: 'Test' }, '');
+    assert.ok(html.includes('<span class="ev-loc-old">Matsalen</span> Nya salen'));
   });
 });

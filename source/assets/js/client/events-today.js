@@ -83,6 +83,17 @@
   function isMovedEvent(e) {
     return !!(e && e.moved && e.moved.from_date && e.moved.from_start);
   }
+  function isRelocated(e) {
+    return !!(e && e.relocated && e.relocated.from_location);
+  }
+  // Location cell: new location as usual, preceded by the previous location
+  // struck through in small text when the activity was relocated (02-§119.16).
+  function locationHtml(e) {
+    var current = e.location ? esc(e.location) : '';
+    if (!isRelocated(e)) return current;
+    var old = '<span class="ev-loc-old">' + esc(e.relocated.from_location) + '</span>';
+    return current ? old + ' ' + current : old;
+  }
   // "Flyttad till" target text: new day+time, or just the new time for a
   // same-day move (02-§119.9).
   function movedToText(e) {
@@ -143,7 +154,9 @@
       ? '<span class="ev-time-old">' + esc(movedFromText(e)) + '</span> <span class="ev-time-new">' + timeStr + '</span>'
       : timeStr;
     var movedClass = moved ? ' is-moved' : '';
-    var metaParts = [e.location, e.responsible].filter(Boolean).map(esc);
+    // A relocated activity shows its new location with the old one struck
+    // through in small text (02-§119.16).
+    var metaParts = [locationHtml(e), e.responsible ? esc(e.responsible) : ''].filter(Boolean);
     var metaEl = metaParts.length ? '<span class="ev-meta"> · ' + metaParts.join(' · ') + '</span>' : '';
     var icalEl = icalLink(e);
     var safeLink = safeHttp(e.link);

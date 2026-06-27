@@ -66,6 +66,12 @@ function eventBodyLines(event, fp, dp) {
     lines.push(`${dp}from_start: '${event.moved.from_start}'`);
     lines.push(`${dp}from_end: ${event.moved.from_end ? `'${event.moved.from_end}'` : 'null'}`);
   }
+  // Only write the relocated block when the activity carries a previous location
+  // (02-§119.14). Restoring the original location drops the block again.
+  if (event.relocated && event.relocated.from_location) {
+    lines.push(`${fp}relocated:`);
+    lines.push(`${dp}from_location: ${yamlScalar(event.relocated.from_location)}`);
+  }
   lines.push(`${fp}owner:`);
   lines.push(`${dp}name: '${((event.owner && event.owner.name) || '').replace(/'/g, "''")}'`);
   lines.push(`${dp}email: ''`);

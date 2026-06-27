@@ -118,6 +118,16 @@ function validateEventObject(event, ref, opts = {}) {
       }
     }
   }
+  // relocated is an optional previous-location marker (05-§3.7, 02-§119.14):
+  // a mapping with a non-empty from_location string.
+  if (event.relocated !== undefined && event.relocated !== null) {
+    const r = event.relocated;
+    if (typeof r !== 'object' || Array.isArray(r)) {
+      errors.push(`${ref}: relocated must be a mapping`);
+    } else if (typeof r.from_location !== 'string' || r.from_location.trim() === '') {
+      errors.push(`${ref}: relocated.from_location must be a non-empty string`);
+    }
+  }
 
   return errors;
 }

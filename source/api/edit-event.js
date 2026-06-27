@@ -46,6 +46,33 @@ function resolveMoved(event, newDate, newStart, newEnd) {
   return { from_date: oldDate, from_start: oldStart, from_end: oldEnd };
 }
 
+// ── relocated (changed-location marker) ───────────────────────────────────────
+
+// Normalise a raw `relocated` value into either null or a clean
+// { from_location } object. A marker needs a non-empty previous location
+// (02-§119.14).
+function normaliseRelocated(raw) {
+  if (!raw || typeof raw !== 'object' || !raw.from_location) return null;
+  return { from_location: String(raw.from_location) };
+}
+
+// Decide the event's `relocated` marker after an edit (02-§119.15), mirroring
+// resolveMoved but for the single `location` field:
+//   - if the edit changed the location, record the location it left;
+//   - unless that change returns it to the location already recorded in
+//     `relocated`, in which case the marker is cleared;
+//   - an edit that leaves the location unchanged keeps the existing marker.
+function resolveRelocated(event, newLocation) {
+  const oldLocation = event.location;
+  const prev        = normaliseRelocated(event.relocated);
+
+  if (newLocation === oldLocation) return prev;
+
+  if (prev && prev.from_location === newLocation) return null;
+
+  return { from_location: oldLocation };
+}
+
 // ── patchEventObject ─────────────────────────────────────────────────────────
 
 // Apply `updates` to a single event object, returning a new object with the
@@ -61,13 +88,16 @@ function patchEventObject(event, updates, now) {
 
   const moved = resolveMoved(event, date, start, end);
 
+  const location = 'location' in updates ? (updates.location || event.location) : event.location;
+  const relocated = resolveRelocated(event, location);
+
   const patched = {
     id:          event.id,
     title:       'title'       in updates ? (updates.title       || event.title)       : event.title,
     date,
     start,
     end,
-    location:    'location'    in updates ? (updates.location    || event.location)    : event.location,
+    location,
     responsible: 'responsible' in updates ? (updates.responsible || event.responsible) : event.responsible,
     description: 'description' in updates ? (updates.description || null)              : (event.description ?? null),
     link:        'link'        in updates ? (updates.link        || null)              : (event.link ?? null),
@@ -79,7 +109,8 @@ function patchEventObject(event, updates, now) {
     },
   };
   if (moved) patched.moved = moved;
+  if (relocated) patched.relocated = relocated;
   return patched;
 }
 
-module.exports = { isEventPast, patchEventObject, normaliseMoved, resolveMoved };
+module.exports = { isEventPast, patchEventObject, normaliseMoved, resolveMoved, normaliseRelocated, resolveRelocated };

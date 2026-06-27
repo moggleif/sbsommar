@@ -338,6 +338,12 @@ final class GitHub
             $lines[]  = "{$dp}from_start: '{$event['moved']['from_start']}'";
             $lines[]  = "{$dp}from_end: " . ($fromEnd ? "'{$fromEnd}'" : 'null');
         }
+        // Only write the relocated block when the activity carries a previous
+        // location (02-§119.14). Restoring the original location drops it again.
+        if (!empty($event['relocated']) && !empty($event['relocated']['from_location'])) {
+            $lines[] = "{$fp}relocated:";
+            $lines[] = "{$dp}from_location: " . self::yamlScalar($event['relocated']['from_location']);
+        }
         $lines[] = "{$fp}owner:";
         $lines[] = "{$dp}name: '" . str_replace("'", "''", $event['owner']['name'] ?? '') . "'";
         $lines[] = "{$dp}email: ''";
@@ -423,13 +429,16 @@ final class GitHub
 
         $moved = self::resolveMoved($event, $date, $start, $end);
 
+        $location  = array_key_exists('location', $updates) ? ($updates['location'] ?: $event['location']) : $event['location'];
+        $relocated = self::resolveRelocated($event, (string) $location);
+
         $patched = [
             'id'          => $event['id'],
             'title'       => array_key_exists('title', $updates) ? ($updates['title'] ?: $event['title']) : $event['title'],
             'date'        => $date,
             'start'       => $start,
             'end'         => $end,
-            'location'    => array_key_exists('location', $updates) ? ($updates['location'] ?: $event['location']) : $event['location'],
+            'location'    => $location,
             'responsible' => array_key_exists('responsible', $updates) ? ($updates['responsible'] ?: $event['responsible']) : $event['responsible'],
             'description' => array_key_exists('description', $updates) ? ($updates['description'] ?: null) : ($event['description'] ?? null),
             'link'        => array_key_exists('link', $updates) ? ($updates['link'] ?: null) : ($event['link'] ?? null),
@@ -443,8 +452,52 @@ final class GitHub
         if ($moved !== null) {
             $patched['moved'] = $moved;
         }
+        if ($relocated !== null) {
+            $patched['relocated'] = $relocated;
+        }
 
         return $patched;
+    }
+
+    /**
+     * Normalise a raw `relocated` value into null or a clean { from_location }
+     * array. A marker needs a non-empty previous location (02-§119.14).
+     *
+     * @param mixed $raw
+     * @return array{from_location:string}|null
+     */
+    public static function normaliseRelocated(mixed $raw): ?array
+    {
+        if (!is_array($raw) || empty($raw['from_location'])) {
+            return null;
+        }
+
+        return ['from_location' => (string) $raw['from_location']];
+    }
+
+    /**
+     * Decide the event's `relocated` marker after an edit (02-§119.15): record
+     * the location it left when the location changes, clear it when the change
+     * restores the recorded original, and keep the existing marker untouched when
+     * the location is unchanged. Mirrors resolveRelocated() in
+     * source/api/edit-event.js.
+     *
+     * @param array<string,mixed> $event
+     * @return array{from_location:string}|null
+     */
+    public static function resolveRelocated(array $event, string $newLocation): ?array
+    {
+        $oldLocation = (string) $event['location'];
+        $prev        = self::normaliseRelocated($event['relocated'] ?? null);
+
+        if ($newLocation === $oldLocation) {
+            return $prev;
+        }
+        if ($prev !== null && $prev['from_location'] === $newLocation) {
+            return null;
+        }
+
+        return ['from_location' => $oldLocation];
     }
 
     /**
