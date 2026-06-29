@@ -448,8 +448,11 @@ message.
 
 Administrators can open the add-activity and edit-activity forms before
 `opens_for_editing`. The bypass is one-sided: it only opens the pre-period
-lock. After `end_date + 1 day` the forms stay locked for everyone so finished
-camps cannot be altered retroactively through the website.
+lock. After each form's `data-closes` date the form stays locked for everyone —
+no bypass — so finished camps cannot be altered retroactively through the
+website. That close date is `end_date + 1 day` for the edit form and the server,
+and `end_date` for the add form (§13.2), since there is no future camp day left
+to add to once the camp has ended.
 
 Client side (`lagg-till.js`, `redigera.js`):
 
